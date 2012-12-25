@@ -10,11 +10,11 @@ exports
 
         Ops::Ops Left::Expr Right::Expr -> Binary
 
-        Apply
-		| Argument
-		| Binary
-		| IfThenElse
-		| Literal -> Expr
+        Apply -> Expr
+        Argument -> Expr
+        Binary -> Expr
+        IfThenElse -> Expr
+        Literal -> Expr
 
         Name::STR Arg::(STR*) Rhs::Expr -> Function
 
@@ -24,9 +24,9 @@ exports
 
          -> ObjectFactory
 
-        EQUAL::
-		| PLUS::
-		| MINUS:: -> Ops
+        EQUAL:: -> Ops
+        PLUS:: -> Ops
+        MINUS:: -> Ops
 
         EMPTY -> Package-info
 

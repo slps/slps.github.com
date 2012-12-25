@@ -6,22 +6,22 @@ exports
   context-free syntax
         Stat+ -> Prog
 
-        Expr SEMI
-		| Trolley
-		| Checkout
-		| Assignment
-		| Ifstat
-		| Whilestat
-		| SKIP SEMI
-		| LBRACE Stat+ RBRACE
-		| SEMI -> Stat
+        Expr SEMI -> Stat
+        Trolley -> Stat
+        Checkout -> Stat
+        Assignment -> Stat
+        Ifstat -> Stat
+        Whilestat -> Stat
+        SKIP SEMI -> Stat
+        LBRACE Stat+ RBRACE -> Stat
+        SEMI -> Stat
 
-        INT
-		| DOUBLE -> Type
+        INT -> Type
+        DOUBLE -> Type
 
-        CONST n::Cid COLON t::Type COLON-EQUALS e::Expr SEMI
-		| VAR Vartypedef SEMI
-		| Procedure SEMI -> Def
+        CONST n::Cid COLON t::Type COLON-EQUALS e::Expr SEMI -> Def
+        VAR Vartypedef SEMI -> Def
+        Procedure SEMI -> Def
 
         Id COLON (INT | DOUBLE) -> Vartypedef
 
@@ -43,12 +43,12 @@ exports
 
         i::CIDENT -> Cid
 
-        INT-NUMBER
-		| DOUBLE-NUMBER
-		| Id
-		| Cid
-		| LPAREN CondExpr RPAREN
-		| Proccall -> Atom
+        INT-NUMBER -> Atom
+        DOUBLE-NUMBER -> Atom
+        Id -> Atom
+        Cid -> Atom
+        LPAREN CondExpr RPAREN -> Atom
+        Proccall -> Atom
 
         TROLLEY Cid CONTAINS Def* -> Trolley
 

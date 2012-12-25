@@ -6,12 +6,12 @@ exports
   context-free syntax
         TROLLEY CONSTID CONTAINS Declaration* CHECKOUT Statement SEMI DONE SEMI -> Program
 
-        CONSTID
-		| VARID -> Id
+        CONSTID -> Id
+        VARID -> Id
 
-        Constant-declaration
-		| Variable-declaration
-		| Procedure-declaration -> Declaration
+        Constant-declaration -> Declaration
+        Variable-declaration -> Declaration
+        Procedure-declaration -> Declaration
 
         CONST CONSTID COLON Type ASSIGN Expression SEMI -> Constant-declaration
 
@@ -21,14 +21,14 @@ exports
 
         (Id COLON Type (COMMA Id COLON Type)*)? -> Param-list
 
-        INT
-		| DOUBLE -> Type
+        INT -> Type
+        DOUBLE -> Type
 
-        INT-NUMBER
-		| DOUBLE-NUMBER
-		| LPAREN Expression RPAREN
-		| Id
-		| Proc -> Term
+        INT-NUMBER -> Term
+        DOUBLE-NUMBER -> Term
+        LPAREN Expression RPAREN -> Term
+        Id -> Term
+        Proc -> Term
 
         Id LPAREN (Term (COMMA Term)*)? RPAREN -> Proc
 
@@ -50,20 +50,20 @@ exports
 
         Disjunction (MIXFIX Expression COLON Expression)? -> Expression
 
-        EQUAL
-		| NONEQUAL
-		| GREATER
-		| GREATER-EQUAL
-		| LESS
-		| LESS-EQUAL -> Relational-op
+        EQUAL -> Relational-op
+        NONEQUAL -> Relational-op
+        GREATER -> Relational-op
+        GREATER-EQUAL -> Relational-op
+        LESS -> Relational-op
+        LESS-EQUAL -> Relational-op
 
-        Single-statement
-		| Multiple-statement -> Statement
+        Single-statement -> Statement
+        Multiple-statement -> Statement
 
-        SKIP
-		| Assignment
-		| Conditional
-		| Loop -> Single-statement
+        SKIP -> Single-statement
+        Assignment -> Single-statement
+        Conditional -> Single-statement
+        Loop -> Single-statement
 
         Id ASSIGN Expression -> Assignment
 

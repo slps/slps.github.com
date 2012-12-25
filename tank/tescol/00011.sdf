@@ -18,43 +18,43 @@ exports
 
         ID COLON Type -> Param
 
-        INTTYPE
-		| DOUBLETYPE -> Type
+        INTTYPE -> Type
+        DOUBLETYPE -> Type
 
         Atom ((Operator Expression) | (MIXFIX l::Expression COLON r::Expression) | (OPARAN Functionparamlist CPARAN) | ) -> Expression
 
         Expression (COMMA Expression)* -> Functionparamlist
 
-        Literal
-		| Identifier
-		| OPARAN Expression CPARAN -> Atom
+        Literal -> Atom
+        Identifier -> Atom
+        OPARAN Expression CPARAN -> Atom
 
-        Arithmeticoperator
-		| Booleanoperator -> Operator
+        Arithmeticoperator -> Operator
+        Booleanoperator -> Operator
 
-        ADDITION
-		| SUBTRACT
-		| DIVISION
-		| MULTIPLY
-		| EXP -> Arithmeticoperator
+        ADDITION -> Arithmeticoperator
+        SUBTRACT -> Arithmeticoperator
+        DIVISION -> Arithmeticoperator
+        MULTIPLY -> Arithmeticoperator
+        EXP -> Arithmeticoperator
 
-        EQUAL
-		| NONEQUAL
-		| LESS
-		| LESSEQUAL
-		| MORE
-		| MOREEQUAL
-		| CONJUNCTION
-		| DISJUNCTION -> Booleanoperator
+        EQUAL -> Booleanoperator
+        NONEQUAL -> Booleanoperator
+        LESS -> Booleanoperator
+        LESSEQUAL -> Booleanoperator
+        MORE -> Booleanoperator
+        MOREEQUAL -> Booleanoperator
+        CONJUNCTION -> Booleanoperator
+        DISJUNCTION -> Booleanoperator
 
-        SKIP SEMI
-		| Assignmentstatement SEMI
-		| Whilestatement
-		| Ifstatement
-		| OBRACE Statement+ CBRACE -> Statement
+        SKIP SEMI -> Statement
+        Assignmentstatement SEMI -> Statement
+        Whilestatement -> Statement
+        Ifstatement -> Statement
+        OBRACE Statement+ CBRACE -> Statement
 
-        ID
-		| CONSTID -> Identifier
+        ID -> Identifier
+        CONSTID -> Identifier
 
         Identifier ASSIGN Expression -> Assignmentstatement
 
@@ -62,8 +62,8 @@ exports
 
         WHILE Expression DO Statement -> Whilestatement
 
-        INT
-		| DOUBLE -> Literal
+        INT -> Literal
+        DOUBLE -> Literal
 
         ";" -> SEMI
 

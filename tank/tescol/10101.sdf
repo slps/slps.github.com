@@ -6,9 +6,9 @@ exports
   context-free syntax
         TROLLEY CONSTANTID CONTAINS Declaration* CHECKOUT Mainstatement SEMI DONE SEMI -> Program
 
-        Variabledec
-		| Constantdec
-		| Proceduredec -> Declaration
+        Variabledec -> Declaration
+        Constantdec -> Declaration
+        Proceduredec -> Declaration
 
         VARIABLE ID COLON Type SEMI -> Variabledec
 
@@ -16,8 +16,8 @@ exports
 
         PROCEDURE pid1::ID PARENOPEN (pid2::ID COLON Type (COMMA pid3::ID COLON Type)*)* PARENCLOSE COLON Type ASSIGN Mainstatement SEMI -> Proceduredec
 
-        INT
-		| FLOAT -> Type
+        INT -> Type
+        FLOAT -> Type
 
         BoolExpr (MIXFIX CondExpr COLON CondExpr)? -> CondExpr
 
@@ -35,23 +35,23 @@ exports
 
         SUBTRACTION* Atom -> Unaryneg
 
-        INTEGER
-		| FLOATINGPOINT
-		| CONSTANTID
-		| ID
-		| PARENOPEN CondExpr PARENCLOSE
-		| ProcedureList -> Atom
+        INTEGER -> Atom
+        FLOATINGPOINT -> Atom
+        CONSTANTID -> Atom
+        ID -> Atom
+        PARENOPEN CondExpr PARENCLOSE -> Atom
+        ProcedureList -> Atom
 
         ID PARENOPEN id1::CondExpr (COMMA id2::CondExpr)* PARENCLOSE -> ProcedureList
 
-        
-		| Statement
-		| STATEMENTOPEN Statement (SEMI Statement)* STATEMENTCLOSE -> Mainstatement
+         -> Mainstatement
+        Statement -> Mainstatement
+        STATEMENTOPEN Statement (SEMI Statement)* STATEMENTCLOSE -> Mainstatement
 
-        SKIP
-		| ID ASSIGN CondExpr
-		| IF BoolExpr THEN Statement ELSE Statement
-		| WHILE BoolExpr DO Statement -> Statement
+        SKIP -> Statement
+        ID ASSIGN CondExpr -> Statement
+        IF BoolExpr THEN Statement ELSE Statement -> Statement
+        WHILE BoolExpr DO Statement -> Statement
 
         ";" -> SEMI
 

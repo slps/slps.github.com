@@ -6,9 +6,9 @@ exports
   context-free syntax
         TROLLEY Constantidentifier CONTAINS Declaration* CHECKOUT Statement DONE SEMI -> Prog
 
-        Constdeclaration
-		| Vardeclaration
-		| Procdeclaration -> Declaration
+        Constdeclaration -> Declaration
+        Vardeclaration -> Declaration
+        Procdeclaration -> Declaration
 
         CONST Constantidentifier COLON Type DEFINED Expression SEMI -> Constdeclaration
 
@@ -20,11 +20,11 @@ exports
 
         Varprocidentifier COLON Type -> Parameter
 
-        SKIP SEMI
-		| Assignment
-		| Conditional
-		| Loop
-		| Groupedstatement -> Statement
+        SKIP SEMI -> Statement
+        Assignment -> Statement
+        Conditional -> Statement
+        Loop -> Statement
+        Groupedstatement -> Statement
 
         BRACKETL Statement+ BRACKETR SEMI -> Groupedstatement
 
@@ -34,8 +34,8 @@ exports
 
         WHILE Booleanexpression DO Statement -> Loop
 
-        p1::Procedureapplication
-		| b1::Booleanexpression (QUESTION Expression COLON Expression)? -> Expression
+        p1::Procedureapplication -> Expression
+        b1::Booleanexpression (QUESTION Expression COLON Expression)? -> Expression
 
         an1::Andexpression (DISJUNCTION Andexpression)* -> Booleanexpression
 
@@ -47,20 +47,20 @@ exports
 
         a1::Atom ((EXPONENTIATION | DIVISION | MULTIPLICATION) a2::Atom)* -> Multdivexpression
 
-        Constantidentifier
-		| Varprocidentifier
-		| Number
-		| PARENTHESISL Expression PARENTHESISR -> Atom
+        Constantidentifier -> Atom
+        Varprocidentifier -> Atom
+        Number -> Atom
+        PARENTHESISL Expression PARENTHESISR -> Atom
 
         Varprocidentifier PARENTHESISL Arguments PARENTHESISR -> Procedureapplication
 
         e1::Expression (COMMA e2::Expression)* -> Arguments
 
-        INTEGER
-		| DOUBLE -> Number
+        INTEGER -> Number
+        DOUBLE -> Number
 
-        INT
-		| DBLE -> Type
+        INT -> Type
+        DBLE -> Type
 
         CONSTID -> Constantidentifier
 
@@ -98,12 +98,12 @@ exports
 
         "**" -> EXPONENTIATION
 
-        "=="
-		| "!="
-		| "<"
-		| "<="
-		| ">="
-		| ">" -> ROP
+        "==" -> ROP
+        "!=" -> ROP
+        "<" -> ROP
+        "<=" -> ROP
+        ">=" -> ROP
+        ">" -> ROP
 
         "done" -> DONE
 

@@ -6,9 +6,9 @@ exports
   context-free syntax
         TROLLEY n1::CONSTID CONTAINS d1::(Declaration*) CHECKOUT s1::Statement DONE SEMI -> Program
 
-        Constdec
-		| Vardec
-		| Procdec -> Declaration
+        Constdec -> Declaration
+        Vardec -> Declaration
+        Procdec -> Declaration
 
         CONST id1::CONSTID COLON t1::Type ASSIGN a1::Arithexp SEMI -> Constdec
 
@@ -20,8 +20,8 @@ exports
 
         id1::ID COLON Type -> Parameter
 
-        INTWORD
-		| DOUWORD -> Type
+        INTWORD -> Type
+        DOUWORD -> Type
 
         Connexp (QMARK Connexp COLON Connexp)? -> Arithexp
 
@@ -35,21 +35,21 @@ exports
 
         Negateexp (EXPO Negateexp)? -> Expoexp
 
-        SUB Negateexp
-		| Parexp -> Negateexp
+        SUB Negateexp -> Negateexp
+        Parexp -> Negateexp
 
-        Literal
-		| id2::CONSTID
-		| id1::ID
-		| LPAR Arithexp RPAR -> Parexp
+        Literal -> Parexp
+        id2::CONSTID -> Parexp
+        id1::ID -> Parexp
+        LPAR Arithexp RPAR -> Parexp
 
-        LBRACE Substatement* RBRACE SEMI
-		| Substatement -> Statement
+        LBRACE Substatement* RBRACE SEMI -> Statement
+        Substatement -> Statement
 
-        SKIP SEMI
-		| Assignment
-		| Cond
-		| Loop -> Substatement
+        SKIP SEMI -> Substatement
+        Assignment -> Substatement
+        Cond -> Substatement
+        Loop -> Substatement
 
         id1::ID ASSIGN a1::Arithexp SEMI -> Assignment
 
@@ -57,66 +57,66 @@ exports
 
         WHILE a1::Arithexp DO s1::Statement -> Loop
 
-        DONE
-		| TROLLEY
-		| CONTAINS
-		| CHECKOUT
-		| SKIP
-		| CONST
-		| PROC
-		| VAR
-		| IF
-		| THEN
-		| ELSE
-		| WHILE
-		| DO
-		| INTWORD
-		| DOUWORD -> Keyword
+        DONE -> Keyword
+        TROLLEY -> Keyword
+        CONTAINS -> Keyword
+        CHECKOUT -> Keyword
+        SKIP -> Keyword
+        CONST -> Keyword
+        PROC -> Keyword
+        VAR -> Keyword
+        IF -> Keyword
+        THEN -> Keyword
+        ELSE -> Keyword
+        WHILE -> Keyword
+        DO -> Keyword
+        INTWORD -> Keyword
+        DOUWORD -> Keyword
 
-        Keyword
-		| WS
-		| Identifier
-		| Symbol
-		| COMMENT
-		| Literal
-		| Constantid -> Token
+        Keyword -> Token
+        WS -> Token
+        Identifier -> Token
+        Symbol -> Token
+        COMMENT -> Token
+        Literal -> Token
+        Constantid -> Token
 
         ID -> Identifier
 
         CONSTID -> Constantid
 
-        Syntaxsymbol
-		| Operatorsymbol
-		| Comparisonsymbol -> Symbol
+        Syntaxsymbol -> Symbol
+        Operatorsymbol -> Symbol
+        Comparisonsymbol -> Symbol
 
-        SEMI
-		| COLON
-		| COMMA
-		| LPAR
-		| RPAR
-		| ASSIGN
-		| QMARK
-		| LBRACE
-		| RBRACE -> Syntaxsymbol
+        SEMI -> Syntaxsymbol
+        COLON -> Syntaxsymbol
+        COMMA -> Syntaxsymbol
+        LPAR -> Syntaxsymbol
+        RPAR -> Syntaxsymbol
+        ASSIGN -> Syntaxsymbol
+        QMARK -> Syntaxsymbol
+        LBRACE -> Syntaxsymbol
+        RBRACE -> Syntaxsymbol
 
-        ADD
-		| SUB
-		| DIV
-		| MULTI
-		| EXPO -> Operatorsymbol
+        ADD -> Operatorsymbol
+        SUB -> Operatorsymbol
+        DIV -> Operatorsymbol
+        MULTI -> Operatorsymbol
+        EXPO -> Operatorsymbol
 
-        EQUALS
-		| NOTEQ
-		| LT
-		| LTE
-		| GT
-		| GTE -> Comparisonsymbol
+        EQUALS -> Comparisonsymbol
+        NOTEQ -> Comparisonsymbol
+        LT -> Comparisonsymbol
+        LTE -> Comparisonsymbol
+        GT -> Comparisonsymbol
+        GTE -> Comparisonsymbol
 
-        CONJUNCT
-		| DISJUNCT -> Compoperator
+        CONJUNCT -> Compoperator
+        DISJUNCT -> Compoperator
 
-        INT
-		| DOUBLE -> Literal
+        INT -> Literal
+        DOUBLE -> Literal
 
         "done" -> DONE
 

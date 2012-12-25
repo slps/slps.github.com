@@ -6,9 +6,9 @@ exports
   context-free syntax
         TROLLEY CID CONTAINS (Declarations SEMI)* Statements DONE SEMI -> Program
 
-        ConstDec
-		| VarDec
-		| ProcDec -> Declarations
+        ConstDec -> Declarations
+        VarDec -> Declarations
+        ProcDec -> Declarations
 
         CONST CID COLON Types ASSI Expr -> ConstDec
 
@@ -18,11 +18,11 @@ exports
 
         CHECKOUT Statement SEMI -> Statements
 
-        Assignment
-		| Conditional
-		| Loops
-		| Grstatement
-		| SKIP -> Statement
+        Assignment -> Statement
+        Conditional -> Statement
+        Loops -> Statement
+        Grstatement -> Statement
+        SKIP -> Statement
 
         IF BoolExpr THEN Statement ELSE Statement -> Conditional
 
@@ -48,21 +48,21 @@ exports
 
         Atom (EXP Atom)* -> ExpExp
 
-        INTG
-		| DOUBLE
-		| ID Arglist?
-		| CID Arglist?
-		| OPAR Expr CPAR -> Atom
+        INTG -> Atom
+        DOUBLE -> Atom
+        ID Arglist? -> Atom
+        CID Arglist? -> Atom
+        OPAR Expr CPAR -> Atom
 
         OPAR (Expr (COM Expr)*)? CPAR -> Arglist
 
         COMMENT -> Comment
 
-        TYPEI
-		| TYPED -> Types
+        TYPEI -> Types
+        TYPED -> Types
 
-        ID
-		| CID -> Id
+        ID -> Id
+        CID -> Id
 
         ("+" | "-")? ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")* "." ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")* (("e" | "E") INTG)? -> DOUBLE
 

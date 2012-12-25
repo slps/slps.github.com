@@ -8,8 +8,8 @@ exports
 
         (ConstDeclaration | VarDeclaration | ProcDeclaration) SEMI -> Declaration
 
-        ID
-		| CID -> Identifier
+        ID -> Identifier
+        CID -> Identifier
 
         VAR Identifier COLON Type -> VarDeclaration
 
@@ -17,11 +17,11 @@ exports
 
         CONST CID COLON Type COLON-EQUALS ArithEx -> ConstDeclaration
 
-        INT
-		| DOUBLE -> Type
+        INT -> Type
+        DOUBLE -> Type
 
-        Expr
-		| ProcedureApplication -> ArithEx
+        Expr -> ArithEx
+        ProcedureApplication -> ArithEx
 
         firstID::Identifier COLON firstType::Type (COMMA followID::Identifier COLON followType::Type)* -> ParameterList
 
@@ -29,10 +29,10 @@ exports
 
         (ArithEx (COMMA ArithEx)*)? -> CommaSeparatedArithEx
 
-        INT-NUMBER
-		| DOUBLE-NUMBER
-		| Identifier
-		| LPAREN ConditionalExpr RPAREN -> Atom
+        INT-NUMBER -> Atom
+        DOUBLE-NUMBER -> Atom
+        Identifier -> Atom
+        LPAREN ConditionalExpr RPAREN -> Atom
 
         ProdExpr ((ADDITION | SUBTRACTION) ProdExpr)* -> Expr
 
@@ -50,13 +50,13 @@ exports
 
         DisjBooleanExpr (QUESTION ConditionalExpr COLON ConditionalExpr)? -> ConditionalExpr
 
-        LBRACE Statement (SEMI Statement)* RBRACE
-		| Statement -> CompoundStatement
+        LBRACE Statement (SEMI Statement)* RBRACE -> CompoundStatement
+        Statement -> CompoundStatement
 
-        SKIP
-		| Assignment
-		| Conditional
-		| Loop -> Statement
+        SKIP -> Statement
+        Assignment -> Statement
+        Conditional -> Statement
+        Loop -> Statement
 
         Identifier COLON-EQUALS ConditionalExpr -> Assignment
 
@@ -152,9 +152,9 @@ exports
 
         ("a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z" | "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z") ("a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z" | "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z" | "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "_")* -> ID
 
-        " "
-		| "\r"
-		| "\t"
-		| "\u000C" -> WS
+        " " -> WS
+        "\r" -> WS
+        "\t" -> WS
+        "\u000C" -> WS
 
         "/*" ANY* "*/" -> COMMENT

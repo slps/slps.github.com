@@ -16,14 +16,14 @@ exports
 
         (Index-value ",")+ -> Index-terms
 
-        Identifier
-		| Manifest-constant -> Index-value
+        Identifier -> Index-value
+        Manifest-constant -> Index-value
 
         Header-mark? "class" Class-name -> Class-header
 
-        "deferred"
-		| "expanded"
-		| "separate" -> Header-mark
+        "deferred" -> Header-mark
+        "expanded" -> Header-mark
+        "separate" -> Header-mark
 
         Identifier -> Class-name
 
@@ -61,8 +61,8 @@ exports
 
         Clients Feature-set -> New-export-item
 
-        Feature-list
-		| "all" -> Feature-set
+        Feature-list -> Feature-set
+        "all" -> Feature-set
 
         (Feature-name ",")* -> Feature-list
 
@@ -96,9 +96,9 @@ exports
 
         "is" Feature-value -> Constant-or-routine
 
-        Manifest-constant
-		| Unique
-		| Routine -> Feature-value
+        Manifest-constant -> Feature-value
+        Unique -> Feature-value
+        Routine -> Feature-value
 
         "Unique" -> Unique
 
@@ -106,41 +106,41 @@ exports
 
         "frozen"? Feature-name -> New-feature
 
-        Identifier
-		| Prefix
-		| Infix -> Feature-name
+        Identifier -> Feature-name
+        Prefix -> Feature-name
+        Infix -> Feature-name
 
         "prefix" """ Prefix-operator """ -> Prefix
 
         "infix" """ Infix-operator """ -> Infix
 
-        Unary
-		| Free-operator -> Prefix-operator
+        Unary -> Prefix-operator
+        Free-operator -> Prefix-operator
 
-        Binary
-		| Free-operator -> Infix-operator
+        Binary -> Infix-operator
+        Free-operator -> Infix-operator
 
-        "not"
-		| "+"
-		| "-" -> Unary
+        "not" -> Unary
+        "+" -> Unary
+        "-" -> Unary
 
-        "+"
-		| "-"
-		| "*"
-		| "/"
-		| "<"
-		| ">"
-		| "<="
-		| ">="
-		| "//"
-		| "\\"
-		| "^"
-		| "and"
-		| "or"
-		| "xor"
-		| "and" "then"
-		| "or" "else"
-		| "implies" -> Binary
+        "+" -> Binary
+        "-" -> Binary
+        "*" -> Binary
+        "/" -> Binary
+        "<" -> Binary
+        ">" -> Binary
+        "<=" -> Binary
+        ">=" -> Binary
+        "//" -> Binary
+        "\\" -> Binary
+        "^" -> Binary
+        "and" -> Binary
+        "or" -> Binary
+        "xor" -> Binary
+        "and" "then" -> Binary
+        "or" "else" -> Binary
+        "implies" -> Binary
 
         "(" Entity-declaration-list ")" -> Formal-arguments
 
@@ -154,16 +154,16 @@ exports
 
         Obsolete? Header-comment? Precondition? Local-declarations? Routine-body Postcondition? Rescue? "end" ("--" Feature-name)? -> Routine
 
-        Effective
-		| Deferred -> Routine-body
+        Effective -> Routine-body
+        Deferred -> Routine-body
 
-        Internal
-		| External -> Effective
+        Internal -> Effective
+        External -> Effective
 
         Routine-mark Compound -> Internal
 
-        "do"
-		| "once" -> Routine-mark
+        "do" -> Routine-mark
+        "once" -> Routine-mark
 
         "deferred" -> Deferred
 
@@ -185,8 +185,8 @@ exports
 
         Tag-mark? Unlabeled-assertion-clause -> Assertion-clause
 
-        Boolean-expression
-		| Comment -> Unlabeled-assertion-clause
+        Boolean-expression -> Unlabeled-assertion-clause
+        Comment -> Unlabeled-assertion-clause
 
         Tag ":" -> Tag-mark
 
@@ -194,11 +194,11 @@ exports
 
         "rescue" Compound -> Rescue
 
-        Class-type
-		| Class-type-expanded
-		| Class-type-separate
-		| Anchored
-		| Bit-type -> Type
+        Class-type -> Type
+        Class-type-expanded -> Type
+        Class-type-separate -> Type
+        Anchored -> Type
+        Bit-type -> Type
 
         Class-name Actual-generics? -> Class-type
 
@@ -212,27 +212,27 @@ exports
 
         "BIT" Bit-length -> Bit-type
 
-        Integer-constant
-		| Attribute -> Bit-length
+        Integer-constant -> Bit-length
+        Attribute -> Bit-length
 
         "like" Anchor -> Anchored
 
-        Identifier
-		| "Current" -> Anchor
+        Identifier -> Anchor
+        "Current" -> Anchor
 
         (Instruction ";")* -> Compound
 
-        Creation
-		| Call
-		| Assignment
-		| Assignment-attempt
-		| Conditional
-		| Multi-branch
-		| Loop
-		| Debug
-		| Check
-		| Retry
-		| Null-instruction -> Instruction
+        Creation -> Instruction
+        Call -> Instruction
+        Assignment -> Instruction
+        Assignment-attempt -> Instruction
+        Conditional -> Instruction
+        Multi-branch -> Instruction
+        Loop -> Instruction
+        Debug -> Instruction
+        Check -> Instruction
+        Retry -> Instruction
+        Null-instruction -> Instruction
 
         "!" Type? "!" Writable Creation-call? -> Creation
 
@@ -258,14 +258,14 @@ exports
 
         (Choice ",")* -> Choices
 
-        Choice-constant
-		| Interval -> Choice
+        Choice-constant -> Choice
+        Interval -> Choice
 
         Choice-constant ".." Choice-constant -> Interval
 
-        Integer-constant
-		| Character-constant
-		| Attribute -> Choice-constant
+        Integer-constant -> Choice-constant
+        Character-constant -> Choice-constant
+        Attribute -> Choice-constant
 
         Initialization Invariant? Variant? Loop-body "end" -> Loop
 
@@ -291,17 +291,17 @@ exports
 
          -> Null-instruction
 
-        Qualified-call
-		| Precursor -> Call
+        Qualified-call -> Call
+        Precursor -> Call
 
         Call-qualifier? Call-chain -> Qualified-call
 
         Call-target "." -> Call-qualifier
 
-        Parenthesized
-		| "Result"
-		| "Current"
-		| Precursor -> Call-target
+        Parenthesized -> Call-target
+        "Result" -> Call-target
+        "Current" -> Call-target
+        Precursor -> Call-target
 
         (Unqualified-call ".")+ -> Call-chain
 
@@ -313,45 +313,45 @@ exports
 
         Identifier -> Attribute
 
-        Identifier
-		| "Result" -> Writable
+        Identifier -> Writable
+        "Result" -> Writable
 
         "(" Actual-list ")" -> Actuals
 
         (Actual ",")* -> Actual-list
 
-        Expression
-		| Address -> Actual
+        Expression -> Actual
+        Address -> Actual
 
         "$" Address-mark -> Address
 
-        Feature-name
-		| "Current"
-		| "Result" -> Address-mark
+        Feature-name -> Address-mark
+        "Current" -> Address-mark
+        "Result" -> Address-mark
 
-        "Current"
-		| "Result"
-		| Call
-		| Operator-expression
-		| Equality
-		| Manifest-array
-		| Old
-		| Strip
-		| Boolean-constant
-		| Bit-constant
-		| Integer
-		| Real
-		| Manifest-string
-		| Character-constant
-		| Wide-character-constant
-		| Wide-manifest-string
-		| Hexadecimal-constant -> Expression
+        "Current" -> Expression
+        "Result" -> Expression
+        Call -> Expression
+        Operator-expression -> Expression
+        Equality -> Expression
+        Manifest-array -> Expression
+        Old -> Expression
+        Strip -> Expression
+        Boolean-constant -> Expression
+        Bit-constant -> Expression
+        Integer -> Expression
+        Real -> Expression
+        Manifest-string -> Expression
+        Character-constant -> Expression
+        Wide-character-constant -> Expression
+        Wide-manifest-string -> Expression
+        Hexadecimal-constant -> Expression
 
         Expression -> Boolean-expression
 
-        Parenthesized
-		| Unary-expression
-		| Binary-expression -> Operator-expression
+        Parenthesized -> Operator-expression
+        Unary-expression -> Operator-expression
+        Binary-expression -> Operator-expression
 
         "(" Expression ")" -> Parenthesized
 
@@ -361,28 +361,28 @@ exports
 
         Expression Comparison Expression -> Equality
 
-        "="
-		| "/=" -> Comparison
+        "=" -> Comparison
+        "/=" -> Comparison
 
-        Boolean-constant
-		| Character-constant
-		| Integer-constant
-		| Real-constant
-		| Manifest-string
-		| Bit-constant
-		| Wide-character-constant
-		| Wide-manifest-string
-		| Hexadecimal-constant -> Manifest-constant
+        Boolean-constant -> Manifest-constant
+        Character-constant -> Manifest-constant
+        Integer-constant -> Manifest-constant
+        Real-constant -> Manifest-constant
+        Manifest-string -> Manifest-constant
+        Bit-constant -> Manifest-constant
+        Wide-character-constant -> Manifest-constant
+        Wide-manifest-string -> Manifest-constant
+        Hexadecimal-constant -> Manifest-constant
 
-        "True"
-		| "False" -> Boolean-constant
+        "True" -> Boolean-constant
+        "False" -> Boolean-constant
 
         Sign? Integer -> Integer-constant
 
         Sign? Real -> Real-constant
 
-        "+"
-		| "-" -> Sign
+        "+" -> Sign
+        "-" -> Sign
 
         "$" Character-constant -> Wide-character-constant
 
@@ -400,5 +400,5 @@ exports
 
         Letter (Letter | Decimal-digit | "_")* -> Identifier
 
-        Decimal-digit+
-		| Decimal-digit (Decimal-digit Decimal-digit?)? ("_" Decimal-digit Decimal-digit Decimal-digit)+ -> Integer
+        Decimal-digit+ -> Integer
+        Decimal-digit (Decimal-digit Decimal-digit?)? ("_" Decimal-digit Decimal-digit Decimal-digit)+ -> Integer

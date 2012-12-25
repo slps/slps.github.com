@@ -7,109 +7,109 @@ exports
   context-free syntax
         "UNSAFE"? (Interface | Module | GenInf | GenMod) -> Compilation
 
-        "INTERFACE" Id ";" Import* Decl* "END" Id "."
-		| "INTERFACE" Id "=" Id GenActls "END" Id "." -> Interface
+        "INTERFACE" Id ";" Import* Decl* "END" Id "." -> Interface
+        "INTERFACE" Id "=" Id GenActls "END" Id "." -> Interface
 
-        "NOT"
-		| "ROOT" -> Id
+        "NOT" -> Id
+        "ROOT" -> Id
 
-        AsImport
-		| FromImport -> Import
+        AsImport -> Import
+        FromImport -> Import
 
         "IMPORT" ImportItem ("," ImportItem)* ";" -> AsImport
 
-        Id
-		| Id "AS" Id -> ImportItem
+        Id -> ImportItem
+        Id "AS" Id -> ImportItem
 
         "FROM" Id "IMPORT" IdList ";" -> FromImport
 
         Id ("," Id)* -> IdList
 
-        "CONST" (ConstDecl ";")*
-		| "TYPE" (TypeDecl ";")*
-		| "EXCEPTION" (ExceptionDecl ";")*
-		| "VAR" (VariableDecl ";")*
-		| ProcedureHead ("=" Block Id)? ";"
-		| "REVEAL" (QualId ("=" | "<:") Type ";")* -> Decl
+        "CONST" (ConstDecl ";")* -> Decl
+        "TYPE" (TypeDecl ";")* -> Decl
+        "EXCEPTION" (ExceptionDecl ";")* -> Decl
+        "VAR" (VariableDecl ";")* -> Decl
+        ProcedureHead ("=" Block Id)? ";" -> Decl
+        "REVEAL" (QualId ("=" | "<:") Type ";")* -> Decl
 
         Id (":" Type)? "=" Expr -> ConstDecl
 
-        TypeLiteral
-		| QualId -> Type
+        TypeLiteral -> Type
+        QualId -> Type
 
-        ArrayType
-		| PackedType
-		| EnumType
-		| ObjectType
-		| ProcedureType
-		| RecordType
-		| RefType
-		| SetType
-		| SubrangeType
-		| "(" Type ")"
-		| TypeName -> TypeLiteral
+        ArrayType -> TypeLiteral
+        PackedType -> TypeLiteral
+        EnumType -> TypeLiteral
+        ObjectType -> TypeLiteral
+        ProcedureType -> TypeLiteral
+        RecordType -> TypeLiteral
+        RefType -> TypeLiteral
+        SetType -> TypeLiteral
+        SubrangeType -> TypeLiteral
+        "(" Type ")" -> TypeLiteral
+        TypeName -> TypeLiteral
 
         "ARRAY" (Type ("," Type)*)? "OF" Type -> ArrayType
 
         "BITS" Expr "FOR" Type -> PackedType
 
-        Expr "OR" Expr
-		| Expr "AND" Expr
-		| "NOT" Expr
-		| Expr Relop Expr
-		| Expr Addop Expr
-		| Expr Mulop Expr
-		| "+" Expr
-		| "-" Expr
-		| Expr Selector
-		| Id
-		| Literal
-		| Constructor
-		| "(" Expr ")" -> Expr
+        Expr "OR" Expr -> Expr
+        Expr "AND" Expr -> Expr
+        "NOT" Expr -> Expr
+        Expr Relop Expr -> Expr
+        Expr Addop Expr -> Expr
+        Expr Mulop Expr -> Expr
+        "+" Expr -> Expr
+        "-" Expr -> Expr
+        Expr Selector -> Expr
+        Id -> Expr
+        Literal -> Expr
+        Constructor -> Expr
+        "(" Expr ")" -> Expr
 
-        "="
-		| "#"
-		| "<"
-		| "<="
-		| ">"
-		| ">="
-		| "IN" -> Relop
+        "=" -> Relop
+        "#" -> Relop
+        "<" -> Relop
+        "<=" -> Relop
+        ">" -> Relop
+        ">=" -> Relop
+        "IN" -> Relop
 
-        "+"
-		| "-"
-		| "&" -> Addop
+        "+" -> Addop
+        "-" -> Addop
+        "&" -> Addop
 
-        "*"
-		| "/"
-		| "DIV"
-		| "MOD" -> Mulop
+        "*" -> Mulop
+        "/" -> Mulop
+        "DIV" -> Mulop
+        "MOD" -> Mulop
 
-        "^"
-		| "." Id
-		| "[" Expr ("," Expr)* "]"
-		| "(" (Actual ("," Actual)*)? ")" -> Selector
+        "^" -> Selector
+        "." Id -> Selector
+        "[" Expr ("," Expr)* "]" -> Selector
+        "(" (Actual ("," Actual)*)? ")" -> Selector
 
-        TypeLiteral
-		| (Id ":=")? Expr -> Actual
+        TypeLiteral -> Actual
+        (Id ":=")? Expr -> Actual
 
         Type "{" AnyCons? "}" -> Constructor
 
         Elt ("," Elt)* ("," "..")? -> AnyCons
 
-        Expr ".." Expr
-		| Expr
-		| Id ":=" Expr -> Elt
+        Expr ".." Expr -> Elt
+        Expr -> Elt
+        Id ":=" Expr -> Elt
 
         "{" IdList? "}" -> EnumType
 
         Ancestor? Brand? "OBJECT" Fields ("METHODS" Methods)? ("OVERRIDES" Overrides)? "END" -> ObjectType
 
-        TypeName
-		| ObjectType
-		| QualId -> Ancestor
+        TypeName -> Ancestor
+        ObjectType -> Ancestor
+        QualId -> Ancestor
 
-        "ROOT"
-		| "UNTRACED" "ROOT" -> TypeName
+        "ROOT" -> TypeName
+        "UNTRACED" "ROOT" -> TypeName
 
         Id ("." Id)? -> QualId
 
@@ -117,9 +117,9 @@ exports
 
         (Field (";" Field)* ";"?)? -> Fields
 
-        IdList ":" Type ":=" Expr
-		| IdList ":" Type
-		| IdList ":=" Expr -> Field
+        IdList ":" Type ":=" Expr -> Field
+        IdList ":" Type -> Field
+        IdList ":=" Expr -> Field
 
         (Method (";" Method)* ";"?)? -> Methods
 
@@ -129,16 +129,16 @@ exports
 
         (Formal (";" Formal)* ";"?)? -> Formals
 
-        Mode? IdList ":" Type ":=" Expr
-		| Mode? IdList ":" Type
-		| Mode? IdList ":=" Expr -> Formal
+        Mode? IdList ":" Type ":=" Expr -> Formal
+        Mode? IdList ":" Type -> Formal
+        Mode? IdList ":=" Expr -> Formal
 
-        "VALUE"
-		| "VAR"
-		| "READONLY" -> Mode
+        "VALUE" -> Mode
+        "VAR" -> Mode
+        "READONLY" -> Mode
 
-        "{" (QualId ("," QualId)*)? "}"
-		| "ANY" -> Raises
+        "{" (QualId ("," QualId)*)? "}" -> Raises
+        "ANY" -> Raises
 
         (Override (";" Override)* ";"?)? -> Overrides
 
@@ -158,9 +158,9 @@ exports
 
         Id ("(" Type ")")? -> ExceptionDecl
 
-        IdList ":" Type ":=" Expr
-		| IdList ":" Type
-		| IdList ":=" Expr -> VariableDecl
+        IdList ":" Type ":=" Expr -> VariableDecl
+        IdList ":" Type -> VariableDecl
+        IdList ":=" Expr -> VariableDecl
 
         "PROCEDURE" Id Signature -> ProcedureHead
 
@@ -168,24 +168,24 @@ exports
 
         (Stmt (";" Stmt)* ";"?)? -> Stmts
 
-        AssignStmt
-		| Block
-		| CallStmt
-		| CaseStmt
-		| ExitStmt
-		| EvalStmt
-		| ForStmt
-		| IfStmt
-		| LockStmt
-		| LoopStmt
-		| RaiseStmt
-		| RepeatStmt
-		| ReturnStmt
-		| TryFinStmt
-		| TryXptStmt
-		| TCaseStmt
-		| WhileStmt
-		| WithStmt -> Stmt
+        AssignStmt -> Stmt
+        Block -> Stmt
+        CallStmt -> Stmt
+        CaseStmt -> Stmt
+        ExitStmt -> Stmt
+        EvalStmt -> Stmt
+        ForStmt -> Stmt
+        IfStmt -> Stmt
+        LockStmt -> Stmt
+        LoopStmt -> Stmt
+        RaiseStmt -> Stmt
+        RepeatStmt -> Stmt
+        ReturnStmt -> Stmt
+        TryFinStmt -> Stmt
+        TryXptStmt -> Stmt
+        TCaseStmt -> Stmt
+        WhileStmt -> Stmt
+        WithStmt -> Stmt
 
         Expr ":=" Expr -> AssignStmt
 
@@ -233,8 +233,8 @@ exports
 
         "(" IdList? ")" -> GenActls
 
-        "MODULE" Id ("EXPORTS" IdList)? ";" Import* Block Id "."
-		| "MODULE" Id ("EXPORTS" IdList)? "=" Id GenActls "END" Id "." -> Module
+        "MODULE" Id ("EXPORTS" IdList)? ";" Import* Block Id "." -> Module
+        "MODULE" Id ("EXPORTS" IdList)? "=" Id GenActls "END" Id "." -> Module
 
         "GENERIC" "INTERFACE" Id GenFmls ";" Import* Decl* "END" Id "." -> GenInf
 

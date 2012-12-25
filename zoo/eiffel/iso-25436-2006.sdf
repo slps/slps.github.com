@@ -24,14 +24,14 @@ exports
 	","
        -> Note-values
 
-        Identifier
-		| Manifest-constant -> Note-item
+        Identifier -> Note-item
+        Manifest-constant -> Note-item
 
         Header-mark? "class" Class-name -> Class-header
 
-        "deferred"
-		| "expanded"
-		| "frozen" -> Header-mark
+        "deferred" -> Header-mark
+        "expanded" -> Header-mark
+        "frozen" -> Header-mark
 
         "obsolete" Message -> Obsolete
 
@@ -69,9 +69,9 @@ exports
 
         Precondition? Local-declarations? Feature-body Postcondition? Rescue? "end" -> Attribute-or-routine
 
-        Deferred
-		| Effective-routine
-		| Attribute -> Feature-body
+        Deferred -> Feature-body
+        Effective-routine -> Feature-body
+        Attribute -> Feature-body
 
         Feature-name Alias? -> Extended-feature-name
 
@@ -79,38 +79,38 @@ exports
 
         "alias" """ Alias-name """ "convert"? -> Alias
 
-        Operator
-		| Bracket -> Alias-name
+        Operator -> Alias-name
+        Bracket -> Alias-name
 
         "[]" -> Bracket
 
-        Unary
-		| Binary -> Operator
+        Unary -> Operator
+        Binary -> Operator
 
-        "not"
-		| "+"
-		| "-"
-		| Free-unary -> Unary
+        "not" -> Unary
+        "+" -> Unary
+        "-" -> Unary
+        Free-unary -> Unary
 
-        "+"
-		| "-"
-		| "*"
-		| "/"
-		| "//"
-		| "\\"
-		| "^"
-		| ".."
-		| "<"
-		| ">"
-		| "<="
-		| ">="
-		| "and"
-		| "or"
-		| "xor"
-		| "and" "then"
-		| "or" "else"
-		| "implies"
-		| Free-binary -> Binary
+        "+" -> Binary
+        "-" -> Binary
+        "*" -> Binary
+        "/" -> Binary
+        "//" -> Binary
+        "\\" -> Binary
+        "^" -> Binary
+        ".." -> Binary
+        "<" -> Binary
+        ">" -> Binary
+        "<=" -> Binary
+        ">=" -> Binary
+        "and" -> Binary
+        "or" -> Binary
+        "xor" -> Binary
+        "and" "then" -> Binary
+        "or" "else" -> Binary
+        "implies" -> Binary
+        Free-binary -> Binary
 
         "assign" Feature-name -> Assigner-mark
 
@@ -154,8 +154,8 @@ exports
 
         Clients Header-comment? Feature-set -> New-export-item
 
-        Feature-list
-		| "all" -> Feature-set
+        Feature-list -> Feature-set
+        "all" -> Feature-set
 
         
 	Feature-name
@@ -178,13 +178,13 @@ exports
 
         "deferred" -> Deferred
 
-        Internal
-		| External -> Effective-routine
+        Internal -> Effective-routine
+        External -> Effective-routine
 
         Routine-mark Compound -> Internal
 
-        "do"
-		| Once -> Routine-mark
+        "do" -> Routine-mark
+        Once -> Routine-mark
 
         "once" ("(" Key-list ")")? -> Once
 
@@ -200,17 +200,17 @@ exports
 	";"
        -> Compound
 
-        Creation-instruction
-		| Call
-		| Assignment
-		| Assigner-call
-		| Conditional
-		| Multi-branch
-		| Loop
-		| Debug
-		| Precursor
-		| Check
-		| Retry -> Instruction
+        Creation-instruction -> Instruction
+        Call -> Instruction
+        Assignment -> Instruction
+        Assigner-call -> Instruction
+        Conditional -> Instruction
+        Multi-branch -> Instruction
+        Loop -> Instruction
+        Debug -> Instruction
+        Precursor -> Instruction
+        Check -> Instruction
+        Retry -> Instruction
 
         "require" "else"? Assertion -> Precondition
 
@@ -225,8 +225,8 @@ exports
 
         Tag-mark? Unlabeled-assertion-clause -> Assertion-clause
 
-        Boolean-expression
-		| Comment -> Unlabeled-assertion-clause
+        Boolean-expression -> Unlabeled-assertion-clause
+        Comment -> Unlabeled-assertion-clause
 
         Tag ":" -> Tag-mark
 
@@ -248,22 +248,22 @@ exports
 
         "undefine" Feature-list -> Undefine
 
-        Class-or-tuple-type
-		| Formal-generic-name
-		| Anchored -> Type
+        Class-or-tuple-type -> Type
+        Formal-generic-name -> Type
+        Anchored -> Type
 
-        Class-type
-		| Tuple-type -> Class-or-tuple-type
+        Class-type -> Class-or-tuple-type
+        Tuple-type -> Class-or-tuple-type
 
         Attachment-mark? Class-name Actual-generics? -> Class-type
 
-        "?"
-		| "!" -> Attachment-mark
+        "?" -> Attachment-mark
+        "!" -> Attachment-mark
 
         Attachment-mark? "like" Anchor -> Anchored
 
-        Feature-name
-		| "Current" -> Anchor
+        Feature-name -> Anchor
+        "Current" -> Anchor
 
         "[" Type-list "]" -> Actual-generics
 
@@ -285,8 +285,8 @@ exports
 
         "->" Constraining-types Constraint-creators? -> Constraint
 
-        Single-constraint
-		| Multiple-constraint -> Constraining-types
+        Single-constraint -> Constraining-types
+        Multiple-constraint -> Constraining-types
 
         Type Renaming? -> Single-constraint
 
@@ -305,8 +305,8 @@ exports
 
         "[" Tuple-parameters "]" -> Tuple-parameter-list
 
-        Type-list
-		| Entity-declaration-list -> Tuple-parameters
+        Type-list -> Tuple-parameters
+        Entity-declaration-list -> Tuple-parameters
 
         "[" Expression-list "]" -> Manifest-tuple
 
@@ -322,8 +322,8 @@ exports
 	","
        -> Converter-list
 
-        Conversion-procedure
-		| Conversion-query -> Converter
+        Conversion-procedure -> Converter
+        Conversion-query -> Converter
 
         Feature-name "({" Type-list "})" -> Conversion-procedure
 
@@ -353,10 +353,10 @@ exports
 	","
        -> Choices
 
-        Constant
-		| Manifest-type
-		| Constant-interval
-		| Type-interval -> Choice
+        Constant -> Choice
+        Manifest-type -> Choice
+        Constant-interval -> Choice
+        Type-interval -> Choice
 
         Constant ".." Constant -> Constant-interval
 
@@ -374,20 +374,20 @@ exports
 
         "attribute" Compound -> Attribute
 
-        Variable
-		| Read-only -> Entity
+        Variable -> Entity
+        Read-only -> Entity
 
-        Variable-attribute
-		| Local -> Variable
+        Variable-attribute -> Variable
+        Local -> Variable
 
         Feature-name -> Variable-attribute
 
-        Identifier
-		| "Result" -> Local
+        Identifier -> Local
+        "Result" -> Local
 
-        Formal
-		| Constant-attribute
-		| "Current" -> Read-only
+        Formal -> Read-only
+        Constant-attribute -> Read-only
+        "Current" -> Read-only
 
         Identifier -> Formal
 
@@ -416,26 +416,26 @@ exports
 
         Expression Comparison Expression -> Equality
 
-        "="
-		| "/="
-		| "~"
-		| "/~" -> Comparison
+        "=" -> Comparison
+        "/=" -> Comparison
+        "~" -> Comparison
+        "/~" -> Comparison
 
         Variable ":=" Expression -> Assignment
 
         Expression ":=" Expression -> Assigner-call
 
-        Object-call
-		| Non-object-call -> Call
+        Object-call -> Call
+        Non-object-call -> Call
 
         (Target ".")? Unqualified-call -> Object-call
 
         Feature-name Actuals? -> Unqualified-call
 
-        Local
-		| Read-only
-		| Call
-		| Parenthesized-target -> Target
+        Local -> Target
+        Read-only -> Target
+        Call -> Target
+        Parenthesized-target -> Target
 
         "(|" Expression "|)" -> Parenthesized-target
 
@@ -454,23 +454,23 @@ exports
 
         "retry" -> Retry
 
-        Call-agent
-		| Inline-agent -> Agent
+        Call-agent -> Agent
+        Inline-agent -> Agent
 
         "agent" Call-agent-body -> Call-agent
 
         "agent" Formal-arguments? Type-mark? Attribute-or-routine? Agent-actuals? -> Inline-agent
 
-        Agent-qualified
-		| Agent-unqualified -> Call-agent-body
+        Agent-qualified -> Call-agent-body
+        Agent-unqualified -> Call-agent-body
 
         Agent-target "." Agent-unqualified -> Agent-qualified
 
         Feature-name Agent-actuals? -> Agent-unqualified
 
-        Entity
-		| Parenthesized
-		| Manifest-type -> Agent-target
+        Entity -> Agent-target
+        Parenthesized -> Agent-target
+        Manifest-type -> Agent-target
 
         "(" Agent-actual-list ")" -> Agent-actuals
 
@@ -479,31 +479,31 @@ exports
 	","
        -> Agent-actual-list
 
-        Expression
-		| Placeholder -> Agent-actual
+        Expression -> Agent-actual
+        Placeholder -> Agent-actual
 
         Manifest-type? "?" -> Placeholder
 
-        Basic-expression
-		| Special-expression -> Expression
+        Basic-expression -> Expression
+        Special-expression -> Expression
 
-        Read-only
-		| Local
-		| Call
-		| Precursor
-		| Equality
-		| Parenthesized
-		| Old
-		| Operator-expression
-		| Bracket-expression
-		| Creation-expression -> Basic-expression
+        Read-only -> Basic-expression
+        Local -> Basic-expression
+        Call -> Basic-expression
+        Precursor -> Basic-expression
+        Equality -> Basic-expression
+        Parenthesized -> Basic-expression
+        Old -> Basic-expression
+        Operator-expression -> Basic-expression
+        Bracket-expression -> Basic-expression
+        Creation-expression -> Basic-expression
 
-        Manifest-constant
-		| Manifest-tuple
-		| Agent
-		| Object-test
-		| Once-string
-		| Address -> Special-expression
+        Manifest-constant -> Special-expression
+        Manifest-tuple -> Special-expression
+        Agent -> Special-expression
+        Object-test -> Special-expression
+        Once-string -> Special-expression
+        Address -> Special-expression
 
         "(" Expression ")" -> Parenthesized
 
@@ -511,12 +511,12 @@ exports
 
         "once" Manifest-string -> Once-string
 
-        Basic-expression
-		| Boolean-constant
-		| Object-test -> Boolean-expression
+        Basic-expression -> Boolean-expression
+        Boolean-constant -> Boolean-expression
+        Object-test -> Boolean-expression
 
-        Unary-expression
-		| Binary-expression -> Operator-expression
+        Unary-expression -> Operator-expression
+        Binary-expression -> Operator-expression
 
         Unary Expression -> Unary-expression
 
@@ -524,39 +524,39 @@ exports
 
         Bracket-target "[" Actuals "]" -> Bracket-expression
 
-        Target
-		| Once-string
-		| Manifest-constant
-		| Manifest-tuple -> Bracket-target
+        Target -> Bracket-target
+        Once-string -> Bracket-target
+        Manifest-constant -> Bracket-target
+        Manifest-tuple -> Bracket-target
 
-        Manifest-constant
-		| Constant-attribute -> Constant
+        Manifest-constant -> Constant
+        Constant-attribute -> Constant
 
         Manifest-type? Manifest-value -> Manifest-constant
 
         "{" Type "}" -> Manifest-type
 
-        Boolean-constant
-		| Character-constant
-		| Integer-constant
-		| Real-constant
-		| Manifest-string
-		| Manifest-type -> Manifest-value
+        Boolean-constant -> Manifest-value
+        Character-constant -> Manifest-value
+        Integer-constant -> Manifest-value
+        Real-constant -> Manifest-value
+        Manifest-string -> Manifest-value
+        Manifest-type -> Manifest-value
 
-        "+"
-		| "-" -> Sign
+        "+" -> Sign
+        "-" -> Sign
 
         Sign? Integer -> Integer-constant
 
         "'" Character "'" -> Character-constant
 
-        "True"
-		| "False" -> Boolean-constant
+        "True" -> Boolean-constant
+        "False" -> Boolean-constant
 
         Sign? Real -> Real-constant
 
-        Basic-manifest-string
-		| Verbatim-string -> Manifest-string
+        Basic-manifest-string -> Manifest-string
+        Verbatim-string -> Manifest-string
 
         """ String-content """ -> Basic-manifest-string
 
@@ -571,24 +571,24 @@ exports
 
         Close-bracket Simple-string? """ -> Verbatim-string-closer
 
-        "["
-		| "{" -> Open-bracket
+        "[" -> Open-bracket
+        "{" -> Open-bracket
 
-        "]"
-		| "}" -> Close-bracket
+        "]" -> Close-bracket
+        "}" -> Close-bracket
 
         "external" External-language External-name? -> External
 
-        Unregistered-language
-		| Registered-language -> External-language
+        Unregistered-language -> External-language
+        Registered-language -> External-language
 
         Manifest-string -> Unregistered-language
 
         "alias" Manifest-string -> External-name
 
-        C-external
-		| CPP-external
-		| DLL-external -> Registered-language
+        C-external -> Registered-language
+        CPP-external -> Registered-language
+        DLL-external -> Registered-language
 
         "signature" External-argument-types? (":" External-type)? -> External-signature
 
@@ -608,8 +608,8 @@ exports
 	","
        -> External-file-list
 
-        External-user-file
-		| External-system-file -> External-file
+        External-user-file -> External-file
+        External-system-file -> External-file
 
         """ Simple-string """ -> External-user-file
 
@@ -636,35 +636,35 @@ exports
 
         "0" Integer-base-letter -> Integer-base
 
-        "b"
-		| "c"
-		| "x"
-		| "B"
-		| "C"
-		| "X" -> Integer-base-letter
+        "b" -> Integer-base-letter
+        "c" -> Integer-base-letter
+        "x" -> Integer-base-letter
+        "B" -> Integer-base-letter
+        "C" -> Integer-base-letter
+        "X" -> Integer-base-letter
 
         Digit+ -> Digit-sequence
 
-        "0"
-		| "1"
-		| "2"
-		| "3"
-		| "4"
-		| "5"
-		| "6"
-		| "7"
-		| "8"
-		| "9"
-		| "a"
-		| "b"
-		| "c"
-		| "d"
-		| "e"
-		| "f"
-		| "A"
-		| "B"
-		| "C"
-		| "D"
-		| "E"
-		| "F"
-		| "_" -> Digit
+        "0" -> Digit
+        "1" -> Digit
+        "2" -> Digit
+        "3" -> Digit
+        "4" -> Digit
+        "5" -> Digit
+        "6" -> Digit
+        "7" -> Digit
+        "8" -> Digit
+        "9" -> Digit
+        "a" -> Digit
+        "b" -> Digit
+        "c" -> Digit
+        "d" -> Digit
+        "e" -> Digit
+        "f" -> Digit
+        "A" -> Digit
+        "B" -> Digit
+        "C" -> Digit
+        "D" -> Digit
+        "E" -> Digit
+        "F" -> Digit
+        "_" -> Digit

@@ -24,10 +24,10 @@ exports
 
         Number (ArithmeticOperator Number)* -> Arithmetic
 
-        INT
-		| DOUBLE
-		| ID
-		| LPAREN ConditionalExpression RPAREN -> Number
+        INT -> Number
+        DOUBLE -> Number
+        ID -> Number
+        LPAREN ConditionalExpression RPAREN -> Number
 
         BooleanExpression (QUESTION Conditional COLON Conditional)? -> ConditionalExpression
 
@@ -39,11 +39,11 @@ exports
 
         Number (ArithmeticOperator Number)* -> Expression
 
-        SKIP
-		| Assignment
-		| Conditional
-		| Loop
-		| StatementList -> Statement
+        SKIP -> Statement
+        Assignment -> Statement
+        Conditional -> Statement
+        Loop -> Statement
+        StatementList -> Statement
 
         ID DEF ArithmeticExpression -> Assignment
 
@@ -53,28 +53,28 @@ exports
 
         CLPAREN Statement SEMI (Statement SEMI)* CRPAREN -> StatementList
 
-        DEF
-		| QUESTION
-		| CONJUNC
-		| DISJUNC
-		| ArithmeticOperator
-		| RelationalOperator -> Operator
+        DEF -> Operator
+        QUESTION -> Operator
+        CONJUNC -> Operator
+        DISJUNC -> Operator
+        ArithmeticOperator -> Operator
+        RelationalOperator -> Operator
 
-        ADD
-		| SUBTRACT
-		| DIVIDE
-		| MULTIPLY
-		| EXPON -> ArithmeticOperator
+        ADD -> ArithmeticOperator
+        SUBTRACT -> ArithmeticOperator
+        DIVIDE -> ArithmeticOperator
+        MULTIPLY -> ArithmeticOperator
+        EXPON -> ArithmeticOperator
 
-        EQUAL
-		| NOTEQUAL
-		| MORETHAN
-		| LESSTHAN
-		| MORETHANEQUAL
-		| LESSTHANEQUAL -> RelationalOperator
+        EQUAL -> RelationalOperator
+        NOTEQUAL -> RelationalOperator
+        MORETHAN -> RelationalOperator
+        LESSTHAN -> RelationalOperator
+        MORETHANEQUAL -> RelationalOperator
+        LESSTHANEQUAL -> RelationalOperator
 
-        INTKEYWORD
-		| DOUBLEKEYWORD -> Type
+        INTKEYWORD -> Type
+        DOUBLEKEYWORD -> Type
 
         "const" -> CONST
 

@@ -14,13 +14,13 @@ exports
 
         DONE SEMICOLON -> Done
 
-        Statement-main
-		| OPENCURL Statement-main (SEMICOLON Statement-main)* CLOSECURL -> Statement
+        Statement-main -> Statement
+        OPENCURL Statement-main (SEMICOLON Statement-main)* CLOSECURL -> Statement
 
-        SKIP
-		| If-statement
-		| While-statement
-		| Assignment -> Statement-main
+        SKIP -> Statement-main
+        If-statement -> Statement-main
+        While-statement -> Statement-main
+        Assignment -> Statement-main
 
         IF Expr THEN a::Statement ELSE b::Statement -> If-statement
 
@@ -28,9 +28,9 @@ exports
 
         Id DEFINEDAS Expr -> Assignment
 
-        Const-dec
-		| Var-dec
-		| Proc-dec -> Header-declaration
+        Const-dec -> Header-declaration
+        Var-dec -> Header-declaration
+        Proc-dec -> Header-declaration
 
         CONST CONSTID COLON Types DEFINEDAS Expr SEMICOLON -> Const-dec
 
@@ -62,10 +62,10 @@ exports
 
         a::Arith-atom (EXPONENTIAL b::Arith-atom)* -> Arith-expo
 
-        (ADDITION | SUBTRACTION)? Number
-		| Id
-		| OPENPAR Expr CLOSEPAR
-		| Proc-call -> Arith-atom
+        (ADDITION | SUBTRACTION)? Number -> Arith-atom
+        Id -> Arith-atom
+        OPENPAR Expr CLOSEPAR -> Arith-atom
+        Proc-call -> Arith-atom
 
         Id OPENPAR (a::Expr (COMMA b::Expr)*)? CLOSEPAR -> Proc-call
 
@@ -97,12 +97,12 @@ exports
 
         "?" -> MIXFIX
 
-        EQUALITY
-		| NON-EQUALITY
-		| L-THAN
-		| LE-THAN
-		| G-THAN
-		| GE-THAN -> Relationals
+        EQUALITY -> Relationals
+        NON-EQUALITY -> Relationals
+        L-THAN -> Relationals
+        LE-THAN -> Relationals
+        G-THAN -> Relationals
+        GE-THAN -> Relationals
 
         "==" -> EQUALITY
 
@@ -116,8 +116,8 @@ exports
 
         ">=" -> GE-THAN
 
-        AND
-		| OR -> Logical
+        AND -> Logical
+        OR -> Logical
 
         "/\\" -> AND
 
@@ -145,8 +145,8 @@ exports
 
         "do" -> DO
 
-        INTEGER
-		| DOUBLE -> Types
+        INTEGER -> Types
+        DOUBLE -> Types
 
         "int" -> INTEGER
 
@@ -160,15 +160,15 @@ exports
 
         (" " | "\t" | "\r" | "\n")+ -> WS
 
-        INT-VAL
-		| DOUBLE-VAL -> Number
+        INT-VAL -> Number
+        DOUBLE-VAL -> Number
 
         ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ -> INT-VAL
 
         INT-VAL? "." ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")* (("e" | "E") ("+" | "-")? INT-VAL)? -> DOUBLE-VAL
 
-        ID
-		| CONSTID -> Id
+        ID -> Id
+        CONSTID -> Id
 
         ("A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z") ("A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z" | "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "_")* -> CONSTID
 

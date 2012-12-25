@@ -13,19 +13,19 @@ exports
 
         Element ("|" Element)* -> Elements
 
-        NonTerminal
-		| Terminal
-		| "[" Element ("|" Element)* "]"
-		| "{" Element ("|" Element)* "}"
-		| "|"
-		| "["
-		| "]"
-		| "{"
-		| "}"
-		| "<"
-		| ">"
-		| "..."
-		| "::="
-		| Element Element -> Element
+        NonTerminal -> Element
+        Terminal -> Element
+        "[" Element ("|" Element)* "]" -> Element
+        "{" Element ("|" Element)* "}" -> Element
+        "|" -> Element
+        "[" -> Element
+        "]" -> Element
+        "{" -> Element
+        "}" -> Element
+        "<" -> Element
+        ">" -> Element
+        "..." -> Element
+        "::=" -> Element
+        Element Element -> Element
 
         STR -> Terminal

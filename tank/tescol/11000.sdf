@@ -12,9 +12,9 @@ exports
 
         DONE SEMI -> Done
 
-        Constant
-		| Variable
-		| Procedure -> Declarations
+        Constant -> Declarations
+        Variable -> Declarations
+        Procedure -> Declarations
 
         CONSTANT CID COLON (INTEGER | DOUBLE) DEFINE Expression SEMI -> Constant
 
@@ -38,11 +38,11 @@ exports
 
         (ID | CID) DEFINE Expression -> Assignment
 
-        INT
-		| DOU
-		| ID
-		| CID
-		| LEFTBRACKET Expression RIGHTBRACKET -> Atom
+        INT -> Atom
+        DOU -> Atom
+        ID -> Atom
+        CID -> Atom
+        LEFTBRACKET Expression RIGHTBRACKET -> Atom
 
         Atom (EXPONENTIATION Atom)? -> Expo
 
@@ -64,13 +64,13 @@ exports
 
         Disjunction (QUESTION Disjunction COLON Disjunction)* -> Conditexpr
 
-        Conditexpr
-		| (ID | CID) LEFTBRACKET (Expression (COMMA Expression)*)? RIGHTBRACKET -> Runproc
+        Conditexpr -> Runproc
+        (ID | CID) LEFTBRACKET (Expression (COMMA Expression)*)? RIGHTBRACKET -> Runproc
 
         Runproc -> Expression
 
-        INTEGER
-		| DOUBLE -> Numbervalues
+        INTEGER -> Numbervalues
+        DOUBLE -> Numbervalues
 
         ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ -> INT
 
@@ -78,12 +78,12 @@ exports
 
         ("e" | "E") ("+" | "-") INT -> EXPONENT
 
-        EQUALITY
-		| NONEQUALITY
-		| GREATERTHAN
-		| LESSTHAN
-		| GREATEROREQUAL
-		| LESSOREQUAL -> Relationships
+        EQUALITY -> Relationships
+        NONEQUALITY -> Relationships
+        GREATERTHAN -> Relationships
+        LESSTHAN -> Relationships
+        GREATEROREQUAL -> Relationships
+        LESSOREQUAL -> Relationships
 
         "done" -> DONE
 

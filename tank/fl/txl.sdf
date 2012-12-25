@@ -9,13 +9,13 @@ exports
 
         Id Id+ "=" Expression Newline -> Fun
 
-        Expression Op Expression
-		| Id Expression+
-		| "if" Expression "then" Expression "else" Expression
-		| "(" Expression ")"
-		| Id
-		| Number -> Expression
+        Expression Op Expression -> Expression
+        Id Expression+ -> Expression
+        "if" Expression "then" Expression "else" Expression -> Expression
+        "(" Expression ")" -> Expression
+        Id -> Expression
+        Number -> Expression
 
-        "+"
-		| "-"
-		| "==" -> Op
+        "+" -> Op
+        "-" -> Op
+        "==" -> Op

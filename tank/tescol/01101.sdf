@@ -24,15 +24,15 @@ exports
 
         BECOMES Cond-statements -> Proc-becomes
 
-        Procedure-call
-		| CID
-		| ID
-		| OPENPARENTHESIS Mix-fix CLOSEDPARENTHESIS
-		| INT
-		| DOUBLE -> Atom
+        Procedure-call -> Atom
+        CID -> Atom
+        ID -> Atom
+        OPENPARENTHESIS Mix-fix CLOSEDPARENTHESIS -> Atom
+        INT -> Atom
+        DOUBLE -> Atom
 
-        SUB Atom
-		| Atom -> Negation
+        SUB Atom -> Negation
+        Atom -> Negation
 
         Negation (EXP Negation)* -> Exponential
 
@@ -52,11 +52,11 @@ exports
 
         Mix-fix (COMMA Mix-fix)* -> Parameters
 
-        Conditional
-		| Loop
-		| Assignment
-		| Skip
-		| Procedure-call -> Statement
+        Conditional -> Statement
+        Loop -> Statement
+        Assignment -> Statement
+        Skip -> Statement
+        Procedure-call -> Statement
 
         SKIP SEMI -> Skip
 
@@ -70,13 +70,13 @@ exports
 
         DO Cond-statements -> Do-statement
 
-        OPENBRACKET Statement* CLOSEDBRACKET
-		| Statement -> Cond-statements
+        OPENBRACKET Statement* CLOSEDBRACKET -> Cond-statements
+        Statement -> Cond-statements
 
         VarIDs BECOMES Mix-fix SEMI -> Assignment
 
-        CID
-		| ID -> VarIDs
+        CID -> VarIDs
+        ID -> VarIDs
 
         CID -> ConIDs
 
@@ -86,8 +86,8 @@ exports
 
         BEGINCOMMENT ANY* ENDCOMMENT -> COMMENT
 
-        "int"
-		| "double" -> TYPE
+        "int" -> TYPE
+        "double" -> TYPE
 
         "done" -> DONE
 

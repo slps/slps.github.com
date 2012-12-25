@@ -20,11 +20,11 @@ exports
 
         CHECKOUT Stat DONE SEMI -> MainStat
 
-        Skip
-		| Assign
-		| Cond
-		| Loop
-		| LCURLYPAR Stat* RCURLYPAR SEMI -> Stat
+        Skip -> Stat
+        Assign -> Stat
+        Cond -> Stat
+        Loop -> Stat
+        LCURLYPAR Stat* RCURLYPAR SEMI -> Stat
 
         SKIP SEMI -> Skip
 
@@ -40,19 +40,19 @@ exports
 
         UnaryExpr (EXPONENTIATE UnaryExpr)* -> ExpExpr
 
-        MINUS Atom
-		| PLUS Atom
-		| Atom -> UnaryExpr
+        MINUS Atom -> UnaryExpr
+        PLUS Atom -> UnaryExpr
+        Atom -> UnaryExpr
 
-        INT
-		| DOUBLE
-		| CONST-ID
-		| VAR-ID
-		| LPAR BracketedExpr RPAR
-		| ProcApply -> Atom
+        INT -> Atom
+        DOUBLE -> Atom
+        CONST-ID -> Atom
+        VAR-ID -> Atom
+        LPAR BracketedExpr RPAR -> Atom
+        ProcApply -> Atom
 
-        CondExpr
-		| ArithmeticExpr -> BracketedExpr
+        CondExpr -> BracketedExpr
+        ArithmeticExpr -> BracketedExpr
 
         TestPart e1::ArithmeticExpr COLON e2::ArithmeticExpr -> CondExpr
 
@@ -66,31 +66,31 @@ exports
 
         BooleanAtom (AND BooleanAtom)* -> ConjunctionExpr
 
-        ArithmeticExpr BooleanOperator ArithmeticExpr
-		| LPAR BooleanExpr RPAR -> BooleanAtom
+        ArithmeticExpr BooleanOperator ArithmeticExpr -> BooleanAtom
+        LPAR BooleanExpr RPAR -> BooleanAtom
 
-        EQUAL
-		| NOT-EQUAL
-		| GREATER
-		| GREATER-EQUAL
-		| LESS
-		| LESS-EQUAL -> BooleanOperator
+        EQUAL -> BooleanOperator
+        NOT-EQUAL -> BooleanOperator
+        GREATER -> BooleanOperator
+        GREATER-EQUAL -> BooleanOperator
+        LESS -> BooleanOperator
+        LESS-EQUAL -> BooleanOperator
 
-        INT-TYPE
-		| DOUBLE-TYPE -> Type
+        INT-TYPE -> Type
+        DOUBLE-TYPE -> Type
 
         ("e" | "E") ("+" | "-")? ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ -> EXPONENT
 
-        "0"
-		| "1"
-		| "2"
-		| "3"
-		| "4"
-		| "5"
-		| "6"
-		| "7"
-		| "8"
-		| "9" -> DIGIT
+        "0" -> DIGIT
+        "1" -> DIGIT
+        "2" -> DIGIT
+        "3" -> DIGIT
+        "4" -> DIGIT
+        "5" -> DIGIT
+        "6" -> DIGIT
+        "7" -> DIGIT
+        "8" -> DIGIT
+        "9" -> DIGIT
 
         ";" -> SEMI
 

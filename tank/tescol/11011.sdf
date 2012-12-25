@@ -12,13 +12,13 @@ exports
 
         CONST CONST-ID COLON Dec-types DEFAS Expr SEMI -> Dec-const
 
-        ID
-		| CONST-ID -> Ids
+        ID -> Ids
+        CONST-ID -> Ids
 
         PROC ID LPAR Param-list COLON Dec-types DEFAS Statement SEMI -> Dec-proc
 
-        TYPE-INT
-		| TYPE-DOUBLE -> Dec-types
+        TYPE-INT -> Dec-types
+        TYPE-DOUBLE -> Dec-types
 
         Param-element? (COMMA Param-element)* -> Param-list
 
@@ -26,11 +26,11 @@ exports
 
         CHECKOUT Statement SEMI -> Statements
 
-        Assign
-		| SKIP
-		| Conditional
-		| Loop
-		| Statement-group -> Statement
+        Assign -> Statement
+        SKIP -> Statement
+        Conditional -> Statement
+        Loop -> Statement
+        Statement-group -> Statement
 
         LCB Statement (SEMI Statement)* RCB -> Statement-group
 
@@ -54,10 +54,10 @@ exports
 
         Atom (ARITH-EXP Atom)* -> Exp-exp
 
-        INT
-		| DOUBLE
-		| Ids Argument-list?
-		| LPAR Expr RPAR -> Atom
+        INT -> Atom
+        DOUBLE -> Atom
+        Ids Argument-list? -> Atom
+        LPAR Expr RPAR -> Atom
 
         LPAR (Expr (COMMA Expr)*)? RPAR -> Argument-list
 

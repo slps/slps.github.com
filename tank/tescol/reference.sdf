@@ -6,9 +6,9 @@ exports
   context-free syntax
         TROLLEY CONSTID CONTAINS (Declaration SEMI)* CHECKOUT Statement SEMI DONE SEMI -> Program
 
-        ConstDecl
-		| VarDecl
-		| ProcDecl -> Declaration
+        ConstDecl -> Declaration
+        VarDecl -> Declaration
+        ProcDecl -> Declaration
 
         CONST CONSTID COLON t::Type DEFAS e::Expression -> ConstDecl
 
@@ -16,9 +16,9 @@ exports
 
         PROC (a::ID | a::CONSTID) LPAR p::ParamList RPAR COLON t::Type DEFAS st::Statement -> ProcDecl
 
-        LPAR Expression RPAR
-		| CONSTID p::ProcApp
-		| ID p::ProcApp -> Term
+        LPAR Expression RPAR -> Term
+        CONSTID p::ProcApp -> Term
+        ID p::ProcApp -> Term
 
         SUB* Term -> Unary
 
@@ -38,14 +38,14 @@ exports
 
         a::Conj (TE b::Expression COLON c::Expression)? -> Expression
 
-        
-		| LPAR AppList RPAR -> ProcApp
+         -> ProcApp
+        LPAR AppList RPAR -> ProcApp
 
-        
-		| e::Expression (COMMA f::Expression)* -> AppList
+         -> AppList
+        e::Expression (COMMA f::Expression)* -> AppList
 
-        INTEGER
-		| DOUBLE -> Number
+        INTEGER -> Number
+        DOUBLE -> Number
 
         (a::ID | a::CONSTID) DEFAS e::Expression -> Assign
 
@@ -53,23 +53,23 @@ exports
 
         WHILE e::Expression DO Statement -> Loop
 
-        
-		| p::ParamElem (COMMA q::ParamElem)* -> ParamList
+         -> ParamList
+        p::ParamElem (COMMA q::ParamElem)* -> ParamList
 
         ID COLON Type -> ParamElem
 
-        StmtElem
-		| StmtList -> Statement
+        StmtElem -> Statement
+        StmtList -> Statement
 
         LBRACE s::StmtElem (SEMI t::StmtElem)* RBRACE -> StmtList
 
-        SKIP
-		| Assign
-		| CondSt
-		| Loop -> StmtElem
+        SKIP -> StmtElem
+        Assign -> StmtElem
+        CondSt -> StmtElem
+        Loop -> StmtElem
 
-        INT
-		| DOUB -> Type
+        INT -> Type
+        DOUB -> Type
 
         "done" -> DONE
 
@@ -121,8 +121,8 @@ exports
 
         "-" -> SUB
 
-        MULT
-		| DIV -> MULTOP
+        MULT -> MULTOP
+        DIV -> MULTOP
 
         "*" -> MULT
 
@@ -134,13 +134,13 @@ exports
 
         "\\/" -> CONJUNC
 
-        LT
-		| LTE
-		| GT
-		| GTE -> RELOP
+        LT -> RELOP
+        LTE -> RELOP
+        GT -> RELOP
+        GTE -> RELOP
 
-        ET
-		| NET -> EQOP
+        ET -> EQOP
+        NET -> EQOP
 
         "==" -> ET
 
@@ -156,70 +156,70 @@ exports
 
         "?" -> TE
 
-        "0"
-		| "1"
-		| "2"
-		| "3"
-		| "4"
-		| "5"
-		| "6"
-		| "7"
-		| "8"
-		| "9" -> DIGIT
+        "0" -> DIGIT
+        "1" -> DIGIT
+        "2" -> DIGIT
+        "3" -> DIGIT
+        "4" -> DIGIT
+        "5" -> DIGIT
+        "6" -> DIGIT
+        "7" -> DIGIT
+        "8" -> DIGIT
+        "9" -> DIGIT
 
-        "A"
-		| "B"
-		| "C"
-		| "D"
-		| "E"
-		| "F"
-		| "G"
-		| "H"
-		| "I"
-		| "J"
-		| "K"
-		| "L"
-		| "M"
-		| "N"
-		| "O"
-		| "P"
-		| "Q"
-		| "R"
-		| "S"
-		| "T"
-		| "U"
-		| "V"
-		| "W"
-		| "X"
-		| "Y"
-		| "Z" -> UPPER
+        "A" -> UPPER
+        "B" -> UPPER
+        "C" -> UPPER
+        "D" -> UPPER
+        "E" -> UPPER
+        "F" -> UPPER
+        "G" -> UPPER
+        "H" -> UPPER
+        "I" -> UPPER
+        "J" -> UPPER
+        "K" -> UPPER
+        "L" -> UPPER
+        "M" -> UPPER
+        "N" -> UPPER
+        "O" -> UPPER
+        "P" -> UPPER
+        "Q" -> UPPER
+        "R" -> UPPER
+        "S" -> UPPER
+        "T" -> UPPER
+        "U" -> UPPER
+        "V" -> UPPER
+        "W" -> UPPER
+        "X" -> UPPER
+        "Y" -> UPPER
+        "Z" -> UPPER
 
-        "a"
-		| "b"
-		| "c"
-		| "d"
-		| "e"
-		| "f"
-		| "g"
-		| "h"
-		| "i"
-		| "j"
-		| "k"
-		| "l"
-		| "m"
-		| "n"
-		| "o"
-		| "p"
-		| "q"
-		| "r"
-		| "s"
-		| "t"
-		| "u"
-		| "v"
-		| "w"
-		| "x"
-		| "y"
-		| "z" -> LOWER
+        "a" -> LOWER
+        "b" -> LOWER
+        "c" -> LOWER
+        "d" -> LOWER
+        "e" -> LOWER
+        "f" -> LOWER
+        "g" -> LOWER
+        "h" -> LOWER
+        "i" -> LOWER
+        "j" -> LOWER
+        "k" -> LOWER
+        "l" -> LOWER
+        "m" -> LOWER
+        "n" -> LOWER
+        "o" -> LOWER
+        "p" -> LOWER
+        "q" -> LOWER
+        "r" -> LOWER
+        "s" -> LOWER
+        "t" -> LOWER
+        "u" -> LOWER
+        "v" -> LOWER
+        "w" -> LOWER
+        "x" -> LOWER
+        "y" -> LOWER
+        "z" -> LOWER
 
         ("+" | "-")? DIGIT+ -> INTEGER
 

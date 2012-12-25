@@ -8,8 +8,8 @@ exports
 
         CompilationUnit -> Stat
 
-        INT
-		| DOUBLE -> Type
+        INT -> Type
+        DOUBLE -> Type
 
         TROLLEY CONSTID CONTAINS de::Declarations CHECKOUT s::Statement SEMI DONE SEMI -> CompilationUnit
 
@@ -27,13 +27,13 @@ exports
 
         "{" SingleStatement (SEMI s::SingleStatement)+ "}" -> ListofStatement
 
-        SkipStm
-		| LoopStm
-		| CondStm
-		| a::AssgStm -> SingleStatement
+        SkipStm -> SingleStatement
+        LoopStm -> SingleStatement
+        CondStm -> SingleStatement
+        a::AssgStm -> SingleStatement
 
-        e::SingleStatement
-		| b::ListofStatement -> Statement
+        e::SingleStatement -> Statement
+        b::ListofStatement -> Statement
 
         SKIP -> SkipStm
 
@@ -43,8 +43,8 @@ exports
 
         ID COLON-EQUALS a1::ArithmeticExpr -> AssgStm
 
-        ConditionalExpr
-		| a::ApplyProcedure -> ArithmeticExpr
+        ConditionalExpr -> ArithmeticExpr
+        a::ApplyProcedure -> ArithmeticExpr
 
         ID LPAREN ExpressionList RPAREN -> ApplyProcedure
 
@@ -64,15 +64,15 @@ exports
 
         UnaryExpr ((MULTIPLICATION | DIVISION | EXPONENTIATION) UnaryExpr)* -> MultExpr
 
-        "-" Atom
-		| Atom -> UnaryExpr
+        "-" Atom -> UnaryExpr
+        Atom -> UnaryExpr
 
-        INTEGER
-		| FLOAT
-		| CONSTID
-		| "(" ConditionalExpr ")"
-		| ApplyProcedure
-		| ID -> Atom
+        INTEGER -> Atom
+        FLOAT -> Atom
+        CONSTID -> Atom
+        "(" ConditionalExpr ")" -> Atom
+        ApplyProcedure -> Atom
+        ID -> Atom
 
         ";" -> SEMI
 

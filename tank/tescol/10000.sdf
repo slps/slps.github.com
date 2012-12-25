@@ -6,16 +6,16 @@ exports
   context-free syntax
         TROLLEY CID CONTAINS NEWLINE* Decl* CHECKOUT NEWLINE* Stat DONE SEMI -> Prog
 
-        VAR ID COLON (INT | DOUBLE) SEMI NEWLINE*
-		| CONST CID COLON (INT | DOUBLE) COLON-EQUALS CondExpr SEMI NEWLINE*
-		| PROC a::ID LPAREN (Decl (COMMA Decl)*)? RPAREN COLON-EQUALS Stat SEMI NEWLINE* -> Decl
+        VAR ID COLON (INT | DOUBLE) SEMI NEWLINE* -> Decl
+        CONST CID COLON (INT | DOUBLE) COLON-EQUALS CondExpr SEMI NEWLINE* -> Decl
+        PROC a::ID LPAREN (Decl (COMMA Decl)*)? RPAREN COLON-EQUALS Stat SEMI NEWLINE* -> Decl
 
-        CondExpr
-		| SKIP
-		| Assign
-		| MultStat
-		| Ifthenelse
-		| Whileloop -> Stat
+        CondExpr -> Stat
+        SKIP -> Stat
+        Assign -> Stat
+        MultStat -> Stat
+        Ifthenelse -> Stat
+        Whileloop -> Stat
 
         IF LPAREN BoolExpr RPAREN THEN Stat (SEMI ELSE Stat)? -> Ifthenelse
 
@@ -39,10 +39,10 @@ exports
 
         Atom EXPONENTIATION? -> ExpoExpr
 
-        INT-NUMBER
-		| DOUBLE-NUMBER
-		| a::(CID | ID) (LPAREN (Expr (COMMA Expr)*)? RPAREN)?
-		| LPAREN CondExpr RPAREN -> Atom
+        INT-NUMBER -> Atom
+        DOUBLE-NUMBER -> Atom
+        a::(CID | ID) (LPAREN (Expr (COMMA Expr)*)? RPAREN)? -> Atom
+        LPAREN CondExpr RPAREN -> Atom
 
         "\r"? "\n" -> NEWLINE
 

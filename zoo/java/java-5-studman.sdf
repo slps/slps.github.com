@@ -23,12 +23,12 @@ exports
 
         "(" -> LPAREN
 
-        AnnotationMemberValueInitializer
-		| AnntotationMemberValuePairs -> AnnotationArguments
+        AnnotationMemberValueInitializer -> AnnotationArguments
+        AnntotationMemberValuePairs -> AnnotationArguments
 
-        ConditionalExpression
-		| Annotation
-		| AnnotationMemberArrayInitializer -> AnnotationMemberValueInitializer
+        ConditionalExpression -> AnnotationMemberValueInitializer
+        Annotation -> AnnotationMemberValueInitializer
+        AnnotationMemberArrayInitializer -> AnnotationMemberValueInitializer
 
         LogicalOrExpression (QUESTION AssignmentExpression COLON ConditionalExpression)? -> ConditionalExpression
 
@@ -52,11 +52,11 @@ exports
 
         UnaryExpression ((STAR | DIV | MOD) UnaryExpression)* -> MultiplicativeExpression
 
-        INC UnaryExpression
-		| DEC UnaryExpression
-		| MINUS UnaryExpression
-		| PLUS UnaryExpression
-		| UnaryExpressionNotPlusMinus -> UnaryExpression
+        INC UnaryExpression -> UnaryExpression
+        DEC UnaryExpression -> UnaryExpression
+        MINUS UnaryExpression -> UnaryExpression
+        PLUS UnaryExpression -> UnaryExpression
+        UnaryExpressionNotPlusMinus -> UnaryExpression
 
         "++" -> INC
 
@@ -66,11 +66,11 @@ exports
 
         "+" -> PLUS
 
-        BNOT UnaryExpression
-		| LNOT UnaryExpression
-		| lpb::LPAREN BuiltInTypeSpec RPAREN UnaryExpression
-		| lp::LPAREN ClassTypeSpec RPAREN UnaryExpressionNotPlusMinus
-		| PostfixExpression -> UnaryExpressionNotPlusMinus
+        BNOT UnaryExpression -> UnaryExpressionNotPlusMinus
+        LNOT UnaryExpression -> UnaryExpressionNotPlusMinus
+        lpb::LPAREN BuiltInTypeSpec RPAREN UnaryExpression -> UnaryExpressionNotPlusMinus
+        lp::LPAREN ClassTypeSpec RPAREN UnaryExpressionNotPlusMinus -> UnaryExpressionNotPlusMinus
+        PostfixExpression -> UnaryExpressionNotPlusMinus
 
         "~" -> BNOT
 
@@ -78,15 +78,15 @@ exports
 
         BuiltInType (lb::LBRACK RBRACK)* -> BuiltInTypeSpec
 
-        "void"
-		| "boolean"
-		| "byte"
-		| "char"
-		| "short"
-		| "int"
-		| "float"
-		| "long"
-		| "double" -> BuiltInType
+        "void" -> BuiltInType
+        "boolean" -> BuiltInType
+        "byte" -> BuiltInType
+        "char" -> BuiltInType
+        "short" -> BuiltInType
+        "int" -> BuiltInType
+        "float" -> BuiltInType
+        "long" -> BuiltInType
+        "double" -> BuiltInType
 
         "[" -> LBRACK
 
@@ -102,11 +102,11 @@ exports
 
         "<" -> LT
 
-        TypeArgumentSpec
-		| WildcardType -> TypeArgument
+        TypeArgumentSpec -> TypeArgument
+        WildcardType -> TypeArgument
 
-        ClassTypeSpec
-		| BuiltInTypeArraySpec -> TypeArgumentSpec
+        ClassTypeSpec -> TypeArgumentSpec
+        BuiltInTypeArraySpec -> TypeArgumentSpec
 
         BuiltInType (lb::LBRACK RBRACK)+ -> BuiltInTypeArraySpec
 
@@ -118,9 +118,9 @@ exports
 
         "," -> COMMA
 
-        GT
-		| SR
-		| BSR -> TypeArgumentsOrParametersEnd
+        GT -> TypeArgumentsOrParametersEnd
+        SR -> TypeArgumentsOrParametersEnd
+        BSR -> TypeArgumentsOrParametersEnd
 
         ">" -> GT
 
@@ -130,21 +130,21 @@ exports
 
         PrimaryExpression ((DOT TypeArguments? ((IDENT (lp::LPAREN ArgList RPAREN)?) | ("super" ((lp3::LPAREN ArgList RPAREN) | (DOT TypeArguments? IDENT (lps::LPAREN ArgList RPAREN)?))))) | (DOT "this") | (DOT NewExpression) | (lb::LBRACK Expression RBRACK))* (in::INC | de::DEC)? -> PostfixExpression
 
-        IdentPrimary (DOT "class")?
-		| Constant
-		| "true"
-		| "false"
-		| "null"
-		| NewExpression
-		| "this"
-		| "super"
-		| LPAREN AssignmentExpression RPAREN
-		| BuiltInType (lbt::LBRACK RBRACK)* DOT "class" -> PrimaryExpression
+        IdentPrimary (DOT "class")? -> PrimaryExpression
+        Constant -> PrimaryExpression
+        "true" -> PrimaryExpression
+        "false" -> PrimaryExpression
+        "null" -> PrimaryExpression
+        NewExpression -> PrimaryExpression
+        "this" -> PrimaryExpression
+        "super" -> PrimaryExpression
+        LPAREN AssignmentExpression RPAREN -> PrimaryExpression
+        BuiltInType (lbt::LBRACK RBRACK)* DOT "class" -> PrimaryExpression
 
         ta1::TypeArguments? IDENT ((DOT ta2::TypeArguments? IDENT) | )* ((lp::LPAREN ArgList RPAREN) | (lbc::LBRACK RBRACK)+)? -> IdentPrimary
 
-        ExpressionList
-		|  -> ArgList
+        ExpressionList -> ArgList
+         -> ArgList
 
         Expression (COMMA Expression)* -> ExpressionList
 
@@ -176,45 +176,45 @@ exports
 
         "|=" -> BOR-ASSIGN
 
-        NUM-INT
-		| CHAR-LITERAL
-		| STRING-LITERAL
-		| NUM-FLOAT
-		| NUM-LONG
-		| NUM-DOUBLE -> Constant
+        NUM-INT -> Constant
+        CHAR-LITERAL -> Constant
+        STRING-LITERAL -> Constant
+        NUM-FLOAT -> Constant
+        NUM-LONG -> Constant
+        NUM-DOUBLE -> Constant
 
-        "." ((("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ EXPONENT? f1::FLOAT-SUFFIX?) | "..")?
-		| (("0" ((("x" | "X") HEX-DIGIT+) | ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ | ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7")+)?) | (("1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9") ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")*)) ("l" | "L" | ("." ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")* EXPONENT? f2::FLOAT-SUFFIX?) | (EXPONENT f3::FLOAT-SUFFIX?) | f4::FLOAT-SUFFIX)? -> NUM-INT
+        "." ((("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ EXPONENT? f1::FLOAT-SUFFIX?) | "..")? -> NUM-INT
+        (("0" ((("x" | "X") HEX-DIGIT+) | ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ | ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7")+)?) | (("1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9") ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")*)) ("l" | "L" | ("." ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")* EXPONENT? f2::FLOAT-SUFFIX?) | (EXPONENT f3::FLOAT-SUFFIX?) | f4::FLOAT-SUFFIX)? -> NUM-INT
 
         ("e" | "E") ("+" | "-")? ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ -> EXPONENT
 
-        "f"
-		| "F"
-		| "d"
-		| "D" -> FLOAT-SUFFIX
+        "f" -> FLOAT-SUFFIX
+        "F" -> FLOAT-SUFFIX
+        "d" -> FLOAT-SUFFIX
+        "D" -> FLOAT-SUFFIX
 
-        "0"
-		| "1"
-		| "2"
-		| "3"
-		| "4"
-		| "5"
-		| "6"
-		| "7"
-		| "8"
-		| "9"
-		| "A"
-		| "B"
-		| "C"
-		| "D"
-		| "E"
-		| "F"
-		| "a"
-		| "b"
-		| "c"
-		| "d"
-		| "e"
-		| "f" -> HEX-DIGIT
+        "0" -> HEX-DIGIT
+        "1" -> HEX-DIGIT
+        "2" -> HEX-DIGIT
+        "3" -> HEX-DIGIT
+        "4" -> HEX-DIGIT
+        "5" -> HEX-DIGIT
+        "6" -> HEX-DIGIT
+        "7" -> HEX-DIGIT
+        "8" -> HEX-DIGIT
+        "9" -> HEX-DIGIT
+        "A" -> HEX-DIGIT
+        "B" -> HEX-DIGIT
+        "C" -> HEX-DIGIT
+        "D" -> HEX-DIGIT
+        "E" -> HEX-DIGIT
+        "F" -> HEX-DIGIT
+        "a" -> HEX-DIGIT
+        "b" -> HEX-DIGIT
+        "c" -> HEX-DIGIT
+        "d" -> HEX-DIGIT
+        "e" -> HEX-DIGIT
+        "f" -> HEX-DIGIT
 
         "\'" (ESC | STR) "\'" -> CHAR-LITERAL
 
@@ -222,48 +222,48 @@ exports
 
         """ (ESC | STR)* """ -> STRING-LITERAL
 
-        "." ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ EXPONENT? ("f" | "F")
-		| "0" ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ ("." | EXPONENT | "f" | "F")
-		| ("1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")* ((("." ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")*)? EXPONENT? ("f" | "F")) | EXPONENT) -> NUM-FLOAT
+        "." ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ EXPONENT? ("f" | "F") -> NUM-FLOAT
+        "0" ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ ("." | EXPONENT | "f" | "F") -> NUM-FLOAT
+        ("1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")* ((("." ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")*)? EXPONENT? ("f" | "F")) | EXPONENT) -> NUM-FLOAT
 
         ("1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")* ("l" | "L") -> NUM-LONG
 
-        "." ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ EXPONENT? ("d" | "D")
-		| "0" ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ ("." | EXPONENT | "d" | "D")
-		| ("1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")* ((("." ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")*)? EXPONENT? ("d" | "D")) | EXPONENT) -> NUM-DOUBLE
+        "." ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ EXPONENT? ("d" | "D") -> NUM-DOUBLE
+        "0" ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ ("." | EXPONENT | "d" | "D") -> NUM-DOUBLE
+        ("1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")* ((("." ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")*)? EXPONENT? ("d" | "D")) | EXPONENT) -> NUM-DOUBLE
 
         "new" TypeArguments? Type ((LPAREN ArgList RPAREN ClassBlock?) | (NewArrayDeclarator ArrayInitializer?)) -> NewExpression
 
-        ClassOrInterfaceType
-		| BuiltInType -> Type
+        ClassOrInterfaceType -> Type
+        BuiltInType -> Type
 
         LCURLY (ClassField | SEMI)* RCURLY -> ClassBlock
 
         "{" -> LCURLY
 
-        mods::Modifiers (td::TypeDefinitionInternal | (tp::TypeParameters? ((h::CtorHead s::ConstructorBody) | (t::TypeSpec ((IDENT LPAREN param::ParameterDeclarationList RPAREN rt::DeclaratorBrackets tc::ThrowsClause? (s2::CompoundStatement | SEMI)) | (v::VariableDefinitions SEMI))))))
-		| "static" s3::CompoundStatement
-		| s4::CompoundStatement -> ClassField
+        mods::Modifiers (td::TypeDefinitionInternal | (tp::TypeParameters? ((h::CtorHead s::ConstructorBody) | (t::TypeSpec ((IDENT LPAREN param::ParameterDeclarationList RPAREN rt::DeclaratorBrackets tc::ThrowsClause? (s2::CompoundStatement | SEMI)) | (v::VariableDefinitions SEMI)))))) -> ClassField
+        "static" s3::CompoundStatement -> ClassField
+        s4::CompoundStatement -> ClassField
 
         (Modifier | Annotation)* -> Modifiers
 
-        "private"
-		| "public"
-		| "protected"
-		| "static"
-		| "transient"
-		| "final"
-		| "abstract"
-		| "native"
-		| "threadsafe"
-		| "synchronized"
-		| "volatile"
-		| "strictfp" -> Modifier
+        "private" -> Modifier
+        "public" -> Modifier
+        "protected" -> Modifier
+        "static" -> Modifier
+        "transient" -> Modifier
+        "final" -> Modifier
+        "abstract" -> Modifier
+        "native" -> Modifier
+        "threadsafe" -> Modifier
+        "synchronized" -> Modifier
+        "volatile" -> Modifier
+        "strictfp" -> Modifier
 
-        ClassDefinition
-		| InterfaceDefinition
-		| EnumDefinition
-		| AnnotationDefinition -> TypeDefinitionInternal
+        ClassDefinition -> TypeDefinitionInternal
+        InterfaceDefinition -> TypeDefinitionInternal
+        EnumDefinition -> TypeDefinitionInternal
+        AnnotationDefinition -> TypeDefinitionInternal
 
         "class" IDENT tp::TypeParameters? sc::SuperClassClause ic::ImplementsClause cb::ClassBlock -> ClassDefinition
 
@@ -287,8 +287,8 @@ exports
 
         mods::Modifiers (td::TypeDefinitionInternal | (tp::TypeParameters? t::TypeSpec ((IDENT LPAREN param::ParameterDeclarationList RPAREN rt::DeclaratorBrackets tc::ThrowsClause? SEMI) | (v::VariableDefinitions SEMI)))) -> InterfaceField
 
-        ClassTypeSpec
-		| BuiltInTypeSpec -> TypeSpec
+        ClassTypeSpec -> TypeSpec
+        BuiltInTypeSpec -> TypeSpec
 
         ((ParameterDeclaration (COMMA ParameterDeclaration)* (COMMA VariableLengthParameterDeclaration)?) | VariableLengthParameterDeclaration)? -> ParameterDeclarationList
 
@@ -312,8 +312,8 @@ exports
 
         (ASSIGN Initializer)? -> VarInitializer
 
-        Expression
-		| ArrayInitializer -> Initializer
+        Expression -> Initializer
+        ArrayInitializer -> Initializer
 
         lc::LCURLY (Initializer (COMMA Initializer)* COMMA?)? RCURLY -> ArrayInitializer
 
@@ -327,29 +327,29 @@ exports
 
         LCURLY (EnumConstantField | SEMI)* RCURLY -> EnumConstantBlock
 
-        mods::Modifiers (td::TypeDefinitionInternal | (tp::TypeParameters? t::TypeSpec ((IDENT LPAREN param::ParameterDeclarationList RPAREN rt::DeclaratorBrackets tc::ThrowsClause? (s2::CompoundStatement | SEMI)) | (v::VariableDefinitions SEMI))))
-		| s4::CompoundStatement -> EnumConstantField
+        mods::Modifiers (td::TypeDefinitionInternal | (tp::TypeParameters? t::TypeSpec ((IDENT LPAREN param::ParameterDeclarationList RPAREN rt::DeclaratorBrackets tc::ThrowsClause? (s2::CompoundStatement | SEMI)) | (v::VariableDefinitions SEMI)))) -> EnumConstantField
+        s4::CompoundStatement -> EnumConstantField
 
         lc::LCURLY Statement* RCURLY -> CompoundStatement
 
-        CompoundStatement
-		| Declaration SEMI
-		| Expression SEMI
-		| m::Modifiers ClassDefinition
-		| IDENT c::COLON Statement
-		| "if" LPAREN Expression RPAREN Statement ("else" Statement)?
-		| ForStatement
-		| "while" LPAREN Expression RPAREN Statement
-		| "do" Statement "while" LPAREN Expression RPAREN SEMI
-		| "break" IDENT? SEMI
-		| "continue" IDENT? SEMI
-		| "return" Expression? SEMI
-		| "switch" LPAREN Expression RPAREN LCURLY CasesGroup* RCURLY
-		| TryBlock
-		| "throw" Expression SEMI
-		| "synchronized" LPAREN Expression RPAREN CompoundStatement
-		| "assert" Expression (COLON Expression)? SEMI
-		| s::SEMI -> Statement
+        CompoundStatement -> Statement
+        Declaration SEMI -> Statement
+        Expression SEMI -> Statement
+        m::Modifiers ClassDefinition -> Statement
+        IDENT c::COLON Statement -> Statement
+        "if" LPAREN Expression RPAREN Statement ("else" Statement)? -> Statement
+        ForStatement -> Statement
+        "while" LPAREN Expression RPAREN Statement -> Statement
+        "do" Statement "while" LPAREN Expression RPAREN SEMI -> Statement
+        "break" IDENT? SEMI -> Statement
+        "continue" IDENT? SEMI -> Statement
+        "return" Expression? SEMI -> Statement
+        "switch" LPAREN Expression RPAREN LCURLY CasesGroup* RCURLY -> Statement
+        TryBlock -> Statement
+        "throw" Expression SEMI -> Statement
+        "synchronized" LPAREN Expression RPAREN CompoundStatement -> Statement
+        "assert" Expression (COLON Expression)? SEMI -> Statement
+        s::SEMI -> Statement
 
         m::Modifiers t::TypeSpec v::VariableDefinitions -> Declaration
 
@@ -419,8 +419,8 @@ exports
 
         lc::LCURLY (AnnotationMemberArrayValueInitializer (COMMA AnnotationMemberArrayValueInitializer)* COMMA?)? RCURLY -> AnnotationMemberArrayInitializer
 
-        ConditionalExpression
-		| Annotation -> AnnotationMemberArrayValueInitializer
+        ConditionalExpression -> AnnotationMemberArrayValueInitializer
+        Annotation -> AnnotationMemberArrayValueInitializer
 
         AnnotationMemberValuePair (COMMA AnnotationMemberValuePair)* -> AnntotationMemberValuePairs
 
@@ -430,5 +430,5 @@ exports
 
         IDENT (DOT IDENT)* (DOT STAR)? -> IdentifierStar
 
-        m::Modifiers TypeDefinitionInternal
-		| SEMI -> TypeDefinition
+        m::Modifiers TypeDefinitionInternal -> TypeDefinition
+        SEMI -> TypeDefinition

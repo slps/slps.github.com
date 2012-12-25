@@ -26,12 +26,12 @@ exports
 
         Postfix-expression "++" Cast-expression "--" Cast-expression Unary-operator Cast-expression "sizeof" Unary-expression "sizeof" "(" Type-id ")" New-expression Delete-expression -> Unary-expression
 
-        "*"
-		| "&"
-		| "+"
-		| "-"
-		| "!"
-		| "~" -> Unary-operator
+        "*" -> Unary-operator
+        "&" -> Unary-operator
+        "+" -> Unary-operator
+        "-" -> Unary-operator
+        "!" -> Unary-operator
+        "~" -> Unary-operator
 
         "::"? "new" New-placement? New-type-id New-initializer? "::"? "new" New-placement? "(" Type-id ")" New-initializer? -> New-expression
 
@@ -75,17 +75,17 @@ exports
 
         Conditional-expression Logical-or-expression Assignment-operator Assignment-expression Throw-expression -> Assignment-expression
 
-        "="
-		| "*="
-		| "/="
-		| "%="
-		| "+="
-		| "-="
-		| ">>="
-		| "<<="
-		| "&="
-		| "^="
-		| "|=" -> Assignment-operator
+        "=" -> Assignment-operator
+        "*=" -> Assignment-operator
+        "/=" -> Assignment-operator
+        "%=" -> Assignment-operator
+        "+=" -> Assignment-operator
+        "-=" -> Assignment-operator
+        ">>=" -> Assignment-operator
+        "<<=" -> Assignment-operator
+        "&=" -> Assignment-operator
+        "^=" -> Assignment-operator
+        "|=" -> Assignment-operator
 
         Assignment-expression Expression "," Assignment-expression -> Expression
 
@@ -263,48 +263,48 @@ exports
 
         "operator" Operator -> Operator-function-id
 
-        "new"
-		| "delete"
-		| "new" "[]"
-		| "delete" "[]"
-		| "+"
-		| "-"
-		| "*"
-		| "/"
-		| "%"
-		| "^"
-		| "&"
-		| "|"
-		| "~"
-		| "!"
-		| "="
-		| "<"
-		| ">"
-		| "+="
-		| "-="
-		| "*="
-		| "/="
-		| "%="
-		| "^="
-		| "&="
-		| "|="
-		| "<<"
-		| ">>"
-		| ">>="
-		| "<<="
-		| "=="
-		| "!="
-		| "<="
-		| ">="
-		| "&&"
-		| "||"
-		| "++"
-		| "--"
-		| ","
-		| "->*"
-		| "->"
-		| "()"
-		| "[]" -> Operator
+        "new" -> Operator
+        "delete" -> Operator
+        "new" "[]" -> Operator
+        "delete" "[]" -> Operator
+        "+" -> Operator
+        "-" -> Operator
+        "*" -> Operator
+        "/" -> Operator
+        "%" -> Operator
+        "^" -> Operator
+        "&" -> Operator
+        "|" -> Operator
+        "~" -> Operator
+        "!" -> Operator
+        "=" -> Operator
+        "<" -> Operator
+        ">" -> Operator
+        "+=" -> Operator
+        "-=" -> Operator
+        "*=" -> Operator
+        "/=" -> Operator
+        "%=" -> Operator
+        "^=" -> Operator
+        "&=" -> Operator
+        "|=" -> Operator
+        "<<" -> Operator
+        ">>" -> Operator
+        ">>=" -> Operator
+        "<<=" -> Operator
+        "==" -> Operator
+        "!=" -> Operator
+        "<=" -> Operator
+        ">=" -> Operator
+        "&&" -> Operator
+        "||" -> Operator
+        "++" -> Operator
+        "--" -> Operator
+        "," -> Operator
+        "->*" -> Operator
+        "->" -> Operator
+        "()" -> Operator
+        "[]" -> Operator
 
         "export"? "template" "<" Template-parameter-list ">" Declaration -> Template-declaration
 

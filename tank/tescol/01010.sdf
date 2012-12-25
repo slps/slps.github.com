@@ -6,9 +6,9 @@ exports
   context-free syntax
         TROLLEY CONSTID CONTAINS Declaration* CHECKOUT Statement SEMI DONE SEMI EOF -> Program
 
-        Procdec
-		| Constdec
-		| Vardec -> Declaration
+        Procdec -> Declaration
+        Constdec -> Declaration
+        Vardec -> Declaration
 
         PROC Procdescribe COLON Type ASSIGN Statement SEMI -> Procdec
 
@@ -34,11 +34,11 @@ exports
 
         WHILE Cond DO Statement -> Whiledo
 
-        SKIP
-		| LCURL Statement (SEMI Statement)* RCURL
-		| Assignment
-		| Ifthenelse
-		| Whiledo -> Statement
+        SKIP -> Statement
+        LCURL Statement (SEMI Statement)* RCURL -> Statement
+        Assignment -> Statement
+        Ifthenelse -> Statement
+        Whiledo -> Statement
 
         Cond (QUEST Expr COLON Expr)? -> Expr
 
@@ -48,13 +48,13 @@ exports
 
         Atom (EXP Expexpr)? -> Expexpr
 
-        Negative Unsignedatom
-		| Unsignedatom -> Atom
+        Negative Unsignedatom -> Atom
+        Unsignedatom -> Atom
 
-        Bracketexpr
-		| Id Argslist?
-		| Sign Number
-		| Number -> Unsignedatom
+        Bracketexpr -> Unsignedatom
+        Id Argslist? -> Unsignedatom
+        Sign Number -> Unsignedatom
+        Number -> Unsignedatom
 
         LPARA Expr RPARA -> Bracketexpr
 
@@ -74,12 +74,12 @@ exports
 
         ":=" -> ASSIGN
 
-        EQL
-		| NEQL
-		| GRT
-		| GRTE
-		| LST
-		| LSTE -> Comparator
+        EQL -> Comparator
+        NEQL -> Comparator
+        GRT -> Comparator
+        GRTE -> Comparator
+        LST -> Comparator
+        LSTE -> Comparator
 
         "==" -> EQL
 
@@ -93,27 +93,27 @@ exports
 
         "<=" -> LSTE
 
-        POSITIVE
-		| NEGATIVE
-		| ADDITION
-		| SUBTRACTION
-		| MUL
-		| DIV
-		| EXP -> Arithop
+        POSITIVE -> Arithop
+        NEGATIVE -> Arithop
+        ADDITION -> Arithop
+        SUBTRACTION -> Arithop
+        MUL -> Arithop
+        DIV -> Arithop
+        EXP -> Arithop
 
-        ADDITION
-		| POSITIVE
-		| SUBTRACTION
-		| NEGATIVE -> Addsub
+        ADDITION -> Addsub
+        POSITIVE -> Addsub
+        SUBTRACTION -> Addsub
+        NEGATIVE -> Addsub
 
-        POSITIVE
-		| ADDITION -> Positive
+        POSITIVE -> Positive
+        ADDITION -> Positive
 
-        NEGATIVE
-		| SUBTRACTION -> Negative
+        NEGATIVE -> Negative
+        SUBTRACTION -> Negative
 
-        POSITIVE
-		| NEGATIVE -> Sign
+        POSITIVE -> Sign
+        NEGATIVE -> Sign
 
         "+" (" " | "\t" | "\r" | "\n" | COMMENT) -> ADDITION
 
@@ -129,8 +129,8 @@ exports
 
         "**" -> EXP
 
-        AND
-		| OR -> Logicop
+        AND -> Logicop
+        OR -> Logicop
 
         "/\\" -> AND
 
@@ -154,9 +154,9 @@ exports
 
         "contains" -> CONTAINS
 
-        CONST
-		| VAR
-		| PROC -> Vartype
+        CONST -> Vartype
+        VAR -> Vartype
+        PROC -> Vartype
 
         "const" -> CONST
 
@@ -174,22 +174,22 @@ exports
 
         "do" -> DO
 
-        INT
-		| DOUBLE -> Type
+        INT -> Type
+        DOUBLE -> Type
 
         "int" -> INT
 
         "double" -> DOUBLE
 
-        ID
-		| CONSTID -> Id
+        ID -> Id
+        CONSTID -> Id
 
         ("A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z") ("A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z" | "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "_")* -> CONSTID
 
         ("a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z" | "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z") ("a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z" | "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z" | "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "_")* -> ID
 
-        INUM
-		| NUM -> Number
+        INUM -> Number
+        NUM -> Number
 
         ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ -> INUM
 

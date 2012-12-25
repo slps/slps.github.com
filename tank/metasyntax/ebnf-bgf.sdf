@@ -21,17 +21,17 @@ exports
 
         Expression (" " Expression)* -> Definition
 
-        Empty
-		| Epsilon
-		| Any
-		| Value
-		| Selectable-expression
-		| Marked-expression
-		| Repetition-expression
-		| Optional-expression
-		| Terminal
-		| Nonterminal
-		| Group-expression -> Expression
+        Empty -> Expression
+        Epsilon -> Expression
+        Any -> Expression
+        Value -> Expression
+        Selectable-expression -> Expression
+        Marked-expression -> Expression
+        Repetition-expression -> Expression
+        Optional-expression -> Expression
+        Terminal -> Expression
+        Nonterminal -> Expression
+        Group-expression -> Expression
 
         "EMPTY" -> Empty
 
@@ -39,8 +39,8 @@ exports
 
         "ANY" -> Any
 
-        "INT"
-		| "STR" -> Value
+        "INT" -> Value
+        "STR" -> Value
 
         selector::STR "::" Expression -> Selectable-expression
 
@@ -48,8 +48,8 @@ exports
 
         Expression Repetition-metasymbol -> Repetition-expression
 
-        "+"
-		| "*" -> Repetition-metasymbol
+        "+" -> Repetition-metasymbol
+        "*" -> Repetition-metasymbol
 
         Expression Optionality-metasymbol -> Optional-expression
 

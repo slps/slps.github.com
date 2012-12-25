@@ -24,11 +24,11 @@ exports
 
         Compound-name (TIC Attribute-id)? -> Subtype-mark
 
-        RANGE
-		| DIGITS
-		| DELTA
-		| ACCESS
-		| IDENTIFIER -> Attribute-id
+        RANGE -> Attribute-id
+        DIGITS -> Attribute-id
+        DELTA -> Attribute-id
+        ACCESS -> Attribute-id
+        IDENTIFIER -> Attribute-id
 
         Private-opt (Lib-pkg-spec-or-body | Subprog-decl-or-rename-or-inst-or-body | Generic-decl) -> Library-item
 
@@ -36,11 +36,11 @@ exports
 
         pkg::PACKAGE ((BODY Def-id IS Pkg-body-part End-id-opt SEMI) | (Def-id Spec-decl-part)) -> Lib-pkg-spec-or-body
 
-        p::PROCEDURE Def-id (Generic-subp-inst | (Formal-part-opt (Renames | Is-separate-or-abstract-or-decl) SEMI))
-		| f::FUNCTION Def-designator (Generic-subp-inst | (Function-tail (Renames | Is-separate-or-abstract-or-decl) SEMI)) -> Subprog-decl
+        p::PROCEDURE Def-id (Generic-subp-inst | (Formal-part-opt (Renames | Is-separate-or-abstract-or-decl) SEMI)) -> Subprog-decl
+        f::FUNCTION Def-designator (Generic-subp-inst | (Function-tail (Renames | Is-separate-or-abstract-or-decl) SEMI)) -> Subprog-decl
 
-        cn::Compound-name
-		| n::IDENTIFIER -> Def-id
+        cn::Compound-name -> Def-id
+        n::IDENTIFIER -> Def-id
 
         IS Generic-inst SEMI -> Generic-subp-inst
 
@@ -48,8 +48,8 @@ exports
 
         LPAREN Value (COMMA Value)* RPAREN -> Parenth-values
 
-        OTHERS RIGHT-SHAFT Expression
-		| Ranged-expr-s (RIGHT-SHAFT Expression)? -> Value
+        OTHERS RIGHT-SHAFT Expression -> Value
+        Ranged-expr-s (RIGHT-SHAFT Expression)? -> Value
 
         Ranged-expr (PIPE Ranged-expr)* -> Ranged-expr-s
 
@@ -57,8 +57,8 @@ exports
 
         RANGE Range -> Range-constraint
 
-        Range-dots
-		| Range-attrib-ref -> Range
+        Range-dots -> Range
+        Range-attrib-ref -> Range
 
         Simple-expression DOT-DOT Simple-expression -> Range-dots
 
@@ -88,17 +88,17 @@ exports
 
         (WITH ((NuLL RECORD) | Value-s))? -> Extension-opt
 
-        IS Separate-or-abstract
-		|  -> Is-separate-or-abstract-or-decl
+        IS Separate-or-abstract -> Is-separate-or-abstract-or-decl
+         -> Is-separate-or-abstract-or-decl
 
-        SEPARATE
-		| ABSTRACT -> Separate-or-abstract
+        SEPARATE -> Separate-or-abstract
+        ABSTRACT -> Separate-or-abstract
 
-        n::Compound-name
-		| d::Designator -> Def-designator
+        n::Compound-name -> Def-designator
+        d::Designator -> Def-designator
 
-        op::Definable-operator-symbol
-		| n::IDENTIFIER -> Designator
+        op::Definable-operator-symbol -> Designator
+        n::IDENTIFIER -> Designator
 
         Func-formal-part-opt RETURN Subtype-mark -> Function-tail
 
@@ -116,17 +116,17 @@ exports
 
         (Basic-decl-item | Pragma)+ -> Basic-declarative-items
 
-        pkg::PACKAGE Def-id Spec-decl-part
-		| tsk::TASK Task-type-or-single-decl
-		| pro::PROTECTED Prot-type-or-single-decl SEMI
-		| Subprog-decl
-		| Decl-common -> Basic-decl-item
+        pkg::PACKAGE Def-id Spec-decl-part -> Basic-decl-item
+        tsk::TASK Task-type-or-single-decl -> Basic-decl-item
+        pro::PROTECTED Prot-type-or-single-decl SEMI -> Basic-decl-item
+        Subprog-decl -> Basic-decl-item
+        Decl-common -> Basic-decl-item
 
-        TYPE Def-id Discrim-part-opt Task-definition-opt
-		| Def-id Task-definition-opt -> Task-type-or-single-decl
+        TYPE Def-id Discrim-part-opt Task-definition-opt -> Task-type-or-single-decl
+        Def-id Task-definition-opt -> Task-type-or-single-decl
 
-        IS Task-items-opt Private-task-items-opt End-id-opt SEMI
-		| SEMI -> Task-definition-opt
+        IS Task-items-opt Private-task-items-opt End-id-opt SEMI -> Task-definition-opt
+        SEMI -> Task-definition-opt
 
         Discrim-part-text? -> Discrim-part-opt
 
@@ -152,17 +152,17 @@ exports
 
         e::ENTRY IDENTIFIER Discrete-subtype-def-opt Formal-part-opt SEMI -> Entry-declaration
 
-        LPAREN Discrete-subtype-definition
-		|  -> Discrete-subtype-def-opt
+        LPAREN Discrete-subtype-definition -> Discrete-subtype-def-opt
+         -> Discrete-subtype-def-opt
 
-        Range
-		| Subtype-ind -> Discrete-subtype-definition
+        Range -> Discrete-subtype-definition
+        Subtype-ind -> Discrete-subtype-definition
 
         r::FOR Subtype-mark USE Rep-spec-part SEMI -> Rep-spec
 
-        RECORD Align-opt Comp-loc-s END RECORD
-		| AT Expression
-		| Expression -> Rep-spec-part
+        RECORD Align-opt Comp-loc-s END RECORD -> Rep-spec-part
+        AT Expression -> Rep-spec-part
+        Expression -> Rep-spec-part
 
         (AT MOD Expression SEMI)? -> Align-opt
 
@@ -170,45 +170,45 @@ exports
 
         (PRIVATE Pragma* Entrydecls-repspecs-opt)? -> Private-task-items-opt
 
-        TYPE Def-id Discrim-part-opt Protected-definition
-		| Def-id Protected-definition -> Prot-type-or-single-decl
+        TYPE Def-id Discrim-part-opt Protected-definition -> Prot-type-or-single-decl
+        Def-id Protected-definition -> Prot-type-or-single-decl
 
         IS Prot-op-decl-s (PRIVATE Prot-member-decl-s)? End-id-opt -> Protected-definition
 
         Prot-op-decl* -> Prot-op-decl-s
 
-        Entry-declaration
-		| p::PROCEDURE Def-id Formal-part-opt SEMI
-		| f::FUNCTION Def-designator Function-tail SEMI
-		| Rep-spec
-		| Pragma -> Prot-op-decl
+        Entry-declaration -> Prot-op-decl
+        p::PROCEDURE Def-id Formal-part-opt SEMI -> Prot-op-decl
+        f::FUNCTION Def-designator Function-tail SEMI -> Prot-op-decl
+        Rep-spec -> Prot-op-decl
+        Pragma -> Prot-op-decl
 
         (Prot-op-decl | Comp-decl)* -> Prot-member-decl-s
 
         Def-ids-colon Component-subtype-def Init-opt SEMI -> Comp-decl
 
-        t::TYPE IDENTIFIER ((IS Type-def) | (Discrim-part ((IS Derived-or-private-or-record) | )) | Empty-discrim-opt) SEMI
-		| s::SUBTYPE IDENTIFIER IS Subtype-ind SEMI
-		| Generic-decl
-		| Use-clause
-		| r::FOR ((Local-enum-name USE) | (Subtype-mark USE Rep-spec-part)) SEMI
-		| IDENTIFIER erd::COLON EXCEPTION RENAMES Compound-name
-		| IDENTIFIER ord::COLON Subtype-mark RENAMES Name
-		| Defining-identifier-list od::COLON (EXCEPTION | (CONSTANT ASSIGN) | (Aliased-constant-opt ((Array-type-definition Init-opt) | (Subtype-ind Init-opt)))) SEMI -> Decl-common
+        t::TYPE IDENTIFIER ((IS Type-def) | (Discrim-part ((IS Derived-or-private-or-record) | )) | Empty-discrim-opt) SEMI -> Decl-common
+        s::SUBTYPE IDENTIFIER IS Subtype-ind SEMI -> Decl-common
+        Generic-decl -> Decl-common
+        Use-clause -> Decl-common
+        r::FOR ((Local-enum-name USE) | (Subtype-mark USE Rep-spec-part)) SEMI -> Decl-common
+        IDENTIFIER erd::COLON EXCEPTION RENAMES Compound-name -> Decl-common
+        IDENTIFIER ord::COLON Subtype-mark RENAMES Name -> Decl-common
+        Defining-identifier-list od::COLON (EXCEPTION | (CONSTANT ASSIGN) | (Aliased-constant-opt ((Array-type-definition Init-opt) | (Subtype-ind Init-opt)))) SEMI -> Decl-common
 
-        LPAREN Enum-id-s RPAREN
-		| RANGE Range
-		| MOD Expression
-		| DIGITS Expression Range-constraint-opt
-		| DELTA Expression ((RANGE Range) | (DIGITS Expression Range-constraint-opt))
-		| Array-type-definition
-		| Access-type-definition
-		| Empty-discrim-opt Derived-or-private-or-record -> Type-def
+        LPAREN Enum-id-s RPAREN -> Type-def
+        RANGE Range -> Type-def
+        MOD Expression -> Type-def
+        DIGITS Expression Range-constraint-opt -> Type-def
+        DELTA Expression ((RANGE Range) | (DIGITS Expression Range-constraint-opt)) -> Type-def
+        Array-type-definition -> Type-def
+        Access-type-definition -> Type-def
+        Empty-discrim-opt Derived-or-private-or-record -> Type-def
 
         Enumeration-literal-specification (COMMA Enumeration-literal-specification)* -> Enum-id-s
 
-        IDENTIFIER
-		| CHARACTER-LITERAL -> Enumeration-literal-specification
+        IDENTIFIER -> Enumeration-literal-specification
+        CHARACTER-LITERAL -> Enumeration-literal-specification
 
         Range-constraint? -> Range-constraint-opt
 
@@ -232,15 +232,15 @@ exports
 
         p::LPAREN Discrete-range (COMMA Discrete-range)* RPAREN -> Index-constraint
 
-        Range
-		| Subtype-ind -> Discrete-range
+        Range -> Discrete-range
+        Subtype-ind -> Discrete-range
 
         p::LPAREN Discriminant-association (COMMA Discriminant-association)* RPAREN -> Discriminant-constraint
 
         Selector-names-opt Expression -> Discriminant-association
 
-        Association-head
-		|  -> Selector-names-opt
+        Association-head -> Selector-names-opt
+         -> Selector-names-opt
 
         Selector-name (PIPE Selector-name)* RIGHT-SHAFT -> Association-head
 
@@ -252,18 +252,18 @@ exports
 
         (CONSTANT | ALL)? -> Constant-all-opt
 
-        Abstract-opt NEW Subtype-ind WITH
-		| NEW Subtype-ind
-		| Abstract-tagged-limited-opt (PRIVATE | Record-definition) -> Derived-or-private-or-record
+        Abstract-opt NEW Subtype-ind WITH -> Derived-or-private-or-record
+        NEW Subtype-ind -> Derived-or-private-or-record
+        Abstract-tagged-limited-opt (PRIVATE | Record-definition) -> Derived-or-private-or-record
 
         ABSTRACT? -> Abstract-opt
 
-        RECORD Component-list END RECORD
-		| NuLL RECORD -> Record-definition
+        RECORD Component-list END RECORD -> Record-definition
+        NuLL RECORD -> Record-definition
 
-        NuLL SEMI
-		| Component-items Variant-part?
-		| Empty-component-items Variant-part -> Component-list
+        NuLL SEMI -> Component-list
+        Component-items Variant-part? -> Component-list
+        Empty-component-items Variant-part -> Component-list
 
         (Pragma | Comp-decl)+ -> Component-items
 
@@ -279,12 +279,12 @@ exports
 
         Choice (PIPE Choice)* -> Choice-s
 
-        OTHERS
-		| Discrete-with-range
-		| Expression -> Choice
+        OTHERS -> Choice
+        Discrete-with-range -> Choice
+        Expression -> Choice
 
-        Mark-with-constraint
-		| Range -> Discrete-with-range
+        Mark-with-constraint -> Discrete-with-range
+        Range -> Discrete-with-range
 
         Subtype-mark Range-constraint -> Mark-with-constraint
 
@@ -302,26 +302,26 @@ exports
 
         ((t::TYPE Def-id ((IS ((LPAREN BOX RPAREN) | (RANGE BOX) | (MOD BOX) | (DELTA BOX ((DIGITS BOX) | )) | (DIGITS BOX) | Array-type-definition | Access-type-definition | (Empty-discrim-opt Discriminable-type-definition))) | (Discrim-part IS Discriminable-type-definition))) | (w::WITH ((PROCEDURE Def-id Formal-part-opt Subprogram-default-opt) | (FUNCTION Def-designator Function-tail Subprogram-default-opt) | (PACKAGE Def-id IS NEW Compound-name Formal-package-actual-part-opt))) | Parameter-specification) SEMI -> Generic-formal-parameter
 
-        Abstract-opt NEW Subtype-ind WITH
-		| NEW Subtype-ind
-		| Abstract-tagged-limited-opt PRIVATE -> Discriminable-type-definition
+        Abstract-opt NEW Subtype-ind WITH -> Discriminable-type-definition
+        NEW Subtype-ind -> Discriminable-type-definition
+        Abstract-tagged-limited-opt PRIVATE -> Discriminable-type-definition
 
         (IS (BOX | Name))? -> Subprogram-default-opt
 
         (LPAREN (BOX | Defining-identifier-list) RPAREN)? -> Formal-package-actual-part-opt
 
-        p::PROCEDURE Def-id (Generic-subp-inst | (Formal-part-opt (Renames | (IS (Separate-or-abstract | Body-part)) | ) SEMI))
-		| f::FUNCTION Def-designator (Generic-subp-inst | (Function-tail (Renames | (IS (Separate-or-abstract | Body-part)) | ) SEMI)) -> Subprog-decl-or-rename-or-inst-or-body
+        p::PROCEDURE Def-id (Generic-subp-inst | (Formal-part-opt (Renames | (IS (Separate-or-abstract | Body-part)) | ) SEMI)) -> Subprog-decl-or-rename-or-inst-or-body
+        f::FUNCTION Def-designator (Generic-subp-inst | (Function-tail (Renames | (IS (Separate-or-abstract | Body-part)) | ) SEMI)) -> Subprog-decl-or-rename-or-inst-or-body
 
         Declarative-part Block-body End-id-opt -> Body-part
 
         (Pragma | Declarative-item)* -> Declarative-part
 
-        pkg::PACKAGE ((Body-is (Separate | (Pkg-body-part End-id-opt)) SEMI) | (Def-id Spec-decl-part))
-		| tsk::TASK ((Body-is (Separate | Body-part) SEMI) | Task-type-or-single-decl)
-		| pro::PROTECTED ((Body-is (Separate | (Prot-op-bodies-opt End-id-opt))) | Prot-type-or-single-decl) SEMI
-		| Subprog-decl-or-rename-or-inst-or-body
-		| Decl-common -> Declarative-item
+        pkg::PACKAGE ((Body-is (Separate | (Pkg-body-part End-id-opt)) SEMI) | (Def-id Spec-decl-part)) -> Declarative-item
+        tsk::TASK ((Body-is (Separate | Body-part) SEMI) | Task-type-or-single-decl) -> Declarative-item
+        pro::PROTECTED ((Body-is (Separate | (Prot-op-bodies-opt End-id-opt))) | Prot-type-or-single-decl) SEMI -> Declarative-item
+        Subprog-decl-or-rename-or-inst-or-body -> Declarative-item
+        Decl-common -> Declarative-item
 
         BODY Def-id IS -> Body-is
 
@@ -333,8 +333,8 @@ exports
 
         (Entry-body | Subprog-decl-or-body | Pragma)* -> Prot-op-bodies-opt
 
-        p::PROCEDURE Def-id Formal-part-opt ((IS Body-part) | ) SEMI
-		| f::FUNCTION Def-designator Function-tail ((IS Body-part) | ) SEMI -> Subprog-decl-or-body
+        p::PROCEDURE Def-id Formal-part-opt ((IS Body-part) | ) SEMI -> Subprog-decl-or-body
+        f::FUNCTION Def-designator Function-tail ((IS Body-part) | ) SEMI -> Subprog-decl-or-body
 
         b::BEGIN Handled-stmt-s -> Block-body
 
@@ -370,9 +370,9 @@ exports
 
         REVERSE? -> Reverse-opt
 
-        endid::Definable-operator-symbol
-		| n::Compound-name
-		|  -> Id-opt
+        endid::Definable-operator-symbol -> Id-opt
+        n::Compound-name -> Id-opt
+         -> Id-opt
 
         END Id-opt -> End-id-opt
 
@@ -396,8 +396,8 @@ exports
 
         Entry-index-spec-opt Formal-part-opt -> Entry-body-formal-part
 
-        LPAREN FOR Def-id IN Discrete-subtype-definition
-		|  -> Entry-index-spec-opt
+        LPAREN FOR Def-id IN Discrete-subtype-definition -> Entry-index-spec-opt
+         -> Entry-index-spec-opt
 
         WHEN Condition -> Entry-barrier
 
@@ -405,8 +405,8 @@ exports
 
         a::ACCEPT Def-id Entry-index-opt Formal-part-opt ((DO Handled-stmt-s End-id-opt SEMI) | SEMI) -> Accept-stmt
 
-        LPAREN Expression
-		|  -> Entry-index-opt
+        LPAREN Expression -> Entry-index-opt
+         -> Entry-index-opt
 
         d::DELAY Until-opt Expression SEMI -> Delay-stmt
 
@@ -424,9 +424,9 @@ exports
 
         (WHEN Condition RIGHT-SHAFT Pragma*)? -> Guard-opt
 
-        Accept-alternative
-		| Delay-alternative
-		| t::TERMINATE SEMI -> Select-alternative
+        Accept-alternative -> Select-alternative
+        Delay-alternative -> Select-alternative
+        t::TERMINATE SEMI -> Select-alternative
 
         Accept-stmt Stmts-opt -> Accept-alternative
 
@@ -446,8 +446,8 @@ exports
 
         Exception-choice (PIPE Exception-choice)* -> Except-choice-s
 
-        Compound-name
-		| OTHERS -> Exception-choice
+        Compound-name -> Exception-choice
+        OTHERS -> Exception-choice
 
         r::RAISE Compound-name? SEMI -> Raise-stmt
 
@@ -463,28 +463,28 @@ exports
 
         Simple-expression ((IN Range-or-mark) | (n::NOT IN Range-or-mark) | (EQ Simple-expression) | (NE Simple-expression) | (LT- Simple-expression) | (LE Simple-expression) | (GT Simple-expression) | (GE Simple-expression))? -> Relation
 
-        Range
-		| Subtype-mark -> Range-or-mark
+        Range -> Range-or-mark
+        Subtype-mark -> Range-or-mark
 
         Signed-term ((PLUS Signed-term) | (MINUS Signed-term) | (CONCAT Signed-term))* -> Simple-expression
 
-        p::PLUS Term
-		| m::MINUS Term
-		| Term -> Signed-term
+        p::PLUS Term -> Signed-term
+        m::MINUS Term -> Signed-term
+        Term -> Signed-term
 
         Factor ((STAR Factor) | (DIV Factor) | (MOD Factor) | (REM Factor))* -> Term
 
-        NOT Primary
-		| ABS Primary
-		| Primary (EXPON Primary)? -> Factor
+        NOT Primary -> Factor
+        ABS Primary -> Factor
+        Primary (EXPON Primary)? -> Factor
 
-        Name-or-qualified
-		| Parenthesized-primary
-		| Allocator
-		| NuLL
-		| NUMERIC-LIT
-		| CHARACTER-LITERAL
-		| cs::CHAR-STRING Operator-call-tail? -> Primary
+        Name-or-qualified -> Primary
+        Parenthesized-primary -> Primary
+        Allocator -> Primary
+        NuLL -> Primary
+        NUMERIC-LIT -> Primary
+        CHARACTER-LITERAL -> Primary
+        cs::CHAR-STRING Operator-call-tail? -> Primary
 
         IDENTIFIER ((DOT (ALL | IDENTIFIER | CHARACTER-LITERAL | dummy::Is-operator)) | (p::LPAREN Value-s RPAREN) | (TIC (Parenthesized-primary | Attribute-id)))* -> Name-or-qualified
 
@@ -492,8 +492,8 @@ exports
 
         sep::SEPARATE LPAREN Compound-name RPAREN (Subprogram-body | Package-body | Task-body | Protected-body) -> Subunit
 
-        p::PROCEDURE Def-id Formal-part-opt IS Body-part SEMI
-		| f::FUNCTION Function-tail IS Body-part SEMI -> Subprogram-body
+        p::PROCEDURE Def-id Formal-part-opt IS Body-part SEMI -> Subprogram-body
+        f::FUNCTION Function-tail IS Body-part SEMI -> Subprogram-body
 
         p::PACKAGE Body-is Pkg-body-part End-id-opt SEMI -> Package-body
 
@@ -701,34 +701,34 @@ exports
 
         DIGIT+ (("#" BASED-INTEGER ("." BASED-INTEGER)? "#") | ("_" DIGIT+)+)? (("." DIGIT+ ("_" DIGIT+)* EXPONENT?) | EXPONENT)? -> NUMERIC-LIT
 
-        "0"
-		| "1"
-		| "2"
-		| "3"
-		| "4"
-		| "5"
-		| "6"
-		| "7"
-		| "8"
-		| "9" -> DIGIT
+        "0" -> DIGIT
+        "1" -> DIGIT
+        "2" -> DIGIT
+        "3" -> DIGIT
+        "4" -> DIGIT
+        "5" -> DIGIT
+        "6" -> DIGIT
+        "7" -> DIGIT
+        "8" -> DIGIT
+        "9" -> DIGIT
 
         "e" ("+" | "-")? DIGIT+ -> EXPONENT
 
-        DIGIT
-		| "a"
-		| "b"
-		| "c"
-		| "d"
-		| "e"
-		| "f" -> EXTENDED-DIGIT
+        DIGIT -> EXTENDED-DIGIT
+        "a" -> EXTENDED-DIGIT
+        "b" -> EXTENDED-DIGIT
+        "c" -> EXTENDED-DIGIT
+        "d" -> EXTENDED-DIGIT
+        "e" -> EXTENDED-DIGIT
+        "f" -> EXTENDED-DIGIT
 
         EXTENDED-DIGIT ("_"? EXTENDED-DIGIT)* -> BASED-INTEGER
 
-        " "
-		| "\t"
-		| "\f"
-		| "\r\n"
-		| "\r"
-		| "\n" -> WS-
+        " " -> WS-
+        "\t" -> WS-
+        "\f" -> WS-
+        "\r\n" -> WS-
+        "\r" -> WS-
+        "\n" -> WS-
 
         COMMENT-INTRO ANY* ("\n" | ("\r" "\n"?)) -> COMMENT

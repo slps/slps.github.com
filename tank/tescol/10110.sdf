@@ -6,8 +6,8 @@ exports
   context-free syntax
         TROLLEY Cidentifier CONTAINS Dec* CHECKOUT CURLY-L (Statement (SEMI Statement)*)? CURLY-R SEMI DONE SEMI EOF -> Program
 
-        ID
-		| CID -> Identifier
+        ID -> Identifier
+        CID -> Identifier
 
         CID -> Cidentifier
 
@@ -17,19 +17,19 @@ exports
 
         "/*" ANY* "*/" -> COMMENT
 
-        ADD
-		| SUBTRACT
-		| MULTIPLY
-		| DIVIDE
-		| EXPONENTIATION
-		| EQUAL -> Operator
+        ADD -> Operator
+        SUBTRACT -> Operator
+        MULTIPLY -> Operator
+        DIVIDE -> Operator
+        EXPONENTIATION -> Operator
+        EQUAL -> Operator
 
-        EQUALITY
-		| NON-EQUALITY
-		| LESS-THAN
-		| GREATER-THAN
-		| LESS-THAN-EQ
-		| GREATER-THAN-EQ -> Comparator
+        EQUALITY -> Comparator
+        NON-EQUALITY -> Comparator
+        LESS-THAN -> Comparator
+        GREATER-THAN -> Comparator
+        LESS-THAN-EQ -> Comparator
+        GREATER-THAN-EQ -> Comparator
 
         "+" -> ADD
 
@@ -63,10 +63,10 @@ exports
 
         ("e" | "E") ("+" | "-")? ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ -> EXPONENT
 
-        INT "." ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")* EXPONENT?
-		| "." ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ EXPONENT?
-		| INT EXPONENT
-		| "." -> DOUBLE
+        INT "." ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")* EXPONENT? -> DOUBLE
+        "." ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ EXPONENT? -> DOUBLE
+        INT EXPONENT -> DOUBLE
+        "." -> DOUBLE
 
         ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ -> INT
 
@@ -122,8 +122,8 @@ exports
 
         (" " | "\t" | "\r" | "\n" | "\f")+ -> WS
 
-        "int"
-		| "double" -> Type
+        "int" -> Type
+        "double" -> Type
 
         "var" Identifier COLON Type SEMI -> Var
 
@@ -149,31 +149,31 @@ exports
 
         Atom (EXPONENTIATION Atom)* -> PowerExpr
 
-        INT
-		| DOUBLE
-		| ID
-		| CID
-		| LPAR CondExpr RPAR
-		| Procedure-expr -> Atom
+        INT -> Atom
+        DOUBLE -> Atom
+        ID -> Atom
+        CID -> Atom
+        LPAR CondExpr RPAR -> Atom
+        Procedure-expr -> Atom
 
         QUESTION BoolExpr QUESTION Expr COLON Expr -> Cond-expr
 
         Identifier LPAR Expr (COMMA Expr)* RPAR -> Procedure-expr
 
-        Constant
-		| Var
-		| Proc -> Dec
+        Constant -> Dec
+        Var -> Dec
+        Proc -> Dec
 
         IF CondExpr THEN Statement ELSE Statement -> Conditional
 
         Identifier DEFINED-AS Expr -> Assignment
 
-        SKIP
-		| Conditional
-		| Loop
-		| Assignment
-		| Cond-expr
-		| CURLY-L (SKIP | Conditional | Loop | Assignment | Cond-expr) (SEMI Statement)* CURLY-R -> Statement
+        SKIP -> Statement
+        Conditional -> Statement
+        Loop -> Statement
+        Assignment -> Statement
+        Cond-expr -> Statement
+        CURLY-L (SKIP | Conditional | Loop | Assignment | Cond-expr) (SEMI Statement)* CURLY-R -> Statement
 
         WHILE BoolExpr DO Statement -> Loop
 

@@ -11,11 +11,11 @@ exports
 
         name::STR arg::STR+ rhs::Expr -> Function
 
-        Literal
-		| Argument
-		| Binary
-		| IfThenElse
-		| Apply -> Expr
+        Literal -> Expr
+        Argument -> Expr
+        Binary -> Expr
+        IfThenElse -> Expr
+        Apply -> Expr
 
         info::INT -> Literal
 
@@ -23,9 +23,9 @@ exports
 
         ops::Ops left::Expr right::Expr -> Binary
 
-        Equal::
-		| Plus::
-		| Minus:: -> Ops
+        Equal:: -> Ops
+        Plus:: -> Ops
+        Minus:: -> Ops
 
         ifExpr::Expr thenExpr::Expr elseExpr::Expr -> IfThenElse
 

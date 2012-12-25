@@ -5,8 +5,8 @@ exports
   sorts
         CompilationUnit Annotations Annotation AnnotationName Identifier Letter JavaIDDigit ElementValuePairs ElementValuePair ElementValue ConditionalExpression ConditionalOrExpression ConditionalAndExpression InclusiveOrExpression ExclusiveOrExpression AndExpression EqualityExpression InstanceOfExpression RelationalExpression ShiftExpression AdditiveExpression MultiplicativeExpression UnaryExpression UnaryExpressionNotPlusMinus CastExpression PrimitiveType Type ClassOrInterfaceType TypeArguments TypeArgument Expression AssignmentOperator Primary ParExpression IdentifierSuffix Arguments ExpressionList ExplicitGenericInvocation NonWildcardTypeArguments TypeList InnerCreator ClassCreatorRest ClassBody ClassBodyDeclaration Block BlockStatement LocalVariableDeclarationStatement LocalVariableDeclaration VariableModifiers VariableModifier VariableDeclarators VariableDeclarator VariableDeclaratorId VariableInitializer ArrayInitializer ClassOrInterfaceDeclaration ClassOrInterfaceModifiers ClassOrInterfaceModifier ClassDeclaration NormalClassDeclaration TypeParameters TypeParameter TypeBound EnumDeclaration ENUM EnumBody EnumConstants EnumConstant EnumBodyDeclarations InterfaceDeclaration NormalInterfaceDeclaration InterfaceBody InterfaceBodyDeclaration Modifiers Modifier InterfaceMemberDecl InterfaceMethodOrFieldDecl InterfaceMethodOrFieldRest ConstantDeclaratorsRest ConstantDeclaratorRest ConstantDeclarator InterfaceMethodDeclaratorRest FormalParameters FormalParameterDecls FormalParameterDeclsRest QualifiedNameList QualifiedName InterfaceGenericMethodDecl VoidInterfaceMethodDeclaratorRest AnnotationTypeDeclaration AnnotationTypeBody AnnotationTypeElementDeclaration AnnotationTypeElementRest AnnotationMethodOrConstantRest AnnotationMethodRest DefaultValue AnnotationConstantRest Statement ASSERT ForControl EnhancedForControl ForInit ForUpdate Catches CatchClause FormalParameter SwitchBlockStatementGroups SwitchBlockStatementGroup SwitchLabel ConstantExpression EnumConstantName StatementExpression MemberDecl GenericMethodOrConstructorDecl GenericMethodOrConstructorRest MethodDeclaratorRest MethodBody ConstructorDeclaratorRest ConstructorBody ExplicitConstructorInvocation MemberDeclaration MethodDeclaration FieldDeclaration VoidMethodDeclaratorRest SuperSuffix Literal IntegerLiteral HexLiteral HexDigit IntegerTypeSuffix OctalLiteral DecimalLiteral FloatingPointLiteral Exponent FloatTypeSuffix CharacterLiteral EscapeSequence UnicodeEscape OctalEscape StringLiteral BooleanLiteral Creator CreatedName ArrayCreatorRest Selector ShiftOp RelationalOp ElementValueArrayInitializer PackageDeclaration ImportDeclaration TypeDeclaration 
   context-free syntax
-        Annotations ((PackageDeclaration ImportDeclaration* TypeDeclaration*) | (ClassOrInterfaceDeclaration TypeDeclaration*))
-		| PackageDeclaration? ImportDeclaration* TypeDeclaration* -> CompilationUnit
+        Annotations ((PackageDeclaration ImportDeclaration* TypeDeclaration*) | (ClassOrInterfaceDeclaration TypeDeclaration*)) -> CompilationUnit
+        PackageDeclaration? ImportDeclaration* TypeDeclaration* -> CompilationUnit
 
         Annotation+ -> Annotations
 
@@ -16,129 +16,129 @@ exports
 
         Letter (Letter | JavaIDDigit)* -> Identifier
 
-        "a"
-		| "b"
-		| "c"
-		| "d"
-		| "e"
-		| "f"
-		| "g"
-		| "h"
-		| "i"
-		| "j"
-		| "k"
-		| "l"
-		| "m"
-		| "n"
-		| "o"
-		| "p"
-		| "q"
-		| "r"
-		| "s"
-		| "t"
-		| "u"
-		| "v"
-		| "w"
-		| "x"
-		| "y"
-		| "z"
-		| "A"
-		| "B"
-		| "C"
-		| "D"
-		| "E"
-		| "F"
-		| "G"
-		| "H"
-		| "I"
-		| "J"
-		| "K"
-		| "L"
-		| "M"
-		| "N"
-		| "O"
-		| "P"
-		| "Q"
-		| "R"
-		| "S"
-		| "T"
-		| "U"
-		| "V"
-		| "W"
-		| "X"
-		| "Y"
-		| "Z" -> Letter
+        "a" -> Letter
+        "b" -> Letter
+        "c" -> Letter
+        "d" -> Letter
+        "e" -> Letter
+        "f" -> Letter
+        "g" -> Letter
+        "h" -> Letter
+        "i" -> Letter
+        "j" -> Letter
+        "k" -> Letter
+        "l" -> Letter
+        "m" -> Letter
+        "n" -> Letter
+        "o" -> Letter
+        "p" -> Letter
+        "q" -> Letter
+        "r" -> Letter
+        "s" -> Letter
+        "t" -> Letter
+        "u" -> Letter
+        "v" -> Letter
+        "w" -> Letter
+        "x" -> Letter
+        "y" -> Letter
+        "z" -> Letter
+        "A" -> Letter
+        "B" -> Letter
+        "C" -> Letter
+        "D" -> Letter
+        "E" -> Letter
+        "F" -> Letter
+        "G" -> Letter
+        "H" -> Letter
+        "I" -> Letter
+        "J" -> Letter
+        "K" -> Letter
+        "L" -> Letter
+        "M" -> Letter
+        "N" -> Letter
+        "O" -> Letter
+        "P" -> Letter
+        "Q" -> Letter
+        "R" -> Letter
+        "S" -> Letter
+        "T" -> Letter
+        "U" -> Letter
+        "V" -> Letter
+        "W" -> Letter
+        "X" -> Letter
+        "Y" -> Letter
+        "Z" -> Letter
 
-        "0"
-		| "1"
-		| "2"
-		| "3"
-		| "4"
-		| "5"
-		| "6"
-		| "7"
-		| "8"
-		| "9"
-		| "a"
-		| "b"
-		| "c"
-		| "d"
-		| "e"
-		| "f"
-		| "g"
-		| "h"
-		| "i"
-		| "j"
-		| "k"
-		| "l"
-		| "m"
-		| "n"
-		| "o"
-		| "p"
-		| "q"
-		| "r"
-		| "s"
-		| "t"
-		| "u"
-		| "v"
-		| "w"
-		| "x"
-		| "y"
-		| "z"
-		| "A"
-		| "B"
-		| "C"
-		| "D"
-		| "E"
-		| "F"
-		| "G"
-		| "H"
-		| "I"
-		| "J"
-		| "K"
-		| "L"
-		| "M"
-		| "N"
-		| "O"
-		| "P"
-		| "Q"
-		| "R"
-		| "S"
-		| "T"
-		| "U"
-		| "V"
-		| "W"
-		| "X"
-		| "Y"
-		| "Z" -> JavaIDDigit
+        "0" -> JavaIDDigit
+        "1" -> JavaIDDigit
+        "2" -> JavaIDDigit
+        "3" -> JavaIDDigit
+        "4" -> JavaIDDigit
+        "5" -> JavaIDDigit
+        "6" -> JavaIDDigit
+        "7" -> JavaIDDigit
+        "8" -> JavaIDDigit
+        "9" -> JavaIDDigit
+        "a" -> JavaIDDigit
+        "b" -> JavaIDDigit
+        "c" -> JavaIDDigit
+        "d" -> JavaIDDigit
+        "e" -> JavaIDDigit
+        "f" -> JavaIDDigit
+        "g" -> JavaIDDigit
+        "h" -> JavaIDDigit
+        "i" -> JavaIDDigit
+        "j" -> JavaIDDigit
+        "k" -> JavaIDDigit
+        "l" -> JavaIDDigit
+        "m" -> JavaIDDigit
+        "n" -> JavaIDDigit
+        "o" -> JavaIDDigit
+        "p" -> JavaIDDigit
+        "q" -> JavaIDDigit
+        "r" -> JavaIDDigit
+        "s" -> JavaIDDigit
+        "t" -> JavaIDDigit
+        "u" -> JavaIDDigit
+        "v" -> JavaIDDigit
+        "w" -> JavaIDDigit
+        "x" -> JavaIDDigit
+        "y" -> JavaIDDigit
+        "z" -> JavaIDDigit
+        "A" -> JavaIDDigit
+        "B" -> JavaIDDigit
+        "C" -> JavaIDDigit
+        "D" -> JavaIDDigit
+        "E" -> JavaIDDigit
+        "F" -> JavaIDDigit
+        "G" -> JavaIDDigit
+        "H" -> JavaIDDigit
+        "I" -> JavaIDDigit
+        "J" -> JavaIDDigit
+        "K" -> JavaIDDigit
+        "L" -> JavaIDDigit
+        "M" -> JavaIDDigit
+        "N" -> JavaIDDigit
+        "O" -> JavaIDDigit
+        "P" -> JavaIDDigit
+        "Q" -> JavaIDDigit
+        "R" -> JavaIDDigit
+        "S" -> JavaIDDigit
+        "T" -> JavaIDDigit
+        "U" -> JavaIDDigit
+        "V" -> JavaIDDigit
+        "W" -> JavaIDDigit
+        "X" -> JavaIDDigit
+        "Y" -> JavaIDDigit
+        "Z" -> JavaIDDigit
 
         ElementValuePair ("," ElementValuePair)* -> ElementValuePairs
 
         Identifier "=" ElementValue -> ElementValuePair
 
-        ConditionalExpression
-		| Annotation
-		| ElementValueArrayInitializer -> ElementValue
+        ConditionalExpression -> ElementValue
+        Annotation -> ElementValue
+        ElementValueArrayInitializer -> ElementValue
 
         ConditionalOrExpression ("?" Expression ":" Expression)? -> ConditionalExpression
 
@@ -164,73 +164,73 @@ exports
 
         UnaryExpression (("*" | "/" | "%") UnaryExpression)* -> MultiplicativeExpression
 
-        "+" UnaryExpression
-		| "-" UnaryExpression
-		| "++" UnaryExpression
-		| "--" UnaryExpression
-		| UnaryExpressionNotPlusMinus -> UnaryExpression
+        "+" UnaryExpression -> UnaryExpression
+        "-" UnaryExpression -> UnaryExpression
+        "++" UnaryExpression -> UnaryExpression
+        "--" UnaryExpression -> UnaryExpression
+        UnaryExpressionNotPlusMinus -> UnaryExpression
 
-        "~" UnaryExpression
-		| "!" UnaryExpression
-		| CastExpression
-		| Primary Selector* ("++" | "--")? -> UnaryExpressionNotPlusMinus
+        "~" UnaryExpression -> UnaryExpressionNotPlusMinus
+        "!" UnaryExpression -> UnaryExpressionNotPlusMinus
+        CastExpression -> UnaryExpressionNotPlusMinus
+        Primary Selector* ("++" | "--")? -> UnaryExpressionNotPlusMinus
 
-        "(" PrimitiveType ")" UnaryExpression
-		| "(" (Type | Expression) ")" UnaryExpressionNotPlusMinus -> CastExpression
+        "(" PrimitiveType ")" UnaryExpression -> CastExpression
+        "(" (Type | Expression) ")" UnaryExpressionNotPlusMinus -> CastExpression
 
-        "boolean"
-		| "char"
-		| "byte"
-		| "short"
-		| "int"
-		| "long"
-		| "float"
-		| "double" -> PrimitiveType
+        "boolean" -> PrimitiveType
+        "char" -> PrimitiveType
+        "byte" -> PrimitiveType
+        "short" -> PrimitiveType
+        "int" -> PrimitiveType
+        "long" -> PrimitiveType
+        "float" -> PrimitiveType
+        "double" -> PrimitiveType
 
-        ClassOrInterfaceType ("[" "]")*
-		| PrimitiveType ("[" "]")* -> Type
+        ClassOrInterfaceType ("[" "]")* -> Type
+        PrimitiveType ("[" "]")* -> Type
 
         Identifier TypeArguments? ("." Identifier TypeArguments?)* -> ClassOrInterfaceType
 
         "<" TypeArgument ("," TypeArgument)* ">" -> TypeArguments
 
-        Type
-		| "?" (("extends" | "super") Type)? -> TypeArgument
+        Type -> TypeArgument
+        "?" (("extends" | "super") Type)? -> TypeArgument
 
         ConditionalExpression (AssignmentOperator Expression)? -> Expression
 
-        "="
-		| "+="
-		| "-="
-		| "*="
-		| "/="
-		| "&="
-		| "|="
-		| "^="
-		| "%="
-		| t1::"<" t2::"<" t3::"="
-		| t1::">" t2::">" t3::">" t4::("="?)
-		| t1::">" t2::">" t3::"=" -> AssignmentOperator
+        "=" -> AssignmentOperator
+        "+=" -> AssignmentOperator
+        "-=" -> AssignmentOperator
+        "*=" -> AssignmentOperator
+        "/=" -> AssignmentOperator
+        "&=" -> AssignmentOperator
+        "|=" -> AssignmentOperator
+        "^=" -> AssignmentOperator
+        "%=" -> AssignmentOperator
+        t1::"<" t2::"<" t3::"=" -> AssignmentOperator
+        t1::">" t2::">" t3::">" t4::("="?) -> AssignmentOperator
+        t1::">" t2::">" t3::"=" -> AssignmentOperator
 
-        ParExpression
-		| "this" ("." Identifier)* IdentifierSuffix?
-		| "super" SuperSuffix
-		| Literal
-		| "new" Creator
-		| Identifier ("." Identifier)* IdentifierSuffix?
-		| PrimitiveType ("[" "]")* "." "class"
-		| "void" "." "class" -> Primary
+        ParExpression -> Primary
+        "this" ("." Identifier)* IdentifierSuffix? -> Primary
+        "super" SuperSuffix -> Primary
+        Literal -> Primary
+        "new" Creator -> Primary
+        Identifier ("." Identifier)* IdentifierSuffix? -> Primary
+        PrimitiveType ("[" "]")* "." "class" -> Primary
+        "void" "." "class" -> Primary
 
         "(" Expression ")" -> ParExpression
 
-        ("[" "]")+ "." "class"
-		| ("[" Expression "]")+
-		| Arguments
-		| "." "class"
-		| "." ExplicitGenericInvocation
-		| "." "this"
-		| "." "super" Arguments
-		| "." "new" InnerCreator -> IdentifierSuffix
+        ("[" "]")+ "." "class" -> IdentifierSuffix
+        ("[" Expression "]")+ -> IdentifierSuffix
+        Arguments -> IdentifierSuffix
+        "." "class" -> IdentifierSuffix
+        "." ExplicitGenericInvocation -> IdentifierSuffix
+        "." "this" -> IdentifierSuffix
+        "." "super" Arguments -> IdentifierSuffix
+        "." "new" InnerCreator -> IdentifierSuffix
 
         "(" ExpressionList? ")" -> Arguments
 
@@ -248,15 +248,15 @@ exports
 
         "{" ClassBodyDeclaration* "}" -> ClassBody
 
-        ";"
-		| "static"? Block
-		| Modifiers MemberDecl -> ClassBodyDeclaration
+        ";" -> ClassBodyDeclaration
+        "static"? Block -> ClassBodyDeclaration
+        Modifiers MemberDecl -> ClassBodyDeclaration
 
         "{" BlockStatement* "}" -> Block
 
-        LocalVariableDeclarationStatement
-		| ClassOrInterfaceDeclaration
-		| Statement -> BlockStatement
+        LocalVariableDeclarationStatement -> BlockStatement
+        ClassOrInterfaceDeclaration -> BlockStatement
+        Statement -> BlockStatement
 
         LocalVariableDeclaration ";" -> LocalVariableDeclarationStatement
 
@@ -264,8 +264,8 @@ exports
 
         VariableModifier* -> VariableModifiers
 
-        "final"
-		| Annotation -> VariableModifier
+        "final" -> VariableModifier
+        Annotation -> VariableModifier
 
         VariableDeclarator ("," VariableDeclarator)* -> VariableDeclarators
 
@@ -273,8 +273,8 @@ exports
 
         Identifier ("[" "]")* -> VariableDeclaratorId
 
-        ArrayInitializer
-		| Expression -> VariableInitializer
+        ArrayInitializer -> VariableInitializer
+        Expression -> VariableInitializer
 
         "{" (VariableInitializer ("," VariableInitializer)* ","?)? "}" -> ArrayInitializer
 
@@ -282,17 +282,17 @@ exports
 
         ClassOrInterfaceModifier* -> ClassOrInterfaceModifiers
 
-        Annotation
-		| "public"
-		| "protected"
-		| "private"
-		| "abstract"
-		| "static"
-		| "final"
-		| "strictfp" -> ClassOrInterfaceModifier
+        Annotation -> ClassOrInterfaceModifier
+        "public" -> ClassOrInterfaceModifier
+        "protected" -> ClassOrInterfaceModifier
+        "private" -> ClassOrInterfaceModifier
+        "abstract" -> ClassOrInterfaceModifier
+        "static" -> ClassOrInterfaceModifier
+        "final" -> ClassOrInterfaceModifier
+        "strictfp" -> ClassOrInterfaceModifier
 
-        NormalClassDeclaration
-		| EnumDeclaration -> ClassDeclaration
+        NormalClassDeclaration -> ClassDeclaration
+        EnumDeclaration -> ClassDeclaration
 
         "class" Identifier TypeParameters? ("extends" Type)? ("implements" TypeList)? ClassBody -> NormalClassDeclaration
 
@@ -314,41 +314,41 @@ exports
 
         ";" ClassBodyDeclaration* -> EnumBodyDeclarations
 
-        NormalInterfaceDeclaration
-		| AnnotationTypeDeclaration -> InterfaceDeclaration
+        NormalInterfaceDeclaration -> InterfaceDeclaration
+        AnnotationTypeDeclaration -> InterfaceDeclaration
 
         "interface" Identifier TypeParameters? ("extends" TypeList)? InterfaceBody -> NormalInterfaceDeclaration
 
         "{" InterfaceBodyDeclaration* "}" -> InterfaceBody
 
-        Modifiers InterfaceMemberDecl
-		| ";" -> InterfaceBodyDeclaration
+        Modifiers InterfaceMemberDecl -> InterfaceBodyDeclaration
+        ";" -> InterfaceBodyDeclaration
 
         Modifier* -> Modifiers
 
-        Annotation
-		| "public"
-		| "protected"
-		| "private"
-		| "static"
-		| "abstract"
-		| "final"
-		| "native"
-		| "synchronized"
-		| "transient"
-		| "volatile"
-		| "strictfp" -> Modifier
+        Annotation -> Modifier
+        "public" -> Modifier
+        "protected" -> Modifier
+        "private" -> Modifier
+        "static" -> Modifier
+        "abstract" -> Modifier
+        "final" -> Modifier
+        "native" -> Modifier
+        "synchronized" -> Modifier
+        "transient" -> Modifier
+        "volatile" -> Modifier
+        "strictfp" -> Modifier
 
-        InterfaceMethodOrFieldDecl
-		| InterfaceGenericMethodDecl
-		| "void" Identifier VoidInterfaceMethodDeclaratorRest
-		| InterfaceDeclaration
-		| ClassDeclaration -> InterfaceMemberDecl
+        InterfaceMethodOrFieldDecl -> InterfaceMemberDecl
+        InterfaceGenericMethodDecl -> InterfaceMemberDecl
+        "void" Identifier VoidInterfaceMethodDeclaratorRest -> InterfaceMemberDecl
+        InterfaceDeclaration -> InterfaceMemberDecl
+        ClassDeclaration -> InterfaceMemberDecl
 
         Type Identifier InterfaceMethodOrFieldRest -> InterfaceMethodOrFieldDecl
 
-        ConstantDeclaratorsRest ";"
-		| InterfaceMethodDeclaratorRest -> InterfaceMethodOrFieldRest
+        ConstantDeclaratorsRest ";" -> InterfaceMethodOrFieldRest
+        InterfaceMethodDeclaratorRest -> InterfaceMethodOrFieldRest
 
         ConstantDeclaratorRest ("," ConstantDeclarator)* -> ConstantDeclaratorsRest
 
@@ -362,8 +362,8 @@ exports
 
         VariableModifiers Type FormalParameterDeclsRest -> FormalParameterDecls
 
-        VariableDeclaratorId ("," FormalParameterDecls)?
-		| "..." VariableDeclaratorId -> FormalParameterDeclsRest
+        VariableDeclaratorId ("," FormalParameterDecls)? -> FormalParameterDeclsRest
+        "..." VariableDeclaratorId -> FormalParameterDeclsRest
 
         QualifiedName ("," QualifiedName)* -> QualifiedNameList
 
@@ -379,14 +379,14 @@ exports
 
         Modifiers AnnotationTypeElementRest -> AnnotationTypeElementDeclaration
 
-        Type AnnotationMethodOrConstantRest ";"
-		| NormalClassDeclaration ";"?
-		| NormalInterfaceDeclaration ";"?
-		| EnumDeclaration ";"?
-		| AnnotationTypeDeclaration ";"? -> AnnotationTypeElementRest
+        Type AnnotationMethodOrConstantRest ";" -> AnnotationTypeElementRest
+        NormalClassDeclaration ";"? -> AnnotationTypeElementRest
+        NormalInterfaceDeclaration ";"? -> AnnotationTypeElementRest
+        EnumDeclaration ";"? -> AnnotationTypeElementRest
+        AnnotationTypeDeclaration ";"? -> AnnotationTypeElementRest
 
-        AnnotationMethodRest
-		| AnnotationConstantRest -> AnnotationMethodOrConstantRest
+        AnnotationMethodRest -> AnnotationMethodOrConstantRest
+        AnnotationConstantRest -> AnnotationMethodOrConstantRest
 
         Identifier "(" ")" DefaultValue? -> AnnotationMethodRest
 
@@ -394,32 +394,32 @@ exports
 
         VariableDeclarators -> AnnotationConstantRest
 
-        Block
-		| ASSERT Expression (":" Expression)? ";"
-		| "if" ParExpression Statement ("else" Statement)?
-		| "for" "(" ForControl ")" Statement
-		| "while" ParExpression Statement
-		| "do" Statement "while" ParExpression ";"
-		| "try" Block ((Catches "finally" Block) | Catches | ("finally" Block))
-		| "switch" ParExpression "{" SwitchBlockStatementGroups "}"
-		| "synchronized" ParExpression Block
-		| "return" Expression? ";"
-		| "throw" Expression ";"
-		| "break" Identifier? ";"
-		| "continue" Identifier? ";"
-		| ";"
-		| StatementExpression ";"
-		| Identifier ":" Statement -> Statement
+        Block -> Statement
+        ASSERT Expression (":" Expression)? ";" -> Statement
+        "if" ParExpression Statement ("else" Statement)? -> Statement
+        "for" "(" ForControl ")" Statement -> Statement
+        "while" ParExpression Statement -> Statement
+        "do" Statement "while" ParExpression ";" -> Statement
+        "try" Block ((Catches "finally" Block) | Catches | ("finally" Block)) -> Statement
+        "switch" ParExpression "{" SwitchBlockStatementGroups "}" -> Statement
+        "synchronized" ParExpression Block -> Statement
+        "return" Expression? ";" -> Statement
+        "throw" Expression ";" -> Statement
+        "break" Identifier? ";" -> Statement
+        "continue" Identifier? ";" -> Statement
+        ";" -> Statement
+        StatementExpression ";" -> Statement
+        Identifier ":" Statement -> Statement
 
         "assert" -> ASSERT
 
-        EnhancedForControl
-		| ForInit? ";" Expression? ";" ForUpdate? -> ForControl
+        EnhancedForControl -> ForControl
+        ForInit? ";" Expression? ";" ForUpdate? -> ForControl
 
         VariableModifiers Type Identifier ":" Expression -> EnhancedForControl
 
-        LocalVariableDeclaration
-		| ExpressionList -> ForInit
+        LocalVariableDeclaration -> ForInit
+        ExpressionList -> ForInit
 
         ExpressionList -> ForUpdate
 
@@ -433,9 +433,9 @@ exports
 
         SwitchLabel+ BlockStatement* -> SwitchBlockStatementGroup
 
-        "case" ConstantExpression ":"
-		| "case" EnumConstantName ":"
-		| "default" ":" -> SwitchLabel
+        "case" ConstantExpression ":" -> SwitchLabel
+        "case" EnumConstantName ":" -> SwitchLabel
+        "default" ":" -> SwitchLabel
 
         Expression -> ConstantExpression
 
@@ -443,17 +443,17 @@ exports
 
         Expression -> StatementExpression
 
-        GenericMethodOrConstructorDecl
-		| MemberDeclaration
-		| "void" Identifier VoidMethodDeclaratorRest
-		| Identifier ConstructorDeclaratorRest
-		| InterfaceDeclaration
-		| ClassDeclaration -> MemberDecl
+        GenericMethodOrConstructorDecl -> MemberDecl
+        MemberDeclaration -> MemberDecl
+        "void" Identifier VoidMethodDeclaratorRest -> MemberDecl
+        Identifier ConstructorDeclaratorRest -> MemberDecl
+        InterfaceDeclaration -> MemberDecl
+        ClassDeclaration -> MemberDecl
 
         TypeParameters GenericMethodOrConstructorRest -> GenericMethodOrConstructorDecl
 
-        (Type | "void") Identifier MethodDeclaratorRest
-		| Identifier ConstructorDeclaratorRest -> GenericMethodOrConstructorRest
+        (Type | "void") Identifier MethodDeclaratorRest -> GenericMethodOrConstructorRest
+        Identifier ConstructorDeclaratorRest -> GenericMethodOrConstructorRest
 
         FormalParameters ("[" "]")* ("throws" QualifiedNameList)? (MethodBody | ";") -> MethodDeclaratorRest
 
@@ -463,8 +463,8 @@ exports
 
         "{" ExplicitConstructorInvocation? BlockStatement* "}" -> ConstructorBody
 
-        NonWildcardTypeArguments? ("this" | "super") Arguments ";"
-		| Primary "." NonWildcardTypeArguments? "super" Arguments ";" -> ExplicitConstructorInvocation
+        NonWildcardTypeArguments? ("this" | "super") Arguments ";" -> ExplicitConstructorInvocation
+        Primary "." NonWildcardTypeArguments? "super" Arguments ";" -> ExplicitConstructorInvocation
 
         Type (MethodDeclaration | FieldDeclaration) -> MemberDeclaration
 
@@ -474,103 +474,103 @@ exports
 
         FormalParameters ("throws" QualifiedNameList)? (MethodBody | ";") -> VoidMethodDeclaratorRest
 
-        Arguments
-		| "." Identifier Arguments? -> SuperSuffix
+        Arguments -> SuperSuffix
+        "." Identifier Arguments? -> SuperSuffix
 
-        IntegerLiteral
-		| FloatingPointLiteral
-		| CharacterLiteral
-		| StringLiteral
-		| BooleanLiteral
-		| "null" -> Literal
+        IntegerLiteral -> Literal
+        FloatingPointLiteral -> Literal
+        CharacterLiteral -> Literal
+        StringLiteral -> Literal
+        BooleanLiteral -> Literal
+        "null" -> Literal
 
-        HexLiteral
-		| OctalLiteral
-		| DecimalLiteral -> IntegerLiteral
+        HexLiteral -> IntegerLiteral
+        OctalLiteral -> IntegerLiteral
+        DecimalLiteral -> IntegerLiteral
 
         "0" ("x" | "X") HexDigit+ IntegerTypeSuffix? -> HexLiteral
 
-        "0"
-		| "1"
-		| "2"
-		| "3"
-		| "4"
-		| "5"
-		| "6"
-		| "7"
-		| "8"
-		| "9"
-		| "a"
-		| "b"
-		| "c"
-		| "d"
-		| "e"
-		| "f"
-		| "A"
-		| "B"
-		| "C"
-		| "D"
-		| "E"
-		| "F" -> HexDigit
+        "0" -> HexDigit
+        "1" -> HexDigit
+        "2" -> HexDigit
+        "3" -> HexDigit
+        "4" -> HexDigit
+        "5" -> HexDigit
+        "6" -> HexDigit
+        "7" -> HexDigit
+        "8" -> HexDigit
+        "9" -> HexDigit
+        "a" -> HexDigit
+        "b" -> HexDigit
+        "c" -> HexDigit
+        "d" -> HexDigit
+        "e" -> HexDigit
+        "f" -> HexDigit
+        "A" -> HexDigit
+        "B" -> HexDigit
+        "C" -> HexDigit
+        "D" -> HexDigit
+        "E" -> HexDigit
+        "F" -> HexDigit
 
-        "l"
-		| "L" -> IntegerTypeSuffix
+        "l" -> IntegerTypeSuffix
+        "L" -> IntegerTypeSuffix
 
         "0" ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7")+ IntegerTypeSuffix? -> OctalLiteral
 
         ("0" | (("1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9") ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")*)) IntegerTypeSuffix? -> DecimalLiteral
 
-        ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ "." ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")* Exponent? FloatTypeSuffix?
-		| "." ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ Exponent? FloatTypeSuffix?
-		| ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ Exponent FloatTypeSuffix?
-		| ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ FloatTypeSuffix -> FloatingPointLiteral
+        ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ "." ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")* Exponent? FloatTypeSuffix? -> FloatingPointLiteral
+        "." ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ Exponent? FloatTypeSuffix? -> FloatingPointLiteral
+        ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ Exponent FloatTypeSuffix? -> FloatingPointLiteral
+        ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ FloatTypeSuffix -> FloatingPointLiteral
 
         ("e" | "E") ("+" | "-")? ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ -> Exponent
 
-        "f"
-		| "F"
-		| "d"
-		| "D" -> FloatTypeSuffix
+        "f" -> FloatTypeSuffix
+        "F" -> FloatTypeSuffix
+        "d" -> FloatTypeSuffix
+        "D" -> FloatTypeSuffix
 
         "\'" (EscapeSequence | STR) "\'" -> CharacterLiteral
 
-        "\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\")
-		| UnicodeEscape
-		| OctalEscape -> EscapeSequence
+        "\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") -> EscapeSequence
+        UnicodeEscape -> EscapeSequence
+        OctalEscape -> EscapeSequence
 
         "\\" "u" HexDigit HexDigit HexDigit HexDigit -> UnicodeEscape
 
-        "\\" ("0" | "1" | "2" | "3") ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7") ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7")
-		| "\\" ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7") ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7")
-		| "\\" ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7") -> OctalEscape
+        "\\" ("0" | "1" | "2" | "3") ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7") ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7") -> OctalEscape
+        "\\" ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7") ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7") -> OctalEscape
+        "\\" ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7") -> OctalEscape
 
         """ (EscapeSequence | STR)* """ -> StringLiteral
 
-        "true"
-		| "false" -> BooleanLiteral
+        "true" -> BooleanLiteral
+        "false" -> BooleanLiteral
 
-        NonWildcardTypeArguments CreatedName ClassCreatorRest
-		| CreatedName (ArrayCreatorRest | ClassCreatorRest) -> Creator
+        NonWildcardTypeArguments CreatedName ClassCreatorRest -> Creator
+        CreatedName (ArrayCreatorRest | ClassCreatorRest) -> Creator
 
-        ClassOrInterfaceType
-		| PrimitiveType -> CreatedName
+        ClassOrInterfaceType -> CreatedName
+        PrimitiveType -> CreatedName
 
         "[" (("]" ("[" "]")* ArrayInitializer) | (Expression "]" ("[" Expression "]")* ("[" "]")*)) -> ArrayCreatorRest
 
-        "." Identifier Arguments?
-		| "." "this"
-		| "." "super" SuperSuffix
-		| "." "new" InnerCreator
-		| "[" Expression "]" -> Selector
+        "." Identifier Arguments? -> Selector
+        "." "this" -> Selector
+        "." "super" SuperSuffix -> Selector
+        "." "new" InnerCreator -> Selector
+        "[" Expression "]" -> Selector
 
-        t1::"<" t2::("<"?)
-		| t1::">" t2::">" t3::">"
-		| t1::">" t2::(">"?) -> ShiftOp
+        t1::"<" t2::("<"?) -> ShiftOp
+        t1::">" t2::">" t3::">" -> ShiftOp
+        t1::">" t2::(">"?) -> ShiftOp
 
-        t1::"<" t2::("="?)
-		| t1::">" t2::("="?)
-		| "<"
-		| ">" -> RelationalOp
+        t1::"<" t2::("="?) -> RelationalOp
+        t1::">" t2::("="?) -> RelationalOp
+        "<" -> RelationalOp
+        ">" -> RelationalOp
 
         "{" (ElementValue ("," ElementValue)*)? ","? "}" -> ElementValueArrayInitializer
 
@@ -578,5 +578,5 @@ exports
 
         "import" "static"? QualifiedName ("." "*")? ";" -> ImportDeclaration
 
-        ClassOrInterfaceDeclaration
-		| ";" -> TypeDeclaration
+        ClassOrInterfaceDeclaration -> TypeDeclaration
+        ";" -> TypeDeclaration

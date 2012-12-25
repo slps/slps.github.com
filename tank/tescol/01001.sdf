@@ -6,9 +6,9 @@ exports
   context-free syntax
         TROLLEY CONST-ID CONTAINS Declaration* CHECKOUT Statement SEMI DONE SEMI -> Program
 
-        Const-dec
-		| Var-dec
-		| Proc-dec -> Declaration
+        Const-dec -> Declaration
+        Var-dec -> Declaration
+        Proc-dec -> Declaration
 
         CONST CONST-ID COLON Typename DEF Arith-exp SEMI -> Const-dec
 
@@ -28,11 +28,11 @@ exports
 
         VAR-ID -> Var-id
 
-        Grouped
-		| SKIP
-		| Assignment
-		| Conditional
-		| Loop -> Statement
+        Grouped -> Statement
+        SKIP -> Statement
+        Assignment -> Statement
+        Conditional -> Statement
+        Loop -> Statement
 
         STST (Statement SEMI)+ STED -> Grouped
 
@@ -56,14 +56,14 @@ exports
 
         Minus (EXP Minus)? -> Exp-exp
 
-        Atom
-		| MINUS Minus -> Minus
+        Atom -> Minus
+        MINUS Minus -> Minus
 
-        Type
-		| Constant
-		| Variable
-		| Procedure
-		| OPEN Arith-exp CLOSE -> Atom
+        Type -> Atom
+        Constant -> Atom
+        Variable -> Atom
+        Procedure -> Atom
+        OPEN Arith-exp CLOSE -> Atom
 
         idname::(VAR-ID | CONST-ID) -> V-id
 
@@ -77,18 +77,18 @@ exports
 
         (Arith-exp (COMMA Arith-exp)*)? -> Params-given
 
-        EQ
-		| NEQ
-		| LESS
-		| LESSEQ
-		| GRT
-		| GRTEQ -> Rel-operator
+        EQ -> Rel-operator
+        NEQ -> Rel-operator
+        LESS -> Rel-operator
+        LESSEQ -> Rel-operator
+        GRT -> Rel-operator
+        GRTEQ -> Rel-operator
 
-        INT-T
-		| DOUBLE-T -> Type
+        INT-T -> Type
+        DOUBLE-T -> Type
 
-        INT
-		| DOUBLE -> Typename
+        INT -> Typename
+        DOUBLE -> Typename
 
         "trolley" -> TROLLEY
 

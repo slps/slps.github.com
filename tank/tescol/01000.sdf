@@ -14,13 +14,13 @@ exports
 
         PROC Id LBRACK Param RBRACK COL Type DEF Statement SEMI -> Procdec
 
-        Assign
-		| Condstatement
-		| Loop -> Statements
+        Assign -> Statements
+        Condstatement -> Statements
+        Loop -> Statements
 
-        SKIP
-		| Statements
-		| LCBRACK Statement (SEMI Statement)* RCBRACK -> Statement
+        SKIP -> Statement
+        Statements -> Statement
+        LCBRACK Statement (SEMI Statement)* RCBRACK -> Statement
 
         Id DEF Arith -> Assign
 
@@ -30,12 +30,12 @@ exports
 
         (l::Id COL ltype::Type (COMMA r::Id COL rtype::Type)*)? -> Param
 
-        EQ
-		| NEQ
-		| LT
-		| GT
-		| LTE
-		| GTE -> ComparOps
+        EQ -> ComparOps
+        NEQ -> ComparOps
+        LT -> ComparOps
+        GT -> ComparOps
+        LTE -> ComparOps
+        GTE -> ComparOps
 
         OrExpr (QUES Arith COL Arith)? -> Arith
 
@@ -51,24 +51,24 @@ exports
 
         Atom (EXP Atom)* -> ExpExpr
 
-        INTNUM
-		| DOUBNUM
-		| Id
-		| Procapp
-		| LBRACK Arith RBRACK -> Atom
+        INTNUM -> Atom
+        DOUBNUM -> Atom
+        Id -> Atom
+        Procapp -> Atom
+        LBRACK Arith RBRACK -> Atom
 
-        VARID
-		| CONSTID
-		| INTNUM
-		| DOUBNUM -> Nums
+        VARID -> Nums
+        CONSTID -> Nums
+        INTNUM -> Nums
+        DOUBNUM -> Nums
 
         Id LBRACK Arith (COMMA Arith)* RBRACK -> Procapp
 
-        INT
-		| DOUBLE -> Type
+        INT -> Type
+        DOUBLE -> Type
 
-        CONSTID
-		| VARID -> Id
+        CONSTID -> Id
+        VARID -> Id
 
         "/*" ANY* "*/" -> COMMENT
 

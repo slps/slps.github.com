@@ -14,11 +14,11 @@ exports
 
         ID COLON (INT | DOUBLE) -> Parameter
 
-        Procedureapp
-		| ID
-		| "(" Expression ")"
-		| INUMB
-		| DNUMB -> Term
+        Procedureapp -> Term
+        ID -> Term
+        "(" Expression ")" -> Term
+        INUMB -> Term
+        DNUMB -> Term
 
         (PLUS | Negation)* Term -> Unary
 
@@ -38,13 +38,13 @@ exports
 
         ID "(" (Expression (COMMA Expression)*)? ")" SEMI? -> Procedureapp
 
-        LBRACE Statement+ RBRACE SEMI
-		| Skip
-		| Assignment
-		| Conditional
-		| Loop
-		| Procedureapp
-		| Ret -> Statement
+        LBRACE Statement+ RBRACE SEMI -> Statement
+        Skip -> Statement
+        Assignment -> Statement
+        Conditional -> Statement
+        Loop -> Statement
+        Procedureapp -> Statement
+        Ret -> Statement
 
         "skip" SEMI -> Skip
 

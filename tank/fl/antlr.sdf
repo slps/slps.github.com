@@ -8,9 +8,9 @@ exports
 
         n::ID a::ID+ "=" e::Expr NEWLINE+ -> Function
 
-        b::Binary
-		| a::Apply
-		| i::IfThenElse -> Expr
+        b::Binary -> Expr
+        a::Apply -> Expr
+        i::IfThenElse -> Expr
 
         l::Atom (o::Ops r::Atom)* -> Binary
 
@@ -18,10 +18,10 @@ exports
 
         "if" c::Expr "then" e1::Expr "else" e2::Expr -> IfThenElse
 
-        ID
-		| INT
-		| "(" e::Expr ")" -> Atom
+        ID -> Atom
+        INT -> Atom
+        "(" e::Expr ")" -> Atom
 
-        "=="
-		| "+"
-		| "-" -> Ops
+        "==" -> Ops
+        "+" -> Ops
+        "-" -> Ops

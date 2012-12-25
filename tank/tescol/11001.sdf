@@ -12,8 +12,8 @@ exports
 
         DONE SEMI -> Done
 
-        CONSTID
-		| VARID -> Varid
+        CONSTID -> Varid
+        VARID -> Varid
 
         name::Id DEFINEDAS exp::Expression -> Assignment
 
@@ -23,14 +23,14 @@ exports
 
         PROC name::Varid LPAREN params::Parameterlist RPAREN COLON t::Type DEFINEDAS content::Statement -> Procdeclaration
 
-        name::Varid COLON t::Type (COMMA params::Parameterlist)?
-		|  -> Parameterlist
+        name::Varid COLON t::Type (COMMA params::Parameterlist)? -> Parameterlist
+         -> Parameterlist
 
-        SKIP
-		| LBRACE Statement (SEMI Statement)* SEMI? RBRACE
-		| Assignment
-		| Ifstatement
-		| Whilestatement -> Statement
+        SKIP -> Statement
+        LBRACE Statement (SEMI Statement)* SEMI? RBRACE -> Statement
+        Assignment -> Statement
+        Ifstatement -> Statement
+        Whilestatement -> Statement
 
         IF exp::Expression THEN Statement ELSE Statement -> Ifstatement
 
@@ -52,27 +52,27 @@ exports
 
         l::Atom-exp (EXP r::Atom-exp)* -> Exp-exp
 
-        e::Unary-exp
-		| LPAREN exp::Expression RPAREN
-		| proc::Proccall -> Atom-exp
+        e::Unary-exp -> Atom-exp
+        LPAREN exp::Expression RPAREN -> Atom-exp
+        proc::Proccall -> Atom-exp
 
         MINUS? (num::Number | var::Id) -> Unary-exp
 
         proc::Varid LPAREN args::Argumentlist RPAREN -> Proccall
 
-        exp::Expression (COMMA args::Argumentlist)?
-		|  -> Argumentlist
+        exp::Expression (COMMA args::Argumentlist)? -> Argumentlist
+         -> Argumentlist
 
-        t::EQUALITY
-		| t::INEQUALITY
-		| t::LANGLE
-		| t::RANGLE
-		| t::LTEQUALS
-		| t::GTEQUALS -> Conditional
+        t::EQUALITY -> Conditional
+        t::INEQUALITY -> Conditional
+        t::LANGLE -> Conditional
+        t::RANGLE -> Conditional
+        t::LTEQUALS -> Conditional
+        t::GTEQUALS -> Conditional
 
-        f::FLOAT
-		| i::INT
-		| u::UINT -> Number
+        f::FLOAT -> Number
+        i::INT -> Number
+        u::UINT -> Number
 
         name::(CONSTID | VARID) -> Id
 
@@ -150,8 +150,8 @@ exports
 
         "const" -> CONST
 
-        TINT
-		| TDOUBLE -> Type
+        TINT -> Type
+        TDOUBLE -> Type
 
         "int" -> TINT
 

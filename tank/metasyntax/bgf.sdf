@@ -9,24 +9,24 @@ exports
 
         label::Label? nonterminal::Nonterminal Expression -> Production
 
-        epsilon::
-		| empty::
-		| value::Value
-		| any::
-		| terminal::Terminal
-		| nonterminal::Nonterminal
-		| selectable::(selector::Selector Expression)
-		| sequence::(Expression+)
-		| marked::Expression
-		| choice::(Expression+)
-		| optional::Expression
-		| plus::Expression
-		| star::Expression
-		| seplistplus::(Expression Expression)
-		| sepliststar::(Expression Expression) -> Expression
+        epsilon:: -> Expression
+        empty:: -> Expression
+        value::Value -> Expression
+        any:: -> Expression
+        terminal::Terminal -> Expression
+        nonterminal::Nonterminal -> Expression
+        selectable::(selector::Selector Expression) -> Expression
+        sequence::(Expression+) -> Expression
+        marked::Expression -> Expression
+        choice::(Expression+) -> Expression
+        optional::Expression -> Expression
+        plus::Expression -> Expression
+        star::Expression -> Expression
+        seplistplus::(Expression Expression) -> Expression
+        sepliststar::(Expression Expression) -> Expression
 
-        int::
-		| string:: -> Value
+        int:: -> Value
+        string:: -> Value
 
         STR -> Label
 

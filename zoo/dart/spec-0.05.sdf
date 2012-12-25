@@ -12,34 +12,34 @@ exports
 
         FinalVarOrType Identifier -> DeclaredIdentifier
 
-        "final" Type?
-		| "var"
-		| Type -> FinalVarOrType
+        "final" Type? -> FinalVarOrType
+        "var" -> FinalVarOrType
+        Type -> FinalVarOrType
 
         ReturnType? Identifier FormalParameterList -> FunctionSignature
 
-        "void"
-		| Type -> ReturnType
+        "void" -> ReturnType
+        Type -> ReturnType
 
-        "=>" Expression ";"
-		| Block -> FunctionBody
+        "=>" Expression ";" -> FunctionBody
+        Block -> FunctionBody
 
         "{" Statements "}" -> Block
 
-        "(" ")"
-		| "(" NormalFormalParameters ("," NamedFormalParameters)? ")"
-		| "(" NamedFormalParameters ")" -> FormalParameterList
+        "(" ")" -> FormalParameterList
+        "(" NormalFormalParameters ("," NamedFormalParameters)? ")" -> FormalParameterList
+        "(" NamedFormalParameters ")" -> FormalParameterList
 
         NormalFormalParameter ("," NormalFormalParameter)* -> NormalFormalParameters
 
         "[" DefaultFormalParameter ("," DefaultFormalParameter)* "]" -> NamedFormalParameters
 
-        FunctionSignature
-		| FieldFormalParameter
-		| SimpleFormalParameter -> NormalFormalParameter
+        FunctionSignature -> NormalFormalParameter
+        FieldFormalParameter -> NormalFormalParameter
+        SimpleFormalParameter -> NormalFormalParameter
 
-        DeclaredIdentifier
-		| Identifier -> SimpleFormalParameter
+        DeclaredIdentifier -> SimpleFormalParameter
+        Identifier -> SimpleFormalParameter
 
         FinalVarOrType? "this" "." Identifier -> FieldFormalParameter
 
@@ -47,58 +47,58 @@ exports
 
         "class" Identifier TypeParameters? Superclass? Interfaces? "{" ClassMemberDefinition* "}" -> ClassDefinition
 
-        Declaration ";"
-		| MethodSignature FunctionBody -> ClassMemberDefinition
+        Declaration ";" -> ClassMemberDefinition
+        MethodSignature FunctionBody -> ClassMemberDefinition
 
-        FactoryConstructorSignature
-		| "static" FunctionSignature
-		| GetterSignature
-		| SetterSignature
-		| OperatorSignature
-		| FunctionSignature Initializers?
-		| NamedConstructorSignature Initializers? -> MethodSignature
+        FactoryConstructorSignature -> MethodSignature
+        "static" FunctionSignature -> MethodSignature
+        GetterSignature -> MethodSignature
+        SetterSignature -> MethodSignature
+        OperatorSignature -> MethodSignature
+        FunctionSignature Initializers? -> MethodSignature
+        NamedConstructorSignature Initializers? -> MethodSignature
 
-        ConstantConstructorSignature (Redirection | Initializers)?
-		| FunctionSignature Redirection
-		| NamedConstructorSignature Redirection
-		| "abstract" GetterSignature
-		| "abstract" SetterSignature
-		| "abstract" OperatorSignature
-		| "abstract" FunctionSignature
-		| "static" "final" Type? StaticFinalDeclarationList
-		| "static"? InitializedVariableDeclaration -> Declaration
+        ConstantConstructorSignature (Redirection | Initializers)? -> Declaration
+        FunctionSignature Redirection -> Declaration
+        NamedConstructorSignature Redirection -> Declaration
+        "abstract" GetterSignature -> Declaration
+        "abstract" SetterSignature -> Declaration
+        "abstract" OperatorSignature -> Declaration
+        "abstract" FunctionSignature -> Declaration
+        "static" "final" Type? StaticFinalDeclarationList -> Declaration
+        "static"? InitializedVariableDeclaration -> Declaration
 
         StaticFinalDeclaration ("," StaticFinalDeclaration)* -> StaticFinalDeclarationList
 
         ReturnType? Operator Operator FormalParameterList -> OperatorSignature
 
-        UnaryOperator
-		| BinaryOperator
-		| "[" "]"
-		| "[" "]" "="
-		| "negate" -> Operator
+        UnaryOperator -> Operator
+        BinaryOperator -> Operator
+        "[" "]" -> Operator
+        "[" "]" "=" -> Operator
+        "negate" -> Operator
 
         NegateOperator -> UnaryOperator
 
-        MultiplicativeOperator
-		| AdditiveOperator
-		| ShiftOperator
-		| RelationalOperator
-		| EqualityOperator
-		| BitwiseOperator -> BinaryOperator
+        MultiplicativeOperator -> BinaryOperator
+        AdditiveOperator -> BinaryOperator
+        ShiftOperator -> BinaryOperator
+        RelationalOperator -> BinaryOperator
+        EqualityOperator -> BinaryOperator
+        BitwiseOperator -> BinaryOperator
 
-        "-"
-		| NegateOperator -> PrefixOperator
+        "-" -> PrefixOperator
+        NegateOperator -> PrefixOperator
 
-        "!"
-		| "~" -> NegateOperator
+        "!" -> NegateOperator
+        "~" -> NegateOperator
 
         "static"? ReturnType? "get" Identifier FormalParameterList -> GetterSignature
 
         "static"? ReturnType? "set" Identifier FormalParameterList -> SetterSignature
 
-        Identifier FormalParameterList
-		| NamedConstructorSignature -> ConstructorSignature
+        Identifier FormalParameterList -> ConstructorSignature
+        NamedConstructorSignature -> ConstructorSignature
 
         Identifier "." Identifier FormalParameterList -> NamedConstructorSignature
 
@@ -106,9 +106,9 @@ exports
 
         ":" SuperCallOrFieldInitializer ("," SuperCallOrFieldInitializer)* -> Initializers
 
-        "super" Arguments
-		| "super" "." Identifier Arguments
-		| FieldInitializer -> SuperCallOrFieldInitializer
+        "super" Arguments -> SuperCallOrFieldInitializer
+        "super" "." Identifier Arguments -> SuperCallOrFieldInitializer
+        FieldInitializer -> SuperCallOrFieldInitializer
 
         ("this" ".")? Identifier "=" ConditionalExpression -> FieldInitializer
 
@@ -122,14 +122,14 @@ exports
 
         "interface" Identifier TypeParameters? Superinterfaces? FactorySpecification? "{" InterfaceMemberDefinition* "}" -> InterfaceDefinition
 
-        "static" "final" Type? InitializedIdentifierList ";"
-		| FunctionSignature ";"
-		| ConstantConstructorSignature ";"
-		| NamedConstructorSignature ";"
-		| GetterSignature ";"
-		| SetterSignature ";"
-		| OperatorSignature ";"
-		| VariableDeclaration ";" -> InterfaceMemberDefinition
+        "static" "final" Type? InitializedIdentifierList ";" -> InterfaceMemberDefinition
+        FunctionSignature ";" -> InterfaceMemberDefinition
+        ConstantConstructorSignature ";" -> InterfaceMemberDefinition
+        NamedConstructorSignature ";" -> InterfaceMemberDefinition
+        GetterSignature ";" -> InterfaceMemberDefinition
+        SetterSignature ";" -> InterfaceMemberDefinition
+        OperatorSignature ";" -> InterfaceMemberDefinition
+        VariableDeclaration ";" -> InterfaceMemberDefinition
 
         "factory" Qualified TypeParameters? -> FactorySpecification
 
@@ -139,95 +139,95 @@ exports
 
         "<" TypeParameter ("," TypeParameter)* ">" -> TypeParameters
 
-        AssignableExpression AssignmentOperator Expression
-		| ConditionalExpression -> Expression
+        AssignableExpression AssignmentOperator Expression -> Expression
+        ConditionalExpression -> Expression
 
         Expression ("," Expression)* -> ExpressionList
 
-        ThisExpression
-		| "super" AssignableSelector
-		| FunctionExpression
-		| Literal
-		| Identifier
-		| NewExpression
-		| ConstantObjectExpression
-		| "(" Expression ")" -> Primary
+        ThisExpression -> Primary
+        "super" AssignableSelector -> Primary
+        FunctionExpression -> Primary
+        Literal -> Primary
+        Identifier -> Primary
+        NewExpression -> Primary
+        ConstantObjectExpression -> Primary
+        "(" Expression ")" -> Primary
 
-        NullLiteral
-		| BooleanLiteral
-		| NumericLiteral
-		| StringLiteral
-		| MapLiteral
-		| ListLiteral -> Literal
+        NullLiteral -> Literal
+        BooleanLiteral -> Literal
+        NumericLiteral -> Literal
+        StringLiteral -> Literal
+        MapLiteral -> Literal
+        ListLiteral -> Literal
 
         "null" -> NullLiteral
 
-        NUMBER
-		| HEX-NUMBER -> NumericLiteral
+        NUMBER -> NumericLiteral
+        HEX-NUMBER -> NumericLiteral
 
-        "+"? DIGIT+ ("." DIGIT+)? EXPONENT?
-		| "+"? "." DIGIT+ EXPONENT? -> NUMBER
+        "+"? DIGIT+ ("." DIGIT+)? EXPONENT? -> NUMBER
+        "+"? "." DIGIT+ EXPONENT? -> NUMBER
 
         ("e" | "E") ("+" | "-")? DIGIT+ -> EXPONENT
 
-        "0x" HEX-DIGIT+
-		| "0X" HEX-DIGIT+ -> HEX-NUMBER
+        "0x" HEX-DIGIT+ -> HEX-NUMBER
+        "0X" HEX-DIGIT+ -> HEX-NUMBER
 
-        "a" "." "." "f"
-		| "A" "." "." "F"
-		| DIGIT -> HEX-DIGIT
+        "a" "." "." "f" -> HEX-DIGIT
+        "A" "." "." "F" -> HEX-DIGIT
+        DIGIT -> HEX-DIGIT
 
-        "true"
-		| "false" -> BooleanLiteral
+        "true" -> BooleanLiteral
+        "false" -> BooleanLiteral
 
-        "@"? MULTI-LINE-STRING
-		| SINGLE-LINE-STRING -> StringLiteral
+        "@"? MULTI-LINE-STRING -> StringLiteral
+        SINGLE-LINE-STRING -> StringLiteral
 
-        """ STRING-CONTENT-DQ* """
-		| "'" STRING-CONTENT-SQ* "'"
-		| "@' ' ' " ("~" ("'" | NEWLINE))* "'"
-		| "@" """ ("~" (""" | NEWLINE))* """ -> SINGLE-LINE-STRING
+        """ STRING-CONTENT-DQ* """ -> SINGLE-LINE-STRING
+        "'" STRING-CONTENT-SQ* "'" -> SINGLE-LINE-STRING
+        "@' ' ' " ("~" ("'" | NEWLINE))* "'" -> SINGLE-LINE-STRING
+        "@" """ ("~" (""" | NEWLINE))* """ -> SINGLE-LINE-STRING
 
-        """"" ("~" """"")* """""
-		| "'''" ("~" "'''")* "'''" -> MULTI-LINE-STRING
+        """"" ("~" """"")* """"" -> MULTI-LINE-STRING
+        "'''" ("~" "'''")* "'''" -> MULTI-LINE-STRING
 
-        "\n"
-		| "\r"
-		| "\f"
-		| "\b"
-		| "\t"
-		| "\v"
-		| "\x" HEX-DIGIT HEX-DIGIT
-		| "\u" HEX-DIGIT HEX-DIGIT HEX-DIGIT HEX-DIGIT
-		| "\u{" HEX-DIGIT-SEQUENCE "}" -> ESCAPE-SEQUENCE
+        "\n" -> ESCAPE-SEQUENCE
+        "\r" -> ESCAPE-SEQUENCE
+        "\f" -> ESCAPE-SEQUENCE
+        "\b" -> ESCAPE-SEQUENCE
+        "\t" -> ESCAPE-SEQUENCE
+        "\v" -> ESCAPE-SEQUENCE
+        "\x" HEX-DIGIT HEX-DIGIT -> ESCAPE-SEQUENCE
+        "\u" HEX-DIGIT HEX-DIGIT HEX-DIGIT HEX-DIGIT -> ESCAPE-SEQUENCE
+        "\u{" HEX-DIGIT-SEQUENCE "}" -> ESCAPE-SEQUENCE
 
         HEX-DIGIT HEX-DIGIT? HEX-DIGIT? HEX-DIGIT? HEX-DIGIT? HEX-DIGIT? HEX-DIGIT? -> HEX-DIGIT-SEQUENCE
 
-        "~" ("\\" | "  "  " | "$" | NEWLINE)
-		| "\\" "~" NEWLINE
-		| STRING-INTERPOLATION -> STRING-CONTENT-DQ
+        "~" ("\\" | "  "  " | "$" | NEWLINE) -> STRING-CONTENT-DQ
+        "\\" "~" NEWLINE -> STRING-CONTENT-DQ
+        STRING-INTERPOLATION -> STRING-CONTENT-DQ
 
-        "~" ("\\" | "\'" | "$" | NEWLINE)
-		| "\\" "~" NEWLINE
-		| STRING-INTERPOLATION -> STRING-CONTENT-SQ
+        "~" ("\\" | "\'" | "$" | NEWLINE) -> STRING-CONTENT-SQ
+        "\\" "~" NEWLINE -> STRING-CONTENT-SQ
+        STRING-INTERPOLATION -> STRING-CONTENT-SQ
 
-        "\n"
-		| "\r" -> NEWLINE
+        "\n" -> NEWLINE
+        "\r" -> NEWLINE
 
-        "$" IDENTIFIER-NO-DOLLAR
-		| "$" "{" "Expression" "}" -> STRING-INTERPOLATION
+        "$" IDENTIFIER-NO-DOLLAR -> STRING-INTERPOLATION
+        "$" "{" "Expression" "}" -> STRING-INTERPOLATION
 
         "const"? TypeArguments? "[" (ExpressionList ","?)? "]" -> ListLiteral
 
         "const"? TypeArguments? "{" (MapLiteralEntry ("," MapLiteralEntry)* ","?)? "}" -> MapLiteral
 
-        Identifier ":" Expression
-		| StringLiteral ":" Expression -> MapLiteralEntry
+        Identifier ":" Expression -> MapLiteralEntry
+        StringLiteral ":" Expression -> MapLiteralEntry
 
         (ReturnType? Identifier)? FormalParameterList FunctionExpressionBody -> FunctionExpression
 
-        "=>" Expression
-		| Block -> FunctionExpressionBody
+        "=>" Expression -> FunctionExpressionBody
+        Block -> FunctionExpressionBody
 
         "this" -> ThisExpression
 
@@ -237,26 +237,26 @@ exports
 
         "(" ArgumentList? ")" -> Arguments
 
-        NamedArgument ("," NamedArgument)*
-		| ExpressionList ("," NamedArgument)* -> ArgumentList
+        NamedArgument ("," NamedArgument)* -> ArgumentList
+        ExpressionList ("," NamedArgument)* -> ArgumentList
 
         Label Expression -> NamedArgument
 
-        "="
-		| CompoundAssignmentOperator -> AssignmentOperator
+        "=" -> AssignmentOperator
+        CompoundAssignmentOperator -> AssignmentOperator
 
-        "*="
-		| "/="
-		| "~/="
-		| "%="
-		| "+="
-		| "-="
-		| "<<="
-		| ">>>="
-		| ">>="
-		| "&="
-		| "^="
-		| "|=" -> CompoundAssignmentOperator
+        "*=" -> CompoundAssignmentOperator
+        "/=" -> CompoundAssignmentOperator
+        "~/=" -> CompoundAssignmentOperator
+        "%=" -> CompoundAssignmentOperator
+        "+=" -> CompoundAssignmentOperator
+        "-=" -> CompoundAssignmentOperator
+        "<<=" -> CompoundAssignmentOperator
+        ">>>=" -> CompoundAssignmentOperator
+        ">>=" -> CompoundAssignmentOperator
+        "&=" -> CompoundAssignmentOperator
+        "^=" -> CompoundAssignmentOperator
+        "|=" -> CompoundAssignmentOperator
 
         LogicalOrExpression ("?" Expression ":" Expression)? -> ConditionalExpression
 
@@ -264,115 +264,115 @@ exports
 
         BitwiseOrExpression ("&&" BitwiseOrExpression)* -> LogicalAndExpression
 
-        BitwiseXorExpression ("|" BitwiseXorExpression)*
-		| "super" ("|" BitwiseXorExpression)+ -> BitwiseOrExpression
+        BitwiseXorExpression ("|" BitwiseXorExpression)* -> BitwiseOrExpression
+        "super" ("|" BitwiseXorExpression)+ -> BitwiseOrExpression
 
-        BitwiseAndExpression ("^" BitwiseAndExpression)*
-		| "super" ("^" BitwiseAndExpression)+ -> BitwiseXorExpression
+        BitwiseAndExpression ("^" BitwiseAndExpression)* -> BitwiseXorExpression
+        "super" ("^" BitwiseAndExpression)+ -> BitwiseXorExpression
 
-        EqualityExpression ("&" EqualityExpression)*
-		| "super" ("&" EqualityExpression)+ -> BitwiseAndExpression
+        EqualityExpression ("&" EqualityExpression)* -> BitwiseAndExpression
+        "super" ("&" EqualityExpression)+ -> BitwiseAndExpression
 
-        "&"
-		| "^"
-		| "|" -> BitwiseOperator
+        "&" -> BitwiseOperator
+        "^" -> BitwiseOperator
+        "|" -> BitwiseOperator
 
-        RelationalExpression (EqualityOperator RelationalExpression)?
-		| "super" EqualityOperator RelationalExpression -> EqualityExpression
+        RelationalExpression (EqualityOperator RelationalExpression)? -> EqualityExpression
+        "super" EqualityOperator RelationalExpression -> EqualityExpression
 
-        "=="
-		| "!="
-		| "==="
-		| "!==" -> EqualityOperator
+        "==" -> EqualityOperator
+        "!=" -> EqualityOperator
+        "===" -> EqualityOperator
+        "!==" -> EqualityOperator
 
-        ShiftExpression ((IsOperator Type) | (RelationalOperator ShiftExpression))?
-		| "super" RelationalOperator ShiftExpression -> RelationalExpression
+        ShiftExpression ((IsOperator Type) | (RelationalOperator ShiftExpression))? -> RelationalExpression
+        "super" RelationalOperator ShiftExpression -> RelationalExpression
 
-        ">="
-		| ">"
-		| "<="
-		| "<" -> RelationalOperator
+        ">=" -> RelationalOperator
+        ">" -> RelationalOperator
+        "<=" -> RelationalOperator
+        "<" -> RelationalOperator
 
-        AdditiveExpression (ShiftOperator AdditiveExpression)*
-		| "super" (ShiftOperator AdditiveExpression)+ -> ShiftExpression
+        AdditiveExpression (ShiftOperator AdditiveExpression)* -> ShiftExpression
+        "super" (ShiftOperator AdditiveExpression)+ -> ShiftExpression
 
-        "<<"
-		| ">>>"
-		| ">>" -> ShiftOperator
+        "<<" -> ShiftOperator
+        ">>>" -> ShiftOperator
+        ">>" -> ShiftOperator
 
-        MultiplicativeExpression (AdditiveOperator MultiplicativeExpression)*
-		| "super" (AdditiveOperator MultiplicativeExpression)+ -> AdditiveExpression
+        MultiplicativeExpression (AdditiveOperator MultiplicativeExpression)* -> AdditiveExpression
+        "super" (AdditiveOperator MultiplicativeExpression)+ -> AdditiveExpression
 
-        "+"
-		| "-" -> AdditiveOperator
+        "+" -> AdditiveOperator
+        "-" -> AdditiveOperator
 
-        UnaryExpression (MultiplicativeOperator UnaryExpression)*
-		| "super" (MultiplicativeOperator UnaryExpression)+ -> MultiplicativeExpression
+        UnaryExpression (MultiplicativeOperator UnaryExpression)* -> MultiplicativeExpression
+        "super" (MultiplicativeOperator UnaryExpression)+ -> MultiplicativeExpression
 
-        "*"
-		| "/"
-		| "%"
-		| "~/" -> MultiplicativeOperator
+        "*" -> MultiplicativeOperator
+        "/" -> MultiplicativeOperator
+        "%" -> MultiplicativeOperator
+        "~/" -> MultiplicativeOperator
 
-        PrefixOperator UnaryExpression
-		| PostfixExpression
-		| UnaryOperator "super"
-		| "-" "super"
-		| IncrementOperator AssignableExpression -> UnaryExpression
+        PrefixOperator UnaryExpression -> UnaryExpression
+        PostfixExpression -> UnaryExpression
+        UnaryOperator "super" -> UnaryExpression
+        "-" "super" -> UnaryExpression
+        IncrementOperator AssignableExpression -> UnaryExpression
 
-        AssignableExpression PostfixOperator
-		| Primary Selector* -> PostfixExpression
+        AssignableExpression PostfixOperator -> PostfixExpression
+        Primary Selector* -> PostfixExpression
 
         IncrementOperator -> PostfixOperator
 
-        "++"
-		| "--" -> IncrementOperator
+        "++" -> IncrementOperator
+        "--" -> IncrementOperator
 
-        Primary (Arguments* AssignableSelector)+
-		| "super" AssignableSelector
-		| Identifier -> AssignableExpression
+        Primary (Arguments* AssignableSelector)+ -> AssignableExpression
+        "super" AssignableSelector -> AssignableExpression
+        Identifier -> AssignableExpression
 
-        AssignableSelector
-		| Arguments -> Selector
+        AssignableSelector -> Selector
+        Arguments -> Selector
 
-        "[" Expression "]"
-		| "." Identifier -> AssignableSelector
+        "[" Expression "]" -> AssignableSelector
+        "." Identifier -> AssignableSelector
 
-        IDENTIFIER-NO-DOLLAR
-		| IDENTIFIER
-		| BUILT-IN-IDENTIFIER -> Identifier
+        IDENTIFIER-NO-DOLLAR -> Identifier
+        IDENTIFIER -> Identifier
+        BUILT-IN-IDENTIFIER -> Identifier
 
         IDENTIFIER-START-NO-DOLLAR IDENTIFIER-PART-NO-DOLLAR* -> IDENTIFIER-NO-DOLLAR
 
         IDENTIFIER-START IDENTIFIER-PART* -> IDENTIFIER
 
-        "abstract"
-		| "assert"
-		| "Dynamic"
-		| "factory"
-		| "get"
-		| "implements"
-		| Import
-		| "interface"
-		| "library"
-		| "negate"
-		| Operator
-		| "set"
-		| "source"
-		| "static"
-		| "typedef" -> BUILT-IN-IDENTIFIER
+        "abstract" -> BUILT-IN-IDENTIFIER
+        "assert" -> BUILT-IN-IDENTIFIER
+        "Dynamic" -> BUILT-IN-IDENTIFIER
+        "factory" -> BUILT-IN-IDENTIFIER
+        "get" -> BUILT-IN-IDENTIFIER
+        "implements" -> BUILT-IN-IDENTIFIER
+        Import -> BUILT-IN-IDENTIFIER
+        "interface" -> BUILT-IN-IDENTIFIER
+        "library" -> BUILT-IN-IDENTIFIER
+        "negate" -> BUILT-IN-IDENTIFIER
+        Operator -> BUILT-IN-IDENTIFIER
+        "set" -> BUILT-IN-IDENTIFIER
+        "source" -> BUILT-IN-IDENTIFIER
+        "static" -> BUILT-IN-IDENTIFIER
+        "typedef" -> BUILT-IN-IDENTIFIER
 
-        IDENTIFIER-START-NO-DOLLAR
-		| "$" -> IDENTIFIER-START
+        IDENTIFIER-START-NO-DOLLAR -> IDENTIFIER-START
+        "$" -> IDENTIFIER-START
 
-        "LETTER"
-		| "_" -> IDENTIFIER-START-NO-DOLLAR
+        "LETTER" -> IDENTIFIER-START-NO-DOLLAR
+        "_" -> IDENTIFIER-START-NO-DOLLAR
 
-        IDENTIFIER-START-NO-DOLLAR
-		| DIGIT -> IDENTIFIER-PART-NO-DOLLAR
+        IDENTIFIER-START-NO-DOLLAR -> IDENTIFIER-PART-NO-DOLLAR
+        DIGIT -> IDENTIFIER-PART-NO-DOLLAR
 
-        IDENTIFIER-START
-		| DIGIT -> IDENTIFIER-PART
+        IDENTIFIER-START -> IDENTIFIER-PART
+        DIGIT -> IDENTIFIER-PART
 
         Identifier ("." Identifier)? -> Qualified
 
@@ -382,21 +382,21 @@ exports
 
         Label* NonLabelledStatement -> Statement
 
-        Block
-		| InitializedVariableDeclaration ";"
-		| ForStatement
-		| WhileStatement
-		| DoStatement
-		| SwitchStatement
-		| IfStatement
-		| TryStatement
-		| BreakStatement
-		| ContinueStatement
-		| ReturnStatement
-		| ThrowStatement
-		| ExpressionStatement
-		| AssertStatement
-		| FunctionSignature FunctionBody -> NonLabelledStatement
+        Block -> NonLabelledStatement
+        InitializedVariableDeclaration ";" -> NonLabelledStatement
+        ForStatement -> NonLabelledStatement
+        WhileStatement -> NonLabelledStatement
+        DoStatement -> NonLabelledStatement
+        SwitchStatement -> NonLabelledStatement
+        IfStatement -> NonLabelledStatement
+        TryStatement -> NonLabelledStatement
+        BreakStatement -> NonLabelledStatement
+        ContinueStatement -> NonLabelledStatement
+        ReturnStatement -> NonLabelledStatement
+        ThrowStatement -> NonLabelledStatement
+        ExpressionStatement -> NonLabelledStatement
+        AssertStatement -> NonLabelledStatement
+        FunctionSignature FunctionBody -> NonLabelledStatement
 
         Expression? ";" -> ExpressionStatement
 
@@ -404,12 +404,12 @@ exports
 
         "for" "(" ForLoopParts ")" Statement -> ForStatement
 
-        ForInitializerStatement Expression? ";" ExpressionList?
-		| DeclaredIdentifier "in" Expression
-		| Identifier "in" Expression -> ForLoopParts
+        ForInitializerStatement Expression? ";" ExpressionList? -> ForLoopParts
+        DeclaredIdentifier "in" Expression -> ForLoopParts
+        Identifier "in" Expression -> ForLoopParts
 
-        InitializedVariableDeclaration ";"
-		| Expression? ";" -> ForInitializerStatement
+        InitializedVariableDeclaration ";" -> ForInitializerStatement
+        Expression? ";" -> ForInitializerStatement
 
         "while" "(" Expression ")" Statement -> WhileStatement
 
@@ -439,16 +439,16 @@ exports
 
         "assert" "(" ConditionalExpression ")" ";" -> AssertStatement
 
-        ClassDefinition
-		| InterfaceDefinition
-		| FunctionTypeAlias
-		| FunctionSignature FunctionBody
-		| ReturnType? GetOrSet Identifier FormalParameterList FunctionBody
-		| "final" Type? StaticFinalDeclarationList ";"
-		| VariableDeclaration ";" -> TopLevelDefinition
+        ClassDefinition -> TopLevelDefinition
+        InterfaceDefinition -> TopLevelDefinition
+        FunctionTypeAlias -> TopLevelDefinition
+        FunctionSignature FunctionBody -> TopLevelDefinition
+        ReturnType? GetOrSet Identifier FormalParameterList FunctionBody -> TopLevelDefinition
+        "final" Type? StaticFinalDeclarationList ";" -> TopLevelDefinition
+        VariableDeclaration ";" -> TopLevelDefinition
 
-        "get"
-		| "set" -> GetOrSet
+        "get" -> GetOrSet
+        "set" -> GetOrSet
 
         ScriptTag? LibraryName Import* Include* Resource* TopLevelDefinition* -> LibraryDefinition
 
@@ -476,16 +476,16 @@ exports
 
         ReturnType? Identifier -> FunctionPrefix
 
-        "0"
-		| "1"
-		| "2"
-		| "3"
-		| "4"
-		| "5"
-		| "6"
-		| "7"
-		| "8"
-		| "9" -> DIGIT
+        "0" -> DIGIT
+        "1" -> DIGIT
+        "2" -> DIGIT
+        "3" -> DIGIT
+        "4" -> DIGIT
+        "5" -> DIGIT
+        "6" -> DIGIT
+        "7" -> DIGIT
+        "8" -> DIGIT
+        "9" -> DIGIT
 
         ("\t" | " " | NEWLINE)+ -> WHITESPACE
 

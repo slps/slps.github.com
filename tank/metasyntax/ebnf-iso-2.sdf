@@ -18,13 +18,13 @@ exports
 
         (Integer "*")? Primary -> Factor
 
-        Optional-sequence
-		| Repeated-sequence
-		| Special-sequence
-		| Grouped-sequence
-		| Meta-identifier
-		| Terminal-string
-		| Empty -> Primary
+        Optional-sequence -> Primary
+        Repeated-sequence -> Primary
+        Special-sequence -> Primary
+        Grouped-sequence -> Primary
+        Meta-identifier -> Primary
+        Terminal-string -> Primary
+        Empty -> Primary
 
          -> Empty
 
@@ -34,8 +34,8 @@ exports
 
         "(" Definitions-list ")" -> Grouped-sequence
 
-        "’" Character+ "’"
-		| """ Character+ """ -> Terminal-string
+        "’" Character+ "’" -> Terminal-string
+        """ Character+ """ -> Terminal-string
 
         Letter (Letter | Decimal-digit)* -> Meta-identifier
 
@@ -45,7 +45,7 @@ exports
 
         "(*" Comment-symbol* "*)" -> Comment
 
-        Comment
-		| Terminal-string
-		| Special-sequence
-		| Character -> Comment-symbol
+        Comment -> Comment-symbol
+        Terminal-string -> Comment-symbol
+        Special-sequence -> Comment-symbol
+        Character -> Comment-symbol

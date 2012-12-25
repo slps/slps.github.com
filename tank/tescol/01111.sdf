@@ -8,9 +8,9 @@ exports
 
         TROLLEY CONSTID CONTAINS Declarations* CHECKOUT Stat DONE SEMI -> ProgTree
 
-        CONST ConstDec SEMI
-		| VAR VarDec SEMI
-		| PROC ProcDec -> Declarations
+        CONST ConstDec SEMI -> Declarations
+        VAR VarDec SEMI -> Declarations
+        PROC ProcDec -> Declarations
 
         c::CONSTID COLON Number DEFINEDAS ArithmeticExpression -> ConstDec
 
@@ -20,11 +20,11 @@ exports
 
         VarDec (COMMA VarDec)* -> ParamList
 
-        ConditionalStat
-		| LoopStat
-		| AssignStat SEMI
-		| SKIP SEMI
-		| LPAR Stat+ RPAR SEMI -> Stat
+        ConditionalStat -> Stat
+        LoopStat -> Stat
+        AssignStat SEMI -> Stat
+        SKIP SEMI -> Stat
+        LPAR Stat+ RPAR SEMI -> Stat
 
         VARANDPROCID DEFINEDAS ArithmeticExpression -> AssignStat
 
@@ -32,12 +32,12 @@ exports
 
         WHILE BoolExpr DO Stat -> LoopStat
 
-        CONSTID
-		| VARANDPROCID
-		| ("+" | "-")? INTVALUE
-		| ("+" | "-")? DOUBLEVALUE
-		| ApplyProc
-		| OPAR ArithmeticExpression CPAR -> Atom
+        CONSTID -> Atom
+        VARANDPROCID -> Atom
+        ("+" | "-")? INTVALUE -> Atom
+        ("+" | "-")? DOUBLEVALUE -> Atom
+        ApplyProc -> Atom
+        OPAR ArithmeticExpression CPAR -> Atom
 
         DisjBool (QUESTION ArithmeticExpression COLON ArithmeticExpression)? -> ArithmeticExpression
 
@@ -61,17 +61,17 @@ exports
 
         ArithmeticExpression (COMMA ArithmeticExpression)* -> SubExprList
 
-        INTKEYWORD
-		| DOUBLEKEYWORD -> Number
+        INTKEYWORD -> Number
+        DOUBLEKEYWORD -> Number
 
         COMMENT -> Comment
 
-        EQUALITY
-		| NONEQUALITY
-		| LESSTHAN
-		| LESSTHANOREQUAL
-		| GREATERTHAN
-		| GREATERTHANOREQUAL -> Operations
+        EQUALITY -> Operations
+        NONEQUALITY -> Operations
+        LESSTHAN -> Operations
+        LESSTHANOREQUAL -> Operations
+        GREATERTHAN -> Operations
+        GREATERTHANOREQUAL -> Operations
 
         ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ -> INTVALUE
 

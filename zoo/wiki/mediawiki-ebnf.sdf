@@ -4,97 +4,97 @@ exports
   sorts
         Digit URL ASCII-letter URL-char Text Full-pagename Namespace Pagename Start-link End-link Internal-link External-link Redirect Header-link ISBN-link Header-end Header6 Header5 Header4 Header3 Header2 Header1 Comment Commentary Horizontal-rule Bold-italic-text Bold-text Italic-text Code-line Nowiki Unordered-list Continue-unordered-list Ordered-list Continue-ordered-list Definition-list Continue-definition-list User-signature User-signature-with-date Current-date Include Template Tplarg Part Title Name Value Balanced-text Place-TOC Force-TOC Disable-TOC Disable-section-edit Table-start Table-end Table-header Table-header-cell Table-cell Table-row Table-body Table Unicode-char Header 
   context-free syntax
-        "1"
-		| "2"
-		| "3"
-		| "4"
-		| "5"
-		| "6"
-		| "7"
-		| "8"
-		| "9"
-		| "0" -> Digit
+        "1" -> Digit
+        "2" -> Digit
+        "3" -> Digit
+        "4" -> Digit
+        "5" -> Digit
+        "6" -> Digit
+        "7" -> Digit
+        "8" -> Digit
+        "9" -> Digit
+        "0" -> Digit
 
         ASCII-letter* "://" URL-char* -> URL
 
-        "a"
-		| "b"
-		| "c"
-		| "d"
-		| "e"
-		| "f"
-		| "g"
-		| "h"
-		| "i"
-		| "j"
-		| "k"
-		| "l"
-		| "m"
-		| "n"
-		| "o"
-		| "p"
-		| "q"
-		| "r"
-		| "s"
-		| "t"
-		| "u"
-		| "v"
-		| "w"
-		| "x"
-		| "y"
-		| "z"
-		| "A"
-		| "B"
-		| "C"
-		| "D"
-		| "E"
-		| "F"
-		| "G"
-		| "H"
-		| "I"
-		| "J"
-		| "K"
-		| "L"
-		| "M"
-		| "N"
-		| "O"
-		| "P"
-		| "Q"
-		| "R"
-		| "S"
-		| "T"
-		| "U"
-		| "V"
-		| "W"
-		| "X"
-		| "Y"
-		| "Z" -> ASCII-letter
+        "a" -> ASCII-letter
+        "b" -> ASCII-letter
+        "c" -> ASCII-letter
+        "d" -> ASCII-letter
+        "e" -> ASCII-letter
+        "f" -> ASCII-letter
+        "g" -> ASCII-letter
+        "h" -> ASCII-letter
+        "i" -> ASCII-letter
+        "j" -> ASCII-letter
+        "k" -> ASCII-letter
+        "l" -> ASCII-letter
+        "m" -> ASCII-letter
+        "n" -> ASCII-letter
+        "o" -> ASCII-letter
+        "p" -> ASCII-letter
+        "q" -> ASCII-letter
+        "r" -> ASCII-letter
+        "s" -> ASCII-letter
+        "t" -> ASCII-letter
+        "u" -> ASCII-letter
+        "v" -> ASCII-letter
+        "w" -> ASCII-letter
+        "x" -> ASCII-letter
+        "y" -> ASCII-letter
+        "z" -> ASCII-letter
+        "A" -> ASCII-letter
+        "B" -> ASCII-letter
+        "C" -> ASCII-letter
+        "D" -> ASCII-letter
+        "E" -> ASCII-letter
+        "F" -> ASCII-letter
+        "G" -> ASCII-letter
+        "H" -> ASCII-letter
+        "I" -> ASCII-letter
+        "J" -> ASCII-letter
+        "K" -> ASCII-letter
+        "L" -> ASCII-letter
+        "M" -> ASCII-letter
+        "N" -> ASCII-letter
+        "O" -> ASCII-letter
+        "P" -> ASCII-letter
+        "Q" -> ASCII-letter
+        "R" -> ASCII-letter
+        "S" -> ASCII-letter
+        "T" -> ASCII-letter
+        "U" -> ASCII-letter
+        "V" -> ASCII-letter
+        "W" -> ASCII-letter
+        "X" -> ASCII-letter
+        "Y" -> ASCII-letter
+        "Z" -> ASCII-letter
 
-        ASCII-letter
-		| Digit
-		| "-"
-		| "_"
-		| "."
-		| "~"
-		| "!"
-		| "*"
-		| "'"
-		| "("
-		| ")"
-		| ";"
-		| ":"
-		| "@"
-		| "&"
-		| "="
-		| "+"
-		| "$"
-		| ","
-		| "/"
-		| "?"
-		| "%"
-		| "#"
-		| "["
-		| "]" -> URL-char
+        ASCII-letter -> URL-char
+        Digit -> URL-char
+        "-" -> URL-char
+        "_" -> URL-char
+        "." -> URL-char
+        "~" -> URL-char
+        "!" -> URL-char
+        "*" -> URL-char
+        "'" -> URL-char
+        "(" -> URL-char
+        ")" -> URL-char
+        ";" -> URL-char
+        ":" -> URL-char
+        "@" -> URL-char
+        "&" -> URL-char
+        "=" -> URL-char
+        "+" -> URL-char
+        "$" -> URL-char
+        "," -> URL-char
+        "/" -> URL-char
+        "?" -> URL-char
+        "%" -> URL-char
+        "#" -> URL-char
+        "[" -> URL-char
+        "]" -> URL-char
 
         Unicode-char* -> Text
 
@@ -110,8 +110,8 @@ exports
 
         Start-link Full-pagename ("|" Label)? End-link Label-extension -> Internal-link
 
-        URL
-		| Start-link URL (Whitespace Label)? End-link Label-extension -> External-link
+        URL -> External-link
+        Start-link URL (Whitespace Label)? End-link Label-extension -> External-link
 
         "#REDIRECT" Internal-link -> Redirect
 
@@ -167,8 +167,8 @@ exports
 
         "~~~~~" -> Current-date
 
-        Template
-		| Tplarg -> Include
+        Template -> Include
+        Tplarg -> Include
 
         "{{" Title ("|" Part)* "}}" -> Template
 
@@ -198,11 +198,11 @@ exports
 
         "|+" Text Line-break -> Table-header
 
-        Line-break "!" (Style | Whitespace)* Text
-		| Table-cell ("!!" | "||") (Style | Whitespace)* Text -> Table-header-cell
+        Line-break "!" (Style | Whitespace)* Text -> Table-header-cell
+        Table-cell ("!!" | "||") (Style | Whitespace)* Text -> Table-header-cell
 
-        Line-break "|" (Style | Whitespace)* Text
-		| Table-cell "||" (Style | Whitespace)* Text -> Table-cell
+        Line-break "|" (Style | Whitespace)* Text -> Table-cell
+        Table-cell "||" (Style | Whitespace)* Text -> Table-cell
 
         Line-break "|-" "-"* (Style | Whitespace)* Line-break -> Table-row
 
@@ -212,9 +212,9 @@ exports
 
         ANY -> Unicode-char
 
-        Header1
-		| Header2
-		| Header3
-		| Header4
-		| Header5
-		| Header6 -> Header
+        Header1 -> Header
+        Header2 -> Header
+        Header3 -> Header
+        Header4 -> Header
+        Header5 -> Header
+        Header6 -> Header

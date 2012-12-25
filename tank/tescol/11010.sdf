@@ -8,9 +8,9 @@ exports
 
         TROLLEY CONSTID CONTAINS Declarations* CHECKOUT Stat DONE SEMI -> ProgTree
 
-        CONST ConstDec SEMI
-		| VAR VarDec SEMI
-		| PROC ProcDec SEMI -> Declarations
+        CONST ConstDec SEMI -> Declarations
+        VAR VarDec SEMI -> Declarations
+        PROC ProcDec SEMI -> Declarations
 
         CONSTID COLON Type DEFINEDAS SubExpr -> ConstDec
 
@@ -20,11 +20,11 @@ exports
 
         VarDec (COMMA VarDec)* -> ParamList
 
-        ConditionalStat
-		| LoopStat
-		| AssignStat
-		| LEFTBRACE Stat (SEMI Stat)* RIGHTBRACE SEMI
-		| SKIP -> Stat
+        ConditionalStat -> Stat
+        LoopStat -> Stat
+        AssignStat -> Stat
+        LEFTBRACE Stat (SEMI Stat)* RIGHTBRACE SEMI -> Stat
+        SKIP -> Stat
 
         SmallId DEFINEDAS CondExpr -> AssignStat
 
@@ -32,12 +32,12 @@ exports
 
         WHILE BoolExpr DO Stat -> LoopStat
 
-        CONSTID
-		| ID
-		| INT
-		| DOUBLE
-		| LEFTPAR CondExpr RIGHTPAR
-		| ApplyProc -> Atom
+        CONSTID -> Atom
+        ID -> Atom
+        INT -> Atom
+        DOUBLE -> Atom
+        LEFTPAR CondExpr RIGHTPAR -> Atom
+        ApplyProc -> Atom
 
         BoolExpr (QUESTION CondExpr COLON CondExpr)? -> CondExpr
 
@@ -57,15 +57,15 @@ exports
 
         Atom (EXPONENTIATION Atom)* -> ExpExpr
 
-        CONSTID
-		| ID -> SmallId
+        CONSTID -> SmallId
+        ID -> SmallId
 
         SmallId LEFTPAR ExprList RIGHTPAR -> ApplyProc
 
         CompExpr (COMMA CompExpr)* -> ExprList
 
-        INTEGER
-		| FLOATDOUBLE -> Type
+        INTEGER -> Type
+        FLOATDOUBLE -> Type
 
         ";" -> SEMI
 

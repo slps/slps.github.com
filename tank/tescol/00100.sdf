@@ -6,15 +6,15 @@ exports
   context-free syntax
         TROLLEY CID CONTAINS Declarations CHECKOUT Statements DONE SEMI EOF -> Program
 
-        INT
-		| DOUBLE -> Type
+        INT -> Type
+        DOUBLE -> Type
 
-        EQUALITY
-		| NON-EQUALITY
-		| LESS
-		| LESS-EQUAL
-		| GREATER-EQUAL
-		| GREATER -> Relational
+        EQUALITY -> Relational
+        NON-EQUALITY -> Relational
+        LESS -> Relational
+        LESS-EQUAL -> Relational
+        GREATER-EQUAL -> Relational
+        GREATER -> Relational
 
         (Constant | Variable | Procedure)* -> Declarations
 
@@ -28,12 +28,12 @@ exports
 
         PROC ID LPAREN Parameters RPAREN COLON Type COLON-EQUALS Statements -> Procedure
 
-        INT-NUMBER
-		| DOUBLE-NUMBER
-		| ID
-		| CID
-		| ProcedureApp
-		| LPAREN Expression RPAREN -> Atom
+        INT-NUMBER -> Atom
+        DOUBLE-NUMBER -> Atom
+        ID -> Atom
+        CID -> Atom
+        ProcedureApp -> Atom
+        LPAREN Expression RPAREN -> Atom
 
         "-" -> Negation
 
@@ -41,11 +41,11 @@ exports
 
         EXPONENTIATION -> ExpOperand
 
-        MULTIPLICATION
-		| DIVISION -> MultOperand
+        MULTIPLICATION -> MultOperand
+        DIVISION -> MultOperand
 
-        ADDITION
-		| SUBTRACTION -> AddOperand
+        ADDITION -> AddOperand
+        SUBTRACTION -> AddOperand
 
         Sign (ExpOperand Sign)? -> OrderExpr
 
@@ -75,15 +75,15 @@ exports
 
         WHILE Expression DO Statements -> Loop
 
-        Skip
-		| Assignment
-		| IfStat
-		| Loop -> Statement
+        Skip -> Statement
+        Assignment -> Statement
+        IfStat -> Statement
+        Loop -> Statement
 
         LBRACE Statement+ RBRACE SEMI -> GroupStatement
 
-        Statement
-		| GroupStatement -> Statements
+        Statement -> Statements
+        GroupStatement -> Statements
 
         ";" -> SEMI
 

@@ -13,9 +13,9 @@ exports
 
         "contains" -> CONTAINS
 
-        Consdec
-		| Vardec
-		| Procdec -> Declaration
+        Consdec -> Declaration
+        Vardec -> Declaration
+        Procdec -> Declaration
 
         CONST CONSTANT COLON Type DEFAS Aexpr SEMI -> Consdec
 
@@ -23,8 +23,8 @@ exports
 
         ":" -> COLON
 
-        INTEGER
-		| DOUBLE -> Type
+        INTEGER -> Type
+        DOUBLE -> Type
 
         "int" -> INTEGER
 
@@ -42,8 +42,8 @@ exports
 
         Expr (Rop Expr)? -> Ropexpr
 
-        MultExpr ((PLUS | MINUS) MultExpr)*
-		| Procapp -> Expr
+        MultExpr ((PLUS | MINUS) MultExpr)* -> Expr
+        Procapp -> Expr
 
         Expon ((MULT | DIV) Expon)* -> MultExpr
 
@@ -55,16 +55,16 @@ exports
 
         "+" -> PLUS
 
-        Number
-		| VARIABLE
-		| CONSTANT
-		| LPAR Cexpr RPAR -> Atom
+        Number -> Atom
+        VARIABLE -> Atom
+        CONSTANT -> Atom
+        LPAR Cexpr RPAR -> Atom
 
-        INT
-		| DUB -> Number
+        INT -> Number
+        DUB -> Number
 
-        "0"
-		| ("1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9") ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")* -> INT
+        "0" -> INT
+        ("1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9") ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")* -> INT
 
         INT? "." ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")* (("e" | "E") INT)? -> DUB
 
@@ -86,12 +86,12 @@ exports
 
         "," -> COMMA
 
-        EQ
-		| NEQ
-		| LESS
-		| MORE
-		| LESSEQ
-		| MOREEQ -> Rop
+        EQ -> Rop
+        NEQ -> Rop
+        LESS -> Rop
+        MORE -> Rop
+        LESSEQ -> Rop
+        MOREEQ -> Rop
 
         "==" -> EQ
 
@@ -125,13 +125,13 @@ exports
 
         Parameter (COMMA Parameter)* -> Paramlist
 
-        Statement
-		| LCPAR Statement (SEMI Statement)* RCPAR -> Statementlist
+        Statement -> Statementlist
+        LCPAR Statement (SEMI Statement)* RCPAR -> Statementlist
 
-        SKIP
-		| Assignment
-		| Conditional
-		| Loop -> Statement
+        SKIP -> Statement
+        Assignment -> Statement
+        Conditional -> Statement
+        Loop -> Statement
 
         "skip" -> SKIP
 

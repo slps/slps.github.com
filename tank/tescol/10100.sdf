@@ -6,20 +6,20 @@ exports
   context-free syntax
         NEWLINE* TROLLEY NEWLINE* CID NEWLINE* CONTAINS NEWLINE* Declarations NEWLINE* Statement NEWLINE* SEMI NEWLINE* DONE NEWLINE* SEMI -> Prog
 
-        StatementList
-		| CondStatement
-		| Expression
-		| Assignment
-		| Loop
-		| SKIP -> Statement
+        StatementList -> Statement
+        CondStatement -> Statement
+        Expression -> Statement
+        Assignment -> Statement
+        Loop -> Statement
+        SKIP -> Statement
 
         WHILE Expression DO Statement -> Loop
 
         LPAREN (ID COLON Type (COMMA ID COLON Type)*)? RPAREN -> Paramlist
 
-        CONST CID COLON Type COLON-EQUALS Expression
-		| VAR ID COLON Type
-		| PROC ID Paramlist COLON Type COLON-EQUALS Statement -> Individual-declaration
+        CONST CID COLON Type COLON-EQUALS Expression -> Individual-declaration
+        VAR ID COLON Type -> Individual-declaration
+        PROC ID Paramlist COLON Type COLON-EQUALS Statement -> Individual-declaration
 
         (Individual-declaration NEWLINE*)* CHECKOUT -> Declarations
 
@@ -27,14 +27,14 @@ exports
 
         ID COLON-EQUALS Expression -> Assignment
 
-        INT
-		| DOUBLE -> Type
+        INT -> Type
+        DOUBLE -> Type
 
-        INT-NUMBER
-		| DOUBLE-NUMBER
-		| ID
-		| CID
-		| LPAREN Expression RPAREN -> Atom
+        INT-NUMBER -> Atom
+        DOUBLE-NUMBER -> Atom
+        ID -> Atom
+        CID -> Atom
+        LPAREN Expression RPAREN -> Atom
 
         Atom ((DIVISION | MULTIPLICATION | EXPONENTIATION) Atom)* -> MultExpression
 

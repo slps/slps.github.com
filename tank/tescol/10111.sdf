@@ -24,13 +24,13 @@ exports
 
         Atom (SYM-EXP Molecule)? -> Molecule
 
-        Immediate
-		| v::Varproc-id
-		| Proc-call
-		| Parenthesised -> Atom
+        Immediate -> Atom
+        v::Varproc-id -> Atom
+        Proc-call -> Atom
+        Parenthesised -> Atom
 
-        (Const-decl | Var-decl) SYM-SEMI
-		| Proc-decl -> Decl
+        (Const-decl | Var-decl) SYM-SEMI -> Decl
+        Proc-decl -> Decl
 
         KW-CONST id::ID-GENERAL SYM-COLON t::Type SYM-ASS e::Expr -> Const-decl
 
@@ -42,33 +42,33 @@ exports
 
         SYM-OPEN-PAREN (Param-and-type (SYM-COMMA Param-and-type)*)? SYM-CLOSE-PAREN -> Param-decl-list
 
-        KW-SKIP SYM-SEMI
-		| a::Varproc-id SYM-ASS c::Mixfix SYM-SEMI
-		| SYM-OPEN-BRACE Statement+ SYM-CLOSE-BRACE SYM-SEMI
-		| KW-IF Mixfix KW-THEN Statement KW-ELSE Statement
-		| KW-WHILE Mixfix KW-DO Statement -> Statement
+        KW-SKIP SYM-SEMI -> Statement
+        a::Varproc-id SYM-ASS c::Mixfix SYM-SEMI -> Statement
+        SYM-OPEN-BRACE Statement+ SYM-CLOSE-BRACE SYM-SEMI -> Statement
+        KW-IF Mixfix KW-THEN Statement KW-ELSE Statement -> Statement
+        KW-WHILE Mixfix KW-DO Statement -> Statement
 
-        SYM-EQ
-		| SYM-INEQ
-		| SYM-GT
-		| SYM-NS-GT
-		| SYM-LT
-		| SYM-NS-LT -> Comparator
+        SYM-EQ -> Comparator
+        SYM-INEQ -> Comparator
+        SYM-GT -> Comparator
+        SYM-NS-GT -> Comparator
+        SYM-LT -> Comparator
+        SYM-NS-LT -> Comparator
 
         SYM-OPEN-PAREN Mixfix SYM-CLOSE-PAREN -> Parenthesised
 
-        KW-TYPE-INT
-		| KW-TYPE-DOUBLE -> Type
+        KW-TYPE-INT -> Type
+        KW-TYPE-DOUBLE -> Type
 
-        ID-VARPROC
-		| ID-GENERAL -> Varproc-id
+        ID-VARPROC -> Varproc-id
+        ID-GENERAL -> Varproc-id
 
         SYM-OPEN-PAREN (Expr (SYM-COMMA Expr)*)? SYM-CLOSE-PAREN -> Arg-list
 
         id::Varproc-id l::Arg-list -> Proc-call
 
-        IntegerNum
-		| DoubleNum -> Immediate
+        IntegerNum -> Immediate
+        DoubleNum -> Immediate
 
         (SYM-ADD | SYM-SUB)? INT -> IntegerNum
 

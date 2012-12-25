@@ -19,70 +19,70 @@ exports
 
         JAVA-ID-START JAVA-ID-PART* -> IDENT
 
-        "a"
-		| "b"
-		| "c"
-		| "d"
-		| "e"
-		| "f"
-		| "g"
-		| "h"
-		| "i"
-		| "j"
-		| "k"
-		| "l"
-		| "m"
-		| "n"
-		| "o"
-		| "p"
-		| "q"
-		| "r"
-		| "s"
-		| "t"
-		| "u"
-		| "v"
-		| "w"
-		| "x"
-		| "y"
-		| "z"
-		| "A"
-		| "B"
-		| "C"
-		| "D"
-		| "E"
-		| "F"
-		| "G"
-		| "H"
-		| "I"
-		| "J"
-		| "K"
-		| "L"
-		| "M"
-		| "N"
-		| "O"
-		| "P"
-		| "Q"
-		| "R"
-		| "S"
-		| "T"
-		| "U"
-		| "V"
-		| "W"
-		| "X"
-		| "Y"
-		| "Z" -> JAVA-ID-START
+        "a" -> JAVA-ID-START
+        "b" -> JAVA-ID-START
+        "c" -> JAVA-ID-START
+        "d" -> JAVA-ID-START
+        "e" -> JAVA-ID-START
+        "f" -> JAVA-ID-START
+        "g" -> JAVA-ID-START
+        "h" -> JAVA-ID-START
+        "i" -> JAVA-ID-START
+        "j" -> JAVA-ID-START
+        "k" -> JAVA-ID-START
+        "l" -> JAVA-ID-START
+        "m" -> JAVA-ID-START
+        "n" -> JAVA-ID-START
+        "o" -> JAVA-ID-START
+        "p" -> JAVA-ID-START
+        "q" -> JAVA-ID-START
+        "r" -> JAVA-ID-START
+        "s" -> JAVA-ID-START
+        "t" -> JAVA-ID-START
+        "u" -> JAVA-ID-START
+        "v" -> JAVA-ID-START
+        "w" -> JAVA-ID-START
+        "x" -> JAVA-ID-START
+        "y" -> JAVA-ID-START
+        "z" -> JAVA-ID-START
+        "A" -> JAVA-ID-START
+        "B" -> JAVA-ID-START
+        "C" -> JAVA-ID-START
+        "D" -> JAVA-ID-START
+        "E" -> JAVA-ID-START
+        "F" -> JAVA-ID-START
+        "G" -> JAVA-ID-START
+        "H" -> JAVA-ID-START
+        "I" -> JAVA-ID-START
+        "J" -> JAVA-ID-START
+        "K" -> JAVA-ID-START
+        "L" -> JAVA-ID-START
+        "M" -> JAVA-ID-START
+        "N" -> JAVA-ID-START
+        "O" -> JAVA-ID-START
+        "P" -> JAVA-ID-START
+        "Q" -> JAVA-ID-START
+        "R" -> JAVA-ID-START
+        "S" -> JAVA-ID-START
+        "T" -> JAVA-ID-START
+        "U" -> JAVA-ID-START
+        "V" -> JAVA-ID-START
+        "W" -> JAVA-ID-START
+        "X" -> JAVA-ID-START
+        "Y" -> JAVA-ID-START
+        "Z" -> JAVA-ID-START
 
-        JAVA-ID-START
-		| "0"
-		| "1"
-		| "2"
-		| "3"
-		| "4"
-		| "5"
-		| "6"
-		| "7"
-		| "8"
-		| "9" -> JAVA-ID-PART
+        JAVA-ID-START -> JAVA-ID-PART
+        "0" -> JAVA-ID-PART
+        "1" -> JAVA-ID-PART
+        "2" -> JAVA-ID-PART
+        "3" -> JAVA-ID-PART
+        "4" -> JAVA-ID-PART
+        "5" -> JAVA-ID-PART
+        "6" -> JAVA-ID-PART
+        "7" -> JAVA-ID-PART
+        "8" -> JAVA-ID-PART
+        "9" -> JAVA-ID-PART
 
         "." -> DOT
 
@@ -90,16 +90,16 @@ exports
 
         "(" -> LPAREN
 
-        AnnotationInitializer (COMMA AnnotationInitializer)*
-		| AnnotationElementValue -> AnnotationInitializers
+        AnnotationInitializer (COMMA AnnotationInitializer)* -> AnnotationInitializers
+        AnnotationElementValue -> AnnotationInitializers
 
         IDENT ASSIGN AnnotationElementValue -> AnnotationInitializer
 
         "=" -> ASSIGN
 
-        AnnotationElementValueExpression
-		| Annotation
-		| AnnotationElementValueArrayInitializer -> AnnotationElementValue
+        AnnotationElementValueExpression -> AnnotationElementValue
+        Annotation -> AnnotationElementValue
+        AnnotationElementValueArrayInitializer -> AnnotationElementValue
 
         ConditionalExpression -> AnnotationElementValueExpression
 
@@ -127,11 +127,11 @@ exports
 
         UnaryExpression ((STAR | DIV | MOD) UnaryExpression)* -> MultiplicativeExpression
 
-        PLUS UnaryExpression
-		| MINUS UnaryExpression
-		| INC PostfixedExpression
-		| DEC PostfixedExpression
-		| UnaryExpressionNotPlusMinus -> UnaryExpression
+        PLUS UnaryExpression -> UnaryExpression
+        MINUS UnaryExpression -> UnaryExpression
+        INC PostfixedExpression -> UnaryExpression
+        DEC PostfixedExpression -> UnaryExpression
+        UnaryExpressionNotPlusMinus -> UnaryExpression
 
         "+" -> PLUS
 
@@ -141,16 +141,16 @@ exports
 
         PrimaryExpression ((outerDot::DOT ((GenericTypeArgumentListSimplified? IDENT Arguments?) | THIS | (Super::SUPER Arguments) | (SUPER innerDot::DOT IDENT Arguments?) | InnerNewExpression)) | (LBRACK Expression RBRACK))* (INC | DEC)? -> PostfixedExpression
 
-        ParenthesizedExpression
-		| Literal
-		| NewExpression
-		| QualifiedIdentExpression
-		| GenericTypeArgumentListSimplified ((SUPER (Arguments | (DOT IDENT Arguments))) | (IDENT Arguments) | (THIS Arguments))
-		| THIS Arguments?
-		| SUPER Arguments
-		| SUPER DOT IDENT (Arguments | )
-		| PrimitiveType ArrayDeclarator* DOT CLASS
-		| VOID DOT CLASS -> PrimaryExpression
+        ParenthesizedExpression -> PrimaryExpression
+        Literal -> PrimaryExpression
+        NewExpression -> PrimaryExpression
+        QualifiedIdentExpression -> PrimaryExpression
+        GenericTypeArgumentListSimplified ((SUPER (Arguments | (DOT IDENT Arguments))) | (IDENT Arguments) | (THIS Arguments)) -> PrimaryExpression
+        THIS Arguments? -> PrimaryExpression
+        SUPER Arguments -> PrimaryExpression
+        SUPER DOT IDENT (Arguments | ) -> PrimaryExpression
+        PrimitiveType ArrayDeclarator* DOT CLASS -> PrimaryExpression
+        VOID DOT CLASS -> PrimaryExpression
 
         LPAREN Expression RPAREN -> ParenthesizedExpression
 
@@ -182,69 +182,69 @@ exports
 
         ")" -> RPAREN
 
-        HEX-LITERAL
-		| OCTAL-LITERAL
-		| DECIMAL-LITERAL
-		| FLOATING-POINT-LITERAL
-		| CHARACTER-LITERAL
-		| STRING-LITERAL
-		| TRUE
-		| FALSE
-		| NULL -> Literal
+        HEX-LITERAL -> Literal
+        OCTAL-LITERAL -> Literal
+        DECIMAL-LITERAL -> Literal
+        FLOATING-POINT-LITERAL -> Literal
+        CHARACTER-LITERAL -> Literal
+        STRING-LITERAL -> Literal
+        TRUE -> Literal
+        FALSE -> Literal
+        NULL -> Literal
 
         "0" ("x" | "X") HEX-DIGIT+ INTEGER-TYPE-SUFFIX? -> HEX-LITERAL
 
-        "0"
-		| "1"
-		| "2"
-		| "3"
-		| "4"
-		| "5"
-		| "6"
-		| "7"
-		| "8"
-		| "9"
-		| "a"
-		| "b"
-		| "c"
-		| "d"
-		| "e"
-		| "f"
-		| "A"
-		| "B"
-		| "C"
-		| "D"
-		| "E"
-		| "F" -> HEX-DIGIT
+        "0" -> HEX-DIGIT
+        "1" -> HEX-DIGIT
+        "2" -> HEX-DIGIT
+        "3" -> HEX-DIGIT
+        "4" -> HEX-DIGIT
+        "5" -> HEX-DIGIT
+        "6" -> HEX-DIGIT
+        "7" -> HEX-DIGIT
+        "8" -> HEX-DIGIT
+        "9" -> HEX-DIGIT
+        "a" -> HEX-DIGIT
+        "b" -> HEX-DIGIT
+        "c" -> HEX-DIGIT
+        "d" -> HEX-DIGIT
+        "e" -> HEX-DIGIT
+        "f" -> HEX-DIGIT
+        "A" -> HEX-DIGIT
+        "B" -> HEX-DIGIT
+        "C" -> HEX-DIGIT
+        "D" -> HEX-DIGIT
+        "E" -> HEX-DIGIT
+        "F" -> HEX-DIGIT
 
-        "l"
-		| "L" -> INTEGER-TYPE-SUFFIX
+        "l" -> INTEGER-TYPE-SUFFIX
+        "L" -> INTEGER-TYPE-SUFFIX
 
         "0" ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7")+ INTEGER-TYPE-SUFFIX? -> OCTAL-LITERAL
 
         ("0" | (("1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9") ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")*)) INTEGER-TYPE-SUFFIX? -> DECIMAL-LITERAL
 
-        ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ ((DOT ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")* EXPONENT? FLOAT-TYPE-SUFFIX?) | (EXPONENT FLOAT-TYPE-SUFFIX?) | FLOAT-TYPE-SUFFIX)
-		| DOT ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ EXPONENT? FLOAT-TYPE-SUFFIX? -> FLOATING-POINT-LITERAL
+        ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ ((DOT ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")* EXPONENT? FLOAT-TYPE-SUFFIX?) | (EXPONENT FLOAT-TYPE-SUFFIX?) | FLOAT-TYPE-SUFFIX) -> FLOATING-POINT-LITERAL
+        DOT ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ EXPONENT? FLOAT-TYPE-SUFFIX? -> FLOATING-POINT-LITERAL
 
         ("e" | "E") ("+" | "-")? ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ -> EXPONENT
 
-        "f"
-		| "F"
-		| "d"
-		| "D" -> FLOAT-TYPE-SUFFIX
+        "f" -> FLOAT-TYPE-SUFFIX
+        "F" -> FLOAT-TYPE-SUFFIX
+        "d" -> FLOAT-TYPE-SUFFIX
+        "D" -> FLOAT-TYPE-SUFFIX
 
         "\'" (ESCAPE-SEQUENCE | STR) "\'" -> CHARACTER-LITERAL
 
-        "\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\")
-		| UNICODE-ESCAPE
-		| OCTAL-ESCAPE -> ESCAPE-SEQUENCE
+        "\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") -> ESCAPE-SEQUENCE
+        UNICODE-ESCAPE -> ESCAPE-SEQUENCE
+        OCTAL-ESCAPE -> ESCAPE-SEQUENCE
 
         "\\" "u" HEX-DIGIT HEX-DIGIT HEX-DIGIT HEX-DIGIT -> UNICODE-ESCAPE
 
-        ("0" | "1" | "2" | "3") ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7") ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7")
-		| "\\" ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7") ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7")
-		| "\\" ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7") -> OCTAL-ESCAPE
+        ("0" | "1" | "2" | "3") ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7") ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7") -> OCTAL-ESCAPE
+        "\\" ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7") ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7") -> OCTAL-ESCAPE
+        "\\" ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7") -> OCTAL-ESCAPE
 
         """ (ESCAPE-SEQUENCE | STR)* """ -> STRING-LITERAL
 
@@ -258,14 +258,14 @@ exports
 
         "new" -> NEW
 
-        BOOLEAN
-		| CHAR
-		| BYTE
-		| SHORT
-		| INT
-		| LONG
-		| FLOAT
-		| DOUBLE -> PrimitiveType
+        BOOLEAN -> PrimitiveType
+        CHAR -> PrimitiveType
+        BYTE -> PrimitiveType
+        SHORT -> PrimitiveType
+        INT -> PrimitiveType
+        LONG -> PrimitiveType
+        FLOAT -> PrimitiveType
+        DOUBLE -> PrimitiveType
 
         "boolean" -> BOOLEAN
 
@@ -283,8 +283,8 @@ exports
 
         "double" -> DOUBLE
 
-        ArrayDeclaratorList ArrayInitializer
-		| LBRACK Expression RBRACK (LBRACK Expression RBRACK)* ArrayDeclaratorList? -> NewArrayConstruction
+        ArrayDeclaratorList ArrayInitializer -> NewArrayConstruction
+        LBRACK Expression RBRACK (LBRACK Expression RBRACK)* ArrayDeclaratorList? -> NewArrayConstruction
 
         ArrayDeclarator+ -> ArrayDeclaratorList
 
@@ -298,8 +298,8 @@ exports
 
         "{" -> LCURLY
 
-        ArrayInitializer
-		| Expression -> VariableInitializer
+        ArrayInitializer -> VariableInitializer
+        Expression -> VariableInitializer
 
         "," -> COMMA
 
@@ -309,11 +309,11 @@ exports
 
         "<" -> LESS-THAN
 
-        Type
-		| QUESTION -> GenericTypeArgumentSimplified
+        Type -> GenericTypeArgumentSimplified
+        QUESTION -> GenericTypeArgumentSimplified
 
-        SimpleType
-		| ObjectType -> Type
+        SimpleType -> Type
+        ObjectType -> Type
 
         PrimitiveType ArrayDeclaratorList? -> SimpleType
 
@@ -325,8 +325,8 @@ exports
 
         LESS-THAN GenericTypeArgument (COMMA GenericTypeArgument)* GenericTypeListClosing -> GenericTypeArgumentList
 
-        Type
-		| QUESTION GenericWildcardBoundType? -> GenericTypeArgument
+        Type -> GenericTypeArgument
+        QUESTION GenericWildcardBoundType? -> GenericTypeArgument
 
         "?" -> QUESTION
 
@@ -336,10 +336,10 @@ exports
 
         "super" -> SUPER
 
-        GREATER-THAN
-		| SHIFT-RIGHT
-		| BIT-SHIFT-RIGHT
-		|  -> GenericTypeListClosing
+        GREATER-THAN -> GenericTypeListClosing
+        SHIFT-RIGHT -> GenericTypeListClosing
+        BIT-SHIFT-RIGHT -> GenericTypeListClosing
+         -> GenericTypeListClosing
 
         ">" -> GREATER-THAN
 
@@ -357,24 +357,24 @@ exports
 
         LCURLY ClassScopeDeclarations* RCURLY -> ClassBody
 
-        Block
-		| STATIC Block
-		| ModifierList ((GenericTypeParameterList? ((Type IDENT FormalParameterList ArrayDeclaratorList? ThrowsClause? (Block | SEMI)) | (VOID IDENT FormalParameterList ThrowsClause? (Block | SEMI)) | (ident::IDENT FormalParameterList ThrowsClause? Block))) | (Type ClassFieldDeclaratorList SEMI))
-		| TypeDeclaration
-		| SEMI -> ClassScopeDeclarations
+        Block -> ClassScopeDeclarations
+        STATIC Block -> ClassScopeDeclarations
+        ModifierList ((GenericTypeParameterList? ((Type IDENT FormalParameterList ArrayDeclaratorList? ThrowsClause? (Block | SEMI)) | (VOID IDENT FormalParameterList ThrowsClause? (Block | SEMI)) | (ident::IDENT FormalParameterList ThrowsClause? Block))) | (Type ClassFieldDeclaratorList SEMI)) -> ClassScopeDeclarations
+        TypeDeclaration -> ClassScopeDeclarations
+        SEMI -> ClassScopeDeclarations
 
         LCURLY BlockStatement* RCURLY -> Block
 
-        LocalVariableDeclaration SEMI
-		| TypeDeclaration
-		| Statement -> BlockStatement
+        LocalVariableDeclaration SEMI -> BlockStatement
+        TypeDeclaration -> BlockStatement
+        Statement -> BlockStatement
 
         LocalModifierList Type ClassFieldDeclaratorList -> LocalVariableDeclaration
 
         LocalModifier* -> LocalModifierList
 
-        FINAL
-		| Annotation -> LocalModifier
+        FINAL -> LocalModifier
+        Annotation -> LocalModifier
 
         "final" -> FINAL
 
@@ -390,17 +390,17 @@ exports
 
         Modifier* -> ModifierList
 
-        PUBLIC
-		| PROTECTED
-		| PRIVATE
-		| STATIC
-		| ABSTRACT
-		| NATIVE
-		| SYNCHRONIZED
-		| TRANSIENT
-		| VOLATILE
-		| STRICTFP
-		| LocalModifier -> Modifier
+        PUBLIC -> Modifier
+        PROTECTED -> Modifier
+        PRIVATE -> Modifier
+        STATIC -> Modifier
+        ABSTRACT -> Modifier
+        NATIVE -> Modifier
+        SYNCHRONIZED -> Modifier
+        TRANSIENT -> Modifier
+        VOLATILE -> Modifier
+        STRICTFP -> Modifier
+        LocalModifier -> Modifier
 
         "public" -> PUBLIC
 
@@ -450,9 +450,9 @@ exports
 
         LCURLY InterfaceScopeDeclarations* RCURLY -> InterfaceBody
 
-        ModifierList ((GenericTypeParameterList? ((Type IDENT FormalParameterList ArrayDeclaratorList? ThrowsClause? SEMI) | (VOID IDENT FormalParameterList ThrowsClause? SEMI))) | (Type InterfaceFieldDeclaratorList SEMI))
-		| TypeDeclaration
-		| SEMI -> InterfaceScopeDeclarations
+        ModifierList ((GenericTypeParameterList? ((Type IDENT FormalParameterList ArrayDeclaratorList? ThrowsClause? SEMI) | (VOID IDENT FormalParameterList ThrowsClause? SEMI))) | (Type InterfaceFieldDeclaratorList SEMI)) -> InterfaceScopeDeclarations
+        TypeDeclaration -> InterfaceScopeDeclarations
+        SEMI -> InterfaceScopeDeclarations
 
         LPAREN ((FormalParameterStandardDecl (COMMA FormalParameterStandardDecl)* (COMMA FormalParameterVarArgDecl)?) | FormalParameterVarArgDecl | ) RPAREN -> FormalParameterList
 
@@ -492,29 +492,29 @@ exports
 
         LCURLY AnnotationScopeDeclarations* RCURLY -> AnnotationBody
 
-        ModifierList Type ((IDENT LPAREN RPAREN AnnotationDefaultValue? SEMI) | (ClassFieldDeclaratorList SEMI))
-		| TypeDeclaration -> AnnotationScopeDeclarations
+        ModifierList Type ((IDENT LPAREN RPAREN AnnotationDefaultValue? SEMI) | (ClassFieldDeclaratorList SEMI)) -> AnnotationScopeDeclarations
+        TypeDeclaration -> AnnotationScopeDeclarations
 
         DEFAULT AnnotationElementValue -> AnnotationDefaultValue
 
         "default" -> DEFAULT
 
-        Block
-		| ASSERT expr1::Expression ((COLON expr2::Expression SEMI) | SEMI)
-		| IF ParenthesizedExpression ifStat::Statement ((ELSE elseStat::Statement) | )
-		| FOR LPAREN ((ForInit SEMI ForCondition SEMI ForUpdater RPAREN Statement) | (LocalModifierList Type IDENT COLON Expression RPAREN Statement))
-		| WHILE ParenthesizedExpression Statement
-		| DO Statement WHILE ParenthesizedExpression SEMI
-		| TRY Block ((Catches FinallyClause?) | FinallyClause)
-		| SWITCH ParenthesizedExpression LCURLY SwitchBlockLabels RCURLY
-		| SYNCHRONIZED ParenthesizedExpression Block
-		| RETURN Expression? SEMI
-		| THROW Expression SEMI
-		| BREAK IDENT? SEMI
-		| CONTINUE IDENT? SEMI
-		| IDENT COLON Statement
-		| Expression SEMI
-		| SEMI -> Statement
+        Block -> Statement
+        ASSERT expr1::Expression ((COLON expr2::Expression SEMI) | SEMI) -> Statement
+        IF ParenthesizedExpression ifStat::Statement ((ELSE elseStat::Statement) | ) -> Statement
+        FOR LPAREN ((ForInit SEMI ForCondition SEMI ForUpdater RPAREN Statement) | (LocalModifierList Type IDENT COLON Expression RPAREN Statement)) -> Statement
+        WHILE ParenthesizedExpression Statement -> Statement
+        DO Statement WHILE ParenthesizedExpression SEMI -> Statement
+        TRY Block ((Catches FinallyClause?) | FinallyClause) -> Statement
+        SWITCH ParenthesizedExpression LCURLY SwitchBlockLabels RCURLY -> Statement
+        SYNCHRONIZED ParenthesizedExpression Block -> Statement
+        RETURN Expression? SEMI -> Statement
+        THROW Expression SEMI -> Statement
+        BREAK IDENT? SEMI -> Statement
+        CONTINUE IDENT? SEMI -> Statement
+        IDENT COLON Statement -> Statement
+        Expression SEMI -> Statement
+        SEMI -> Statement
 
         "assert" -> ASSERT
 
@@ -526,9 +526,9 @@ exports
 
         "for" -> FOR
 
-        LocalVariableDeclaration
-		| ExpressionList
-		|  -> ForInit
+        LocalVariableDeclaration -> ForInit
+        ExpressionList -> ForInit
+         -> ForInit
 
         Expression? -> ForCondition
 
@@ -578,10 +578,10 @@ exports
 
         "--" -> DEC
 
-        NOT UnaryExpression
-		| LOGICAL-NOT UnaryExpression
-		| LPAREN Type RPAREN UnaryExpression
-		| PostfixedExpression -> UnaryExpressionNotPlusMinus
+        NOT UnaryExpression -> UnaryExpressionNotPlusMinus
+        LOGICAL-NOT UnaryExpression -> UnaryExpressionNotPlusMinus
+        LPAREN Type RPAREN UnaryExpression -> UnaryExpressionNotPlusMinus
+        PostfixedExpression -> UnaryExpressionNotPlusMinus
 
         "~" -> NOT
 
@@ -625,5 +625,5 @@ exports
 
         ".*" -> DOTSTAR
 
-        TypeDeclaration
-		| SEMI -> TypeDecls
+        TypeDeclaration -> TypeDecls
+        SEMI -> TypeDecls

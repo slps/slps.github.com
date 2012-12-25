@@ -14,12 +14,12 @@ exports
 
         Declaration* "BEGIN" Stmts "END" -> Block
 
-        "CONST" (ConstDecl ";")*
-		| "TYPE" (TypeDecl ";")*
-		| "EXCEPTION" (ExceptionDecl ";")*
-		| "VAR" (VariableDecl ";")*
-		| ProcedureHead ("=" Block Ident)? ";"
-		| "REVEAL" (TypeID ("=" | "<:") Type ";")* -> Declaration
+        "CONST" (ConstDecl ";")* -> Declaration
+        "TYPE" (TypeDecl ";")* -> Declaration
+        "EXCEPTION" (ExceptionDecl ";")* -> Declaration
+        "VAR" (VariableDecl ";")* -> Declaration
+        ProcedureHead ("=" Block Ident)? ";" -> Declaration
+        "REVEAL" (TypeID ("=" | "<:") Type ";")* -> Declaration
 
         Ident (":" Type)? "=" ConstExpr -> ConstDecl
 
@@ -41,24 +41,24 @@ exports
 
         (Stmt (";" Stmt)* ";"?)? -> Stmts
 
-        AssignStmt
-		| Block
-		| CallStmt
-		| CaseStmt
-		| ExitStmt
-		| EvalStmt
-		| ForStmt
-		| IfStmt
-		| LockStmt
-		| LoopStmt
-		| RaiseStmt
-		| RepeatStmt
-		| ReturnStmt
-		| TryFinStmt
-		| TryXptStmt
-		| TCaseStmt
-		| WhileStmt
-		| WithStmt -> Stmt
+        AssignStmt -> Stmt
+        Block -> Stmt
+        CallStmt -> Stmt
+        CaseStmt -> Stmt
+        ExitStmt -> Stmt
+        EvalStmt -> Stmt
+        ForStmt -> Stmt
+        IfStmt -> Stmt
+        LockStmt -> Stmt
+        LoopStmt -> Stmt
+        RaiseStmt -> Stmt
+        RepeatStmt -> Stmt
+        ReturnStmt -> Stmt
+        TryFinStmt -> Stmt
+        TryXptStmt -> Stmt
+        TCaseStmt -> Stmt
+        WhileStmt -> Stmt
+        WithStmt -> Stmt
 
         Expr ":=" Expr -> AssignStmt
 
@@ -104,20 +104,20 @@ exports
 
         Ident "=" Expr -> Binding
 
-        (Ident ":=")? Expr
-		| Type -> Actual
+        (Ident ":=")? Expr -> Actual
+        Type -> Actual
 
-        TypeName
-		| ArrayType
-		| PackedType
-		| EnumType
-		| ObjectType
-		| ProcedureType
-		| RecordType
-		| RefType
-		| SetType
-		| SubrangeType
-		| "(" Type ")" -> Type
+        TypeName -> Type
+        ArrayType -> Type
+        PackedType -> Type
+        EnumType -> Type
+        ObjectType -> Type
+        ProcedureType -> Type
+        RecordType -> Type
+        RefType -> Type
+        SetType -> Type
+        SubrangeType -> Type
+        "(" Type ")" -> Type
 
         "ARRAY" (Type ("," Type)*)? "OF" Type -> ArrayType
 
@@ -137,9 +137,9 @@ exports
 
         "[" ConstExpr ".." ConstExpr "]" -> SubrangeType
 
-        TypeName
-		| ObjectType
-		| "UNTRACED" -> Ancestor
+        TypeName -> Ancestor
+        ObjectType -> Ancestor
+        "UNTRACED" -> Ancestor
 
         "BRANDED" TextLiteral? -> Brand
 
@@ -169,34 +169,34 @@ exports
 
         E8 Selector* -> E7
 
-        Ident
-		| Number
-		| CharLiteral
-		| TextLiteral
-		| Constructor
-		| "(" Expr ")" -> E8
+        Ident -> E8
+        Number -> E8
+        CharLiteral -> E8
+        TextLiteral -> E8
+        Constructor -> E8
+        "(" Expr ")" -> E8
 
-        "="
-		| "#"
-		| "<"
-		| "<="
-		| ">"
-		| ">="
-		| "IN" -> Relop
+        "=" -> Relop
+        "#" -> Relop
+        "<" -> Relop
+        "<=" -> Relop
+        ">" -> Relop
+        ">=" -> Relop
+        "IN" -> Relop
 
-        "+"
-		| "-"
-		| "&" -> Addop
+        "+" -> Addop
+        "-" -> Addop
+        "&" -> Addop
 
-        "*"
-		| "/"
-		| "DIV"
-		| "MOD" -> Mulop
+        "*" -> Mulop
+        "/" -> Mulop
+        "DIV" -> Mulop
+        "MOD" -> Mulop
 
-        "^"
-		| "." Ident
-		| "[" Expr ("," Expr)* "]"
-		| "(" (Actual ("," Actual)*)? ")" -> Selector
+        "^" -> Selector
+        "." Ident -> Selector
+        "[" Expr ("," Expr)* "]" -> Selector
+        "(" (Actual ("," Actual)*)? ")" -> Selector
 
         Type "{" (SetCons | RecordCons | ArrayCons)? "}" -> Constructor
 
@@ -210,9 +210,9 @@ exports
 
         Expr ("," Expr)* ("," "..")? -> ArrayCons
 
-        Ident ("." Ident)?
-		| "ROOT"
-		| "UNTRACED" "ROOT" -> TypeName
+        Ident ("." Ident)? -> TypeName
+        "ROOT" -> TypeName
+        "UNTRACED" "ROOT" -> TypeName
 
         Ident ("." Ident)? -> ExceptionID
 
@@ -220,275 +220,275 @@ exports
 
         Ident ("," Ident)* -> IDList
 
-        Number
-		| CharLiteral
-		| TextLiteral -> Literal
+        Number -> Literal
+        CharLiteral -> Literal
+        TextLiteral -> Literal
 
         Letter (Letter | Digit | "_")* -> Ident
 
-        "+"
-		| "-"
-		| "*"
-		| "/"
-		| "."
-		| "^"
-		| ":" "="
-		| "="
-		| "$"
-		| "<"
-		| "<" "="
-		| ">" "="
-		| ">"
-		| "&"
-		| "<" ":"
-		| "=" ">"
-		| ","
-		| ";"
-		| "|"
-		| ":"
-		| "." "."
-		| "("
-		| ")"
-		| "{"
-		| "}"
-		| "["
-		| "]" -> Operator
+        "+" -> Operator
+        "-" -> Operator
+        "*" -> Operator
+        "/" -> Operator
+        "." -> Operator
+        "^" -> Operator
+        ":" "=" -> Operator
+        "=" -> Operator
+        "$" -> Operator
+        "<" -> Operator
+        "<" "=" -> Operator
+        ">" "=" -> Operator
+        ">" -> Operator
+        "&" -> Operator
+        "<" ":" -> Operator
+        "=" ">" -> Operator
+        "," -> Operator
+        ";" -> Operator
+        "|" -> Operator
+        ":" -> Operator
+        "." "." -> Operator
+        "(" -> Operator
+        ")" -> Operator
+        "{" -> Operator
+        "}" -> Operator
+        "[" -> Operator
+        "]" -> Operator
 
         "’" (PrintingChar | Escape) "’" -> CharLiteral
 
         """ (PrintingChar | Escape)* """ -> TextLiteral
 
-        "\" "n"
-		| "\" "t"
-		| "\" "r"
-		| "\" "f"
-		| "\" "\"
-		| "\" "’"
-		| "\" """
-		| "\" OctalDigit OctalDigit OctalDigit -> Escape
+        "\" "n" -> Escape
+        "\" "t" -> Escape
+        "\" "r" -> Escape
+        "\" "f" -> Escape
+        "\" "\" -> Escape
+        "\" "’" -> Escape
+        "\" """ -> Escape
+        "\" OctalDigit OctalDigit OctalDigit -> Escape
 
-        Digit+
-		| Digit+ "_" HexDigit+
-		| Digit+ "." Digit+ Exponent? -> Number
+        Digit+ -> Number
+        Digit+ "_" HexDigit+ -> Number
+        Digit+ "." Digit+ Exponent? -> Number
 
         ("E" | "e" | "D" | "d") ("+" | "-")? Digit+ -> Exponent
 
-        Letter
-		| Digit
-		| UtherChar -> PrintingChar
+        Letter -> PrintingChar
+        Digit -> PrintingChar
+        UtherChar -> PrintingChar
 
-        Digit
-		| "A"
-		| "B"
-		| "C"
-		| "D"
-		| "E"
-		| "F"
-		| "a"
-		| "b"
-		| "c"
-		| "d"
-		| "e"
-		| "f" -> HexDigit
+        Digit -> HexDigit
+        "A" -> HexDigit
+        "B" -> HexDigit
+        "C" -> HexDigit
+        "D" -> HexDigit
+        "E" -> HexDigit
+        "F" -> HexDigit
+        "a" -> HexDigit
+        "b" -> HexDigit
+        "c" -> HexDigit
+        "d" -> HexDigit
+        "e" -> HexDigit
+        "f" -> HexDigit
 
-        "0"
-		| "1"
-		| "2"
-		| "3"
-		| "4"
-		| "5"
-		| "6"
-		| "7"
-		| "8"
-		| "9" -> Digit
+        "0" -> Digit
+        "1" -> Digit
+        "2" -> Digit
+        "3" -> Digit
+        "4" -> Digit
+        "5" -> Digit
+        "6" -> Digit
+        "7" -> Digit
+        "8" -> Digit
+        "9" -> Digit
 
-        "0"
-		| "1"
-		| "2"
-		| "3"
-		| "4"
-		| "5"
-		| "6"
-		| "7" -> OctalDigit
+        "0" -> OctalDigit
+        "1" -> OctalDigit
+        "2" -> OctalDigit
+        "3" -> OctalDigit
+        "4" -> OctalDigit
+        "5" -> OctalDigit
+        "6" -> OctalDigit
+        "7" -> OctalDigit
 
-        "A"
-		| "B"
-		| "C"
-		| "D"
-		| "E"
-		| "F"
-		| "G"
-		| "H"
-		| "I"
-		| "J"
-		| "K"
-		| "L"
-		| "M"
-		| "N"
-		| "O"
-		| "P"
-		| "Q"
-		| "R"
-		| "S"
-		| "T"
-		| "U"
-		| "V"
-		| "W"
-		| "X"
-		| "Y"
-		| "Z"
-		| "a"
-		| "b"
-		| "c"
-		| "d"
-		| "e"
-		| "f"
-		| "g"
-		| "h"
-		| "i"
-		| "j"
-		| "k"
-		| "l"
-		| "m"
-		| "n"
-		| "o"
-		| "p"
-		| "q"
-		| "r"
-		| "s"
-		| "t"
-		| "u"
-		| "v"
-		| "w"
-		| "x"
-		| "y"
-		| "z" -> Letter
+        "A" -> Letter
+        "B" -> Letter
+        "C" -> Letter
+        "D" -> Letter
+        "E" -> Letter
+        "F" -> Letter
+        "G" -> Letter
+        "H" -> Letter
+        "I" -> Letter
+        "J" -> Letter
+        "K" -> Letter
+        "L" -> Letter
+        "M" -> Letter
+        "N" -> Letter
+        "O" -> Letter
+        "P" -> Letter
+        "Q" -> Letter
+        "R" -> Letter
+        "S" -> Letter
+        "T" -> Letter
+        "U" -> Letter
+        "V" -> Letter
+        "W" -> Letter
+        "X" -> Letter
+        "Y" -> Letter
+        "Z" -> Letter
+        "a" -> Letter
+        "b" -> Letter
+        "c" -> Letter
+        "d" -> Letter
+        "e" -> Letter
+        "f" -> Letter
+        "g" -> Letter
+        "h" -> Letter
+        "i" -> Letter
+        "j" -> Letter
+        "k" -> Letter
+        "l" -> Letter
+        "m" -> Letter
+        "n" -> Letter
+        "o" -> Letter
+        "p" -> Letter
+        "q" -> Letter
+        "r" -> Letter
+        "s" -> Letter
+        "t" -> Letter
+        "u" -> Letter
+        "v" -> Letter
+        "w" -> Letter
+        "x" -> Letter
+        "y" -> Letter
+        "z" -> Letter
 
-        " "
-		| "!"
-		| "#"
-		| "$"
-		| "%"
-		| "&"
-		| "("
-		| ")"
-		| "*"
-		| "+"
-		| ","
-		| "-"
-		| "."
-		| "/"
-		| ":"
-		| ";"
-		| "<"
-		| "="
-		| ">"
-		| "?"
-		| "@"
-		| "["
-		| "]"
-		| "^"
-		| "_"
-		| "‘"
-		| "{"
-		| "|"
-		| "}"
-		| "~"
-		| ExtendedChar -> OtherChar
+        " " -> OtherChar
+        "!" -> OtherChar
+        "#" -> OtherChar
+        "$" -> OtherChar
+        "%" -> OtherChar
+        "&" -> OtherChar
+        "(" -> OtherChar
+        ")" -> OtherChar
+        "*" -> OtherChar
+        "+" -> OtherChar
+        "," -> OtherChar
+        "-" -> OtherChar
+        "." -> OtherChar
+        "/" -> OtherChar
+        ":" -> OtherChar
+        ";" -> OtherChar
+        "<" -> OtherChar
+        "=" -> OtherChar
+        ">" -> OtherChar
+        "?" -> OtherChar
+        "@" -> OtherChar
+        "[" -> OtherChar
+        "]" -> OtherChar
+        "^" -> OtherChar
+        "_" -> OtherChar
+        "‘" -> OtherChar
+        "{" -> OtherChar
+        "|" -> OtherChar
+        "}" -> OtherChar
+        "~" -> OtherChar
+        ExtendedChar -> OtherChar
 
-        " "
-		| "¡"
-		| "¢"
-		| "£"
-		| "¤"
-		| "¥"
-		| "¦"
-		| "§"
-		| "¨"
-		| "©"
-		| "ª"
-		| "«"
-		| "¬"
-		| "­"
-		| "®"
-		| "¯"
-		| "°"
-		| "±"
-		| "²"
-		| "³"
-		| "´"
-		| "µ"
-		| "¶"
-		| "·"
-		| "¸"
-		| "¹"
-		| "º"
-		| "»"
-		| "¼"
-		| "½"
-		| "¾"
-		| "¿"
-		| "À"
-		| "Á"
-		| "Â"
-		| "Ã"
-		| "Ä"
-		| "Å"
-		| "Æ"
-		| "Ç"
-		| "È"
-		| "É"
-		| "Ê"
-		| "Ë"
-		| "Ì"
-		| "Í"
-		| "Î"
-		| "Ï"
-		| "Ð"
-		| "Ñ"
-		| "Ò"
-		| "Ó"
-		| "Ô"
-		| "Õ"
-		| "Ö"
-		| "×"
-		| "Ø"
-		| "Ù"
-		| "Ú"
-		| "Û"
-		| "Ü"
-		| "Ý"
-		| "Þ"
-		| "ß"
-		| "à"
-		| "á"
-		| "â"
-		| "ã"
-		| "ä"
-		| "å"
-		| "æ"
-		| "ç"
-		| "è"
-		| "é"
-		| "ê"
-		| "ë"
-		| "ì"
-		| "í"
-		| "î"
-		| "ï"
-		| "ð"
-		| "ñ"
-		| "ò"
-		| "ó"
-		| "ô"
-		| "õ"
-		| "ö"
-		| "÷"
-		| "ø"
-		| "ù"
-		| "ú"
-		| "û"
-		| "ü"
-		| "ý"
-		| "þ"
-		| "ÿ" -> ExtendedChar
+        " " -> ExtendedChar
+        "¡" -> ExtendedChar
+        "¢" -> ExtendedChar
+        "£" -> ExtendedChar
+        "¤" -> ExtendedChar
+        "¥" -> ExtendedChar
+        "¦" -> ExtendedChar
+        "§" -> ExtendedChar
+        "¨" -> ExtendedChar
+        "©" -> ExtendedChar
+        "ª" -> ExtendedChar
+        "«" -> ExtendedChar
+        "¬" -> ExtendedChar
+        "­" -> ExtendedChar
+        "®" -> ExtendedChar
+        "¯" -> ExtendedChar
+        "°" -> ExtendedChar
+        "±" -> ExtendedChar
+        "²" -> ExtendedChar
+        "³" -> ExtendedChar
+        "´" -> ExtendedChar
+        "µ" -> ExtendedChar
+        "¶" -> ExtendedChar
+        "·" -> ExtendedChar
+        "¸" -> ExtendedChar
+        "¹" -> ExtendedChar
+        "º" -> ExtendedChar
+        "»" -> ExtendedChar
+        "¼" -> ExtendedChar
+        "½" -> ExtendedChar
+        "¾" -> ExtendedChar
+        "¿" -> ExtendedChar
+        "À" -> ExtendedChar
+        "Á" -> ExtendedChar
+        "Â" -> ExtendedChar
+        "Ã" -> ExtendedChar
+        "Ä" -> ExtendedChar
+        "Å" -> ExtendedChar
+        "Æ" -> ExtendedChar
+        "Ç" -> ExtendedChar
+        "È" -> ExtendedChar
+        "É" -> ExtendedChar
+        "Ê" -> ExtendedChar
+        "Ë" -> ExtendedChar
+        "Ì" -> ExtendedChar
+        "Í" -> ExtendedChar
+        "Î" -> ExtendedChar
+        "Ï" -> ExtendedChar
+        "Ð" -> ExtendedChar
+        "Ñ" -> ExtendedChar
+        "Ò" -> ExtendedChar
+        "Ó" -> ExtendedChar
+        "Ô" -> ExtendedChar
+        "Õ" -> ExtendedChar
+        "Ö" -> ExtendedChar
+        "×" -> ExtendedChar
+        "Ø" -> ExtendedChar
+        "Ù" -> ExtendedChar
+        "Ú" -> ExtendedChar
+        "Û" -> ExtendedChar
+        "Ü" -> ExtendedChar
+        "Ý" -> ExtendedChar
+        "Þ" -> ExtendedChar
+        "ß" -> ExtendedChar
+        "à" -> ExtendedChar
+        "á" -> ExtendedChar
+        "â" -> ExtendedChar
+        "ã" -> ExtendedChar
+        "ä" -> ExtendedChar
+        "å" -> ExtendedChar
+        "æ" -> ExtendedChar
+        "ç" -> ExtendedChar
+        "è" -> ExtendedChar
+        "é" -> ExtendedChar
+        "ê" -> ExtendedChar
+        "ë" -> ExtendedChar
+        "ì" -> ExtendedChar
+        "í" -> ExtendedChar
+        "î" -> ExtendedChar
+        "ï" -> ExtendedChar
+        "ð" -> ExtendedChar
+        "ñ" -> ExtendedChar
+        "ò" -> ExtendedChar
+        "ó" -> ExtendedChar
+        "ô" -> ExtendedChar
+        "õ" -> ExtendedChar
+        "ö" -> ExtendedChar
+        "÷" -> ExtendedChar
+        "ø" -> ExtendedChar
+        "ù" -> ExtendedChar
+        "ú" -> ExtendedChar
+        "û" -> ExtendedChar
+        "ü" -> ExtendedChar
+        "ý" -> ExtendedChar
+        "þ" -> ExtendedChar
+        "ÿ" -> ExtendedChar

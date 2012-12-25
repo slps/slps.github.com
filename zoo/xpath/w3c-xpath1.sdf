@@ -4,39 +4,39 @@ exports
   sorts
         LocationPath AbsoluteLocationPath RelativeLocationPath Step AxisSpecifier AxisName NodeTest Predicate PredicateExpr AbbreviatedAbsoluteLocationPath AbbreviatedRelativeLocationPath AbbreviatedStep AbbreviatedAxisSpecifier Expr PrimaryExpr FunctionCall Argument UnionExpr PathExpr FilterExpr OrExpr AndExpr EqualityExpr RelationalExpr AdditiveExpr MultiplicativeExpr UnaryExpr ExprToken Number Operator OperatorName MultiplyOperator VariableReference NameTest NodeType ExprWhitespace Digits 
   context-free syntax
-        RelativeLocationPath
-		| AbsoluteLocationPath -> LocationPath {cons(NT-LocationPath)}
+        RelativeLocationPath -> LocationPath
+        AbsoluteLocationPath -> LocationPath {cons(NT-LocationPath)}
 
-        "/" RelativeLocationPath?
-		| AbbreviatedAbsoluteLocationPath -> AbsoluteLocationPath {cons(NT-AbsoluteLocationPath)}
+        "/" RelativeLocationPath? -> AbsoluteLocationPath
+        AbbreviatedAbsoluteLocationPath -> AbsoluteLocationPath {cons(NT-AbsoluteLocationPath)}
 
-        Step
-		| RelativeLocationPath "/" Step
-		| AbbreviatedRelativeLocationPath -> RelativeLocationPath {cons(NT-RelativeLocationPath)}
+        Step -> RelativeLocationPath
+        RelativeLocationPath "/" Step -> RelativeLocationPath
+        AbbreviatedRelativeLocationPath -> RelativeLocationPath {cons(NT-RelativeLocationPath)}
 
-        AxisSpecifier NodeTest Predicate*
-		| AbbreviatedStep -> Step {cons(NT-Step)}
+        AxisSpecifier NodeTest Predicate* -> Step
+        AbbreviatedStep -> Step {cons(NT-Step)}
 
-        AxisName "::"
-		| AbbreviatedAxisSpecifier -> AxisSpecifier {cons(NT-AxisSpecifier)}
+        AxisName "::" -> AxisSpecifier
+        AbbreviatedAxisSpecifier -> AxisSpecifier {cons(NT-AxisSpecifier)}
 
-        "ancestor"
-		| "ancestor-or-self"
-		| "attribute"
-		| "child"
-		| "descendant"
-		| "descendant-or-self"
-		| "following"
-		| "following-sibling"
-		| "namespace"
-		| "parent"
-		| "preceding"
-		| "preceding-sibling"
-		| "self" -> AxisName {cons(NT-AxisName)}
+        "ancestor" -> AxisName
+        "ancestor-or-self" -> AxisName
+        "attribute" -> AxisName
+        "child" -> AxisName
+        "descendant" -> AxisName
+        "descendant-or-self" -> AxisName
+        "following" -> AxisName
+        "following-sibling" -> AxisName
+        "namespace" -> AxisName
+        "parent" -> AxisName
+        "preceding" -> AxisName
+        "preceding-sibling" -> AxisName
+        "self" -> AxisName {cons(NT-AxisName)}
 
-        NameTest
-		| NodeType "(" ")"
-		| "processing-instruction" "(" Literal ")" -> NodeTest {cons(NT-NodeTest)}
+        NameTest -> NodeTest
+        NodeType "(" ")" -> NodeTest
+        "processing-instruction" "(" Literal ")" -> NodeTest {cons(NT-NodeTest)}
 
         "[" PredicateExpr "]" -> Predicate {cons(NT-Predicate)}
 
@@ -46,114 +46,114 @@ exports
 
         RelativeLocationPath "//" Step -> AbbreviatedRelativeLocationPath {cons(NT-AbbreviatedRelativeLocationPath)}
 
-        "."
-		| ".." -> AbbreviatedStep {cons(NT-AbbreviatedStep)}
+        "." -> AbbreviatedStep
+        ".." -> AbbreviatedStep {cons(NT-AbbreviatedStep)}
 
         "@"? -> AbbreviatedAxisSpecifier {cons(NT-AbbreviatedAxisSpecifier)}
 
         OrExpr -> Expr {cons(NT-Expr)}
 
-        VariableReference
-		| "(" Expr ")"
-		| Literal
-		| Number
-		| FunctionCall -> PrimaryExpr {cons(NT-PrimaryExpr)}
+        VariableReference -> PrimaryExpr
+        "(" Expr ")" -> PrimaryExpr
+        Literal -> PrimaryExpr
+        Number -> PrimaryExpr
+        FunctionCall -> PrimaryExpr {cons(NT-PrimaryExpr)}
 
         FunctionName "(" (Argument ("," Argument)*)? ")" -> FunctionCall {cons(NT-FunctionCall)}
 
         Expr -> Argument {cons(NT-Argument)}
 
-        PathExpr
-		| UnionExpr "|" PathExpr -> UnionExpr {cons(NT-UnionExpr)}
+        PathExpr -> UnionExpr
+        UnionExpr "|" PathExpr -> UnionExpr {cons(NT-UnionExpr)}
 
-        LocationPath
-		| FilterExpr
-		| FilterExpr "/" RelativeLocationPath
-		| FilterExpr "//" RelativeLocationPath -> PathExpr {cons(NT-PathExpr)}
+        LocationPath -> PathExpr
+        FilterExpr -> PathExpr
+        FilterExpr "/" RelativeLocationPath -> PathExpr
+        FilterExpr "//" RelativeLocationPath -> PathExpr {cons(NT-PathExpr)}
 
-        PrimaryExpr
-		| FilterExpr Predicate -> FilterExpr {cons(NT-FilterExpr)}
+        PrimaryExpr -> FilterExpr
+        FilterExpr Predicate -> FilterExpr {cons(NT-FilterExpr)}
 
-        AndExpr
-		| OrExpr "or" AndExpr -> OrExpr {cons(NT-OrExpr)}
+        AndExpr -> OrExpr
+        OrExpr "or" AndExpr -> OrExpr {cons(NT-OrExpr)}
 
-        EqualityExpr
-		| AndExpr "and" EqualityExpr -> AndExpr {cons(NT-AndExpr)}
+        EqualityExpr -> AndExpr
+        AndExpr "and" EqualityExpr -> AndExpr {cons(NT-AndExpr)}
 
-        RelationalExpr
-		| EqualityExpr "=" RelationalExpr
-		| EqualityExpr "!=" RelationalExpr -> EqualityExpr {cons(NT-EqualityExpr)}
+        RelationalExpr -> EqualityExpr
+        EqualityExpr "=" RelationalExpr -> EqualityExpr
+        EqualityExpr "!=" RelationalExpr -> EqualityExpr {cons(NT-EqualityExpr)}
 
-        AdditiveExpr
-		| RelationalExpr "<" AdditiveExpr
-		| RelationalExpr ">" AdditiveExpr
-		| RelationalExpr "<=" AdditiveExpr
-		| RelationalExpr ">=" AdditiveExpr -> RelationalExpr {cons(NT-RelationalExpr)}
+        AdditiveExpr -> RelationalExpr
+        RelationalExpr "<" AdditiveExpr -> RelationalExpr
+        RelationalExpr ">" AdditiveExpr -> RelationalExpr
+        RelationalExpr "<=" AdditiveExpr -> RelationalExpr
+        RelationalExpr ">=" AdditiveExpr -> RelationalExpr {cons(NT-RelationalExpr)}
 
-        MultiplicativeExpr
-		| AdditiveExpr "+" MultiplicativeExpr
-		| AdditiveExpr "-" MultiplicativeExpr -> AdditiveExpr {cons(NT-AdditiveExpr)}
+        MultiplicativeExpr -> AdditiveExpr
+        AdditiveExpr "+" MultiplicativeExpr -> AdditiveExpr
+        AdditiveExpr "-" MultiplicativeExpr -> AdditiveExpr {cons(NT-AdditiveExpr)}
 
-        UnaryExpr
-		| MultiplicativeExpr MultiplyOperator UnaryExpr
-		| MultiplicativeExpr "div" UnaryExpr
-		| MultiplicativeExpr "mod" UnaryExpr -> MultiplicativeExpr {cons(NT-MultiplicativeExpr)}
+        UnaryExpr -> MultiplicativeExpr
+        MultiplicativeExpr MultiplyOperator UnaryExpr -> MultiplicativeExpr
+        MultiplicativeExpr "div" UnaryExpr -> MultiplicativeExpr
+        MultiplicativeExpr "mod" UnaryExpr -> MultiplicativeExpr {cons(NT-MultiplicativeExpr)}
 
-        UnionExpr
-		| "-" UnaryExpr -> UnaryExpr {cons(NT-UnaryExpr)}
+        UnionExpr -> UnaryExpr
+        "-" UnaryExpr -> UnaryExpr {cons(NT-UnaryExpr)}
 
-        "("
-		| ")"
-		| "["
-		| "]"
-		| "."
-		| ".."
-		| "@"
-		| ","
-		| "::"
-		| NameTest
-		| NodeType
-		| Operator
-		| FunctionName
-		| AxisName
-		| Literal
-		| Number
-		| VariableReference -> ExprToken {cons(NT-ExprToken)}
+        "(" -> ExprToken
+        ")" -> ExprToken
+        "[" -> ExprToken
+        "]" -> ExprToken
+        "." -> ExprToken
+        ".." -> ExprToken
+        "@" -> ExprToken
+        "," -> ExprToken
+        "::" -> ExprToken
+        NameTest -> ExprToken
+        NodeType -> ExprToken
+        Operator -> ExprToken
+        FunctionName -> ExprToken
+        AxisName -> ExprToken
+        Literal -> ExprToken
+        Number -> ExprToken
+        VariableReference -> ExprToken {cons(NT-ExprToken)}
 
-        Digits ("." Digits?)?
-		| "." Digits -> Number {cons(NT-Number)}
+        Digits ("." Digits?)? -> Number
+        "." Digits -> Number {cons(NT-Number)}
 
-        OperatorName
-		| MultiplyOperator
-		| "/"
-		| "//"
-		| "|"
-		| "+"
-		| "-"
-		| "="
-		| "!="
-		| "<"
-		| "<="
-		| ">"
-		| ">=" -> Operator {cons(NT-Operator)}
+        OperatorName -> Operator
+        MultiplyOperator -> Operator
+        "/" -> Operator
+        "//" -> Operator
+        "|" -> Operator
+        "+" -> Operator
+        "-" -> Operator
+        "=" -> Operator
+        "!=" -> Operator
+        "<" -> Operator
+        "<=" -> Operator
+        ">" -> Operator
+        ">=" -> Operator {cons(NT-Operator)}
 
-        "and"
-		| "or"
-		| "mod"
-		| "div" -> OperatorName {cons(NT-OperatorName)}
+        "and" -> OperatorName
+        "or" -> OperatorName
+        "mod" -> OperatorName
+        "div" -> OperatorName {cons(NT-OperatorName)}
 
         "*" -> MultiplyOperator {cons(NT-MultiplyOperator)}
 
         "$" QName -> VariableReference {cons(NT-VariableReference)}
 
-        "*"
-		| NCName ":" "*"
-		| QName -> NameTest {cons(NT-NameTest)}
+        "*" -> NameTest
+        NCName ":" "*" -> NameTest
+        QName -> NameTest {cons(NT-NameTest)}
 
-        "comment"
-		| "text"
-		| "processing-instruction"
-		| "node" -> NodeType {cons(NT-NodeType)}
+        "comment" -> NodeType
+        "text" -> NodeType
+        "processing-instruction" -> NodeType
+        "node" -> NodeType {cons(NT-NodeType)}
 
         S -> ExprWhitespace {cons(NT-ExprWhitespace)}
 

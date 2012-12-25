@@ -6,9 +6,9 @@ exports
   context-free syntax
         TROLLEY CID CONTAINS Declaration* CheckoutStat -> Prog
 
-        ConstDec
-		| VarDec
-		| ProcDec -> Declaration
+        ConstDec -> Declaration
+        VarDec -> Declaration
+        ProcDec -> Declaration
 
         CHECKOUT Statement DONE SEMI -> CheckoutStat
 
@@ -18,11 +18,11 @@ exports
 
         PROC name::ID LPAREN (a::ID COLON a_t::Type (COMMA b::ID COLON b_t::Type)*)? RPAREN COLON r_t::Type COLON-EQUALS c::Statement -> ProcDec
 
-        Assignment
-		| IfStat
-		| LoopStat
-		| SkipStat
-		| LBRACE Statement+ RBRACE SEMI -> Statement
+        Assignment -> Statement
+        IfStat -> Statement
+        LoopStat -> Statement
+        SkipStat -> Statement
+        LBRACE Statement+ RBRACE SEMI -> Statement
 
         SKIP SEMI -> SkipStat
 
@@ -32,12 +32,12 @@ exports
 
         (INT | DOUBLE)? -> Type
 
-        INT-NUMBER
-		| DOUBLE-NUMBER
-		| ID
-		| CID
-		| ProcCall
-		| LPAREN MixFix RPAREN -> Atom
+        INT-NUMBER -> Atom
+        DOUBLE-NUMBER -> Atom
+        ID -> Atom
+        CID -> Atom
+        ProcCall -> Atom
+        LPAREN MixFix RPAREN -> Atom
 
         (name::ID | name::CID) LPAREN (a::MixFix (COMMA b::MixFix)*)? RPAREN -> ProcCall
 
@@ -55,11 +55,11 @@ exports
 
         Relation ((CONJUNCTION | DISJUNCTION) Relation)* -> ConjDisjunExpr
 
-        a::ConjDisjunExpr QUESTION b::ConjDisjunExpr COLON c::ConjDisjunExpr
-		| ConjDisjunExpr -> MixFix
+        a::ConjDisjunExpr QUESTION b::ConjDisjunExpr COLON c::ConjDisjunExpr -> MixFix
+        ConjDisjunExpr -> MixFix
 
-        IF a::MixFix THEN b::Statement ELSE c::Statement
-		| IF a::MixFix THEN b::Statement -> IfStat
+        IF a::MixFix THEN b::Statement ELSE c::Statement -> IfStat
+        IF a::MixFix THEN b::Statement -> IfStat
 
         WHILE a::MixFix DO b::Statement -> LoopStat
 

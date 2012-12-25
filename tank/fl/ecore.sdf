@@ -10,11 +10,11 @@ exports
 
         name::STR -> Argument
 
-        LiteralExp
-		| ArgumentExp
-		| IfThenElseExp
-		| ApplyExp
-		| BinaryExp -> Exp
+        LiteralExp -> Exp
+        ArgumentExp -> Exp
+        IfThenElseExp -> Exp
+        ApplyExp -> Exp
+        BinaryExp -> Exp
 
         value::INT -> LiteralExp
 
@@ -24,9 +24,9 @@ exports
 
         function::Function argument::Exp+ -> ApplyExp
 
-        PlusExp
-		| MinusExp
-		| EqualExp -> BinaryExp
+        PlusExp -> BinaryExp
+        MinusExp -> BinaryExp
+        EqualExp -> BinaryExp
 
         left::Exp right::Exp -> PlusExp
 
