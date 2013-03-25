@@ -9,12 +9,22 @@ all:
 	_dev/format zoo ada/kellogg ada/kellogg
 	cp ../slps/topics/grammars/ada/lncs-4348/grammar.bgf zoo/ada/lncs-4348.bgf
 	_dev/format zoo ada/lncs-4348 ada/lncs-4348
+	cp ../slps/topics/grammars/ada/cordy-hyaric/grammar.bgf zoo/ada/cordy-hyaric.bgf
+	_dev/format zoo ada/cordy-hyaric ada/cordy-hyaric
 	cp ../slps/topics/grammars/c/iso-9899-1999/grammar.bgf zoo/c/iso-9899-1999.bgf
 	_dev/format zoo c/iso-9899-1999 c/iso-9899-1999
 	cp ../slps/topics/grammars/c/iso-9899-tc2/grammar.bgf zoo/c/iso-9899-tc2.bgf
 	_dev/format zoo c/iso-9899-tc2 c/iso-9899-tc2
 	cp ../slps/topics/grammars/c/iso-9899-tc3/grammar.bgf zoo/c/iso-9899-tc3.bgf
 	_dev/format zoo c/iso-9899-tc3 c/iso-9899-tc3
+	cp ../slps/topics/grammars/c/cordy-malton/grammar.bgf zoo/c/cordy-malton.bgf
+	_dev/format zoo c/cordy-malton c/cordy-malton
+	cp ../slps/topics/grammars/c/malton-dahn/grammar.bgf zoo/c/malton-dahn.bgf
+	_dev/format zoo c/malton-dahn c/malton-dahn
+	cp ../slps/topics/grammars/c/cordy-malton-dahn/grammar.bgf zoo/c/cordy-malton-dahn.bgf
+	_dev/format zoo c/cordy-malton-dahn c/cordy-malton-dahn
+	cp ../slps/topics/grammars/c/antoniol/grammar.bgf zoo/c/antoniol.bgf
+	_dev/format zoo c/antoniol c/antoniol
 	cp ../slps/topics/grammars/cpp/iso-14882-1998/grammar.bgf zoo/cpp/iso-14882-1998.bgf
 	_dev/format zoo cpp/iso-14882-1998 cpp/iso-14882-1998
 	cp ../slps/topics/grammars/cpp/iso-n2723/grammar.bgf zoo/cpp/iso-n2723.bgf

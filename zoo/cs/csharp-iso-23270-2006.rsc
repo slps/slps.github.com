@@ -1,4 +1,4 @@
-@contributor{bgf2src automated exporter - SLPS}
+@contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module Csharp_iso_23270_2006
 
 syntax Compilation_unit

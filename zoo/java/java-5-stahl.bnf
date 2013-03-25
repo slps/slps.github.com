@@ -176,8 +176,8 @@ constant:
         NUM_LONG
         NUM_DOUBLE
 NUM_INT:
-        "." (("." ".") | (("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ EXPONENT? f1::FLOAT_SUFFIX?)?)
-        (("0" ((("x" | "X") HEX_DIGIT+) | ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ | ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7")+)?) | (("1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9") ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")*)) ("l" | "L" | ("." ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")* EXPONENT? f2::FLOAT_SUFFIX?) | (EXPONENT f3::FLOAT_SUFFIX?) | f4::FLOAT_SUFFIX)?
+        "." (("." ".") | (("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ EXPONENT? (f1::FLOAT_SUFFIX)?)?)
+        (("0" ((("x" | "X") HEX_DIGIT+) | ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ | ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7")+)?) | (("1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9") ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")*)) ("l" | "L" | ("." ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")* EXPONENT? (f2::FLOAT_SUFFIX)?) | (EXPONENT (f3::FLOAT_SUFFIX)?) | f4::FLOAT_SUFFIX)?
 EXPONENT:
         ("e" | "E") ("+" | "-")? ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+
 FLOAT_SUFFIX:
@@ -294,14 +294,14 @@ interfaceBlock:
 interfaceField:
         mods::modifiers (it::innerTypeDef | (tp::typeParameters md::memberDef))
 memberDef:
-        t::typeSpec ((IDENT LPAREN param::parameterDeclarationList RPAREN rt::declaratorBrackets tc::throwsClause? (SEMI | s2::compoundStatement)) | (v::variableDefinitions SEMI))
+        t::typeSpec ((IDENT LPAREN param::parameterDeclarationList RPAREN rt::declaratorBrackets (tc::throwsClause)? (SEMI | s2::compoundStatement)) | (v::variableDefinitions SEMI))
 typeSpec:
         classTypeSpec
         builtInTypeSpec
 parameterDeclarationList:
         (parameterDeclaration (COMMA parameterDeclaration)*)?
 parameterDeclaration:
-        pm::parameterModifier t::typeSpec el::ELLIPSIS? id::IDENT pd::declaratorBrackets
+        pm::parameterModifier t::typeSpec (el::ELLIPSIS)? id::IDENT pd::declaratorBrackets
 parameterModifier:
         ("final" | annotation)*
 ELLIPSIS:

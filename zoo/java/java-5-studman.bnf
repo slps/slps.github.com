@@ -5,7 +5,7 @@ packageDefinition:
 annotations:
         annotation*
 annotation:
-        AT i::identifier (LPAREN args::annotationArguments? RPAREN)?
+        AT i::identifier (LPAREN (args::annotationArguments)? RPAREN)?
 AT:
         "@"
 identifier:
@@ -135,7 +135,7 @@ primaryExpression:
         LPAREN assignmentExpression RPAREN
         builtInType (lbt::LBRACK RBRACK)* DOT "class"
 identPrimary:
-        ta1::typeArguments? IDENT ((DOT ta2::typeArguments? IDENT) | EPSILON)* ((lp::LPAREN argList RPAREN) | (lbc::LBRACK RBRACK)+)?
+        (ta1::typeArguments)? IDENT ((DOT (ta2::typeArguments)? IDENT) | EPSILON)* ((lp::LPAREN argList RPAREN) | (lbc::LBRACK RBRACK)+)?
 argList:
         expressionList
         EPSILON
@@ -177,8 +177,8 @@ constant:
         NUM_LONG
         NUM_DOUBLE
 NUM_INT:
-        "." ((("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ EXPONENT? f1::FLOAT_SUFFIX?) | "..")?
-        (("0" ((("x" | "X") HEX_DIGIT+) | ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ | ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7")+)?) | (("1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9") ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")*)) ("l" | "L" | ("." ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")* EXPONENT? f2::FLOAT_SUFFIX?) | (EXPONENT f3::FLOAT_SUFFIX?) | f4::FLOAT_SUFFIX)?
+        "." ((("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ EXPONENT? (f1::FLOAT_SUFFIX)?) | "..")?
+        (("0" ((("x" | "X") HEX_DIGIT+) | ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ | ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7")+)?) | (("1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9") ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")*)) ("l" | "L" | ("." ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")* EXPONENT? (f2::FLOAT_SUFFIX)?) | (EXPONENT (f3::FLOAT_SUFFIX)?) | f4::FLOAT_SUFFIX)?
 EXPONENT:
         ("e" | "E") ("+" | "-")? ("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+
 FLOAT_SUFFIX:
@@ -235,7 +235,7 @@ classBlock:
 LCURLY:
         "{"
 classField:
-        mods::modifiers (td::typeDefinitionInternal | (tp::typeParameters? ((h::ctorHead s::constructorBody) | (t::typeSpec ((IDENT LPAREN param::parameterDeclarationList RPAREN rt::declaratorBrackets tc::throwsClause? (s2::compoundStatement | SEMI)) | (v::variableDefinitions SEMI))))))
+        mods::modifiers (td::typeDefinitionInternal | ((tp::typeParameters)? ((h::ctorHead s::constructorBody) | (t::typeSpec ((IDENT LPAREN param::parameterDeclarationList RPAREN rt::declaratorBrackets (tc::throwsClause)? (s2::compoundStatement | SEMI)) | (v::variableDefinitions SEMI))))))
         "static" s3::compoundStatement
         s4::compoundStatement
 modifiers:
@@ -259,7 +259,7 @@ typeDefinitionInternal:
         enumDefinition
         annotationDefinition
 classDefinition:
-        "class" IDENT tp::typeParameters? sc::superClassClause ic::implementsClause cb::classBlock
+        "class" IDENT (tp::typeParameters)? sc::superClassClause ic::implementsClause cb::classBlock
 typeParameters:
         LT typeParameter (COMMA typeParameter)* typeArgumentsOrParametersEnd?
 typeParameter:
@@ -273,13 +273,13 @@ superClassClause:
 implementsClause:
         (i::"implements" classOrInterfaceType (COMMA classOrInterfaceType)*)?
 interfaceDefinition:
-        "interface" IDENT tp::typeParameters? ie::interfaceExtends ib::interfaceBlock
+        "interface" IDENT (tp::typeParameters)? ie::interfaceExtends ib::interfaceBlock
 interfaceExtends:
         (e::"extends" classOrInterfaceType (COMMA classOrInterfaceType)*)?
 interfaceBlock:
         LCURLY (interfaceField | SEMI)* RCURLY
 interfaceField:
-        mods::modifiers (td::typeDefinitionInternal | (tp::typeParameters? t::typeSpec ((IDENT LPAREN param::parameterDeclarationList RPAREN rt::declaratorBrackets tc::throwsClause? SEMI) | (v::variableDefinitions SEMI))))
+        mods::modifiers (td::typeDefinitionInternal | ((tp::typeParameters)? t::typeSpec ((IDENT LPAREN param::parameterDeclarationList RPAREN rt::declaratorBrackets (tc::throwsClause)? SEMI) | (v::variableDefinitions SEMI))))
 typeSpec:
         classTypeSpec
         builtInTypeSpec
@@ -288,7 +288,7 @@ parameterDeclarationList:
 parameterDeclaration:
         pm::parameterModifier t::typeSpec id::IDENT pd::declaratorBrackets
 parameterModifier:
-        annotation* f::"final"? annotation*
+        annotation* (f::"final")? annotation*
 declaratorBrackets:
         (lb::LBRACK RBRACK)*
 variableLengthParameterDeclaration:
@@ -317,11 +317,11 @@ enumDefinition:
 enumBlock:
         LCURLY (enumConstant (COMMA enumConstant)* COMMA?)? (SEMI (classField | SEMI)*)? RCURLY
 enumConstant:
-        an::annotations i::IDENT (LPAREN a::argList RPAREN)? b::enumConstantBlock?
+        an::annotations i::IDENT (LPAREN a::argList RPAREN)? (b::enumConstantBlock)?
 enumConstantBlock:
         LCURLY (enumConstantField | SEMI)* RCURLY
 enumConstantField:
-        mods::modifiers (td::typeDefinitionInternal | (tp::typeParameters? t::typeSpec ((IDENT LPAREN param::parameterDeclarationList RPAREN rt::declaratorBrackets tc::throwsClause? (s2::compoundStatement | SEMI)) | (v::variableDefinitions SEMI))))
+        mods::modifiers (td::typeDefinitionInternal | ((tp::typeParameters)? t::typeSpec ((IDENT LPAREN param::parameterDeclarationList RPAREN rt::declaratorBrackets (tc::throwsClause)? (s2::compoundStatement | SEMI)) | (v::variableDefinitions SEMI))))
         s4::compoundStatement
 compoundStatement:
         lc::LCURLY statement* RCURLY

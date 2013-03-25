@@ -1,0 +1,30 @@
+module Main
+
+exports
+ context-free start-symbols program
+  sorts
+        Program Line Ifdef Elsif-part Else-part Any-other-line Not-newline Long-comment Ifdef-token 
+  context-free syntax
+        Line* -> Program
+
+        Ifdef -> Line
+        "//"? Other-preprocessor-line Newline -> Line
+        "//"? Any-other-line Newline -> Line
+
+        "//"? Ifdef-line Newline Line* Elsif-part* Else-part? "//"? Endifdef-line Newline -> Ifdef
+
+        "//"? Elsifdef-line Newline Line* -> Elsif-part
+
+        "//"? Elsedef-line Newline Line* -> Else-part
+
+        Not-newline* -> Any-other-line
+
+        Long-comment -> Not-newline
+        Token -> Not-newline
+
+        Comment+ -> Long-comment
+
+        Ifdef-line -> Ifdef-token
+        Elsedef-line -> Ifdef-token
+        Elsifdef-line -> Ifdef-token
+        Endifdef-line -> Ifdef-token
