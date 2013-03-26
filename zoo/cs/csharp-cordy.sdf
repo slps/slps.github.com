@@ -1,0 +1,998 @@
+module Main
+
+exports
+  sorts
+        Literal Boolean-literal Integer-literal Character-literal String-literal Null-literal Program Compilation-unit Namespace-name Type-name Namespace-or-type-name Colon-colon-id Dot-id Type Value-type Struct-type Simple-type Numeric-type Integral-type Floating-point-type Enum-type Nullable-type Non-nullable-value-type Reference-type Class-type Interface-type Array-type Non-array-type Rank-specifiers Rank-specifier Delegate-type Variable-reference Argument-list Argument Primary-expression Primary-no-array-creation-expression Simple-primary-expression Primary-expression-modifier Simple-name Parenthesized-expression Member-access-operator Predefined-type Invocation-operator Element-access-operator This-access Base-access Post-increment-operator Post-decrement-operator Object-or-delegate-creation-expression Array-creation-expression Object-initializer-expression Object-formals Object-initializer Member-initializer-list Member-initializer Member-name-equals Expression-list Typeof-expression Unbound-type-name Dot-id-generic-dimension-specifier Generic-dimension-specifier Checked-expression Unchecked-expression Default-value-expression Anonymous-method-expression Anonymous-method-signature Anonymous-method-parameter-list Anonymous-method-parameter Unary-expression Pre-increment-expression Pre-decrement-expression Cast-expression Multiplicative-expression Additive-expression Shift-expression Relational-expression Equality-expression And-expression Exclusive-or-expression Inclusive-or-expression Conditional-and-expression Conditional-or-expression Null-coalescing-expression Conditional-expression Assignment Assignment-operator Expression Constant-expression Boolean-expression Query-expression Query-body Query-body-clause From-clause Join-clause Into-item-name Let-clause Where-clause Orderby-clause Key-expr-ascending-descending Ascending-descending Final-query-clause Select-clause Groupby-clause Query-continuation Item-name Sel-expr Key-expr Src-expr Pred-expr Lambda-expression Input-parameters Input-parameter Statement Embedded-statement Block Statement-list Empty-statement Labeled-statement Declaration-statement Local-variable-declaration Local-variable-declarators Local-variable-declarator Equals-local-variable-initializer Local-variable-initializer Local-constant-declaration Expression-statement Statement-expression Object-creation-expression Selection-statement If-statement Else-if-clause Else-clause Nested-statement Switch-statement Switch-block Switch-sections Switch-section Switch-labels Switch-label Iteration-statement While-statement Do-statement For-statement For-initializer For-condition For-iterator Statement-expression-list Foreach-statement Jump-statement Break-statement Continue-statement Goto-statement Return-statement Throw-statement Try-statement Catch-clauses Specific-catch-clauses Specific-catch-clause General-catch-clause Finally-clause Checked-statement Unchecked-statement Lock-statement Using-statement Resource-acquisition Yield-statement Namespace-declaration Qualified-identifier Namespace-body Extern-alias-directives Extern-alias-directive Using-directives Using-directive Using-alias-directive Using-namespace-directive Namespace-member-declarations Namespace-member-declaration Type-declaration Qualified-alias-member Class-declaration Class-modifiers Class-modifier Class-base Class-and-interface-type-ist Class-or-interface-type Class-body Class-member-declarations Class-member-declaration Constant-declaration Constant-modifiers Constant-modifier Constant-declarators Constant-declarator Field-declaration Field-modifiers Field-modifier Variable-declarators Variable-declarator Equals-variable-initializer Variable-initializer Method-declaration Method-header Method-modifiers Method-modifier Return-type Member-name Interface-type-dot Method-body Formal-parameter-list Comma-parameter-array Fixed-parameters Fixed-parameter Parameter-modifier Parameter-array Property-declaration Property-modifiers Property-modifier Accessor-declarations Get-accessor-declaration Set-accessor-declaration Accessor-modifier Accessor-body Event-declaration Event-modifiers Event-modifier Event-accessor-declarations Add-accessor-declaration Remove-accessor-declaration Indexer-declaration Indexer-modifiers Indexer-modifier Indexer-declarator Operator-declaration Operator-modifiers Operator-modifier Operator-declarator Unary-operator-declarator Overloadable-unary-operator Binary-operator-declarator Overloadable-binary-operator Conversion-operator-declarator Operator-body Constructor-declaration Constructor-modifiers Constructor-modifier Constructor-declarator Constructor-initializer Constructor-body Static-constructor-declaration Static-constructor-modifiers Static-constructor-body Finalizer-declaration Finalizer-body Struct-declaration Struct-modifiers Struct-modifier Struct-interfaces Interface-type-list Struct-body Struct-member-declarations Struct-member-declaration Array-initializer Variable-initializer-list Interface-declaration Interface-modifiers Interface-modifier Interface-base Interface-body Interface-member-declarations Interface-member-declaration Interface-method-declaration Interface-property-declaration Interface-accessors Interface-event-declaration Interface-indexer-declaration Enum-declaration Enum-base Enum-body Enum-modifiers Enum-modifier Enum-member-declarations Enum-member-declaration Equals-constant-expression Delegate-declaration Delegate-modifiers Delegate-modifier Global-attributes Global-attribute-sections Global-attribute-section Global-attribute-target-specifier Global-attribute-target Attributes Attribute-sections Attribute-section Attribute-target-specifier Attribute-target Attribute-list Attribute Attribute-name Attribute-arguments Attribute-argument-list Attribute-argument Positional-argument Named-argument Attribute-argument-expression Type-parameter-list Type-parameters Attributes-type-parameter Type-parameter Type-argument-list Type-argument Type-parameter-constraints-clauses Type-parameter-constraints-clause Type-parameter-constraints Type-parameter-constraint Primary-constraint Secondary-constraint Constructor-constraint Unsafe-statement Pointer-type Unmanaged-type Pointer-indirection-expression Pointer-member-access-operator Pointer-element-access-operator Addressof-expression Sizeof-expression Fixed-statement Fixed-pointer-declarators Fixed-pointer-declarator Fixed-pointer-initializer Stackalloc-initializer 
+  context-free syntax
+        Boolean-literal -> Literal
+        Integer-literal -> Literal
+        Real-literal -> Literal
+        Character-literal -> Literal
+        String-literal -> Literal
+        Null-literal -> Literal
+
+        "true" -> Boolean-literal
+        "false" -> Boolean-literal
+
+        Decimal-integer-literal -> Integer-literal
+        Hexadecimal-integer-literal -> Integer-literal
+
+        Charlit -> Character-literal
+
+        Stringlit -> String-literal
+
+        "null" -> Null-literal
+
+        Compilation-unit -> Program
+
+        Extern-alias-directives? Using-directives? Global-attributes? Namespace-member-declarations? -> Compilation-unit
+
+        Namespace-or-type-name -> Namespace-name
+
+        Namespace-or-type-name -> Type-name
+
+        "this"? Id Colon-colon-id? Dot-id* Type-argument-list? -> Namespace-or-type-name
+
+        "::" Id -> Colon-colon-id
+
+        "." Id -> Dot-id
+
+        Value-type -> Type
+        Reference-type -> Type
+        Type-parameter -> Type
+
+        Struct-type -> Value-type
+        Enum-type -> Value-type
+
+        Type-name -> Struct-type
+        Simple-type -> Struct-type
+        Nullable-type -> Struct-type
+
+        Numeric-type -> Simple-type
+        "bool" -> Simple-type
+
+        Integral-type -> Numeric-type
+        Floating-point-type -> Numeric-type
+        "decimal" -> Numeric-type
+
+        "sbyte" -> Integral-type
+        "byte" -> Integral-type
+        "short" -> Integral-type
+        "ushort" -> Integral-type
+        "int" -> Integral-type
+        "uint" -> Integral-type
+        "long" -> Integral-type
+        "ulong" -> Integral-type
+        "char" -> Integral-type
+
+        "float" -> Floating-point-type
+        "double" -> Floating-point-type
+
+        Type-name -> Enum-type
+
+        Non-nullable-value-type "?" -> Nullable-type
+
+        Enum-type -> Non-nullable-value-type
+        Type-name -> Non-nullable-value-type
+        Simple-type -> Non-nullable-value-type
+
+        Class-type -> Reference-type
+        Interface-type -> Reference-type
+        Array-type -> Reference-type
+        Delegate-type -> Reference-type
+
+        Type-name -> Class-type
+        "object" -> Class-type
+        "string" -> Class-type
+
+        Type-name -> Interface-type
+
+        Non-array-type Rank-specifiers -> Array-type
+
+        Value-type -> Non-array-type
+        Class-type -> Non-array-type
+        Interface-type -> Non-array-type
+        Delegate-type -> Non-array-type
+        Type-parameter -> Non-array-type
+
+        Rank-specifier* -> Rank-specifiers
+
+        "[" ","* "]" -> Rank-specifier
+
+        Type-name -> Delegate-type
+
+        Expression -> Variable-reference
+
+        Argument"," -> Argument-list
+
+        Expression -> Argument
+        "ref" Variable-reference -> Argument
+        "out" Variable-reference -> Argument
+
+        Array-creation-expression -> Primary-expression
+        Primary-no-array-creation-expression -> Primary-expression
+        Object-initializer-expression -> Primary-expression
+
+        Simple-primary-expression Primary-expression-modifier* -> Primary-no-array-creation-expression
+
+        Literal -> Simple-primary-expression
+        Simple-name -> Simple-primary-expression
+        Parenthesized-expression -> Simple-primary-expression
+        This-access -> Simple-primary-expression
+        Base-access -> Simple-primary-expression
+        Object-or-delegate-creation-expression -> Simple-primary-expression
+        Typeof-expression -> Simple-primary-expression
+        Checked-expression -> Simple-primary-expression
+        Unchecked-expression -> Simple-primary-expression
+        Default-value-expression -> Simple-primary-expression
+        Anonymous-method-expression -> Simple-primary-expression
+        Predefined-type Member-access-operator -> Simple-primary-expression
+        Qualified-alias-member Member-access-operator -> Simple-primary-expression
+
+        Member-access-operator -> Primary-expression-modifier
+        Invocation-operator -> Primary-expression-modifier
+        Element-access-operator -> Primary-expression-modifier
+        Post-increment-operator -> Primary-expression-modifier
+        Post-decrement-operator -> Primary-expression-modifier
+
+        Id Type-argument-list? -> Simple-name
+
+        "(" Expression ")" -> Parenthesized-expression
+
+        "." Id Type-argument-list? -> Member-access-operator
+
+        "bool" -> Predefined-type
+        "byte" -> Predefined-type
+        "char" -> Predefined-type
+        "decimal" -> Predefined-type
+        "double" -> Predefined-type
+        "float" -> Predefined-type
+        "int" -> Predefined-type
+        "long" -> Predefined-type
+        "object" -> Predefined-type
+        "sbyte" -> Predefined-type
+        "short" -> Predefined-type
+        "string" -> Predefined-type
+        "uint" -> Predefined-type
+        "ulong" -> Predefined-type
+        "ushort" -> Predefined-type
+
+        "(" Argument"," ")" -> Invocation-operator
+
+        "[" Expression+ "]" -> Element-access-operator
+
+        "this" -> This-access
+
+        "base" "." Id Type-argument-list? -> Base-access
+        "base" "[" Expression+ "]" -> Base-access
+
+        "++" -> Post-increment-operator
+
+        "--" -> Post-decrement-operator
+
+        "new" Type "(" Argument-list? ")" -> Object-or-delegate-creation-expression
+
+        "new" Non-array-type "[" Expression-list "]" Rank-specifiers? Array-initializer? -> Array-creation-expression
+        "new" Array-type Array-initializer -> Array-creation-expression
+
+        "new" Array-type? Object-formals? Rank-specifiers? Object-initializer -> Object-initializer-expression
+
+        "(" Formal-parameter-list? ")" -> Object-formals
+
+        "{" Member-initializer-list? ","? "}" -> Object-initializer
+
+        Member-initializer+ -> Member-initializer-list
+
+        Member-name-equals? Expression -> Member-initializer
+        Member-name-equals? Array-initializer -> Member-initializer
+
+        Simple-name "=" -> Member-name-equals
+
+        Expression+ -> Expression-list
+
+        "typeof" "(" Type ")" -> Typeof-expression
+        "typeof" "(" Unbound-type-name ")" -> Typeof-expression
+        "typeof" "(" "void" ")" -> Typeof-expression
+        "typeof" "(" ")" -> Typeof-expression
+
+        Id Colon-colon-id? Generic-dimension-specifier? Dot-id-generic-dimension-specifier* -> Unbound-type-name
+
+        "." Id Generic-dimension-specifier? -> Dot-id-generic-dimension-specifier
+
+        "<" ","* ">" -> Generic-dimension-specifier
+
+        "checked" "(" Expression ")" -> Checked-expression
+
+        "unchecked" "(" Expression ")" -> Unchecked-expression
+
+        "default" "(" Type ")" -> Default-value-expression
+
+        "delegate" Anonymous-method-signature? Block -> Anonymous-method-expression
+
+        "(" Anonymous-method-parameter-list? ")" -> Anonymous-method-signature
+
+        Anonymous-method-parameter+ -> Anonymous-method-parameter-list
+
+        Parameter-modifier? Type Id -> Anonymous-method-parameter
+
+        Primary-expression -> Unary-expression
+        "+" Unary-expression -> Unary-expression
+        "-" Unary-expression -> Unary-expression
+        "!" Unary-expression -> Unary-expression
+        "~" Unary-expression -> Unary-expression
+        Pre-increment-expression -> Unary-expression
+        Pre-decrement-expression -> Unary-expression
+        Cast-expression -> Unary-expression
+
+        "++" Unary-expression -> Pre-increment-expression
+
+        "--" Unary-expression -> Pre-decrement-expression
+
+        "(" Type ")" Unary-expression -> Cast-expression
+
+        Unary-expression -> Multiplicative-expression
+        Multiplicative-expression "*" Unary-expression -> Multiplicative-expression
+        Multiplicative-expression "/" Unary-expression -> Multiplicative-expression
+        Multiplicative-expression "%" Unary-expression -> Multiplicative-expression
+
+        Multiplicative-expression -> Additive-expression
+        Additive-expression "+" Multiplicative-expression -> Additive-expression
+        Additive-expression "-" Multiplicative-expression -> Additive-expression
+
+        Additive-expression -> Shift-expression
+        Shift-expression "<<" Additive-expression -> Shift-expression
+        Shift-expression ">>" Additive-expression -> Shift-expression
+
+        Shift-expression -> Relational-expression
+        Relational-expression "<" Shift-expression -> Relational-expression
+        Relational-expression ">" Shift-expression -> Relational-expression
+        Relational-expression "<=" Shift-expression -> Relational-expression
+        Relational-expression ">=" Shift-expression -> Relational-expression
+        Relational-expression "is" Type -> Relational-expression
+        Relational-expression "as" Type -> Relational-expression
+
+        Relational-expression -> Equality-expression
+        Equality-expression "==" Relational-expression -> Equality-expression
+        Equality-expression "!=" Relational-expression -> Equality-expression
+
+        Equality-expression -> And-expression
+        And-expression "&" Equality-expression -> And-expression
+
+        And-expression -> Exclusive-or-expression
+        Exclusive-or-expression "^" And-expression -> Exclusive-or-expression
+
+        Exclusive-or-expression -> Inclusive-or-expression
+        Inclusive-or-expression "|" Exclusive-or-expression -> Inclusive-or-expression
+
+        Inclusive-or-expression -> Conditional-and-expression
+        Conditional-and-expression "&&" Inclusive-or-expression -> Conditional-and-expression
+
+        Conditional-and-expression -> Conditional-or-expression
+        Conditional-or-expression "||" Conditional-and-expression -> Conditional-or-expression
+
+        Conditional-or-expression -> Null-coalescing-expression
+        Conditional-or-expression "??" Null-coalescing-expression -> Null-coalescing-expression
+
+        Null-coalescing-expression -> Conditional-expression
+        Null-coalescing-expression "?" Expression ":" Expression -> Conditional-expression
+
+        Unary-expression Assignment-operator Expression -> Assignment
+
+        "=" -> Assignment-operator
+        "+=" -> Assignment-operator
+        "-=" -> Assignment-operator
+        "*=" -> Assignment-operator
+        "/=" -> Assignment-operator
+        "%=" -> Assignment-operator
+        "&=" -> Assignment-operator
+        "|=" -> Assignment-operator
+        "^=" -> Assignment-operator
+        "<<=" -> Assignment-operator
+        ">>=" -> Assignment-operator
+
+        Conditional-expression -> Expression
+        Assignment -> Expression
+        Query-expression -> Expression
+        Lambda-expression -> Expression
+
+        Expression -> Constant-expression
+
+        Expression -> Boolean-expression
+
+        From-clause IN Query-body EX -> Query-expression
+
+        Query-body-clause* Final-query-clause Query-continuation? -> Query-body
+
+        NL From-clause -> Query-body-clause
+        NL Join-clause -> Query-body-clause
+        NL Let-clause -> Query-body-clause
+        NL Where-clause -> Query-body-clause
+        NL Orderby-clause -> Query-body-clause
+
+        "from" Item-name "in" Src-expr -> From-clause
+
+        "join" Item-name "in" Src-expr "on" Key-expr "equals" Key-expr Into-item-name? -> Join-clause
+
+        "into" Item-name -> Into-item-name
+
+        "let" Item-name "=" Sel-expr -> Let-clause
+
+        "where" Pred-expr -> Where-clause
+
+        "orderby" Key-expr-ascending-descending"," -> Orderby-clause
+
+        Key-expr Ascending-descending? -> Key-expr-ascending-descending
+
+        "ascending" -> Ascending-descending
+        "descending" -> Ascending-descending
+
+        NL Select-clause -> Final-query-clause
+        NL Groupby-clause -> Final-query-clause
+
+        "select" Sel-expr -> Select-clause
+
+        "group" Sel-expr "by" Key-expr -> Groupby-clause
+
+        "into" Item-name Query-body -> Query-continuation
+
+        Type? Simple-name -> Item-name
+
+        Expression -> Sel-expr
+
+        Expression -> Key-expr
+
+        Expression -> Src-expr
+
+        Expression -> Pred-expr
+
+        Input-parameters "=>" Expression -> Lambda-expression
+        Input-parameters "=>" Block -> Lambda-expression
+
+        Input-parameter -> Input-parameters
+        "(" Input-parameter"," ")" -> Input-parameters
+
+        Type? Id -> Input-parameter
+
+        Expression -> Constant-expression
+
+        Expression -> Boolean-expression
+
+        Labeled-statement -> Statement
+        Declaration-statement -> Statement
+        Embedded-statement -> Statement
+
+        Block -> Embedded-statement
+        Empty-statement -> Embedded-statement
+        Expression-statement -> Embedded-statement
+        Selection-statement -> Embedded-statement
+        Iteration-statement -> Embedded-statement
+        Jump-statement -> Embedded-statement
+        Try-statement -> Embedded-statement
+        Checked-statement -> Embedded-statement
+        Unchecked-statement -> Embedded-statement
+        Lock-statement -> Embedded-statement
+        Using-statement -> Embedded-statement
+        Yield-statement -> Embedded-statement
+
+        "{" (NL IN) Statement-list? EX "}" ";"? -> Block
+
+        Statement+ -> Statement-list
+
+        ";" -> Empty-statement
+
+        Id ":" Statement -> Labeled-statement
+
+        Local-variable-declaration ";" NL -> Declaration-statement
+        Local-constant-declaration ";" NL -> Declaration-statement
+
+        Type Local-variable-declarators -> Local-variable-declaration
+
+        Local-variable-declarator+ -> Local-variable-declarators
+
+        Id Equals-local-variable-initializer? -> Local-variable-declarator
+
+        "=" Local-variable-initializer -> Equals-local-variable-initializer
+
+        Expression -> Local-variable-initializer
+        Array-initializer -> Local-variable-initializer
+
+        "const" Type Constant-declarators -> Local-constant-declaration
+
+        Statement-expression ";" NL -> Expression-statement
+
+        Primary-no-array-creation-expression -> Statement-expression
+        Object-creation-expression -> Statement-expression
+        Assignment -> Statement-expression
+        Pre-increment-expression -> Statement-expression
+        Pre-decrement-expression -> Statement-expression
+
+        "new" Type "(" Argument-list? ")" -> Object-creation-expression
+
+        If-statement -> Selection-statement
+        Switch-statement -> Selection-statement
+
+        "if" "(" Boolean-expression ")" Nested-statement Else-if-clause* Else-clause? NL -> If-statement
+
+        "else" "if" "(" Boolean-expression ")" Nested-statement -> Else-if-clause
+
+        "else" Nested-statement -> Else-clause
+
+        Block -> Nested-statement
+        (IN NL) Embedded-statement EX -> Nested-statement
+
+        "switch" "(" Expression ")" Switch-block -> Switch-statement
+
+        "{" (NL IN) Switch-sections EX "}" NL -> Switch-block
+
+        Switch-section+ -> Switch-sections
+
+        Switch-labels (NL IN) Statement-list EX -> Switch-section
+
+        Switch-label+ -> Switch-labels
+
+        "case" Constant-expression ":" -> Switch-label
+        "default" ":" -> Switch-label
+
+        While-statement -> Iteration-statement
+        Do-statement -> Iteration-statement
+        For-statement -> Iteration-statement
+        Foreach-statement -> Iteration-statement
+
+        "while" "(" Boolean-expression ")" Nested-statement NL -> While-statement
+
+        "do" (NL IN) Embedded-statement EX "while" "(" Boolean-expression ")" ";" NL -> Do-statement
+
+        "for" "(" For-initializer? ";" For-condition? ";" For-iterator? ")" Nested-statement NL -> For-statement
+
+        Local-variable-declaration -> For-initializer
+        Statement-expression-list -> For-initializer
+
+        Boolean-expression -> For-condition
+
+        Statement-expression-list -> For-iterator
+
+        Statement-expression+ -> Statement-expression-list
+
+        "foreach" "(" Type Id "in" Expression ")" Nested-statement NL -> Foreach-statement
+
+        Break-statement -> Jump-statement
+        Continue-statement -> Jump-statement
+        Goto-statement -> Jump-statement
+        Return-statement -> Jump-statement
+        Throw-statement -> Jump-statement
+
+        "break" ";" NL -> Break-statement
+
+        "continue" ";" NL -> Continue-statement
+
+        "goto" Id ";" NL -> Goto-statement
+        "goto" "case" Constant-expression ";" NL -> Goto-statement
+        "goto" "default" ";" NL -> Goto-statement
+
+        "return" Expression? ";" NL -> Return-statement
+
+        "throw" Expression? ";" NL -> Throw-statement
+
+        "try" Block NL Catch-clauses? Finally-clause? -> Try-statement
+
+        Specific-catch-clauses? General-catch-clause? -> Catch-clauses
+
+        Specific-catch-clause+ -> Specific-catch-clauses
+
+        "catch" "(" Class-type Id? ")" Block NL -> Specific-catch-clause
+
+        "catch" Block NL -> General-catch-clause
+
+        "finally" Block NL -> Finally-clause
+
+        "checked" Block NL -> Checked-statement
+
+        "unchecked" Block NL -> Unchecked-statement
+
+        "lock" "(" Expression ")" NL Embedded-statement -> Lock-statement
+
+        "using" "(" Resource-acquisition ")" NL Embedded-statement -> Using-statement
+
+        Local-variable-declaration -> Resource-acquisition
+        Expression -> Resource-acquisition
+
+        "yield" "return" Expression ";" NL -> Yield-statement
+        "yield" "break" ";" NL -> Yield-statement
+
+        "namespace" Qualified-identifier NL Namespace-body -> Namespace-declaration
+
+        Id Dot-id* -> Qualified-identifier
+
+        "{" (NL IN) Extern-alias-directives? Using-directives? Namespace-member-declarations? EX "}" ";"? NL -> Namespace-body
+
+        Extern-alias-directive+ NL -> Extern-alias-directives
+
+        "extern" Id Id ";" NL -> Extern-alias-directive
+
+        Using-directive+ NL -> Using-directives
+
+        Using-alias-directive -> Using-directive
+        Using-namespace-directive -> Using-directive
+
+        "using" Id "=" Namespace-or-type-name ";" NL -> Using-alias-directive
+
+        "using" Namespace-name ";" NL -> Using-namespace-directive
+
+        Namespace-member-declaration+ -> Namespace-member-declarations
+
+        Namespace-declaration NL -> Namespace-member-declaration
+        Type-declaration NL -> Namespace-member-declaration
+
+        Class-declaration -> Type-declaration
+        Struct-declaration -> Type-declaration
+        Interface-declaration -> Type-declaration
+        Enum-declaration -> Type-declaration
+        Delegate-declaration -> Type-declaration
+
+        Id "::" Id Type-argument-list? -> Qualified-alias-member
+
+        Attributes? Class-modifiers? "partial"? "class" Id Type-parameter-list? Class-base? Type-parameter-constraints-clauses? NL Class-body -> Class-declaration
+
+        Class-modifier+ -> Class-modifiers
+
+        "new" -> Class-modifier
+        "public" -> Class-modifier
+        "protected" -> Class-modifier
+        "internal" -> Class-modifier
+        "private" -> Class-modifier
+        "abstract" -> Class-modifier
+        "sealed" -> Class-modifier
+        "static" -> Class-modifier
+
+        ":" Class-and-interface-type-ist -> Class-base
+
+        Class-or-interface-type+ -> Class-and-interface-type-ist
+
+        Class-type -> Class-or-interface-type
+        Interface-type -> Class-or-interface-type
+
+        "{" (NL IN) Class-member-declarations? EX "}" ";"? NL -> Class-body
+
+        Class-member-declaration+ -> Class-member-declarations
+
+        Constant-declaration -> Class-member-declaration
+        Field-declaration -> Class-member-declaration
+        Method-declaration -> Class-member-declaration
+        Property-declaration -> Class-member-declaration
+        Event-declaration -> Class-member-declaration
+        Indexer-declaration -> Class-member-declaration
+        Operator-declaration -> Class-member-declaration
+        Constructor-declaration -> Class-member-declaration
+        Finalizer-declaration -> Class-member-declaration
+        Static-constructor-declaration -> Class-member-declaration
+        Type-declaration -> Class-member-declaration
+
+        Attributes? Constant-modifiers? "const" Type Constant-declarators ";" NL -> Constant-declaration
+
+        Constant-modifier+ -> Constant-modifiers
+
+        "new" -> Constant-modifier
+        "public" -> Constant-modifier
+        "protected" -> Constant-modifier
+        "internal" -> Constant-modifier
+        "private" -> Constant-modifier
+
+        Constant-declarator+ -> Constant-declarators
+
+        Id "=" Constant-expression -> Constant-declarator
+
+        Attributes? Field-modifiers? Type Variable-declarators ";" NL -> Field-declaration
+
+        Field-modifier+ -> Field-modifiers
+
+        "new" -> Field-modifier
+        "public" -> Field-modifier
+        "protected" -> Field-modifier
+        "internal" -> Field-modifier
+        "private" -> Field-modifier
+        "static" -> Field-modifier
+        "readonly" -> Field-modifier
+        "volatile" -> Field-modifier
+
+        Variable-declarator+ -> Variable-declarators
+
+        Id Equals-variable-initializer? -> Variable-declarator
+
+        "=" Variable-initializer -> Equals-variable-initializer
+
+        Expression -> Variable-initializer
+        Array-initializer -> Variable-initializer
+
+        Method-header NL Method-body NL -> Method-declaration
+
+        Attributes? Method-modifiers? Return-type Member-name Type-parameter-list? "(" Formal-parameter-list? ")" Type-parameter-constraints-clauses? -> Method-header
+
+        Method-modifier+ -> Method-modifiers
+
+        "new" -> Method-modifier
+        "public" -> Method-modifier
+        "protected" -> Method-modifier
+        "internal" -> Method-modifier
+        "private" -> Method-modifier
+        "static" -> Method-modifier
+        "virtual" -> Method-modifier
+        "sealed" -> Method-modifier
+        "override" -> Method-modifier
+        "abstract" -> Method-modifier
+        "extern" -> Method-modifier
+        "partial" -> Method-modifier
+
+        Type -> Return-type
+        "void" -> Return-type
+
+        Interface-type-dot? Id -> Member-name
+
+        Interface-type "." -> Interface-type-dot
+
+        Block NL -> Method-body
+        ";" NL -> Method-body
+
+        Fixed-parameters Comma-parameter-array? -> Formal-parameter-list
+
+        "," Parameter-array -> Comma-parameter-array
+
+        Fixed-parameter+ -> Fixed-parameters
+
+        Attributes? Parameter-modifier? Type Id -> Fixed-parameter
+        Parameter-array -> Fixed-parameter
+
+        "ref" -> Parameter-modifier
+        "out" -> Parameter-modifier
+
+        Attributes? "params" Array-type Id -> Parameter-array
+
+        NL Attributes? Property-modifiers? Type Member-name "{" (NL IN) Accessor-declarations EX "}" NL -> Property-declaration
+
+        Property-modifier+ -> Property-modifiers
+
+        "new" -> Property-modifier
+        "public" -> Property-modifier
+        "protected" -> Property-modifier
+        "internal" -> Property-modifier
+        "private" -> Property-modifier
+        "static" -> Property-modifier
+        "virtual" -> Property-modifier
+        "sealed" -> Property-modifier
+        "override" -> Property-modifier
+        "abstract" -> Property-modifier
+        "extern" -> Property-modifier
+
+        Get-accessor-declaration Set-accessor-declaration? -> Accessor-declarations
+        Set-accessor-declaration Get-accessor-declaration? -> Accessor-declarations
+
+        Attributes? Accessor-modifier? "get" Accessor-body -> Get-accessor-declaration
+
+        Attributes? Accessor-modifier? "set" Accessor-body -> Set-accessor-declaration
+
+        "protected" -> Accessor-modifier
+        "internal" -> Accessor-modifier
+        "private" -> Accessor-modifier
+        "protected" "internal" -> Accessor-modifier
+        "internal" "protected" -> Accessor-modifier
+
+        Block NL -> Accessor-body
+        ";" NL -> Accessor-body
+
+        Attributes? Event-modifiers? "event" Type Variable-declarators ";" NL -> Event-declaration
+        Attributes? Event-modifiers? "event" Type Member-name "{" (NL IN) Event-accessor-declarations EX "}" (NL EX) -> Event-declaration
+
+        Event-modifier+ -> Event-modifiers
+
+        "new" -> Event-modifier
+        "public" -> Event-modifier
+        "protected" -> Event-modifier
+        "internal" -> Event-modifier
+        "private" -> Event-modifier
+        "static" -> Event-modifier
+        "virtual" -> Event-modifier
+        "sealed" -> Event-modifier
+        "override" -> Event-modifier
+        "abstract" -> Event-modifier
+        "extern" -> Event-modifier
+
+        Add-accessor-declaration Remove-accessor-declaration -> Event-accessor-declarations
+        Remove-accessor-declaration Add-accessor-declaration -> Event-accessor-declarations
+
+        Attributes? "add" Block NL -> Add-accessor-declaration
+
+        Attributes? "remove" Block NL -> Remove-accessor-declaration
+
+        Attributes? Indexer-modifiers? Indexer-declarator "{" (NL IN) Accessor-declarations EX "}" NL -> Indexer-declaration
+
+        Indexer-modifier+ -> Indexer-modifiers
+
+        "new" -> Indexer-modifier
+        "public" -> Indexer-modifier
+        "protected" -> Indexer-modifier
+        "internal" -> Indexer-modifier
+        "private" -> Indexer-modifier
+        "virtual" -> Indexer-modifier
+        "sealed" -> Indexer-modifier
+        "override" -> Indexer-modifier
+        "abstract" -> Indexer-modifier
+        "extern" -> Indexer-modifier
+
+        Type Interface-type-dot? "this" "[" Formal-parameter-list "]" -> Indexer-declarator
+
+        Attributes? Operator-modifiers? Operator-declarator Operator-body -> Operator-declaration
+
+        Operator-modifier+ -> Operator-modifiers
+
+        "public" -> Operator-modifier
+        "static" -> Operator-modifier
+        "extern" -> Operator-modifier
+
+        Unary-operator-declarator -> Operator-declarator
+        Binary-operator-declarator -> Operator-declarator
+        Conversion-operator-declarator -> Operator-declarator
+
+        Type "operator" Overloadable-unary-operator "(" Type Id ")" -> Unary-operator-declarator
+
+        "+" -> Overloadable-unary-operator
+        "-" -> Overloadable-unary-operator
+        "!" -> Overloadable-unary-operator
+        "~" -> Overloadable-unary-operator
+        "++" -> Overloadable-unary-operator
+        "--" -> Overloadable-unary-operator
+        "true" -> Overloadable-unary-operator
+        "false" -> Overloadable-unary-operator
+
+        Type "operator" Overloadable-binary-operator "(" Type Id ")" -> Binary-operator-declarator
+
+        "+" -> Overloadable-binary-operator
+        "-" -> Overloadable-binary-operator
+        "*" -> Overloadable-binary-operator
+        "/" -> Overloadable-binary-operator
+        "%" -> Overloadable-binary-operator
+        "&" -> Overloadable-binary-operator
+        "|" -> Overloadable-binary-operator
+        "^" -> Overloadable-binary-operator
+        "<<" -> Overloadable-binary-operator
+        ">>" -> Overloadable-binary-operator
+        "==" -> Overloadable-binary-operator
+        "!=" -> Overloadable-binary-operator
+        ">" -> Overloadable-binary-operator
+        "<" -> Overloadable-binary-operator
+        ">=" -> Overloadable-binary-operator
+        "<=" -> Overloadable-binary-operator
+
+        "implicit" "operator" Type "(" Type Id ")" -> Conversion-operator-declarator
+        "explicit" "operator" Type "(" Type Id ")" -> Conversion-operator-declarator
+
+        Block NL -> Operator-body
+        ";" NL -> Operator-body
+
+        Attributes? Constructor-modifiers? Constructor-declarator NL Constructor-body NL -> Constructor-declaration
+
+        Constructor-modifier+ -> Constructor-modifiers
+
+        "public" -> Constructor-modifier
+        "protected" -> Constructor-modifier
+        "internal" -> Constructor-modifier
+        "private" -> Constructor-modifier
+        "extern" -> Constructor-modifier
+
+        Id "(" Formal-parameter-list? ")" Constructor-initializer? -> Constructor-declarator
+
+        ":" "base" "(" Argument-list? ")" -> Constructor-initializer
+        ":" "this" "(" Argument-list? ")" -> Constructor-initializer
+
+        Block NL -> Constructor-body
+        ";" NL -> Constructor-body
+
+        Attributes? Static-constructor-modifiers Id "(" ")" NL Static-constructor-body NL -> Static-constructor-declaration
+
+        "extern"? "static" -> Static-constructor-modifiers
+        "static" "extern"? -> Static-constructor-modifiers
+
+        Block NL -> Static-constructor-body
+        ";" NL -> Static-constructor-body
+
+        Attributes? "extern"? "~" Id "(" ")" Finalizer-body -> Finalizer-declaration
+
+        Block NL -> Finalizer-body
+        ";" NL -> Finalizer-body
+
+        Attributes? Struct-modifiers? "partial"? "struct" Id Type-parameter-list? Struct-interfaces? Type-parameter-constraints-clauses? NL Struct-body NL -> Struct-declaration
+
+        Struct-modifier+ -> Struct-modifiers
+
+        "new" -> Struct-modifier
+        "public" -> Struct-modifier
+        "proctected" -> Struct-modifier
+        "internal" -> Struct-modifier
+        "private" -> Struct-modifier
+
+        ":" Interface-type-list -> Struct-interfaces
+
+        Interface-type+ -> Interface-type-list
+
+        "{" (NL IN) Struct-member-declarations? EX "}" ";"? NL -> Struct-body
+
+        Struct-member-declaration+ -> Struct-member-declarations
+
+        Constant-declaration -> Struct-member-declaration
+        Field-declaration -> Struct-member-declaration
+        Method-declaration -> Struct-member-declaration
+        Property-declaration -> Struct-member-declaration
+        Event-declaration -> Struct-member-declaration
+        Indexer-declaration -> Struct-member-declaration
+        Operator-declaration -> Struct-member-declaration
+        Constructor-declaration -> Struct-member-declaration
+        Static-constructor-declaration -> Struct-member-declaration
+        Type-declaration -> Struct-member-declaration
+
+        "{" Variable-initializer-list? ","? "}" -> Array-initializer
+
+        Variable-initializer+ -> Variable-initializer-list
+
+        Attributes? Interface-modifiers? "partial"? "interface" Id Type-parameter-list? Interface-base? Type-parameter-constraints-clauses? NL Interface-body NL -> Interface-declaration
+
+        Interface-modifier* -> Interface-modifiers
+
+        "new" -> Interface-modifier
+        "public" -> Interface-modifier
+        "protected" -> Interface-modifier
+        "internal" -> Interface-modifier
+        "private" -> Interface-modifier
+
+        ":" Interface-type-list -> Interface-base
+
+        "{" (NL IN) Interface-member-declarations? EX "}" ";"? NL -> Interface-body
+
+        Interface-member-declaration+ -> Interface-member-declarations
+
+        Interface-method-declaration -> Interface-member-declaration
+        Interface-property-declaration -> Interface-member-declaration
+        Interface-event-declaration -> Interface-member-declaration
+        Interface-indexer-declaration -> Interface-member-declaration
+
+        Attributes? "new"? Return-type Id Type-parameter-list? "(" Formal-parameter-list? ")" Type-parameter-constraints-clauses? ";" NL -> Interface-method-declaration
+
+        Attributes? "new"? Type Id NL "{" (NL IN) Interface-accessors EX "}" NL -> Interface-property-declaration
+
+        Attributes? "get" ";" -> Interface-accessors
+        Attributes? "set" ";" -> Interface-accessors
+        Attributes? "get" ";" Attributes? "set" ";" -> Interface-accessors
+        Attributes? "set" ";" Attributes? "get" ";" -> Interface-accessors
+
+        Attributes? "new"? "event" Type Id ";" NL -> Interface-event-declaration
+
+        Attributes? "new"? Type "this" "[" Formal-parameter-list "]" "{" (NL IN) Interface-accessors EX "}" NL -> Interface-indexer-declaration
+
+        Attributes? Enum-modifiers? "enum" Id Enum-base? Enum-body NL -> Enum-declaration
+
+        ":" Integral-type -> Enum-base
+
+        "{" (NL IN) Enum-member-declarations? ","? EX "}" ";"? NL -> Enum-body
+
+        Enum-modifier+ -> Enum-modifiers
+
+        "new" -> Enum-modifier
+        "public" -> Enum-modifier
+        "protected" -> Enum-modifier
+        "internal" -> Enum-modifier
+        "private" -> Enum-modifier
+
+        Enum-member-declaration+ -> Enum-member-declarations
+
+        Attributes? Id Equals-constant-expression? -> Enum-member-declaration
+
+        "=" Constant-expression -> Equals-constant-expression
+
+        Attributes? Delegate-modifiers? "delegate" Return-type Id Type-parameter-list? "(" Formal-parameter-list? ")" Type-parameter-constraints-clauses? ";" NL -> Delegate-declaration
+
+        Delegate-modifier+ -> Delegate-modifiers
+
+        "new" -> Delegate-modifier
+        "public" -> Delegate-modifier
+        "protected" -> Delegate-modifier
+        "internal" -> Delegate-modifier
+        "private" -> Delegate-modifier
+
+        Global-attribute-sections -> Global-attributes
+
+        Global-attribute-section+ -> Global-attribute-sections
+
+        "[" Global-attribute-target-specifier Attribute-list ","? "]" -> Global-attribute-section
+
+        Global-attribute-target ":" -> Global-attribute-target-specifier
+
+        Id -> Global-attribute-target
+        Key -> Global-attribute-target
+
+        Attribute-sections -> Attributes
+
+        Attribute-section+ -> Attribute-sections
+
+        "[" Attribute-target-specifier? Attribute-list ","? "]" -> Attribute-section
+
+        Attribute-target ":" -> Attribute-target-specifier
+
+        Id -> Attribute-target
+        Key -> Attribute-target
+
+        Attribute+ -> Attribute-list
+
+        Attribute-name Attribute-arguments? -> Attribute
+
+        Type-name -> Attribute-name
+
+        "(" Attribute-argument-list ")" -> Attribute-arguments
+
+        Attribute-argument"," -> Attribute-argument-list
+
+        Positional-argument -> Attribute-argument
+        Named-argument -> Attribute-argument
+
+        Attribute-argument-expression -> Positional-argument
+
+        Id "=" Attribute-argument-expression -> Named-argument
+
+        Expression -> Attribute-argument-expression
+
+        "<" Type-parameters ">" -> Type-parameter-list
+
+        Attributes-type-parameter+ -> Type-parameters
+
+        Attributes? Type-parameter -> Attributes-type-parameter
+
+        Id -> Type-parameter
+
+        "<" Type-argument+ ">" -> Type-argument-list
+
+        Type -> Type-argument
+
+        Type-parameter-constraints-clause+ -> Type-parameter-constraints-clauses
+
+        "where" Type-parameter ":" Type-parameter-constraints -> Type-parameter-constraints-clause
+
+        Type-parameter-constraint"," -> Type-parameter-constraints
+
+        Primary-constraint -> Type-parameter-constraint
+        Secondary-constraint -> Type-parameter-constraint
+        Constructor-constraint -> Type-parameter-constraint
+
+        Class-type -> Primary-constraint
+        "class" -> Primary-constraint
+        "struct" -> Primary-constraint
+
+        Interface-type -> Secondary-constraint
+        Type-parameter -> Secondary-constraint
+
+        "new" "(" ")" -> Constructor-constraint
+
+        "unsafe" Block -> Unsafe-statement
+
+        Unmanaged-type "*"* -> Pointer-type
+        "void" "*" "*"* -> Pointer-type
+
+        Value-type -> Unmanaged-type
+        Reference-type -> Unmanaged-type
+        Type-parameter -> Unmanaged-type
+
+        "*" Unary-expression -> Pointer-indirection-expression
+
+        "->" Id Type-argument-list? -> Pointer-member-access-operator
+
+        "[" Expression "]" -> Pointer-element-access-operator
+
+        "&" Unary-expression -> Addressof-expression
+
+        "sizeof" "(" Unmanaged-type ")" -> Sizeof-expression
+
+        "fixed" "(" Pointer-type Fixed-pointer-declarators ")" Embedded-statement -> Fixed-statement
+
+        Fixed-pointer-declarator+ -> Fixed-pointer-declarators
+
+        Id "=" Fixed-pointer-initializer -> Fixed-pointer-declarator
+
+        "&" Variable-reference -> Fixed-pointer-initializer
+        Expression -> Fixed-pointer-initializer
+
+        "stackalloc" Unmanaged-type "[" Expression "]" -> Stackalloc-initializer

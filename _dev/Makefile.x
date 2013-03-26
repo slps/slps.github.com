@@ -29,6 +29,8 @@ all:
 	_dev/format zoo cpp/iso-14882-1998 cpp/iso-14882-1998
 	cp ../slps/topics/grammars/cpp/iso-n2723/grammar.bgf zoo/cpp/iso-n2723.bgf
 	_dev/format zoo cpp/iso-n2723 cpp/iso-n2723
+	cp ../slps/topics/grammars/cpp/elges-cordy/grammar.bgf zoo/cpp/elges-cordy.bgf
+	_dev/format zoo cpp/elges-cordy cpp/elges-cordy
 	cp ../slps/topics/grammars/csharp/ecma-334-1/grammar.bgf zoo/cs/csharp-ecma-334-1.bgf
 	_dev/format zoo cs/csharp-ecma-334-1 csharp/ecma-334-1
 	cp ../slps/topics/grammars/csharp/ecma-334-2/grammar.bgf zoo/cs/csharp-ecma-334-2.bgf
@@ -49,6 +51,10 @@ all:
 	_dev/format zoo cs/csharp-iso-23270-2006 csharp/iso-23270-2006
 	cp ../slps/topics/grammars/csharp/msft-ls-3.0/grammar.bgf zoo/cs/csharp-msft-ls-3.0.bgf
 	_dev/format zoo cs/csharp-msft-ls-3.0 csharp/msft-ls-3.0
+	cp ../slps/topics/grammars/csharp/cordy/grammar.bgf zoo/cs/csharp-cordy.bgf
+	_dev/format zoo cs/csharp-cordy csharp/cordy
+	cp ../slps/topics/grammars/csharp/antoniol/grammar.bgf zoo/cs/csharp-antoniol.bgf
+	_dev/format zoo cs/csharp-antoniol csharp/antoniol
 	cp ../slps/topics/grammars/csharp/msft-ls-4.0/grammar.bgf zoo/cs/csharp-msft-ls-4.0.bgf
 	_dev/format zoo cs/csharp-msft-ls-4.0 csharp/msft-ls-4.0
 	cp ../slps/topics/grammars/dart/google/grammar.bgf zoo/dart/google.bgf
@@ -61,8 +67,12 @@ all:
 	_dev/format zoo eiffel/bezault eiffel/bezault
 	cp ../slps/topics/grammars/eiffel/iso-25436-2006/grammar.bgf zoo/eiffel/iso-25436-2006.bgf
 	_dev/format zoo eiffel/iso-25436-2006 eiffel/iso-25436-2006
+	cp ../slps/topics/grammars/eiffel/cordy/grammar.bgf zoo/eiffel/cordy.bgf
+	_dev/format zoo eiffel/cordy eiffel/cordy
 	cp ../slps/topics/grammars/fortran/derricks/grammar.bgf zoo/fortran/derricks.bgf
 	_dev/format zoo fortran/derricks fortran/derricks
+	cp ../slps/topics/grammars/fortran/waite-cordy/grammar.bgf zoo/fortran/waite-cordy.bgf
+	_dev/format zoo fortran/waite-cordy fortran/waite-cordy
 	cp ../slps/topics/grammars/java-1/jls-read/grammar.bgf zoo/java/java-1-jls-read.bgf
 	_dev/format zoo java/java-1-jls-read java-1/jls-read
 	cp ../slps/topics/grammars/java-1/jls-impl/grammar.bgf zoo/java/java-1-jls-impl.bgf
@@ -87,6 +97,12 @@ all:
 	_dev/format zoo modula/src-052 modula/src-052
 	cp ../slps/topics/grammars/modula/sdf/grammar.bgf zoo/modula/sdf.bgf
 	_dev/format zoo modula/sdf modula/sdf
+	cp ../slps/topics/grammars/pascal/delphi/grammar.bgf zoo/pascal/delphi.bgf
+	_dev/format zoo pascal/delphi pascal/delphi
+	cp ../slps/topics/grammars/pascal/delphipp/grammar.bgf zoo/pascal/delphipp.bgf
+	_dev/format zoo pascal/delphipp pascal/delphipp
+	cp ../slps/topics/grammars/pascal/object/grammar.bgf zoo/pascal/object.bgf
+	_dev/format zoo pascal/object pascal/object
 	cp ../slps/topics/grammars/w3c/xpath1/grammar.bgf zoo/xpath/w3c-xpath1.bgf
 	_dev/format zoo xpath/w3c-xpath1 w3c/xpath1
 	cp ../slps/topics/grammars/wiki/mediawiki-bnf/grammar.bgf zoo/wiki/mediawiki-bnf.bgf

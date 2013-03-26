@@ -1,0 +1,575 @@
+module Main
+
+exports
+  sorts
+        Label-id Builtinid Name Namespace Qualified-id Filenamelit Colon Equal End-struct Semi-calling-spec Calling-spec Hint-directive Ctrlchar Delphi-file File-end Program-file Package-file Unit-file Program-decl Package-decl Unit-decl Program-file-list Requires-clause Contains-clause Uses-clause Uses-item In-filename Initialization-kw Implementation-kw Finalization-kw Interface-kw Interface-section Implementation-section Initialization-section Finalization-section Intfdecl-block Impldecl-block Nested-decl-block Identlist Colon-id Intfdecl-section Impldecl-section Nested-decl-section Label-decl Exports-section Exports-entry Resource-section Const-section Constant-decl Constant-spec Const-init Typed-const Array-constant Record-field-constant Record-constant Record-field-constant-semi Var-section Var-keyword Var-decl Var-init Absolute-init Type-section Type-decl Type-spec Real-type Integer-type Char-type Boolean-type Variant-type String-type Enumerated-type Enum-spec Subrange-type Dotdot-expr Ordinal-type Simple-type Struct-type Of-basetype Of-object Of-const Set-type File-type Pointer-type Procedural-type Colon-type Array-type Array-index-list Array-index Procedure-id Procedure-impl-decl External-directive External-name Semi-directive Directive Procedure-intf-decl Procedure-signature Procedure-external-decl Procedure-keyword Formal-parameters Semi-formal-parameter Formal-parameter Parm-qual Parameter Parameter-type Param-init Procedure-body-semi Procedure-body Heritage-list Class-keyword Interface-keyword Guid-decl Class-reference-type Class-type Class-body Interface-body Interface-type Visibility-default Visibility-block Method-decl Method-deleg Visibility Variant-section Id-colon Record-variant Class-member Property-decl Defaultarray-spec Prop-indexes Prop-index-decl Prop-index-modifier Prop-index-name Prop-specifier Dispid-spec Index-spec Accessor-spec Accessor-verb Stored-spec Default-spec Implements-spec Expr Expression Term Infix-expr Atom-expr Sign Prefix-opr Postfix-opr Infix-opr Set-constructor Arguments Array-subscript Semi-argm Semi-set-element Semi-expression Set-element Argm Argmfmt Labelid-colon Statement-list Statement-semi Statement Unlabeled-stm Assign-stm Call-stm Jump-stm Goto-stm Sequence-stm Loop-stm Selection-stm With-stm Try-finally-stm Try-except-stm Nested-stm Else-stm Case-selector Case-label Case-else To-or-downto Exception-block Exception-handler-list Exception-handler-semi Exception-handler Exception-var Raise-stm At-address 
+  context-free syntax
+        Anynumber -> Label-id
+        Id -> Label-id
+
+        "string" -> Builtinid
+        "file" -> Builtinid
+        "set" -> Builtinid
+
+        Builtinid -> Name
+        Id -> Name
+
+        Id "." -> Namespace
+
+        Namespace* Name SPON -> Qualified-id
+
+        Charlit -> Filenamelit
+        Stringlit -> Filenamelit
+        Qualified-id -> Filenamelit
+
+        SPOFF ":" SPON -> Colon
+
+        "=" -> Equal
+
+        "end" -> End-struct
+
+        ";"? Calling-spec -> Semi-calling-spec
+
+        "pascal" -> Calling-spec
+        "safecall" -> Calling-spec
+        "stdcall" -> Calling-spec
+        "cdecl" -> Calling-spec
+        "register" -> Calling-spec
+        "local" -> Calling-spec
+
+        "platform" -> Hint-directive
+        "deprecated" -> Hint-directive
+        "library" -> Hint-directive
+
+        "^'A" -> Ctrlchar
+        "^'B" -> Ctrlchar
+        "^'C" -> Ctrlchar
+        "^'D" -> Ctrlchar
+        "^'E" -> Ctrlchar
+        "^'F" -> Ctrlchar
+        "^'G" -> Ctrlchar
+        "^'H" -> Ctrlchar
+        "^'I" -> Ctrlchar
+        "^'J" -> Ctrlchar
+        "^'K" -> Ctrlchar
+        "^'L" -> Ctrlchar
+        "^'M" -> Ctrlchar
+        "^'N" -> Ctrlchar
+        "^'O" -> Ctrlchar
+        "^'P" -> Ctrlchar
+        "^'Q" -> Ctrlchar
+        "^'R" -> Ctrlchar
+        "^'S" -> Ctrlchar
+        "^'T" -> Ctrlchar
+        "^'U" -> Ctrlchar
+        "^'V" -> Ctrlchar
+        "^'W" -> Ctrlchar
+        "^'X" -> Ctrlchar
+        "^'Y" -> Ctrlchar
+        "^'Z" -> Ctrlchar
+
+        Program-file -> Delphi-file
+        Package-file -> Delphi-file
+        Unit-file -> Delphi-file
+
+        "." -> File-end
+
+        Program-decl Uses-clause? Impldecl-block Procedure-body File-end -> Program-file
+
+        Package-decl Requires-clause? Contains-clause? End-struct File-end -> Package-file
+
+        Unit-decl Interface-section Implementation-section Initialization-section? Finalization-section? End-struct File-end -> Unit-file
+
+        "program" Qualified-id Program-file-list? ";" NL -> Program-decl
+        "library" Qualified-id ";" NL -> Program-decl
+
+        "package" Qualified-id ";" NL -> Package-decl
+
+        "unit" Qualified-id Hint-directive? ";" NL -> Unit-decl
+
+        "(" Id"," ")" -> Program-file-list
+
+        "requires" Qualified-id"," ";" NL -> Requires-clause
+
+        "contains" Uses-item"," ";" NL -> Contains-clause
+
+        "uses" (NL IN) Uses-item"," ";" (EX NL) -> Uses-clause
+
+        Qualified-id In-filename? -> Uses-item
+
+        "in" Filenamelit -> In-filename
+
+        "initialization" -> Initialization-kw
+        "begin" -> Initialization-kw
+
+        "implementation" NL -> Implementation-kw
+
+        "finalization" -> Finalization-kw
+
+        "interface" NL -> Interface-kw
+
+        Interface-kw Uses-clause? Intfdecl-block -> Interface-section
+
+        Implementation-kw Uses-clause? Impldecl-block -> Implementation-section
+
+        Initialization-kw NL Statement-list -> Initialization-section
+
+        Finalization-kw Statement-list -> Finalization-section
+
+        Intfdecl-section* -> Intfdecl-block
+
+        Impldecl-section* -> Impldecl-block
+
+        Nested-decl-section* -> Nested-decl-block
+
+        Id Colon-id* -> Identlist
+
+        "," NL Id -> Colon-id
+
+        Const-section -> Intfdecl-section
+        Type-section -> Intfdecl-section
+        Var-section -> Intfdecl-section
+        Label-decl -> Intfdecl-section
+        Procedure-intf-decl -> Intfdecl-section
+        Procedure-external-decl -> Intfdecl-section
+        Resource-section -> Intfdecl-section
+        Exports-section -> Intfdecl-section
+
+        Const-section -> Impldecl-section
+        Type-section -> Impldecl-section
+        Var-section -> Impldecl-section
+        Label-decl -> Impldecl-section
+        Procedure-impl-decl -> Impldecl-section
+        Procedure-external-decl -> Impldecl-section
+        Resource-section -> Impldecl-section
+        Exports-section -> Impldecl-section
+
+        Const-section -> Nested-decl-section
+        Type-section -> Nested-decl-section
+        Var-section -> Nested-decl-section
+        Label-decl -> Nested-decl-section
+        Procedure-impl-decl -> Nested-decl-section
+
+        "label" Label-id"," ";" NL -> Label-decl
+
+        "exports" Exports-entry"," ";" NL -> Exports-section
+
+        Procedure-id Formal-parameters? External-name? -> Exports-entry
+
+        "resourcestring" Constant-decl+ -> Resource-section
+
+        "const" (NL IN) Constant-decl+ EX -> Const-section
+
+        Identlist Constant-spec Hint-directive? ";" NL -> Constant-decl
+
+        Equal Expr -> Constant-spec
+        Colon-type Const-init -> Constant-spec
+
+        Equal Typed-const -> Const-init
+
+        Array-constant -> Typed-const
+        Record-constant -> Typed-const
+        Expr -> Typed-const
+
+        "(" Typed-const"," ")" -> Array-constant
+
+        Id Colon Typed-const -> Record-field-constant
+
+        "(" Record-field-constant-semi* Record-field-constant? ")" -> Record-constant
+
+        Record-field-constant ";" NL -> Record-field-constant-semi
+
+        Var-keyword (NL IN) Var-decl+ EX -> Var-section
+
+        "var" -> Var-keyword
+        "threadvar" -> Var-keyword
+
+        Identlist Colon-type Hint-directive? Var-init? ";" NL -> Var-decl
+
+        Absolute-init -> Var-init
+        Const-init -> Var-init
+
+        "absolute" Expr -> Absolute-init
+
+        "type" (NL IN) Type-decl+ EX -> Type-section
+
+        Identlist Equal "type"? Type-spec Hint-directive? ";" NL -> Type-decl
+
+        Simple-type -> Type-spec
+        String-type -> Type-spec
+        Struct-type -> Type-spec
+        Pointer-type -> Type-spec
+        Procedural-type -> Type-spec
+        Variant-type -> Type-spec
+        Class-reference-type -> Type-spec
+        Class-type -> Type-spec
+        Interface-type -> Type-spec
+        Qualified-id -> Type-spec
+
+        "real" -> Real-type
+        "real48" -> Real-type
+        "single" -> Real-type
+        "double" -> Real-type
+        "extended" -> Real-type
+        "comp" -> Real-type
+        "currency" -> Real-type
+
+        "shortint" -> Integer-type
+        "smallint" -> Integer-type
+        "longint" -> Integer-type
+        "int64" -> Integer-type
+        "word" -> Integer-type
+        "byte" -> Integer-type
+        "longword" -> Integer-type
+        "integer" -> Integer-type
+        "cardinal" -> Integer-type
+
+        "char" -> Char-type
+        "ansichar" -> Char-type
+        "widechar" -> Char-type
+
+        "boolean" -> Boolean-type
+        "bytebool" -> Boolean-type
+        "wordbool" -> Boolean-type
+        "longbool" -> Boolean-type
+
+        "variant" -> Variant-type
+        "olevariant" -> Variant-type
+
+        "string" -> String-type
+        "shortstring" -> String-type
+        "ansistring" -> String-type
+        "widestring" -> String-type
+        "string" "[" Expression "]" -> String-type
+
+        "(" Enum-spec+ ")" -> Enumerated-type
+
+        Id Param-init? -> Enum-spec
+
+        Expression SPOFF Dotdot-expr SPON -> Subrange-type
+
+        ".." Expression -> Dotdot-expr
+
+        Integer-type -> Ordinal-type
+        Char-type -> Ordinal-type
+        Enumerated-type -> Ordinal-type
+        Boolean-type -> Ordinal-type
+        Subrange-type -> Ordinal-type
+
+        Ordinal-type -> Simple-type
+        Real-type -> Simple-type
+
+        Set-type -> Struct-type
+        Array-type -> Struct-type
+        File-type -> Struct-type
+
+        "of" Type-spec -> Of-basetype
+
+        "of" "object" -> Of-object
+
+        "of" "const" -> Of-const
+
+        "set" Of-basetype -> Set-type
+
+        "file" Of-basetype? -> File-type
+
+        "^" SPOFF Qualified-id SPON -> Pointer-type
+
+        Procedure-intf-decl Of-object? Semi-calling-spec* -> Procedural-type
+
+        Colon Type-spec -> Colon-type
+
+        "array" Of-const -> Array-type
+        "packed"? "array" Array-index-list* Of-basetype -> Array-type
+
+        "[" Array-index"," "]" -> Array-index-list
+
+        Ordinal-type -> Array-index
+        Qualified-id -> Array-index
+
+        Namespace? Id -> Procedure-id
+
+        NL Procedure-intf-decl Nested-decl-block Procedure-body-semi -> Procedure-impl-decl
+
+        "external" Expr? External-name? -> External-directive
+
+        "name" Expr -> External-name
+        "index" Expr -> External-name
+
+        ";"? Directive -> Semi-directive
+
+        "dynamic" -> Directive
+        "virtual" -> Directive
+        "abstract" -> Directive
+        "message" Qualified-id? -> Directive
+        "dispid" Sign? Anynumber -> Directive
+        "override" -> Directive
+        "overload" -> Directive
+        "reintroduce" -> Directive
+        "static" -> Directive
+        "assembler" -> Directive
+        "far" -> Directive
+        "export" -> Directive
+        Hint-directive -> Directive
+        Calling-spec -> Directive
+
+        Procedure-signature Semi-directive* ";"? NL -> Procedure-intf-decl
+
+        "class"? Procedure-keyword Procedure-id? Formal-parameters? Colon-type? -> Procedure-signature
+
+        Procedure-intf-decl External-directive Semi-calling-spec? ";"? NL -> Procedure-external-decl
+
+        "function" -> Procedure-keyword
+        "procedure" -> Procedure-keyword
+        "constructor" -> Procedure-keyword
+        "destructor" -> Procedure-keyword
+
+        "(" Formal-parameter Semi-formal-parameter* ")" -> Formal-parameters
+
+        ";" Formal-parameter -> Semi-formal-parameter
+
+        Parm-qual? Parameter -> Formal-parameter
+
+        "var" -> Parm-qual
+        "const" -> Parm-qual
+        "out" -> Parm-qual
+
+        Id"," Parameter-type? -> Parameter
+
+        Colon-type Param-init? -> Parameter-type
+
+        Equal Expr -> Param-init
+
+        Procedure-body ";" NL -> Procedure-body-semi
+
+        Sequence-stm -> Procedure-body
+        "forward" -> Procedure-body
+
+        "(" Qualified-id"," ")" -> Heritage-list
+        "helper" "for" Id -> Heritage-list
+
+        "class" -> Class-keyword
+        "record" -> Class-keyword
+        "object" -> Class-keyword
+
+        "interface" -> Interface-keyword
+        "dispinterface" -> Interface-keyword
+
+        "[" Expr "]" -> Guid-decl
+
+        "class" "of" Qualified-id -> Class-reference-type
+
+        "packed"? Class-keyword Heritage-list? NL Class-body? -> Class-type
+
+        Visibility-default Visibility-block* End-struct -> Class-body
+
+        Visibility-default End-struct -> Interface-body
+
+        Interface-keyword Heritage-list? Guid-decl? Interface-body? -> Interface-type
+
+        IN Class-member* EX -> Visibility-default
+
+        Visibility (NL IN) Class-member* EX -> Visibility-block
+
+        Procedure-signature Method-deleg -> Method-decl
+        Procedure-signature ";" Dispid-spec ";" -> Method-decl
+        Procedure-intf-decl -> Method-decl
+
+        Equal Qualified-id ";" NL -> Method-deleg
+
+        "public" -> Visibility
+        "protected" -> Visibility
+        "strict"? "private" -> Visibility
+        "published" -> Visibility
+        "automated" -> Visibility
+
+        "case" Id-colon? Type-spec "of" Record-variant+ -> Variant-section
+
+        Id Colon -> Id-colon
+
+        Expr+ Colon "(" Visibility-default ")" ";"? NL -> Record-variant
+
+        Var-decl -> Class-member
+        Method-decl -> Class-member
+        Property-decl -> Class-member
+        Variant-section -> Class-member
+
+        "property" Id Prop-indexes? Colon-type? Prop-specifier* Defaultarray-spec? ";" NL -> Property-decl
+
+        ";" "default" -> Defaultarray-spec
+
+        "[" Prop-index-decl+ "]" -> Prop-indexes
+
+        Prop-index-name+ Colon-type ";"? -> Prop-index-decl
+
+        "const" -> Prop-index-modifier
+        "var" -> Prop-index-modifier
+
+        Prop-index-modifier? Qualified-id -> Prop-index-name
+
+        Index-spec -> Prop-specifier
+        Accessor-spec -> Prop-specifier
+        Stored-spec -> Prop-specifier
+        Default-spec -> Prop-specifier
+        Implements-spec -> Prop-specifier
+        Dispid-spec -> Prop-specifier
+
+        "dispid" SP Expr -> Dispid-spec
+
+        "index" SP Expr -> Index-spec
+
+        "readonly" -> Accessor-spec
+        "writeonly" -> Accessor-spec
+        Accessor-verb Qualified-id -> Accessor-spec
+
+        "read" -> Accessor-verb
+        "write" -> Accessor-verb
+
+        "stored" SP Expr -> Stored-spec
+
+        "default" SP Expr -> Default-spec
+        "nodefault" -> Default-spec
+
+        "implements" Qualified-id"," -> Implements-spec
+
+        SP SPOFF Expression SPON -> Expr
+
+        Term Infix-expr* -> Expression
+
+        Prefix-opr* Atom-expr Postfix-opr* -> Term
+
+        SP Infix-opr SP Term -> Infix-expr
+
+        Charlit -> Atom-expr
+        Anynumber -> Atom-expr
+        Ctrlchar -> Atom-expr
+        "nil" -> Atom-expr
+        "(" Expression ")" -> Atom-expr
+        Set-constructor -> Atom-expr
+        Qualified-id -> Atom-expr
+
+        "+" -> Sign
+        "-" -> Sign
+
+        "not" SP -> Prefix-opr
+        "inherited" SP -> Prefix-opr
+        "@" -> Prefix-opr
+        Sign -> Prefix-opr
+
+        Arguments -> Postfix-opr
+        Array-subscript -> Postfix-opr
+        "." Id -> Postfix-opr
+        "^" -> Postfix-opr
+
+        ">" -> Infix-opr
+        "<" -> Infix-opr
+        "<=" -> Infix-opr
+        ">=" -> Infix-opr
+        "<>" -> Infix-opr
+        "=" -> Infix-opr
+        "in" -> Infix-opr
+        "is" -> Infix-opr
+        "as" -> Infix-opr
+        "+" -> Infix-opr
+        "-" -> Infix-opr
+        "or" -> Infix-opr
+        "xor" -> Infix-opr
+        "*" -> Infix-opr
+        "/" -> Infix-opr
+        "div" -> Infix-opr
+        "mod" -> Infix-opr
+        "and" -> Infix-opr
+        "shl" -> Infix-opr
+        "shr" -> Infix-opr
+        "^" -> Infix-opr
+
+        "[" Set-element? Semi-set-element* "]" -> Set-constructor
+
+        "(" Argm? Semi-argm* ")" -> Arguments
+
+        "[" Expression? Semi-expression* "]" -> Array-subscript
+
+        "," SP Argm -> Semi-argm
+
+        "," SP Set-element -> Semi-set-element
+
+        "," SP Expression -> Semi-expression
+
+        Expression Dotdot-expr? -> Set-element
+
+        Expression Argmfmt? Argmfmt? -> Argm
+
+        ":" Anynumber -> Argmfmt
+
+        Label-id Colon -> Labelid-colon
+
+        IN Statement-semi* Statement? EX -> Statement-list
+
+        Statement? ";" NL -> Statement-semi
+
+        Labelid-colon? Unlabeled-stm -> Statement
+
+        Sequence-stm -> Unlabeled-stm
+        Loop-stm -> Unlabeled-stm
+        With-stm -> Unlabeled-stm
+        Try-finally-stm -> Unlabeled-stm
+        Try-except-stm -> Unlabeled-stm
+        Selection-stm -> Unlabeled-stm
+        Jump-stm -> Unlabeled-stm
+        Assign-stm -> Unlabeled-stm
+        Call-stm -> Unlabeled-stm
+
+        Expr ":=" Expr -> Assign-stm
+
+        Expr -> Call-stm
+        "inherited" -> Call-stm
+
+        Goto-stm -> Jump-stm
+        Raise-stm -> Jump-stm
+
+        "goto" Label-id -> Goto-stm
+
+        "begin" NL Statement-list End-struct -> Sequence-stm
+
+        "repeat" Statement-list "until" Expr -> Loop-stm
+        "while" Expr "do" Nested-stm -> Loop-stm
+        "for" Id ":=" Expr To-or-downto Expr "do" Nested-stm -> Loop-stm
+        "for" Id "in" Id "do" Nested-stm -> Loop-stm
+
+        "if" Expr "then" Nested-stm Else-stm? -> Selection-stm
+        "case" Expr "of" Case-selector* Case-else? End-struct -> Selection-stm
+
+        "with" Expr+ "do" Nested-stm -> With-stm
+
+        "try" NL Statement-list "finally" NL Statement-list End-struct -> Try-finally-stm
+
+        "try" NL Statement-list "except" NL Exception-block End-struct -> Try-except-stm
+
+        Sequence-stm -> Nested-stm
+        (NL IN) Statement? EX -> Nested-stm
+
+        NL "else" Nested-stm -> Else-stm
+
+        Case-label"," Colon Nested-stm ";"? -> Case-selector
+
+        Expr Dotdot-expr? -> Case-label
+
+        "else" Statement-list -> Case-else
+
+        "to" -> To-or-downto
+        "downto" -> To-or-downto
+
+        Exception-handler-list Case-else? -> Exception-block
+        Statement-list -> Exception-block
+
+        Exception-handler-semi* Exception-handler? -> Exception-handler-list
+
+        Exception-handler ";" NL -> Exception-handler-semi
+
+        "on" Exception-var? Type-spec "do" Nested-stm -> Exception-handler
+
+        Id Colon -> Exception-var
+
+        "raise" Expr? At-address? -> Raise-stm
+
+        "at" Expr -> At-address

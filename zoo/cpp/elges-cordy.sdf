@@ -1,0 +1,522 @@
+module Main
+
+exports
+  sorts
+        Program Declaration-list Declaration Asm-declaration Class-definition Storage-class-specifier Class-specifier Class-head Class-key Base-spec Base-list Base-specifier Access-specifier Member Access-specifier-colon Member-declaration Member-declarator-list Member-declarator Function-definition Function-declarator Function-body Ctor-initializer Mem-initializer-list Mem-initializer Namespace-definition Qualified-namespace-spec Nested-name-spec Class-or-namespace-name Namespace-name Template-declaration Template-parameter-list Template-parameter Type-parameter Linkage-specification Exception-specification Type-list Using-declaration Declarator-list Init-declarator Declarator Declared-item Declarator-extension Parenthesized-parameter-declaration-list Pointer-operator Stars Const-volatile-qualifier-list Const-volatile-qualifier Declared-name Type-name Abstract-declarator Abstract-extension Parameter-declaration-list Comma-dotdotdot Parameter-declaration Parameter-declarator Equal-expression Initializer Initial-value Initializer-list Initializer-element Decl-specifier Decl-specifiers Function-specifier Type-specifier Type-specifiers Simple-type-name Template-class-name Template-arguments Template-argument-list Template-argument Non-gt-binary-expression Non-gt-binary-operation Non-gt-binary-operator Elaborated-type-specifier Enum-specifier Enum-list Enumerator Equal-constant-expression Constant-expression Conversion-function-name Conversion-type-name Operator-function-name Operator Statement Unlabeled-statement Try-block Handler-list Handler Exception-declaration Exception-declarator Label Expression-statement Null-statement Compound-statement Statement-list Selection-statement Else-statement Iteration-statement For-init-statement For-body Jump-statement Declaration-statement Preprocessor File-identifier Filename Dot-slash-identifier Expression Assignment-expression Assignment-operator Conditional-expression Conditional-operation Binary-expression Binary-operation Binary-operator Cast-expression Unary-expression Throw-expression Unary-operator Allocation-expression Placement Allocation-type-name Allocation-declarator Allocation-array-declarator Deallocation-expression Postfix-expression Postfix-extension Expression-list Primary-expression Name Class-name Qualified-name Class-component Literal String-constant NL-stringlit Character-constant Number-constant 
+  context-free syntax
+        Declaration-list -> Program
+
+        Declaration* -> Declaration-list
+
+        Asm-declaration -> Declaration
+        Class-definition -> Declaration
+        Function-definition -> Declaration
+        Namespace-definition -> Declaration
+        Template-declaration -> Declaration
+        Linkage-specification -> Declaration
+        Exception-specification -> Declaration
+        Using-declaration -> Declaration
+        Decl-specifiers? Declarator-list ";" NL -> Declaration
+        Decl-specifiers ";" NL -> Declaration
+        ";" NL -> Declaration
+        Preprocessor NL -> Declaration
+
+        "asm" "(" String-constant ")" ";" NL -> Asm-declaration
+
+        NL Storage-class-specifier* Class-specifier Declarator-list? ";" (NL NL) -> Class-definition
+
+        "auto" -> Storage-class-specifier
+        "register" -> Storage-class-specifier
+        "static" -> Storage-class-specifier
+        "extern" -> Storage-class-specifier
+
+        Class-head "{" (NL IN) Member* EX "}" -> Class-specifier
+
+        Class-key Id? Base-spec? -> Class-head
+        Class-key Nested-name-spec Id Base-spec? -> Class-head
+        Class-key Class-name Base-spec? -> Class-head
+
+        "class" -> Class-key
+        "struct" -> Class-key
+        "union" -> Class-key
+
+        ":" Base-list -> Base-spec
+
+        Base-specifier ","? Base-specifier"," -> Base-list
+
+        "::"? Nested-name-spec? Class-name -> Base-specifier
+        "virtual" Access-specifier? "::"? Nested-name-spec? Class-name -> Base-specifier
+        Access-specifier "virtual"? "::"? Nested-name-spec? Class-name -> Base-specifier
+
+        "private" -> Access-specifier
+        "protected" -> Access-specifier
+        "public" -> Access-specifier
+
+        Access-specifier-colon? Member-declaration -> Member
+
+        EX-2 NL Access-specifier SPOFF ":" SPON IN-2 NL -> Access-specifier-colon
+
+        Function-definition ";"? -> Member-declaration
+        Qualified-name ";" NL -> Member-declaration
+        Using-declaration -> Member-declaration
+        Decl-specifiers? Member-declarator-list ";" NL -> Member-declaration
+        Decl-specifiers ";" NL -> Member-declaration
+        ";" NL -> Member-declaration
+        Preprocessor NL -> Member-declaration
+
+        Member-declarator+ -> Member-declarator-list
+
+        Declarator Initializer? -> Member-declarator
+        Id? SPOFF ":" SPON Constant-expression -> Member-declarator
+
+        NL Decl-specifiers? Function-declarator Ctor-initializer? Exception-specification? Function-body -> Function-definition
+
+        Pointer-operator* Declared-item Declarator-extension+ -> Function-declarator
+
+        NL Compound-statement ";"? NL -> Function-body
+        "try" Ctor-initializer? NL Compound-statement ";"? NL Handler-list -> Function-body
+
+        SPOFF ":" SPON Mem-initializer-list -> Ctor-initializer
+
+        Mem-initializer+ -> Mem-initializer-list
+
+        "::"? Nested-name-spec? Class-name "(" Expression-list? ")" -> Mem-initializer
+
+        "namespace" Id? "{" (NL IN) Declaration-list? EX "}" (NL NL) -> Namespace-definition
+        "namespace" Id "=" Qualified-namespace-spec -> Namespace-definition
+
+        "::"? Nested-name-spec? Class-or-namespace-name -> Qualified-namespace-spec
+
+        Class-or-namespace-name "::" Nested-name-spec? -> Nested-name-spec
+
+        Class-name -> Class-or-namespace-name
+        Namespace-name -> Class-or-namespace-name
+
+        Id -> Namespace-name
+
+        "template" "<" Template-parameter-list ">" Declaration -> Template-declaration
+
+        Template-parameter -> Template-parameter-list
+        Template-parameter-list "," Template-parameter -> Template-parameter-list
+
+        Type-parameter -> Template-parameter
+        Parameter-declaration -> Template-parameter
+
+        "class" Id -> Type-parameter
+
+        NL "extern" Stringlit "{" (NL IN) Declaration-list EX "}" ";"? (NL NL) -> Linkage-specification
+        "extern" Stringlit Declaration -> Linkage-specification
+
+        "throw" "(" Type-list? ")" -> Exception-specification
+
+        Type-name -> Type-list
+        Type-list "," Type-name -> Type-list
+
+        "using" "::"? Nested-name-spec? Name ";" -> Using-declaration
+        "using" "namespace" "::"? Nested-name-spec? Id ";" -> Using-declaration
+
+        Init-declarator+ -> Declarator-list
+
+        Declarator Initializer? -> Init-declarator
+
+        Pointer-operator* Declared-item Declarator-extension* -> Declarator
+
+        Declared-name -> Declared-item
+        "(" Declarator ")" -> Declared-item
+
+        Parenthesized-parameter-declaration-list Const-volatile-qualifier-list? -> Declarator-extension
+        "[" Constant-expression? "]" -> Declarator-extension
+
+        "(" Parameter-declaration-list ")" -> Parenthesized-parameter-declaration-list
+        "(" Parenthesized-parameter-declaration-list ")" -> Parenthesized-parameter-declaration-list
+
+        Stars Const-volatile-qualifier-list? -> Pointer-operator
+        "&" Const-volatile-qualifier-list? -> Pointer-operator
+        Id "::" Stars Const-volatile-qualifier-list? -> Pointer-operator
+        "::"? Nested-name-spec "*" Const-volatile-qualifier-list -> Pointer-operator
+
+        "*" -> Stars
+        "**" -> Stars
+
+        Const-volatile-qualifier+ -> Const-volatile-qualifier-list
+
+        "const" -> Const-volatile-qualifier
+        "volatile" -> Const-volatile-qualifier
+
+        Nested-name-spec? Name -> Declared-name
+        "~" SPOFF Id SPON -> Declared-name
+
+        Type-specifiers Abstract-declarator? -> Type-name
+
+        Abstract-extension+ -> Abstract-declarator
+        "(" Abstract-declarator ")" Abstract-extension* -> Abstract-declarator
+
+        "(" Parameter-declaration-list ")" Const-volatile-qualifier-list? -> Abstract-extension
+        "[" Constant-expression? "]" -> Abstract-extension
+        Pointer-operator -> Abstract-extension
+        "(" Abstract-declarator ")" -> Abstract-extension
+
+        Parameter-declaration"," Comma-dotdotdot? -> Parameter-declaration-list
+
+        ","? "..." -> Comma-dotdotdot
+
+        Decl-specifiers Parameter-declarator Equal-expression? -> Parameter-declaration
+
+        Declarator -> Parameter-declarator
+        Abstract-declarator? -> Parameter-declarator
+
+        "=" Expression -> Equal-expression
+
+        "=" Initial-value -> Initializer
+        "(" Expression-list? ")" -> Initializer
+
+        Assignment-expression -> Initial-value
+        "{" IN Initializer-list ","? EX "}" -> Initial-value
+
+        Initializer-element+ -> Initializer-list
+
+        Assignment-expression -> Initializer-element
+        NL "{" IN Initializer-list ","? EX "}" -> Initializer-element
+
+        Storage-class-specifier -> Decl-specifier
+        Type-specifier -> Decl-specifier
+        Function-specifier -> Decl-specifier
+        "friend" -> Decl-specifier
+        "typedef" -> Decl-specifier
+
+        Decl-specifier+ -> Decl-specifiers
+
+        "inline" -> Function-specifier
+        "virtual" -> Function-specifier
+
+        Simple-type-name -> Type-specifier
+        Class-specifier -> Type-specifier
+        Enum-specifier -> Type-specifier
+        Elaborated-type-specifier -> Type-specifier
+        Const-volatile-qualifier -> Type-specifier
+
+        Type-specifier+ -> Type-specifiers
+
+        "char" -> Simple-type-name
+        "bool" -> Simple-type-name
+        "short" -> Simple-type-name
+        "int" -> Simple-type-name
+        "long" -> Simple-type-name
+        "signed" -> Simple-type-name
+        "unsigned" -> Simple-type-name
+        "float" -> Simple-type-name
+        "double" -> Simple-type-name
+        "void" -> Simple-type-name
+        "::"? Nested-name-spec? Id -> Simple-type-name
+        "::"? Nested-name-spec? Template-class-name -> Simple-type-name
+
+        Id Template-arguments -> Template-class-name
+
+        "<" Template-argument-list ">" -> Template-arguments
+
+        Template-argument -> Template-argument-list
+        Template-argument-list "," Template-argument -> Template-argument-list
+
+        Type-name -> Template-argument
+        Non-gt-binary-expression -> Template-argument
+
+        Cast-expression Non-gt-binary-operation* -> Non-gt-binary-expression
+
+        Non-gt-binary-operator Cast-expression -> Non-gt-binary-operation
+
+        "||" -> Non-gt-binary-operator
+        "&&" -> Non-gt-binary-operator
+        "|" -> Non-gt-binary-operator
+        "^" -> Non-gt-binary-operator
+        "&" -> Non-gt-binary-operator
+        "==" -> Non-gt-binary-operator
+        "!=" -> Non-gt-binary-operator
+        "<" -> Non-gt-binary-operator
+        "<=" -> Non-gt-binary-operator
+        ">=" -> Non-gt-binary-operator
+        "<<" -> Non-gt-binary-operator
+        ">>" -> Non-gt-binary-operator
+        "+" -> Non-gt-binary-operator
+        "-" -> Non-gt-binary-operator
+        "*" -> Non-gt-binary-operator
+        "/" -> Non-gt-binary-operator
+        "%" -> Non-gt-binary-operator
+        ".*" -> Non-gt-binary-operator
+        "->*" -> Non-gt-binary-operator
+
+        Class-key "::"? Nested-name-spec? Class-name -> Elaborated-type-specifier
+        "enum" "::"? Nested-name-spec? Id -> Elaborated-type-specifier
+
+        "enum" Id? "{" Enum-list? "}" -> Enum-specifier
+
+        Enumerator+ ","? -> Enum-list
+
+        Id Equal-constant-expression? -> Enumerator
+
+        "=" Constant-expression -> Equal-constant-expression
+
+        Conditional-expression -> Constant-expression
+
+        "operator" Conversion-type-name -> Conversion-function-name
+
+        Type-specifiers Pointer-operator? -> Conversion-type-name
+
+        "operator" Operator -> Operator-function-name
+
+        "new" -> Operator
+        "delete" -> Operator
+        "+" -> Operator
+        "-" -> Operator
+        "*" -> Operator
+        "/" -> Operator
+        "%" -> Operator
+        "^" -> Operator
+        "&" -> Operator
+        "|" -> Operator
+        "~" -> Operator
+        "!" -> Operator
+        "=" -> Operator
+        "<" -> Operator
+        ">" -> Operator
+        "+=" -> Operator
+        "-=" -> Operator
+        "-+" -> Operator
+        "*=" -> Operator
+        "/=" -> Operator
+        "%=" -> Operator
+        "^=" -> Operator
+        "&=" -> Operator
+        "|=" -> Operator
+        "<<" -> Operator
+        ">>" -> Operator
+        ">>=" -> Operator
+        "<<=" -> Operator
+        "==" -> Operator
+        "!=" -> Operator
+        "<=" -> Operator
+        ">=" -> Operator
+        "&&" -> Operator
+        "||" -> Operator
+        "++" -> Operator
+        "--" -> Operator
+        "," -> Operator
+        "->*" -> Operator
+        "->" -> Operator
+        "(" Type-specifier? ")" -> Operator
+        "[" "]" -> Operator
+
+        Label* Unlabeled-statement -> Statement
+
+        Null-statement -> Unlabeled-statement
+        Expression-statement -> Unlabeled-statement
+        Compound-statement -> Unlabeled-statement
+        Selection-statement -> Unlabeled-statement
+        Iteration-statement -> Unlabeled-statement
+        Jump-statement -> Unlabeled-statement
+        Declaration-statement -> Unlabeled-statement
+        Try-block -> Unlabeled-statement
+
+        "try" Compound-statement Handler-list -> Try-block
+
+        Handler Handler-list? -> Handler-list
+
+        "catch" "(" Exception-declaration ")" Compound-statement -> Handler
+
+        Type-specifiers Exception-declarator? -> Exception-declaration
+        "..." -> Exception-declaration
+
+        Declarator -> Exception-declarator
+        Abstract-declarator -> Exception-declarator
+
+        Id SPOFF ":" SPON -> Label
+        EX "case" Constant-expression SPOFF ":" SPON (NL IN) -> Label
+        EX "default" SPOFF ":" SPON (NL IN) -> Label
+
+        Expression ";" NL -> Expression-statement
+
+        ";" NL -> Null-statement
+
+        "{" (NL IN) Statement-list? EX "}" NL -> Compound-statement
+
+        Statement+ -> Statement-list
+
+        "if" "(" Expression ")" Statement Else-statement? -> Selection-statement
+        "switch" "(" Expression ")" Statement -> Selection-statement
+
+        "else" Statement -> Else-statement
+
+        "while" "(" Expression ")" Statement -> Iteration-statement
+        "do" Statement "while" "(" Expression ")" ";" NL -> Iteration-statement
+        "for" "(" For-init-statement Expression? ";" Expression? ")" For-body -> Iteration-statement
+
+        Expression ";" -> For-init-statement
+        Decl-specifiers? Declarator-list ";" -> For-init-statement
+        Decl-specifiers ";" -> For-init-statement
+        ";" -> For-init-statement
+
+        Compound-statement -> For-body
+        (IN NL) Statement EX -> For-body
+
+        "break" ";" NL -> Jump-statement
+        "continue" ";" NL -> Jump-statement
+        "return" Expression? ";" NL -> Jump-statement
+        "goto" Id ";" NL -> Jump-statement
+
+        Declaration -> Declaration-statement
+
+        "#define" Id "(" Id+ ")" Expression -> Preprocessor
+        "#define" Id Expression -> Preprocessor
+        EX "#else" IN -> Preprocessor
+        EX "#endif" NL -> Preprocessor
+        NL "#if" Expression IN -> Preprocessor
+        NL "#ifdef" Id IN -> Preprocessor
+        NL "#ifndef" Id IN -> Preprocessor
+        "#ident" Stringlit -> Preprocessor
+        "#include" Stringlit -> Preprocessor
+        "#include" "<" SPOFF Filename ">" SPON -> Preprocessor
+        "#line" Integernumber Stringlit? -> Preprocessor
+        "#undef" Id -> Preprocessor
+        "#LINK" Stringlit -> Preprocessor
+
+        Id -> File-identifier
+        Key -> File-identifier
+
+        File-identifier Dot-slash-identifier* -> Filename
+
+        "."? "/"? File-identifier -> Dot-slash-identifier
+
+        Assignment-expression -> Expression
+        Expression "," Assignment-expression -> Expression
+
+        Conditional-expression -> Assignment-expression
+        Unary-expression Assignment-operator Assignment-expression -> Assignment-expression
+
+        "=" -> Assignment-operator
+        "*=" -> Assignment-operator
+        "/=" -> Assignment-operator
+        "%=" -> Assignment-operator
+        "+=" -> Assignment-operator
+        "-=" -> Assignment-operator
+        ">>=" -> Assignment-operator
+        "<<=" -> Assignment-operator
+        "&=" -> Assignment-operator
+        "^=" -> Assignment-operator
+        "|=" -> Assignment-operator
+
+        Binary-expression Conditional-operation? -> Conditional-expression
+
+        "?" Expression ":" Conditional-expression -> Conditional-operation
+
+        Cast-expression Binary-operation* -> Binary-expression
+
+        Binary-operator Cast-expression -> Binary-operation
+
+        "||" -> Binary-operator
+        "&&" -> Binary-operator
+        "|" -> Binary-operator
+        "^" -> Binary-operator
+        "&" -> Binary-operator
+        "==" -> Binary-operator
+        "!=" -> Binary-operator
+        "<" -> Binary-operator
+        ">" -> Binary-operator
+        "<=" -> Binary-operator
+        ">=" -> Binary-operator
+        "<<" -> Binary-operator
+        ">>" -> Binary-operator
+        "+" -> Binary-operator
+        "-" -> Binary-operator
+        "*" -> Binary-operator
+        "/" -> Binary-operator
+        "%" -> Binary-operator
+        ".*" -> Binary-operator
+        "->*" -> Binary-operator
+
+        Unary-expression -> Cast-expression
+        "(" Type-name ")" Cast-expression -> Cast-expression
+
+        Postfix-expression -> Unary-expression
+        "++" Unary-expression -> Unary-expression
+        "--" Unary-expression -> Unary-expression
+        Unary-operator Cast-expression -> Unary-expression
+        "sizeof" Unary-expression -> Unary-expression
+        "sizeof" "(" Type-name ")" -> Unary-expression
+        Allocation-expression -> Unary-expression
+        Deallocation-expression -> Unary-expression
+        Throw-expression -> Unary-expression
+
+        "throw" Assignment-expression? -> Throw-expression
+
+        "**" -> Unary-operator
+        "*" -> Unary-operator
+        "&" -> Unary-operator
+        "+" -> Unary-operator
+        "-" -> Unary-operator
+        "!" -> Unary-operator
+        "~" -> Unary-operator
+
+        "::"? "new" Placement? Allocation-type-name Initializer? -> Allocation-expression
+
+        "(" Expression-list ")" -> Placement
+
+        Type-specifiers Allocation-declarator? -> Allocation-type-name
+        "(" Type-name ")" Allocation-declarator? -> Allocation-type-name
+
+        Allocation-array-declarator -> Allocation-declarator
+        "*" Const-volatile-qualifier-list? Allocation-declarator? -> Allocation-declarator
+        "::"? Nested-name-spec "*" Const-volatile-qualifier-list? Allocation-declarator? -> Allocation-declarator
+        Qualified-name "::" "*" Const-volatile-qualifier-list? Allocation-declarator? -> Allocation-declarator
+
+        "[" Expression? "]" -> Allocation-array-declarator
+        Allocation-array-declarator "[" Expression? "]" -> Allocation-array-declarator
+
+        "::"? "delete" Cast-expression -> Deallocation-expression
+        "::"? "delete" "[" Expression? "]" Cast-expression -> Deallocation-expression
+
+        Primary-expression Postfix-extension* -> Postfix-expression
+        Simple-type-name "(" Expression-list? ")" Postfix-extension* -> Postfix-expression
+
+        "[" Expression? "]" -> Postfix-extension
+        "(" Expression-list? ")" -> Postfix-extension
+        "." Name -> Postfix-extension
+        "->" Name -> Postfix-extension
+        "++" -> Postfix-extension
+        "--" -> Postfix-extension
+
+        Assignment-expression+ -> Expression-list
+
+        Literal -> Primary-expression
+        "this" -> Primary-expression
+        "::" Id -> Primary-expression
+        "::" Operator-function-name -> Primary-expression
+        "(" Expression ")" -> Primary-expression
+        Name -> Primary-expression
+
+        Id -> Name
+        Template-class-name -> Name
+        Qualified-name -> Name
+        Operator-function-name -> Name
+        Conversion-function-name -> Name
+
+        Id Template-arguments? -> Class-name
+
+        Class-name "::" Class-component -> Qualified-name
+
+        Class-name -> Class-component
+        "~" SPOFF Class-name SPON -> Class-component
+        Operator-function-name -> Class-component
+        Conversion-function-name -> Class-component
+        Qualified-name -> Class-component
+
+        Number-constant -> Literal
+        Character-constant -> Literal
+        String-constant -> Literal
+
+        Stringlit IN NL-stringlit* EX -> String-constant
+
+        NL Stringlit -> NL-stringlit
+
+        Charlit -> Character-constant
+
+        "-"? Number -> Number-constant
+        Hexnumber -> Number-constant

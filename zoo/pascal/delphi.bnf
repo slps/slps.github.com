@@ -1,0 +1,570 @@
+label_id:
+        anynumber
+        id
+builtinid:
+        "string"
+        "file"
+        "set"
+name:
+        builtinid
+        id
+namespace:
+        id "."
+qualified_id:
+        namespace* name SPON
+filenamelit:
+        charlit
+        stringlit
+        qualified_id
+colon:
+        SPOFF ":" SPON
+equal:
+        "="
+end_struct:
+        "end"
+semi_calling_spec:
+        ";"? calling_spec
+calling_spec:
+        "pascal"
+        "safecall"
+        "stdcall"
+        "cdecl"
+        "register"
+        "local"
+hint_directive:
+        "platform"
+        "deprecated"
+        "library"
+ctrlchar:
+        "^'A"
+        "^'B"
+        "^'C"
+        "^'D"
+        "^'E"
+        "^'F"
+        "^'G"
+        "^'H"
+        "^'I"
+        "^'J"
+        "^'K"
+        "^'L"
+        "^'M"
+        "^'N"
+        "^'O"
+        "^'P"
+        "^'Q"
+        "^'R"
+        "^'S"
+        "^'T"
+        "^'U"
+        "^'V"
+        "^'W"
+        "^'X"
+        "^'Y"
+        "^'Z"
+delphi_file:
+        program_file
+        package_file
+        unit_file
+file_end:
+        "."
+program_file:
+        program_decl uses_clause? impldecl_block procedure_body file_end
+package_file:
+        package_decl requires_clause? contains_clause? end_struct file_end
+unit_file:
+        unit_decl interface_section implementation_section initialization_section? finalization_section? end_struct file_end
+program_decl:
+        "program" qualified_id program_file_list? ";" NL
+        "library" qualified_id ";" NL
+package_decl:
+        "package" qualified_id ";" NL
+unit_decl:
+        "unit" qualified_id hint_directive? ";" NL
+program_file_list:
+        "(" {id ","}* ")"
+requires_clause:
+        "requires" {qualified_id ","}* ";" NL
+contains_clause:
+        "contains" {uses_item ","}* ";" NL
+uses_clause:
+        "uses" (NL IN) {uses_item ","}* ";" (EX NL)
+uses_item:
+        qualified_id in_filename?
+in_filename:
+        "in" filenamelit
+initialization_kw:
+        "initialization"
+        "begin"
+implementation_kw:
+        "implementation" NL
+finalization_kw:
+        "finalization"
+interface_kw:
+        "interface" NL
+interface_section:
+        interface_kw uses_clause? intfdecl_block
+implementation_section:
+        implementation_kw uses_clause? impldecl_block
+initialization_section:
+        initialization_kw NL statement_list
+finalization_section:
+        finalization_kw statement_list
+intfdecl_block:
+        intfdecl_section*
+impldecl_block:
+        impldecl_section*
+nested_decl_block:
+        nested_decl_section*
+identlist:
+        id colon_id*
+colon_id:
+        "," NL id
+intfdecl_section:
+        const_section
+        type_section
+        var_section
+        label_decl
+        procedure_intf_decl
+        procedure_external_decl
+        resource_section
+        exports_section
+impldecl_section:
+        const_section
+        type_section
+        var_section
+        label_decl
+        procedure_impl_decl
+        procedure_external_decl
+        resource_section
+        exports_section
+nested_decl_section:
+        const_section
+        type_section
+        var_section
+        label_decl
+        procedure_impl_decl
+label_decl:
+        "label" {label_id ","}* ";" NL
+exports_section:
+        "exports" {exports_entry ","}* ";" NL
+exports_entry:
+        procedure_id formal_parameters? external_name?
+resource_section:
+        "resourcestring" constant_decl+
+const_section:
+        "const" (NL IN) constant_decl+ EX
+constant_decl:
+        identlist constant_spec hint_directive? ";" NL
+constant_spec:
+        equal expr
+        colon_type const_init
+const_init:
+        equal typed_const
+typed_const:
+        array_constant
+        record_constant
+        expr
+array_constant:
+        "(" {typed_const ","}* ")"
+record_field_constant:
+        id colon typed_const
+record_constant:
+        "(" record_field_constant_semi* record_field_constant? ")"
+record_field_constant_semi:
+        record_field_constant ";" NL
+var_section:
+        var_keyword (NL IN) var_decl+ EX
+var_keyword:
+        "var"
+        "threadvar"
+var_decl:
+        identlist colon_type hint_directive? var_init? ";" NL
+var_init:
+        absolute_init
+        const_init
+absolute_init:
+        "absolute" expr
+type_section:
+        "type" (NL IN) type_decl+ EX
+type_decl:
+        identlist equal "type"? type_spec hint_directive? ";" NL
+type_spec:
+        simple_type
+        string_type
+        struct_type
+        pointer_type
+        procedural_type
+        variant_type
+        class_reference_type
+        class_type
+        interface_type
+        qualified_id
+real_type:
+        "real"
+        "real48"
+        "single"
+        "double"
+        "extended"
+        "comp"
+        "currency"
+integer_type:
+        "shortint"
+        "smallint"
+        "longint"
+        "int64"
+        "word"
+        "byte"
+        "longword"
+        "integer"
+        "cardinal"
+char_type:
+        "char"
+        "ansichar"
+        "widechar"
+boolean_type:
+        "boolean"
+        "bytebool"
+        "wordbool"
+        "longbool"
+variant_type:
+        "variant"
+        "olevariant"
+string_type:
+        "string"
+        "shortstring"
+        "ansistring"
+        "widestring"
+        "string" "[" expression "]"
+enumerated_type:
+        "(" enum_spec+ ")"
+enum_spec:
+        id param_init?
+subrange_type:
+        expression SPOFF dotdot_expr SPON
+dotdot_expr:
+        ".." expression
+ordinal_type:
+        integer_type
+        char_type
+        enumerated_type
+        boolean_type
+        subrange_type
+simple_type:
+        ordinal_type
+        real_type
+struct_type:
+        set_type
+        array_type
+        file_type
+of_basetype:
+        "of" type_spec
+of_object:
+        "of" "object"
+of_const:
+        "of" "const"
+set_type:
+        "set" of_basetype
+file_type:
+        "file" of_basetype?
+pointer_type:
+        "^" SPOFF qualified_id SPON
+procedural_type:
+        procedure_intf_decl of_object? semi_calling_spec*
+colon_type:
+        colon type_spec
+array_type:
+        "array" of_const
+        "packed"? "array" array_index_list* of_basetype
+array_index_list:
+        "[" {array_index ","}* "]"
+array_index:
+        ordinal_type
+        qualified_id
+procedure_id:
+        namespace? id
+procedure_impl_decl:
+        NL procedure_intf_decl nested_decl_block procedure_body_semi
+external_directive:
+        "external" expr? external_name?
+external_name:
+        "name" expr
+        "index" expr
+semi_directive:
+        ";"? directive
+directive:
+        "dynamic"
+        "virtual"
+        "abstract"
+        "message" qualified_id?
+        "dispid" sign? anynumber
+        "override"
+        "overload"
+        "reintroduce"
+        "static"
+        "assembler"
+        "far"
+        "export"
+        hint_directive
+        calling_spec
+procedure_intf_decl:
+        procedure_signature semi_directive* ";"? NL
+procedure_signature:
+        "class"? procedure_keyword procedure_id? formal_parameters? colon_type?
+procedure_external_decl:
+        procedure_intf_decl external_directive semi_calling_spec? ";"? NL
+procedure_keyword:
+        "function"
+        "procedure"
+        "constructor"
+        "destructor"
+formal_parameters:
+        "(" formal_parameter semi_formal_parameter* ")"
+semi_formal_parameter:
+        ";" formal_parameter
+formal_parameter:
+        parm_qual? parameter
+parm_qual:
+        "var"
+        "const"
+        "out"
+parameter:
+        {id ","}* parameter_type?
+parameter_type:
+        colon_type param_init?
+param_init:
+        equal expr
+procedure_body_semi:
+        procedure_body ";" NL
+procedure_body:
+        sequence_stm
+        "forward"
+heritage_list:
+        "(" {qualified_id ","}* ")"
+        "helper" "for" id
+class_keyword:
+        "class"
+        "record"
+        "object"
+interface_keyword:
+        "interface"
+        "dispinterface"
+guid_decl:
+        "[" expr "]"
+class_reference_type:
+        "class" "of" qualified_id
+class_type:
+        "packed"? class_keyword heritage_list? NL class_body?
+class_body:
+        visibility_default visibility_block* end_struct
+interface_body:
+        visibility_default end_struct
+interface_type:
+        interface_keyword heritage_list? guid_decl? interface_body?
+visibility_default:
+        IN class_member* EX
+visibility_block:
+        visibility (NL IN) class_member* EX
+method_decl:
+        procedure_signature method_deleg
+        procedure_signature ";" dispid_spec ";"
+        procedure_intf_decl
+method_deleg:
+        equal qualified_id ";" NL
+visibility:
+        "public"
+        "protected"
+        "strict"? "private"
+        "published"
+        "automated"
+variant_section:
+        "case" id_colon? type_spec "of" record_variant+
+id_colon:
+        id colon
+record_variant:
+        expr+ colon "(" visibility_default ")" ";"? NL
+class_member:
+        var_decl
+        method_decl
+        property_decl
+        variant_section
+property_decl:
+        "property" id prop_indexes? colon_type? prop_specifier* defaultarray_spec? ";" NL
+defaultarray_spec:
+        ";" "default"
+prop_indexes:
+        "[" prop_index_decl+ "]"
+prop_index_decl:
+        prop_index_name+ colon_type ";"?
+prop_index_modifier:
+        "const"
+        "var"
+prop_index_name:
+        prop_index_modifier? qualified_id
+prop_specifier:
+        index_spec
+        accessor_spec
+        stored_spec
+        default_spec
+        implements_spec
+        dispid_spec
+dispid_spec:
+        "dispid" SP expr
+index_spec:
+        "index" SP expr
+accessor_spec:
+        "readonly"
+        "writeonly"
+        accessor_verb qualified_id
+accessor_verb:
+        "read"
+        "write"
+stored_spec:
+        "stored" SP expr
+default_spec:
+        "default" SP expr
+        "nodefault"
+implements_spec:
+        "implements" {qualified_id ","}*
+expr:
+        SP SPOFF expression SPON
+expression:
+        term infix_expr*
+term:
+        prefix_opr* atom_expr postfix_opr*
+infix_expr:
+        SP infix_opr SP term
+atom_expr:
+        charlit
+        anynumber
+        ctrlchar
+        "nil"
+        "(" expression ")"
+        set_constructor
+        qualified_id
+sign:
+        "+"
+        "-"
+prefix_opr:
+        "not" SP
+        "inherited" SP
+        "@"
+        sign
+postfix_opr:
+        arguments
+        array_subscript
+        "." id
+        "^"
+infix_opr:
+        ">"
+        "<"
+        "<="
+        ">="
+        "<>"
+        "="
+        "in"
+        "is"
+        "as"
+        "+"
+        "-"
+        "or"
+        "xor"
+        "*"
+        "/"
+        "div"
+        "mod"
+        "and"
+        "shl"
+        "shr"
+        "^"
+set_constructor:
+        "[" set_element? semi_set_element* "]"
+arguments:
+        "(" argm? semi_argm* ")"
+array_subscript:
+        "[" expression? semi_expression* "]"
+semi_argm:
+        "," SP argm
+semi_set_element:
+        "," SP set_element
+semi_expression:
+        "," SP expression
+set_element:
+        expression dotdot_expr?
+argm:
+        expression argmfmt? argmfmt?
+argmfmt:
+        ":" anynumber
+labelid_colon:
+        label_id colon
+statement_list:
+        IN statement_semi* statement? EX
+statement_semi:
+        statement? ";" NL
+statement:
+        labelid_colon? unlabeled_stm
+unlabeled_stm:
+        sequence_stm
+        loop_stm
+        with_stm
+        try_finally_stm
+        try_except_stm
+        selection_stm
+        jump_stm
+        assign_stm
+        call_stm
+assign_stm:
+        expr ":=" expr
+call_stm:
+        expr
+        "inherited"
+jump_stm:
+        goto_stm
+        raise_stm
+goto_stm:
+        "goto" label_id
+sequence_stm:
+        "begin" NL statement_list end_struct
+loop_stm:
+        "repeat" statement_list "until" expr
+        "while" expr "do" nested_stm
+        "for" id ":=" expr to_or_downto expr "do" nested_stm
+        "for" id "in" id "do" nested_stm
+selection_stm:
+        "if" expr "then" nested_stm else_stm?
+        "case" expr "of" case_selector* case_else? end_struct
+with_stm:
+        "with" expr+ "do" nested_stm
+try_finally_stm:
+        "try" NL statement_list "finally" NL statement_list end_struct
+try_except_stm:
+        "try" NL statement_list "except" NL exception_block end_struct
+nested_stm:
+        sequence_stm
+        (NL IN) statement? EX
+else_stm:
+        NL "else" nested_stm
+case_selector:
+        {case_label ","}* colon nested_stm ";"?
+case_label:
+        expr dotdot_expr?
+case_else:
+        "else" statement_list
+to_or_downto:
+        "to"
+        "downto"
+exception_block:
+        exception_handler_list case_else?
+        statement_list
+exception_handler_list:
+        exception_handler_semi* exception_handler?
+exception_handler_semi:
+        exception_handler ";" NL
+exception_handler:
+        "on" exception_var? type_spec "do" nested_stm
+exception_var:
+        id colon
+raise_stm:
+        "raise" expr? at_address?
+at_address:
+        "at" expr

@@ -1,0 +1,186 @@
+module Main
+
+exports
+  sorts
+        Ident Namespace Nested-id Filenamelit Delphipp-file Pp-stmt-or-water Pp-comment Cmbracketblock Cmstarblock Bracketbody Starbody Cmline Cmlinebody Pp-any Codetoken Pp-stmt Pp-directivestmt Pp-directive Pp-align Pp-minenumsize Pp-switch Pp-switchopt Pp-ifstmt Pp-ifblock Pp-content Pp-elseifblock Pp-ifexpr Pp-elseifexpr Pp-endif If-alt Else-alt Endif-alt Pp-boolexpr Boolfunc Booleanlit Pp-litexpr Pp-boolopr Pp-compareopr 
+  context-free syntax
+        Id -> Ident
+        Key -> Ident
+
+        Id "." -> Namespace
+
+        SPOFF Namespace* Ident SPON -> Nested-id
+
+        Charlit -> Filenamelit
+        Stringlit -> Filenamelit
+        Nested-id -> Filenamelit
+
+        Pp-stmt-or-water* -> Delphipp-file
+
+        Pp-stmt -> Pp-stmt-or-water
+        Pp-comment -> Pp-stmt-or-water
+        Pp-any -> Pp-stmt-or-water
+
+        Cmbracketblock -> Pp-comment
+        Cmstarblock -> Pp-comment
+        Cmline -> Pp-comment
+
+        "{" Bracketbody* "}" -> Cmbracketblock
+
+        "(*" Starbody* "*)" -> Cmstarblock
+
+        Pp-any -> Bracketbody
+
+        Pp-any -> Starbody
+
+        "//" Cmlinebody* EOL -> Cmline
+
+        Pp-any -> Cmlinebody
+
+        Id Codetoken* -> Pp-any
+        Key -> Pp-any
+        Token -> Pp-any
+
+        "(" -> Codetoken
+        ")" -> Codetoken
+        "." -> Codetoken
+        ";" -> Codetoken
+        ":" -> Codetoken
+        "," -> Codetoken
+        "[" -> Codetoken
+        "]" -> Codetoken
+        "+" -> Codetoken
+        "-" -> Codetoken
+        "*" -> Codetoken
+        "/" -> Codetoken
+        "^" -> Codetoken
+        "=" -> Codetoken
+        "@" -> Codetoken
+        ">" -> Codetoken
+        "<" -> Codetoken
+        "<>" -> Codetoken
+        ">=" -> Codetoken
+        "<=" -> Codetoken
+        ":=" -> Codetoken
+        "//" -> Codetoken
+        Id -> Codetoken
+        Anynumber -> Codetoken
+        Charlit -> Codetoken
+        Space -> Codetoken
+
+        Pp-ifstmt -> Pp-stmt
+        Pp-directivestmt -> Pp-stmt
+
+        "{$" Space? Pp-directive"," Bracketbody* "}" -> Pp-directivestmt
+        "(*$" Space? Pp-directive"," Starbody* "*)" -> Pp-directivestmt
+
+        "DEFINE" Space Id -> Pp-directive
+        "UNDEF" Space Id -> Pp-directive
+        "INCLUDE" Space? Filenamelit -> Pp-directive
+        "I" Space? Filenamelit -> Pp-directive
+        "LINK" Space? Filenamelit -> Pp-directive
+        "L" Space? Filenamelit -> Pp-directive
+        "RESOURCE" Space? Filenamelit Space? Filenamelit? -> Pp-directive
+        "R" Space? Filenamelit Space? Filenamelit? -> Pp-directive
+        "HPPEMIT" Space? Charlit -> Pp-directive
+        "EXTERNALSYM" Space Id -> Pp-directive
+        "NODEFINE" -> Pp-directive
+        "MINENUMSIZE" -> Pp-directive
+        "DENYPACKAGEUNIT" -> Pp-directive
+        "WEAKPACKAGEUNIT" -> Pp-directive
+        "IMAGEBASE" Space? Anynumber -> Pp-directive
+        "C" Space Id -> Pp-directive
+        "MINENUMSIZE" Space Anynumber -> Pp-directive
+        Pp-minenumsize -> Pp-directive
+        "ALIGN" Space? Anynumber -> Pp-directive
+        Pp-align -> Pp-directive
+        "M" Space? Anynumber"," -> Pp-directive
+        "MAXSTACKSIZE" Space Anynumber -> Pp-directive
+        "MINSTACKSIZE" Space Anynumber -> Pp-directive
+        "RESOURCERESERVE" Space Anynumber -> Pp-directive
+        "NOINCLUDE" -> Pp-directive
+        "WARN" -> Pp-directive
+        "MESSAGE" -> Pp-directive
+        "APPTYPE" -> Pp-directive
+        "LIBPREFIX" Space? Charlit -> Pp-directive
+        "LIBSUFIX" Space? Charlit -> Pp-directive
+        "LIBVERSION" Space? Charlit -> Pp-directive
+        "DESCRIPTION" Space? Charlit -> Pp-directive
+        "D" Space? Charlit -> Pp-directive
+        "EXTENSION" Space Id -> Pp-directive
+        "E" Space Id -> Pp-directive
+        Pp-switch Space? -> Pp-directive
+
+        "A1" -> Pp-align
+        "A2" -> Pp-align
+        "A4" -> Pp-align
+        "A8" -> Pp-align
+
+        "Z1" -> Pp-minenumsize
+        "Z2" -> Pp-minenumsize
+        "Z4" -> Pp-minenumsize
+
+        Id Space? Pp-switchopt -> Pp-switch
+
+        "+" -> Pp-switchopt
+        "-" -> Pp-switchopt
+        "ON" -> Pp-switchopt
+        "OFF" -> Pp-switchopt
+
+        Pp-ifblock Pp-elseifblock* Pp-endif -> Pp-ifstmt
+
+        Pp-ifexpr Pp-content* -> Pp-ifblock
+
+        Pp-stmt-or-water -> Pp-content
+
+        Pp-elseifexpr Pp-content* -> Pp-elseifblock
+
+        "{$" Space? If-alt Bracketbody* "}" -> Pp-ifexpr
+        "(*$" Space? If-alt Starbody* "*)" -> Pp-ifexpr
+
+        "{$" Space? Else-alt Space? Bracketbody* "}" -> Pp-elseifexpr
+        "(*$" Space? Else-alt Space? Starbody* "*)" -> Pp-elseifexpr
+
+        "{$" Space? Endif-alt Bracketbody* "}" -> Pp-endif
+        "(*$" Space? Endif-alt Starbody* "*)" -> Pp-endif
+
+        "IF" Space? Pp-boolexpr -> If-alt
+        "IFDEF" Space? Id -> If-alt
+        "IFNDEF" Space? Id -> If-alt
+        "IFOPT" Space? Pp-switch -> If-alt
+
+        "ELSEIF" Space? Pp-boolexpr -> Else-alt
+        "ELSE" Space? -> Else-alt
+
+        "ENDIF" -> Endif-alt
+        "IFEND" -> Endif-alt
+
+        Booleanlit -> Pp-boolexpr
+        Boolfunc Space? "(" Id ")" -> Pp-boolexpr
+        "NOT" Space? Pp-boolexpr -> Pp-boolexpr
+        Id -> Pp-boolexpr
+        Pp-boolexpr "pp_boolopr" Pp-boolexpr -> Pp-boolexpr
+        Pp-litexpr "pp_compareopr" Pp-litexpr -> Pp-boolexpr
+        "(" Pp-boolexpr ")" -> Pp-boolexpr
+
+        "DEFINED" -> Boolfunc
+        "DECLARED" -> Boolfunc
+        "OPTION" -> Boolfunc
+
+        "FALSE" -> Booleanlit
+        "TRUE" -> Booleanlit
+
+        Id -> Pp-litexpr
+        Charlit -> Pp-litexpr
+        Anynumber -> Pp-litexpr
+
+        "AND" -> Pp-boolopr
+        "OR" -> Pp-boolopr
+        "XOR" -> Pp-boolopr
+
+        ">" -> Pp-compareopr
+        "<" -> Pp-compareopr
+        "=" -> Pp-compareopr
+        ">=" -> Pp-compareopr
+        "<=" -> Pp-compareopr
+        "<>" -> Pp-compareopr

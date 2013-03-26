@@ -1,0 +1,517 @@
+program:
+        declaration_list
+declaration_list:
+        declaration*
+declaration:
+        asm_declaration
+        class_definition
+        function_definition
+        namespace_definition
+        template_declaration
+        linkage_specification
+        exception_specification
+        using_declaration
+        decl_specifiers? declarator_list ";" NL
+        decl_specifiers ";" NL
+        ";" NL
+        preprocessor NL
+asm_declaration:
+        "asm" "(" string_constant ")" ";" NL
+class_definition:
+        NL storage_class_specifier* class_specifier declarator_list? ";" (NL NL)
+storage_class_specifier:
+        "auto"
+        "register"
+        "static"
+        "extern"
+class_specifier:
+        class_head "{" (NL IN) member* EX "}"
+class_head:
+        class_key id? base_spec?
+        class_key nested_name_spec id base_spec?
+        class_key class_name base_spec?
+class_key:
+        "class"
+        "struct"
+        "union"
+base_spec:
+        ":" base_list
+base_list:
+        base_specifier ","? {base_specifier ","}*
+base_specifier:
+        "::"? nested_name_spec? class_name
+        "virtual" access_specifier? "::"? nested_name_spec? class_name
+        access_specifier "virtual"? "::"? nested_name_spec? class_name
+access_specifier:
+        "private"
+        "protected"
+        "public"
+member:
+        access_specifier_colon? member_declaration
+access_specifier_colon:
+        EX_2 NL access_specifier SPOFF ":" SPON IN_2 NL
+member_declaration:
+        function_definition ";"?
+        qualified_name ";" NL
+        using_declaration
+        decl_specifiers? member_declarator_list ";" NL
+        decl_specifiers ";" NL
+        ";" NL
+        preprocessor NL
+member_declarator_list:
+        member_declarator+
+member_declarator:
+        declarator initializer?
+        id? SPOFF ":" SPON constant_expression
+function_definition:
+        NL decl_specifiers? function_declarator ctor_initializer? exception_specification? function_body
+function_declarator:
+        pointer_operator* declared_item declarator_extension+
+function_body:
+        NL compound_statement ";"? NL
+        "try" ctor_initializer? NL compound_statement ";"? NL handler_list
+ctor_initializer:
+        SPOFF ":" SPON mem_initializer_list
+mem_initializer_list:
+        mem_initializer+
+mem_initializer:
+        "::"? nested_name_spec? class_name "(" expression_list? ")"
+namespace_definition:
+        "namespace" id? "{" (NL IN) declaration_list? EX "}" (NL NL)
+        "namespace" id "=" qualified_namespace_spec
+qualified_namespace_spec:
+        "::"? nested_name_spec? class_or_namespace_name
+nested_name_spec:
+        class_or_namespace_name "::" nested_name_spec?
+class_or_namespace_name:
+        class_name
+        namespace_name
+namespace_name:
+        id
+template_declaration:
+        "template" "<" template_parameter_list ">" declaration
+template_parameter_list:
+        template_parameter
+        template_parameter_list "," template_parameter
+template_parameter:
+        type_parameter
+        parameter_declaration
+type_parameter:
+        "class" id
+linkage_specification:
+        NL "extern" stringlit "{" (NL IN) declaration_list EX "}" ";"? (NL NL)
+        "extern" stringlit declaration
+exception_specification:
+        "throw" "(" type_list? ")"
+type_list:
+        type_name
+        type_list "," type_name
+using_declaration:
+        "using" "::"? nested_name_spec? name ";"
+        "using" "namespace" "::"? nested_name_spec? id ";"
+declarator_list:
+        init_declarator+
+init_declarator:
+        declarator initializer?
+declarator:
+        pointer_operator* declared_item declarator_extension*
+declared_item:
+        declared_name
+        "(" declarator ")"
+declarator_extension:
+        parenthesized_parameter_declaration_list const_volatile_qualifier_list?
+        "[" constant_expression? "]"
+parenthesized_parameter_declaration_list:
+        "(" parameter_declaration_list ")"
+        "(" parenthesized_parameter_declaration_list ")"
+pointer_operator:
+        stars const_volatile_qualifier_list?
+        "&" const_volatile_qualifier_list?
+        id "::" stars const_volatile_qualifier_list?
+        "::"? nested_name_spec "*" const_volatile_qualifier_list
+stars:
+        "*"
+        "**"
+const_volatile_qualifier_list:
+        const_volatile_qualifier+
+const_volatile_qualifier:
+        "const"
+        "volatile"
+declared_name:
+        nested_name_spec? name
+        "~" SPOFF id SPON
+type_name:
+        type_specifiers abstract_declarator?
+abstract_declarator:
+        abstract_extension+
+        "(" abstract_declarator ")" abstract_extension*
+abstract_extension:
+        "(" parameter_declaration_list ")" const_volatile_qualifier_list?
+        "[" constant_expression? "]"
+        pointer_operator
+        "(" abstract_declarator ")"
+parameter_declaration_list:
+        {parameter_declaration ","}* comma_dotdotdot?
+comma_dotdotdot:
+        ","? "..."
+parameter_declaration:
+        decl_specifiers parameter_declarator equal_expression?
+parameter_declarator:
+        declarator
+        abstract_declarator?
+equal_expression:
+        "=" expression
+initializer:
+        "=" initial_value
+        "(" expression_list? ")"
+initial_value:
+        assignment_expression
+        "{" IN initializer_list ","? EX "}"
+initializer_list:
+        initializer_element+
+initializer_element:
+        assignment_expression
+        NL "{" IN initializer_list ","? EX "}"
+decl_specifier:
+        storage_class_specifier
+        type_specifier
+        function_specifier
+        "friend"
+        "typedef"
+decl_specifiers:
+        decl_specifier+
+function_specifier:
+        "inline"
+        "virtual"
+type_specifier:
+        simple_type_name
+        class_specifier
+        enum_specifier
+        elaborated_type_specifier
+        const_volatile_qualifier
+type_specifiers:
+        type_specifier+
+simple_type_name:
+        "char"
+        "bool"
+        "short"
+        "int"
+        "long"
+        "signed"
+        "unsigned"
+        "float"
+        "double"
+        "void"
+        "::"? nested_name_spec? id
+        "::"? nested_name_spec? template_class_name
+template_class_name:
+        id template_arguments
+template_arguments:
+        "<" template_argument_list ">"
+template_argument_list:
+        template_argument
+        template_argument_list "," template_argument
+template_argument:
+        type_name
+        non_gt_binary_expression
+non_gt_binary_expression:
+        cast_expression non_gt_binary_operation*
+non_gt_binary_operation:
+        non_gt_binary_operator cast_expression
+non_gt_binary_operator:
+        "||"
+        "&&"
+        "|"
+        "^"
+        "&"
+        "=="
+        "!="
+        "<"
+        "<="
+        ">="
+        "<<"
+        ">>"
+        "+"
+        "-"
+        "*"
+        "/"
+        "%"
+        ".*"
+        "->*"
+elaborated_type_specifier:
+        class_key "::"? nested_name_spec? class_name
+        "enum" "::"? nested_name_spec? id
+enum_specifier:
+        "enum" id? "{" enum_list? "}"
+enum_list:
+        enumerator+ ","?
+enumerator:
+        id equal_constant_expression?
+equal_constant_expression:
+        "=" constant_expression
+constant_expression:
+        conditional_expression
+conversion_function_name:
+        "operator" conversion_type_name
+conversion_type_name:
+        type_specifiers pointer_operator?
+operator_function_name:
+        "operator" operator
+operator:
+        "new"
+        "delete"
+        "+"
+        "-"
+        "*"
+        "/"
+        "%"
+        "^"
+        "&"
+        "|"
+        "~"
+        "!"
+        "="
+        "<"
+        ">"
+        "+="
+        "-="
+        "-+"
+        "*="
+        "/="
+        "%="
+        "^="
+        "&="
+        "|="
+        "<<"
+        ">>"
+        ">>="
+        "<<="
+        "=="
+        "!="
+        "<="
+        ">="
+        "&&"
+        "||"
+        "++"
+        "--"
+        ","
+        "->*"
+        "->"
+        "(" type_specifier? ")"
+        "[" "]"
+statement:
+        label* unlabeled_statement
+unlabeled_statement:
+        null_statement
+        expression_statement
+        compound_statement
+        selection_statement
+        iteration_statement
+        jump_statement
+        declaration_statement
+        try_block
+try_block:
+        "try" compound_statement handler_list
+handler_list:
+        handler handler_list?
+handler:
+        "catch" "(" exception_declaration ")" compound_statement
+exception_declaration:
+        type_specifiers exception_declarator?
+        "..."
+exception_declarator:
+        declarator
+        abstract_declarator
+label:
+        id SPOFF ":" SPON
+        EX "case" constant_expression SPOFF ":" SPON (NL IN)
+        EX "default" SPOFF ":" SPON (NL IN)
+expression_statement:
+        expression ";" NL
+null_statement:
+        ";" NL
+compound_statement:
+        "{" (NL IN) statement_list? EX "}" NL
+statement_list:
+        statement+
+selection_statement:
+        "if" "(" expression ")" statement else_statement?
+        "switch" "(" expression ")" statement
+else_statement:
+        "else" statement
+iteration_statement:
+        "while" "(" expression ")" statement
+        "do" statement "while" "(" expression ")" ";" NL
+        "for" "(" for_init_statement expression? ";" expression? ")" for_body
+for_init_statement:
+        expression ";"
+        decl_specifiers? declarator_list ";"
+        decl_specifiers ";"
+        ";"
+for_body:
+        compound_statement
+        (IN NL) statement EX
+jump_statement:
+        "break" ";" NL
+        "continue" ";" NL
+        "return" expression? ";" NL
+        "goto" id ";" NL
+declaration_statement:
+        declaration
+preprocessor:
+        "#define" id "(" id+ ")" expression
+        "#define" id expression
+        EX "#else" IN
+        EX "#endif" NL
+        NL "#if" expression IN
+        NL "#ifdef" id IN
+        NL "#ifndef" id IN
+        "#ident" stringlit
+        "#include" stringlit
+        "#include" "<" SPOFF filename ">" SPON
+        "#line" integernumber stringlit?
+        "#undef" id
+        "#LINK" stringlit
+file_identifier:
+        id
+        key
+filename:
+        file_identifier dot_slash_identifier*
+dot_slash_identifier:
+        "."? "/"? file_identifier
+expression:
+        assignment_expression
+        expression "," assignment_expression
+assignment_expression:
+        conditional_expression
+        unary_expression assignment_operator assignment_expression
+assignment_operator:
+        "="
+        "*="
+        "/="
+        "%="
+        "+="
+        "-="
+        ">>="
+        "<<="
+        "&="
+        "^="
+        "|="
+conditional_expression:
+        binary_expression conditional_operation?
+conditional_operation:
+        "?" expression ":" conditional_expression
+binary_expression:
+        cast_expression binary_operation*
+binary_operation:
+        binary_operator cast_expression
+binary_operator:
+        "||"
+        "&&"
+        "|"
+        "^"
+        "&"
+        "=="
+        "!="
+        "<"
+        ">"
+        "<="
+        ">="
+        "<<"
+        ">>"
+        "+"
+        "-"
+        "*"
+        "/"
+        "%"
+        ".*"
+        "->*"
+cast_expression:
+        unary_expression
+        "(" type_name ")" cast_expression
+unary_expression:
+        postfix_expression
+        "++" unary_expression
+        "--" unary_expression
+        unary_operator cast_expression
+        "sizeof" unary_expression
+        "sizeof" "(" type_name ")"
+        allocation_expression
+        deallocation_expression
+        throw_expression
+throw_expression:
+        "throw" assignment_expression?
+unary_operator:
+        "**"
+        "*"
+        "&"
+        "+"
+        "-"
+        "!"
+        "~"
+allocation_expression:
+        "::"? "new" placement? allocation_type_name initializer?
+placement:
+        "(" expression_list ")"
+allocation_type_name:
+        type_specifiers allocation_declarator?
+        "(" type_name ")" allocation_declarator?
+allocation_declarator:
+        allocation_array_declarator
+        "*" const_volatile_qualifier_list? allocation_declarator?
+        "::"? nested_name_spec "*" const_volatile_qualifier_list? allocation_declarator?
+        qualified_name "::" "*" const_volatile_qualifier_list? allocation_declarator?
+allocation_array_declarator:
+        "[" expression? "]"
+        allocation_array_declarator "[" expression? "]"
+deallocation_expression:
+        "::"? "delete" cast_expression
+        "::"? "delete" "[" expression? "]" cast_expression
+postfix_expression:
+        primary_expression postfix_extension*
+        simple_type_name "(" expression_list? ")" postfix_extension*
+postfix_extension:
+        "[" expression? "]"
+        "(" expression_list? ")"
+        "." name
+        "->" name
+        "++"
+        "--"
+expression_list:
+        assignment_expression+
+primary_expression:
+        literal
+        "this"
+        "::" id
+        "::" operator_function_name
+        "(" expression ")"
+        name
+name:
+        id
+        template_class_name
+        qualified_name
+        operator_function_name
+        conversion_function_name
+class_name:
+        id template_arguments?
+qualified_name:
+        class_name "::" class_component
+class_component:
+        class_name
+        "~" SPOFF class_name SPON
+        operator_function_name
+        conversion_function_name
+        qualified_name
+literal:
+        number_constant
+        character_constant
+        string_constant
+string_constant:
+        stringlit IN NL_stringlit* EX
+NL_stringlit:
+        NL stringlit
+character_constant:
+        charlit
+number_constant:
+        "-"? number
+        hexnumber
