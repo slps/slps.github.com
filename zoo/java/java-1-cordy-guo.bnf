@@ -1,0 +1,354 @@
+program:
+        package_declaration
+package_declaration:
+        package_header? import_declaration* type_declaration*
+package_header:
+        "package" package_name ";" (NL NL)
+package_name:
+        qualified_name
+import_declaration:
+        "import" imported_name ";" (NL NL)
+imported_name:
+        package_or_type_name dot_star?
+package_or_type_name:
+        qualified_name
+dot_star:
+        "." "*"
+declared_name:
+        reference
+type_declaration:
+        class_declaration (NL NL)
+        interface_declaration (NL NL)
+class_declaration:
+        class_header class_body
+class_header:
+        modifier* "class" class_name extends_clause? implements_clause?
+class_body:
+        class_or_interface_body
+interface_declaration:
+        interface_header interface_body
+interface_header:
+        modifier* "interface" interface_name extends_clause? implements_clause?
+interface_body:
+        class_or_interface_body
+modifier:
+        "abstract"
+        "final"
+        "public"
+        "protected"
+        "private"
+        "static"
+        "transient"
+        "volatile"
+        "native"
+        "synchronized"
+        "strictfp"
+extends_clause:
+        "extends" type_name+
+implements_clause:
+        "implements" qualified_name+
+class_name:
+        declared_name
+interface_name:
+        declared_name
+class_or_interface_body:
+        "{" (NL IN) class_body_declaration* EX "}" ";"? (NL NL)
+class_body_declaration:
+        empty_declaration
+        member_declaration
+        instance_initializer
+        static_initializer
+        field_declaration
+empty_declaration:
+        ";" NL
+member_declaration:
+        method_or_constructor_declaration
+        type_declaration
+method_or_constructor_declaration:
+        method_declaration
+        constructor_declaration
+instance_initializer:
+        NL block (NL NL)
+static_initializer:
+        NL "static" block (NL NL)
+constructor_declaration:
+        NL modifier* constructor_declarator throws? constructor_body (NL NL)
+constructor_declarator:
+        class_name "(" {formal_parameter ","}* ")"
+constructor_body:
+        block NL
+field_declaration:
+        variable_declaration
+variable_declaration:
+        modifier* type_specifier variable_declarators ";" NL
+variable_declarators:
+        variable_declarator+
+variable_declarator:
+        variable_name equals_variable_initializer?
+variable_name:
+        declared_name dimension*
+equals_variable_initializer:
+        "=" variable_initializer
+variable_initializer:
+        expression
+        array_initializer
+array_initializer:
+        "{" {variable_initializer ","}* ","? "}"
+method_declaration:
+        NL modifier* type_specifier method_declarator throws? method_body
+method_declarator:
+        method_name "(" {formal_parameter ","}* ")" dimension*
+method_name:
+        declared_name
+formal_parameter:
+        "final"? type_specifier formal_parameter_name
+formal_parameter_name:
+        variable_name
+throws:
+        "throws" qualified_name+
+method_body:
+        block (NL NL)
+        ";" (NL NL)
+type_specifier:
+        type_name
+        array_type_specifier
+array_type_specifier:
+        type_name dimension+
+type_name:
+        primitive_type
+        qualified_name
+primitive_type:
+        "boolean"
+        "char"
+        "byte"
+        "short"
+        "int"
+        "long"
+        "float"
+        "double"
+        "void"
+block:
+        "{" (NL IN) declaration_or_statement* EX "}"
+declaration_or_statement:
+        local_variable_declaration
+        class_declaration
+        statement
+local_variable_declaration:
+        variable_declaration
+statement:
+        label_statement
+        empty_statement
+        expression_statement
+        if_statement
+        switch_statement
+        while_statement
+        do_statement
+        for_statement
+        break_statement
+        continue_statement
+        return_statement
+        throw_statement
+        synchronized_statement
+        try_statement
+        block
+empty_statement:
+        ";" NL
+label_statement:
+        label_name ":" NL
+label_name:
+        reference
+expression_statement:
+        expression ";" NL
+if_statement:
+        "if" "(" expression ")" statement else_clause? NL
+else_clause:
+        "else" statement
+switch_statement:
+        "switch" "(" expression ")" switch_block NL
+switch_block:
+        "{" (IN NL) switch_alternative* EX "}"
+switch_alternative:
+        switch_label (IN NL) declaration_or_statement* EX
+switch_label:
+        "case" constant_expression ":"
+        "default" ":"
+while_statement:
+        "while" "(" expression ")" statement NL
+do_statement:
+        "do" statement "while" "(" expression ")" ";" NL
+for_statement:
+        "for" "(" for_init for_expression for_update ")" statement NL
+for_init:
+        {expression ","}* ";"
+        local_variable_declaration
+for_expression:
+        expression? ";"
+for_update:
+        {expression ","}*
+break_statement:
+        "break" label_name? ";" NL
+continue_statement:
+        "continue" label_name? ";" NL
+return_statement:
+        "return" expression? ";" NL
+throw_statement:
+        "throw" expression ";" NL
+synchronized_statement:
+        "synchronized" "(" expression ")" statement NL
+try_statement:
+        "try" block catch_clause* finally_clause? NL
+catch_clause:
+        "catch" "(" type_specifier variable_name ")" block
+finally_clause:
+        "finally" block
+constant_expression:
+        expression
+expression:
+        assignment_expression
+assignment_expression:
+        conditional_expression
+        unary_expression assignment_operator assignment_expression
+assignment_operator:
+        "="
+        "*="
+        "/="
+        "%="
+        "+="
+        "-="
+        "<<="
+        ">>="
+        ">>>="
+        "&="
+        "^="
+        "|="
+conditional_expression:
+        conditional_or_expression conditional_choice?
+conditional_choice:
+        "?" expression ":" conditional_expression
+conditional_or_expression:
+        conditional_and_expression or_conditional_and_expression*
+or_conditional_and_expression:
+        "||" conditional_and_expression
+conditional_and_expression:
+        inclusive_or_expression and_inclusive_or_expression*
+and_inclusive_or_expression:
+        "&&" inclusive_or_expression
+inclusive_or_expression:
+        exclusive_or_expression or_exclusive_or_expression*
+or_exclusive_or_expression:
+        "|" exclusive_or_expression
+exclusive_or_expression:
+        and_expression or_and_expression*
+or_and_expression:
+        "^" and_expression
+and_expression:
+        equality_expression and_equality_expression*
+and_equality_expression:
+        "&" equality_expression
+equality_expression:
+        relational_expression equality_op_relational_expression*
+equality_op_relational_expression:
+        equality_op relational_expression
+equality_op:
+        "=="
+        "!="
+relational_expression:
+        shift_expression relational_op_shift_expression*
+relational_op_shift_expression:
+        relational_op shift_expression
+        "instanceof" type_specifier
+relational_op:
+        "<"
+        ">"
+        "<="
+        ">="
+shift_expression:
+        additive_expression shift_additive_expression*
+shift_additive_expression:
+        shift_op additive_expression
+shift_op:
+        "<<"
+        ">>"
+        ">>>"
+additive_expression:
+        multiplicative_expression add_op_multiplicative_expression*
+add_op_multiplicative_expression:
+        add_op multiplicative_expression
+add_op:
+        "+"
+        "-"
+multiplicative_expression:
+        unary_expression mult_op_unary_expression*
+mult_op_unary_expression:
+        mult_op unary_expression
+mult_op:
+        "*"
+        "/"
+        "%"
+unary_expression:
+        pre_inc_dec unary_expression
+        unary_op unary_expression
+        postfix_expression
+        cast_expression
+pre_inc_dec:
+        "++"
+        "--"
+unary_op:
+        "+"
+        "-"
+        "~"
+        "!"
+cast_expression:
+        "(" type_specifier ")" unary_expression
+postfix_expression:
+        primary post_inc_dec*
+post_inc_dec:
+        "++"
+        "--"
+subscript:
+        "[" expression "]"
+primary:
+        literal
+        reference
+        "(" expression ")" component*
+        class_instance_creation_expression
+        array_creation_expression
+literal:
+        numeric_literal
+        character_literal
+        string_literal
+        boolean_literal
+        null_literal
+numeric_literal:
+        number
+character_literal:
+        charlit
+string_literal:
+        stringlit
+boolean_literal:
+        "true"
+        "false"
+null_literal:
+        "null"
+class_instance_creation_expression:
+        "new" class_or_interface_name "(" {argument ","}* ")" class_body?
+class_or_interface_name:
+        qualified_name
+array_creation_expression:
+        "new" array_type_specifier array_initializer?
+dimension:
+        "[" expression? "]"
+argument:
+        expression
+qualified_name:
+        reference
+reference:
+        id component*
+component:
+        dot_id
+        method_argument
+        subscript
+method_argument:
+        "(" {argument ","}* ")"
+dot_id:
+        "." id

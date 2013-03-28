@@ -1,0 +1,359 @@
+module Main
+
+exports
+  sorts
+        Program Package-declaration Package-header Package-name Import-declaration Imported-name Package-or-type-name Dot-star Declared-name Type-declaration Class-declaration Class-header Class-body Interface-declaration Interface-header Interface-body Modifier Extends-clause Implements-clause Class-name Interface-name Class-or-interface-body Class-body-declaration Empty-declaration Member-declaration Method-or-constructor-declaration Instance-initializer Static-initializer Constructor-declaration Constructor-declarator Constructor-body Field-declaration Variable-declaration Variable-declarators Variable-declarator Variable-name Equals-variable-initializer Variable-initializer Array-initializer Method-declaration Method-declarator Method-name Formal-parameter Formal-parameter-name Throws Method-body Type-specifier Array-type-specifier Type-name Primitive-type Block Declaration-or-statement Local-variable-declaration Statement Empty-statement Label-statement Label-name Expression-statement If-statement Else-clause Switch-statement Switch-block Switch-alternative Switch-label While-statement Do-statement For-statement For-init For-expression For-update Break-statement Continue-statement Return-statement Throw-statement Synchronized-statement Try-statement Catch-clause Finally-clause Constant-expression Expression Assignment-expression Assignment-operator Conditional-expression Conditional-choice Conditional-or-expression Or-conditional-and-expression Conditional-and-expression And-inclusive-or-expression Inclusive-or-expression Or-exclusive-or-expression Exclusive-or-expression Or-and-expression And-expression And-equality-expression Equality-expression Equality-op-relational-expression Equality-op Relational-expression Relational-op-shift-expression Relational-op Shift-expression Shift-additive-expression Shift-op Additive-expression Add-op-multiplicative-expression Add-op Multiplicative-expression Mult-op-unary-expression Mult-op Unary-expression Pre-inc-dec Unary-op Cast-expression Postfix-expression Post-inc-dec Subscript Primary Literal Numeric-literal Character-literal String-literal Boolean-literal Null-literal Class-instance-creation-expression Class-or-interface-name Array-creation-expression Dimension Argument Qualified-name Reference Component Method-argument Dot-id 
+  context-free syntax
+        Package-declaration -> Program
+
+        Package-header? Import-declaration* Type-declaration* -> Package-declaration
+
+        "package" Package-name ";" (NL NL) -> Package-header
+
+        Qualified-name -> Package-name
+
+        "import" Imported-name ";" (NL NL) -> Import-declaration
+
+        Package-or-type-name Dot-star? -> Imported-name
+
+        Qualified-name -> Package-or-type-name
+
+        "." "*" -> Dot-star
+
+        Reference -> Declared-name
+
+        Class-declaration (NL NL) -> Type-declaration
+        Interface-declaration (NL NL) -> Type-declaration
+
+        Class-header Class-body -> Class-declaration
+
+        Modifier* "class" Class-name Extends-clause? Implements-clause? -> Class-header
+
+        Class-or-interface-body -> Class-body
+
+        Interface-header Interface-body -> Interface-declaration
+
+        Modifier* "interface" Interface-name Extends-clause? Implements-clause? -> Interface-header
+
+        Class-or-interface-body -> Interface-body
+
+        "abstract" -> Modifier
+        "final" -> Modifier
+        "public" -> Modifier
+        "protected" -> Modifier
+        "private" -> Modifier
+        "static" -> Modifier
+        "transient" -> Modifier
+        "volatile" -> Modifier
+        "native" -> Modifier
+        "synchronized" -> Modifier
+        "strictfp" -> Modifier
+
+        "extends" Type-name+ -> Extends-clause
+
+        "implements" Qualified-name+ -> Implements-clause
+
+        Declared-name -> Class-name
+
+        Declared-name -> Interface-name
+
+        "{" (NL IN) Class-body-declaration* EX "}" ";"? (NL NL) -> Class-or-interface-body
+
+        Empty-declaration -> Class-body-declaration
+        Member-declaration -> Class-body-declaration
+        Instance-initializer -> Class-body-declaration
+        Static-initializer -> Class-body-declaration
+        Field-declaration -> Class-body-declaration
+
+        ";" NL -> Empty-declaration
+
+        Method-or-constructor-declaration -> Member-declaration
+        Type-declaration -> Member-declaration
+
+        Method-declaration -> Method-or-constructor-declaration
+        Constructor-declaration -> Method-or-constructor-declaration
+
+        NL Block (NL NL) -> Instance-initializer
+
+        NL "static" Block (NL NL) -> Static-initializer
+
+        NL Modifier* Constructor-declarator Throws? Constructor-body (NL NL) -> Constructor-declaration
+
+        Class-name "(" Formal-parameter"," ")" -> Constructor-declarator
+
+        Block NL -> Constructor-body
+
+        Variable-declaration -> Field-declaration
+
+        Modifier* Type-specifier Variable-declarators ";" NL -> Variable-declaration
+
+        Variable-declarator+ -> Variable-declarators
+
+        Variable-name Equals-variable-initializer? -> Variable-declarator
+
+        Declared-name Dimension* -> Variable-name
+
+        "=" Variable-initializer -> Equals-variable-initializer
+
+        Expression -> Variable-initializer
+        Array-initializer -> Variable-initializer
+
+        "{" Variable-initializer"," ","? "}" -> Array-initializer
+
+        NL Modifier* Type-specifier Method-declarator Throws? Method-body -> Method-declaration
+
+        Method-name "(" Formal-parameter"," ")" Dimension* -> Method-declarator
+
+        Declared-name -> Method-name
+
+        "final"? Type-specifier Formal-parameter-name -> Formal-parameter
+
+        Variable-name -> Formal-parameter-name
+
+        "throws" Qualified-name+ -> Throws
+
+        Block (NL NL) -> Method-body
+        ";" (NL NL) -> Method-body
+
+        Type-name -> Type-specifier
+        Array-type-specifier -> Type-specifier
+
+        Type-name Dimension+ -> Array-type-specifier
+
+        Primitive-type -> Type-name
+        Qualified-name -> Type-name
+
+        "boolean" -> Primitive-type
+        "char" -> Primitive-type
+        "byte" -> Primitive-type
+        "short" -> Primitive-type
+        "int" -> Primitive-type
+        "long" -> Primitive-type
+        "float" -> Primitive-type
+        "double" -> Primitive-type
+        "void" -> Primitive-type
+
+        "{" (NL IN) Declaration-or-statement* EX "}" -> Block
+
+        Local-variable-declaration -> Declaration-or-statement
+        Class-declaration -> Declaration-or-statement
+        Statement -> Declaration-or-statement
+
+        Variable-declaration -> Local-variable-declaration
+
+        Label-statement -> Statement
+        Empty-statement -> Statement
+        Expression-statement -> Statement
+        If-statement -> Statement
+        Switch-statement -> Statement
+        While-statement -> Statement
+        Do-statement -> Statement
+        For-statement -> Statement
+        Break-statement -> Statement
+        Continue-statement -> Statement
+        Return-statement -> Statement
+        Throw-statement -> Statement
+        Synchronized-statement -> Statement
+        Try-statement -> Statement
+        Block -> Statement
+
+        ";" NL -> Empty-statement
+
+        Label-name ":" NL -> Label-statement
+
+        Reference -> Label-name
+
+        Expression ";" NL -> Expression-statement
+
+        "if" "(" Expression ")" Statement Else-clause? NL -> If-statement
+
+        "else" Statement -> Else-clause
+
+        "switch" "(" Expression ")" Switch-block NL -> Switch-statement
+
+        "{" (IN NL) Switch-alternative* EX "}" -> Switch-block
+
+        Switch-label (IN NL) Declaration-or-statement* EX -> Switch-alternative
+
+        "case" Constant-expression ":" -> Switch-label
+        "default" ":" -> Switch-label
+
+        "while" "(" Expression ")" Statement NL -> While-statement
+
+        "do" Statement "while" "(" Expression ")" ";" NL -> Do-statement
+
+        "for" "(" For-init For-expression For-update ")" Statement NL -> For-statement
+
+        Expression"," ";" -> For-init
+        Local-variable-declaration -> For-init
+
+        Expression? ";" -> For-expression
+
+        Expression"," -> For-update
+
+        "break" Label-name? ";" NL -> Break-statement
+
+        "continue" Label-name? ";" NL -> Continue-statement
+
+        "return" Expression? ";" NL -> Return-statement
+
+        "throw" Expression ";" NL -> Throw-statement
+
+        "synchronized" "(" Expression ")" Statement NL -> Synchronized-statement
+
+        "try" Block Catch-clause* Finally-clause? NL -> Try-statement
+
+        "catch" "(" Type-specifier Variable-name ")" Block -> Catch-clause
+
+        "finally" Block -> Finally-clause
+
+        Expression -> Constant-expression
+
+        Assignment-expression -> Expression
+
+        Conditional-expression -> Assignment-expression
+        Unary-expression Assignment-operator Assignment-expression -> Assignment-expression
+
+        "=" -> Assignment-operator
+        "*=" -> Assignment-operator
+        "/=" -> Assignment-operator
+        "%=" -> Assignment-operator
+        "+=" -> Assignment-operator
+        "-=" -> Assignment-operator
+        "<<=" -> Assignment-operator
+        ">>=" -> Assignment-operator
+        ">>>=" -> Assignment-operator
+        "&=" -> Assignment-operator
+        "^=" -> Assignment-operator
+        "|=" -> Assignment-operator
+
+        Conditional-or-expression Conditional-choice? -> Conditional-expression
+
+        "?" Expression ":" Conditional-expression -> Conditional-choice
+
+        Conditional-and-expression Or-conditional-and-expression* -> Conditional-or-expression
+
+        "||" Conditional-and-expression -> Or-conditional-and-expression
+
+        Inclusive-or-expression And-inclusive-or-expression* -> Conditional-and-expression
+
+        "&&" Inclusive-or-expression -> And-inclusive-or-expression
+
+        Exclusive-or-expression Or-exclusive-or-expression* -> Inclusive-or-expression
+
+        "|" Exclusive-or-expression -> Or-exclusive-or-expression
+
+        And-expression Or-and-expression* -> Exclusive-or-expression
+
+        "^" And-expression -> Or-and-expression
+
+        Equality-expression And-equality-expression* -> And-expression
+
+        "&" Equality-expression -> And-equality-expression
+
+        Relational-expression Equality-op-relational-expression* -> Equality-expression
+
+        Equality-op Relational-expression -> Equality-op-relational-expression
+
+        "==" -> Equality-op
+        "!=" -> Equality-op
+
+        Shift-expression Relational-op-shift-expression* -> Relational-expression
+
+        Relational-op Shift-expression -> Relational-op-shift-expression
+        "instanceof" Type-specifier -> Relational-op-shift-expression
+
+        "<" -> Relational-op
+        ">" -> Relational-op
+        "<=" -> Relational-op
+        ">=" -> Relational-op
+
+        Additive-expression Shift-additive-expression* -> Shift-expression
+
+        Shift-op Additive-expression -> Shift-additive-expression
+
+        "<<" -> Shift-op
+        ">>" -> Shift-op
+        ">>>" -> Shift-op
+
+        Multiplicative-expression Add-op-multiplicative-expression* -> Additive-expression
+
+        Add-op Multiplicative-expression -> Add-op-multiplicative-expression
+
+        "+" -> Add-op
+        "-" -> Add-op
+
+        Unary-expression Mult-op-unary-expression* -> Multiplicative-expression
+
+        Mult-op Unary-expression -> Mult-op-unary-expression
+
+        "*" -> Mult-op
+        "/" -> Mult-op
+        "%" -> Mult-op
+
+        Pre-inc-dec Unary-expression -> Unary-expression
+        Unary-op Unary-expression -> Unary-expression
+        Postfix-expression -> Unary-expression
+        Cast-expression -> Unary-expression
+
+        "++" -> Pre-inc-dec
+        "--" -> Pre-inc-dec
+
+        "+" -> Unary-op
+        "-" -> Unary-op
+        "~" -> Unary-op
+        "!" -> Unary-op
+
+        "(" Type-specifier ")" Unary-expression -> Cast-expression
+
+        Primary Post-inc-dec* -> Postfix-expression
+
+        "++" -> Post-inc-dec
+        "--" -> Post-inc-dec
+
+        "[" Expression "]" -> Subscript
+
+        Literal -> Primary
+        Reference -> Primary
+        "(" Expression ")" Component* -> Primary
+        Class-instance-creation-expression -> Primary
+        Array-creation-expression -> Primary
+
+        Numeric-literal -> Literal
+        Character-literal -> Literal
+        String-literal -> Literal
+        Boolean-literal -> Literal
+        Null-literal -> Literal
+
+        Number -> Numeric-literal
+
+        Charlit -> Character-literal
+
+        Stringlit -> String-literal
+
+        "true" -> Boolean-literal
+        "false" -> Boolean-literal
+
+        "null" -> Null-literal
+
+        "new" Class-or-interface-name "(" Argument"," ")" Class-body? -> Class-instance-creation-expression
+
+        Qualified-name -> Class-or-interface-name
+
+        "new" Array-type-specifier Array-initializer? -> Array-creation-expression
+
+        "[" Expression? "]" -> Dimension
+
+        Expression -> Argument
+
+        Reference -> Qualified-name
+
+        Id Component* -> Reference
+
+        Dot-id -> Component
+        Method-argument -> Component
+        Subscript -> Component
+
+        "(" Argument"," ")" -> Method-argument
+
+        "." Id -> Dot-id

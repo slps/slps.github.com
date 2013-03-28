@@ -77,6 +77,8 @@ all:
 	_dev/format zoo java/java-1-jls-read java-1/jls-read
 	cp ../slps/topics/grammars/java-1/jls-impl/grammar.bgf zoo/java/java-1-jls-impl.bgf
 	_dev/format zoo java/java-1-jls-impl java-1/jls-impl
+	cp ../slps/topics/grammars/java-1/cordy-guo/grammar.bgf zoo/java/java-1-cordy-guo.bgf
+	_dev/format zoo java/java-1-cordy-guo java-1/cordy-guo
 	cp ../slps/topics/grammars/java-2/jls-read/grammar.bgf zoo/java/java-2-jls-read.bgf
 	_dev/format zoo java/java-2-jls-read java-2/jls-read
 	cp ../slps/topics/grammars/java-2/jls-impl/grammar.bgf zoo/java/java-2-jls-impl.bgf
@@ -93,6 +95,10 @@ all:
 	_dev/format zoo java/java-5-parr java-5/parr
 	cp ../slps/topics/grammars/java-5/habelitz/grammar.bgf zoo/java/java-5-habelitz.bgf
 	_dev/format zoo java/java-5-habelitz java-5/habelitz
+	cp ../slps/topics/grammars/java-5/cordy-guo-dean/grammar.bgf zoo/java/java-5-cordy-guo-dean.bgf
+	_dev/format zoo java/java-5-cordy-guo-dean java-5/cordy-guo-dean
+	cp ../slps/topics/grammars/js/synytskyy-cordy/grammar.bgf zoo/javascript/js-synytskyy-cordy.bgf
+	_dev/format zoo javascript/js-synytskyy-cordy js/synytskyy-cordy
 	cp ../slps/topics/grammars/modula/src-052/grammar.bgf zoo/modula/src-052.bgf
 	_dev/format zoo modula/src-052 modula/src-052
 	cp ../slps/topics/grammars/modula/sdf/grammar.bgf zoo/modula/sdf.bgf

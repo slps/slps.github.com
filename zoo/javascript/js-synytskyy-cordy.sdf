@@ -1,0 +1,255 @@
+module Main
+
+exports
+  sorts
+        Program Js-program Js-subscope Js-declaration-or-statement Js-label Js-declaration Js-variable-declaration Js-variable-description Js-variable-initialization Js-constant-declaration Js-constant-description Js-function-declaration Js-function-expn Js-formal-parameter Js-expn Js-assignment-expn Assign-js-conditional-expn Js-assignment-op Js-conditional-expn Js-conditional-clause Js-logical-or-expn Js-logical-or-logical-and-expn Js-logical-and-expn Js-logical-and-bitwise-or-expn Js-bitwise-or-expn Js-bitwise-or-bitwise-xor-expn Js-bitwise-xor-expn Js-bitwise-xor-bitwise-and-expn Js-bitwise-and-expn Js-bitwise-and-equality-expn Js-equality-expn Js-equality-op-relational-expn Js-equality-op Js-relational-expn Js-relational-op-shift-expn Js-relational-op Js-shift-expn Js-shift-op-additive-expn Js-shift-op Js-additive-expn Js-additive-op-multiplicative-expn Js-additive-op Js-multiplicative-expn Js-multiplicative-op-unary-expn Js-multiplicative-op Js-unary-expn Js-unary-op Js-postfix-expn Js-postfix-op Js-lefthand-side-expn Js-member-expn Js-selector Js-arguments Js-subscripts Js-field-selector Js-primary-expn Js-literal Js-numeric-literal Js-string-literal Js-regular-expn-literal Js-array-literal Js-array-element Js-object-literal Js-property-assignment Js-property-name Js-property-set-parameter Js-statement Js-empty-statement Js-compound-statement Js-expression-statement Js-if-statement Js-else-clause Js-for-statement Js-declaration-or-statement-no-nl Js-while-statement Js-break-statement Js-continue-statement Js-return-statement Js-with-statement Js-switch-statement Js-case-clause Js-case-clause-value Js-do-statement Js-try-catch-statement Js-catch-clause Js-finally-clause Js-throw-statement Js-debugger-statement 
+  context-free syntax
+        Js-program -> Program
+
+        Js-declaration-or-statement* -> Js-program
+
+        Js-declaration-or-statement* -> Js-subscope
+
+        Js-declaration NL -> Js-declaration-or-statement
+        Js-label? Js-statement NL -> Js-declaration-or-statement
+        Comment NL -> Js-declaration-or-statement
+
+        Id ":" -> Js-label
+
+        Js-variable-declaration ";"? -> Js-declaration
+        Js-constant-declaration ";"? -> Js-declaration
+        Js-function-declaration ";"? -> Js-declaration
+
+        "var" Js-variable-description"," -> Js-variable-declaration
+
+        Id Js-variable-initialization? -> Js-variable-description
+
+        "=" Js-assignment-expn -> Js-variable-initialization
+
+        "const" Js-constant-description"," -> Js-constant-declaration
+
+        Id Js-variable-initialization -> Js-constant-description
+
+        NL "function" Id "(" Js-formal-parameter"," ")" NL "{" (NL IN) Js-subscope EX "}" NL -> Js-function-declaration
+
+        "function" Id? "(" Js-formal-parameter"," ")" NL "{" (NL IN) Js-subscope EX "}" -> Js-function-expn
+
+        Id -> Js-formal-parameter
+
+        Js-assignment-expn+ -> Js-expn
+
+        Js-conditional-expn Assign-js-conditional-expn* -> Js-assignment-expn
+
+        Js-assignment-op Js-conditional-expn -> Assign-js-conditional-expn
+
+        "=" -> Js-assignment-op
+        "*=" -> Js-assignment-op
+        "/" SPOFF "=" SPON -> Js-assignment-op
+        "%=" -> Js-assignment-op
+        "+=" -> Js-assignment-op
+        "-=" -> Js-assignment-op
+        "<<=" -> Js-assignment-op
+        ">>=" -> Js-assignment-op
+        ">>>=" -> Js-assignment-op
+        "&=" -> Js-assignment-op
+        "^=" -> Js-assignment-op
+        "|=" -> Js-assignment-op
+
+        Js-logical-or-expn Js-conditional-clause? -> Js-conditional-expn
+
+        "?" Js-assignment-expn ":" Js-assignment-expn -> Js-conditional-clause
+
+        Js-logical-and-expn Js-logical-or-logical-and-expn* -> Js-logical-or-expn
+
+        "||" Js-logical-and-expn -> Js-logical-or-logical-and-expn
+
+        Js-bitwise-or-expn Js-logical-and-bitwise-or-expn* -> Js-logical-and-expn
+
+        "&&" Js-bitwise-or-expn -> Js-logical-and-bitwise-or-expn
+
+        Js-bitwise-xor-expn Js-bitwise-or-bitwise-xor-expn* -> Js-bitwise-or-expn
+
+        "|" Js-bitwise-xor-expn -> Js-bitwise-or-bitwise-xor-expn
+
+        Js-bitwise-and-expn Js-bitwise-xor-bitwise-and-expn* -> Js-bitwise-xor-expn
+
+        "^" Js-bitwise-and-expn -> Js-bitwise-xor-bitwise-and-expn
+
+        Js-equality-expn Js-bitwise-and-equality-expn* -> Js-bitwise-and-expn
+
+        "&" Js-equality-expn -> Js-bitwise-and-equality-expn
+
+        Js-relational-expn Js-equality-op-relational-expn* -> Js-equality-expn
+
+        Js-equality-op Js-relational-expn -> Js-equality-op-relational-expn
+
+        "==" -> Js-equality-op
+        "!=" -> Js-equality-op
+        "===" -> Js-equality-op
+        "!==" -> Js-equality-op
+        "in" -> Js-equality-op
+        "instanceof" -> Js-equality-op
+
+        Js-shift-expn Js-relational-op-shift-expn* -> Js-relational-expn
+
+        Js-relational-op Js-shift-expn -> Js-relational-op-shift-expn
+
+        "<" -> Js-relational-op
+        ">" -> Js-relational-op
+        "<=" -> Js-relational-op
+        ">=" -> Js-relational-op
+
+        Js-additive-expn Js-shift-op-additive-expn* -> Js-shift-expn
+
+        Js-shift-op Js-additive-expn -> Js-shift-op-additive-expn
+
+        "<<" -> Js-shift-op
+        ">>" -> Js-shift-op
+        ">>>" -> Js-shift-op
+
+        Js-multiplicative-expn Js-additive-op-multiplicative-expn* -> Js-additive-expn
+
+        Js-additive-op Js-multiplicative-expn -> Js-additive-op-multiplicative-expn
+
+        "+" -> Js-additive-op
+        "-" -> Js-additive-op
+
+        Js-unary-expn Js-multiplicative-op-unary-expn* -> Js-multiplicative-expn
+
+        Js-multiplicative-op Js-unary-expn -> Js-multiplicative-op-unary-expn
+
+        "*" -> Js-multiplicative-op
+        "/" -> Js-multiplicative-op
+        "%" -> Js-multiplicative-op
+
+        Js-unary-op* Js-postfix-expn -> Js-unary-expn
+
+        "delete" -> Js-unary-op
+        "void" -> Js-unary-op
+        "typeof" -> Js-unary-op
+        "++" -> Js-unary-op
+        "--" -> Js-unary-op
+        "+" -> Js-unary-op
+        "-" -> Js-unary-op
+        "~" -> Js-unary-op
+        "!" -> Js-unary-op
+
+        Js-lefthand-side-expn Js-postfix-op? -> Js-postfix-expn
+
+        "++" -> Js-postfix-op
+        "--" -> Js-postfix-op
+
+        "new"? Js-member-expn -> Js-lefthand-side-expn
+
+        Js-primary-expn Js-selector* -> Js-member-expn
+
+        Js-arguments -> Js-selector
+        Js-subscripts -> Js-selector
+        Js-field-selector -> Js-selector
+
+        "(" Js-assignment-expn"," ")" -> Js-arguments
+
+        "[" Js-expn "]" -> Js-subscripts
+
+        "." Id -> Js-field-selector
+
+        "this" -> Js-primary-expn
+        "class" -> Js-primary-expn
+        Id -> Js-primary-expn
+        Js-literal -> Js-primary-expn
+        Js-array-literal -> Js-primary-expn
+        Js-object-literal -> Js-primary-expn
+        Js-function-expn -> Js-primary-expn
+        "(" Js-expn ")" -> Js-primary-expn
+
+        "null" -> Js-literal
+        "true" -> Js-literal
+        "false" -> Js-literal
+        Js-numeric-literal -> Js-literal
+        Js-string-literal -> Js-literal
+        Js-regular-expn-literal -> Js-literal
+
+        Number -> Js-numeric-literal
+        Js-hex-number -> Js-numeric-literal
+
+        Stringlit -> Js-string-literal
+        Charlit -> Js-string-literal
+
+        Js-regexp -> Js-regular-expn-literal
+
+        "[" Js-array-element"," "]" -> Js-array-literal
+
+        Js-assignment-expn? -> Js-array-element
+
+        "{" Js-property-assignment"," ","? "}" -> Js-object-literal
+
+        Js-property-name ":" Js-expn -> Js-property-assignment
+        "get" Js-property-name "(" ")" "{" Js-subscope "}" -> Js-property-assignment
+        "set" Js-property-name "(" Js-property-set-parameter ")" "{" Js-subscope "}" -> Js-property-assignment
+
+        Id -> Js-property-name
+        Js-string-literal -> Js-property-name
+        Number -> Js-property-name
+
+        Id -> Js-property-set-parameter
+
+        Js-compound-statement ";"? -> Js-statement
+        Js-expression-statement ";"? -> Js-statement
+        Js-if-statement ";"? -> Js-statement
+        Js-for-statement ";"? -> Js-statement
+        Js-while-statement ";"? -> Js-statement
+        Js-break-statement ";"? -> Js-statement
+        Js-continue-statement ";"? -> Js-statement
+        Js-return-statement ";"? -> Js-statement
+        Js-with-statement ";"? -> Js-statement
+        Js-switch-statement ";"? -> Js-statement
+        Js-do-statement ";"? -> Js-statement
+        Js-try-catch-statement ";"? -> Js-statement
+        Js-throw-statement ";"? -> Js-statement
+        Js-debugger-statement ";"? -> Js-statement
+        Js-empty-statement -> Js-statement
+
+        ";" -> Js-empty-statement
+
+        "{" (NL IN) Js-subscope EX "}" -> Js-compound-statement
+
+        Js-expn -> Js-expression-statement
+
+        "if" "(" Js-expn ")" Js-declaration-or-statement Js-else-clause? -> Js-if-statement
+
+        "else" Js-declaration-or-statement -> Js-else-clause
+
+        "for" "(" Js-declaration-or-statement-no-nl"," ";" Js-expn? ";" Js-expn? ")" Js-statement -> Js-for-statement
+        "for" "each"? "(" Js-declaration-or-statement-no-nl "in" Js-expn ")" Js-statement -> Js-for-statement
+
+        Js-declaration -> Js-declaration-or-statement-no-nl
+        Js-statement -> Js-declaration-or-statement-no-nl
+
+        "while" "(" Js-expn ")" Js-statement -> Js-while-statement
+
+        "break" Id? -> Js-break-statement
+
+        "continue" Id? -> Js-continue-statement
+
+        "return" Js-expn? -> Js-return-statement
+
+        "with" "(" Js-expn ")" Js-statement -> Js-with-statement
+
+        "switch" "(" Js-expn ")" "{" NL Js-case-clause* "}" -> Js-switch-statement
+
+        Js-case-clause-value (NL IN) Js-subscope EX -> Js-case-clause
+
+        "case" Js-expn ":" -> Js-case-clause-value
+        "default" ":" -> Js-case-clause-value
+
+        "do" Js-statement "while" "(" Js-expn ")" -> Js-do-statement
+
+        "try" Js-compound-statement Js-catch-clause? Js-finally-clause? -> Js-try-catch-statement
+
+        NL "catch" "(" Id ")" Js-compound-statement -> Js-catch-clause
+
+        NL "finally" Js-compound-statement -> Js-finally-clause
+
+        "throw" Js-expn -> Js-throw-statement
+
+        "debugger" -> Js-debugger-statement

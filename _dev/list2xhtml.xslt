@@ -125,7 +125,7 @@
 					<li>
 						<xsl:text>BNF-like Grammar Format:</xsl:text>
 						<span class="links">
-							[<a href="https://github.com/grammarware/slps/blob/master/shared/xsd/bgf.xsd">Schema</a>]
+							[<a href="http://github.com/grammarware/slps/blob/master/shared/xsd/bgf.xsd">Schema</a>]
 							[<a href="http://www.w3.org/TR/xml/">W3C XML Rec</a>]
 							[<a href="http://www.w3.org/TR/xmlschema11-1/">W3C XSD WD 1</a>]
 							[<a href="http://www.w3.org/TR/xmlschema11-2/">W3C XSD WD 2</a>]
@@ -199,6 +199,22 @@ Last updated: </xsl:text>
 			</span>
 		</li>
 	</xsl:template>
+	<xsl:template match="readme">
+		<xsl:text> [</xsl:text>
+		<xsl:variable name="handle">
+			<xsl:choose>
+				<xsl:when test="text()!=''">
+					<xsl:value-of select="."/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="../../handle"/>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+		<a xmlns="http://www.w3.org/1999/xhtml" href="http://github.com/grammarware/slps/blob/master/topics/grammars/{$handle}/README.txt">ReadMe</a>
+		<xsl:text>]
+</xsl:text>
+	</xsl:template>
 	<xsl:template match="link">
 		<xsl:text> [</xsl:text>
 		<xsl:choose>
@@ -208,7 +224,7 @@ Last updated: </xsl:text>
 				</a>
 			</xsl:when>
 			<xsl:when test="mu">
-				<a xmlns="http://www.w3.org/1999/xhtml" href="https://github.com/grammarware/slps/blob/master/{mu}">
+				<a xmlns="http://www.w3.org/1999/xhtml" href="http://github.com/grammarware/slps/blob/master/{mu}">
 					<xsl:value-of select="name"/>
 				</a>
 			</xsl:when>
@@ -219,7 +235,7 @@ Last updated: </xsl:text>
 				</a>
 			</xsl:when>
 			<xsl:when test="slps">
-				<a xmlns="http://www.w3.org/1999/xhtml" href="https://github.com/grammarware/slps/tree/master/{slps}">
+				<a xmlns="http://www.w3.org/1999/xhtml" href="http://github.com/grammarware/slps/tree/master/{slps}">
 					<xsl:value-of select="name"/>
 				</a>
 			</xsl:when>
@@ -229,7 +245,8 @@ Last updated: </xsl:text>
 				</a>
 			</xsl:when>
 		</xsl:choose>
-		<xsl:text>] </xsl:text>
+		<xsl:text>]
+</xsl:text>
 	</xsl:template>
 	<xsl:template match="source">
 		<li xmlns="http://www.w3.org/1999/xhtml">
@@ -276,7 +293,7 @@ Last updated: </xsl:text>
 				<xsl:value-of select="specific"/>
 			</xsl:if>
 			<span class="links">
-				<xsl:apply-templates select="link"/>
+				<xsl:apply-templates select="link|readme"/>
 			</span>
 		</li>
 	</xsl:template>
