@@ -223,6 +223,11 @@ Last updated: </xsl:text>
 					<xsl:value-of select="name"/>
 				</a>
 			</xsl:when>
+			<xsl:when test="@wiki">
+				<a xmlns="http://www.w3.org/1999/xhtml" href="http://github.com/grammarware/slps/wiki/{@wiki}">
+					<xsl:value-of select="@wiki"/>
+				</a>
+			</xsl:when>
 			<xsl:when test="mu">
 				<a xmlns="http://www.w3.org/1999/xhtml" href="http://github.com/grammarware/slps/blob/master/{mu}">
 					<xsl:value-of select="name"/>

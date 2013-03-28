@@ -1,4 +1,6 @@
 all:
+	cp ../slps/topics/grammars/hats/abs/grammar.bgf zoo/hats/abs.bgf
+	_dev/format zoo hats/abs hats/abs
 	cp ../slps/topics/grammars/ada/kempe/grammar.bgf zoo/ada/kempe.bgf
 	_dev/format zoo ada/kempe ada/kempe
 	cp ../slps/topics/grammars/ada/laemmel-verhoef/grammar.bgf zoo/ada/laemmel-verhoef.bgf
@@ -103,6 +105,8 @@ all:
 	_dev/format zoo modula/src-052 modula/src-052
 	cp ../slps/topics/grammars/modula/sdf/grammar.bgf zoo/modula/sdf.bgf
 	_dev/format zoo modula/sdf modula/sdf
+	cp ../slps/topics/grammars/modula/dagenais-cordy/grammar.bgf zoo/modula/dagenais-cordy.bgf
+	_dev/format zoo modula/dagenais-cordy modula/dagenais-cordy
 	cp ../slps/topics/grammars/pascal/delphi/grammar.bgf zoo/pascal/delphi.bgf
 	_dev/format zoo pascal/delphi pascal/delphi
 	cp ../slps/topics/grammars/pascal/delphipp/grammar.bgf zoo/pascal/delphipp.bgf

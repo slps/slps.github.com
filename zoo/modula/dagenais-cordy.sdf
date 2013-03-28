@@ -1,0 +1,340 @@
+module Main
+
+exports
+ context-free start-symbols program
+  sorts
+        Program Interface IInterface Module IModule GInterface GModule Exports Import AsImport ComaImportItem FromImport Block Decl EqualBlock GenFmls GenActls ImportItem AsId ConstDecl ColonType TypeDecl RevealDecl ExceptionDecl ParenthesizedType VariableDecl EqualExpr ProcedureHead Signature Raises Formals SemicolonFormal Formal EqualConstExpr Mode RaisesList Stmts OptStmts SemiColonStmt Stmt AssignStmt CallStmt CaseStmt VerticalCase ElseStmts ExitStmt EvalStmt ForStmt ByExpr IfStmt Elsif LockStmt LoopStmt RaiseStmt ParenthesizedExpr RepeatStmt ReturnStmt TypecaseStmt VerticalTCase TryStmt ExceptOrFinally VerticalHandler WhileStmt WithStmt Case Labels DotDotConstExpr Handler ParenthesizedId TCase Binding Actual Type ArrayType PackedType EnumerationType ObjectType ObjectOrTypeName TheMethods TheOverrides ProcedureType RecordType RefType SetType SubrangeType Brand Fields FieldList SemiColonField Field Methods MethodList SemiColonMethod Method Overrides OverrideList SemiColonOverride Override ConstExpr Expr OrE1 E1 AndE2 E2 E3 RelOpE4 E4 AddOpE5 E5 MulOpE6 E6 E7 E8 SignOp RelOp AddOp MulOp Selector ComaExpr Constructor AnyCons SetCons SetElt DotDotExpr RecordCons RecordElt ArrayCons ComaDotDot IdList QualId DotId TypeName 
+  context-free syntax
+        Interface -> Program
+        Module -> Program
+        GInterface -> Program
+        GModule -> Program
+        IInterface -> Program
+        IModule -> Program
+
+        "UNSAFE"? "INTERFACE" Id ";" (NL NL) Import* Decl* NL "END" Id "." NL -> Interface
+
+        "UNSAFE"? "INTERFACE" Id "=" Id GenActls "END" Id "." NL -> IInterface
+
+        "UNSAFE"? "MODULE" Id Exports? ";" (NL NL) Import* Block Id "." NL -> Module
+
+        "UNSAFE"? "MODULE" Id Exports? "=" Id GenActls "END" Id "." NL -> IModule
+
+        "GENERIC" "INTERFACE" Id GenFmls ";" Import* Decl* NL "END" Id "." NL -> GInterface
+
+        "GENERIC" "MODULE" Id GenFmls ";" (NL NL) Import* Block Id "." NL -> GModule
+
+        "EXPORTS" IdList -> Exports
+
+        AsImport -> Import
+        FromImport (NL NL) -> Import
+
+        "IMPORT" ImportItem ComaImportItem* ";" (NL NL) -> AsImport
+
+        "," ImportItem -> ComaImportItem
+
+        "FROM" Id "IMPORT" IdList ";" (NL NL) -> FromImport
+
+        Decl* "BEGIN" Stmts "END" -> Block
+
+        ProcedureHead EqualBlock? ";" (NL NL) -> Decl
+        "VAR" (IN NL) VariableDecl* EX -> Decl
+        "TYPE" (IN NL) TypeDecl* (EX NL) -> Decl
+        "CONST" (IN NL) ConstDecl* (EX NL) -> Decl
+        "EXCEPTION" (IN NL) ExceptionDecl* (EX NL) -> Decl
+        "REVEAL" (IN NL) RevealDecl* (EX NL) -> Decl
+
+        "=" (IN NL) Block Id EX -> EqualBlock
+
+        "(" IdList? ")" -> GenFmls
+
+        "(" IdList? ")" -> GenActls
+
+        Id AsId? -> ImportItem
+
+        "AS" Id -> AsId
+
+        Id ColonType? "=" ConstExpr ";" NL -> ConstDecl
+
+        ":" Type -> ColonType
+
+        Id "=" Type ";" NL -> TypeDecl
+        Id "<:" Type ";" NL -> TypeDecl
+
+        QualId "=" Type ";" NL -> RevealDecl
+        QualId "<:" Type ";" NL -> RevealDecl
+
+        Id ParenthesizedType? ";" NL -> ExceptionDecl
+
+        "(" Type ")" -> ParenthesizedType
+
+        IdList ColonType? EqualExpr? ";" NL -> VariableDecl
+
+        ":=" Expr -> EqualExpr
+
+        "PROCEDURE" Id Signature -> ProcedureHead
+
+        "(" Formals? ")" ColonType? Raises? -> Signature
+
+        "RAISES" RaisesList -> Raises
+
+        Formal SemicolonFormal* ";"? -> Formals
+
+        ";" Formal -> SemicolonFormal
+
+        Mode? IdList ColonType? EqualConstExpr? -> Formal
+
+        ":=" ConstExpr -> EqualConstExpr
+
+        "VALUE" -> Mode
+        "VAR" -> Mode
+        "READONLY" -> Mode
+
+        "{" QualId"," "}" -> RaisesList
+        "ANY" -> RaisesList
+
+        (IN NL) OptStmts? EX -> Stmts
+
+        Stmt SemiColonStmt* ";"? NL -> OptStmts
+
+        ";" NL Stmt -> SemiColonStmt
+
+        IfStmt -> Stmt
+        ForStmt -> Stmt
+        ReturnStmt -> Stmt
+        WhileStmt -> Stmt
+        AssignStmt -> Stmt
+        CallStmt -> Stmt
+        Block -> Stmt
+        CaseStmt -> Stmt
+        ExitStmt -> Stmt
+        EvalStmt -> Stmt
+        LockStmt -> Stmt
+        LoopStmt -> Stmt
+        RaiseStmt -> Stmt
+        RepeatStmt -> Stmt
+        TypecaseStmt -> Stmt
+        TryStmt -> Stmt
+        WithStmt -> Stmt
+
+        Expr ":=" Expr -> AssignStmt
+
+        Expr "(" Actual"," ")" -> CallStmt
+
+        "CASE" Expr "OF" NL Case? VerticalCase* ElseStmts? "END" -> CaseStmt
+
+        "|" Case -> VerticalCase
+
+        "ELSE" Stmts -> ElseStmts
+
+        "EXIT" -> ExitStmt
+
+        "EVAL" Expr -> EvalStmt
+
+        "FOR" Id ":=" Expr "TO" Expr ByExpr? "DO" Stmts "END" -> ForStmt
+
+        "BY" Expr -> ByExpr
+
+        "IF" Expr "THEN" Stmts Elsif* ElseStmts? "END" -> IfStmt
+
+        "ELSIF" Expr "THEN" Stmts -> Elsif
+
+        "LOCK" Expr "DO" Stmts "END" -> LockStmt
+
+        "LOOP" Stmts "END" -> LoopStmt
+
+        "RAISE" QualId ParenthesizedExpr? -> RaiseStmt
+
+        "(" Expr ")" -> ParenthesizedExpr
+
+        "REPEAT" Stmts "UNTIL" Expr -> RepeatStmt
+
+        "RETURN" Expr? -> ReturnStmt
+
+        "TYPECASE" Expr "OF" NL TCase? VerticalTCase* ElseStmts? "END" -> TypecaseStmt
+
+        "|" TCase -> VerticalTCase
+
+        "TRY" Stmts ExceptOrFinally "END" -> TryStmt
+
+        "EXCEPT" NL Handler? VerticalHandler* ElseStmts? -> ExceptOrFinally
+        "FINALLY" Stmts -> ExceptOrFinally
+
+        "|" Handler -> VerticalHandler
+
+        "WHILE" Expr "DO" Stmts "END" -> WhileStmt
+
+        "WITH" Binding+ "DO" Stmts "END" -> WithStmt
+
+        Labels"," "=>" Stmts -> Case
+
+        ConstExpr DotDotConstExpr? -> Labels
+
+        ".." ConstExpr -> DotDotConstExpr
+
+        QualId"," ParenthesizedId? "=>" Stmts -> Handler
+
+        "(" Id ")" -> ParenthesizedId
+
+        Type"," ParenthesizedId? "=>" Stmts -> TCase
+
+        Id "=" Expr -> Binding
+
+        Type -> Actual
+        Expr -> Actual
+        Id ":=" Expr -> Actual
+
+        TypeName -> Type
+        ArrayType -> Type
+        EnumerationType -> Type
+        RecordType -> Type
+        ObjectType -> Type
+        ProcedureType -> Type
+        RefType -> Type
+        SetType -> Type
+        SubrangeType -> Type
+        PackedType -> Type
+        "(" Type ")" -> Type
+
+        "ARRAY" Type"," "OF" Type -> ArrayType
+
+        "BITS" ConstExpr "FOR" Type -> PackedType
+
+        "{" IdList? "}" -> EnumerationType
+
+        ObjectOrTypeName? Brand? "OBJECT" (IN NL) Fields TheMethods? TheOverrides? "END" EX -> ObjectType
+
+        TypeName -> ObjectOrTypeName
+        ObjectType -> ObjectOrTypeName
+
+        "METHODS" NL Methods -> TheMethods
+
+        "OVERRIDES" NL Overrides -> TheOverrides
+
+        "PROCEDURE" Signature -> ProcedureType
+
+        "RECORD" (IN NL) Fields "END" EX -> RecordType
+
+        "UNTRACED"? Brand? "REF" Type -> RefType
+
+        "SET" "OF" Type -> SetType
+
+        "[" ConstExpr ".." ConstExpr "]" -> SubrangeType
+
+        "BRANDED" ConstExpr? -> Brand
+
+        FieldList? -> Fields
+
+        IN Field SemiColonField* ";"? (EX NL) -> FieldList
+
+        ";" NL Field -> SemiColonField
+
+        IdList ColonType? EqualConstExpr? -> Field
+
+        MethodList? -> Methods
+
+        IN Method SemiColonMethod* ";"? (EX NL) -> MethodList
+
+        ";" NL Method -> SemiColonMethod
+
+        Id Signature EqualConstExpr? -> Method
+
+        OverrideList? -> Overrides
+
+        IN Override SemiColonOverride* ";"? (EX NL) -> OverrideList
+
+        ";" NL Override -> SemiColonOverride
+
+        Id ":=" ConstExpr -> Override
+
+        Expr -> ConstExpr
+
+        E1 OrE1* -> Expr
+
+        "OR" E1 -> OrE1
+
+        E2 AndE2* -> E1
+
+        "AND" E2 -> AndE2
+
+        "NOT"* E3 -> E2
+
+        E4 RelOpE4* -> E3
+
+        RelOp E4 -> RelOpE4
+
+        E5 AddOpE5* -> E4
+
+        AddOp E5 -> AddOpE5
+
+        E6 MulOpE6* -> E5
+
+        MulOp E6 -> MulOpE6
+
+        SignOp* E7 -> E6
+
+        E8 Selector* -> E7
+
+        Id -> E8
+        Number -> E8
+        Charlit -> E8
+        Stringlit -> E8
+        "(" Expr ")" -> E8
+        Constructor -> E8
+
+        "+" -> SignOp
+        "-" -> SignOp
+
+        "=" -> RelOp
+        "#" -> RelOp
+        "<" -> RelOp
+        "<=" -> RelOp
+        ">" -> RelOp
+        ">=" -> RelOp
+        "IN" -> RelOp
+
+        "+" -> AddOp
+        "-" -> AddOp
+        "&" -> AddOp
+
+        "*" -> MulOp
+        "/" -> MulOp
+        "DIV" -> MulOp
+        "MOD" -> MulOp
+
+        "." Id -> Selector
+        "[" Expr ComaExpr* "]" -> Selector
+        "(" Actual"," ")" -> Selector
+        "^" -> Selector
+
+        "," Expr -> ComaExpr
+
+        Type "{" AnyCons "}" -> Constructor
+
+        SetCons -> AnyCons
+        RecordCons -> AnyCons
+        ArrayCons -> AnyCons
+
+        SetElt"," -> SetCons
+
+        Expr DotDotExpr? -> SetElt
+
+        ".." Expr -> DotDotExpr
+
+        RecordElt"," -> RecordCons
+
+        Expr EqualExpr? -> RecordElt
+
+        Expr"," ComaDotDot? -> ArrayCons
+
+        "," ".." -> ComaDotDot
+
+        Id"," -> IdList
+
+        Id DotId? -> QualId
+
+        "." Id -> DotId
+
+        QualId -> TypeName
+        "ROOT" -> TypeName
+        "UNTRACED" "ROOT" -> TypeName

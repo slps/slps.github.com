@@ -35,6 +35,8 @@ type:
         value_type
         reference_type
         type_parameter
+type:
+        pointer_type
 value_type:
         struct_type
         enum_type
@@ -109,6 +111,8 @@ primary_expression:
         object_initializer_expression
 primary_no_array_creation_expression:
         simple_primary_expression primary_expression_modifier*
+primary_no_array_creation_expression:
+        sizeof_expression
 simple_primary_expression:
         literal
         simple_name
@@ -129,6 +133,9 @@ primary_expression_modifier:
         element_access_operator
         post_increment_operator
         post_decrement_operator
+primary_expression_modifier:
+        pointer_member_access_operator
+        pointer_element_access_operator
 simple_name:
         id type_argument_list?
 parenthesized_expression:
@@ -153,6 +160,8 @@ predefined_type:
         "ushort"
 invocation_operator:
         "(" {argument ","}* ")"
+invocation_operator:
+        "((" argument_list_or_key* "))"
 element_access_operator:
         "[" expression+ "]"
 this_access:
@@ -218,6 +227,9 @@ unary_expression:
         pre_increment_expression
         pre_decrement_expression
         cast_expression
+unary_expression:
+        pointer_indirection_expression
+        addressof_expression
 pre_increment_expression:
         "++" unary_expression
 pre_decrement_expression:
@@ -347,10 +359,6 @@ input_parameters:
         "(" {input_parameter ","}* ")"
 input_parameter:
         type? id
-constant_expression:
-        expression
-boolean_expression:
-        expression
 statement:
         labeled_statement
         declaration_statement
@@ -368,8 +376,12 @@ embedded_statement:
         lock_statement
         using_statement
         yield_statement
+embedded_statement:
+        unsafe_statement
+embedded_statement:
+        fixed_statement
 block:
-        "{" (NL IN) statement_list? EX "}" ";"?
+        "{" NL IN statement_list? EX "}" ";"?
 statement_list:
         statement+
 empty_statement:
@@ -390,6 +402,10 @@ equals_local_variable_initializer:
 local_variable_initializer:
         expression
         array_initializer
+local_variable_initializer:
+        expression
+        array_initializer
+        stackalloc_initializer
 local_constant_declaration:
         "const" type constant_declarators
 expression_statement:
@@ -413,15 +429,15 @@ else_clause:
         "else" nested_statement
 nested_statement:
         block
-        (IN NL) embedded_statement EX
+        IN NL embedded_statement EX
 switch_statement:
         "switch" "(" expression ")" switch_block
 switch_block:
-        "{" (NL IN) switch_sections EX "}" NL
+        "{" NL IN switch_sections EX "}" NL
 switch_sections:
         switch_section+
 switch_section:
-        switch_labels (NL IN) statement_list EX
+        switch_labels NL IN statement_list EX
 switch_labels:
         switch_label+
 switch_label:
@@ -435,7 +451,7 @@ iteration_statement:
 while_statement:
         "while" "(" boolean_expression ")" nested_statement NL
 do_statement:
-        "do" (NL IN) embedded_statement EX "while" "(" boolean_expression ")" ";" NL
+        "do" NL IN embedded_statement EX "while" "(" boolean_expression ")" ";" NL
 for_statement:
         "for" "(" for_initializer? ";" for_condition? ";" for_iterator? ")" nested_statement NL
 for_initializer:
@@ -498,7 +514,7 @@ namespace_declaration:
 qualified_identifier:
         id dot_id*
 namespace_body:
-        "{" (NL IN) extern_alias_directives? using_directives? namespace_member_declarations? EX "}" ";"? NL
+        "{" NL IN extern_alias_directives? using_directives? namespace_member_declarations? EX "}" ";"? NL
 extern_alias_directives:
         extern_alias_directive+ NL
 extern_alias_directive:
@@ -538,6 +554,8 @@ class_modifier:
         "abstract"
         "sealed"
         "static"
+class_modifier:
+        "unsafe"
 class_base:
         ":" class_and_interface_type_ist
 class_and_interface_type_ist:
@@ -546,7 +564,7 @@ class_or_interface_type:
         class_type
         interface_type
 class_body:
-        "{" (NL IN) class_member_declarations? EX "}" ";"? NL
+        "{" NL IN class_member_declarations? EX "}" ";"? NL
 class_member_declarations:
         class_member_declaration+
 class_member_declaration:
@@ -588,6 +606,8 @@ field_modifier:
         "static"
         "readonly"
         "volatile"
+field_modifier:
+        "unsafe"
 variable_declarators:
         variable_declarator+
 variable_declarator:
@@ -616,6 +636,8 @@ method_modifier:
         "abstract"
         "extern"
         "partial"
+method_modifier:
+        "unsafe"
 return_type:
         type
         "void"
@@ -641,7 +663,7 @@ parameter_modifier:
 parameter_array:
         attributes? "params" array_type id
 property_declaration:
-        NL attributes? property_modifiers? type member_name "{" (NL IN) accessor_declarations EX "}" NL
+        NL attributes? property_modifiers? type member_name "{" NL IN accessor_declarations EX "}" NL
 property_modifiers:
         property_modifier+
 property_modifier:
@@ -656,6 +678,8 @@ property_modifier:
         "override"
         "abstract"
         "extern"
+property_modifier:
+        "unsafe"
 accessor_declarations:
         get_accessor_declaration set_accessor_declaration?
         set_accessor_declaration get_accessor_declaration?
@@ -674,7 +698,7 @@ accessor_body:
         ";" NL
 event_declaration:
         attributes? event_modifiers? "event" type variable_declarators ";" NL
-        attributes? event_modifiers? "event" type member_name "{" (NL IN) event_accessor_declarations EX "}" (NL EX)
+        attributes? event_modifiers? "event" type member_name "{" NL IN event_accessor_declarations EX "}" NL EX
 event_modifiers:
         event_modifier+
 event_modifier:
@@ -689,6 +713,8 @@ event_modifier:
         "override"
         "abstract"
         "extern"
+event_modifier:
+        "unsafe"
 event_accessor_declarations:
         add_accessor_declaration remove_accessor_declaration
         remove_accessor_declaration add_accessor_declaration
@@ -697,7 +723,7 @@ add_accessor_declaration:
 remove_accessor_declaration:
         attributes? "remove" block NL
 indexer_declaration:
-        attributes? indexer_modifiers? indexer_declarator "{" (NL IN) accessor_declarations EX "}" NL
+        attributes? indexer_modifiers? indexer_declarator "{" NL IN accessor_declarations EX "}" NL
 indexer_modifiers:
         indexer_modifier+
 indexer_modifier:
@@ -711,6 +737,8 @@ indexer_modifier:
         "override"
         "abstract"
         "extern"
+indexer_modifier:
+        "unsafe"
 indexer_declarator:
         type interface_type_dot? "this" "[" formal_parameter_list "]"
 operator_declaration:
@@ -721,6 +749,8 @@ operator_modifier:
         "public"
         "static"
         "extern"
+operator_modifier:
+        "unsafe"
 operator_declarator:
         unary_operator_declarator
         binary_operator_declarator
@@ -771,6 +801,8 @@ constructor_modifier:
         "internal"
         "private"
         "extern"
+constructor_modifier:
+        "unsafe"
 constructor_declarator:
         id "(" formal_parameter_list? ")" constructor_initializer?
 constructor_initializer:
@@ -784,11 +816,21 @@ static_constructor_declaration:
 static_constructor_modifiers:
         "extern"? "static"
         "static" "extern"?
+static_constructor_modifiers:
+        "extern"? "unsafe"? "static"
+        "unsafe"? "extern"? "static"
+        "extern"? "static" "unsafe"?
+        "unsafe"? "static" "extern"?
+        "static" "extern"? "unsafe"?
+        "static" "unsafe"? "extern"?
 static_constructor_body:
         block NL
         ";" NL
 finalizer_declaration:
         attributes? "extern"? "~" id "(" ")" finalizer_body
+finalizer_declaration:
+        attributes? "extern"? "unsafe"? "~" id "(" ")" NL finalizer_body NL
+        attributes? "unsafe"? "extern"? "~" id "(" ")" NL finalizer_body NL
 finalizer_body:
         block NL
         ";" NL
@@ -802,12 +844,14 @@ struct_modifier:
         "proctected"
         "internal"
         "private"
+struct_modifier:
+        "unsafe"
 struct_interfaces:
         ":" interface_type_list
 interface_type_list:
         interface_type+
 struct_body:
-        "{" (NL IN) struct_member_declarations? EX "}" ";"? NL
+        "{" NL IN struct_member_declarations? EX "}" ";"? NL
 struct_member_declarations:
         struct_member_declaration+
 struct_member_declaration:
@@ -835,10 +879,12 @@ interface_modifier:
         "protected"
         "internal"
         "private"
+interface_modifier:
+        "unsafe"
 interface_base:
         ":" interface_type_list
 interface_body:
-        "{" (NL IN) interface_member_declarations? EX "}" ";"? NL
+        "{" NL IN interface_member_declarations? EX "}" ";"? NL
 interface_member_declarations:
         interface_member_declaration+
 interface_member_declaration:
@@ -849,7 +895,7 @@ interface_member_declaration:
 interface_method_declaration:
         attributes? "new"? return_type id type_parameter_list? "(" formal_parameter_list? ")" type_parameter_constraints_clauses? ";" NL
 interface_property_declaration:
-        attributes? "new"? type id NL "{" (NL IN) interface_accessors EX "}" NL
+        attributes? "new"? type id NL "{" NL IN interface_accessors EX "}" NL
 interface_accessors:
         attributes? "get" ";"
         attributes? "set" ";"
@@ -858,13 +904,13 @@ interface_accessors:
 interface_event_declaration:
         attributes? "new"? "event" type id ";" NL
 interface_indexer_declaration:
-        attributes? "new"? type "this" "[" formal_parameter_list "]" "{" (NL IN) interface_accessors EX "}" NL
+        attributes? "new"? type "this" "[" formal_parameter_list "]" "{" NL IN interface_accessors EX "}" NL
 enum_declaration:
         attributes? enum_modifiers? "enum" id enum_base? enum_body NL
 enum_base:
         ":" integral_type
 enum_body:
-        "{" (NL IN) enum_member_declarations? ","? EX "}" ";"? NL
+        "{" NL IN enum_member_declarations? ","? EX "}" ";"? NL
 enum_modifiers:
         enum_modifier+
 enum_modifier:
@@ -889,6 +935,8 @@ delegate_modifier:
         "protected"
         "internal"
         "private"
+delegate_modifier:
+        "unsafe"
 global_attributes:
         global_attribute_sections
 global_attribute_sections:
@@ -991,3 +1039,6 @@ fixed_pointer_initializer:
         expression
 stackalloc_initializer:
         "stackalloc" unmanaged_type "[" expression "]"
+argument_list_or_key:
+        argument_list
+        "in"
