@@ -1,6 +1,4 @@
 all:
-	cp ../slps/topics/grammars/hats/abs/grammar.bgf zoo/hats/abs.bgf
-	_dev/format zoo hats/abs hats/abs
 	cp ../slps/topics/grammars/ada/kempe/grammar.bgf zoo/ada/kempe.bgf
 	_dev/format zoo ada/kempe ada/kempe
 	cp ../slps/topics/grammars/ada/laemmel-verhoef/grammar.bgf zoo/ada/laemmel-verhoef.bgf

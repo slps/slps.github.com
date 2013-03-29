@@ -260,33 +260,36 @@ Last updated: </xsl:text>
 				<xsl:value-of select="."/>
 				<xsl:text>, </xsl:text>
 			</xsl:for-each>
-			<xsl:if test="title">
-				<em>
-					<xsl:value-of select="title"/>
-					<xsl:text>. </xsl:text>
-				</em>
-			</xsl:if>
-			<xsl:if test="file">
-				<code>
-					<xsl:value-of select="file"/>
-				</code>
-			</xsl:if>
-			<xsl:if test="subtitle">
-				<xsl:value-of select="subtitle"/>
-				<xsl:text>. </xsl:text>
-			</xsl:if>
-			<xsl:if test="edition">
-				<xsl:value-of select="edition"/>
+			<xsl:for-each select="title|subtitle|file">
+				<xsl:if test="local-name()='title'">
+					<em>
+						<xsl:value-of select="."/>
+					</em>
+				</xsl:if>
+				<xsl:if test="local-name()='subtitle'">
+					<xsl:value-of select="."/>
+				</xsl:if>
+				<xsl:if test="local-name()='file'">
+					<code>
+						<xsl:value-of select="."/>
+					</code>
+				</xsl:if>
+				<xsl:text>, </xsl:text>
+			</xsl:for-each>
+			<xsl:if test="etc"><xsl:text>…</xsl:text></xsl:if>
+			<xsl:for-each select="edition|version|revision">
+				<xsl:value-of select="."/>
 				<sup>
 					<xsl:choose>
-						<xsl:when test="edition='1'">st</xsl:when>
-						<xsl:when test="edition='2'">nd</xsl:when>
-						<xsl:when test="edition='3'">rd</xsl:when>
-						<xsl:otherwise>th</xsl:otherwise>
+						<xsl:when test=".='1'">st </xsl:when>
+						<xsl:when test=".='2'">nd </xsl:when>
+						<xsl:when test=".='3'">rd </xsl:when>
+						<xsl:otherwise>th </xsl:otherwise>
 					</xsl:choose>
 				</sup>
-				<xsl:text> edition. </xsl:text>
-			</xsl:if>
+				<xsl:value-of select="local-name()"/>
+				<xsl:text>, </xsl:text>
+			</xsl:for-each>
 			<!-- <xsl:copy-of select="title/node()"/> -->
 			<xsl:if test="date">
 				<xsl:text> (</xsl:text>

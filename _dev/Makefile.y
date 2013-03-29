@@ -1,4 +1,6 @@
 all:
+	cp ../slps/topics/grammars/hats/abs/grammar.bgf tank/hats/abs.bgf
+	_dev/format tank hats/abs hats/abs
 	_dev/format tank fl/antlr fl/antlr
 	_dev/format tank fl/dcg fl/dcg
 	_dev/format tank fl/sdf fl/sdf

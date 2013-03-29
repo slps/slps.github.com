@@ -1,4 +1,4 @@
-@contributor{bgf2src automated exporter - SLPS}
+@contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module 10110
 
 syntax Program
