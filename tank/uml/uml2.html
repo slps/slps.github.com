@@ -1,0 +1,544 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:bgf="http://planet-sl.org/bgf" xmlns:xbgf="http://planet-sl.org/xbgf" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Browsable UML Grammar</title><link href="/slps.css" rel="stylesheet" type="text/css"></link><script type="text/javascript">
+
+				  var _gaq = _gaq || [];
+				  _gaq.push(['_setAccount', 'UA-3743366-7']);
+				  _gaq.push(['_setDomainName', 'github.com']);
+				  _gaq.push(['_trackPageview']);
+
+				  (function() {
+				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				  })();
+
+				</script></head><body><h1 class="l">Browsable UML Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Julien Baudry, <em>UML2 1.0</em>, <code>UML2.ecore</code>, 2006/05/21.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>240</strong></li><li>Number of top alternatives: <strong>287</strong></li><li>Number of defined nonterminal symbols: <strong>240</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>240</strong>: <code><a href="#Element" class="nt">Element</a>, <a href="#MultiplicityElement" class="nt">MultiplicityElement</a>, <a href="#NamedElement" class="nt">NamedElement</a>, <a href="#Namespace" class="nt">Namespace</a>, <a href="#OpaqueExpression" class="nt">OpaqueExpression</a>, <a href="#ValueSpecification" class="nt">ValueSpecification</a>, <a href="#Expression" class="nt">Expression</a>, <a href="#Comment" class="nt">Comment</a>, <a href="#DirectedRelationship" class="nt">DirectedRelationship</a>, <a href="#Relationship" class="nt">Relationship</a>, <a href="#Class" class="nt">Class</a>, <a href="#Type" class="nt">Type</a>, <a href="#Property" class="nt">Property</a>, <a href="#Operation" class="nt">Operation</a>, <a href="#TypedElement" class="nt">TypedElement</a>, <a href="#Parameter" class="nt">Parameter</a>, <a href="#Package" class="nt">Package</a>, <a href="#Enumeration" class="nt">Enumeration</a>, <a href="#DataType" class="nt">DataType</a>, <a href="#EnumerationLiteral" class="nt">EnumerationLiteral</a>, <a href="#PrimitiveType" class="nt">PrimitiveType</a>, <a href="#Classifier" class="nt">Classifier</a>, <a href="#Feature" class="nt">Feature</a>, <a href="#Constraint" class="nt">Constraint</a>, <a href="#VisibilityKind" class="nt">VisibilityKind</a>, <a href="#LiteralBoolean" class="nt">LiteralBoolean</a>, <a href="#LiteralSpecification" class="nt">LiteralSpecification</a>, <a href="#LiteralString" class="nt">LiteralString</a>, <a href="#LiteralNull" class="nt">LiteralNull</a>, <a href="#LiteralInteger" class="nt">LiteralInteger</a>, <a href="#LiteralUnlimitedNatural" class="nt">LiteralUnlimitedNatural</a>, <a href="#BehavioralFeature" class="nt">BehavioralFeature</a>, <a href="#StructuralFeature" class="nt">StructuralFeature</a>, <a href="#InstanceSpecification" class="nt">InstanceSpecification</a>, <a href="#Slot" class="nt">Slot</a>, <a href="#InstanceValue" class="nt">InstanceValue</a>, <a href="#RedefinableElement" class="nt">RedefinableElement</a>, <a href="#Generalization" class="nt">Generalization</a>, <a href="#PackageableElement" class="nt">PackageableElement</a>, <a href="#ElementImport" class="nt">ElementImport</a>, <a href="#PackageImport" class="nt">PackageImport</a>, <a href="#Association" class="nt">Association</a>, <a href="#PackageMerge" class="nt">PackageMerge</a>, <a href="#Stereotype" class="nt">Stereotype</a>, <a href="#Profile" class="nt">Profile</a>, <a href="#ProfileApplication" class="nt">ProfileApplication</a>, <a href="#Extension" class="nt">Extension</a>, <a href="#ExtensionEnd" class="nt">ExtensionEnd</a>, <a href="#ParameterDirectionKind" class="nt">ParameterDirectionKind</a>, <a href="#AggregationKind" class="nt">AggregationKind</a>, <a href="#Behavior" class="nt">Behavior</a>, <a href="#BehavioredClassifier" class="nt">BehavioredClassifier</a>, <a href="#Activity" class="nt">Activity</a>, <a href="#Permission" class="nt">Permission</a>, <a href="#Dependency" class="nt">Dependency</a>, <a href="#Usage" class="nt">Usage</a>, <a href="#Abstraction" class="nt">Abstraction</a>, <a href="#Realization" class="nt">Realization</a>, <a href="#Substitution" class="nt">Substitution</a>, <a href="#GeneralizationSet" class="nt">GeneralizationSet</a>, <a href="#AssociationClass" class="nt">AssociationClass</a>, <a href="#InformationItem" class="nt">InformationItem</a>, <a href="#InformationFlow" class="nt">InformationFlow</a>, <a href="#Model" class="nt">Model</a>, <a href="#ConnectorEnd" class="nt">ConnectorEnd</a>, <a href="#ConnectableElement" class="nt">ConnectableElement</a>, <a href="#Connector" class="nt">Connector</a>, <a href="#StructuredClassifier" class="nt">StructuredClassifier</a>, <a href="#ActivityEdge" class="nt">ActivityEdge</a>, <a href="#ActivityGroup" class="nt">ActivityGroup</a>, <a href="#ActivityNode" class="nt">ActivityNode</a>, <a href="#Action" class="nt">Action</a>, <a href="#ObjectNode" class="nt">ObjectNode</a>, <a href="#ControlNode" class="nt">ControlNode</a>, <a href="#ControlFlow" class="nt">ControlFlow</a>, <a href="#ObjectFlow" class="nt">ObjectFlow</a>, <a href="#InitialNode" class="nt">InitialNode</a>, <a href="#FinalNode" class="nt">FinalNode</a>, <a href="#ActivityFinalNode" class="nt">ActivityFinalNode</a>, <a href="#DecisionNode" class="nt">DecisionNode</a>, <a href="#MergeNode" class="nt">MergeNode</a>, <a href="#ExecutableNode" class="nt">ExecutableNode</a>, <a href="#OutputPin" class="nt">OutputPin</a>, <a href="#InputPin" class="nt">InputPin</a>, <a href="#Pin" class="nt">Pin</a>, <a href="#ActivityParameterNode" class="nt">ActivityParameterNode</a>, <a href="#ValuePin" class="nt">ValuePin</a>, <a href="#Interface" class="nt">Interface</a>, <a href="#Implementation" class="nt">Implementation</a>, <a href="#Artifact" class="nt">Artifact</a>, <a href="#Manifestation" class="nt">Manifestation</a>, <a href="#Actor" class="nt">Actor</a>, <a href="#Extend" class="nt">Extend</a>, <a href="#UseCase" class="nt">UseCase</a>, <a href="#ExtensionPoint" class="nt">ExtensionPoint</a>, <a href="#Include" class="nt">Include</a>, <a href="#CollaborationOccurrence" class="nt">CollaborationOccurrence</a>, <a href="#Collaboration" class="nt">Collaboration</a>, <a href="#Port" class="nt">Port</a>, <a href="#EncapsulatedClassifier" class="nt">EncapsulatedClassifier</a>, <a href="#CallConcurrencyKind" class="nt">CallConcurrencyKind</a>, <a href="#CallTrigger" class="nt">CallTrigger</a>, <a href="#MessageTrigger" class="nt">MessageTrigger</a>, <a href="#ChangeTrigger" class="nt">ChangeTrigger</a>, <a href="#Trigger" class="nt">Trigger</a>, <a href="#Reception" class="nt">Reception</a>, <a href="#Signal" class="nt">Signal</a>, <a href="#SignalTrigger" class="nt">SignalTrigger</a>, <a href="#TimeTrigger" class="nt">TimeTrigger</a>, <a href="#AnyTrigger" class="nt">AnyTrigger</a>, <a href="#Variable" class="nt">Variable</a>, <a href="#StructuredActivityNode" class="nt">StructuredActivityNode</a>, <a href="#ConditionalNode" class="nt">ConditionalNode</a>, <a href="#Clause" class="nt">Clause</a>, <a href="#LoopNode" class="nt">LoopNode</a>, <a href="#Interaction" class="nt">Interaction</a>, <a href="#InteractionFragment" class="nt">InteractionFragment</a>, <a href="#Lifeline" class="nt">Lifeline</a>, <a href="#Message" class="nt">Message</a>, <a href="#GeneralOrdering" class="nt">GeneralOrdering</a>, <a href="#MessageKind" class="nt">MessageKind</a>, <a href="#MessageSort" class="nt">MessageSort</a>, <a href="#MessageEnd" class="nt">MessageEnd</a>, <a href="#EventOccurrence" class="nt">EventOccurrence</a>, <a href="#ExecutionOccurrence" class="nt">ExecutionOccurrence</a>, <a href="#StateInvariant" class="nt">StateInvariant</a>, <a href="#Stop" class="nt">Stop</a>, <a href="#TemplateSignature" class="nt">TemplateSignature</a>, <a href="#TemplateParameter" class="nt">TemplateParameter</a>, <a href="#TemplateableElement" class="nt">TemplateableElement</a>, <a href="#StringExpression" class="nt">StringExpression</a>, <a href="#ParameterableElement" class="nt">ParameterableElement</a>, <a href="#TemplateBinding" class="nt">TemplateBinding</a>, <a href="#TemplateParameterSubstitution" class="nt">TemplateParameterSubstitution</a>, <a href="#OperationTemplateParameter" class="nt">OperationTemplateParameter</a>, <a href="#ClassifierTemplateParameter" class="nt">ClassifierTemplateParameter</a>, <a href="#ParameterableClassifier" class="nt">ParameterableClassifier</a>, <a href="#RedefinableTemplateSignature" class="nt">RedefinableTemplateSignature</a>, <a href="#TemplateableClassifier" class="nt">TemplateableClassifier</a>, <a href="#ConnectableElementTemplateParameter" class="nt">ConnectableElementTemplateParameter</a>, <a href="#ForkNode" class="nt">ForkNode</a>, <a href="#JoinNode" class="nt">JoinNode</a>, <a href="#FlowFinalNode" class="nt">FlowFinalNode</a>, <a href="#CentralBufferNode" class="nt">CentralBufferNode</a>, <a href="#ActivityPartition" class="nt">ActivityPartition</a>, <a href="#ExpansionNode" class="nt">ExpansionNode</a>, <a href="#ExpansionRegion" class="nt">ExpansionRegion</a>, <a href="#ExpansionKind" class="nt">ExpansionKind</a>, <a href="#ExceptionHandler" class="nt">ExceptionHandler</a>, <a href="#InteractionOccurrence" class="nt">InteractionOccurrence</a>, <a href="#Gate" class="nt">Gate</a>, <a href="#PartDecomposition" class="nt">PartDecomposition</a>, <a href="#InteractionOperand" class="nt">InteractionOperand</a>, <a href="#InteractionConstraint" class="nt">InteractionConstraint</a>, <a href="#InteractionOperator" class="nt">InteractionOperator</a>, <a href="#CombinedFragment" class="nt">CombinedFragment</a>, <a href="#Continuation" class="nt">Continuation</a>, <a href="#StateMachine" class="nt">StateMachine</a>, <a href="#Region" class="nt">Region</a>, <a href="#Pseudostate" class="nt">Pseudostate</a>, <a href="#State" class="nt">State</a>, <a href="#Vertex" class="nt">Vertex</a>, <a href="#ConnectionPointReference" class="nt">ConnectionPointReference</a>, <a href="#Transition" class="nt">Transition</a>, <a href="#TransitionKind" class="nt">TransitionKind</a>, <a href="#PseudostateKind" class="nt">PseudostateKind</a>, <a href="#FinalState" class="nt">FinalState</a>, <a href="#CreateObjectAction" class="nt">CreateObjectAction</a>, <a href="#DestroyObjectAction" class="nt">DestroyObjectAction</a>, <a href="#TestIdentityAction" class="nt">TestIdentityAction</a>, <a href="#ReadSelfAction" class="nt">ReadSelfAction</a>, <a href="#StructuralFeatureAction" class="nt">StructuralFeatureAction</a>, <a href="#ReadStructuralFeatureAction" class="nt">ReadStructuralFeatureAction</a>, <a href="#WriteStructuralFeatureAction" class="nt">WriteStructuralFeatureAction</a>, <a href="#ClearStructuralFeatureAction" class="nt">ClearStructuralFeatureAction</a>, <a href="#RemoveStructuralFeatureValueAction" class="nt">RemoveStructuralFeatureValueAction</a>, <a href="#AddStructuralFeatureValueAction" class="nt">AddStructuralFeatureValueAction</a>, <a href="#LinkAction" class="nt">LinkAction</a>, <a href="#LinkEndData" class="nt">LinkEndData</a>, <a href="#ReadLinkAction" class="nt">ReadLinkAction</a>, <a href="#LinkEndCreationData" class="nt">LinkEndCreationData</a>, <a href="#CreateLinkAction" class="nt">CreateLinkAction</a>, <a href="#WriteLinkAction" class="nt">WriteLinkAction</a>, <a href="#DestroyLinkAction" class="nt">DestroyLinkAction</a>, <a href="#ClearAssociationAction" class="nt">ClearAssociationAction</a>, <a href="#VariableAction" class="nt">VariableAction</a>, <a href="#ReadVariableAction" class="nt">ReadVariableAction</a>, <a href="#WriteVariableAction" class="nt">WriteVariableAction</a>, <a href="#ClearVariableAction" class="nt">ClearVariableAction</a>, <a href="#AddVariableValueAction" class="nt">AddVariableValueAction</a>, <a href="#RemoveVariableValueAction" class="nt">RemoveVariableValueAction</a>, <a href="#ApplyFunctionAction" class="nt">ApplyFunctionAction</a>, <a href="#PrimitiveFunction" class="nt">PrimitiveFunction</a>, <a href="#CallAction" class="nt">CallAction</a>, <a href="#InvocationAction" class="nt">InvocationAction</a>, <a href="#SendSignalAction" class="nt">SendSignalAction</a>, <a href="#BroadcastSignalAction" class="nt">BroadcastSignalAction</a>, <a href="#SendObjectAction" class="nt">SendObjectAction</a>, <a href="#CallOperationAction" class="nt">CallOperationAction</a>, <a href="#CallBehaviorAction" class="nt">CallBehaviorAction</a>, <a href="#TimeExpression" class="nt">TimeExpression</a>, <a href="#Duration" class="nt">Duration</a>, <a href="#TimeObservationAction" class="nt">TimeObservationAction</a>, <a href="#DurationInterval" class="nt">DurationInterval</a>, <a href="#Interval" class="nt">Interval</a>, <a href="#TimeConstraint" class="nt">TimeConstraint</a>, <a href="#IntervalConstraint" class="nt">IntervalConstraint</a>, <a href="#TimeInterval" class="nt">TimeInterval</a>, <a href="#DurationObservationAction" class="nt">DurationObservationAction</a>, <a href="#DurationConstraint" class="nt">DurationConstraint</a>, <a href="#DataStoreNode" class="nt">DataStoreNode</a>, <a href="#ParameterEffectKind" class="nt">ParameterEffectKind</a>, <a href="#InterruptibleActivityRegion" class="nt">InterruptibleActivityRegion</a>, <a href="#ObjectNodeOrderingKind" class="nt">ObjectNodeOrderingKind</a>, <a href="#ParameterSet" class="nt">ParameterSet</a>, <a href="#Component" class="nt">Component</a>, <a href="#ConnectorKind" class="nt">ConnectorKind</a>, <a href="#Deployment" class="nt">Deployment</a>, <a href="#DeployedArtifact" class="nt">DeployedArtifact</a>, <a href="#DeploymentTarget" class="nt">DeploymentTarget</a>, <a href="#Node" class="nt">Node</a>, <a href="#Device" class="nt">Device</a>, <a href="#ExecutionEnvironment" class="nt">ExecutionEnvironment</a>, <a href="#CommunicationPath" class="nt">CommunicationPath</a>, <a href="#ProtocolConformance" class="nt">ProtocolConformance</a>, <a href="#ProtocolStateMachine" class="nt">ProtocolStateMachine</a>, <a href="#ProtocolTransition" class="nt">ProtocolTransition</a>, <a href="#ReadExtentAction" class="nt">ReadExtentAction</a>, <a href="#ReclassifyObjectAction" class="nt">ReclassifyObjectAction</a>, <a href="#ReadIsClassifiedObjectAction" class="nt">ReadIsClassifiedObjectAction</a>, <a href="#StartOwnedBehaviorAction" class="nt">StartOwnedBehaviorAction</a>, <a href="#QualifierValue" class="nt">QualifierValue</a>, <a href="#ReadLinkObjectEndAction" class="nt">ReadLinkObjectEndAction</a>, <a href="#ReadLinkObjectEndQualifierAction" class="nt">ReadLinkObjectEndQualifierAction</a>, <a href="#CreateLinkObjectAction" class="nt">CreateLinkObjectAction</a>, <a href="#AcceptEventAction" class="nt">AcceptEventAction</a>, <a href="#AcceptCallAction" class="nt">AcceptCallAction</a>, <a href="#ReplyAction" class="nt">ReplyAction</a>, <a href="#RaiseExceptionAction" class="nt">RaiseExceptionAction</a>, <a href="#DeploymentSpecification" class="nt">DeploymentSpecification</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Element">Element</a>:
+        ε
+</pre><pre><a class="nt" name="MultiplicityElement">MultiplicityElement</a>:
+        ε
+</pre><pre><a class="nt" name="NamedElement">NamedElement</a>:
+        ε
+</pre><pre><a class="nt" name="Namespace">Namespace</a>:
+        ε
+</pre><pre><a class="nt" name="OpaqueExpression">OpaqueExpression</a>:
+        <span class="sel">body</span>::<span class="meta">any</span> <span class="sel">language</span>::<span class="meta">any</span> <span class="sel">result</span>::<span class="meta">any</span> <span class="sel">behavior</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ValueSpecification">ValueSpecification</a>:
+        ε
+</pre><pre><a class="nt" name="Expression">Expression</a>:
+        <span class="sel">symbol</span>::<span class="meta">any</span> <span class="sel">operand</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Comment">Comment</a>:
+        <span class="sel">body</span>::<span class="meta">any</span> <span class="sel">annotatedElement</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">bodyExpression</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="DirectedRelationship">DirectedRelationship</a>:
+        ε
+</pre><pre><a class="nt" name="Relationship">Relationship</a>:
+        ε
+</pre><pre><a class="nt" name="Class">Class</a>:
+        <span class="sel">ownedOperation</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">superClass</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">extension</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">nestedClassifier</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">isActive</span>::<span class="meta">any</span> <span class="sel">ownedReception</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Type">Type</a>:
+        ε
+</pre><pre><a class="nt" name="Property">Property</a>:
+        <span class="sel">default</span>::<span class="meta">any</span> <span class="sel">isComposite</span>::<span class="meta">any</span> <span class="sel">isDerived</span>::<span class="meta">any</span> <span class="sel">class_</span>::<span class="meta">any</span> <span class="sel">opposite</span>::<span class="meta">any</span> <span class="sel">isDerivedUnion</span>::<span class="meta">any</span> <span class="sel">owningAssociation</span>::<span class="meta">any</span> <span class="sel">redefinedProperty</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">subsettedProperty</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">datatype</span>::<span class="meta">any</span> <span class="sel">association</span>::<span class="meta">any</span> <span class="sel">aggregation</span>::<span class="meta">any</span> <span class="sel">defaultValue</span>::<span class="meta">any</span> <span class="sel">qualifier</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">associationEnd</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Operation">Operation</a>:
+        <span class="sel">ownedParameter</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">class_</span>::<span class="meta">any</span> <span class="sel">isQuery</span>::<span class="meta">any</span> <span class="sel">datatype</span>::<span class="meta">any</span> <span class="sel">precondition</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">postcondition</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">redefinedOperation</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">bodyCondition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="TypedElement">TypedElement</a>:
+        ε
+</pre><pre><a class="nt" name="Parameter">Parameter</a>:
+        <span class="sel">operation</span>::<span class="meta">any</span> <span class="sel">default</span>::<span class="meta">any</span> <span class="sel">direction</span>::<span class="meta">any</span> <span class="sel">defaultValue</span>::<span class="meta">any</span> <span class="sel">isException</span>::<span class="meta">any</span> <span class="sel">isStream</span>::<span class="meta">any</span> <span class="sel">effect</span>::<span class="meta">any</span> <span class="sel">parameterSet</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Package">Package</a>:
+        <span class="sel">nestedPackage</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">nestingPackage</span>::<span class="meta">any</span> <span class="sel">ownedType</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">ownedMember</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">packageMerge</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">appliedProfile</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">packageExtension</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Enumeration">Enumeration</a>:
+        <span class="sel">ownedLiteral</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="DataType">DataType</a>:
+        <span class="sel">ownedAttribute</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">ownedOperation</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="EnumerationLiteral">EnumerationLiteral</a>:
+        <span class="sel">enumeration</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="PrimitiveType">PrimitiveType</a>:
+        ε
+</pre><pre><a class="nt" name="Classifier">Classifier</a>:
+        ε
+</pre><pre><a class="nt" name="Feature">Feature</a>:
+        ε
+</pre><pre><a class="nt" name="Constraint">Constraint</a>:
+        <span class="sel">context</span>::<span class="meta">any</span> <span class="sel">namespace</span>::<span class="meta">any</span> <span class="sel">specification</span>::<span class="meta">any</span> <span class="sel">constrainedElement</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="VisibilityKind">VisibilityKind</a>:
+        <span class="sel">package</span>::ε
+        <span class="sel">private</span>::ε
+        <span class="sel">protected</span>::ε
+        <span class="sel">public</span>::ε
+</pre><pre><a class="nt" name="LiteralBoolean">LiteralBoolean</a>:
+        <span class="sel">value</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="LiteralSpecification">LiteralSpecification</a>:
+        ε
+</pre><pre><a class="nt" name="LiteralString">LiteralString</a>:
+        <span class="sel">value</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="LiteralNull">LiteralNull</a>:
+        
+</pre><pre><a class="nt" name="LiteralInteger">LiteralInteger</a>:
+        <span class="sel">value</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="LiteralUnlimitedNatural">LiteralUnlimitedNatural</a>:
+        <span class="sel">value</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="BehavioralFeature">BehavioralFeature</a>:
+        ε
+</pre><pre><a class="nt" name="StructuralFeature">StructuralFeature</a>:
+        ε
+</pre><pre><a class="nt" name="InstanceSpecification">InstanceSpecification</a>:
+        <span class="sel">slot</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">classifier</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">specification</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Slot">Slot</a>:
+        <span class="sel">owningInstance</span>::<span class="meta">any</span> <span class="sel">value</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">definingFeature</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="InstanceValue">InstanceValue</a>:
+        <span class="sel">instance</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="RedefinableElement">RedefinableElement</a>:
+        ε
+</pre><pre><a class="nt" name="Generalization">Generalization</a>:
+        <span class="sel">specific</span>::<span class="meta">any</span> <span class="sel">general</span>::<span class="meta">any</span> <span class="sel">isSubstitutable</span>::<span class="meta">any</span> <span class="sel">generalizationSet</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="PackageableElement">PackageableElement</a>:
+        ε
+</pre><pre><a class="nt" name="ElementImport">ElementImport</a>:
+        <span class="sel">visibility</span>::<span class="meta">any</span> <span class="sel">alias</span>::<span class="meta">any</span> <span class="sel">importedElement</span>::<span class="meta">any</span> <span class="sel">importingNamespace</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="PackageImport">PackageImport</a>:
+        <span class="sel">visibility</span>::<span class="meta">any</span> <span class="sel">importedPackage</span>::<span class="meta">any</span> <span class="sel">importingNamespace</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Association">Association</a>:
+        <span class="sel">isDerived</span>::<span class="meta">any</span> <span class="sel">ownedEnd</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">endType</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">memberEnd</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="PackageMerge">PackageMerge</a>:
+        <span class="sel">mergingPackage</span>::<span class="meta">any</span> <span class="sel">mergedPackage</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Stereotype">Stereotype</a>:
+        ε
+</pre><pre><a class="nt" name="Profile">Profile</a>:
+        <span class="sel">ownedStereotype</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">metaclassReference</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">metamodelReference</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="ProfileApplication">ProfileApplication</a>:
+        <span class="sel">importedProfile</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Extension">Extension</a>:
+        <span class="sel">isRequired</span>::<span class="meta">any</span> <span class="sel">metaclass</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ExtensionEnd">ExtensionEnd</a>:
+        ε
+</pre><pre><a class="nt" name="ParameterDirectionKind">ParameterDirectionKind</a>:
+        <span class="sel">in</span>::ε
+        <span class="sel">inout</span>::ε
+        <span class="sel">out</span>::ε
+        <span class="sel">return</span>::ε
+</pre><pre><a class="nt" name="AggregationKind">AggregationKind</a>:
+        <span class="sel">composite</span>::ε
+        <span class="sel">none</span>::ε
+        <span class="sel">shared</span>::ε
+</pre><pre><a class="nt" name="Behavior">Behavior</a>:
+        ε
+</pre><pre><a class="nt" name="BehavioredClassifier">BehavioredClassifier</a>:
+        ε
+</pre><pre><a class="nt" name="Activity">Activity</a>:
+        <span class="sel">body</span>::<span class="meta">any</span> <span class="sel">language</span>::<span class="meta">any</span> <span class="sel">edge</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">group</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">node</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">action</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">structuredNode</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">isSingleExecution</span>::<span class="meta">any</span> <span class="sel">isReadOnly</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Permission">Permission</a>:
+        ε
+</pre><pre><a class="nt" name="Dependency">Dependency</a>:
+        <span class="sel">client</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">supplier</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Usage">Usage</a>:
+        ε
+</pre><pre><a class="nt" name="Abstraction">Abstraction</a>:
+        <span class="sel">mapping</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Realization">Realization</a>:
+        <span class="sel">abstraction</span>::<span class="meta">any</span> <span class="sel">realizingClassifier</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Substitution">Substitution</a>:
+        <span class="sel">contract</span>::<span class="meta">any</span> <span class="sel">substitutingClassifier</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="GeneralizationSet">GeneralizationSet</a>:
+        <span class="sel">isCovering</span>::<span class="meta">any</span> <span class="sel">isDisjoint</span>::<span class="meta">any</span> <span class="sel">powertype</span>::<span class="meta">any</span> <span class="sel">generalization</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="AssociationClass">AssociationClass</a>:
+        ε
+</pre><pre><a class="nt" name="InformationItem">InformationItem</a>:
+        <span class="sel">represented</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="InformationFlow">InformationFlow</a>:
+        <span class="sel">realization</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">conveyed</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Model">Model</a>:
+        <span class="sel">viewpoint</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ConnectorEnd">ConnectorEnd</a>:
+        <span class="sel">definingEnd</span>::<span class="meta">any</span> <span class="sel">role</span>::<span class="meta">any</span> <span class="sel">partWithPort</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ConnectableElement">ConnectableElement</a>:
+        ε
+</pre><pre><a class="nt" name="Connector">Connector</a>:
+        <span class="sel">type</span>::<span class="meta">any</span> <span class="sel">redefinedConnector</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">end</span>::<span class="meta">any</span> <span class="sel">kind</span>::<span class="meta">any</span> <span class="sel">contract</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="StructuredClassifier">StructuredClassifier</a>:
+        ε
+</pre><pre><a class="nt" name="ActivityEdge">ActivityEdge</a>:
+        ε
+</pre><pre><a class="nt" name="ActivityGroup">ActivityGroup</a>:
+        ε
+</pre><pre><a class="nt" name="ActivityNode">ActivityNode</a>:
+        ε
+</pre><pre><a class="nt" name="Action">Action</a>:
+        <span class="sel">effect</span>::<span class="meta">any</span> <span class="sel">output</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">input</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">context</span>::<span class="meta">any</span> <span class="sel">localPrecondition</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">localPostcondition</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="ObjectNode">ObjectNode</a>:
+        ε
+</pre><pre><a class="nt" name="ControlNode">ControlNode</a>:
+        ε
+</pre><pre><a class="nt" name="ControlFlow">ControlFlow</a>:
+        <span class="sel">activity</span>::<span class="meta">any</span> <span class="sel">source</span>::<span class="meta">any</span> <span class="sel">target</span>::<span class="meta">any</span> <span class="sel">inGroup</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">guard</span>::<span class="meta">any</span> <span class="sel">redefinedElement</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">inStructuredNode</span>::<span class="meta">any</span> <span class="sel">inPartition</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">weight</span>::<span class="meta">any</span> <span class="sel">interrupts</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ObjectFlow">ObjectFlow</a>:
+        <span class="sel">isMulticast</span>::<span class="meta">any</span> <span class="sel">isMultireceive</span>::<span class="meta">any</span> <span class="sel">transformation</span>::<span class="meta">any</span> <span class="sel">selection</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="InitialNode">InitialNode</a>:
+        
+</pre><pre><a class="nt" name="FinalNode">FinalNode</a>:
+        ε
+</pre><pre><a class="nt" name="ActivityFinalNode">ActivityFinalNode</a>:
+        
+</pre><pre><a class="nt" name="DecisionNode">DecisionNode</a>:
+        <span class="sel">decisionInput</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="MergeNode">MergeNode</a>:
+        
+</pre><pre><a class="nt" name="ExecutableNode">ExecutableNode</a>:
+        ε
+</pre><pre><a class="nt" name="OutputPin">OutputPin</a>:
+        
+</pre><pre><a class="nt" name="InputPin">InputPin</a>:
+        
+</pre><pre><a class="nt" name="Pin">Pin</a>:
+        ε
+</pre><pre><a class="nt" name="ActivityParameterNode">ActivityParameterNode</a>:
+        <span class="sel">parameter</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ValuePin">ValuePin</a>:
+        <span class="sel">value</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Interface">Interface</a>:
+        <span class="sel">ownedAttribute</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">ownedOperation</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">redefinedInterface</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">nestedClassifier</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">ownedReception</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">protocol</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Implementation">Implementation</a>:
+        <span class="sel">contract</span>::<span class="meta">any</span> <span class="sel">implementingClassifier</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Artifact">Artifact</a>:
+        <span class="sel">fileName</span>::<span class="meta">any</span> <span class="sel">nestedArtifact</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">manifestation</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">ownedOperation</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">ownedAttribute</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Manifestation">Manifestation</a>:
+        <span class="sel">utilizedElement</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Actor">Actor</a>:
+        <span class="sel">feature</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">isAbstract</span>::<span class="meta">any</span> <span class="sel">inheritedMember</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">general</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">generalization</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">attribute</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">redefinedClassifier</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">substitution</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">powertypeExtent</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">ownedUseCase</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">useCase</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">representation</span>::<span class="meta">any</span> <span class="sel">occurrence</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Extend">Extend</a>:
+        <span class="sel">extendedCase</span>::<span class="meta">any</span> <span class="sel">extension</span>::<span class="meta">any</span> <span class="sel">condition</span>::<span class="meta">any</span> <span class="sel">extensionLocation</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="UseCase">UseCase</a>:
+        <span class="sel">include</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">extend</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">extensionPoint</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">subject</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="ExtensionPoint">ExtensionPoint</a>:
+        <span class="sel">useCase</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Include">Include</a>:
+        <span class="sel">includingCase</span>::<span class="meta">any</span> <span class="sel">addition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="CollaborationOccurrence">CollaborationOccurrence</a>:
+        <span class="sel">type</span>::<span class="meta">any</span> <span class="sel">roleBinding</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Collaboration">Collaboration</a>:
+        <span class="sel">collaborationRole</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Port">Port</a>:
+        <span class="sel">isBehavior</span>::<span class="meta">any</span> <span class="sel">isService</span>::<span class="meta">any</span> <span class="sel">required</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">redefinedPort</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">provided</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">protocol</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="EncapsulatedClassifier">EncapsulatedClassifier</a>:
+        ε
+</pre><pre><a class="nt" name="CallConcurrencyKind">CallConcurrencyKind</a>:
+        <span class="sel">guarded</span>::ε
+        <span class="sel">concurrent</span>::ε
+        <span class="sel">sequential</span>::ε
+</pre><pre><a class="nt" name="CallTrigger">CallTrigger</a>:
+        <span class="sel">operation</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="MessageTrigger">MessageTrigger</a>:
+        ε
+</pre><pre><a class="nt" name="ChangeTrigger">ChangeTrigger</a>:
+        <span class="sel">changeExpression</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Trigger">Trigger</a>:
+        ε
+</pre><pre><a class="nt" name="Reception">Reception</a>:
+        <span class="sel">signal</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Signal">Signal</a>:
+        <span class="sel">ownedAttribute</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="SignalTrigger">SignalTrigger</a>:
+        <span class="sel">signal</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="TimeTrigger">TimeTrigger</a>:
+        <span class="sel">isRelative</span>::<span class="meta">any</span> <span class="sel">when</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="AnyTrigger">AnyTrigger</a>:
+        
+</pre><pre><a class="nt" name="Variable">Variable</a>:
+        <span class="sel">scope</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="StructuredActivityNode">StructuredActivityNode</a>:
+        <span class="sel">variable</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">containedNode</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">containedEdge</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">mustIsolate</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ConditionalNode">ConditionalNode</a>:
+        <span class="sel">isDeterminate</span>::<span class="meta">any</span> <span class="sel">isAssured</span>::<span class="meta">any</span> <span class="sel">clause</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">result</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Clause">Clause</a>:
+        <span class="sel">test</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">body</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">predecessorClause</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">successorClause</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">decider</span>::<span class="meta">any</span> <span class="sel">bodyOutput</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="LoopNode">LoopNode</a>:
+        <span class="sel">isTestedFirst</span>::<span class="meta">any</span> <span class="sel">bodyPart</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">setupPart</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">decider</span>::<span class="meta">any</span> <span class="sel">test</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">result</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">loopVariable</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">bodyOutput</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">loopVariableInput</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Interaction">Interaction</a>:
+        <span class="sel">lifeline</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">message</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">fragment</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">formalGate</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="InteractionFragment">InteractionFragment</a>:
+        ε
+</pre><pre><a class="nt" name="Lifeline">Lifeline</a>:
+        <span class="sel">coveredBy</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">represents</span>::<span class="meta">any</span> <span class="sel">interaction</span>::<span class="meta">any</span> <span class="sel">selector</span>::<span class="meta">any</span> <span class="sel">decomposedAs</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Message">Message</a>:
+        <span class="sel">messageKind</span>::<span class="meta">any</span> <span class="sel">messageSort</span>::<span class="meta">any</span> <span class="sel">receiveEvent</span>::<span class="meta">any</span> <span class="sel">sendEvent</span>::<span class="meta">any</span> <span class="sel">connector</span>::<span class="meta">any</span> <span class="sel">interaction</span>::<span class="meta">any</span> <span class="sel">signature</span>::<span class="meta">any</span> <span class="sel">argument</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="GeneralOrdering">GeneralOrdering</a>:
+        <span class="sel">before</span>::<span class="meta">any</span> <span class="sel">after</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="MessageKind">MessageKind</a>:
+        <span class="sel">found</span>::ε
+        <span class="sel">lost</span>::ε
+        <span class="sel">unknown</span>::ε
+        <span class="sel">complete</span>::ε
+</pre><pre><a class="nt" name="MessageSort">MessageSort</a>:
+        <span class="sel">synchSignal</span>::ε
+        <span class="sel">synchCall</span>::ε
+        <span class="sel">asynchCall</span>::ε
+        <span class="sel">asynchSignal</span>::ε
+</pre><pre><a class="nt" name="MessageEnd">MessageEnd</a>:
+        ε
+</pre><pre><a class="nt" name="EventOccurrence">EventOccurrence</a>:
+        <span class="sel">startExec</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">finishExec</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">toAfter</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">toBefore</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="ExecutionOccurrence">ExecutionOccurrence</a>:
+        <span class="sel">start</span>::<span class="meta">any</span> <span class="sel">finish</span>::<span class="meta">any</span> <span class="sel">behavior</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="StateInvariant">StateInvariant</a>:
+        <span class="sel">invariant</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Stop">Stop</a>:
+        ε
+</pre><pre><a class="nt" name="TemplateSignature">TemplateSignature</a>:
+        <span class="sel">parameter</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">ownedParameter</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">nestedSignature</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">nestingSignature</span>::<span class="meta">any</span> <span class="sel">template</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="TemplateParameter">TemplateParameter</a>:
+        <span class="sel">signature</span>::<span class="meta">any</span> <span class="sel">parameteredElement</span>::<span class="meta">any</span> <span class="sel">ownedParameteredElement</span>::<span class="meta">any</span> <span class="sel">default</span>::<span class="meta">any</span> <span class="sel">ownedDefault</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="TemplateableElement">TemplateableElement</a>:
+        ε
+</pre><pre><a class="nt" name="StringExpression">StringExpression</a>:
+        <span class="sel">subExpression</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">owningExpression</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ParameterableElement">ParameterableElement</a>:
+        ε
+</pre><pre><a class="nt" name="TemplateBinding">TemplateBinding</a>:
+        <span class="sel">boundElement</span>::<span class="meta">any</span> <span class="sel">signature</span>::<span class="meta">any</span> <span class="sel">parameterSubstitution</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="TemplateParameterSubstitution">TemplateParameterSubstitution</a>:
+        <span class="sel">formal</span>::<span class="meta">any</span> <span class="sel">templateBinding</span>::<span class="meta">any</span> <span class="sel">actual</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">ownedActual</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="OperationTemplateParameter">OperationTemplateParameter</a>:
+        ε
+</pre><pre><a class="nt" name="ClassifierTemplateParameter">ClassifierTemplateParameter</a>:
+        <span class="sel">allowSubstitutable</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ParameterableClassifier">ParameterableClassifier</a>:
+        ε
+</pre><pre><a class="nt" name="RedefinableTemplateSignature">RedefinableTemplateSignature</a>:
+        ε
+</pre><pre><a class="nt" name="TemplateableClassifier">TemplateableClassifier</a>:
+        ε
+</pre><pre><a class="nt" name="ConnectableElementTemplateParameter">ConnectableElementTemplateParameter</a>:
+        ε
+</pre><pre><a class="nt" name="ForkNode">ForkNode</a>:
+        
+</pre><pre><a class="nt" name="JoinNode">JoinNode</a>:
+        <span class="sel">isCombineDuplicate</span>::<span class="meta">any</span> <span class="sel">joinSpec</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="FlowFinalNode">FlowFinalNode</a>:
+        
+</pre><pre><a class="nt" name="CentralBufferNode">CentralBufferNode</a>:
+        <span class="sel">ordering</span>::<span class="meta">any</span> <span class="sel">upperBound</span>::<span class="meta">any</span> <span class="sel">inState</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">selection</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ActivityPartition">ActivityPartition</a>:
+        <span class="sel">isDimension</span>::<span class="meta">any</span> <span class="sel">isExternal</span>::<span class="meta">any</span> <span class="sel">containedEdge</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">containedNode</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">subgroup</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">superPartition</span>::<span class="meta">any</span> <span class="sel">represents</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ExpansionNode">ExpansionNode</a>:
+        <span class="sel">regionAsOutput</span>::<span class="meta">any</span> <span class="sel">regionAsInput</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ExpansionRegion">ExpansionRegion</a>:
+        <span class="sel">mode</span>::<span class="meta">any</span> <span class="sel">outputElement</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">inputElement</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="ExpansionKind">ExpansionKind</a>:
+        <span class="sel">parallel</span>::ε
+        <span class="sel">iterative</span>::ε
+        <span class="sel">stream</span>::ε
+</pre><pre><a class="nt" name="ExceptionHandler">ExceptionHandler</a>:
+        <span class="sel">protectedNode</span>::<span class="meta">any</span> <span class="sel">handlerBody</span>::<span class="meta">any</span> <span class="sel">exceptionInput</span>::<span class="meta">any</span> <span class="sel">exceptionType</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="InteractionOccurrence">InteractionOccurrence</a>:
+        <span class="sel">refersTo</span>::<span class="meta">any</span> <span class="sel">actualGate</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">argument</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Gate">Gate</a>:
+        <span class="sel">receiveMessage</span>::<span class="meta">any</span> <span class="sel">sendMessage</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="PartDecomposition">PartDecomposition</a>:
+        ε
+</pre><pre><a class="nt" name="InteractionOperand">InteractionOperand</a>:
+        <span class="sel">guard</span>::<span class="meta">any</span> <span class="sel">fragment</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="InteractionConstraint">InteractionConstraint</a>:
+        <span class="sel">minint</span>::<span class="meta">any</span> <span class="sel">maxint</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="InteractionOperator">InteractionOperator</a>:
+        <span class="sel">consider</span>::ε
+        <span class="sel">par</span>::ε
+        <span class="sel">opt</span>::ε
+        <span class="sel">loop</span>::ε
+        <span class="sel">alt</span>::ε
+        <span class="sel">break</span>::ε
+        <span class="sel">assert</span>::ε
+        <span class="sel">strict</span>::ε
+        <span class="sel">seq</span>::ε
+        <span class="sel">ignore</span>::ε
+        <span class="sel">neg</span>::ε
+        <span class="sel">critical</span>::ε
+</pre><pre><a class="nt" name="CombinedFragment">CombinedFragment</a>:
+        <span class="sel">interactionOperator</span>::<span class="meta">any</span> <span class="sel">operand</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">cfragmentGate</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Continuation">Continuation</a>:
+        <span class="sel">setting</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="StateMachine">StateMachine</a>:
+        <span class="sel">region</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">connectionPoint</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">extendedStateMachine</span>::<span class="meta">any</span> <span class="sel">stateMachine_redefinitionContext</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Region">Region</a>:
+        <span class="sel">subvertex</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">transition</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">stateMachine</span>::<span class="meta">any</span> <span class="sel">state</span>::<span class="meta">any</span> <span class="sel">extendedRegion</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Pseudostate">Pseudostate</a>:
+        <span class="sel">kind</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="State">State</a>:
+        <span class="sel">isComposite</span>::<span class="meta">any</span> <span class="sel">isOrthogonal</span>::<span class="meta">any</span> <span class="sel">isSimple</span>::<span class="meta">any</span> <span class="sel">isSubmachineState</span>::<span class="meta">any</span> <span class="sel">submachine</span>::<span class="meta">any</span> <span class="sel">connection</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">redefinedState</span>::<span class="meta">any</span> <span class="sel">deferrableTrigger</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">region</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">entry</span>::<span class="meta">any</span> <span class="sel">exit</span>::<span class="meta">any</span> <span class="sel">doActivity</span>::<span class="meta">any</span> <span class="sel">stateInvariant</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Vertex">Vertex</a>:
+        ε
+</pre><pre><a class="nt" name="ConnectionPointReference">ConnectionPointReference</a>:
+        <span class="sel">entry</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">exit</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Transition">Transition</a>:
+        <span class="sel">kind</span>::<span class="meta">any</span> <span class="sel">container</span>::<span class="meta">any</span> <span class="sel">source</span>::<span class="meta">any</span> <span class="sel">target</span>::<span class="meta">any</span> <span class="sel">redefinedTransition</span>::<span class="meta">any</span> <span class="sel">trigger</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">guard</span>::<span class="meta">any</span> <span class="sel">effect</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="TransitionKind">TransitionKind</a>:
+        <span class="sel">internal</span>::ε
+        <span class="sel">local</span>::ε
+        <span class="sel">external</span>::ε
+</pre><pre><a class="nt" name="PseudostateKind">PseudostateKind</a>:
+        <span class="sel">deepHistory</span>::ε
+        <span class="sel">shallowHistory</span>::ε
+        <span class="sel">choice</span>::ε
+        <span class="sel">join</span>::ε
+        <span class="sel">exitPoint</span>::ε
+        <span class="sel">terminate</span>::ε
+        <span class="sel">fork</span>::ε
+        <span class="sel">junction</span>::ε
+        <span class="sel">initial</span>::ε
+        <span class="sel">entryPoint</span>::ε
+</pre><pre><a class="nt" name="FinalState">FinalState</a>:
+        ε
+</pre><pre><a class="nt" name="CreateObjectAction">CreateObjectAction</a>:
+        <span class="sel">classifier</span>::<span class="meta">any</span> <span class="sel">result</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="DestroyObjectAction">DestroyObjectAction</a>:
+        <span class="sel">isDestroyLinks</span>::<span class="meta">any</span> <span class="sel">isDestroyOwnedObjects</span>::<span class="meta">any</span> <span class="sel">target</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="TestIdentityAction">TestIdentityAction</a>:
+        <span class="sel">first</span>::<span class="meta">any</span> <span class="sel">second</span>::<span class="meta">any</span> <span class="sel">result</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ReadSelfAction">ReadSelfAction</a>:
+        <span class="sel">result</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="StructuralFeatureAction">StructuralFeatureAction</a>:
+        ε
+</pre><pre><a class="nt" name="ReadStructuralFeatureAction">ReadStructuralFeatureAction</a>:
+        <span class="sel">result</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="WriteStructuralFeatureAction">WriteStructuralFeatureAction</a>:
+        ε
+</pre><pre><a class="nt" name="ClearStructuralFeatureAction">ClearStructuralFeatureAction</a>:
+        <span class="sel">structuralFeature</span>::<span class="meta">any</span> <span class="sel">object</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="RemoveStructuralFeatureValueAction">RemoveStructuralFeatureValueAction</a>:
+        <span class="sel">value</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="AddStructuralFeatureValueAction">AddStructuralFeatureValueAction</a>:
+        <span class="sel">isReplaceAll</span>::<span class="meta">any</span> <span class="sel">insertAt</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="LinkAction">LinkAction</a>:
+        ε
+</pre><pre><a class="nt" name="LinkEndData">LinkEndData</a>:
+        <span class="sel">value</span>::<span class="meta">any</span> <span class="sel">end</span>::<span class="meta">any</span> <span class="sel">qualifier</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="ReadLinkAction">ReadLinkAction</a>:
+        <span class="sel">result</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="LinkEndCreationData">LinkEndCreationData</a>:
+        <span class="sel">isReplaceAll</span>::<span class="meta">any</span> <span class="sel">insertAt</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="CreateLinkAction">CreateLinkAction</a>:
+        
+</pre><pre><a class="nt" name="WriteLinkAction">WriteLinkAction</a>:
+        ε
+</pre><pre><a class="nt" name="DestroyLinkAction">DestroyLinkAction</a>:
+        
+</pre><pre><a class="nt" name="ClearAssociationAction">ClearAssociationAction</a>:
+        <span class="sel">object</span>::<span class="meta">any</span> <span class="sel">association</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="VariableAction">VariableAction</a>:
+        ε
+</pre><pre><a class="nt" name="ReadVariableAction">ReadVariableAction</a>:
+        <span class="sel">result</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="WriteVariableAction">WriteVariableAction</a>:
+        ε
+</pre><pre><a class="nt" name="ClearVariableAction">ClearVariableAction</a>:
+        <span class="sel">variable</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="AddVariableValueAction">AddVariableValueAction</a>:
+        <span class="sel">isReplaceAll</span>::<span class="meta">any</span> <span class="sel">insertAt</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="RemoveVariableValueAction">RemoveVariableValueAction</a>:
+        <span class="sel">value</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ApplyFunctionAction">ApplyFunctionAction</a>:
+        <span class="sel">function</span>::<span class="meta">any</span> <span class="sel">argument</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">result</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="PrimitiveFunction">PrimitiveFunction</a>:
+        <span class="sel">body</span>::<span class="meta">any</span> <span class="sel">language</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="CallAction">CallAction</a>:
+        ε
+</pre><pre><a class="nt" name="InvocationAction">InvocationAction</a>:
+        ε
+</pre><pre><a class="nt" name="SendSignalAction">SendSignalAction</a>:
+        <span class="sel">target</span>::<span class="meta">any</span> <span class="sel">signal</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="BroadcastSignalAction">BroadcastSignalAction</a>:
+        <span class="sel">signal</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SendObjectAction">SendObjectAction</a>:
+        <span class="sel">target</span>::<span class="meta">any</span> <span class="sel">request</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="CallOperationAction">CallOperationAction</a>:
+        <span class="sel">operation</span>::<span class="meta">any</span> <span class="sel">target</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="CallBehaviorAction">CallBehaviorAction</a>:
+        <span class="sel">behavior</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="TimeExpression">TimeExpression</a>:
+        <span class="sel">firstTime</span>::<span class="meta">any</span> <span class="sel">event</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Duration">Duration</a>:
+        <span class="sel">firstTime</span>::<span class="meta">any</span> <span class="sel">event</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="TimeObservationAction">TimeObservationAction</a>:
+        <span class="sel">now</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="DurationInterval">DurationInterval</a>:
+        ε
+</pre><pre><a class="nt" name="Interval">Interval</a>:
+        <span class="sel">min</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">max</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="TimeConstraint">TimeConstraint</a>:
+        ε
+</pre><pre><a class="nt" name="IntervalConstraint">IntervalConstraint</a>:
+        ε
+</pre><pre><a class="nt" name="TimeInterval">TimeInterval</a>:
+        ε
+</pre><pre><a class="nt" name="DurationObservationAction">DurationObservationAction</a>:
+        <span class="sel">duration</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="DurationConstraint">DurationConstraint</a>:
+        ε
+</pre><pre><a class="nt" name="DataStoreNode">DataStoreNode</a>:
+        ε
+</pre><pre><a class="nt" name="ParameterEffectKind">ParameterEffectKind</a>:
+        <span class="sel">update</span>::ε
+        <span class="sel">read</span>::ε
+        <span class="sel">delete</span>::ε
+        <span class="sel">create</span>::ε
+</pre><pre><a class="nt" name="InterruptibleActivityRegion">InterruptibleActivityRegion</a>:
+        <span class="sel">interruptingEdge</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">containedNode</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="ObjectNodeOrderingKind">ObjectNodeOrderingKind</a>:
+        <span class="sel">FIFO</span>::ε
+        <span class="sel">unordered</span>::ε
+        <span class="sel">ordered</span>::ε
+        <span class="sel">LIFO</span>::ε
+</pre><pre><a class="nt" name="ParameterSet">ParameterSet</a>:
+        <span class="sel">parameter</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">condition</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Component">Component</a>:
+        <span class="sel">isIndirectlyInstantiated</span>::<span class="meta">any</span> <span class="sel">required</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">provided</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">realization</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">ownedMember</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="ConnectorKind">ConnectorKind</a>:
+        <span class="sel">delegation</span>::ε
+        <span class="sel">assembly</span>::ε
+</pre><pre><a class="nt" name="Deployment">Deployment</a>:
+        <span class="sel">deployedArtifact</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">location</span>::<span class="meta">any</span> <span class="sel">configuration</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="DeployedArtifact">DeployedArtifact</a>:
+        ε
+</pre><pre><a class="nt" name="DeploymentTarget">DeploymentTarget</a>:
+        ε
+</pre><pre><a class="nt" name="Node">Node</a>:
+        <span class="sel">nestedNode</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Device">Device</a>:
+        ε
+</pre><pre><a class="nt" name="ExecutionEnvironment">ExecutionEnvironment</a>:
+        ε
+</pre><pre><a class="nt" name="CommunicationPath">CommunicationPath</a>:
+        ε
+</pre><pre><a class="nt" name="ProtocolConformance">ProtocolConformance</a>:
+        <span class="sel">specificMachine</span>::<span class="meta">any</span> <span class="sel">generalMachine</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ProtocolStateMachine">ProtocolStateMachine</a>:
+        <span class="sel">conformance</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="ProtocolTransition">ProtocolTransition</a>:
+        <span class="sel">postCondition</span>::<span class="meta">any</span> <span class="sel">referred</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">preCondition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ReadExtentAction">ReadExtentAction</a>:
+        <span class="sel">result</span>::<span class="meta">any</span> <span class="sel">classifier</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ReclassifyObjectAction">ReclassifyObjectAction</a>:
+        <span class="sel">isReplaceAll</span>::<span class="meta">any</span> <span class="sel">oldClassifier</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">newClassifier</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">object</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ReadIsClassifiedObjectAction">ReadIsClassifiedObjectAction</a>:
+        <span class="sel">isDirect</span>::<span class="meta">any</span> <span class="sel">classifier</span>::<span class="meta">any</span> <span class="sel">result</span>::<span class="meta">any</span> <span class="sel">object</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="StartOwnedBehaviorAction">StartOwnedBehaviorAction</a>:
+        <span class="sel">object</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="QualifierValue">QualifierValue</a>:
+        <span class="sel">qualifier</span>::<span class="meta">any</span> <span class="sel">value</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ReadLinkObjectEndAction">ReadLinkObjectEndAction</a>:
+        <span class="sel">object</span>::<span class="meta">any</span> <span class="sel">end</span>::<span class="meta">any</span> <span class="sel">result</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ReadLinkObjectEndQualifierAction">ReadLinkObjectEndQualifierAction</a>:
+        <span class="sel">object</span>::<span class="meta">any</span> <span class="sel">result</span>::<span class="meta">any</span> <span class="sel">qualifier</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="CreateLinkObjectAction">CreateLinkObjectAction</a>:
+        <span class="sel">result</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="AcceptEventAction">AcceptEventAction</a>:
+        <span class="sel">trigger</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">result</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="AcceptCallAction">AcceptCallAction</a>:
+        <span class="sel">returnInformation</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ReplyAction">ReplyAction</a>:
+        <span class="sel">replyToCall</span>::<span class="meta">any</span> <span class="sel">replyValue</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">returnInformation</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="RaiseExceptionAction">RaiseExceptionAction</a>:
+        <span class="sel">exception</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="DeploymentSpecification">DeploymentSpecification</a>:
+        <span class="sel">deploymentLocation</span>::<span class="meta">any</span> <span class="sel">executionLocation</span>::<span class="meta">any</span>
+</pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
+Last updated: 09/04/2013.</div></body></html>
