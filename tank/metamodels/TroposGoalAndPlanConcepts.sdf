@@ -1,0 +1,27 @@
+module Main
+
+exports
+  sorts
+        Actor Decomposition Contribution Goal MeansEnd Resource Plan BooleanDecomposition BooleanDecLink AndDecLink OrDecLink 
+  context-free syntax
+        decomposition::ANY+ contribution::ANY+ meansEnd::ANY+ -> Actor
+
+        PointOfView::ANY -> Decomposition
+
+        metric::ANY contributer::ANY contributed::ANY PointOfView::ANY -> Contribution
+
+        contributionR::ANY+ contributionD::ANY+ meansEndS::ANY+ meansEndD::ANY+ booleanDecomposition::ANY booleanDecLink::ANY+ -> Goal
+
+        meansR::ANY means::ANY end::ANY PointOfView::ANY meansP::ANY -> MeansEnd
+
+        meansEndR::ANY+ -> Resource
+
+        meansEndP::ANY+ booleanDecompositionP::ANY booleanDecLinkP::ANY+ -> Plan
+
+        type::ANY root::ANY rootP::ANY booleanDecLinkD::ANY+ -> BooleanDecomposition
+
+        booleanDecompositionB::ANY target::ANY targetP::ANY -> BooleanDecLink
+
+         -> AndDecLink
+
+         -> OrDecLink

@@ -1,0 +1,185 @@
+module Main
+
+exports
+  sorts
+        UIML Header MetaData Peer Presentation Logic DComponent DClass DProperty DMethod DParam Script Listener UsedInTagKind MapsTypeKind ExtensibleElement Source LocalSource RemoteSource Interface Structure Part Style Property Content Behavior Repeat Constant Reference Rule Condition EventCondition EqualCondition OpCondition Action Action-1 Action-2 Call Parameter PropertyParameter ReferenceParameter CallParameter OperationParameter EventParameter ConstantParameter IteratorParameter Iterator ConstantIterator PropertyIterator CallIterator TextIterator Event Equal EqualToConstant EqualToProperty EqualToReference EqualToOperation Operation Restructure Branch WhenTrue WhenFalse ByDefault HowKind ExportKind WhereKind Template BehaviorTemplate DClassTemplate DComponentTemplate ConstantTemplate ContentTemplate InterfaceTemplate LogicTemplate PartTemplate PeerTemplate PresentationTemplate PropertyTemplate RestructureTemplate RuleTemplate ScriptTemplate StructureTemplate StyleTemplate 
+  context-free syntax
+        head::ANY templates::ANY+ interfaces::ANY+ peers::ANY+ -> UIML
+
+        metas::ANY+ -> Header
+
+        name::ANY content::ANY -> MetaData
+
+        id::ANY how::ANY export::ANY source::ANY presentations::ANY+ logics::ANY+ -> Peer
+
+        id::ANY how::ANY export::ANY base::ANY source::ANY dClasses::ANY+ -> Presentation
+
+        id::ANY how::ANY export::ANY source::ANY dComponents::ANY+ -> Logic
+
+        id::ANY how::ANY export::ANY mapsTo::ANY location::ANY source::ANY dMethods::ANY+ -> DComponent
+
+        id::ANY how::ANY export::ANY mapsTo::ANY mapsType::ANY source::ANY dMethods::ANY+ dProperties::ANY+ events::ANY+ listeners::ANY+ -> DClass
+
+        id::ANY mapsType::ANY mapsTo::ANY returnType::ANY dMethods::ANY+ dParams::ANY+ -> DProperty
+
+        id::ANY how::ANY export::ANY mapsTo::ANY returnType::ANY source::ANY dParams::ANY+ script::ANY -> DMethod
+
+        id::ANY type::ANY value::ANY -> DParam
+
+        id::ANY type::ANY how::ANY export::ANY value::ANY source::ANY -> Script
+
+        class::ANY attacher::ANY -> Listener
+
+        event:: -> UsedInTagKind
+        listener:: -> UsedInTagKind
+        part:: -> UsedInTagKind
+
+        attribute:: -> MapsTypeKind
+        getMethod:: -> MapsTypeKind
+        setMethod:: -> MapsTypeKind
+        method:: -> MapsTypeKind
+
+         -> ExtensibleElement
+
+         -> Source
+
+        source::ANY -> LocalSource
+
+        location::ANY -> RemoteSource
+
+        id::ANY how::ANY export::ANY source::ANY structure::ANY+ style::ANY+ content::ANY+ behavior::ANY+ -> Interface
+
+        id::ANY how::ANY export::ANY source::ANY parts::ANY+ -> Structure
+
+        id::ANY how::ANY export::ANY class::ANY wherePart::ANY source::ANY style::ANY content::ANY behavior::ANY parts::ANY+ repeats::ANY+ -> Part
+
+        id::ANY how::ANY export::ANY source::ANY properties::ANY+ -> Style
+
+        name::ANY how::ANY export::ANY values::ANY+ parts::ANY+ events::ANY+ source::ANY constants::ANY+ properties::ANY+ references::ANY+ calls::ANY+ iterators::ANY+ -> Property
+
+        id::ANY how::ANY export::ANY source::ANY constants::ANY+ -> Content
+
+        id::ANY how::ANY export::ANY source::ANY rules::ANY+ -> Behavior
+
+        iterator::ANY parts::ANY+ -> Repeat
+
+        id::ANY how::ANY export::ANY model::ANY value::ANY source::ANY constants::ANY+ -> Constant
+
+        constant::ANY -> Reference
+
+        id::ANY how::ANY export::ANY source::ANY condition::ANY action::ANY -> Rule
+
+         -> Condition
+
+        event::ANY -> EventCondition
+
+        equal::ANY -> EqualCondition
+
+        op::ANY -> OpCondition
+
+         -> Action
+
+        event::ANY properties::ANY+ calls::ANY+ restructures::ANY+ -> Action-1
+
+        whenTrue::ANY whenFalse::ANY byDefault::ANY -> Action-2
+
+        name::ANY params::ANY+ -> Call
+
+         -> Parameter
+
+        property::ANY -> PropertyParameter
+
+        reference::ANY -> ReferenceParameter
+
+        call::ANY -> CallParameter
+
+        op::ANY -> OperationParameter
+
+        event::ANY -> EventParameter
+
+        constant::ANY -> ConstantParameter
+
+        iterator::ANY -> IteratorParameter
+
+         -> Iterator
+
+        constant::ANY -> ConstantIterator
+
+        property::ANY -> PropertyIterator
+
+        call::ANY -> CallIterator
+
+        value::ANY -> TextIterator
+
+        class::ANY parts::ANY+ -> Event
+
+         -> Equal
+
+        constant::ANY -> EqualToConstant
+
+        property::ANY -> EqualToProperty
+
+        reference::ANY -> EqualToReference
+
+        op::ANY -> EqualToOperation
+
+        name::ANY constants::ANY+ properties::ANY+ references::ANY+ calls::ANY+ ops::ANY+ events::ANY+ -> Operation
+
+        how::ANY atPart::ANY wherePart::ANY source::ANY template::ANY -> Restructure
+
+        properties::ANY+ calls::ANY+ restructure::ANY op::ANY equal::ANY event::ANY -> Branch
+
+         -> WhenTrue
+
+         -> WhenFalse
+
+         -> ByDefault
+
+        append:: -> HowKind
+        cascade:: -> HowKind
+        replace:: -> HowKind
+        union:: -> HowKind
+        delete:: -> HowKind
+
+        hidden:: -> ExportKind
+        optional:: -> ExportKind
+        required:: -> ExportKind
+
+        first:: -> WhereKind
+        last:: -> WhereKind
+        before:: -> WhereKind
+        after:: -> WhereKind
+
+         -> Template
+
+        behavior::ANY -> BehaviorTemplate
+
+        dClass::ANY -> DClassTemplate
+
+        dComponent::ANY -> DComponentTemplate
+
+        constant::ANY -> ConstantTemplate
+
+        content::ANY -> ContentTemplate
+
+        interface::ANY -> InterfaceTemplate
+
+        logic::ANY -> LogicTemplate
+
+        part::ANY -> PartTemplate
+
+        peer::ANY -> PeerTemplate
+
+        presentation::ANY -> PresentationTemplate
+
+        property::ANY -> PropertyTemplate
+
+        restructure::ANY -> RestructureTemplate
+
+        rule::ANY -> RuleTemplate
+
+        script::ANY -> ScriptTemplate
+
+        structure::ANY -> StructureTemplate
+
+        style::ANY -> StyleTemplate

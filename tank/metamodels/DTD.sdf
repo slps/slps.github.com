@@ -1,0 +1,56 @@
+module Main
+
+exports
+  sorts
+        Occurence OtherAttributeTypeEnum TypeDescription Notation Entity Element AnyElement RestrictedElement ElementContent Mixed Children Sequence Leaf Choice AttributeList AttributeDescription NoDefaultValue DefaultValue AttributeType Enumeration OtherAttributeType 
+  context-free syntax
+        zeroOrOne:: -> Occurence
+        zeroOrMore:: -> Occurence
+        oneOrMore:: -> Occurence
+        one:: -> Occurence
+
+        cdata:: -> OtherAttributeTypeEnum
+        id:: -> OtherAttributeTypeEnum
+        idref:: -> OtherAttributeTypeEnum
+        entityType:: -> OtherAttributeTypeEnum
+        entities:: -> OtherAttributeTypeEnum
+        nmtoken:: -> OtherAttributeTypeEnum
+        nmtakens:: -> OtherAttributeTypeEnum
+
+         -> TypeDescription
+
+        content::ANY -> Notation
+
+        content::ANY isInternal::ANY -> Entity
+
+         -> Element
+
+         -> AnyElement
+
+        content::ANY -> RestrictedElement
+
+         -> ElementContent
+
+        elements::ANY -> Mixed
+
+         -> Children
+
+        children::ANY -> Sequence
+
+        elementName::ANY -> Leaf
+
+        childrenChoice::ANY -> Choice
+
+        containsAttributes::ANY+ -> AttributeList
+
+         -> AttributeDescription
+
+        isRequired::ANY -> NoDefaultValue
+
+        value::ANY isFixed::ANY -> DefaultValue
+
+         -> AttributeType
+
+        values::ANY -> Enumeration
+
+        type::ANY -> OtherAttributeType

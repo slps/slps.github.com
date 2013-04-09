@@ -1,0 +1,23 @@
+module Main
+
+exports
+  sorts
+        ControllerAttribute Controller StateMachine State SubControllerState ViewState StateTransition StateMachineAction Event 
+  context-free syntax
+        controller::ANY -> ControllerAttribute
+
+        controllerAttribute::ANY+ behavior::ANY -> Controller
+
+        states::ANY+ -> StateMachine
+
+        substates::ANY+ theContainer::ANY outGoing::ANY+ incoming::ANY+ -> State
+
+        controller::ANY -> SubControllerState
+
+         -> ViewState
+
+        source::ANY target::ANY trigger::ANY effect::ANY -> StateTransition
+
+         -> StateMachineAction
+
+         -> Event

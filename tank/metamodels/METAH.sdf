@@ -1,0 +1,33 @@
+module Main
+
+exports
+  sorts
+        METAHFile METAHEntry Package PackageImplementation Data Attribute ProcessDeclaration ProcessImplementation ProcessAttribute Process Port Connection MacroDeclaration MacroImplementation 
+  context-free syntax
+        entries::ANY+ -> METAHFile
+
+         -> METAHEntry
+
+        packName::ANY data::ANY+ -> Package
+
+        implementationName::ANY implements::ANY attributes::ANY+ -> PackageImplementation
+
+        dataName::ANY -> Data
+
+        attName::ANY attValue::ANY attValueType::ANY attType::ANY -> Attribute
+
+        procDecName::ANY ports::ANY+ -> ProcessDeclaration
+
+        procImpName::ANY declaration::ANY processAttributes::ANY+ -> ProcessImplementation
+
+        attName::ANY attValue::ANY attValueType::ANY -> ProcessAttribute
+
+        procName::ANY periodic::ANY declaration::ANY implementation::ANY -> Process
+
+        portName::ANY portCom::ANY portPackage::ANY portType::ANY -> Port
+
+        compSrc::ANY portSrc::ANY compDest::ANY portDest::ANY -> Connection
+
+        name::ANY ports::ANY+ -> MacroDeclaration
+
+        macroImpName::ANY declaration::ANY process::ANY+ connections::ANY+ -> MacroImplementation

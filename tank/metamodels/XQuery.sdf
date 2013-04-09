@@ -1,0 +1,41 @@
+module Main
+
+exports
+  sorts
+        XQueryProgram Expression ExecutableExpression Node FLWOR FunctionCall FunctionDeclaration ElementNode AttributeNode TextNode ReturnXPath XPath BooleanExp For Let Where OrderBy Return 
+  context-free syntax
+        expressions::ANY+ -> XQueryProgram
+
+        parentNode::ANY returnEx::ANY -> Expression
+
+        xQueryProgram::ANY functionDeclaration::ANY -> ExecutableExpression
+
+        name::ANY -> Node
+
+        for::ANY let::ANY where::ANY orderBy::ANY return::ANY -> FLWOR
+
+        name::ANY parameters::ANY+ -> FunctionCall
+
+        name::ANY expression::ANY+ -> FunctionDeclaration
+
+        nodes::ANY+ -> ElementNode
+
+        value::ANY -> AttributeNode
+
+         -> TextNode
+
+        value::ANY -> ReturnXPath
+
+        functionCall::ANY for::ANY let::ANY -> XPath
+
+        where::ANY -> BooleanExp
+
+        var::ANY flwor::ANY expression::ANY -> For
+
+        var::ANY flwor::ANY expression::ANY -> Let
+
+        flwor::ANY expression::ANY -> Where
+
+        flwor::ANY -> OrderBy
+
+        flwor::ANY expressions::ANY+ -> Return

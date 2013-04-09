@@ -1,0 +1,12 @@
+WorkflowProcessDefinition:
+        participantSpecificatons::ANY+ revelantDatas::ANY+ applicationDeclarations::ANY+ processActivities::ANY+ transitionInformations::ANY+
+WorkflowApplicationDeclaration:
+        processDefinition::ANY processActivities::ANY+ revelantDatas::ANY+
+WorkflowRelevantData:
+        processDefinition::ANY applicationDeclarations::ANY+ processActivities::ANY+ participantSpecifications::ANY+ transitionInformations::ANY+
+WorkflowParticipantSpecification:
+        processDefinition::ANY revelantDatas::ANY+ processActivities::ANY+
+WorkflowProcessActivity:
+        processDefinition::ANY applicationDeclarations::ANY+ revelantDatas::ANY+ participantSpecifications::ANY+ to_transitionInformation::ANY from_transitionInformation::ANY
+TransitionInformation:
+        processDefinition::ANY revelantDatas::ANY+ to_processActivity::ANY from_processActivity::ANY

@@ -1,0 +1,36 @@
+XQueryProgram:
+        expressions::ANY+
+Expression:
+        parentNode::ANY returnEx::ANY
+ExecutableExpression:
+        xQueryProgram::ANY functionDeclaration::ANY
+Node:
+        name::ANY
+FLWOR:
+        for::ANY let::ANY where::ANY orderBy::ANY return::ANY
+FunctionCall:
+        name::ANY parameters::ANY+
+FunctionDeclaration:
+        name::ANY expression::ANY+
+ElementNode:
+        nodes::ANY+
+AttributeNode:
+        value::ANY
+TextNode:
+        EPSILON
+ReturnXPath:
+        value::ANY
+XPath:
+        functionCall::ANY for::ANY let::ANY
+BooleanExp:
+        where::ANY
+For:
+        var::ANY flwor::ANY expression::ANY
+Let:
+        var::ANY flwor::ANY expression::ANY
+Where:
+        flwor::ANY expression::ANY
+OrderBy:
+        flwor::ANY
+Return:
+        flwor::ANY expressions::ANY+

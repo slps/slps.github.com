@@ -1,0 +1,325 @@
+module Main
+
+exports
+  sorts
+        Collaboration ClassifierRole AssociationRole AssociationEndRole Message Interaction InteractionInstanceSet CollaborationInstanceSet UseCase Actor UseCaseInstance Extend Include ExtensionPoint AggregationKind CallConcurrencyKind ChangeableKind OrderingKind ParameterDirectionKind ScopeKind VisibilityKind Multiplicity MultiplicityRange Expression BooleanExpression TypeExpression MappingExpression ProcedureExpression ObjectSetExpression ActionExpression IterationExpression TimeExpression ArgListsExpression PseudostateKind Instance Signal Action CreateAction DestroyAction UninterpretedAction AttributeLink Object Link LinkObject DataValue CallAction SendAction ActionSequence Argument Reception LinkEnd ReturnAction TerminateAction Stimulus Exception ComponentInstance NodeInstance SubsystemInstance ActivityGraph Partition SubactivityState ActionState CallState ObjectFlowState ClassifierInState StateMachine Event StateVertex State TimeEvent CallEvent SignalEvent Transition CompositeState ChangeEvent Guard Pseudostate SimpleState SubmachineState SynchState StubState FinalState Point Dimension BezierPoint DiagramElement GraphElement SemanticModelBridge GraphEdge GraphNode GraphConnector LeafElement Reference TextElement GraphicPrimitive Polyline Ellipse Image Property SimpleSemanticModelElement Uml1SemanticModelBridge CoreSemanticModelBridge DiagramLink Diagram Element ModelElement GeneralizableElement Namespace Classifier Class DataType Feature StructuralFeature AssociationEnd Interface Constraint Relationship Association Attribute BehavioralFeature Operation Parameter Method Generalization AssociationClass Dependency Abstraction PresentationElement Usage Binding Component Node Permission Comment Flow ElementResidence TemplateParameter Primitive Enumeration EnumerationLiteral Stereotype TagDefinition TaggedValue ProgrammingLanguageDataType Artifact TemplateArgument Package Model Subsystem ElementImport 
+  context-free syntax
+        usedCollaboration::ANY+ representedOperation::ANY representedClassifier::ANY interaction::ANY+ constrainingElement::ANY+ -> Collaboration
+
+        availableContents::ANY+ base::ANY+ conformingInstance::ANY+ availableFeature::ANY+ multiplicity::ANY -> ClassifierRole
+
+        base::ANY conformingLink::ANY+ message::ANY+ multiplicity::ANY -> AssociationRole
+
+        base::ANY availableQualifier::ANY+ collaborationMultiplicity::ANY -> AssociationEndRole
+
+        interaction::ANY conformingStimulus::ANY+ action::ANY communicationConnection::ANY activator::ANY receiver::ANY sender::ANY predecessor::ANY+ -> Message
+
+        message::ANY+ context::ANY -> Interaction
+
+        interaction::ANY context::ANY participatingStimulus::ANY+ -> InteractionInstanceSet
+
+        collaboration::ANY constrainingElement::ANY+ participatingInstance::ANY+ interactionInstanceSet::ANY+ participatingLink::ANY+ -> CollaborationInstanceSet
+
+        include::ANY+ extend::ANY+ extensionPoint::ANY+ -> UseCase
+
+        powertypeRange::ANY+ feature::ANY+ -> Actor
+
+        ownedInstance::ANY+ linkEnd::ANY+ classifier::ANY+ componentInstance::ANY slot::ANY+ ownedLink::ANY+ -> UseCaseInstance
+
+        extensionPoint::ANY+ extension::ANY base::ANY condition::ANY -> Extend
+
+        addition::ANY base::ANY -> Include
+
+        useCase::ANY location::ANY -> ExtensionPoint
+
+        ak_none:: -> AggregationKind
+        ak_aggregate:: -> AggregationKind
+        ak_composite:: -> AggregationKind
+
+        cck_sequential:: -> CallConcurrencyKind
+        cck_guarded:: -> CallConcurrencyKind
+        cck_concurrent:: -> CallConcurrencyKind
+
+        ck_changeable:: -> ChangeableKind
+        ck_frozen:: -> ChangeableKind
+        ck_addOnly:: -> ChangeableKind
+
+        ok_unordered:: -> OrderingKind
+        ok_ordered:: -> OrderingKind
+
+        pdk_in:: -> ParameterDirectionKind
+        pdk_inout:: -> ParameterDirectionKind
+        pdk_out:: -> ParameterDirectionKind
+        pdk_return:: -> ParameterDirectionKind
+
+        sk_instance:: -> ScopeKind
+        sk_classifier:: -> ScopeKind
+
+        vk_public:: -> VisibilityKind
+        vk_protected:: -> VisibilityKind
+        vk_private:: -> VisibilityKind
+        vk_package:: -> VisibilityKind
+
+        range::ANY+ -> Multiplicity
+
+        multiplicity::ANY lower::ANY upper::ANY -> MultiplicityRange
+
+        language::ANY body::ANY -> Expression
+
+         -> BooleanExpression
+
+         -> TypeExpression
+
+         -> MappingExpression
+
+         -> ProcedureExpression
+
+         -> ObjectSetExpression
+
+         -> ActionExpression
+
+         -> IterationExpression
+
+         -> TimeExpression
+
+         -> ArgListsExpression
+
+        pk_choice:: -> PseudostateKind
+        pk_deepHistory:: -> PseudostateKind
+        pk_fork:: -> PseudostateKind
+        pk_initial:: -> PseudostateKind
+        pk_join:: -> PseudostateKind
+        pk_junction:: -> PseudostateKind
+        pk_shallowHistory:: -> PseudostateKind
+
+         -> Instance
+
+        powertypeRange::ANY+ feature::ANY+ -> Signal
+
+         -> Action
+
+        instantiation::ANY -> CreateAction
+
+        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY -> DestroyAction
+
+        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY -> UninterpretedAction
+
+        instance::ANY value::ANY linkEnd::ANY attribute::ANY -> AttributeLink
+
+        ownedInstance::ANY+ linkEnd::ANY+ classifier::ANY+ componentInstance::ANY slot::ANY+ ownedLink::ANY+ -> Object
+
+        association::ANY connection::ANY -> Link
+
+         -> LinkObject
+
+        ownedInstance::ANY+ linkEnd::ANY+ classifier::ANY+ componentInstance::ANY slot::ANY+ ownedLink::ANY+ -> DataValue
+
+        operation::ANY -> CallAction
+
+        signal::ANY -> SendAction
+
+        action::ANY+ -> ActionSequence
+
+        action::ANY value::ANY -> Argument
+
+        signal::ANY specification::ANY isRoot::ANY isLeaf::ANY isAbstract::ANY -> Reception
+
+        link::ANY qualifiedValue::ANY+ instance::ANY associationEnd::ANY -> LinkEnd
+
+        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY -> ReturnAction
+
+        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY -> TerminateAction
+
+        argument::ANY+ communicationLink::ANY receiver::ANY dispatchAction::ANY sender::ANY -> Stimulus
+
+         -> Exception
+
+        resident::ANY+ nodeInstance::ANY -> ComponentInstance
+
+        resident::ANY+ -> NodeInstance
+
+        ownedInstance::ANY+ linkEnd::ANY+ classifier::ANY+ componentInstance::ANY slot::ANY+ ownedLink::ANY+ -> SubsystemInstance
+
+        partition::ANY+ -> ActivityGraph
+
+        contents::ANY+ activityGraph::ANY -> Partition
+
+        isDynamic::ANY dynamicArguments::ANY dynamicMultiplicity::ANY -> SubactivityState
+
+        isDynamic::ANY dynamicArguments::ANY dynamicMultiplicity::ANY -> ActionState
+
+         -> CallState
+
+        type::ANY parameter::ANY+ isSynch::ANY -> ObjectFlowState
+
+        inState::ANY+ type::ANY -> ClassifierInState
+
+        context::ANY submachineState::ANY+ top::ANY transitions::ANY+ -> StateMachine
+
+         -> Event
+
+         -> StateVertex
+
+         -> State
+
+        when::ANY -> TimeEvent
+
+        operation::ANY -> CallEvent
+
+        signal::ANY -> SignalEvent
+
+        target::ANY trigger::ANY stateMachine::ANY source::ANY effect::ANY guard::ANY -> Transition
+
+        subvertex::ANY+ isConcurrent::ANY -> CompositeState
+
+        changeExpression::ANY -> ChangeEvent
+
+        transition::ANY expression::ANY -> Guard
+
+        kind::ANY -> Pseudostate
+
+        deferrableEvent::ANY+ internalTransition::ANY+ exit::ANY doActivity::ANY entry::ANY stateMachine::ANY -> SimpleState
+
+        submachine::ANY -> SubmachineState
+
+        bound::ANY -> SynchState
+
+        referenceState::ANY -> StubState
+
+        deferrableEvent::ANY+ internalTransition::ANY+ exit::ANY doActivity::ANY entry::ANY stateMachine::ANY -> FinalState
+
+        x::ANY y::ANY -> Point
+
+        width::ANY height::ANY -> Dimension
+
+        base::ANY control1::ANY control2::ANY -> BezierPoint
+
+         -> DiagramElement
+
+         -> GraphElement
+
+         -> SemanticModelBridge
+
+        anchor::ANY waypoints::ANY -> GraphEdge
+
+        size::ANY -> GraphNode
+
+        graphElement::ANY graphEdge::ANY+ position::ANY -> GraphConnector
+
+         -> LeafElement
+
+        referenced::ANY -> Reference
+
+        text::ANY -> TextElement
+
+         -> GraphicPrimitive
+
+        waypoints::ANY closed::ANY -> Polyline
+
+        center::ANY radiusX::ANY radiusY::ANY rotation::ANY startAngle::ANY endAngle::ANY -> Ellipse
+
+        uri::ANY mimeType::ANY -> Image
+
+        key::ANY value::ANY -> Property
+
+        typeInfo::ANY -> SimpleSemanticModelElement
+
+        element::ANY -> Uml1SemanticModelBridge
+
+        diagram::ANY graphElement::ANY presentation::ANY -> CoreSemanticModelBridge
+
+        graphElement::ANY diagram::ANY zoom::ANY viewport::ANY -> DiagramLink
+
+        owner::ANY diagramLink::ANY+ name::ANY zoom::ANY viewport::ANY -> Diagram
+
+         -> Element
+
+         -> ModelElement
+
+         -> GeneralizableElement
+
+         -> Namespace
+
+         -> Classifier
+
+        isActive::ANY -> Class
+
+        powertypeRange::ANY+ feature::ANY+ -> DataType
+
+         -> Feature
+
+         -> StructuralFeature
+
+        association::ANY specification::ANY+ participant::ANY qualifier::ANY+ isNavigable::ANY ordering::ANY aggregation::ANY targetScope::ANY multiplicity::ANY changeability::ANY -> AssociationEnd
+
+        powertypeRange::ANY+ feature::ANY+ -> Interface
+
+        constrainedElement::ANY+ body::ANY -> Constraint
+
+         -> Relationship
+
+        connection::ANY -> Association
+
+        associationEnd::ANY initialValue::ANY -> Attribute
+
+         -> BehavioralFeature
+
+        concurrency::ANY isRoot::ANY isLeaf::ANY isAbstract::ANY specification::ANY -> Operation
+
+        type::ANY behavioralFeature::ANY defaultValue::ANY kind::ANY -> Parameter
+
+        specification::ANY body::ANY -> Method
+
+        parent::ANY powertype::ANY child::ANY discriminator::ANY -> Generalization
+
+         -> AssociationClass
+
+        client::ANY+ supplier::ANY+ -> Dependency
+
+        mapping::ANY -> Abstraction
+
+         -> PresentationElement
+
+         -> Usage
+
+        argument::ANY+ -> Binding
+
+        deploymentLocation::ANY+ residentElement::ANY+ implementation::ANY+ -> Component
+
+        deployedComponent::ANY+ -> Node
+
+         -> Permission
+
+        annotatedElement::ANY+ body::ANY -> Comment
+
+        source::ANY+ target::ANY+ -> Flow
+
+        container::ANY resident::ANY visibility::ANY -> ElementResidence
+
+        template::ANY parameter::ANY defaultElement::ANY -> TemplateParameter
+
+         -> Primitive
+
+        literal::ANY+ -> Enumeration
+
+        enumeration::ANY -> EnumerationLiteral
+
+        stereotypeConstraint::ANY+ definedTag::ANY+ icon::ANY baseClass::ANY+ -> Stereotype
+
+        owner::ANY tagType::ANY multiplicity::ANY -> TagDefinition
+
+        type::ANY referenceValue::ANY+ modelElement::ANY dataValue::ANY+ -> TaggedValue
+
+        expression::ANY -> ProgrammingLanguageDataType
+
+        powertypeRange::ANY+ feature::ANY+ -> Artifact
+
+        binding::ANY modelElement::ANY -> TemplateArgument
+
+        elementImport::ANY+ -> Package
+
+         -> Model
+
+        isInstantiable::ANY -> Subsystem
+
+        package::ANY importedElement::ANY visibility::ANY alias::ANY isSpecification::ANY -> ElementImport

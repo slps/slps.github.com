@@ -1,0 +1,17 @@
+module Main
+
+exports
+  sorts
+        WorkflowProcessDefinition WorkflowApplicationDeclaration WorkflowRelevantData WorkflowParticipantSpecification WorkflowProcessActivity TransitionInformation 
+  context-free syntax
+        participantSpecificatons::ANY+ revelantDatas::ANY+ applicationDeclarations::ANY+ processActivities::ANY+ transitionInformations::ANY+ -> WorkflowProcessDefinition
+
+        processDefinition::ANY processActivities::ANY+ revelantDatas::ANY+ -> WorkflowApplicationDeclaration
+
+        processDefinition::ANY applicationDeclarations::ANY+ processActivities::ANY+ participantSpecifications::ANY+ transitionInformations::ANY+ -> WorkflowRelevantData
+
+        processDefinition::ANY revelantDatas::ANY+ processActivities::ANY+ -> WorkflowParticipantSpecification
+
+        processDefinition::ANY applicationDeclarations::ANY+ revelantDatas::ANY+ participantSpecifications::ANY+ to_transitionInformation::ANY from_transitionInformation::ANY -> WorkflowProcessActivity
+
+        processDefinition::ANY revelantDatas::ANY+ to_processActivity::ANY from_processActivity::ANY -> TransitionInformation

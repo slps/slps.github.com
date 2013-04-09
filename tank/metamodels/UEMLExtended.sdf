@@ -1,0 +1,77 @@
+module Main
+
+exports
+  sorts
+        UEMLObject UEMLModel Geometry Port Flow Activity Object InformationObject Resource MaterialResource HumanResource ResourceFlow IOFlow ControlFlow TriggerFlow ConstraintFlow ResourceRole RoleType Anchor OutputPort InputPort ConnectionOperator AssociationConnector FlowObject Event ResourceType ActivityType PassiveObject Commitment Software Organisation Process Service Agent Contract Task 
+  context-free syntax
+        has::ANY model::ANY -> UEMLObject
+
+        contains::ANY+ -> UEMLModel
+
+        object::ANY -> Geometry
+
+         -> Port
+
+        associationConnector::ANY -> Flow
+
+        resourceRole::ANY+ parent::ANY hasOutput::ANY+ hasInput::ANY+ activityType::ANY -> Activity
+
+        ioFlow::ANY -> Object
+
+        controlFlow::ANY -> InformationObject
+
+        carries::ANY plays::ANY+ resourceType::ANY commitment::ANY+ -> Resource
+
+         -> MaterialResource
+
+         -> HumanResource
+
+        resourceCarries::ANY+ -> ResourceFlow
+
+        carries::ANY+ -> IOFlow
+
+        carries::ANY+ -> ControlFlow
+
+         -> TriggerFlow
+
+         -> ConstraintFlow
+
+        resourcePlays::ANY+ roleQualifier::ANY in::ANY -> ResourceRole
+
+         -> RoleType
+
+         -> Anchor
+
+        activity::ANY -> OutputPort
+
+        activity::ANY -> InputPort
+
+         -> ConnectionOperator
+
+        origin::ANY+ target::ANY+ classAssociation::ANY -> AssociationConnector
+
+        target::ANY origin::ANY -> FlowObject
+
+         -> Event
+
+        resource::ANY+ -> ResourceType
+
+        activityT::ANY+ -> ActivityType
+
+         -> PassiveObject
+
+        resource::ANY+ task::ANY agentO::ANY agentC::ANY contract::ANY -> Commitment
+
+         -> Software
+
+         -> Organisation
+
+        child::ANY fulfills::ANY+ realises::ANY -> Process
+
+        process::ANY -> Service
+
+        obliger::ANY claimer::ANY has_parties::ANY -> Agent
+
+        process::ANY+ agent::ANY collection_of::ANY+ -> Contract
+
+        fulfills::ANY+ -> Task

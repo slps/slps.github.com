@@ -1,0 +1,25 @@
+module Main
+
+exports
+  sorts
+        LocatedElement Editor AbstractElement Block GroupElement Element Format Color Font Indent 
+  context-free syntax
+         -> LocatedElement
+
+        extension::ANY abstractElements::ANY+ -> Editor
+
+         -> AbstractElement
+
+        blockbegin::ANY blockend::ANY -> Block
+
+        indent::ANY element::ANY+ -> GroupElement
+
+        element::ANY groupElement::ANY -> Element
+
+        color::ANY font::ANY -> Format
+
+        red::ANY green::ANY blue::ANY -> Color
+
+        font::ANY bold::ANY italic::ANY -> Font
+
+        retrait::ANY groupElementIndent::ANY -> Indent

@@ -1,0 +1,81 @@
+module Main
+
+exports
+  sorts
+        LocatedElement XAsmFile XAsmSpec Asm Signature Argument Body MetaInformation AccessUpdateFunction Declaration Function Parameter Universe Initialization Term Constant FunctionOrVariableTerm OperatorTerm BooleanConstant IntegerConstant StringConstant UndefConstant Rule SkipRule AsmInvocation UpdateRule ChooseRule DoForallRule ConditionalRule ElseIf ExtendRule ElementDecl VariableDecl Extension ReturnRule AccessUpdateType AsmType 
+  context-free syntax
+         -> LocatedElement
+
+         -> XAsmFile
+
+        Asm::ANY+ -> XAsmSpec
+
+        signature::ANY returnType::ANY metaInformation::ANY body::ANY -> Asm
+
+        isMain::ANY name::ANY arguments::ANY+ -> Signature
+
+        type::ANY -> Argument
+
+        declarations::ANY+ initialization::ANY rules::ANY+ -> Body
+
+        usedAsIn::ANY+ usedAs::ANY accessUpdateFunctions::ANY+ -> MetaInformation
+
+        type::ANY functions::ANY+ -> AccessUpdateFunction
+
+         -> Declaration
+
+        parameters::ANY+ returnType::ANY initTerm::ANY isExternal::ANY -> Function
+
+        name::ANY type::ANY -> Parameter
+
+        name::ANY contents::ANY+ superUniverses::ANY+ -> Universe
+
+        rules::ANY+ -> Initialization
+
+         -> Term
+
+         -> Constant
+
+        declaration::ANY terms::ANY+ -> FunctionOrVariableTerm
+
+        opName::ANY leftExp::ANY rightExp::ANY -> OperatorTerm
+
+        value::ANY -> BooleanConstant
+
+        value::ANY -> IntegerConstant
+
+        value::ANY -> StringConstant
+
+         -> UndefConstant
+
+         -> Rule
+
+        inSequence::ANY -> SkipRule
+
+        asmName::ANY arguments::ANY+ -> AsmInvocation
+
+        function::ANY updateTerm::ANY -> UpdateRule
+
+        chooseId::ANY inSet::ANY guard::ANY ifChoosenRules::ANY+ ifNotChoosenRule::ANY -> ChooseRule
+
+        id::ANY inSet::ANY condition::ANY doRule::ANY+ -> DoForallRule
+
+        condition::ANY thenRule::ANY+ elseRule::ANY elseIfRule::ANY -> ConditionalRule
+
+        condition::ANY thenRule::ANY+ elseRule::ANY elseIfRule::ANY -> ElseIf
+
+        extensions::ANY+ rules::ANY+ -> ExtendRule
+
+         -> ElementDecl
+
+        name::ANY -> VariableDecl
+
+        elements::ANY+ universe::ANY -> Extension
+
+        term::ANY -> ReturnRule
+
+        access:: -> AccessUpdateType
+        update:: -> AccessUpdateType
+
+        function:: -> AsmType
+        subasm:: -> AsmType

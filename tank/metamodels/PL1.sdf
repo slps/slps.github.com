@@ -1,0 +1,37 @@
+module Main
+
+exports
+  sorts
+        PLIClassifier PLISimpleType PLINamedType PLIComposedType PLIAlias PLIAttribute PLIComputationalType PLINonComputationalType PLIElement PLIElementInitialValue PLISourceText PLIArray PLIFixedBoundArray PLIFixedLboundArray PLIHBoundArray PLIVariableBoundArray 
+  context-free syntax
+        name::ANY typedElements::ANY+ -> PLIClassifier
+
+        alias::ANY -> PLISimpleType
+
+         -> PLINamedType
+
+        elements::ANY+ -> PLIComposedType
+
+        type::ANY contains::ANY+ -> PLIAlias
+
+         -> PLIAttribute
+
+         -> PLIComputationalType
+
+         -> PLINonComputationalType
+
+        level::ANY name::ANY sharedType::ANY group::ANY initial::ANY source::ANY array::ANY -> PLIElement
+
+        initialValue::ANY -> PLIElementInitialValue
+
+        source::ANY fileName::ANY -> PLISourceText
+
+        arrayOf::ANY -> PLIArray
+
+        IBound::ANY uBound::ANY referredTo::ANY -> PLIFixedBoundArray
+
+        IBound::ANY uBoundToAllocate::ANY referredTo::ANY -> PLIFixedLboundArray
+
+        uBound::ANY IBoundToAllocate::ANY referredTo::ANY -> PLIHBoundArray
+
+        IBoundToAllocate::ANY hBoundToAllocate::ANY referredTo::ANY -> PLIVariableBoundArray

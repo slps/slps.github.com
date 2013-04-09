@@ -1,0 +1,47 @@
+module Main
+
+exports
+  sorts
+        OCCAM-Program OCCAM-Element Process Channel Action Assignment Input Output Constructor Buckel If While Condition Sequential Parallel Alternative DataType Library File Server Declaration 
+  context-free syntax
+        occam_Elements::ANY+ files::ANY+ -> OCCAM-Program
+
+        name::ANY -> OCCAM-Element
+
+        declaration::ANY constructors::ANY+ parameters::ANY+ libraries::ANY+ toChannel::ANY -> Process
+
+        name::ANY type::ANY toServer::ANY toProcess::ANY -> Channel
+
+        constructor::ANY while::ANY if::ANY -> Action
+
+         -> Assignment
+
+         -> Input
+
+         -> Output
+
+        process::ANY actions::ANY+ buckels::ANY+ childrens::ANY+ -> Constructor
+
+        constructor::ANY -> Buckel
+
+        conditions::ANY+ actions::ANY+ -> If
+
+        conditions::ANY+ actions::ANY+ -> While
+
+        elementRight::ANY elementLeft::ANY typeCondition::ANY if::ANY while::ANY -> Condition
+
+         -> Sequential
+
+         -> Parallel
+
+         -> Alternative
+
+        dataType::ANY -> DataType
+
+        name::ANY -> Library
+
+        name::ANY -> File
+
+        name::ANY toChannel::ANY -> Server
+
+        name::ANY process::ANY elements::ANY+ -> Declaration

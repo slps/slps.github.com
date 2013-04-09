@@ -1,0 +1,233 @@
+AST:
+        root::ANY
+ASTNode:
+        EPSILON
+AnonymousClassDeclaration:
+        bodyDeclarations::ANY+
+BodyDeclaration:
+        EPSILON
+CatchClause:
+        body::ANY exception::ANY
+Comment:
+        EPSILON
+CompilationUnit:
+        comments::ANY+ package::ANY imports::ANY+ types::ANY+
+Expression:
+        EPSILON
+ImportDeclaration:
+        onDemand::ANY static::ANY name::ANY
+MemberRef:
+        name::ANY qualifier::ANY
+MemberValuePair:
+        name::ANY value::ANY
+MethodRef:
+        name::ANY qualifier::ANY parameters::ANY+
+MethodRefParameter:
+        name::ANY type::ANY varargs::ANY
+ExtendedModifier:
+        EPSILON
+Modifier:
+        abstract::ANY final::ANY native::ANY none::ANY private::ANY protected::ANY public::ANY static::ANY strictfp::ANY synchronized::ANY transient::ANY volatile::ANY
+PackageDeclaration:
+        annotations::ANY+ javadoc::ANY name::ANY
+Statement:
+        EPSILON
+TagElement:
+        fragments::ANY+ tagName::ANY nested::ANY
+TextElement:
+        text::ANY
+Type:
+        EPSILON
+TypeParameter:
+        name::ANY typeBounds::ANY+
+VariableDeclaration:
+        EPSILON
+AbstractTypeDeclaration:
+        EPSILON
+AnnotationTypeMemberDeclaration:
+        default::ANY name::ANY type::ANY
+EnumConstantDeclaration:
+        arguments::ANY+ anonymousClassDeclaration::ANY name::ANY
+FieldDeclaration:
+        fragments::ANY+ type::ANY
+Initializer:
+        body::ANY
+MethodDeclaration:
+        body::ANY extraDimensions::ANY name::ANY returnType::ANY constructor::ANY varargs::ANY parameters::ANY+ thrownExceptions::ANY+ typeParameters::ANY+
+AnnotationTypeDeclaration:
+        EPSILON
+EnumDeclaration:
+        superInterfaceTypes::ANY+ enumConstants::ANY+
+TypeDeclaration:
+        superclassType::ANY interface::ANY superInterfaceTypes::ANY+ typeParameters::ANY+
+BlockComment:
+        EPSILON
+Javadoc:
+        tags::ANY+
+LineComment:
+        EPSILON
+Annotation:
+        EPSILON
+ArrayAccess:
+        array::ANY index::ANY
+ArrayCreation:
+        dimensions::ANY+ initializer::ANY type::ANY
+ArrayInitializer:
+        expressions::ANY+
+Assignment:
+        leftHandSide::ANY operator::ANY rightHandSide::ANY
+AssignementOperatorKind:
+        RIGHT_SHIFT_SIGNED_ASSIGN::EPSILON
+        BIT_XOR_ASSIGN::EPSILON
+        TIMES_ASSIGN::EPSILON
+        LEFT_SHIFT_ASSIGN::EPSILON
+        MINUS_ASSIGN::EPSILON
+        BIT_OR_ASSIGN::EPSILON
+        PLUS_ASSIGN::EPSILON
+        ASSIGN::EPSILON
+        RIGHT_SHIFT_UNSIGNED_ASSIGN::EPSILON
+        REMAINDER_ASSIGN::EPSILON
+        DIVIDE_ASSIGN::EPSILON
+        BIT_AND_ASSIGN::EPSILON
+BooleanLiteral:
+        booleanValue::ANY
+CastExpression:
+        expression::ANY type::ANY
+CharacterLiteral:
+        charValue::ANY escapedValue::ANY
+ClassInstanceCreation:
+        arguments::ANY+ anonymousClassDeclaration::ANY expression::ANY type::ANY typeArguments::ANY+
+ConditionalExpression:
+        elseExpression::ANY expression::ANY thenExpression::ANY
+FieldAccess:
+        expression::ANY name::ANY
+InfixExpression:
+        extendedOperands::ANY+ leftOperand::ANY operator::ANY rightOperand::ANY
+InfixExpressionOperatorKind:
+        GREATER_EQUALS::EPSILON
+        OR::EPSILON
+        RIGHT_SHIFT_SIGNED::EPSILON
+        MINUS::EPSILON
+        XOR::EPSILON
+        LESS_EQUALS::EPSILON
+        EQUALS::EPSILON
+        NOT_EQUALS::EPSILON
+        AND::EPSILON
+        PLUS::EPSILON
+        GREATER::EPSILON
+        CONDITIONAL_OR::EPSILON
+        REMAINDER::EPSILON
+        LESS::EPSILON
+        LEFT_SHIFT::EPSILON
+        RIGHT_SHIFT_UNSIGNED::EPSILON
+        CONDITIONAL_AND::EPSILON
+        TIMES::EPSILON
+        DIVIDE::EPSILON
+InstanceofExpression:
+        leftOperand::ANY rightOperand::ANY
+MethodInvocation:
+        arguments::ANY+ expression::ANY name::ANY typeArguments::ANY+
+Name:
+        EPSILON
+NullLiteral:
+        EPSILON
+NumberLiteral:
+        token::ANY
+ParenthesizedExpression:
+        expression::ANY
+PostfixExpression:
+        operand::ANY operator::ANY
+PostfixExpresssionOperatorKind:
+        INCREMENT::EPSILON
+        DECREMENT::EPSILON
+PrefixExpression:
+        operand::ANY operator::ANY
+PrefixExpresssionOperatorKind:
+        MINUS::EPSILON
+        NOT::EPSILON
+        DECREMENT::EPSILON
+        COMPLEMENT::EPSILON
+        INCREMENT::EPSILON
+        PLUS::EPSILON
+StringLiteral:
+        escapedValue::ANY literalValue::ANY
+SuperFieldAccess:
+        name::ANY qualifier::ANY
+SuperMethodInvocation:
+        arguments::ANY+ name::ANY qualifier::ANY typeArguments::ANY+
+ThisExpression:
+        qualifier::ANY
+TypeLiteral:
+        type::ANY
+VariableDeclarationExpression:
+        fragments::ANY+ modifiers::ANY+ type::ANY
+AssertStatement:
+        expression::ANY message::ANY
+Block:
+        statements::ANY+
+BreakStatement:
+        label::ANY
+ConstructorInvocation:
+        arguments::ANY+ typeArguments::ANY+
+ContinueStatement:
+        label::ANY
+DoStatement:
+        body::ANY expression::ANY
+EmptyStatement:
+        EPSILON
+EnhancedForStatement:
+        body::ANY expression::ANY parameter::ANY
+ExpressionStatement:
+        expression::ANY
+ForStatement:
+        body::ANY expression::ANY initializers::ANY+ updaters::ANY+
+IfStatement:
+        elseStatement::ANY expression::ANY thenStatement::ANY
+LabeledStatement:
+        body::ANY label::ANY
+ReturnStatement:
+        expression::ANY
+SuperConstructorInvocation:
+        arguments::ANY+ expression::ANY typeArguments::ANY+
+SwitchCase:
+        expression::ANY default::ANY
+SwitchStatement:
+        expression::ANY statements::ANY+
+SynchronizedStatement:
+        body::ANY expression::ANY
+ThrowStatement:
+        expression::ANY
+TryStatement:
+        catchClauses::ANY+ body::ANY finally::ANY
+TypeDeclarationStatement:
+        declaration::ANY
+VariableDeclarationStatement:
+        fragments::ANY+ modifiers::ANY+ type::ANY
+WhileStatement:
+        body::ANY expression::ANY
+ArrayType:
+        componentType::ANY dimensions::ANY elementType::ANY
+ParameterizedType:
+        type::ANY typeArguments::ANY+
+PrimitiveType:
+        code::ANY
+QualifiedType:
+        name::ANY qualifier::ANY
+SimpleType:
+        name::ANY
+WildcardType:
+        bound::ANY upperBound::ANY
+SingleVariableDeclaration:
+        type::ANY varargs::ANY modifiers::ANY+
+VariableDeclarationFragment:
+        EPSILON
+QualifiedName:
+        name::ANY qualifier::ANY
+SimpleName:
+        identifier::ANY declaration::ANY
+MarkerAnnotation:
+        EPSILON
+NormalAnnotation:
+        values::ANY+
+SingleMemberAnnotation:
+        value::ANY

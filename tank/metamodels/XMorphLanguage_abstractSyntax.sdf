@@ -1,0 +1,83 @@
+module Main
+
+exports
+  sorts
+        VarScope AbstractVar VarUse MOF::Property Key PatternScope PatternDefn TRule Transformation Query Term TRuleVar PatternVar ExtentVar CompoundTerm AndTerm OrTerm NotTerm IfTerm SimpleTerm TrackingUse MOF::Class PatternUse MofTerm Condition MofInstance MofOrder Expression CoumpoundExpr CollectionExpr FunctionExpr FeatureExpr InstanceRef MOF::Object SimpleExpr StringConstant IntConstant BooleanConstant EnumConstant 
+  context-free syntax
+         -> VarScope
+
+         -> AbstractVar
+
+        var::ANY -> VarUse
+
+        part::ANY -> MOF::Property
+
+        property::ANY+ transformation::ANY -> Key
+
+         -> PatternScope
+
+        scope::ANY parameter::ANY+ body::ANY -> PatternDefn
+
+        superseded::ANY+ superseder::ANY+ transformation::ANY extended::ANY+ extender::ANY+ term::ANY tgt::ANY+ -> TRule
+
+        keys::ANY+ tRule::ANY+ -> Transformation
+
+        term::ANY parameter::ANY+ -> Query
+
+         -> Term
+
+        superseder::ANY+ superseded::ANY+ extended::ANY+ extender::ANY+ -> TRuleVar
+
+        query::ANY patternDefn::ANY -> PatternVar
+
+        src::ANY -> ExtentVar
+
+         -> CompoundTerm
+
+        term::ANY+ -> AndTerm
+
+        term::ANY+ -> OrTerm
+
+        term::ANY+ -> NotTerm
+
+        term::ANY+ -> IfTerm
+
+         -> SimpleTerm
+
+        featureNames::ANY tracking::ANY -> TrackingUse
+
+        tracking::ANY+ -> MOF::Class
+
+        tRuleST::ANY arg::ANY+ -> PatternUse
+
+         -> MofTerm
+
+        reason::ANY -> Condition
+
+        isExactly::ANY typeName::ANY instance::ANY -> MofInstance
+
+        lesser::ANY instance::ANY greater::ANY -> MofOrder
+
+         -> Expression
+
+         -> CoumpoundExpr
+
+        unique::ANY ordered::ANY -> CollectionExpr
+
+        function::ANY -> FunctionExpr
+
+        collect::ANY featureName::ANY -> FeatureExpr
+
+        obj::ANY -> InstanceRef
+
+        obj::ANY -> MOF::Object
+
+         -> SimpleExpr
+
+        representation::ANY -> StringConstant
+
+        representation::ANY -> IntConstant
+
+        representation::ANY -> BooleanConstant
+
+        representation::ANY -> EnumConstant

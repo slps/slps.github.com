@@ -1,0 +1,149 @@
+module Main
+
+exports
+  sorts
+        LocatedElement ACG ACGElement Function Attribute Parameter Node ASMNode CodeNode SimpleNode StatementBlock Statement CompoundStat ForEachStat OnceStat VariableStat OperationStat ConditionalStat LetStat AnalyzeStat ReportStat Severity FieldStat ParamStat EmitStat LabelStat NewStat DupStat DupX1Stat PopStat SwapStat IterateStat EndIterateStat GetAsmStat FindMEStat PushTStat PushFStat EmitWithOperandStat PushStat PushIStat PushDStat LoadStat StoreStat CallStat PCallStat SuperCallStat GetStat SetStat EmitWithLabelRefStat IfStat GotoStat VariableDecl Expression VariableExp SelfExp LastExp IfExp IsAExp LetExp PropertyCallExp NavigationExp IteratorExp OperationCallExp OperatorCallExp LiteralExp OclUndefinedExp CollectionExp SequenceExp BooleanExp IntegerExp StringExp 
+  context-free syntax
+         -> LocatedElement
+
+        metamodel::ANY startsWith::ANY elements::ANY+ -> ACG
+
+         -> ACGElement
+
+        context::ANY name::ANY parameters::ANY+ body::ANY -> Function
+
+        context::ANY name::ANY body::ANY -> Attribute
+
+         -> Parameter
+
+         -> Node
+
+        name::ANY -> ASMNode
+
+        element::ANY mode::ANY guard::ANY -> CodeNode
+
+        element::ANY mode::ANY guard::ANY -> SimpleNode
+
+         -> StatementBlock
+
+         -> Statement
+
+         -> CompoundStat
+
+        iterator::ANY collection::ANY -> ForEachStat
+
+         -> OnceStat
+
+        definition::ANY name::ANY -> VariableStat
+
+        context::ANY name::ANY -> OperationStat
+
+        condition::ANY elseStatements::ANY+ -> ConditionalStat
+
+        variable::ANY value::ANY -> LetStat
+
+        target::ANY mode::ANY -> AnalyzeStat
+
+        severity::ANY message::ANY -> ReportStat
+
+        critic:: -> Severity
+        error:: -> Severity
+        warning:: -> Severity
+
+        name::ANY type::ANY -> FieldStat
+
+        name::ANY type::ANY -> ParamStat
+
+         -> EmitStat
+
+        name::ANY id::ANY -> LabelStat
+
+         -> NewStat
+
+         -> DupStat
+
+         -> DupX1Stat
+
+         -> PopStat
+
+         -> SwapStat
+
+         -> IterateStat
+
+         -> EndIterateStat
+
+         -> GetAsmStat
+
+         -> FindMEStat
+
+         -> PushTStat
+
+         -> PushFStat
+
+         -> EmitWithOperandStat
+
+        operand::ANY -> PushStat
+
+        operand::ANY -> PushIStat
+
+        operand::ANY -> PushDStat
+
+        operand::ANY -> LoadStat
+
+        operand::ANY -> StoreStat
+
+        operand::ANY -> CallStat
+
+        operand::ANY -> PCallStat
+
+        operand::ANY -> SuperCallStat
+
+        operand::ANY -> GetStat
+
+        operand::ANY -> SetStat
+
+         -> EmitWithLabelRefStat
+
+        label::ANY -> IfStat
+
+        label::ANY -> GotoStat
+
+        name::ANY -> VariableDecl
+
+         -> Expression
+
+        variable::ANY -> VariableExp
+
+         -> SelfExp
+
+         -> LastExp
+
+        condition::ANY thenExp::ANY elseExp::ANY -> IfExp
+
+        source::ANY type::ANY -> IsAExp
+
+        variable::ANY value::ANY in::ANY -> LetExp
+
+         -> PropertyCallExp
+
+        source::ANY name::ANY -> NavigationExp
+
+        iterator::ANY body::ANY -> IteratorExp
+
+        arguments::ANY+ -> OperationCallExp
+
+         -> OperatorCallExp
+
+         -> LiteralExp
+
+         -> OclUndefinedExp
+
+         -> CollectionExp
+
+        elements::ANY+ -> SequenceExp
+
+        value::ANY -> BooleanExp
+
+        value::ANY -> IntegerExp
+
+        value::ANY -> StringExp

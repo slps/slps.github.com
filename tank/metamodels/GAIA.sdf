@@ -1,0 +1,43 @@
+module Main
+
+exports
+  sorts
+        OrganizationalStructure Organization OrganizationalRule SafetyRule LivenessRule AgentType Service Role Activity Responsibility LivenessProperty SafetyProperty AssociationConnector Permission Resource Environnement Action Communication Protocol 
+  context-free syntax
+        organization::ANY+ -> OrganizationalStructure
+
+        collaborates::ANY interacts::ANY member::ANY+ observes::ANY+ -> Organization
+
+         -> OrganizationalRule
+
+         -> SafetyRule
+
+         -> LivenessRule
+
+        provides::ANY+ collaborates::ANY agentType::ANY plays::ANY+ -> AgentType
+
+        inputs::ANY outputs::ANY pre-conditions::ANY post-conditions::ANY -> Service
+
+        activity::ANY+ communication::ANY+ responsibility::ANY+ actsOn::ANY -> Role
+
+         -> Activity
+
+         -> Responsibility
+
+         -> LivenessProperty
+
+         -> SafetyProperty
+
+        actsOn::ANY+ role::ANY permission::ANY+ -> AssociationConnector
+
+        association::ANY -> Permission
+
+        name::ANY description::ANY permitted_action::ANY+ environnement::ANY -> Resource
+
+        resource::ANY+ -> Environnement
+
+        type::ANY -> Action
+
+        observes::ANY+ protocol::ANY -> Communication
+
+        name::ANY initiator::ANY partner::ANY inputs::ANY outputs::ANY description::ANY -> Protocol

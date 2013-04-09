@@ -1,0 +1,44 @@
+module Main
+
+exports
+  sorts
+        Simulink System Connector Line BranchPoint Port Block BlockRef Primitive OutPut TriggerPort EnablePort Reference Annotation Parameter Units TriggerEnum EnableEnum 
+  context-free syntax
+        subSystem::ANY+ -> Simulink
+
+        name::ANY simulink::ANY blocks::ANY lines::ANY subSystem::ANY+ -> System
+
+         -> Connector
+
+        name::ANY block::ANY system::ANY -> Line
+
+         -> BranchPoint
+
+        units::ANY -> Port
+
+        description::ANY name::ANY priority::ANY natagme::ANY blockType::ANY lines::ANY+ parameters::ANY+ annotations::ANY+ blockRefs::ANY+ system::ANY -> Block
+
+         -> BlockRef
+
+        deadLine::ANY period::ANY executionTime::ANY -> Primitive
+
+        number::ANY -> OutPut
+
+        triggerType::ANY -> TriggerPort
+
+        statesWhenEnabling::ANY -> EnablePort
+
+        sourceBlock::ANY sourceType::ANY -> Reference
+
+        text::ANY block::ANY -> Annotation
+
+        value::ANY block::ANY -> Parameter
+
+        alpha:: -> Units
+        beta:: -> Units
+
+        alpha:: -> TriggerEnum
+        beta:: -> TriggerEnum
+
+        alpha:: -> EnableEnum
+        beta:: -> EnableEnum

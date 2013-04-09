@@ -1,0 +1,25 @@
+module Main
+
+exports
+  sorts
+        NamedElement DescribableElement CommentableElement Project Property Target TaskElement Attribute Task TaskParameter 
+  context-free syntax
+         -> NamedElement
+
+         -> DescribableElement
+
+         -> CommentableElement
+
+        properties::ANY+ targets::ANY+ defaultTarget::ANY -> Project
+
+        name::ANY value::ANY location::ANY refid::ANY resource::ANY file::ANY url::ANY environment::ANY classpath::ANY classpathref::ANY prefix::ANY -> Property
+
+        if::ANY unless::ANY tasks::ANY+ depends::ANY+ -> Target
+
+         -> TaskElement
+
+        value::ANY -> Attribute
+
+        attributes::ANY+ elements::ANY+ -> Task
+
+        attributes::ANY+ elements::ANY+ -> TaskParameter

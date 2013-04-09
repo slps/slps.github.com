@@ -1,0 +1,101 @@
+module Main
+
+exports
+  sorts
+        Element MoDAFModel Enterprise Environment OperationalMission Architecture ArchitecturalDescription ArchitecturalReference ArchitecturalProduct Elements ArchitecturalFramework View Concern StakeholderHasConcern Stakeholder MetaData ArchitectureMetaData Taxonomy ClassifiedElement Standard MeasurableProperty CapabilityRequirement Effect EnduringTask OperationalConstraint PostType OrganisationType RoleInOrganisation LocationType OperationalActivity Node InformationExchange Competence InformationElement NodeConnectionType System DataElement SystemFunction SystemConnectionSpecification ProjectType Service Unit Dimension OrganisationProjectRelationship ProjectThreadType TimeExpression LiteralSpecification Property 
+  context-free syntax
+         -> Element
+
+        enterprise::ANY environment::ANY operationalMissions::ANY+ architectures::ANY+ architecturalDescription::ANY+ architecturalReferences::ANY+ architecturalFrameworks::ANY+ architectureMetadatas::ANY+ metaDatas::ANY+ stakeholders::ANY+ stakeholderHasConcerns::ANY+ -> MoDAFModel
+
+        inhabits::ANY fulfills::ANY+ -> Enterprise
+
+        influences::ANY -> Environment
+
+        name::ANY content::ANY -> OperationalMission
+
+        enterprise::ANY describedBy::ANY -> Architecture
+
+        approvialAuthority::ANY architect::ANY assumptionAndConstraints::ANY creatingOrganisation::ANY dateCompleted::ANY purpose::ANY recommendations::ANY summaryOfFindings::ANY tollsUsed::ANY viewpoints::ANY+ products::ANY+ taxonomy::ANY -> ArchitecturalDescription
+
+        referred::ANY referrer::ANY -> ArchitecturalReference
+
+        description::ANY architecturalElements::ANY+ definingView::ANY addresses::ANY+ -> ArchitecturalProduct
+
+        name::ANY content::ANY -> Elements
+
+        ownedMember::ANY+ -> ArchitecturalFramework
+
+        framework::ANY frameworkWebsite::ANY viewCode::ANY viewDescription::ANY viewName::ANY definingFramework::ANY usedToCover::ANY+ -> View
+
+        adressedBy::ANY+ -> Concern
+
+        client::ANY supplier::ANY owner::ANY -> StakeholderHasConcern
+
+        name::ANY content::ANY -> Stakeholder
+
+        dublinCoreElement::ANY modMetaDataElement::ANY name::ANY body::ANY -> MetaData
+
+        annotatedArchitecture::ANY -> ArchitectureMetaData
+
+        date::ANY url::ANY version::ANY contents::ANY+ -> Taxonomy
+
+         -> ClassifiedElement
+
+        identifier::ANY publishedWebsite::ANY publisher::ANY ratificationDate::ANY version::ANY withdrawalDate::ANY -> Standard
+
+        maxValue::ANY minValue::ANY -> MeasurableProperty
+
+        taxonomy::ANY -> CapabilityRequirement
+
+        taxonomy::ANY -> Effect
+
+        taxonomy::ANY -> EnduringTask
+
+        nodeUsageContext::ANY -> OperationalConstraint
+
+        taxonomy::ANY -> PostType
+
+        taxonomy::ANY -> OrganisationType
+
+        taxonomy::ANY -> RoleInOrganisation
+
+        taxonomy::ANY -> LocationType
+
+        taxonomy::ANY -> OperationalActivity
+
+        taxonomy::ANY -> Node
+
+        identifier::ANY requirementText::ANY -> InformationExchange
+
+        taxonomy::ANY -> Competence
+
+        taxonomy::ANY -> InformationElement
+
+        taxonomy::ANY -> NodeConnectionType
+
+        taxonomy::ANY -> System
+
+        taxonomy::ANY -> DataElement
+
+        systemUsageContext::ANY -> SystemFunction
+
+        taxonomy::ANY -> SystemConnectionSpecification
+
+        taxonomy::ANY -> ProjectType
+
+        taxonomy::ANY -> Service
+
+        taxonomy::ANY -> Unit
+
+        taxonomy::ANY -> Dimension
+
+        taxonomy::ANY -> OrganisationProjectRelationship
+
+        taxonomy::ANY -> ProjectThreadType
+
+        value::ANY -> TimeExpression
+
+        value::ANY -> LiteralSpecification
+
+        value::ANY -> Property

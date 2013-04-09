@@ -1,0 +1,35 @@
+module Main
+
+exports
+  sorts
+        EDataType NamedObject Attribute Entity Port Relation Director Parameter ComponentPort ComponentRelation ComponentEntity AtomicActor CompositeEntity WorkSpace CompositeActor 
+  context-free syntax
+        value::ANY -> EDataType
+
+        name::ANY -> NamedObject
+
+        att_container::ANY value::ANY -> Attribute
+
+        attributes::ANY+ parameters::ANY+ ports::ANY+ -> Entity
+
+        po_container::ANY links::ANY+ -> Port
+
+        ports::ANY+ -> Relation
+
+        ca_container::ANY -> Director
+
+        pa_container::ANY dataType::ANY -> Parameter
+
+         -> ComponentPort
+
+        re_container::ANY -> ComponentRelation
+
+        ce_container::ANY -> ComponentEntity
+
+         -> AtomicActor
+
+        containees::ANY+ relations::ANY+ -> CompositeEntity
+
+         -> WorkSpace
+
+        directors::ANY -> CompositeActor

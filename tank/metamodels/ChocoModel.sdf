@@ -1,0 +1,44 @@
+module Main
+
+exports
+  sorts
+        LocatedElement OpConstraint Package Import ChocoProblem Element Expression ConstraintDef IntVar Domain IntConstant SymbolicTerm IntValue IntExp Constraint PostConstraint 
+  context-free syntax
+         -> LocatedElement
+
+        eq:: -> OpConstraint
+        and2:: -> OpConstraint
+        or2:: -> OpConstraint
+        gt:: -> OpConstraint
+        ge:: -> OpConstraint
+        lt:: -> OpConstraint
+        le:: -> OpConstraint
+        plus:: -> OpConstraint
+
+        name::ANY import::ANY+ problem::ANY -> Package
+
+        fqn::ANY -> Import
+
+        name::ANY elements::ANY+ -> ChocoProblem
+
+         -> Element
+
+         -> Expression
+
+        op::ANY left::ANY right::ANY -> ConstraintDef
+
+        domain::ANY -> IntVar
+
+        lower::ANY upper::ANY -> Domain
+
+        val::ANY -> IntConstant
+
+        term::ANY -> SymbolicTerm
+
+        val::ANY -> IntValue
+
+        op::ANY left::ANY right::ANY -> IntExp
+
+        op::ANY left::ANY right::ANY -> Constraint
+
+        op::ANY constraint::ANY -> PostConstraint

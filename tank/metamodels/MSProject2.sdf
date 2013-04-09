@@ -1,0 +1,21 @@
+module Main
+
+exports
+  sorts
+        MSPProject MSPTask MSPLink MSPAssignment MSPResource MSPHumanResource MSPMachine Date 
+  context-free syntax
+        resource::ANY+ link::ANY+ task::ANY+ -> MSPProject
+
+        finishDate::ANY startDate::ANY project::ANY superTask::ANY subTask::ANY+ assignment::ANY+ inLink::ANY+ outLink::ANY+ -> MSPTask
+
+        project::ANY succ::ANY pred::ANY -> MSPLink
+
+        task::ANY resource::ANY -> MSPAssignment
+
+        cost::ANY project::ANY assignment::ANY+ -> MSPResource
+
+        email::ANY -> MSPHumanResource
+
+         -> MSPMachine
+
+        day::ANY month::ANY year::ANY -> Date

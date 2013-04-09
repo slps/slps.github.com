@@ -1,0 +1,30 @@
+module Main
+
+exports
+  sorts
+        ModelKind RootMeasureSet Category Metric ElementKind MeasureSet Measure IntegerMeasure DoubleMeasure PercentageMeasure 
+  context-free syntax
+        KM3:: -> ModelKind
+        UML2:: -> ModelKind
+
+        modelType::ANY categories::ANY+ measureSets::ANY+ -> RootMeasureSet
+
+        name::ANY desc::ANY metrics::ANY+ root::ANY -> Category
+
+        name::ANY desc::ANY preferredValue::ANY category::ANY -> Metric
+
+        metamodel:: -> ElementKind
+        model:: -> ElementKind
+        package:: -> ElementKind
+        interface:: -> ElementKind
+        class:: -> ElementKind
+
+        elementName::ANY elementType::ANY measures::ANY+ root::ANY subsets::ANY+ parent::ANY -> MeasureSet
+
+         -> Measure
+
+        value::ANY -> IntegerMeasure
+
+        value::ANY -> DoubleMeasure
+
+        value::ANY -> PercentageMeasure

@@ -1,0 +1,76 @@
+LocatedElement:
+        EPSILON
+XAsmFile:
+        EPSILON
+XAsmSpec:
+        Asm::ANY+
+Asm:
+        signature::ANY returnType::ANY metaInformation::ANY body::ANY
+Signature:
+        isMain::ANY name::ANY arguments::ANY+
+Argument:
+        type::ANY
+Body:
+        declarations::ANY+ initialization::ANY rules::ANY+
+MetaInformation:
+        usedAsIn::ANY+ usedAs::ANY accessUpdateFunctions::ANY+
+AccessUpdateFunction:
+        type::ANY functions::ANY+
+Declaration:
+        EPSILON
+Function:
+        parameters::ANY+ returnType::ANY initTerm::ANY isExternal::ANY
+Parameter:
+        name::ANY type::ANY
+Universe:
+        name::ANY contents::ANY+ superUniverses::ANY+
+Initialization:
+        rules::ANY+
+Term:
+        EPSILON
+Constant:
+        EPSILON
+FunctionOrVariableTerm:
+        declaration::ANY terms::ANY+
+OperatorTerm:
+        opName::ANY leftExp::ANY rightExp::ANY
+BooleanConstant:
+        value::ANY
+IntegerConstant:
+        value::ANY
+StringConstant:
+        value::ANY
+UndefConstant:
+        
+Rule:
+        EPSILON
+SkipRule:
+        inSequence::ANY
+AsmInvocation:
+        asmName::ANY arguments::ANY+
+UpdateRule:
+        function::ANY updateTerm::ANY
+ChooseRule:
+        chooseId::ANY inSet::ANY guard::ANY ifChoosenRules::ANY+ ifNotChoosenRule::ANY
+DoForallRule:
+        id::ANY inSet::ANY condition::ANY doRule::ANY+
+ConditionalRule:
+        condition::ANY thenRule::ANY+ elseRule::ANY elseIfRule::ANY
+ElseIf:
+        condition::ANY thenRule::ANY+ elseRule::ANY elseIfRule::ANY
+ExtendRule:
+        extensions::ANY+ rules::ANY+
+ElementDecl:
+        EPSILON
+VariableDecl:
+        name::ANY
+Extension:
+        elements::ANY+ universe::ANY
+ReturnRule:
+        term::ANY
+AccessUpdateType:
+        access::EPSILON
+        update::EPSILON
+AsmType:
+        function::EPSILON
+        subasm::EPSILON

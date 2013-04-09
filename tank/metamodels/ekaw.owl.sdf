@@ -1,0 +1,740 @@
+module Main
+
+exports
+  sorts
+        Thing Meta-Reviewer Decision Preference ProgramCommittee Bid ConferenceChair ConferenceMember AssociatedChair ProgramCommitteeMember AuthorNotReviewer SubjectArea ExternalReviewer Chairman ProgramCommitteeChair Acceptance Rejection Co-author PaperAbstract PaperFullVersion Administrator Meta-Review Account Inforamtion User Role Help-Request Person Symposium Document Invited-Paper Admin-Role Paper-Typologies Event-Setup Event-URL Notification-Email Email Short-Paper Author-Role Preview Review-Form Committe-Role Group-Email Submission-Template Review-Form-Setup Misc Event-Creation Approval-Email Rejection-Email Submission Template Feature-Request Event-Tracks Request Activity Head-Role Detail Corresponding-Author Reviewer-Role Event-Approval Registration Full-Paper Research-Topic Description Assistance Email-Template Conference-participant Active-conference-participant Passive-conference-participant Review-expertise Submitted-contribution Regular-author Conference-contributor Contribution-1th-author Contribution-co-author Conference-contribution Co-chair Committee Committee-member Abstract Extended-abstract Important-dates Invited-speaker Conference-proceedings Information-for-participants Conference-document Regular-contribution Poster Written-contribution Conference-applicant Camera-ready-contribution Accepted-contribution Program-committee Organizing-committee Steering-committee Conference-volume Call-for-paper Conference-announcement Invited-talk Conference-part Presentation Chair Track Rejected-contribution Reviewed-contribution Late-paid-applicant Paid-applicant Early-paid-applicant Organizer Call-for-participation Publisher Registeered-applicant Track-workshop-chair Conference-www Conference-fees Review-preference EEnum Accepted-Paper Rejected-Paper Undecided-Paper Manual-Paper-Assignment Program-Committee-member Paper-assignment Intensity Start-date-of-camera-ready-submission Camera-ready-submission-date Date-of-notification Date Article Contact-Person Bidding-of-reviewer Activity URL Conference-setup Human Managing-of-conference-process Program-Committee-Chair Reviewing-proces End-date-of-camera-ready-submission Abstract-submission-date Group-email Senior-Reviewer-URL Notification Notification-email Chair-URL Abstract-of-paper Submission-process Lower-tier-reviewing-process Start-date-of-conference Date-of-conference Senior-Program-Committee-member End-date-of-abstract-submission Phase-of-conference Regular-Program-Committee-member Start-date-of-full-paper-submission Full-paper-submission-date Start-date-of-abstract-submission End-date-of-conference Review-form Automatic-Paper-Assignment Institute Classification Summary-of-reviews Upper-tier-reviewing-process End-date-of-full-paper-submission Acceptance-notification-email Rejection-notification-email Contact-Person-URL Regular-Reviewer-URL Trip Banquet Reception Social-event Event Contribution City Company Scholar Short-paper Reviewing-results-event Administrative-event Reviewing-event Registration-of-participants-event Submission-event Camera-Ready-event Workshop Tutorial Working-event Member Participant Member-PC Chair-PC Student Science-Worker Assistant Volunteer Regular Author Pc-meeting Session Conference Chair Review Participant Program SlideSet Programme MealMenu Topic ConferenceEvent Call ReviewRating Organization ReviewForm PersonalHistory Sponsorship ReviewQuestion Country ConferenceSession ContactInformation Place WeekRejectRating AcceptRating AccpetIfRoomRating RejectRating MealEvent NonAcademicEvent BreakEvent ParallelAndDistributedComputingTopic WirelessCommunicationsTopic OperatingTopicsystems ComputerNetworksTopic SatelliteAndSpaceCommunicationsTopic CADTopic MultimediaTopic CommunicationsTopic PowerlineTransmissionTopic AntennasTopic PerformanceTopic SignalProcessingTopic MicroelectronicsTopic TestOnlyTopic RadioCommunicationsTopic ComputerArchitectureTopic MedicineTopic SecurityTopic MobileComputingTopic CryptographyTopic CommunicationTheoryTopic DiningPlace AcademiaOrganization IndustryOrganization NGO GovernmentOrganization ComputerNetworksEnterpriseTopic ComputerNetworksSwitchingTopic ComputerNetworksSensorTopic ComputerNetworksSecurityTopic ComputerNetworksOpticalTopic ComputerNetworksMeasurementsTopic ComputerNetworksManagementTopic ComputerNetworksAapplicationsTopic ActivePaper PendingPaper WithdrawnPaper RejectedPaper AcceptedPaper PublishedPaper Attendee CoffeeBreak FreeTimeBreak MealBreak Reviewer ClosingTalk WelcomeTalk TalkEvent SessionChair TPCMember TwoLevelConference CallForPapers TextualReviewQuestion NumericalReviewQuestion OrganizationalMeeting PaperPresentation AcademicEvent PersonalPublicationHistory Excursion SocialEvent CallForReviews PersonalReviewHistory ConferenceVenuePlace CallForManuscripts SingleLevelConference MeetingRoomPlace AccommodationPlace RatedPapers TravelGrant ConferenceDinner Evaluated-Paper Camera-Ready-Paper Positive-Review Workshop-Paper Industrial-Paper Paper Conference-Paper Industrial-Session Conference-Session Regular-Session Poster-Session Demo-Session Session Paper-Author Conference-Trip Social-Event Tutorial-Abstract Conference-Participant Submitted-Paper Assigned-Paper Negative-Review Neutral-Review Organising-Agency Academic-Institution Organisation Proceedings-Publisher Poster-Paper Regular-Paper Demo-Paper Location Research-Institute Scientific-Event Invited-Talk-Abstract Agency-Staff-Member Workshop-Session Invited-Talk Contributed-Talk Demo-Chair Tutorial-Chair PC-Chair PC-Member OC-Member Proceedings Programme-Brochure Flyer Web-Site Multi-author-Volume Individual-Presentation OC-Chair Conference-Banquet Workshop-Chair Conference-Proceedings Session-Chair Early-Registered-Participant Late-Registered-Participant University Possible-Reviewer Invited-Speaker Presenter SC-Member 
+  context-free syntax
+         -> Thing
+
+         -> Meta-Reviewer
+
+         -> Decision
+
+         -> Preference
+
+        hasProgramCommitteeMember::ANY -> ProgramCommittee
+
+        adjustedBy::ANY -> Bid
+
+         -> ConferenceChair
+
+        memberOfConference::ANY -> ConferenceMember
+
+         -> AssociatedChair
+
+        memberOfProgramCommittee::ANY maxPapers::ANY addedBy::ANY -> ProgramCommitteeMember
+
+         -> AuthorNotReviewer
+
+         -> SubjectArea
+
+        assignedByReviewer::ANY -> ExternalReviewer
+
+         -> Chairman
+
+        endReview::ANY -> ProgramCommitteeChair
+
+         -> Acceptance
+
+         -> Rejection
+
+        co-writePaper::ANY -> Co-author
+
+         -> PaperAbstract
+
+         -> PaperFullVersion
+
+        approve::ANY assign::ANY finalizePaperAssignment::ANY runPaperAssignmentTools::ANY enableVirtualMeeting::ANY startReviewerBidding::ANY assignReviewer::ANY rejectPaper::ANY enterConferenceDetails::ANY printHardcopyMailingManifests::ANY setMaxPapers::ANY enterReviewCriteria::ANY acceptPaper::ANY addProgramCommitteeMember::ANY -> Administrator
+
+         -> Meta-Review
+
+        registred_by::ANY -> Account
+
+         -> Inforamtion
+
+        recieve::ANY create::ANY+ submit::ANY -> User
+
+        assigned_by::ANY -> Role
+
+         -> Help-Request
+
+        attendeeAt::ANY isMemberOf::ANY hasFirstName::ANY hasBiography::ANY hasLastName::ANY employedBy::ANY hasHomePage::ANY hasSurname::ANY hasFax::ANY hasFirstName::ANY hasPhone::ANY hasEmail::ANY contributes::ANY has_an_email::ANY has_the_first_name::ANY has_gender::ANY has_the_last_name::ANY authorOf::ANY hasConflictOfInterest::ANY email::ANY inverse_of_add::ANY+ execute::ANY+ get::ANY use::ANY register::ANY modify::ANY+ take_part_in::ANY remove::ANY+ add::ANY send::ANY added_by::ANY -> Person
+
+         -> Symposium
+
+        relatesTo::ANY+ writtenBy::ANY hasUpdatedVersion::ANY updatedVersionOf::ANY recieved_by::ANY used_by::ANY submited__by::ANY -> Document
+
+         -> Invited-Paper
+
+         -> Admin-Role
+
+         -> Paper-Typologies
+
+        define::ANY -> Event-Setup
+
+        concerned::ANY -> Event-URL
+
+         -> Notification-Email
+
+         -> Email
+
+         -> Short-Paper
+
+         -> Author-Role
+
+         -> Preview
+
+         -> Review-Form
+
+         -> Committe-Role
+
+         -> Group-Email
+
+         -> Submission-Template
+
+         -> Review-Form-Setup
+
+         -> Misc
+
+         -> Event-Creation
+
+        confirm::ANY -> Approval-Email
+
+         -> Rejection-Email
+
+         -> Submission
+
+         -> Template
+
+         -> Feature-Request
+
+         -> Event-Tracks
+
+         -> Request
+
+        has_result::ANY sent_by::ANY -> Activity
+
+         -> Head-Role
+
+         -> Detail
+
+         -> Corresponding-Author
+
+         -> Reviewer-Role
+
+         -> Event-Approval
+
+         -> Registration
+
+         -> Full-Paper
+
+         -> Research-Topic
+
+         -> Description
+
+         -> Assistance
+
+         -> Email-Template
+
+         -> Conference-participant
+
+        gives_presentations::ANY -> Active-conference-participant
+
+         -> Passive-conference-participant
+
+        has_a_submitted_contribution::ANY has_an_expertise::ANY -> Review-expertise
+
+        has_a_review_expertise::ANY -> Submitted-contribution
+
+         -> Regular-author
+
+         -> Conference-contributor
+
+         -> Contribution-1th-author
+
+         -> Contribution-co-author
+
+        is_submitted_at::ANY -> Conference-contribution
+
+        was_a_committe_co-chair_of::ANY -> Co-chair
+
+        has_members::ANY was_a_committee_of::ANY has_a_committee_co-chair::ANY has_a_committee_chair::ANY -> Committee
+
+        was_a_member_of::ANY -> Committee-member
+
+        part_of_article::ANY is_the_1th_part_of::ANY+ -> Abstract
+
+         -> Extended-abstract
+
+        is_an_abstract_submission_date::ANY is_a_full_paper_submission_date::ANY is_an_ending_date::ANY is_a_date_of_acceptance_announcement::ANY is_a_date_of_camera_ready_paper_submission::ANY is_a_starting_date::ANY belong_to_a_conference_volume::ANY -> Important-dates
+
+         -> Invited-speaker
+
+        has_an_ISBN::ANY has_a_publisher::ANY has_a_volume::ANY -> Conference-proceedings
+
+         -> Information-for-participants
+
+        has_authors::ANY has_a_date_of_issue::ANY -> Conference-document
+
+         -> Regular-contribution
+
+         -> Poster
+
+         -> Written-contribution
+
+         -> Conference-applicant
+
+         -> Camera-ready-contribution
+
+         -> Accepted-contribution
+
+        was_a_program_committee_of::ANY -> Program-committee
+
+        was_an_organizing_committee_of::ANY -> Organizing-committee
+
+        was_a_steering_committee_of::ANY -> Steering-committee
+
+        has_parts::ANY has_workshops::ANY has_tracks::ANY has_tutorials::ANY has_a_commtitee::ANY has_a_steering_committee::ANY has_an_organizing_committee::ANY has_important_dates::ANY has_contributions::ANY has_a_location::ANY has_a_program_committee::ANY -> Conference-volume
+
+         -> Call-for-paper
+
+         -> Conference-announcement
+
+         -> Invited-talk
+
+        has_a_track-workshop-tutorial_topic::ANY is_part_of_conference_volumes::ANY has_a_track-workshop-tutorial_chair::ANY -> Conference-part
+
+        is_given_by::ANY -> Presentation
+
+        was_a_committee_chair_of::ANY -> Chair
+
+         -> Track
+
+         -> Rejected-contribution
+
+        has_a_review::ANY -> Reviewed-contribution
+
+         -> Late-paid-applicant
+
+         -> Paid-applicant
+
+         -> Early-paid-applicant
+
+         -> Organizer
+
+         -> Call-for-participation
+
+        issues::ANY -> Publisher
+
+         -> Registeered-applicant
+
+        was_a_track-workshop_chair_of::ANY -> Track-workshop-chair
+
+        has_a_URL::ANY -> Conference-www
+
+         -> Conference-fees
+
+        has_a_topic_or_a_submission_contribution::ANY+ has_a_degree::ANY -> Review-preference
+
+        male:: -> EEnum
+        female:: -> EEnum
+        high:: -> EEnum
+        medium:: -> EEnum
+        low:: -> EEnum
+        very high:: -> EEnum
+
+         -> Accepted-Paper
+
+         -> Rejected-Paper
+
+         -> Undecided-Paper
+
+        manually_assign_paper::ANY+ -> Manual-Paper-Assignment
+
+         -> Program-Committee-member
+
+        assign_paper::ANY is_performed_by::ANY -> Paper-assignment
+
+         -> Intensity
+
+         -> Start-date-of-camera-ready-submission
+
+         -> Camera-ready-submission-date
+
+         -> Date-of-notification
+
+         -> Date
+
+        article_written_by::ANY has_reviewer::ANY has_abstract::ANY goes_through::ANY is_sent_to::ANY is_created_in::ANY structure_created_by::ANY has_author::ANY gives_classification::ANY -> Article
+
+         -> Contact-Person
+
+        is_performed_by::ANY -> Bidding-of-reviewer
+
+        is_followed_by::ANY is_monitored_by::ANY has_intensity::ANY has_result::ANY is_performed_by::ANY is_supervised_by::ANY -> Activity
+
+         -> URL
+
+        sets_member::ANY is_made_by::ANY includes_topic::ANY sets_date::ANY sets_URL::ANY -> Conference-setup
+
+        is_author_of::ANY performs_activity::ANY is_employed_in::ANY has_topic_of_interest::ANY supervises::ANY e-mail::ANY last_name::ANY first_name::ANY -> Human
+
+         -> Managing-of-conference-process
+
+         -> Program-Committee-Chair
+
+         -> Reviewing-proces
+
+         -> End-date-of-camera-ready-submission
+
+         -> Abstract-submission-date
+
+         -> Group-email
+
+         -> Senior-Reviewer-URL
+
+        has_result::ANY is_performed_by::ANY -> Notification
+
+         -> Notification-email
+
+         -> Chair-URL
+
+         -> Abstract-of-paper
+
+        is_performed_by::ANY -> Submission-process
+
+         -> Lower-tier-reviewing-process
+
+         -> Start-date-of-conference
+
+         -> Date-of-conference
+
+        supervises::ANY -> Senior-Program-Committee-member
+
+         -> End-date-of-abstract-submission
+
+         -> Phase-of-conference
+
+         -> Regular-Program-Committee-member
+
+         -> Start-date-of-full-paper-submission
+
+         -> Full-paper-submission-date
+
+         -> Start-date-of-abstract-submission
+
+         -> End-date-of-conference
+
+        is_created_in::ANY -> Review-form
+
+        automatically_assign_paper::ANY+ -> Automatic-Paper-Assignment
+
+         -> Institute
+
+         -> Classification
+
+        is_created_in::ANY -> Summary-of-reviews
+
+        is_performed_by::ANY -> Upper-tier-reviewing-process
+
+         -> End-date-of-full-paper-submission
+
+         -> Acceptance-notification-email
+
+         -> Rejection-notification-email
+
+         -> Contact-Person-URL
+
+         -> Regular-Reviewer-URL
+
+         -> Trip
+
+         -> Banquet
+
+         -> Reception
+
+         -> Social-event
+
+        eventOnList::ANY+ partOfEvent::ANY hasEvent::ANY organisedBy::ANY+ heldIn::ANY conists_of::ANY confirmed_by::ANY defined_by::ANY approved_by::ANY starts_on::ANY ends_on::ANY has_startdate::ANY has_enddate::ANY -> Event
+
+        writtenBy::ANY dealsWith::ANY remark::ANY abstract::ANY contactEmail::ANY hasKeyword::ANY hasTitle::ANY -> Contribution
+
+         -> City
+
+         -> Company
+
+        studyAt::ANY -> Scholar
+
+         -> Poster
+
+         -> Short-paper
+
+         -> Reviewing-results-event
+
+        follows::ANY parallel_with::ANY -> Administrative-event
+
+         -> Reviewing-event
+
+         -> Registration-of-participants-event
+
+         -> Submission-event
+
+         -> Camera-Ready-event
+
+         -> Workshop
+
+         -> Tutorial
+
+        hasTopic::ANY hasAdministrativeEvent::ANY -> Working-event
+
+         -> Member
+
+        earlyRegistration::ANY -> Participant
+
+        expertOn::ANY reviewes::ANY -> Member-PC
+
+         -> Chair-PC
+
+         -> Student
+
+         -> Science-Worker
+
+         -> Assistant
+
+         -> Volunteer
+
+         -> Regular
+
+        writes_article::ANY assigns_article_to_conference::ANY hasRelatedPaper::ANY submitPaper::ANY writePaper::ANY writes::ANY -> Author
+
+         -> Pc-meeting
+
+         -> Session
+
+        is_in_phase::ANY hasMember::ANY hasName::ANY endDate::ANY paperDueOn::ANY registrationDueOn::ANY manuscriptDueOn::ANY startDate::ANY hasCountry::ANY hasConferenceMember::ANY paperAssignmentFinalizedBy::ANY reviewCriteriaEnteredBy::ANY paperAssignmentToolsRunBy::ANY virtualMeetingEnabledBy::ANY hardcopyMailingManifestsPrintedBy::ANY detailsEnteredBy::ANY reviewerBiddingStartedBy::ANY date::ANY reviewsPerPaper::ANY logoURL::ANY acceptsHardcopySubmissions::ANY siteURL::ANY has_program::ANY -> Conference
+
+        assigns_reviewers_to_article::ANY creates_program::ANY -> Chair
+
+        reviewOfPaper::ANY reviewWrittenBy::ANY writtenBy::ANY reviews::ANY gives_classification::ANY is_created_in::ANY review_written_by::ANY -> Review
+
+        submits_to_conference::ANY -> Participant
+
+        program_created_by::ANY has_session::ANY -> Program
+
+         -> SlideSet
+
+        belongsToEvent::ANY -> Programme
+
+        isMenuOf::ANY -> MealMenu
+
+        belongs_to_a_review_reference::ANY is_a_topis_of_conference_parts::ANY isTopicOf::ANY -> Topic
+
+        hasAttendee::ANY hasLocation::ANY hasProgramme::ANY hasEndDateTime::ANY hasStartDateTime::ANY -> ConferenceEvent
+
+        forEvent::ANY isInitiatedBy::ANY+ hasSubmissionInstructions::ANY hasSubmissionDeadline::ANY -> Call
+
+         -> ReviewRating
+
+        isProviderOf::ANY -> Organization
+
+         -> ReviewForm
+
+         -> PersonalHistory
+
+        providedBy::ANY hasCostCurrency::ANY hasCostAmount::ANY -> Sponsorship
+
+         -> ReviewQuestion
+
+         -> Country
+
+         -> ConferenceSession
+
+        hasCity::ANY hasStreet::ANY hasPostalCode::ANY hasPhone::ANY -> ContactInformation
+
+        isLocationOf::ANY -> Place
+
+         -> WeekRejectRating
+
+         -> AcceptRating
+
+         -> AccpetIfRoomRating
+
+         -> RejectRating
+
+        hasMenu::ANY -> MealEvent
+
+         -> NonAcademicEvent
+
+         -> BreakEvent
+
+         -> ParallelAndDistributedComputingTopic
+
+         -> WirelessCommunicationsTopic
+
+         -> OperatingTopicsystems
+
+         -> ComputerNetworksTopic
+
+         -> SatelliteAndSpaceCommunicationsTopic
+
+         -> CADTopic
+
+         -> MultimediaTopic
+
+         -> CommunicationsTopic
+
+         -> PowerlineTransmissionTopic
+
+         -> AntennasTopic
+
+         -> PerformanceTopic
+
+         -> SignalProcessingTopic
+
+         -> MicroelectronicsTopic
+
+         -> TestOnlyTopic
+
+         -> RadioCommunicationsTopic
+
+         -> ComputerArchitectureTopic
+
+         -> MedicineTopic
+
+         -> SecurityTopic
+
+         -> MobileComputingTopic
+
+         -> CryptographyTopic
+
+         -> CommunicationTheoryTopic
+
+         -> ConferenceChair
+
+         -> DiningPlace
+
+         -> AcademiaOrganization
+
+         -> IndustryOrganization
+
+         -> NGO
+
+         -> GovernmentOrganization
+
+         -> ComputerNetworksEnterpriseTopic
+
+         -> ComputerNetworksSwitchingTopic
+
+         -> ComputerNetworksSensorTopic
+
+         -> ComputerNetworksSecurityTopic
+
+         -> ComputerNetworksOpticalTopic
+
+         -> ComputerNetworksMeasurementsTopic
+
+         -> ComputerNetworksManagementTopic
+
+         -> ComputerNetworksAapplicationsTopic
+
+        hasRating::ANY -> ActivePaper
+
+         -> PendingPaper
+
+         -> WithdrawnPaper
+
+         -> RejectedPaper
+
+        relatedToEvent::ANY -> AcceptedPaper
+
+         -> PublishedPaper
+
+         -> Attendee
+
+         -> CoffeeBreak
+
+         -> FreeTimeBreak
+
+         -> MealBreak
+
+        assignedByAdministrator::ANY adjustBid::ANY readPaper::ANY hasBeenAssigned::ANY writeReview::ANY assignExternalReviewer::ANY invites_co-reviewers::ANY invited_by::ANY has_a_review_reference_or_expertise::ANY+ writes_review::ANY hasReviewHistory::ANY -> Reviewer
+
+         -> ClosingTalk
+
+         -> WelcomeTalk
+
+         -> TalkEvent
+
+         -> SessionChair
+
+         -> TPCMember
+
+         -> TwoLevelConference
+
+         -> CallForPapers
+
+         -> TextualReviewQuestion
+
+         -> NumericalReviewQuestion
+
+         -> OrganizationalMeeting
+
+        relatedToPaper::ANY -> PaperPresentation
+
+        hasCall::ANY -> AcademicEvent
+
+         -> PersonalPublicationHistory
+
+         -> Excursion
+
+         -> SocialEvent
+
+         -> CallForReviews
+
+        isReviewHistoryOf::ANY -> PersonalReviewHistory
+
+         -> ConferenceVenuePlace
+
+         -> CallForManuscripts
+
+         -> Reception
+
+         -> SingleLevelConference
+
+         -> MeetingRoomPlace
+
+         -> AccommodationPlace
+
+         -> RatedPapers
+
+         -> TravelGrant
+
+         -> ConferenceDinner
+
+         -> Accepted-Paper
+
+         -> Rejected-Paper
+
+        hasReview::ANY -> Evaluated-Paper
+
+         -> Camera-Ready-Paper
+
+         -> Positive-Review
+
+         -> Workshop-Paper
+
+         -> Industrial-Paper
+
+        full_paper_size::ANY has_author::ANY isWrittenBy::ANY isReviewedBy::ANY+ hasReview::ANY hasReviewer::ANY hasCo-author::ANY hasBid::ANY hasDecision::ANY assignedTo::ANY hasSubjectArea::ANY readByReviewer::ANY paperID::ANY title::ANY hasAuthor::ANY acceptedBy::ANY rejectedBy::ANY readByMeta-Reviewer::ANY -> Paper
+
+         -> Conference-Paper
+
+         -> Industrial-Session
+
+         -> Conference-Session
+
+         -> Regular-Session
+
+         -> Poster-Session
+
+         -> Demo-Session
+
+         -> Session
+
+         -> Paper-Author
+
+         -> Conference-Trip
+
+         -> Social-Event
+
+         -> Tutorial-Abstract
+
+         -> Conference-Participant
+
+         -> Submitted-Paper
+
+        hasReviewer::ANY -> Assigned-Paper
+
+         -> Negative-Review
+
+         -> Neutral-Review
+
+        topicCoveredBy::ANY -> Research-Topic
+
+         -> Organising-Agency
+
+        scientificallyOrganises::ANY -> Academic-Institution
+
+        publisherOf::ANY+ technicallyOrganises::ANY -> Organisation
+
+         -> Proceedings-Publisher
+
+         -> Poster-Paper
+
+         -> Regular-Paper
+
+         -> Demo-Paper
+
+        locationOf::ANY -> Location
+
+         -> Research-Institute
+
+         -> Scientific-Event
+
+         -> Invited-Talk-Abstract
+
+         -> Agency-Staff-Member
+
+         -> Workshop-Session
+
+         -> Invited-Talk
+
+        presentationOfPaper::ANY+ -> Contributed-Talk
+
+         -> Demo-Chair
+
+         -> Tutorial-Chair
+
+         -> PC-Chair
+
+         -> PC-Member
+
+         -> OC-Member
+
+         -> Proceedings
+
+         -> Programme-Brochure
+
+         -> Flyer
+
+         -> Web-Site
+
+         -> Multi-author-Volume
+
+        presentationOfPaper::ANY+ -> Individual-Presentation
+
+         -> OC-Chair
+
+         -> Conference-Banquet
+
+         -> Workshop-Chair
+
+         -> Conference-Proceedings
+
+         -> Session-Chair
+
+         -> Early-Registered-Participant
+
+         -> Late-Registered-Participant
+
+         -> University
+
+        reviewerOfPaper::ANY -> Possible-Reviewer
+
+         -> Student
+
+         -> Invited-Speaker
+
+         -> Presenter
+
+         -> SC-Member

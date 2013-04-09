@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:bgf="http://planet-sl.org/bgf" xmlns:xbgf="http://planet-sl.org/xbgf" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Browsable DTD 1.0 Grammar</title><link href="/slps.css" rel="stylesheet" type="text/css"></link><script type="text/javascript">
+
+				  var _gaq = _gaq || [];
+				  _gaq.push(['_setAccount', 'UA-3743366-7']);
+				  _gaq.push(['_setDomainName', 'github.com']);
+				  _gaq.push(['_trackPageview']);
+
+				  (function() {
+				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				  })();
+
+				</script></head><body><h1 class="l">Browsable DTD 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Pierrick Guyard, <code>DTD.ecore</code>, 2005/06/20.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>21</strong></li><li>Number of top alternatives: <strong>30</strong></li><li>Number of defined nonterminal symbols: <strong>21</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>21</strong>: <code><a href="#Occurence" class="nt">Occurence</a>, <a href="#OtherAttributeTypeEnum" class="nt">OtherAttributeTypeEnum</a>, <a href="#TypeDescription" class="nt">TypeDescription</a>, <a href="#Notation" class="nt">Notation</a>, <a href="#Entity" class="nt">Entity</a>, <a href="#Element" class="nt">Element</a>, <a href="#AnyElement" class="nt">AnyElement</a>, <a href="#RestrictedElement" class="nt">RestrictedElement</a>, <a href="#ElementContent" class="nt">ElementContent</a>, <a href="#Mixed" class="nt">Mixed</a>, <a href="#Children" class="nt">Children</a>, <a href="#Sequence" class="nt">Sequence</a>, <a href="#Leaf" class="nt">Leaf</a>, <a href="#Choice" class="nt">Choice</a>, <a href="#AttributeList" class="nt">AttributeList</a>, <a href="#AttributeDescription" class="nt">AttributeDescription</a>, <a href="#NoDefaultValue" class="nt">NoDefaultValue</a>, <a href="#DefaultValue" class="nt">DefaultValue</a>, <a href="#AttributeType" class="nt">AttributeType</a>, <a href="#Enumeration" class="nt">Enumeration</a>, <a href="#OtherAttributeType" class="nt">OtherAttributeType</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Occurence">Occurence</a>:
+        <span class="sel">zeroOrOne</span>::ε
+        <span class="sel">zeroOrMore</span>::ε
+        <span class="sel">oneOrMore</span>::ε
+        <span class="sel">one</span>::ε
+</pre><pre><a class="nt" name="OtherAttributeTypeEnum">OtherAttributeTypeEnum</a>:
+        <span class="sel">cdata</span>::ε
+        <span class="sel">id</span>::ε
+        <span class="sel">idref</span>::ε
+        <span class="sel">entityType</span>::ε
+        <span class="sel">entities</span>::ε
+        <span class="sel">nmtoken</span>::ε
+        <span class="sel">nmtakens</span>::ε
+</pre><pre><a class="nt" name="TypeDescription">TypeDescription</a>:
+        ε
+</pre><pre><a class="nt" name="Notation">Notation</a>:
+        <span class="sel">content</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Entity">Entity</a>:
+        <span class="sel">content</span>::<span class="meta">any</span> <span class="sel">isInternal</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Element">Element</a>:
+        ε
+</pre><pre><a class="nt" name="AnyElement">AnyElement</a>:
+        
+</pre><pre><a class="nt" name="RestrictedElement">RestrictedElement</a>:
+        <span class="sel">content</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ElementContent">ElementContent</a>:
+        ε
+</pre><pre><a class="nt" name="Mixed">Mixed</a>:
+        <span class="sel">elements</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Children">Children</a>:
+        ε
+</pre><pre><a class="nt" name="Sequence">Sequence</a>:
+        <span class="sel">children</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Leaf">Leaf</a>:
+        <span class="sel">elementName</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Choice">Choice</a>:
+        <span class="sel">childrenChoice</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="AttributeList">AttributeList</a>:
+        <span class="sel">containsAttributes</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="AttributeDescription">AttributeDescription</a>:
+        ε
+</pre><pre><a class="nt" name="NoDefaultValue">NoDefaultValue</a>:
+        <span class="sel">isRequired</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="DefaultValue">DefaultValue</a>:
+        <span class="sel">value</span>::<span class="meta">any</span> <span class="sel">isFixed</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="AttributeType">AttributeType</a>:
+        ε
+</pre><pre><a class="nt" name="Enumeration">Enumeration</a>:
+        <span class="sel">values</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="OtherAttributeType">OtherAttributeType</a>:
+        <span class="sel">type</span>::<span class="meta">any</span>
+</pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
+Last updated: 09/04/2013.</div></body></html>

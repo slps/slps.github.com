@@ -1,0 +1,42 @@
+module Main
+
+exports
+  sorts
+        CollectionTypes PredicateCategory ExternalVocabularyLanguage PredicateType ReactionRuleSet ProductionRuleSet EventType RuleSet RuleBase IntegrityRuleSet DerivationRuleSet 
+  context-free syntax
+        individual:: -> CollectionTypes
+        set:: -> CollectionTypes
+        orderedSet:: -> CollectionTypes
+        bag:: -> CollectionTypes
+        sequence:: -> CollectionTypes
+
+        closed:: -> PredicateCategory
+        open:: -> PredicateCategory
+        partial:: -> PredicateCategory
+
+        RDFS:: -> ExternalVocabularyLanguage
+        UML:: -> ExternalVocabularyLanguage
+        OWL:: -> ExternalVocabularyLanguage
+
+        ObjectClassificationPredicate:: -> PredicateType
+        AttributionPredicate:: -> PredicateType
+        AssociationPredicate:: -> PredicateType
+        ReferencePropertyPredicate:: -> PredicateType
+        EqualityPredicate:: -> PredicateType
+        InequalityPredicate:: -> PredicateType
+        DatatypePredicate:: -> PredicateType
+        DataClassificationPredicate:: -> PredicateType
+
+        rules::ANY+ -> ReactionRuleSet
+
+        rules::ANY+ -> ProductionRuleSet
+
+        eventTypeID::ANY -> EventType
+
+         -> RuleSet
+
+        vocabularies::ANY externalVocabulaires::ANY+ rules::ANY+ ruleBaseID::ANY -> RuleBase
+
+        rules::ANY+ -> IntegrityRuleSet
+
+        rules::ANY+ -> DerivationRuleSet

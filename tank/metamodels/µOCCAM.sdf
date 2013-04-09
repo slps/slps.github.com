@@ -1,0 +1,119 @@
+module Main
+
+exports
+  sorts
+        Process StopProcess SkipProcess Action Construction Instance Assignment Input Output Sequence NormalSequence ReplicatorSequence Conditional NormalConditional ReplicatorConditional Loop Parallel NormalParallel ReplicatorParallel Alternation NormalAlternation ReplicatorAlternation Choice BooleanRef Alternative Guard InputGuard BooleanGuard Replicator Base Count Type PrimitiveType Literal Element Subscript Variable Channel Operand VariableOPerand LiteralOperand ExpressionOperand Expression MonadicExpression DyadicExpression SimpleExpression Specification Declaration TypeDeclaration IntDeclaration ValDeclaration Definition Formal ProcedureBody Actual MonadicOperator DyadicOperator 
+  context-free syntax
+         -> Process
+
+         -> StopProcess
+
+         -> SkipProcess
+
+         -> Action
+
+         -> Construction
+
+        name::ANY -> Instance
+
+        variable::ANY expression::ANY -> Assignment
+
+        channel::ANY variable::ANY -> Input
+
+        channel::ANY expression::ANY -> Output
+
+         -> Sequence
+
+        process::ANY -> NormalSequence
+
+        replicator::ANY -> ReplicatorSequence
+
+         -> Conditional
+
+        choice::ANY -> NormalConditional
+
+        replicator::ANY -> ReplicatorConditional
+
+        boolean::ANY process::ANY -> Loop
+
+         -> Parallel
+
+        process::ANY -> NormalParallel
+
+        replicator::ANY -> ReplicatorParallel
+
+        alternative::ANY -> Alternation
+
+        process::ANY -> NormalAlternation
+
+        replicator::ANY -> ReplicatorAlternation
+
+        boolean::ANY process::ANY -> Choice
+
+        expression::ANY -> BooleanRef
+
+        guard::ANY process::ANY -> Alternative
+
+         -> Guard
+
+        input::ANY -> InputGuard
+
+        boolean::ANY -> BooleanGuard
+
+        name::ANY base::ANY count::ANY -> Replicator
+
+        expression::ANY -> Base
+
+        expression::ANY -> Count
+
+        primitiveType::ANY expression::ANY -> Type
+
+        isInt::ANY isChan::ANY -> PrimitiveType
+
+        integer::ANY -> Literal
+
+        name::ANY subscript::ANY -> Element
+
+        expression::ANY -> Subscript
+
+        element::ANY -> Variable
+
+        element::ANY -> Channel
+
+         -> Operand
+
+         -> VariableOPerand
+
+         -> LiteralOperand
+
+        operand::ANY -> ExpressionOperand
+
+         -> Expression
+
+        monadicOperator::ANY -> MonadicExpression
+
+        operandRight::ANY dyadicOperator::ANY -> DyadicExpression
+
+        operand::ANY -> SimpleExpression
+
+         -> Specification
+
+         -> Declaration
+
+        type::ANY -> TypeDeclaration
+
+        name::ANY expression::ANY -> IntDeclaration
+
+        name::ANY expression::ANY -> ValDeclaration
+
+        name::ANY procedureBody::ANY -> Definition
+
+        name::ANY primitiveType::ANY -> Formal
+
+        name::ANY process::ANY -> ProcedureBody
+
+        element::ANY -> Actual
+
+        minus::ANY not::ANY -> MonadicOperator
+
+        plus::ANY minus::ANY star::ANY slash::ANY or::ANY inverseSlash::ANY and::ANY eq::ANY ne::ANY lt::ANY gt::ANY le::ANY ge::ANY -> DyadicOperator

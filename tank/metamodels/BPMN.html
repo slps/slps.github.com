@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:bgf="http://planet-sl.org/bgf" xmlns:xbgf="http://planet-sl.org/xbgf" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Browsable BPMN 1.1 Grammar</title><link href="/slps.css" rel="stylesheet" type="text/css"></link><script type="text/javascript">
+
+				  var _gaq = _gaq || [];
+				  _gaq.push(['_setAccount', 'UA-3743366-7']);
+				  _gaq.push(['_setDomainName', 'github.com']);
+				  _gaq.push(['_trackPageview']);
+
+				  (function() {
+				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				  })();
+
+				</script></head><body><h1 class="l">Browsable BPMN 1.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Frédéric Jouault, <code>BPMN.ecore</code>, 2007/03/06.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>20</strong></li><li>Number of top alternatives: <strong>52</strong></li><li>Number of defined nonterminal symbols: <strong>20</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>20</strong>: <code><a href="#Activity" class="nt">Activity</a>, <a href="#ActivityType" class="nt">ActivityType</a>, <a href="#Artifact" class="nt">Artifact</a>, <a href="#ArtifactsContainer" class="nt">ArtifactsContainer</a>, <a href="#Association" class="nt">Association</a>, <a href="#BpmnDiagram" class="nt">BpmnDiagram</a>, <a href="#DataObject" class="nt">DataObject</a>, <a href="#DirectionType" class="nt">DirectionType</a>, <a href="#Graph" class="nt">Graph</a>, <a href="#Group" class="nt">Group</a>, <a href="#Identifiable" class="nt">Identifiable</a>, <a href="#IdentifiableNode" class="nt">IdentifiableNode</a>, <a href="#Lane" class="nt">Lane</a>, <a href="#MessagingEdge" class="nt">MessagingEdge</a>, <a href="#NamedBpmnObject" class="nt">NamedBpmnObject</a>, <a href="#Pool" class="nt">Pool</a>, <a href="#SequenceEdge" class="nt">SequenceEdge</a>, <a href="#SubProcess" class="nt">SubProcess</a>, <a href="#TextAnnotation" class="nt">TextAnnotation</a>, <a href="#Vertex" class="nt">Vertex</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Activity">Activity</a>:
+        <span class="sel">orderedMessages</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">incomingMessages</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">outgoingMessages</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">groups</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">activityType</span>::<span class="meta">any</span> <span class="sel">eventHandlerFor</span>::<span class="meta">any</span> <span class="sel">lane</span>::<span class="meta">any</span> <span class="sel">looping</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ActivityType">ActivityType</a>:
+        <span class="sel">SubProcess</span>::ε
+        <span class="sel">EventEndMultiple</span>::ε
+        <span class="sel">EventEndMessage</span>::ε
+        <span class="sel">EventIntermediateMessage</span>::ε
+        <span class="sel">EventStartMultiple</span>::ε
+        <span class="sel">EventIntermediateMultiple</span>::ε
+        <span class="sel">GatewayParallel</span>::ε
+        <span class="sel">EventStartTimer</span>::ε
+        <span class="sel">EventStartEmpty</span>::ε
+        <span class="sel">EventIntermediateCancel</span>::ε
+        <span class="sel">EventEndError</span>::ε
+        <span class="sel">EventStartRule</span>::ε
+        <span class="sel">EventEndTerminate</span>::ε
+        <span class="sel">EventStartLink</span>::ε
+        <span class="sel">EventIntermediateLink</span>::ε
+        <span class="sel">EventEndCancel</span>::ε
+        <span class="sel">EventEndLink</span>::ε
+        <span class="sel">EventIntermediateEmpty</span>::ε
+        <span class="sel">EventIntermediateCompensation</span>::ε
+        <span class="sel">Task</span>::ε
+        <span class="sel">GatewayDataBasedExclusive</span>::ε
+        <span class="sel">GatewayComplex</span>::ε
+        <span class="sel">EventEndEmpty</span>::ε
+        <span class="sel">EventIntermediateError</span>::ε
+        <span class="sel">EventIntermediateTimer</span>::ε
+        <span class="sel">EventEndCompensation</span>::ε
+        <span class="sel">EventStartMessage</span>::ε
+        <span class="sel">GatewayDataBasedInclusive</span>::ε
+        <span class="sel">GatewayEventBasedExclusive</span>::ε
+        <span class="sel">EventIntermediateRule</span>::ε
+</pre><pre><a class="nt" name="Artifact">Artifact</a>:
+        <span class="sel">associations</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">artifactsContainer</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ArtifactsContainer">ArtifactsContainer</a>:
+        <span class="sel">artifacts</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Association">Association</a>:
+        <span class="sel">direction</span>::<span class="meta">any</span> <span class="sel">source</span>::<span class="meta">any</span> <span class="sel">target</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="BpmnDiagram">BpmnDiagram</a>:
+        <span class="sel">pools</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">messages</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">author</span>::<span class="meta">any</span> <span class="sel">title</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="DataObject">DataObject</a>:
+        ε
+</pre><pre><a class="nt" name="DirectionType">DirectionType</a>:
+        <span class="sel">Both</span>::ε
+        <span class="sel">From</span>::ε
+        <span class="sel">To</span>::ε
+        <span class="sel">None</span>::ε
+</pre><pre><a class="nt" name="Graph">Graph</a>:
+        <span class="sel">vertices</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">sequenceEdges</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Group">Group</a>:
+        <span class="sel">activities</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Identifiable">Identifiable</a>:
+        <span class="sel">iD</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="IdentifiableNode">IdentifiableNode</a>:
+        <span class="sel">associations</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Lane">Lane</a>:
+        <span class="sel">activities</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">pool</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="MessagingEdge">MessagingEdge</a>:
+        <span class="sel">bpmnDiagram</span>::<span class="meta">any</span> <span class="sel">source</span>::<span class="meta">any</span> <span class="sel">target</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="NamedBpmnObject">NamedBpmnObject</a>:
+        <span class="sel">documentation</span>::<span class="meta">any</span> <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">ncname</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Pool">Pool</a>:
+        <span class="sel">lanes</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">bpmnDiagram</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SequenceEdge">SequenceEdge</a>:
+        <span class="sel">graph</span>::<span class="meta">any</span> <span class="sel">isDefault</span>::<span class="meta">any</span> <span class="sel">source</span>::<span class="meta">any</span> <span class="sel">target</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SubProcess">SubProcess</a>:
+        <span class="sel">eventHandlers</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">isTransaction</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="TextAnnotation">TextAnnotation</a>:
+        ε
+</pre><pre><a class="nt" name="Vertex">Vertex</a>:
+        <span class="sel">outgoingEdges</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">incomingEdges</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">graph</span>::<span class="meta">any</span>
+</pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
+Last updated: 09/04/2013.</div></body></html>

@@ -1,0 +1,72 @@
+module Main
+
+exports
+  sorts
+        Case Step LoopStep MultiStep Operator Parameter ParameterType FeatureConstruction DataMinStep TimeOperator FeatureSelection MultiRelFeatureConstr RowSelection Agregation Scaling Discretization Segmentation Sampling ExecutionElement DataObject MSL-Tool TransformationGroup Transformation Function StoredProcedure SQLQuery ModelElement Classifier StructuralFeature Class DataType Attribute 
+  context-free syntax
+        name::ANY caseMode::ANY caseInput::ANY documentation::ANY listOfStep::ANY+ -> Case
+
+        name::ANY description::ANY belongsToCase::ANY embedsOperator::ANY predecessors::ANY+ successors::ANY+ -> Step
+
+         -> LoopStep
+
+        iterationCondition::ANY -> MultiStep
+
+         -> Operator
+
+        name::ANY place::ANY parameterType::ANY belongsToOperator::ANY -> Parameter
+
+        Value:: -> ParameterType
+        Concept:: -> ParameterType
+        RelationShip:: -> ParameterType
+        FeatureAttribute:: -> ParameterType
+
+        scalingFactor::ANY -> FeatureConstruction
+
+        loopable::ANY numberOfInputParameters::ANY numberOfOutputParameters::ANY manual::ANY tool::ANY input::ANY+ output::ANY+ realizes::ANY -> DataMinStep
+
+        loopable::ANY numberOfInputParameters::ANY numberOfOutputParameters::ANY manual::ANY tool::ANY input::ANY+ output::ANY+ realizes::ANY -> TimeOperator
+
+        loopable::ANY numberOfInputParameters::ANY numberOfOutputParameters::ANY manual::ANY tool::ANY input::ANY+ output::ANY+ realizes::ANY -> FeatureSelection
+
+        loopable::ANY numberOfInputParameters::ANY numberOfOutputParameters::ANY manual::ANY tool::ANY input::ANY+ output::ANY+ realizes::ANY -> MultiRelFeatureConstr
+
+        loopable::ANY numberOfInputParameters::ANY numberOfOutputParameters::ANY manual::ANY tool::ANY input::ANY+ output::ANY+ realizes::ANY -> RowSelection
+
+         -> Agregation
+
+         -> Scaling
+
+         -> Discretization
+
+         -> Segmentation
+
+         -> Sampling
+
+        source::ANY target::ANY -> ExecutionElement
+
+        source::ANY target::ANY -> DataObject
+
+         -> MSL-Tool
+
+        transformation::ANY+ -> TransformationGroup
+
+        transformationGroup::ANY -> Transformation
+
+        nameOf::ANY signature::ANY -> Function
+
+        nameOf::ANY signature::ANY -> StoredProcedure
+
+         -> SQLQuery
+
+         -> ModelElement
+
+         -> Classifier
+
+         -> StructuralFeature
+
+        name::ANY attributes::ANY+ -> Class
+
+        attribute::ANY -> DataType
+
+        class::ANY has::ANY -> Attribute

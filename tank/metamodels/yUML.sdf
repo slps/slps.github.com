@@ -1,0 +1,47 @@
+module Main
+
+exports
+  sorts
+        LocatedElement Model Class ModelElement ColorableElement ClassReference AssociationType Relationship ClassDefinition Association Inheritance Cardinality Visibility ClassMember Attribute Method Note NoteAssociation 
+  context-free syntax
+         -> LocatedElement
+
+        classes::ANY+ elements::ANY+ -> Model
+
+        name::ANY -> Class
+
+         -> ModelElement
+
+         -> ColorableElement
+
+        class::ANY stereotype::ANY definition::ANY -> ClassReference
+
+        simpleAssociation:: -> AssociationType
+        aggregation:: -> AssociationType
+        composition:: -> AssociationType
+
+         -> Relationship
+
+        attributes::ANY+ methods::ANY+ -> ClassDefinition
+
+        type::ANY sourceCardinality::ANY sourceLabel::ANY navigableSource::ANY sourceVisibility::ANY targetCardinality::ANY targetLabel::ANY navigableTarget::ANY targetVisibility::ANY -> Association
+
+        source::ANY target::ANY -> Inheritance
+
+        lowerBound::ANY upperBound::ANY -> Cardinality
+
+        unspecified:: -> Visibility
+        public:: -> Visibility
+        private:: -> Visibility
+        protected:: -> Visibility
+        package:: -> Visibility
+
+         -> ClassMember
+
+        type::ANY -> Attribute
+
+        arguments::ANY+ -> Method
+
+        text::ANY+ -> Note
+
+        note::ANY -> NoteAssociation

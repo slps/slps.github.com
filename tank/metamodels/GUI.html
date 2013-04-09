@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:bgf="http://planet-sl.org/bgf" xmlns:xbgf="http://planet-sl.org/xbgf" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Browsable GUI 0.1 Grammar</title><link href="/slps.css" rel="stylesheet" type="text/css"></link><script type="text/javascript">
+
+				  var _gaq = _gaq || [];
+				  _gaq.push(['_setAccount', 'UA-3743366-7']);
+				  _gaq.push(['_setDomainName', 'github.com']);
+				  _gaq.push(['_trackPageview']);
+
+				  (function() {
+				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				  })();
+
+				</script></head><body><h1 class="l">Browsable GUI 0.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Anas Abouzahra, Pierre-Yves Baudouin, Thomas Broussaud, Grégory Pouliquen, <code>GUI.ecore</code>, 2006/04/11.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>15</strong></li><li>Number of top alternatives: <strong>17</strong></li><li>Number of defined nonterminal symbols: <strong>15</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>15</strong>: <code><a href="#LocatedElement" class="nt">LocatedElement</a>, <a href="#Named" class="nt">Named</a>, <a href="#GUI" class="nt">GUI</a>, <a href="#Tab" class="nt">Tab</a>, <a href="#Composant" class="nt">Composant</a>, <a href="#Layout" class="nt">Layout</a>, <a href="#Group" class="nt">Group</a>, <a href="#Label" class="nt">Label</a>, <a href="#TextArea" class="nt">TextArea</a>, <a href="#Table" class="nt">Table</a>, <a href="#Column" class="nt">Column</a>, <a href="#ComboBox" class="nt">ComboBox</a>, <a href="#Row" class="nt">Row</a>, <a href="#Item" class="nt">Item</a>, <a href="#Button" class="nt">Button</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
+        ε
+</pre><pre><a class="nt" name="Named">Named</a>:
+        ε
+</pre><pre><a class="nt" name="GUI">GUI</a>:
+        <span class="sel">guiTabs</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Tab">Tab</a>:
+        <span class="sel">title</span>::<span class="meta">any</span> <span class="sel">gui</span>::<span class="meta">any</span> <span class="sel">group</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Composant">Composant</a>:
+        ε
+</pre><pre><a class="nt" name="Layout">Layout</a>:
+        <span class="sel">default</span>::ε
+        <span class="sel">horizontal</span>::ε
+        <span class="sel">vertical</span>::ε
+</pre><pre><a class="nt" name="Group">Group</a>:
+        <span class="sel">title</span>::<span class="meta">any</span> <span class="sel">layout</span>::<span class="meta">any</span> <span class="sel">description</span>::<span class="meta">any</span> <span class="sel">tabGroup</span>::<span class="meta">any</span> <span class="sel">composants</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Label">Label</a>:
+        <span class="sel">text</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="TextArea">TextArea</a>:
+        <span class="sel">text</span>::<span class="meta">any</span> <span class="sel">nbRows</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Table">Table</a>:
+        <span class="sel">tabColumns</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Column">Column</a>:
+        <span class="sel">title</span>::<span class="meta">any</span> <span class="sel">columnTab</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ComboBox">ComboBox</a>:
+        <span class="sel">listRows</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Row">Row</a>:
+        <span class="sel">rowList</span>::<span class="meta">any</span> <span class="sel">text</span>::<span class="meta">any</span> <span class="sel">listItems</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Item">Item</a>:
+        <span class="sel">itemList</span>::<span class="meta">any</span> <span class="sel">text</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Button">Button</a>:
+        <span class="sel">title</span>::<span class="meta">any</span>
+</pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
+Last updated: 09/04/2013.</div></body></html>

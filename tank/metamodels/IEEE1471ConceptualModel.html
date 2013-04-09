@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:bgf="http://planet-sl.org/bgf" xmlns:xbgf="http://planet-sl.org/xbgf" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Browsable Conceptual model 0.1 Grammar</title><link href="/slps.css" rel="stylesheet" type="text/css"></link><script type="text/javascript">
+
+				  var _gaq = _gaq || [];
+				  _gaq.push(['_setAccount', 'UA-3743366-7']);
+				  _gaq.push(['_setDomainName', 'github.com']);
+				  _gaq.push(['_trackPageview']);
+
+				  (function() {
+				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				  })();
+
+				</script></head><body><h1 class="l">Browsable Conceptual model 0.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Albin Jossic, <code>IEEE1471ConceptualModel.ecore</code>, 2006/05/6.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>14</strong></li><li>Number of top alternatives: <strong>14</strong></li><li>Number of defined nonterminal symbols: <strong>14</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>14</strong>: <code><a href="#Element" class="nt">Element</a>, <a href="#IEEE1471Model" class="nt">IEEE1471Model</a>, <a href="#System" class="nt">System</a>, <a href="#Mission" class="nt">Mission</a>, <a href="#Environment" class="nt">Environment</a>, <a href="#Architecture" class="nt">Architecture</a>, <a href="#Rationale" class="nt">Rationale</a>, <a href="#ArchitecturalDescription" class="nt">ArchitecturalDescription</a>, <a href="#View" class="nt">View</a>, <a href="#Model" class="nt">Model</a>, <a href="#Stakeholder" class="nt">Stakeholder</a>, <a href="#Concern" class="nt">Concern</a>, <a href="#Viewpoint" class="nt">Viewpoint</a>, <a href="#LibraryViewpoint" class="nt">LibraryViewpoint</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Element">Element</a>:
+        ε
+</pre><pre><a class="nt" name="IEEE1471Model">IEEE1471Model</a>:
+        <span class="sel">system</span>::<span class="meta">any</span> <span class="sel">environment</span>::<span class="meta">any</span> <span class="sel">missions</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">architecture</span>::<span class="meta">any</span> <span class="sel">stakeholders</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">concerns</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">viewpoints</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">libraryViewpoints</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">architecturalDescription</span>::<span class="meta">any</span> <span class="sel">rationale</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="System">System</a>:
+        <span class="sel">fulfils</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">inhabits</span>::<span class="meta">any</span> <span class="sel">hasAn</span>::<span class="meta">any</span> <span class="sel">has</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Mission">Mission</a>:
+        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">content</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Environment">Environment</a>:
+        <span class="sel">influences</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Architecture">Architecture</a>:
+        <span class="sel">describedBy</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Rationale">Rationale</a>:
+        <span class="sel">provides</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ArchitecturalDescription">ArchitecturalDescription</a>:
+        <span class="sel">identifiesS</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">identifiesC</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">selects</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">organizedBy</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">aggregates</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="View">View</a>:
+        <span class="sel">conformsTo</span>::<span class="meta">any</span> <span class="sel">consitsOf</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Model">Model</a>:
+        <span class="sel">participatesInV</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">participatesInAD</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Stakeholder">Stakeholder</a>:
+        <span class="sel">has</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Concern">Concern</a>:
+        <span class="sel">isImportantTo</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Viewpoint">Viewpoint</a>:
+        <span class="sel">hasSource</span>::<span class="meta">any</span> <span class="sel">usedToCover</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">establishesMethodsFor</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="LibraryViewpoint">LibraryViewpoint</a>:
+        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">content</span>::<span class="meta">any</span>
+</pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
+Last updated: 09/04/2013.</div></body></html>

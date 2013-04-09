@@ -1,0 +1,41 @@
+module Main
+
+exports
+  sorts
+        Strong Start End FeedBack Weak Grouping Precedence DynPrecedence DerPrecedence BasPrecedence MetaTaskOccurence ParBinding ParameterPrec ModelElement DependancyUML MetaTask ParameterUML MetaDocument 
+  context-free syntax
+         -> Strong
+
+         -> Start
+
+         -> End
+
+         -> FeedBack
+
+         -> Weak
+
+         -> Grouping
+
+        deprecs::ANY+ parbind::ANY+ -> Precedence
+
+         -> DynPrecedence
+
+        precs::ANY+ auxTasks::ANY+ -> DerPrecedence
+
+         -> BasPrecedence
+
+        dprecs::ANY+ taskCl::ANY+ -> MetaTaskOccurence
+
+        inclusion::ANY precs::ANY+ targetPar::ANY sourcePar::ANY -> ParBinding
+
+        parbindsTar::ANY+ parbindsSour::ANY+ dstParams::ANY+ orParams::ANY+ -> ParameterPrec
+
+        dependencyUMLsupp::ANY dependencyUMLcli::ANY -> ModelElement
+
+        suppier::ANY+ client::ANY+ -> DependancyUML
+
+        params::ANY+ occurs::ANY+ -> MetaTask
+
+        task::ANY doc::ANY+ -> ParameterUML
+
+        params::ANY+ -> MetaDocument

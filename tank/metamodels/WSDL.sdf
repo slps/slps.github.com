@@ -1,0 +1,33 @@
+module Main
+
+exports
+  sorts
+        Port Service Param Input Output PortType Operation StartWithExtensions Binding BindingFault BindingOperation Fault Message Part 
+  context-free syntax
+        name::ANY service::ANY binding::ANY -> Port
+
+        name::ANY ports::ANY+ -> Service
+
+        name::ANY message::ANY -> Param
+
+        operation::ANY -> Input
+
+        operation::ANY -> Output
+
+        name::ANY operations::ANY+ bindings::ANY+ -> PortType
+
+        name::ANY input::ANY output::ANY type::ANY faults::ANY+ -> Operation
+
+         -> StartWithExtensions
+
+        name::ANY ports::ANY+ type::ANY operations::ANY+ -> Binding
+
+        operation::ANY binding::ANY -> BindingFault
+
+        name::ANY bind::ANY binding::ANY input::ANY output::ANY faults::ANY+ -> BindingOperation
+
+        name::ANY operation::ANY message::ANY -> Fault
+
+        name::ANY params::ANY+ faults::ANY+ parts::ANY+ -> Message
+
+        name::ANY message::ANY -> Part

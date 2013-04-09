@@ -1,0 +1,30 @@
+module Main
+
+exports
+  sorts
+        JavaProject PackageFragment CompilationUnit ImportDeclaration Type Field Method JavaElement MEMBER-KIND NamedElement PackageDeclaration 
+  context-free syntax
+        ownedPackageFragment::ANY+ -> JavaProject
+
+        ownedCompilationUnit::ANY+ -> PackageFragment
+
+        importDeclaration::ANY+ ownedType::ANY+ declaration::ANY -> CompilationUnit
+
+        name::ANY -> ImportDeclaration
+
+        nestedType::ANY+ ownedSuperType::ANY+ elementName::ANY member_kind::ANY methods::ANY+ fields::ANY+ -> Type
+
+         -> Field
+
+        returnType::ANY parametersName::ANY+ parametersType::ANY+ -> Method
+
+         -> JavaElement
+
+        class:: -> MEMBER-KIND
+        enum:: -> MEMBER-KIND
+        interface:: -> MEMBER-KIND
+        Annotation:: -> MEMBER-KIND
+
+         -> NamedElement
+
+        name::ANY -> PackageDeclaration

@@ -1,0 +1,27 @@
+module Main
+
+exports
+  sorts
+        AddressInfo Date ClassicModels ProductLine Product Office Employee Customer Payment Order OrderDetail 
+  context-free syntax
+         -> AddressInfo
+
+        year::ANY month::ANY day::ANY -> Date
+
+        offices::ANY+ productLines::ANY+ customers::ANY+ -> ClassicModels
+
+        productLineOwner::ANY products::ANY+ name::ANY textDescription::ANY htmlDescription::ANY -> ProductLine
+
+        productLine::ANY code::ANY name::ANY scale::ANY vendor::ANY description::ANY quantityInStock::ANY buyPrice::ANY MSRP::ANY -> Product
+
+        officeOwner::ANY code::ANY employees::ANY+ territory::ANY -> Office
+
+        office::ANY number::ANY employeeCustomers::ANY+ lastName::ANY firstName::ANY extension::ANY email::ANY reportsTo::ANY jobTitle::ANY -> Employee
+
+        customerOwner::ANY number::ANY orders::ANY+ payments::ANY+ salesRepEmployee::ANY name::ANY contactLastName::ANY contactFirstName::ANY creditLimit::ANY -> Customer
+
+        customer::ANY checkNumber::ANY date::ANY amount::ANY -> Payment
+
+        customer::ANY orderDetails::ANY+ number::ANY date::ANY requiredDate::ANY shippedDate::ANY status::ANY comments::ANY -> Order
+
+        order::ANY product::ANY quantityOrdered::ANY priceEach::ANY -> OrderDetail

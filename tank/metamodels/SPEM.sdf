@@ -1,0 +1,35 @@
+module Main
+
+exports
+  sorts
+        ArtifactUsageName ProcessDefinitionElement Guidance ArtifactKind WorkItem RoleKind Condition ProcessComponent Goal Precondition WorkDefinition ActivityKind Iteration Phase Lifecycle 
+  context-free syntax
+        isInput::ANY isOutput::ANY hasWorkPerArtifact::ANY artifactKind::ANY workDefinition::ANY -> ArtifactUsageName
+
+        guidances::ANY+ processComponents::ANY+ -> ProcessDefinitionElement
+
+        processDefinitionElements::ANY+ -> Guidance
+
+        artifactUsageNames::ANY+ responsible::ANY -> ArtifactKind
+
+         -> WorkItem
+
+        artifactKinds::ANY+ -> RoleKind
+
+         -> Condition
+
+        processDefinitionElements::ANY+ -> ProcessComponent
+
+        workDefinition::ANY -> Goal
+
+        workDefinition::ANY -> Precondition
+
+        artifactUsageNames::ANY+ goal::ANY precondition::ANY -> WorkDefinition
+
+        performer::ANY+ assistant::ANY+ -> ActivityKind
+
+         -> Iteration
+
+         -> Phase
+
+         -> Lifecycle

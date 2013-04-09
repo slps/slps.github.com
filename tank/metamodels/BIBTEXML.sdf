@@ -1,0 +1,61 @@
+module Main
+
+exports
+  sorts
+        BibtexFile Author Entry AuthoredEntry BookTitledEntry InstitutionEntry EditoredEntry DatedEntry JournalEntry TitledEntry NotedEntry PublisheredEntry SchoolEntry Article Book Booklet InBook InCollection Manual TechReport ThesisEntry PhdThesis MastersThesis Proceedings InProceedings Conference Unpublished Misc 
+  context-free syntax
+        entries::ANY+ -> BibtexFile
+
+        name::ANY -> Author
+
+         -> Entry
+
+         -> AuthoredEntry
+
+         -> BookTitledEntry
+
+         -> InstitutionEntry
+
+         -> EditoredEntry
+
+         -> DatedEntry
+
+         -> JournalEntry
+
+         -> TitledEntry
+
+         -> NotedEntry
+
+         -> PublisheredEntry
+
+         -> SchoolEntry
+
+        volume::ANY number::ANY pages::ANY note::ANY -> Article
+
+        volume::ANY number::ANY series::ANY address::ANY edition::ANY note::ANY -> Book
+
+        authors::ANY+ howpublished::ANY address::ANY note::ANY -> Booklet
+
+        chapter::ANY type::ANY -> InBook
+
+        chapter::ANY type::ANY -> InCollection
+
+        organization::ANY address::ANY edition::ANY note::ANY -> Manual
+
+        type::ANY number::ANY address::ANY note::ANY -> TechReport
+
+         -> ThesisEntry
+
+        type::ANY address::ANY note::ANY -> PhdThesis
+
+        type::ANY address::ANY note::ANY -> MastersThesis
+
+        editor::ANY volume::ANY number::ANY series::ANY address::ANY organization::ANY publisher::ANY note::ANY -> Proceedings
+
+        pages::ANY -> InProceedings
+
+         -> Conference
+
+         -> Unpublished
+
+        authors::ANY+ title::ANY howpublished::ANY month::ANY year::ANY note::ANY -> Misc

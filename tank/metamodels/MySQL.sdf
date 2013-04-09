@@ -1,0 +1,21 @@
+module Main
+
+exports
+  sorts
+        NamedElement DataBase Table Column IntegerColumn EnumColumn EnumSet EnumItem 
+  context-free syntax
+         -> NamedElement
+
+        tables::ANY+ -> DataBase
+
+        columns::ANY+ database::ANY -> Table
+
+        type::ANY isPrimaryKey::ANY null::ANY defaultValue::ANY comment::ANY table::ANY -> Column
+
+        isAutoIncrement::ANY -> IntegerColumn
+
+        enumSet::ANY -> EnumColumn
+
+        enumItems::ANY+ -> EnumSet
+
+        enumSet::ANY -> EnumItem

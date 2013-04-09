@@ -1,0 +1,136 @@
+LocatedElement:
+        EPSILON
+Body:
+        rules::ANY+
+InWhereHolds:
+        var::ANY in::ANY where::ANY holds::ANY
+AsmLFile:
+        elements::ANY+ main::ANY
+AsmLElement:
+        EPSILON
+VarDeclaration:
+        isConstant::ANY isDeclaration::ANY isLocal::ANY name::ANY type::ANY
+Namespace:
+        name::ANY
+Structure:
+        name::ANY varOrCase::ANY+ superStructureName::ANY
+VarOrCase:
+        EPSILON
+Case:
+        name::ANY variables::ANY+
+Class:
+        name::ANY isAbstract::ANY superClassName::ANY varOrMethod::ANY+
+VarOrMethod:
+        ownerClass::ANY
+Enumeration:
+        name::ANY enumerators::ANY+
+Enumerator:
+        name::ANY value::ANY
+Function:
+        EPSILON
+Method:
+        isAbstract::ANY isShared::ANY isEntryPoint::ANY isOverride::ANY returnType::ANY parameters::ANY+
+Parameter:
+        name::ANY type::ANY ownerMethod::ANY
+Main:
+        mainFile::ANY initialisations::ANY+
+Initially:
+        id::ANY val::ANY
+Rule:
+        EPSILON
+SkipRule:
+        ownerBody::ANY
+Step:
+        EPSILON
+StepUntilFixPoint:
+        name::ANY
+StepExpression:
+        EPSILON
+StepWhile:
+        expression::ANY
+StepUntil:
+        expression::ANY
+StepForEach:
+        expressions::ANY+
+MethodInvocation:
+        called::ANY
+UpdateRule:
+        EPSILON
+UpdateVarRule:
+        updateVar::ANY
+UpdateFieldRule:
+        path::ANY
+UpdateMapRule:
+        updateMap::ANY parameters::ANY+
+ChooseRule:
+        expressions::ANY+ ifChoosenRules::ANY ifNotChoosenRule::ANY
+ForallRule:
+        expressions::ANY+ doRule::ANY
+ConditionalRule:
+        condition::ANY thenRule::ANY elseRule::ANY elseIfRule::ANY
+ElseIf:
+        EPSILON
+ReturnRule:
+        term::ANY
+AddRule:
+        val::ANY set::ANY
+RemoveRule:
+        val::ANY set::ANY
+Type:
+        EPSILON
+NamedType:
+        name::ANY
+MapType:
+        ofType::ANY toType::ANY
+TupletType:
+        types::ANY
+SetType:
+        of::ANY
+SequenceType:
+        of::ANY
+Term:
+        EPSILON
+VarTerm:
+        name::ANY
+Operator:
+        opName::ANY leftExp::ANY rightExp::ANY
+MapTerm:
+        ofTerm::ANY toTerm::ANY separator::ANY
+TulpletTerm:
+        terms::ANY
+MethodCallTerm:
+        name::ANY parameters::ANY+
+NewInstance:
+        EPSILON
+PredicateTerm:
+        expressions::ANY+
+ForAllTerm:
+        EPSILON
+ExistsTerm:
+        isUnique::ANY
+AnyIn:
+        EPSILON
+SetTerm:
+        EPSILON
+EnumerateSet:
+        vals::ANY+
+RangeSet:
+        minval::ANY maxval::ANY
+AlgorithmSet:
+        expressions::ANY+
+SequenceTerm:
+        EPSILON
+EnumerateSequence:
+        vals::ANY+
+RangeSequence:
+        minval::ANY maxval::ANY
+Constant:
+        EPSILON
+BooleanConstant:
+        val::ANY
+IntegerConstant:
+        val::ANY
+StringConstant:
+        val::ANY
+NullConstant:
+        

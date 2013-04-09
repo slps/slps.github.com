@@ -1,0 +1,87 @@
+module Main
+
+exports
+  sorts
+        StringProperty StringType BreakType NoteValue OnOffType FldCharTypeProperty WordDocument BodyElt BlockLevelElt BlockLevelChunkElt ParaElt ParaContentElt RunElt RunContentElt BreakElt Text DelText InstrText DelInstrText NoBreakHyphen SoftHyphen AnnotationRef FootnoteRef EndnoteRef Separator ContinuationSeparator PgNum Cr Footnote Endnote NoteElt Picture Symbol SymElt Tab FldChar FldCharElt 
+  context-free syntax
+         -> StringProperty
+
+        val::ANY -> StringType
+
+        bt_page:: -> BreakType
+        bt_column:: -> BreakType
+        bt_text_wrapping:: -> BreakType
+
+        ftn_normal:: -> NoteValue
+        ftn_separator:: -> NoteValue
+        ftn_continuation_separator:: -> NoteValue
+        ftn_continuation_notice:: -> NoteValue
+
+        oot_on:: -> OnOffType
+        oot_off:: -> OnOffType
+
+        fctp_begin:: -> FldCharTypeProperty
+        fctp_separate:: -> FldCharTypeProperty
+        fctp_end:: -> FldCharTypeProperty
+
+        ignoreSubtree::ANY ignoreElements::ANY body::ANY -> WordDocument
+
+        be_wordDocument::ANY blockLevelElts::ANY+ -> BodyElt
+
+         -> BlockLevelElt
+
+         -> BlockLevelChunkElt
+
+        pContentElts::ANY+ -> ParaElt
+
+         -> ParaContentElt
+
+        rContentElts::ANY+ -> RunElt
+
+         -> RunContentElt
+
+        type::ANY -> BreakElt
+
+         -> Text
+
+         -> DelText
+
+         -> InstrText
+
+         -> DelInstrText
+
+        rce_rElt::ANY -> NoBreakHyphen
+
+        rce_rElt::ANY -> SoftHyphen
+
+        rce_rElt::ANY -> AnnotationRef
+
+        rce_rElt::ANY -> FootnoteRef
+
+        rce_rElt::ANY -> EndnoteRef
+
+        rce_rElt::ANY -> Separator
+
+        rce_rElt::ANY -> ContinuationSeparator
+
+        rce_rElt::ANY -> PgNum
+
+        rce_rElt::ANY -> Cr
+
+         -> Footnote
+
+         -> Endnote
+
+         -> NoteElt
+
+        rce_rElt::ANY -> Picture
+
+         -> Symbol
+
+        font::ANY char::ANY -> SymElt
+
+        rce_rElt::ANY -> Tab
+
+         -> FldChar
+
+        fldData::ANY fldCharType::ANY fldLock::ANY -> FldCharElt

@@ -1,0 +1,25 @@
+module Main
+
+exports
+  sorts
+        RootFolder CompoundComponent PrimitiveComponent BaseComponent InputPort LocalPort OutputPort PortBase Signal AssociationPortBase-PortBase 
+  context-free syntax
+        compoundComponent::ANY+ -> RootFolder
+
+        rootFolder::ANY baseComponent::ANY+ localPort::ANY+ -> CompoundComponent
+
+         -> PrimitiveComponent
+
+        name::ANY position::ANY signal::ANY+ outputPort::ANY+ inputPort::ANY+ compoundComponent::ANY -> BaseComponent
+
+        baseComponent::ANY -> InputPort
+
+        compoundComponent::ANY -> LocalPort
+
+        baseComponent::ANY -> OutputPort
+
+        name::ANY position::ANY associationPortBase_PortBasesrc::ANY associationPortBase_PortBasedst::ANY -> PortBase
+
+        name::ANY position::ANY baseComponent::ANY associationPortBase_PortBase::ANY -> Signal
+
+        srcPortBase::ANY+ dstPortBase::ANY+ signal::ANY -> AssociationPortBase-PortBase

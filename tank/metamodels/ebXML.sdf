@@ -1,0 +1,53 @@
+module Main
+
+exports
+  sorts
+        MultyPartyCollaboration BusinessPartnerRole Performs AuthorizedRole Transaction BinaryCollaboration BusinessState Start Fork Join CompletionState Failure Success BusinessActivity BusinessTransactionActivity CollaborationActivity BusinessTransaction BusinessAction RequestingBusinessActivity RespondingBusinessActivity DocumentSecurity DocumentEnvelope Attachment BusinessDocument 
+  context-free syntax
+        partners::ANY+ -> MultyPartyCollaboration
+
+        collaboration::ANY transition::ANY performers::ANY+ -> BusinessPartnerRole
+
+        performedBy::ANY collaboration::ANY role::ANY -> Performs
+
+        isInitiator::ANY performers::ANY+ -> AuthorizedRole
+
+        onInitiation::ANY conditionGuard::ANY conditionExpression::ANY from::ANY to::ANY -> Transaction
+
+        pattern::ANY timeToPerform::ANY preCondition::ANY postCondition::ANY beginsWhen::ANY endsWhen::ANY roles::ANY+ transitions::ANY+ states::ANY+ -> BinaryCollaboration
+
+         -> BusinessState
+
+        collaboration::ANY from::ANY to::ANY -> Start
+
+        waitForAll::ANY -> Fork
+
+        collaboration::ANY from::ANY to::ANY -> Join
+
+        guardCondition::ANY -> CompletionState
+
+         -> Failure
+
+         -> Success
+
+         -> BusinessActivity
+
+        timeToPerform::ANY isConcurrent::ANY isLegallyBinding::ANY use::ANY -> BusinessTransactionActivity
+
+        use::ANY -> CollaborationActivity
+
+        pattern::ANY isGuaranteedDeliveryRequired::ANY preCondition::ANY postCondition::ANY beginsWhen::ANY endsWhen::ANY requester::ANY responder::ANY -> BusinessTransaction
+
+         -> BusinessAction
+
+        timeToAcknowledgeAcceptance::ANY transaction::ANY documentEnvelope::ANY -> RequestingBusinessActivity
+
+        transaction::ANY documentEnvelope::ANY -> RespondingBusinessActivity
+
+         -> DocumentSecurity
+
+        isPositiveResponse::ANY requesting::ANY responding::ANY attachements::ANY+ document::ANY -> DocumentEnvelope
+
+        mimeType::ANY specification::ANY version::ANY envelope::ANY document::ANY -> Attachment
+
+        specificationLocation::ANY specificationElement::ANY conditionExpression::ANY envelopes::ANY+ attachments::ANY+ -> BusinessDocument

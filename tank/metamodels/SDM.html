@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:bgf="http://planet-sl.org/bgf" xmlns:xbgf="http://planet-sl.org/xbgf" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Browsable System Definition Model 0.2 Grammar</title><link href="/slps.css" rel="stylesheet" type="text/css"></link><script type="text/javascript">
+
+				  var _gaq = _gaq || [];
+				  _gaq.push(['_setAccount', 'UA-3743366-7']);
+				  _gaq.push(['_setDomainName', 'github.com']);
+				  _gaq.push(['_trackPageview']);
+
+				  (function() {
+				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				  })();
+
+				</script></head><body><h1 class="l">Browsable System Definition Model 0.2 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Albin Jossic, <code>SDM.ecore</code>, 2005/06/13.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>130</strong></li><li>Number of top alternatives: <strong>160</strong></li><li>Number of defined nonterminal symbols: <strong>130</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>130</strong>: <code><a href="#SystemDefinitionModel" class="nt">SystemDefinitionModel</a>, <a href="#Information" class="nt">Information</a>, <a href="#Import" class="nt">Import</a>, <a href="#ImportNamespaceIdentity" class="nt">ImportNamespaceIdentity</a>, <a href="#SDMCommunicationDefinition" class="nt">SDMCommunicationDefinition</a>, <a href="#SDMContainmentDefinition" class="nt">SDMContainmentDefinition</a>, <a href="#SDMDelegationDefinition" class="nt">SDMDelegationDefinition</a>, <a href="#SDMReferenceDefinition" class="nt">SDMReferenceDefinition</a>, <a href="#SDMEndpointDefinition" class="nt">SDMEndpointDefinition</a>, <a href="#SDMResourceDefinition" class="nt">SDMResourceDefinition</a>, <a href="#SDMSystemDefinition" class="nt">SDMSystemDefinition</a>, <a href="#SDMConstraintDefinition" class="nt">SDMConstraintDefinition</a>, <a href="#SDMManager" class="nt">SDMManager</a>, <a href="#ManagerDeclaration" class="nt">ManagerDeclaration</a>, <a href="#ObjectDefinition" class="nt">ObjectDefinition</a>, <a href="#OBFlow" class="nt">OBFlow</a>, <a href="#OBRelationshipConstraint" class="nt">OBRelationshipConstraint</a>, <a href="#OBConstraint" class="nt">OBConstraint</a>, <a href="#OBConstraintGroup" class="nt">OBConstraintGroup</a>, <a href="#OBEndpointDefinition" class="nt">OBEndpointDefinition</a>, <a href="#OBSystemDefinition" class="nt">OBSystemDefinition</a>, <a href="#OBResourceDefinition" class="nt">OBResourceDefinition</a>, <a href="#OBCommunicationDefinition" class="nt">OBCommunicationDefinition</a>, <a href="#OBContainmentDefinition" class="nt">OBContainmentDefinition</a>, <a href="#OBDelegationDefinition" class="nt">OBDelegationDefinition</a>, <a href="#OBReferenceDefinition" class="nt">OBReferenceDefinition</a>, <a href="#OBHostingDefinition" class="nt">OBHostingDefinition</a>, <a href="#OBEndpoint" class="nt">OBEndpoint</a>, <a href="#OBSubsystem" class="nt">OBSubsystem</a>, <a href="#OBResource" class="nt">OBResource</a>, <a href="#OBHosting" class="nt">OBHosting</a>, <a href="#OBContainment" class="nt">OBContainment</a>, <a href="#OBConnection" class="nt">OBConnection</a>, <a href="#OBDelegation" class="nt">OBDelegation</a>, <a href="#OBReference" class="nt">OBReference</a>, <a href="#SystemDefinition" class="nt">SystemDefinition</a>, <a href="#EndpointDefinition" class="nt">EndpointDefinition</a>, <a href="#ResourceDefinition" class="nt">ResourceDefinition</a>, <a href="#RelationshipDefinition" class="nt">RelationshipDefinition</a>, <a href="#RDObjectConstraint" class="nt">RDObjectConstraint</a>, <a href="#RDConstraint" class="nt">RDConstraint</a>, <a href="#RDConstraintGroup" class="nt">RDConstraintGroup</a>, <a href="#RDFlow" class="nt">RDFlow</a>, <a href="#RDConnection" class="nt">RDConnection</a>, <a href="#RDHosting" class="nt">RDHosting</a>, <a href="#RDDelegation" class="nt">RDDelegation</a>, <a href="#RDReference" class="nt">RDReference</a>, <a href="#RDContainment" class="nt">RDContainment</a>, <a href="#CommunicationDefinition" class="nt">CommunicationDefinition</a>, <a href="#HostingDefinition" class="nt">HostingDefinition</a>, <a href="#ContainmentDefinition" class="nt">ContainmentDefinition</a>, <a href="#DelegationDefinition" class="nt">DelegationDefinition</a>, <a href="#ReferenceDefinition" class="nt">ReferenceDefinition</a>, <a href="#Member" class="nt">Member</a>, <a href="#MembSettingValue" class="nt">MembSettingValue</a>, <a href="#MembSettingValueList" class="nt">MembSettingValueList</a>, <a href="#ObjectMember" class="nt">ObjectMember</a>, <a href="#RelationshipMember" class="nt">RelationshipMember</a>, <a href="#SystemMember" class="nt">SystemMember</a>, <a href="#EndpointMember" class="nt">EndpointMember</a>, <a href="#ResourceMember" class="nt">ResourceMember</a>, <a href="#HostingMember" class="nt">HostingMember</a>, <a href="#CommunicationMember" class="nt">CommunicationMember</a>, <a href="#ContainmentMember" class="nt">ContainmentMember</a>, <a href="#DelegationMember" class="nt">DelegationMember</a>, <a href="#ReferenceMember" class="nt">ReferenceMember</a>, <a href="#DesignData" class="nt">DesignData</a>, <a href="#NameSpace" class="nt">NameSpace</a>, <a href="#ObjectConstraint" class="nt">ObjectConstraint</a>, <a href="#OCConstraint" class="nt">OCConstraint</a>, <a href="#OCRelationshipConstraint" class="nt">OCRelationshipConstraint</a>, <a href="#OCConstraintGroup" class="nt">OCConstraintGroup</a>, <a href="#RelationshipConstraint" class="nt">RelationshipConstraint</a>, <a href="#RCConstraint" class="nt">RCConstraint</a>, <a href="#RCRelationshipConstraint" class="nt">RCRelationshipConstraint</a>, <a href="#RCObjectConstraint" class="nt">RCObjectConstraint</a>, <a href="#RCConstraintGroup" class="nt">RCConstraintGroup</a>, <a href="#ConstraintGroup" class="nt">ConstraintGroup</a>, <a href="#CGConstraint" class="nt">CGConstraint</a>, <a href="#CGRelationshipConstraint" class="nt">CGRelationshipConstraint</a>, <a href="#CGObjectConstraint" class="nt">CGObjectConstraint</a>, <a href="#StructuralConstraint" class="nt">StructuralConstraint</a>, <a href="#ConstraintDefinition" class="nt">ConstraintDefinition</a>, <a href="#CDRelationshipConstraint" class="nt">CDRelationshipConstraint</a>, <a href="#CDConstraintGroup" class="nt">CDConstraintGroup</a>, <a href="#CDObjectConstraint" class="nt">CDObjectConstraint</a>, <a href="#CDConstraint" class="nt">CDConstraint</a>, <a href="#ConstraintMember" class="nt">ConstraintMember</a>, <a href="#Definition" class="nt">Definition</a>, <a href="#DefSettingDeclaration" class="nt">DefSettingDeclaration</a>, <a href="#DefSettingValue" class="nt">DefSettingValue</a>, <a href="#DefSettingValueList" class="nt">DefSettingValueList</a>, <a href="#SimpleName" class="nt">SimpleName</a>, <a href="#QualifiedName" class="nt">QualifiedName</a>, <a href="#Path" class="nt">Path</a>, <a href="#SettingPath" class="nt">SettingPath</a>, <a href="#NamespaceIdentity" class="nt">NamespaceIdentity</a>, <a href="#FlowDefinition" class="nt">FlowDefinition</a>, <a href="#FlowMember" class="nt">FlowMember</a>, <a href="#ValueTransfer" class="nt">ValueTransfer</a>, <a href="#Output" class="nt">Output</a>, <a href="#Input" class="nt">Input</a>, <a href="#SettingDefinitions" class="nt">SettingDefinitions</a>, <a href="#SettingMember" class="nt">SettingMember</a>, <a href="#SettingsAttributes" class="nt">SettingsAttributes</a>, <a href="#SettingMemberAccess" class="nt">SettingMemberAccess</a>, <a href="#SettingMemberSecure" class="nt">SettingMemberSecure</a>, <a href="#Facet" class="nt">Facet</a>, <a href="#SettingValue" class="nt">SettingValue</a>, <a href="#SettingValueList" class="nt">SettingValueList</a>, <a href="#Value" class="nt">Value</a>, <a href="#SettingValueAttributes" class="nt">SettingValueAttributes</a>, <a href="#Description" class="nt">Description</a>, <a href="#Entry" class="nt">Entry</a>, <a href="#DescriptionEntry" class="nt">DescriptionEntry</a>, <a href="#Substitute" class="nt">Substitute</a>, <a href="#PathList" class="nt">PathList</a>, <a href="#MaxOccurs" class="nt">MaxOccurs</a>, <a href="#MinOccurs" class="nt">MinOccurs</a>, <a href="#FourPartVersionType" class="nt">FourPartVersionType</a>, <a href="#PublicKeyType" class="nt">PublicKeyType</a>, <a href="#PublicKeyTokenType" class="nt">PublicKeyTokenType</a>, <a href="#CompilationHashType" class="nt">CompilationHashType</a>, <a href="#RolesList" class="nt">RolesList</a>, <a href="#Culture" class="nt">Culture</a>, <a href="#CultureNeutral" class="nt">CultureNeutral</a>, <a href="#ProcessorArchitectures" class="nt">ProcessorArchitectures</a>, <a href="#Platform" class="nt">Platform</a>, <a href="#ConstraintEvaluation" class="nt">ConstraintEvaluation</a>, <a href="#Element" class="nt">Element</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="SystemDefinitionModel">SystemDefinitionModel</a>:
+        <span class="sel">information</span>::<span class="meta">any</span> <span class="sel">import</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">designData</span>::<span class="meta">any</span> <span class="sel">settingDefinitions</span>::<span class="meta">any</span> <span class="sel">communicationDefinition</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">containmentDefinition</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">delegationDefinition</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">referenceDefinition</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">endpointDefinition</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">resourceDefinition</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">systemDefinition</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">constraintDefinition</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">manager</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">nameSpace</span>::<span class="meta">any</span> <span class="sel">namespaceIdentity</span>::<span class="meta">any</span> <span class="sel">documentLanguage</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">compilationHash</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Information">Information</a>:
+        <span class="sel">sdm</span>::<span class="meta">any</span> <span class="sel">friendlyname</span>::<span class="meta">any</span> <span class="sel">companyname</span>::<span class="meta">any</span> <span class="sel">copyright</span>::<span class="meta">any</span> <span class="sel">trademark</span>::<span class="meta">any</span> <span class="sel">description</span>::<span class="meta">any</span> <span class="sel">comments</span>::<span class="meta">any</span> <span class="sel">compilerversion</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Import">Import</a>:
+        <span class="sel">sdm</span>::<span class="meta">any</span> <span class="sel">alias</span>::<span class="meta">any</span> <span class="sel">identity</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ImportNamespaceIdentity">ImportNamespaceIdentity</a>:
+        <span class="sel">import</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SDMCommunicationDefinition">SDMCommunicationDefinition</a>:
+        <span class="sel">sdm</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SDMContainmentDefinition">SDMContainmentDefinition</a>:
+        <span class="sel">sdm</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SDMDelegationDefinition">SDMDelegationDefinition</a>:
+        <span class="sel">sdm</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SDMReferenceDefinition">SDMReferenceDefinition</a>:
+        <span class="sel">sdm</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SDMEndpointDefinition">SDMEndpointDefinition</a>:
+        <span class="sel">sdm</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SDMResourceDefinition">SDMResourceDefinition</a>:
+        <span class="sel">sdm</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SDMSystemDefinition">SDMSystemDefinition</a>:
+        <span class="sel">sdm</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SDMConstraintDefinition">SDMConstraintDefinition</a>:
+        <span class="sel">sdm</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SDMManager">SDMManager</a>:
+        <span class="sel">sdm</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ManagerDeclaration">ManagerDeclaration</a>:
+        <span class="sel">description</span>::<span class="meta">any</span> <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">assemblyName</span>::<span class="meta">any</span> <span class="sel">version</span>::<span class="meta">any</span> <span class="sel">publicKeyToken</span>::<span class="meta">any</span> <span class="sel">culture</span>::<span class="meta">any</span> <span class="sel">platform</span>::<span class="meta">any</span> <span class="sel">sourcePath</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ObjectDefinition">ObjectDefinition</a>:
+        <span class="sel">flow</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">relationshipConstraint</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">constraint</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">constraintGroup</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">endpointDefinition</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">systemDefinition</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">resourceDefinition</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">communicationDefinition</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">containmentDefinition</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">delegationDefinition</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">referenceDefinition</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">hostingDefinition</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">endpoint</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">subsystem</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">resource</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">hosting</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">containment</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">connection</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">delegation</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">obreference</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">layer</span>::<span class="meta">any</span> <span class="sel">extends</span>::<span class="meta">any</span> <span class="sel">abstract</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="OBFlow">OBFlow</a>:
+        <span class="sel">objectDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="OBRelationshipConstraint">OBRelationshipConstraint</a>:
+        <span class="sel">objectDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="OBConstraint">OBConstraint</a>:
+        <span class="sel">objectDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="OBConstraintGroup">OBConstraintGroup</a>:
+        <span class="sel">objectDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="OBEndpointDefinition">OBEndpointDefinition</a>:
+        <span class="sel">objectDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="OBSystemDefinition">OBSystemDefinition</a>:
+        <span class="sel">objectDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="OBResourceDefinition">OBResourceDefinition</a>:
+        <span class="sel">objectDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="OBCommunicationDefinition">OBCommunicationDefinition</a>:
+        <span class="sel">objectDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="OBContainmentDefinition">OBContainmentDefinition</a>:
+        <span class="sel">objectDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="OBDelegationDefinition">OBDelegationDefinition</a>:
+        <span class="sel">objectDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="OBReferenceDefinition">OBReferenceDefinition</a>:
+        <span class="sel">objectDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="OBHostingDefinition">OBHostingDefinition</a>:
+        <span class="sel">objectDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="OBEndpoint">OBEndpoint</a>:
+        <span class="sel">objectDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="OBSubsystem">OBSubsystem</a>:
+        <span class="sel">objectDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="OBResource">OBResource</a>:
+        <span class="sel">objectDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="OBHosting">OBHosting</a>:
+        <span class="sel">objectDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="OBContainment">OBContainment</a>:
+        <span class="sel">objectDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="OBConnection">OBConnection</a>:
+        <span class="sel">objectDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="OBDelegation">OBDelegation</a>:
+        <span class="sel">objectDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="OBReference">OBReference</a>:
+        <span class="sel">objectDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SystemDefinition">SystemDefinition</a>:
+        <span class="sel">simulationRoot</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="EndpointDefinition">EndpointDefinition</a>:
+        ε
+</pre><pre><a class="nt" name="ResourceDefinition">ResourceDefinition</a>:
+        ε
+</pre><pre><a class="nt" name="RelationshipDefinition">RelationshipDefinition</a>:
+        <span class="sel">objectConstraint</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">constraint</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">constraintGroup</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">flow</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">connection</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">hosting</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">delegation</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">reference</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">containment</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">extends</span>::<span class="meta">any</span> <span class="sel">abstract</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="RDObjectConstraint">RDObjectConstraint</a>:
+        <span class="sel">relationshipDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="RDConstraint">RDConstraint</a>:
+        <span class="sel">relationshipDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="RDConstraintGroup">RDConstraintGroup</a>:
+        <span class="sel">relationshipDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="RDFlow">RDFlow</a>:
+        <span class="sel">relationshipDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="RDConnection">RDConnection</a>:
+        <span class="sel">relationshipDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="RDHosting">RDHosting</a>:
+        <span class="sel">relationshipDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="RDDelegation">RDDelegation</a>:
+        <span class="sel">relationshipDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="RDReference">RDReference</a>:
+        <span class="sel">relationshipDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="RDContainment">RDContainment</a>:
+        <span class="sel">relationshipDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="CommunicationDefinition">CommunicationDefinition</a>:
+        <span class="sel">clientDefinition</span>::<span class="meta">any</span> <span class="sel">serverDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="HostingDefinition">HostingDefinition</a>:
+        <span class="sel">guestDefinition</span>::<span class="meta">any</span> <span class="sel">hostDefinition</span>::<span class="meta">any</span> <span class="sel">simulationRoot</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ContainmentDefinition">ContainmentDefinition</a>:
+        <span class="sel">parentDefinition</span>::<span class="meta">any</span> <span class="sel">memberDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="DelegationDefinition">DelegationDefinition</a>:
+        <span class="sel">proxyDefinition</span>::<span class="meta">any</span> <span class="sel">delegateDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ReferenceDefinition">ReferenceDefinition</a>:
+        <span class="sel">dependentDefinition</span>::<span class="meta">any</span> <span class="sel">sourceDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Member">Member</a>:
+        <span class="sel">description</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">designData</span>::<span class="meta">any</span> <span class="sel">settingValue</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">settingValueList</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">definition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="MembSettingValue">MembSettingValue</a>:
+        <span class="sel">member</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="MembSettingValueList">MembSettingValueList</a>:
+        <span class="sel">member</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ObjectMember">ObjectMember</a>:
+        <span class="sel">minOccurs</span>::<span class="meta">any</span> <span class="sel">maxOccurs</span>::<span class="meta">any</span> <span class="sel">reference</span>::<span class="meta">any</span> <span class="sel">proxy</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="RelationshipMember">RelationshipMember</a>:
+        ε
+</pre><pre><a class="nt" name="SystemMember">SystemMember</a>:
+        ε
+</pre><pre><a class="nt" name="EndpointMember">EndpointMember</a>:
+        ε
+</pre><pre><a class="nt" name="ResourceMember">ResourceMember</a>:
+        ε
+</pre><pre><a class="nt" name="HostingMember">HostingMember</a>:
+        <span class="sel">guestMember</span>::<span class="meta">any</span> <span class="sel">hostMember</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="CommunicationMember">CommunicationMember</a>:
+        <span class="sel">clientMember</span>::<span class="meta">any</span> <span class="sel">serverMember</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ContainmentMember">ContainmentMember</a>:
+        <span class="sel">childMember</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="DelegationMember">DelegationMember</a>:
+        <span class="sel">proxyMember</span>::<span class="meta">any</span> <span class="sel">delegateMember</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ReferenceMember">ReferenceMember</a>:
+        <span class="sel">dependentMember</span>::<span class="meta">any</span> <span class="sel">sourceMember</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="DesignData">DesignData</a>:
+        <span class="sel">nameSpace</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="NameSpace">NameSpace</a>:
+        <span class="sel">designData</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ObjectConstraint">ObjectConstraint</a>:
+        <span class="sel">constraint</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">relationshipConstraint</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">constraintGroup</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">primaryRole</span>::<span class="meta">any</span> <span class="sel">primaryObjectDefinition</span>::<span class="meta">any</span> <span class="sel">secondaryRole</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">secondaryObjectDefinition</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">minOccurs</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">maxOccurs</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="OCConstraint">OCConstraint</a>:
+        <span class="sel">objectConstraint</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="OCRelationshipConstraint">OCRelationshipConstraint</a>:
+        <span class="sel">objectConstraint_OC</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="OCConstraintGroup">OCConstraintGroup</a>:
+        <span class="sel">objectConstraint_OC</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="RelationshipConstraint">RelationshipConstraint</a>:
+        <span class="sel">constraint</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">relationshipConstraint</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">objectConstraint</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">constraintGroup</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">relationshipDefinition</span>::<span class="meta">any</span> <span class="sel">targetRole</span>::<span class="meta">any</span> <span class="sel">targetObjectDefinition</span>::<span class="meta">any</span> <span class="sel">minOccurs</span>::<span class="meta">any</span> <span class="sel">maxOccurs</span>::<span class="meta">any</span> <span class="sel">delegationAware</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="RCConstraint">RCConstraint</a>:
+        <span class="sel">relationshipConstraint</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="RCRelationshipConstraint">RCRelationshipConstraint</a>:
+        <span class="sel">relationshipConstraint_RC</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="RCObjectConstraint">RCObjectConstraint</a>:
+        <span class="sel">relationshipConstraint_RC</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="RCConstraintGroup">RCConstraintGroup</a>:
+        <span class="sel">relationshipConstraint_RC</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ConstraintGroup">ConstraintGroup</a>:
+        <span class="sel">constraint</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">relationshipConstraint</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">objectConstraint</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="CGConstraint">CGConstraint</a>:
+        <span class="sel">constraintGroup</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="CGRelationshipConstraint">CGRelationshipConstraint</a>:
+        <span class="sel">constraintGroup_CG</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="CGObjectConstraint">CGObjectConstraint</a>:
+        <span class="sel">constraintGroup_CG</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="StructuralConstraint">StructuralConstraint</a>:
+        <span class="sel">description</span>::<span class="meta">any</span> <span class="sel">designData</span>::<span class="meta">any</span> <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">evaluate</span>::<span class="meta">any</span> <span class="sel">raiseError</span>::<span class="meta">any</span> <span class="sel">returnEarly</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ConstraintDefinition">ConstraintDefinition</a>:
+        <span class="sel">relationshipConstraint</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">constraintGroup</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">objectConstraint</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">constraint</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">targetDefinition</span>::<span class="meta">any</span> <span class="sel">returnEarly</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="CDRelationshipConstraint">CDRelationshipConstraint</a>:
+        <span class="sel">constraintDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="CDConstraintGroup">CDConstraintGroup</a>:
+        <span class="sel">constraintDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="CDObjectConstraint">CDObjectConstraint</a>:
+        <span class="sel">constraintDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="CDConstraint">CDConstraint</a>:
+        <span class="sel">constraintDefinition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ConstraintMember">ConstraintMember</a>:
+        <span class="sel">input</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">raiseError</span>::<span class="meta">any</span> <span class="sel">evaluate</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Definition">Definition</a>:
+        <span class="sel">description</span>::<span class="meta">any</span> <span class="sel">designData</span>::<span class="meta">any</span> <span class="sel">settingDeclaration</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">settingValue</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">settingValueList</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">manager</span>::<span class="meta">any</span> <span class="sel">className</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="DefSettingDeclaration">DefSettingDeclaration</a>:
+        <span class="sel">definition_DSD</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="DefSettingValue">DefSettingValue</a>:
+        <span class="sel">definition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="DefSettingValueList">DefSettingValueList</a>:
+        <span class="sel">definition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SimpleName">SimpleName</a>:
+        ε
+</pre><pre><a class="nt" name="QualifiedName">QualifiedName</a>:
+        ε
+</pre><pre><a class="nt" name="Path">Path</a>:
+        ε
+</pre><pre><a class="nt" name="SettingPath">SettingPath</a>:
+        ε
+</pre><pre><a class="nt" name="NamespaceIdentity">NamespaceIdentity</a>:
+        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">version</span>::<span class="meta">any</span> <span class="sel">publicKey</span>::<span class="meta">any</span> <span class="sel">publicKeyToken</span>::<span class="meta">any</span> <span class="sel">culture</span>::<span class="meta">any</span> <span class="sel">platform</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="FlowDefinition">FlowDefinition</a>:
+        ε
+</pre><pre><a class="nt" name="FlowMember">FlowMember</a>:
+        <span class="sel">input</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">output</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="ValueTransfer">ValueTransfer</a>:
+        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">path</span>::<span class="meta">any</span> <span class="sel">cast</span>::<span class="meta">any</span> <span class="sel">convert</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Output">Output</a>:
+        <span class="sel">fixed</span>::<span class="meta">any</span> <span class="sel">replace</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Input">Input</a>:
+        ε
+</pre><pre><a class="nt" name="SettingDefinitions">SettingDefinitions</a>:
+        <span class="sel">nameSpace</span>::<span class="meta">any</span> <span class="sel">manager</span>::<span class="meta">any</span> <span class="sel">clrNameSpace</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SettingMember">SettingMember</a>:
+        <span class="sel">facet</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">settingAttributes</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SettingsAttributes">SettingsAttributes</a>:
+        <span class="sel">list</span>::<span class="meta">any</span> <span class="sel">access</span>::<span class="meta">any</span> <span class="sel">secure</span>::<span class="meta">any</span> <span class="sel">deploymentTime</span>::<span class="meta">any</span> <span class="sel">required</span>::<span class="meta">any</span> <span class="sel">canBeNull</span>::<span class="meta">any</span> <span class="sel">elementsCanBeNull</span>::<span class="meta">any</span> <span class="sel">defaultRead</span>::<span class="meta">any</span> <span class="sel">defaultWrite</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SettingMemberAccess">SettingMemberAccess</a>:
+        <span class="sel">ReadWrite</span>::ε
+        <span class="sel">ReadOnly</span>::ε
+        <span class="sel">WriteOnly</span>::ε
+</pre><pre><a class="nt" name="SettingMemberSecure">SettingMemberSecure</a>:
+        <span class="sel">Always</span>::ε
+        <span class="sel">PerInstance</span>::ε
+        <span class="sel">Never</span>::ε
+</pre><pre><a class="nt" name="Facet">Facet</a>:
+        <span class="sel">name</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SettingValue">SettingValue</a>:
+        <span class="sel">contents</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">settingValueAttributes</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SettingValueList">SettingValueList</a>:
+        <span class="sel">value</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">settingValueAttributes</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Value">Value</a>:
+        <span class="sel">contents</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">null</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SettingValueAttributes">SettingValueAttributes</a>:
+        <span class="sel">path</span>::<span class="meta">any</span> <span class="sel">null</span>::<span class="meta">any</span> <span class="sel">fixed</span>::<span class="meta">any</span> <span class="sel">unset</span>::<span class="meta">any</span> <span class="sel">definition</span>::<span class="meta">any</span> <span class="sel">convert</span>::<span class="meta">any</span> <span class="sel">secure</span>::<span class="meta">any</span> <span class="sel">reference</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Description">Description</a>:
+        <span class="sel">entry</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">resourceId</span>::<span class="meta">any</span> <span class="sel">manager</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Entry">Entry</a>:
+        <span class="sel">description</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="DescriptionEntry">DescriptionEntry</a>:
+        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">resourceId</span>::<span class="meta">any</span> <span class="sel">manager</span>::<span class="meta">any</span> <span class="sel">substitute</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Substitute">Substitute</a>:
+        <span class="sel">descriptionEntry</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="PathList">PathList</a>:
+        <span class="sel">settingPath</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="MaxOccurs">MaxOccurs</a>:
+        ε
+</pre><pre><a class="nt" name="MinOccurs">MinOccurs</a>:
+        ε
+</pre><pre><a class="nt" name="FourPartVersionType">FourPartVersionType</a>:
+        ε
+</pre><pre><a class="nt" name="PublicKeyType">PublicKeyType</a>:
+        ε
+</pre><pre><a class="nt" name="PublicKeyTokenType">PublicKeyTokenType</a>:
+        ε
+</pre><pre><a class="nt" name="CompilationHashType">CompilationHashType</a>:
+        ε
+</pre><pre><a class="nt" name="RolesList">RolesList</a>:
+        <span class="sel">Host</span>::ε
+        <span class="sel">Guest</span>::ε
+        <span class="sel">Parent</span>::ε
+        <span class="sel">Member</span>::ε
+        <span class="sel">Source</span>::ε
+        <span class="sel">Dependent</span>::ε
+        <span class="sel">Proxy</span>::ε
+        <span class="sel">Delegate</span>::ε
+        <span class="sel">Client</span>::ε
+        <span class="sel">Server</span>::ε
+</pre><pre><a class="nt" name="Culture">Culture</a>:
+        ε
+</pre><pre><a class="nt" name="CultureNeutral">CultureNeutral</a>:
+        ε
+</pre><pre><a class="nt" name="ProcessorArchitectures">ProcessorArchitectures</a>:
+        <span class="sel">x86</span>::ε
+        <span class="sel">ia64</span>::ε
+        <span class="sel">amd64</span>::ε
+        <span class="sel">wow64</span>::ε
+        <span class="sel">msil</span>::ε
+        <span class="sel">shx</span>::ε
+        <span class="sel">arm</span>::ε
+        <span class="sel">data</span>::ε
+</pre><pre><a class="nt" name="Platform">Platform</a>:
+        <span class="sel">x86</span>::ε
+        <span class="sel">ia64</span>::ε
+        <span class="sel">amd64</span>::ε
+        <span class="sel">wow64</span>::ε
+        <span class="sel">msil</span>::ε
+        <span class="sel">shx</span>::ε
+        <span class="sel">arm</span>::ε
+        <span class="sel">data</span>::ε
+        <span class="sel">*</span>::ε
+        <span class="sel">neutral</span>::ε
+</pre><pre><a class="nt" name="ConstraintEvaluation">ConstraintEvaluation</a>:
+        <span class="sel">Design</span>::ε
+        <span class="sel">Never</span>::ε
+</pre><pre><a class="nt" name="Element">Element</a>:
+        <span class="sel">value</span>::<span class="meta">any</span>
+</pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
+Last updated: 09/04/2013.</div></body></html>

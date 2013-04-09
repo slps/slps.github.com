@@ -1,0 +1,57 @@
+module Main
+
+exports
+  sorts
+        Namespace Task DataSet Parameter DataElement ModelElement Flow DataFlow ControlFlow ControlPoint Input Output OutputSet InputSet Exception SimpleTask CoumpoundTask MutliTask InvokerTask TerminatorTask ApplicationTask Decision Clock SendCommunication ReceiveCommunication BusinessProcess 
+  context-free syntax
+         -> Namespace
+
+         -> Task
+
+         -> DataSet
+
+         -> Parameter
+
+         -> DataElement
+
+         -> ModelElement
+
+         -> Flow
+
+         -> DataFlow
+
+         -> ControlFlow
+
+        sink::ANY+ -> ControlPoint
+
+        sink::ANY source::ANY -> Input
+
+        sink::ANY source::ANY -> Output
+
+        containsOutput::ANY+ -> OutputSet
+
+        containsInput::ANY+ -> InputSet
+
+         -> Exception
+
+        containsDataSet::ANY containsControlPoint::ANY+ invoker::ANY+ terminator::ANY+ -> SimpleTask
+
+        containsTask::ANY+ containsFlow::ANY+ realizes::ANY -> CoumpoundTask
+
+         -> MutliTask
+
+        invokes::ANY+ -> InvokerTask
+
+        terminates::ANY+ -> TerminatorTask
+
+         -> ApplicationTask
+
+         -> Decision
+
+         -> Clock
+
+         -> SendCommunication
+
+         -> ReceiveCommunication
+
+         -> BusinessProcess

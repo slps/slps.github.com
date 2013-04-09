@@ -1,0 +1,56 @@
+LocatedElement:
+        EPSILON
+SQLRoot:
+        statements::ANY+
+Statement:
+        EPSILON
+ViewStatement:
+        name::ANY columns::ANY+ query::ANY
+InsertStmt:
+        tableName::ANY values::ANY+
+QueryStmt:
+        EPSILON
+QueryStmtCol:
+        columns::ANY+
+QueryStmtAllCol:
+        tables::ANY+ condition::ANY
+NamedElement:
+        EPSILON
+Table:
+        alias::ANY
+WhereClause:
+        expression::ANY
+Expression:
+        EPSILON
+BinaryExp:
+        EPSILON
+OrExp:
+        opName::ANY leftExp::ANY rightExp::ANY
+AndExp:
+        opName::ANY leftExp::ANY rightExp::ANY
+NotExp:
+        opName::ANY valueExp::ANY unused::ANY
+LikeExp:
+        columnName::ANY expression::ANY
+InExp:
+        columnName::ANY elements::ANY+
+OperationExp:
+        optName::ANY
+Predicate:
+        EPSILON
+QueryPredicate:
+        query::ANY
+ColumnExp:
+        alias::ANY type::ANY
+ValueExp:
+        EPSILON
+StringValueExp:
+        aValue::ANY
+IntegerValueExp:
+        aValue::ANY
+ListExp:
+        elements::ANY+
+FunctionExp:
+        arguments::ANY+ name::ANY
+DataType:
+        name::ANY

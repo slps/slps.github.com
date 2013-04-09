@@ -1,0 +1,103 @@
+module Main
+
+exports
+  sorts
+        DeploymentReport DeploymentImport ImportNamespaceIdentity NamespaceIdentity Applications LogicalServers OuterSystem Binding Zone ReportObject SequenceReport BoundLogicalServer LogicalServer Application ReportSystem ReportResource ReportEndpoint Setting SettingFacet SettingInstanceValue SettingAttributes SettingValue ErrorCollection DocumentError DocumentResolutionError DocumentConstraintError FailedInput Description Guid SimpleName Path FourPartVersionType PublicKeyType PublicKeyTokenType Culture CultureNeutral ProcessorArchitectures Platform SettingState Element 
+  context-free syntax
+        import::ANY+ applications::ANY binding::ANY logicalServers::ANY errors::ANY -> DeploymentReport
+
+        alias::ANY identity::ANY -> DeploymentImport
+
+        import::ANY -> ImportNamespaceIdentity
+
+        name::ANY version::ANY publicKey::ANY publicKeyToken::ANY culture::ANY platform::ANY -> NamespaceIdentity
+
+        system::ANY+ application::ANY+ -> Applications
+
+        zone::ANY+ logicalServer::ANY+ -> LogicalServers
+
+        system::ANY+ application::ANY+ name::ANY -> OuterSystem
+
+        zone::ANY+ boundLogicalServer::ANY+ -> Binding
+
+        zone::ANY+ boundLogicalServer::ANY+ logicalServer::ANY+ name::ANY -> Zone
+
+        sequence::ANY+ name::ANY definition::ANY extends::ANY instanceId::ANY hostedOn::ANY -> ReportObject
+
+        report::ANY setting::ANY system::ANY+ resource::ANY+ endpoint::ANY+ -> SequenceReport
+
+        setting::ANY+ application::ANY+ name::ANY definition::ANY extends::ANY -> BoundLogicalServer
+
+         -> LogicalServer
+
+         -> Application
+
+         -> ReportSystem
+
+         -> ReportResource
+
+         -> ReportEndpoint
+
+        value::ANY+ facet::ANY+ settingAttributes::ANY -> Setting
+
+        value::ANY settingAttributes::ANY -> SettingFacet
+
+        contents::ANY+ null::ANY -> SettingInstanceValue
+
+        name::ANY definition::ANY state::ANY fixed::ANY list::ANY null::ANY secure::ANY failedToSerialize::ANY -> SettingAttributes
+
+        contents::ANY+ Null::ANY Secure::ANY -> SettingValue
+
+        documentError::ANY+ documentResolutionError::ANY+ documentConstraintError::ANY+ -> ErrorCollection
+
+        description::ANY+ Code::ANY Level::ANY File::ANY -> DocumentError
+
+        Statement::ANY -> DocumentResolutionError
+
+        failedInput::ANY+ constraintMember::ANY constraintDefinition::ANY targetInstancePath::ANY ownerInstancePath::ANY constraintErrorCode::ANY constraintErrorMessage::ANY -> DocumentConstraintError
+
+        contents::ANY+ -> FailedInput
+
+        contents::ANY+ -> Description
+
+         -> Guid
+
+         -> SimpleName
+
+         -> Path
+
+         -> FourPartVersionType
+
+         -> PublicKeyType
+
+         -> PublicKeyTokenType
+
+         -> Culture
+
+         -> CultureNeutral
+
+        x86:: -> ProcessorArchitectures
+        ia64:: -> ProcessorArchitectures
+        amd64:: -> ProcessorArchitectures
+        wow64:: -> ProcessorArchitectures
+        msil:: -> ProcessorArchitectures
+        shx:: -> ProcessorArchitectures
+        arm:: -> ProcessorArchitectures
+        data:: -> ProcessorArchitectures
+
+        x86:: -> Platform
+        ia64:: -> Platform
+        amd64:: -> Platform
+        wow64:: -> Platform
+        msil:: -> Platform
+        shx:: -> Platform
+        arm:: -> Platform
+        data:: -> Platform
+        *:: -> Platform
+        neutral:: -> Platform
+
+        Set:: -> SettingState
+        NotSet:: -> SettingState
+        Error:: -> SettingState
+
+        value::ANY -> Element

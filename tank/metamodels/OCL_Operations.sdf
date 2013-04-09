@@ -1,0 +1,33 @@
+module Main
+
+exports
+  sorts
+        OperationExp PropertyOperation OclOperation ConstExp IntegerConstExp StringConstExp RealConstExp AttributeExp Attribute NaviguationExp AssocationEnd ClassifierOperation Operation OclExpression 
+  context-free syntax
+         -> OperationExp
+
+        isMarkedPre::ANY source::ANY -> PropertyOperation
+
+        arguments::ANY -> OclOperation
+
+         -> ConstExp
+
+        value::ANY -> IntegerConstExp
+
+        value::ANY -> StringConstExp
+
+        value::ANY -> RealConstExp
+
+        attr::ANY -> AttributeExp
+
+        attrExp::ANY+ -> Attribute
+
+        assEnd::ANY qualifierValues::ANY -> NaviguationExp
+
+        navExp::ANY+ -> AssocationEnd
+
+        op::ANY arguments::ANY -> ClassifierOperation
+
+        classOp::ANY+ -> Operation
+
+         -> OclExpression

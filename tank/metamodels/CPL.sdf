@@ -1,0 +1,69 @@
+module Main
+
+exports
+  sorts
+        Element CPL NodeContainer SubAction Outgoing Incoming NotPresent Otherwise SwitchedAddress SwitchedString SwitchedLanguage SwitchedTime SwitchedPriority Busy NoAnswer Redirection Failure Default Node Switch AddressSwitch StringSwitch LanguageSwitch TimeSwitch PrioritySwitch Location SubCall Action SignallingAction Proxy Redirect Reject 
+  context-free syntax
+         -> Element
+
+        subActions::ANY+ outgoing::ANY incoming::ANY -> CPL
+
+         -> NodeContainer
+
+        id::ANY -> SubAction
+
+        contents::ANY -> Outgoing
+
+        contents::ANY -> Incoming
+
+        contents::ANY -> NotPresent
+
+        contents::ANY -> Otherwise
+
+        is::ANY contains::ANY subDomainOf::ANY -> SwitchedAddress
+
+        is::ANY contains::ANY -> SwitchedString
+
+        matches::ANY -> SwitchedLanguage
+
+        dtstart::ANY dtend::ANY duration::ANY freq::ANY until::ANY count::ANY interval::ANY bySecond::ANY byMinute::ANY byHour::ANY byDay::ANY byMonthDay::ANY byYearDay::ANY byWeekNo::ANY byMonth::ANY wkst::ANY bySetPos::ANY -> SwitchedTime
+
+        less::ANY greater::ANY equal::ANY -> SwitchedPriority
+
+        contents::ANY -> Busy
+
+        contents::ANY -> NoAnswer
+
+        contents::ANY -> Redirection
+
+        contents::ANY -> Failure
+
+        contents::ANY -> Default
+
+         -> Node
+
+         -> Switch
+
+        field::ANY subField::ANY addresses::ANY+ -> AddressSwitch
+
+        field::ANY strings::ANY+ -> StringSwitch
+
+        languages::ANY+ -> LanguageSwitch
+
+        tzid::ANY tzurl::ANY times::ANY+ -> TimeSwitch
+
+        priorities::ANY+ -> PrioritySwitch
+
+        url::ANY priority::ANY clear::ANY -> Location
+
+        ref::ANY -> SubCall
+
+         -> Action
+
+         -> SignallingAction
+
+        timeout::ANY recurse::ANY ordering::ANY busy::ANY noAnswer::ANY redirection::ANY failure::ANY default::ANY -> Proxy
+
+        permanent::ANY -> Redirect
+
+        status::ANY reason::ANY -> Reject

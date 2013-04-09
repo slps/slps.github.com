@@ -1,0 +1,33 @@
+module Main
+
+exports
+  sorts
+        ATOM Entry Source Content InLineXHTMLContent InLineOtherContent OutOfLineContent Generator Category Link Person Author Contributor Date 
+  context-free syntax
+        title::ANY id::ANY subtitle::ANY rights::ANY icon::ANY logo::ANY links::ANY+ lastUpdate::ANY generator::ANY categories::ANY+ authors::ANY+ contibutors::ANY+ entries::ANY+ -> ATOM
+
+        title::ANY id::ANY rights::ANY summary::ANY links::ANY+ source::ANY published::ANY lastUpdate::ANY content::ANY categories::ANY+ authors::ANY+ contibutors::ANY+ atom::ANY -> Entry
+
+        id::ANY icon::ANY logo::ANY rights::ANY title::ANY subtitle::ANY links::ANY+ lastUpdate::ANY generator::ANY contributors::ANY+ categories::ANY+ author::ANY -> Source
+
+        type::ANY -> Content
+
+         -> InLineXHTMLContent
+
+         -> InLineOtherContent
+
+        src::ANY -> OutOfLineContent
+
+        uri::ANY version::ANY -> Generator
+
+        term::ANY scheme::ANY label::ANY -> Category
+
+        href::ANY rel::ANY type::ANY hreflang::ANY title::ANY lenght::ANY -> Link
+
+        name::ANY uri::ANY email::ANY -> Person
+
+         -> Author
+
+         -> Contributor
+
+        day::ANY month::ANY year::ANY hours::ANY minutes::ANY seconds::ANY -> Date

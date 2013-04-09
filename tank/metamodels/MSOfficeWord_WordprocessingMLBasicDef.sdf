@@ -1,0 +1,139 @@
+module Main
+
+exports
+  sorts
+        DateTimeType VersionType ValueType StringValue FloatValue DateTimeTypeValue BooleanValue DocumentPropertiesCollection CustomDocumentPropertiesCollection CustomDocumentProperty SmartTagType SmartTagsCollection StringProperty StringType BreakType NoteValue OnOffType FldCharTypeProperty WordDocument DocPrElt BodyElt BlockLevelElt BlockLevelChunkElt ParaElt ParaPrElt ParaContentElt RunElt RunPrElt RunContentElt BreakElt Text DelText InstrText DelInstrText NoBreakHyphen SoftHyphen AnnotationRef FootnoteRef EndnoteRef Separator ContinuationSeparator PgNum Cr Footnote Endnote NoteElt Picture Symbol SymElt Tab FldChar FldCharElt FontsListElt ListsElt StylesElt SectPrElt RunLevelElt CfChunk SimpleFieldElt HLinkElt SubDocElt PictureType TabElt 
+  context-free syntax
+        year::ANY month::ANY day::ANY hour::ANY minute::ANY second::ANY -> DateTimeType
+
+        n::ANY nn::ANY -> VersionType
+
+         -> ValueType
+
+        value::ANY -> StringValue
+
+        value::ANY -> FloatValue
+
+        value::ANY -> DateTimeTypeValue
+
+        value::ANY -> BooleanValue
+
+        dp_wordDocument::ANY title::ANY subject::ANY keywords::ANY description::ANY category::ANY author::ANY lastAuthor::ANY manager::ANY company::ANY hyperlinkBase::ANY revision::ANY presentationFormat::ANY guid::ANY appName::ANY version::ANY totalTime::ANY lastPrinted::ANY created::ANY lastSaved::ANY pages::ANY words::ANY characters::ANY charactersWithSpaces::ANY bytes::ANY lines::ANY paragraphs::ANY -> DocumentPropertiesCollection
+
+        cdp_wordDocument::ANY customDocumentProperties::ANY+ -> CustomDocumentPropertiesCollection
+
+        customDocumentProperty_cdpe::ANY name::ANY value::ANY -> CustomDocumentProperty
+
+        smartTagType_ste::ANY namespaceuri::ANY name::ANY url::ANY -> SmartTagType
+
+        st_wordDocument::ANY smartTagTypes::ANY+ -> SmartTagsCollection
+
+         -> StringProperty
+
+        val::ANY -> StringType
+
+        bt_page:: -> BreakType
+        bt_column:: -> BreakType
+        bt_text_wrapping:: -> BreakType
+
+        ftn_normal:: -> NoteValue
+        ftn_separator:: -> NoteValue
+        ftn_continuation_separator:: -> NoteValue
+        ftn_continuation_notice:: -> NoteValue
+
+        oot_on:: -> OnOffType
+        oot_off:: -> OnOffType
+
+        fctp_begin:: -> FldCharTypeProperty
+        fctp_separate:: -> FldCharTypeProperty
+        fctp_end:: -> FldCharTypeProperty
+
+        wd_smartTags::ANY wd_docProperties::ANY wd_customDocProperties::ANY ignoreSubtree::ANY ignoreElements::ANY fonts::ANY lists::ANY styles::ANY docPr::ANY body::ANY -> WordDocument
+
+        dpe_wordDocument::ANY -> DocPrElt
+
+        be_wordDocument::ANY blockLevelElts::ANY+ sectPr::ANY -> BodyElt
+
+         -> BlockLevelElt
+
+         -> BlockLevelChunkElt
+
+        pPr::ANY pContentElts::ANY+ -> ParaElt
+
+        ppe_pElt::ANY -> ParaPrElt
+
+         -> ParaContentElt
+
+        rPr::ANY rContentElts::ANY+ -> RunElt
+
+        rpe_rElt::ANY -> RunPrElt
+
+         -> RunContentElt
+
+        type::ANY -> BreakElt
+
+         -> Text
+
+         -> DelText
+
+         -> InstrText
+
+         -> DelInstrText
+
+        rce_rElt::ANY -> NoBreakHyphen
+
+        rce_rElt::ANY -> SoftHyphen
+
+        rce_rElt::ANY -> AnnotationRef
+
+        rce_rElt::ANY -> FootnoteRef
+
+        rce_rElt::ANY -> EndnoteRef
+
+        rce_rElt::ANY -> Separator
+
+        rce_rElt::ANY -> ContinuationSeparator
+
+        rce_rElt::ANY -> PgNum
+
+        rce_rElt::ANY -> Cr
+
+         -> Footnote
+
+         -> Endnote
+
+         -> NoteElt
+
+         -> Picture
+
+         -> Symbol
+
+        font::ANY char::ANY -> SymElt
+
+         -> Tab
+
+         -> FldChar
+
+        fldData::ANY fldCharType::ANY fldLock::ANY -> FldCharElt
+
+        fle_wordDocument::ANY -> FontsListElt
+
+        le_wordDocument::ANY -> ListsElt
+
+        se_wordDocument::ANY -> StylesElt
+
+        spe_bodyElt::ANY -> SectPrElt
+
+         -> RunLevelElt
+
+        ble_bodyElt::ANY ble_note::ANY -> CfChunk
+
+        pce_pElt::ANY -> SimpleFieldElt
+
+        pce_pElt::ANY -> HLinkElt
+
+        pce_pElt::ANY -> SubDocElt
+
+         -> PictureType
+
+         -> TabElt

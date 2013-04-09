@@ -1,0 +1,61 @@
+module Main
+
+exports
+  sorts
+        LocatedElement SQLRoot Statement ViewStatement InsertStmt QueryStmt QueryStmtCol QueryStmtAllCol NamedElement Table WhereClause Expression BinaryExp OrExp AndExp NotExp LikeExp InExp OperationExp Predicate QueryPredicate ColumnExp ValueExp StringValueExp IntegerValueExp ListExp FunctionExp DataType 
+  context-free syntax
+         -> LocatedElement
+
+        statements::ANY+ -> SQLRoot
+
+         -> Statement
+
+        name::ANY columns::ANY+ query::ANY -> ViewStatement
+
+        tableName::ANY values::ANY+ -> InsertStmt
+
+         -> QueryStmt
+
+        columns::ANY+ -> QueryStmtCol
+
+        tables::ANY+ condition::ANY -> QueryStmtAllCol
+
+         -> NamedElement
+
+        alias::ANY -> Table
+
+        expression::ANY -> WhereClause
+
+         -> Expression
+
+         -> BinaryExp
+
+        opName::ANY leftExp::ANY rightExp::ANY -> OrExp
+
+        opName::ANY leftExp::ANY rightExp::ANY -> AndExp
+
+        opName::ANY valueExp::ANY unused::ANY -> NotExp
+
+        columnName::ANY expression::ANY -> LikeExp
+
+        columnName::ANY elements::ANY+ -> InExp
+
+        optName::ANY -> OperationExp
+
+         -> Predicate
+
+        query::ANY -> QueryPredicate
+
+        alias::ANY type::ANY -> ColumnExp
+
+         -> ValueExp
+
+        aValue::ANY -> StringValueExp
+
+        aValue::ANY -> IntegerValueExp
+
+        elements::ANY+ -> ListExp
+
+        arguments::ANY+ name::ANY -> FunctionExp
+
+        name::ANY -> DataType

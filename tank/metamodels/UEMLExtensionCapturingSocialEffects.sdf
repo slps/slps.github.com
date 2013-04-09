@@ -1,0 +1,63 @@
+module Main
+
+exports
+  sorts
+        UEMLObject UEMLModel Geometry Port Flow Activity Object InformationObject Resource MaterialResource HumanResource ResourceFlow IOFlow ControlFlow TriggerFlow ConstraintFlow ResourceRole RoleType Anchor OutputPort InputPort ConnectionOperator AssociationConnector Process Service Agent Contract Task Commitment 
+  context-free syntax
+        has::ANY model::ANY -> UEMLObject
+
+        contains::ANY+ -> UEMLModel
+
+        object::ANY -> Geometry
+
+         -> Port
+
+        associationConnector::ANY -> Flow
+
+        resourceRole::ANY+ parent::ANY hasOutput::ANY -> Activity
+
+        ioFlow::ANY -> Object
+
+        controlFlow::ANY -> InformationObject
+
+        carries::ANY plays::ANY+ -> Resource
+
+         -> MaterialResource
+
+         -> HumanResource
+
+        resourceCarries::ANY+ -> ResourceFlow
+
+        carries::ANY+ -> IOFlow
+
+        carries::ANY+ -> ControlFlow
+
+         -> TriggerFlow
+
+         -> ConstraintFlow
+
+        resourcePlays::ANY+ roleQualifier::ANY in::ANY -> ResourceRole
+
+         -> RoleType
+
+        target::ANY origin::ANY -> Anchor
+
+        activity::ANY -> OutputPort
+
+         -> InputPort
+
+         -> ConnectionOperator
+
+        origin::ANY+ target::ANY+ classAssociation::ANY -> AssociationConnector
+
+        child::ANY fulfills::ANY+ realises::ANY -> Process
+
+        process::ANY -> Service
+
+        obliger::ANY claimer::ANY has_parties::ANY -> Agent
+
+        process::ANY+ agent::ANY collection_of::ANY+ -> Contract
+
+        fulfills::ANY+ -> Task
+
+        task::ANY agentO::ANY agentC::ANY contract::ANY -> Commitment

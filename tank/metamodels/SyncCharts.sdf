@@ -1,0 +1,35 @@
+module Main
+
+exports
+  sorts
+        ModelElement SyncChart ReferenceState Arc Vertex PseudoState PseudoStateKind State SimpleState CompositeState Stg Transition TransitionKind PseudoTransition PseudoTransitionKind 
+  context-free syntax
+         -> ModelElement
+
+        context::ANY referenceState::ANY+ -> SyncChart
+
+        subSyncChart::ANY containers::ANY -> ReferenceState
+
+         -> Arc
+
+         -> Vertex
+
+        kind::ANY -> PseudoState
+
+         -> PseudoStateKind
+
+        isFinal::ANY -> State
+
+         -> SimpleState
+
+        canTerminate::ANY isSuspendable::ANY stg::ANY+ -> CompositeState
+
+        withFinal::ANY compositeState::ANY arc::ANY+ referenceState::ANY+ -> Stg
+
+        kind::ANY -> Transition
+
+         -> TransitionKind
+
+        kind::ANY -> PseudoTransition
+
+         -> PseudoTransitionKind

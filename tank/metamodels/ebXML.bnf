@@ -1,0 +1,48 @@
+MultyPartyCollaboration:
+        partners::ANY+
+BusinessPartnerRole:
+        collaboration::ANY transition::ANY performers::ANY+
+Performs:
+        performedBy::ANY collaboration::ANY role::ANY
+AuthorizedRole:
+        isInitiator::ANY performers::ANY+
+Transaction:
+        onInitiation::ANY conditionGuard::ANY conditionExpression::ANY from::ANY to::ANY
+BinaryCollaboration:
+        pattern::ANY timeToPerform::ANY preCondition::ANY postCondition::ANY beginsWhen::ANY endsWhen::ANY roles::ANY+ transitions::ANY+ states::ANY+
+BusinessState:
+        EPSILON
+Start:
+        collaboration::ANY from::ANY to::ANY
+Fork:
+        waitForAll::ANY
+Join:
+        collaboration::ANY from::ANY to::ANY
+CompletionState:
+        guardCondition::ANY
+Failure:
+        EPSILON
+Success:
+        EPSILON
+BusinessActivity:
+        EPSILON
+BusinessTransactionActivity:
+        timeToPerform::ANY isConcurrent::ANY isLegallyBinding::ANY use::ANY
+CollaborationActivity:
+        use::ANY
+BusinessTransaction:
+        pattern::ANY isGuaranteedDeliveryRequired::ANY preCondition::ANY postCondition::ANY beginsWhen::ANY endsWhen::ANY requester::ANY responder::ANY
+BusinessAction:
+        EPSILON
+RequestingBusinessActivity:
+        timeToAcknowledgeAcceptance::ANY transaction::ANY documentEnvelope::ANY
+RespondingBusinessActivity:
+        transaction::ANY documentEnvelope::ANY
+DocumentSecurity:
+        EPSILON
+DocumentEnvelope:
+        isPositiveResponse::ANY requesting::ANY responding::ANY attachements::ANY+ document::ANY
+Attachment:
+        mimeType::ANY specification::ANY version::ANY envelope::ANY document::ANY
+BusinessDocument:
+        specificationLocation::ANY specificationElement::ANY conditionExpression::ANY envelopes::ANY+ attachments::ANY+

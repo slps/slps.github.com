@@ -1,0 +1,98 @@
+DeploymentReport:
+        import::ANY+ applications::ANY binding::ANY logicalServers::ANY errors::ANY
+DeploymentImport:
+        alias::ANY identity::ANY
+ImportNamespaceIdentity:
+        import::ANY
+NamespaceIdentity:
+        name::ANY version::ANY publicKey::ANY publicKeyToken::ANY culture::ANY platform::ANY
+Applications:
+        system::ANY+ application::ANY+
+LogicalServers:
+        zone::ANY+ logicalServer::ANY+
+OuterSystem:
+        system::ANY+ application::ANY+ name::ANY
+Binding:
+        zone::ANY+ boundLogicalServer::ANY+
+Zone:
+        zone::ANY+ boundLogicalServer::ANY+ logicalServer::ANY+ name::ANY
+ReportObject:
+        sequence::ANY+ name::ANY definition::ANY extends::ANY instanceId::ANY hostedOn::ANY
+SequenceReport:
+        report::ANY setting::ANY system::ANY+ resource::ANY+ endpoint::ANY+
+BoundLogicalServer:
+        setting::ANY+ application::ANY+ name::ANY definition::ANY extends::ANY
+LogicalServer:
+        EPSILON
+Application:
+        EPSILON
+ReportSystem:
+        EPSILON
+ReportResource:
+        EPSILON
+ReportEndpoint:
+        EPSILON
+Setting:
+        value::ANY+ facet::ANY+ settingAttributes::ANY
+SettingFacet:
+        value::ANY settingAttributes::ANY
+SettingInstanceValue:
+        contents::ANY+ null::ANY
+SettingAttributes:
+        name::ANY definition::ANY state::ANY fixed::ANY list::ANY null::ANY secure::ANY failedToSerialize::ANY
+SettingValue:
+        contents::ANY+ Null::ANY Secure::ANY
+ErrorCollection:
+        documentError::ANY+ documentResolutionError::ANY+ documentConstraintError::ANY+
+DocumentError:
+        description::ANY+ Code::ANY Level::ANY File::ANY
+DocumentResolutionError:
+        Statement::ANY
+DocumentConstraintError:
+        failedInput::ANY+ constraintMember::ANY constraintDefinition::ANY targetInstancePath::ANY ownerInstancePath::ANY constraintErrorCode::ANY constraintErrorMessage::ANY
+FailedInput:
+        contents::ANY+
+Description:
+        contents::ANY+
+Guid:
+        EPSILON
+SimpleName:
+        EPSILON
+Path:
+        EPSILON
+FourPartVersionType:
+        EPSILON
+PublicKeyType:
+        EPSILON
+PublicKeyTokenType:
+        EPSILON
+Culture:
+        EPSILON
+CultureNeutral:
+        EPSILON
+ProcessorArchitectures:
+        x86::EPSILON
+        ia64::EPSILON
+        amd64::EPSILON
+        wow64::EPSILON
+        msil::EPSILON
+        shx::EPSILON
+        arm::EPSILON
+        data::EPSILON
+Platform:
+        x86::EPSILON
+        ia64::EPSILON
+        amd64::EPSILON
+        wow64::EPSILON
+        msil::EPSILON
+        shx::EPSILON
+        arm::EPSILON
+        data::EPSILON
+        *::EPSILON
+        neutral::EPSILON
+SettingState:
+        Set::EPSILON
+        NotSet::EPSILON
+        Error::EPSILON
+Element:
+        value::ANY

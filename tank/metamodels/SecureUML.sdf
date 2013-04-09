@@ -1,0 +1,25 @@
+module Main
+
+exports
+  sorts
+        Group User Subject Role Permission AuthorizationConstraint AtomicAction CompositeAction Action Resource 
+  context-free syntax
+        subjectGroup::ANY+ -> Group
+
+         -> User
+
+        group::ANY role::ANY+ -> Subject
+
+        roleHierarchy::ANY+ subjectAssignment::ANY+ permissionAssignment::ANY+ -> Role
+
+        role::ANY+ constraintAssignment::ANY actionAssignment::ANY+ -> Permission
+
+        permission::ANY+ -> AuthorizationConstraint
+
+         -> AtomicAction
+
+        subordinatedAction::ANY+ -> CompositeAction
+
+        permission::ANY+ resource::ANY actionHyerarchy::ANY+ -> Action
+
+        resourceAction::ANY+ -> Resource

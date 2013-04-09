@@ -1,0 +1,35 @@
+module Main
+
+exports
+  sorts
+        OclExpression SelfExp ResultExp VariableExp OperationExp QueryExp Type VariableDeclaration VariableInitialisation ForAllExp ExistsExp SelectExp RejectExp CollectExp IterateExp 
+  context-free syntax
+         -> OclExpression
+
+        queryArg::ANY+ querySrc::ANY+ resultType::ANY varDec::ANY+ varInit::ANY+ -> SelfExp
+
+        queryArg::ANY+ querySrc::ANY+ resultType::ANY varDec::ANY+ varInit::ANY+ -> ResultExp
+
+        var::ANY -> VariableExp
+
+         -> OperationExp
+
+         -> QueryExp
+
+         -> Type
+
+        var::ANY varType::ANY oclExpression::ANY+ queryExp::ANY+ varInit::ANY+ -> VariableDeclaration
+
+        initExpression::ANY varDec::ANY iterateExp::ANY -> VariableInitialisation
+
+         -> ForAllExp
+
+         -> ExistsExp
+
+         -> SelectExp
+
+         -> RejectExp
+
+         -> CollectExp
+
+        varInit::ANY -> IterateExp

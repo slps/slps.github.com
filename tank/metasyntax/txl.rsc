@@ -99,7 +99,7 @@ syntax FormatCues
  ;
 syntax OptNL
         = 
-        LiteralOrType NL
+        NL
  ;
 syntax FormatCue
         = 
@@ -218,7 +218,7 @@ syntax RuleApplications
  ;
 syntax RuleoptNL
         = 
-        LiteralOrExpression NL
+        NL
  ;
 syntax RuleApplication
         = SP "[" Ruleid VaridOrLiteral* EachArgs? "]" CommentNL*

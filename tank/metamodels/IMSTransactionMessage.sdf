@@ -1,0 +1,32 @@
+module Main
+
+exports
+  sorts
+        OIMAPrefixFormats TwoByteField VariableLengthField IMSTransactionMessage OIMAPrefix ControlData StateData SecurityData UserData StandardFields ApplicationData Field TDLangElement 
+  context-free syntax
+        opp_one:: -> OIMAPrefixFormats
+        opp_two:: -> OIMAPrefixFormats
+
+         -> TwoByteField
+
+         -> VariableLengthField
+
+        OIMAPrefixFormat::ANY standardFieldsFlag::ANY OIMAPrefixComponent::ANY standardFieldComponent::ANY messageComponent::ANY -> IMSTransactionMessage
+
+        controlDataComponent::ANY stateDataComponent::ANY securityDataComponent::ANY userDataComponent::ANY -> OIMAPrefix
+
+         -> ControlData
+
+         -> StateData
+
+         -> SecurityData
+
+         -> UserData
+
+        length::ANY reservedField::ANY transactionCode::ANY -> StandardFields
+
+        languageElements::ANY+ fieldComponents::ANY+ -> ApplicationData
+
+        fieldContainer::ANY -> Field
+
+         -> TDLangElement

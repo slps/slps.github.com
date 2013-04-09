@@ -1,0 +1,17 @@
+module Main
+
+exports
+  sorts
+        RModelElement Schema Table Column Key ForeignKey 
+  context-free syntax
+         -> RModelElement
+
+        tables::ANY+ -> Schema
+
+        schema::ANY column::ANY+ key::ANY+ foreignKey::ANY+ -> Table
+
+        type::ANY owner::ANY key::ANY+ foreignKey::ANY+ -> Column
+
+        owner::ANY column::ANY+ refersToOpposite::ANY+ -> Key
+
+        column::ANY+ owner::ANY refersTo::ANY -> ForeignKey

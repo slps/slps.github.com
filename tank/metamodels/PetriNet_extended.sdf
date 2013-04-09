@@ -1,0 +1,31 @@
+module Main
+
+exports
+  sorts
+        LocatedElement NamedElement PetriNet Element Place Transition Arc PlaceToTransition TransitionToPlace Execution Token Marking Movement 
+  context-free syntax
+         -> LocatedElement
+
+         -> NamedElement
+
+        elements::ANY+ arcs::ANY+ execs::ANY+ -> PetriNet
+
+         -> Element
+
+        incomingArc::ANY+ outgoingArc::ANY+ -> Place
+
+        incomingArc::ANY+ outgoingArc::ANY+ -> Transition
+
+         -> Arc
+
+        from::ANY to::ANY -> PlaceToTransition
+
+        from::ANY to::ANY -> TransitionToPlace
+
+        net::ANY markings::ANY+ movements::ANY+ -> Execution
+
+        placedAt::ANY marking::ANY -> Token
+
+        exec::ANY tokens::ANY+ -> Marking
+
+        exec::ANY fire::ANY source::ANY target::ANY -> Movement

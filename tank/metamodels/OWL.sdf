@@ -1,0 +1,113 @@
+module Main
+
+exports
+  sorts
+        Document LocalName Namespace NamespaceDefinition RDFSResource RDFGraph List Container Alt Bag Seq RDFProperty ContainerMembershipProperty RDFStatement ReificationKind URIReferenceNode BlankNode RDFSClass RDFSDataType RDFSLiteral PlainLiteral TypedLiteral XMLLiteral URIReference UniformResourceIdentifier OWLOntology OWLGraph OWLStatement OWLUniverse OWLClass IntersectionClass UnionClass ComplementClass EnumeratedClass OWLRestriction HasValueRestriction AllValuesFromRestriction SomeValuesFromRestriction CardinalityRestriction MaxCardinalityRestriction MinCardinalityRestriction OWLAnnotationProperty OWLOntologyProperty Property FunctionalProperty OWLDatatypeProperty OWLObjectProperty InverseFunctionalProperty SymmetricProperty TransitiveProperty Individual OWLAllDifferent OWLDataRange 
+  context-free syntax
+        localName::ANY+ xmlBase::ANY+ namespaceDefinition::ANY+ statement::ANY+ -> Document
+
+        name::ANY document::ANY uriRef::ANY+ -> LocalName
+
+        document::ANY+ namespaceURIRef::ANY namespaceDefinition::ANY+ -> Namespace
+
+        namespacePrefix::ANY document::ANY namespace::ANY -> NamespaceDefinition
+
+        uriRef::ANY+ subjectStatement::ANY+ objectStatement::ANY+ label::ANY+ type::ANY+ comment::ANY+ seeAlso::ANY+ referringResource::ANY+ isDefinedBy::ANY+ definedResource::ANY+ member::ANY+ container::ANY+ list::ANY+ -> RDFSResource
+
+        graphName::ANY statement::ANY+ -> RDFGraph
+
+        first::ANY rest::ANY originalList::ANY+ -> List
+
+         -> Container
+
+         -> Alt
+
+         -> Bag
+
+         -> Seq
+
+        predicateStatement::ANY+ subPropertyOf::ANY+ superProperty::ANY+ domain::ANY+ range::ANY+ propertyRestriction::ANY+ -> RDFProperty
+
+         -> ContainerMembershipProperty
+
+        reificationKind::ANY graph::ANY+ RDFpredicate::ANY RDFobject::ANY RDFsubject::ANY nameForReification::ANY+ document::ANY+ -> RDFStatement
+
+        none:: -> ReificationKind
+        reifiedOnly:: -> ReificationKind
+        reified:: -> ReificationKind
+
+         -> URIReferenceNode
+
+        nodeId::ANY -> BlankNode
+
+        subClassOf::ANY+ superClass::ANY+ typedResource::ANY+ propertyForDomain::ANY+ propertyForRange::ANY+ -> RDFSClass
+
+        dataRange::ANY+ -> RDFSDataType
+
+        lexicalForm::ANY restrictionClass::ANY+ dataRange::ANY+ -> RDFSLiteral
+
+        language::ANY labeledResource::ANY commentedResource::ANY -> PlainLiteral
+
+        datatypeURI::ANY cardinalityRestriction::ANY+ minCardinalityRestriction::ANY+ maxCardinalityRestriction::ANY+ -> TypedLiteral
+
+         -> XMLLiteral
+
+        uri::ANY resource::ANY literal::ANY+ namedGraph::ANY reifiedStatement::ANY+ fragmentIdentifier::ANY namespace::ANY -> URIReference
+
+        name::ANY uriRef::ANY+ -> UniformResourceIdentifier
+
+        owlUniverse::ANY+ OWLPriorVersion::ANY+ newerOntology::ANY+ OWLIncompatibleWith::ANY+ incompatibleOntology::ANY+ OWLImports::ANY+ importingOntology::ANY+ owlGraph::ANY+ owlStatement::ANY+ versionInfo::ANY+ -> OWLOntology
+
+        ontology::ANY+ owlStatement::ANY+ -> OWLGraph
+
+        ontology::ANY+ owlGraph::ANY+ -> OWLStatement
+
+        ontology::ANY+ -> OWLUniverse
+
+        isDeprecated::ANY OWLequivalentClass::ANY+ equivalentClass::ANY+ OWLdisjointWith::ANY+ disjointClass::ANY+ intersectionClass::ANY+ unionClass::ANY+ complementClass::ANY+ allValuesFromRestrictionClass::ANY+ someValuesFromRestrictionClass::ANY+ -> OWLClass
+
+        OWLIntersectionOf::ANY+ -> IntersectionClass
+
+        OWLUnionOf::ANY+ -> UnionClass
+
+        OWLComplementOf::ANY+ -> ComplementClass
+
+        OWLOneOf::ANY+ -> EnumeratedClass
+
+        OWLOnProperty::ANY -> OWLRestriction
+
+        OWLHasLiteralValue::ANY OWLHasIndividualValue::ANY -> HasValueRestriction
+
+        OWLAllValuesFromDataRange::ANY OWLAllValuesFromClass::ANY -> AllValuesFromRestriction
+
+        OWLSomeValuesFromClass::ANY OWLSomeValuesFromDataRange::ANY -> SomeValuesFromRestriction
+
+        OWLCardinality::ANY -> CardinalityRestriction
+
+        OWLMaxCardinality::ANY -> MaxCardinalityRestriction
+
+        OWLMinCardinality::ANY -> MinCardinalityRestriction
+
+         -> OWLAnnotationProperty
+
+         -> OWLOntologyProperty
+
+         -> Property
+
+        isDeprecated::ANY OWLEquivalentProperty::ANY+ equivalentProperty::ANY+ -> FunctionalProperty
+
+        isDeprecated::ANY OWLEquivalentProperty::ANY+ equivalentProperty::ANY+ -> OWLDatatypeProperty
+
+        OWLInverseOf::ANY inverseProperty::ANY+ -> OWLObjectProperty
+
+         -> InverseFunctionalProperty
+
+         -> SymmetricProperty
+
+         -> TransitiveProperty
+
+        OWLDifferentFrom::ANY+ differentIndividual::ANY+ OWLSameAs::ANY+ sameIndividual::ANY+ allDifferent::ANY+ enumeratedClass::ANY+ restrictionClass::ANY+ -> Individual
+
+        OWLDistinctMembers::ANY -> OWLAllDifferent
+
+        datatype::ANY OWLOneOf::ANY+ someValuesFromRestrictionClass::ANY allValuesFromRestrictionClass::ANY -> OWLDataRange

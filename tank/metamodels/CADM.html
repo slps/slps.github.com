@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:bgf="http://planet-sl.org/bgf" xmlns:xbgf="http://planet-sl.org/xbgf" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Browsable CADM (C4ISR Architecture Data Model) 1.0 Grammar</title><link href="/slps.css" rel="stylesheet" type="text/css"></link><script type="text/javascript">
+
+				  var _gaq = _gaq || [];
+				  _gaq.push(['_setAccount', 'UA-3743366-7']);
+				  _gaq.push(['_setDomainName', 'github.com']);
+				  _gaq.push(['_trackPageview']);
+
+				  (function() {
+				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				  })();
+
+				</script></head><body><h1 class="l">Browsable CADM (C4ISR Architecture Data Model) 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Albin Jossic, <code>CADM.ecore</code>, 2006/06/06.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>26</strong></li><li>Number of top alternatives: <strong>26</strong></li><li>Number of defined nonterminal symbols: <strong>26</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>26</strong>: <code><a href="#Element" class="nt">Element</a>, <a href="#Architecture" class="nt">Architecture</a>, <a href="#Organization" class="nt">Organization</a>, <a href="#Guidance" class="nt">Guidance</a>, <a href="#Document" class="nt">Document</a>, <a href="#Action" class="nt">Action</a>, <a href="#Agreement" class="nt">Agreement</a>, <a href="#Standard" class="nt">Standard</a>, <a href="#Task" class="nt">Task</a>, <a href="#InformationAsset" class="nt">InformationAsset</a>, <a href="#ConceptualDataModel" class="nt">ConceptualDataModel</a>, <a href="#ActivityModel" class="nt">ActivityModel</a>, <a href="#Node" class="nt">Node</a>, <a href="#Network" class="nt">Network</a>, <a href="#Requirement" class="nt">Requirement</a>, <a href="#InfoExchRequirement" class="nt">InfoExchRequirement</a>, <a href="#ExchangeNeedLineReq" class="nt">ExchangeNeedLineReq</a>, <a href="#MissionArea" class="nt">MissionArea</a>, <a href="#System" class="nt">System</a>, <a href="#Mission" class="nt">Mission</a>, <a href="#FunctionalArea" class="nt">FunctionalArea</a>, <a href="#Capability" class="nt">Capability</a>, <a href="#MaterielItem" class="nt">MaterielItem</a>, <a href="#EquipmentType" class="nt">EquipmentType</a>, <a href="#SoftwareItem" class="nt">SoftwareItem</a>, <a href="#Facility" class="nt">Facility</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Element">Element</a>:
+        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">content</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Architecture">Architecture</a>:
+        <span class="sel">isAssociatedWith</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">missions</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">isFocusOf</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">uses</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Organization">Organization</a>:
+        <span class="sel">isAssociatedWith</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">softwareItems</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">owns</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">includes</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">performsTo</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">hasRequirement</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">hasMissionArea</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">associatedSystems</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">isProponentOf</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Guidance">Guidance</a>:
+        <span class="sel">isAssocitatedWith</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">isImplementedBy</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">isSpecifiedIn</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">providesAuthorityFor</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">defines</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Document">Document</a>:
+        <span class="sel">isAssociatedWith</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">describesArchitecture</span>::<span class="meta">any</span> <span class="sel">describesSystem</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">isSpecifiedUsing</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">cites</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Action">Action</a>:
+        <span class="sel">mayBeA</span>::<span class="meta">any</span> <span class="sel">isAssociatedWith</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">involvedIn</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Agreement">Agreement</a>:
+        <span class="sel">isAssociatedWith</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">isCitedBy</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">appliesTo</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">implements</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Standard">Standard</a>:
+        ε
+</pre><pre><a class="nt" name="Task">Task</a>:
+        <span class="sel">isAssociatedWith</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">isPerformedBy</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">isPerformedUsing</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">specifies</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="InformationAsset">InformationAsset</a>:
+        <span class="sel">isAssociatedWith</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="ConceptualDataModel">ConceptualDataModel</a>:
+        ε
+</pre><pre><a class="nt" name="ActivityModel">ActivityModel</a>:
+        ε
+</pre><pre><a class="nt" name="Node">Node</a>:
+        <span class="sel">isAssociatedWith</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">describes</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">hasServicesProvidedBy</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">involvedIn</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">uses</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">involves</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">isParticipedInBy</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">supports</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Network">Network</a>:
+        <span class="sel">isAssociatedWith</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">isDescribedIn</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">compliesWith</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">has</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">performsTo</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Requirement">Requirement</a>:
+        <span class="sel">mayBeSatifiedBy</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">isSpecifiedUsing</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">specifiesNeedFor</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">cites</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="InfoExchRequirement">InfoExchRequirement</a>:
+        <span class="sel">isCitedIn</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">isSpecifiedInInfos</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="ExchangeNeedLineReq">ExchangeNeedLineReq</a>:
+        ε
+</pre><pre><a class="nt" name="MissionArea">MissionArea</a>:
+        <span class="sel">supports</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="System">System</a>:
+        <span class="sel">isAssociatedWith</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">citedIn</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">compliesWith</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">isDescribedBy</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">uses</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">operatesUsing</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">performsTo</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">associatedOrganization</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">appliesTo</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Mission">Mission</a>:
+        <span class="sel">isCitedBy</span>::<span class="meta">any</span> <span class="sel">requires</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">isAssigned</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">mayCite</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="FunctionalArea">FunctionalArea</a>:
+        <span class="sel">isPartOf</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">supports</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">cites</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Capability">Capability</a>:
+        <span class="sel">specifiesRequired</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="MaterielItem">MaterielItem</a>:
+        <span class="sel">establishedAs</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">conformsTo</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">performsTo</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="EquipmentType">EquipmentType</a>:
+        ε
+</pre><pre><a class="nt" name="SoftwareItem">SoftwareItem</a>:
+        <span class="sel">uses</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">isSourceFor</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Facility">Facility</a>:
+        ε
+</pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
+Last updated: 09/04/2013.</div></body></html>

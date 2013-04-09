@@ -1,0 +1,67 @@
+module Main
+
+exports
+  sorts
+        Element DoDAFModel Document AMSpecification AMSpecificationElement PAExchangeRequirement ArchitectureDocument IE AMIERole Control Input Output Mechanism MechanismSystem MechanismReference MechanismFacility InformationAssetDocument AMPA PACapability PA AM InformationAsset Task PATask Organization OrganizationType OperationalRole Occupation PersonType Skill DOSCR 
+  context-free syntax
+         -> Element
+
+        document::ANY+ am::ANY+ task::ANY+ iaDocument::ANY+ amSpecification::ANY+ doscr::ANY+ organizationType::ANY+ -> DoDAFModel
+
+        type::ANY cites::ANY+ records::ANY+ isTheReferenceFor::ANY+ isThePrimaryReferenceFor::ANY+ -> Document
+
+        isSpecifiedUsing::ANY+ -> AMSpecification
+
+        subject::ANY -> AMSpecificationElement
+
+        isTheSubjectOf::ANY+ -> PAExchangeRequirement
+
+        name::ANY description::ANY view::ANY -> ArchitectureDocument
+
+        isAssociatedWith::ANY+ isOrdinateOf::ANY+ isSubordinateOf::ANY+ -> IE
+
+        defines::ANY+ -> AMIERole
+
+        source::ANY destination::ANY -> Control
+
+        isTheInputThatIsDefinedBy::ANY+ source::ANY destination::ANY information::ANY -> Input
+
+        source::ANY destination::ANY information::ANY -> Output
+
+        source::ANY destination::ANY resourceType::ANY -> Mechanism
+
+         -> MechanismSystem
+
+         -> MechanismReference
+
+         -> MechanismFacility
+
+        name::ANY description::ANY view::ANY -> InformationAssetDocument
+
+        isOrdinateOf::ANY+ isSubordinateOf::ANY+ defines::ANY+ -> AMPA
+
+        name::ANY description::ANY view::ANY -> PACapability
+
+        isTheProducerFor::ANY+ isTheConsumerFor::ANY+ isParentFor::ANY+ isChildFor::ANY+ has::ANY+ isIncludedIn::ANY+ correspondsTo::ANY+ -> PA
+
+        type::ANY specifies::ANY+ includes::ANY+ paTask::ANY+ -> AM
+
+         -> InformationAsset
+
+        levelIdentifier::ANY references::ANY cost::ANY -> Task
+
+        isCitedBy::ANY -> PATask
+
+        type::ANY supplies::ANY+ providesStewardshipFor::ANY+ owns::ANY+ develops::ANY+ isCitedAs::ANY+ -> Organization
+
+        isTheTypeOf::ANY+ isCitedAs::ANY+ -> OrganizationType
+
+        isCitedAs::ANY+ -> OperationalRole
+
+        mayBeCitedForOR::ANY+ mayBeCitedForPT::ANY+ -> Occupation
+
+        mayBeCitedFor::ANY+ can::ANY+ -> PersonType
+
+        mayBeCitedFor::ANY+ -> Skill
+
+        mayBeAn::ANY appliesTo::ANY+ mayBeCitedFor::ANY+ -> DOSCR

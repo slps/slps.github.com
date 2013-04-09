@@ -1,0 +1,301 @@
+TemplateExp:
+        EPSILON
+ObjectTemplateExp:
+        part::ANY+ referredClass::ANY
+CollectionTemplateExp:
+        part::ANY+ kind::ANY referredCollectionType::ANY match::ANY
+PropertyTemplateItem:
+        objContainer::ANY value::ANY referredProperty::ANY
+ImperativeIterateExp:
+        target::ANY
+AssignExp:
+        value::ANY+ left::ANY defaultValue::ANY isReset::ANY
+BlockExp:
+        body::ANY+
+SwitchExp:
+        alternativePart::ANY+ elsePart::ANY
+VariableInitExp:
+        referredVariable::ANY withResult::ANY
+WhileExp:
+        condition::ANY body::ANY
+ComputeExp:
+        returnedElement::ANY body::ANY
+AltExp:
+        condition::ANY body::ANY
+UnlinkExp:
+        target::ANY item::ANY
+ReturnExp:
+        value::ANY
+BreakExp:
+        
+TryExp:
+        tryBody::ANY exception::ANY+ exceptBody::ANY
+RaiseExp:
+        exception::ANY
+ContinueExp:
+        
+ForExp:
+        condition::ANY
+TupleExp:
+        element::ANY+
+Typedef:
+        base::ANY condition::ANY
+InstantiationExp:
+        instantiatedClass::ANY extent::ANY argument::ANY+
+DictionaryType:
+        keyType::ANY
+DictLiteralExp:
+        part::ANY+
+DictLiteralPart:
+        key::ANY value::ANY
+TemplateParameterType:
+        specification::ANY
+LogExp:
+        text::ANY level::ANY condition::ANY element::ANY
+AssertExp:
+        severity::ANY log::ANY assertion::ANY
+SeverityKind:
+        error::EPSILON
+        fatal::EPSILON
+        warning::EPSILON
+ImperativeLoopExp:
+        EPSILON
+CollectorExp:
+        target::ANY
+ImperativeExpression:
+        EPSILON
+UnpackExp:
+        variable::ANY+
+AnonymousTupleType:
+        elementType::ANY+
+AnonymousTupleLiteralExp:
+        part::ANY+
+AnonymousTupleLiteralPart:
+        value::ANY+
+ListType:
+        elementType::ANY
+Class:
+        ownedAttribute::ANY+ ownedOperation::ANY+ superClass::ANY+ isAbstract::ANY
+DataType:
+        EPSILON
+Element:
+        EPSILON
+Tag:
+        element::ANY+ transformation::ANY owner::ANY value::ANY name::ANY
+Enumeration:
+        ownedLiteral::ANY+
+NamedElement:
+        EPSILON
+Extent:
+        EPSILON
+Object:
+        EPSILON
+Operation:
+        class::ANY ownedParameter::ANY+ raisedException::ANY+
+MultiplicityElement:
+        EPSILON
+Package:
+        ownedType::ANY+ nestedPackage::ANY+ uri::ANY
+Type:
+        EPSILON
+Parameter:
+        operation::ANY
+EnumerationLiteral:
+        enumeration::ANY
+Property:
+        Class::ANY opposite::ANY module::ANY isReadOnly::ANY isDerived::ANY isComposite::ANY isId::ANY default::ANY
+TypedElement:
+        EPSILON
+PrimitiveType:
+        
+URIExtent:
+        EPSILON
+Comment:
+        annotatedElement::ANY+
+MappingBody:
+        initSection::ANY+ endSection::ANY+
+Helper:
+        isQuery::ANY
+ResolveExp:
+        condition::ANY one::ANY isInverse::ANY isDeferred::ANY
+ResolveInExp:
+        inMapping::ANY
+OperationalTransformation:
+        intermediateClass::ANY+ refined::ANY intermediateProperty::ANY+ modelParameter::ANY+ entry::ANY relation::ANY+
+MappingParameter:
+        refinedDomain::ANY extent::ANY
+MappingOperation:
+        disjunct::ANY+ refinedRelation::ANY merged::ANY+ inherited::ANY+ when::ANY+
+MappingCallExp:
+        isStrict::ANY
+Constructor:
+        EPSILON
+ContextualProperty:
+        context::ANY overridden::ANY
+EntryOperation:
+        EPSILON
+ImperativeCallExp:
+        isVirtual::ANY
+ImperativeOperation:
+        context::ANY result::ANY+ overridden::ANY body::ANY isBlackbox::ANY
+DirectionKind:
+        in::EPSILON
+        inout::EPSILON
+        out::EPSILON
+Library:
+        EPSILON
+ModelParameter:
+        EPSILON
+ModelType:
+        metamodel::ANY+ additionalCondition::ANY+ conformanceKind::ANY
+Module:
+        ownedTag::ANY+ configProperty::ANY+ moduleImport::ANY+ usedModelType::ANY+ isBlackbox::ANY
+ModuleImport:
+        binding::ANY+ module::ANY importedModule::ANY kind::ANY
+ImportKind:
+        extension::EPSILON
+        access::EPSILON
+VarParameter:
+        ctxOwner::ANY resOwner::ANY kind::ANY
+OperationBody:
+        operation::ANY content::ANY+
+ConstructorBody:
+        EPSILON
+ObjectExp:
+        referredObject::ANY body::ANY
+Area:
+        EPSILON
+Assignment:
+        bottomPattern::ANY slotExpression::ANY value::ANY targetProperty::ANY isDefault::ANY
+BottomPattern:
+        area::ANY assignment::ANY+ realizedVariable::ANY+ enforcementOperation::ANY+
+GuardPattern:
+        area::ANY
+Mapping:
+        specification::ANY+ local::ANY+ context::ANY
+RealizedVariable:
+        EPSILON
+CoreDomain:
+        EPSILON
+CorePattern:
+        EPSILON
+EnforcementOperation:
+        enforcementMode::ANY bottomPattern::ANY operationCallExp::ANY
+EnforcementMode:
+        Deletion::EPSILON
+        Creation::EPSILON
+Domain:
+        isCheckable::ANY isEnforceable::ANY rule::ANY typedModel::ANY
+Transformation:
+        ownedTag::ANY+ modelParameter::ANY+ rule::ANY+ extends::ANY
+TypedModel:
+        transformation::ANY usedPackage::ANY+ dependsOn::ANY+
+Rule:
+        domain::ANY+ transformation::ANY overrides::ANY
+Pattern:
+        predicate::ANY+ bindsTo::ANY+ whenOwner::ANY whereOwner::ANY
+Predicate:
+        conditionExpression::ANY pattern::ANY
+Function:
+        queryExpression::ANY
+FunctionParameter:
+        EPSILON
+RelationalTransformation:
+        ownedKey::ANY+
+Relation:
+        isTopLevel::ANY variable::ANY+ operationalImpl::ANY+ where::ANY when::ANY
+RelationDomain:
+        pattern::ANY rootVariable::ANY
+DomainPattern:
+        templateExpression::ANY
+RelationImplementation:
+        relation::ANY impl::ANY inDirectionOf::ANY
+Key:
+        identifies::ANY part::ANY+ transformation::ANY
+BooleanLiteralExp:
+        booleanSymbol::ANY
+CallExp:
+        EPSILON
+CollectionKind:
+        OrderedSet::EPSILON
+        Set::EPSILON
+        Bag::EPSILON
+        Sequence::EPSILON
+OclExpression:
+        EPSILON
+UnlimitedNaturalExp:
+        symbol::ANY
+IfExp:
+        condition::ANY thenExpression::ANY elseExpression::ANY
+LetExp:
+        in::ANY+ variable::ANY
+Variable:
+        initExpression::ANY LetExp::ANY computeOwner::ANY bindParameter::ANY
+PropertyCallExp:
+        referredProperty::ANY
+VariableExp:
+        referredVariable::ANY
+TypeExp:
+        referredType::ANY
+LoopExp:
+        EPSILON
+IteratorExp:
+        body::ANY iterator::ANY+
+StringLiteralExp:
+        stringSymbol::ANY
+IntegerLiteralExp:
+        integerSymbol::ANY
+OperationCallExp:
+        argument::ANY+ referredOperation::ANY
+RealLiteralExp:
+        realSymbol::ANY
+LiteralExp:
+        EPSILON
+IterateExp:
+        result::ANY
+PrimitiveLiteralExp:
+        EPSILON
+NumericLiteralExp:
+        EPSILON
+CollectionLiteralExp:
+        kind::ANY part::ANY+
+CollectionLiteralPart:
+        EPSILON
+CollectionItem:
+        item::ANY
+CollectionRange:
+        first::ANY last::ANY
+TupleLiteralExp:
+        part::ANY+
+NullLiteralExp:
+        
+ExpressionInOcl:
+        bodyExpression::ANY context::ANY resultVariable::ANY parameterVariable::ANY
+OpaqueExpression:
+        EPSILON
+InvalidLiteralExp:
+        
+FeaturePropertyCall:
+        EPSILON
+TupleLiteralPart:
+        TupleLiteralExp::ANY attribute::ANY
+BagType:
+        elementType::ANY
+CollectionType:
+        EPSILON
+EnumLiteralExp:
+        referredEnumLiteral::ANY
+InvalidType:
+        package::ANY
+OrderedSetType:
+        elementType::ANY
+SequenceType:
+        elementType::ANY
+SetType:
+        elementType::ANY
+TupleType:
+        EPSILON
+VoidType:
+        package::ANY
+AnyType:
+        EPSILON

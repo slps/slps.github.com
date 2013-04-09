@@ -1,0 +1,56 @@
+module Main
+
+exports
+  sorts
+        LocatedElement NamedElement Structure ProcContainerElement Program Monitor Procedure VariableDeclaration Parameter Direction Type Expression VariableExp PropertyCallExp OperatorCallExp AttributeCallExp ProcedureCallExp LiteralExp BooleanExp IntegerExp Statement AssignmentStat ConditionalStat WhileStat ExpressionStat 
+  context-free syntax
+         -> LocatedElement
+
+         -> NamedElement
+
+         -> Structure
+
+         -> ProcContainerElement
+
+        monitors::ANY+ -> Program
+
+        program::ANY -> Monitor
+
+        container::ANY parameters::ANY+ statements::ANY+ -> Procedure
+
+        type::ANY initialValue::ANY structure::ANY -> VariableDeclaration
+
+        direction::ANY procedure::ANY -> Parameter
+
+        in:: -> Direction
+        out:: -> Direction
+
+        name::ANY -> Type
+
+         -> Expression
+
+        declaration::ANY -> VariableExp
+
+         -> PropertyCallExp
+
+        right::ANY -> OperatorCallExp
+
+        source::ANY name::ANY -> AttributeCallExp
+
+        arguments::ANY+ -> ProcedureCallExp
+
+         -> LiteralExp
+
+        symbol::ANY -> BooleanExp
+
+        symbol::ANY -> IntegerExp
+
+         -> Statement
+
+        target::ANY value::ANY -> AssignmentStat
+
+        condition::ANY thenStats::ANY+ elseStats::ANY+ -> ConditionalStat
+
+        condition::ANY doStats::ANY+ -> WhileStat
+
+        expression::ANY -> ExpressionStat

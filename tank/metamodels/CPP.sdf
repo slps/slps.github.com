@@ -1,0 +1,41 @@
+module Main
+
+exports
+  sorts
+        CDerived CStructured CBehavorialFeature CFunction CStructureContents CField CDerivableType VisibilityKind CPPReference CPPExtern CPPConst CPPTemplate CPPClass CPPGeneralization CPPOperation CPPOperator CPPMember 
+  context-free syntax
+         -> CDerived
+
+         -> CStructured
+
+         -> CBehavorialFeature
+
+        isVsrArg::ANY -> CFunction
+
+         -> CStructureContents
+
+         -> CField
+
+         -> CDerivableType
+
+        vk_public:: -> VisibilityKind
+        vk_private:: -> VisibilityKind
+        vk_protected:: -> VisibilityKind
+
+         -> CPPReference
+
+        linkage::ANY -> CPPExtern
+
+         -> CPPConst
+
+        classes::ANY+ -> CPPTemplate
+
+        isAbstract::ANY isVolatile::ANY visibility::ANY templates::ANY+ generalizations::ANY+ -> CPPClass
+
+        visibility::ANY isVirtual::ANY supertype::ANY -> CPPGeneralization
+
+        isStatic::ANY isExtern::ANY isInline::ANY isVirtual::ANY isPure::ANY visibility::ANY isCtor::ANY isDtor::ANY throws::ANY+ -> CPPOperation
+
+        isInline::ANY visibility::ANY -> CPPOperator
+
+        isStatic::ANY isVolatile::ANY isRegister::ANY visibility::ANY -> CPPMember

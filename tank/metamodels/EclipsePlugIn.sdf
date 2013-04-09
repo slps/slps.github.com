@@ -1,0 +1,19 @@
+module Main
+
+exports
+  sorts
+        Application ExtensionPoint Description Extension PlugIn Librairy Class 
+  context-free syntax
+        name::ANY version::ANY author::ANY extensionPoints::ANY+ -> Application
+
+        name::ANY id::ANY application::ANY descriptions::ANY+ plugIn::ANY -> ExtensionPoint
+
+        xmlSchema::ANY extensionPoints::ANY+ -> Description
+
+        name::ANY id::ANY isConfiguredInto::ANY -> Extension
+
+        id::ANY displayableName::ANY version::ANY supplier::ANY configures::ANY+ extensionPoints::ANY+ requires::ANY+ uses::ANY+ -> PlugIn
+
+        name::ANY plugIn::ANY classes::ANY+ -> Librairy
+
+        name::ANY librairy::ANY -> Class

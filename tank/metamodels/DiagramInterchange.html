@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:bgf="http://planet-sl.org/bgf" xmlns:xbgf="http://planet-sl.org/xbgf" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Browsable DiagramInterchange 1.0 Grammar</title><link href="/slps.css" rel="stylesheet" type="text/css"></link><script type="text/javascript">
+
+				  var _gaq = _gaq || [];
+				  _gaq.push(['_setAccount', 'UA-3743366-7']);
+				  _gaq.push(['_setDomainName', 'github.com']);
+				  _gaq.push(['_trackPageview']);
+
+				  (function() {
+				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				  })();
+
+				</script></head><body><h1 class="l">Browsable DiagramInterchange 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Hugo Bruneliere, <code>DiagramInterchange.ecore</code>, 2005/08/11.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>24</strong></li><li>Number of top alternatives: <strong>24</strong></li><li>Number of defined nonterminal symbols: <strong>24</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>24</strong>: <code><a href="#Dimension" class="nt">Dimension</a>, <a href="#Point" class="nt">Point</a>, <a href="#BezierPoint" class="nt">BezierPoint</a>, <a href="#Property" class="nt">Property</a>, <a href="#DiagramElement" class="nt">DiagramElement</a>, <a href="#Reference" class="nt">Reference</a>, <a href="#GraphElement" class="nt">GraphElement</a>, <a href="#GraphEdge" class="nt">GraphEdge</a>, <a href="#GraphNode" class="nt">GraphNode</a>, <a href="#GraphConnector" class="nt">GraphConnector</a>, <a href="#DiagramLink" class="nt">DiagramLink</a>, <a href="#SemanticModelBridge" class="nt">SemanticModelBridge</a>, <a href="#Diagram" class="nt">Diagram</a>, <a href="#SimpleSemanticModelElement" class="nt">SimpleSemanticModelElement</a>, <a href="#UML1SemanticModelBridge" class="nt">UML1SemanticModelBridge</a>, <a href="#CoreSemanticModelBridge" class="nt">CoreSemanticModelBridge</a>, <a href="#CoreElement" class="nt">CoreElement</a>, <a href="#ElementsElement" class="nt">ElementsElement</a>, <a href="#LeafElement" class="nt">LeafElement</a>, <a href="#TextElement" class="nt">TextElement</a>, <a href="#Image" class="nt">Image</a>, <a href="#GraphicPrimitive" class="nt">GraphicPrimitive</a>, <a href="#Polyline" class="nt">Polyline</a>, <a href="#Ellipse" class="nt">Ellipse</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Dimension">Dimension</a>:
+        <span class="sel">width</span>::<span class="meta">any</span> <span class="sel">heigth</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Point">Point</a>:
+        <span class="sel">x</span>::<span class="meta">any</span> <span class="sel">y</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="BezierPoint">BezierPoint</a>:
+        <span class="sel">controls</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Property">Property</a>:
+        <span class="sel">key</span>::<span class="meta">any</span> <span class="sel">value</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="DiagramElement">DiagramElement</a>:
+        ε
+</pre><pre><a class="nt" name="Reference">Reference</a>:
+        <span class="sel">isIndividualRepresentation</span>::<span class="meta">any</span> <span class="sel">referenced</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="GraphElement">GraphElement</a>:
+        ε
+</pre><pre><a class="nt" name="GraphEdge">GraphEdge</a>:
+        <span class="sel">waypoints</span>::<span class="meta">any</span> <span class="sel">anchors</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="GraphNode">GraphNode</a>:
+        <span class="sel">size</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="GraphConnector">GraphConnector</a>:
+        <span class="sel">position</span>::<span class="meta">any</span> <span class="sel">gc_graphElement</span>::<span class="meta">any</span> <span class="sel">graphEdges</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="DiagramLink">DiagramLink</a>:
+        <span class="sel">zoom</span>::<span class="meta">any</span> <span class="sel">viewPort</span>::<span class="meta">any</span> <span class="sel">dl_graphElement</span>::<span class="meta">any</span> <span class="sel">dl_diagram</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SemanticModelBridge">SemanticModelBridge</a>:
+        ε
+</pre><pre><a class="nt" name="Diagram">Diagram</a>:
+        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">zoom</span>::<span class="meta">any</span> <span class="sel">viewPort</span>::<span class="meta">any</span> <span class="sel">diagramLinks</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">namespace</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SimpleSemanticModelElement">SimpleSemanticModelElement</a>:
+        <span class="sel">typeInfo</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="UML1SemanticModelBridge">UML1SemanticModelBridge</a>:
+        <span class="sel">element</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="CoreSemanticModelBridge">CoreSemanticModelBridge</a>:
+        <span class="sel">element</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="CoreElement">CoreElement</a>:
+        ε
+</pre><pre><a class="nt" name="ElementsElement">ElementsElement</a>:
+        ε
+</pre><pre><a class="nt" name="LeafElement">LeafElement</a>:
+        ε
+</pre><pre><a class="nt" name="TextElement">TextElement</a>:
+        <span class="sel">text</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Image">Image</a>:
+        <span class="sel">uri</span>::<span class="meta">any</span> <span class="sel">mimeType</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="GraphicPrimitive">GraphicPrimitive</a>:
+        ε
+</pre><pre><a class="nt" name="Polyline">Polyline</a>:
+        <span class="sel">waypoints</span>::<span class="meta">any</span> <span class="sel">closed</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Ellipse">Ellipse</a>:
+        <span class="sel">center</span>::<span class="meta">any</span> <span class="sel">radiusX</span>::<span class="meta">any</span> <span class="sel">radiusY</span>::<span class="meta">any</span> <span class="sel">rotation</span>::<span class="meta">any</span> <span class="sel">startAngle</span>::<span class="meta">any</span> <span class="sel">endAngle</span>::<span class="meta">any</span>
+</pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
+Last updated: 09/04/2013.</div></body></html>

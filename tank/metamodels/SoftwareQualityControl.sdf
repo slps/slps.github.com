@@ -1,0 +1,21 @@
+module Main
+
+exports
+  sorts
+        DateType ControlsSequence Control ControlType BugTracking Bug BugStatusType 
+  context-free syntax
+        day::ANY month::ANY year::ANY -> DateType
+
+        controls::ANY+ -> ControlsSequence
+
+        c_controlsSequence::ANY responsible::ANY component::ANY developmentPhase::ANY scope::ANY date::ANY controlledElt::ANY eltRef::ANY eltAuthor::ANY formRef::ANY type::ANY -> Control
+
+         -> ControlType
+
+        bugs::ANY+ -> BugTracking
+
+        b_bugTracking::ANY number::ANY componentVersion::ANY description::ANY status::ANY originator::ANY responsible::ANY commentsAnswers::ANY openDate::ANY closeDate::ANY -> Bug
+
+        bst_open:: -> BugStatusType
+        bst_closed:: -> BugStatusType
+        bst_skipped:: -> BugStatusType

@@ -1,0 +1,253 @@
+LocatedElement:
+        EPSILON
+Program:
+        service::ANY
+Service:
+        name::ANY declarations::ANY+ sessions::ANY+
+Session:
+        EPSILON
+Registration:
+        declarations::ANY+ sessions::ANY+
+Dialog:
+        declarations::ANY+ methods::ANY+
+Event:
+        eventId::ANY declarations::ANY+ methods::ANY+
+Method:
+        type::ANY direction::ANY methodName::ANY arguments::ANY+ statements::ANY+ branches::ANY+
+Argument:
+        EPSILON
+MethodName:
+        EPSILON
+SIPMethodName:
+        name::ANY
+ControlMethodName:
+        name::ANY
+Branch:
+        statements::ANY+
+DefaultBranch:
+        EPSILON
+NamedBranch:
+        name::ANY+
+TypeExpression:
+        EPSILON
+SimpleType:
+        type::ANY
+SequenceType:
+        modifier::ANY type::ANY size::ANY
+DefinedType:
+        typeName::ANY
+Declaration:
+        EPSILON
+VariableDeclaration:
+        type::ANY initExp::ANY
+FunctionDeclaration:
+        EPSILON
+RemoteFunctionDeclaration:
+        functionLocation::ANY
+LocalFunctionDeclaration:
+        statements::ANY+
+StructureDeclaration:
+        properties::ANY+
+StructureProperty:
+        name::ANY type::ANY
+FunctionCall:
+        function::ANY parameters::ANY+
+Statement:
+        EPSILON
+CompoundStat:
+        statements::ANY+
+SetStat:
+        target::ANY setValue::ANY
+DeclarationStat:
+        declaration::ANY
+ReturnStat:
+        returnedValue::ANY branch::ANY
+IfStat:
+        condition::ANY thenStatements::ANY+ elseStatements::ANY+
+WhenStat:
+        idExp::ANY whenHeaders::ANY+ statements::ANY+ elseStatements::ANY+
+ForeachStat:
+        iteratorName::ANY sequenceExp::ANY statements::ANY+
+SelectStat:
+        matchedExp::ANY selectCases::ANY+ selectDefault::ANY
+FunctionCallStat:
+        functionCall::ANY
+ContinueStat:
+        
+BreakStat:
+        
+PushStat:
+        target::ANY pushedValue::ANY
+WhenHeader:
+        headerId::ANY value::ANY
+SelectMember:
+        EPSILON
+SelectDefault:
+        statements::ANY+
+SelectCase:
+        values::ANY+
+Expression:
+        EPSILON
+ConstantExp:
+        value::ANY
+OperatorExp:
+        opName::ANY leftExp::ANY rightExp::ANY
+ForwardExp:
+        isParallel::ANY exp::ANY
+WithExp:
+        exp::ANY msgFields::ANY+
+BlockExp:
+        exp::ANY
+ReasonExp:
+        
+BODYExp:
+        
+RequestURIExp:
+        
+PopExp:
+        source::ANY
+FunctionCallExp:
+        functionCall::ANY
+Place:
+        EPSILON
+SIPHeaderPlace:
+        header::ANY
+VariablePlace:
+        EPSILON
+PropertyCallPlace:
+        propName::ANY source::ANY
+Variable:
+        source::ANY
+MessageField:
+        EPSILON
+ReasonMessageField:
+        exp::ANY
+HeadedMessageField:
+        headerId::ANY
+Constant:
+        EPSILON
+BooleanConstant:
+        value::ANY
+IntegerConstant:
+        value::ANY
+StringConstant:
+        value::ANY
+URIConstant:
+        uri::ANY
+SequenceConstant:
+        values::ANY+
+ResponseConstant:
+        response::ANY
+Response:
+        EPSILON
+SuccessResponse:
+        successKind::ANY
+ErrorResponse:
+        
+ClientErrorResponse:
+        errorKind::ANY
+GlobalErrorResponse:
+        errorKind::ANY
+RedirectionErrorResponse:
+        errorKind::ANY
+ServerErrorResponse:
+        errorKind::ANY
+Direction:
+        inout::EPSILON
+        in::EPSILON
+        out::EPSILON
+SIPMethod:
+        ACK::EPSILON
+        BYE::EPSILON
+        CANCEL::EPSILON
+        INVITE::EPSILON
+        NOTIFY::EPSILON
+        OPTIONS::EPSILON
+        REACK::EPSILON
+        REGISTER::EPSILON
+        REINVITE::EPSILON
+        REREGISTER::EPSILON
+        RESUBSCRIBE::EPSILON
+        SUBSCRIBE::EPSILON
+ControlMethod:
+        deploy::EPSILON
+        undeploy::EPSILON
+        uninvite::EPSILON
+        unregister::EPSILON
+        unsubscribe::EPSILON
+PrimitiveType:
+        void::EPSILON
+        bool::EPSILON
+        int::EPSILON
+        request::EPSILON
+        response::EPSILON
+        string::EPSILON
+        time::EPSILON
+        uri::EPSILON
+Modifier:
+        LIFO::EPSILON
+        FIFO::EPSILON
+FunctionLocation:
+        remote::EPSILON
+        local::EPSILON
+SIPHeader:
+        CALL_ID::EPSILON
+        CONTACT::EPSILON
+        CSEQ::EPSILON
+        EVENT::EPSILON
+        FROM::EPSILON
+        MAX_FORWARDS::EPSILON
+        SUBSCRIPTION_STATE::EPSILON
+        TO::EPSILON
+        VIA::EPSILON
+SuccessKind:
+        OK::EPSILON
+        ACCEPTED::EPSILON
+ClientErrorKind:
+        ADDRESS_INCOMPLETE::EPSILON
+        AMBIGUOUS::EPSILON
+        BAD_EXTENSION::EPSILON
+        BAD_REQUEST::EPSILON
+        BUSY_HERE::EPSILON
+        CALL_OR_TRANSACTION_DOES_NOT_EXIST::EPSILON
+        EXTENSION_REQUIRED::EPSILON
+        FORBIDDEN::EPSILON
+        GONE::EPSILON
+        INTERVAL_TOO_BRIEF::EPSILON
+        LOOP_DETECTED::EPSILON
+        METHOD_NOT_ALLOWED::EPSILON
+        NOT_ACCEPTABLE_HERE::EPSILON
+        NOT_ACCEPTABLE::EPSILON
+        NOT_FOUND::EPSILON
+        PAYMENT_REQUIRED::EPSILON
+        PROXY_AUTHENTICATION_REQUIRED::EPSILON
+        REQUESTURI_TOO_LONG::EPSILON
+        REQUEST_ENTITY_TOO_LARGE::EPSILON
+        REQUEST_PENDING::EPSILON
+        REQUEST_TERMINATED::EPSILON
+        REQUEST_TIMEOUT::EPSILON
+        TEMPORARILY_UNAVAILABLE::EPSILON
+        TOO_MANY_HOPS::EPSILON
+        UNAUTHORIZED::EPSILON
+        UNDECIPHERABLE::EPSILON
+        UNSUPPORTED_MEDIA_TYPE::EPSILON
+        UNSUPPORTED_URI_SCHEME::EPSILON
+GlobalErrorKind:
+        BUSY_EVERYWHERE::EPSILON
+        DECLINE::EPSILON
+        DOES_NOT_EXIST_ANYWHERE::EPSILON
+        NOT_ACCEPTABLE::EPSILON
+RedirectionErrorKind:
+        ALTERNATIVE_SERVICE::EPSILON
+        MOVED_PERMANENTLY::EPSILON
+        MOVED_TEMPORARILY::EPSILON
+        MULTIPLE_CHOICES::EPSILON
+        USE_PROXY::EPSILON
+ServerErrorKind:
+        BAD_GATEWAY::EPSILON
+        MESSAGE_TOO_LARGE::EPSILON
+        NOT_IMPLEMENTED::EPSILON
+        SERVER_INTERNAL_ERROR::EPSILON
+        SERVER_TIMEOUT::EPSILON
+        SERVICE_UNAVAILABLE::EPSILON
+        VERSION_NOT_SUPPORTED::EPSILON

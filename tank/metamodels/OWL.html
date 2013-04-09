@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:bgf="http://planet-sl.org/bgf" xmlns:xbgf="http://planet-sl.org/xbgf" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Browsable OWL 1 Grammar</title><link href="/slps.css" rel="stylesheet" type="text/css"></link><script type="text/javascript">
+
+				  var _gaq = _gaq || [];
+				  _gaq.push(['_setAccount', 'UA-3743366-7']);
+				  _gaq.push(['_setDomainName', 'github.com']);
+				  _gaq.push(['_trackPageview']);
+
+				  (function() {
+				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				  })();
+
+				</script></head><body><h1 class="l">Browsable OWL 1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Guillaume Hillairet, <code>OWL.ecore</code>, 2007/02/14.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>53</strong></li><li>Number of top alternatives: <strong>55</strong></li><li>Number of defined nonterminal symbols: <strong>53</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>53</strong>: <code><a href="#Document" class="nt">Document</a>, <a href="#LocalName" class="nt">LocalName</a>, <a href="#Namespace" class="nt">Namespace</a>, <a href="#NamespaceDefinition" class="nt">NamespaceDefinition</a>, <a href="#RDFSResource" class="nt">RDFSResource</a>, <a href="#RDFGraph" class="nt">RDFGraph</a>, <a href="#List" class="nt">List</a>, <a href="#Container" class="nt">Container</a>, <a href="#Alt" class="nt">Alt</a>, <a href="#Bag" class="nt">Bag</a>, <a href="#Seq" class="nt">Seq</a>, <a href="#RDFProperty" class="nt">RDFProperty</a>, <a href="#ContainerMembershipProperty" class="nt">ContainerMembershipProperty</a>, <a href="#RDFStatement" class="nt">RDFStatement</a>, <a href="#ReificationKind" class="nt">ReificationKind</a>, <a href="#URIReferenceNode" class="nt">URIReferenceNode</a>, <a href="#BlankNode" class="nt">BlankNode</a>, <a href="#RDFSClass" class="nt">RDFSClass</a>, <a href="#RDFSDataType" class="nt">RDFSDataType</a>, <a href="#RDFSLiteral" class="nt">RDFSLiteral</a>, <a href="#PlainLiteral" class="nt">PlainLiteral</a>, <a href="#TypedLiteral" class="nt">TypedLiteral</a>, <a href="#XMLLiteral" class="nt">XMLLiteral</a>, <a href="#URIReference" class="nt">URIReference</a>, <a href="#UniformResourceIdentifier" class="nt">UniformResourceIdentifier</a>, <a href="#OWLOntology" class="nt">OWLOntology</a>, <a href="#OWLGraph" class="nt">OWLGraph</a>, <a href="#OWLStatement" class="nt">OWLStatement</a>, <a href="#OWLUniverse" class="nt">OWLUniverse</a>, <a href="#OWLClass" class="nt">OWLClass</a>, <a href="#IntersectionClass" class="nt">IntersectionClass</a>, <a href="#UnionClass" class="nt">UnionClass</a>, <a href="#ComplementClass" class="nt">ComplementClass</a>, <a href="#EnumeratedClass" class="nt">EnumeratedClass</a>, <a href="#OWLRestriction" class="nt">OWLRestriction</a>, <a href="#HasValueRestriction" class="nt">HasValueRestriction</a>, <a href="#AllValuesFromRestriction" class="nt">AllValuesFromRestriction</a>, <a href="#SomeValuesFromRestriction" class="nt">SomeValuesFromRestriction</a>, <a href="#CardinalityRestriction" class="nt">CardinalityRestriction</a>, <a href="#MaxCardinalityRestriction" class="nt">MaxCardinalityRestriction</a>, <a href="#MinCardinalityRestriction" class="nt">MinCardinalityRestriction</a>, <a href="#OWLAnnotationProperty" class="nt">OWLAnnotationProperty</a>, <a href="#OWLOntologyProperty" class="nt">OWLOntologyProperty</a>, <a href="#Property" class="nt">Property</a>, <a href="#FunctionalProperty" class="nt">FunctionalProperty</a>, <a href="#OWLDatatypeProperty" class="nt">OWLDatatypeProperty</a>, <a href="#OWLObjectProperty" class="nt">OWLObjectProperty</a>, <a href="#InverseFunctionalProperty" class="nt">InverseFunctionalProperty</a>, <a href="#SymmetricProperty" class="nt">SymmetricProperty</a>, <a href="#TransitiveProperty" class="nt">TransitiveProperty</a>, <a href="#Individual" class="nt">Individual</a>, <a href="#OWLAllDifferent" class="nt">OWLAllDifferent</a>, <a href="#OWLDataRange" class="nt">OWLDataRange</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Document">Document</a>:
+        <span class="sel">localName</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">xmlBase</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">namespaceDefinition</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">statement</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="LocalName">LocalName</a>:
+        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">document</span>::<span class="meta">any</span> <span class="sel">uriRef</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Namespace">Namespace</a>:
+        <span class="sel">document</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">namespaceURIRef</span>::<span class="meta">any</span> <span class="sel">namespaceDefinition</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="NamespaceDefinition">NamespaceDefinition</a>:
+        <span class="sel">namespacePrefix</span>::<span class="meta">any</span> <span class="sel">document</span>::<span class="meta">any</span> <span class="sel">namespace</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="RDFSResource">RDFSResource</a>:
+        <span class="sel">uriRef</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">subjectStatement</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">objectStatement</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">label</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">type</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">comment</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">seeAlso</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">referringResource</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">isDefinedBy</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">definedResource</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">member</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">container</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">list</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="RDFGraph">RDFGraph</a>:
+        <span class="sel">graphName</span>::<span class="meta">any</span> <span class="sel">statement</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="List">List</a>:
+        <span class="sel">first</span>::<span class="meta">any</span> <span class="sel">rest</span>::<span class="meta">any</span> <span class="sel">originalList</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Container">Container</a>:
+        ε
+</pre><pre><a class="nt" name="Alt">Alt</a>:
+        ε
+</pre><pre><a class="nt" name="Bag">Bag</a>:
+        ε
+</pre><pre><a class="nt" name="Seq">Seq</a>:
+        ε
+</pre><pre><a class="nt" name="RDFProperty">RDFProperty</a>:
+        <span class="sel">predicateStatement</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">subPropertyOf</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">superProperty</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">domain</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">range</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">propertyRestriction</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="ContainerMembershipProperty">ContainerMembershipProperty</a>:
+        ε
+</pre><pre><a class="nt" name="RDFStatement">RDFStatement</a>:
+        <span class="sel">reificationKind</span>::<span class="meta">any</span> <span class="sel">graph</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">RDFpredicate</span>::<span class="meta">any</span> <span class="sel">RDFobject</span>::<span class="meta">any</span> <span class="sel">RDFsubject</span>::<span class="meta">any</span> <span class="sel">nameForReification</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">document</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="ReificationKind">ReificationKind</a>:
+        <span class="sel">none</span>::ε
+        <span class="sel">reifiedOnly</span>::ε
+        <span class="sel">reified</span>::ε
+</pre><pre><a class="nt" name="URIReferenceNode">URIReferenceNode</a>:
+        ε
+</pre><pre><a class="nt" name="BlankNode">BlankNode</a>:
+        <span class="sel">nodeId</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="RDFSClass">RDFSClass</a>:
+        <span class="sel">subClassOf</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">superClass</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">typedResource</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">propertyForDomain</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">propertyForRange</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="RDFSDataType">RDFSDataType</a>:
+        <span class="sel">dataRange</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="RDFSLiteral">RDFSLiteral</a>:
+        <span class="sel">lexicalForm</span>::<span class="meta">any</span> <span class="sel">restrictionClass</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">dataRange</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="PlainLiteral">PlainLiteral</a>:
+        <span class="sel">language</span>::<span class="meta">any</span> <span class="sel">labeledResource</span>::<span class="meta">any</span> <span class="sel">commentedResource</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="TypedLiteral">TypedLiteral</a>:
+        <span class="sel">datatypeURI</span>::<span class="meta">any</span> <span class="sel">cardinalityRestriction</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">minCardinalityRestriction</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">maxCardinalityRestriction</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="XMLLiteral">XMLLiteral</a>:
+        ε
+</pre><pre><a class="nt" name="URIReference">URIReference</a>:
+        <span class="sel">uri</span>::<span class="meta">any</span> <span class="sel">resource</span>::<span class="meta">any</span> <span class="sel">literal</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">namedGraph</span>::<span class="meta">any</span> <span class="sel">reifiedStatement</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">fragmentIdentifier</span>::<span class="meta">any</span> <span class="sel">namespace</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="UniformResourceIdentifier">UniformResourceIdentifier</a>:
+        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">uriRef</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="OWLOntology">OWLOntology</a>:
+        <span class="sel">owlUniverse</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">OWLPriorVersion</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">newerOntology</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">OWLIncompatibleWith</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">incompatibleOntology</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">OWLImports</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">importingOntology</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">owlGraph</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">owlStatement</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">versionInfo</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="OWLGraph">OWLGraph</a>:
+        <span class="sel">ontology</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">owlStatement</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="OWLStatement">OWLStatement</a>:
+        <span class="sel">ontology</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">owlGraph</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="OWLUniverse">OWLUniverse</a>:
+        <span class="sel">ontology</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="OWLClass">OWLClass</a>:
+        <span class="sel">isDeprecated</span>::<span class="meta">any</span> <span class="sel">OWLequivalentClass</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">equivalentClass</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">OWLdisjointWith</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">disjointClass</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">intersectionClass</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">unionClass</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">complementClass</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">allValuesFromRestrictionClass</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">someValuesFromRestrictionClass</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="IntersectionClass">IntersectionClass</a>:
+        <span class="sel">OWLIntersectionOf</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="UnionClass">UnionClass</a>:
+        <span class="sel">OWLUnionOf</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="ComplementClass">ComplementClass</a>:
+        <span class="sel">OWLComplementOf</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="EnumeratedClass">EnumeratedClass</a>:
+        <span class="sel">OWLOneOf</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="OWLRestriction">OWLRestriction</a>:
+        <span class="sel">OWLOnProperty</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="HasValueRestriction">HasValueRestriction</a>:
+        <span class="sel">OWLHasLiteralValue</span>::<span class="meta">any</span> <span class="sel">OWLHasIndividualValue</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="AllValuesFromRestriction">AllValuesFromRestriction</a>:
+        <span class="sel">OWLAllValuesFromDataRange</span>::<span class="meta">any</span> <span class="sel">OWLAllValuesFromClass</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SomeValuesFromRestriction">SomeValuesFromRestriction</a>:
+        <span class="sel">OWLSomeValuesFromClass</span>::<span class="meta">any</span> <span class="sel">OWLSomeValuesFromDataRange</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="CardinalityRestriction">CardinalityRestriction</a>:
+        <span class="sel">OWLCardinality</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="MaxCardinalityRestriction">MaxCardinalityRestriction</a>:
+        <span class="sel">OWLMaxCardinality</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="MinCardinalityRestriction">MinCardinalityRestriction</a>:
+        <span class="sel">OWLMinCardinality</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="OWLAnnotationProperty">OWLAnnotationProperty</a>:
+        ε
+</pre><pre><a class="nt" name="OWLOntologyProperty">OWLOntologyProperty</a>:
+        ε
+</pre><pre><a class="nt" name="Property">Property</a>:
+        ε
+</pre><pre><a class="nt" name="FunctionalProperty">FunctionalProperty</a>:
+        <span class="sel">isDeprecated</span>::<span class="meta">any</span> <span class="sel">OWLEquivalentProperty</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">equivalentProperty</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="OWLDatatypeProperty">OWLDatatypeProperty</a>:
+        <span class="sel">isDeprecated</span>::<span class="meta">any</span> <span class="sel">OWLEquivalentProperty</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">equivalentProperty</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="OWLObjectProperty">OWLObjectProperty</a>:
+        <span class="sel">OWLInverseOf</span>::<span class="meta">any</span> <span class="sel">inverseProperty</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="InverseFunctionalProperty">InverseFunctionalProperty</a>:
+        ε
+</pre><pre><a class="nt" name="SymmetricProperty">SymmetricProperty</a>:
+        ε
+</pre><pre><a class="nt" name="TransitiveProperty">TransitiveProperty</a>:
+        ε
+</pre><pre><a class="nt" name="Individual">Individual</a>:
+        <span class="sel">OWLDifferentFrom</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">differentIndividual</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">OWLSameAs</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">sameIndividual</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">allDifferent</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">enumeratedClass</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">restrictionClass</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="OWLAllDifferent">OWLAllDifferent</a>:
+        <span class="sel">OWLDistinctMembers</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="OWLDataRange">OWLDataRange</a>:
+        <span class="sel">datatype</span>::<span class="meta">any</span> <span class="sel">OWLOneOf</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">someValuesFromRestrictionClass</span>::<span class="meta">any</span> <span class="sel">allValuesFromRestrictionClass</span>::<span class="meta">any</span>
+</pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
+Last updated: 09/04/2013.</div></body></html>

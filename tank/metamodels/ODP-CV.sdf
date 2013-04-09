@@ -1,0 +1,75 @@
+module Main
+
+exports
+  sorts
+        EnvironmentContract ComputationalTemplate ComputationalObject BindingObject ComputationalObjectTemplate ComputationalInterfaceTemplate Interface Binding SignalInterface OperationInterface StreamInterface InterfaceSignature SignalInterfaceSignature OperationInterfaceSignature StreamInterfaceSignature InteractionSignature Parameter AnnouncementSignature InterrogationSignature TerminationSignature SignalSignature FlowSignature ActionTemplate Behaviour Action State InternalAction Interaction Flow Signal Operation Announcement Interrogation Invocation Termination 
+  context-free syntax
+        ec_to_a::ANY+ specifier_ec::ANY -> EnvironmentContract
+
+         -> ComputationalTemplate
+
+        co_to_i::ANY+ co_to_bh::ANY specifier_co::ANY co_to_st::ANY -> ComputationalObject
+
+         -> BindingObject
+
+        cot_to_co::ANY+ part_provide::ANY+ part_request::ANY+ -> ComputationalObjectTemplate
+
+        cit_to_i::ANY+ aggregate_provide::ANY+ aggregate_request::ANY+ cit_to_intsig::ANY -> ComputationalInterfaceTemplate
+
+         -> Interface
+
+        bd_to_i::ANY -> Binding
+
+         -> SignalInterface
+
+         -> OperationInterface
+
+         -> StreamInterface
+
+         -> InterfaceSignature
+
+        sgisig_to_ssig::ANY+ -> SignalInterfaceSignature
+
+        optisig_to_ansig::ANY+ optisig_to_intsig::ANY+ -> OperationInterfaceSignature
+
+        strisig_to_fsig::ANY+ -> StreamInterfaceSignature
+
+         -> InteractionSignature
+
+        param_to_isig::ANY -> Parameter
+
+        ansig_to_optisig::ANY -> AnnouncementSignature
+
+        intsig_to_optisig::ANY intsig_to_tersig::ANY+ -> InterrogationSignature
+
+        tersig_to_intsig::ANY -> TerminationSignature
+
+        ssig_to_sgisig::ANY -> SignalSignature
+
+        fsig_to_strisig::ANY -> FlowSignature
+
+        at_to_a::ANY+ at_to_isig::ANY -> ActionTemplate
+
+        specifier_bh::ANY owner_bh::ANY bh_to_a::ANY+ -> Behaviour
+
+        constrainer_ec::ANY+ changedState::ANY+ specifier_a::ANY a_to_bh::ANY -> Action
+
+        startState::ANY endState::ANY changer::ANY+ st_to_co::ANY -> State
+
+         -> InternalAction
+
+         -> Interaction
+
+         -> Flow
+
+         -> Signal
+
+         -> Operation
+
+         -> Announcement
+
+        int_to_ter::ANY -> Interrogation
+
+        inv_to_ter::ANY inv_to_opt::ANY -> Invocation
+
+        owner_ter::ANY ter_to_inv::ANY -> Termination

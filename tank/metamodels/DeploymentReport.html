@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:bgf="http://planet-sl.org/bgf" xmlns:xbgf="http://planet-sl.org/xbgf" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Browsable System Definition Model DeploymentReport 0.1 Grammar</title><link href="/slps.css" rel="stylesheet" type="text/css"></link><script type="text/javascript">
+
+				  var _gaq = _gaq || [];
+				  _gaq.push(['_setAccount', 'UA-3743366-7']);
+				  _gaq.push(['_setDomainName', 'github.com']);
+				  _gaq.push(['_trackPageview']);
+
+				  (function() {
+				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				  })();
+
+				</script></head><body><h1 class="l">Browsable System Definition Model DeploymentReport 0.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Albin Jossic, <code>DeploymentReport.ecore</code>, 2005/07/05.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>40</strong></li><li>Number of top alternatives: <strong>58</strong></li><li>Number of defined nonterminal symbols: <strong>40</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>40</strong>: <code><a href="#DeploymentReport" class="nt">DeploymentReport</a>, <a href="#DeploymentImport" class="nt">DeploymentImport</a>, <a href="#ImportNamespaceIdentity" class="nt">ImportNamespaceIdentity</a>, <a href="#NamespaceIdentity" class="nt">NamespaceIdentity</a>, <a href="#Applications" class="nt">Applications</a>, <a href="#LogicalServers" class="nt">LogicalServers</a>, <a href="#OuterSystem" class="nt">OuterSystem</a>, <a href="#Binding" class="nt">Binding</a>, <a href="#Zone" class="nt">Zone</a>, <a href="#ReportObject" class="nt">ReportObject</a>, <a href="#SequenceReport" class="nt">SequenceReport</a>, <a href="#BoundLogicalServer" class="nt">BoundLogicalServer</a>, <a href="#LogicalServer" class="nt">LogicalServer</a>, <a href="#Application" class="nt">Application</a>, <a href="#ReportSystem" class="nt">ReportSystem</a>, <a href="#ReportResource" class="nt">ReportResource</a>, <a href="#ReportEndpoint" class="nt">ReportEndpoint</a>, <a href="#Setting" class="nt">Setting</a>, <a href="#SettingFacet" class="nt">SettingFacet</a>, <a href="#SettingInstanceValue" class="nt">SettingInstanceValue</a>, <a href="#SettingAttributes" class="nt">SettingAttributes</a>, <a href="#SettingValue" class="nt">SettingValue</a>, <a href="#ErrorCollection" class="nt">ErrorCollection</a>, <a href="#DocumentError" class="nt">DocumentError</a>, <a href="#DocumentResolutionError" class="nt">DocumentResolutionError</a>, <a href="#DocumentConstraintError" class="nt">DocumentConstraintError</a>, <a href="#FailedInput" class="nt">FailedInput</a>, <a href="#Description" class="nt">Description</a>, <a href="#Guid" class="nt">Guid</a>, <a href="#SimpleName" class="nt">SimpleName</a>, <a href="#Path" class="nt">Path</a>, <a href="#FourPartVersionType" class="nt">FourPartVersionType</a>, <a href="#PublicKeyType" class="nt">PublicKeyType</a>, <a href="#PublicKeyTokenType" class="nt">PublicKeyTokenType</a>, <a href="#Culture" class="nt">Culture</a>, <a href="#CultureNeutral" class="nt">CultureNeutral</a>, <a href="#ProcessorArchitectures" class="nt">ProcessorArchitectures</a>, <a href="#Platform" class="nt">Platform</a>, <a href="#SettingState" class="nt">SettingState</a>, <a href="#Element" class="nt">Element</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="DeploymentReport">DeploymentReport</a>:
+        <span class="sel">import</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">applications</span>::<span class="meta">any</span> <span class="sel">binding</span>::<span class="meta">any</span> <span class="sel">logicalServers</span>::<span class="meta">any</span> <span class="sel">errors</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="DeploymentImport">DeploymentImport</a>:
+        <span class="sel">alias</span>::<span class="meta">any</span> <span class="sel">identity</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ImportNamespaceIdentity">ImportNamespaceIdentity</a>:
+        <span class="sel">import</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="NamespaceIdentity">NamespaceIdentity</a>:
+        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">version</span>::<span class="meta">any</span> <span class="sel">publicKey</span>::<span class="meta">any</span> <span class="sel">publicKeyToken</span>::<span class="meta">any</span> <span class="sel">culture</span>::<span class="meta">any</span> <span class="sel">platform</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Applications">Applications</a>:
+        <span class="sel">system</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">application</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="LogicalServers">LogicalServers</a>:
+        <span class="sel">zone</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">logicalServer</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="OuterSystem">OuterSystem</a>:
+        <span class="sel">system</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">application</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">name</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Binding">Binding</a>:
+        <span class="sel">zone</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">boundLogicalServer</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Zone">Zone</a>:
+        <span class="sel">zone</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">boundLogicalServer</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">logicalServer</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">name</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ReportObject">ReportObject</a>:
+        <span class="sel">sequence</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">definition</span>::<span class="meta">any</span> <span class="sel">extends</span>::<span class="meta">any</span> <span class="sel">instanceId</span>::<span class="meta">any</span> <span class="sel">hostedOn</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SequenceReport">SequenceReport</a>:
+        <span class="sel">report</span>::<span class="meta">any</span> <span class="sel">setting</span>::<span class="meta">any</span> <span class="sel">system</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">resource</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">endpoint</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="BoundLogicalServer">BoundLogicalServer</a>:
+        <span class="sel">setting</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">application</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">definition</span>::<span class="meta">any</span> <span class="sel">extends</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="LogicalServer">LogicalServer</a>:
+        ε
+</pre><pre><a class="nt" name="Application">Application</a>:
+        ε
+</pre><pre><a class="nt" name="ReportSystem">ReportSystem</a>:
+        ε
+</pre><pre><a class="nt" name="ReportResource">ReportResource</a>:
+        ε
+</pre><pre><a class="nt" name="ReportEndpoint">ReportEndpoint</a>:
+        ε
+</pre><pre><a class="nt" name="Setting">Setting</a>:
+        <span class="sel">value</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">facet</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">settingAttributes</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SettingFacet">SettingFacet</a>:
+        <span class="sel">value</span>::<span class="meta">any</span> <span class="sel">settingAttributes</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SettingInstanceValue">SettingInstanceValue</a>:
+        <span class="sel">contents</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">null</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SettingAttributes">SettingAttributes</a>:
+        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">definition</span>::<span class="meta">any</span> <span class="sel">state</span>::<span class="meta">any</span> <span class="sel">fixed</span>::<span class="meta">any</span> <span class="sel">list</span>::<span class="meta">any</span> <span class="sel">null</span>::<span class="meta">any</span> <span class="sel">secure</span>::<span class="meta">any</span> <span class="sel">failedToSerialize</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SettingValue">SettingValue</a>:
+        <span class="sel">contents</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">Null</span>::<span class="meta">any</span> <span class="sel">Secure</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ErrorCollection">ErrorCollection</a>:
+        <span class="sel">documentError</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">documentResolutionError</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">documentConstraintError</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="DocumentError">DocumentError</a>:
+        <span class="sel">description</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">Code</span>::<span class="meta">any</span> <span class="sel">Level</span>::<span class="meta">any</span> <span class="sel">File</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="DocumentResolutionError">DocumentResolutionError</a>:
+        <span class="sel">Statement</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="DocumentConstraintError">DocumentConstraintError</a>:
+        <span class="sel">failedInput</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">constraintMember</span>::<span class="meta">any</span> <span class="sel">constraintDefinition</span>::<span class="meta">any</span> <span class="sel">targetInstancePath</span>::<span class="meta">any</span> <span class="sel">ownerInstancePath</span>::<span class="meta">any</span> <span class="sel">constraintErrorCode</span>::<span class="meta">any</span> <span class="sel">constraintErrorMessage</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="FailedInput">FailedInput</a>:
+        <span class="sel">contents</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Description">Description</a>:
+        <span class="sel">contents</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Guid">Guid</a>:
+        ε
+</pre><pre><a class="nt" name="SimpleName">SimpleName</a>:
+        ε
+</pre><pre><a class="nt" name="Path">Path</a>:
+        ε
+</pre><pre><a class="nt" name="FourPartVersionType">FourPartVersionType</a>:
+        ε
+</pre><pre><a class="nt" name="PublicKeyType">PublicKeyType</a>:
+        ε
+</pre><pre><a class="nt" name="PublicKeyTokenType">PublicKeyTokenType</a>:
+        ε
+</pre><pre><a class="nt" name="Culture">Culture</a>:
+        ε
+</pre><pre><a class="nt" name="CultureNeutral">CultureNeutral</a>:
+        ε
+</pre><pre><a class="nt" name="ProcessorArchitectures">ProcessorArchitectures</a>:
+        <span class="sel">x86</span>::ε
+        <span class="sel">ia64</span>::ε
+        <span class="sel">amd64</span>::ε
+        <span class="sel">wow64</span>::ε
+        <span class="sel">msil</span>::ε
+        <span class="sel">shx</span>::ε
+        <span class="sel">arm</span>::ε
+        <span class="sel">data</span>::ε
+</pre><pre><a class="nt" name="Platform">Platform</a>:
+        <span class="sel">x86</span>::ε
+        <span class="sel">ia64</span>::ε
+        <span class="sel">amd64</span>::ε
+        <span class="sel">wow64</span>::ε
+        <span class="sel">msil</span>::ε
+        <span class="sel">shx</span>::ε
+        <span class="sel">arm</span>::ε
+        <span class="sel">data</span>::ε
+        <span class="sel">*</span>::ε
+        <span class="sel">neutral</span>::ε
+</pre><pre><a class="nt" name="SettingState">SettingState</a>:
+        <span class="sel">Set</span>::ε
+        <span class="sel">NotSet</span>::ε
+        <span class="sel">Error</span>::ε
+</pre><pre><a class="nt" name="Element">Element</a>:
+        <span class="sel">value</span>::<span class="meta">any</span>
+</pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
+Last updated: 09/04/2013.</div></body></html>

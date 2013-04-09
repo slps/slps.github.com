@@ -1,0 +1,27 @@
+module Main
+
+exports
+  sorts
+        InvariantSchema InformationObjectTemplate InformationObjectType InformationObject State StateChange DynamicSchema StaticSchema Action ActionType ActionTemplate 
+  context-free syntax
+        constrainer_AT::ANY+ constrainer_ATy::ANY+ constrainer_SC::ANY+ constrainer_S::ANY+ constrainer_IOT::ANY+ constrainer_IOTy::ANY+ -> InvariantSchema
+
+        IOT_IO::ANY+ IOT_constrainer::ANY+ -> InformationObjectTemplate
+
+        IOTy_IO::ANY+ IOTy_constrainer::ANY+ -> InformationObjectType
+
+        describer::ANY+ IO_IOT::ANY+ IO_IOTy::ANY+ IO_A::ANY+ IO_S::ANY -> InformationObject
+
+        change::ANY causeSC::ANY S_IO::ANY S_constrainer::ANY+ -> State
+
+        startState::ANY endState::ANY specifier::ANY+ cause::ANY+ SC_constrainer::ANY+ -> StateChange
+
+        dsStateChange::ANY+ -> DynamicSchema
+
+        locationTime::ANY SS_IO::ANY+ -> StaticSchema
+
+        effect::ANY+ A_AT::ANY+ participant::ANY+ A_ATy::ANY+ -> Action
+
+        ATy_A::ANY+ ATy_constrainer::ANY+ -> ActionType
+
+        AT_A::ANY+ AT_constrainer::ANY+ -> ActionTemplate

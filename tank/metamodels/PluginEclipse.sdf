@@ -1,0 +1,39 @@
+module Main
+
+exports
+  sorts
+        LocatedElement Resolution Visibility Eclipse Bundle RequireBundleAttribute AttResolution AttVisibility Range Version RequiredBundle ImportedPackage ExportedPackage Package Xfriends Xinternal 
+  context-free syntax
+         -> LocatedElement
+
+        Mandatory:: -> Resolution
+        Optional:: -> Resolution
+
+        Private:: -> Visibility
+        Reexport:: -> Visibility
+
+        bundles::ANY+ packages::ANY+ -> Eclipse
+
+        symbolicName::ANY singleton::ANY manifestVersion::ANY require::ANY+ version::ANY export::ANY+ import::ANY+ packages::ANY+ -> Bundle
+
+         -> RequireBundleAttribute
+
+        value::ANY -> AttResolution
+
+        value::ANY -> AttVisibility
+
+        isLeftInclusive::ANY isRightInclusive::ANY lowerBound::ANY upperBound::ANY -> Range
+
+        major::ANY minor::ANY micro::ANY qualification::ANY -> Version
+
+        requireBundleAttribute::ANY+ bundle::ANY -> RequiredBundle
+
+        resolution::ANY package::ANY range::ANY -> ImportedPackage
+
+        package::ANY version::ANY xFriends::ANY -> ExportedPackage
+
+        fqn::ANY importedBy::ANY+ exportedBy::ANY -> Package
+
+        bundles::ANY+ -> Xfriends
+
+        value::ANY -> Xinternal

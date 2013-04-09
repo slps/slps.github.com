@@ -1,0 +1,98 @@
+module Main
+
+exports
+  sorts
+        Matlab BlockDefaults Model AnnotationDefaults LineDefaults System Subsystem Block Annotation Line DirectLine InputPort Branch BranchedLine Primitive Port Reference Masked Normal Parameter OutputPort Type Double INteger Enumeration BOolean TrueFalse Text Vector DirectBranch NestedBranch Machine Junction Transition Event Data Instance Target Chart State Props Range Array StateFlow TransitionTerminal Simulink 
+  context-free syntax
+        model::ANY+ -> Matlab
+
+        blockDefaults::ANY model::ANY -> BlockDefaults
+
+        name::ANY matlab::ANY annotationDefaults::ANY+ system::ANY+ blockDefaults::ANY+ lineDefaults::ANY+ simulink::ANY -> Model
+
+        annotationDefaults::ANY model::ANY -> AnnotationDefaults
+
+        lineDefaults::ANY model::ANY -> LineDefaults
+
+        name::ANY blocks::ANY+ lines::ANY+ annotations::ANY+ model::ANY parentSubsystem::ANY -> System
+
+        system::ANY -> Subsystem
+
+        name::ANY blockType::ANY description::ANY priority::ANY tag::ANY position::ANY mySystem::ANY ports::ANY+ -> Block
+
+        position::ANY text::ANY system::ANY -> Annotation
+
+        points::ANY id::ANY srcPort::ANY system::ANY -> Line
+
+        destPort1::ANY -> DirectLine
+
+        owningDirectLine::ANY owningDirectBranch::ANY -> InputPort
+
+        points::ANY branchedLine::ANY nestedBranch::ANY -> Branch
+
+        branchs::ANY+ -> BranchedLine
+
+        id::ANY parameters::ANY+ refPort::ANY -> Primitive
+
+        id::ANY number::ANY portBlock::ANY primitive::ANY -> Port
+
+        sourceType::ANY sourceBlock::ANY parameters::ANY+ -> Reference
+
+         -> Masked
+
+         -> Normal
+
+        name::ANY le_reference::ANY primitive::ANY -> Parameter
+
+        owningLine::ANY -> OutputPort
+
+        value::ANY -> Type
+
+        value::ANY -> Double
+
+        value::ANY -> INteger
+
+        value::ANY -> Enumeration
+
+        value::ANY -> BOolean
+
+        True:: -> TrueFalse
+        False:: -> TrueFalse
+
+        value::ANY -> Text
+
+        value::ANY -> Vector
+
+        id::ANY destPort::ANY -> DirectBranch
+
+        branchs::ANY+ -> NestedBranch
+
+        name::ANY id::ANY events::ANY+ data::ANY+ instances::ANY+ targets::ANY+ stateFlow::ANY -> Machine
+
+        _id::ANY id::ANY type::ANY position::ANY state::ANY chart::ANY -> Junction
+
+        _id::ANY dataLimites::ANY id::ANY trigger::ANY condition::ANY conditionAction::ANY action::ANY chart::ANY state::ANY -> Transition
+
+        name::ANY id::ANY scope::ANY description::ANY trigger::ANY machine::ANY chart::ANY state::ANY -> Event
+
+        name::ANY id::ANY scope::ANY description::ANY units::ANY dataType::ANY props::ANY+ state::ANY chart::ANY machine::ANY -> Data
+
+        _id::ANY id::ANY name::ANY machine::ANY -> Instance
+
+        name::ANY id::ANY codeCommand::ANY description::ANY makeCommand::ANY codeFlags::ANY checksumOld::ANY machine::ANY -> Target
+
+        name::ANY id::ANY _id::ANY decomposotion::ANY updateMethode::ANY sampleTime::ANY junctions::ANY+ events::ANY+ transitions::ANY+ data::ANY+ states::ANY+ -> Chart
+
+        name::ANY id::ANY _id::ANY type::ANY entryAction::ANY exitAction::ANY duringAction::ANY eventActions::ANY decomposition::ANY position::ANY junctions::ANY+ events::ANY+ transitions::ANY+ data::ANY+ chart::ANY states::ANY+ -> State
+
+        initialValue::ANY arrays::ANY+ ranges::ANY+ data::ANY -> Props
+
+        maximum::ANY minimum::ANY props::ANY -> Range
+
+        firstIndex::ANY size::ANY props::ANY -> Array
+
+        stateFlow::ANY machines::ANY+ simulink::ANY -> StateFlow
+
+        _id::ANY -> TransitionTerminal
+
+        simulink::ANY stateFlows::ANY+ models::ANY+ -> Simulink

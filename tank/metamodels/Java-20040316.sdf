@@ -1,0 +1,23 @@
+module Main
+
+exports
+  sorts
+        JavaElement ClassFeature ClassMember Field JavaClass Method Package PrimitiveType FeatureParameter 
+  context-free syntax
+         -> JavaElement
+
+         -> ClassFeature
+
+         -> ClassMember
+
+        owner::ANY type::ANY isStatic::ANY isPublic::ANY -> Field
+
+        members::ANY+ package::ANY typedElements::ANY+ parameters::ANY+ isAbstract::ANY isStatic::ANY isPublic::ANY -> JavaClass
+
+        parameters::ANY+ -> Method
+
+        classes::ANY+ -> Package
+
+         -> PrimitiveType
+
+        type::ANY method::ANY -> FeatureParameter

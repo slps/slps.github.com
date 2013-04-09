@@ -1,0 +1,163 @@
+module Main
+
+exports
+  sorts
+        AssociationDirectionKind OrientationKind AccessLevelKind ProcessTypeKind StatusKind AdHocOrderingKind ModeKind GatewayTypeKind ExecutionKind TriggerKind ImplementationKind Element Package MessageFlow Association Pool Lane Participant Artifact DataObject Group Annotation TypeDeclaration Application ParametrizedApplication ReferencedApplication Activity Task TaskService TaskReceive TaskManual TaskReference TaskScript TaskSend TaskUser TaskApplication Route SubFlow BlockActivity Event Trigger ResultCompensation ResultError ResultMultiple TriggerResultLink TriggerResultMessage TriggerIntermediateMultiple TriggerMultiple TriggerRule TriggerTimer StartEvent IntermediateEvent EndEvent Gateway Process Transition ActivitySet ExternalReference Object ExternalPackage Category DataField Script 
+  context-free syntax
+        None:: -> AssociationDirectionKind
+        To:: -> AssociationDirectionKind
+        From:: -> AssociationDirectionKind
+        Both:: -> AssociationDirectionKind
+
+        Horizontal:: -> OrientationKind
+        Vertical:: -> OrientationKind
+
+        Public:: -> AccessLevelKind
+        Private:: -> AccessLevelKind
+
+        None:: -> ProcessTypeKind
+        Private:: -> ProcessTypeKind
+        Abstract:: -> ProcessTypeKind
+        Collaboration:: -> ProcessTypeKind
+
+        None:: -> StatusKind
+        Ready:: -> StatusKind
+        Active:: -> StatusKind
+        Cancelled:: -> StatusKind
+        Aborting:: -> StatusKind
+        Aborted:: -> StatusKind
+        Completing:: -> StatusKind
+        Completed:: -> StatusKind
+
+        Sequential:: -> AdHocOrderingKind
+        Parallel:: -> AdHocOrderingKind
+
+        Automatic:: -> ModeKind
+        Manual:: -> ModeKind
+
+        Xor:: -> GatewayTypeKind
+        Or:: -> GatewayTypeKind
+        Complex:: -> GatewayTypeKind
+        And:: -> GatewayTypeKind
+
+        Asynchr:: -> ExecutionKind
+        Synchr:: -> ExecutionKind
+
+        None:: -> TriggerKind
+        Message:: -> TriggerKind
+        Timer:: -> TriggerKind
+        Rule:: -> TriggerKind
+        Link:: -> TriggerKind
+        Error:: -> TriggerKind
+        Cancel:: -> TriggerKind
+        Compensation:: -> TriggerKind
+        Terminate:: -> TriggerKind
+        Multiple:: -> TriggerKind
+
+        WebService:: -> ImplementationKind
+        Other:: -> ImplementationKind
+        Unspecified:: -> ImplementationKind
+
+         -> Element
+
+        script::ANY externalPackages::ANY+ typeDeclarations::ANY+ participants::ANY+ applications::ANY+ dataFields::ANY+ pools::ANY+ messageFlows::ANY+ associations::ANY+ artifacts::ANY+ workflowProcesses::ANY+ -> Package
+
+        targetActivity::ANY sourceActivity::ANY targetPool::ANY sourcePool::ANY object::ANY -> MessageFlow
+
+        associationDirection::ANY targetArtifact::ANY sourceArtifact::ANY targetPool::ANY sourcePool::ANY targetActivity::ANY sourceActivity::ANY object::ANY -> Association
+
+        orientation::ANY boundaryVisible::ANY lanes::ANY+ object::ANY participant::ANY process::ANY -> Pool
+
+        object::ANY parentLane::ANY parentPool::ANY -> Lane
+
+        id::ANY name::ANY -> Participant
+
+        textAnnotation::ANY group::ANY object::ANY dataObject::ANY -> Artifact
+
+        state::ANY requiredForStart::ANY producedAtCompletion::ANY dataFields::ANY+ -> DataObject
+
+         -> Group
+
+         -> Annotation
+
+        id::ANY name::ANY -> TypeDeclaration
+
+        id::ANY name::ANY -> Application
+
+         -> ParametrizedApplication
+
+        externalReference::ANY -> ReferencedApplication
+
+        isStartActivity::ANY status::ANY startMode::ANY finishMode::ANY startQuantity::ANY isATransaction::ANY dataFields::ANY+ object::ANY -> Activity
+
+         -> Task
+
+        implementation::ANY -> TaskService
+
+        instantiate::ANY implementation::ANY -> TaskReceive
+
+         -> TaskManual
+
+        taskRef::ANY -> TaskReference
+
+        script::ANY -> TaskScript
+
+        implementation::ANY -> TaskSend
+
+        implementation::ANY -> TaskUser
+
+        packageRef::ANY -> TaskApplication
+
+        gatewayType::ANY instantiate::ANY markerVisiable::ANY -> Route
+
+        execution::ANY instanceDataField::ANY packageRef::ANY startActivitySet::ANY startActivity::ANY -> SubFlow
+
+        activitySet::ANY startActivity::ANY -> BlockActivity
+
+         -> Event
+
+         -> Trigger
+
+        activity::ANY -> ResultCompensation
+
+        errorCode::ANY -> ResultError
+
+         -> ResultMultiple
+
+        processRef::ANY -> TriggerResultLink
+
+         -> TriggerResultMessage
+
+         -> TriggerIntermediateMultiple
+
+         -> TriggerMultiple
+
+        ruleName::ANY -> TriggerRule
+
+        timeDate::ANY timeCycle::ANY -> TriggerTimer
+
+        triggerKind::ANY implementation::ANY trigger::ANY -> StartEvent
+
+        target::ANY -> IntermediateEvent
+
+        triggerKind::ANY implementation::ANY trigger::ANY -> EndEvent
+
+         -> Gateway
+
+        accessLevel::ANY processType::ANY status::ANY suppressJoinFailure::ANY enableInstanceCompensation::ANY adHoc::ANY adHocOrdering::ANY adHocCompletionCondition::ANY participant::ANY+ applications::ANY+ dataField::ANY activitySets::ANY+ activities::ANY+ transitions::ANY+ object::ANY defaultStartActivitySet::ANY defaultStartActivity::ANY -> Process
+
+        quantity::ANY object::ANY to::ANY from::ANY -> Transition
+
+        adHoc::ANY adHocOrdering::ANY adHocCompletionCondition::ANY defaultStartActivity::ANY activities::ANY+ transitions::ANY+ object::ANY -> ActivitySet
+
+        xref::ANY location::ANY namespace::ANY -> ExternalReference
+
+        categories::ANY+ -> Object
+
+        href::ANY -> ExternalPackage
+
+        id::ANY name::ANY -> Category
+
+        isArray::ANY correlation::ANY dataType::ANY -> DataField
+
+        type::ANY version::ANY grammar::ANY -> Script

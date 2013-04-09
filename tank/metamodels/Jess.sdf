@@ -1,0 +1,88 @@
+module Main
+
+exports
+  sorts
+        LocatedElement Root Expression Integ Floa Str Ident ValidIdentifier SlotName JessVariable TemplateExpression SlotOp DefinitionExp GlobalDefinition VarDefinition FunctionDefinition AdviceDefinition UnDefAdvice FactDefinition RuleDefinition DeclareRule ModuleDefinition QueryDefinition DeclareVar TemplateDefinition DeclareBloc ASlotDef SlotDef MultiSlotDef SlotOptions UseFuncExp WhileExp ForExp ForeachExp FuncCall EngineExp ExitExp IfExpression ConditionAction ElifConditionAction Advice 
+  context-free syntax
+         -> LocatedElement
+
+        expressions::ANY+ -> Root
+
+         -> Expression
+
+        val::ANY -> Integ
+
+        val::ANY -> Floa
+
+        val::ANY -> Str
+
+         -> Ident
+
+        val::ANY -> ValidIdentifier
+
+        val::ANY -> SlotName
+
+        val::ANY -> JessVariable
+
+        templateName::ANY firstSlot::ANY slotOp::ANY+ -> TemplateExpression
+
+        slotIdent::ANY operator::ANY exp::ANY -> SlotOp
+
+         -> DefinitionExp
+
+        varDef::ANY+ -> GlobalDefinition
+
+        jessVar::ANY eq::ANY expression::ANY -> VarDefinition
+
+        funcName::ANY parameters::ANY+ expressions::ANY+ -> FunctionDefinition
+
+        direction::ANY op::ANY advice::ANY+ -> AdviceDefinition
+
+        op::ANY -> UnDefAdvice
+
+        factName::ANY documentation::ANY fact::ANY+ -> FactDefinition
+
+        ruleName::ANY documentation::ANY declare::ANY conditions::ANY+ functionCall::ANY+ -> RuleDefinition
+
+        salience::ANY nodeIndexHash::ANY autoFocus::ANY noLoop::ANY -> DeclareRule
+
+        moduleName::ANY documentation::ANY -> ModuleDefinition
+
+        queryName::ANY documentation::ANY declare::ANY expressions::ANY+ -> QueryDefinition
+
+        var::ANY+ node::ANY max::ANY -> DeclareVar
+
+        templateName::ANY inherits::ANY+ documentation::ANY declareBloc::ANY slotDef::ANY+ -> TemplateDefinition
+
+        slotSpecific::ANY backchainReaction::ANY fromClass::ANY includeVariable::ANY order::ANY -> DeclareBloc
+
+        slotName::ANY optionals::ANY+ -> ASlotDef
+
+         -> SlotDef
+
+         -> MultiSlotDef
+
+        type::ANY def::ANY defaultDyn::ANY allowedValues::ANY+ -> SlotOptions
+
+         -> UseFuncExp
+
+        hasDo::ANY boolExp::ANY actions::ANY+ -> WhileExp
+
+        initializer::ANY condition::ANY increment::ANY expressions::ANY+ -> ForExp
+
+        var::ANY list::ANY expressions::ANY+ -> ForeachExp
+
+        funcName::ANY funcParam::ANY+ -> FuncCall
+
+         -> EngineExp
+
+         -> ExitExp
+
+        ifthen::ANY elifthen::ANY+ else::ANY+ -> IfExpression
+
+        condition::ANY actions::ANY+ -> ConditionAction
+
+        condAct::ANY -> ElifConditionAction
+
+        before:: -> Advice
+        after:: -> Advice

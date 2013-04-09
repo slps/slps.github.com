@@ -1,0 +1,112 @@
+module Main
+
+exports
+  sorts
+        ErrorType SeverityType StatusType OperatingSystemType PriorityType ReportedPlatformType ResolutionType BugzillaRoot Bug StringElt Keywords Dependson Blocks Cc LongDesc Attachment 
+  context-free syntax
+        et_null:: -> ErrorType
+        et_NotFound:: -> ErrorType
+        et_NotPermitted:: -> ErrorType
+        et_InvalidBugId:: -> ErrorType
+
+        st_null:: -> SeverityType
+        st_blocker:: -> SeverityType
+        st_critical:: -> SeverityType
+        st_major:: -> SeverityType
+        st_normal:: -> SeverityType
+        st_minor:: -> SeverityType
+        st_trivial:: -> SeverityType
+        st_enhancement:: -> SeverityType
+
+        st_null:: -> StatusType
+        st_UNCONFIRMED:: -> StatusType
+        st_NEW:: -> StatusType
+        st_ASSIGNED:: -> StatusType
+        st_REOPENED:: -> StatusType
+        st_RESOLVED:: -> StatusType
+        st_VERIFIED:: -> StatusType
+        st_CLOSED:: -> StatusType
+
+        ost_null:: -> OperatingSystemType
+        ost_all:: -> OperatingSystemType
+        ost_Windows 3.1:: -> OperatingSystemType
+        ost_Windows 95:: -> OperatingSystemType
+        ost_Windows 98:: -> OperatingSystemType
+        ost_Windows ME:: -> OperatingSystemType
+        ost_Windows 2000:: -> OperatingSystemType
+        ost_Windows NT:: -> OperatingSystemType
+        ost_Windows XP:: -> OperatingSystemType
+        ost_Windows Vista:: -> OperatingSystemType
+        ost_Windows Server 2003:: -> OperatingSystemType
+        ost_MacSystem 7:: -> OperatingSystemType
+        ost_MacSystem 7.5:: -> OperatingSystemType
+        ost_MacSystem 7.6.1:: -> OperatingSystemType
+        ost_MacSystem 8.0:: -> OperatingSystemType
+        ost_MacSystem 8.5:: -> OperatingSystemType
+        ost_MacSystem 8.6:: -> OperatingSystemType
+        ost_MacSystem 9.x:: -> OperatingSystemType
+        ost_Mac OS X 10.0:: -> OperatingSystemType
+        ost_Mac OS X 10.1:: -> OperatingSystemType
+        ost_Mac OS X 10.2:: -> OperatingSystemType
+        ost_Mac OS X 10.3:: -> OperatingSystemType
+        ost_Linux:: -> OperatingSystemType
+        ost_BDS/OS:: -> OperatingSystemType
+        ost_FreeBSD:: -> OperatingSystemType
+        ost_NetBSD:: -> OperatingSystemType
+        ost_OpenBSD:: -> OperatingSystemType
+        ost_AIX:: -> OperatingSystemType
+        ost_BeOS:: -> OperatingSystemType
+        ost_HP-UX:: -> OperatingSystemType
+        ost_IRIX:: -> OperatingSystemType
+        ost_Neutrino:: -> OperatingSystemType
+        ost_OpenVMS:: -> OperatingSystemType
+        ost_OS/2:: -> OperatingSystemType
+        ost_OSF/1:: -> OperatingSystemType
+        ost_Solaris:: -> OperatingSystemType
+        ost_SunOS:: -> OperatingSystemType
+        ost_other:: -> OperatingSystemType
+
+        pt_null:: -> PriorityType
+        pt_P1:: -> PriorityType
+        pt_P2:: -> PriorityType
+        pt_P3:: -> PriorityType
+        pt_P4:: -> PriorityType
+        pt_P5:: -> PriorityType
+
+        rpt_null:: -> ReportedPlatformType
+        rpt_all:: -> ReportedPlatformType
+        rpt_DEC:: -> ReportedPlatformType
+        rpt_HP:: -> ReportedPlatformType
+        rpt_Macintosh:: -> ReportedPlatformType
+        rpt_PC:: -> ReportedPlatformType
+        rpt_SGI:: -> ReportedPlatformType
+        rpt_Sun:: -> ReportedPlatformType
+        rpt_other:: -> ReportedPlatformType
+
+        rt_null:: -> ResolutionType
+        rt_FIXED:: -> ResolutionType
+        rt_INVALID:: -> ResolutionType
+        rt_WONTFIX:: -> ResolutionType
+        rt_LATER:: -> ResolutionType
+        rt_REMIND:: -> ResolutionType
+        rt_DUPLICATE:: -> ResolutionType
+        rt_WORKSFORME:: -> ResolutionType
+        rt_MOVED:: -> ResolutionType
+
+        version::ANY urlbase::ANY maintainer::ANY exporter::ANY bugs::ANY+ -> BugzillaRoot
+
+        bug_bugzillaRoot::ANY error::ANY bug_id::ANY exporter::ANY urlbase::ANY bug_status::ANY resolution::ANY product::ANY priority::ANY version::ANY rep_platform::ANY assigned_to::ANY delta_ts::ANY component::ANY reporter::ANY target_milestone::ANY bug_severity::ANY creation_ts::ANY qa_contact::ANY status_whiteboard::ANY op_sys::ANY bug_file_loc::ANY short_desc::ANY keywords::ANY+ dependson::ANY+ blocks::ANY+ cc::ANY+ long_desc::ANY+ attachment::ANY+ -> Bug
+
+         -> StringElt
+
+        value::ANY -> Keywords
+
+        value::ANY -> Dependson
+
+        value::ANY -> Blocks
+
+        value::ANY -> Cc
+
+        isPrivate::ANY who::ANY bug_when::ANY thetext::ANY -> LongDesc
+
+        isObsolete::ANY isPatch::ANY isPrivate::ANY id::ANY date::ANY desc::ANY type::ANY data::ANY -> Attachment

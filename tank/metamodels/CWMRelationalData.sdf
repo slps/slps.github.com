@@ -1,0 +1,29 @@
+module Main
+
+exports
+  sorts
+        QueryExpression CheckConstraint Column ColumnSet NamedColumnSet QueryColumnSet Table View Trigger SQLDataType SQLDistinctType SQLSimpleType 
+  context-free syntax
+        expresssion::ANY -> QueryExpression
+
+        constraintElements::ANY+ constrainedElements::ANY+ -> CheckConstraint
+
+        precision::ANY scale::ANY isNullable::ANY length::ANY collectionName::ANY characterSetName::ANY column_constraints::ANY+ type::ANY owner::ANY optionScopeColumnSet::ANY -> Column
+
+        features::ANY+ -> ColumnSet
+
+        optionScopeColumn::ANY triggers::ANY+ -> NamedColumnSet
+
+        query::ANY -> QueryColumnSet
+
+        isTemporary::ANY temporaryScope::ANY isSystem::ANY table_constraints::ANY+ -> Table
+
+        isReadOnly::ANY checkOption::ANY queryExpression::ANY -> View
+
+        namedColumnSet::ANY -> Trigger
+
+        typeNumber::ANY structuralFeatures::ANY+ -> SQLDataType
+
+        length::ANY precision::ANY scale::ANY sqlSimpleType::ANY -> SQLDistinctType
+
+        characterMaximumLength::ANY characterOctetLength::ANY numericPrecision::ANY numericPrecisionRadix::ANY numericScale::ANY dateTimePrecision::ANY sqlDistinctTypes::ANY+ -> SQLSimpleType

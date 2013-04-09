@@ -1,0 +1,77 @@
+module Main
+
+exports
+  sorts
+        Activity ActivityType Artifact ArtifactsContainer Association BpmnDiagram DataObject DirectionType Graph Group Identifiable IdentifiableNode Lane MessagingEdge NamedBpmnObject Pool SequenceEdge SubProcess TextAnnotation Vertex 
+  context-free syntax
+        orderedMessages::ANY+ incomingMessages::ANY+ outgoingMessages::ANY+ groups::ANY+ activityType::ANY eventHandlerFor::ANY lane::ANY looping::ANY -> Activity
+
+        SubProcess:: -> ActivityType
+        EventEndMultiple:: -> ActivityType
+        EventEndMessage:: -> ActivityType
+        EventIntermediateMessage:: -> ActivityType
+        EventStartMultiple:: -> ActivityType
+        EventIntermediateMultiple:: -> ActivityType
+        GatewayParallel:: -> ActivityType
+        EventStartTimer:: -> ActivityType
+        EventStartEmpty:: -> ActivityType
+        EventIntermediateCancel:: -> ActivityType
+        EventEndError:: -> ActivityType
+        EventStartRule:: -> ActivityType
+        EventEndTerminate:: -> ActivityType
+        EventStartLink:: -> ActivityType
+        EventIntermediateLink:: -> ActivityType
+        EventEndCancel:: -> ActivityType
+        EventEndLink:: -> ActivityType
+        EventIntermediateEmpty:: -> ActivityType
+        EventIntermediateCompensation:: -> ActivityType
+        Task:: -> ActivityType
+        GatewayDataBasedExclusive:: -> ActivityType
+        GatewayComplex:: -> ActivityType
+        EventEndEmpty:: -> ActivityType
+        EventIntermediateError:: -> ActivityType
+        EventIntermediateTimer:: -> ActivityType
+        EventEndCompensation:: -> ActivityType
+        EventStartMessage:: -> ActivityType
+        GatewayDataBasedInclusive:: -> ActivityType
+        GatewayEventBasedExclusive:: -> ActivityType
+        EventIntermediateRule:: -> ActivityType
+
+        associations::ANY+ artifactsContainer::ANY -> Artifact
+
+        artifacts::ANY+ -> ArtifactsContainer
+
+        direction::ANY source::ANY target::ANY -> Association
+
+        pools::ANY+ messages::ANY+ author::ANY title::ANY -> BpmnDiagram
+
+         -> DataObject
+
+        Both:: -> DirectionType
+        From:: -> DirectionType
+        To:: -> DirectionType
+        None:: -> DirectionType
+
+        vertices::ANY+ sequenceEdges::ANY+ -> Graph
+
+        activities::ANY+ -> Group
+
+        iD::ANY -> Identifiable
+
+        associations::ANY+ -> IdentifiableNode
+
+        activities::ANY+ pool::ANY -> Lane
+
+        bpmnDiagram::ANY source::ANY target::ANY -> MessagingEdge
+
+        documentation::ANY name::ANY ncname::ANY -> NamedBpmnObject
+
+        lanes::ANY+ bpmnDiagram::ANY -> Pool
+
+        graph::ANY isDefault::ANY source::ANY target::ANY -> SequenceEdge
+
+        eventHandlers::ANY+ isTransaction::ANY -> SubProcess
+
+         -> TextAnnotation
+
+        outgoingEdges::ANY+ incomingEdges::ANY+ graph::ANY -> Vertex

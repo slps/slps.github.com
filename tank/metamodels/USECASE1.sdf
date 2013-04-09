@@ -1,0 +1,37 @@
+module Main
+
+exports
+  sorts
+        Task User Actor Goal UseCase Service Scenario Context PreCondition PostCondition Episode Event Action Responce Stimilus Parameter 
+  context-free syntax
+        service::ANY+ -> Task
+
+        useCase::ANY+ actor::ANY+ -> User
+
+        useCase::ANY+ goal::ANY+ user::ANY+ -> Actor
+
+        service::ANY+ actor::ANY+ -> Goal
+
+        context::ANY service::ANY+ user::ANY+ actor::ANY+ -> UseCase
+
+        useCase::ANY+ goal::ANY+ task::ANY+ -> Service
+
+         -> Scenario
+
+        preCondition::ANY+ postCondition::ANY+ useCase::ANY+ -> Context
+
+        context::ANY+ -> PreCondition
+
+        context::ANY+ -> PostCondition
+
+        event::ANY+ -> Episode
+
+        episode::ANY+ -> Event
+
+         -> Action
+
+        parameter::ANY+ -> Responce
+
+        parameter::ANY+ -> Stimilus
+
+        stimilus::ANY+ responce::ANY+ -> Parameter

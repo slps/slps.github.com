@@ -1,0 +1,57 @@
+module Main
+
+exports
+  sorts
+        RelationSchip ConstrainedRelationSchip Aggregation Composition Association Generalisation Dependency AssociationEnd Package Steriotype Class Constraint Operation Characteristic BusnissRule MetaData Source Domain DescriptiveAttribute Geometry Temporality VisualInfo Value RangeDomain EnumeratedDomain PerceptorySteriotype 
+  context-free syntax
+        affectCharacteristic::ANY+ constraint::ANY steriotype::ANY+ packages::ANY+ associatePackages::ANY -> RelationSchip
+
+         -> ConstrainedRelationSchip
+
+         -> Aggregation
+
+         -> Composition
+
+         -> Association
+
+         -> Generalisation
+
+         -> Dependency
+
+         -> AssociationEnd
+
+        steriotype::ANY children::ANY+ parent::ANY classes::ANY+ relationSchip::ANY+ connectedRelationSchip::ANY+ -> Package
+
+        descriptiveAttribute::ANY+ operations::ANY+ relationSchip::ANY+ theClass::ANY+ thePackage::ANY+ -> Steriotype
+
+        characteristic::ANY+ details::ANY operations::ANY myOperations::ANY+ constraint::ANY+ steriotype::ANY packages::ANY+ -> Class
+
+        caracteristic::ANY theClass::ANY relationSchip::ANY+ -> Constraint
+
+        detail::ANY inCharacteristic::ANY+ affectFeature::ANY+ steriotype::ANY behaviour::ANY -> Operation
+
+        details::ANY rule::ANY operations::ANY theClass::ANY relationSchip::ANY constraint::ANY -> Characteristic
+
+        characteristic::ANY -> BusnissRule
+
+        source::ANY characteristic::ANY operations::ANY theClass::ANY -> MetaData
+
+        metaData::ANY -> Source
+
+        descriptiveAttribute::ANY+ -> Domain
+
+        tempsDef::ANY specialDef::ANY steriotype::ANY domain::ANY -> DescriptiveAttribute
+
+        tempsDef::ANY descriptiveAttributeg::ANY -> Geometry
+
+        geometry::ANY descriptiveAttributet::ANY -> Temporality
+
+         -> VisualInfo
+
+        enumeratedDomain::ANY -> Value
+
+         -> RangeDomain
+
+        value::ANY+ -> EnumeratedDomain
+
+         -> PerceptorySteriotype

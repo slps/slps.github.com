@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:bgf="http://planet-sl.org/bgf" xmlns:xbgf="http://planet-sl.org/xbgf" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Browsable DOT 1.0 Grammar</title><link href="/slps.css" rel="stylesheet" type="text/css"></link><script type="text/javascript">
+
+				  var _gaq = _gaq || [];
+				  _gaq.push(['_setAccount', 'UA-3743366-7']);
+				  _gaq.push(['_setDomainName', 'github.com']);
+				  _gaq.push(['_trackPageview']);
+
+				  (function() {
+				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				  })();
+
+				</script></head><body><h1 class="l">Browsable DOT 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Jean PaliÃ?Â¨s, <code>DOT.ecore</code>, 2005/06/30.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>26</strong></li><li>Number of top alternatives: <strong>26</strong></li><li>Number of defined nonterminal symbols: <strong>26</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>26</strong>: <code><a href="#Label" class="nt">Label</a>, <a href="#SimpleLabel" class="nt">SimpleLabel</a>, <a href="#ComplexLabel" class="nt">ComplexLabel</a>, <a href="#Compartment" class="nt">Compartment</a>, <a href="#VerticalCompartment" class="nt">VerticalCompartment</a>, <a href="#HorizontalCompartment" class="nt">HorizontalCompartment</a>, <a href="#SimpleCompartment" class="nt">SimpleCompartment</a>, <a href="#Anchor" class="nt">Anchor</a>, <a href="#GraphElement" class="nt">GraphElement</a>, <a href="#Graph" class="nt">Graph</a>, <a href="#Layer" class="nt">Layer</a>, <a href="#Nodelike" class="nt">Nodelike</a>, <a href="#SubGraph" class="nt">SubGraph</a>, <a href="#Node" class="nt">Node</a>, <a href="#Arc" class="nt">Arc</a>, <a href="#DirectedArc" class="nt">DirectedArc</a>, <a href="#UndirectedArc" class="nt">UndirectedArc</a>, <a href="#Shape" class="nt">Shape</a>, <a href="#NodeShape" class="nt">NodeShape</a>, <a href="#SimpleNodeShape" class="nt">SimpleNodeShape</a>, <a href="#PointNodeShape" class="nt">PointNodeShape</a>, <a href="#ComplexNodeShape" class="nt">ComplexNodeShape</a>, <a href="#PolygonNodeShape" class="nt">PolygonNodeShape</a>, <a href="#MNodeShape" class="nt">MNodeShape</a>, <a href="#RecordNodeShape" class="nt">RecordNodeShape</a>, <a href="#ArrowShape" class="nt">ArrowShape</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Label">Label</a>:
+        ε
+</pre><pre><a class="nt" name="SimpleLabel">SimpleLabel</a>:
+        <span class="sel">content</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ComplexLabel">ComplexLabel</a>:
+        <span class="sel">compartments</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Compartment">Compartment</a>:
+        ε
+</pre><pre><a class="nt" name="VerticalCompartment">VerticalCompartment</a>:
+        <span class="sel">complexLabel</span>::<span class="meta">any</span> <span class="sel">compartments</span>::<span class="meta">any</span> <span class="sel">anchor</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="HorizontalCompartment">HorizontalCompartment</a>:
+        <span class="sel">complexLabel</span>::<span class="meta">any</span> <span class="sel">compartments</span>::<span class="meta">any</span> <span class="sel">anchor</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SimpleCompartment">SimpleCompartment</a>:
+        <span class="sel">content</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Anchor">Anchor</a>:
+        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">source</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="GraphElement">GraphElement</a>:
+        ε
+</pre><pre><a class="nt" name="Graph">Graph</a>:
+        <span class="sel">type</span>::<span class="meta">any</span> <span class="sel">rankDir</span>::<span class="meta">any</span> <span class="sel">labeljust</span>::<span class="meta">any</span> <span class="sel">labelloc</span>::<span class="meta">any</span> <span class="sel">concentrate</span>::<span class="meta">any</span> <span class="sel">nodes</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">boundingBox</span>::<span class="meta">any</span> <span class="sel">compound</span>::<span class="meta">any</span> <span class="sel">layers</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">nodeSeparation</span>::<span class="meta">any</span> <span class="sel">ordering</span>::<span class="meta">any</span> <span class="sel">size</span>::<span class="meta">any</span> <span class="sel">ratio</span>::<span class="meta">any</span> <span class="sel">center</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Layer">Layer</a>:
+        <span class="sel">nodes</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">arcs</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">graph</span>::<span class="meta">any</span> <span class="sel">layerSeparator</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Nodelike">Nodelike</a>:
+        ε
+</pre><pre><a class="nt" name="SubGraph">SubGraph</a>:
+        <span class="sel">nodes</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">labelloc</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Node">Node</a>:
+        <span class="sel">fixedSize</span>::<span class="meta">any</span> <span class="sel">fontname</span>::<span class="meta">any</span> <span class="sel">fontsize</span>::<span class="meta">any</span> <span class="sel">height</span>::<span class="meta">any</span> <span class="sel">width</span>::<span class="meta">any</span> <span class="sel">shape</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Arc">Arc</a>:
+        ε
+</pre><pre><a class="nt" name="DirectedArc">DirectedArc</a>:
+        <span class="sel">arrowHead</span>::<span class="meta">any</span> <span class="sel">headlabel</span>::<span class="meta">any</span> <span class="sel">taillabel</span>::<span class="meta">any</span> <span class="sel">arrowTail</span>::<span class="meta">any</span> <span class="sel">tail_lp</span>::<span class="meta">any</span> <span class="sel">head_lp</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="UndirectedArc">UndirectedArc</a>:
+        <span class="sel">fromNode</span>::<span class="meta">any</span> <span class="sel">toNode</span>::<span class="meta">any</span> <span class="sel">layers</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">constraint</span>::<span class="meta">any</span> <span class="sel">group</span>::<span class="meta">any</span> <span class="sel">minlen</span>::<span class="meta">any</span> <span class="sel">sameHead</span>::<span class="meta">any</span> <span class="sel">sameTail</span>::<span class="meta">any</span> <span class="sel">lhead</span>::<span class="meta">any</span> <span class="sel">ltail</span>::<span class="meta">any</span> <span class="sel">decorate</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Shape">Shape</a>:
+        ε
+</pre><pre><a class="nt" name="NodeShape">NodeShape</a>:
+        ε
+</pre><pre><a class="nt" name="SimpleNodeShape">SimpleNodeShape</a>:
+        
+</pre><pre><a class="nt" name="PointNodeShape">PointNodeShape</a>:
+        
+</pre><pre><a class="nt" name="ComplexNodeShape">ComplexNodeShape</a>:
+        ε
+</pre><pre><a class="nt" name="PolygonNodeShape">PolygonNodeShape</a>:
+        <span class="sel">sides</span>::<span class="meta">any</span> <span class="sel">skew</span>::<span class="meta">any</span> <span class="sel">distortion</span>::<span class="meta">any</span> <span class="sel">isRegular</span>::<span class="meta">any</span> <span class="sel">orientation</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="MNodeShape">MNodeShape</a>:
+        <span class="sel">toplabel</span>::<span class="meta">any</span> <span class="sel">bottomlabel</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="RecordNodeShape">RecordNodeShape</a>:
+        
+</pre><pre><a class="nt" name="ArrowShape">ArrowShape</a>:
+        <span class="sel">clipping</span>::<span class="meta">any</span> <span class="sel">isPlain</span>::<span class="meta">any</span> <span class="sel">size</span>::<span class="meta">any</span>
+</pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
+Last updated: 09/04/2013.</div></body></html>

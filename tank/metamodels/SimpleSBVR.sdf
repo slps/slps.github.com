@@ -1,0 +1,71 @@
+module Main
+
+exports
+  sorts
+        Root Element Representation Designation Text Meaning Concept NounConcept ObjectType IndividualConcept DataType NonEmptyString NonNegativeInteger FactType BinaryFactType IsPropertyOfFactType AssociativeFactType CategorizationFactType ObjectificationFactType Role FactTypeRole LogicalFormulation AtomicFormulation BinaryAtomicFormulation NecessityFormulation Quantification UniversalQuantification AtLeastNQuantification ExactlyNQuantification AtMostNQuantification BindableTarget Variable RoleBinding 
+  context-free syntax
+        elements::ANY+ -> Root
+
+        objectName::ANY -> Element
+
+        meaning::ANY -> Representation
+
+        text::ANY -> Designation
+
+        value::ANY -> Text
+
+        representations::ANY+ -> Meaning
+
+         -> Concept
+
+         -> NounConcept
+
+        specializes::ANY generalizes::ANY+ -> ObjectType
+
+        instanceOf::ANY -> IndividualConcept
+
+         -> DataType
+
+        value::ANY -> NonEmptyString
+
+        value::ANY -> NonNegativeInteger
+
+         -> FactType
+
+        role1::ANY role2::ANY -> BinaryFactType
+
+         -> IsPropertyOfFactType
+
+         -> AssociativeFactType
+
+         -> CategorizationFactType
+
+         -> ObjectificationFactType
+
+        nounConcept::ANY -> Role
+
+         -> FactTypeRole
+
+         -> LogicalFormulation
+
+        isBasedOn::ANY -> AtomicFormulation
+
+        roleBinding1::ANY roleBinding2::ANY -> BinaryAtomicFormulation
+
+         -> NecessityFormulation
+
+        introducedVariable::ANY scopesOver::ANY -> Quantification
+
+         -> UniversalQuantification
+
+        minCardinality::ANY -> AtLeastNQuantification
+
+        cardinality::ANY -> ExactlyNQuantification
+
+        maxCardinality::ANY -> AtMostNQuantification
+
+         -> BindableTarget
+
+        rangesOver::ANY -> Variable
+
+        occursIn::ANY isOf::ANY bindsTo::ANY -> RoleBinding

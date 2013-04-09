@@ -1,0 +1,33 @@
+module Main
+
+exports
+  sorts
+        RSS Channel Item Image TextInput Cloud Category Enclosure Source Date DayKind 
+  context-free syntax
+        version::ANY channel::ANY -> RSS
+
+        title::ANY link::ANY description::ANY language::ANY copyright::ANY managingEditor::ANY webmaster::ANY generator::ANY docs::ANY ttl::ANY rating::ANY skipHours::ANY+ skipDays::ANY+ rss::ANY pubDate::ANY lastBuildDate::ANY image::ANY textInput::ANY cloud::ANY category::ANY items::ANY+ -> Channel
+
+        title::ANY link::ANY description::ANY author::ANY comments::ANY guid::ANY source::ANY pubDate::ANY enclosure::ANY category::ANY channel::ANY -> Item
+
+        url::ANY title::ANY link::ANY description::ANY width::ANY height::ANY channel::ANY -> Image
+
+        title::ANY description::ANY name::ANY link::ANY channel::ANY -> TextInput
+
+        domain::ANY port::ANY path::ANY registerProcedure::ANY protocol::ANY channel::ANY -> Cloud
+
+        domain::ANY value::ANY -> Category
+
+        url::ANY lenght::ANY type::ANY -> Enclosure
+
+        url::ANY value::ANY -> Source
+
+        eDay::ANY day::ANY month::ANY year::ANY hours::ANY minutes::ANY seconds::ANY -> Date
+
+        Monday:: -> DayKind
+        Tuesday:: -> DayKind
+        Wednesday:: -> DayKind
+        Thursday:: -> DayKind
+        Friday:: -> DayKind
+        Saturday:: -> DayKind
+        Sunday:: -> DayKind

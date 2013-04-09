@@ -17,9 +17,11 @@ syntax Expression
         | terminal: Terminal
         | nonterminal: Nonterminal
         | selectable: Selector selector Expression
-        | sequence: Expression+
         | marked: Expression
+        | sequence: Expression+
         | choice: Expression+
+        | allof: Expression+
+        | not: Expression
         | optional: Expression
         | plus: Expression
         | star: Expression

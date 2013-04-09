@@ -1,0 +1,65 @@
+module Main
+
+exports
+  sorts
+        ValuedElement Type Title Name Date Author Adress Organisation Phone Fax EMail Heading Abstract Keywords SectionBody Corps Value Cite Path Label Figure Item Items Enumerate Section Description Citation Bibliography DocumentBody Document 
+  context-free syntax
+         -> ValuedElement
+
+        value::ANY -> Type
+
+        value::ANY -> Title
+
+        author::ANY organisation::ANY -> Name
+
+        value::ANY -> Date
+
+        names::ANY+ -> Author
+
+        value::ANY -> Adress
+
+        names::ANY+ adress::ANY heading::ANY -> Organisation
+
+        value::ANY -> Phone
+
+        value::ANY -> Fax
+
+        value::ANY -> EMail
+
+        organisations::ANY+ phone::ANY fax::ANY email::ANY -> Heading
+
+        value::ANY -> Abstract
+
+        value::ANY -> Keywords
+
+        corps::ANY+ section::ANY -> SectionBody
+
+         -> Corps
+
+         -> Value
+
+         -> Cite
+
+        value::ANY -> Path
+
+        value::ANY -> Label
+
+        path::ANY label::ANY title::ANY -> Figure
+
+        itemscontainer::ANY enumeratecontainer::ANY -> Item
+
+        item::ANY+ -> Items
+
+        item::ANY+ -> Enumerate
+
+        title::ANY sectionBody::ANY -> Section
+
+        date::ANY -> Description
+
+        label::ANY author::ANY description::ANY bibliography::ANY -> Citation
+
+        citations::ANY+ documentbody::ANY -> Bibliography
+
+        sections::ANY+ bibliography::ANY+ document::ANY -> DocumentBody
+
+        type::ANY title::ANY author::ANY date::ANY heading::ANY abstract::ANY keywords::ANY documentbody::ANY -> Document

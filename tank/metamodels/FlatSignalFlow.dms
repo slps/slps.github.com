@@ -1,0 +1,10 @@
+RootFolder = rootContainer::ANY+ ;
+RootContainer = name::ANY position::ANY rootFolder::ANY actor::ANY+ inputSignal::ANY+ outputSignal::ANY+ queue::ANY+ ;
+Actor = memory::ANY script::ANY file::ANY WCET::ANY name::ANY position::ANY rootContainer::ANY transmitter::ANY+ receiver::ANY+ ;
+Transmitter = name::ANY position::ANY actor::ANY associationQueueTransmitter::ANY ;
+Receiver = name::ANY position::ANY actor::ANY associationReceiverQueue::ANY ;
+InputSignal = name::ANY position::ANY rootContainer::ANY associationReceiverQueue::ANY ;
+OutputSignal = name::ANY position::ANY rootContainer::ANY associationQueueTransmitter::ANY ;
+Queue = name::ANY position::ANY rootContainer::ANY associationReceiverQueue::ANY associationQueueTransmitter::ANY ;
+AssociationReceiverQueue = srcqueue::ANY+ dstreceiver::ANY+ inputSignal::ANY ;
+AssociationQueueTransmitter = dstqueue::ANY+ srctransmitter::ANY+ outputSignal::ANY ;

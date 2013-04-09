@@ -1,0 +1,158 @@
+AssociationDirectionKind:
+        None::EPSILON
+        To::EPSILON
+        From::EPSILON
+        Both::EPSILON
+OrientationKind:
+        Horizontal::EPSILON
+        Vertical::EPSILON
+AccessLevelKind:
+        Public::EPSILON
+        Private::EPSILON
+ProcessTypeKind:
+        None::EPSILON
+        Private::EPSILON
+        Abstract::EPSILON
+        Collaboration::EPSILON
+StatusKind:
+        None::EPSILON
+        Ready::EPSILON
+        Active::EPSILON
+        Cancelled::EPSILON
+        Aborting::EPSILON
+        Aborted::EPSILON
+        Completing::EPSILON
+        Completed::EPSILON
+AdHocOrderingKind:
+        Sequential::EPSILON
+        Parallel::EPSILON
+ModeKind:
+        Automatic::EPSILON
+        Manual::EPSILON
+GatewayTypeKind:
+        Xor::EPSILON
+        Or::EPSILON
+        Complex::EPSILON
+        And::EPSILON
+ExecutionKind:
+        Asynchr::EPSILON
+        Synchr::EPSILON
+TriggerKind:
+        None::EPSILON
+        Message::EPSILON
+        Timer::EPSILON
+        Rule::EPSILON
+        Link::EPSILON
+        Error::EPSILON
+        Cancel::EPSILON
+        Compensation::EPSILON
+        Terminate::EPSILON
+        Multiple::EPSILON
+ImplementationKind:
+        WebService::EPSILON
+        Other::EPSILON
+        Unspecified::EPSILON
+Element:
+        EPSILON
+Package:
+        script::ANY externalPackages::ANY+ typeDeclarations::ANY+ participants::ANY+ applications::ANY+ dataFields::ANY+ pools::ANY+ messageFlows::ANY+ associations::ANY+ artifacts::ANY+ workflowProcesses::ANY+
+MessageFlow:
+        targetActivity::ANY sourceActivity::ANY targetPool::ANY sourcePool::ANY object::ANY
+Association:
+        associationDirection::ANY targetArtifact::ANY sourceArtifact::ANY targetPool::ANY sourcePool::ANY targetActivity::ANY sourceActivity::ANY object::ANY
+Pool:
+        orientation::ANY boundaryVisible::ANY lanes::ANY+ object::ANY participant::ANY process::ANY
+Lane:
+        object::ANY parentLane::ANY parentPool::ANY
+Participant:
+        id::ANY name::ANY
+Artifact:
+        textAnnotation::ANY group::ANY object::ANY dataObject::ANY
+DataObject:
+        state::ANY requiredForStart::ANY producedAtCompletion::ANY dataFields::ANY+
+Group:
+        EPSILON
+Annotation:
+        EPSILON
+TypeDeclaration:
+        id::ANY name::ANY
+Application:
+        id::ANY name::ANY
+ParametrizedApplication:
+        EPSILON
+ReferencedApplication:
+        externalReference::ANY
+Activity:
+        isStartActivity::ANY status::ANY startMode::ANY finishMode::ANY startQuantity::ANY isATransaction::ANY dataFields::ANY+ object::ANY
+Task:
+        EPSILON
+TaskService:
+        implementation::ANY
+TaskReceive:
+        instantiate::ANY implementation::ANY
+TaskManual:
+        
+TaskReference:
+        taskRef::ANY
+TaskScript:
+        script::ANY
+TaskSend:
+        implementation::ANY
+TaskUser:
+        implementation::ANY
+TaskApplication:
+        packageRef::ANY
+Route:
+        gatewayType::ANY instantiate::ANY markerVisiable::ANY
+SubFlow:
+        execution::ANY instanceDataField::ANY packageRef::ANY startActivitySet::ANY startActivity::ANY
+BlockActivity:
+        activitySet::ANY startActivity::ANY
+Event:
+        EPSILON
+Trigger:
+        EPSILON
+ResultCompensation:
+        activity::ANY
+ResultError:
+        errorCode::ANY
+ResultMultiple:
+        
+TriggerResultLink:
+        processRef::ANY
+TriggerResultMessage:
+        
+TriggerIntermediateMultiple:
+        
+TriggerMultiple:
+        
+TriggerRule:
+        ruleName::ANY
+TriggerTimer:
+        timeDate::ANY timeCycle::ANY
+StartEvent:
+        triggerKind::ANY implementation::ANY trigger::ANY
+IntermediateEvent:
+        target::ANY
+EndEvent:
+        triggerKind::ANY implementation::ANY trigger::ANY
+Gateway:
+        EPSILON
+Process:
+        accessLevel::ANY processType::ANY status::ANY suppressJoinFailure::ANY enableInstanceCompensation::ANY adHoc::ANY adHocOrdering::ANY adHocCompletionCondition::ANY participant::ANY+ applications::ANY+ dataField::ANY activitySets::ANY+ activities::ANY+ transitions::ANY+ object::ANY defaultStartActivitySet::ANY defaultStartActivity::ANY
+Transition:
+        quantity::ANY object::ANY to::ANY from::ANY
+ActivitySet:
+        adHoc::ANY adHocOrdering::ANY adHocCompletionCondition::ANY defaultStartActivity::ANY activities::ANY+ transitions::ANY+ object::ANY
+ExternalReference:
+        xref::ANY location::ANY namespace::ANY
+Object:
+        categories::ANY+
+ExternalPackage:
+        href::ANY
+Category:
+        id::ANY name::ANY
+DataField:
+        isArray::ANY correlation::ANY dataType::ANY
+Script:
+        type::ANY version::ANY grammar::ANY

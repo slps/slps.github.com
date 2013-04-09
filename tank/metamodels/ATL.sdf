@@ -1,0 +1,173 @@
+module Main
+
+exports
+  sorts
+        LocatedElement Unit Library Query Module ModuleElement Helper Rule MatchedRule LazyMatchedRule CalledRule InPattern OutPattern PatternElement InPatternElement SimpleInPatternElement OutPatternElement SimpleOutPatternElement ForEachOutPatternElement Binding RuleVariableDeclaration LibraryRef ActionBlock Statement ExpressionStat BindingStat IfStat ForStat OclExpression VariableExp SuperExp PrimitiveExp StringExp BooleanExp NumericExp RealExp IntegerExp CollectionExp BagExp OrderedSetExp SequenceExp SetExp TupleExp TuplePart MapExp MapElement EnumLiteralExp OclUndefinedExp PropertyCallExp NavigationOrAttributeCallExp OperationCallExp OperatorCallExp CollectionOperationCallExp LoopExp IterateExp IteratorExp LetExp IfExp VariableDeclaration Iterator Parameter CollectionType OclType Primitive StringType BooleanType NumericType IntegerType RealType BagType OrderedSetType SequenceType SetType OclAnyType TupleType TupleTypeAttribute OclModelElement MapType OclFeatureDefinition OclContextDefinition OclFeature Attribute Operation OclModel 
+  context-free syntax
+         -> LocatedElement
+
+        libraries::ANY+ name::ANY -> Unit
+
+        helpers::ANY+ -> Library
+
+        body::ANY helpers::ANY+ -> Query
+
+        isRefining::ANY inModels::ANY+ outModels::ANY+ elements::ANY+ -> Module
+
+         -> ModuleElement
+
+        query::ANY library::ANY definition::ANY -> Helper
+
+         -> Rule
+
+        inPattern::ANY children::ANY+ superRule::ANY isAbstract::ANY isRefining::ANY isNoDefault::ANY -> MatchedRule
+
+        isUnique::ANY -> LazyMatchedRule
+
+        parameters::ANY+ isEntrypoint::ANY isEndpoint::ANY -> CalledRule
+
+        elements::ANY+ rule::ANY filter::ANY -> InPattern
+
+        rule::ANY elements::ANY+ -> OutPattern
+
+         -> PatternElement
+
+         -> InPatternElement
+
+        mapsTo::ANY inPattern::ANY models::ANY+ -> SimpleInPatternElement
+
+         -> OutPatternElement
+
+        reverseBindings::ANY+ -> SimpleOutPatternElement
+
+        collection::ANY iterator::ANY -> ForEachOutPatternElement
+
+        value::ANY outPatternElement::ANY propertyName::ANY isAssignment::ANY -> Binding
+
+        rule::ANY -> RuleVariableDeclaration
+
+        unit::ANY name::ANY -> LibraryRef
+
+        rule::ANY statements::ANY+ -> ActionBlock
+
+         -> Statement
+
+        expression::ANY -> ExpressionStat
+
+        source::ANY propertyName::ANY isAssignment::ANY value::ANY -> BindingStat
+
+        condition::ANY thenStatements::ANY+ elseStatements::ANY+ -> IfStat
+
+        iterator::ANY collection::ANY statements::ANY+ -> ForStat
+
+         -> OclExpression
+
+        referredVariable::ANY -> VariableExp
+
+        type::ANY ifExp3::ANY appliedProperty::ANY collection::ANY letExp::ANY loopExp::ANY parentOperation::ANY initializedVariable::ANY ifExp2::ANY owningOperation::ANY ifExp1::ANY owningAttribute::ANY -> SuperExp
+
+         -> PrimitiveExp
+
+        stringSymbol::ANY -> StringExp
+
+        booleanSymbol::ANY -> BooleanExp
+
+         -> NumericExp
+
+        realSymbol::ANY -> RealExp
+
+        integerSymbol::ANY -> IntegerExp
+
+         -> CollectionExp
+
+        elements::ANY+ -> BagExp
+
+        elements::ANY+ -> OrderedSetExp
+
+        elements::ANY+ -> SequenceExp
+
+        elements::ANY+ -> SetExp
+
+        tuplePart::ANY+ -> TupleExp
+
+        tuple::ANY -> TuplePart
+
+        elements::ANY+ -> MapExp
+
+        map::ANY key::ANY value::ANY -> MapElement
+
+        name::ANY -> EnumLiteralExp
+
+        type::ANY ifExp3::ANY appliedProperty::ANY collection::ANY letExp::ANY loopExp::ANY parentOperation::ANY initializedVariable::ANY ifExp2::ANY owningOperation::ANY ifExp1::ANY owningAttribute::ANY -> OclUndefinedExp
+
+         -> PropertyCallExp
+
+        name::ANY -> NavigationOrAttributeCallExp
+
+        arguments::ANY+ operationName::ANY -> OperationCallExp
+
+         -> OperatorCallExp
+
+         -> CollectionOperationCallExp
+
+         -> LoopExp
+
+        result::ANY -> IterateExp
+
+        name::ANY -> IteratorExp
+
+        variable::ANY in_::ANY -> LetExp
+
+        thenExpression::ANY condition::ANY elseExpression::ANY -> IfExp
+
+        id::ANY varName::ANY type::ANY initExpression::ANY letExp::ANY baseExp::ANY variableExp::ANY+ -> VariableDeclaration
+
+        loopExpr::ANY -> Iterator
+
+        operation::ANY -> Parameter
+
+        elementType::ANY -> CollectionType
+
+        name::ANY definitions::ANY oclExpression::ANY operation::ANY mapType2::ANY attribute::ANY mapType::ANY collectionTypes::ANY tupleTypeAttribute::ANY variableDeclaration::ANY -> OclType
+
+         -> Primitive
+
+         -> StringType
+
+         -> BooleanType
+
+         -> NumericType
+
+         -> IntegerType
+
+         -> RealType
+
+         -> BagType
+
+         -> OrderedSetType
+
+         -> SequenceType
+
+         -> SetType
+
+         -> OclAnyType
+
+        attributes::ANY+ -> TupleType
+
+        type::ANY tupleType::ANY name::ANY -> TupleTypeAttribute
+
+        model::ANY -> OclModelElement
+
+        valueType::ANY keyType::ANY -> MapType
+
+        feature::ANY context_::ANY -> OclFeatureDefinition
+
+        definition::ANY context_::ANY -> OclContextDefinition
+
+         -> OclFeature
+
+        name::ANY initExpression::ANY type::ANY -> Attribute
+
+        name::ANY parameters::ANY+ returnType::ANY body::ANY -> Operation
+
+        name::ANY metamodel::ANY elements::ANY+ model::ANY+ -> OclModel

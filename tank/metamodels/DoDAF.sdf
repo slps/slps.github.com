@@ -1,0 +1,119 @@
+module Main
+
+exports
+  sorts
+        Element System SystemRole SystemFunction Service SystemRoleInterface ServiceDependency ServiceProvider ServiceMediator ServiceRegistry ServiceLocator ServiceBroker SystemAtNode SystemAtNodeInterface SystemsNode COI Vocabulary DataReference Performer OperationalRole OperationalActivity Product Material Data SystemProductFlow ConstraintOrRequirement Constraint QualityRequirement DIA NMJIC HigherEchelon JFC F2C2 ComponentCommand DJFLCC JFACC JFMCC JFSOCC SubordinateAirCommand MAW WOC AOCCID AOCCombatPlanStrategyCells ResultData CombatReport WSV MISREP Imagery CollectionRequirement BDAReport MunitionsEffectsAssesment ATO RestrikeRecommendation TargetNomination TargetMaterialsAnalysis Target MIDB 
+  context-free syntax
+         -> Element
+
+        decomposes::ANY+ fulfills::ANY+ -> System
+
+        decomposes::ANY+ performs::ANY+ terminatesAt::ANY -> SystemRole
+
+        decomposes::ANY+ consumes::ANY+ produces::ANY+ terminatesAt::ANY mesuredBy::ANY+ -> SystemFunction
+
+         -> Service
+
+        originatesFrom::ANY -> SystemRoleInterface
+
+         -> ServiceDependency
+
+         -> ServiceProvider
+
+         -> ServiceMediator
+
+         -> ServiceRegistry
+
+         -> ServiceLocator
+
+         -> ServiceBroker
+
+        references::ANY terminatesAt::ANY -> SystemAtNode
+
+        originatesFrom::ANY -> SystemAtNodeInterface
+
+        groups::ANY+ -> SystemsNode
+
+        comprises::ANY+ defines::ANY -> COI
+
+        comprises::ANY+ -> Vocabulary
+
+        defineBy::ANY -> DataReference
+
+        decomposes::ANY+ fulfills::ANY+ -> Performer
+
+        decomposes::ANY+ accomplishes::ANY+ -> OperationalRole
+
+        decomposes::ANY+ supports::ANY+ -> OperationalActivity
+
+        name::ANY content::ANY -> Product
+
+         -> Material
+
+         -> Data
+
+        transports::ANY+ originatesFrom::ANY -> SystemProductFlow
+
+         -> ConstraintOrRequirement
+
+         -> Constraint
+
+         -> QualityRequirement
+
+        nmjic::ANY higherEchelon::ANY -> DIA
+
+        dia::ANY -> NMJIC
+
+        dia::ANY jfc::ANY -> HigherEchelon
+
+        higherEchelon::ANY f2c2::ANY componentComand::ANY -> JFC
+
+        jfc::ANY -> F2C2
+
+        jfc::ANY -> ComponentCommand
+
+         -> DJFLCC
+
+        subordinateAirCommand::ANY aoccid::ANY+ aoccpsc::ANY+ -> JFACC
+
+         -> JFMCC
+
+         -> JFSOCC
+
+        jfacc::ANY -> SubordinateAirCommand
+
+         -> MAW
+
+         -> WOC
+
+        name::ANY content::ANY -> AOCCID
+
+        name::ANY content::ANY -> AOCCombatPlanStrategyCells
+
+        sourceID::ANY timeStamp::ANY cr::ANY+ bdaReport::ANY+ -> ResultData
+
+        friendlyUnitsInvolved::ANY combatLocation::ANY resultsAssessment::ANY duration::ANY -> CombatReport
+
+        missionID::ANY weaponfSystemID::ANY videoType::ANY -> WSV
+
+        missionID::ANY missionObjectives::ANY missionAssesments::ANY -> MISREP
+
+        imageType::ANY spectralData::ANY geospacialLocation::ANY imageSize::ANY -> Imagery
+
+        sourceID::ANY collectionTargetID::ANY toBeDoneByTime::ANY specialNeeds::ANY rd::ANY+ ato::ANY+ isContainedIn::ANY+ -> CollectionRequirement
+
+        targetID::ANY reportSourceID::ANY assesmentSumart::ANY validityDuration::ANY rd::ANY+ mea::ANY -> BDAReport
+
+        bdaReport::ANY ato::ANY tn::ANY -> MunitionsEffectsAssesment
+
+        timePeriod::ANY cr::ANY+ mea::ANY tn::ANY+ rr::ANY -> ATO
+
+        ato::ANY tn::ANY -> RestrikeRecommendation
+
+        ato::ANY+ mea::ANY+ rr::ANY target::ANY -> TargetNomination
+
+        targetID::ANY target::ANY -> TargetMaterialsAnalysis
+
+        cr::ANY+ tn::ANY holds::ANY describes::ANY+ -> Target
+
+        target::ANY+ -> MIDB

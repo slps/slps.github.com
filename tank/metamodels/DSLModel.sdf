@@ -1,0 +1,33 @@
+module Main
+
+exports
+  sorts
+        Model Element ModelElement ModelElementLink EmbeddingLink ReferenceLink NamedElement Property Role Value IntegerValue DoubleValue BooleanValue StringValue 
+  context-free syntax
+        domainModel::ANY contents::ANY+ -> Model
+
+         -> Element
+
+        parentLink::ANY properties::ANY+ embeddinglinks::ANY+ referencelinks::ANY+ -> ModelElement
+
+        links::ANY+ -> ModelElementLink
+
+        owner::ANY elements::ANY+ -> EmbeddingLink
+
+        owner::ANY modelElement::ANY roles::ANY -> ReferenceLink
+
+         -> NamedElement
+
+        owner::ANY value::ANY -> Property
+
+        element::ANY owner::ANY -> Role
+
+         -> Value
+
+        value::ANY -> IntegerValue
+
+        value::ANY -> DoubleValue
+
+        value::ANY -> BooleanValue
+
+        value::ANY -> StringValue

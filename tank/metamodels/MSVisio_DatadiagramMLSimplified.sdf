@@ -1,0 +1,85 @@
+module Main
+
+exports
+  sorts
+        CellType VisioDocument PageSheet NamedElt IdentifiedElt UniqueIdElt Shape ShapeElt IXElt DelElt Geom XYElt LineTo MoveTo XYAElt ArcTo SplineKnot PolylineTo XYABElt InfiniteLine XYABCDElt Ellipse EllipticalArcTo SplineStart XYABCDEElt NURBSTo Text TextElt StringElt MastersCollection MasterShortCut Icon Master ShapesCollection ConnectsCollection Connect MasterElt PagesCollection Page PageElt 
+  context-free syntax
+        unit::ANY formula::ANY err::ANY value::ANY -> CellType
+
+        docMasters::ANY docPages::ANY -> VisioDocument
+
+         -> PageSheet
+
+         -> NamedElt
+
+         -> IdentifiedElt
+
+         -> UniqueIdElt
+
+        ss_shapes::ANY lineStyle::ANY fillStyle::ANY textStyle::ANY shapeElts::ANY+ -> Shape
+
+         -> ShapeElt
+
+         -> IXElt
+
+         -> DelElt
+
+        noFill::ANY noLine::ANY noShow::ANY noSnap::ANY linesTo::ANY+ movesTo::ANY+ arcsTo::ANY+ splineKnots::ANY+ polylinesTo::ANY+ infiniteLines::ANY+ ellipses::ANY+ ellipticalArcsTo::ANY+ splineStarts::ANY+ nurbsTo::ANY+ -> Geom
+
+         -> XYElt
+
+        lt_geom::ANY -> LineTo
+
+        mt_geom::ANY -> MoveTo
+
+         -> XYAElt
+
+        ac_geom::ANY -> ArcTo
+
+        sk_geom::ANY -> SplineKnot
+
+        pt_geom::ANY -> PolylineTo
+
+         -> XYABElt
+
+        il_geom::ANY -> InfiniteLine
+
+         -> XYABCDElt
+
+        e_geom::ANY -> Ellipse
+
+        eat_geom::ANY -> EllipticalArcTo
+
+        ss_geom::ANY -> SplineStart
+
+         -> XYABCDEElt
+
+        nt_geom::ANY -> NURBSTo
+
+        textElts::ANY+ -> Text
+
+         -> TextElt
+
+        value::ANY -> StringElt
+
+        ms_visioDocument::ANY masters::ANY+ masterShortCuts::ANY+ -> MastersCollection
+
+        m_masterShortCuts::ANY iconSize::ANY patternFlags::ANY prompt::ANY shortcutURL::ANY shortcutHelp::ANY alignName::ANY icons::ANY+ -> MasterShortCut
+
+        i_masterShortCut::ANY value::ANY -> Icon
+
+        m_masters::ANY baseID::ANY matchByName::ANY iconSize::ANY patternFlags::ANY prompt::ANY hidden::ANY iconUpdate::ANY alignName::ANY masterElts::ANY+ -> Master
+
+        shapes::ANY+ -> ShapesCollection
+
+        connections::ANY+ -> ConnectsCollection
+
+        c_connects::ANY fromSheet::ANY toSheet::ANY fromCell::ANY toCell::ANY fromPart::ANY toPart::ANY -> Connect
+
+         -> MasterElt
+
+        ps_visioDocument::ANY pages::ANY+ -> PagesCollection
+
+        p_pages::ANY background::ANY backPage::ANY viewScale::ANY viewCenterX::ANY ViewCenterY::ANY reviewerID::ANY associatedPage::ANY pageElts::ANY+ -> Page
+
+         -> PageElt

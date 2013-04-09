@@ -1,0 +1,98 @@
+module Main
+
+exports
+  sorts
+        DateTimeType VersionType ValueType StringValue NumberValue DateTimeTypeValue BooleanValue ErrorValue DocumentPropertiesCollection CustomDocumentPropertiesCollection CustomDocumentProperty SmartTagType SmartTagsCollection Workbook Worksheet StyledElement Table TableElement ColOrRowElement Column Row Cell Comment Data ExcelWorkbook DisplayDrawingObjectsType CalculationWorkbookType WorksheetOptionsElt ExcelWorksheetTypeType VisibleType EnableSelectionType PageSetup Layout OrientationType HeaderOrFooterElt Header Footer PageMarginsInfo Print CommentsLayoutType 
+  context-free syntax
+        year::ANY month::ANY day::ANY hour::ANY minute::ANY second::ANY -> DateTimeType
+
+        n::ANY nn::ANY -> VersionType
+
+         -> ValueType
+
+        value::ANY -> StringValue
+
+        value::ANY -> NumberValue
+
+        value::ANY -> DateTimeTypeValue
+
+        value::ANY -> BooleanValue
+
+        vt_data::ANY -> ErrorValue
+
+        dp_workbook::ANY title::ANY subject::ANY keywords::ANY description::ANY category::ANY author::ANY lastAuthor::ANY manager::ANY company::ANY hyperlinkBase::ANY revision::ANY presentationFormat::ANY guid::ANY appName::ANY version::ANY totalTime::ANY lastPrinted::ANY created::ANY lastSaved::ANY pages::ANY words::ANY characters::ANY charactersWithSpaces::ANY bytes::ANY lines::ANY paragraphs::ANY -> DocumentPropertiesCollection
+
+        cdp_workbook::ANY customDocumentProperties::ANY+ -> CustomDocumentPropertiesCollection
+
+        customDocumentProperty_cdpe::ANY name::ANY value::ANY -> CustomDocumentProperty
+
+        smartTagType_ste::ANY namespaceuri::ANY name::ANY url::ANY -> SmartTagType
+
+        st_workbook::ANY st_cell::ANY smartTagTypes::ANY+ -> SmartTagsCollection
+
+        wb_smartTags::ANY wb_docProperties::ANY wb_customDocProperties::ANY wb_excelWorkbook::ANY wb_worksheets::ANY+ -> Workbook
+
+        ws_workbook::ANY ws_table::ANY name::ANY protected::ANY rightToLeft::ANY w_worksheetOptions::ANY -> Worksheet
+
+         -> StyledElement
+
+        t_worksheet::ANY t_cols::ANY+ t_rows::ANY+ defaultColumnWidth::ANY defaultRowHeight::ANY expandedColumnCount::ANY expandedRowCount::ANY leftCell::ANY topCell::ANY fullColumns::ANY fullRows::ANY -> Table
+
+         -> TableElement
+
+         -> ColOrRowElement
+
+        c_table::ANY autoFitWidth::ANY width::ANY -> Column
+
+        r_table::ANY r_cells::ANY+ autoFitHeight::ANY height::ANY -> Row
+
+        c_smartTags::ANY+ c_row::ANY arrayRange::ANY formula::ANY hRef::ANY mergeAcross::ANY mergeDown::ANY c_data::ANY c_comment::ANY -> Cell
+
+        c_cell::ANY com_data::ANY author::ANY showAlways::ANY -> Comment
+
+        d_cell::ANY d_comment::ANY value::ANY -> Data
+
+        ew_workbook::ANY selectedSheets::ANY windowHidden::ANY hideHorizontalScrollBar::ANY hideVerticalScrollBar::ANY hideWorkbookTabs::ANY windowHeight::ANY windowWidth::ANY windowTopX::ANY windowTopY::ANY activeSheet::ANY activeChart::ANY firstVisibleSheet::ANY hidePivotTableFieldList::ANY protectStructure::ANY protectWindows::ANY displayInkNotes::ANY embedSaveSmartTags::ANY futureVer::ANY tabRatio::ANY windowIconic::ANY displayDrawingObjects::ANY createBackup::ANY calculation::ANY doNotCalculateBeforeSave::ANY date1904::ANY refModeR1C1::ANY iteration::ANY maxIterations::ANY maxChange::ANY precisionAsDisplayed::ANY doNotSaveLinkValues::ANY noAutoRecover::ANY acceptLabelsInFormulas::ANY uncalced::ANY -> ExcelWorkbook
+
+        ddot_displayShapes:: -> DisplayDrawingObjectsType
+        ddot_placeHolders:: -> DisplayDrawingObjectsType
+        ddot_hideAll:: -> DisplayDrawingObjectsType
+
+        cwt_automaticCalculation:: -> CalculationWorkbookType
+        cwt_manualCalculation:: -> CalculationWorkbookType
+        cwt_semiAutomaticCalculation:: -> CalculationWorkbookType
+
+        wo_worksheet::ANY fitToPage::ANY doNotDisplayColHeaders::ANY doNotDisplayRowHeaders::ANY gridlineColor::ANY name::ANY excelWorksheetType::ANY intlMacro::ANY unsynced::ANY selected::ANY codeName::ANY displayPageBreak::ANY transitionExpressionEvaluation::ANY transitionFormulaEntry::ANY zoom::ANY pageBreakZoom::ANY showPageBreakZoom::ANY defaultRowHeight::ANY defaultColumnWidth::ANY standardWidth::ANY visible::ANY leftColumnVisible::ANY displayRightToLeft::ANY gridlineColorIndex::ANY displayFormulas::ANY doNotDisplayGridlines::ANY doNotDisplayHeadings::ANY doNotDisplayOutline::ANY applyAutomaticOutlineStyles::ANY noSummaryRowsBelowDetail::ANY noSummaryColumnsRightDetail::ANY doNotDisplayZeros::ANY activeRow::ANY activeColumn::ANY filterOn::ANY rangeSelection::ANY topRowVisible::ANY topRowBottomPane::ANY leftColumnRightPane::ANY activePane::ANY splitHorizontal::ANY splitVertical::ANY freezePanes::ANY frozenNoSplit::ANY tabColorIndex::ANY protectContentst::ANY protectObjects::ANY protectScenarios::ANY enableSelection::ANY allowFormatCells::ANY allowSizeCols::ANY allowSizeRows::ANY allowInsertCols::ANY allowInsertRows::ANY allowInsertHyperlinks::ANY allowDeleteCols::ANY allowDeleteRows::ANY allowSort::ANY allowFilter::ANY allowUsePivotTables::ANY wo_pageSetup::ANY wo_print::ANY -> WorksheetOptionsElt
+
+        ewt_Worksheet:: -> ExcelWorksheetTypeType
+        ewt_Chart:: -> ExcelWorksheetTypeType
+        ewt_Macro:: -> ExcelWorksheetTypeType
+        ewt_Dialog:: -> ExcelWorksheetTypeType
+
+        vt_SheetVisible:: -> VisibleType
+        vt_SheetHidden:: -> VisibleType
+        vt_SheetVeryHidden:: -> VisibleType
+
+        est_UnlockedCells:: -> EnableSelectionType
+        est_NoSelection:: -> EnableSelectionType
+
+        ps_worksheetOptions::ANY ps_layout::ANY ps_header::ANY ps_footer::ANY ps_pageMargins::ANY -> PageSetup
+
+        l_pageSetup::ANY orientation::ANY centerHorizontal::ANY centerVertical::ANY startPageNumber::ANY -> Layout
+
+        ot_Landscape:: -> OrientationType
+        ot_Portrait:: -> OrientationType
+
+         -> HeaderOrFooterElt
+
+        h_pageSetup::ANY -> Header
+
+        f_pageSetup::ANY -> Footer
+
+        pm_pageSetup::ANY left::ANY right::ANY top::ANY bottom::ANY -> PageMarginsInfo
+
+        p_worksheetOptions::ANY fitWidth::ANY fitHeight::ANY leftToRight::ANY blackAndWhite::ANY draftQuality::ANY commentsLayout::ANY scale::ANY printErrors::ANY validPrinterInfo::ANY paperSizeIndex::ANY horizontalResolution::ANY verticalResolution::ANY gridlines::ANY numberOfCopies::ANY rowColHeadings::ANY -> Print
+
+        clt_InPlace:: -> CommentsLayoutType
+        clt_PrintNone:: -> CommentsLayoutType
+        clt_SheetEnd:: -> CommentsLayoutType

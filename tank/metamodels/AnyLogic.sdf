@@ -1,0 +1,41 @@
+module Main
+
+exports
+  sorts
+        ModelElement VisualModelElement Point Model ActiveObjectClass Connector EmbeddedObject ActiveObjectClassRef Parameter Shape EmbeddedObjectPresentation Experiment SimulationExperiment Control Button Frame Text Font 
+  context-free syntax
+        id::ANY name::ANY excludeFromBuild::ANY -> ModelElement
+
+        position::ANY label::ANY publicFlag::ANY presentationFlag::ANY showLabel::ANY -> VisualModelElement
+
+        x::ANY y::ANY -> Point
+
+        engineVersion::ANY javaPackageName::ANY activeObjectClasses::ANY+ experiments::ANY+ -> Model
+
+        clientAreaTopLeft::ANY presentationTopGroupPersistent::ANY iconTopGroupPersistent::ANY generic::ANY genericParameters::ANY agent::ANY environmentDefinesInitialLocation::ANY connectors::ANY+ embeddedObjects::ANY+ shapes::ANY+ -> ActiveObjectClass
+
+        sourceEmbeddedObject::ANY sourceConnectableName::ANY targetEmbeddedObject::ANY targetConnectableName::ANY points::ANY+ -> Connector
+
+        presentation::ANY activeObjectClass::ANY genericParametersSubstitute::ANY parameters::ANY+ -> EmbeddedObject
+
+        packageName::ANY className::ANY -> ActiveObjectClassRef
+
+        name::ANY value::ANY -> Parameter
+
+        asObject::ANY embeddedIcon::ANY rotation::ANY -> Shape
+
+         -> EmbeddedObjectPresentation
+
+         -> Experiment
+
+        activeObjectClass::ANY clientAreaTopLeft::ANY presentationTopGroupPersistent::ANY iconTopGroupPersistent::ANY frame::ANY commandLineArguments::ANY maximumMemory::ANY randomSeed::ANY seedValue::ANY vmArgs::ANY absoluteAccuracy::ANY relativeAccuracy::ANY timeAccuracy::ANY fixedTimeStep::ANY shapes::ANY+ controls::ANY+ parameters::ANY+ enableAdaptiveFrameManagement::ANY enableAntiAliasing::ANY enablePanning::ANY enableZoom::ANY executionMode::ANY cpuRatio::ANY title::ANY framesPerSecond::ANY realTimeScale::ANY uiProperties::ANY+ useCalendar::ANY stopOption::ANY initialDate::ANY initialTime::ANY finalDate::ANY finalTime::ANY modelTimeUnit::ANY -> SimulationExperiment
+
+        width::ANY height::ANY asObject::ANY embeddedIcon::ANY fillColor::ANY textColor::ANY enableExpression::ANY actionCode::ANY labelText::ANY font::ANY -> Control
+
+         -> Button
+
+        x::ANY y::ANY width::ANY height::ANY -> Frame
+
+        color::ANY text::ANY font::ANY alignment::ANY -> Text
+
+        name::ANY size::ANY style::ANY -> Font

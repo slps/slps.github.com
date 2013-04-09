@@ -1,0 +1,15 @@
+MgaObject = name::ANY position::ANY ;
+StateBase = defaultTransition::ANY marked::ANY associationStateStatedst::ANY+ associationStateStatesrc::ANY+ data::ANY+ associationDataStateBase::ANY ;
+DataVar = stateBase::ANY+ orState::ANY associationDataStateBase::ANY ;
+Transition = guard::ANY trigger::ANY action::ANY isSync::ANY orState::ANY associationStateState::ANY ;
+StateDateRelation = value::ANY color::ANY ;
+RootFolder = name::ANY rootFolders::ANY+ orState::ANY+ ;
+OrState = rootFolder::ANY state::ANY+ init::ANY dataVar::ANY+ stateDataRelation::ANY+ transition::ANY+ compoundState::ANY+ ;
+AndState = compoundState::ANY+ ;
+CompoundState = andState::ANY orState::ANY ;
+PrimitiveState = ;
+Init = orState::ANY ;
+State = orState::ANY ;
+StateDataRelation = value::ANY color::ANY orState::ANY associationDataStateBase1::ANY ;
+AssociationStateState = transition::ANY dstTransition::ANY+ srcTransition::ANY+ ;
+AssociationDataStateBase = stateDataRelation::ANY dataVar::ANY+ stateBase::ANY+ ;

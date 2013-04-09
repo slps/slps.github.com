@@ -2,27 +2,31 @@
 module Abs
 
 syntax SqlAttrDefList
-        = a: SqlAttrDef
-        | SqlAttrDefList l COMMA SqlAttrDef a
+        = SqlAttrDefList l COMMA SqlAttrDef a
+        | a: SqlAttrDef
  ;
 syntax ABSGoal
         = cu: 
         CompilationUnit
  ;
 syntax Guard
-        = e: DataExp
-        | VarOrFieldRef r QMARK
+        = VarOrFieldRef r QMARK
+        | e: DataExp
+        | Guard g1 GUARDAND Guard g2
         | BAR Exp e BAR
         | DURATION LPAREN DataExp min COMMA DataExp max RPAREN
-        | Guard g1 GUARDAND Guard g2
+ ;
+syntax PORT
+        = 
+        "port"
  ;
 syntax ModuleNameDecl
         = 
         MODULE ModuleName n SEMICOLON
  ;
 syntax DataConstructorList
-        = i: DataConstructor
-        | DataConstructorList l BAR DataConstructor i
+        = DataConstructorList l BAR DataConstructor i
+        | i: DataConstructor
  ;
 syntax Literal
         = i: IntLiteral
@@ -40,9 +44,13 @@ syntax BlockWithoutAnnotations
         = 
         LBRACE RBRACE
  ;
+syntax IMPLIES
+        = 
+        "-\>"
+ ;
 syntax FeatureList
-        = f: Feature
-        | FeatureList l COMMA Feature f
+        = FeatureList l COMMA Feature f
+        | f: Feature
  ;
 syntax Featvar
         = f: 
@@ -58,17 +66,45 @@ syntax MlitExp
         | TYPE_IDENTIFIER f DOT IDENTIFIER a
         | id: TYPE_IDENTIFIER
  ;
+syntax OPT
+        = 
+        "opt"
+ ;
 syntax DatatypeparamListDecl
         = 
         LT DatatypeparamList l GT
+ ;
+syntax DESC
+        = 
+        "desc"
+ ;
+syntax SEMICOLON
+        = 
+        ";"
+ ;
+syntax QMARK
+        = 
+        "?"
+ ;
+syntax THIS
+        = 
+        "this"
+ ;
+syntax NOTEQ
+        = "!="
+        | "\<\>"
  ;
 syntax ParamDecls
         = 
         LPAREN RPAREN
  ;
+syntax ONEOF
+        = 
+        "oneof"
+ ;
 syntax SqlOrderingAttributes
-        = ()
-        | ORDER BY SqlOrderingAttributeList l
+        = ORDER BY SqlOrderingAttributeList l
+        | ()
  ;
 syntax StmtList
         = StmtList l Stmt i
@@ -76,57 +112,69 @@ syntax StmtList
  ;
 syntax FieldDecl
         = PORT TypeExp t IDENTIFIER i
-        | TypeExp t IDENTIFIER i
         | PORT TypeExp t IDENTIFIER i ASSIGN DataExp e
         | TypeExp t IDENTIFIER i ASSIGN DataExp e
+        | TypeExp t IDENTIFIER i
  ;
 syntax EqualityExp
-        = EqualityExp e1 EQEQ RelationalExp e2
+        = EqualityExp e1 NOTEQ RelationalExp e2
         | RelationalExp
-        | EqualityExp e1 NOTEQ RelationalExp e2
+        | EqualityExp e1 EQEQ RelationalExp e2
  ;
 syntax VarOrFieldRef
-        = THIS callee BANG b
-        | n: IDENTIFIER
-        | THIS callee DOT d
+        = THIS callee DOT d
+        | THIS callee BANG b
         | THIS DOT IDENTIFIER id
+        | n: IDENTIFIER
  ;
 syntax Appcond
         = 
         OrAppcond
  ;
+syntax HASFIELD
+        = 
+        "hasField"
+ ;
+syntax ANDAND
+        = 
+        "&&"
+ ;
 syntax FeatureDecl
         = f: TYPE_IDENTIFIER
         | TYPE_IDENTIFIER f LBRACE AttributeConstraintList acl RBRACE
  ;
-syntax MfactorExp
-        = MINUS MfactorExp e
-        | MlitExp
-        | NEGATION MfactorExp e
-        | LPAREN Mexp e RPAREN
- ;
 syntax ImplementInterfacesRemove
         = 
         REMOVES IfnameList i
+ ;
+syntax MfactorExp
+        = NEGATION MfactorExp e
+        | MINUS MfactorExp e
+        | MlitExp
+        | LPAREN Mexp e RPAREN
+ ;
+syntax EQ
+        = 
+        "="
  ;
 syntax CaseExp
         = 
         CASE DataExp caseterm LBRACE RBRACE
  ;
 syntax MultExp
-        = MultExp e1 MULT Factor e2
-        | MultExp e1 MOD Factor e2
-        | f: Factor
+        = MultExp e1 MOD Factor e2
         | MultExp e1 DIV Factor e2
+        | f: Factor
+        | MultExp e1 MULT Factor e2
  ;
 syntax Name
         = SimpleName
         | QualifiedName
  ;
 syntax SqlAggregateFunction
-        = COUNT LPAREN MULT RPAREN
+        = IDENTIFIER i LPAREN SqlTupleScalarFunction f RPAREN
         | f: SqlTupleScalarFunction
-        | IDENTIFIER i LPAREN SqlTupleScalarFunction f RPAREN
+        | COUNT LPAREN MULT RPAREN
  ;
 syntax IDENTIFIER
         = 
@@ -136,39 +184,67 @@ syntax ParamDecl
         = 
         TypeExp t IDENTIFIER i
  ;
+syntax COMMA
+        = 
+        ","
+ ;
+syntax NOT
+        = 
+        "not"
+ ;
 syntax Mexp
-        = Mexp e1 OROR MandExp e2
-        | MandExp
+        = MandExp
+        | Mexp e1 OROR MandExp e2
  ;
 syntax AfterCondition
         = 
         AFTER DeltaList l
  ;
+syntax LBRACKET
+        = 
+        "["
+ ;
+syntax END
+        = 
+        "end"
+ ;
 syntax Fextension
         = 
         TYPE_IDENTIFIER f LBRACE AttributeConstraintList acl RBRACE
  ;
+syntax INSERT
+        = 
+        "insert"
+ ;
 syntax SqlAttrDef
-        = SqlAggregateFunction fun AS DataExp e
-        | f: Factor
+        = f: Factor
+        | SqlAggregateFunction fun AS DataExp e
+ ;
+syntax WHERE
+        = 
+        "where"
  ;
 syntax FunctionDecl
         = DEF Datatypeuse t IDENTIFIER fn DatatypeparamListDecl p LPAREN RPAREN ASSIGN ExpFunctionDef ef SEMICOLON
         | DEF Datatypeuse t IDENTIFIER fn LPAREN RPAREN ASSIGN ExpFunctionDef ef SEMICOLON
-        | DEF Datatypeuse t IDENTIFIER fn LPAREN RPAREN ASSIGN BUILTIN SEMICOLON
         | DEF Datatypeuse t IDENTIFIER fn DatatypeparamListDecl p LPAREN RPAREN ASSIGN BUILTIN SEMICOLON
+        | DEF Datatypeuse t IDENTIFIER fn LPAREN RPAREN ASSIGN BUILTIN SEMICOLON
  ;
 syntax ModuleModifierList
         = ModuleModifierList l ModuleModifier m
         | m: ModuleModifier
  ;
 syntax DatatypeDecl
-        = DATA TYPE_IDENTIFIER id SEMICOLON
-        | DATA TYPE_IDENTIFIER id ASSIGN DataConstructorList l SEMICOLON
+        = DATA TYPE_IDENTIFIER id ASSIGN DataConstructorList l SEMICOLON
+        | DATA TYPE_IDENTIFIER id SEMICOLON
  ;
 syntax TYPE_IDENTIFIER
         = 
         TYPE_IDENTIFIER_OLD
+ ;
+syntax PRODUCT
+        = 
+        "product"
  ;
 syntax Product
         = PRODUCT TYPE_IDENTIFIER id LPAREN RPAREN SEMICOLON
@@ -181,17 +257,25 @@ syntax Decl
         | ClassDecl
         | InterfaceDecl
  ;
-syntax Feature
-        = TYPE_IDENTIFIER id PRIME
-        | id: TYPE_IDENTIFIER
+syntax UPDATE
+        = 
+        "update"
  ;
-syntax SimpleTypeName
-        = id: 
-        TYPE_IDENTIFIER
+syntax Feature
+        = id: TYPE_IDENTIFIER
+        | TYPE_IDENTIFIER id PRIME
+ ;
+syntax RARROW
+        = 
+        "=\>"
  ;
 syntax PureExpPrefix
         = LPAREN IfExp e RPAREN
         | PureExpNoIf
+ ;
+syntax SimpleTypeName
+        = id: 
+        TYPE_IDENTIFIER
  ;
 syntax DeltaId
         = delta: 
@@ -206,16 +290,20 @@ syntax ExpFunctionDef
         DataExp
  ;
 syntax AsyncCall
-        = PureExpPrefix callee BANG IDENTIFIER method LPAREN RPAREN
-        | THIS callee BANG IDENTIFIER method LPAREN RPAREN
+        = THIS callee BANG IDENTIFIER method LPAREN RPAREN
+        | PureExpPrefix callee BANG IDENTIFIER method LPAREN RPAREN
  ;
 syntax ConstructorArgList
-        = ConstructorArgList l COMMA ConstructorArg a
-        | a: ConstructorArg
+        = a: ConstructorArg
+        | ConstructorArgList l COMMA ConstructorArg a
  ;
 syntax SqlOrderingAttributeList
-        = SqlOrderingAttributeList l COMMA SqlOrderingAttribute a
-        | a: SqlOrderingAttribute
+        = a: SqlOrderingAttribute
+        | SqlOrderingAttributeList l COMMA SqlOrderingAttribute a
+ ;
+syntax MODIFIES
+        = 
+        "modifies"
  ;
 syntax InfModifierFragmentList
         = InfModifierFragmentList l InfModifierFragment f
@@ -225,29 +313,65 @@ syntax AndExp
         = AndExp e1 ANDAND EqualityExp e2
         | EqualityExp
  ;
+syntax MOD
+        = 
+        "%"
+ ;
+syntax ROOT
+        = 
+        "root"
+ ;
 syntax WhenCondition
-        = TO Appcond ac
-        | WHEN Appcond ac
+        = WHEN Appcond ac
+        | TO Appcond ac
  ;
 syntax MethodsigList
         = Methodsig m SEMICOLON
         | MethodsigList l Methodsig m SEMICOLON
  ;
+syntax COUNT
+        = 
+        "count"
+ ;
+syntax ASSIGN
+        = 
+        "="
+ ;
 syntax SqlAttrAssignment
         = 
         DataExp e EQ SqlTupleScalarFunction f
  ;
+syntax GT
+        = 
+        "\>"
+ ;
 syntax OoModifier
-        = REMOVES CLASS TypeName id SEMICOLON
+        = ADDS QualifiedClassDecl classdecl
+        | REMOVES CLASS TypeName id SEMICOLON
         | MODIFIES INTERFACE TypeName id LBRACE RBRACE
         | ADDS QualifiedInterfaceDecl ifacedecl
         | MODIFIES CLASS TypeName id LBRACE RBRACE
-        | ADDS QualifiedClassDecl classdecl
  ;
 syntax MimplExp
         = MeqExp
-        | MimplExp e1 IMPLIES MeqExp e2
         | MimplExp e1 EQUIV MeqExp e2
+        | MimplExp e1 IMPLIES MeqExp e2
+ ;
+syntax REBIND
+        = 
+        "rebind"
+ ;
+syntax IFOUT
+        = 
+        "ifout"
+ ;
+syntax SELECT
+        = 
+        "select"
+ ;
+syntax DISTINCT
+        = 
+        "distinct"
  ;
 syntax SqlTupleCaseBranches
         = SqlTupleCaseBranches l SqlTupleCaseBranch b
@@ -262,9 +386,84 @@ syntax IfnameList
         | i: Ifname
  ;
 syntax FnodeList
-        = ()
-        | FnodeList l COMMA Fnode f
+        = FnodeList l COMMA Fnode f
+        | ()
         | f: Fnode
+ ;
+syntax LEFT
+        = 
+        "left"
+ ;
+syntax YYINITIAL
+        = "after"
+        | "exclude"
+        | "sql"
+        | "null"
+        | "duration"
+        | "father"
+        | "skip"
+        | "productline"
+        | "if"
+        | "interface"
+        | "return"
+        | "else"
+        | "in"
+        | "product"
+        | "extends"
+        | "by"
+        | "def"
+        | "hasMethod"
+        | "movecogto"
+        | "features"
+        | "builtin"
+        | "extension"
+        | "core"
+        | "critical"
+        | "hasInterface"
+        | "implements"
+        | "data"
+        | "from"
+        | "location"
+        | "get"
+        | "ifin"
+        | "type"
+        | "hasField"
+        | "this"
+        | "opt"
+        | "module"
+        | "group"
+        | "then"
+        | "original"
+        | "new"
+        | "await"
+        | "class"
+        | "cog"
+        | "require"
+        | "ifout"
+        | "root"
+        | "rebind"
+        | "port"
+        | "removes"
+        | "suspend"
+        | "uses"
+        | "move"
+        | "adds"
+        | ".original"
+        | "import"
+        | "export"
+        | "delta"
+        | "assert"
+        | "when"
+        | "while"
+        | "case"
+        | "allof"
+        | "modifies"
+        | "oneof"
+        | "let"
+ ;
+syntax BUILTIN
+        = 
+        "builtin"
  ;
 syntax ImportList
         = t: Import
@@ -278,9 +477,21 @@ syntax LocationExp
         = 
         LOC LPAREN PureExp param RPAREN
  ;
+syntax EQUIV
+        = 
+        "\<-\>"
+ ;
 syntax SqlAttrRefList
         = SqlAttrRefList l COMMA SqlAttrRef a
         | a: SqlAttrRef
+ ;
+syntax LPAREN
+        = 
+        "("
+ ;
+syntax EXTENSION
+        = 
+        "extension"
  ;
 syntax DeltaParamDecl
         = p: ParamDecl
@@ -290,22 +501,30 @@ syntax ConstructorArg
         = u: Datatypeuse
         | Datatypeuse u IDENTIFIER id
  ;
+syntax SUSPEND
+        = 
+        "suspend"
+ ;
+syntax THEN
+        = 
+        "then"
+ ;
 syntax FunctionalModifier
-        = ADDS TypesynDecl typesyndecl
-        | MODIFIES TypesynDecl typesyndecl
-        | ADDS DatatypeDecl datatypedecl
+        = MODIFIES DatatypeDecl datatypedecl
         | ADDS FunctionDecl functiondecl
-        | MODIFIES DatatypeDecl datatypedecl
+        | ADDS DatatypeDecl datatypedecl
+        | MODIFIES TypesynDecl typesyndecl
+        | ADDS TypesynDecl typesyndecl
  ;
 syntax EffExp
         = AsyncCall
         | NewlocExp "/"
+        | PureExpPrefix p DOT GET
         | NewExp
-        | IncompleteExp
         | SyncCall
+        | IncompleteExp
         | SQL LPAREN SqlExp e RPAREN
         | OriginalCall
-        | PureExpPrefix p DOT GET
  ;
 syntax FnappListExp
         = 
@@ -324,14 +543,14 @@ syntax DeltaDeclList
         | DeltaDeclList l DeltaDecl t
  ;
 syntax PatternList
-        = PatternList l COMMA Pattern i
-        | i: Pattern
+        = i: Pattern
+        | PatternList l COMMA Pattern i
  ;
 syntax SqlTupleScalarFunctionSum
-        = SqlTupleScalarFunctionSum f1 MINUS SqlTupleScalarFunctionProduct f2
-        | SqlTupleScalarFunctionSum f1 PLUS SqlTupleScalarFunctionProduct f2
-        | SqlTupleScalarFunctionSum f1 MINUS LPAREN SqlTupleScalarFunctionSum f2 RPAREN
+        = SqlTupleScalarFunctionSum f1 PLUS SqlTupleScalarFunctionProduct f2
+        | SqlTupleScalarFunctionSum f1 MINUS SqlTupleScalarFunctionProduct f2
         | SqlTupleScalarFunctionProduct
+        | SqlTupleScalarFunctionSum f1 MINUS LPAREN SqlTupleScalarFunctionSum f2 RPAREN
  ;
 syntax InfModifierFragment
         = REMOVES Methodsig ms SEMICOLON
@@ -341,78 +560,110 @@ syntax DeltaParamDecls
         = 
         LPAREN RPAREN
  ;
+syntax LTEQ
+        = 
+        "\<="
+ ;
 syntax MainBlock
         = 
         LBRACE RBRACE
  ;
-syntax DeltaparamList
-        = DeltaparamList l COMMA Deltaparam p
-        | p: Deltaparam
+syntax AS
+        = 
+        "as"
  ;
 syntax CompoundStmt
         = IfThenElseStmt
         | BlockWithoutAnnotations
         | WhileStmt
  ;
+syntax DeltaparamList
+        = DeltaparamList l COMMA Deltaparam p
+        | p: Deltaparam
+ ;
 syntax Methodsig
         = 
         TypeExp returntype IDENTIFIER id LPAREN RPAREN
  ;
 syntax SqlTupleConstantList
-        = c: SqlTupleConstant
-        | SqlTupleConstantList l COMMA SqlTupleConstant c
+        = SqlTupleConstantList l COMMA SqlTupleConstant c
+        | c: SqlTupleConstant
  ;
 syntax NewlocExp
         = 
         NEW LOC
  ;
+syntax BANG
+        = 
+        "!"
+ ;
 syntax DeltaclauseList
-        = ()
-        | DeltaclauseList l DeltaClause dc SEMICOLON
+        = DeltaclauseList l DeltaClause dc SEMICOLON
+        | ()
+ ;
+syntax SET
+        = 
+        "set"
  ;
 syntax PureExpNoIf
         = ConstructorExp
         | NULL
         | FnappExp
-        | CaseExp
         | VarOrFieldRef
+        | CaseExp
         | THIS
-        | FnappListExp
         | LetExp
- ;
-syntax DatatypeuseList
-        = i: Datatypeuse
-        | DatatypeuseList l COMMA Datatypeuse i
+        | FnappListExp
  ;
 syntax OptfeatureList
         = OPTFEATURES FeatureList l SEMICOLON
         | ()
+ ;
+syntax DatatypeuseList
+        = DatatypeuseList l COMMA Datatypeuse i
+        | i: Datatypeuse
+ ;
+syntax REMOVES
+        = 
+        "removes"
  ;
 syntax ListLiteralExp
         = 
         LBRACKET RBRACKET
  ;
 syntax MaddExp
-        = MaddExp e1 MINUS MmultExp e2
+        = MaddExp e1 PLUS MmultExp e2
         | e: MmultExp
-        | MaddExp e1 PLUS MmultExp e2
+        | MaddExp e1 MINUS MmultExp e2
  ;
 syntax DeltaList
-        = DeltaList l COMMA Delta id
-        | id: Delta
+        = id: Delta
+        | DeltaList l COMMA Delta id
  ;
 syntax ConstructorPattern
         = 
         co: TypeName
  ;
+syntax BY
+        = 
+        "by"
+ ;
 syntax FactorAppcond
-        = LPAREN Appcond ac RPAREN
+        = NEGATION FactorAppcond ac
+        | LPAREN Appcond ac RPAREN
         | f: Feature
-        | NEGATION FactorAppcond ac
  ;
 syntax SqlStringLiteral
         = s: 
         SQLSTRINGLITERAL
+ ;
+syntax MINUS
+        = 
+        "-"
+ ;
+syntax ASC
+        = 
+        "asc"
  ;
 syntax VarDecl
         = TypeExp t IDENTIFIER i ASSIGN Exp e
@@ -422,12 +673,28 @@ syntax Group
         = 
         GROUP Cardinality c LBRACE FnodeList fs RBRACE
  ;
+syntax GROUP
+        = 
+        "group"
+ ;
+syntax PRIME
+        = 
+        "'"
+ ;
+syntax EQEQ
+        = 
+        "=="
+ ;
+syntax GTEQ
+        = 
+        "\>="
+ ;
 syntax ModifierFragment
-        = REMOVES FieldDecl f SEMICOLON
+        = ADDS Method m
+        | REMOVES FieldDecl f SEMICOLON
         | MODIFIES Method m
         | ADDS FieldDecl f SEMICOLON
         | REMOVES Methodsig ms SEMICOLON
-        | ADDS Method m
  ;
 syntax QualifiedInterfaceDecl
         = 
@@ -441,15 +708,23 @@ syntax TypeExp
         = n: TypeName
         | TypeName n LT DatatypeuseList p GT
  ;
+syntax INTO
+        = 
+        "into"
+ ;
+syntax MODULE
+        = 
+        "module"
+ ;
 syntax Block
         = 
         b: BlockWithoutAnnotations
  ;
 syntax SqlRelationRef
-        = SqlRelationRef r1 JOIN SqlAtomicRelationRef r2
-        | SqlRelationRef r1 RIGHT JOIN SqlAtomicRelationRef r2
+        = SqlRelationRef r1 LEFT JOIN SqlAtomicRelationRef r2
         | SqlAtomicRelationRef
-        | SqlRelationRef r1 LEFT JOIN SqlAtomicRelationRef r2
+        | SqlRelationRef r1 RIGHT JOIN SqlAtomicRelationRef r2
+        | SqlRelationRef r1 JOIN SqlAtomicRelationRef r2
  ;
 syntax AnyName
         = TypeName
@@ -458,6 +733,10 @@ syntax AnyName
 syntax AttrAssignments
         = 
         LBRACE AttrAssignmentList l RBRACE
+ ;
+syntax DIV
+        = 
+        "/"
  ;
 syntax FromCondition
         = 
@@ -468,51 +747,95 @@ syntax AdaptationList
         | ad: Adaptation
  ;
 syntax SqlTupleConstant
-        = i: IntLiteral
+        = MINUS IntLiteral i
+        | i: IntLiteral
         | s: SqlStringLiteral
-        | TRUE
-        | MINUS IntLiteral i
         | FALSE
+        | TRUE
         | r: VarOrFieldRef
  ;
 syntax NewExp
         = 
         NEW TypeName i LPAREN RPAREN
  ;
+syntax EXTENDS
+        = 
+        "extends"
+ ;
 syntax WhileStmt
         = 
         WHILE LPAREN DataExp e1 RPAREN Stmt s1
+ ;
+syntax NULL
+        = 
+        "null"
  ;
 syntax ModuleModifier
         = m: OoModifier
         | m: FunctionalModifier
  ;
+syntax NEW
+        = 
+        "new"
+ ;
 syntax QualifiedTypeName
         = 
         TypeName qn DOT TYPE_IDENTIFIER n
  ;
+syntax TRUE
+        = 
+        "true"
+ ;
 syntax SqlExp
         = INSERT INTO SqlRelationRef r LPAREN SqlAttrRefList a RPAREN VALUES LPAREN SqlTupleConstantList v RPAREN
         | UPDATE SqlRelationRef r SET SqlAttrAssignmentList a OptSqlCondition c
-        | SELECT SqlAttrsDef a FROM SqlRelationRef r OptSqlCondition c SqlGroupingAttributes g SqlOrderingAttributes o
         | SELECT DISTINCT SqlAttrsDef a FROM SqlRelationRef r OptSqlCondition c SqlGroupingAttributes g SqlOrderingAttributes o
+        | SELECT SqlAttrsDef a FROM SqlRelationRef r OptSqlCondition c SqlGroupingAttributes g SqlOrderingAttributes o
+ ;
+syntax LT
+        = 
+        "\<"
+ ;
+syntax DURATION
+        = 
+        "duration"
  ;
 syntax CorefeatureList
         = ()
         | COREFEATURES FeatureList l SEMICOLON
  ;
+syntax CORE
+        = 
+        "core"
+ ;
+syntax CRITICAL
+        = 
+        "critical"
+ ;
+syntax PLUS
+        = 
+        "+"
+ ;
 syntax Delta
         = id: 
         TYPE_IDENTIFIER
+ ;
+syntax DELTA
+        = 
+        "delta"
  ;
 syntax ImplementInterfacesAdd
         = 
         ADDS IfnameList i
  ;
 syntax MeqExp
-        = MrelExp
+        = MeqExp e1 EQEQ MrelExp e2
+        | MrelExp
         | MeqExp e1 NOTEQ MrelExp e2
-        | MeqExp e1 EQEQ MrelExp e2
+ ;
+syntax IMPORT
+        = 
+        "import"
  ;
 syntax ModifierFragmentList
         = f: ModifierFragment
@@ -522,50 +845,112 @@ syntax IfExp
         = 
         IF DataExp e THEN DataExp c ELSE DataExp a
  ;
+syntax SQL
+        = "update"
+        | "end"
+        | "select"
+        | "where"
+        | "left"
+        | "as"
+        | "by"
+        | "set"
+        | "true"
+        | "null"
+        | "and"
+        | "sql"
+        | "or"
+        | "count"
+        | "join"
+        | "values"
+        | "false"
+        | "is"
+        | "else"
+        | "desc"
+        | "insert"
+        | "not"
+        | "distinct"
+        | "right"
+        | "then"
+        | "group"
+        | "asc"
+        | "into"
+        | "from"
+        | "case"
+        | "when"
+        | "order"
+ ;
+syntax FROM
+        = 
+        "from"
+ ;
 syntax SqlAttrAssignmentList
         = a: SqlAttrAssignment
         | SqlAttrAssignmentList l COMMA SqlAttrAssignment a
  ;
+syntax DATA
+        = 
+        "data"
+ ;
 syntax AttributeConstraintList
-        = AttributeConstraintList acl TYPE_IDENTIFIER t IDENTIFIER id IN LBRACKET BoundaryInt b1 UNTIL BoundaryInt b2 RBRACKET SEMICOLON
-        | AttributeConstraintList acl TYPE_IDENTIFIER t IDENTIFIER id SEMICOLON "/"
+        = AttributeConstraintList acl TYPE_IDENTIFIER t IDENTIFIER id SEMICOLON "/"
         | AttributeConstraintList acl EXCLUDE COLON Featvar f SEMICOLON
-        | AttributeConstraintList acl TYPE_IDENTIFIER t IDENTIFIER id IN LBRACE IntList il RBRACE SEMICOLON
-        | AttributeConstraintList acl TYPE_IDENTIFIER t LBRACKET BoundaryInt b1 UNTIL BoundaryInt b2 RBRACKET IDENTIFIER id SEMICOLON
-        | AttributeConstraintList acl Mexp e SEMICOLON
-        | "/"
         | AttributeConstraintList acl REQUIRE COLON Featvar f SEMICOLON
+        | AttributeConstraintList acl TYPE_IDENTIFIER t IDENTIFIER id IN LBRACKET BoundaryInt b1 UNTIL BoundaryInt b2 RBRACKET SEMICOLON
         | AttributeConstraintList acl IFIN COLON Mexp e SEMICOLON
+        | "/"
+        | AttributeConstraintList acl TYPE_IDENTIFIER t LBRACKET BoundaryInt b1 UNTIL BoundaryInt b2 RBRACKET IDENTIFIER id SEMICOLON
+        | AttributeConstraintList acl TYPE_IDENTIFIER t IDENTIFIER id IN LBRACE IntList il RBRACE SEMICOLON
         | AttributeConstraintList acl IFOUT COLON Mexp e SEMICOLON
+        | AttributeConstraintList acl Mexp e SEMICOLON
+ ;
+syntax AND
+        = 
+        "and"
+ ;
+syntax EXPORT
+        = 
+        "export"
  ;
 syntax AnyNameList
-        = n: AnyName
-        | AnyNameList l COMMA AnyName n
+        = AnyNameList l COMMA AnyName n
+        | n: AnyName
  ;
 syntax ExtendsInterfaces
         = 
         EXTENDS IfnameList i
+ ;
+syntax IMPLEMENTS
+        = 
+        "implements"
  ;
 syntax SqlAtomicRelationRef
         = r: StringLiteral
         | r: VarOrFieldRef
  ;
 syntax AttrAssignment
-        = IDENTIFIER n ASSIGN INTLITERAL i
-        | IDENTIFIER n ASSIGN TYPE_IDENTIFIER c
+        = IDENTIFIER n ASSIGN TYPE_IDENTIFIER c
+        | IDENTIFIER n ASSIGN INTLITERAL i
  ;
 syntax IncompleteExp
-        = PureExpPrefix callee BANG b
+        = NEW
+        | PureExpPrefix callee BANG b
         | PureExpPrefix callee DOT d
-        | NEW
+ ;
+syntax AFTER
+        = 
+        "after"
  ;
 syntax ImplementInterfaces
         = 
         IMPLEMENTS IfnameList i
  ;
+syntax EXCLUDE
+        = 
+        "exclude"
+ ;
 syntax IfThenElseStmt
-        = IF LPAREN DataExp e1 RPAREN Stmt s1 ELSE Stmt s2
-        | IF LPAREN DataExp e1 RPAREN Stmt s1
+        = IF LPAREN DataExp e1 RPAREN Stmt s1
+        | IF LPAREN DataExp e1 RPAREN Stmt s1 ELSE Stmt s2
  ;
 syntax SyncCall
         = PureExpPrefix callee DOT IDENTIFIER method LPAREN RPAREN
@@ -577,13 +962,17 @@ syntax CompilationUnit
  ;
 syntax Import
         = IMPORT AnyNameList l FROM ModuleName m SEMICOLON
-        | IMPORT AnyNameList l SEMICOLON
         | IMPORT MULT FROM ModuleName m SEMICOLON
+        | IMPORT AnyNameList l SEMICOLON
  ;
 syntax HasCondition
-        = HASFIELD FieldDecl f
+        = HASINTERFACE TypeName n
         | HASMETHOD Methodsig ms
-        | HASINTERFACE TypeName n
+        | HASFIELD FieldDecl f
+ ;
+syntax USES
+        = 
+        "uses"
  ;
 syntax SqlTupleScalarFunctionQuotient
         = SqlTupleScalarFunctionQuotient f1 DIV LPAREN SqlTupleScalarFunctionSum f2 RPAREN
@@ -591,42 +980,74 @@ syntax SqlTupleScalarFunctionQuotient
         | AtomicSqlTupleScalarFunction
  ;
 syntax Export
-        = EXPORT MULT SEMICOLON
+        = EXPORT MULT FROM ModuleName m SEMICOLON
         | EXPORT AnyNameList l SEMICOLON
-        | EXPORT MULT FROM ModuleName m SEMICOLON
         | EXPORT AnyNameList l FROM ModuleName m SEMICOLON
+        | EXPORT MULT SEMICOLON
  ;
 syntax SqlAndCondition
-        = SqlAndCondition c1 AND op SqlCondition c2
-        | SqlCondition
+        = SqlCondition
+        | SqlAndCondition c1 AND op SqlCondition c2
+ ;
+syntax OPTFEATURES
+        = 
+        "features"
  ;
 syntax DataConstructor
         = 
         co: TYPE_IDENTIFIER
  ;
+syntax ORIGINAL
+        = 
+        "original"
+ ;
 syntax SqlTupleScalarFunctionProduct
-        = SqlTupleScalarFunctionProduct f1 MULT SqlTupleScalarFunctionQuotient f2
-        | SqlTupleScalarFunctionQuotient
+        = SqlTupleScalarFunctionQuotient
         | SqlTupleScalarFunctionProduct f1 MULT LPAREN SqlTupleScalarFunctionSum f2 RPAREN
+        | SqlTupleScalarFunctionProduct f1 MULT SqlTupleScalarFunctionQuotient f2
  ;
 syntax SqlAttrsDef
         = MULT
         | l: SqlAttrDefList
  ;
+syntax HASINTERFACE
+        = 
+        "hasInterface"
+ ;
 syntax AddExp
-        = AddExp e1 PLUS MultExp e2
-        | e: MultExp
+        = e: MultExp
         | AddExp e1 MINUS MultExp e2
+        | AddExp e1 PLUS MultExp e2
  ;
 syntax DeltaAccessList
         = t: DeltaAccess
         | DeltaAccessList l DeltaAccess t
+ ;
+syntax HASMETHOD
+        = 
+        "hasMethod"
+ ;
+syntax RPAREN
+        = 
+        ")"
+ ;
+syntax MOVECOGTO
+        = 
+        "movecogto"
  ;
 syntax PureExp
         = FatherExp "/"
         | LocationExp "/"
         | IfExp
         | PureExpNoIf
+ ;
+syntax DEF
+        = 
+        "def"
+ ;
+syntax OR
+        = 
+        "or"
  ;
 syntax ConstructorExp
         = f: TypeName
@@ -641,10 +1062,10 @@ syntax IntLiteral
         INTLITERAL
  ;
 syntax MmultExp
-        = MmultExp e1 MULT MfactorExp e2
-        | e: MfactorExp
-        | MmultExp e1 DIV MfactorExp e2
+        = MmultExp e1 DIV MfactorExp e2
         | MmultExp e1 MOD MfactorExp e2
+        | e: MfactorExp
+        | MmultExp e1 MULT MfactorExp e2
  ;
 syntax OriginalCall
         = ORIGINAL LPAREN RPAREN
@@ -659,66 +1080,110 @@ syntax Stmt
         = s: CompoundStmt
         | StmtWithoutAnnotations s SEMICOLON
  ;
-syntax Deltaparam
-        = i: INTLITERAL
-        | c: TYPE_IDENTIFIER
-        | TYPE_IDENTIFIER fid DOT IDENTIFIER aid
+syntax RBRACKET
+        = 
+        "]"
  ;
 syntax ParamDeclList
         = ParamDeclList l COMMA ParamDecl i
         | i: ParamDecl
  ;
+syntax Deltaparam
+        = TYPE_IDENTIFIER fid DOT IDENTIFIER aid
+        | i: INTLITERAL
+        | c: TYPE_IDENTIFIER
+ ;
+syntax ADDS
+        = 
+        "adds"
+ ;
 syntax SqlTupleScalarFunctionConcat
         = SqlTupleScalarFunctionConcat f1 CONCAT SqlTupleScalarFunctionSum f2
         | SqlTupleScalarFunctionSum
+ ;
+syntax BAR
+        = 
+        "|"
  ;
 syntax DataExp
         = 
         OrExp
  ;
+syntax RIGHT
+        = 
+        "right"
+ ;
 syntax Exp
         = e: DataExp
         | e: EffExp
+ ;
+syntax DOTORIGINAL
+        = 
+        ".original"
+ ;
+syntax LET
+        = 
+        "let"
+ ;
+syntax OROR
+        = 
+        "||"
  ;
 syntax TypeName
         = QualifiedTypeName
         | SimpleTypeName
  ;
+syntax IFIN
+        = 
+        "ifin"
+ ;
 syntax SqlTupleCaseFunction
         = 
         CASE SqlTupleCaseBranches b ELSE SqlTupleScalarFunction f END
+ ;
+syntax FALSE
+        = 
+        "false"
  ;
 syntax Datatypeuse
         = TypeName n LT DatatypeuseList p GT
         | n: TypeName
  ;
+syntax SUBLOC
+        = 
+        "move"
+ ;
 syntax FatherExp
         = 
         FATHER LPAREN PureExp param RPAREN
+ ;
+syntax RBRACE
+        = 
+        "}"
  ;
 syntax Method
         = CRITICAL Methodsig ms Block b
         | Methodsig ms Block b
  ;
 syntax AndAppcond
-        = AndAppcond ac1 ANDAND FactorAppcond ac2
-        | FactorAppcond
+        = FactorAppcond
+        | AndAppcond ac1 ANDAND FactorAppcond ac2
  ;
 syntax IntList
-        = MINUS INTLITERAL i
-        | IntList il COMMA MINUS INTLITERAL i
+        = IntList il COMMA MINUS INTLITERAL i
         | IntList il COMMA INTLITERAL i
+        | MINUS INTLITERAL i
         | i: INTLITERAL
  ;
 syntax SqlCondition
-        = NOT SqlCondition c
-        | SqlTupleScalarFunction f1 SqlComparisonRelation r SqlTupleScalarFunction f2
+        = SqlTupleScalarFunction f1 SqlComparisonRelation r SqlTupleScalarFunction f2
         | StringLiteral a IS NULL
+        | NOT SqlCondition c
         | LPAREN SqlOrCondition c RPAREN
  ;
 syntax SqlGroupingAttributes
-        = ()
-        | GROUP BY SqlAttrRefList a
+        = GROUP BY SqlAttrRefList a
+        | ()
  ;
 syntax Datatypeparam
         = id: 
@@ -732,9 +1197,21 @@ syntax ModuleDeclList
         = ModuleDeclList l ModuleDecl t
         | t: ModuleDecl
  ;
+syntax CONCAT
+        = 
+        "||"
+ ;
 syntax CaseBranch
         = 
         Pattern lhs RARROW DataExp rhs SEMICOLON
+ ;
+syntax GUARDAND
+        = 
+        "&"
+ ;
+syntax WHILE
+        = 
+        "while"
  ;
 syntax Deltaparams
         = 
@@ -744,14 +1221,26 @@ syntax DeltaAccess
         = 
         USES ModuleName m SEMICOLON
  ;
+syntax IF
+        = 
+        "if"
+ ;
 syntax OrExp
-        = AndExp
-        | OrExp e1 OROR AndExp e2
+        = OrExp e1 OROR AndExp e2
+        | AndExp
  ;
 syntax SqlOrderingAttribute
-        = DataExp e DESC
+        = DataExp e ASC
+        | DataExp e DESC
         | e: DataExp
-        | DataExp e ASC
+ ;
+syntax ALLOF
+        = 
+        "allof"
+ ;
+syntax INTERFACE
+        = 
+        "interface"
  ;
 syntax QualifiedClassDecl
         = 
@@ -769,13 +1258,49 @@ syntax FnappExp
         = 
         Name f LPAREN RPAREN
  ;
+syntax IN
+        = 
+        "in"
+ ;
+syntax VALUES
+        = 
+        "values"
+ ;
 syntax OptSqlCondition
-        = WHERE SqlOrCondition c
-        | ()
+        = ()
+        | WHERE SqlOrCondition c
+ ;
+syntax LOC
+        = 
+        "location"
+ ;
+syntax ORDER
+        = 
+        "order"
+ ;
+syntax IS
+        = 
+        "is"
+ ;
+syntax JOIN
+        = 
+        "join"
  ;
 syntax LAYOUT
         = Comment
         | ()
+ ;
+syntax DOT
+        = 
+        "."
+ ;
+syntax GET
+        = 
+        "get"
+ ;
+syntax AWAIT
+        = 
+        "await"
  ;
 syntax ModuleName
         = 
@@ -785,9 +1310,25 @@ syntax Adaptation
         = 
         TYPE_IDENTIFIER product BY TYPE_IDENTIFIER update SEMICOLON
  ;
+syntax MULT
+        = 
+        "*"
+ ;
+syntax CASE
+        = 
+        "case"
+ ;
+syntax RETURN
+        = 
+        "return"
+ ;
 syntax DataExpList
-        = DataExpList l COMMA DataExp i
-        | i: DataExp
+        = i: DataExp
+        | DataExpList l COMMA DataExp i
+ ;
+syntax UNTIL
+        = 
+        ".."
  ;
 syntax StringLiteral
         = s: 
@@ -797,46 +1338,82 @@ syntax SqlTupleScalarFunction
         = 
         SqlTupleScalarFunctionConcat
  ;
+syntax COLON
+        = 
+        ":"
+ ;
 syntax MethodList
         = MethodList l Method i
         | i: Method
  ;
+syntax USCORE
+        = 
+        "_"
+ ;
 syntax Featuremodeldecl
-        = Featuremodeldecl l EXTENSION Fextension ext
-        | Featuremodeldecl l ROOT FeatureDecl f
+        = Featuremodeldecl l ROOT FeatureDecl f
         | ()
+        | Featuremodeldecl l EXTENSION Fextension ext
  ;
 syntax InitBlock
         = 
         Block
  ;
+syntax TYPE
+        = 
+        "type"
+ ;
+syntax WHEN
+        = 
+        "when"
+ ;
+syntax ELSE
+        = 
+        "else"
+ ;
+syntax ASSERT
+        = 
+        "assert"
+ ;
+syntax LBRACE
+        = 
+        "{"
+ ;
 syntax DatatypeparamList
-        = DatatypeparamList l COMMA Datatypeparam p
-        | p: Datatypeparam
+        = p: Datatypeparam
+        | DatatypeparamList l COMMA Datatypeparam p
  ;
 syntax StmtWithoutAnnotations
-        = REBIND IDENTIFIER field ASSIGN Exp e
-        | VarOrFieldRef r ASSIGN Exp e
-        | SKIP
-        | REBIND Exp obj COLON IDENTIFIER field ASSIGN Exp e
-        | e: EffExp
-        | vd: VarDecl
-        | DURATION LPAREN DataExp min COMMA DataExp max RPAREN
-        | SUBLOC PureExp sub IN PureExp father
-        | ASSERT DataExp e
-        | AWAIT Guard
-        | SUSPEND
-        | RETURN Exp e
+        = ASSERT DataExp e
         | MOVECOGTO DataExp
+        | RETURN Exp e
+        | AWAIT Guard
+        | SKIP
+        | e: EffExp
+        | SUBLOC PureExp sub IN PureExp father
+        | vd: VarDecl
+        | SUSPEND
+        | REBIND Exp obj COLON IDENTIFIER field ASSIGN Exp e
+        | DURATION LPAREN DataExp min COMMA DataExp max RPAREN
+        | VarOrFieldRef r ASSIGN Exp e
+        | REBIND IDENTIFIER field ASSIGN Exp e
+ ;
+syntax REQUIRE
+        = 
+        "require"
  ;
 syntax BoundaryInt
-        = i: INTLITERAL
-        | MULT
+        = MULT
         | MINUS INTLITERAL i
+        | i: INTLITERAL
+ ;
+syntax PRODUCTLINE
+        = 
+        "productline"
  ;
 syntax OrAppcond
-        = OrAppcond ac1 OROR AndAppcond ac2
-        | AndAppcond
+        = AndAppcond
+        | OrAppcond ac1 OROR AndAppcond ac2
  ;
 syntax Annotation
         = LBRACKET TypeExp type COLON DataExp exp RBRACKET
@@ -860,11 +1437,11 @@ syntax AtomicSqlTupleScalarFunction
         | SqlTupleCaseFunction
  ;
 syntax RelationalExp
-        = RelationalExp e1 LTEQ AddExp e2
+        = RelationalExp e1 GTEQ AddExp e2
         | AddExp
-        | RelationalExp e1 LT AddExp e2
         | RelationalExp e1 GT AddExp e2
-        | RelationalExp e1 GTEQ AddExp e2
+        | RelationalExp e1 LT AddExp e2
+        | RelationalExp e1 LTEQ AddExp e2
  ;
 syntax ModuleDecl
         = 
@@ -875,27 +1452,43 @@ syntax SqlAttrRef
         DataExp
  ;
 syntax MandExp
-        = MimplExp
-        | MandExp e1 ANDAND MimplExp e2
+        = MandExp e1 ANDAND MimplExp e2
+        | MimplExp
  ;
 syntax Deltaspec
         = 
         id: TYPE_IDENTIFIER
  ;
 syntax MrelExp
-        = MrelExp e1 GTEQ MaddExp e2
-        | MrelExp e1 GT MaddExp e2
+        = MrelExp e1 LTEQ MaddExp e2
         | MrelExp e1 LT MaddExp e2
+        | MrelExp e1 GT MaddExp e2
         | MaddExp
-        | MrelExp e1 LTEQ MaddExp e2
+        | MrelExp e1 GTEQ MaddExp e2
+ ;
+syntax FATHER
+        = 
+        "father"
  ;
 syntax DeltaParamDeclList
         = i: DeltaParamDecl
         | DeltaParamDeclList l COMMA DeltaParamDecl i
  ;
+syntax COG
+        = 
+        "cog"
+ ;
 syntax Cog
         = 
         COG
+ ;
+syntax CLASS
+        = 
+        "class"
+ ;
+syntax NEGATION
+        = 
+        "~"
  ;
 syntax FieldDeclList
         = FieldDecl i SEMICOLON
@@ -910,17 +1503,17 @@ syntax InterfaceDecl
         INTERFACE TYPE_IDENTIFIER id LBRACE RBRACE
  ;
 syntax Cardinality
-        = ONEOF
+        = LBRACKET INTLITERAL i UNTIL MULT RBRACKET
+        | ONEOF
         | LBRACKET INTLITERAL i1 UNTIL INTLITERAL i2 RBRACKET
         | ALLOF
-        | LBRACKET INTLITERAL i UNTIL MULT RBRACKET
  ;
 syntax Factor
-        = NEGATION Factor b
+        = Literal
         | MINUS Factor e
-        | Literal
         | PureExp
         | LPAREN OrExp e RPAREN
+        | NEGATION Factor b
  ;
 syntax DataConstructorParams
         = 
@@ -928,17 +1521,21 @@ syntax DataConstructorParams
  ;
 syntax SqlComparisonRelation
         = LT
-        | LTEQ
-        | GTEQ
-        | NOTEQ
-        | EQ
         | GT
+        | EQ
+        | NOTEQ
+        | GTEQ
+        | LTEQ
  ;
 syntax Pattern
-        = USCORE
-        | l: Literal
+        = l: Literal
+        | USCORE
         | v: IDENTIFIER
         | ConstructorPattern
+ ;
+syntax SKIP
+        = 
+        "skip"
  ;
 syntax AttrAssignmentList
         = a: AttrAssignment

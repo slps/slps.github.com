@@ -1,0 +1,71 @@
+module Main
+
+exports
+  sorts
+        Element DoDAFModel Document SystemFunctionTraceabilityMatrix SystemFunctionTraceabilityElement SystemDocument ArchitectureDocument PA SystemFunction SystemPA SoftwareApplicationProcedurePA AM InformationAsset AMPA System Task ArchitectureTask OperationalCapabilityTask SystemOperationalCapabilityTask PATask Capability CapabilityDocument SystemCapability NetworkCapability NodeLinkCapability MaterielItemCapabilityNorm OrganizationTypeCapabilityNorm RequiredInformationTechnologyCapability InformationTechnologyRequirement InformationExchangeRequirement PAExchangeRequirement SupportStatusCode 
+  context-free syntax
+         -> Element
+
+        document::ANY+ sftm::ANY+ sd::ANY+ am::ANY+ system::ANY+ task::ANY+ capability::ANY+ capabilityDocument::ANY+ systemCapability::ANY+ -> DoDAFModel
+
+        type::ANY cites::ANY+ describes::ANY+ records::ANY+ isThePrimaryReferenceFor::ANY+ -> Document
+
+        isDefinedBy::ANY+ -> SystemFunctionTraceabilityMatrix
+
+        systemFunction::ANY operationalActivity::ANY systemProcessActivity::ANY system::ANY capability::ANY supportStatusCode::ANY -> SystemFunctionTraceabilityElement
+
+        name::ANY description::ANY view::ANY -> SystemDocument
+
+        name::ANY description::ANY view::ANY -> ArchitectureDocument
+
+        isParentFor::ANY+ isChildFor::ANY+ correspondsTo::ANY+ isIncludedIn::ANY+ isAssignedTo::ANY+ isSupportedBy::ANY+ isTheConsumerFor::ANY+ isTheProducerFor::ANY+ -> PA
+
+        isCitedFor::ANY+ -> SystemFunction
+
+        mayBeCitedFor::ANY+ provides::ANY+ enables::ANY+ -> SystemPA
+
+        name::ANY description::ANY view::ANY -> SoftwareApplicationProcedurePA
+
+        type::ANY isCitedBy::ANY+ includes::ANY+ -> AM
+
+         -> InformationAsset
+
+        isOrdinateOf::ANY+ isSubordinateOf::ANY+ -> AMPA
+
+        isDesignedToProvide::ANY+ isDescribedBy::ANY+ performs::ANY+ isUsedToAccomplish::ANY+ -> System
+
+        levelIdentifier::ANY references::ANY cost::ANY correspondsTo::ANY+ isSupportedBy::ANY+ isTheSourceOfNeedFor::ANY+ isTheDestinationOfNeedFor::ANY+ isCitedFor::ANY+ -> Task
+
+        name::ANY description::ANY view::ANY -> ArchitectureTask
+
+        isAccomplishedA::ANY -> OperationalCapabilityTask
+
+         -> SystemOperationalCapabilityTask
+
+         -> PATask
+
+        isPerformedBy::ANY+ isOrdinateFor::ANY+ isSubordinateOf::ANY+ isPerformedByNC::ANY+ isPerformedByNLC::ANY+ isPerformedBySC::ANY+ isCitedInCD::ANY+ isUsedInMICN::ANY+ isUsedInOTCN::ANY+ isAttainedFor::ANY+ -> Capability
+
+        isCitedIn::ANY+ -> CapabilityDocument
+
+        isCitedIn::ANY+ -> SystemCapability
+
+         -> NetworkCapability
+
+         -> NodeLinkCapability
+
+         -> MaterielItemCapabilityNorm
+
+         -> OrganizationTypeCapabilityNorm
+
+         -> RequiredInformationTechnologyCapability
+
+        specifies::ANY+ -> InformationTechnologyRequirement
+
+         -> InformationExchangeRequirement
+
+        isCitedIn::ANY+ -> PAExchangeRequirement
+
+        red:: -> SupportStatusCode
+        yellow:: -> SupportStatusCode
+        green:: -> SupportStatusCode

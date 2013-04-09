@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:bgf="http://planet-sl.org/bgf" xmlns:xbgf="http://planet-sl.org/xbgf" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Browsable SpreadsheetMLStyles 1.2 Grammar</title><link href="/slps.css" rel="stylesheet" type="text/css"></link><script type="text/javascript">
+
+				  var _gaq = _gaq || [];
+				  _gaq.push(['_setAccount', 'UA-3743366-7']);
+				  _gaq.push(['_setDomainName', 'github.com']);
+				  _gaq.push(['_trackPageview']);
+
+				  (function() {
+				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				  })();
+
+				</script></head><body><h1 class="l">Browsable SpreadsheetMLStyles 1.2 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Hugo Bruneliere, <code>MSOfficeExcel_SpreadsheetMLStyles.ecore</code>, 2005/07/01.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>60</strong></li><li>Number of top alternatives: <strong>142</strong></li><li>Number of defined nonterminal symbols: <strong>60</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>60</strong>: <code><a href="#DateTimeType" class="nt">DateTimeType</a>, <a href="#VersionType" class="nt">VersionType</a>, <a href="#ValueType" class="nt">ValueType</a>, <a href="#StringValue" class="nt">StringValue</a>, <a href="#NumberValue" class="nt">NumberValue</a>, <a href="#DateTimeTypeValue" class="nt">DateTimeTypeValue</a>, <a href="#BooleanValue" class="nt">BooleanValue</a>, <a href="#ErrorValue" class="nt">ErrorValue</a>, <a href="#DocumentPropertiesCollection" class="nt">DocumentPropertiesCollection</a>, <a href="#CustomDocumentPropertiesCollection" class="nt">CustomDocumentPropertiesCollection</a>, <a href="#CustomDocumentProperty" class="nt">CustomDocumentProperty</a>, <a href="#SmartTagType" class="nt">SmartTagType</a>, <a href="#SmartTagsCollection" class="nt">SmartTagsCollection</a>, <a href="#Workbook" class="nt">Workbook</a>, <a href="#Worksheet" class="nt">Worksheet</a>, <a href="#StyledElement" class="nt">StyledElement</a>, <a href="#Table" class="nt">Table</a>, <a href="#TableElement" class="nt">TableElement</a>, <a href="#ColOrRowElement" class="nt">ColOrRowElement</a>, <a href="#Column" class="nt">Column</a>, <a href="#Row" class="nt">Row</a>, <a href="#Cell" class="nt">Cell</a>, <a href="#Comment" class="nt">Comment</a>, <a href="#Data" class="nt">Data</a>, <a href="#ExcelWorkbook" class="nt">ExcelWorkbook</a>, <a href="#DisplayDrawingObjectsType" class="nt">DisplayDrawingObjectsType</a>, <a href="#CalculationWorkbookType" class="nt">CalculationWorkbookType</a>, <a href="#WorksheetOptionsElt" class="nt">WorksheetOptionsElt</a>, <a href="#ExcelWorksheetTypeType" class="nt">ExcelWorksheetTypeType</a>, <a href="#VisibleType" class="nt">VisibleType</a>, <a href="#EnableSelectionType" class="nt">EnableSelectionType</a>, <a href="#PageSetup" class="nt">PageSetup</a>, <a href="#Layout" class="nt">Layout</a>, <a href="#OrientationType" class="nt">OrientationType</a>, <a href="#HeaderOrFooterElt" class="nt">HeaderOrFooterElt</a>, <a href="#Header" class="nt">Header</a>, <a href="#Footer" class="nt">Footer</a>, <a href="#PageMarginsInfo" class="nt">PageMarginsInfo</a>, <a href="#Print" class="nt">Print</a>, <a href="#CommentsLayoutType" class="nt">CommentsLayoutType</a>, <a href="#StylesCollection" class="nt">StylesCollection</a>, <a href="#StyleType" class="nt">StyleType</a>, <a href="#ProtectionType" class="nt">ProtectionType</a>, <a href="#AlignmentType" class="nt">AlignmentType</a>, <a href="#HorizontalAlignementType" class="nt">HorizontalAlignementType</a>, <a href="#ReadingOrderType" class="nt">ReadingOrderType</a>, <a href="#VerticalAlignementType" class="nt">VerticalAlignementType</a>, <a href="#BordersType" class="nt">BordersType</a>, <a href="#BorderType" class="nt">BorderType</a>, <a href="#PositionType" class="nt">PositionType</a>, <a href="#LineStyleType" class="nt">LineStyleType</a>, <a href="#FontType" class="nt">FontType</a>, <a href="#UnderlineType" class="nt">UnderlineType</a>, <a href="#VerticalAlignType" class="nt">VerticalAlignType</a>, <a href="#InteriorType" class="nt">InteriorType</a>, <a href="#PatternType" class="nt">PatternType</a>, <a href="#NumberFormatType" class="nt">NumberFormatType</a>, <a href="#ExcelNumberFormatType" class="nt">ExcelNumberFormatType</a>, <a href="#NamesType" class="nt">NamesType</a>, <a href="#NamedRange" class="nt">NamedRange</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="DateTimeType">DateTimeType</a>:
+        <span class="sel">year</span>::<span class="meta">any</span> <span class="sel">month</span>::<span class="meta">any</span> <span class="sel">day</span>::<span class="meta">any</span> <span class="sel">hour</span>::<span class="meta">any</span> <span class="sel">minute</span>::<span class="meta">any</span> <span class="sel">second</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="VersionType">VersionType</a>:
+        <span class="sel">n</span>::<span class="meta">any</span> <span class="sel">nn</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ValueType">ValueType</a>:
+        ε
+</pre><pre><a class="nt" name="StringValue">StringValue</a>:
+        <span class="sel">value</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="NumberValue">NumberValue</a>:
+        <span class="sel">value</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="DateTimeTypeValue">DateTimeTypeValue</a>:
+        <span class="sel">value</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="BooleanValue">BooleanValue</a>:
+        <span class="sel">value</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ErrorValue">ErrorValue</a>:
+        <span class="sel">vt_data</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="DocumentPropertiesCollection">DocumentPropertiesCollection</a>:
+        <span class="sel">dp_workbook</span>::<span class="meta">any</span> <span class="sel">title</span>::<span class="meta">any</span> <span class="sel">subject</span>::<span class="meta">any</span> <span class="sel">keywords</span>::<span class="meta">any</span> <span class="sel">description</span>::<span class="meta">any</span> <span class="sel">category</span>::<span class="meta">any</span> <span class="sel">author</span>::<span class="meta">any</span> <span class="sel">lastAuthor</span>::<span class="meta">any</span> <span class="sel">manager</span>::<span class="meta">any</span> <span class="sel">company</span>::<span class="meta">any</span> <span class="sel">hyperlinkBase</span>::<span class="meta">any</span> <span class="sel">revision</span>::<span class="meta">any</span> <span class="sel">presentationFormat</span>::<span class="meta">any</span> <span class="sel">guid</span>::<span class="meta">any</span> <span class="sel">appName</span>::<span class="meta">any</span> <span class="sel">version</span>::<span class="meta">any</span> <span class="sel">totalTime</span>::<span class="meta">any</span> <span class="sel">lastPrinted</span>::<span class="meta">any</span> <span class="sel">created</span>::<span class="meta">any</span> <span class="sel">lastSaved</span>::<span class="meta">any</span> <span class="sel">pages</span>::<span class="meta">any</span> <span class="sel">words</span>::<span class="meta">any</span> <span class="sel">characters</span>::<span class="meta">any</span> <span class="sel">charactersWithSpaces</span>::<span class="meta">any</span> <span class="sel">bytes</span>::<span class="meta">any</span> <span class="sel">lines</span>::<span class="meta">any</span> <span class="sel">paragraphs</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="CustomDocumentPropertiesCollection">CustomDocumentPropertiesCollection</a>:
+        <span class="sel">cdp_workbook</span>::<span class="meta">any</span> <span class="sel">customDocumentProperties</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="CustomDocumentProperty">CustomDocumentProperty</a>:
+        <span class="sel">customDocumentProperty_cdpe</span>::<span class="meta">any</span> <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">value</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SmartTagType">SmartTagType</a>:
+        <span class="sel">smartTagType_ste</span>::<span class="meta">any</span> <span class="sel">namespaceuri</span>::<span class="meta">any</span> <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">url</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SmartTagsCollection">SmartTagsCollection</a>:
+        <span class="sel">st_workbook</span>::<span class="meta">any</span> <span class="sel">st_cell</span>::<span class="meta">any</span> <span class="sel">smartTagTypes</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Workbook">Workbook</a>:
+        <span class="sel">wb_smartTags</span>::<span class="meta">any</span> <span class="sel">wb_docProperties</span>::<span class="meta">any</span> <span class="sel">wb_customDocProperties</span>::<span class="meta">any</span> <span class="sel">wb_excelWorkbook</span>::<span class="meta">any</span> <span class="sel">wb_styles</span>::<span class="meta">any</span> <span class="sel">wb_names</span>::<span class="meta">any</span> <span class="sel">wb_worksheets</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Worksheet">Worksheet</a>:
+        <span class="sel">ws_workbook</span>::<span class="meta">any</span> <span class="sel">ws_table</span>::<span class="meta">any</span> <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">protected</span>::<span class="meta">any</span> <span class="sel">rightToLeft</span>::<span class="meta">any</span> <span class="sel">w_worksheetOptions</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="StyledElement">StyledElement</a>:
+        ε
+</pre><pre><a class="nt" name="Table">Table</a>:
+        <span class="sel">t_worksheet</span>::<span class="meta">any</span> <span class="sel">t_cols</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">t_rows</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">defaultColumnWidth</span>::<span class="meta">any</span> <span class="sel">defaultRowHeight</span>::<span class="meta">any</span> <span class="sel">expandedColumnCount</span>::<span class="meta">any</span> <span class="sel">expandedRowCount</span>::<span class="meta">any</span> <span class="sel">leftCell</span>::<span class="meta">any</span> <span class="sel">topCell</span>::<span class="meta">any</span> <span class="sel">fullColumns</span>::<span class="meta">any</span> <span class="sel">fullRows</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="TableElement">TableElement</a>:
+        ε
+</pre><pre><a class="nt" name="ColOrRowElement">ColOrRowElement</a>:
+        ε
+</pre><pre><a class="nt" name="Column">Column</a>:
+        <span class="sel">c_table</span>::<span class="meta">any</span> <span class="sel">autoFitWidth</span>::<span class="meta">any</span> <span class="sel">width</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Row">Row</a>:
+        <span class="sel">r_table</span>::<span class="meta">any</span> <span class="sel">r_cells</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">autoFitHeight</span>::<span class="meta">any</span> <span class="sel">height</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Cell">Cell</a>:
+        <span class="sel">c_smartTags</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">c_row</span>::<span class="meta">any</span> <span class="sel">arrayRange</span>::<span class="meta">any</span> <span class="sel">formula</span>::<span class="meta">any</span> <span class="sel">hRef</span>::<span class="meta">any</span> <span class="sel">mergeAcross</span>::<span class="meta">any</span> <span class="sel">mergeDown</span>::<span class="meta">any</span> <span class="sel">c_data</span>::<span class="meta">any</span> <span class="sel">c_comment</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Comment">Comment</a>:
+        <span class="sel">c_cell</span>::<span class="meta">any</span> <span class="sel">com_data</span>::<span class="meta">any</span> <span class="sel">author</span>::<span class="meta">any</span> <span class="sel">showAlways</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Data">Data</a>:
+        <span class="sel">d_cell</span>::<span class="meta">any</span> <span class="sel">d_comment</span>::<span class="meta">any</span> <span class="sel">value</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ExcelWorkbook">ExcelWorkbook</a>:
+        <span class="sel">ew_workbook</span>::<span class="meta">any</span> <span class="sel">selectedSheets</span>::<span class="meta">any</span> <span class="sel">windowHidden</span>::<span class="meta">any</span> <span class="sel">hideHorizontalScrollBar</span>::<span class="meta">any</span> <span class="sel">hideVerticalScrollBar</span>::<span class="meta">any</span> <span class="sel">hideWorkbookTabs</span>::<span class="meta">any</span> <span class="sel">windowHeight</span>::<span class="meta">any</span> <span class="sel">windowWidth</span>::<span class="meta">any</span> <span class="sel">windowTopX</span>::<span class="meta">any</span> <span class="sel">windowTopY</span>::<span class="meta">any</span> <span class="sel">activeSheet</span>::<span class="meta">any</span> <span class="sel">activeChart</span>::<span class="meta">any</span> <span class="sel">firstVisibleSheet</span>::<span class="meta">any</span> <span class="sel">hidePivotTableFieldList</span>::<span class="meta">any</span> <span class="sel">protectStructure</span>::<span class="meta">any</span> <span class="sel">protectWindows</span>::<span class="meta">any</span> <span class="sel">displayInkNotes</span>::<span class="meta">any</span> <span class="sel">embedSaveSmartTags</span>::<span class="meta">any</span> <span class="sel">futureVer</span>::<span class="meta">any</span> <span class="sel">tabRatio</span>::<span class="meta">any</span> <span class="sel">windowIconic</span>::<span class="meta">any</span> <span class="sel">displayDrawingObjects</span>::<span class="meta">any</span> <span class="sel">createBackup</span>::<span class="meta">any</span> <span class="sel">calculation</span>::<span class="meta">any</span> <span class="sel">doNotCalculateBeforeSave</span>::<span class="meta">any</span> <span class="sel">date1904</span>::<span class="meta">any</span> <span class="sel">refModeR1C1</span>::<span class="meta">any</span> <span class="sel">iteration</span>::<span class="meta">any</span> <span class="sel">maxIterations</span>::<span class="meta">any</span> <span class="sel">maxChange</span>::<span class="meta">any</span> <span class="sel">precisionAsDisplayed</span>::<span class="meta">any</span> <span class="sel">doNotSaveLinkValues</span>::<span class="meta">any</span> <span class="sel">noAutoRecover</span>::<span class="meta">any</span> <span class="sel">acceptLabelsInFormulas</span>::<span class="meta">any</span> <span class="sel">uncalced</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="DisplayDrawingObjectsType">DisplayDrawingObjectsType</a>:
+        <span class="sel">ddot_displayShapes</span>::ε
+        <span class="sel">ddot_placeHolders</span>::ε
+        <span class="sel">ddot_hideAll</span>::ε
+</pre><pre><a class="nt" name="CalculationWorkbookType">CalculationWorkbookType</a>:
+        <span class="sel">cwt_automaticCalculation</span>::ε
+        <span class="sel">cwt_manualCalculation</span>::ε
+        <span class="sel">cwt_semiAutomaticCalculation</span>::ε
+</pre><pre><a class="nt" name="WorksheetOptionsElt">WorksheetOptionsElt</a>:
+        <span class="sel">wo_worksheet</span>::<span class="meta">any</span> <span class="sel">fitToPage</span>::<span class="meta">any</span> <span class="sel">doNotDisplayColHeaders</span>::<span class="meta">any</span> <span class="sel">doNotDisplayRowHeaders</span>::<span class="meta">any</span> <span class="sel">gridlineColor</span>::<span class="meta">any</span> <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">excelWorksheetType</span>::<span class="meta">any</span> <span class="sel">intlMacro</span>::<span class="meta">any</span> <span class="sel">unsynced</span>::<span class="meta">any</span> <span class="sel">selected</span>::<span class="meta">any</span> <span class="sel">codeName</span>::<span class="meta">any</span> <span class="sel">displayPageBreak</span>::<span class="meta">any</span> <span class="sel">transitionExpressionEvaluation</span>::<span class="meta">any</span> <span class="sel">transitionFormulaEntry</span>::<span class="meta">any</span> <span class="sel">zoom</span>::<span class="meta">any</span> <span class="sel">pageBreakZoom</span>::<span class="meta">any</span> <span class="sel">showPageBreakZoom</span>::<span class="meta">any</span> <span class="sel">defaultRowHeight</span>::<span class="meta">any</span> <span class="sel">defaultColumnWidth</span>::<span class="meta">any</span> <span class="sel">standardWidth</span>::<span class="meta">any</span> <span class="sel">visible</span>::<span class="meta">any</span> <span class="sel">leftColumnVisible</span>::<span class="meta">any</span> <span class="sel">displayRightToLeft</span>::<span class="meta">any</span> <span class="sel">gridlineColorIndex</span>::<span class="meta">any</span> <span class="sel">displayFormulas</span>::<span class="meta">any</span> <span class="sel">doNotDisplayGridlines</span>::<span class="meta">any</span> <span class="sel">doNotDisplayHeadings</span>::<span class="meta">any</span> <span class="sel">doNotDisplayOutline</span>::<span class="meta">any</span> <span class="sel">applyAutomaticOutlineStyles</span>::<span class="meta">any</span> <span class="sel">noSummaryRowsBelowDetail</span>::<span class="meta">any</span> <span class="sel">noSummaryColumnsRightDetail</span>::<span class="meta">any</span> <span class="sel">doNotDisplayZeros</span>::<span class="meta">any</span> <span class="sel">activeRow</span>::<span class="meta">any</span> <span class="sel">activeColumn</span>::<span class="meta">any</span> <span class="sel">filterOn</span>::<span class="meta">any</span> <span class="sel">rangeSelection</span>::<span class="meta">any</span> <span class="sel">topRowVisible</span>::<span class="meta">any</span> <span class="sel">topRowBottomPane</span>::<span class="meta">any</span> <span class="sel">leftColumnRightPane</span>::<span class="meta">any</span> <span class="sel">activePane</span>::<span class="meta">any</span> <span class="sel">splitHorizontal</span>::<span class="meta">any</span> <span class="sel">splitVertical</span>::<span class="meta">any</span> <span class="sel">freezePanes</span>::<span class="meta">any</span> <span class="sel">frozenNoSplit</span>::<span class="meta">any</span> <span class="sel">tabColorIndex</span>::<span class="meta">any</span> <span class="sel">protectContentst</span>::<span class="meta">any</span> <span class="sel">protectObjects</span>::<span class="meta">any</span> <span class="sel">protectScenarios</span>::<span class="meta">any</span> <span class="sel">enableSelection</span>::<span class="meta">any</span> <span class="sel">allowFormatCells</span>::<span class="meta">any</span> <span class="sel">allowSizeCols</span>::<span class="meta">any</span> <span class="sel">allowSizeRows</span>::<span class="meta">any</span> <span class="sel">allowInsertCols</span>::<span class="meta">any</span> <span class="sel">allowInsertRows</span>::<span class="meta">any</span> <span class="sel">allowInsertHyperlinks</span>::<span class="meta">any</span> <span class="sel">allowDeleteCols</span>::<span class="meta">any</span> <span class="sel">allowDeleteRows</span>::<span class="meta">any</span> <span class="sel">allowSort</span>::<span class="meta">any</span> <span class="sel">allowFilter</span>::<span class="meta">any</span> <span class="sel">allowUsePivotTables</span>::<span class="meta">any</span> <span class="sel">wo_pageSetup</span>::<span class="meta">any</span> <span class="sel">wo_print</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ExcelWorksheetTypeType">ExcelWorksheetTypeType</a>:
+        <span class="sel">ewt_Worksheet</span>::ε
+        <span class="sel">ewt_Chart</span>::ε
+        <span class="sel">ewt_Macro</span>::ε
+        <span class="sel">ewt_Dialog</span>::ε
+</pre><pre><a class="nt" name="VisibleType">VisibleType</a>:
+        <span class="sel">vt_SheetVisible</span>::ε
+        <span class="sel">vt_SheetHidden</span>::ε
+        <span class="sel">vt_SheetVeryHidden</span>::ε
+</pre><pre><a class="nt" name="EnableSelectionType">EnableSelectionType</a>:
+        <span class="sel">est_UnlockedCells</span>::ε
+        <span class="sel">est_NoSelection</span>::ε
+</pre><pre><a class="nt" name="PageSetup">PageSetup</a>:
+        <span class="sel">ps_worksheetOptions</span>::<span class="meta">any</span> <span class="sel">ps_layout</span>::<span class="meta">any</span> <span class="sel">ps_header</span>::<span class="meta">any</span> <span class="sel">ps_footer</span>::<span class="meta">any</span> <span class="sel">ps_pageMargins</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Layout">Layout</a>:
+        <span class="sel">l_pageSetup</span>::<span class="meta">any</span> <span class="sel">orientation</span>::<span class="meta">any</span> <span class="sel">centerHorizontal</span>::<span class="meta">any</span> <span class="sel">centerVertical</span>::<span class="meta">any</span> <span class="sel">startPageNumber</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="OrientationType">OrientationType</a>:
+        <span class="sel">ot_Landscape</span>::ε
+        <span class="sel">ot_Portrait</span>::ε
+</pre><pre><a class="nt" name="HeaderOrFooterElt">HeaderOrFooterElt</a>:
+        ε
+</pre><pre><a class="nt" name="Header">Header</a>:
+        <span class="sel">h_pageSetup</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Footer">Footer</a>:
+        <span class="sel">f_pageSetup</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="PageMarginsInfo">PageMarginsInfo</a>:
+        <span class="sel">pm_pageSetup</span>::<span class="meta">any</span> <span class="sel">left</span>::<span class="meta">any</span> <span class="sel">right</span>::<span class="meta">any</span> <span class="sel">top</span>::<span class="meta">any</span> <span class="sel">bottom</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Print">Print</a>:
+        <span class="sel">p_worksheetOptions</span>::<span class="meta">any</span> <span class="sel">fitWidth</span>::<span class="meta">any</span> <span class="sel">fitHeight</span>::<span class="meta">any</span> <span class="sel">leftToRight</span>::<span class="meta">any</span> <span class="sel">blackAndWhite</span>::<span class="meta">any</span> <span class="sel">draftQuality</span>::<span class="meta">any</span> <span class="sel">commentsLayout</span>::<span class="meta">any</span> <span class="sel">scale</span>::<span class="meta">any</span> <span class="sel">printErrors</span>::<span class="meta">any</span> <span class="sel">validPrinterInfo</span>::<span class="meta">any</span> <span class="sel">paperSizeIndex</span>::<span class="meta">any</span> <span class="sel">horizontalResolution</span>::<span class="meta">any</span> <span class="sel">verticalResolution</span>::<span class="meta">any</span> <span class="sel">gridlines</span>::<span class="meta">any</span> <span class="sel">numberOfCopies</span>::<span class="meta">any</span> <span class="sel">rowColHeadings</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="CommentsLayoutType">CommentsLayoutType</a>:
+        <span class="sel">clt_InPlace</span>::ε
+        <span class="sel">clt_PrintNone</span>::ε
+        <span class="sel">clt_SheetEnd</span>::ε
+</pre><pre><a class="nt" name="StylesCollection">StylesCollection</a>:
+        <span class="sel">s_workbook</span>::<span class="meta">any</span> <span class="sel">style</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="StyleType">StyleType</a>:
+        <span class="sel">st_styles</span>::<span class="meta">any</span> <span class="sel">st_styledElement</span>::<span class="meta">any</span> <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">parent</span>::<span class="meta">any</span> <span class="sel">st_parent</span>::<span class="meta">any</span> <span class="sel">alignment</span>::<span class="meta">any</span> <span class="sel">borders</span>::<span class="meta">any</span> <span class="sel">font</span>::<span class="meta">any</span> <span class="sel">interior</span>::<span class="meta">any</span> <span class="sel">numberFormat</span>::<span class="meta">any</span> <span class="sel">protection</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ProtectionType">ProtectionType</a>:
+        <span class="sel">pt_styleType</span>::<span class="meta">any</span> <span class="sel">protected</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="AlignmentType">AlignmentType</a>:
+        <span class="sel">at_styleType</span>::<span class="meta">any</span> <span class="sel">horizontal</span>::<span class="meta">any</span> <span class="sel">readingOrder</span>::<span class="meta">any</span> <span class="sel">indent</span>::<span class="meta">any</span> <span class="sel">rotate</span>::<span class="meta">any</span> <span class="sel">shrinkToFit</span>::<span class="meta">any</span> <span class="sel">vertical</span>::<span class="meta">any</span> <span class="sel">verticalText</span>::<span class="meta">any</span> <span class="sel">wrapText</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="HorizontalAlignementType">HorizontalAlignementType</a>:
+        <span class="sel">hat_CenterAcrossSelection</span>::ε
+        <span class="sel">hat_Fill</span>::ε
+        <span class="sel">hat_Left</span>::ε
+        <span class="sel">hat_Right</span>::ε
+        <span class="sel">hat_Justify</span>::ε
+        <span class="sel">hat_Distributed</span>::ε
+        <span class="sel">hat_Center</span>::ε
+        <span class="sel">hat_Automatic</span>::ε
+        <span class="sel">hat_JustifyDistributed</span>::ε
+</pre><pre><a class="nt" name="ReadingOrderType">ReadingOrderType</a>:
+        <span class="sel">rot_RightToLeft</span>::ε
+        <span class="sel">rot_LeftToRight</span>::ε
+        <span class="sel">rot_Context</span>::ε
+</pre><pre><a class="nt" name="VerticalAlignementType">VerticalAlignementType</a>:
+        <span class="sel">vat_Top</span>::ε
+        <span class="sel">vat_Bottom</span>::ε
+        <span class="sel">vat_Justify</span>::ε
+        <span class="sel">vat_Distributed</span>::ε
+        <span class="sel">vat_Center</span>::ε
+        <span class="sel">vat_Automatic</span>::ε
+        <span class="sel">vat_JustifyDistributed</span>::ε
+</pre><pre><a class="nt" name="BordersType">BordersType</a>:
+        <span class="sel">bt_styleType</span>::<span class="meta">any</span> <span class="sel">border</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="BorderType">BorderType</a>:
+        <span class="sel">bt_bordersType</span>::<span class="meta">any</span> <span class="sel">position</span>::<span class="meta">any</span> <span class="sel">color</span>::<span class="meta">any</span> <span class="sel">lineStyle</span>::<span class="meta">any</span> <span class="sel">weight</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="PositionType">PositionType</a>:
+        <span class="sel">pt_Left</span>::ε
+        <span class="sel">pt_Top</span>::ε
+        <span class="sel">pt_Right</span>::ε
+        <span class="sel">pt_Bottom</span>::ε
+        <span class="sel">pt_DiagonalLeft</span>::ε
+        <span class="sel">pt_DiagonalRight</span>::ε
+</pre><pre><a class="nt" name="LineStyleType">LineStyleType</a>:
+        <span class="sel">lst_None</span>::ε
+        <span class="sel">lst_Continuous</span>::ε
+        <span class="sel">lst_Dash</span>::ε
+        <span class="sel">lst_Dot</span>::ε
+        <span class="sel">lst_DashDot</span>::ε
+        <span class="sel">lst_DashDotDot</span>::ε
+        <span class="sel">lst_SlantDashDot</span>::ε
+        <span class="sel">lst_Double</span>::ε
+</pre><pre><a class="nt" name="FontType">FontType</a>:
+        <span class="sel">ft_styleType</span>::<span class="meta">any</span> <span class="sel">bold</span>::<span class="meta">any</span> <span class="sel">color</span>::<span class="meta">any</span> <span class="sel">fontName</span>::<span class="meta">any</span> <span class="sel">italic</span>::<span class="meta">any</span> <span class="sel">outline</span>::<span class="meta">any</span> <span class="sel">shadow</span>::<span class="meta">any</span> <span class="sel">size</span>::<span class="meta">any</span> <span class="sel">strikeThrough</span>::<span class="meta">any</span> <span class="sel">underline</span>::<span class="meta">any</span> <span class="sel">verticalAlign</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="UnderlineType">UnderlineType</a>:
+        <span class="sel">ut_None</span>::ε
+        <span class="sel">ut_Single</span>::ε
+        <span class="sel">ut_Double</span>::ε
+        <span class="sel">ut_SingleAccounting</span>::ε
+        <span class="sel">ut_DoubleAccounting</span>::ε
+</pre><pre><a class="nt" name="VerticalAlignType">VerticalAlignType</a>:
+        <span class="sel">vat_None</span>::ε
+        <span class="sel">vat_Subscript</span>::ε
+        <span class="sel">vat_Superscript</span>::ε
+</pre><pre><a class="nt" name="InteriorType">InteriorType</a>:
+        <span class="sel">it_styleType</span>::<span class="meta">any</span> <span class="sel">color</span>::<span class="meta">any</span> <span class="sel">pattern</span>::<span class="meta">any</span> <span class="sel">patternColor</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="PatternType">PatternType</a>:
+        <span class="sel">pt_None</span>::ε
+        <span class="sel">pt_Solid</span>::ε
+        <span class="sel">pt_Gray75</span>::ε
+        <span class="sel">pt_Gray50</span>::ε
+        <span class="sel">pt_Gray25</span>::ε
+        <span class="sel">pt_Gray125</span>::ε
+        <span class="sel">pt_Gray0625</span>::ε
+        <span class="sel">pt_HorzStripe</span>::ε
+        <span class="sel">pt_VertStripe</span>::ε
+        <span class="sel">pt_ReverseDiagStripe</span>::ε
+        <span class="sel">pt_DiagStripe</span>::ε
+        <span class="sel">pt_DiagCross</span>::ε
+        <span class="sel">pt_ThickDiagCross</span>::ε
+        <span class="sel">pt_ThinHorzStripe</span>::ε
+        <span class="sel">pt_ThinVertStripe</span>::ε
+        <span class="sel">pt_ThinReverseDiagStripe</span>::ε
+        <span class="sel">pt_ThinDiagStripe</span>::ε
+        <span class="sel">pt_ThinHorzCross</span>::ε
+        <span class="sel">pt_ThinDiagCross</span>::ε
+</pre><pre><a class="nt" name="NumberFormatType">NumberFormatType</a>:
+        <span class="sel">nft_styleType</span>::<span class="meta">any</span> <span class="sel">format</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ExcelNumberFormatType">ExcelNumberFormatType</a>:
+        <span class="sel">enft_General</span>::ε
+        <span class="sel">enft_General_Number</span>::ε
+        <span class="sel">enft_General_Date</span>::ε
+        <span class="sel">enft_Long_Date</span>::ε
+        <span class="sel">enft_Medium_Date</span>::ε
+        <span class="sel">enft_Short_Date</span>::ε
+        <span class="sel">enft_Long_Time</span>::ε
+        <span class="sel">enft_Medium_Time</span>::ε
+        <span class="sel">enft_Short_Time</span>::ε
+        <span class="sel">enft_Currency</span>::ε
+        <span class="sel">enft_Euro_Currency</span>::ε
+        <span class="sel">enft_Fixed</span>::ε
+        <span class="sel">enft_Standard</span>::ε
+        <span class="sel">enft_Percent</span>::ε
+        <span class="sel">enft_Scientific</span>::ε
+        <span class="sel">enft_Yes_No</span>::ε
+        <span class="sel">enft_True_False</span>::ε
+        <span class="sel">enft_On_Off</span>::ε
+</pre><pre><a class="nt" name="NamesType">NamesType</a>:
+        <span class="sel">nt_workbook</span>::<span class="meta">any</span> <span class="sel">namedRanges</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="NamedRange">NamedRange</a>:
+        <span class="sel">nr_namesType</span>::<span class="meta">any</span> <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">refersTo</span>::<span class="meta">any</span> <span class="sel">hidden</span>::<span class="meta">any</span>
+</pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
+Last updated: 09/04/2013.</div></body></html>

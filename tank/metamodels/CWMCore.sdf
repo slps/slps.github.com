@@ -1,0 +1,37 @@
+module Main
+
+exports
+  sorts
+        VisibilityKind BooleanExpression ModelElement Dependency Constraint Feature StructuralFeature Attribute NameSpace Classifier Package Class Datatype Subsystem Model 
+  context-free syntax
+        vk_public_vis:: -> VisibilityKind
+        vk_private_vis:: -> VisibilityKind
+        vk_protected_vis:: -> VisibilityKind
+
+        expresssion::ANY -> BooleanExpression
+
+        name::ANY visibility::ANY contraints::ANY+ clientDependencies::ANY+ supplierDependencies::ANY+ namespace::ANY importers::ANY+ -> ModelElement
+
+        kind::ANY clients::ANY+ suppliers::ANY+ -> Dependency
+
+        body::ANY constrainedElements::ANY+ -> Constraint
+
+        owner::ANY -> Feature
+
+        type::ANY -> StructuralFeature
+
+         -> Attribute
+
+        ownedElements::ANY+ -> NameSpace
+
+        features::ANY+ -> Classifier
+
+        importedElements::ANY+ -> Package
+
+         -> Class
+
+         -> Datatype
+
+         -> Subsystem
+
+         -> Model

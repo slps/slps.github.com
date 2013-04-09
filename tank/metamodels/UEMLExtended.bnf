@@ -1,0 +1,72 @@
+UEMLObject:
+        has::ANY model::ANY
+UEMLModel:
+        contains::ANY+
+Geometry:
+        object::ANY
+Port:
+        EPSILON
+Flow:
+        associationConnector::ANY
+Activity:
+        resourceRole::ANY+ parent::ANY hasOutput::ANY+ hasInput::ANY+ activityType::ANY
+Object:
+        ioFlow::ANY
+InformationObject:
+        controlFlow::ANY
+Resource:
+        carries::ANY plays::ANY+ resourceType::ANY commitment::ANY+
+MaterialResource:
+        EPSILON
+HumanResource:
+        EPSILON
+ResourceFlow:
+        resourceCarries::ANY+
+IOFlow:
+        carries::ANY+
+ControlFlow:
+        carries::ANY+
+TriggerFlow:
+        EPSILON
+ConstraintFlow:
+        EPSILON
+ResourceRole:
+        resourcePlays::ANY+ roleQualifier::ANY in::ANY
+RoleType:
+        EPSILON
+Anchor:
+        EPSILON
+OutputPort:
+        activity::ANY
+InputPort:
+        activity::ANY
+ConnectionOperator:
+        EPSILON
+AssociationConnector:
+        origin::ANY+ target::ANY+ classAssociation::ANY
+FlowObject:
+        target::ANY origin::ANY
+Event:
+        EPSILON
+ResourceType:
+        resource::ANY+
+ActivityType:
+        activityT::ANY+
+PassiveObject:
+        EPSILON
+Commitment:
+        resource::ANY+ task::ANY agentO::ANY agentC::ANY contract::ANY
+Software:
+        EPSILON
+Organisation:
+        EPSILON
+Process:
+        child::ANY fulfills::ANY+ realises::ANY
+Service:
+        process::ANY
+Agent:
+        obliger::ANY claimer::ANY has_parties::ANY
+Contract:
+        process::ANY+ agent::ANY collection_of::ANY+
+Task:
+        fulfills::ANY+

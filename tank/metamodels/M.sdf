@@ -1,0 +1,31 @@
+module Main
+
+exports
+  sorts
+        IdentifiedElement MElement MElementReference Module ModuleMember ImportDirective ExportDirective Value NumericalValue StringValue IntegerValue DecimalValue BooleanValue 
+  context-free syntax
+         -> IdentifiedElement
+
+         -> MElement
+
+        alias::ANY referencedElement::ANY -> MElementReference
+
+        imports::ANY+ exports::ANY+ moduleMembers::ANY+ -> Module
+
+         -> ModuleMember
+
+        module::ANY importedElements::ANY+ -> ImportDirective
+
+        module::ANY exportedElements::ANY+ -> ExportDirective
+
+         -> Value
+
+         -> NumericalValue
+
+        value::ANY -> StringValue
+
+        value::ANY -> IntegerValue
+
+        value::ANY -> DecimalValue
+
+        value::ANY -> BooleanValue

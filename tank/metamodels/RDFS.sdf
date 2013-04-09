@@ -1,0 +1,45 @@
+module Main
+
+exports
+  sorts
+        Resource Graph List Container Alt Bag Seq Property ContainerMembershipProperty Statement URIReferenceNode BlankNode Class Datatype Literal PlainLiteral TypedLiteral RDFXMLLiteral URIReference UniformResourceIdentifier 
+  context-free syntax
+        graph::ANY uriRef::ANY+ subjectStatement::ANY+ objectStatement::ANY+ label::ANY+ type::ANY+ seeAlso::ANY+ referringResource::ANY+ member::ANY+ container::ANY+ list::ANY+ -> Resource
+
+        graphName::ANY resources::ANY+ -> Graph
+
+        first::ANY rest::ANY originalList::ANY+ -> List
+
+         -> Container
+
+         -> Alt
+
+         -> Bag
+
+         -> Seq
+
+        predicateStatement::ANY+ subPropertyOf::ANY+ superProperty::ANY+ domain::ANY+ range::ANY+ -> Property
+
+         -> ContainerMembershipProperty
+
+        predicate::ANY object::ANY subject::ANY isReifiedOnly::ANY isReified::ANY nameForReification::ANY+ -> Statement
+
+         -> URIReferenceNode
+
+        nodeId::ANY -> BlankNode
+
+        subClassOf::ANY+ superClass::ANY+ typedResource::ANY+ propertyForDomain::ANY+ propertyForRange::ANY+ -> Class
+
+         -> Datatype
+
+        lexicalForm::ANY -> Literal
+
+        language::ANY labeledResource::ANY -> PlainLiteral
+
+        datatypeURI::ANY -> TypedLiteral
+
+         -> RDFXMLLiteral
+
+        uri::ANY resource::ANY literal::ANY namedGraph::ANY reifiedStatement::ANY+ -> URIReference
+
+        name::ANY uriRef::ANY+ -> UniformResourceIdentifier

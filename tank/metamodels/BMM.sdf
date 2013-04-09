@@ -1,0 +1,67 @@
+module Main
+
+exports
+  sorts
+        MotivationElement Assessment End Influencer InfluencingOrganization Means PotentialImpact AssessmentCategory InfluencerCategory OrganizationCategory OrganizationUnit BusinessProcess Asset Liability Resource Mission CourseOfAction FixedAsset Offering Directive Strategy Tactic BusinessRule BusinessPolicy Regulation Vision DesiredResult Goal Objective PotentialReward Risk 
+  context-free syntax
+        name::ANY description::ANY -> MotivationElement
+
+        usingAssessmentUsesUsedAssessment::ANY+ assessmentProvidesImpetusForDirective::ANY+ assessmentIdentifiesPotentialImpact::ANY+ assessmentJudgmentOfInfluencer::ANY+ -> Assessment
+
+         -> End
+
+         -> Influencer
+
+        influencingOrganizationIsSourceOfInfluencer::ANY+ -> InfluencingOrganization
+
+         -> Means
+
+        potentialImpactProvidesImpetusForDirective::ANY+ -> PotentialImpact
+
+        assessmentCategoryCategoriesAssessment::ANY+ -> AssessmentCategory
+
+        influencerCategoryCategorizesInfluencer::ANY+ -> InfluencerCategory
+
+        organizationCategoryCategorizesInfluencingOrganization::ANY+ -> OrganizationCategory
+
+        organizationUnitDefinesEnd::ANY+ organizationUnitEstablishesMeans::ANY+ organizationUnitIsResponsibleForAsset::ANY+ organizationUnitIsResponsibleForLiability::ANY+ organizationUnitRecognizesInfluencer::ANY+ organizationUnitActAsInfluencingOrganization::ANY+ organizationUnitMakesAssessment::ANY+ organizationUnitIsResponsibleForBusinessProcess::ANY+ -> OrganizationUnit
+
+        businessProcessRealizesCourseOfAction::ANY+ businessProcessManagerAsset::ANY+ businessProcessDeliversOfeering::ANY+ -> BusinessProcess
+
+         -> Asset
+
+        liabilityClaimsResource::ANY+ -> Liability
+
+         -> Resource
+
+        missionMakesOperativeVision::ANY -> Mission
+
+        enablingCourseofActionEnablesEnabledCourseOfAction::ANY+ broaderCourseofActionIncludesMoreSpecificCourseOfAction::ANY+ courseOfActionChanneIsEffortsTowardsDesiredResult::ANY courseOfActionDeployAsset::ANY+ courseOfActionDefiensOffering::ANY+ -> CourseOfAction
+
+        fixedAssetProvidesResource::ANY+ -> FixedAsset
+
+        offeringRequiresResource::ANY+ offeringUsesFixedAsset::ANY+ -> Offering
+
+        directiveGovernsCourseOfAction::ANY+ directiveIsSourceOfCourseOfAction::ANY+ directiveActAsRegulation::ANY+ directiveSupportsAchievementOfDesiredResult::ANY+ directiveGovernsUseOfAsset::ANY+ -> Directive
+
+        strategyIsAComponentOfThePlanForMission::ANY+ strategyDeterminesOrganizationUnit::ANY+ -> Strategy
+
+        tacticImplementsStrategy::ANY+ tacticEffectsEnforcementLevelOfBusinessRule::ANY+ -> Tactic
+
+        businessRuleGuidesBusinessProcess::ANY+ -> BusinessRule
+
+        businessPolicyIsBasisForBusinessRule::ANY+ broaderBusinessPolicyIncludesMoreSpecificBusinessPolicy::ANY+ businessPolicyGovernsBusinessProcess::ANY+ -> BusinessPolicy
+
+         -> Regulation
+
+         -> Vision
+
+        broaderDesiredResultIncludesMoreSpecificDesiredResult::ANY+ -> DesiredResult
+
+        goalAmplidfiesVision::ANY -> Goal
+
+        objectiveQuantifiesGoal::ANY+ -> Objective
+
+         -> PotentialReward
+
+         -> Risk

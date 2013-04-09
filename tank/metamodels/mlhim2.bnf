@@ -1,0 +1,323 @@
+Action:
+        time::DvTemporal description::ItemStructure ismTransition::DvCodedString instructionDetails::DvCodedString
+Activity:
+        description::ItemStructure timing::DvParsable actions::DvToken+
+AdminEntry:
+        data::ItemStructure
+ASKR:
+        EPSILON
+ASKU:
+        NAV
+Attestation:
+        attestedView::DvMedia proof::DvParsable reason::DvCodedString commiter::PartyProxy timeCommited::DvTemporal isPending::DvBoolean
+CareEntry:
+        Action
+        Evaluation
+        Instruction
+        Observation
+CCD:
+        definition::Locatable metaData::MetaDataSet+ ontology::Ontology
+Cluster:
+        items::Item+
+Composition:
+        attestation::Attestation links::Link+ original::DvToken predecessor::DvToken created::DvTemporal composer::PartyProxy territory::Location category::DvCodedString language::DvLanguage context::EventContext content::Locatable
+ContentItem:
+        Entry
+        Section
+DataStructure:
+        History
+        ItemStructure
+DER:
+        EPSILON
+Device:
+        details::ItemStructure
+DvAny:
+        DvBoolean
+        DvChar
+        DvEncapsulated
+        DvInterval
+        DvNumeric
+        DvOrdered
+        DvParagraph
+        DvURI
+        PartyProxy
+        ReferenceRange
+DvBoolean:
+        dv::ANY
+DvByte:
+        dv::ANY
+DvChar:
+        DvLanguage
+        DvNormalizedString
+        DvString
+        DvToken
+DvCodedString:
+        codeString::ANY terminologyName::ANY terminologyAbbrev::ANY
+DvCount:
+        count::ANY
+DvDate:
+        dv::ANY
+DvDateTime:
+        dv::ANY
+DvDecimal:
+        dv::ANY
+DvDuration:
+        dv::ANY
+DvEncapsulated:
+        DvMedia
+        DvParsable
+DvIdentifier:
+        issuer::ANY assigner::ANY name::ANY
+DvInt:
+        dv::INT
+DvInteger:
+        dv::ANY
+DvInterval:
+        lower::DvOrdered upper::DvOrdered lowerIncluded::ANY upperIncluded::ANY lowerUnbounded::ANY upperUnbounded::ANY
+DvLanguage:
+        dv::ANY
+DvLong:
+        dv::ANY
+DvMedia:
+        DvMediaApp
+        DvMediaAudio
+        DvMediaImage
+        DvMediaModel
+        DvMediaMsg
+        DvMediaMultipart
+        DvMediaText
+        DvMediaVideo
+DvMediaApp:
+        dv::ANY
+DvMediaAudio:
+        dv::ANY
+DvMediaImage:
+        dv::ANY
+DvMediaModel:
+        dv::ANY
+DvMediaMsg:
+        dv::ANY
+DvMediaMultipart:
+        dv::ANY
+DvMediaText:
+        dv::STR
+DvMediaVideo:
+        dv::ANY
+DvNegativeInteger:
+        dv::ANY
+DvNonNegativeInteger:
+        dv::ANY
+DvNonPositiveInteger:
+        dv::ANY
+DvNormalizedString:
+        uuid::ANY language::ANY dv::ANY
+DvNumeric:
+        DvByte
+        DvDecimal
+        DvInt
+        DvInteger
+        DvLong
+        DvNegativeInteger
+        DvNonNegativeInteger
+        DvNonPositiveInteger
+        DvPositiveInteger
+        DvShort
+        DvUnsignedByte
+        DvUnsignedInt
+        DvUnsignedLong
+        DvUnsignedShort
+DvOrdered:
+        DvOrdinal
+        DvQuantified
+DvOrdinal:
+        dv::ANY symbol::STR
+DvParagraph:
+        items::DvString+
+DvParsable:
+        dv::ANY formalism::ANY
+DvPositiveInteger:
+        dv::ANY
+DvProportion:
+        proportionType::ANY
+DvQuantified:
+        DvCount
+        DvQuantity
+        DvRatio
+DvQuantity:
+        units::ANY
+DvRate:
+        rateType::ANY
+DvRatio:
+        DvProportion
+        DvRate
+DvShort:
+        dv::ANY
+DvString:
+        uuid::ANY language::ANY dv::STR
+DvTemporal:
+        DvDate
+        DvDateTime
+        DvDuration
+        DvTime
+DvTime:
+        dv::ANY
+DvToken:
+        dv::ANY
+DvUnsignedByte:
+        dv::ANY
+DvUnsignedInt:
+        dv::ANY
+DvUnsignedLong:
+        dv::ANY
+DvUnsignedShort:
+        dv::ANY
+DvURI:
+        dv::ANY
+Element:
+        dv::DvAny
+EntityRef:
+        EPSILON
+Entry:
+        AdminEntry
+        CareEntry
+Evaluation:
+        data::ItemStructure
+Event:
+        IntervalEvent
+        PointEvent
+EventContext:
+        healthcareFacility::Organization startTime::DvTemporal endTime::DvTemporal participation::Participation location::Location setting::DvCodedString
+ExceptionalValue:
+        NI
+FeederAudit:
+        originatingSystemAudit::FeederAuditDetails originatingSystemItemIds::DvIdentifier+ feederSystemAudit::FeederAuditDetails feederSystemIds::DvIdentifier+ originalContent::DvEncapsulated
+FeederAuditDetails:
+        systemId::DvIdentifier versionId::DvNormalizedString provider::PartyIdentified location::Location time::DvTemporal subject::PartyProxy+
+Folder:
+        items::Composition+
+Group:
+        members::Party+
+History:
+        origin::DvTemporal events::Event+ period::DvDuration duration::DvDuration summary::ItemStructure
+Instruction:
+        expiryTime::DvTemporal narrative::DvString wfDefinition::DvParsable activities::Activity+
+IntervalEvent:
+        width::DvDuration mathFunction::DvCodedString sampleCount::DvCount
+INV:
+        DER
+        OTH
+        UNC
+Item:
+        Cluster
+        Element
+        Slot
+ItemList:
+        items::Item+
+ItemSingle:
+        item::Item
+ItemStructure:
+        ItemList
+        ItemSingle
+        ItemTable
+        ItemTree
+ItemTable:
+        rows::Cluster+
+ItemTree:
+        items::Item+
+Link:
+        relation::Relationship target::DvToken
+Locatable:
+        Activity
+        Attestation
+        Composition
+        ContentItem
+        DataStructure
+        Event
+        EventContext
+        Folder
+        Item
+        Location
+        Party
+        Relationship
+        Role
+Location:
+        details::ItemStructure description::DvString isPrimary::DvBoolean
+MetaDataEntry:
+        title::STR contents::STR
+MetaDataSet:
+        name::STR entries::MetaDataEntry+
+MSK:
+        EPSILON
+NA:
+        EPSILON
+NASK:
+        EPSILON
+NAV:
+        EPSILON
+NI:
+        INV
+        MSK
+        NA
+        UNK
+NINF:
+        EPSILON
+NonHuman:
+        details::ItemStructure
+ObjectRef:
+        uuid::ANY namespace::ANY objType::ANY
+Observation:
+        data::History state::History
+Ontology:
+        names::STR+ internalVocabularies::STR+ lookupTables::STR+ terminologies::STR+ generalEntries::OntologyEntry+
+OntologyEntry:
+        contents::STR+
+Organization:
+        details::ItemStructure
+OTH:
+        NINF
+        PINF
+Participation:
+        performer::PartyProxy function::DvCodedString mode::DvCodedString time::DvTemporal
+Party:
+        Device
+        Group
+        NonHuman
+        Organization
+        Person
+PartyIdentified:
+        name::DvString identifiers::DvIdentifier+
+PartyProxy:
+        PartyIdentified
+        PartySelf
+PartyRelated:
+        relationship::Relationship
+PartySelf:
+        externalRef::EntityRef
+Person:
+        details::ItemStructure
+PINF:
+        EPSILON
+PointEvent:
+        time::DvTemporal data::DvAny state::ItemStructure
+QS:
+        EPSILON
+ReferenceRange:
+        definition::DvString dataRange::DvInterval
+Relationship:
+        targets::DvToken+
+Role:
+        details::ItemStructure description::DvString isPrimary::DvBoolean
+Section:
+        items::ContentItem+
+Slot:
+        ccd::DvToken allowedCcds::DvToken+
+TRC:
+        EPSILON
+UNC:
+        EPSILON
+UNK:
+        ASKR
+        ASKU
+        NASK
+        QS
+        TRC

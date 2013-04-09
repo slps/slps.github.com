@@ -1,0 +1,108 @@
+Document:
+        localName::ANY+ xmlBase::ANY+ namespaceDefinition::ANY+ statement::ANY+
+LocalName:
+        name::ANY document::ANY uriRef::ANY+
+Namespace:
+        document::ANY+ namespaceURIRef::ANY namespaceDefinition::ANY+
+NamespaceDefinition:
+        namespacePrefix::ANY document::ANY namespace::ANY
+RDFSResource:
+        uriRef::ANY+ subjectStatement::ANY+ objectStatement::ANY+ label::ANY+ type::ANY+ comment::ANY+ seeAlso::ANY+ referringResource::ANY+ isDefinedBy::ANY+ definedResource::ANY+ member::ANY+ container::ANY+ list::ANY+
+RDFGraph:
+        graphName::ANY statement::ANY+
+List:
+        first::ANY rest::ANY originalList::ANY+
+Container:
+        EPSILON
+Alt:
+        EPSILON
+Bag:
+        EPSILON
+Seq:
+        EPSILON
+RDFProperty:
+        predicateStatement::ANY+ subPropertyOf::ANY+ superProperty::ANY+ domain::ANY+ range::ANY+ propertyRestriction::ANY+
+ContainerMembershipProperty:
+        EPSILON
+RDFStatement:
+        reificationKind::ANY graph::ANY+ RDFpredicate::ANY RDFobject::ANY RDFsubject::ANY nameForReification::ANY+ document::ANY+
+ReificationKind:
+        none::EPSILON
+        reifiedOnly::EPSILON
+        reified::EPSILON
+URIReferenceNode:
+        EPSILON
+BlankNode:
+        nodeId::ANY
+RDFSClass:
+        subClassOf::ANY+ superClass::ANY+ typedResource::ANY+ propertyForDomain::ANY+ propertyForRange::ANY+
+RDFSDataType:
+        dataRange::ANY+
+RDFSLiteral:
+        lexicalForm::ANY restrictionClass::ANY+ dataRange::ANY+
+PlainLiteral:
+        language::ANY labeledResource::ANY commentedResource::ANY
+TypedLiteral:
+        datatypeURI::ANY cardinalityRestriction::ANY+ minCardinalityRestriction::ANY+ maxCardinalityRestriction::ANY+
+XMLLiteral:
+        EPSILON
+URIReference:
+        uri::ANY resource::ANY literal::ANY+ namedGraph::ANY reifiedStatement::ANY+ fragmentIdentifier::ANY namespace::ANY
+UniformResourceIdentifier:
+        name::ANY uriRef::ANY+
+OWLOntology:
+        owlUniverse::ANY+ OWLPriorVersion::ANY+ newerOntology::ANY+ OWLIncompatibleWith::ANY+ incompatibleOntology::ANY+ OWLImports::ANY+ importingOntology::ANY+ owlGraph::ANY+ owlStatement::ANY+ versionInfo::ANY+
+OWLGraph:
+        ontology::ANY+ owlStatement::ANY+
+OWLStatement:
+        ontology::ANY+ owlGraph::ANY+
+OWLUniverse:
+        ontology::ANY+
+OWLClass:
+        isDeprecated::ANY OWLequivalentClass::ANY+ equivalentClass::ANY+ OWLdisjointWith::ANY+ disjointClass::ANY+ intersectionClass::ANY+ unionClass::ANY+ complementClass::ANY+ allValuesFromRestrictionClass::ANY+ someValuesFromRestrictionClass::ANY+
+IntersectionClass:
+        OWLIntersectionOf::ANY+
+UnionClass:
+        OWLUnionOf::ANY+
+ComplementClass:
+        OWLComplementOf::ANY+
+EnumeratedClass:
+        OWLOneOf::ANY+
+OWLRestriction:
+        OWLOnProperty::ANY
+HasValueRestriction:
+        OWLHasLiteralValue::ANY OWLHasIndividualValue::ANY
+AllValuesFromRestriction:
+        OWLAllValuesFromDataRange::ANY OWLAllValuesFromClass::ANY
+SomeValuesFromRestriction:
+        OWLSomeValuesFromClass::ANY OWLSomeValuesFromDataRange::ANY
+CardinalityRestriction:
+        OWLCardinality::ANY
+MaxCardinalityRestriction:
+        OWLMaxCardinality::ANY
+MinCardinalityRestriction:
+        OWLMinCardinality::ANY
+OWLAnnotationProperty:
+        EPSILON
+OWLOntologyProperty:
+        EPSILON
+Property:
+        EPSILON
+FunctionalProperty:
+        isDeprecated::ANY OWLEquivalentProperty::ANY+ equivalentProperty::ANY+
+OWLDatatypeProperty:
+        isDeprecated::ANY OWLEquivalentProperty::ANY+ equivalentProperty::ANY+
+OWLObjectProperty:
+        OWLInverseOf::ANY inverseProperty::ANY+
+InverseFunctionalProperty:
+        EPSILON
+SymmetricProperty:
+        EPSILON
+TransitiveProperty:
+        EPSILON
+Individual:
+        OWLDifferentFrom::ANY+ differentIndividual::ANY+ OWLSameAs::ANY+ sameIndividual::ANY+ allDifferent::ANY+ enumeratedClass::ANY+ restrictionClass::ANY+
+OWLAllDifferent:
+        OWLDistinctMembers::ANY
+OWLDataRange:
+        datatype::ANY OWLOneOf::ANY+ someValuesFromRestrictionClass::ANY allValuesFromRestrictionClass::ANY

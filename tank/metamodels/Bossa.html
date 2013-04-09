@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:bgf="http://planet-sl.org/bgf" xmlns:xbgf="http://planet-sl.org/xbgf" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Browsable Bossa 1.0 1.1 Grammar</title><link href="/slps.css" rel="stylesheet" type="text/css"></link><script type="text/javascript">
+
+				  var _gaq = _gaq || [];
+				  _gaq.push(['_setAccount', 'UA-3743366-7']);
+				  _gaq.push(['_setDomainName', 'github.com']);
+				  _gaq.push(['_trackPageview']);
+
+				  (function() {
+				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				  })();
+
+				</script></head><body><h1 class="l">Browsable Bossa 1.0 1.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: SROUR Youssef, <code>Bossa.ecore</code>, 2006/07/31.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>114</strong></li><li>Number of top alternatives: <strong>114</strong></li><li>Number of defined nonterminal symbols: <strong>114</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>114</strong>: <code><a href="#BossaProgramm" class="nt">BossaProgramm</a>, <a href="#Scheduler" class="nt">Scheduler</a>, <a href="#NormalScheduler" class="nt">NormalScheduler</a>, <a href="#VirtualScheduler" class="nt">VirtualScheduler</a>, <a href="#AbstractSchedulerDecl" class="nt">AbstractSchedulerDecl</a>, <a href="#SchedulerDecl" class="nt">SchedulerDecl</a>, <a href="#VSchdulerDecl" class="nt">VSchdulerDecl</a>, <a href="#ConstDef" class="nt">ConstDef</a>, <a href="#TypeDef" class="nt">TypeDef</a>, <a href="#EnumRange" class="nt">EnumRange</a>, <a href="#EnumDef" class="nt">EnumDef</a>, <a href="#BagId" class="nt">BagId</a>, <a href="#RangeDef" class="nt">RangeDef</a>, <a href="#ProcessDef" class="nt">ProcessDef</a>, <a href="#SchedulerDef" class="nt">SchedulerDef</a>, <a href="#ProcessVarDecl" class="nt">ProcessVarDecl</a>, <a href="#Timer_ProcessVarDecl" class="nt">Timer_ProcessVarDecl</a>, <a href="#System_ProcessVarDecl" class="nt">System_ProcessVarDecl</a>, <a href="#Normal_ProcessVarDecl" class="nt">Normal_ProcessVarDecl</a>, <a href="#HandlerDef" class="nt">HandlerDef</a>, <a href="#InterfaceDef" class="nt">InterfaceDef</a>, <a href="#FunctionDef" class="nt">FunctionDef</a>, <a href="#Expression" class="nt">Expression</a>, <a href="#Integer_Expression" class="nt">Integer_Expression</a>, <a href="#Id_Expression" class="nt">Id_Expression</a>, <a href="#State_Expression" class="nt">State_Expression</a>, <a href="#True_Expression" class="nt">True_Expression</a>, <a href="#False_Expression" class="nt">False_Expression</a>, <a href="#Unop_Expression" class="nt">Unop_Expression</a>, <a href="#Etoile_Expression" class="nt">Etoile_Expression</a>, <a href="#ExpId_Expression" class="nt">ExpId_Expression</a>, <a href="#Select_Expression" class="nt">Select_Expression</a>, <a href="#FnName_Expression" class="nt">FnName_Expression</a>, <a href="#Empty_Expression" class="nt">Empty_Expression</a>, <a href="#SRCOnSched_Expression" class="nt">SRCOnSched_Expression</a>, <a href="#SchedulerOf_Expression" class="nt">SchedulerOf_Expression</a>, <a href="#In_Expression" class="nt">In_Expression</a>, <a href="#Parenthese_Expression" class="nt">Parenthese_Expression</a>, <a href="#Binop_Expression" class="nt">Binop_Expression</a>, <a href="#Compo_Binop_Expression" class="nt">Compo_Binop_Expression</a>, <a href="#ValDecl" class="nt">ValDecl</a>, <a href="#Normal_ValDecl" class="nt">Normal_ValDecl</a>, <a href="#System_ValDecl" class="nt">System_ValDecl</a>, <a href="#Timer_ValDecl" class="nt">Timer_ValDecl</a>, <a href="#FunDecl" class="nt">FunDecl</a>, <a href="#StateDef" class="nt">StateDef</a>, <a href="#ClassNameStorage" class="nt">ClassNameStorage</a>, <a href="#OrderDef" class="nt">OrderDef</a>, <a href="#AdmissionDef" class="nt">AdmissionDef</a>, <a href="#TraceDef" class="nt">TraceDef</a>, <a href="#TypeExpr" class="nt">TypeExpr</a>, <a href="#TypeOrVoid" class="nt">TypeOrVoid</a>, <a href="#ParameterType" class="nt">ParameterType</a>, <a href="#Storage" class="nt">Storage</a>, <a href="#Process_Storage" class="nt">Process_Storage</a>, <a href="#Scheduler_Storage" class="nt">Scheduler_Storage</a>, <a href="#Queue_Storage" class="nt">Queue_Storage</a>, <a href="#KeyCritDecls" class="nt">KeyCritDecls</a>, <a href="#CompoKeyCritDecls" class="nt">CompoKeyCritDecls</a>, <a href="#CritDecls" class="nt">CritDecls</a>, <a href="#CritDecl" class="nt">CritDecl</a>, <a href="#CritDeclWhithId" class="nt">CritDeclWhithId</a>, <a href="#CritDeclWhithoutId" class="nt">CritDeclWhithoutId</a>, <a href="#ValDef" class="nt">ValDef</a>, <a href="#AdmCrit" class="nt">AdmCrit</a>, <a href="#AttachDetach" class="nt">AttachDetach</a>, <a href="#ParamVarDecl" class="nt">ParamVarDecl</a>, <a href="#SeqStmt" class="nt">SeqStmt</a>, <a href="#TraceEvent" class="nt">TraceEvent</a>, <a href="#TraceExpr" class="nt">TraceExpr</a>, <a href="#TraceTest" class="nt">TraceTest</a>, <a href="#ProcParam" class="nt">ProcParam</a>, <a href="#Statment" class="nt">Statment</a>, <a href="#IfStmt" class="nt">IfStmt</a>, <a href="#ForStmt" class="nt">ForStmt</a>, <a href="#ForeachForStmt" class="nt">ForeachForStmt</a>, <a href="#ForEachIncreasingForStmt" class="nt">ForEachIncreasingForStmt</a>, <a href="#ForEachDecreasingForStmt" class="nt">ForEachDecreasingForStmt</a>, <a href="#ReturnStmt" class="nt">ReturnStmt</a>, <a href="#SwitchStmt" class="nt">SwitchStmt</a>, <a href="#AssignStmt" class="nt">AssignStmt</a>, <a href="#MoveStmt" class="nt">MoveStmt</a>, <a href="#NormalMoveStmt" class="nt">NormalMoveStmt</a>, <a href="#ForwardMoveStmt" class="nt">ForwardMoveStmt</a>, <a href="#StateRef" class="nt">StateRef</a>, <a href="#DeferStmt" class="nt">DeferStmt</a>, <a href="#PrimStmt" class="nt">PrimStmt</a>, <a href="#ErrorStmt" class="nt">ErrorStmt</a>, <a href="#BreakStmt" class="nt">BreakStmt</a>, <a href="#LocExpr" class="nt">LocExpr</a>, <a href="#MoveExpr" class="nt">MoveExpr</a>, <a href="#Select_MoveExpr" class="nt">Select_MoveExpr</a>, <a href="#SatateName_MoveExpr" class="nt">SatateName_MoveExpr</a>, <a href="#ID_MoveExpr" class="nt">ID_MoveExpr</a>, <a href="#IDSource_MoveExpr" class="nt">IDSource_MoveExpr</a>, <a href="#IDTarget_MoveExpr" class="nt">IDTarget_MoveExpr</a>, <a href="#ClassState" class="nt">ClassState</a>, <a href="#OnHandlerDef" class="nt">OnHandlerDef</a>, <a href="#EventName" class="nt">EventName</a>, <a href="#ComposantOfSwitchStmt" class="nt">ComposantOfSwitchStmt</a>, <a href="#ComposantOfInterFunc" class="nt">ComposantOfInterFunc</a>, <a href="#BossaTypeExpr" class="nt">BossaTypeExpr</a>, <a href="#QueueType" class="nt">QueueType</a>, <a href="#Normal_QueueType" class="nt">Normal_QueueType</a>, <a href="#Fifo_QueueType" class="nt">Fifo_QueueType</a>, <a href="#Lifo_QueueType" class="nt">Lifo_QueueType</a>, <a href="#Critop" class="nt">Critop</a>, <a href="#StateVisibility" class="nt">StateVisibility</a>, <a href="#ClassName" class="nt">ClassName</a>, <a href="#NonProcType" class="nt">NonProcType</a>, <a href="#Unop" class="nt">Unop</a>, <a href="#Binop" class="nt">Binop</a>, <a href="#AssignUnop" class="nt">AssignUnop</a>, <a href="#AssignBinop" class="nt">AssignBinop</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="BossaProgramm">BossaProgramm</a>:
+        <span class="sel">scheduler</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Scheduler">Scheduler</a>:
+        ε
+</pre><pre><a class="nt" name="NormalScheduler">NormalScheduler</a>:
+        <span class="sel">schedulerDecl</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="VirtualScheduler">VirtualScheduler</a>:
+        <span class="sel">vschedulerDecl</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="AbstractSchedulerDecl">AbstractSchedulerDecl</a>:
+        ε
+</pre><pre><a class="nt" name="SchedulerDecl">SchedulerDecl</a>:
+        <span class="sel">processDef</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="VSchdulerDecl">VSchdulerDecl</a>:
+        <span class="sel">schedulerDef</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ConstDef">ConstDef</a>:
+        <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">expr</span>::<span class="meta">any</span> <span class="sel">bossaTypeExpr</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="TypeDef">TypeDef</a>:
+        <span class="sel">enumRang</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="EnumRange">EnumRange</a>:
+        <span class="sel">enumDef</span>::<span class="meta">any</span> <span class="sel">rangeDef</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="EnumDef">EnumDef</a>:
+        <span class="sel">theIds</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="BagId">BagId</a>:
+        <span class="sel">theValue</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="RangeDef">RangeDef</a>:
+        <span class="sel">expr</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ProcessDef">ProcessDef</a>:
+        <span class="sel">processVarDecl</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="SchedulerDef">SchedulerDef</a>:
+        <span class="sel">processVarDecl</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="ProcessVarDecl">ProcessVarDecl</a>:
+        <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">processDef</span>::<span class="meta">any</span> <span class="sel">schedulerDef</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Timer_ProcessVarDecl">Timer_ProcessVarDecl</a>:
+        ε
+</pre><pre><a class="nt" name="System_ProcessVarDecl">System_ProcessVarDecl</a>:
+        <span class="sel">system</span>::<span class="meta">any</span> <span class="sel">typeExpr</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Normal_ProcessVarDecl">Normal_ProcessVarDecl</a>:
+        <span class="sel">typeExpr</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="HandlerDef">HandlerDef</a>:
+        <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">scheduler</span>::<span class="meta">any</span> <span class="sel">onHandlerDef</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="InterfaceDef">InterfaceDef</a>:
+        <span class="sel">composantOfInterFunc</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">scheduler</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="FunctionDef">FunctionDef</a>:
+        <span class="sel">composantOfInterFunc</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">scheduler</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Expression">Expression</a>:
+        ε
+</pre><pre><a class="nt" name="Integer_Expression">Integer_Expression</a>:
+        <span class="sel">theValue</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Id_Expression">Id_Expression</a>:
+        <span class="sel">id</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="State_Expression">State_Expression</a>:
+        <span class="sel">theValue</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="True_Expression">True_Expression</a>:
+        
+</pre><pre><a class="nt" name="False_Expression">False_Expression</a>:
+        
+</pre><pre><a class="nt" name="Unop_Expression">Unop_Expression</a>:
+        <span class="sel">unop</span>::<span class="meta">any</span> <span class="sel">expr</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Etoile_Expression">Etoile_Expression</a>:
+        <span class="sel">expr</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ExpId_Expression">ExpId_Expression</a>:
+        <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">expr</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Select_Expression">Select_Expression</a>:
+        
+</pre><pre><a class="nt" name="FnName_Expression">FnName_Expression</a>:
+        <span class="sel">expr</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Empty_Expression">Empty_Expression</a>:
+        <span class="sel">classState</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SRCOnSched_Expression">SRCOnSched_Expression</a>:
+        
+</pre><pre><a class="nt" name="SchedulerOf_Expression">SchedulerOf_Expression</a>:
+        <span class="sel">expr</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="In_Expression">In_Expression</a>:
+        <span class="sel">in</span>::<span class="meta">any</span> <span class="sel">expr</span>::<span class="meta">any</span> <span class="sel">classState</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Parenthese_Expression">Parenthese_Expression</a>:
+        <span class="sel">expr</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Binop_Expression">Binop_Expression</a>:
+        <span class="sel">id_Expression</span>::<span class="meta">any</span> <span class="sel">compo_Binop_Expression</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Compo_Binop_Expression">Compo_Binop_Expression</a>:
+        <span class="sel">binop</span>::<span class="meta">any</span> <span class="sel">id_Expression</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ValDecl">ValDecl</a>:
+        <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">abstractSchedulerDecl</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Normal_ValDecl">Normal_ValDecl</a>:
+        <span class="sel">nonProcType</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="System_ValDecl">System_ValDecl</a>:
+        <span class="sel">nonProcType</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Timer_ValDecl">Timer_ValDecl</a>:
+        ε
+</pre><pre><a class="nt" name="FunDecl">FunDecl</a>:
+        <span class="sel">parameterTypes</span>::<span class="meta">any</span> <span class="sel">nonProcType</span>::<span class="meta">any</span> <span class="sel">abstractSchedulerDecl</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="StateDef">StateDef</a>:
+        <span class="sel">classNameStorage</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">abstractSchedulerDecl</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ClassNameStorage">ClassNameStorage</a>:
+        <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">className</span>::<span class="meta">any</span> <span class="sel">storage</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="OrderDef">OrderDef</a>:
+        <span class="sel">keyCritDecl</span>::<span class="meta">any</span> <span class="sel">critDecls</span>::<span class="meta">any</span> <span class="sel">abstractSchedulerDecl</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="AdmissionDef">AdmissionDef</a>:
+        <span class="sel">valDef</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">admCrit</span>::<span class="meta">any</span> <span class="sel">attachDetach</span>::<span class="meta">any</span> <span class="sel">abstractSchedulerDecl</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="TraceDef">TraceDef</a>:
+        <span class="sel">traceEvent</span>::<span class="meta">any</span> <span class="sel">traceExpr</span>::<span class="meta">any</span> <span class="sel">traceTest</span>::<span class="meta">any</span> <span class="sel">abstractSchedulerDecl</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="TypeExpr">TypeExpr</a>:
+        <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">bossaTypeExpr</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="TypeOrVoid">TypeOrVoid</a>:
+        <span class="sel">isVoid</span>::<span class="meta">any</span> <span class="sel">typeExpr</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ParameterType">ParameterType</a>:
+        <span class="sel">typeExpr</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Storage">Storage</a>:
+        ε
+</pre><pre><a class="nt" name="Process_Storage">Process_Storage</a>:
+        
+</pre><pre><a class="nt" name="Scheduler_Storage">Scheduler_Storage</a>:
+        <span class="sel">stateVisibility</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Queue_Storage">Queue_Storage</a>:
+        <span class="sel">stateVisibility</span>::<span class="meta">any</span> <span class="sel">queueType</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="KeyCritDecls">KeyCritDecls</a>:
+        <span class="sel">compoKeyCritDecls</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="CompoKeyCritDecls">CompoKeyCritDecls</a>:
+        <span class="sel">critDecl</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="CritDecls">CritDecls</a>:
+        <span class="sel">critDecl</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="CritDecl">CritDecl</a>:
+        ε
+</pre><pre><a class="nt" name="CritDeclWhithId">CritDeclWhithId</a>:
+        <span class="sel">id</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="CritDeclWhithoutId">CritDeclWhithoutId</a>:
+        <span class="sel">expr</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ValDef">ValDef</a>:
+        <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">typeExpr</span>::<span class="meta">any</span> <span class="sel">expr</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="AdmCrit">AdmCrit</a>:
+        <span class="sel">paramVarDecl</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">expr</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="AttachDetach">AttachDetach</a>:
+        <span class="sel">procParam1</span>::<span class="meta">any</span> <span class="sel">procParam2</span>::<span class="meta">any</span> <span class="sel">seqStmt1</span>::<span class="meta">any</span> <span class="sel">seqStmt2</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ParamVarDecl">ParamVarDecl</a>:
+        <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">typeExpr</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SeqStmt">SeqStmt</a>:
+        <span class="sel">valDef</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">stmt</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="TraceEvent">TraceEvent</a>:
+        <span class="sel">eventName</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="TraceExpr">TraceExpr</a>:
+        <span class="sel">id</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="TraceTest">TraceTest</a>:
+        <span class="sel">expr</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ProcParam">ProcParam</a>:
+        <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">process</span>::<span class="meta">any</span> <span class="sel">scheduler</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Statment">Statment</a>:
+        ε
+</pre><pre><a class="nt" name="IfStmt">IfStmt</a>:
+        <span class="sel">expr</span>::<span class="meta">any</span> <span class="sel">seqStmt</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ForStmt">ForStmt</a>:
+        ε
+</pre><pre><a class="nt" name="ForeachForStmt">ForeachForStmt</a>:
+        <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">isIn</span>::<span class="meta">any</span> <span class="sel">classState</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">seqStmt</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ForEachIncreasingForStmt">ForEachIncreasingForStmt</a>:
+        <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">seqStmt</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ForEachDecreasingForStmt">ForEachDecreasingForStmt</a>:
+        <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">seqStmt</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ReturnStmt">ReturnStmt</a>:
+        <span class="sel">expr</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SwitchStmt">SwitchStmt</a>:
+        <span class="sel">locExpr</span>::<span class="meta">any</span> <span class="sel">composantOfSwitchStmt</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="AssignStmt">AssignStmt</a>:
+        <span class="sel">locExpr</span>::<span class="meta">any</span> <span class="sel">assignUnop</span>::<span class="meta">any</span> <span class="sel">assignBinop</span>::<span class="meta">any</span> <span class="sel">expr</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="MoveStmt">MoveStmt</a>:
+        ε
+</pre><pre><a class="nt" name="NormalMoveStmt">NormalMoveStmt</a>:
+        <span class="sel">stateRef</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ForwardMoveStmt">ForwardMoveStmt</a>:
+        <span class="sel">isHead</span>::<span class="meta">any</span> <span class="sel">isTail</span>::<span class="meta">any</span> <span class="sel">moveExpr</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="StateRef">StateRef</a>:
+        <span class="sel">stateRef</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="DeferStmt">DeferStmt</a>:
+        <span class="sel">deferStmt</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="PrimStmt">PrimStmt</a>:
+        <span class="sel">expr</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="ErrorStmt">ErrorStmt</a>:
+        <span class="sel">errorType</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="BreakStmt">BreakStmt</a>:
+        
+</pre><pre><a class="nt" name="LocExpr">LocExpr</a>:
+        <span class="sel">stateName</span>::<span class="meta">any</span> <span class="sel">id</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="MoveExpr">MoveExpr</a>:
+        ε
+</pre><pre><a class="nt" name="Select_MoveExpr">Select_MoveExpr</a>:
+        
+</pre><pre><a class="nt" name="SatateName_MoveExpr">SatateName_MoveExpr</a>:
+        
+</pre><pre><a class="nt" name="ID_MoveExpr">ID_MoveExpr</a>:
+        <span class="sel">id</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="IDSource_MoveExpr">IDSource_MoveExpr</a>:
+        <span class="sel">id</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="IDTarget_MoveExpr">IDTarget_MoveExpr</a>:
+        <span class="sel">id</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ClassState">ClassState</a>:
+        <span class="sel">state</span>::<span class="meta">any</span> <span class="sel">className</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="OnHandlerDef">OnHandlerDef</a>:
+        <span class="sel">eventName</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">seqStmt</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="EventName">EventName</a>:
+        <span class="sel">eventNameLeft</span>::<span class="meta">any</span> <span class="sel">eventNameRight</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ComposantOfSwitchStmt">ComposantOfSwitchStmt</a>:
+        <span class="sel">classState</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">seqStmt</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ComposantOfInterFunc">ComposantOfInterFunc</a>:
+        <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">typeOrVoid</span>::<span class="meta">any</span> <span class="sel">paramVarDecl</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">seqStmt</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="BossaTypeExpr">BossaTypeExpr</a>:
+        <span class="sel">bossaTypeExpr</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="QueueType">QueueType</a>:
+        ε
+</pre><pre><a class="nt" name="Normal_QueueType">Normal_QueueType</a>:
+        
+</pre><pre><a class="nt" name="Fifo_QueueType">Fifo_QueueType</a>:
+        
+</pre><pre><a class="nt" name="Lifo_QueueType">Lifo_QueueType</a>:
+        
+</pre><pre><a class="nt" name="Critop">Critop</a>:
+        <span class="sel">lowest</span>::<span class="meta">any</span> <span class="sel">highest</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="StateVisibility">StateVisibility</a>:
+        <span class="sel">public</span>::<span class="meta">any</span> <span class="sel">private</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ClassName">ClassName</a>:
+        <span class="sel">className</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="NonProcType">NonProcType</a>:
+        <span class="sel">system</span>::<span class="meta">any</span> <span class="sel">struct</span>::<span class="meta">any</span> <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">nonProcType</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Unop">Unop</a>:
+        <span class="sel">plus</span>::<span class="meta">any</span> <span class="sel">minus</span>::<span class="meta">any</span> <span class="sel">excl</span>::<span class="meta">any</span> <span class="sel">tild</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Binop">Binop</a>:
+        <span class="sel">plus</span>::<span class="meta">any</span> <span class="sel">minus</span>::<span class="meta">any</span> <span class="sel">star</span>::<span class="meta">any</span> <span class="sel">slash</span>::<span class="meta">any</span> <span class="sel">percentage</span>::<span class="meta">any</span> <span class="sel">doubleAnd</span>::<span class="meta">any</span> <span class="sel">doubleVerticalBar</span>::<span class="meta">any</span> <span class="sel">and</span>::<span class="meta">any</span> <span class="sel">eq</span>::<span class="meta">any</span> <span class="sel">ne</span>::<span class="meta">any</span> <span class="sel">lt</span>::<span class="meta">any</span> <span class="sel">gt</span>::<span class="meta">any</span> <span class="sel">le</span>::<span class="meta">any</span> <span class="sel">ge</span>::<span class="meta">any</span> <span class="sel">doubleLt</span>::<span class="meta">any</span> <span class="sel">doubleGt</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="AssignUnop">AssignUnop</a>:
+        <span class="sel">doublePlus</span>::<span class="meta">any</span> <span class="sel">doubleMoins</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="AssignBinop">AssignBinop</a>:
+        <span class="sel">affect</span>::<span class="meta">any</span> <span class="sel">plusEqual</span>::<span class="meta">any</span> <span class="sel">moinsEqual</span>::<span class="meta">any</span> <span class="sel">starEqual</span>::<span class="meta">any</span> <span class="sel">slashEqual</span>::<span class="meta">any</span> <span class="sel">percentageEqual</span>::<span class="meta">any</span> <span class="sel">andEqual</span>::<span class="meta">any</span> <span class="sel">orEqual</span>::<span class="meta">any</span> <span class="sel">doubleLtEqual</span>::<span class="meta">any</span> <span class="sel">doubleGtEqual</span>::<span class="meta">any</span>
+</pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
+Last updated: 09/04/2013.</div></body></html>

@@ -1,0 +1,37 @@
+module Main
+
+exports
+  sorts
+        Resource Service Behavior WorkLoad Step Start End Control InternalActivity ServiceCall ActualParam Branch Fork Join Acquire Release 
+  context-free syntax
+        name::ANY type::ANY capacity::ANY schedulingPolicy::ANY description::ANY acquire::ANY release::ANY -> Resource
+
+        name::ANY formalParams::ANY speedAttr::ANY failAttr::ANY description::ANY behavior::ANY+ behaviorUsed::ANY+ serviceCall::ANY+ -> Service
+
+        stepn::ANY stepb::ANY+ service::ANY usedService::ANY+ workLoad::ANY -> Behavior
+
+        workLoadType::ANY arrivalProcess::ANY population::ANY initialResource::ANY behavior::ANY -> WorkLoad
+
+        name::ANY repetition::ANY internalExecTime::ANY internalFailProb::ANY completionModel::ANY serviceCall::ANY+ predecessor::ANY+ successor::ANY+ behavior::ANY nestedBehavior::ANY -> Step
+
+         -> Start
+
+         -> End
+
+         -> Control
+
+         -> InternalActivity
+
+        resourceType::ANY serviceName::ANY isSynch::ANY actualParam::ANY+ step::ANY calledService::ANY -> ServiceCall
+
+        value::ANY serviceCall::ANY -> ActualParam
+
+        branchProbs::ANY -> Branch
+
+         -> Fork
+
+         -> Join
+
+        resourceUnits::ANY resource::ANY -> Acquire
+
+        resourceUnits::ANY resource::ANY -> Release

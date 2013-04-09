@@ -1,0 +1,141 @@
+module Main
+
+exports
+  sorts
+        Element ModelElement GeneralizableElement Namespace Classifier Feature StructuralFeature AssociationEnd Relationship Association Attribute BehavioralFeature Operation Parameter Generalization AggregationKind ChangeableKind OrderingKind CallConcurrencyKind ParameterDirectionKind ScopeKind VisibilityKind Multiplicity MultiplicityRange Expression BooleanExpression ObjectSetExpression ActionExpression IterationExpression Instance Signal Action CreateAction DestroyAction UninterpretedAction AttributeLink Object Link LinkObject DataValue CallAction SendAction ActionSequence Argument Reception LinkEnd ReturnAction TerminateAction Stimulus Exception ComponentInstance NodeInstance SubsystemInstance Collaboration ClassifierRole AssociationRole AssociationEndRole Message Interaction InteractionInstanceSet CollaborationInstanceSet 
+  context-free syntax
+         -> Element
+
+         -> ModelElement
+
+         -> GeneralizableElement
+
+         -> Namespace
+
+         -> Classifier
+
+         -> Feature
+
+         -> StructuralFeature
+
+        association::ANY specification::ANY+ participant::ANY qualifier::ANY+ isNavigable::ANY ordering::ANY aggregation::ANY targetScope::ANY multiplicity::ANY changeability::ANY -> AssociationEnd
+
+         -> Relationship
+
+        connection::ANY -> Association
+
+        associationEnd::ANY initialValue::ANY -> Attribute
+
+         -> BehavioralFeature
+
+        concurrency::ANY isRoot::ANY isLeaf::ANY isAbstract::ANY specification::ANY -> Operation
+
+        type::ANY behavioralFeature::ANY defaultValue::ANY kind::ANY -> Parameter
+
+        parent::ANY powertype::ANY child::ANY discriminator::ANY -> Generalization
+
+        ak_none:: -> AggregationKind
+        ak_aggregate:: -> AggregationKind
+        ak_composite:: -> AggregationKind
+
+        ck_changeable:: -> ChangeableKind
+        ck_frozen:: -> ChangeableKind
+        ck_addOnly:: -> ChangeableKind
+
+        ok_unordered:: -> OrderingKind
+        ok_ordered:: -> OrderingKind
+
+        cck_sequential:: -> CallConcurrencyKind
+        cck_guarded:: -> CallConcurrencyKind
+        cck_concurrent:: -> CallConcurrencyKind
+
+        pdk_in:: -> ParameterDirectionKind
+        pdk_inout:: -> ParameterDirectionKind
+        pdk_out:: -> ParameterDirectionKind
+        pdk_return:: -> ParameterDirectionKind
+
+        sk_instance:: -> ScopeKind
+        sk_classifier:: -> ScopeKind
+
+        vk_public:: -> VisibilityKind
+        vk_protected:: -> VisibilityKind
+        vk_private:: -> VisibilityKind
+        vk_package:: -> VisibilityKind
+
+        range::ANY+ -> Multiplicity
+
+        multiplicity::ANY lower::ANY upper::ANY -> MultiplicityRange
+
+        language::ANY body::ANY -> Expression
+
+         -> BooleanExpression
+
+         -> ObjectSetExpression
+
+         -> ActionExpression
+
+         -> IterationExpression
+
+         -> Instance
+
+        powertypeRange::ANY+ feature::ANY+ -> Signal
+
+         -> Action
+
+        instantiation::ANY -> CreateAction
+
+        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY -> DestroyAction
+
+        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY -> UninterpretedAction
+
+        instance::ANY value::ANY linkEnd::ANY attribute::ANY -> AttributeLink
+
+        ownedInstance::ANY+ linkEnd::ANY+ classifier::ANY+ componentInstance::ANY slot::ANY+ ownedLink::ANY+ -> Object
+
+        association::ANY connection::ANY -> Link
+
+         -> LinkObject
+
+        ownedInstance::ANY+ linkEnd::ANY+ classifier::ANY+ componentInstance::ANY slot::ANY+ ownedLink::ANY+ -> DataValue
+
+        operation::ANY -> CallAction
+
+        signal::ANY -> SendAction
+
+        action::ANY+ -> ActionSequence
+
+        action::ANY value::ANY -> Argument
+
+        signal::ANY specification::ANY isRoot::ANY isLeaf::ANY isAbstract::ANY -> Reception
+
+        link::ANY qualifiedValue::ANY+ instance::ANY associationEnd::ANY -> LinkEnd
+
+        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY -> ReturnAction
+
+        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY -> TerminateAction
+
+        argument::ANY+ communicationLink::ANY receiver::ANY dispatchAction::ANY sender::ANY -> Stimulus
+
+         -> Exception
+
+        resident::ANY+ nodeInstance::ANY -> ComponentInstance
+
+        resident::ANY+ -> NodeInstance
+
+        ownedInstance::ANY+ linkEnd::ANY+ classifier::ANY+ componentInstance::ANY slot::ANY+ ownedLink::ANY+ -> SubsystemInstance
+
+        usedCollaboration::ANY+ representedOperation::ANY representedClassifier::ANY interaction::ANY+ constrainingElement::ANY+ -> Collaboration
+
+        availableContents::ANY+ base::ANY+ conformingInstance::ANY+ availableFeature::ANY+ multiplicity::ANY -> ClassifierRole
+
+        base::ANY conformingLink::ANY+ message::ANY+ multiplicity::ANY -> AssociationRole
+
+        base::ANY availableQualifier::ANY+ collaborationMultiplicity::ANY -> AssociationEndRole
+
+        interaction::ANY conformingStimulus::ANY+ action::ANY communicationConnection::ANY activator::ANY receiver::ANY sender::ANY predecessor::ANY+ -> Message
+
+        message::ANY+ context::ANY -> Interaction
+
+        interaction::ANY context::ANY participatingStimulus::ANY+ -> InteractionInstanceSet
+
+        collaboration::ANY constrainingElement::ANY+ participatingInstance::ANY+ interactionInstanceSet::ANY+ participatingLink::ANY+ -> CollaborationInstanceSet

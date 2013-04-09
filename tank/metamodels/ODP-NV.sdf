@@ -1,0 +1,61 @@
+module Main
+
+exports
+  sorts
+        Node Nucleus Capsule EngineeringObject CapsuleManager Cluster ClusterManager BEO Stub Binder ProtocolObject Interceptor Channel ClientServerChannel ControllingObject SecurityAuthority ManagementAuthority AddressingAuthority NamingAuthority ControlledObject Domain SecurityDomain ManagementDomain AddressingDomain NamingDomain EngineeringInterfaceReferenceManagementDomain EngineeringInterfaceReferenceManagementPolicy EngineeringInterfaceReference 
+  context-free syntax
+        location::ANY manager::ANY capsules::ANY+ -> Node
+
+        otherEngObjects::ANY+ beos::ANY+ -> Nucleus
+
+        otherEngObjects::ANY+ capsuleManager::ANY clusterManagers::ANY+ clusters::ANY+ -> Capsule
+
+        nodeManager::ANY -> EngineeringObject
+
+        cmClusterManagers::ANY+ -> CapsuleManager
+
+        clusterManager::ANY clusterBeos::ANY+ -> Cluster
+
+        clusters::ANY+ clustermanagerBeos::ANY+ capsuleManager::ANY -> ClusterManager
+
+        beoNodeManager::ANY locallyBoundObjects::ANY+ localbinds::ANY+ beoManager::ANY beoChannel::ANY+ beoStub::ANY+ -> BEO
+
+        stChannel::ANY stBinder::ANY stBeo::ANY -> Stub
+
+        bdChannel::ANY chBinder::ANY bdProtocolObject::ANY+ -> Binder
+
+        type::ANY poChannel::ANY poBinder::ANY poInterceptor::ANY+ poBoundProtocolObject::ANY+ -> ProtocolObject
+
+        intChannel::ANY intProtocolObject::ANY -> Interceptor
+
+        chStub::ANY chBinder::ANY chPObject::ANY chInterceptor::ANY+ chEndPoint::ANY -> Channel
+
+         -> ClientServerChannel
+
+        coDomain::ANY+ -> ControllingObject
+
+         -> SecurityAuthority
+
+         -> ManagementAuthority
+
+         -> AddressingAuthority
+
+         -> NamingAuthority
+
+        cdoDomain::ANY+ -> ControlledObject
+
+        parentDomain::ANY subDomain::ANY+ domControllingObject::ANY domMember::ANY+ -> Domain
+
+         -> SecurityDomain
+
+         -> ManagementDomain
+
+         -> AddressingDomain
+
+         -> NamingDomain
+
+        eirmdReference::ANY+ eirmdManagementPolicy::ANY -> EngineeringInterfaceReferenceManagementDomain
+
+        eirmpManagementDomain::ANY+ -> EngineeringInterfaceReferenceManagementPolicy
+
+        eirManagementDomain::ANY -> EngineeringInterfaceReference

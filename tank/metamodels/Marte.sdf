@@ -1,0 +1,315 @@
+module Main
+
+exports
+  sorts
+        Element Comment Package NamedElement StructuralFeature ConnectableElement TemplateableElement Property VisibilityKind Dependency DirectedRelationship Relationship Namespace ElementImport PackageImport Constraint TypedElement Type Association Classifier RedefinableElement TemplateBinding TemplateSignature TemplateParameter ParameterableElement TemplateParameterSubstitution Generalization GeneralizationSet Feature Substitution PackageableElement PackageMerge ProfileApplication Profile Stereotype Class StringExpression Expression ValueSpecification BehavioredClassifier Behavior MultiplicityElement DeploymentTarget DataType AggregationKind CollaborationUse UseCase Realization Abstraction Image OpaqueExpression Parameter EncapsulatedClassifier Operation Reception Extension EnumerationLiteral ActivityPartition Enumeration InstanceSpecification BehavioralFeature Signal TimeExpression Observation Duration DurationInterval Interval TimeConstraint IntervalConstraint TimeInterval DurationConstraint TimeObservation DurationObservation ConnectorEnd TimeEvent Event Port Action Message Lifeline ExecutionSpecification InvocationAction Connector Collaboration Interface InterfaceRealization Trigger ProtocolStateMachine StateMachine ProtocolConformance Deployment Include Extend ExtensionPoint Region StructuredClassifier Vertex Transition TransitionKind State ParameterSet ActivityNode ActivityGroup ParameterDirectionKind ParameterEffectKind ActivityEdge InterruptibleActivityRegion DeployedArtifact Slot ExecutableNode OutputPin Pin InputPin MessageKind ExceptionHandler ObjectNode ObjectNodeOrderingKind MessageEnd MessageSort Interaction PartDecomposition InteractionUse InteractionFragment ConnectorKind Pseudostate PseudostateKind ConnectionPointReference StructuredActivityNode Variable Activity OccurrenceSpecification DeploymentSpecification Gate Artifact GeneralOrdering Manifestation InteractionOperand InteractionConstraint 
+  context-free syntax
+         -> Element
+
+        body::ANY annotatedElement::ANY+ -> Comment
+
+        ownedType::ANY+ packageMerge::ANY+ packagedElement::ANY+ nestedPackage::ANY+ nestingPackage::ANY profileApplication::ANY+ -> Package
+
+         -> NamedElement
+
+         -> StructuralFeature
+
+         -> ConnectableElement
+
+         -> TemplateableElement
+
+        class::ANY datatype::ANY owningAssociation::ANY association::ANY isDerived::ANY isDerivedUnion::ANY default::ANY aggregation::ANY isComposite::ANY redefinedProperty::ANY+ defaultValue::ANY opposite::ANY subsettedProperty::ANY+ qualifier::ANY+ associationEnd::ANY -> Property
+
+        public:: -> VisibilityKind
+        private:: -> VisibilityKind
+        protected:: -> VisibilityKind
+        package:: -> VisibilityKind
+
+        supplier::ANY+ client::ANY+ -> Dependency
+
+         -> DirectedRelationship
+
+         -> Relationship
+
+         -> Namespace
+
+        visibility::ANY alias::ANY importedElement::ANY importingNamespace::ANY -> ElementImport
+
+        visibility::ANY importedPackage::ANY importingNamespace::ANY -> PackageImport
+
+        constrainedElement::ANY+ specification::ANY context::ANY -> Constraint
+
+         -> TypedElement
+
+         -> Type
+
+        isDerived::ANY ownedEnd::ANY+ endType::ANY+ memberEnd::ANY navigableOwnedEnd::ANY+ -> Association
+
+         -> Classifier
+
+         -> RedefinableElement
+
+        signature::ANY parameterSubstitution::ANY+ boundElement::ANY -> TemplateBinding
+
+        parameter::ANY+ ownedParameter::ANY+ template::ANY -> TemplateSignature
+
+        signature::ANY parameteredElement::ANY ownedParameteredElement::ANY default::ANY ownedDefault::ANY -> TemplateParameter
+
+         -> ParameterableElement
+
+        formal::ANY actual::ANY+ ownedActual::ANY+ templateBinding::ANY -> TemplateParameterSubstitution
+
+        isSubstitutable::ANY general::ANY generalizationSet::ANY+ specific::ANY -> Generalization
+
+        isCovering::ANY isDisjoint::ANY powertype::ANY generalization::ANY+ -> GeneralizationSet
+
+         -> Feature
+
+        contract::ANY substitutingClassifier::ANY -> Substitution
+
+         -> PackageableElement
+
+        mergedPackage::ANY receivingPackage::ANY -> PackageMerge
+
+        appliedProfile::ANY isStrict::ANY applyingPackage::ANY -> ProfileApplication
+
+        ownedStereotype::ANY+ metaclassReference::ANY+ metamodelReference::ANY+ -> Profile
+
+        icon::ANY+ -> Stereotype
+
+        nestedClassifier::ANY+ ownedOperation::ANY+ superClass::ANY+ isActive::ANY ownedReception::ANY+ extension::ANY+ -> Class
+
+        subExpression::ANY+ owningExpression::ANY -> StringExpression
+
+        symbol::ANY operand::ANY+ -> Expression
+
+         -> ValueSpecification
+
+         -> BehavioredClassifier
+
+         -> Behavior
+
+         -> MultiplicityElement
+
+         -> DeploymentTarget
+
+        ownedAttribute::ANY+ ownedOperation::ANY+ -> DataType
+
+        none:: -> AggregationKind
+        shared:: -> AggregationKind
+        composite:: -> AggregationKind
+
+        type::ANY roleBinding::ANY+ -> CollaborationUse
+
+        include::ANY+ extend::ANY+ extensionPoint::ANY+ subject::ANY+ -> UseCase
+
+         -> Realization
+
+        mapping::ANY -> Abstraction
+
+        content::ANY location::ANY format::ANY -> Image
+
+        body::ANY+ language::ANY+ result::ANY behavior::ANY -> OpaqueExpression
+
+        direction::ANY default::ANY defaultValue::ANY operation::ANY parameterSet::ANY+ isException::ANY isStream::ANY effect::ANY -> Parameter
+
+         -> EncapsulatedClassifier
+
+        interface::ANY class::ANY isQuery::ANY isOrdered::ANY isUnique::ANY lower::ANY upper::ANY precondition::ANY+ postcondition::ANY+ redefinedOperation::ANY+ datatype::ANY bodyCondition::ANY type::ANY -> Operation
+
+        signal::ANY -> Reception
+
+        isRequired::ANY metaclass::ANY -> Extension
+
+        enumeration::ANY -> EnumerationLiteral
+
+        isDimension::ANY isExternal::ANY node::ANY+ subpartition::ANY+ superPartition::ANY represents::ANY edge::ANY+ -> ActivityPartition
+
+        ownedLiteral::ANY+ -> Enumeration
+
+        classifier::ANY+ slot::ANY+ specification::ANY -> InstanceSpecification
+
+         -> BehavioralFeature
+
+        ownedAttribute::ANY+ -> Signal
+
+        expr::ANY observation::ANY+ -> TimeExpression
+
+         -> Observation
+
+        expr::ANY observation::ANY+ -> Duration
+
+         -> DurationInterval
+
+        min::ANY max::ANY -> Interval
+
+        firstEvent::ANY -> TimeConstraint
+
+         -> IntervalConstraint
+
+         -> TimeInterval
+
+        firstEvent::ANY -> DurationConstraint
+
+        event::ANY firstEvent::ANY -> TimeObservation
+
+        event::ANY firstEvent::ANY -> DurationObservation
+
+        definingEnd::ANY partWithPort::ANY role::ANY -> ConnectorEnd
+
+        isRelative::ANY when::ANY -> TimeEvent
+
+         -> Event
+
+        isBehavior::ANY isService::ANY required::ANY+ redefinedPort::ANY+ provided::ANY+ protocol::ANY -> Port
+
+         -> Action
+
+        messageKind::ANY messageSort::ANY receiveEvent::ANY sendEvent::ANY connector::ANY interaction::ANY argument::ANY+ signature::ANY -> Message
+
+        represents::ANY interaction::ANY selector::ANY decomposedAs::ANY coveredBy::ANY+ -> Lifeline
+
+         -> ExecutionSpecification
+
+         -> InvocationAction
+
+        type::ANY redefinedConnector::ANY+ end::ANY kind::ANY contract::ANY+ -> Connector
+
+        collaborationRole::ANY+ -> Collaboration
+
+        ownedAttribute::ANY+ ownedOperation::ANY+ nestedClassifier::ANY+ redefinedInterface::ANY+ ownedReception::ANY+ protocol::ANY -> Interface
+
+        contract::ANY implementingClassifier::ANY -> InterfaceRealization
+
+        event::ANY port::ANY+ -> Trigger
+
+        conformance::ANY+ -> ProtocolStateMachine
+
+        region::ANY+ submachineState::ANY+ connectionPoint::ANY+ extendedStateMachine::ANY+ -> StateMachine
+
+        generalMachine::ANY specificMachine::ANY -> ProtocolConformance
+
+        deployedArtifact::ANY+ configuration::ANY+ location::ANY -> Deployment
+
+        addition::ANY includingCase::ANY -> Include
+
+        extendedCase::ANY condition::ANY extensionLocation::ANY+ extension::ANY -> Extend
+
+        useCase::ANY -> ExtensionPoint
+
+        subvertex::ANY+ transition::ANY+ state::ANY extendedRegion::ANY stateMachine::ANY -> Region
+
+         -> StructuredClassifier
+
+         -> Vertex
+
+        kind::ANY container::ANY redefinedTransition::ANY guard::ANY effect::ANY trigger::ANY+ target::ANY source::ANY -> Transition
+
+        internal:: -> TransitionKind
+        local:: -> TransitionKind
+        external:: -> TransitionKind
+
+        isComposite::ANY isOrthogonal::ANY isSimple::ANY isSubmachineState::ANY submachine::ANY connection::ANY+ connectionPoint::ANY+ redefinedState::ANY stateInvariant::ANY entry::ANY exit::ANY doActivity::ANY deferrableTrigger::ANY+ region::ANY+ -> State
+
+        parameter::ANY+ condition::ANY+ -> ParameterSet
+
+         -> ActivityNode
+
+         -> ActivityGroup
+
+        in:: -> ParameterDirectionKind
+        inout:: -> ParameterDirectionKind
+        out:: -> ParameterDirectionKind
+        return:: -> ParameterDirectionKind
+
+        create:: -> ParameterEffectKind
+        read:: -> ParameterEffectKind
+        update:: -> ParameterEffectKind
+        delete:: -> ParameterEffectKind
+
+         -> ActivityEdge
+
+        node::ANY+ interruptingEdge::ANY+ -> InterruptibleActivityRegion
+
+         -> DeployedArtifact
+
+        definingFeature::ANY value::ANY+ owningInstance::ANY -> Slot
+
+         -> ExecutableNode
+
+         -> OutputPin
+
+        isControl::ANY -> Pin
+
+         -> InputPin
+
+        complete:: -> MessageKind
+        lost:: -> MessageKind
+        found:: -> MessageKind
+        unknown:: -> MessageKind
+
+        handlerBody::ANY exceptionInput::ANY exceptionType::ANY+ protectedNode::ANY -> ExceptionHandler
+
+         -> ObjectNode
+
+        unordered:: -> ObjectNodeOrderingKind
+        ordered:: -> ObjectNodeOrderingKind
+        LIFO:: -> ObjectNodeOrderingKind
+        FIFO:: -> ObjectNodeOrderingKind
+
+         -> MessageEnd
+
+        synchCall:: -> MessageSort
+        asynchCall:: -> MessageSort
+        asynchSignal:: -> MessageSort
+        createMessage:: -> MessageSort
+        deleteMessage:: -> MessageSort
+        reply:: -> MessageSort
+
+        lifeline::ANY+ fragment::ANY+ action::ANY+ formalGate::ANY+ message::ANY+ -> Interaction
+
+         -> PartDecomposition
+
+        refersTo::ANY actualGate::ANY+ argument::ANY+ -> InteractionUse
+
+         -> InteractionFragment
+
+        assembly:: -> ConnectorKind
+        delegation:: -> ConnectorKind
+
+        kind::ANY stateMachine::ANY state::ANY -> Pseudostate
+
+        initial:: -> PseudostateKind
+        deepHistory:: -> PseudostateKind
+        shallowHistory:: -> PseudostateKind
+        join:: -> PseudostateKind
+        fork:: -> PseudostateKind
+        junction:: -> PseudostateKind
+        choice:: -> PseudostateKind
+        entryPoint:: -> PseudostateKind
+        exitPoint:: -> PseudostateKind
+        terminate:: -> PseudostateKind
+
+        entry::ANY+ exit::ANY+ state::ANY -> ConnectionPointReference
+
+        variable::ANY+ edge::ANY+ mustIsolate::ANY node::ANY+ -> StructuredActivityNode
+
+        scope::ANY activityScope::ANY -> Variable
+
+        structuredNode::ANY+ variable::ANY+ node::ANY+ isReadOnly::ANY edge::ANY+ partition::ANY+ isSingleExecution::ANY group::ANY+ -> Activity
+
+        toBefore::ANY+ event::ANY toAfter::ANY+ -> OccurrenceSpecification
+
+        deploymentLocation::ANY executionLocation::ANY deployment::ANY -> DeploymentSpecification
+
+        message::ANY -> Gate
+
+        fileName::ANY nestedArtifact::ANY+ manifestation::ANY+ ownedOperation::ANY+ ownedAttribute::ANY+ -> Artifact
+
+        before::ANY after::ANY -> GeneralOrdering
+
+        utilizedElement::ANY -> Manifestation
+
+        guard::ANY fragment::ANY+ -> InteractionOperand
+
+        minint::ANY maxint::ANY -> InteractionConstraint

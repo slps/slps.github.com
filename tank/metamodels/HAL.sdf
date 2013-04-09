@@ -1,0 +1,108 @@
+module Main
+
+exports
+  sorts
+        HAL Connexion Entry Article ArticleRecent ArticleRetro Notice ReferenceBiblioType ArtRevueType WorkshopType ArtOuvrageType OuvrageType TheseType BrevetType AutreType ArtRevue ArtJournal Workshop Communication Conference ArtOuvrage Ouvrage Brevet Autre These MetaType MetaArtType MetaArtNoticeType AutLabType Auteur Laboratoire AbstractMetaLab MetaLab AffiliationType TamponType DateVisibleEnum AbstractDepot Depot FormatEnum DepotWeb FormatWebEnum AbstractDepotType DepotsType WebLink Server 
+  context-free syntax
+        connexion::ANY contents::ANY+ -> HAL
+
+        login::ANY password::ANY -> Connexion
+
+         -> Entry
+
+         -> Article
+
+        fichiers::ANY -> ArticleRecent
+
+        dateRedaction::ANY fichiers::ANY -> ArticleRetro
+
+        metaArtNotice::ANY -> Notice
+
+         -> ReferenceBiblioType
+
+         -> ArtRevueType
+
+         -> WorkshopType
+
+         -> ArtOuvrageType
+
+         -> OuvrageType
+
+         -> TheseType
+
+         -> BrevetType
+
+         -> AutreType
+
+        urldoi::ANY journal::ANY volume::ANY page::ANY annee::ANY -> ArtRevue
+
+        urldoi::ANY journal::ANY volume::ANY page::ANY annee::ANY -> ArtJournal
+
+        urldoi::ANY titconf::ANY ville::ANY pays::ANY edcom::ANY annee::ANY page::ANY edsci::ANY serie::ANY -> Workshop
+
+        urldoi::ANY titconf::ANY ville::ANY pays::ANY edcom::ANY annee::ANY page::ANY edsci::ANY serie::ANY -> Communication
+
+        urldoi::ANY titconf::ANY ville::ANY pays::ANY edcom::ANY annee::ANY page::ANY edsci::ANY serie::ANY -> Conference
+
+        urldoi::ANY titouv::ANY edcom::ANY annee::ANY edsci::ANY serie::ANY -> ArtOuvrage
+
+        urldoi::ANY edcom::ANY annee::ANY page::ANY -> Ouvrage
+
+        datebrevet::ANY numbrevet::ANY page::ANY pays::ANY -> Brevet
+
+        urldoi::ANY annee::ANY description::ANY -> Autre
+
+        orgthe::ANY niveau::ANY defencedate::ANY directeur::ANY codirecteur::ANY -> These
+
+         -> MetaType
+
+        domain::ANY abstract::ANY referenceBiblio::ANY -> MetaArtType
+
+        domain::ANY abstract::ANY referenceBiblio::ANY -> MetaArtNoticeType
+
+        auteurs::ANY+ laboratoires::ANY+ -> AutLabType
+
+        nom::ANY prenom::ANY autrePrenom::ANY email::ANY urlPerso::ANY lab::ANY -> Auteur
+
+        id::ANY metas::ANY -> Laboratoire
+
+         -> AbstractMetaLab
+
+        id::ANY -> MetaLab
+
+        institution::ANY+ prive::ANY+ ecole::ANY+ universite::ANY+ -> AffiliationType
+
+        id::ANY -> TamponType
+
+        15J:: -> DateVisibleEnum
+        1M:: -> DateVisibleEnum
+        3M:: -> DateVisibleEnum
+        1A:: -> DateVisibleEnum
+        2A:: -> DateVisibleEnum
+        JAMAIS:: -> DateVisibleEnum
+
+         -> AbstractDepot
+
+        format::ANY -> Depot
+
+        PDF:: -> FormatEnum
+        TEX:: -> FormatEnum
+        DOC:: -> FormatEnum
+        RTF:: -> FormatEnum
+        TXT:: -> FormatEnum
+        PS:: -> FormatEnum
+        ANNEX:: -> FormatEnum
+
+        format::ANY -> DepotWeb
+
+        XML:: -> FormatWebEnum
+        HTML:: -> FormatWebEnum
+        HTM:: -> FormatWebEnum
+
+         -> AbstractDepotType
+
+        depots::ANY+ -> DepotsType
+
+        identifiant::ANY server::ANY -> WebLink
+
+         -> Server

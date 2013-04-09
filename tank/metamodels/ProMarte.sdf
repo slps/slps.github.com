@@ -1,0 +1,276 @@
+module Main
+
+exports
+  sorts
+        TimeBase Instant TimeValue TimeInterval Interval SingleTimeBase SingleInstant SingleInterval SingleTimeValue SingleTimeInterval DiscreteTimeBase DiscreteInstant Event EventOccurence PhysicalTime PhysicalInstant Duration MultipleTimeBase CoincidencePoint MultipleInterval MultipleTimeValue MetricTimeValue DiscreteTimeValue MetricTimeInterval DiscreteTimeInterval SimultaneousEventOccurrence TimedEvent TimedEventOccurence TimedAction Delay TimingMechanism Clock Timer TimeOut ClockInterrupt System Model AnnotatedModel ModelElement AnnotatedModelElement NFP NFPLibrary NFPCategory ModelingConcern AnalysisConcern DesignConcern Quantity BasicQuantity DerivedQuantity QualitativeNFP QuantitativeNFP Realization Measure ComplexNFP BasicNFP NFPType NFPInstantType NFPurationType NFPRateType NFPProbabilityType NFPSizeType NFPValueSpecification NFPConstant NFPListConstant NFPStringConstant NFPIntegerConstant NFPRealConstant NFPBooleanConstant NFPVariable NFPExpression SourceKinds DirectionKinds StatisticalQualifierKinds InstantUnitKinds DurationUnitKinds RateUnitKinds ProbabilityUnitKinds SizeUnitKinds Classifier ResourceClassifier ResourceServiceClassifier InstanceSpecification ResourceInstanceSpecification ResourceServiceInstanceSpecification Hardware HardwareLibrary HardwareEntity HardwareDeployment HardwareEntityInstance ECUInstance ChannelInstance ECUGateInstance ECU ECUGate Channel AnalysisContext Workload Transaction Trigger Response Behavior Scenario Step Resource BasicResource StructuredResource ProcessingResource Link ProcessResource Component StructuredComponent BasicComponent LogicalResource ServerResource Service Interface 
+  context-free syntax
+         -> TimeBase
+
+         -> Instant
+
+         -> TimeValue
+
+         -> TimeInterval
+
+         -> Interval
+
+        currentValue::ANY maximumValue::ANY currentInstant::ANY -> SingleTimeBase
+
+        coPoint::ANY -> SingleInstant
+
+        first::ANY last::ANY members::ANY+ -> SingleInterval
+
+        denotedInstant::ANY+ ref::ANY -> SingleTimeValue
+
+        start::ANY end::ANY -> SingleTimeInterval
+
+        refEvent::ANY -> DiscreteTimeBase
+
+        next::ANY previous::ANY refOcc::ANY -> DiscreteInstant
+
+         -> Event
+
+         -> EventOccurence
+
+         -> PhysicalTime
+
+         -> PhysicalInstant
+
+         -> Duration
+
+        bases::ANY+ -> MultipleTimeBase
+
+        coincidenceInstants::ANY+ -> CoincidencePoint
+
+        first::ANY+ last::ANY+ -> MultipleInterval
+
+        values::ANY+ -> MultipleTimeValue
+
+         -> MetricTimeValue
+
+        denotedInstant::ANY+ ref::ANY -> DiscreteTimeValue
+
+         -> MetricTimeInterval
+
+        endValues::ANY denotedInterval::ANY+ -> DiscreteTimeInterval
+
+        at::ANY occurence::ANY -> SimultaneousEventOccurrence
+
+        timestamp::ANY+ -> TimedEvent
+
+        at::ANY timestamp::ANY -> TimedEventOccurence
+
+        duration::ANY+ start::ANY+ end::ANY+ -> TimedAction
+
+         -> Delay
+
+        stability::ANY drift::ANY skew::ANY origin::ANY resolution::ANY refClock::ANY state::ANY -> TimingMechanism
+
+        accuracy::ANY offset::ANY generatedInterrupt::ANY+ -> Clock
+
+        isPeriodic::ANY duration::ANY genratedTimeOuts::ANY+ -> Timer
+
+         -> TimeOut
+
+         -> ClockInterrupt
+
+        dimension::ANY+ -> System
+
+        ownes::ANY+ -> Model
+
+        conformsTo::ANY+ import::ANY+ -> AnnotatedModel
+
+        owner::ANY -> ModelElement
+
+        annotation::ANY+ -> AnnotatedModelElement
+
+        measurementQuantity::ANY storedBy::ANY+ groupedBy::ANY -> NFP
+
+        refersTo::ANY+ usedNFP::ANY+ -> NFPLibrary
+
+        setOf::ANY+ ownes::ANY+ owner::ANY -> NFPCategory
+
+        relevantQuantity::ANY+ annotedModel::ANY -> ModelingConcern
+
+         -> AnalysisConcern
+
+         -> DesignConcern
+
+         -> Quantity
+
+         -> BasicQuantity
+
+         -> DerivedQuantity
+
+        parameter::ANY+ -> QualitativeNFP
+
+        sampleSet::ANY+ measure::ANY+ -> QuantitativeNFP
+
+        function::ANY+ owner::ANY -> Realization
+
+        appliesTo::ANY+ owner::ANY -> Measure
+
+        parent::ANY+ child::ANY+ ownes::ANY+ -> ComplexNFP
+
+        statisticalQualifier::ANY directon::ANY typedBy::ANY valuedBy::ANY+ dimensionOf::ANY+ -> BasicNFP
+
+        valueSpecificationLanguage::ANY source::ANY constrainedSpec::ANY+ -> NFPType
+
+        value::ANY unit::ANY -> NFPInstantType
+
+        value::ANY unit::ANY -> NFPurationType
+
+        value::ANY unit::ANY -> NFPRateType
+
+        value::ANY unit::ANY -> NFPProbabilityType
+
+        value::ANY unit::ANY -> NFPSizeType
+
+        constrainedBy::ANY+ expression::ANY -> NFPValueSpecification
+
+        ownerList::ANY -> NFPConstant
+
+        listElements::ANY+ -> NFPListConstant
+
+        body::ANY -> NFPStringConstant
+
+        body::ANY -> NFPIntegerConstant
+
+        bodyBeforeComa::ANY bodyAfterComa::ANY -> NFPRealConstant
+
+        body::ANY -> NFPBooleanConstant
+
+        varName::ANY -> NFPVariable
+
+        body::ANY+ operand::ANY+ -> NFPExpression
+
+        est:: -> SourceKinds
+        meas:: -> SourceKinds
+        req:: -> SourceKinds
+        implicit:: -> SourceKinds
+        calc:: -> SourceKinds
+
+        increasing:: -> DirectionKinds
+        decreasing:: -> DirectionKinds
+        undefined:: -> DirectionKinds
+
+        max:: -> StatisticalQualifierKinds
+        min:: -> StatisticalQualifierKinds
+        range:: -> StatisticalQualifierKinds
+        mean:: -> StatisticalQualifierKinds
+        variance:: -> StatisticalQualifierKinds
+        standardDeviation:: -> StatisticalQualifierKinds
+        percentil:: -> StatisticalQualifierKinds
+        frequency:: -> StatisticalQualifierKinds
+        moment:: -> StatisticalQualifierKinds
+        distribution:: -> StatisticalQualifierKinds
+        instantaneous:: -> StatisticalQualifierKinds
+
+        TAI:: -> InstantUnitKinds
+        UT0:: -> InstantUnitKinds
+        UT1:: -> InstantUnitKinds
+        UTC:: -> InstantUnitKinds
+        TT:: -> InstantUnitKinds
+        TDB:: -> InstantUnitKinds
+        TCG:: -> InstantUnitKinds
+        TCB:: -> InstantUnitKinds
+        Sideral:: -> InstantUnitKinds
+        Local:: -> InstantUnitKinds
+
+        ns:: -> DurationUnitKinds
+        us:: -> DurationUnitKinds
+        ms:: -> DurationUnitKinds
+        s:: -> DurationUnitKinds
+        min:: -> DurationUnitKinds
+        hrs:: -> DurationUnitKinds
+        dys:: -> DurationUnitKinds
+        wks:: -> DurationUnitKinds
+        mos:: -> DurationUnitKinds
+        yrs:: -> DurationUnitKinds
+
+        kbs:: -> RateUnitKinds
+        MIPS:: -> RateUnitKinds
+
+        us:: -> ProbabilityUnitKinds
+        s:: -> ProbabilityUnitKinds
+
+        bits:: -> SizeUnitKinds
+        bytes:: -> SizeUnitKinds
+        Mb:: -> SizeUnitKinds
+        MB:: -> SizeUnitKinds
+
+         -> Classifier
+
+         -> ResourceClassifier
+
+         -> ResourceServiceClassifier
+
+         -> InstanceSpecification
+
+         -> ResourceInstanceSpecification
+
+         -> ResourceServiceInstanceSpecification
+
+        owner::ANY containH::ANY+ containHL::ANY+ containHE::ANY+ deploymentConfiguration::ANY+ -> Hardware
+
+        owner::ANY -> HardwareLibrary
+
+        owner::ANY -> HardwareEntity
+
+        owner::ANY contain::ANY+ -> HardwareDeployment
+
+        owner::ANY -> HardwareEntityInstance
+
+        composedOf::ANY+ -> ECUInstance
+
+        gateInstances::ANY -> ChannelInstance
+
+        channel::ANY -> ECUGateInstance
+
+        contain::ANY+ -> ECU
+
+        owner::ANY kindOf::ANY -> ECUGate
+
+        specify::ANY -> Channel
+
+        global::ANY+ workload::ANY behavior::ANY usedResources::ANY+ -> AnalysisContext
+
+        transaction::ANY+ -> Workload
+
+        workload::ANY+ trigger::ANY+ response::ANY -> Transaction
+
+        arrivalPattern::ANY effect::ANY+ -> Trigger
+
+        efficiency::ANY endToEndLatency::ANY cause::ANY+ behavior::ANY+ -> Response
+
+        scenario::ANY+ -> Behavior
+
+        behavior::ANY+ scenarionLatency::ANY+ steps::ANY+ root::ANY endToEndResponse::ANY -> Scenario
+
+        predecessor::ANY+ successor::ANY+ stepLatency::ANY+ usedResourceService::ANY+ -> Step
+
+         -> Resource
+
+         -> BasicResource
+
+        basicResource::ANY -> StructuredResource
+
+        links::ANY+ components::ANY+ -> ProcessingResource
+
+         -> Link
+
+        components::ANY+ -> ProcessResource
+
+        process::ANY+ interfaces::ANY+ -> Component
+
+         -> StructuredComponent
+
+         -> BasicComponent
+
+         -> LogicalResource
+
+        services::ANY+ -> ServerResource
+
+        resource::ANY interface::ANY -> Service
+
+        service::ANY -> Interface

@@ -1,0 +1,99 @@
+module Main
+
+exports
+  sorts
+        MaudeSpec MaudeTopEl ModExpression InstModExp RenModExp CompModExp ModuleIdModExp TheoryIdModExp Parameter Theory FTheory STheory Module FModule SModule ModElement ModImportation ImportationMode Type Sort Kind SubsortRel Operation Statement Membership Equation Rule Condition EquationalCond RewriteCond MembershipCond BooleanCond MatchingCond EqualCond Term Constant RecTerm Variable View ViewMapping RenMapping TermMapping SortMapping OpTypedMapping OpMapping LabelMapping 
+  context-free syntax
+        els::ANY+ printableEls::ANY+ -> MaudeSpec
+
+         -> MaudeTopEl
+
+         -> ModExpression
+
+        modExp::ANY views::ANY+ -> InstModExp
+
+        modExp::ANY renamings::ANY+ -> RenModExp
+
+        modExps::ANY -> CompModExp
+
+        module::ANY -> ModuleIdModExp
+
+        theory::ANY -> TheoryIdModExp
+
+        label::ANY modExp::ANY -> Parameter
+
+         -> Theory
+
+        els::ANY+ -> FTheory
+
+        els::ANY+ -> STheory
+
+         -> Module
+
+        els::ANY+ params::ANY+ -> FModule
+
+        els::ANY+ params::ANY+ -> SModule
+
+         -> ModElement
+
+        imports::ANY mode::ANY -> ModImportation
+
+        protecting:: -> ImportationMode
+        including:: -> ImportationMode
+        extending:: -> ImportationMode
+
+         -> Type
+
+        subsortRels::ANY+ supersortRels::ANY+ kind::ANY -> Sort
+
+        sorts::ANY+ -> Kind
+
+        subsorts::ANY+ supersorts::ANY+ -> SubsortRel
+
+        name::ANY coarity::ANY arity::ANY+ atts::ANY+ -> Operation
+
+         -> Statement
+
+        term::ANY sort::ANY -> Membership
+
+        lhs::ANY rhs::ANY -> Equation
+
+        lhs::ANY rhs::ANY -> Rule
+
+         -> Condition
+
+         -> EquationalCond
+
+        rhs::ANY -> RewriteCond
+
+        rhs::ANY -> MembershipCond
+
+         -> BooleanCond
+
+        rhs::ANY -> MatchingCond
+
+        rhs::ANY -> EqualCond
+
+         -> Term
+
+        op::ANY -> Constant
+
+        op::ANY args::ANY+ -> RecTerm
+
+        name::ANY -> Variable
+
+        from::ANY to::ANY els::ANY+ -> View
+
+         -> ViewMapping
+
+         -> RenMapping
+
+        from::ANY to::ANY -> TermMapping
+
+        from::ANY to::ANY -> SortMapping
+
+        from::ANY to::ANY atts::ANY+ -> OpTypedMapping
+
+        from::ANY to::ANY -> OpMapping
+
+        from::ANY to::ANY -> LabelMapping

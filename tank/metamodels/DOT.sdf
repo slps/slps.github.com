@@ -1,0 +1,57 @@
+module Main
+
+exports
+  sorts
+        Label SimpleLabel ComplexLabel Compartment VerticalCompartment HorizontalCompartment SimpleCompartment Anchor GraphElement Graph Layer Nodelike SubGraph Node Arc DirectedArc UndirectedArc Shape NodeShape SimpleNodeShape PointNodeShape ComplexNodeShape PolygonNodeShape MNodeShape RecordNodeShape ArrowShape 
+  context-free syntax
+         -> Label
+
+        content::ANY -> SimpleLabel
+
+        compartments::ANY+ -> ComplexLabel
+
+         -> Compartment
+
+        complexLabel::ANY compartments::ANY anchor::ANY -> VerticalCompartment
+
+        complexLabel::ANY compartments::ANY anchor::ANY -> HorizontalCompartment
+
+        content::ANY -> SimpleCompartment
+
+        name::ANY source::ANY -> Anchor
+
+         -> GraphElement
+
+        type::ANY rankDir::ANY labeljust::ANY labelloc::ANY concentrate::ANY nodes::ANY+ boundingBox::ANY compound::ANY layers::ANY+ nodeSeparation::ANY ordering::ANY size::ANY ratio::ANY center::ANY -> Graph
+
+        nodes::ANY+ arcs::ANY+ graph::ANY layerSeparator::ANY -> Layer
+
+         -> Nodelike
+
+        nodes::ANY+ labelloc::ANY -> SubGraph
+
+        fixedSize::ANY fontname::ANY fontsize::ANY height::ANY width::ANY shape::ANY -> Node
+
+         -> Arc
+
+        arrowHead::ANY headlabel::ANY taillabel::ANY arrowTail::ANY tail_lp::ANY head_lp::ANY -> DirectedArc
+
+        fromNode::ANY toNode::ANY layers::ANY+ constraint::ANY group::ANY minlen::ANY sameHead::ANY sameTail::ANY lhead::ANY ltail::ANY decorate::ANY -> UndirectedArc
+
+         -> Shape
+
+         -> NodeShape
+
+         -> SimpleNodeShape
+
+         -> PointNodeShape
+
+         -> ComplexNodeShape
+
+        sides::ANY skew::ANY distortion::ANY isRegular::ANY orientation::ANY -> PolygonNodeShape
+
+        toplabel::ANY bottomlabel::ANY -> MNodeShape
+
+         -> RecordNodeShape
+
+        clipping::ANY isPlain::ANY size::ANY -> ArrowShape

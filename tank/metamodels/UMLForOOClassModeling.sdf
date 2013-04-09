@@ -1,0 +1,34 @@
+module Main
+
+exports
+  sorts
+        VisibilityKind ScopeKind MultiplicityType ModelElement Feature NameSpace GeneralizableElement Classifier Class StructuralFeature Attribute BehavioralFeature Operation 
+  context-free syntax
+        vk_public_vis:: -> VisibilityKind
+        vk_private_vis:: -> VisibilityKind
+        vk_protected_vis:: -> VisibilityKind
+
+        sk_instance_level:: -> ScopeKind
+        sk_classifier_level:: -> ScopeKind
+
+        lower::ANY upper::ANY isOrdered::ANY isUnique::ANY -> MultiplicityType
+
+        name::ANY -> ModelElement
+
+        ownerScope::ANY visibility::ANY owner::ANY -> Feature
+
+         -> NameSpace
+
+        isRoot::ANY isLeaf::ANY isAbstract::ANY -> GeneralizableElement
+
+        feature::ANY+ -> Classifier
+
+        isActive::ANY -> Class
+
+        multiplicity::ANY isChangeable::ANY targetScope::ANY -> StructuralFeature
+
+        initialValue::ANY -> Attribute
+
+        isQuery::ANY -> BehavioralFeature
+
+        isRoot::ANY isLeaf::ANY isAbstract::ANY specification::ANY -> Operation

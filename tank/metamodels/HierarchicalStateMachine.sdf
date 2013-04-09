@@ -1,0 +1,35 @@
+module Main
+
+exports
+  sorts
+        MgaObject StateBase DataVar Transition StateDateRelation RootFolder OrState AndState CompoundState PrimitiveState Init State StateDataRelation AssociationStateState AssociationDataStateBase 
+  context-free syntax
+        name::ANY position::ANY -> MgaObject
+
+        defaultTransition::ANY marked::ANY associationStateStatedst::ANY+ associationStateStatesrc::ANY+ data::ANY+ associationDataStateBase::ANY -> StateBase
+
+        stateBase::ANY+ orState::ANY associationDataStateBase::ANY -> DataVar
+
+        guard::ANY trigger::ANY action::ANY isSync::ANY orState::ANY associationStateState::ANY -> Transition
+
+        value::ANY color::ANY -> StateDateRelation
+
+        name::ANY rootFolders::ANY+ orState::ANY+ -> RootFolder
+
+        rootFolder::ANY state::ANY+ init::ANY dataVar::ANY+ stateDataRelation::ANY+ transition::ANY+ compoundState::ANY+ -> OrState
+
+        compoundState::ANY+ -> AndState
+
+        andState::ANY orState::ANY -> CompoundState
+
+         -> PrimitiveState
+
+        orState::ANY -> Init
+
+        orState::ANY -> State
+
+        value::ANY color::ANY orState::ANY associationDataStateBase1::ANY -> StateDataRelation
+
+        transition::ANY dstTransition::ANY+ srcTransition::ANY+ -> AssociationStateState
+
+        stateDataRelation::ANY dataVar::ANY+ stateBase::ANY+ -> AssociationDataStateBase

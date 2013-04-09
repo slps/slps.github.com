@@ -1,0 +1,37 @@
+module Main
+
+exports
+  sorts
+        LocatedElement NamedElement Database Table TableElement Column Key SimpleKey PrimaryKey ForeignKey Type Parameter Value IntegerVal NullVal StringVal 
+  context-free syntax
+         -> LocatedElement
+
+         -> NamedElement
+
+        tables::ANY+ -> Database
+
+        database::ANY referencedBy::ANY+ elements::ANY+ parameters::ANY+ -> Table
+
+         -> TableElement
+
+        referencedBy::ANY+ name::ANY type::ANY canBeNull::ANY default::ANY keys::ANY+ -> Column
+
+         -> Key
+
+        isUnique::ANY name::ANY columns::ANY+ -> SimpleKey
+
+        isUnique::ANY name::ANY columns::ANY+ -> PrimaryKey
+
+        referencedTable::ANY referencedColumns::ANY+ -> ForeignKey
+
+        length::ANY isUnsigned::ANY -> Type
+
+        table::ANY value::ANY -> Parameter
+
+         -> Value
+
+        value::ANY -> IntegerVal
+
+         -> NullVal
+
+        value::ANY -> StringVal

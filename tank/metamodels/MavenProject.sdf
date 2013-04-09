@@ -1,0 +1,19 @@
+module Main
+
+exports
+  sorts
+        Project Build Resource MailingList Person Developer Contributor 
+  context-free syntax
+        id::ANY groupId::ANY artifactId::ANY name::ANY description::ANY mailingLists::ANY+ developersAndContributors::ANY+ build::ANY dependencies::ANY+ -> Project
+
+        defaultGoal::ANY sourceDirectory::ANY unitTestSourceDirectory::ANY uniTest::ANY+ resources::ANY+ -> Build
+
+        targetPath::ANY filtering::ANY directory::ANY includes::ANY excludes::ANY -> Resource
+
+        name::ANY subscribe::ANY unsubscribe::ANY post::ANY archive::ANY otherArchives::ANY -> MailingList
+
+         -> Person
+
+        id::ANY -> Developer
+
+        name::ANY email::ANY url::ANY organization::ANY organizationUrl::ANY roles::ANY timezone::ANY properties::ANY -> Contributor

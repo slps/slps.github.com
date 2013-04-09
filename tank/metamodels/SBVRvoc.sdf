@@ -1,0 +1,185 @@
+module Main
+
+exports
+  sorts
+        LocatedElement Root VocabularyEntry Caption DefCaption DescCaption SrcCaption DBCaption GenCCaption CTypCaption Necessity Possibility RefSCaption NoteCaption ExCaption SynCaption SynFCaption SeeCaption SFCaption NSURICaption PrimaryRepresentation NotFactTypeRepresentation TermRepresentation NameRepresentation FactTypeFormRepresentation ConceptDefinition ConceptSource Note Sentence NameSpaceURI Word StringWord QuotedStringWord NameWord Verb ConjonctionnalKeyWord ModalVerb Join Link Qualif EndOperator SBVRExpression SBVRPropWithKW ModalForm SimpleSBVRProp SubSBVRProp LinkSBVRConcept ConjConcept Concept NameConcept ObjectConcept StringConcept NounConcept Qualification GeneralConcept NameGConcept NounGConcept Qualifier ModalBegin ModalBeginC 
+  context-free syntax
+         -> LocatedElement
+
+        entries::ANY+ -> Root
+
+        primaryRep::ANY caption::ANY+ -> VocabularyEntry
+
+         -> Caption
+
+        definition::ANY -> DefCaption
+
+        description::ANY -> DescCaption
+
+        source::ANY -> SrcCaption
+
+        dictionaryBasis::ANY -> DBCaption
+
+        generalConcept::ANY -> GenCCaption
+
+        conceptType::ANY+ -> CTypCaption
+
+        exp::ANY -> Necessity
+
+        exp::ANY -> Possibility
+
+        referenceScheme::ANY -> RefSCaption
+
+        note::ANY -> NoteCaption
+
+        example::ANY+ -> ExCaption
+
+        synonym::ANY+ -> SynCaption
+
+        synonymousForm::ANY+ -> SynFCaption
+
+        see::ANY -> SeeCaption
+
+        subjectField::ANY -> SFCaption
+
+        namespaceURI::ANY -> NSURICaption
+
+         -> PrimaryRepresentation
+
+         -> NotFactTypeRepresentation
+
+        term::ANY+ -> TermRepresentation
+
+        hasThe::ANY name::ANY+ -> NameRepresentation
+
+        primaryRep1::ANY verbExp::ANY+ primaryRep2::ANY -> FactTypeFormRepresentation
+
+        exp::ANY conjexp::ANY+ -> ConceptDefinition
+
+        source::ANY+ -> ConceptSource
+
+        sentences::ANY+ -> Note
+
+        words::ANY+ -> Sentence
+
+        URI::ANY+ -> NameSpaceURI
+
+         -> Word
+
+        val::ANY -> StringWord
+
+        val::ANY -> QuotedStringWord
+
+        val::ANY -> NameWord
+
+        is:: -> Verb
+        relevant:: -> Verb
+        comprises:: -> Verb
+        to:: -> Verb
+        work:: -> Verb
+        in:: -> Verb
+        trades:: -> Verb
+        as:: -> Verb
+        are:: -> Verb
+        accepted:: -> Verb
+        generally:: -> Verb
+        important:: -> Verb
+        across:: -> Verb
+        share:: -> Verb
+        sets:: -> Verb
+        assigned:: -> Verb
+        by:: -> Verb
+        contains:: -> Verb
+        for:: -> Verb
+        has:: -> Verb
+        specifies:: -> Verb
+        specified:: -> Verb
+
+        and:: -> ConjonctionnalKeyWord
+        or:: -> ConjonctionnalKeyWord
+        if:: -> ConjonctionnalKeyWord
+        whether:: -> ConjonctionnalKeyWord
+
+        must:: -> ModalVerb
+        may:: -> ModalVerb
+        never:: -> ModalVerb
+        always:: -> ModalVerb
+
+        that:: -> Join
+        who:: -> Join
+
+        of:: -> Link
+        quoteS:: -> Link
+
+        the:: -> Qualif
+        The:: -> Qualif
+        a:: -> Qualif
+        A:: -> Qualif
+        an:: -> Qualif
+        An:: -> Qualif
+        Each:: -> Qualif
+        each:: -> Qualif
+        Some:: -> Qualif
+        some:: -> Qualif
+        At:: -> Qualif
+        at:: -> Qualif
+        Exactly:: -> Qualif
+        exactly:: -> Qualif
+
+        given:: -> EndOperator
+        thanone:: -> EndOperator
+        one:: -> EndOperator
+        isobligatorythat:: -> EndOperator
+        ispermittedthat:: -> EndOperator
+        isprohibitedthat:: -> EndOperator
+        isnecessarythat:: -> EndOperator
+        ispossiblethat:: -> EndOperator
+        isimpossiblethat:: -> EndOperator
+        isnotthecasethat:: -> EndOperator
+        least:: -> EndOperator
+        leastone:: -> EndOperator
+        most:: -> EndOperator
+        mostone:: -> EndOperator
+        leastnandatmostm:: -> EndOperator
+        andonlyif:: -> EndOperator
+        ornot:: -> EndOperator
+        not:: -> EndOperator
+        of:: -> EndOperator
+
+        hasPoint::ANY firstProposition::ANY nextProposition::ANY+ -> SBVRExpression
+
+        conjonction::ANY endConj::ANY proposition::ANY -> SBVRPropWithKW
+
+        modal::ANY isNeg::ANY -> ModalForm
+
+        modal::ANY concept1::ANY modalVerb::ANY verbs::ANY+ concept2::ANY -> SimpleSBVRProp
+
+        join::ANY modalVerb::ANY verbs::ANY+ concept2::ANY -> SubSBVRProp
+
+        link::ANY concept::ANY -> LinkSBVRConcept
+
+        conjonction::ANY concept::ANY -> ConjConcept
+
+         -> Concept
+
+        the::ANY name::ANY+ -> NameConcept
+
+        operatoredConcept::ANY qualify::ANY -> ObjectConcept
+
+        stringWord::ANY+ -> StringConcept
+
+        qualif::ANY noun::ANY+ -> NounConcept
+
+        generalConcept::ANY+ -> Qualification
+
+         -> GeneralConcept
+
+        name::ANY -> NameGConcept
+
+        noun::ANY+ -> NounGConcept
+
+        op::ANY endOperator::ANY min::ANY max::ANY -> Qualifier
+
+        endOperator::ANY -> ModalBegin
+
+         -> ModalBeginC

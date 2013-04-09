@@ -1,0 +1,56 @@
+Node:
+        location::ANY manager::ANY capsules::ANY+
+Nucleus:
+        otherEngObjects::ANY+ beos::ANY+
+Capsule:
+        otherEngObjects::ANY+ capsuleManager::ANY clusterManagers::ANY+ clusters::ANY+
+EngineeringObject:
+        nodeManager::ANY
+CapsuleManager:
+        cmClusterManagers::ANY+
+Cluster:
+        clusterManager::ANY clusterBeos::ANY+
+ClusterManager:
+        clusters::ANY+ clustermanagerBeos::ANY+ capsuleManager::ANY
+BEO:
+        beoNodeManager::ANY locallyBoundObjects::ANY+ localbinds::ANY+ beoManager::ANY beoChannel::ANY+ beoStub::ANY+
+Stub:
+        stChannel::ANY stBinder::ANY stBeo::ANY
+Binder:
+        bdChannel::ANY chBinder::ANY bdProtocolObject::ANY+
+ProtocolObject:
+        type::ANY poChannel::ANY poBinder::ANY poInterceptor::ANY+ poBoundProtocolObject::ANY+
+Interceptor:
+        intChannel::ANY intProtocolObject::ANY
+Channel:
+        chStub::ANY chBinder::ANY chPObject::ANY chInterceptor::ANY+ chEndPoint::ANY
+ClientServerChannel:
+        EPSILON
+ControllingObject:
+        coDomain::ANY+
+SecurityAuthority:
+        EPSILON
+ManagementAuthority:
+        EPSILON
+AddressingAuthority:
+        EPSILON
+NamingAuthority:
+        EPSILON
+ControlledObject:
+        cdoDomain::ANY+
+Domain:
+        parentDomain::ANY subDomain::ANY+ domControllingObject::ANY domMember::ANY+
+SecurityDomain:
+        EPSILON
+ManagementDomain:
+        EPSILON
+AddressingDomain:
+        EPSILON
+NamingDomain:
+        EPSILON
+EngineeringInterfaceReferenceManagementDomain:
+        eirmdReference::ANY+ eirmdManagementPolicy::ANY
+EngineeringInterfaceReferenceManagementPolicy:
+        eirmpManagementDomain::ANY+
+EngineeringInterfaceReference:
+        eirManagementDomain::ANY

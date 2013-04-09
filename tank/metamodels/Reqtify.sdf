@@ -1,0 +1,27 @@
+module Main
+
+exports
+  sorts
+        Project TypedElement ElementWithIL Document TextElement Section AbstractRequirement Requirement MacroRequirement CoverLink Attribute 
+  context-free syntax
+        documents::ANY+ -> Project
+
+         -> TypedElement
+
+         -> ElementWithIL
+
+        project::ANY sections::ANY+ -> Document
+
+         -> TextElement
+
+        document::ANY sectionChildren::ANY+ sectionParent::ANY requirements::ANY+ -> Section
+
+         -> AbstractRequirement
+
+        section::ANY isContained::ANY coverLinks::ANY+ attribute::ANY+ -> Requirement
+
+        contains::ANY+ -> MacroRequirement
+
+        linkWith::ANY -> CoverLink
+
+        value::ANY -> Attribute

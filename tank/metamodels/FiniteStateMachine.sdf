@@ -1,0 +1,17 @@
+module Main
+
+exports
+  sorts
+        MgaObject Transition State StateMachine RootFolder AssociationStateState 
+  context-free syntax
+        name::ANY position::ANY -> MgaObject
+
+        stateMachine::ANY associationStateState::ANY -> Transition
+
+        stateMachine::ANY associationStateStatedst::ANY+ associationStateStatesrc::ANY+ -> State
+
+        rootFolder::ANY state::ANY+ transition::ANY+ -> StateMachine
+
+        name::ANY rootFolders::ANY+ stateMachine::ANY+ -> RootFolder
+
+        transition::ANY dstTransition::ANY+ srcTransition::ANY+ -> AssociationStateState

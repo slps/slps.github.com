@@ -1,0 +1,224 @@
+module Main
+
+exports
+  sorts
+        DateTimeType VersionType ValueType StringValue FloatValue DateTimeTypeValue BooleanValue DocumentPropertiesCollection CustomDocumentPropertiesCollection CustomDocumentProperty SmartTagType SmartTagsCollection StringProperty StringType BreakType NoteValue OnOffType FldCharTypeProperty HintType StyleKindValue UnderlineProperty UnderlineValues HighlightColorValues VerticalAlignRunType JustificationValue WordDocument DocPrElt BodyElt BlockLevelElt BlockLevelChunkElt ParaElt ParaPrElt ParaContentElt RunElt RunPrElt LangElt RunContentElt BreakElt Text DelText InstrText DelInstrText NoBreakHyphen SoftHyphen AnnotationRef FootnoteRef EndnoteRef Separator ContinuationSeparator PgNum Cr Footnote Endnote NoteElt Picture Symbol SymElt Tab FldChar FldCharElt TableElt TablePrElt TableGridElt TableContentElt RowElt TablePrExElt TableRowPrElt RowContentElt TableCellElt TableCellPrElt FontsListElt FontsElt FontElt StylesElt StyleElt ListsElt SectPrElt RunLevelElt CfChunk SimpleFieldElt HLinkElt SubDocElt PictureType TabElt 
+  context-free syntax
+        year::ANY month::ANY day::ANY hour::ANY minute::ANY second::ANY -> DateTimeType
+
+        n::ANY nn::ANY -> VersionType
+
+         -> ValueType
+
+        value::ANY -> StringValue
+
+        value::ANY -> FloatValue
+
+        value::ANY -> DateTimeTypeValue
+
+        value::ANY -> BooleanValue
+
+        dp_wordDocument::ANY title::ANY subject::ANY keywords::ANY description::ANY category::ANY author::ANY lastAuthor::ANY manager::ANY company::ANY hyperlinkBase::ANY revision::ANY presentationFormat::ANY guid::ANY appName::ANY version::ANY totalTime::ANY lastPrinted::ANY created::ANY lastSaved::ANY pages::ANY words::ANY characters::ANY charactersWithSpaces::ANY bytes::ANY lines::ANY paragraphs::ANY -> DocumentPropertiesCollection
+
+        cdp_wordDocument::ANY customDocumentProperties::ANY+ -> CustomDocumentPropertiesCollection
+
+        customDocumentProperty_cdpe::ANY name::ANY value::ANY -> CustomDocumentProperty
+
+        smartTagType_ste::ANY namespaceuri::ANY name::ANY url::ANY -> SmartTagType
+
+        st_wordDocument::ANY smartTagTypes::ANY+ -> SmartTagsCollection
+
+         -> StringProperty
+
+        val::ANY -> StringType
+
+        bt_page:: -> BreakType
+        bt_column:: -> BreakType
+        bt_text_wrapping:: -> BreakType
+
+        ftn_normal:: -> NoteValue
+        ftn_separator:: -> NoteValue
+        ftn_continuation_separator:: -> NoteValue
+        ftn_continuation_notice:: -> NoteValue
+
+        oot_on:: -> OnOffType
+        oot_off:: -> OnOffType
+
+        fctp_begin:: -> FldCharTypeProperty
+        fctp_separate:: -> FldCharTypeProperty
+        fctp_end:: -> FldCharTypeProperty
+
+        ht_default:: -> HintType
+        ht_fareast:: -> HintType
+        ht_cs:: -> HintType
+
+        skv_paragraph:: -> StyleKindValue
+        skv_character:: -> StyleKindValue
+        skv_table:: -> StyleKindValue
+        skv_list:: -> StyleKindValue
+
+        val::ANY color::ANY -> UnderlineProperty
+
+        uv_single:: -> UnderlineValues
+        uv_words:: -> UnderlineValues
+        uv_double:: -> UnderlineValues
+        uv_thick:: -> UnderlineValues
+        uv_dotted:: -> UnderlineValues
+        uv_dotted_heavy:: -> UnderlineValues
+        uv_dash:: -> UnderlineValues
+        uv_dashed_heavy:: -> UnderlineValues
+        uv_dash_long:: -> UnderlineValues
+        uv_dash_long_heavy:: -> UnderlineValues
+        uv_dot_dash:: -> UnderlineValues
+        uv_dash_dot_heavy:: -> UnderlineValues
+        uv_dot_dot_dash:: -> UnderlineValues
+        uv_dash_dot_dot_heavy:: -> UnderlineValues
+        uv_wave:: -> UnderlineValues
+        uv_wavy_heavy:: -> UnderlineValues
+        uv_wavy_double:: -> UnderlineValues
+        uv_none:: -> UnderlineValues
+
+        hcv_black:: -> HighlightColorValues
+        hcv_blue:: -> HighlightColorValues
+        hcv_cyan:: -> HighlightColorValues
+        hcv_green:: -> HighlightColorValues
+        hcv_magenta:: -> HighlightColorValues
+        hcv_red:: -> HighlightColorValues
+        hcv_yellow:: -> HighlightColorValues
+        hcv_white:: -> HighlightColorValues
+        hcv_dark_blue:: -> HighlightColorValues
+        hcv_dark_cyan:: -> HighlightColorValues
+        hcv_dark_green:: -> HighlightColorValues
+        hcv_dark_magenta:: -> HighlightColorValues
+        hcv_dark_red:: -> HighlightColorValues
+        hcv_dark_yellow:: -> HighlightColorValues
+        hcv_dark_gray:: -> HighlightColorValues
+        hcv_light_gray:: -> HighlightColorValues
+        hcv_none:: -> HighlightColorValues
+
+        vart_baseline:: -> VerticalAlignRunType
+        vart_superscript:: -> VerticalAlignRunType
+        vart_subscript:: -> VerticalAlignRunType
+
+        jv_left:: -> JustificationValue
+        jv_center:: -> JustificationValue
+        jv_right:: -> JustificationValue
+        jv_both:: -> JustificationValue
+
+        wd_smartTags::ANY wd_docProperties::ANY wd_customDocProperties::ANY ignoreSubtree::ANY ignoreElements::ANY fonts::ANY lists::ANY styles::ANY docPr::ANY body::ANY -> WordDocument
+
+        dpe_wordDocument::ANY -> DocPrElt
+
+        be_wordDocument::ANY blockLevelElts::ANY+ sectPr::ANY -> BodyElt
+
+         -> BlockLevelElt
+
+         -> BlockLevelChunkElt
+
+        pPr::ANY pContentElts::ANY+ -> ParaElt
+
+        ppe_pElt::ANY ppe_styleElt::ANY pStyle::ANY keepNext::ANY keepLines::ANY pageBreakBefore::ANY supressLineNumbers::ANY suppressAutoHyphens::ANY contextualSpacing::ANY bidi::ANY justification::ANY -> ParaPrElt
+
+         -> ParaContentElt
+
+        rPr::ANY rContentElts::ANY+ -> RunElt
+
+        rpe_rElt::ANY rpe_styleElt::ANY rStyle::ANY rFonts::ANY bold::ANY bold_cs::ANY italic::ANY italic_cs::ANY capitals::ANY smallCapitals::ANY strike::ANY doubleStrike::ANY outline::ANY shadow::ANY emboss::ANY imprint::ANY noProof::ANY vanish::ANY specVanish::ANY rtl::ANY cs::ANY underline::ANY color::ANY highlight::ANY verticalAlign::ANY language::ANY -> RunPrElt
+
+        le_runPrElt::ANY val::ANY bidi::ANY -> LangElt
+
+         -> RunContentElt
+
+        type::ANY -> BreakElt
+
+         -> Text
+
+         -> DelText
+
+         -> InstrText
+
+         -> DelInstrText
+
+        rce_rElt::ANY -> NoBreakHyphen
+
+        rce_rElt::ANY -> SoftHyphen
+
+        rce_rElt::ANY -> AnnotationRef
+
+        rce_rElt::ANY -> FootnoteRef
+
+        rce_rElt::ANY -> EndnoteRef
+
+        rce_rElt::ANY -> Separator
+
+        rce_rElt::ANY -> ContinuationSeparator
+
+        rce_rElt::ANY -> PgNum
+
+        rce_rElt::ANY -> Cr
+
+         -> Footnote
+
+         -> Endnote
+
+         -> NoteElt
+
+         -> Picture
+
+         -> Symbol
+
+        font::ANY char::ANY -> SymElt
+
+         -> Tab
+
+         -> FldChar
+
+        fldData::ANY fldCharType::ANY fldLock::ANY -> FldCharElt
+
+        tblPr::ANY tblGrid::ANY tblContent::ANY+ -> TableElt
+
+        tpe_tblElt::ANY tpe_styleElt::ANY -> TablePrElt
+
+        tge_tblElt::ANY -> TableGridElt
+
+        tce_tblElt::ANY tr::ANY+ tce_runLevelElts::ANY -> TableContentElt
+
+        re_tblContentElt::ANY tblPrEx::ANY trPr::ANY rowContent::ANY+ -> RowElt
+
+        tpee_rowElt::ANY -> TablePrExElt
+
+        tpe_rowElt::ANY trpe_styleElt::ANY -> TableRowPrElt
+
+        rce_rowElt::ANY tc::ANY+ rce_runLevelElts::ANY -> RowContentElt
+
+        tce_rowContentElt::ANY tcPr::ANY tce_content::ANY+ -> TableCellElt
+
+        tcpe_tableCellElt::ANY tcpe_styleElt::ANY -> TableCellPrElt
+
+        fle_wordDocument::ANY defaultFonts::ANY fonts::ANY+ -> FontsListElt
+
+        fse_fontsListElt::ANY fse_runPrElt::ANY hint::ANY ascii::ANY h_ansi::ANY fareast::ANY cs::ANY -> FontsElt
+
+        fe_fontsListElt::ANY name::ANY altName::ANY -> FontElt
+
+        se_wordDocument::ANY versionOfBuiltInStylenames::ANY styles::ANY+ -> StylesElt
+
+        se_stylesElt::ANY type::ANY styleId::ANY default::ANY name::ANY aliases::ANY sti::ANY basedOn::ANY next::ANY link::ANY autoRedefine::ANY hidden::ANY semiHidden::ANY locked::ANY personal::ANY personalCompose::ANY personalReply::ANY rsid::ANY se_pPr::ANY se_rPr::ANY se_tblPr::ANY se_trPr::ANY se_tcPr::ANY -> StyleElt
+
+        le_wordDocument::ANY -> ListsElt
+
+        spe_bodyElt::ANY -> SectPrElt
+
+        rle_tblContentElt::ANY rle_rowContentElt::ANY -> RunLevelElt
+
+        ble_bodyElt::ANY ble_note::ANY ble_tableCellElt::ANY -> CfChunk
+
+        pce_pElt::ANY -> SimpleFieldElt
+
+        pce_pElt::ANY -> HLinkElt
+
+        pce_pElt::ANY -> SubDocElt
+
+         -> PictureType
+
+         -> TabElt

@@ -1,0 +1,53 @@
+module Main
+
+exports
+  sorts
+        QoSComponent QoSProfile QoSContraints Operation CompoundProfile SimpleProfile ProfileTransition QoSStatement SingleQoSStatement CoumpoundQoSStatement QoSContraint QualificationKind QoSCharacteristic BooleanExpression MappingExpression StatisticalAttributekindKind Parameter DataType Domain DirectionKind Numeric Set Enumeration StringSet 
+  context-free syntax
+        profile::ANY+ operations::ANY -> QoSComponent
+
+         -> QoSProfile
+
+         -> QoSContraints
+
+         -> Operation
+
+        profileTransition::ANY+ simpleProfile::ANY+ -> CompoundProfile
+
+        compoundProfile::ANY use::ANY provides::ANY -> SimpleProfile
+
+        operations::ANY+ from::ANY to::ANY compoundProfile::ANY -> ProfileTransition
+
+        contraints::ANY+ relation::ANY parameter::ANY+ -> QoSStatement
+
+        contraint::ANY -> SingleQoSStatement
+
+        statement::ANY -> CoumpoundQoSStatement
+
+        qualification::ANY -> QoSContraint
+
+        value::ANY -> QualificationKind
+
+        invariant::ANY parallel_and_composition::ANY parallel_or_composition::ANY sequential_composition::ANY values::ANY statisticalAttribute::ANY+ parameter::ANY domain::ANY -> QoSCharacteristic
+
+        value::ANY -> BooleanExpression
+
+        value::ANY -> MappingExpression
+
+         -> StatisticalAttributekindKind
+
+         -> Parameter
+
+         -> DataType
+
+        direction::ANY -> Domain
+
+        value::ANY -> DirectionKind
+
+         -> Numeric
+
+        stringSet::ANY+ -> Set
+
+         -> Enumeration
+
+        string::ANY+ -> StringSet

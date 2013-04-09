@@ -1,0 +1,80 @@
+module Main
+
+exports
+  sorts
+        Instance AttributeLink Link LinkEnd ComponentInstance NodeInstance UseCase Actor UseCaseInstance Extend Include ExtensionPoint Element ModelElement GeneralizableElement Namespace Classifier Feature StructuralFeature AssociationEnd Relationship Association Attribute Generalization AggregationKind ChangeableKind OrderingKind ScopeKind VisibilityKind Multiplicity MultiplicityRange Expression BooleanExpression 
+  context-free syntax
+         -> Instance
+
+        instance::ANY value::ANY linkEnd::ANY attribute::ANY -> AttributeLink
+
+        association::ANY connection::ANY -> Link
+
+        link::ANY qualifiedValue::ANY+ instance::ANY associationEnd::ANY -> LinkEnd
+
+        resident::ANY+ nodeInstance::ANY -> ComponentInstance
+
+        resident::ANY+ -> NodeInstance
+
+        include::ANY+ extend::ANY+ extensionPoint::ANY+ -> UseCase
+
+        powertypeRange::ANY+ feature::ANY+ -> Actor
+
+        ownedInstance::ANY+ linkEnd::ANY+ classifier::ANY+ componentInstance::ANY slot::ANY+ ownedLink::ANY+ -> UseCaseInstance
+
+        extensionPoint::ANY+ extension::ANY base::ANY condition::ANY -> Extend
+
+        addition::ANY base::ANY -> Include
+
+        useCase::ANY location::ANY -> ExtensionPoint
+
+         -> Element
+
+         -> ModelElement
+
+         -> GeneralizableElement
+
+         -> Namespace
+
+         -> Classifier
+
+         -> Feature
+
+         -> StructuralFeature
+
+        association::ANY specification::ANY+ participant::ANY qualifier::ANY+ isNavigable::ANY ordering::ANY aggregation::ANY targetScope::ANY multiplicity::ANY changeability::ANY -> AssociationEnd
+
+         -> Relationship
+
+        connection::ANY -> Association
+
+        associationEnd::ANY initialValue::ANY -> Attribute
+
+        parent::ANY powertype::ANY child::ANY discriminator::ANY -> Generalization
+
+        ak_none:: -> AggregationKind
+        ak_aggregate:: -> AggregationKind
+        ak_composite:: -> AggregationKind
+
+        ck_changeable:: -> ChangeableKind
+        ck_frozen:: -> ChangeableKind
+        ck_addOnly:: -> ChangeableKind
+
+        ok_unordered:: -> OrderingKind
+        ok_ordered:: -> OrderingKind
+
+        sk_instance:: -> ScopeKind
+        sk_classifier:: -> ScopeKind
+
+        vk_public:: -> VisibilityKind
+        vk_protected:: -> VisibilityKind
+        vk_private:: -> VisibilityKind
+        vk_package:: -> VisibilityKind
+
+        range::ANY+ -> Multiplicity
+
+        multiplicity::ANY lower::ANY upper::ANY -> MultiplicityRange
+
+        language::ANY body::ANY -> Expression
+
+         -> BooleanExpression

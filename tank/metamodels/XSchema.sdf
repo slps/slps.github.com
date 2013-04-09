@@ -1,0 +1,70 @@
+module Main
+
+exports
+  sorts
+        AttributeUseType AnnotedElement Annotation Documentation ApplicationInfo NamedElement XSchema XSchemaContentElement Parameters Element Occurable AbstractContent Container AtomicContent ElementRef GroupRef All Group Choice Sequence AbstractAttributeGroupContent AttributeGroup AttributeGroupRef AtomicAttributeGroupContent Attribute AttributeRef AbstractType SimpleType ComplexType ComplexTypeSimpleContent ComplexTypeComplexContent 
+  context-free syntax
+        null:: -> AttributeUseType
+        optional:: -> AttributeUseType
+        prohibited:: -> AttributeUseType
+        required:: -> AttributeUseType
+
+         -> AnnotedElement
+
+        documentations::ANY+ applicationInfos::ANY+ annotedElement::ANY -> Annotation
+
+        text::ANY -> Documentation
+
+        text::ANY -> ApplicationInfo
+
+         -> NamedElement
+
+        namespace::ANY contents::ANY+ -> XSchema
+
+         -> XSchemaContentElement
+
+         -> Parameters
+
+        references::ANY+ -> Element
+
+         -> Occurable
+
+         -> AbstractContent
+
+         -> Container
+
+         -> AtomicContent
+
+        referencedElement::ANY -> ElementRef
+
+        referencedGroup::ANY -> GroupRef
+
+        contents::ANY+ -> All
+
+        references::ANY+ -> Group
+
+        contents::ANY+ -> Choice
+
+        contents::ANY+ -> Sequence
+
+         -> AbstractAttributeGroupContent
+
+        contents::ANY+ references::ANY+ -> AttributeGroup
+
+        referencedAttributeGroup::ANY -> AttributeGroupRef
+
+         -> AtomicAttributeGroupContent
+
+        use::ANY references::ANY+ -> Attribute
+
+        referencedAttribute::ANY -> AttributeRef
+
+         -> AbstractType
+
+        extensions::ANY+ -> SimpleType
+
+        extensions::ANY+ content::ANY attributes::ANY+ -> ComplexType
+
+        base::ANY -> ComplexTypeSimpleContent
+
+        base::ANY -> ComplexTypeComplexContent

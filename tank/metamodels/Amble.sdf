@@ -1,0 +1,33 @@
+module Main
+
+exports
+  sorts
+        Element Program Process State Transition Trans Strans Transall Guard Action Network Channel Message Variable 
+  context-free syntax
+         -> Element
+
+        processes::ANY+ networks::ANY+ -> Program
+
+        minId::ANY maxId::ANY instancesNb::ANY states::ANY+ transitions::ANY+ initial::ANY variables::ANY+ connectedTo::ANY+ -> Process
+
+        isInitial::ANY incoming::ANY+ outgoing::ANY+ -> State
+
+         -> Transition
+
+        waitFor::ANY -> Trans
+
+        guard::ANY action::ANY source::ANY target::ANY -> Strans
+
+        waitFor::ANY -> Transall
+
+        name::ANY -> Guard
+
+        name::ANY -> Action
+
+        channels::ANY+ -> Network
+
+        messages::ANY+ source::ANY target::ANY -> Channel
+
+        name::ANY -> Message
+
+        type::ANY initValue::ANY -> Variable

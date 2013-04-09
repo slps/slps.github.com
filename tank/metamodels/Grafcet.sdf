@@ -1,0 +1,23 @@
+module Main
+
+exports
+  sorts
+        LocatedElement NamedElement Grafcet Element Step Transition Connection StepToTransition TransitionToStep 
+  context-free syntax
+         -> LocatedElement
+
+         -> NamedElement
+
+        elements::ANY+ connections::ANY+ -> Grafcet
+
+         -> Element
+
+        isInitial::ANY isActive::ANY action::ANY incomingConnections::ANY+ outgoingConnections::ANY+ -> Step
+
+        condition::ANY incomingConnections::ANY+ outgoingConnections::ANY+ -> Transition
+
+         -> Connection
+
+        from::ANY to::ANY -> StepToTransition
+
+        from::ANY to::ANY -> TransitionToStep

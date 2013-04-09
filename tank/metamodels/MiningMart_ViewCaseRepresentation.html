@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:bgf="http://planet-sl.org/bgf" xmlns:xbgf="http://planet-sl.org/xbgf" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Browsable Case representation 1.0 Grammar</title><link href="/slps.css" rel="stylesheet" type="text/css"></link><script type="text/javascript">
+
+				  var _gaq = _gaq || [];
+				  _gaq.push(['_setAccount', 'UA-3743366-7']);
+				  _gaq.push(['_setDomainName', 'github.com']);
+				  _gaq.push(['_trackPageview']);
+
+				  (function() {
+				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				  })();
+
+				</script></head><body><h1 class="l">Browsable Case representation 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Anca Vaduva, JÃ?Â¶rg-Uwe Kietz, Regina ZÃ?Â¼cker, Klaus R. Dittrich, SIMON Eric, <code>MiningMart_ViewCaseRepresentation.ecore</code>, 2006/07/21.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>32</strong></li><li>Number of top alternatives: <strong>35</strong></li><li>Number of defined nonterminal symbols: <strong>32</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>32</strong>: <code><a href="#Case" class="nt">Case</a>, <a href="#Step" class="nt">Step</a>, <a href="#LoopStep" class="nt">LoopStep</a>, <a href="#MultiStep" class="nt">MultiStep</a>, <a href="#Operator" class="nt">Operator</a>, <a href="#Parameter" class="nt">Parameter</a>, <a href="#ParameterType" class="nt">ParameterType</a>, <a href="#FeatureConstruction" class="nt">FeatureConstruction</a>, <a href="#DataMinStep" class="nt">DataMinStep</a>, <a href="#TimeOperator" class="nt">TimeOperator</a>, <a href="#FeatureSelection" class="nt">FeatureSelection</a>, <a href="#MultiRelFeatureConstr" class="nt">MultiRelFeatureConstr</a>, <a href="#RowSelection" class="nt">RowSelection</a>, <a href="#Agregation" class="nt">Agregation</a>, <a href="#Scaling" class="nt">Scaling</a>, <a href="#Discretization" class="nt">Discretization</a>, <a href="#Segmentation" class="nt">Segmentation</a>, <a href="#Sampling" class="nt">Sampling</a>, <a href="#ExecutionElement" class="nt">ExecutionElement</a>, <a href="#DataObject" class="nt">DataObject</a>, <a href="#MSL-Tool" class="nt">MSL-Tool</a>, <a href="#TransformationGroup" class="nt">TransformationGroup</a>, <a href="#Transformation" class="nt">Transformation</a>, <a href="#Function" class="nt">Function</a>, <a href="#StoredProcedure" class="nt">StoredProcedure</a>, <a href="#SQLQuery" class="nt">SQLQuery</a>, <a href="#ModelElement" class="nt">ModelElement</a>, <a href="#Classifier" class="nt">Classifier</a>, <a href="#StructuralFeature" class="nt">StructuralFeature</a>, <a href="#Class" class="nt">Class</a>, <a href="#DataType" class="nt">DataType</a>, <a href="#Attribute" class="nt">Attribute</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Case">Case</a>:
+        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">caseMode</span>::<span class="meta">any</span> <span class="sel">caseInput</span>::<span class="meta">any</span> <span class="sel">documentation</span>::<span class="meta">any</span> <span class="sel">listOfStep</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Step">Step</a>:
+        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">description</span>::<span class="meta">any</span> <span class="sel">belongsToCase</span>::<span class="meta">any</span> <span class="sel">embedsOperator</span>::<span class="meta">any</span> <span class="sel">predecessors</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">successors</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="LoopStep">LoopStep</a>:
+        ε
+</pre><pre><a class="nt" name="MultiStep">MultiStep</a>:
+        <span class="sel">iterationCondition</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Operator">Operator</a>:
+        ε
+</pre><pre><a class="nt" name="Parameter">Parameter</a>:
+        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">place</span>::<span class="meta">any</span> <span class="sel">parameterType</span>::<span class="meta">any</span> <span class="sel">belongsToOperator</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ParameterType">ParameterType</a>:
+        <span class="sel">Value</span>::ε
+        <span class="sel">Concept</span>::ε
+        <span class="sel">RelationShip</span>::ε
+        <span class="sel">FeatureAttribute</span>::ε
+</pre><pre><a class="nt" name="FeatureConstruction">FeatureConstruction</a>:
+        <span class="sel">scalingFactor</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="DataMinStep">DataMinStep</a>:
+        <span class="sel">loopable</span>::<span class="meta">any</span> <span class="sel">numberOfInputParameters</span>::<span class="meta">any</span> <span class="sel">numberOfOutputParameters</span>::<span class="meta">any</span> <span class="sel">manual</span>::<span class="meta">any</span> <span class="sel">tool</span>::<span class="meta">any</span> <span class="sel">input</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">output</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">realizes</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="TimeOperator">TimeOperator</a>:
+        <span class="sel">loopable</span>::<span class="meta">any</span> <span class="sel">numberOfInputParameters</span>::<span class="meta">any</span> <span class="sel">numberOfOutputParameters</span>::<span class="meta">any</span> <span class="sel">manual</span>::<span class="meta">any</span> <span class="sel">tool</span>::<span class="meta">any</span> <span class="sel">input</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">output</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">realizes</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="FeatureSelection">FeatureSelection</a>:
+        <span class="sel">loopable</span>::<span class="meta">any</span> <span class="sel">numberOfInputParameters</span>::<span class="meta">any</span> <span class="sel">numberOfOutputParameters</span>::<span class="meta">any</span> <span class="sel">manual</span>::<span class="meta">any</span> <span class="sel">tool</span>::<span class="meta">any</span> <span class="sel">input</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">output</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">realizes</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="MultiRelFeatureConstr">MultiRelFeatureConstr</a>:
+        <span class="sel">loopable</span>::<span class="meta">any</span> <span class="sel">numberOfInputParameters</span>::<span class="meta">any</span> <span class="sel">numberOfOutputParameters</span>::<span class="meta">any</span> <span class="sel">manual</span>::<span class="meta">any</span> <span class="sel">tool</span>::<span class="meta">any</span> <span class="sel">input</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">output</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">realizes</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="RowSelection">RowSelection</a>:
+        <span class="sel">loopable</span>::<span class="meta">any</span> <span class="sel">numberOfInputParameters</span>::<span class="meta">any</span> <span class="sel">numberOfOutputParameters</span>::<span class="meta">any</span> <span class="sel">manual</span>::<span class="meta">any</span> <span class="sel">tool</span>::<span class="meta">any</span> <span class="sel">input</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">output</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">realizes</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Agregation">Agregation</a>:
+        ε
+</pre><pre><a class="nt" name="Scaling">Scaling</a>:
+        ε
+</pre><pre><a class="nt" name="Discretization">Discretization</a>:
+        ε
+</pre><pre><a class="nt" name="Segmentation">Segmentation</a>:
+        ε
+</pre><pre><a class="nt" name="Sampling">Sampling</a>:
+        ε
+</pre><pre><a class="nt" name="ExecutionElement">ExecutionElement</a>:
+        <span class="sel">source</span>::<span class="meta">any</span> <span class="sel">target</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="DataObject">DataObject</a>:
+        <span class="sel">source</span>::<span class="meta">any</span> <span class="sel">target</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="MSL-Tool">MSL-Tool</a>:
+        ε
+</pre><pre><a class="nt" name="TransformationGroup">TransformationGroup</a>:
+        <span class="sel">transformation</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Transformation">Transformation</a>:
+        <span class="sel">transformationGroup</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Function">Function</a>:
+        <span class="sel">nameOf</span>::<span class="meta">any</span> <span class="sel">signature</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="StoredProcedure">StoredProcedure</a>:
+        <span class="sel">nameOf</span>::<span class="meta">any</span> <span class="sel">signature</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="SQLQuery">SQLQuery</a>:
+        ε
+</pre><pre><a class="nt" name="ModelElement">ModelElement</a>:
+        ε
+</pre><pre><a class="nt" name="Classifier">Classifier</a>:
+        ε
+</pre><pre><a class="nt" name="StructuralFeature">StructuralFeature</a>:
+        ε
+</pre><pre><a class="nt" name="Class">Class</a>:
+        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">attributes</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="DataType">DataType</a>:
+        <span class="sel">attribute</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Attribute">Attribute</a>:
+        <span class="sel">class</span>::<span class="meta">any</span> <span class="sel">has</span>::<span class="meta">any</span>
+</pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
+Last updated: 09/04/2013.</div></body></html>

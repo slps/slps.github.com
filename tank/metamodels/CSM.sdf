@@ -1,0 +1,47 @@
+module Main
+
+exports
+  sorts
+        CSM GeneralResource Step Scenarion Start End ResourceAcquire ResourceRelease Workload Component ProcessingResource ExternalService ActiveResource PassiveResource Message PathConnection Join Fork Merge Branch Seqence 
+  context-free syntax
+        step::ANY+ generalResource::ANY+ scenarion::ANY+ -> CSM
+
+        resourceAcquire::ANY+ resourceRelease::ANY+ -> GeneralResource
+
+        postPath::ANY prePath::ANY activeResource::ANY -> Step
+
+        step::ANY+ root::ANY+ -> Scenarion
+
+        workload::ANY -> Start
+
+         -> End
+
+        generalResource::ANY -> ResourceAcquire
+
+        generalResource::ANY -> ResourceRelease
+
+        start::ANY -> Workload
+
+         -> Component
+
+         -> ProcessingResource
+
+         -> ExternalService
+
+        step::ANY+ -> ActiveResource
+
+         -> PassiveResource
+
+         -> Message
+
+        message::ANY post::ANY+ pre::ANY+ -> PathConnection
+
+         -> Join
+
+         -> Fork
+
+         -> Merge
+
+         -> Branch
+
+         -> Seqence

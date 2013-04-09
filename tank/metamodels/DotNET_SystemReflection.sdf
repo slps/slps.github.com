@@ -1,0 +1,171 @@
+module Main
+
+exports
+  sorts
+        NamedElement Assembly ManifestResource Module MemberInfo PropertyInfo FieldInfo EventInfo ParameterInfo MethodBase MethodInfo ConstructorInfo Type EventAttributes FieldAttributes GenericParameterAttributes MemberTypes MethodAttributes ParameterAttributes PropertyAttributes TypeAttributes 
+  context-free syntax
+         -> NamedElement
+
+        location::ANY imageRuntimeVersion::ANY evidence::ANY codeBase::ANY entryPoint::ANY modules::ANY+ manifestModule::ANY referencedAssembly::ANY+ manifest::ANY -> Assembly
+
+        content::ANY assembly::ANY -> ManifestResource
+
+        qualifiedName::ANY scopeName::ANY assembly::ANY types::ANY+ -> Module
+
+         -> MemberInfo
+
+        propertyType::ANY attributes::ANY+ -> PropertyInfo
+
+        fieldType::ANY attributes::ANY+ -> FieldInfo
+
+        isMulticast::ANY attributes::ANY eventHandlerType::ANY -> EventInfo
+
+        defaultValue::ANY position::ANY attributes::ANY+ parameterType::ANY member::ANY -> ParameterInfo
+
+         -> MethodBase
+
+        returnType::ANY -> MethodInfo
+
+        attributes::ANY+ parameters::ANY+ -> ConstructorInfo
+
+        namespace::ANY genericParameterAttributes::ANY+ typeAttributes::ANY+ baseType::ANY module::ANY interfaces::ANY+ members::ANY+ -> Type
+
+        None:: -> EventAttributes
+        ReservedMask:: -> EventAttributes
+        RTSpecialName:: -> EventAttributes
+        SpecialName:: -> EventAttributes
+
+        FieldAccessMask:: -> FieldAttributes
+        PrivateScope:: -> FieldAttributes
+        Private:: -> FieldAttributes
+        Assembly:: -> FieldAttributes
+        Family:: -> FieldAttributes
+        FamANDAssem:: -> FieldAttributes
+        FamORAssem:: -> FieldAttributes
+        Public:: -> FieldAttributes
+        Shared:: -> FieldAttributes
+        InitOnly:: -> FieldAttributes
+        Literal:: -> FieldAttributes
+        NotSerialized:: -> FieldAttributes
+        SpecialName:: -> FieldAttributes
+        PinvokeImpl:: -> FieldAttributes
+        ReservedMask:: -> FieldAttributes
+        RTSpecialName:: -> FieldAttributes
+        HasFieldMarshal:: -> FieldAttributes
+        HasDefault:: -> FieldAttributes
+        HasFieldRVA:: -> FieldAttributes
+        Static:: -> FieldAttributes
+
+        HasElementType:: -> GenericParameterAttributes
+        Abstract:: -> GenericParameterAttributes
+        AnsiClass:: -> GenericParameterAttributes
+        AutoClass:: -> GenericParameterAttributes
+        AutoLayout:: -> GenericParameterAttributes
+        ByRef:: -> GenericParameterAttributes
+        Class:: -> GenericParameterAttributes
+        COMObject:: -> GenericParameterAttributes
+        Contextful:: -> GenericParameterAttributes
+        Enum:: -> GenericParameterAttributes
+        ExplicitLayout:: -> GenericParameterAttributes
+        Import:: -> GenericParameterAttributes
+        Interface:: -> GenericParameterAttributes
+        LayoutSequential:: -> GenericParameterAttributes
+        MarshalByRef:: -> GenericParameterAttributes
+        NestedAssembly:: -> GenericParameterAttributes
+        NestedFamADNAssem:: -> GenericParameterAttributes
+        NestedFamily:: -> GenericParameterAttributes
+        NestedFamORAssem:: -> GenericParameterAttributes
+        NestedPrivate:: -> GenericParameterAttributes
+        NestedPublic:: -> GenericParameterAttributes
+        NotPublic:: -> GenericParameterAttributes
+        Pointer:: -> GenericParameterAttributes
+        Primitive:: -> GenericParameterAttributes
+        Public:: -> GenericParameterAttributes
+        Sealed:: -> GenericParameterAttributes
+        Serializable:: -> GenericParameterAttributes
+        SpecialName:: -> GenericParameterAttributes
+        UnicodeClass:: -> GenericParameterAttributes
+        ValueType:: -> GenericParameterAttributes
+
+        Constructor:: -> MemberTypes
+        Event:: -> MemberTypes
+        Field:: -> MemberTypes
+        Method:: -> MemberTypes
+        Property:: -> MemberTypes
+        TypeInfo:: -> MemberTypes
+        Custom:: -> MemberTypes
+        NestedType:: -> MemberTypes
+        All:: -> MemberTypes
+
+        Abstract:: -> MethodAttributes
+        Assembly:: -> MethodAttributes
+        ChekedAccessOnOverride:: -> MethodAttributes
+        FamADNAssem:: -> MethodAttributes
+        Family:: -> MethodAttributes
+        FamORAssem:: -> MethodAttributes
+        Final:: -> MethodAttributes
+        HasSecurity:: -> MethodAttributes
+        HideBySig:: -> MethodAttributes
+        MemberAccessMask:: -> MethodAttributes
+        NewSlot:: -> MethodAttributes
+        PInvokeImpl:: -> MethodAttributes
+        Private:: -> MethodAttributes
+        PrivateScope:: -> MethodAttributes
+        Public:: -> MethodAttributes
+        RequiredSecObject:: -> MethodAttributes
+        ReservedMask:: -> MethodAttributes
+        ReuseSlot:: -> MethodAttributes
+        RTSpecialName:: -> MethodAttributes
+        SpecialName:: -> MethodAttributes
+        Static:: -> MethodAttributes
+        UnmanagedExport:: -> MethodAttributes
+        Virtual:: -> MethodAttributes
+        VtableLayoutMask:: -> MethodAttributes
+
+        HasDefault:: -> ParameterAttributes
+        HasDefaultMArshal:: -> ParameterAttributes
+        In:: -> ParameterAttributes
+        Lcid:: -> ParameterAttributes
+        None:: -> ParameterAttributes
+        Optional:: -> ParameterAttributes
+        Out:: -> ParameterAttributes
+        Reserved3:: -> ParameterAttributes
+        Reserved4:: -> ParameterAttributes
+        ReservedMask:: -> ParameterAttributes
+        RetVal:: -> ParameterAttributes
+
+        NotSupported:: -> PropertyAttributes
+        Optional:: -> PropertyAttributes
+        Read:: -> PropertyAttributes
+        Required:: -> PropertyAttributes
+        Write:: -> PropertyAttributes
+
+        Abstract:: -> TypeAttributes
+        AnsiClass:: -> TypeAttributes
+        AutoClass:: -> TypeAttributes
+        AutoLayout:: -> TypeAttributes
+        BeforFieldInit:: -> TypeAttributes
+        Class:: -> TypeAttributes
+        ClassSemanticsMask:: -> TypeAttributes
+        ExplicitLayout:: -> TypeAttributes
+        HasSecutity:: -> TypeAttributes
+        Import:: -> TypeAttributes
+        Interface:: -> TypeAttributes
+        LayoutMask:: -> TypeAttributes
+        NestedAssembly:: -> TypeAttributes
+        NestedFamADNAssem:: -> TypeAttributes
+        NestedFamily:: -> TypeAttributes
+        NestedFamORAssem:: -> TypeAttributes
+        NestedPrivate:: -> TypeAttributes
+        NestedPublic:: -> TypeAttributes
+        NotPublic:: -> TypeAttributes
+        Public:: -> TypeAttributes
+        ReservedMask:: -> TypeAttributes
+        RTSpecialName:: -> TypeAttributes
+        Sealed:: -> TypeAttributes
+        SequentialLayout:: -> TypeAttributes
+        Serializable:: -> TypeAttributes
+        SpecialName:: -> TypeAttributes
+        StringFormatMask:: -> TypeAttributes
+        UnicodeClass:: -> TypeAttributes
+        VisibilityMask:: -> TypeAttributes

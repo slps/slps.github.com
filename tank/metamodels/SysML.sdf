@@ -1,0 +1,141 @@
+module Main
+
+exports
+  sorts
+        Entity NamedElement Dependency Conform Package View Class Viewpoint Comment Rationale Problem Block ConstraintBlock Property BlockProperty ConstraintProperty DistributedProperty DataType ValueType Unit Dimension ConnectorEnd NestedConnectorEnd Port FlowPort FlowProperty Interface FlowSpecification FlowDirection Classifier InformationItem InformationFlow ItemFlow Parameter ActivityEdge ParameterSet Optional Rate InstanceSpecification Continous Discrete Probability ValueSpecification Behavior Operation ControlOperation ObjectNode NoBuffer Overwrite Abstraction Allocate Allocated ActivityPartition AllocateActivityPartition Trace DeriveReqt Verify Copy Realization Satisfy Requirement TestCase RequirementRelated BasicInterval Interval Uniform Normal 
+  context-free syntax
+         -> Entity
+
+         -> NamedElement
+
+        name::ANY -> Dependency
+
+        target::ANY source::ANY -> Conform
+
+        name::ANY -> Package
+
+        conformsTo::ANY -> View
+
+        name::ANY -> Class
+
+        stakeholders::ANY+ purpose::ANY concerns::ANY+ languages::ANY+ methods::ANY+ -> Viewpoint
+
+        content::ANY -> Comment
+
+         -> Rationale
+
+         -> Problem
+
+        isEncapsulated::ANY -> Block
+
+         -> ConstraintBlock
+
+         -> Property
+
+         -> BlockProperty
+
+         -> ConstraintProperty
+
+         -> DistributedProperty
+
+         -> DataType
+
+        unit::ANY dimension::ANY -> ValueType
+
+         -> Unit
+
+         -> Dimension
+
+         -> ConnectorEnd
+
+        propertyPath::ANY -> NestedConnectorEnd
+
+        isBehavior::ANY -> Port
+
+        isAtomic::ANY direction::ANY isConjugated::ANY -> FlowPort
+
+        direction::ANY -> FlowProperty
+
+         -> Interface
+
+        ownedFlowProperty::ANY+ -> FlowSpecification
+
+        in:: -> FlowDirection
+        out:: -> FlowDirection
+        inout:: -> FlowDirection
+
+         -> Classifier
+
+        represented::ANY+ -> InformationItem
+
+        conveyed::ANY+ source::ANY+ target::ANY+ -> InformationFlow
+
+        itemProperty::ANY -> ItemFlow
+
+         -> Parameter
+
+         -> ActivityEdge
+
+         -> ParameterSet
+
+         -> Optional
+
+        instance::ANY -> Rate
+
+         -> InstanceSpecification
+
+         -> Continous
+
+         -> Discrete
+
+        probability::ANY -> Probability
+
+         -> ValueSpecification
+
+         -> Behavior
+
+         -> Operation
+
+         -> ControlOperation
+
+         -> ObjectNode
+
+         -> NoBuffer
+
+         -> Overwrite
+
+         -> Abstraction
+
+         -> Allocate
+
+        allocatedFrom::ANY+ allocatedTo::ANY+ -> Allocated
+
+         -> ActivityPartition
+
+         -> AllocateActivityPartition
+
+         -> Trace
+
+         -> DeriveReqt
+
+         -> Verify
+
+         -> Copy
+
+         -> Realization
+
+         -> Satisfy
+
+        text::ANY id::ANY derived::ANY+ derivedFrom::ANY+ satisfiedBy::ANY+ refinedBy::ANY+ tracedTo::ANY+ verifiedBy::ANY+ master::ANY -> Requirement
+
+         -> TestCase
+
+        verifies::ANY+ tracedFrom::ANY+ satisfies::ANY+ refines::ANY+ -> RequirementRelated
+
+        min::ANY max::ANY -> BasicInterval
+
+         -> Interval
+
+         -> Uniform
+
+        mean::ANY standardDeviation::ANY -> Normal

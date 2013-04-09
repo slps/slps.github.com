@@ -1,0 +1,101 @@
+module Main
+
+exports
+  sorts
+        Project Property PropertyName PropertyValue PropertyLocation PropertyFile PropertyEnv Target Pattern Basic Mapper InExcludes Includes Excludes IncludesFile ExcludesFile FileList Filter FiltersFile PathElement Set PatternSet FileSet FilterSet Path ClassPath Task TaskDef NewTask Attribut PreDefinedTask ExecutionTask Exec Java MiscellaneousTask Echo Tstamp FormatTstamp CompileTask Javac DocumentationTask Javadoc ArchiveTask Jar FileTask Mkdir Copy Delete 
+  context-free syntax
+        name::ANY basedir::ANY description::ANY default::ANY path::ANY properties::ANY+ taskdef::ANY+ targets::ANY+ -> Project
+
+         -> Property
+
+         -> PropertyName
+
+        value::ANY -> PropertyValue
+
+        location::ANY -> PropertyLocation
+
+        file::ANY -> PropertyFile
+
+        environment::ANY -> PropertyEnv
+
+        name::ANY description::ANY unless::ANY ifCondition::ANY depends::ANY+ tasks::ANY+ -> Target
+
+         -> Pattern
+
+         -> Basic
+
+        type::ANY classname::ANY classpath::ANY classpathref::ANY from::ANY to::ANY -> Mapper
+
+         -> InExcludes
+
+        name::ANY ifCondition::ANY unless::ANY -> Includes
+
+        name::ANY ifCondition::ANY unless::ANY -> Excludes
+
+        name::ANY ifCondition::ANY unless::ANY -> IncludesFile
+
+        name::ANY ifCondition::ANY unless::ANY -> ExcludesFile
+
+        dir::ANY files::ANY -> FileList
+
+        token::ANY value::ANY -> Filter
+
+        file::ANY -> FiltersFile
+
+        path::ANY location::ANY -> PathElement
+
+         -> Set
+
+        inexcludes::ANY+ -> PatternSet
+
+        dir::ANY patternset::ANY+ include::ANY+ exclude::ANY+ -> FileSet
+
+        starttoken::ANY endtoken::ANY filter::ANY+ filtersfile::ANY+ -> FilterSet
+
+        id::ANY refid::ANY path::ANY pathElement::ANY+ fileset::ANY+ -> Path
+
+        refid::ANY pathElement::ANY+ fileset::ANY+ -> ClassPath
+
+         -> Task
+
+        name::ANY classname::ANY -> TaskDef
+
+        taskName::ANY attributes::ANY+ -> NewTask
+
+        name::ANY value::ANY -> Attribut
+
+         -> PreDefinedTask
+
+         -> ExecutionTask
+
+        executable::ANY dir::ANY -> Exec
+
+        classname::ANY jar::ANY fork::ANY classPath::ANY -> Java
+
+         -> MiscellaneousTask
+
+        message::ANY file::ANY append::ANY -> Echo
+
+        format::ANY+ -> Tstamp
+
+        property::ANY pattern::ANY offset::ANY unit::ANY locale::ANY -> FormatTstamp
+
+         -> CompileTask
+
+        srcdir::ANY destdir::ANY debug::ANY fork::ANY optimize::ANY deprecation::ANY inExcludes::ANY+ classPath::ANY -> Javac
+
+         -> DocumentationTask
+
+        sourcepath::ANY destdir::ANY packagenames::ANY defaultexcludes::ANY author::ANY version::ANY use::ANY windowtitle::ANY -> Javadoc
+
+         -> ArchiveTask
+
+        jarfile::ANY basedir::ANY compress::ANY encoding::ANY manifest::ANY -> Jar
+
+         -> FileTask
+
+        dir::ANY -> Mkdir
+
+        file::ANY presservelastmodified::ANY tofile::ANY todir::ANY overwrite::ANY filtering::ANY flatten::ANY includeEmptyDirs::ANY fileset::ANY filterset::ANY mapper::ANY -> Copy
+
+        file::ANY dir::ANY verbose::ANY quiet::ANY failonerror::ANY includeEmptyDirs::ANY includes::ANY includesfile::ANY excludes::ANY excludesfile::ANY defaultexcludes::ANY -> Delete

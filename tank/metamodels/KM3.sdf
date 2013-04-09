@@ -1,0 +1,29 @@
+module Main
+
+exports
+  sorts
+        LocatedElement ModelElement Classifier DataType Enumeration EnumLiteral Class StructuralFeature Attribute Reference Package Metamodel 
+  context-free syntax
+         -> LocatedElement
+
+         -> ModelElement
+
+        name::ANY package::ANY -> Classifier
+
+         -> DataType
+
+        literals::ANY+ -> Enumeration
+
+        name::ANY package::ANY -> EnumLiteral
+
+        isAbstract::ANY supertypes::ANY+ structuralFeatures::ANY+ -> Class
+
+        lower::ANY upper::ANY isOrdered::ANY isUnique::ANY owner::ANY type::ANY -> StructuralFeature
+
+         -> Attribute
+
+        isContainer::ANY opposite::ANY -> Reference
+
+        contents::ANY+ metamodel::ANY -> Package
+
+        contents::ANY+ -> Metamodel

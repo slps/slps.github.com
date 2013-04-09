@@ -1,0 +1,48 @@
+module Main
+
+exports
+  sorts
+        LocatedElement Profile Method ThreadAction ThreadStart ThreadEnd Trace StackTraceElement Times Time Date Day Month 
+  context-free syntax
+         -> LocatedElement
+
+        header::ANY threadActions::ANY+ traces::ANY+ times::ANY methods::ANY+ -> Profile
+
+        fullyQualifiedName::ANY stackTraceElements::ANY+ -> Method
+
+         -> ThreadAction
+
+        obj::ANY name::ANY group::ANY -> ThreadStart
+
+        id::ANY -> ThreadEnd
+
+        id::ANY threadId::ANY elements::ANY+ times::ANY+ -> Trace
+
+        method::ANY fileName::ANY line::ANY trace::ANY -> StackTraceElement
+
+        unit::ANY total::ANY date::ANY elements::ANY+ -> Times
+
+        rank::ANY self::ANY accum::ANY count::ANY trace::ANY method::ANY -> Time
+
+        day::ANY month::ANY dayOfMonth::ANY hour::ANY minutes::ANY seconds::ANY year::ANY -> Date
+
+        Monday:: -> Day
+        Tuesday:: -> Day
+        Wednesday:: -> Day
+        Thursday:: -> Day
+        Friday:: -> Day
+        Saturday:: -> Day
+        Sunday:: -> Day
+
+        January:: -> Month
+        February:: -> Month
+        March:: -> Month
+        April:: -> Month
+        May:: -> Month
+        June:: -> Month
+        July:: -> Month
+        August:: -> Month
+        September:: -> Month
+        October:: -> Month
+        November:: -> Month
+        December:: -> Month

@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:bgf="http://planet-sl.org/bgf" xmlns:xbgf="http://planet-sl.org/xbgf" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Browsable DotNET System Reflection 1.2 Grammar</title><link href="/slps.css" rel="stylesheet" type="text/css"></link><script type="text/javascript">
+
+				  var _gaq = _gaq || [];
+				  _gaq.push(['_setAccount', 'UA-3743366-7']);
+				  _gaq.push(['_setDomainName', 'github.com']);
+				  _gaq.push(['_trackPageview']);
+
+				  (function() {
+				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				  })();
+
+				</script></head><body><h1 class="l">Browsable DotNET System Reflection 1.2 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Jean-Marc Prieur, <code>DotNET_SystemReflection.ecore</code>, 2006/04/05.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>21</strong></li><li>Number of top alternatives: <strong>145</strong></li><li>Number of defined nonterminal symbols: <strong>21</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>21</strong>: <code><a href="#NamedElement" class="nt">NamedElement</a>, <a href="#Assembly" class="nt">Assembly</a>, <a href="#ManifestResource" class="nt">ManifestResource</a>, <a href="#Module" class="nt">Module</a>, <a href="#MemberInfo" class="nt">MemberInfo</a>, <a href="#PropertyInfo" class="nt">PropertyInfo</a>, <a href="#FieldInfo" class="nt">FieldInfo</a>, <a href="#EventInfo" class="nt">EventInfo</a>, <a href="#ParameterInfo" class="nt">ParameterInfo</a>, <a href="#MethodBase" class="nt">MethodBase</a>, <a href="#MethodInfo" class="nt">MethodInfo</a>, <a href="#ConstructorInfo" class="nt">ConstructorInfo</a>, <a href="#Type" class="nt">Type</a>, <a href="#EventAttributes" class="nt">EventAttributes</a>, <a href="#FieldAttributes" class="nt">FieldAttributes</a>, <a href="#GenericParameterAttributes" class="nt">GenericParameterAttributes</a>, <a href="#MemberTypes" class="nt">MemberTypes</a>, <a href="#MethodAttributes" class="nt">MethodAttributes</a>, <a href="#ParameterAttributes" class="nt">ParameterAttributes</a>, <a href="#PropertyAttributes" class="nt">PropertyAttributes</a>, <a href="#TypeAttributes" class="nt">TypeAttributes</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="NamedElement">NamedElement</a>:
+        ε
+</pre><pre><a class="nt" name="Assembly">Assembly</a>:
+        <span class="sel">location</span>::<span class="meta">any</span> <span class="sel">imageRuntimeVersion</span>::<span class="meta">any</span> <span class="sel">evidence</span>::<span class="meta">any</span> <span class="sel">codeBase</span>::<span class="meta">any</span> <span class="sel">entryPoint</span>::<span class="meta">any</span> <span class="sel">modules</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">manifestModule</span>::<span class="meta">any</span> <span class="sel">referencedAssembly</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">manifest</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ManifestResource">ManifestResource</a>:
+        <span class="sel">content</span>::<span class="meta">any</span> <span class="sel">assembly</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Module">Module</a>:
+        <span class="sel">qualifiedName</span>::<span class="meta">any</span> <span class="sel">scopeName</span>::<span class="meta">any</span> <span class="sel">assembly</span>::<span class="meta">any</span> <span class="sel">types</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="MemberInfo">MemberInfo</a>:
+        ε
+</pre><pre><a class="nt" name="PropertyInfo">PropertyInfo</a>:
+        <span class="sel">propertyType</span>::<span class="meta">any</span> <span class="sel">attributes</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="FieldInfo">FieldInfo</a>:
+        <span class="sel">fieldType</span>::<span class="meta">any</span> <span class="sel">attributes</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="EventInfo">EventInfo</a>:
+        <span class="sel">isMulticast</span>::<span class="meta">any</span> <span class="sel">attributes</span>::<span class="meta">any</span> <span class="sel">eventHandlerType</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ParameterInfo">ParameterInfo</a>:
+        <span class="sel">defaultValue</span>::<span class="meta">any</span> <span class="sel">position</span>::<span class="meta">any</span> <span class="sel">attributes</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">parameterType</span>::<span class="meta">any</span> <span class="sel">member</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="MethodBase">MethodBase</a>:
+        ε
+</pre><pre><a class="nt" name="MethodInfo">MethodInfo</a>:
+        <span class="sel">returnType</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="ConstructorInfo">ConstructorInfo</a>:
+        <span class="sel">attributes</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">parameters</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Type">Type</a>:
+        <span class="sel">namespace</span>::<span class="meta">any</span> <span class="sel">genericParameterAttributes</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">typeAttributes</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">baseType</span>::<span class="meta">any</span> <span class="sel">module</span>::<span class="meta">any</span> <span class="sel">interfaces</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">members</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="EventAttributes">EventAttributes</a>:
+        <span class="sel">None</span>::ε
+        <span class="sel">ReservedMask</span>::ε
+        <span class="sel">RTSpecialName</span>::ε
+        <span class="sel">SpecialName</span>::ε
+</pre><pre><a class="nt" name="FieldAttributes">FieldAttributes</a>:
+        <span class="sel">FieldAccessMask</span>::ε
+        <span class="sel">PrivateScope</span>::ε
+        <span class="sel">Private</span>::ε
+        <span class="sel">Assembly</span>::ε
+        <span class="sel">Family</span>::ε
+        <span class="sel">FamANDAssem</span>::ε
+        <span class="sel">FamORAssem</span>::ε
+        <span class="sel">Public</span>::ε
+        <span class="sel">Shared</span>::ε
+        <span class="sel">InitOnly</span>::ε
+        <span class="sel">Literal</span>::ε
+        <span class="sel">NotSerialized</span>::ε
+        <span class="sel">SpecialName</span>::ε
+        <span class="sel">PinvokeImpl</span>::ε
+        <span class="sel">ReservedMask</span>::ε
+        <span class="sel">RTSpecialName</span>::ε
+        <span class="sel">HasFieldMarshal</span>::ε
+        <span class="sel">HasDefault</span>::ε
+        <span class="sel">HasFieldRVA</span>::ε
+        <span class="sel">Static</span>::ε
+</pre><pre><a class="nt" name="GenericParameterAttributes">GenericParameterAttributes</a>:
+        <span class="sel">HasElementType</span>::ε
+        <span class="sel">Abstract</span>::ε
+        <span class="sel">AnsiClass</span>::ε
+        <span class="sel">AutoClass</span>::ε
+        <span class="sel">AutoLayout</span>::ε
+        <span class="sel">ByRef</span>::ε
+        <span class="sel">Class</span>::ε
+        <span class="sel">COMObject</span>::ε
+        <span class="sel">Contextful</span>::ε
+        <span class="sel">Enum</span>::ε
+        <span class="sel">ExplicitLayout</span>::ε
+        <span class="sel">Import</span>::ε
+        <span class="sel">Interface</span>::ε
+        <span class="sel">LayoutSequential</span>::ε
+        <span class="sel">MarshalByRef</span>::ε
+        <span class="sel">NestedAssembly</span>::ε
+        <span class="sel">NestedFamADNAssem</span>::ε
+        <span class="sel">NestedFamily</span>::ε
+        <span class="sel">NestedFamORAssem</span>::ε
+        <span class="sel">NestedPrivate</span>::ε
+        <span class="sel">NestedPublic</span>::ε
+        <span class="sel">NotPublic</span>::ε
+        <span class="sel">Pointer</span>::ε
+        <span class="sel">Primitive</span>::ε
+        <span class="sel">Public</span>::ε
+        <span class="sel">Sealed</span>::ε
+        <span class="sel">Serializable</span>::ε
+        <span class="sel">SpecialName</span>::ε
+        <span class="sel">UnicodeClass</span>::ε
+        <span class="sel">ValueType</span>::ε
+</pre><pre><a class="nt" name="MemberTypes">MemberTypes</a>:
+        <span class="sel">Constructor</span>::ε
+        <span class="sel">Event</span>::ε
+        <span class="sel">Field</span>::ε
+        <span class="sel">Method</span>::ε
+        <span class="sel">Property</span>::ε
+        <span class="sel">TypeInfo</span>::ε
+        <span class="sel">Custom</span>::ε
+        <span class="sel">NestedType</span>::ε
+        <span class="sel">All</span>::ε
+</pre><pre><a class="nt" name="MethodAttributes">MethodAttributes</a>:
+        <span class="sel">Abstract</span>::ε
+        <span class="sel">Assembly</span>::ε
+        <span class="sel">ChekedAccessOnOverride</span>::ε
+        <span class="sel">FamADNAssem</span>::ε
+        <span class="sel">Family</span>::ε
+        <span class="sel">FamORAssem</span>::ε
+        <span class="sel">Final</span>::ε
+        <span class="sel">HasSecurity</span>::ε
+        <span class="sel">HideBySig</span>::ε
+        <span class="sel">MemberAccessMask</span>::ε
+        <span class="sel">NewSlot</span>::ε
+        <span class="sel">PInvokeImpl</span>::ε
+        <span class="sel">Private</span>::ε
+        <span class="sel">PrivateScope</span>::ε
+        <span class="sel">Public</span>::ε
+        <span class="sel">RequiredSecObject</span>::ε
+        <span class="sel">ReservedMask</span>::ε
+        <span class="sel">ReuseSlot</span>::ε
+        <span class="sel">RTSpecialName</span>::ε
+        <span class="sel">SpecialName</span>::ε
+        <span class="sel">Static</span>::ε
+        <span class="sel">UnmanagedExport</span>::ε
+        <span class="sel">Virtual</span>::ε
+        <span class="sel">VtableLayoutMask</span>::ε
+</pre><pre><a class="nt" name="ParameterAttributes">ParameterAttributes</a>:
+        <span class="sel">HasDefault</span>::ε
+        <span class="sel">HasDefaultMArshal</span>::ε
+        <span class="sel">In</span>::ε
+        <span class="sel">Lcid</span>::ε
+        <span class="sel">None</span>::ε
+        <span class="sel">Optional</span>::ε
+        <span class="sel">Out</span>::ε
+        <span class="sel">Reserved3</span>::ε
+        <span class="sel">Reserved4</span>::ε
+        <span class="sel">ReservedMask</span>::ε
+        <span class="sel">RetVal</span>::ε
+</pre><pre><a class="nt" name="PropertyAttributes">PropertyAttributes</a>:
+        <span class="sel">NotSupported</span>::ε
+        <span class="sel">Optional</span>::ε
+        <span class="sel">Read</span>::ε
+        <span class="sel">Required</span>::ε
+        <span class="sel">Write</span>::ε
+</pre><pre><a class="nt" name="TypeAttributes">TypeAttributes</a>:
+        <span class="sel">Abstract</span>::ε
+        <span class="sel">AnsiClass</span>::ε
+        <span class="sel">AutoClass</span>::ε
+        <span class="sel">AutoLayout</span>::ε
+        <span class="sel">BeforFieldInit</span>::ε
+        <span class="sel">Class</span>::ε
+        <span class="sel">ClassSemanticsMask</span>::ε
+        <span class="sel">ExplicitLayout</span>::ε
+        <span class="sel">HasSecutity</span>::ε
+        <span class="sel">Import</span>::ε
+        <span class="sel">Interface</span>::ε
+        <span class="sel">LayoutMask</span>::ε
+        <span class="sel">NestedAssembly</span>::ε
+        <span class="sel">NestedFamADNAssem</span>::ε
+        <span class="sel">NestedFamily</span>::ε
+        <span class="sel">NestedFamORAssem</span>::ε
+        <span class="sel">NestedPrivate</span>::ε
+        <span class="sel">NestedPublic</span>::ε
+        <span class="sel">NotPublic</span>::ε
+        <span class="sel">Public</span>::ε
+        <span class="sel">ReservedMask</span>::ε
+        <span class="sel">RTSpecialName</span>::ε
+        <span class="sel">Sealed</span>::ε
+        <span class="sel">SequentialLayout</span>::ε
+        <span class="sel">Serializable</span>::ε
+        <span class="sel">SpecialName</span>::ε
+        <span class="sel">StringFormatMask</span>::ε
+        <span class="sel">UnicodeClass</span>::ε
+        <span class="sel">VisibilityMask</span>::ε
+</pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
+Last updated: 09/04/2013.</div></body></html>

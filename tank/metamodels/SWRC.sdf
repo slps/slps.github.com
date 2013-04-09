@@ -1,0 +1,115 @@
+module Main
+
+exports
+  sorts
+        Bibliography Publication Article Book InBook Booklet InCollection InProceedings Proceedings Manual Misc Unpublished Thesis MasterThesis PhDThesis Report ProjectReport TechnicalReport Event Conference Workshop Exhibition Lecture Meeting ProjectMeeting Person Employee Manager AdministrativeStaff TechnicalStaff AcademicStaff Lecturer FacultyMember FullProfessor AssistantProfessor AssociateProfessor Student Undergraduate Graduate PhDStudent Organization ResearchGroup Association Department Institute Enterprise University Project ResearchProject DevelopmentProject SoftwareProject Product SoftwareComponent Topic ResearchTopic 
+  context-free syntax
+        publications::ANY+ -> Bibliography
+
+         -> Publication
+
+        author::ANY+ journal::ANY month::ANY number::ANY pages::ANY volume::ANY -> Article
+
+        month::ANY number::ANY volume::ANY series::ANY source::ANY address::ANY edition::ANY isbn::ANY price::ANY editor::ANY publisher::ANY author::ANY+ -> Book
+
+        author::ANY+ publisher::ANY editor::ANY month::ANY number::ANY pages::ANY volume::ANY series::ANY chapter::ANY type::ANY address::ANY -> InBook
+
+        author::ANY+ month::ANY address::ANY edition::ANY howpublished::ANY -> Booklet
+
+        editor::ANY author::ANY+ publisher::ANY month::ANY number::ANY pages::ANY address::ANY edition::ANY volume::ANY series::ANY chapter::ANY type::ANY booktitle::ANY -> InCollection
+
+        editor::ANY author::ANY+ month::ANY number::ANY pages::ANY address::ANY volume::ANY series::ANY booktitle::ANY organization::ANY publisher::ANY -> InProceedings
+
+        editor::ANY publisher::ANY organization::ANY month::ANY number::ANY volume::ANY address::ANY series::ANY -> Proceedings
+
+        author::ANY+ organization::ANY month::ANY address::ANY edition::ANY -> Manual
+
+        month::ANY howpublished::ANY -> Misc
+
+        author::ANY+ month::ANY -> Unpublished
+
+         -> Thesis
+
+        author::ANY+ school::ANY month::ANY address::ANY type::ANY -> MasterThesis
+
+        author::ANY+ school::ANY month::ANY address::ANY type::ANY -> PhDThesis
+
+         -> Report
+
+        describesProject::ANY -> ProjectReport
+
+        series::ANY organization::ANY -> TechnicalReport
+
+        name::ANY date::ANY eventTitle::ANY location::ANY atEvent::ANY hasPartEvent::ANY -> Event
+
+        series::ANY -> Conference
+
+        series::ANY -> Workshop
+
+         -> Exhibition
+
+        givenBy::ANY -> Lecture
+
+        title::ANY participant::ANY+ -> Meeting
+
+         -> ProjectMeeting
+
+        address::ANY name::ANY email::ANY fax::ANY homepage::ANY phone::ANY photo::ANY -> Person
+
+        affiliation::ANY -> Employee
+
+         -> Manager
+
+         -> AdministrativeStaff
+
+         -> TechnicalStaff
+
+        cooperateWith::ANY+ editor::ANY headOf::ANY headOfGroup::ANY memberOfPC::ANY organizerOrChairOf::ANY publication::ANY+ supervises::ANY+ worksAtProject::ANY -> AcademicStaff
+
+         -> Lecturer
+
+         -> FacultyMember
+
+         -> FullProfessor
+
+         -> AssistantProfessor
+
+         -> AssociateProfessor
+
+        studiesAt::ANY -> Student
+
+         -> Undergraduate
+
+         -> Graduate
+
+        publication::ANY+ worksAtProject::ANY supervisor::ANY -> PhDStudent
+
+        location::ANY name::ANY carriesOut::ANY+ develops::ANY+ employs::ANY+ finances::ANY+ publishes::ANY+ technicalReport::ANY+ -> Organization
+
+        head::ANY member::ANY+ -> ResearchGroup
+
+         -> Association
+
+        hasParts::ANY -> Department
+
+        cooperateWith::ANY hasParts::ANY+ -> Institute
+
+         -> Enterprise
+
+        hasParts::ANY+ student::ANY+ -> University
+
+         -> Project
+
+        name::ANY carriedOutBy::ANY financedBy::ANY head::ANY isAbout::ANY+ member::ANY+ projectInfo::ANY+ -> ResearchProject
+
+        name::ANY carriedOutBy::ANY financedBy::ANY head::ANY isAbout::ANY+ member::ANY+ projectInfo::ANY+ -> DevelopmentProject
+
+        product::ANY -> SoftwareProject
+
+        name::ANY developedBy::ANY -> Product
+
+        hasPrice::ANY -> SoftwareComponent
+
+        name::ANY -> Topic
+
+        dealWithIn::ANY isWorkedOnBy::ANY+ -> ResearchTopic

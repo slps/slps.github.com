@@ -1,0 +1,233 @@
+module Main
+
+exports
+  sorts
+        BossaProgramm Scheduler NormalScheduler VirtualScheduler AbstractSchedulerDecl SchedulerDecl VSchdulerDecl ConstDef TypeDef EnumRange EnumDef BagId RangeDef ProcessDef SchedulerDef ProcessVarDecl Timer-ProcessVarDecl System-ProcessVarDecl Normal-ProcessVarDecl HandlerDef InterfaceDef FunctionDef Expression Integer-Expression Id-Expression State-Expression True-Expression False-Expression Unop-Expression Etoile-Expression ExpId-Expression Select-Expression FnName-Expression Empty-Expression SRCOnSched-Expression SchedulerOf-Expression In-Expression Parenthese-Expression Binop-Expression Compo-Binop-Expression ValDecl Normal-ValDecl System-ValDecl Timer-ValDecl FunDecl StateDef ClassNameStorage OrderDef AdmissionDef TraceDef TypeExpr TypeOrVoid ParameterType Storage Process-Storage Scheduler-Storage Queue-Storage KeyCritDecls CompoKeyCritDecls CritDecls CritDecl CritDeclWhithId CritDeclWhithoutId ValDef AdmCrit AttachDetach ParamVarDecl SeqStmt TraceEvent TraceExpr TraceTest ProcParam Statment IfStmt ForStmt ForeachForStmt ForEachIncreasingForStmt ForEachDecreasingForStmt ReturnStmt SwitchStmt AssignStmt MoveStmt NormalMoveStmt ForwardMoveStmt StateRef DeferStmt PrimStmt ErrorStmt BreakStmt LocExpr MoveExpr Select-MoveExpr SatateName-MoveExpr ID-MoveExpr IDSource-MoveExpr IDTarget-MoveExpr ClassState OnHandlerDef EventName ComposantOfSwitchStmt ComposantOfInterFunc BossaTypeExpr QueueType Normal-QueueType Fifo-QueueType Lifo-QueueType Critop StateVisibility ClassName NonProcType Unop Binop AssignUnop AssignBinop 
+  context-free syntax
+        scheduler::ANY -> BossaProgramm
+
+         -> Scheduler
+
+        schedulerDecl::ANY -> NormalScheduler
+
+        vschedulerDecl::ANY -> VirtualScheduler
+
+         -> AbstractSchedulerDecl
+
+        processDef::ANY -> SchedulerDecl
+
+        schedulerDef::ANY -> VSchdulerDecl
+
+        id::ANY expr::ANY bossaTypeExpr::ANY -> ConstDef
+
+        enumRang::ANY -> TypeDef
+
+        enumDef::ANY rangeDef::ANY -> EnumRange
+
+        theIds::ANY+ -> EnumDef
+
+        theValue::ANY -> BagId
+
+        expr::ANY -> RangeDef
+
+        processVarDecl::ANY+ -> ProcessDef
+
+        processVarDecl::ANY+ -> SchedulerDef
+
+        id::ANY processDef::ANY schedulerDef::ANY -> ProcessVarDecl
+
+         -> Timer-ProcessVarDecl
+
+        system::ANY typeExpr::ANY -> System-ProcessVarDecl
+
+        typeExpr::ANY -> Normal-ProcessVarDecl
+
+        id::ANY scheduler::ANY onHandlerDef::ANY+ -> HandlerDef
+
+        composantOfInterFunc::ANY+ scheduler::ANY -> InterfaceDef
+
+        composantOfInterFunc::ANY+ scheduler::ANY -> FunctionDef
+
+         -> Expression
+
+        theValue::ANY -> Integer-Expression
+
+        id::ANY -> Id-Expression
+
+        theValue::ANY -> State-Expression
+
+         -> True-Expression
+
+         -> False-Expression
+
+        unop::ANY expr::ANY -> Unop-Expression
+
+        expr::ANY -> Etoile-Expression
+
+        id::ANY expr::ANY -> ExpId-Expression
+
+         -> Select-Expression
+
+        expr::ANY+ -> FnName-Expression
+
+        classState::ANY -> Empty-Expression
+
+         -> SRCOnSched-Expression
+
+        expr::ANY -> SchedulerOf-Expression
+
+        in::ANY expr::ANY classState::ANY -> In-Expression
+
+        expr::ANY -> Parenthese-Expression
+
+        id_Expression::ANY compo_Binop_Expression::ANY -> Binop-Expression
+
+        binop::ANY id_Expression::ANY -> Compo-Binop-Expression
+
+        id::ANY abstractSchedulerDecl::ANY -> ValDecl
+
+        nonProcType::ANY -> Normal-ValDecl
+
+        nonProcType::ANY -> System-ValDecl
+
+         -> Timer-ValDecl
+
+        parameterTypes::ANY nonProcType::ANY abstractSchedulerDecl::ANY -> FunDecl
+
+        classNameStorage::ANY+ abstractSchedulerDecl::ANY -> StateDef
+
+        id::ANY className::ANY storage::ANY -> ClassNameStorage
+
+        keyCritDecl::ANY critDecls::ANY abstractSchedulerDecl::ANY -> OrderDef
+
+        valDef::ANY+ admCrit::ANY attachDetach::ANY abstractSchedulerDecl::ANY -> AdmissionDef
+
+        traceEvent::ANY traceExpr::ANY traceTest::ANY abstractSchedulerDecl::ANY -> TraceDef
+
+        id::ANY bossaTypeExpr::ANY -> TypeExpr
+
+        isVoid::ANY typeExpr::ANY -> TypeOrVoid
+
+        typeExpr::ANY+ -> ParameterType
+
+         -> Storage
+
+         -> Process-Storage
+
+        stateVisibility::ANY -> Scheduler-Storage
+
+        stateVisibility::ANY queueType::ANY -> Queue-Storage
+
+        compoKeyCritDecls::ANY+ -> KeyCritDecls
+
+        critDecl::ANY -> CompoKeyCritDecls
+
+        critDecl::ANY+ -> CritDecls
+
+         -> CritDecl
+
+        id::ANY -> CritDeclWhithId
+
+        expr::ANY -> CritDeclWhithoutId
+
+        id::ANY typeExpr::ANY expr::ANY -> ValDef
+
+        paramVarDecl::ANY+ expr::ANY -> AdmCrit
+
+        procParam1::ANY procParam2::ANY seqStmt1::ANY seqStmt2::ANY -> AttachDetach
+
+        id::ANY typeExpr::ANY -> ParamVarDecl
+
+        valDef::ANY+ stmt::ANY+ -> SeqStmt
+
+        eventName::ANY+ -> TraceEvent
+
+        id::ANY+ -> TraceExpr
+
+        expr::ANY -> TraceTest
+
+        id::ANY process::ANY scheduler::ANY -> ProcParam
+
+         -> Statment
+
+        expr::ANY seqStmt::ANY -> IfStmt
+
+         -> ForStmt
+
+        id::ANY isIn::ANY classState::ANY+ seqStmt::ANY -> ForeachForStmt
+
+        id::ANY seqStmt::ANY -> ForEachIncreasingForStmt
+
+        id::ANY seqStmt::ANY -> ForEachDecreasingForStmt
+
+        expr::ANY -> ReturnStmt
+
+        locExpr::ANY composantOfSwitchStmt::ANY+ -> SwitchStmt
+
+        locExpr::ANY assignUnop::ANY assignBinop::ANY expr::ANY -> AssignStmt
+
+         -> MoveStmt
+
+        stateRef::ANY -> NormalMoveStmt
+
+        isHead::ANY isTail::ANY moveExpr::ANY -> ForwardMoveStmt
+
+        stateRef::ANY -> StateRef
+
+        deferStmt::ANY -> DeferStmt
+
+        expr::ANY+ -> PrimStmt
+
+        errorType::ANY -> ErrorStmt
+
+         -> BreakStmt
+
+        stateName::ANY id::ANY+ -> LocExpr
+
+         -> MoveExpr
+
+         -> Select-MoveExpr
+
+         -> SatateName-MoveExpr
+
+        id::ANY -> ID-MoveExpr
+
+        id::ANY -> IDSource-MoveExpr
+
+        id::ANY -> IDTarget-MoveExpr
+
+        state::ANY className::ANY -> ClassState
+
+        eventName::ANY+ seqStmt::ANY -> OnHandlerDef
+
+        eventNameLeft::ANY eventNameRight::ANY -> EventName
+
+        classState::ANY+ seqStmt::ANY -> ComposantOfSwitchStmt
+
+        id::ANY typeOrVoid::ANY paramVarDecl::ANY+ seqStmt::ANY -> ComposantOfInterFunc
+
+        bossaTypeExpr::ANY -> BossaTypeExpr
+
+         -> QueueType
+
+         -> Normal-QueueType
+
+         -> Fifo-QueueType
+
+         -> Lifo-QueueType
+
+        lowest::ANY highest::ANY -> Critop
+
+        public::ANY private::ANY -> StateVisibility
+
+        className::ANY -> ClassName
+
+        system::ANY struct::ANY id::ANY nonProcType::ANY -> NonProcType
+
+        plus::ANY minus::ANY excl::ANY tild::ANY -> Unop
+
+        plus::ANY minus::ANY star::ANY slash::ANY percentage::ANY doubleAnd::ANY doubleVerticalBar::ANY and::ANY eq::ANY ne::ANY lt::ANY gt::ANY le::ANY ge::ANY doubleLt::ANY doubleGt::ANY -> Binop
+
+        doublePlus::ANY doubleMoins::ANY -> AssignUnop
+
+        affect::ANY plusEqual::ANY moinsEqual::ANY starEqual::ANY slashEqual::ANY percentageEqual::ANY andEqual::ANY orEqual::ANY doubleLtEqual::ANY doubleGtEqual::ANY -> AssignBinop

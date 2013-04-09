@@ -1,0 +1,19 @@
+module Main
+
+exports
+  sorts
+        QoSComponent Operation QoSProfile CompoundProfile SimpleProfile QoSStatement ProfileTransition 
+  context-free syntax
+        operations::ANY profile::ANY+ -> QoSComponent
+
+         -> Operation
+
+         -> QoSProfile
+
+        profileTransition::ANY+ simpleProfile::ANY+ -> CompoundProfile
+
+        compoundProfile::ANY uses::ANY provides::ANY -> SimpleProfile
+
+         -> QoSStatement
+
+        operations::ANY+ from::ANY to::ANY compoundProfile::ANY -> ProfileTransition

@@ -1,0 +1,121 @@
+module Main
+
+exports
+  sorts
+        Project Xmlns AntProperty AntPropertyName AntPropertyValue AntPropertyLocation AntPropertyFile AntPropertyEnv JellyCommand JellySet JellyForEach AbstractGoal ContentsGoal AttainGoal PrePostGoal PreGoal PostGoal Goal Pattern Basic Mapper InExcludes Includes Excludes IncludesFile ExcludesFile FileList Filter FiltersFile PathElement Set PatternSet FileSet FilterSet Path ClassPath Task AntTaskDef NewTask Attribut PreDefinedTask ExecutionTask Exec Java MiscellaneousTask Echo Tstamp FormatTstamp CompileTask Javac DocumentationTask Javadoc ArchiveTask Jar FileTask Mkdir Copy Delete 
+  context-free syntax
+        xmlns::ANY+ default::ANY path::ANY properties::ANY+ taskdefs::ANY+ prePostGoals::ANY+ goals::ANY+ -> Project
+
+        name::ANY value::ANY -> Xmlns
+
+         -> AntProperty
+
+         -> AntPropertyName
+
+        value::ANY -> AntPropertyValue
+
+        location::ANY -> AntPropertyLocation
+
+        file::ANY -> AntPropertyFile
+
+        environment::ANY -> AntPropertyEnv
+
+         -> JellyCommand
+
+        var::ANY value::ANY -> JellySet
+
+        items::ANY var::ANY indexVar::ANY contents::ANY -> JellyForEach
+
+         -> AbstractGoal
+
+         -> ContentsGoal
+
+        attainGoal::ANY -> AttainGoal
+
+         -> PrePostGoal
+
+        centralGoal::ANY -> PreGoal
+
+        centralGoal::ANY -> PostGoal
+
+        name::ANY preGoal::ANY postGoal::ANY -> Goal
+
+         -> Pattern
+
+         -> Basic
+
+        type::ANY classname::ANY classpath::ANY classpathref::ANY from::ANY to::ANY -> Mapper
+
+         -> InExcludes
+
+        name::ANY ifCondition::ANY unless::ANY -> Includes
+
+        name::ANY ifCondition::ANY unless::ANY -> Excludes
+
+        name::ANY ifCondition::ANY unless::ANY -> IncludesFile
+
+        name::ANY ifCondition::ANY unless::ANY -> ExcludesFile
+
+        dir::ANY files::ANY -> FileList
+
+        token::ANY value::ANY -> Filter
+
+        file::ANY -> FiltersFile
+
+        path::ANY location::ANY -> PathElement
+
+         -> Set
+
+        inexcludes::ANY+ -> PatternSet
+
+        dir::ANY patternset::ANY+ include::ANY+ exclude::ANY+ -> FileSet
+
+        starttoken::ANY endtoken::ANY filter::ANY+ filtersfile::ANY+ -> FilterSet
+
+        id::ANY refid::ANY path::ANY pathElement::ANY+ fileset::ANY+ -> Path
+
+        refid::ANY pathElement::ANY+ fileset::ANY+ -> ClassPath
+
+         -> Task
+
+        name::ANY classname::ANY -> AntTaskDef
+
+        taskName::ANY attributes::ANY+ -> NewTask
+
+        name::ANY value::ANY -> Attribut
+
+         -> PreDefinedTask
+
+         -> ExecutionTask
+
+        executable::ANY dir::ANY -> Exec
+
+        classname::ANY jar::ANY fork::ANY classPath::ANY -> Java
+
+         -> MiscellaneousTask
+
+        message::ANY file::ANY append::ANY -> Echo
+
+        format::ANY+ -> Tstamp
+
+        property::ANY pattern::ANY offset::ANY unit::ANY locale::ANY -> FormatTstamp
+
+         -> CompileTask
+
+        srcdir::ANY destdir::ANY debug::ANY fork::ANY optimize::ANY deprecation::ANY inExcludes::ANY+ classPath::ANY -> Javac
+
+         -> DocumentationTask
+
+        sourcepath::ANY destdir::ANY packagenames::ANY defaultexcludes::ANY author::ANY version::ANY use::ANY windowtitle::ANY -> Javadoc
+
+         -> ArchiveTask
+
+        jarfile::ANY basedir::ANY compress::ANY encoding::ANY manifest::ANY -> Jar
+
+         -> FileTask
+
+        dir::ANY -> Mkdir
+
+        file::ANY presservelastmodified::ANY tofile::ANY todir::ANY overwrite::ANY filtering::ANY flatten::ANY includeEmptyDirs::ANY fileset::ANY filterset::ANY mapper::ANY -> Copy
+
+        file::ANY dir::ANY verbose::ANY quiet::ANY failonerror::ANY includeEmptyDirs::ANY includes::ANY includesfile::ANY excludes::ANY excludesfile::ANY defaultexcludes::ANY -> Delete

@@ -1,0 +1,153 @@
+module Main
+
+exports
+  sorts
+        Signal Action CreateAction DestroyAction UninterpretedAction CallAction SendAction ActionSequence Argument ReturnAction TerminateAction Exception Element ModelElement GeneralizableElement Namespace Classifier Feature Relationship BehavioralFeature Operation Parameter Generalization AggregationKind ChangeableKind OrderingKind CallConcurrencyKind ParameterDirectionKind PseudostateKind ScopeKind VisibilityKind Multiplicity MultiplicityRange Expression BooleanExpression ObjectSetExpression ActionExpression IterationExpression TimeExpression ArgListsExpression StateMachine Event StateVertex State TimeEvent CallEvent SignalEvent Transition CompositeState ChangeEvent Guard Pseudostate SimpleState SubmachineState SynchState StubState FinalState ActivityGraph Partition SubactivityState ActionState CallState ObjectFlowState ClassifierInState 
+  context-free syntax
+        powertypeRange::ANY+ feature::ANY+ -> Signal
+
+         -> Action
+
+        instantiation::ANY -> CreateAction
+
+        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY -> DestroyAction
+
+        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY -> UninterpretedAction
+
+        operation::ANY -> CallAction
+
+        signal::ANY -> SendAction
+
+        action::ANY+ -> ActionSequence
+
+        action::ANY value::ANY -> Argument
+
+        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY -> ReturnAction
+
+        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY -> TerminateAction
+
+         -> Exception
+
+         -> Element
+
+         -> ModelElement
+
+         -> GeneralizableElement
+
+         -> Namespace
+
+         -> Classifier
+
+         -> Feature
+
+         -> Relationship
+
+         -> BehavioralFeature
+
+        concurrency::ANY isRoot::ANY isLeaf::ANY isAbstract::ANY specification::ANY -> Operation
+
+        type::ANY behavioralFeature::ANY defaultValue::ANY kind::ANY -> Parameter
+
+        parent::ANY powertype::ANY child::ANY discriminator::ANY -> Generalization
+
+        ak_none:: -> AggregationKind
+        ak_aggregate:: -> AggregationKind
+        ak_composite:: -> AggregationKind
+
+        ck_changeable:: -> ChangeableKind
+        ck_frozen:: -> ChangeableKind
+        ck_addOnly:: -> ChangeableKind
+
+        ok_unordered:: -> OrderingKind
+        ok_ordered:: -> OrderingKind
+
+        cck_sequential:: -> CallConcurrencyKind
+        cck_guarded:: -> CallConcurrencyKind
+        cck_concurrent:: -> CallConcurrencyKind
+
+        pdk_in:: -> ParameterDirectionKind
+        pdk_inout:: -> ParameterDirectionKind
+        pdk_out:: -> ParameterDirectionKind
+        pdk_return:: -> ParameterDirectionKind
+
+        pk_choice:: -> PseudostateKind
+        pk_deepHistory:: -> PseudostateKind
+        pk_fork:: -> PseudostateKind
+        pk_initial:: -> PseudostateKind
+        pk_join:: -> PseudostateKind
+        pk_junction:: -> PseudostateKind
+        pk_shallowHistory:: -> PseudostateKind
+
+        sk_instance:: -> ScopeKind
+        sk_classifier:: -> ScopeKind
+
+        vk_public:: -> VisibilityKind
+        vk_protected:: -> VisibilityKind
+        vk_private:: -> VisibilityKind
+        vk_package:: -> VisibilityKind
+
+        range::ANY+ -> Multiplicity
+
+        multiplicity::ANY lower::ANY upper::ANY -> MultiplicityRange
+
+        language::ANY body::ANY -> Expression
+
+         -> BooleanExpression
+
+         -> ObjectSetExpression
+
+         -> ActionExpression
+
+         -> IterationExpression
+
+         -> TimeExpression
+
+         -> ArgListsExpression
+
+        context::ANY submachineState::ANY+ top::ANY transitions::ANY+ -> StateMachine
+
+         -> Event
+
+         -> StateVertex
+
+         -> State
+
+        when::ANY -> TimeEvent
+
+        operation::ANY -> CallEvent
+
+        signal::ANY -> SignalEvent
+
+        target::ANY trigger::ANY stateMachine::ANY source::ANY effect::ANY guard::ANY -> Transition
+
+        subvertex::ANY+ isConcurrent::ANY -> CompositeState
+
+        changeExpression::ANY -> ChangeEvent
+
+        transition::ANY expression::ANY -> Guard
+
+        kind::ANY -> Pseudostate
+
+        deferrableEvent::ANY+ internalTransition::ANY+ exit::ANY doActivity::ANY entry::ANY stateMachine::ANY -> SimpleState
+
+        submachine::ANY -> SubmachineState
+
+        bound::ANY -> SynchState
+
+        referenceState::ANY -> StubState
+
+        deferrableEvent::ANY+ internalTransition::ANY+ exit::ANY doActivity::ANY entry::ANY stateMachine::ANY -> FinalState
+
+        partition::ANY+ -> ActivityGraph
+
+        contents::ANY+ activityGraph::ANY -> Partition
+
+        isDynamic::ANY dynamicArguments::ANY dynamicMultiplicity::ANY -> SubactivityState
+
+        isDynamic::ANY dynamicArguments::ANY dynamicMultiplicity::ANY -> ActionState
+
+         -> CallState
+
+        type::ANY parameter::ANY+ isSynch::ANY -> ObjectFlowState
+
+        inState::ANY+ type::ANY -> ClassifierInState

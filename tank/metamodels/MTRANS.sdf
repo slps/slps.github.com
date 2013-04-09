@@ -1,0 +1,23 @@
+module Main
+
+exports
+  sorts
+        MetaClass MetaModel Module Rule Inheritance Expression Section Instruction Variable 
+  context-free syntax
+         -> MetaClass
+
+         -> MetaModel
+
+        name::ANY mode::ANY metaDest::ANY+ metaSource::ANY+ rules::ANY+ -> Module
+
+        isAbstract::ANY isEntryPoint::ANY name::ANY module::ANY target::ANY source::ANY declaration::ANY sections::ANY+ guard::ANY inheritances::ANY+ -> Rule
+
+        rule::ANY expressions::ANY+ inheritedRules::ANY+ -> Inheritance
+
+        operator::ANY inheritance::ANY rule::ANY instruction::ANY -> Expression
+
+        kind::ANY rule::ANY instructions::ANY+ -> Section
+
+        body::ANY section::ANY -> Instruction
+
+        name::ANY rule::ANY -> Variable

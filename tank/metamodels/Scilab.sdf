@@ -1,0 +1,79 @@
+module Main
+
+exports
+  sorts
+        Man Meta Short-Description Calling-Sequence Calling-Sequence-Item Param Param-Indent Param-Item Param-Name Param-Description Description Description-Indent Description-Item AIMG See-Also Exemple See-Also-Item A Img Biblio Used-Functions PSPPP P SP PP Itemize Item Table Table-New-Row Table-New-Column Link Authors Authors-Item Section InOut PreDef 
+  context-free syntax
+        language::ANY title::ANY type::ANY date::ANY name::ANY keyword::ANY exemple::ANY meta::ANY+ -> Man
+
+        meta::ANY path::ANY category::ANY version_CSI::ANY version_DOC::ANY author::ANY man::ANY -> Meta
+
+        name::ANY verb::ANY+ -> Short-Description
+
+        calling_Sequence_Item::ANY+ -> Calling-Sequence
+
+        calling_Sequence_Item::ANY+ calling_Sequence::ANY -> Calling-Sequence-Item
+
+        target::ANY param_Indent::ANY+ -> Param
+
+        param::ANY param_Description::ANY param_Item::ANY+ -> Param-Indent
+
+        label::ANY param_Indent::ANY param_Name::ANY param_Description::ANY -> Param-Item
+
+        verb::ANY+ param_Item::ANY -> Param-Name
+
+        param_Indent::ANY+ param_Item::ANY -> Param-Description
+
+        itemize::ANY+ description_Indent::ANY+ -> Description
+
+        description::ANY description_Item::ANY+ -> Description-Indent
+
+        label::ANY description_Indent::ANY -> Description-Item
+
+        verb::ANY+ -> AIMG
+
+        see_Also_Item::ANY+ -> See-Also
+
+        exemple::ANY xml_space::ANY -> Exemple
+
+        see_Also::ANY link::ANY+ -> See-Also-Item
+
+        href::ANY psppp::ANY authors_Item::ANY -> A
+
+        src::ANY psppp::ANY -> Img
+
+        p::ANY+ sp::ANY+ pp::ANY+ -> Biblio
+
+        verbatim::ANY+ table::ANY+ -> Used-Functions
+
+        verb::ANY+ em::ANY+ bd::ANY+ tt::ANY+ a::ANY+ link::ANY+ img::ANY+ -> PSPPP
+
+        biblio::ANY -> P
+
+        biblio::ANY -> SP
+
+        biblio::ANY -> PP
+
+        label::ANY item::ANY section::ANY authors_Item::ANY description::ANY -> Itemize
+
+        itemize::ANY+ -> Item
+
+        table_New_Row::ANY+ used_Functions::ANY -> Table
+
+        table_New_Column::ANY+ table::ANY -> Table-New-Row
+
+        Verb::ANY+ em::ANY+ bd::ANY+ tt::ANY+ table_New_Row::ANY -> Table-New-Column
+
+        link::ANY psppp::ANY see_Also_Item::ANY authors_Item::ANY -> Link
+
+        authors_Item::ANY+ -> Authors
+
+        Verb::ANY+ em::ANY+ bd::ANY+ tt::ANY+ verbatim::ANY+ label::ANY a::ANY+ link::ANY+ authors::ANY itemize::ANY+ -> Authors-Item
+
+        itemize::ANY+ -> Section
+
+        in:: -> InOut
+        out:: -> InOut
+
+        Preserve:: -> PreDef
+        Default:: -> PreDef

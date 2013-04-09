@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:bgf="http://planet-sl.org/bgf" xmlns:xbgf="http://planet-sl.org/xbgf" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Browsable Pascal 0.1 Grammar</title><link href="/slps.css" rel="stylesheet" type="text/css"></link><script type="text/javascript">
+
+				  var _gaq = _gaq || [];
+				  _gaq.push(['_setAccount', 'UA-3743366-7']);
+				  _gaq.push(['_setDomainName', 'github.com']);
+				  _gaq.push(['_trackPageview']);
+
+				  (function() {
+				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				  })();
+
+				</script></head><body><h1 class="l">Browsable Pascal 0.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Hugo Bruneliere, <code>Pascal.ecore</code>, 2005/08/10.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>16</strong></li><li>Number of top alternatives: <strong>16</strong></li><li>Number of defined nonterminal symbols: <strong>16</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>16</strong>: <code><a href="#Program" class="nt">Program</a>, <a href="#Variable" class="nt">Variable</a>, <a href="#Type" class="nt">Type</a>, <a href="#Parameter" class="nt">Parameter</a>, <a href="#Instruction" class="nt">Instruction</a>, <a href="#Calculation" class="nt">Calculation</a>, <a href="#Control" class="nt">Control</a>, <a href="#Assignment" class="nt">Assignment</a>, <a href="#Block" class="nt">Block</a>, <a href="#Conditional" class="nt">Conditional</a>, <a href="#Loop" class="nt">Loop</a>, <a href="#Procedure" class="nt">Procedure</a>, <a href="#Function" class="nt">Function</a>, <a href="#For" class="nt">For</a>, <a href="#While" class="nt">While</a>, <a href="#Repeat" class="nt">Repeat</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Program">Program</a>:
+        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">variables</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">types</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">procedures</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Variable">Variable</a>:
+        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">program</span>::<span class="meta">any</span> <span class="sel">procedure</span>::<span class="meta">any</span> <span class="sel">type</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Type">Type</a>:
+        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">program</span>::<span class="meta">any</span> <span class="sel">variables</span>::<span class="meta">any</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="Parameter">Parameter</a>:
+        <span class="sel">procedure_parameter</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Instruction">Instruction</a>:
+        <span class="sel">block</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Calculation">Calculation</a>:
+        ε
+</pre><pre><a class="nt" name="Control">Control</a>:
+        ε
+</pre><pre><a class="nt" name="Assignment">Assignment</a>:
+        ε
+</pre><pre><a class="nt" name="Block">Block</a>:
+        <span class="sel">instructions</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">procedure</span>::<span class="meta">any</span> <span class="sel">loop</span>::<span class="meta">any</span> <span class="sel">conditional</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Conditional">Conditional</a>:
+        <span class="sel">blocks</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Loop">Loop</a>:
+        <span class="sel">block_loop</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Procedure">Procedure</a>:
+        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">program</span>::<span class="meta">any</span> <span class="sel">variables</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">parameters</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">block_procedure</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="Function">Function</a>:
+        <span class="sel">returnType</span>::<span class="meta">any</span>
+</pre><pre><a class="nt" name="For">For</a>:
+        ε
+</pre><pre><a class="nt" name="While">While</a>:
+        ε
+</pre><pre><a class="nt" name="Repeat">Repeat</a>:
+        ε
+</pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
+Last updated: 09/04/2013.</div></body></html>

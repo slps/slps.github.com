@@ -1,0 +1,136 @@
+Element:
+        EPSILON
+ModelElement:
+        EPSILON
+GeneralizableElement:
+        EPSILON
+Namespace:
+        EPSILON
+Classifier:
+        EPSILON
+Feature:
+        EPSILON
+StructuralFeature:
+        EPSILON
+AssociationEnd:
+        association::ANY specification::ANY+ participant::ANY qualifier::ANY+ isNavigable::ANY ordering::ANY aggregation::ANY targetScope::ANY multiplicity::ANY changeability::ANY
+Relationship:
+        EPSILON
+Association:
+        connection::ANY
+Attribute:
+        associationEnd::ANY initialValue::ANY
+BehavioralFeature:
+        EPSILON
+Operation:
+        concurrency::ANY isRoot::ANY isLeaf::ANY isAbstract::ANY specification::ANY
+Parameter:
+        type::ANY behavioralFeature::ANY defaultValue::ANY kind::ANY
+Generalization:
+        parent::ANY powertype::ANY child::ANY discriminator::ANY
+AggregationKind:
+        ak_none::EPSILON
+        ak_aggregate::EPSILON
+        ak_composite::EPSILON
+ChangeableKind:
+        ck_changeable::EPSILON
+        ck_frozen::EPSILON
+        ck_addOnly::EPSILON
+OrderingKind:
+        ok_unordered::EPSILON
+        ok_ordered::EPSILON
+CallConcurrencyKind:
+        cck_sequential::EPSILON
+        cck_guarded::EPSILON
+        cck_concurrent::EPSILON
+ParameterDirectionKind:
+        pdk_in::EPSILON
+        pdk_inout::EPSILON
+        pdk_out::EPSILON
+        pdk_return::EPSILON
+ScopeKind:
+        sk_instance::EPSILON
+        sk_classifier::EPSILON
+VisibilityKind:
+        vk_public::EPSILON
+        vk_protected::EPSILON
+        vk_private::EPSILON
+        vk_package::EPSILON
+Multiplicity:
+        range::ANY+
+MultiplicityRange:
+        multiplicity::ANY lower::ANY upper::ANY
+Expression:
+        language::ANY body::ANY
+BooleanExpression:
+        EPSILON
+ObjectSetExpression:
+        EPSILON
+ActionExpression:
+        EPSILON
+IterationExpression:
+        EPSILON
+Instance:
+        EPSILON
+Signal:
+        powertypeRange::ANY+ feature::ANY+
+Action:
+        EPSILON
+CreateAction:
+        instantiation::ANY
+DestroyAction:
+        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY
+UninterpretedAction:
+        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY
+AttributeLink:
+        instance::ANY value::ANY linkEnd::ANY attribute::ANY
+Object:
+        ownedInstance::ANY+ linkEnd::ANY+ classifier::ANY+ componentInstance::ANY slot::ANY+ ownedLink::ANY+
+Link:
+        association::ANY connection::ANY
+LinkObject:
+        EPSILON
+DataValue:
+        ownedInstance::ANY+ linkEnd::ANY+ classifier::ANY+ componentInstance::ANY slot::ANY+ ownedLink::ANY+
+CallAction:
+        operation::ANY
+SendAction:
+        signal::ANY
+ActionSequence:
+        action::ANY+
+Argument:
+        action::ANY value::ANY
+Reception:
+        signal::ANY specification::ANY isRoot::ANY isLeaf::ANY isAbstract::ANY
+LinkEnd:
+        link::ANY qualifiedValue::ANY+ instance::ANY associationEnd::ANY
+ReturnAction:
+        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY
+TerminateAction:
+        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY
+Stimulus:
+        argument::ANY+ communicationLink::ANY receiver::ANY dispatchAction::ANY sender::ANY
+Exception:
+        EPSILON
+ComponentInstance:
+        resident::ANY+ nodeInstance::ANY
+NodeInstance:
+        resident::ANY+
+SubsystemInstance:
+        ownedInstance::ANY+ linkEnd::ANY+ classifier::ANY+ componentInstance::ANY slot::ANY+ ownedLink::ANY+
+Collaboration:
+        usedCollaboration::ANY+ representedOperation::ANY representedClassifier::ANY interaction::ANY+ constrainingElement::ANY+
+ClassifierRole:
+        availableContents::ANY+ base::ANY+ conformingInstance::ANY+ availableFeature::ANY+ multiplicity::ANY
+AssociationRole:
+        base::ANY conformingLink::ANY+ message::ANY+ multiplicity::ANY
+AssociationEndRole:
+        base::ANY availableQualifier::ANY+ collaborationMultiplicity::ANY
+Message:
+        interaction::ANY conformingStimulus::ANY+ action::ANY communicationConnection::ANY activator::ANY receiver::ANY sender::ANY predecessor::ANY+
+Interaction:
+        message::ANY+ context::ANY
+InteractionInstanceSet:
+        interaction::ANY context::ANY participatingStimulus::ANY+
+CollaborationInstanceSet:
+        collaboration::ANY constrainingElement::ANY+ participatingInstance::ANY+ interactionInstanceSet::ANY+ participatingLink::ANY+

@@ -1,0 +1,48 @@
+module Main
+
+exports
+  sorts
+        COBOLUsageValue COBOLInitialValueKind COBOLElement COBOLClassifier COBOLSimpleType COBOLComposedType COBOLElementInitialValue COBOL88Element COBOL88ElementValue COBOLRedefiningElement COBOL66Element COBOLSourceText COBOLFixedLengthArray COBOLVariableLengthArray 
+  context-free syntax
+        cuv_binary:: -> COBOLUsageValue
+        cuv_dbcs:: -> COBOLUsageValue
+        cuv_double:: -> COBOLUsageValue
+        cuv_display:: -> COBOLUsageValue
+        cuv_float:: -> COBOLUsageValue
+        cuv_index:: -> COBOLUsageValue
+        cuv_objectReference:: -> COBOLUsageValue
+        cuv_packedDecimal:: -> COBOLUsageValue
+        cuv_pointer:: -> COBOLUsageValue
+        cuv_procedurePointer:: -> COBOLUsageValue
+
+        civk_string_value:: -> COBOLInitialValueKind
+        civk_low_value:: -> COBOLInitialValueKind
+        civk_high_value:: -> COBOLInitialValueKind
+        civk_zero_value:: -> COBOLInitialValueKind
+        civk_quotes:: -> COBOLInitialValueKind
+        civk_null:: -> COBOLInitialValueKind
+        civk_all_literal:: -> COBOLInitialValueKind
+
+        level::ANY refined::ANY name::ANY sharedType::ANY group::ANY initial::ANY+ contains::ANY+ source::ANY array::ANY -> COBOLElement
+
+        typeded::ANY name::ANY typedElements::ANY+ -> COBOLClassifier
+
+        usageValue::ANY pictureString::ANY usage::ANY -> COBOLSimpleType
+
+        elements::ANY+ -> COBOLComposedType
+
+        initVal::ANY valueKind::ANY -> COBOLElementInitialValue
+
+        name::ANY has::ANY+ -> COBOL88Element
+
+        lowerLimit::ANY upperLimit::ANY range::ANY -> COBOL88ElementValue
+
+        redefines::ANY -> COBOLRedefiningElement
+
+        name::ANY end::ANY start::ANY -> COBOL66Element
+
+        source::ANY fileName::ANY -> COBOLSourceText
+
+        maxUpper::ANY -> COBOLFixedLengthArray
+
+        minUpper::ANY dependingOn::ANY -> COBOLVariableLengthArray

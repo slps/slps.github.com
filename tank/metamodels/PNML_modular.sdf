@@ -1,0 +1,104 @@
+module Main
+
+exports
+  sorts
+        IdedElement URI Color AnyElement NCName RotationType ShapeType StyleType DecorationType AlignType PNMLDocument Module Interface NetElement NetContent ToolSpecific LabeledElement Label Name Inscription InitialMarking NetContentElement Arc Page Reference ReferencePlace ReferenceTransition Instance ImportNode Node Place Transition Graphics NetGraphics NodeGraphics EdgeGraphics AnnotationGraphics PageGraphics Coordinate Position Offset Dimension Fill Line Font 
+  context-free syntax
+         -> IdedElement
+
+        value::ANY -> URI
+
+         -> Color
+
+        name::ANY text::ANY -> AnyElement
+
+        value::ANY -> NCName
+
+        rtvertical:: -> RotationType
+        rthorizontal:: -> RotationType
+        rtdiagonal:: -> RotationType
+
+        shtline:: -> ShapeType
+        shtcurve:: -> ShapeType
+
+        sttsolid:: -> StyleType
+        sttdash:: -> StyleType
+        sttdot:: -> StyleType
+
+        dtunderligne:: -> DecorationType
+        dtoverligne:: -> DecorationType
+        dtlinethrough:: -> DecorationType
+
+        atleft:: -> AlignType
+        atcenter:: -> AlignType
+        atright:: -> AlignType
+
+        xmlns::ANY nets::ANY+ modules::ANY+ -> PNMLDocument
+
+        interfaces::ANY+ netcontents::ANY+ document::ANY -> Module
+
+        module::ANY importplace::ANY+ exportplace::ANY+ importtransition::ANY+ exporttransition::ANY+ -> Interface
+
+        type::ANY document::ANY contents::ANY+ tools::ANY+ netgraphics::ANY name::ANY -> NetElement
+
+         -> NetContent
+
+        tool::ANY version::ANY anyelement::ANY+ net::ANY arc::ANY node::ANY page::ANY -> ToolSpecific
+
+         -> LabeledElement
+
+        text::ANY namedelement::ANY -> Label
+
+        net::ANY netcontent::ANY -> Name
+
+        arc::ANY -> Inscription
+
+        place::ANY -> InitialMarking
+
+         -> NetContentElement
+
+        source::ANY target::ANY tools::ANY+ edgegraphics::ANY inscription::ANY -> Arc
+
+        contents::ANY+ tools::ANY+ pagegraphics::ANY -> Page
+
+         -> Reference
+
+         -> ReferencePlace
+
+         -> ReferenceTransition
+
+        ref::ANY importplace::ANY+ importtransition::ANY+ -> Instance
+
+        parameter::ANY ref::ANY instanceplace::ANY instancetransition::ANY -> ImportNode
+
+        netcontentelement::ANY tools::ANY+ nodegraphics::ANY -> Node
+
+        initialmarking::ANY -> Place
+
+        node::ANY -> Transition
+
+         -> Graphics
+
+        net::ANY -> NetGraphics
+
+        node::ANY position::ANY dimension::ANY fill::ANY line::ANY -> NodeGraphics
+
+        arc::ANY position::ANY+ fill::ANY line::ANY -> EdgeGraphics
+
+        namedelement::ANY offset::ANY font::ANY fill::ANY line::ANY -> AnnotationGraphics
+
+        page::ANY -> PageGraphics
+
+         -> Coordinate
+
+        nodegraphics::ANY edgegraphics::ANY -> Position
+
+        annotationgraphics::ANY -> Offset
+
+        width::ANY height::ANY nodegraphics::ANY -> Dimension
+
+        gradientrotation::ANY interiorcolor::ANY gradientcolor::ANY image::ANY nodegraphics::ANY edgegraphics::ANY annotationgraphics::ANY -> Fill
+
+        color::ANY width::ANY shape::ANY style::ANY nodegraphics::ANY edgegraphics::ANY annotationgraphics::ANY -> Line
+
+        family::ANY style::ANY weight::ANY size::ANY decoration::ANY align::ANY rotation::ANY annotationgraphics::ANY -> Font
