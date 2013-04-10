@@ -2,32 +2,42 @@ module Main
 
 exports
   sorts
-        Element ModelElement KDMEntity KDMContainer KDMGroup KDMRelationship Annotation Attribute KDMExtensionFamily Stereotype TagDefinition TaggedValue KDMFramework KDMModel 
+        Element ModelElement KDMEntity Annotation Attribute KDMExtensionFamily Stereotype TagDefinition TaggedValue KDMFramework 
   context-free syntax
-         -> Element
+        ModelElement -> Element
 
-         -> ModelElement
+        Annotation -> Element
 
-         -> KDMEntity
+        Attribute -> Element
 
-         -> KDMContainer
+        KDMExtensionFamily -> Element
 
-         -> KDMGroup
+        Stereotype -> Element
 
-         -> KDMRelationship
+        TagDefinition -> Element
 
-        note::ANY -> Annotation
+        TaggedValue -> Element
 
-        tag::ANY value::ANY -> Attribute
+        KDMFramework -> Element
 
-        name::ANY stereotype::ANY+ -> KDMExtensionFamily
+        KDMEntity -> ModelElement
 
-        baseClass::ANY name::ANY family::ANY extendedElement::ANY tag::ANY+ -> Stereotype
+        KDMRelationship -> ModelElement
 
-        tag::ANY type::ANY -> TagDefinition
+        KDMContainer -> KDMEntity
 
-        value::ANY tag::ANY -> TaggedValue
+        KDMGroup -> KDMEntity
 
-         -> KDMFramework
+        note::String -> Annotation
 
-         -> KDMModel
+        tag::String value::String -> Attribute
+
+        name::String stereotype::Stereotype+ -> KDMExtensionFamily
+
+        baseClass::String name::String family::KDMExtensionFamily extendedElement::ModelElement tag::TagDefinition+ -> Stereotype
+
+        tag::String type::String -> TagDefinition
+
+        value::String tag::TagDefinition -> TaggedValue
+
+        KDMModel -> KDMFramework

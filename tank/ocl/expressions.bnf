@@ -1,21 +1,23 @@
 OclExpression:
-        EPSILON
+        SelfExp
+OclExpression:
+        ResultExp
+OclExpression:
+        VariableExp
+OclExpression:
+        OperationExp
+OclExpression:
+        QueryExp
 SelfExp:
-        queryArg::ANY+ querySrc::ANY+ resultType::ANY varDec::ANY+ varInit::ANY+
+        queryArg::QueryExp+ querySrc::QueryExp+ resultType::Type varDec::VariableDeclaration+ varInit::VariableInitialisation+
 ResultExp:
-        queryArg::ANY+ querySrc::ANY+ resultType::ANY varDec::ANY+ varInit::ANY+
+        queryArg::QueryExp+ querySrc::QueryExp+ resultType::Type varDec::VariableDeclaration+ varInit::VariableInitialisation+
 VariableExp:
-        var::ANY
-OperationExp:
-        EPSILON
-QueryExp:
-        EPSILON
-Type:
-        EPSILON
+        var::String
 VariableDeclaration:
-        var::ANY varType::ANY oclExpression::ANY+ queryExp::ANY+ varInit::ANY+
+        var::String varType::Type oclExpression::OclExpression+ queryExp::QueryExp+ varInit::VariableInitialisation+
 VariableInitialisation:
-        initExpression::ANY varDec::ANY iterateExp::ANY
+        initExpression::OclExpression varDec::VariableDeclaration iterateExp::IterateExp
 ForAllExp:
         EPSILON
 ExistsExp:
@@ -27,4 +29,4 @@ RejectExp:
 CollectExp:
         EPSILON
 IterateExp:
-        varInit::ANY
+        varInit::VariableInitialisation

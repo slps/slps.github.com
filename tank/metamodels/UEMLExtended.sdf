@@ -4,74 +4,132 @@ exports
   sorts
         UEMLObject UEMLModel Geometry Port Flow Activity Object InformationObject Resource MaterialResource HumanResource ResourceFlow IOFlow ControlFlow TriggerFlow ConstraintFlow ResourceRole RoleType Anchor OutputPort InputPort ConnectionOperator AssociationConnector FlowObject Event ResourceType ActivityType PassiveObject Commitment Software Organisation Process Service Agent Contract Task 
   context-free syntax
-        has::ANY model::ANY -> UEMLObject
+        UEMLModel -> UEMLObject
 
-        contains::ANY+ -> UEMLModel
+        Port -> UEMLObject
 
-        object::ANY -> Geometry
+        Flow -> UEMLObject
 
-         -> Port
+        Object -> UEMLObject
 
-        associationConnector::ANY -> Flow
+        has::Geometry model::UEMLModel -> UEMLObject
 
-        resourceRole::ANY+ parent::ANY hasOutput::ANY+ hasInput::ANY+ activityType::ANY -> Activity
+        contains::UEMLObject+ -> UEMLModel
 
-        ioFlow::ANY -> Object
+        object::UEMLObject -> Geometry
 
-        controlFlow::ANY -> InformationObject
+        ResourceRole -> Port
 
-        carries::ANY plays::ANY+ resourceType::ANY commitment::ANY+ -> Resource
+        Anchor -> Port
+
+        ResourceRole -> Port
+        Anchor -> Port
+
+        ResourceFlow -> Flow
+
+        IOFlow -> Flow
+
+        ControlFlow -> Flow
+
+        associationConnector::AssociationConnector -> Flow
+
+        Process -> Activity
+
+        Task -> Activity
+
+        resourceRole::ResourceRole+ parent::Process hasOutput::OutputPort+ hasInput::InputPort+ activityType::ActivityType -> Activity
+
+        InformationObject -> Object
+
+        Resource -> Object
+
+        ioFlow::IOFlow -> Object
+
+        controlFlow::ControlFlow -> InformationObject
+
+        PassiveObject -> Resource
+
+        Service -> Resource
+
+        Agent -> Resource
+
+        carries::ResourceFlow plays::ResourceRole+ resourceType::ResourceType commitment::Commitment+ -> Resource
 
          -> MaterialResource
 
          -> HumanResource
 
-        resourceCarries::ANY+ -> ResourceFlow
+        resourceCarries::Resource+ -> ResourceFlow
 
-        carries::ANY+ -> IOFlow
+        carries::Object+ -> IOFlow
 
-        carries::ANY+ -> ControlFlow
+        TriggerFlow -> ControlFlow
+
+        ConstraintFlow -> ControlFlow
+
+        carries::InformationObject+ -> ControlFlow
 
          -> TriggerFlow
 
          -> ConstraintFlow
 
-        resourcePlays::ANY+ roleQualifier::ANY in::ANY -> ResourceRole
+        resourcePlays::Resource+ roleQualifier::RoleType in::Activity -> ResourceRole
 
          -> RoleType
 
-         -> Anchor
+        OutputPort -> Anchor
 
-        activity::ANY -> OutputPort
+        InputPort -> Anchor
 
-        activity::ANY -> InputPort
+        OutputPort -> Anchor
+        InputPort -> Anchor
+
+        activity::Activity -> OutputPort
+
+        activity::Activity -> InputPort
 
          -> ConnectionOperator
 
-        origin::ANY+ target::ANY+ classAssociation::ANY -> AssociationConnector
+        origin::FlowObject+ target::FlowObject+ classAssociation::Flow -> AssociationConnector
 
-        target::ANY origin::ANY -> FlowObject
+        Event -> FlowObject
+
+        target::AssociationConnector origin::AssociationConnector -> FlowObject
 
          -> Event
 
-        resource::ANY+ -> ResourceType
+        resource::Resource+ -> ResourceType
 
-        activityT::ANY+ -> ActivityType
+        activityT::Activity+ -> ActivityType
 
-         -> PassiveObject
+        MaterialResource -> PassiveObject
 
-        resource::ANY+ task::ANY agentO::ANY agentC::ANY contract::ANY -> Commitment
+        Commitment -> PassiveObject
+
+        Contract -> PassiveObject
+
+        MaterialResource -> PassiveObject
+        Commitment -> PassiveObject
+        Contract -> PassiveObject
+
+        resource::Resource+ task::Task agentO::Agent agentC::Agent contract::Contract -> Commitment
 
          -> Software
 
          -> Organisation
 
-        child::ANY fulfills::ANY+ realises::ANY -> Process
+        child::Activity fulfills::Contract+ realises::Service -> Process
 
-        process::ANY -> Service
+        process::Process -> Service
 
-        obliger::ANY claimer::ANY has_parties::ANY -> Agent
+        HumanResource -> Agent
 
-        process::ANY+ agent::ANY collection_of::ANY+ -> Contract
+        Software -> Agent
 
-        fulfills::ANY+ -> Task
+        Organisation -> Agent
+
+        obliger::Commitment claimer::Commitment has_parties::Contract -> Agent
+
+        process::Process+ agent::Agent collection_of::Commitment+ -> Contract
+
+        fulfills::Commitment+ -> Task

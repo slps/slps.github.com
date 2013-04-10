@@ -13,28 +13,44 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable HPROF 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Frédéric Jouault, <code>HPROF.ecore</code>, 2009/09/09.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>13</strong></li><li>Number of top alternatives: <strong>30</strong></li><li>Number of defined nonterminal symbols: <strong>13</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>13</strong>: <code><a href="#LocatedElement" class="nt">LocatedElement</a>, <a href="#Profile" class="nt">Profile</a>, <a href="#Method" class="nt">Method</a>, <a href="#ThreadAction" class="nt">ThreadAction</a>, <a href="#ThreadStart" class="nt">ThreadStart</a>, <a href="#ThreadEnd" class="nt">ThreadEnd</a>, <a href="#Trace" class="nt">Trace</a>, <a href="#StackTraceElement" class="nt">StackTraceElement</a>, <a href="#Times" class="nt">Times</a>, <a href="#Time" class="nt">Time</a>, <a href="#Date" class="nt">Date</a>, <a href="#Day" class="nt">Day</a>, <a href="#Month" class="nt">Month</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
-        ε
+				</script></head><body><h1 class="l">Browsable HPROF 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Frédéric Jouault, <code>HPROF.ecore</code>, 2009/09/09.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>21</strong></li><li>Number of top alternatives: <strong>38</strong></li><li>Number of defined nonterminal symbols: <strong>13</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#LocatedElement" class="nt">LocatedElement</a></code></li><li>Bottom nonterminal symbols: <strong>3</strong>: <code><a href="#String" class="nt">String</a>, <a href="#Integer" class="nt">Integer</a>, <a href="#Double" class="nt">Double</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
+        <a class="nt" href="#Profile">Profile</a>
+</pre><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
+        <a class="nt" href="#Method">Method</a>
+</pre><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
+        <a class="nt" href="#ThreadAction">ThreadAction</a>
+</pre><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
+        <a class="nt" href="#Trace">Trace</a>
+</pre><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
+        <a class="nt" href="#StackTraceElement">StackTraceElement</a>
+</pre><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
+        <a class="nt" href="#Times">Times</a>
+</pre><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
+        <a class="nt" href="#Time">Time</a>
+</pre><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
+        <a class="nt" href="#Date">Date</a>
 </pre><pre><a class="nt" name="Profile">Profile</a>:
-        <span class="sel">header</span>::<span class="meta">any</span> <span class="sel">threadActions</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">traces</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">times</span>::<span class="meta">any</span> <span class="sel">methods</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">header</span>::<a class="nt" href="#String">String</a> <span class="sel">threadActions</span>::<a class="nt" href="#ThreadAction">ThreadAction</a><span class="meta">+</span> <span class="sel">traces</span>::<a class="nt" href="#Trace">Trace</a><span class="meta">+</span> <span class="sel">times</span>::<a class="nt" href="#Times">Times</a> <span class="sel">methods</span>::<a class="nt" href="#Method">Method</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Method">Method</a>:
-        <span class="sel">fullyQualifiedName</span>::<span class="meta">any</span> <span class="sel">stackTraceElements</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">fullyQualifiedName</span>::<a class="nt" href="#String">String</a> <span class="sel">stackTraceElements</span>::<a class="nt" href="#StackTraceElement">StackTraceElement</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="ThreadAction">ThreadAction</a>:
-        ε
+        <a class="nt" href="#ThreadStart">ThreadStart</a>
+</pre><pre><a class="nt" name="ThreadAction">ThreadAction</a>:
+        <a class="nt" href="#ThreadEnd">ThreadEnd</a>
 </pre><pre><a class="nt" name="ThreadStart">ThreadStart</a>:
-        <span class="sel">obj</span>::<span class="meta">any</span> <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">group</span>::<span class="meta">any</span>
+        <span class="sel">obj</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">group</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="ThreadEnd">ThreadEnd</a>:
-        <span class="sel">id</span>::<span class="meta">any</span>
+        <span class="sel">id</span>::<a class="nt" href="#Integer">Integer</a>
 </pre><pre><a class="nt" name="Trace">Trace</a>:
-        <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">threadId</span>::<span class="meta">any</span> <span class="sel">elements</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">times</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">id</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">threadId</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">elements</span>::<a class="nt" href="#StackTraceElement">StackTraceElement</a><span class="meta">+</span> <span class="sel">times</span>::<a class="nt" href="#Time">Time</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="StackTraceElement">StackTraceElement</a>:
-        <span class="sel">method</span>::<span class="meta">any</span> <span class="sel">fileName</span>::<span class="meta">any</span> <span class="sel">line</span>::<span class="meta">any</span> <span class="sel">trace</span>::<span class="meta">any</span>
+        <span class="sel">method</span>::<a class="nt" href="#Method">Method</a> <span class="sel">fileName</span>::<a class="nt" href="#String">String</a> <span class="sel">line</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">trace</span>::<a class="nt" href="#Trace">Trace</a>
 </pre><pre><a class="nt" name="Times">Times</a>:
-        <span class="sel">unit</span>::<span class="meta">any</span> <span class="sel">total</span>::<span class="meta">any</span> <span class="sel">date</span>::<span class="meta">any</span> <span class="sel">elements</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">unit</span>::<a class="nt" href="#String">String</a> <span class="sel">total</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">date</span>::<a class="nt" href="#Date">Date</a> <span class="sel">elements</span>::<a class="nt" href="#Time">Time</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Time">Time</a>:
-        <span class="sel">rank</span>::<span class="meta">any</span> <span class="sel">self</span>::<span class="meta">any</span> <span class="sel">accum</span>::<span class="meta">any</span> <span class="sel">count</span>::<span class="meta">any</span> <span class="sel">trace</span>::<span class="meta">any</span> <span class="sel">method</span>::<span class="meta">any</span>
+        <span class="sel">rank</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">self</span>::<a class="nt" href="#Double">Double</a> <span class="sel">accum</span>::<a class="nt" href="#Double">Double</a> <span class="sel">count</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">trace</span>::<a class="nt" href="#Trace">Trace</a> <span class="sel">method</span>::<a class="nt" href="#Method">Method</a>
 </pre><pre><a class="nt" name="Date">Date</a>:
-        <span class="sel">day</span>::<span class="meta">any</span> <span class="sel">month</span>::<span class="meta">any</span> <span class="sel">dayOfMonth</span>::<span class="meta">any</span> <span class="sel">hour</span>::<span class="meta">any</span> <span class="sel">minutes</span>::<span class="meta">any</span> <span class="sel">seconds</span>::<span class="meta">any</span> <span class="sel">year</span>::<span class="meta">any</span>
+        <span class="sel">day</span>::<a class="nt" href="#Day">Day</a> <span class="sel">month</span>::<a class="nt" href="#Month">Month</a> <span class="sel">dayOfMonth</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">hour</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">minutes</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">seconds</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">year</span>::<a class="nt" href="#Integer">Integer</a>
 </pre><pre><a class="nt" name="Day">Day</a>:
         <span class="sel">Monday</span>::ε
         <span class="sel">Tuesday</span>::ε
@@ -57,4 +73,4 @@
         <span class="sel">November</span>::ε
         <span class="sel">December</span>::ε
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

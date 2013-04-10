@@ -6,8 +6,8 @@ syntax StringProperty
         ()
  ;
 syntax StringType
-        = 
-        val: ANY
+        = StringProperty
+        | val: String
  ;
 syntax BreakType
         = bt_page: ()
@@ -31,39 +31,49 @@ syntax FldCharTypeProperty
  ;
 syntax WordDocument
         = 
-        ANY ignoreSubtree ANY ignoreElements ANY body
+        StringProperty ignoreSubtree StringProperty ignoreElements BodyElt body
  ;
 syntax BodyElt
         = 
-        ANY be_wordDocument ANY blockLevelElts+
+        WordDocument be_wordDocument BlockLevelElt blockLevelElts+
  ;
 syntax BlockLevelElt
         = 
-        ()
+        BlockLevelChunkElt
  ;
 syntax BlockLevelChunkElt
         = 
-        ()
+        ParaElt
  ;
 syntax ParaElt
         = 
-        ANY pContentElts+
+        ParaContentElt pContentElts+
  ;
 syntax ParaContentElt
         = 
-        ()
+        RunElt
  ;
 syntax RunElt
         = 
-        ANY rContentElts+
+        RunContentElt rContentElts+
  ;
 syntax RunContentElt
-        = 
-        ()
+        = BreakElt
+        | NoBreakHyphen
+        | SoftHyphen
+        | AnnotationRef
+        | FootnoteRef
+        | EndnoteRef
+        | Separator
+        | ContinuationSeparator
+        | PgNum
+        | Cr
+        | Picture
+        | Tab
  ;
 syntax BreakElt
         = 
-        type: ANY
+        type: BreakType
  ;
 syntax Text
         = 
@@ -83,39 +93,39 @@ syntax DelInstrText
  ;
 syntax NoBreakHyphen
         = 
-        ANY rce_rElt
+        rce_rElt: RunElt
  ;
 syntax SoftHyphen
         = 
-        ANY rce_rElt
+        rce_rElt: RunElt
  ;
 syntax AnnotationRef
         = 
-        ANY rce_rElt
+        rce_rElt: RunElt
  ;
 syntax FootnoteRef
         = 
-        ANY rce_rElt
+        rce_rElt: RunElt
  ;
 syntax EndnoteRef
         = 
-        ANY rce_rElt
+        rce_rElt: RunElt
  ;
 syntax Separator
         = 
-        ANY rce_rElt
+        rce_rElt: RunElt
  ;
 syntax ContinuationSeparator
         = 
-        ANY rce_rElt
+        rce_rElt: RunElt
  ;
 syntax PgNum
         = 
-        ANY rce_rElt
+        rce_rElt: RunElt
  ;
 syntax Cr
         = 
-        ANY rce_rElt
+        rce_rElt: RunElt
  ;
 syntax Footnote
         = 
@@ -125,13 +135,9 @@ syntax Endnote
         = 
         ()
  ;
-syntax NoteElt
-        = 
-        ()
- ;
 syntax Picture
         = 
-        ANY rce_rElt
+        rce_rElt: RunElt
  ;
 syntax Symbol
         = 
@@ -139,11 +145,11 @@ syntax Symbol
  ;
 syntax SymElt
         = 
-        ANY font ANY char
+        StringType font StringType char
  ;
 syntax Tab
         = 
-        ANY rce_rElt
+        rce_rElt: RunElt
  ;
 syntax FldChar
         = 
@@ -151,5 +157,5 @@ syntax FldChar
  ;
 syntax FldCharElt
         = 
-        ANY fldData ANY fldCharType ANY fldLock
+        StringType fldData FldCharTypeProperty fldCharType OnOffType fldLock
  ;

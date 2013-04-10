@@ -3,13 +3,13 @@ module WTIP_SimpleRDBMS
 
 syntax Table
         = 
-        ANY name ANY fkeys+ ANY pkey+ ANY cols+
+        String name FKey fkeys+ Column pkey+ Column cols+
  ;
 syntax Column
         = 
-        ANY name ANY type
+        String name String type
  ;
 syntax FKey
         = 
-        ANY references ANY cols+
+        Table references Column cols+
  ;

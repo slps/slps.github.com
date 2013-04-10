@@ -7,15 +7,15 @@ syntax ModelKind
  ;
 syntax RootMeasureSet
         = 
-        ANY modelType ANY categories+ ANY measureSets+
+        ModelKind modelType Category categories+ MeasureSet measureSets+
  ;
 syntax Category
         = 
-        ANY name ANY desc ANY metrics+ ANY root
+        String name String desc Metric metrics+ RootMeasureSet root
  ;
 syntax Metric
         = 
-        ANY name ANY desc ANY preferredValue ANY category
+        String name String desc String preferredValue Category category
  ;
 syntax ElementKind
         = metamodel: ()
@@ -26,21 +26,22 @@ syntax ElementKind
  ;
 syntax MeasureSet
         = 
-        ANY elementName ANY elementType ANY measures+ ANY root ANY subsets+ ANY parent
+        String elementName ElementKind elementType Measure measures+ RootMeasureSet root MeasureSet subsets+ MeasureSet parent
  ;
 syntax Measure
-        = 
-        ()
+        = IntegerMeasure
+        | DoubleMeasure
+        | PercentageMeasure
  ;
 syntax IntegerMeasure
         = 
-        value: ANY
+        value: Integer
  ;
 syntax DoubleMeasure
         = 
-        value: ANY
+        value: Double
  ;
 syntax PercentageMeasure
         = 
-        value: ANY
+        value: Double
  ;

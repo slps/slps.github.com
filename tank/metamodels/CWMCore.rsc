@@ -8,43 +8,48 @@ syntax VisibilityKind
  ;
 syntax BooleanExpression
         = 
-        expresssion: ANY
+        expresssion: String
  ;
 syntax ModelElement
-        = 
-        ANY name ANY visibility ANY contraints+ ANY clientDependencies+ ANY supplierDependencies+ ANY namespace ANY importers+
+        = Dependency
+        | Constraint
+        | Feature
+        | NameSpace
+        | String name VisibilityKind visibility Constraint contraints+ Dependency clientDependencies+ Dependency supplierDependencies+ NameSpace namespace Package importers+
  ;
 syntax Dependency
         = 
-        ANY kind ANY clients+ ANY suppliers+
+        String kind ModelElement clients+ ModelElement suppliers+
  ;
 syntax Constraint
         = 
-        ANY body ANY constrainedElements+
+        BooleanExpression body ModelElement constrainedElements+
  ;
 syntax Feature
-        = 
-        owner: ANY
+        = StructuralFeature
+        | owner: Classifier
  ;
 syntax StructuralFeature
-        = 
-        type: ANY
+        = Attribute
+        | type: Classifier
  ;
 syntax Attribute
         = 
         ()
  ;
 syntax NameSpace
-        = 
-        ANY ownedElements+
+        = Classifier
+        | Package
+        | ModelElement ownedElements+
  ;
 syntax Classifier
-        = 
-        ANY features+
+        = Class
+        | Datatype
+        | Feature features+
  ;
 syntax Package
-        = 
-        ANY importedElements+
+        = Model
+        | ModelElement importedElements+
  ;
 syntax Class
         = 

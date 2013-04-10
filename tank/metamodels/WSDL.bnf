@@ -1,28 +1,40 @@
 Port:
-        name::ANY service::ANY binding::ANY
+        name::String service::Service binding::Binding
 Service:
-        name::ANY ports::ANY+
+        name::String ports::Port+
 Param:
-        name::ANY message::ANY
+        Input
+Param:
+        Output
+Param:
+        name::String message::Message
 Input:
-        operation::ANY
+        operation::Operation
 Output:
-        operation::ANY
+        operation::Operation
 PortType:
-        name::ANY operations::ANY+ bindings::ANY+
+        name::String operations::Operation+ bindings::Binding+
 Operation:
-        name::ANY input::ANY output::ANY type::ANY faults::ANY+
+        name::String input::Input output::Output type::PortType faults::Fault+
 StartWithExtensions:
-        EPSILON
+        Binding
+StartWithExtensions:
+        BindingFault
+StartWithExtensions:
+        BindingOperation
+StartWithExtensions:
+        Binding
+        BindingFault
+        BindingOperation
 Binding:
-        name::ANY ports::ANY+ type::ANY operations::ANY+
+        name::String ports::Port+ type::PortType operations::BindingOperation+
 BindingFault:
-        operation::ANY binding::ANY
+        operation::BindingOperation binding::Fault
 BindingOperation:
-        name::ANY bind::ANY binding::ANY input::ANY output::ANY faults::ANY+
+        name::String bind::Binding binding::Operation input::StartWithExtensions output::StartWithExtensions faults::BindingFault+
 Fault:
-        name::ANY operation::ANY message::ANY
+        name::String operation::Operation message::Message
 Message:
-        name::ANY params::ANY+ faults::ANY+ parts::ANY+
+        name::String params::Param+ faults::Fault+ parts::Part+
 Part:
-        name::ANY message::ANY
+        name::String message::Message

@@ -3,27 +3,34 @@ module EQN
 
 syntax RoutingChain
         = 
-        ANY queuingNetwork+
+        QueuingNetwork queuingNetwork+
  ;
 syntax QueuingNetwork
         = 
-        ANY center+ ANY workLoad
+        Center center+ RoutingChain workLoad
  ;
 syntax ExecutionGraph
         = 
-        ANY nodeNested ANY node+
+        Node nodeNested Node node+
  ;
 syntax Center
-        = 
-        ANY node ANY queuingNetwork
+        = Special
+        | ActiveCenter
+        | PassiveCenter
+        | Node node QueuingNetwork queuingNetwork
  ;
 syntax Node
         = 
-        ANY nested ANY executionGraph ANY demand+
+        ExecutionGraph nested ExecutionGraph executionGraph Center demand+
  ;
 syntax Special
-        = 
-        ()
+        = Source
+        | Sink
+        | Fork
+        | Join
+        | Split
+        | Allocate
+        | Release
  ;
 syntax ActiveCenter
         = 

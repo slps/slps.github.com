@@ -1,157 +1,491 @@
 Actuality:
-        EPSILON
+        Representation
+Actuality:
+        Representation
 StateOfAffairs:
-        EPSILON
+        Actuality
+StateOfAffairs:
+        Actuality
 Thing:
-        name::ANY+
+        StateOfAffairs
+Thing:
+        Meaning
+Thing:
+        BindableTarget
+Thing:
+        SemanticFormulation
+Thing:
+        Namespace
+Thing:
+        RoleBinding
+Thing:
+        ReferenceScheme
+Thing:
+        Set
+Thing:
+        BodyOfSharedConcepts
+Thing:
+        BodyOfSharedGuidance
+Thing:
+        CategorizationScheme
+Thing:
+        Community
+Thing:
+        ConceptualSchema
+Thing:
+        FactModel
+Thing:
+        Language
+Thing:
+        LevelOfEnforcement
+Thing:
+        Res
+Thing:
+        Situation
+Thing:
+        SubjectField
+Thing:
+        TerminologicalDictionary
+Thing:
+        Viewpoint
+Thing:
+        name::Name+
 Name:
         EPSILON
 Designation:
-        implicitlyIsUnderstood::ANY signifier::ANY
+        Name
+Designation:
+        Placeholder
+Designation:
+        FactSymbol
+Designation:
+        FactTypeRoleDesignation
+Designation:
+        NonverbalDesignation
+Designation:
+        PreferredDesignation
+Designation:
+        ProhibitedDesignation
+Designation:
+        Term
+Designation:
+        implicitlyIsUnderstood::Boolean signifier::Expression
 Representation:
-        meaning::ANY expression::ANY
+        Designation
+Representation:
+        Definition
+Representation:
+        Statement
+Representation:
+        FactTypeForm
+Representation:
+        CommunicationContent
+Representation:
+        Description
+Representation:
+        DescriptiveExample
+Representation:
+        FormalRepresentation
+Representation:
+        InformalRepresentation
+Representation:
+        Note
+Representation:
+        Reference
+Representation:
+        meaning::Meaning expression::Expression
 Meaning:
-        representation::ANY+
+        Proposition
+Meaning:
+        Concept
+Meaning:
+        Question
+Meaning:
+        representation::Representation+
 Expression:
-        EPSILON
+        Text
+Expression:
+        Text
 BindableTarget:
-        EPSILON
+        Expression
+BindableTarget:
+        Variable
+BindableTarget:
+        Expression
+        Variable
 AdoptedDefinition:
         EPSILON
 Definition:
-        EPSILON
+        AdoptedDefinition
+Definition:
+        IntensionalDefinition
+Definition:
+        ExtensionalDefinition
+Definition:
+        OwnedDefinition
+Definition:
+        AdoptedDefinition
+        IntensionalDefinition
+        ExtensionalDefinition
+        OwnedDefinition
 Advice:
-        EPSILON
+        AdviceOfPossibility
+Advice:
+        AdviceOfPermission
+Advice:
+        AdviceOfPossibility
+        AdviceOfPermission
 ElementOfGuidance:
-        isPracticable::ANY
+        Advice
+ElementOfGuidance:
+        ElementOfGovernance
+ElementOfGuidance:
+        isPracticable::Boolean
 Proposition:
-        isFalse::ANY isTrue::ANY statement::ANY+ isPossiblyTrue::ANY isObligatedToBeTrue::ANY isPermittedToBeTrue::ANY isNecessarilyTrue::ANY
+        ElementOfGuidance
+Proposition:
+        Rule
+Proposition:
+        Fact
+Proposition:
+        isFalse::Boolean isTrue::Boolean statement::Statement+ isPossiblyTrue::Boolean isObligatedToBeTrue::Boolean isPermittedToBeTrue::Boolean isNecessarilyTrue::Boolean
 Statement:
-        EPSILON
+        GuidanceStatement
+Statement:
+        GuidanceStatement
 AdviceOfContingency:
         EPSILON
 AdviceOfPossibility:
-        EPSILON
+        AdviceOfContingency
+AdviceOfPossibility:
+        AdviceOfContingency
 AdviceOfOptionality:
         EPSILON
 AdviceOfPermission:
-        EPSILON
+        AdviceOfOptionality
+AdviceOfPermission:
+        AdviceOfOptionality
 AdviceStatement:
-        EPSILON
+        StatementOfAdviceOfPossibility
+AdviceStatement:
+        StatementOfAdviceOfPermission
+AdviceStatement:
+        StatementOfAdviceOfPossibility
+        StatementOfAdviceOfPermission
 GuidanceStatement:
-        EPSILON
+        AdviceStatement
+GuidanceStatement:
+        BusinessPolicyStatement
+GuidanceStatement:
+        RuleStatement
+GuidanceStatement:
+        AdviceStatement
+        BusinessPolicyStatement
+        RuleStatement
 AggregationFormulation:
         EPSILON
 ProjectingFormulation:
-        projection::ANY
+        AggregationFormulation
+ProjectingFormulation:
+        AnswerNominalization
+ProjectingFormulation:
+        FactTypeNominalization
+ProjectingFormulation:
+        NounConceptNominalization
+ProjectingFormulation:
+        QuestionNominalization
+ProjectingFormulation:
+        projection::Projection
 LogicalFormulation:
-        EPSILON
+        ProjectingFormulation
+LogicalFormulation:
+        Quantification
+LogicalFormulation:
+        AtomicFormulation
+LogicalFormulation:
+        LogicalOperation
+LogicalFormulation:
+        InstantiationFormulation
+LogicalFormulation:
+        ModalFormulation
+LogicalFormulation:
+        Objectification
+LogicalFormulation:
+        PropositionNominalization
+LogicalFormulation:
+        ProjectingFormulation
+        Quantification
+        AtomicFormulation
+        LogicalOperation
+        InstantiationFormulation
+        ModalFormulation
+        Objectification
+        PropositionNominalization
 SemanticFormulation:
-        EPSILON
+        LogicalFormulation
+SemanticFormulation:
+        Projection
+SemanticFormulation:
+        ClosedSemanticFormulation
+SemanticFormulation:
+        LogicalFormulation
+        Projection
+        ClosedSemanticFormulation
 Projection:
-        constrainingFormulation::ANY projectionVariable::ANY+ auxiliaryVariable::ANY+
+        BagProjection
+Projection:
+        ClosedProjection
+Projection:
+        SetProjection
+Projection:
+        constrainingFormulation::LogicalFormulation projectionVariable::Variable+ auxiliaryVariable::AuxiliaryVariable+
 Variable:
-        restrictingFormulation::ANY projectionPosition::ANY rangedoverConcept::ANY isUnitary::ANY
+        AuxiliaryVariable
+Variable:
+        restrictingFormulation::LogicalFormulation projectionPosition::PositiveInteger rangedoverConcept::Concept isUnitary::Boolean
 PositiveInteger:
         EPSILON
 NonnegativeInteger:
-        EPSILON
+        PositiveInteger
+NonnegativeInteger:
+        PositiveInteger
 Integer:
-        value::ANY
+        NonnegativeInteger
+Integer:
+        value::integer
 Number:
-        EPSILON
+        Integer
+Number:
+        Integer
 Quantity:
-        EPSILON
+        Number
+Quantity:
+        Number
 NounConcept:
-        EPSILON
+        Quantity
+NounConcept:
+        Role
+NounConcept:
+        ContextualizedConcept
+NounConcept:
+        Quantity
+        Role
+        ContextualizedConcept
 Concept:
-        attributiveNamespace::ANY+ definition::ANY+ moreGeneralConcept::ANY+ category::ANY+ essentialCharacteristic::ANY+ instance::ANY+ referenceScheme::ANY+ impliedCharacteristic::ANY+ necessaryCharacteristic::ANY+ designation::ANY+ extension::ANY
+        NounConcept
+Concept:
+        FactType
+Concept:
+        CategorizationType
+Concept:
+        ObjectType
+Concept:
+        ConceptOfThingAsComposite
+Concept:
+        ConceptOfThingAsContinuant
+Concept:
+        ConceptOfThingAsDeveloped
+Concept:
+        ConceptOfThingAsOccurrent
+Concept:
+        ConceptOfThingAsPrimitive
+Concept:
+        ConceptOfThingAsUnitary
+Concept:
+        ConceptOfThingExistingDependently
+Concept:
+        ConceptOfThingExistingIndependently
+Concept:
+        DerivableConcept
+Concept:
+        attributiveNamespace::AttributiveNamespace+ definition::Definition+ moreGeneralConcept::Concept+ category::Concept+ essentialCharacteristic::Characteristic+ instance::Thing+ referenceScheme::ReferenceScheme+ impliedCharacteristic::Characteristic+ necessaryCharacteristic::Characteristic+ designation::Designation+ extension::Set
 AttributiveNamespace:
         EPSILON
 Namespace:
-        uri::ANY+
+        AttributiveNamespace
+Namespace:
+        VocabularyNamespace
+Namespace:
+        uri::Uri+
 Uri:
         EPSILON
 Text:
-        value::ANY
+        Uri
+Text:
+        value::String
 Characteristic:
         EPSILON
 FactType:
-        factTypeForm::ANY+ role::ANY+
+        Characteristic
+FactType:
+        AssociativeFactType
+FactType:
+        AssortmentFactType
+FactType:
+        BinaryFactType
+FactType:
+        SpecializationFactType
+FactType:
+        IsroleofFactType
+FactType:
+        factTypeForm::FactTypeForm+ role::FactTypeRole+
 FactTypeForm:
-        placeholder::ANY+
+        NounForm
+FactTypeForm:
+        SententialForm
+FactTypeForm:
+        placeholder::Placeholder+
 Placeholder:
-        startingCharacterPosition::ANY
+        startingCharacterPosition::PositiveInteger
 FactTypeRole:
-        roleBinding::ANY+
+        roleBinding::RoleBinding+
 Role:
-        EPSILON
+        FactTypeRole
+Role:
+        FactTypeRole
 RoleBinding:
         EPSILON
 ReferenceScheme:
-        simplyUsedRole::ANY+ identifyingCharacteristic::ANY+ extensionallyUsedRole::ANY+
+        simplyUsedRole::FactTypeRole+ identifyingCharacteristic::Characteristic+ extensionallyUsedRole::FactTypeRole+
 Set:
-        cardinality::ANY element::ANY+
+        BodyOfSharedMeanings
+Set:
+        Vocabulary
+Set:
+        Rulebook
+Set:
+        cardinality::NonnegativeInteger element::Thing+
 AuxiliaryVariable:
         EPSILON
 AnswerNominalization:
         EPSILON
 AssociativeFactType:
-        EPSILON
+        IspropertyofFactType
+AssociativeFactType:
+        IspropertyofFactType
 AssortmentFactType:
         EPSILON
 AtleastnQuantification:
-        minimumCardinality::ANY
+        ExistentialQuantification
+AtleastnQuantification:
+        minimumCardinality::NonnegativeInteger
 Quantification:
-        scopeFormulation::ANY
+        AtleastnQuantification
+Quantification:
+        AtmostnQuantification
+Quantification:
+        ExactlynQuantification
+Quantification:
+        NumericRangeQuantification
+Quantification:
+        UniversalQuantification
+Quantification:
+        scopeFormulation::LogicalFormulation
 AtmostnQuantification:
-        maximumCardinality::ANY
+        AtmostoneQuantification
+AtmostnQuantification:
+        maximumCardinality::NonnegativeInteger
 AtmostoneQuantification:
         EPSILON
 AtomicFormulation:
-        roleBinding::ANY+
+        roleBinding::RoleBinding+
 BagProjection:
         EPSILON
 BinaryFactType:
-        EPSILON
+        PartitiveFactType
+BinaryFactType:
+        PartitiveFactType
 BinaryLogicalOperation:
-        logicalOperand2::ANY+ logicalOperand1::ANY+
+        Conjunction
+BinaryLogicalOperation:
+        Disjunction
+BinaryLogicalOperation:
+        Equivalence
+BinaryLogicalOperation:
+        ExclusiveDisjunction
+BinaryLogicalOperation:
+        Implication
+BinaryLogicalOperation:
+        NandFormulation
+BinaryLogicalOperation:
+        NorFormulation
+BinaryLogicalOperation:
+        WhetherornotFormulation
+BinaryLogicalOperation:
+        logicalOperand2::LogicalFormulation+ logicalOperand1::LogicalFormulation+
 LogicalOperation:
-        logicalOperand::ANY
+        BinaryLogicalOperation
+LogicalOperation:
+        LogicalNegation
+LogicalOperation:
+        logicalOperand::LogicalFormulation
 BodyOfSharedConcepts:
         EPSILON
 BodyOfSharedGuidance:
         EPSILON
 BodyOfSharedMeanings:
-        elementaryFactType::ANY+
+        elementaryFactType::FactType+
 BusinessPolicy:
         EPSILON
 ElementOfGovernance:
-        isDirectlyEnforceable::ANY
+        BusinessPolicy
+ElementOfGovernance:
+        isDirectlyEnforceable::Boolean
 BusinessPolicyStatement:
         EPSILON
 BusinessRule:
         EPSILON
 Rule:
-        EPSILON
+        StructuralRule
+Rule:
+        StructuralRule
 BusinessVocabulary:
         EPSILON
 Vocabulary:
-        EPSILON
+        BusinessVocabulary
+Vocabulary:
+        BusinessVocabulary
 CategorizationFactType:
         EPSILON
 SpecializationFactType:
-        EPSILON
+        CategorizationFactType
+SpecializationFactType:
+        ContextualizationFactType
+SpecializationFactType:
+        CategorizationFactType
+        ContextualizationFactType
 CategorizationScheme:
-        EPSILON
+        Segmentation
+CategorizationScheme:
+        ExplicitnessOfRepresentation
+CategorizationScheme:
+        FactTypeTemplating
+CategorizationScheme:
+        KindOfGuidanceStatement
+CategorizationScheme:
+        RealworldNumericalCorrespondence
+CategorizationScheme:
+        Segmentation
+        ExplicitnessOfRepresentation
+        FactTypeTemplating
+        KindOfGuidanceStatement
+        RealworldNumericalCorrespondence
 CategorizationType:
         EPSILON
 CharacteristicType:
         EPSILON
 ConceptType:
-        EPSILON
+        CharacteristicType
+ConceptType:
+        CharacteristicType
 ObjectType:
-        categorizationScheme::ANY+ categorizationType::ANY+
+        ConceptType
+ObjectType:
+        FundamentalConcept
+ObjectType:
+        LogicalFormulationKind
+ObjectType:
+        categorizationScheme::CategorizationScheme+ categorizationType::CategorizationType+
 ClosedLogicalFormulation:
         EPSILON
 ClosedSemanticFormulation:
@@ -161,7 +495,11 @@ ClosedProjection:
 CommunicationContent:
         EPSILON
 Community:
-        uri::ANY+ subcommunity::ANY+
+        SemanticCommunity
+Community:
+        SpeechCommunity
+Community:
+        uri::Uri+ subcommunity::Community+
 ConceptOfThingAsComposite:
         EPSILON
 ConceptOfThingAsContinuant:
@@ -185,19 +523,41 @@ Conjunction:
 ContextOfThing:
         EPSILON
 Segmentation:
-        EPSILON
+        ContextOfThing
+Segmentation:
+        RepresentationFormality
+Segmentation:
+        ThingInContext
+Segmentation:
+        ContextOfThing
+        RepresentationFormality
+        ThingInContext
 ContextualizationFactType:
-        EPSILON
+        IsfacetofFactType
+ContextualizationFactType:
+        IsfacetofFactType
 ContextualizedConcept:
-        EPSILON
+        Facet
+ContextualizedConcept:
+        Facet
 ContingencyStatement:
         EPSILON
 StatementOfAdviceOfPossibility:
-        EPSILON
+        ContingencyStatement
+StatementOfAdviceOfPossibility:
+        NonnecessityStatement
+StatementOfAdviceOfPossibility:
+        PossibilityStatement
+StatementOfAdviceOfPossibility:
+        ContingencyStatement
+        NonnecessityStatement
+        PossibilityStatement
 DefiniteDescription:
         EPSILON
 IntensionalDefinition:
-        EPSILON
+        DefiniteDescription
+IntensionalDefinition:
+        DefiniteDescription
 DerivableConcept:
         EPSILON
 Description:
@@ -209,7 +569,9 @@ Disjunction:
 Equivalence:
         EPSILON
 ExactlynQuantification:
-        cardinality::ANY
+        ExactlyoneQuantification
+ExactlynQuantification:
+        cardinality::NonnegativeInteger
 ExactlyoneQuantification:
         EPSILON
 ExclusiveDisjunction:
@@ -229,7 +591,7 @@ FactModel:
 FactSymbol:
         EPSILON
 FactTypeHasFactInFactModel:
-        factType::ANY fact::ANY factModel::ANY
+        factType::FactType fact::Fact factModel::FactModel
 FactTypeNominalization:
         EPSILON
 FactTypeRoleDesignation:
@@ -243,15 +605,30 @@ FundamentalConcept:
 Icon:
         EPSILON
 NonverbalDesignation:
-        EPSILON
+        Icon
+NonverbalDesignation:
+        Icon
 Implication:
-        consequent::ANY+ antecedent::ANY+
+        consequent::LogicalFormulation+ antecedent::LogicalFormulation+
 ImpossibilityStatement:
         EPSILON
 StructuralRuleStatement:
-        EPSILON
+        ImpossibilityStatement
+StructuralRuleStatement:
+        NecessityStatement
+StructuralRuleStatement:
+        RestrictedPossibilityStatement
+StructuralRuleStatement:
+        ImpossibilityStatement
+        NecessityStatement
+        RestrictedPossibilityStatement
 RuleStatement:
-        EPSILON
+        StructuralRuleStatement
+RuleStatement:
+        OperativeBusinessRuleStatement
+RuleStatement:
+        StructuralRuleStatement
+        OperativeBusinessRuleStatement
 IndividualConcept:
         EPSILON
 InformalRepresentation:
@@ -275,7 +652,18 @@ LogicalFormulationKind:
 LogicalNegation:
         EPSILON
 ModalFormulation:
-        EPSILON
+        NecessityFormulation
+ModalFormulation:
+        ObligationFormulation
+ModalFormulation:
+        PermissibilityFormulation
+ModalFormulation:
+        PossibilityFormulation
+ModalFormulation:
+        NecessityFormulation
+        ObligationFormulation
+        PermissibilityFormulation
+        PossibilityFormulation
 NandFormulation:
         EPSILON
 NecessityFormulation:
@@ -287,7 +675,15 @@ NonnecessityStatement:
 NonobligationStatement:
         EPSILON
 StatementOfAdviceOfPermission:
-        EPSILON
+        NonobligationStatement
+StatementOfAdviceOfPermission:
+        OptionalityStatement
+StatementOfAdviceOfPermission:
+        PermissionStatement
+StatementOfAdviceOfPermission:
+        NonobligationStatement
+        OptionalityStatement
+        PermissionStatement
 NorFormulation:
         EPSILON
 Note:
@@ -297,7 +693,7 @@ NounConceptNominalization:
 NounForm:
         EPSILON
 NumericRangeQuantification:
-        maximumCardinality::ANY minimumCardinality::ANY
+        maximumCardinality::NonnegativeInteger minimumCardinality::NonnegativeInteger
 Objectification:
         EPSILON
 ObligationFormulation:
@@ -305,9 +701,17 @@ ObligationFormulation:
 ObligationStatement:
         EPSILON
 OperativeBusinessRuleStatement:
-        EPSILON
+        ObligationStatement
+OperativeBusinessRuleStatement:
+        ProhibitionStatement
+OperativeBusinessRuleStatement:
+        RestrictedPermissionStatement
+OperativeBusinessRuleStatement:
+        ObligationStatement
+        ProhibitionStatement
+        RestrictedPermissionStatement
 OperativeBusinessRule:
-        levelOfEnforcement::ANY+
+        levelOfEnforcement::LevelOfEnforcement+
 OptionalityStatement:
         EPSILON
 OwnedDefinition:
@@ -349,7 +753,7 @@ RestrictedPossibilityStatement:
 Rulebook:
         EPSILON
 SemanticCommunity:
-        speechCommunity::ANY+
+        speechCommunity::SpeechCommunity+
 SpeechCommunity:
         EPSILON
 SententialForm:
@@ -361,9 +765,9 @@ Situation:
 SituationalRole:
         EPSILON
 SpeechCommunityAdoptsAdoptedDefinitionCitingReference:
-        speechCommunity::ANY adoptedDefinition::ANY reference::ANY
+        speechCommunity::SpeechCommunity adoptedDefinition::AdoptedDefinition reference::Reference
 StateOfAffairsInvolvesThingInRole:
-        stateOfAffairs::ANY thing::ANY role::ANY
+        stateOfAffairs::StateOfAffairs thing::Thing role::Role
 StructuralBusinessRule:
         EPSILON
 StructuralRule:
@@ -373,7 +777,7 @@ SubjectField:
 Term:
         EPSILON
 TerminologicalDictionary:
-        uri::ANY+
+        uri::Uri+
 ThingInContext:
         EPSILON
 UniversalQuantification:
@@ -383,4 +787,4 @@ Viewpoint:
 VocabularyNamespace:
         EPSILON
 WhetherornotFormulation:
-        inconsequent::ANY+ consequent::ANY+
+        inconsequent::LogicalFormulation+ consequent::LogicalFormulation+

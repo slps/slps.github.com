@@ -1,28 +1,48 @@
 Element:
-        EPSILON
+        Program
+Element:
+        Process
+Element:
+        State
+Element:
+        Guard
+Element:
+        Action
+Element:
+        Network
+Element:
+        Channel
+Element:
+        Message
+Element:
+        Variable
 Program:
-        processes::ANY+ networks::ANY+
+        processes::Process+ networks::Network+
 Process:
-        minId::ANY maxId::ANY instancesNb::ANY states::ANY+ transitions::ANY+ initial::ANY variables::ANY+ connectedTo::ANY+
+        minId::Integer maxId::Integer instancesNb::Integer states::State+ transitions::Transition+ initial::Action variables::Variable+ connectedTo::Network+
 State:
-        isInitial::ANY incoming::ANY+ outgoing::ANY+
+        isInitial::Boolean incoming::Transition+ outgoing::Transition+
 Transition:
-        EPSILON
+        Trans
+Transition:
+        Strans
+Transition:
+        Transall
 Trans:
-        waitFor::ANY
+        waitFor::Message
 Strans:
-        guard::ANY action::ANY source::ANY target::ANY
+        guard::Guard action::Action source::State target::State
 Transall:
-        waitFor::ANY
+        waitFor::Message
 Guard:
-        name::ANY
+        name::String
 Action:
-        name::ANY
+        name::String
 Network:
-        channels::ANY+
+        channels::Channel+
 Channel:
-        messages::ANY+ source::ANY target::ANY
+        messages::Message+ source::Process target::Process
 Message:
-        name::ANY
+        name::String
 Variable:
-        type::ANY initValue::ANY
+        type::String initValue::String

@@ -6,32 +6,76 @@ syntax AST
         root: ANY
  ;
 syntax ASTNode
-        = 
-        ()
+        = AnonymousClassDeclaration
+        | BodyDeclaration
+        | CatchClause
+        | Comment
+        | CompilationUnit
+        | Expression
+        | ImportDeclaration
+        | MemberRef
+        | MemberValuePair
+        | MethodRef
+        | MethodRefParameter
+        | PackageDeclaration
+        | Statement
+        | TagElement
+        | TextElement
+        | Type
+        | TypeParameter
+        | VariableDeclaration
  ;
 syntax AnonymousClassDeclaration
         = 
         ANY bodyDeclarations+
  ;
 syntax BodyDeclaration
-        = 
-        ()
+        = AbstractTypeDeclaration
+        | AnnotationTypeMemberDeclaration
+        | EnumConstantDeclaration
+        | FieldDeclaration
+        | Initializer
+        | MethodDeclaration
  ;
 syntax CatchClause
         = 
         ANY body ANY exception
  ;
 syntax Comment
-        = 
-        ()
+        = BlockComment
+        | Javadoc
+        | LineComment
  ;
 syntax CompilationUnit
         = 
         ANY comments+ ANY package ANY imports+ ANY types+
  ;
 syntax Expression
-        = 
-        ()
+        = ArrayAccess
+        | ArrayCreation
+        | ArrayInitializer
+        | Assignment
+        | BooleanLiteral
+        | CastExpression
+        | CharacterLiteral
+        | ClassInstanceCreation
+        | ConditionalExpression
+        | FieldAccess
+        | InfixExpression
+        | InstanceofExpression
+        | MethodInvocation
+        | Name
+        | NullLiteral
+        | NumberLiteral
+        | ParenthesizedExpression
+        | PostfixExpression
+        | PrefixExpression
+        | StringLiteral
+        | SuperFieldAccess
+        | SuperMethodInvocation
+        | ThisExpression
+        | TypeLiteral
+        | VariableDeclarationExpression
  ;
 syntax ImportDeclaration
         = 
@@ -53,10 +97,6 @@ syntax MethodRefParameter
         = 
         ANY name ANY type ANY varargs
  ;
-syntax ExtendedModifier
-        = 
-        ()
- ;
 syntax Modifier
         = 
         ANY abstract ANY final ANY native ANY none ANY private ANY protected ANY public ANY static ANY strictfp ANY synchronized ANY transient ANY volatile
@@ -66,8 +106,28 @@ syntax PackageDeclaration
         ANY annotations+ ANY javadoc ANY name
  ;
 syntax Statement
-        = 
-        ()
+        = AssertStatement
+        | Block
+        | BreakStatement
+        | ConstructorInvocation
+        | ContinueStatement
+        | DoStatement
+        | EmptyStatement
+        | EnhancedForStatement
+        | ExpressionStatement
+        | ForStatement
+        | IfStatement
+        | LabeledStatement
+        | ReturnStatement
+        | SuperConstructorInvocation
+        | SwitchCase
+        | SwitchStatement
+        | SynchronizedStatement
+        | ThrowStatement
+        | TryStatement
+        | TypeDeclarationStatement
+        | VariableDeclarationStatement
+        | WhileStatement
  ;
 syntax TagElement
         = 
@@ -78,20 +138,25 @@ syntax TextElement
         text: ANY
  ;
 syntax Type
-        = 
-        ()
+        = ArrayType
+        | ParameterizedType
+        | PrimitiveType
+        | QualifiedType
+        | SimpleType
+        | WildcardType
  ;
 syntax TypeParameter
         = 
         ANY name ANY typeBounds+
  ;
 syntax VariableDeclaration
-        = 
-        ()
+        = SingleVariableDeclaration
+        | VariableDeclarationFragment
  ;
 syntax AbstractTypeDeclaration
-        = 
-        ()
+        = AnnotationTypeDeclaration
+        | EnumDeclaration
+        | TypeDeclaration
  ;
 syntax AnnotationTypeMemberDeclaration
         = 
@@ -115,7 +180,7 @@ syntax MethodDeclaration
  ;
 syntax AnnotationTypeDeclaration
         = 
-        ()
+        ANY bodyDeclarations+ ANY name ANY localTypeDeclaration ANY memberTypeDeclaration ANY packageMemberTypeDeclaration
  ;
 syntax EnumDeclaration
         = 
@@ -127,7 +192,7 @@ syntax TypeDeclaration
  ;
 syntax BlockComment
         = 
-        ()
+        alternateRoot: ANY
  ;
 syntax Javadoc
         = 
@@ -135,11 +200,12 @@ syntax Javadoc
  ;
 syntax LineComment
         = 
-        ()
+        alternateRoot: ANY
  ;
 syntax Annotation
-        = 
-        ()
+        = MarkerAnnotation
+        | NormalAnnotation
+        | SingleMemberAnnotation
  ;
 syntax ArrayAccess
         = 
@@ -229,12 +295,12 @@ syntax MethodInvocation
         ANY arguments+ ANY expression ANY name ANY typeArguments+
  ;
 syntax Name
-        = 
-        ()
+        = QualifiedName
+        | SimpleName
  ;
 syntax NullLiteral
         = 
-        ()
+        ANY resolveBoxing ANY resolveUnboxing
  ;
 syntax NumberLiteral
         = 
@@ -406,7 +472,7 @@ syntax SingleVariableDeclaration
  ;
 syntax VariableDeclarationFragment
         = 
-        ()
+        ANY extraDimensions ANY initializer ANY name
  ;
 syntax QualifiedName
         = 
@@ -418,7 +484,7 @@ syntax SimpleName
  ;
 syntax MarkerAnnotation
         = 
-        ()
+        typeName: ANY
  ;
 syntax NormalAnnotation
         = 

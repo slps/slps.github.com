@@ -1,48 +1,66 @@
 MultyPartyCollaboration:
-        partners::ANY+
+        partners::BusinessPartnerRole+
 BusinessPartnerRole:
-        collaboration::ANY transition::ANY performers::ANY+
+        collaboration::MultyPartyCollaboration transition::Transaction performers::Performs+
 Performs:
-        performedBy::ANY collaboration::ANY role::ANY
+        performedBy::BusinessPartnerRole collaboration::BinaryCollaboration role::AuthorizedRole
 AuthorizedRole:
-        isInitiator::ANY performers::ANY+
+        isInitiator::Boolean performers::Performs+
 Transaction:
-        onInitiation::ANY conditionGuard::ANY conditionExpression::ANY from::ANY to::ANY
+        onInitiation::String conditionGuard::String conditionExpression::String from::BusinessState to::BusinessState
 BinaryCollaboration:
-        pattern::ANY timeToPerform::ANY preCondition::ANY postCondition::ANY beginsWhen::ANY endsWhen::ANY roles::ANY+ transitions::ANY+ states::ANY+
+        pattern::String timeToPerform::String preCondition::String postCondition::String beginsWhen::String endsWhen::String roles::Performs+ transitions::Transaction+ states::BusinessState+
 BusinessState:
-        EPSILON
+        Start
+BusinessState:
+        Fork
+BusinessState:
+        Join
+BusinessState:
+        CompletionState
+BusinessState:
+        BusinessActivity
 Start:
-        collaboration::ANY from::ANY to::ANY
+        collaboration::BinaryCollaboration from::AuthorizedRole to::AuthorizedRole
 Fork:
-        waitForAll::ANY
+        waitForAll::String
 Join:
-        collaboration::ANY from::ANY to::ANY
+        collaboration::BinaryCollaboration from::AuthorizedRole to::AuthorizedRole
 CompletionState:
-        guardCondition::ANY
+        Failure
+CompletionState:
+        Success
+CompletionState:
+        guardCondition::String
 Failure:
         EPSILON
 Success:
         EPSILON
 BusinessActivity:
-        EPSILON
+        BusinessTransactionActivity
+BusinessActivity:
+        CollaborationActivity
 BusinessTransactionActivity:
-        timeToPerform::ANY isConcurrent::ANY isLegallyBinding::ANY use::ANY
+        timeToPerform::String isConcurrent::Boolean isLegallyBinding::Boolean use::BusinessTransaction
 CollaborationActivity:
-        use::ANY
+        use::BinaryCollaboration
 BusinessTransaction:
-        pattern::ANY isGuaranteedDeliveryRequired::ANY preCondition::ANY postCondition::ANY beginsWhen::ANY endsWhen::ANY requester::ANY responder::ANY
+        pattern::String isGuaranteedDeliveryRequired::Boolean preCondition::String postCondition::String beginsWhen::String endsWhen::String requester::RequestingBusinessActivity responder::RespondingBusinessActivity
 BusinessAction:
-        EPSILON
+        RequestingBusinessActivity
+BusinessAction:
+        RespondingBusinessActivity
 RequestingBusinessActivity:
-        timeToAcknowledgeAcceptance::ANY transaction::ANY documentEnvelope::ANY
+        timeToAcknowledgeAcceptance::String transaction::BusinessTransaction documentEnvelope::DocumentEnvelope
 RespondingBusinessActivity:
-        transaction::ANY documentEnvelope::ANY
+        transaction::BusinessTransaction documentEnvelope::DocumentEnvelope
 DocumentSecurity:
-        EPSILON
+        DocumentEnvelope
+DocumentSecurity:
+        Attachment
 DocumentEnvelope:
-        isPositiveResponse::ANY requesting::ANY responding::ANY attachements::ANY+ document::ANY
+        isPositiveResponse::Boolean requesting::RequestingBusinessActivity responding::RespondingBusinessActivity attachements::Attachment+ document::BusinessDocument
 Attachment:
-        mimeType::ANY specification::ANY version::ANY envelope::ANY document::ANY
+        mimeType::String specification::String version::String envelope::DocumentEnvelope document::BusinessDocument
 BusinessDocument:
-        specificationLocation::ANY specificationElement::ANY conditionExpression::ANY envelopes::ANY+ attachments::ANY+
+        specificationLocation::String specificationElement::String conditionExpression::String envelopes::DocumentEnvelope+ attachments::Attachment+

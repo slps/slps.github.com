@@ -1,25 +1,35 @@
 LocatedElement:
-        EPSILON
+        IdedElement
+LocatedElement:
+        URI
+LocatedElement:
+        PNMLDocument
+LocatedElement:
+        NetContent
+LocatedElement:
+        LabeledElement
+LocatedElement:
+        Label
 IdedElement:
-        EPSILON
+        NetElement
 URI:
-        value::ANY
+        value::String
 PNMLDocument:
-        xmlns::ANY nets::ANY+
+        xmlns::URI nets::NetElement+
 NetElement:
-        type::ANY document::ANY contents::ANY+ name::ANY
-NetContent:
-        EPSILON
+        type::URI document::PNMLDocument contents::NetContent+ name::Name
 LabeledElement:
-        EPSILON
+        Name
 Label:
-        text::ANY labeledElement::ANY
+        text::String labeledElement::LabeledElement
 Name:
-        net::ANY netContent::ANY
+        net::NetElement netContent::NetContent
 NetContentElement:
-        EPSILON
+        Place
+NetContentElement:
+        Transition
 Arc:
-        source::ANY target::ANY
+        source::NetContentElement target::NetContentElement
 Place:
         
 Transition:

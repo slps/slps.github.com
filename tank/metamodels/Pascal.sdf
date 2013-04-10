@@ -4,31 +4,57 @@ exports
   sorts
         Program Variable Type Parameter Instruction Calculation Control Assignment Block Conditional Loop Procedure Function For While Repeat 
   context-free syntax
-        name::ANY variables::ANY+ types::ANY+ procedures::ANY+ -> Program
+        name::String variables::Variable+ types::Type+ procedures::Procedure+ -> Program
 
-        name::ANY program::ANY procedure::ANY type::ANY -> Variable
+        Parameter -> Variable
 
-        name::ANY program::ANY variables::ANY+ -> Type
+        name::String program::Program procedure::Procedure type::Type -> Variable
 
-        procedure_parameter::ANY -> Parameter
+        name::String program::Program variables::Variable+ -> Type
 
-        block::ANY -> Instruction
+        procedure_parameter::Procedure -> Parameter
+
+        Calculation -> Instruction
+
+        Control -> Instruction
+
+        Assignment -> Instruction
+
+        Block -> Instruction
+
+        block::Block -> Instruction
 
          -> Calculation
 
-         -> Control
+        Conditional -> Control
+
+        Loop -> Control
+
+        Procedure -> Control
+
+        Conditional -> Control
+        Loop -> Control
+        Procedure -> Control
 
          -> Assignment
 
-        instructions::ANY+ procedure::ANY loop::ANY conditional::ANY -> Block
+        instructions::Instruction+ procedure::Procedure loop::Loop conditional::Conditional -> Block
 
-        blocks::ANY -> Conditional
+        blocks::Block -> Conditional
 
-        block_loop::ANY -> Loop
+        For -> Loop
 
-        name::ANY program::ANY variables::ANY+ parameters::ANY+ block_procedure::ANY -> Procedure
+        While -> Loop
 
-        returnType::ANY -> Function
+        Repeat -> Loop
+
+        block_loop::Block -> Loop
+
+        Function -> Procedure
+
+        name::String program::Program variables::Variable+ parameters::Parameter+ block_procedure::Block -> Procedure
+
+        returnType::Type -> Function
 
          -> For
 

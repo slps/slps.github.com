@@ -3,139 +3,146 @@ module Scilab
 
 syntax Man
         = 
-        ANY language ANY title ANY type ANY date ANY name ANY keyword ANY exemple ANY meta+
+        String language String title String type String date String name String keyword String exemple Meta meta+
  ;
 syntax Meta
         = 
-        ANY meta ANY path ANY category ANY version_CSI ANY version_DOC ANY author ANY man
+        String meta String path String category String version_CSI String version_DOC String author Man man
  ;
 syntax Short_Description
         = 
-        ANY name ANY verb+
+        String name String verb+
  ;
 syntax Calling_Sequence
         = 
-        ANY calling_Sequence_Item+
+        Calling_Sequence_Item calling_Sequence_Item+
  ;
 syntax Calling_Sequence_Item
         = 
-        ANY calling_Sequence_Item+ ANY calling_Sequence
+        String calling_Sequence_Item+ Calling_Sequence calling_Sequence
  ;
 syntax Param
         = 
-        ANY target ANY param_Indent+
+        InOut target Param_Indent param_Indent+
  ;
 syntax Param_Indent
         = 
-        ANY param ANY param_Description ANY param_Item+
+        Param param Param_Description param_Description Param_Item param_Item+
  ;
 syntax Param_Item
         = 
-        ANY label ANY param_Indent ANY param_Name ANY param_Description
+        String label Param_Indent param_Indent Param_Name param_Name Param_Description param_Description
  ;
 syntax Param_Name
         = 
-        ANY verb+ ANY param_Item
+        String verb+ Param_Item param_Item
  ;
 syntax Param_Description
         = 
-        ANY param_Indent+ ANY param_Item
+        Param_Indent param_Indent+ Param_Item param_Item
  ;
 syntax Description
         = 
-        ANY itemize+ ANY description_Indent+
+        Itemize itemize+ Description_Indent description_Indent+
  ;
 syntax Description_Indent
         = 
-        ANY description ANY description_Item+
+        Description description Description_Item description_Item+
  ;
 syntax Description_Item
         = 
-        ANY label ANY description_Indent
+        String label Description_Indent description_Indent
  ;
 syntax AIMG
-        = 
-        ANY verb+
+        = A
+        | Img
+        | String verb+
  ;
 syntax See_Also
         = 
-        ANY see_Also_Item+
+        See_Also_Item see_Also_Item+
  ;
 syntax Exemple
         = 
-        ANY exemple ANY xml_space
+        String exemple PreDef xml_space
  ;
 syntax See_Also_Item
         = 
-        ANY see_Also ANY link+
+        See_Also see_Also Link link+
  ;
 syntax A
         = 
-        ANY href ANY psppp ANY authors_Item
+        String href PSPPP psppp Authors_Item authors_Item
  ;
 syntax Img
         = 
-        ANY src ANY psppp
+        String src PSPPP psppp
  ;
 syntax Biblio
-        = 
-        ANY p+ ANY sp+ ANY pp+
+        = Short_Description
+        | Used_Functions
+        | Authors_Item
+        | P p+ SP sp+ PP pp+
  ;
 syntax Used_Functions
-        = 
-        ANY verbatim+ ANY table+
+        = Param_Description
+        | Description
+        | Itemize
+        | String verbatim+ Table table+
  ;
 syntax PSPPP
-        = 
-        ANY verb+ ANY em+ ANY bd+ ANY tt+ ANY a+ ANY link+ ANY img+
+        = P
+        | SP
+        | PP
+        | String verb+ String em+ String bd+ String tt+ A a+ Link link+ Img img+
  ;
 syntax P
         = 
-        biblio: ANY
+        biblio: Biblio
  ;
 syntax SP
         = 
-        biblio: ANY
+        biblio: Biblio
  ;
 syntax PP
         = 
-        biblio: ANY
+        biblio: Biblio
  ;
 syntax Itemize
         = 
-        ANY label ANY item ANY section ANY authors_Item ANY description
+        String label Item item Section section Authors_Item authors_Item Description description
  ;
 syntax Item
         = 
-        ANY itemize+
+        Itemize itemize+
  ;
 syntax Table
         = 
-        ANY table_New_Row+ ANY used_Functions
+        Table_New_Row table_New_Row+ Used_Functions used_Functions
  ;
 syntax Table_New_Row
         = 
-        ANY table_New_Column+ ANY table
+        Table_New_Column table_New_Column+ Table table
  ;
 syntax Table_New_Column
         = 
-        ANY Verb+ ANY em+ ANY bd+ ANY tt+ ANY table_New_Row
+        String Verb+ String em+ String bd+ String tt+ Table_New_Row table_New_Row
  ;
 syntax Link
         = 
-        ANY link ANY psppp ANY see_Also_Item ANY authors_Item
+        String link PSPPP psppp See_Also_Item see_Also_Item Authors_Item authors_Item
  ;
 syntax Authors
         = 
-        ANY authors_Item+
+        Authors_Item authors_Item+
  ;
 syntax Authors_Item
         = 
-        ANY Verb+ ANY em+ ANY bd+ ANY tt+ ANY verbatim+ ANY label ANY a+ ANY link+ ANY authors ANY itemize+
+        String Verb+ String em+ String bd+ String tt+ String verbatim+ String label A a+ Link link+ Authors authors Itemize itemize+
  ;
 syntax Section
         = 
-        ANY itemize+
+        Itemize itemize+
  ;
 syntax InOut
         = in: ()

@@ -4,20 +4,24 @@ exports
   sorts
         ModelElement Constraint TaggedValue TagDefinition Multiplicity GeneralizableElement Stereotype Geometry Name 
   context-free syntax
-        referenceTag::ANY+ stereotype::ANY+ constraint::ANY+ taggedValue::ANY+ -> ModelElement
+        TagDefinition -> ModelElement
 
-        constrainedElement::ANY+ constrainedStereotype::ANY -> Constraint
+        referenceTag::TaggedValue+ stereotype::Stereotype+ constraint::Constraint+ taggedValue::TaggedValue+ -> ModelElement
 
-        dataValue::ANY referenceValue::ANY+ type::ANY -> TaggedValue
+        constrainedElement::ModelElement+ constrainedStereotype::Stereotype -> Constraint
 
-        tagType::ANY multiplicity::ANY typedValue::ANY+ owner::ANY -> TagDefinition
+        dataValue::String referenceValue::ModelElement+ type::TagDefinition -> TaggedValue
 
-        value::ANY -> Multiplicity
+        tagType::String multiplicity::Multiplicity typedValue::TaggedValue+ owner::Stereotype -> TagDefinition
 
-         -> GeneralizableElement
+        value::String -> Multiplicity
 
-        icon::ANY baseClass::ANY+ definedTag::ANY+ stereotypeConstraint::ANY+ extendedElement::ANY+ -> Stereotype
+        Stereotype -> GeneralizableElement
 
-        value::ANY -> Geometry
+        Stereotype -> GeneralizableElement
 
-        value::ANY -> Name
+        icon::Geometry baseClass::Name+ definedTag::TagDefinition+ stereotypeConstraint::Constraint+ extendedElement::ModelElement+ -> Stereotype
+
+        value::String -> Geometry
+
+        value::String -> Name

@@ -1,20 +1,34 @@
 LocatedElement:
-        EPSILON
+        Editor
+LocatedElement:
+        AbstractElement
+LocatedElement:
+        Element
+LocatedElement:
+        Format
+LocatedElement:
+        Color
+LocatedElement:
+        Font
+LocatedElement:
+        Indent
 Editor:
-        extension::ANY abstractElements::ANY+
+        extension::String abstractElements::AbstractElement+
 AbstractElement:
-        EPSILON
+        Block
+AbstractElement:
+        GroupElement
 Block:
-        blockbegin::ANY blockend::ANY
+        blockbegin::String blockend::String
 GroupElement:
-        indent::ANY element::ANY+
+        indent::Indent element::Element+
 Element:
-        element::ANY groupElement::ANY
+        element::String groupElement::GroupElement
 Format:
-        color::ANY font::ANY
+        color::Color font::Font
 Color:
-        red::ANY green::ANY blue::ANY
+        red::Integer green::Integer blue::Integer
 Font:
-        font::ANY bold::ANY italic::ANY
+        font::String bold::Boolean italic::Boolean
 Indent:
-        retrait::ANY groupElementIndent::ANY
+        retrait::String groupElementIndent::GroupElement

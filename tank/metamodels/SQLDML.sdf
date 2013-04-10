@@ -4,58 +4,94 @@ exports
   sorts
         LocatedElement SQLRoot Statement ViewStatement InsertStmt QueryStmt QueryStmtCol QueryStmtAllCol NamedElement Table WhereClause Expression BinaryExp OrExp AndExp NotExp LikeExp InExp OperationExp Predicate QueryPredicate ColumnExp ValueExp StringValueExp IntegerValueExp ListExp FunctionExp DataType 
   context-free syntax
-         -> LocatedElement
+        SQLRoot -> LocatedElement
 
-        statements::ANY+ -> SQLRoot
+        Statement -> LocatedElement
 
-         -> Statement
+        NamedElement -> LocatedElement
 
-        name::ANY columns::ANY+ query::ANY -> ViewStatement
+        WhereClause -> LocatedElement
 
-        tableName::ANY values::ANY+ -> InsertStmt
+        Expression -> LocatedElement
 
-         -> QueryStmt
+        statements::Statement+ -> SQLRoot
 
-        columns::ANY+ -> QueryStmtCol
+        ViewStatement -> Statement
 
-        tables::ANY+ condition::ANY -> QueryStmtAllCol
+        InsertStmt -> Statement
 
-         -> NamedElement
+        QueryStmt -> Statement
 
-        alias::ANY -> Table
+        name::String columns::ColumnExp+ query::QueryStmt -> ViewStatement
 
-        expression::ANY -> WhereClause
+        tableName::String values::Expression+ -> InsertStmt
 
-         -> Expression
+        QueryStmtCol -> QueryStmt
 
-         -> BinaryExp
+        QueryStmtAllCol -> QueryStmt
 
-        opName::ANY leftExp::ANY rightExp::ANY -> OrExp
+        columns::Expression+ -> QueryStmtCol
 
-        opName::ANY leftExp::ANY rightExp::ANY -> AndExp
+        tables::Table+ condition::WhereClause -> QueryStmtAllCol
 
-        opName::ANY valueExp::ANY unused::ANY -> NotExp
+        Table -> NamedElement
 
-        columnName::ANY expression::ANY -> LikeExp
+        DataType -> NamedElement
 
-        columnName::ANY elements::ANY+ -> InExp
+        alias::String -> Table
 
-        optName::ANY -> OperationExp
+        expression::Expression -> WhereClause
 
-         -> Predicate
+        BinaryExp -> Expression
 
-        query::ANY -> QueryPredicate
+        NotExp -> Expression
 
-        alias::ANY type::ANY -> ColumnExp
+        LikeExp -> Expression
 
-         -> ValueExp
+        InExp -> Expression
 
-        aValue::ANY -> StringValueExp
+        Predicate -> Expression
 
-        aValue::ANY -> IntegerValueExp
+        QueryPredicate -> Expression
 
-        elements::ANY+ -> ListExp
+        OrExp -> BinaryExp
 
-        arguments::ANY+ name::ANY -> FunctionExp
+        AndExp -> BinaryExp
 
-        name::ANY -> DataType
+        OperationExp -> BinaryExp
+
+        opName::String leftExp::Expression rightExp::Expression -> OrExp
+
+        opName::String leftExp::Expression rightExp::Expression -> AndExp
+
+        opName::String valueExp::Expression unused::Expression -> NotExp
+
+        columnName::String expression::StringValueExp -> LikeExp
+
+        columnName::String elements::Predicate+ -> InExp
+
+        optName::String -> OperationExp
+
+        ValueExp -> Predicate
+
+        ListExp -> Predicate
+
+        FunctionExp -> Predicate
+
+        query::QueryStmt -> QueryPredicate
+
+        alias::String type::DataType -> ColumnExp
+
+        StringValueExp -> ValueExp
+
+        IntegerValueExp -> ValueExp
+
+        aValue::String -> StringValueExp
+
+        aValue::Integer -> IntegerValueExp
+
+        elements::Expression+ -> ListExp
+
+        arguments::Expression+ name::String -> FunctionExp
+
+        name::String -> DataType

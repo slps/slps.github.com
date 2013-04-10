@@ -4,15 +4,19 @@ exports
   sorts
         Task Operator BinaryOperator UnaryOperator FiniteInteration BinaryType UnaryType 
   context-free syntax
-        id::ANY name::ANY category::ANY frequency::ANY importance::ANY structurationLevel::ANY complexityLevel::ANY criticity::ANY centrality::ANY terminationValue::ANY taskType::ANY taskItem::ANY decompositionTasks::ANY+ decomposedTask::ANY leftOperator::ANY rightOperator::ANY decoration::ANY -> Task
+        id::String name::String category::String frequency::Integer importance::Integer structurationLevel::Integer complexityLevel::Integer criticity::Integer centrality::Integer terminationValue::String taskType::String taskItem::String decompositionTasks::Task+ decomposedTask::Task leftOperator::BinaryOperator rightOperator::BinaryOperator decoration::UnaryOperator -> Task
 
-         -> Operator
+        BinaryOperator -> Operator
 
-        type::ANY leftTask::ANY rightTask::ANY -> BinaryOperator
+        UnaryOperator -> Operator
 
-        UnaryType::ANY decoratedTask::ANY -> UnaryOperator
+        type::BinaryType leftTask::Task rightTask::Task -> BinaryOperator
 
-        interation::ANY -> FiniteInteration
+        FiniteInteration -> UnaryOperator
+
+        UnaryType::UnaryType decoratedTask::Task -> UnaryOperator
+
+        interation::Integer -> FiniteInteration
 
         Enabling:: -> BinaryType
         Disabling:: -> BinaryType

@@ -1,38 +1,48 @@
 OrganizationalStructure:
-        organization::ANY+
+        organization::Organization+
 Organization:
-        collaborates::ANY interacts::ANY member::ANY+ observes::ANY+
+        collaborates::Organization interacts::Organization member::AgentType+ observes::OrganizationalRule+
 OrganizationalRule:
-        EPSILON
+        SafetyRule
+OrganizationalRule:
+        LivenessRule
+OrganizationalRule:
+        SafetyRule
+        LivenessRule
 SafetyRule:
         EPSILON
 LivenessRule:
         EPSILON
 AgentType:
-        provides::ANY+ collaborates::ANY agentType::ANY plays::ANY+
+        provides::Service+ collaborates::AgentType agentType::AgentType plays::Role+
 Service:
-        inputs::ANY outputs::ANY pre-conditions::ANY post-conditions::ANY
+        inputs::String outputs::String pre-conditions::String post-conditions::String
 Role:
-        activity::ANY+ communication::ANY+ responsibility::ANY+ actsOn::ANY
+        activity::Activity+ communication::Communication+ responsibility::Responsibility+ actsOn::AssociationConnector
 Activity:
         EPSILON
 Responsibility:
-        EPSILON
+        LivenessProperty
+Responsibility:
+        SafetyProperty
+Responsibility:
+        LivenessProperty
+        SafetyProperty
 LivenessProperty:
         EPSILON
 SafetyProperty:
         EPSILON
 AssociationConnector:
-        actsOn::ANY+ role::ANY permission::ANY+
+        actsOn::Resource+ role::Role permission::Permission+
 Permission:
-        association::ANY
+        association::AssociationConnector
 Resource:
-        name::ANY description::ANY permitted_action::ANY+ environnement::ANY
+        name::String description::String permitted_action::Action+ environnement::Environnement
 Environnement:
-        resource::ANY+
+        resource::Resource+
 Action:
-        type::ANY
+        type::String
 Communication:
-        observes::ANY+ protocol::ANY
+        observes::OrganizationalRule+ protocol::Protocol
 Protocol:
-        name::ANY initiator::ANY partner::ANY inputs::ANY outputs::ANY description::ANY
+        name::String initiator::String partner::String inputs::String outputs::String description::String

@@ -1,12 +1,12 @@
 Architecture:
-        describedBy::ANY
+        describedBy::ArchitectureDescription
 ArchitectureDescription:
-        selects::ANY+ organizedBy::ANY+
+        selects::ArchitectureView+ organizedBy::ArchitectureView+
 ArchitectureView:
-        selectedBy::ANY+ constituents::ANY+ conformsTo::ANY+
+        selectedBy::ArchitectureDescription+ constituents::ModelElement+ conformsTo::ArchitectureViewPoint+
 ArchitectureViewPoint:
-        defines::ANY views::ANY+
+        defines::MainView views::ArchitectureView+
 MainView:
-        isProjectedOnto::ANY+ consistsOf::ANY+
+        isProjectedOnto::ArchitectureView+ consistsOf::ModelElement+
 ModelElement:
         EPSILON

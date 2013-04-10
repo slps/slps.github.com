@@ -2,8 +2,10 @@
 module Perceptory
 
 syntax RelationSchip
-        = 
-        ANY affectCharacteristic+ ANY constraint ANY steriotype+ ANY packages+ ANY associatePackages
+        = Association
+        | Generalisation
+        | Dependency
+        | Characteristic affectCharacteristic+ Constraint constraint Steriotype steriotype+ Package packages+ Package associatePackages
  ;
 syntax ConstrainedRelationSchip
         = 
@@ -18,8 +20,8 @@ syntax Composition
         ()
  ;
 syntax Association
-        = 
-        ()
+        = Aggregation
+        | Composition
  ;
 syntax Generalisation
         = 
@@ -35,55 +37,56 @@ syntax AssociationEnd
  ;
 syntax Package
         = 
-        ANY steriotype ANY children+ ANY parent ANY classes+ ANY relationSchip+ ANY connectedRelationSchip+
+        Steriotype steriotype Package children+ Package parent Class classes+ RelationSchip relationSchip+ RelationSchip connectedRelationSchip+
  ;
 syntax Steriotype
-        = 
-        ANY descriptiveAttribute+ ANY operations+ ANY relationSchip+ ANY theClass+ ANY thePackage+
+        = PerceptorySteriotype
+        | DescriptiveAttribute descriptiveAttribute+ Operation operations+ RelationSchip relationSchip+ Class theClass+ Package thePackage+
  ;
 syntax Class
         = 
-        ANY characteristic+ ANY details ANY operations ANY myOperations+ ANY constraint+ ANY steriotype ANY packages+
+        Characteristic characteristic+ MetaData details Operation operations Operation myOperations+ Constraint constraint+ Steriotype steriotype Package packages+
  ;
 syntax Constraint
         = 
-        ANY caracteristic ANY theClass ANY relationSchip+
+        Characteristic caracteristic Class theClass RelationSchip relationSchip+
  ;
 syntax Operation
         = 
-        ANY detail ANY inCharacteristic+ ANY affectFeature+ ANY steriotype ANY behaviour
+        MetaData detail Characteristic inCharacteristic+ Class affectFeature+ Steriotype steriotype Class behaviour
  ;
 syntax Characteristic
-        = 
-        ANY details ANY rule ANY operations ANY theClass ANY relationSchip ANY constraint
+        = DescriptiveAttribute
+        | MetaData details BusnissRule rule Operation operations Class theClass RelationSchip relationSchip Constraint constraint
  ;
 syntax BusnissRule
         = 
-        characteristic: ANY
+        characteristic: Characteristic
  ;
 syntax MetaData
         = 
-        ANY source ANY characteristic ANY operations ANY theClass
+        Source source Characteristic characteristic Operation operations Class theClass
  ;
 syntax Source
         = 
-        metaData: ANY
+        metaData: MetaData
  ;
 syntax Domain
-        = 
-        ANY descriptiveAttribute+
+        = RangeDomain
+        | EnumeratedDomain
+        | DescriptiveAttribute descriptiveAttribute+
  ;
 syntax DescriptiveAttribute
         = 
-        ANY tempsDef ANY specialDef ANY steriotype ANY domain
+        Temporality tempsDef Geometry specialDef Steriotype steriotype Domain domain
  ;
 syntax Geometry
         = 
-        ANY tempsDef ANY descriptiveAttributeg
+        Temporality tempsDef DescriptiveAttribute descriptiveAttributeg
  ;
 syntax Temporality
         = 
-        ANY geometry ANY descriptiveAttributet
+        Geometry geometry DescriptiveAttribute descriptiveAttributet
  ;
 syntax VisualInfo
         = 
@@ -91,7 +94,7 @@ syntax VisualInfo
  ;
 syntax Value
         = 
-        enumeratedDomain: ANY
+        enumeratedDomain: EnumeratedDomain
  ;
 syntax RangeDomain
         = 
@@ -99,7 +102,7 @@ syntax RangeDomain
  ;
 syntax EnumeratedDomain
         = 
-        ANY value+
+        Value value+
  ;
 syntax PerceptorySteriotype
         = 

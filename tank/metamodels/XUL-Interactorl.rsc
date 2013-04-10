@@ -3,15 +3,15 @@ module XUL_Interactorl
 
 syntax UIModel
         = 
-        ANY windows ANY functions+
+        Windows windows Function functions+
  ;
 syntax Windows
         = 
-        ANY id ANY title ANY orient ANY style ANY headers+ ANY headersJScript+
+        String id String title Orients orient String style HeaderCss headers+ HeaderJScript headersJScript+
  ;
 syntax Button
         = 
-        ANY tooltiptext ANY image
+        String tooltiptext String image
  ;
 syntax Orients
         = horizontal: ()
@@ -19,31 +19,31 @@ syntax Orients
  ;
 syntax Image
         = 
-        src: ANY
+        src: String
  ;
 syntax RadioGroup
         = 
-        ANY radiobuttons+
+        Radio radiobuttons+
  ;
 syntax Radio
         = 
-        ANY id ANY label ANY selected ANY disabled
+        String id String label Boolean selected Boolean disabled
  ;
 syntax ListBox
         = 
-        ANY rows ANY listitems+
+        Integer rows ListItem listitems+
  ;
 syntax ListItem
         = 
-        ANY label ANY value
+        String label String value
  ;
 syntax MenuList
         = 
-        ANY menuitems+
+        MenuItem menuitems+
  ;
 syntax MenuItem
         = 
-        label: ANY
+        label: String
  ;
 syntax Vbox
         = 
@@ -54,28 +54,50 @@ syntax Hbox
         ()
  ;
 syntax Containement
-        = 
-        ANY style ANY accesskey ANY class ANY maxlength ANY label ANY orient ANY minlength ANY onclick ANY disabled
+        = Button
+        | Image
+        | RadioGroup
+        | ListBox
+        | MenuList
+        | TabBox
+        | TextBox
+        | Spacer
+        | Label
+        | Grid
+        | CheckBox
+        | Caption
+        | Description
+        | String style String accesskey String class Integer maxlength String label Orients orient String minlength String onclick String disabled
  ;
 syntax GroupBox
         = 
         ()
  ;
 syntax Container
-        = 
-        ANY xulInteractors+
+        = Windows
+        | Vbox
+        | Hbox
+        | GroupBox
+        | Row
+        | Column
+        | TabPanel
+        | Interactor xulInteractors+
  ;
 syntax Interactor
-        = 
-        ANY flex ANY id ANY stat ANY style ANY events+
+        = Radio
+        | ListItem
+        | MenuItem
+        | Containement
+        | Container
+        | Integer flex String id String stat String style Event events+
  ;
 syntax TabBox
         = 
-        ANY tabPanels+
+        Interactor tabPanels+
  ;
 syntax TextBox
         = 
-        ANY multiline ANY value
+        Boolean multiline String value
  ;
 syntax Spacer
         = 
@@ -83,11 +105,11 @@ syntax Spacer
  ;
 syntax Label
         = 
-        ANY value ANY control
+        String value String control
  ;
 syntax Grid
         = 
-        ANY columns+ ANY rows+
+        Column columns+ Row rows+
  ;
 syntax Row
         = 
@@ -99,35 +121,35 @@ syntax Column
  ;
 syntax CheckBox
         = 
-        checked: ANY
+        checked: Boolean
  ;
 syntax Caption
         = 
-        label: ANY
+        label: String
  ;
 syntax Description
         = 
-        value: ANY
+        value: String
  ;
 syntax HeaderCss
         = 
-        ANY ref ANY type
+        String ref String type
  ;
 syntax HeaderJScript
         = 
-        ref: ANY
+        ref: String
  ;
 syntax TabPanel
         = 
-        ANY id ANY orient
+        String id Orients orient
  ;
 syntax Event
-        = 
-        ANY functionCallParameters+ ANY functionCalledName ANY name
+        = OnClick
+        | Parameter functionCallParameters+ String functionCalledName String name
  ;
 syntax Parameter
         = 
-        ANY value ANY name
+        String value String name
  ;
 syntax OnClick
         = 
@@ -135,5 +157,5 @@ syntax OnClick
  ;
 syntax Function
         = 
-        ANY name ANY functionUIModel ANY body
+        String name UIModel functionUIModel String body
  ;

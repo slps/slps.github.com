@@ -1,28 +1,38 @@
 Element:
-        EPSILON
+        ModelElement
+Element:
+        Annotation
+Element:
+        Attribute
+Element:
+        KDMExtensionFamily
+Element:
+        Stereotype
+Element:
+        TagDefinition
+Element:
+        TaggedValue
+Element:
+        KDMFramework
 ModelElement:
-        EPSILON
+        KDMEntity
+ModelElement:
+        KDMRelationship
 KDMEntity:
-        EPSILON
-KDMContainer:
-        EPSILON
-KDMGroup:
-        EPSILON
-KDMRelationship:
-        EPSILON
+        KDMContainer
+KDMEntity:
+        KDMGroup
 Annotation:
-        note::ANY
+        note::String
 Attribute:
-        tag::ANY value::ANY
+        tag::String value::String
 KDMExtensionFamily:
-        name::ANY stereotype::ANY+
+        name::String stereotype::Stereotype+
 Stereotype:
-        baseClass::ANY name::ANY family::ANY extendedElement::ANY tag::ANY+
+        baseClass::String name::String family::KDMExtensionFamily extendedElement::ModelElement tag::TagDefinition+
 TagDefinition:
-        tag::ANY type::ANY
+        tag::String type::String
 TaggedValue:
-        value::ANY tag::ANY
+        value::String tag::TagDefinition
 KDMFramework:
-        EPSILON
-KDMModel:
-        EPSILON
+        KDMModel

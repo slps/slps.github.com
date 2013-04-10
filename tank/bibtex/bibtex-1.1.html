@@ -13,47 +13,55 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable BibTeX 1.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: David Touzet, <code>BibTeX1.1.ecore</code>, 2005/05/17.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>21</strong></li><li>Number of top alternatives: <strong>21</strong></li><li>Number of defined nonterminal symbols: <strong>21</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>21</strong>: <code><a href="#BibTeXFile" class="nt">BibTeXFile</a>, <a href="#Author" class="nt">Author</a>, <a href="#BibTeXEntry" class="nt">BibTeXEntry</a>, <a href="#AuthoredEntry" class="nt">AuthoredEntry</a>, <a href="#DatedEntry" class="nt">DatedEntry</a>, <a href="#TitledEntry" class="nt">TitledEntry</a>, <a href="#BookTitledEntry" class="nt">BookTitledEntry</a>, <a href="#Article" class="nt">Article</a>, <a href="#TechReport" class="nt">TechReport</a>, <a href="#Unpublished" class="nt">Unpublished</a>, <a href="#Manual" class="nt">Manual</a>, <a href="#Proceedings" class="nt">Proceedings</a>, <a href="#InProceedings" class="nt">InProceedings</a>, <a href="#Booklet" class="nt">Booklet</a>, <a href="#Book" class="nt">Book</a>, <a href="#InCollection" class="nt">InCollection</a>, <a href="#InBook" class="nt">InBook</a>, <a href="#Misc" class="nt">Misc</a>, <a href="#ThesisEntry" class="nt">ThesisEntry</a>, <a href="#PhDThesis" class="nt">PhDThesis</a>, <a href="#MasterThesis" class="nt">MasterThesis</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="BibTeXFile">BibTeXFile</a>:
-        <span class="sel">entries</span>::<span class="meta">any</span><span class="meta">+</span>
+				</script></head><body><h1 class="l">Browsable BibTeX 1.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: David Touzet, <code>BibTeX1.1.ecore</code>, 2005/05/17.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>25</strong></li><li>Number of top alternatives: <strong>25</strong></li><li>Number of defined nonterminal symbols: <strong>19</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>10</strong>: <code><a href="#BibTeXFile" class="nt">BibTeXFile</a>, <a href="#Author" class="nt">Author</a>, <a href="#Article" class="nt">Article</a>, <a href="#TechReport" class="nt">TechReport</a>, <a href="#Unpublished" class="nt">Unpublished</a>, <a href="#Proceedings" class="nt">Proceedings</a>, <a href="#InProceedings" class="nt">InProceedings</a>, <a href="#Book" class="nt">Book</a>, <a href="#InCollection" class="nt">InCollection</a>, <a href="#ThesisEntry" class="nt">ThesisEntry</a></code></li><li>Bottom nonterminal symbols: <strong>4</strong>: <code><a href="#String" class="nt">String</a>, <a href="#AuthoredEntry" class="nt">AuthoredEntry</a>, <a href="#BookTitledEntry" class="nt">BookTitledEntry</a>, <a href="#Integer" class="nt">Integer</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="BibTeXFile">BibTeXFile</a>:
+        <span class="sel">entries</span>::<a class="nt" href="#BibTeXEntry">BibTeXEntry</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Author">Author</a>:
-        <span class="sel">author</span>::<span class="meta">any</span>
+        <span class="sel">author</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="BibTeXEntry">BibTeXEntry</a>:
-        ε
-</pre><pre><a class="nt" name="AuthoredEntry">AuthoredEntry</a>:
-        ε
+        <a class="nt" href="#AuthoredEntry">AuthoredEntry</a>
+</pre><pre><a class="nt" name="BibTeXEntry">BibTeXEntry</a>:
+        <a class="nt" href="#DatedEntry">DatedEntry</a>
+</pre><pre><a class="nt" name="BibTeXEntry">BibTeXEntry</a>:
+        <a class="nt" href="#TitledEntry">TitledEntry</a>
+</pre><pre><a class="nt" name="BibTeXEntry">BibTeXEntry</a>:
+        <a class="nt" href="#BookTitledEntry">BookTitledEntry</a>
+</pre><pre><a class="nt" name="BibTeXEntry">BibTeXEntry</a>:
+        <a class="nt" href="#Misc">Misc</a>
 </pre><pre><a class="nt" name="DatedEntry">DatedEntry</a>:
-        ε
+        <a class="nt" href="#Booklet">Booklet</a>
 </pre><pre><a class="nt" name="TitledEntry">TitledEntry</a>:
-        ε
-</pre><pre><a class="nt" name="BookTitledEntry">BookTitledEntry</a>:
-        ε
+        <a class="nt" href="#Manual">Manual</a>
 </pre><pre><a class="nt" name="Article">Article</a>:
-        <span class="sel">journal</span>::<span class="meta">any</span>
+        <span class="sel">journal</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="TechReport">TechReport</a>:
         ε
 </pre><pre><a class="nt" name="Unpublished">Unpublished</a>:
-        <span class="sel">note</span>::<span class="meta">any</span>
+        <span class="sel">note</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Manual">Manual</a>:
-        <span class="sel">title</span>::<span class="meta">any</span>
+        <span class="sel">title</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Proceedings">Proceedings</a>:
         ε
 </pre><pre><a class="nt" name="InProceedings">InProceedings</a>:
         ε
 </pre><pre><a class="nt" name="Booklet">Booklet</a>:
-        <span class="sel">year</span>::<span class="meta">any</span>
+        <span class="sel">year</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Book">Book</a>:
-        <span class="sel">publisher</span>::<span class="meta">any</span>
+        <a class="nt" href="#InBook">InBook</a>
+</pre><pre><a class="nt" name="Book">Book</a>:
+        <span class="sel">publisher</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="InCollection">InCollection</a>:
         ε
 </pre><pre><a class="nt" name="InBook">InBook</a>:
-        <span class="sel">chapter</span>::<span class="meta">any</span>
+        <span class="sel">chapter</span>::<a class="nt" href="#Integer">Integer</a>
 </pre><pre><a class="nt" name="Misc">Misc</a>:
-        <span class="sel">id</span>::<span class="meta">any</span>
+        <span class="sel">id</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="ThesisEntry">ThesisEntry</a>:
-        ε
+        <a class="nt" href="#PhDThesis">PhDThesis</a>
+</pre><pre><a class="nt" name="ThesisEntry">ThesisEntry</a>:
+        <a class="nt" href="#MasterThesis">MasterThesis</a>
 </pre><pre><a class="nt" name="PhDThesis">PhDThesis</a>:
-        <span class="sel">school</span>::<span class="meta">any</span>
+        <span class="sel">school</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="MasterThesis">MasterThesis</a>:
-        <span class="sel">school</span>::<span class="meta">any</span>
+        <span class="sel">school</span>::<a class="nt" href="#String">String</a>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

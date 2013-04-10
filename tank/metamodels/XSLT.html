@@ -13,37 +13,61 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable XSLT 1.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Peter Rosendal, <code>XSLT.ecore</code>, 2005/06/13.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>16</strong></li><li>Number of top alternatives: <strong>16</strong></li><li>Number of defined nonterminal symbols: <strong>16</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>16</strong>: <code><a href="#Node" class="nt">Node</a>, <a href="#ElementNode" class="nt">ElementNode</a>, <a href="#AttributeNode" class="nt">AttributeNode</a>, <a href="#RootNode" class="nt">RootNode</a>, <a href="#TextNode" class="nt">TextNode</a>, <a href="#XSLTNode" class="nt">XSLTNode</a>, <a href="#XSLTRootNode" class="nt">XSLTRootNode</a>, <a href="#Document" class="nt">Document</a>, <a href="#ApplyTemplates" class="nt">ApplyTemplates</a>, <a href="#If" class="nt">If</a>, <a href="#Template" class="nt">Template</a>, <a href="#ValueOf" class="nt">ValueOf</a>, <a href="#When" class="nt">When</a>, <a href="#Choose" class="nt">Choose</a>, <a href="#Otherwise" class="nt">Otherwise</a>, <a href="#Sort" class="nt">Sort</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Node">Node</a>:
-        ε
+				</script></head><body><h1 class="l">Browsable XSLT 1.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Peter Rosendal, <code>XSLT.ecore</code>, 2005/06/13.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>28</strong></li><li>Number of top alternatives: <strong>28</strong></li><li>Number of defined nonterminal symbols: <strong>16</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: —</li><li>Bottom nonterminal symbols: <strong>1</strong>: <code><a href="#String" class="nt">String</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Node">Node</a>:
+        <a class="nt" href="#ElementNode">ElementNode</a>
+</pre><pre><a class="nt" name="Node">Node</a>:
+        <a class="nt" href="#AttributeNode">AttributeNode</a>
 </pre><pre><a class="nt" name="ElementNode">ElementNode</a>:
-        <span class="sel">nodes</span>::<span class="meta">any</span><span class="meta">+</span>
+        <a class="nt" href="#RootNode">RootNode</a>
+</pre><pre><a class="nt" name="ElementNode">ElementNode</a>:
+        <a class="nt" href="#TextNode">TextNode</a>
+</pre><pre><a class="nt" name="ElementNode">ElementNode</a>:
+        <a class="nt" href="#XSLTNode">XSLTNode</a>
+</pre><pre><a class="nt" name="ElementNode">ElementNode</a>:
+        <span class="sel">nodes</span>::<a class="nt" href="#Node">Node</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="AttributeNode">AttributeNode</a>:
-        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">parentNode</span>::<span class="meta">any</span>
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">parentNode</span>::<a class="nt" href="#ElementNode">ElementNode</a>
 </pre><pre><a class="nt" name="RootNode">RootNode</a>:
-        <span class="sel">document</span>::<span class="meta">any</span>
+        <a class="nt" href="#XSLTRootNode">XSLTRootNode</a>
+</pre><pre><a class="nt" name="RootNode">RootNode</a>:
+        <span class="sel">document</span>::<a class="nt" href="#Document">Document</a>
 </pre><pre><a class="nt" name="TextNode">TextNode</a>:
-        <span class="sel">value</span>::<span class="meta">any</span>
+        <span class="sel">value</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="XSLTNode">XSLTNode</a>:
-        ε
+        <a class="nt" href="#ApplyTemplates">ApplyTemplates</a>
+</pre><pre><a class="nt" name="XSLTNode">XSLTNode</a>:
+        <a class="nt" href="#If">If</a>
+</pre><pre><a class="nt" name="XSLTNode">XSLTNode</a>:
+        <a class="nt" href="#Template">Template</a>
+</pre><pre><a class="nt" name="XSLTNode">XSLTNode</a>:
+        <a class="nt" href="#ValueOf">ValueOf</a>
+</pre><pre><a class="nt" name="XSLTNode">XSLTNode</a>:
+        <a class="nt" href="#When">When</a>
+</pre><pre><a class="nt" name="XSLTNode">XSLTNode</a>:
+        <a class="nt" href="#Choose">Choose</a>
+</pre><pre><a class="nt" name="XSLTNode">XSLTNode</a>:
+        <a class="nt" href="#Otherwise">Otherwise</a>
+</pre><pre><a class="nt" name="XSLTNode">XSLTNode</a>:
+        <a class="nt" href="#Sort">Sort</a>
 </pre><pre><a class="nt" name="XSLTRootNode">XSLTRootNode</a>:
         ε
 </pre><pre><a class="nt" name="Document">Document</a>:
-        <span class="sel">documentName</span>::<span class="meta">any</span> <span class="sel">document</span>::<span class="meta">any</span>
+        <span class="sel">documentName</span>::<a class="nt" href="#String">String</a> <span class="sel">document</span>::<a class="nt" href="#RootNode">RootNode</a>
 </pre><pre><a class="nt" name="ApplyTemplates">ApplyTemplates</a>:
-        <span class="sel">select</span>::<span class="meta">any</span>
+        <span class="sel">select</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="If">If</a>:
-        <span class="sel">test</span>::<span class="meta">any</span>
+        <span class="sel">test</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Template">Template</a>:
-        <span class="sel">match</span>::<span class="meta">any</span>
+        <span class="sel">match</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="ValueOf">ValueOf</a>:
-        <span class="sel">select</span>::<span class="meta">any</span>
+        <span class="sel">select</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="When">When</a>:
-        <span class="sel">test</span>::<span class="meta">any</span>
+        <span class="sel">test</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Choose">Choose</a>:
-        <span class="sel">when</span>::<span class="meta">any</span> <span class="sel">otherwise</span>::<span class="meta">any</span>
+        <span class="sel">when</span>::<a class="nt" href="#When">When</a> <span class="sel">otherwise</span>::<a class="nt" href="#Otherwise">Otherwise</a>
 </pre><pre><a class="nt" name="Otherwise">Otherwise</a>:
         
 </pre><pre><a class="nt" name="Sort">Sort</a>:
-        <span class="sel">select</span>::<span class="meta">any</span>
+        <span class="sel">select</span>::<a class="nt" href="#String">String</a>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

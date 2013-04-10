@@ -3,19 +3,19 @@ module SimpleAirlineDomain
 
 syntax Airport
         = 
-        ANY name ANY departingFlight+ ANY arrivingFlight+
+        String name Flight departingFlight+ Flight arrivingFlight+
  ;
 syntax Flight
         = 
-        ANY departTime ANY duration ANY maxnrPassengers ANY passenger+ ANY airline ANY origin ANY destination
+        Time departTime Time duration Integer maxnrPassengers Passenger passenger+ Airline airline Airport origin Airport destination
  ;
 syntax Airline
         = 
-        ANY name ANY nationality ANY flight+
+        String name String nationality Flight flight+
  ;
 syntax Passenger
         = 
-        ANY name ANY age ANY gender ANY needsAssistance ANY flight
+        String name Integer age Genre gender Boolean needsAssistance Flight flight
  ;
 syntax Genre
         = male: ()
@@ -23,5 +23,5 @@ syntax Genre
  ;
 syntax Time
         = 
-        ANY year ANY month ANY day ANY hour ANY minute ANY second
+        Integer year Integer month Integer day Integer hour Integer minute Integer second
  ;

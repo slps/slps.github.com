@@ -2,32 +2,47 @@
 module CADM
 
 syntax Element
-        = 
-        ANY name ANY content
+        = Architecture
+        | Organization
+        | Guidance
+        | Document
+        | Action
+        | Agreement
+        | Task
+        | InformationAsset
+        | Network
+        | MissionArea
+        | System
+        | Mission
+        | FunctionalArea
+        | Capability
+        | MaterielItem
+        | Facility
+        | String name String content
  ;
 syntax Architecture
         = 
-        ANY isAssociatedWith+ ANY missions+ ANY isFocusOf+ ANY uses+
+        Architecture isAssociatedWith+ Mission missions+ FunctionalArea isFocusOf+ Organization uses+
  ;
 syntax Organization
         = 
-        ANY isAssociatedWith+ ANY softwareItems+ ANY owns+ ANY includes+ ANY performsTo+ ANY hasRequirement+ ANY hasMissionArea+ ANY associatedSystems+ ANY isProponentOf+
+        Organization isAssociatedWith+ SoftwareItem softwareItems+ InformationAsset owns+ Node includes+ Capability performsTo+ Requirement hasRequirement+ MissionArea hasMissionArea+ System associatedSystems+ FunctionalArea isProponentOf+
  ;
 syntax Guidance
-        = 
-        ANY isAssocitatedWith+ ANY isImplementedBy+ ANY isSpecifiedIn+ ANY providesAuthorityFor+ ANY defines+
+        = Requirement
+        | Guidance isAssocitatedWith+ Architecture isImplementedBy+ Document isSpecifiedIn+ InformationAsset providesAuthorityFor+ MissionArea defines+
  ;
 syntax Document
         = 
-        ANY isAssociatedWith+ ANY describesArchitecture ANY describesSystem+ ANY isSpecifiedUsing+ ANY cites+
+        Document isAssociatedWith+ Architecture describesArchitecture System describesSystem+ Agreement isSpecifiedUsing+ InformationAsset cites+
  ;
 syntax Action
         = 
-        ANY mayBeA ANY isAssociatedWith+ ANY involvedIn+
+        Task mayBeA Action isAssociatedWith+ ActivityModel involvedIn+
  ;
 syntax Agreement
-        = 
-        ANY isAssociatedWith+ ANY isCitedBy+ ANY appliesTo+ ANY implements+
+        = Standard
+        | Agreement isAssociatedWith+ Agreement isCitedBy+ InformationAsset appliesTo+ Guidance implements+
  ;
 syntax Standard
         = 
@@ -35,11 +50,12 @@ syntax Standard
  ;
 syntax Task
         = 
-        ANY isAssociatedWith+ ANY isPerformedBy+ ANY isPerformedUsing+ ANY specifies+
+        Task isAssociatedWith+ Node isPerformedBy+ System isPerformedUsing+ Requirement specifies+
  ;
 syntax InformationAsset
-        = 
-        ANY isAssociatedWith+
+        = ConceptualDataModel
+        | ActivityModel
+        | InformationAsset isAssociatedWith+
  ;
 syntax ConceptualDataModel
         = 
@@ -51,19 +67,20 @@ syntax ActivityModel
  ;
 syntax Node
         = 
-        ANY isAssociatedWith+ ANY describes+ ANY hasServicesProvidedBy+ ANY involvedIn+ ANY uses+ ANY involves+ ANY isParticipedInBy+ ANY supports+
+        Node isAssociatedWith+ Architecture describes+ Facility hasServicesProvidedBy+ ActivityModel involvedIn+ InformationAsset uses+ InfoExchRequirement involves+ Network isParticipedInBy+ System supports+
  ;
 syntax Network
         = 
-        ANY isAssociatedWith+ ANY isDescribedIn+ ANY compliesWith+ ANY has+ ANY performsTo+
+        Network isAssociatedWith+ Document isDescribedIn+ Standard compliesWith+ Organization has+ Capability performsTo+
  ;
 syntax Requirement
-        = 
-        ANY mayBeSatifiedBy+ ANY isSpecifiedUsing+ ANY specifiesNeedFor+ ANY cites+
+        = InfoExchRequirement
+        | ExchangeNeedLineReq
+        | Architecture mayBeSatifiedBy+ InformationAsset isSpecifiedUsing+ MaterielItem specifiesNeedFor+ MissionArea cites+
  ;
 syntax InfoExchRequirement
         = 
-        ANY isCitedIn+ ANY isSpecifiedInInfos+
+        Document isCitedIn+ InformationAsset isSpecifiedInInfos+
  ;
 syntax ExchangeNeedLineReq
         = 
@@ -71,27 +88,28 @@ syntax ExchangeNeedLineReq
  ;
 syntax MissionArea
         = 
-        ANY supports+
+        Task supports+
  ;
 syntax System
         = 
-        ANY isAssociatedWith+ ANY citedIn+ ANY compliesWith+ ANY isDescribedBy+ ANY uses+ ANY operatesUsing+ ANY performsTo+ ANY associatedOrganization+ ANY appliesTo+
+        System isAssociatedWith+ Architecture citedIn+ Standard compliesWith+ InformationAsset isDescribedBy+ MaterielItem uses+ Network operatesUsing+ Capability performsTo+ Organization associatedOrganization+ Requirement appliesTo+
  ;
 syntax Mission
         = 
-        ANY isCitedBy ANY requires+ ANY isAssigned+ ANY mayCite+
+        Architecture isCitedBy Task requires+ Organization isAssigned+ FunctionalArea mayCite+
  ;
 syntax FunctionalArea
         = 
-        ANY isPartOf+ ANY supports+ ANY cites+
+        FunctionalArea isPartOf+ System supports+ MissionArea cites+
  ;
 syntax Capability
         = 
-        ANY specifiesRequired+
+        Requirement specifiesRequired+
  ;
 syntax MaterielItem
-        = 
-        ANY establishedAs+ ANY conformsTo+ ANY performsTo+
+        = EquipmentType
+        | SoftwareItem
+        | MaterielItem establishedAs+ Standard conformsTo+ Capability performsTo+
  ;
 syntax EquipmentType
         = 
@@ -99,7 +117,7 @@ syntax EquipmentType
  ;
 syntax SoftwareItem
         = 
-        ANY uses+ ANY isSourceFor
+        EquipmentType uses+ Organization isSourceFor
  ;
 syntax Facility
         = 

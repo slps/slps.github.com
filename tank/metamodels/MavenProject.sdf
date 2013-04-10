@@ -4,16 +4,18 @@ exports
   sorts
         Project Build Resource MailingList Person Developer Contributor 
   context-free syntax
-        id::ANY groupId::ANY artifactId::ANY name::ANY description::ANY mailingLists::ANY+ developersAndContributors::ANY+ build::ANY dependencies::ANY+ -> Project
+        id::String groupId::String artifactId::String name::String description::String mailingLists::MailingList+ developersAndContributors::Person+ build::Build dependencies::Project+ -> Project
 
-        defaultGoal::ANY sourceDirectory::ANY unitTestSourceDirectory::ANY uniTest::ANY+ resources::ANY+ -> Build
+        defaultGoal::String sourceDirectory::String unitTestSourceDirectory::String uniTest::Resource+ resources::Resource+ -> Build
 
-        targetPath::ANY filtering::ANY directory::ANY includes::ANY excludes::ANY -> Resource
+        targetPath::String filtering::String directory::String includes::String excludes::String -> Resource
 
-        name::ANY subscribe::ANY unsubscribe::ANY post::ANY archive::ANY otherArchives::ANY -> MailingList
+        name::String subscribe::String unsubscribe::String post::String archive::String otherArchives::String -> MailingList
 
-         -> Person
+        Developer -> Person
 
-        id::ANY -> Developer
+        Contributor -> Person
 
-        name::ANY email::ANY url::ANY organization::ANY organizationUrl::ANY roles::ANY timezone::ANY properties::ANY -> Contributor
+        id::String -> Developer
+
+        name::String email::String url::String organization::String organizationUrl::String roles::String timezone::String properties::String -> Contributor

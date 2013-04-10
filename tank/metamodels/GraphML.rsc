@@ -2,48 +2,55 @@
 module GraphML
 
 syntax LocatedElement
-        = 
-        ()
+        = Root
+        | Element
+        | Port
+        | EndPoint
+        | Data
  ;
 syntax Root
         = 
-        ANY keys+ ANY graphs+
+        Key keys+ Graph graphs+
  ;
 syntax Element
-        = 
-        ANY id ANY datas+
+        = Key
+        | Graph
+        | Edge
+        | HyperEdge
+        | Node
+        | String id Data datas+
  ;
 syntax Key
         = 
-        ANY for ANY attrName ANY type ANY defValue
+        ElemType for String attrName AttrType type String defValue
  ;
 syntax Graph
         = 
-        ANY contents+ ANY edgeDefault
+        Element contents+ EdgeType edgeDefault
  ;
 syntax Edge
         = 
-        ANY source ANY target ANY sourceport ANY targetport
+        Node source Node target Port sourceport Port targetport
  ;
 syntax HyperEdge
         = 
-        ANY endpoints+
+        EndPoint endpoints+
  ;
 syntax Node
         = 
-        ANY subgraph ANY ports+
+        Graph subgraph Port ports+
  ;
 syntax Port
         = 
-        name: ANY
+        name: String
  ;
 syntax EndPoint
         = 
-        ANY node ANY port
+        Node node Port port
  ;
 syntax Data
         = 
-        ANY key ANY value
+        String key String value
  ;
 syntax ElemType
         = edge: ()

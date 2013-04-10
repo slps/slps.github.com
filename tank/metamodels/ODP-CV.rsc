@@ -3,15 +3,15 @@ module ODP_CV
 
 syntax EnvironmentContract
         = 
-        ANY ec_to_a+ ANY specifier_ec
+        Action ec_to_a+ ComputationalTemplate specifier_ec
  ;
 syntax ComputationalTemplate
-        = 
-        ()
+        = ComputationalObjectTemplate
+        | ComputationalInterfaceTemplate
  ;
 syntax ComputationalObject
-        = 
-        ANY co_to_i+ ANY co_to_bh ANY specifier_co ANY co_to_st
+        = BindingObject
+        | Interface co_to_i+ Behaviour co_to_bh ComputationalObjectTemplate specifier_co State co_to_st
  ;
 syntax BindingObject
         = 
@@ -19,125 +19,134 @@ syntax BindingObject
  ;
 syntax ComputationalObjectTemplate
         = 
-        ANY cot_to_co+ ANY part_provide+ ANY part_request+
+        ComputationalObject cot_to_co+ ComputationalInterfaceTemplate part_provide+ ComputationalInterfaceTemplate part_request+
  ;
 syntax ComputationalInterfaceTemplate
         = 
-        ANY cit_to_i+ ANY aggregate_provide+ ANY aggregate_request+ ANY cit_to_intsig
+        Interface cit_to_i+ ComputationalObjectTemplate aggregate_provide+ ComputationalObjectTemplate aggregate_request+ InterfaceSignature cit_to_intsig
  ;
 syntax Interface
-        = 
-        ()
+        = SignalInterface
+        | OperationInterface
+        | StreamInterface
  ;
 syntax Binding
         = 
-        bd_to_i: ANY
+        bd_to_i: Interface
  ;
 syntax SignalInterface
         = 
-        ()
+        ComputationalObject owner_i Binding i_to_bd ComputationalInterfaceTemplate specifier_i Interaction i_to_ina+
  ;
 syntax OperationInterface
         = 
-        ()
+        ComputationalObject owner_i Binding i_to_bd ComputationalInterfaceTemplate specifier_i Interaction i_to_ina+
  ;
 syntax StreamInterface
         = 
-        ()
+        ComputationalObject owner_i Binding i_to_bd ComputationalInterfaceTemplate specifier_i Interaction i_to_ina+
  ;
 syntax InterfaceSignature
-        = 
-        ()
+        = SignalInterfaceSignature
+        | OperationInterfaceSignature
+        | StreamInterfaceSignature
  ;
 syntax SignalInterfaceSignature
         = 
-        ANY sgisig_to_ssig+
+        SignalSignature sgisig_to_ssig+
  ;
 syntax OperationInterfaceSignature
         = 
-        ANY optisig_to_ansig+ ANY optisig_to_intsig+
+        AnnouncementSignature optisig_to_ansig+ InterrogationSignature optisig_to_intsig+
  ;
 syntax StreamInterfaceSignature
         = 
-        ANY strisig_to_fsig+
+        FlowSignature strisig_to_fsig+
  ;
 syntax InteractionSignature
-        = 
-        ()
+        = AnnouncementSignature
+        | InterrogationSignature
+        | TerminationSignature
+        | SignalSignature
+        | FlowSignature
  ;
 syntax Parameter
         = 
-        param_to_isig: ANY
+        param_to_isig: InteractionSignature
  ;
 syntax AnnouncementSignature
         = 
-        ansig_to_optisig: ANY
+        ansig_to_optisig: OperationInterfaceSignature
  ;
 syntax InterrogationSignature
         = 
-        ANY intsig_to_optisig ANY intsig_to_tersig+
+        OperationInterfaceSignature intsig_to_optisig TerminationSignature intsig_to_tersig+
  ;
 syntax TerminationSignature
         = 
-        tersig_to_intsig: ANY
+        tersig_to_intsig: InterrogationSignature
  ;
 syntax SignalSignature
         = 
-        ssig_to_sgisig: ANY
+        ssig_to_sgisig: SignalInterfaceSignature
  ;
 syntax FlowSignature
         = 
-        fsig_to_strisig: ANY
+        fsig_to_strisig: StreamInterfaceSignature
  ;
 syntax ActionTemplate
         = 
-        ANY at_to_a+ ANY at_to_isig
+        Action at_to_a+ InteractionSignature at_to_isig
  ;
 syntax Behaviour
         = 
-        ANY specifier_bh ANY owner_bh ANY bh_to_a+
+        ComputationalTemplate specifier_bh ComputationalObject owner_bh Action bh_to_a+
  ;
 syntax Action
-        = 
-        ANY constrainer_ec+ ANY changedState+ ANY specifier_a ANY a_to_bh
+        = InternalAction
+        | Interaction
+        | EnvironmentContract constrainer_ec+ State changedState+ ActionTemplate specifier_a Behaviour a_to_bh
  ;
 syntax State
         = 
-        ANY startState ANY endState ANY changer+ ANY st_to_co
+        State startState State endState Action changer+ ComputationalObject st_to_co
  ;
 syntax InternalAction
         = 
         ()
  ;
 syntax Interaction
-        = 
-        ()
+        = Flow
+        | Signal
+        | Operation
+        | Invocation
+        | Termination
  ;
 syntax Flow
         = 
-        ()
+        ina_to_i: Interface
  ;
 syntax Signal
         = 
-        ()
+        ina_to_i: Interface
  ;
 syntax Operation
-        = 
-        ()
+        = Announcement
+        | Interrogation
  ;
 syntax Announcement
         = 
-        ()
+        opt_to_inv: Invocation
  ;
 syntax Interrogation
         = 
-        int_to_ter: ANY
+        int_to_ter: Termination
  ;
 syntax Invocation
         = 
-        ANY inv_to_ter ANY inv_to_opt
+        Termination inv_to_ter Operation inv_to_opt
  ;
 syntax Termination
         = 
-        ANY owner_ter ANY ter_to_inv
+        Interrogation owner_ter Invocation ter_to_inv
  ;

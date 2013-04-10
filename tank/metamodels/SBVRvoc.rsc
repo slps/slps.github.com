@@ -2,140 +2,176 @@
 module SBVRvoc
 
 syntax LocatedElement
-        = 
-        ()
+        = Root
+        | VocabularyEntry
+        | Caption
+        | PrimaryRepresentation
+        | ConceptDefinition
+        | ConceptSource
+        | Note
+        | Sentence
+        | NameSpaceURI
+        | Word
+        | SBVRExpression
+        | SBVRPropWithKW
+        | ModalForm
+        | SimpleSBVRProp
+        | SubSBVRProp
+        | LinkSBVRConcept
+        | ConjConcept
+        | Concept
+        | NounConcept
+        | Qualification
+        | GeneralConcept
+        | Qualifier
+        | ModalBegin
  ;
 syntax Root
         = 
-        ANY entries+
+        VocabularyEntry entries+
  ;
 syntax VocabularyEntry
         = 
-        ANY primaryRep ANY caption+
+        PrimaryRepresentation primaryRep Caption caption+
  ;
 syntax Caption
-        = 
-        ()
+        = DefCaption
+        | DescCaption
+        | SrcCaption
+        | DBCaption
+        | GenCCaption
+        | CTypCaption
+        | Necessity
+        | Possibility
+        | RefSCaption
+        | NoteCaption
+        | ExCaption
+        | SynCaption
+        | SynFCaption
+        | SeeCaption
+        | SFCaption
+        | NSURICaption
  ;
 syntax DefCaption
         = 
-        definition: ANY
+        definition: ConceptDefinition
  ;
 syntax DescCaption
         = 
-        description: ANY
+        description: Note
  ;
 syntax SrcCaption
         = 
-        source: ANY
+        source: ConceptSource
  ;
 syntax DBCaption
         = 
-        dictionaryBasis: ANY
+        dictionaryBasis: ConceptSource
  ;
 syntax GenCCaption
         = 
-        generalConcept: ANY
+        generalConcept: PrimaryRepresentation
  ;
 syntax CTypCaption
         = 
-        ANY conceptType+
+        PrimaryRepresentation conceptType+
  ;
 syntax Necessity
         = 
-        exp: ANY
+        exp: SBVRExpression
  ;
 syntax Possibility
         = 
-        exp: ANY
+        exp: SBVRExpression
  ;
 syntax RefSCaption
         = 
-        referenceScheme: ANY
+        referenceScheme: PrimaryRepresentation
  ;
 syntax NoteCaption
         = 
-        note: ANY
+        note: Note
  ;
 syntax ExCaption
         = 
-        ANY example+
+        SBVRExpression example+
  ;
 syntax SynCaption
         = 
-        ANY synonym+
+        PrimaryRepresentation synonym+
  ;
 syntax SynFCaption
         = 
-        ANY synonymousForm+
+        SBVRExpression synonymousForm+
  ;
 syntax SeeCaption
         = 
-        see: ANY
+        see: PrimaryRepresentation
  ;
 syntax SFCaption
         = 
-        subjectField: ANY
+        subjectField: PrimaryRepresentation
  ;
 syntax NSURICaption
         = 
-        namespaceURI: ANY
+        namespaceURI: NameSpaceURI
  ;
 syntax PrimaryRepresentation
-        = 
-        ()
+        = NotFactTypeRepresentation
+        | FactTypeFormRepresentation
  ;
 syntax NotFactTypeRepresentation
-        = 
-        ()
+        = TermRepresentation
+        | NameRepresentation
  ;
 syntax TermRepresentation
         = 
-        ANY term+
+        StringWord term+
  ;
 syntax NameRepresentation
         = 
-        ANY hasThe ANY name+
+        Boolean hasThe NameWord name+
  ;
 syntax FactTypeFormRepresentation
         = 
-        ANY primaryRep1 ANY verbExp+ ANY primaryRep2
+        NotFactTypeRepresentation primaryRep1 Verb verbExp+ NotFactTypeRepresentation primaryRep2
  ;
 syntax ConceptDefinition
         = 
-        ANY exp ANY conjexp+
+        Concept exp ConjConcept conjexp+
  ;
 syntax ConceptSource
         = 
-        ANY source+
+        Word source+
  ;
 syntax Note
         = 
-        ANY sentences+
+        Sentence sentences+
  ;
 syntax Sentence
         = 
-        ANY words+
+        Word words+
  ;
 syntax NameSpaceURI
         = 
-        ANY URI+
+        Word URI+
  ;
 syntax Word
-        = 
-        ()
+        = StringWord
+        | QuotedStringWord
+        | NameWord
  ;
 syntax StringWord
         = 
-        ANY val
+        val: String
  ;
 syntax QuotedStringWord
         = 
-        ANY val
+        val: String
  ;
 syntax NameWord
         = 
-        ANY val
+        val: String
  ;
 syntax Verb
         = is: ()
@@ -220,75 +256,76 @@ syntax EndOperator
  ;
 syntax SBVRExpression
         = 
-        ANY hasPoint ANY firstProposition ANY nextProposition+
+        Boolean hasPoint SimpleSBVRProp firstProposition SBVRPropWithKW nextProposition+
  ;
 syntax SBVRPropWithKW
         = 
-        ANY conjonction ANY endConj ANY proposition
+        ConjonctionnalKeyWord conjonction EndOperator endConj SimpleSBVRProp proposition
  ;
 syntax ModalForm
         = 
-        ANY modal ANY isNeg
+        ModalVerb modal Boolean isNeg
  ;
 syntax SimpleSBVRProp
         = 
-        ANY modal ANY concept1 ANY modalVerb ANY verbs+ ANY concept2
+        ModalBegin modal Concept concept1 ModalForm modalVerb Verb verbs+ Concept concept2
  ;
 syntax SubSBVRProp
         = 
-        ANY join ANY modalVerb ANY verbs+ ANY concept2
+        Join join ModalVerb modalVerb Verb verbs+ Concept concept2
  ;
 syntax LinkSBVRConcept
         = 
-        ANY link ANY concept
+        Link link Concept concept
  ;
 syntax ConjConcept
         = 
-        ANY conjonction ANY concept
+        ConjonctionnalKeyWord conjonction Concept concept
  ;
 syntax Concept
-        = 
-        ()
+        = NameConcept
+        | ObjectConcept
+        | StringConcept
  ;
 syntax NameConcept
         = 
-        ANY the ANY name+
+        Qualif the NameWord name+
  ;
 syntax ObjectConcept
         = 
-        ANY operatoredConcept ANY qualify
+        NounConcept operatoredConcept Qualification qualify
  ;
 syntax StringConcept
         = 
-        ANY stringWord+
+        QuotedStringWord stringWord+
  ;
 syntax NounConcept
         = 
-        ANY qualif ANY noun+
+        Qualifier qualif StringWord noun+
  ;
 syntax Qualification
         = 
-        ANY generalConcept+
+        GeneralConcept generalConcept+
  ;
 syntax GeneralConcept
-        = 
-        ()
+        = NameGConcept
+        | NounGConcept
  ;
 syntax NameGConcept
         = 
-        name: ANY
+        name: NameConcept
  ;
 syntax NounGConcept
         = 
-        ANY noun+
+        StringWord noun+
  ;
 syntax Qualifier
         = 
-        ANY op ANY endOperator ANY min ANY max
+        Qualif op EndOperator endOperator StringWord min StringWord max
  ;
 syntax ModalBegin
-        = 
-        endOperator: ANY
+        = ModalBeginC
+        | endOperator: EndOperator
  ;
 syntax ModalBeginC
         = 

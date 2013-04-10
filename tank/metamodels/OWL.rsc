@@ -3,35 +3,47 @@ module OWL
 
 syntax Document
         = 
-        ANY localName+ ANY xmlBase+ ANY namespaceDefinition+ ANY statement+
+        LocalName localName+ Namespace xmlBase+ NamespaceDefinition namespaceDefinition+ RDFStatement statement+
  ;
 syntax LocalName
         = 
-        ANY name ANY document ANY uriRef+
+        String name Document document URIReference uriRef+
  ;
 syntax Namespace
         = 
-        ANY document+ ANY namespaceURIRef ANY namespaceDefinition+
+        Document document+ URIReference namespaceURIRef NamespaceDefinition namespaceDefinition+
  ;
 syntax NamespaceDefinition
         = 
-        ANY namespacePrefix ANY document ANY namespace
+        String namespacePrefix Document document Namespace namespace
  ;
 syntax RDFSResource
-        = 
-        ANY uriRef+ ANY subjectStatement+ ANY objectStatement+ ANY label+ ANY type+ ANY comment+ ANY seeAlso+ ANY referringResource+ ANY isDefinedBy+ ANY definedResource+ ANY member+ ANY container+ ANY list+
+        = Document
+        | RDFGraph
+        | List
+        | Container
+        | RDFProperty
+        | RDFStatement
+        | URIReferenceNode
+        | BlankNode
+        | RDFSClass
+        | RDFSLiteral
+        | OWLOntology
+        | OWLUniverse
+        | URIReference uriRef+ RDFStatement subjectStatement+ RDFStatement objectStatement+ PlainLiteral label+ RDFSClass type+ PlainLiteral comment+ RDFSResource seeAlso+ RDFSResource referringResource+ RDFSResource isDefinedBy+ RDFSResource definedResource+ RDFSResource member+ RDFSResource container+ List list+
  ;
 syntax RDFGraph
-        = 
-        ANY graphName ANY statement+
+        = OWLGraph
+        | URIReference graphName RDFStatement statement+
  ;
 syntax List
         = 
-        ANY first ANY rest ANY originalList+
+        RDFSResource first List rest List originalList+
  ;
 syntax Container
-        = 
-        ()
+        = Alt
+        | Bag
+        | Seq
  ;
 syntax Alt
         = 
@@ -47,15 +59,15 @@ syntax Seq
  ;
 syntax RDFProperty
         = 
-        ANY predicateStatement+ ANY subPropertyOf+ ANY superProperty+ ANY domain+ ANY range+ ANY propertyRestriction+
+        RDFStatement predicateStatement+ RDFProperty subPropertyOf+ RDFProperty superProperty+ RDFSClass domain+ RDFSClass range+ OWLRestriction propertyRestriction+
  ;
 syntax ContainerMembershipProperty
         = 
         ()
  ;
 syntax RDFStatement
-        = 
-        ANY reificationKind ANY graph+ ANY RDFpredicate ANY RDFobject ANY RDFsubject ANY nameForReification+ ANY document+
+        = OWLStatement
+        | ReificationKind reificationKind RDFGraph graph+ RDFProperty RDFpredicate RDFSResource RDFobject RDFSResource RDFsubject URIReference nameForReification+ Document document+
  ;
 syntax ReificationKind
         = none: ()
@@ -68,103 +80,114 @@ syntax URIReferenceNode
  ;
 syntax BlankNode
         = 
-        nodeId: ANY
+        nodeId: String
  ;
 syntax RDFSClass
-        = 
-        ANY subClassOf+ ANY superClass+ ANY typedResource+ ANY propertyForDomain+ ANY propertyForRange+
+        = RDFSDataType
+        | RDFSClass subClassOf+ RDFSClass superClass+ RDFSResource typedResource+ RDFProperty propertyForDomain+ RDFProperty propertyForRange+
  ;
 syntax RDFSDataType
         = 
-        ANY dataRange+
+        OWLDataRange dataRange+
  ;
 syntax RDFSLiteral
-        = 
-        ANY lexicalForm ANY restrictionClass+ ANY dataRange+
+        = PlainLiteral
+        | TypedLiteral
+        | String lexicalForm HasValueRestriction restrictionClass+ OWLDataRange dataRange+
  ;
 syntax PlainLiteral
         = 
-        ANY language ANY labeledResource ANY commentedResource
+        String language RDFSResource labeledResource RDFSResource commentedResource
  ;
 syntax TypedLiteral
-        = 
-        ANY datatypeURI ANY cardinalityRestriction+ ANY minCardinalityRestriction+ ANY maxCardinalityRestriction+
+        = XMLLiteral
+        | URIReference datatypeURI CardinalityRestriction cardinalityRestriction+ MinCardinalityRestriction minCardinalityRestriction+ MaxCardinalityRestriction maxCardinalityRestriction+
  ;
 syntax XMLLiteral
         = 
         ()
  ;
 syntax URIReference
-        = 
-        ANY uri ANY resource ANY literal+ ANY namedGraph ANY reifiedStatement+ ANY fragmentIdentifier ANY namespace
+        = UniformResourceIdentifier
+        | UniformResourceIdentifier uri RDFSResource resource TypedLiteral literal+ RDFGraph namedGraph RDFStatement reifiedStatement+ LocalName fragmentIdentifier Namespace namespace
  ;
 syntax UniformResourceIdentifier
         = 
-        ANY name ANY uriRef+
+        String name URIReference uriRef+
  ;
 syntax OWLOntology
         = 
-        ANY owlUniverse+ ANY OWLPriorVersion+ ANY newerOntology+ ANY OWLIncompatibleWith+ ANY incompatibleOntology+ ANY OWLImports+ ANY importingOntology+ ANY owlGraph+ ANY owlStatement+ ANY versionInfo+
+        OWLUniverse owlUniverse+ OWLOntology OWLPriorVersion+ OWLOntology newerOntology+ OWLOntology OWLIncompatibleWith+ OWLOntology incompatibleOntology+ OWLOntology OWLImports+ OWLOntology importingOntology+ OWLGraph owlGraph+ OWLStatement owlStatement+ RDFSLiteral versionInfo+
  ;
 syntax OWLGraph
         = 
-        ANY ontology+ ANY owlStatement+
+        OWLOntology ontology+ OWLStatement owlStatement+
  ;
 syntax OWLStatement
         = 
-        ANY ontology+ ANY owlGraph+
+        OWLOntology ontology+ OWLGraph owlGraph+
  ;
 syntax OWLUniverse
         = 
-        ANY ontology+
+        OWLOntology ontology+
  ;
 syntax OWLClass
-        = 
-        ANY isDeprecated ANY OWLequivalentClass+ ANY equivalentClass+ ANY OWLdisjointWith+ ANY disjointClass+ ANY intersectionClass+ ANY unionClass+ ANY complementClass+ ANY allValuesFromRestrictionClass+ ANY someValuesFromRestrictionClass+
+        = IntersectionClass
+        | UnionClass
+        | ComplementClass
+        | EnumeratedClass
+        | OWLRestriction
+        | OWLAllDifferent
+        | Boolean isDeprecated OWLClass OWLequivalentClass+ OWLClass equivalentClass+ OWLClass OWLdisjointWith+ OWLClass disjointClass+ IntersectionClass intersectionClass+ UnionClass unionClass+ ComplementClass complementClass+ AllValuesFromRestriction allValuesFromRestrictionClass+ SomeValuesFromRestriction someValuesFromRestrictionClass+
  ;
 syntax IntersectionClass
         = 
-        ANY OWLIntersectionOf+
+        OWLClass OWLIntersectionOf+
  ;
 syntax UnionClass
         = 
-        ANY OWLUnionOf+
+        OWLClass OWLUnionOf+
  ;
 syntax ComplementClass
         = 
-        ANY OWLComplementOf+
+        OWLClass OWLComplementOf+
  ;
 syntax EnumeratedClass
         = 
-        ANY OWLOneOf+
+        Individual OWLOneOf+
  ;
 syntax OWLRestriction
-        = 
-        OWLOnProperty: ANY
+        = HasValueRestriction
+        | AllValuesFromRestriction
+        | SomeValuesFromRestriction
+        | CardinalityRestriction
+        | MaxCardinalityRestriction
+        | MinCardinalityRestriction
+        | OWLOnProperty: RDFProperty
  ;
 syntax HasValueRestriction
         = 
-        ANY OWLHasLiteralValue ANY OWLHasIndividualValue
+        RDFSLiteral OWLHasLiteralValue Individual OWLHasIndividualValue
  ;
 syntax AllValuesFromRestriction
         = 
-        ANY OWLAllValuesFromDataRange ANY OWLAllValuesFromClass
+        OWLDataRange OWLAllValuesFromDataRange OWLClass OWLAllValuesFromClass
  ;
 syntax SomeValuesFromRestriction
         = 
-        ANY OWLSomeValuesFromClass ANY OWLSomeValuesFromDataRange
+        OWLClass OWLSomeValuesFromClass OWLDataRange OWLSomeValuesFromDataRange
  ;
 syntax CardinalityRestriction
         = 
-        OWLCardinality: ANY
+        OWLCardinality: TypedLiteral
  ;
 syntax MaxCardinalityRestriction
         = 
-        OWLMaxCardinality: ANY
+        OWLMaxCardinality: TypedLiteral
  ;
 syntax MinCardinalityRestriction
         = 
-        OWLMinCardinality: ANY
+        OWLMinCardinality: TypedLiteral
  ;
 syntax OWLAnnotationProperty
         = 
@@ -175,20 +198,23 @@ syntax OWLOntologyProperty
         ()
  ;
 syntax Property
-        = 
-        ()
+        = FunctionalProperty
+        | OWLDatatypeProperty
+        | OWLObjectProperty
  ;
 syntax FunctionalProperty
         = 
-        ANY isDeprecated ANY OWLEquivalentProperty+ ANY equivalentProperty+
+        Boolean isDeprecated Property OWLEquivalentProperty+ Property equivalentProperty+
  ;
 syntax OWLDatatypeProperty
         = 
-        ANY isDeprecated ANY OWLEquivalentProperty+ ANY equivalentProperty+
+        Boolean isDeprecated Property OWLEquivalentProperty+ Property equivalentProperty+
  ;
 syntax OWLObjectProperty
-        = 
-        ANY OWLInverseOf ANY inverseProperty+
+        = InverseFunctionalProperty
+        | SymmetricProperty
+        | TransitiveProperty
+        | OWLObjectProperty OWLInverseOf OWLObjectProperty inverseProperty+
  ;
 syntax InverseFunctionalProperty
         = 
@@ -204,13 +230,13 @@ syntax TransitiveProperty
  ;
 syntax Individual
         = 
-        ANY OWLDifferentFrom+ ANY differentIndividual+ ANY OWLSameAs+ ANY sameIndividual+ ANY allDifferent+ ANY enumeratedClass+ ANY restrictionClass+
+        Individual OWLDifferentFrom+ Individual differentIndividual+ Individual OWLSameAs+ Individual sameIndividual+ OWLAllDifferent allDifferent+ EnumeratedClass enumeratedClass+ HasValueRestriction restrictionClass+
  ;
 syntax OWLAllDifferent
         = 
-        OWLDistinctMembers: ANY
+        OWLDistinctMembers: Individual
  ;
 syntax OWLDataRange
         = 
-        ANY datatype ANY OWLOneOf+ ANY someValuesFromRestrictionClass ANY allValuesFromRestrictionClass
+        RDFSDataType datatype RDFSLiteral OWLOneOf+ SomeValuesFromRestriction someValuesFromRestrictionClass AllValuesFromRestriction allValuesFromRestrictionClass
  ;

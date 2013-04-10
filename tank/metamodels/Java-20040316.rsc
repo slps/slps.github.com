@@ -2,32 +2,33 @@
 module Java_20040316
 
 syntax JavaElement
-        = 
-        ()
+        = ClassFeature
+        | Package
  ;
 syntax ClassFeature
-        = 
-        ()
+        = ClassMember
+        | JavaClass
+        | FeatureParameter
  ;
 syntax ClassMember
-        = 
-        ()
+        = Field
+        | Method
  ;
 syntax Field
         = 
-        ANY owner ANY type ANY isStatic ANY isPublic
+        JavaClass owner JavaClass type Boolean isStatic Boolean isPublic
  ;
 syntax JavaClass
-        = 
-        ANY members+ ANY package ANY typedElements+ ANY parameters+ ANY isAbstract ANY isStatic ANY isPublic
+        = PrimitiveType
+        | ClassMember members+ Package package ClassMember typedElements+ FeatureParameter parameters+ Boolean isAbstract Boolean isStatic Boolean isPublic
  ;
 syntax Method
         = 
-        ANY parameters+
+        FeatureParameter parameters+
  ;
 syntax Package
         = 
-        ANY classes+
+        JavaClass classes+
  ;
 syntax PrimitiveType
         = 
@@ -35,5 +36,5 @@ syntax PrimitiveType
  ;
 syntax FeatureParameter
         = 
-        ANY type ANY method
+        JavaClass type Method method
  ;

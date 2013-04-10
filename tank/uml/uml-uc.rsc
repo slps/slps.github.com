@@ -2,12 +2,13 @@
 module Uml_uc
 
 syntax Classifier
-        = 
-        ANY instance+
+        = Actor
+        | UseCase
+        | Instance instance+
  ;
 syntax Instance
-        = 
-        ANY classifier+
+        = UseCaseInstance
+        | Classifier classifier+
  ;
 syntax Actor
         = 
@@ -15,37 +16,37 @@ syntax Actor
  ;
 syntax UseCase
         = 
-        ANY extensionPoint+ ANY includeAddition ANY includeBase ANY extendExtension ANY extendBase ANY extensionPoints+
+        String extensionPoint+ Include includeAddition Include includeBase Extend extendExtension Extend extendBase ExtensionPoint extensionPoints+
  ;
 syntax UseCaseInstance
         = 
         ()
  ;
 syntax RelationShip
-        = 
-        ()
+        = Include
+        | Extend
  ;
 syntax Include
         = 
-        ANY addition ANY base
+        UseCase addition UseCase base
  ;
 syntax Extend
         = 
-        ANY condition ANY extension ANY base ANY extensionPoint+
+        BooleanExpression condition UseCase extension UseCase base ExtensionPoint extensionPoint+
  ;
 syntax BooleanExpression
         = 
-        value: ANY
+        value: String
  ;
 syntax ModelElement
         = 
-        ()
+        ExtensionPoint
  ;
 syntax ExtensionPoint
         = 
-        ANY location ANY extend+ ANY useCase+
+        LocationReference location Extend extend+ UseCase useCase+
  ;
 syntax LocationReference
         = 
-        value: ANY
+        value: String
  ;

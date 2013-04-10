@@ -11,29 +11,29 @@ syntax MetaModel
  ;
 syntax Module
         = 
-        ANY name ANY mode ANY metaDest+ ANY metaSource+ ANY rules+
+        String name String mode MetaModel metaDest+ MetaModel metaSource+ Rule rules+
  ;
 syntax Rule
         = 
-        ANY isAbstract ANY isEntryPoint ANY name ANY module ANY target ANY source ANY declaration ANY sections+ ANY guard ANY inheritances+
+        Boolean isAbstract Boolean isEntryPoint String name Module module MetaClass target MetaClass source Variable declaration Section sections+ Expression guard Inheritance inheritances+
  ;
 syntax Inheritance
         = 
-        ANY rule ANY expressions+ ANY inheritedRules+
+        Rule rule Expression expressions+ Rule inheritedRules+
  ;
 syntax Expression
         = 
-        ANY operator ANY inheritance ANY rule ANY instruction
+        String operator Inheritance inheritance Rule rule Instruction instruction
  ;
 syntax Section
         = 
-        ANY kind ANY rule ANY instructions+
+        String kind Rule rule Instruction instructions+
  ;
 syntax Instruction
         = 
-        ANY body ANY section
+        Expression body Section section
  ;
 syntax Variable
         = 
-        ANY name ANY rule
+        String name Rule rule
  ;

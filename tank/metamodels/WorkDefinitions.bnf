@@ -1,18 +1,28 @@
 WorkDefinition:
-        parentWorks::ANY+ subWorks::ANY+ owner::ANY
+        Lifecycle
+WorkDefinition:
+        Phase
+WorkDefinition:
+        Iteration
+WorkDefinition:
+        Activity
+WorkDefinition:
+        parentWorks::WorkDefinition+ subWorks::WorkDefinition+ owner::ProcessPerformer
 ProcessPerformer:
-        features::ANY+
+        Role
+ProcessPerformer:
+        features::WorkDefinition+
 Role:
-        products::ANY+
+        products::WorkProduct+
 WorkProduct:
-        responsible::ANY
+        responsible::Role
 Lifecycle:
-        phases::ANY+
+        phases::Phase+
 Phase:
-        lifeCycle::ANY iterations::ANY+
+        lifeCycle::Lifecycle iterations::Iteration+
 Iteration:
-        phase::ANY activities::ANY+
+        phase::Phase activities::Activity+
 Activity:
-        iteration::ANY steps::ANY+
+        iteration::Iteration steps::Step+
 Step:
         EPSILON

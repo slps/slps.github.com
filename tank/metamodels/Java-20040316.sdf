@@ -4,20 +4,30 @@ exports
   sorts
         JavaElement ClassFeature ClassMember Field JavaClass Method Package PrimitiveType FeatureParameter 
   context-free syntax
-         -> JavaElement
+        ClassFeature -> JavaElement
 
-         -> ClassFeature
+        Package -> JavaElement
 
-         -> ClassMember
+        ClassMember -> ClassFeature
 
-        owner::ANY type::ANY isStatic::ANY isPublic::ANY -> Field
+        JavaClass -> ClassFeature
 
-        members::ANY+ package::ANY typedElements::ANY+ parameters::ANY+ isAbstract::ANY isStatic::ANY isPublic::ANY -> JavaClass
+        FeatureParameter -> ClassFeature
 
-        parameters::ANY+ -> Method
+        Field -> ClassMember
 
-        classes::ANY+ -> Package
+        Method -> ClassMember
+
+        owner::JavaClass type::JavaClass isStatic::Boolean isPublic::Boolean -> Field
+
+        PrimitiveType -> JavaClass
+
+        members::ClassMember+ package::Package typedElements::ClassMember+ parameters::FeatureParameter+ isAbstract::Boolean isStatic::Boolean isPublic::Boolean -> JavaClass
+
+        parameters::FeatureParameter+ -> Method
+
+        classes::JavaClass+ -> Package
 
          -> PrimitiveType
 
-        type::ANY method::ANY -> FeatureParameter
+        type::JavaClass method::Method -> FeatureParameter

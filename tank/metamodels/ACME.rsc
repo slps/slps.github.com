@@ -3,65 +3,64 @@ module ACME
 
 syntax ACMEFile
         = 
-        ANY entries+
- ;
-syntax ACMEEntry
-        = 
-        ()
+        ACMEEntry entries+
  ;
 syntax Element
-        = 
-        ()
+        = Type
+        | Component
+        | Port
+        | Connector
+        | Role
  ;
 syntax Type
         = 
-        ANY name ANY representations+ ANY property+
+        String name Representation representations+ Property property+
  ;
 syntax System
         = 
-        ANY componentDeclaration+ ANY connectorDeclaration+ ANY attachments+ ANY bindings+
+        ComponentInstance componentDeclaration+ Connector connectorDeclaration+ Link attachments+ Link bindings+
  ;
 syntax Representation
         = 
-        ANY systems+
+        System systems+
  ;
 syntax Component
         = 
-        ()
+        ComponentInstance
  ;
 syntax ComponentInstance
         = 
-        instanceOf: ANY
+        instanceOf: String
  ;
 syntax ComponentType
         = 
-        extend: ANY
+        extend: String
  ;
 syntax Port
         = 
-        ANY name ANY representations+ ANY property+
+        String name Representation representations+ Property property+
  ;
 syntax Connector
         = 
-        ANY roles+ ANY system
+        Role roles+ System system
  ;
 syntax Role
         = 
-        ANY name ANY representations+ ANY property+
+        String name Representation representations+ Property property+
  ;
 syntax Property
         = 
-        ANY name ANY val
+        String name String val
  ;
 syntax Link
-        = 
-        ()
+        = Attachment
+        | Binding
  ;
 syntax Attachment
         = 
-        ANY comp ANY port ANY con ANY role
+        String comp String port String con String role
  ;
 syntax Binding
         = 
-        ANY compSrc ANY portSrc ANY compDest ANY portDest
+        String compSrc String portSrc String compDest String portDest
  ;

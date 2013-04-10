@@ -1,32 +1,56 @@
 Node:
-        EPSILON
+        ElementNode
+Node:
+        AttributeNode
 ElementNode:
-        nodes::ANY+
+        RootNode
+ElementNode:
+        TextNode
+ElementNode:
+        XSLTNode
+ElementNode:
+        nodes::Node+
 AttributeNode:
-        name::ANY parentNode::ANY
+        name::String parentNode::ElementNode
 RootNode:
-        document::ANY
+        XSLTRootNode
+RootNode:
+        document::Document
 TextNode:
-        value::ANY
+        value::String
 XSLTNode:
-        EPSILON
+        ApplyTemplates
+XSLTNode:
+        If
+XSLTNode:
+        Template
+XSLTNode:
+        ValueOf
+XSLTNode:
+        When
+XSLTNode:
+        Choose
+XSLTNode:
+        Otherwise
+XSLTNode:
+        Sort
 XSLTRootNode:
         EPSILON
 Document:
-        documentName::ANY document::ANY
+        documentName::String document::RootNode
 ApplyTemplates:
-        select::ANY
+        select::String
 If:
-        test::ANY
+        test::String
 Template:
-        match::ANY
+        match::String
 ValueOf:
-        select::ANY
+        select::String
 When:
-        test::ANY
+        test::String
 Choose:
-        when::ANY otherwise::ANY
+        when::When otherwise::Otherwise
 Otherwise:
         
 Sort:
-        select::ANY
+        select::String

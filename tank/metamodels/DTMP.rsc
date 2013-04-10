@@ -3,13 +3,13 @@ module DTMP
 
 syntax State
         = 
-        ANY name ANY isStart ANY isEnd ANY isFail ANY incoming+ ANY outGoing+ ANY formalParam+
+        String name Boolean isStart Boolean isEnd Boolean isFail Transition incoming+ Transition outGoing+ Parameter formalParam+
  ;
 syntax Transition
         = 
-        ANY transProb+ ANY to ANY from
+        String transProb+ State to State from
  ;
 syntax Parameter
         = 
-        ANY name+ ANY type+ ANY state
+        String name+ String type+ State state
  ;

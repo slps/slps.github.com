@@ -1,33 +1,71 @@
 Element:
-        EPSILON
+        ModelElement
 ModelElement:
-        EPSILON
-GeneralizableElement:
-        EPSILON
-Namespace:
-        EPSILON
+        GeneralizableElement
+ModelElement:
+        Namespace
+ModelElement:
+        Feature
+ModelElement:
+        AssociationEnd
+ModelElement:
+        Relationship
+ModelElement:
+        Parameter
+ModelElement:
+        Instance
+ModelElement:
+        Action
+ModelElement:
+        AttributeLink
+ModelElement:
+        Link
+ModelElement:
+        Argument
+ModelElement:
+        LinkEnd
+ModelElement:
+        Stimulus
+ModelElement:
+        Message
+ModelElement:
+        Interaction
+ModelElement:
+        InteractionInstanceSet
+ModelElement:
+        CollaborationInstanceSet
 Classifier:
-        EPSILON
+        Signal
+Classifier:
+        ClassifierRole
 Feature:
-        EPSILON
+        StructuralFeature
+Feature:
+        BehavioralFeature
 StructuralFeature:
-        EPSILON
+        Attribute
 AssociationEnd:
-        association::ANY specification::ANY+ participant::ANY qualifier::ANY+ isNavigable::ANY ordering::ANY aggregation::ANY targetScope::ANY multiplicity::ANY changeability::ANY
+        AssociationEndRole
+AssociationEnd:
+        association::Association specification::Classifier+ participant::Classifier qualifier::Attribute+ isNavigable::Boolean ordering::OrderingKind aggregation::AggregationKind targetScope::ScopeKind multiplicity::Multiplicity changeability::ChangeableKind
 Relationship:
-        EPSILON
+        Generalization
 Association:
-        connection::ANY
+        AssociationRole
+Association:
+        connection::AssociationEnd
 Attribute:
-        associationEnd::ANY initialValue::ANY
+        associationEnd::AssociationEnd initialValue::Expression
 BehavioralFeature:
-        EPSILON
+        Operation
+BehavioralFeature:
+        Reception
 Operation:
-        concurrency::ANY isRoot::ANY isLeaf::ANY isAbstract::ANY specification::ANY
+        concurrency::CallConcurrencyKind isRoot::Boolean isLeaf::Boolean isAbstract::Boolean specification::String
 Parameter:
-        type::ANY behavioralFeature::ANY defaultValue::ANY kind::ANY
+        type::Classifier behavioralFeature::BehavioralFeature defaultValue::Expression kind::ParameterDirectionKind
 Generalization:
-        parent::ANY powertype::ANY child::ANY discriminator::ANY
+        parent::GeneralizableElement powertype::Classifier child::GeneralizableElement discriminator::String
 AggregationKind:
         ak_none::EPSILON
         ak_aggregate::EPSILON
@@ -57,11 +95,19 @@ VisibilityKind:
         vk_private::EPSILON
         vk_package::EPSILON
 Multiplicity:
-        range::ANY+
+        range::MultiplicityRange+
 MultiplicityRange:
-        multiplicity::ANY lower::ANY upper::ANY
+        multiplicity::Multiplicity lower::Integer upper::Integer
 Expression:
-        language::ANY body::ANY
+        BooleanExpression
+Expression:
+        ObjectSetExpression
+Expression:
+        ActionExpression
+Expression:
+        IterationExpression
+Expression:
+        language::String body::String
 BooleanExpression:
         EPSILON
 ObjectSetExpression:
@@ -71,66 +117,90 @@ ActionExpression:
 IterationExpression:
         EPSILON
 Instance:
-        EPSILON
+        Object
+Instance:
+        DataValue
+Instance:
+        ComponentInstance
+Instance:
+        NodeInstance
+Instance:
+        SubsystemInstance
 Signal:
-        powertypeRange::ANY+ feature::ANY+
+        Exception
+Signal:
+        Exception
 Action:
-        EPSILON
+        CreateAction
+Action:
+        DestroyAction
+Action:
+        UninterpretedAction
+Action:
+        CallAction
+Action:
+        SendAction
+Action:
+        ActionSequence
+Action:
+        ReturnAction
+Action:
+        TerminateAction
 CreateAction:
-        instantiation::ANY
+        instantiation::Classifier
 DestroyAction:
-        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY
+        actualArgument::Argument+ actionSequence::ActionSequence recurrence::IterationExpression target::ObjectSetExpression isAsynchronous::Boolean script::ActionExpression
 UninterpretedAction:
-        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY
+        actualArgument::Argument+ actionSequence::ActionSequence recurrence::IterationExpression target::ObjectSetExpression isAsynchronous::Boolean script::ActionExpression
 AttributeLink:
-        instance::ANY value::ANY linkEnd::ANY attribute::ANY
+        instance::Instance value::Instance linkEnd::LinkEnd attribute::Attribute
 Object:
-        ownedInstance::ANY+ linkEnd::ANY+ classifier::ANY+ componentInstance::ANY slot::ANY+ ownedLink::ANY+
+        ownedInstance::Instance+ linkEnd::LinkEnd+ classifier::Classifier+ componentInstance::ComponentInstance slot::AttributeLink+ ownedLink::Link+
 Link:
-        association::ANY connection::ANY
+        association::Association connection::LinkEnd
 LinkObject:
         EPSILON
 DataValue:
-        ownedInstance::ANY+ linkEnd::ANY+ classifier::ANY+ componentInstance::ANY slot::ANY+ ownedLink::ANY+
+        ownedInstance::Instance+ linkEnd::LinkEnd+ classifier::Classifier+ componentInstance::ComponentInstance slot::AttributeLink+ ownedLink::Link+
 CallAction:
-        operation::ANY
+        operation::Operation
 SendAction:
-        signal::ANY
+        signal::Signal
 ActionSequence:
-        action::ANY+
+        action::Action+
 Argument:
-        action::ANY value::ANY
+        action::Action value::Expression
 Reception:
-        signal::ANY specification::ANY isRoot::ANY isLeaf::ANY isAbstract::ANY
+        signal::Signal specification::String isRoot::Boolean isLeaf::Boolean isAbstract::Boolean
 LinkEnd:
-        link::ANY qualifiedValue::ANY+ instance::ANY associationEnd::ANY
+        link::Link qualifiedValue::AttributeLink+ instance::Instance associationEnd::AssociationEnd
 ReturnAction:
-        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY
+        actualArgument::Argument+ actionSequence::ActionSequence recurrence::IterationExpression target::ObjectSetExpression isAsynchronous::Boolean script::ActionExpression
 TerminateAction:
-        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY
+        actualArgument::Argument+ actionSequence::ActionSequence recurrence::IterationExpression target::ObjectSetExpression isAsynchronous::Boolean script::ActionExpression
 Stimulus:
-        argument::ANY+ communicationLink::ANY receiver::ANY dispatchAction::ANY sender::ANY
+        argument::Instance+ communicationLink::Link receiver::Instance dispatchAction::Action sender::Instance
 Exception:
         EPSILON
 ComponentInstance:
-        resident::ANY+ nodeInstance::ANY
+        resident::Instance+ nodeInstance::NodeInstance
 NodeInstance:
-        resident::ANY+
+        resident::ComponentInstance+
 SubsystemInstance:
-        ownedInstance::ANY+ linkEnd::ANY+ classifier::ANY+ componentInstance::ANY slot::ANY+ ownedLink::ANY+
+        ownedInstance::Instance+ linkEnd::LinkEnd+ classifier::Classifier+ componentInstance::ComponentInstance slot::AttributeLink+ ownedLink::Link+
 Collaboration:
-        usedCollaboration::ANY+ representedOperation::ANY representedClassifier::ANY interaction::ANY+ constrainingElement::ANY+
+        usedCollaboration::Collaboration+ representedOperation::Operation representedClassifier::Classifier interaction::Interaction+ constrainingElement::ModelElement+
 ClassifierRole:
-        availableContents::ANY+ base::ANY+ conformingInstance::ANY+ availableFeature::ANY+ multiplicity::ANY
+        availableContents::ModelElement+ base::Classifier+ conformingInstance::Instance+ availableFeature::Feature+ multiplicity::Multiplicity
 AssociationRole:
-        base::ANY conformingLink::ANY+ message::ANY+ multiplicity::ANY
+        base::Association conformingLink::Link+ message::Message+ multiplicity::Multiplicity
 AssociationEndRole:
-        base::ANY availableQualifier::ANY+ collaborationMultiplicity::ANY
+        base::AssociationEnd availableQualifier::Attribute+ collaborationMultiplicity::Multiplicity
 Message:
-        interaction::ANY conformingStimulus::ANY+ action::ANY communicationConnection::ANY activator::ANY receiver::ANY sender::ANY predecessor::ANY+
+        interaction::Interaction conformingStimulus::Stimulus+ action::Action communicationConnection::AssociationRole activator::Message receiver::ClassifierRole sender::ClassifierRole predecessor::Message+
 Interaction:
-        message::ANY+ context::ANY
+        message::Message+ context::Collaboration
 InteractionInstanceSet:
-        interaction::ANY context::ANY participatingStimulus::ANY+
+        interaction::Interaction context::CollaborationInstanceSet participatingStimulus::Stimulus+
 CollaborationInstanceSet:
-        collaboration::ANY constrainingElement::ANY+ participatingInstance::ANY+ interactionInstanceSet::ANY+ participatingLink::ANY+
+        collaboration::Collaboration constrainingElement::ModelElement+ participatingInstance::Instance+ interactionInstanceSet::InteractionInstanceSet+ participatingLink::Link+

@@ -4,66 +4,114 @@ exports
   sorts
         Element CPL NodeContainer SubAction Outgoing Incoming NotPresent Otherwise SwitchedAddress SwitchedString SwitchedLanguage SwitchedTime SwitchedPriority Busy NoAnswer Redirection Failure Default Node Switch AddressSwitch StringSwitch LanguageSwitch TimeSwitch PrioritySwitch Location SubCall Action SignallingAction Proxy Redirect Reject 
   context-free syntax
-         -> Element
+        CPL -> Element
 
-        subActions::ANY+ outgoing::ANY incoming::ANY -> CPL
+        NodeContainer -> Element
 
-         -> NodeContainer
+        Node -> Element
 
-        id::ANY -> SubAction
+        subActions::SubAction+ outgoing::Outgoing incoming::Incoming -> CPL
 
-        contents::ANY -> Outgoing
+        SubAction -> NodeContainer
 
-        contents::ANY -> Incoming
+        Outgoing -> NodeContainer
 
-        contents::ANY -> NotPresent
+        Incoming -> NodeContainer
 
-        contents::ANY -> Otherwise
+        NotPresent -> NodeContainer
 
-        is::ANY contains::ANY subDomainOf::ANY -> SwitchedAddress
+        Otherwise -> NodeContainer
 
-        is::ANY contains::ANY -> SwitchedString
+        SwitchedAddress -> NodeContainer
 
-        matches::ANY -> SwitchedLanguage
+        SwitchedString -> NodeContainer
 
-        dtstart::ANY dtend::ANY duration::ANY freq::ANY until::ANY count::ANY interval::ANY bySecond::ANY byMinute::ANY byHour::ANY byDay::ANY byMonthDay::ANY byYearDay::ANY byWeekNo::ANY byMonth::ANY wkst::ANY bySetPos::ANY -> SwitchedTime
+        SwitchedLanguage -> NodeContainer
 
-        less::ANY greater::ANY equal::ANY -> SwitchedPriority
+        SwitchedTime -> NodeContainer
 
-        contents::ANY -> Busy
+        SwitchedPriority -> NodeContainer
 
-        contents::ANY -> NoAnswer
+        Busy -> NodeContainer
 
-        contents::ANY -> Redirection
+        NoAnswer -> NodeContainer
 
-        contents::ANY -> Failure
+        Redirection -> NodeContainer
 
-        contents::ANY -> Default
+        Failure -> NodeContainer
 
-         -> Node
+        Default -> NodeContainer
 
-         -> Switch
+        id::String -> SubAction
 
-        field::ANY subField::ANY addresses::ANY+ -> AddressSwitch
+        contents::Node -> Outgoing
 
-        field::ANY strings::ANY+ -> StringSwitch
+        contents::Node -> Incoming
 
-        languages::ANY+ -> LanguageSwitch
+        contents::Node -> NotPresent
 
-        tzid::ANY tzurl::ANY times::ANY+ -> TimeSwitch
+        contents::Node -> Otherwise
 
-        priorities::ANY+ -> PrioritySwitch
+        is::String contains::String subDomainOf::String -> SwitchedAddress
 
-        url::ANY priority::ANY clear::ANY -> Location
+        is::String contains::String -> SwitchedString
 
-        ref::ANY -> SubCall
+        matches::String -> SwitchedLanguage
 
-         -> Action
+        dtstart::String dtend::String duration::String freq::String until::String count::String interval::String bySecond::String byMinute::String byHour::String byDay::String byMonthDay::String byYearDay::String byWeekNo::String byMonth::String wkst::String bySetPos::String -> SwitchedTime
 
-         -> SignallingAction
+        less::String greater::String equal::String -> SwitchedPriority
 
-        timeout::ANY recurse::ANY ordering::ANY busy::ANY noAnswer::ANY redirection::ANY failure::ANY default::ANY -> Proxy
+        contents::Node -> Busy
 
-        permanent::ANY -> Redirect
+        contents::Node -> NoAnswer
 
-        status::ANY reason::ANY -> Reject
+        contents::Node -> Redirection
+
+        contents::Node -> Failure
+
+        contents::Node -> Default
+
+        Switch -> Node
+
+        SubCall -> Node
+
+        Action -> Node
+
+        AddressSwitch -> Switch
+
+        StringSwitch -> Switch
+
+        LanguageSwitch -> Switch
+
+        TimeSwitch -> Switch
+
+        PrioritySwitch -> Switch
+
+        field::String subField::String addresses::SwitchedAddress+ -> AddressSwitch
+
+        field::String strings::SwitchedString+ -> StringSwitch
+
+        languages::SwitchedLanguage+ -> LanguageSwitch
+
+        tzid::String tzurl::String times::SwitchedTime+ -> TimeSwitch
+
+        priorities::SwitchedPriority+ -> PrioritySwitch
+
+        url::String priority::String clear::String -> Location
+
+        ref::String -> SubCall
+
+        SignallingAction -> Action
+
+        Proxy -> SignallingAction
+
+        Redirect -> SignallingAction
+
+        Reject -> SignallingAction
+
+        timeout::String recurse::String ordering::String busy::Busy noAnswer::NoAnswer redirection::Redirection failure::Failure default::Default -> Proxy
+
+        permanent::String -> Redirect
+
+        status::String reason::String -> Reject

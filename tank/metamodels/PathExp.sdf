@@ -4,10 +4,12 @@ exports
   sorts
         Element PathExp State Transition 
   context-free syntax
-         -> Element
+        PathExp -> Element
 
-        states::ANY+ transitions::ANY+ -> PathExp
+        Transition -> Element
 
-        incoming::ANY+ outgoing::ANY+ -> State
+        states::State+ transitions::Transition+ -> PathExp
 
-        source::ANY target::ANY -> Transition
+        incoming::Transition+ outgoing::Transition+ -> State
+
+        source::State target::State -> Transition

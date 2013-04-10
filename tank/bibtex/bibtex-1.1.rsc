@@ -3,35 +3,30 @@ module Bibtex_1_1
 
 syntax BibTeXFile
         = 
-        ANY entries+
+        BibTeXEntry entries+
  ;
 syntax Author
         = 
-        author: ANY
+        author: String
  ;
 syntax BibTeXEntry
-        = 
-        ()
- ;
-syntax AuthoredEntry
-        = 
-        ()
+        = AuthoredEntry
+        | DatedEntry
+        | TitledEntry
+        | BookTitledEntry
+        | Misc
  ;
 syntax DatedEntry
         = 
-        ()
+        Booklet
  ;
 syntax TitledEntry
         = 
-        ()
- ;
-syntax BookTitledEntry
-        = 
-        ()
+        Manual
  ;
 syntax Article
         = 
-        journal: ANY
+        journal: String
  ;
 syntax TechReport
         = 
@@ -39,11 +34,11 @@ syntax TechReport
  ;
 syntax Unpublished
         = 
-        note: ANY
+        note: String
  ;
 syntax Manual
         = 
-        ANY title
+        title: String
  ;
 syntax Proceedings
         = 
@@ -55,11 +50,11 @@ syntax InProceedings
  ;
 syntax Booklet
         = 
-        ANY year
+        year: String
  ;
 syntax Book
-        = 
-        publisher: ANY
+        = InBook
+        | publisher: String
  ;
 syntax InCollection
         = 
@@ -67,21 +62,21 @@ syntax InCollection
  ;
 syntax InBook
         = 
-        chapter: ANY
+        chapter: Integer
  ;
 syntax Misc
         = 
-        ANY id
+        id: String
  ;
 syntax ThesisEntry
-        = 
-        ()
+        = PhDThesis
+        | MasterThesis
  ;
 syntax PhDThesis
         = 
-        ANY school
+        school: String
  ;
 syntax MasterThesis
         = 
-        ANY school
+        school: String
  ;

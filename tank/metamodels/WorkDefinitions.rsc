@@ -2,36 +2,39 @@
 module WorkDefinitions
 
 syntax WorkDefinition
-        = 
-        ANY parentWorks+ ANY subWorks+ ANY owner
+        = Lifecycle
+        | Phase
+        | Iteration
+        | Activity
+        | WorkDefinition parentWorks+ WorkDefinition subWorks+ ProcessPerformer owner
  ;
 syntax ProcessPerformer
-        = 
-        ANY features+
+        = Role
+        | WorkDefinition features+
  ;
 syntax Role
         = 
-        ANY products+
+        WorkProduct products+
  ;
 syntax WorkProduct
         = 
-        responsible: ANY
+        responsible: Role
  ;
 syntax Lifecycle
         = 
-        ANY phases+
+        Phase phases+
  ;
 syntax Phase
         = 
-        ANY lifeCycle ANY iterations+
+        Lifecycle lifeCycle Iteration iterations+
  ;
 syntax Iteration
         = 
-        ANY phase ANY activities+
+        Phase phase Activity activities+
  ;
 syntax Activity
         = 
-        ANY iteration ANY steps+
+        Iteration iteration Step steps+
  ;
 syntax Step
         = 

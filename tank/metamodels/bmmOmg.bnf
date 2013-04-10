@@ -1,61 +1,117 @@
 Assessment:
-        motivatedDirective::ANY+ affectedEnd::ANY+ judgedInfluencer::ANY+ assessingOrganizationUnit::ANY affectedMeans::ANY+ identifiedPotentialImpact::ANY+ usedAssessment::ANY+ usingAssessment::ANY+ categorizingAssessmentCategory::ANY+
+        motivatedDirective::Directive+ affectedEnd::End+ judgedInfluencer::Influencer+ assessingOrganizationUnit::OrganizationUnit affectedMeans::Means+ identifiedPotentialImpact::PotentialImpact+ usedAssessment::Assessment+ usingAssessment::Assessment+ categorizingAssessmentCategory::AssessmentCategory+
 MotivationElement:
-        EPSILON
+        Assessment
+MotivationElement:
+        Means
+MotivationElement:
+        OrganizationUnit
+MotivationElement:
+        End
+MotivationElement:
+        BusinessProcess
+MotivationElement:
+        Asset
+MotivationElement:
+        Liability
+MotivationElement:
+        Influencer
+MotivationElement:
+        InfluencerCategory
+MotivationElement:
+        InfluencingOrganization
+MotivationElement:
+        OrganizationCategory
+MotivationElement:
+        PotentialImpact
+MotivationElement:
+        AssessmentCategory
 Directive:
-        supportedDesiredResult::ANY+ governedCourseOfAction::ANY+ derivedCourseOfAction::ANY+ governedAsset::ANY+ motivatingPotentialImpact::ANY+ directiveRegulation::ANY+ motivatingAssessment::ANY+
+        BusinessPolicy
+Directive:
+        BusinessRule
+Directive:
+        supportedDesiredResult::DesiredResult+ governedCourseOfAction::CourseOfAction+ derivedCourseOfAction::CourseOfAction+ governedAsset::Asset+ motivatingPotentialImpact::PotentialImpact+ directiveRegulation::Regulation+ motivatingAssessment::Assessment+
 Means:
-        establishingOrganizationUnit::ANY+ judgingAssessment::ANY+
+        Directive
+Means:
+        CourseOfAction
+Means:
+        Mission
+Means:
+        establishingOrganizationUnit::OrganizationUnit+ judgingAssessment::Assessment+
 OrganizationUnit:
-        definedEnd::ANY+ managedBusinessProces::ANY+ managedLiability::ANY+ managedAsset::ANY+ determiningStrategy::ANY+ recognizedInfluencer::ANY+ internalInfluencingOrganization::ANY+ madeAssessment::ANY+ establishedMeans::ANY+
+        definedEnd::End+ managedBusinessProces::BusinessProcess+ managedLiability::Liability+ managedAsset::Asset+ determiningStrategy::Strategy+ recognizedInfluencer::Influencer+ internalInfluencingOrganization::InfluencingOrganization+ madeAssessment::Assessment+ establishedMeans::Means+
 End:
-        judgingAssessment::ANY+ definingOrganizationUnit::ANY+
+        DesiredResult
+End:
+        Vision
+End:
+        judgingAssessment::Assessment+ definingOrganizationUnit::OrganizationUnit+
 BusinessProcess:
-        deliveredOffering::ANY+ realizedCourseOfAction::ANY+ managedAsset::ANY+ governingBusinessPolicy::ANY+ guidingBusinessRule::ANY responsibleOrganizationUnit::ANY+
+        deliveredOffering::Offering+ realizedCourseOfAction::CourseOfAction+ managedAsset::Asset+ governingBusinessPolicy::BusinessPolicy+ guidingBusinessRule::BusinessRule responsibleOrganizationUnit::OrganizationUnit+
 Offering:
-        definingCourseOfAction::ANY+ usedAsset::ANY+ requiredResource::ANY+ deliveringBusinessProcess::ANY+
+        definingCourseOfAction::CourseOfAction+ usedAsset::FixedAsset+ requiredResource::Resource+ deliveringBusinessProcess::BusinessProcess+
 Asset:
-        deployingCourseOfAction::ANY+ governingDirective::ANY+ responsibleOrganizationUnit::ANY+ managingBusinessProcess::ANY+
+        Resource
+Asset:
+        FixedAsset
+Asset:
+        deployingCourseOfAction::CourseOfAction+ governingDirective::Directive+ responsibleOrganizationUnit::OrganizationUnit+ managingBusinessProcess::BusinessProcess+
 CourseOfAction:
-        enabledCourseOfAction::ANY+ enablingCourseOfAction::ANY+ moreSpecficCourseOfAction::ANY+ broaderCourseOfAction::ANY+ supportedDesiredResult::ANY+ definedOffering::ANY+ dischargedLiability::ANY+ realizingBusinessProcess::ANY governingDirective::ANY+ baseDirective::ANY+ deployedAsset::ANY+
+        Tactic
+CourseOfAction:
+        Strategy
+CourseOfAction:
+        enabledCourseOfAction::CourseOfAction+ enablingCourseOfAction::CourseOfAction+ moreSpecficCourseOfAction::CourseOfAction+ broaderCourseOfAction::CourseOfAction+ supportedDesiredResult::DesiredResult+ definedOffering::Offering+ dischargedLiability::Liability+ realizingBusinessProcess::BusinessProcess governingDirective::Directive+ baseDirective::Directive+ deployedAsset::Asset+
 DesiredResult:
-        moreSpecificDesiredResult::ANY+ broaderDesiredResult::ANY+ supportingDirective::ANY+ supportingCourseOfAction::ANY+
+        Goal
+DesiredResult:
+        Objective
+DesiredResult:
+        moreSpecificDesiredResult::DesiredResult+ broaderDesiredResult::DesiredResult+ supportingDirective::Directive+ supportingCourseOfAction::CourseOfAction+
 Liability:
-        claimedResource::ANY+ responsibleOrganizationUnit::ANY+ dischargingCourseOfAction::ANY+
+        claimedResource::Resource+ responsibleOrganizationUnit::OrganizationUnit+ dischargingCourseOfAction::CourseOfAction+
 Resource:
-        providingFixedAsset::ANY+ requiringOffering::ANY+ claimingLiability::ANY+
+        providingFixedAsset::FixedAsset+ requiringOffering::Offering+ claimingLiability::Liability+
 FixedAsset:
-        usingOffering::ANY+ providedResource::ANY+
+        usingOffering::Offering+ providedResource::Resource+
 BusinessPolicy:
-        moreSpecificBusinessPolicy::ANY+ broaderBusinessPolicy::ANY+ derivedBusinessRule::ANY+ governedBusinessProcess::ANY+
+        moreSpecificBusinessPolicy::BusinessPolicy+ broaderBusinessPolicy::BusinessPolicy+ derivedBusinessRule::BusinessRule+ governedBusinessProcess::BusinessProcess+
 BusinessRule:
-        effectingTactic::ANY+ guidedBusinessProcess::ANY+ baseBusinessPolicy::ANY+
+        effectingTactic::Tactic+ guidedBusinessProcess::BusinessProcess+ baseBusinessPolicy::BusinessPolicy+
 Tactic:
-        implementedStrategy::ANY+ enforcedBusinessRule::ANY+
+        implementedStrategy::Strategy+ enforcedBusinessRule::BusinessRule+
 Strategy:
-        determinedOrganizationUnit::ANY+ plannedMission::ANY+ implementingTactic::ANY+
+        determinedOrganizationUnit::OrganizationUnit+ plannedMission::Mission+ implementingTactic::Tactic+
 Mission:
-        operativeVision::ANY componentStrategy::ANY+
+        operativeVision::Vision componentStrategy::Strategy+
 Vision:
-        amplifyingGoal::ANY+ deliveringMission::ANY+
+        amplifyingGoal::Goal+ deliveringMission::Mission+
 Goal:
-        quantifyingObjective::ANY+ amplifiedVision::ANY
+        quantifyingObjective::Objective+ amplifiedVision::Vision
 Objective:
-        quantifiedGoal::ANY+
+        quantifiedGoal::Goal+
 Influencer:
-        categorizingInfluencerCategory::ANY+ sourceInfluencingOrganization::ANY+ judgingAssessment::ANY+ recognizingOrganizationUnit::ANY+
+        Regulation
+Influencer:
+        categorizingInfluencerCategory::InfluencerCategory+ sourceInfluencingOrganization::InfluencingOrganization+ judgingAssessment::Assessment+ recognizingOrganizationUnit::OrganizationUnit+
 InfluencerCategory:
-        categorizedInfluencer::ANY+
+        categorizedInfluencer::Influencer+
 InfluencingOrganization:
-        categorizingOrganizationCategory::ANY+ influencingOrganizationUnit::ANY providedInfluencer::ANY+
+        categorizingOrganizationCategory::OrganizationCategory+ influencingOrganizationUnit::OrganizationUnit providedInfluencer::Influencer+
 OrganizationCategory:
-        categorizedInfluencingOrganization::ANY+
+        categorizedInfluencingOrganization::InfluencingOrganization+
 PotentialImpact:
-        identifyingAssessment::ANY+ motivatedDirective::ANY+
+        PotentialReward
+PotentialImpact:
+        Risk
+PotentialImpact:
+        identifyingAssessment::Assessment+ motivatedDirective::Directive+
 Regulation:
-        regulatingDirective::ANY
+        regulatingDirective::Directive
 AssessmentCategory:
-        categorizedAssessment::ANY+
+        categorizedAssessment::Assessment+
 PotentialReward:
         EPSILON
 Risk:

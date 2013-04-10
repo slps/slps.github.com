@@ -3,193 +3,208 @@ module Ant
 
 syntax Project
         = 
-        ANY name ANY basedir ANY description ANY default ANY path ANY properties+ ANY taskdef+ ANY targets+
+        String name String basedir String description Target default Path path Property properties+ TaskDef taskdef+ Target targets+
  ;
 syntax Property
-        = 
-        ()
+        = PropertyName
+        | PropertyFile
+        | PropertyEnv
  ;
 syntax PropertyName
-        = 
-        ()
+        = PropertyValue
+        | PropertyLocation
  ;
 syntax PropertyValue
         = 
-        value: ANY
+        value: String
  ;
 syntax PropertyLocation
         = 
-        location: ANY
+        location: String
  ;
 syntax PropertyFile
         = 
-        file: ANY
+        file: String
  ;
 syntax PropertyEnv
         = 
-        environment: ANY
+        environment: String
  ;
 syntax Target
         = 
-        ANY name ANY description ANY unless ANY ifCondition ANY depends+ ANY tasks+
+        String name String description String unless String ifCondition Target depends+ Task tasks+
  ;
 syntax Pattern
-        = 
-        ()
+        = Basic
+        | Set
  ;
 syntax Basic
-        = 
-        ()
+        = Mapper
+        | InExcludes
+        | FileList
+        | Filter
+        | FiltersFile
+        | PathElement
  ;
 syntax Mapper
         = 
-        ANY type ANY classname ANY classpath ANY classpathref ANY from ANY to
+        String type String classname String classpath String classpathref String from String to
  ;
 syntax InExcludes
-        = 
-        ()
+        = Includes
+        | Excludes
+        | IncludesFile
+        | ExcludesFile
  ;
 syntax Includes
         = 
-        ANY name ANY ifCondition ANY unless
+        String name String ifCondition String unless
  ;
 syntax Excludes
         = 
-        ANY name ANY ifCondition ANY unless
+        String name String ifCondition String unless
  ;
 syntax IncludesFile
         = 
-        ANY name ANY ifCondition ANY unless
+        String name String ifCondition String unless
  ;
 syntax ExcludesFile
         = 
-        ANY name ANY ifCondition ANY unless
+        String name String ifCondition String unless
  ;
 syntax FileList
         = 
-        ANY dir ANY files
+        String dir String files
  ;
 syntax Filter
         = 
-        ANY token ANY value
+        String token String value
  ;
 syntax FiltersFile
         = 
-        file: ANY
+        file: String
  ;
 syntax PathElement
         = 
-        ANY path ANY location
+        String path String location
  ;
 syntax Set
-        = 
-        ()
+        = PatternSet
+        | FileSet
+        | FilterSet
+        | Path
+        | ClassPath
  ;
 syntax PatternSet
         = 
-        ANY inexcludes+
+        InExcludes inexcludes+
  ;
 syntax FileSet
         = 
-        ANY dir ANY patternset+ ANY include+ ANY exclude+
+        String dir PatternSet patternset+ Includes include+ Excludes exclude+
  ;
 syntax FilterSet
         = 
-        ANY starttoken ANY endtoken ANY filter+ ANY filtersfile+
+        String starttoken String endtoken Filter filter+ FiltersFile filtersfile+
  ;
 syntax Path
         = 
-        ANY id ANY refid ANY path ANY pathElement+ ANY fileset+
+        String id String refid Path path PathElement pathElement+ FileSet fileset+
  ;
 syntax ClassPath
         = 
-        ANY refid ANY pathElement+ ANY fileset+
+        String refid PathElement pathElement+ FileSet fileset+
  ;
 syntax Task
-        = 
-        ()
+        = NewTask
+        | PreDefinedTask
  ;
 syntax TaskDef
         = 
-        ANY name ANY classname
+        String name String classname
  ;
 syntax NewTask
         = 
-        ANY taskName ANY attributes+
+        TaskDef taskName Attribut attributes+
  ;
 syntax Attribut
         = 
-        ANY name ANY value
+        String name String value
  ;
 syntax PreDefinedTask
-        = 
-        ()
+        = ExecutionTask
+        | MiscellaneousTask
+        | CompileTask
+        | DocumentationTask
+        | ArchiveTask
+        | FileTask
  ;
 syntax ExecutionTask
-        = 
-        ()
+        = Exec
+        | Java
  ;
 syntax Exec
         = 
-        ANY executable ANY dir
+        String executable String dir
  ;
 syntax Java
         = 
-        ANY classname ANY jar ANY fork ANY classPath
+        String classname String jar String fork ClassPath classPath
  ;
 syntax MiscellaneousTask
-        = 
-        ()
+        = Echo
+        | Tstamp
  ;
 syntax Echo
         = 
-        ANY message ANY file ANY append
+        String message String file String append
  ;
 syntax Tstamp
         = 
-        ANY format+
+        FormatTstamp format+
  ;
 syntax FormatTstamp
         = 
-        ANY property ANY pattern ANY offset ANY unit ANY locale
+        String property String pattern String offset String unit String locale
  ;
 syntax CompileTask
         = 
-        ()
+        Javac
  ;
 syntax Javac
         = 
-        ANY srcdir ANY destdir ANY debug ANY fork ANY optimize ANY deprecation ANY inExcludes+ ANY classPath
+        String srcdir String destdir String debug String fork String optimize String deprecation InExcludes inExcludes+ ClassPath classPath
  ;
 syntax DocumentationTask
         = 
-        ()
+        Javadoc
  ;
 syntax Javadoc
         = 
-        ANY sourcepath ANY destdir ANY packagenames ANY defaultexcludes ANY author ANY version ANY use ANY windowtitle
+        String sourcepath String destdir String packagenames String defaultexcludes String author String version String use String windowtitle
  ;
 syntax ArchiveTask
         = 
-        ()
+        Jar
  ;
 syntax Jar
         = 
-        ANY jarfile ANY basedir ANY compress ANY encoding ANY manifest
+        String jarfile String basedir String compress String encoding String manifest
  ;
 syntax FileTask
-        = 
-        ()
+        = Mkdir
+        | Copy
+        | Delete
  ;
 syntax Mkdir
         = 
-        dir: ANY
+        dir: String
  ;
 syntax Copy
         = 
-        ANY file ANY presservelastmodified ANY tofile ANY todir ANY overwrite ANY filtering ANY flatten ANY includeEmptyDirs ANY fileset ANY filterset ANY mapper
+        String file String presservelastmodified String tofile String todir String overwrite String filtering String flatten String includeEmptyDirs FileSet fileset FilterSet filterset Mapper mapper
  ;
 syntax Delete
         = 
-        ANY file ANY dir ANY verbose ANY quiet ANY failonerror ANY includeEmptyDirs ANY includes ANY includesfile ANY excludes ANY excludesfile ANY defaultexcludes
+        String file String dir String verbose String quiet String failonerror String includeEmptyDirs String includes String includesfile String excludes String excludesfile String defaultexcludes
  ;

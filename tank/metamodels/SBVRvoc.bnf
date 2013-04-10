@@ -1,71 +1,153 @@
 LocatedElement:
-        EPSILON
+        Root
+LocatedElement:
+        VocabularyEntry
+LocatedElement:
+        Caption
+LocatedElement:
+        PrimaryRepresentation
+LocatedElement:
+        ConceptDefinition
+LocatedElement:
+        ConceptSource
+LocatedElement:
+        Note
+LocatedElement:
+        Sentence
+LocatedElement:
+        NameSpaceURI
+LocatedElement:
+        Word
+LocatedElement:
+        SBVRExpression
+LocatedElement:
+        SBVRPropWithKW
+LocatedElement:
+        ModalForm
+LocatedElement:
+        SimpleSBVRProp
+LocatedElement:
+        SubSBVRProp
+LocatedElement:
+        LinkSBVRConcept
+LocatedElement:
+        ConjConcept
+LocatedElement:
+        Concept
+LocatedElement:
+        NounConcept
+LocatedElement:
+        Qualification
+LocatedElement:
+        GeneralConcept
+LocatedElement:
+        Qualifier
+LocatedElement:
+        ModalBegin
 Root:
-        entries::ANY+
+        entries::VocabularyEntry+
 VocabularyEntry:
-        primaryRep::ANY caption::ANY+
+        primaryRep::PrimaryRepresentation caption::Caption+
 Caption:
-        EPSILON
+        DefCaption
+Caption:
+        DescCaption
+Caption:
+        SrcCaption
+Caption:
+        DBCaption
+Caption:
+        GenCCaption
+Caption:
+        CTypCaption
+Caption:
+        Necessity
+Caption:
+        Possibility
+Caption:
+        RefSCaption
+Caption:
+        NoteCaption
+Caption:
+        ExCaption
+Caption:
+        SynCaption
+Caption:
+        SynFCaption
+Caption:
+        SeeCaption
+Caption:
+        SFCaption
+Caption:
+        NSURICaption
 DefCaption:
-        definition::ANY
+        definition::ConceptDefinition
 DescCaption:
-        description::ANY
+        description::Note
 SrcCaption:
-        source::ANY
+        source::ConceptSource
 DBCaption:
-        dictionaryBasis::ANY
+        dictionaryBasis::ConceptSource
 GenCCaption:
-        generalConcept::ANY
+        generalConcept::PrimaryRepresentation
 CTypCaption:
-        conceptType::ANY+
+        conceptType::PrimaryRepresentation+
 Necessity:
-        exp::ANY
+        exp::SBVRExpression
 Possibility:
-        exp::ANY
+        exp::SBVRExpression
 RefSCaption:
-        referenceScheme::ANY
+        referenceScheme::PrimaryRepresentation
 NoteCaption:
-        note::ANY
+        note::Note
 ExCaption:
-        example::ANY+
+        example::SBVRExpression+
 SynCaption:
-        synonym::ANY+
+        synonym::PrimaryRepresentation+
 SynFCaption:
-        synonymousForm::ANY+
+        synonymousForm::SBVRExpression+
 SeeCaption:
-        see::ANY
+        see::PrimaryRepresentation
 SFCaption:
-        subjectField::ANY
+        subjectField::PrimaryRepresentation
 NSURICaption:
-        namespaceURI::ANY
+        namespaceURI::NameSpaceURI
 PrimaryRepresentation:
-        EPSILON
+        NotFactTypeRepresentation
+PrimaryRepresentation:
+        FactTypeFormRepresentation
 NotFactTypeRepresentation:
-        EPSILON
+        TermRepresentation
+NotFactTypeRepresentation:
+        NameRepresentation
 TermRepresentation:
-        term::ANY+
+        term::StringWord+
 NameRepresentation:
-        hasThe::ANY name::ANY+
+        hasThe::Boolean name::NameWord+
 FactTypeFormRepresentation:
-        primaryRep1::ANY verbExp::ANY+ primaryRep2::ANY
+        primaryRep1::NotFactTypeRepresentation verbExp::Verb+ primaryRep2::NotFactTypeRepresentation
 ConceptDefinition:
-        exp::ANY conjexp::ANY+
+        exp::Concept conjexp::ConjConcept+
 ConceptSource:
-        source::ANY+
+        source::Word+
 Note:
-        sentences::ANY+
+        sentences::Sentence+
 Sentence:
-        words::ANY+
+        words::Word+
 NameSpaceURI:
-        URI::ANY+
+        URI::Word+
 Word:
-        EPSILON
+        StringWord
+Word:
+        QuotedStringWord
+Word:
+        NameWord
 StringWord:
-        val::ANY
+        val::String
 QuotedStringWord:
-        val::ANY
+        val::String
 NameWord:
-        val::ANY
+        val::String
 Verb:
         is::EPSILON
         relevant::EPSILON
@@ -141,40 +223,48 @@ EndOperator:
         not::EPSILON
         of::EPSILON
 SBVRExpression:
-        hasPoint::ANY firstProposition::ANY nextProposition::ANY+
+        hasPoint::Boolean firstProposition::SimpleSBVRProp nextProposition::SBVRPropWithKW+
 SBVRPropWithKW:
-        conjonction::ANY endConj::ANY proposition::ANY
+        conjonction::ConjonctionnalKeyWord endConj::EndOperator proposition::SimpleSBVRProp
 ModalForm:
-        modal::ANY isNeg::ANY
+        modal::ModalVerb isNeg::Boolean
 SimpleSBVRProp:
-        modal::ANY concept1::ANY modalVerb::ANY verbs::ANY+ concept2::ANY
+        modal::ModalBegin concept1::Concept modalVerb::ModalForm verbs::Verb+ concept2::Concept
 SubSBVRProp:
-        join::ANY modalVerb::ANY verbs::ANY+ concept2::ANY
+        join::Join modalVerb::ModalVerb verbs::Verb+ concept2::Concept
 LinkSBVRConcept:
-        link::ANY concept::ANY
+        link::Link concept::Concept
 ConjConcept:
-        conjonction::ANY concept::ANY
+        conjonction::ConjonctionnalKeyWord concept::Concept
 Concept:
-        EPSILON
+        NameConcept
+Concept:
+        ObjectConcept
+Concept:
+        StringConcept
 NameConcept:
-        the::ANY name::ANY+
+        the::Qualif name::NameWord+
 ObjectConcept:
-        operatoredConcept::ANY qualify::ANY
+        operatoredConcept::NounConcept qualify::Qualification
 StringConcept:
-        stringWord::ANY+
+        stringWord::QuotedStringWord+
 NounConcept:
-        qualif::ANY noun::ANY+
+        qualif::Qualifier noun::StringWord+
 Qualification:
-        generalConcept::ANY+
+        generalConcept::GeneralConcept+
 GeneralConcept:
-        EPSILON
+        NameGConcept
+GeneralConcept:
+        NounGConcept
 NameGConcept:
-        name::ANY
+        name::NameConcept
 NounGConcept:
-        noun::ANY+
+        noun::StringWord+
 Qualifier:
-        op::ANY endOperator::ANY min::ANY max::ANY
+        op::Qualif endOperator::EndOperator min::StringWord max::StringWord
 ModalBegin:
-        endOperator::ANY
+        ModalBeginC
+ModalBegin:
+        endOperator::EndOperator
 ModalBeginC:
         EPSILON

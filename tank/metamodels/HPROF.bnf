@@ -1,25 +1,41 @@
 LocatedElement:
-        EPSILON
+        Profile
+LocatedElement:
+        Method
+LocatedElement:
+        ThreadAction
+LocatedElement:
+        Trace
+LocatedElement:
+        StackTraceElement
+LocatedElement:
+        Times
+LocatedElement:
+        Time
+LocatedElement:
+        Date
 Profile:
-        header::ANY threadActions::ANY+ traces::ANY+ times::ANY methods::ANY+
+        header::String threadActions::ThreadAction+ traces::Trace+ times::Times methods::Method+
 Method:
-        fullyQualifiedName::ANY stackTraceElements::ANY+
+        fullyQualifiedName::String stackTraceElements::StackTraceElement+
 ThreadAction:
-        EPSILON
+        ThreadStart
+ThreadAction:
+        ThreadEnd
 ThreadStart:
-        obj::ANY name::ANY group::ANY
+        obj::Integer name::String group::String
 ThreadEnd:
-        id::ANY
+        id::Integer
 Trace:
-        id::ANY threadId::ANY elements::ANY+ times::ANY+
+        id::Integer threadId::Integer elements::StackTraceElement+ times::Time+
 StackTraceElement:
-        method::ANY fileName::ANY line::ANY trace::ANY
+        method::Method fileName::String line::Integer trace::Trace
 Times:
-        unit::ANY total::ANY date::ANY elements::ANY+
+        unit::String total::Integer date::Date elements::Time+
 Time:
-        rank::ANY self::ANY accum::ANY count::ANY trace::ANY method::ANY
+        rank::Integer self::Double accum::Double count::Integer trace::Trace method::Method
 Date:
-        day::ANY month::ANY dayOfMonth::ANY hour::ANY minutes::ANY seconds::ANY year::ANY
+        day::Day month::Month dayOfMonth::Integer hour::Integer minutes::Integer seconds::Integer year::Integer
 Day:
         Monday::EPSILON
         Tuesday::EPSILON

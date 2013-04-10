@@ -4,62 +4,94 @@ exports
   sorts
         ValuedElement Type Title Name Date Author Adress Organisation Phone Fax EMail Heading Abstract Keywords SectionBody Corps Value Cite Path Label Figure Item Items Enumerate Section Description Citation Bibliography DocumentBody Document 
   context-free syntax
-         -> ValuedElement
+        Type -> ValuedElement
 
-        value::ANY -> Type
+        Title -> ValuedElement
 
-        value::ANY -> Title
+        Name -> ValuedElement
 
-        author::ANY organisation::ANY -> Name
+        Date -> ValuedElement
 
-        value::ANY -> Date
+        Adress -> ValuedElement
 
-        names::ANY+ -> Author
+        Phone -> ValuedElement
 
-        value::ANY -> Adress
+        Fax -> ValuedElement
 
-        names::ANY+ adress::ANY heading::ANY -> Organisation
+        EMail -> ValuedElement
 
-        value::ANY -> Phone
+        Abstract -> ValuedElement
 
-        value::ANY -> Fax
+        Keywords -> ValuedElement
 
-        value::ANY -> EMail
+        Path -> ValuedElement
 
-        organisations::ANY+ phone::ANY fax::ANY email::ANY -> Heading
+        Label -> ValuedElement
 
-        value::ANY -> Abstract
+        Item -> ValuedElement
 
-        value::ANY -> Keywords
+        Description -> ValuedElement
 
-        corps::ANY+ section::ANY -> SectionBody
+        value::String -> Type
 
-         -> Corps
+        value::String -> Title
+
+        author::Author organisation::Organisation -> Name
+
+        value::String -> Date
+
+        names::Name+ -> Author
+
+        value::String -> Adress
+
+        names::Name+ adress::Adress heading::Heading -> Organisation
+
+        value::String -> Phone
+
+        value::String -> Fax
+
+        value::String -> EMail
+
+        organisations::Organisation+ phone::Phone fax::Fax email::EMail -> Heading
+
+        value::String -> Abstract
+
+        value::String -> Keywords
+
+        corps::Corps+ section::Section -> SectionBody
+
+        Figure -> Corps
+
+        Items -> Corps
+
+        Enumerate -> Corps
+
+        Section -> Corps
 
          -> Value
 
          -> Cite
 
-        value::ANY -> Path
+        value::String -> Path
 
-        value::ANY -> Label
+        value::String -> Label
 
-        path::ANY label::ANY title::ANY -> Figure
+        path::Path label::Label title::Title -> Figure
 
-        itemscontainer::ANY enumeratecontainer::ANY -> Item
+        itemscontainer::Items enumeratecontainer::Enumerate -> Item
 
-        item::ANY+ -> Items
+        item::Item+ -> Items
 
-        item::ANY+ -> Enumerate
+        item::Item+ -> Enumerate
 
-        title::ANY sectionBody::ANY -> Section
+        title::Title sectionBody::SectionBody -> Section
 
-        date::ANY -> Description
+        date::Date -> Description
 
-        label::ANY author::ANY description::ANY bibliography::ANY -> Citation
+        label::Label author::Author description::Description bibliography::Bibliography -> Citation
 
-        citations::ANY+ documentbody::ANY -> Bibliography
+        citations::Citation+ documentbody::DocumentBody -> Bibliography
 
-        sections::ANY+ bibliography::ANY+ document::ANY -> DocumentBody
+        sections::Section+ bibliography::Bibliography+ document::Document -> DocumentBody
 
-        type::ANY title::ANY author::ANY date::ANY heading::ANY abstract::ANY keywords::ANY documentbody::ANY -> Document
+        type::Type title::Title author::Author date::Date heading::Heading abstract::Abstract keywords::Keywords documentbody::DocumentBody -> Document

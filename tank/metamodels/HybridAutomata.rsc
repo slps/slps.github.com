@@ -3,9 +3,9 @@ module HybridAutomata
 
 syntax FiniteTransition
         = 
-        ANY trigger ANY guard ANY action
+        String trigger String guard String action
  ;
 syntax FiniteState
         = 
-        ANY name ANY position ANY isInit
+        String name String position Boolean isInit
  ;

@@ -1,5 +1,21 @@
 LocatedElement:
-        EPSILON
+        Eclipse
+LocatedElement:
+        Bundle
+LocatedElement:
+        RequireBundleAttribute
+LocatedElement:
+        Version
+LocatedElement:
+        RequiredBundle
+LocatedElement:
+        ImportedPackage
+LocatedElement:
+        ExportedPackage
+LocatedElement:
+        Package
+LocatedElement:
+        Xfriends
 Resolution:
         Mandatory::EPSILON
         Optional::EPSILON
@@ -7,28 +23,34 @@ Visibility:
         Private::EPSILON
         Reexport::EPSILON
 Eclipse:
-        bundles::ANY+ packages::ANY+
+        bundles::Bundle+ packages::Package+
 Bundle:
-        symbolicName::ANY singleton::ANY manifestVersion::ANY require::ANY+ version::ANY export::ANY+ import::ANY+ packages::ANY+
+        symbolicName::String singleton::Boolean manifestVersion::Integer require::RequiredBundle+ version::Version export::ExportedPackage+ import::ImportedPackage+ packages::Package+
 RequireBundleAttribute:
-        EPSILON
+        AttResolution
+RequireBundleAttribute:
+        AttVisibility
+RequireBundleAttribute:
+        Range
 AttResolution:
-        value::ANY
+        value::Resolution
 AttVisibility:
-        value::ANY
+        value::Visibility
 Range:
-        isLeftInclusive::ANY isRightInclusive::ANY lowerBound::ANY upperBound::ANY
+        isLeftInclusive::Boolean isRightInclusive::Boolean lowerBound::Version upperBound::Version
 Version:
-        major::ANY minor::ANY micro::ANY qualification::ANY
+        major::Integer minor::Integer micro::Integer qualification::String
 RequiredBundle:
-        requireBundleAttribute::ANY+ bundle::ANY
+        requireBundleAttribute::RequireBundleAttribute+ bundle::Bundle
 ImportedPackage:
-        resolution::ANY package::ANY range::ANY
+        resolution::Resolution package::Package range::Range
 ExportedPackage:
-        package::ANY version::ANY xFriends::ANY
+        Xinternal
+ExportedPackage:
+        package::Package version::Version xFriends::Xfriends
 Package:
-        fqn::ANY importedBy::ANY+ exportedBy::ANY
+        fqn::String importedBy::ImportedPackage+ exportedBy::ExportedPackage
 Xfriends:
-        bundles::ANY+
+        bundles::Bundle+
 Xinternal:
-        value::ANY
+        value::Boolean

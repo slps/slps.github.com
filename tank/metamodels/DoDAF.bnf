@@ -1,21 +1,85 @@
 Element:
-        EPSILON
+        System
+Element:
+        SystemRole
+Element:
+        SystemFunction
+Element:
+        SystemRoleInterface
+Element:
+        SystemAtNode
+Element:
+        SystemAtNodeInterface
+Element:
+        SystemsNode
+Element:
+        COI
+Element:
+        Vocabulary
+Element:
+        DataReference
+Element:
+        Performer
+Element:
+        OperationalRole
+Element:
+        OperationalActivity
+Element:
+        Product
+Element:
+        SystemProductFlow
+Element:
+        ConstraintOrRequirement
+Element:
+        DIA
+Element:
+        NMJIC
+Element:
+        HigherEchelon
+Element:
+        JFC
+Element:
+        F2C2
+Element:
+        ComponentCommand
+Element:
+        SubordinateAirCommand
+Element:
+        AOCCID
+Element:
+        AOCCombatPlanStrategyCells
 System:
-        decomposes::ANY+ fulfills::ANY+
+        decomposes::System+ fulfills::SystemRole+
 SystemRole:
-        decomposes::ANY+ performs::ANY+ terminatesAt::ANY
+        ServiceProvider
+SystemRole:
+        decomposes::SystemRole+ performs::SystemFunction+ terminatesAt::SystemRoleInterface
 SystemFunction:
-        decomposes::ANY+ consumes::ANY+ produces::ANY+ terminatesAt::ANY mesuredBy::ANY+
+        Service
+SystemFunction:
+        decomposes::SystemFunction+ consumes::Product+ produces::Product+ terminatesAt::SystemProductFlow mesuredBy::ConstraintOrRequirement+
 Service:
         EPSILON
 SystemRoleInterface:
-        originatesFrom::ANY
+        ServiceDependency
+SystemRoleInterface:
+        originatesFrom::SystemRole
 ServiceDependency:
         EPSILON
 ServiceProvider:
-        EPSILON
+        ServiceMediator
+ServiceProvider:
+        ServiceMediator
 ServiceMediator:
-        EPSILON
+        ServiceRegistry
+ServiceMediator:
+        ServiceLocator
+ServiceMediator:
+        ServiceBroker
+ServiceMediator:
+        ServiceRegistry
+        ServiceLocator
+        ServiceBroker
 ServiceRegistry:
         EPSILON
 ServiceLocator:
@@ -23,92 +87,119 @@ ServiceLocator:
 ServiceBroker:
         EPSILON
 SystemAtNode:
-        references::ANY terminatesAt::ANY
+        references::System terminatesAt::SystemAtNodeInterface
 SystemAtNodeInterface:
-        originatesFrom::ANY
+        originatesFrom::SystemAtNode
 SystemsNode:
-        groups::ANY+
+        groups::SystemAtNode+
 COI:
-        comprises::ANY+ defines::ANY
+        comprises::Performer+ defines::Vocabulary
 Vocabulary:
-        comprises::ANY+
+        comprises::DataReference+
 DataReference:
-        defineBy::ANY
+        defineBy::Data
 Performer:
-        decomposes::ANY+ fulfills::ANY+
+        decomposes::Performer+ fulfills::OperationalRole+
 OperationalRole:
-        decomposes::ANY+ accomplishes::ANY+
+        decomposes::OperationalRole+ accomplishes::OperationalActivity+
 OperationalActivity:
-        decomposes::ANY+ supports::ANY+
+        decomposes::OperationalRole+ supports::SystemFunction+
 Product:
-        name::ANY content::ANY
+        Material
+Product:
+        Data
+Product:
+        Material
+        Data
 Material:
         EPSILON
 Data:
         EPSILON
 SystemProductFlow:
-        transports::ANY+ originatesFrom::ANY
+        transports::Product+ originatesFrom::SystemFunction
 ConstraintOrRequirement:
-        EPSILON
+        Constraint
+ConstraintOrRequirement:
+        QualityRequirement
 Constraint:
         
 QualityRequirement:
         
 DIA:
-        nmjic::ANY higherEchelon::ANY
+        nmjic::NMJIC higherEchelon::HigherEchelon
 NMJIC:
-        dia::ANY
+        dia::DIA
 HigherEchelon:
-        dia::ANY jfc::ANY
+        dia::DIA jfc::JFC
 JFC:
-        higherEchelon::ANY f2c2::ANY componentComand::ANY
+        higherEchelon::HigherEchelon f2c2::F2C2 componentComand::ComponentCommand
 F2C2:
-        jfc::ANY
+        jfc::JFC
 ComponentCommand:
-        jfc::ANY
+        DJFLCC
+ComponentCommand:
+        JFACC
+ComponentCommand:
+        JFMCC
+ComponentCommand:
+        JFSOCC
+ComponentCommand:
+        jfc::JFC
 DJFLCC:
         EPSILON
 JFACC:
-        subordinateAirCommand::ANY aoccid::ANY+ aoccpsc::ANY+
+        subordinateAirCommand::SubordinateAirCommand aoccid::AOCCID+ aoccpsc::AOCCombatPlanStrategyCells+
 JFMCC:
         EPSILON
 JFSOCC:
         EPSILON
 SubordinateAirCommand:
-        jfacc::ANY
+        MAW
+SubordinateAirCommand:
+        WOC
+SubordinateAirCommand:
+        jfacc::JFACC
 MAW:
         EPSILON
 WOC:
         EPSILON
 AOCCID:
-        name::ANY content::ANY
+        name::String content::String
 AOCCombatPlanStrategyCells:
-        name::ANY content::ANY
+        name::String content::String
 ResultData:
-        sourceID::ANY timeStamp::ANY cr::ANY+ bdaReport::ANY+
+        CombatReport
+ResultData:
+        WSV
+ResultData:
+        MISREP
+ResultData:
+        Imagery
+ResultData:
+        sourceID::String timeStamp::String cr::CollectionRequirement+ bdaReport::BDAReport+
 CombatReport:
-        friendlyUnitsInvolved::ANY combatLocation::ANY resultsAssessment::ANY duration::ANY
+        friendlyUnitsInvolved::String combatLocation::String resultsAssessment::String duration::String
 WSV:
-        missionID::ANY weaponfSystemID::ANY videoType::ANY
+        missionID::String weaponfSystemID::String videoType::String
 MISREP:
-        missionID::ANY missionObjectives::ANY missionAssesments::ANY
+        missionID::String missionObjectives::String missionAssesments::String
 Imagery:
-        imageType::ANY spectralData::ANY geospacialLocation::ANY imageSize::ANY
+        imageType::String spectralData::String geospacialLocation::String imageSize::Integer
 CollectionRequirement:
-        sourceID::ANY collectionTargetID::ANY toBeDoneByTime::ANY specialNeeds::ANY rd::ANY+ ato::ANY+ isContainedIn::ANY+
+        sourceID::String collectionTargetID::String toBeDoneByTime::String specialNeeds::String rd::ResultData+ ato::ATO+ isContainedIn::Target+
 BDAReport:
-        targetID::ANY reportSourceID::ANY assesmentSumart::ANY validityDuration::ANY rd::ANY+ mea::ANY
+        targetID::String reportSourceID::String assesmentSumart::String validityDuration::String rd::ResultData+ mea::MunitionsEffectsAssesment
 MunitionsEffectsAssesment:
-        bdaReport::ANY ato::ANY tn::ANY
+        bdaReport::BDAReport ato::ATO tn::TargetNomination
 ATO:
-        timePeriod::ANY cr::ANY+ mea::ANY tn::ANY+ rr::ANY
+        timePeriod::String cr::CollectionRequirement+ mea::MunitionsEffectsAssesment tn::TargetNomination+ rr::RestrikeRecommendation
 RestrikeRecommendation:
-        ato::ANY tn::ANY
+        ato::ATO tn::TargetNomination
 TargetNomination:
-        ato::ANY+ mea::ANY+ rr::ANY target::ANY
+        ato::ATO+ mea::MunitionsEffectsAssesment+ rr::RestrikeRecommendation target::Target
 TargetMaterialsAnalysis:
-        targetID::ANY target::ANY
+        targetID::String target::Target
 Target:
-        cr::ANY+ tn::ANY holds::ANY describes::ANY+
+        cr::CollectionRequirement+ tn::TargetNomination holds::MIDB describes::TargetMaterialsAnalysis+
 MIDB:
-        target::ANY+
+        target::Target+

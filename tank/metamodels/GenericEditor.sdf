@@ -4,22 +4,36 @@ exports
   sorts
         LocatedElement Editor AbstractElement Block GroupElement Element Format Color Font Indent 
   context-free syntax
-         -> LocatedElement
+        Editor -> LocatedElement
 
-        extension::ANY abstractElements::ANY+ -> Editor
+        AbstractElement -> LocatedElement
 
-         -> AbstractElement
+        Element -> LocatedElement
 
-        blockbegin::ANY blockend::ANY -> Block
+        Format -> LocatedElement
 
-        indent::ANY element::ANY+ -> GroupElement
+        Color -> LocatedElement
 
-        element::ANY groupElement::ANY -> Element
+        Font -> LocatedElement
 
-        color::ANY font::ANY -> Format
+        Indent -> LocatedElement
 
-        red::ANY green::ANY blue::ANY -> Color
+        extension::String abstractElements::AbstractElement+ -> Editor
 
-        font::ANY bold::ANY italic::ANY -> Font
+        Block -> AbstractElement
 
-        retrait::ANY groupElementIndent::ANY -> Indent
+        GroupElement -> AbstractElement
+
+        blockbegin::String blockend::String -> Block
+
+        indent::Indent element::Element+ -> GroupElement
+
+        element::String groupElement::GroupElement -> Element
+
+        color::Color font::Font -> Format
+
+        red::Integer green::Integer blue::Integer -> Color
+
+        font::String bold::Boolean italic::Boolean -> Font
+
+        retrait::String groupElementIndent::GroupElement -> Indent

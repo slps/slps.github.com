@@ -4,50 +4,70 @@ exports
   sorts
         Dimension Point BezierPoint Property DiagramElement Reference GraphElement GraphEdge GraphNode GraphConnector DiagramLink SemanticModelBridge Diagram SimpleSemanticModelElement UML1SemanticModelBridge CoreSemanticModelBridge CoreElement ElementsElement LeafElement TextElement Image GraphicPrimitive Polyline Ellipse 
   context-free syntax
-        width::ANY heigth::ANY -> Dimension
+        width::Double heigth::Double -> Dimension
 
-        x::ANY y::ANY -> Point
+        BezierPoint -> Point
 
-        controls::ANY -> BezierPoint
+        x::Double y::Double -> Point
 
-        key::ANY value::ANY -> Property
+        controls::Point -> BezierPoint
 
-         -> DiagramElement
+        key::String value::String -> Property
 
-        isIndividualRepresentation::ANY referenced::ANY -> Reference
+        Reference -> DiagramElement
 
-         -> GraphElement
+        GraphElement -> DiagramElement
 
-        waypoints::ANY anchors::ANY -> GraphEdge
+        LeafElement -> DiagramElement
 
-        size::ANY -> GraphNode
+        isIndividualRepresentation::Boolean referenced::DiagramElement -> Reference
 
-        position::ANY gc_graphElement::ANY graphEdges::ANY+ -> GraphConnector
+        GraphEdge -> GraphElement
 
-        zoom::ANY viewPort::ANY dl_graphElement::ANY dl_diagram::ANY -> DiagramLink
+        GraphNode -> GraphElement
 
-         -> SemanticModelBridge
+        waypoints::Point anchors::GraphConnector -> GraphEdge
 
-        name::ANY zoom::ANY viewPort::ANY diagramLinks::ANY+ namespace::ANY -> Diagram
+        Diagram -> GraphNode
 
-        typeInfo::ANY -> SimpleSemanticModelElement
+        size::Dimension -> GraphNode
 
-        element::ANY -> UML1SemanticModelBridge
+        position::Point gc_graphElement::GraphElement graphEdges::GraphEdge+ -> GraphConnector
 
-        element::ANY -> CoreSemanticModelBridge
+        zoom::Double viewPort::Point dl_graphElement::GraphElement dl_diagram::Diagram -> DiagramLink
+
+        SimpleSemanticModelElement -> SemanticModelBridge
+
+        UML1SemanticModelBridge -> SemanticModelBridge
+
+        CoreSemanticModelBridge -> SemanticModelBridge
+
+        name::String zoom::Double viewPort::Point diagramLinks::DiagramLink+ namespace::SemanticModelBridge -> Diagram
+
+        typeInfo::String -> SimpleSemanticModelElement
+
+        element::CoreElement -> UML1SemanticModelBridge
+
+        element::ElementsElement -> CoreSemanticModelBridge
 
          -> CoreElement
 
          -> ElementsElement
 
-         -> LeafElement
+        TextElement -> LeafElement
 
-        text::ANY -> TextElement
+        Image -> LeafElement
 
-        uri::ANY mimeType::ANY -> Image
+        GraphicPrimitive -> LeafElement
 
-         -> GraphicPrimitive
+        text::String -> TextElement
 
-        waypoints::ANY closed::ANY -> Polyline
+        uri::String mimeType::String -> Image
 
-        center::ANY radiusX::ANY radiusY::ANY rotation::ANY startAngle::ANY endAngle::ANY -> Ellipse
+        Polyline -> GraphicPrimitive
+
+        Ellipse -> GraphicPrimitive
+
+        waypoints::Point closed::Boolean -> Polyline
+
+        center::Point radiusX::Double radiusY::Double rotation::Double startAngle::Double endAngle::Double -> Ellipse

@@ -3,31 +3,35 @@ module SEE_Design
 
 syntax LogFile
         = 
-        ANY file ANY instance ANY logger
+        String file LogFile instance Logger logger
  ;
 syntax Logger
         = 
-        ANY instance ANY expression ANY logFile
+        Logger instance Expression expression LogFile logFile
  ;
 syntax Expression
-        = 
-        ANY loggingOn ANY logger
+        = Literal
+        | UnaryOperator
+        | BinaryOperator
+        | Boolean loggingOn Logger logger
  ;
 syntax Literal
-        = 
-        value: ANY
+        = VariableExpression
+        | NumberExpression
+        | value: Integer
  ;
 syntax VariableExpression
         = 
-        name: ANY
+        name: String
  ;
 syntax NumberExpression
         = 
         ()
  ;
 syntax UnaryOperator
-        = 
-        operand: ANY
+        = UnaryPlusOp
+        | UnaryMinusOp
+        | operand: Expression
  ;
 syntax UnaryPlusOp
         = 
@@ -38,8 +42,9 @@ syntax UnaryMinusOp
         ()
  ;
 syntax BinaryOperator
-        = 
-        ANY operand1 ANY operand2
+        = PlusOperator
+        | MinusOperator
+        | Expression operand1 Expression operand2
  ;
 syntax PlusOperator
         = 

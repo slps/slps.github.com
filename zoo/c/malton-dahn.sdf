@@ -3,8 +3,467 @@ module Main
 exports
  context-free start-symbols program
   sorts
-        Comment-NL Null-declaration Local-label Ptr-qualifier Restrict-qualifier Designator Array-designator Struct-or-union-designator Designator-assignment Extension-specifier Bit-qualifier Inline-qualifier Attributes-or-asm Attribute-spec Attribute-extension Tagged-attribute-id Tagged-attribute-number Attribute-near Attribute-far Attribute-visibility Visibility-type Attribute-nonnull Attribute-nothrow Attribute-may-alias Attribute-tls-model Tls-model-type Attribute-cleanup Attribute-dllexport Attribute-used Attribute-always-inline Attribute-noinline Attribute-vector-size Attribute-deprecated Attribute-mode Attribute-format Attribute-format-arg Attribute-aligned Attribute-weak Attribute-alias Attribute-no-check-mem Attribute-regparm Attribute-stdcall Attribute-cdecl Attribute-longcall Attribute-long-call Attribute-short-call Attribute-dllimport Attribute-exception Exception-function Exception-arg Attribute-funvector Attribute-interrupt Attribute-interrupt-handler Attribute-sp-switch Attribute-trap-exit Attribute-eightbit Attribute-tiny Attribute-signal Attribute-naked Attribute-model Attribute-model-name Attribute-nocommon Attribute-shared Attribute-malloc Format-archetype Attribute-noreturn Attribute-const Attribute-pure Attribute-trans-union Attribute-unused Attribute-packed Attribute-no-instrument Attribute-section Attribute-constructor Attribute-destructor Asm-statement Asm-spec Asm-or-cv Asm-template Asm-output-operands Asm-input-operands Asm-operand Asm-clobbered-registers Compound-statement-expression Compound-literal Compound-literal-array-type Compound-literal-array-declarator Typeof-expression Typeof-specifier Complex-specifier Simple-type-or-qualifier Gnu-long-int Gnu-long-int-string Gnu-long-int-charlit Hexfloat Argument-expression Alignof-expression 
+        C-compilation-unit Constant String Expression Constant-expression Assignment-expression Assignment-operation Assignment-operator Conditional-expression Conditional-operation Binary-expression Binary-operator Unary-expression Sizeof-expression Unary-operator Postfix-expression Reference Reference-id Reference-expression Unannotated-reference-base Nonreference Nonreferential-primary Postfix-extension Declaration Declaration-body Decl-specifiers Struct-or-union-specifier Tagged-reference-id Member-declaration Member-declarator Bitfieldsize Decl-qualifier Sc-specifier Type-specifier Type-qualifier Simple-type-name Type-id Struct-or-union Enum-specifier Enumerator Enumerator-value Init-declarator Declarator Base-declarator Declarator-extension Function-declarator-extension Array-declarator-extension Ptr-operator Cv-qualifier Type-name Type-specifiers Abstract-declarator Argument-declaration-list Argument-declaration Argument-declarator Initialization Initializer Statement Label Label-id Unlabeled-statement Null-statement Compound-statement Compound-statement-body Expression-statement If-statement Switch-statement Else-statement While-statement Do-statement For-statement Jump-statement Declaration-or-function-definition Function-definition KR-parameter-decls Semi Program Preprocessor Filepath File-id Slash-fileid Slash Comment-NL Null-declaration Local-label Ptr-qualifier Restrict-qualifier Designator Array-designator Struct-or-union-designator Designator-assignment Extension-specifier Bit-qualifier Inline-qualifier Attributes-or-asm Attribute-spec Attribute-extension Tagged-attribute-id Tagged-attribute-number Attribute-near Attribute-far Attribute-visibility Visibility-type Attribute-nonnull Attribute-nothrow Attribute-may-alias Attribute-tls-model Tls-model-type Attribute-cleanup Attribute-dllexport Attribute-used Attribute-always-inline Attribute-noinline Attribute-vector-size Attribute-deprecated Attribute-mode Attribute-format Attribute-format-arg Attribute-aligned Attribute-weak Attribute-alias Attribute-no-check-mem Attribute-regparm Attribute-stdcall Attribute-cdecl Attribute-longcall Attribute-long-call Attribute-short-call Attribute-dllimport Attribute-exception Exception-function Exception-arg Attribute-funvector Attribute-interrupt Attribute-interrupt-handler Attribute-sp-switch Attribute-trap-exit Attribute-eightbit Attribute-tiny Attribute-signal Attribute-naked Attribute-model Attribute-model-name Attribute-nocommon Attribute-shared Attribute-malloc Format-archetype Attribute-noreturn Attribute-const Attribute-pure Attribute-trans-union Attribute-unused Attribute-packed Attribute-no-instrument Attribute-section Attribute-constructor Attribute-destructor Asm-statement Asm-spec Asm-or-cv Asm-template Asm-output-operands Asm-input-operands Asm-operand Asm-clobbered-registers Compound-statement-expression Compound-literal Compound-literal-array-type Compound-literal-array-declarator Typeof-expression Typeof-specifier Complex-specifier Simple-type-or-qualifier Gnu-long-int Gnu-long-int-string Gnu-long-int-charlit Hexfloat Argument-expression Alignof-expression Designated-initializer 
   context-free syntax
+        Declaration-or-function-definition* -> C-compilation-unit
+
+        Number -> Constant
+        Float -> Constant
+        Hex -> Constant
+        Long -> Constant
+        SP Dotfloat -> Constant
+        Charlit -> Constant
+        String -> Constant
+
+        Gnu-long-int -> Constant
+        Gnu-long-int-string+ -> Constant
+        Hexfloat -> Constant
+
+        Stringlit+ -> String
+
+        Assignment-expression+ -> Expression
+
+        Comment-NL* "..." -> Expression
+
+        Conditional-expression -> Constant-expression
+
+        Restrict-qualifier -> Constant-expression
+
+        Conditional-expression Assignment-operation? -> Assignment-expression
+
+        Conditional-expression -> Assignment-expression
+        Conditional-expression Assignment-operation -> Assignment-expression
+
+        Assignment-operator Assignment-expression -> Assignment-operation
+
+        "=" -> Assignment-operator
+        "*=" -> Assignment-operator
+        "/=" -> Assignment-operator
+        "%=" -> Assignment-operator
+        "+=" -> Assignment-operator
+        "-=" -> Assignment-operator
+        ">>=" -> Assignment-operator
+        "<<=" -> Assignment-operator
+        "&=" -> Assignment-operator
+        "^=" -> Assignment-operator
+        "|=" -> Assignment-operator
+
+        Binary-expression Conditional-operation? -> Conditional-expression
+
+        Binary-expression Conditional-operation* -> Conditional-expression
+
+        "?" Expression ":" Conditional-expression -> Conditional-operation
+
+        "?" Expression? ":" Binary-expression -> Conditional-operation
+
+        Unary-expression -> Binary-expression
+        Binary-expression Binary-operator Unary-expression -> Binary-expression
+
+        "+" -> Binary-operator
+        "-" -> Binary-operator
+        "*" -> Binary-operator
+        "/" -> Binary-operator
+        "%" -> Binary-operator
+        "==" -> Binary-operator
+        "!=" -> Binary-operator
+        "<" -> Binary-operator
+        ">" -> Binary-operator
+        "<=" -> Binary-operator
+        ">=" -> Binary-operator
+        "||" -> Binary-operator
+        "&&" -> Binary-operator
+        "|" -> Binary-operator
+        "^" -> Binary-operator
+        "&" -> Binary-operator
+        "<<" -> Binary-operator
+        ">>" -> Binary-operator
+
+        Postfix-expression -> Unary-expression
+        Unary-operator SPOFF Unary-expression SPON -> Unary-expression
+        "(" Type-name ")" Unary-expression -> Unary-expression
+        Sizeof-expression -> Unary-expression
+
+        Alignof-expression -> Unary-expression
+
+        "sizeof" "(" Type-name ")" -> Sizeof-expression
+        "sizeof" Unary-expression -> Sizeof-expression
+
+        "sizeof" Unary-expression -> Sizeof-expression
+        "sizeof" "(" Type-name ")" -> Sizeof-expression
+
+        "*" -> Unary-operator
+        "&" -> Unary-operator
+        "+" -> Unary-operator
+        "-" -> Unary-operator
+        "!" -> Unary-operator
+        "~" -> Unary-operator
+        "++" -> Unary-operator
+        "--" -> Unary-operator
+
+        "&&" -> Unary-operator
+
+        Reference -> Postfix-expression
+        Nonreference -> Postfix-expression
+
+        Reference-id -> Reference
+        Reference-expression -> Reference
+
+        Id -> Reference-id
+
+        Unannotated-reference-base Postfix-extension* -> Reference-expression
+
+        Reference-id -> Unannotated-reference-base
+        Nonreferential-primary -> Unannotated-reference-base
+
+        Nonreferential-primary Postfix-extension* -> Nonreference
+
+        Constant -> Nonreferential-primary
+        String -> Nonreferential-primary
+        "(" Expression ")" -> Nonreferential-primary
+
+        Constant -> Nonreferential-primary
+        String -> Nonreferential-primary
+        "(" Expression ")" -> Nonreferential-primary
+        Compound-statement-expression -> Nonreferential-primary
+        Compound-literal -> Nonreferential-primary
+        Extension-specifier Compound-statement-expression -> Nonreferential-primary
+        Extension-specifier "(" Expression ")" -> Nonreferential-primary
+
+        "[" Expression "]" -> Postfix-extension
+        "(" Expression? ")" -> Postfix-extension
+        "." Id -> Postfix-extension
+        "->" Id -> Postfix-extension
+        "++" -> Postfix-extension
+        "--" -> Postfix-extension
+
+        "[" Expression "]" -> Postfix-extension
+        "(" 
+		Argument-expression
+		","
+	       ")" -> Postfix-extension
+        "." Id -> Postfix-extension
+        "->" Id -> Postfix-extension
+        "++" -> Postfix-extension
+        "--" -> Postfix-extension
+
+        Declaration-body Semi -> Declaration
+        Preprocessor -> Declaration
+
+        Comment-NL -> Declaration
+
+        Null-declaration -> Declaration
+        Declaration-body Semi -> Declaration
+        Preprocessor -> Declaration
+
+        Decl-specifiers Init-declarator+ -> Declaration-body
+        Enum-specifier -> Declaration-body
+        Struct-or-union-specifier -> Declaration-body
+
+        Decl-specifiers Init-declarator+ -> Declaration-body
+        Decl-qualifier* Struct-or-union-specifier -> Declaration-body
+        Decl-qualifier* Enum-specifier Attribute-spec* -> Declaration-body
+        Local-label Declarator+ -> Declaration-body
+        Asm-spec -> Declaration-body
+
+        Decl-qualifier* Type-specifier? Decl-qualifier* -> Decl-specifiers
+
+        Decl-qualifier* Type-specifier Decl-qualifier* -> Decl-specifiers
+        Decl-qualifier* -> Decl-specifiers
+
+        Struct-or-union Tagged-reference-id? "{" IN NL Member-declaration* EX "}" -> Struct-or-union-specifier
+        Struct-or-union Tagged-reference-id -> Struct-or-union-specifier
+
+        Struct-or-union Attribute-spec* Tagged-reference-id? "{" IN NL Member-declaration* EX "}" Attribute-spec* -> Struct-or-union-specifier
+        Struct-or-union Attribute-spec* Tagged-reference-id -> Struct-or-union-specifier
+
+        Reference-id -> Tagged-reference-id
+
+        Decl-specifiers Member-declarator+ Semi -> Member-declaration
+        Preprocessor -> Member-declaration
+
+        Comment-NL -> Member-declaration
+
+        Decl-specifiers Member-declarator+ Semi -> Member-declaration
+        Decl-qualifier* Struct-or-union-specifier Semi -> Member-declaration
+        Semi -> Member-declaration
+        Preprocessor -> Member-declaration
+
+        Declarator Bitfieldsize? -> Member-declarator
+        Bitfieldsize -> Member-declarator
+
+        Declarator Bitfieldsize? Attributes-or-asm* -> Member-declarator
+        Bitfieldsize -> Member-declarator
+
+        ":" Constant-expression -> Bitfieldsize
+
+        Sc-specifier -> Decl-qualifier
+        Cv-qualifier -> Decl-qualifier
+        Type-qualifier -> Decl-qualifier
+
+        Sc-specifier -> Decl-qualifier
+        Type-qualifier -> Decl-qualifier
+        Attribute-spec -> Decl-qualifier
+        Extension-specifier -> Decl-qualifier
+
+        "auto" -> Sc-specifier
+        "register" -> Sc-specifier
+        "static" -> Sc-specifier
+        "extern" -> Sc-specifier
+        "typedef" -> Sc-specifier
+
+        Simple-type-name -> Type-specifier
+        Enum-specifier -> Type-specifier
+        Struct-or-union-specifier -> Type-specifier
+
+        Typeof-expression -> Type-specifier
+        Complex-specifier -> Type-specifier
+
+        "long" -> Type-qualifier
+        "short" -> Type-qualifier
+        "signed" -> Type-qualifier
+        "unsigned" -> Type-qualifier
+
+        Bit-qualifier -> Type-qualifier
+        Inline-qualifier -> Type-qualifier
+        Cv-qualifier -> Type-qualifier
+        Restrict-qualifier -> Type-qualifier
+
+        "char" -> Simple-type-name
+        "int" -> Simple-type-name
+        "void" -> Simple-type-name
+        "float" -> Simple-type-name
+        "double" -> Simple-type-name
+        Type-id -> Simple-type-name
+
+        Reference-id -> Type-id
+
+        "struct" -> Struct-or-union
+        "union" -> Struct-or-union
+
+        "enum" Tagged-reference-id? "{" 
+		Enumerator
+		","
+	       "}" -> Enum-specifier
+        "enum" Tagged-reference-id -> Enum-specifier
+
+        "enum" Tagged-reference-id -> Enum-specifier
+        "enum" Tagged-reference-id? "{" 
+		Enumerator
+		","
+	       ","? "}" -> Enum-specifier
+
+        Reference-id Enumerator-value? -> Enumerator
+
+        "=" Constant-expression -> Enumerator-value
+
+        Declarator Initialization? -> Init-declarator
+
+        Declarator Initialization? Attributes-or-asm* -> Init-declarator
+
+        Ptr-operator* Base-declarator SPON Declarator-extension* -> Declarator
+
+        Attribute-spec* Ptr-operator* Base-declarator Declarator-extension* Attribute-spec* -> Declarator
+
+        Reference-id -> Base-declarator
+        "(" Declarator ")" -> Base-declarator
+
+        Attribute-spec* Reference-id -> Base-declarator
+        Attribute-spec* "(" Declarator ")" -> Base-declarator
+
+        Function-declarator-extension -> Declarator-extension
+        Array-declarator-extension -> Declarator-extension
+
+        "(" Argument-declaration-list ")" Cv-qualifier* -> Function-declarator-extension
+
+        "[" Constant-expression? "]" -> Array-declarator-extension
+
+        "*" Cv-qualifier* SPOFF -> Ptr-operator
+
+        "*" Ptr-qualifier* -> Ptr-operator
+
+        "const" -> Cv-qualifier
+        "volatile" -> Cv-qualifier
+
+        "const" -> Cv-qualifier
+        "volatile" -> Cv-qualifier
+        "__const" -> Cv-qualifier
+        "__const__" -> Cv-qualifier
+        "const__" -> Cv-qualifier
+        "__volatile__" -> Cv-qualifier
+        "__volatile" -> Cv-qualifier
+        "volatile__" -> Cv-qualifier
+
+        Type-specifiers Abstract-declarator? -> Type-name
+
+        Type-qualifier+ Type-specifier? Type-qualifier* -> Type-specifiers
+        Type-specifier Type-qualifier* -> Type-specifiers
+
+        Type-qualifier* Type-specifier Type-qualifier* -> Type-specifiers
+        Type-qualifier* -> Type-specifiers
+
+        Ptr-operator+ Declarator-extension* -> Abstract-declarator
+        "(" Abstract-declarator ")" Declarator-extension* -> Abstract-declarator
+
+        Ptr-operator+ Declarator-extension* -> Abstract-declarator
+        Array-declarator-extension* -> Abstract-declarator
+        "(" Abstract-declarator ")" Declarator-extension* -> Abstract-declarator
+
+        
+	Argument-declaration
+	","
+       -> Argument-declaration-list
+
+        "..." Comment-NL* -> Argument-declaration-list
+
+        Decl-specifiers Argument-declarator? -> Argument-declaration
+        "..." -> Argument-declaration
+
+        Comment-NL* "..." -> Argument-declaration
+
+        "..." Comment-NL* -> Argument-declaration
+
+        Declarator -> Argument-declarator
+        Abstract-declarator -> Argument-declarator
+
+        "=" Initializer -> Initialization
+        "(" Constant-expression ")" -> Initialization
+
+        Comment-NL* "..." -> Initialization
+
+        Expression -> Initializer
+        NL "{" IN 
+		Initializer
+		","
+	       ","? EX "}" -> Initializer
+
+        Comment-NL* "..." -> Initializer
+
+        Assignment-expression -> Initializer
+        NL "{" IN 
+		Designated-initializer
+		","
+	       ","? EX "}" -> Initializer
+
+        Label* Unlabeled-statement -> Statement
+        Preprocessor -> Statement
+
+        Comment-NL -> Statement
+
+        Label -> Statement
+
+        Label-id ":" -> Label
+        EX SP SP "case" Constant-expression ":" IN NL -> Label
+        EX SP SP "default" ":" IN NL -> Label
+
+        Label-id ":" Attribute-spec* -> Label
+        EX SP SP "case" Constant-expression ":" IN NL -> Label
+        EX SP SP "case" Constant-expression SP "..." SP Constant-expression ":" IN NL -> Label
+        EX SP SP "default" ":" IN NL -> Label
+
+        Id -> Label-id
+
+        Expression-statement -> Unlabeled-statement
+        If-statement -> Unlabeled-statement
+        For-statement -> Unlabeled-statement
+        While-statement -> Unlabeled-statement
+        Switch-statement -> Unlabeled-statement
+        Do-statement -> Unlabeled-statement
+        Null-statement -> Unlabeled-statement
+        Jump-statement -> Unlabeled-statement
+        Compound-statement -> Unlabeled-statement
+
+        Asm-statement -> Unlabeled-statement
+
+        Semi -> Null-statement
+
+        "{" IN NL Compound-statement-body "}" ";"? NL -> Compound-statement
+
+        Comment-NL* "..." -> Compound-statement
+
+        "{" NL Compound-statement-body* "}" ";"? NL -> Compound-statement
+
+        Statement* EX -> Compound-statement-body
+        Declaration Compound-statement-body -> Compound-statement-body
+
+        IN Declaration EX -> Compound-statement-body
+        IN Function-definition EX -> Compound-statement-body
+        IN Statement EX -> Compound-statement-body
+
+        Expression Semi -> Expression-statement
+
+        "if" "(" Expression ")" Statement Else-statement? -> If-statement
+
+        "if" "(" Expression ")" Comment-NL* Statement Else-statement? -> If-statement
+
+        "switch" "(" Expression ")" Statement -> Switch-statement
+
+        "switch" "(" Expression ")" Comment-NL* Statement -> Switch-statement
+
+        "else" Statement -> Else-statement
+
+        "while" "(" Expression ")" Statement -> While-statement
+
+        "do" Statement "while" "(" Expression ")" Semi -> Do-statement
+
+        "for" "(" Expression? ";" Expression? ";" Expression? ")" Statement -> For-statement
+
+        "for" "(" Declaration-body ";" Expression? ";" Expression? ")" Statement -> For-statement
+
+        "goto" Label-id Semi -> Jump-statement
+        "continue" Semi -> Jump-statement
+        "break" Semi -> Jump-statement
+        "return" Expression? Semi -> Jump-statement
+
+        "goto" Ptr-operator Expression Semi -> Jump-statement
+
+        Declaration -> Declaration-or-function-definition
+        Function-definition -> Declaration-or-function-definition
+
+        NL Decl-specifiers Declarator KR-parameter-decls? Compound-statement NL -> Function-definition
+
+        NL IN Declaration+ EX -> KR-parameter-decls
+
+        ";" NL -> Semi
+
+        C-compilation-unit -> Program
+
+        "#define" Id "(" Id+ ")" Expression NL -> Preprocessor
+        "#define" Id Expression NL -> Preprocessor
+        EX "#else" IN NL -> Preprocessor
+        EX "#endif" NL NL -> Preprocessor
+        NL "#if" Expression IN NL -> Preprocessor
+        NL "#ifdef" Id IN NL -> Preprocessor
+        NL "#ifndef" Id IN NL -> Preprocessor
+        "#ident" Stringlit NL -> Preprocessor
+        "#include" Stringlit NL -> Preprocessor
+        "#include" "<" SPOFF Filepath ">" SPON NL -> Preprocessor
+        "#line" Integernumber Stringlit? NL -> Preprocessor
+        "#undef" Id NL -> Preprocessor
+        "#LINK" Stringlit NL -> Preprocessor
+
+        EX "#endif" Comment-NL? NL -> Preprocessor
+        "..." -> Preprocessor
+
+        "..." Comment-NL? -> Preprocessor
+
+        "#" Integernumber String Integernumber* NL -> Preprocessor
+        "#pragma" SPON Id* "(" 
+		Id
+		","
+	       ")" NL -> Preprocessor
+
+        File-id Slash-fileid* -> Filepath
+
+        Id -> File-id
+        Key -> File-id
+
+        Slash File-id -> Slash-fileid
+
+        "/" -> Slash
+        "\" -> Slash
+        "." -> Slash
+        ":" -> Slash
+
         Comment NL -> Comment-NL
 
         Semi -> Null-declaration
@@ -498,3 +957,10 @@ exports
         "__alignof" "(" Unary-expression ")" -> Alignof-expression
         "__alignof__" "(" Type-name ")" -> Alignof-expression
         "__alignof" "(" Type-name ")" -> Alignof-expression
+
+        Assignment-expression -> Designated-initializer
+        Designator* Designator-assignment? Assignment-expression -> Designated-initializer
+        Designator* Designator-assignment? NL "{" IN 
+		Designated-initializer
+		","
+	       ","? EX "}" -> Designated-initializer

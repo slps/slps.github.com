@@ -1,28 +1,52 @@
 Element:
-        EPSILON
+        IEEE1471Model
+Element:
+        System
+Element:
+        Mission
+Element:
+        Environment
+Element:
+        Architecture
+Element:
+        Rationale
+Element:
+        ArchitecturalDescription
+Element:
+        View
+Element:
+        Model
+Element:
+        Stakeholder
+Element:
+        Concern
+Element:
+        Viewpoint
+Element:
+        LibraryViewpoint
 IEEE1471Model:
-        system::ANY environment::ANY missions::ANY+ architecture::ANY stakeholders::ANY+ concerns::ANY+ viewpoints::ANY+ libraryViewpoints::ANY+ architecturalDescription::ANY rationale::ANY
+        system::System environment::Environment missions::Mission+ architecture::Architecture stakeholders::Stakeholder+ concerns::Concern+ viewpoints::Viewpoint+ libraryViewpoints::LibraryViewpoint+ architecturalDescription::ArchitecturalDescription rationale::Rationale
 System:
-        fulfils::ANY+ inhabits::ANY hasAn::ANY has::ANY+
+        fulfils::Mission+ inhabits::Environment hasAn::Architecture has::Stakeholder+
 Mission:
-        name::ANY content::ANY
+        name::String content::String
 Environment:
-        influences::ANY
+        influences::System
 Architecture:
-        describedBy::ANY
+        describedBy::ArchitecturalDescription
 Rationale:
-        provides::ANY
+        provides::ArchitecturalDescription
 ArchitecturalDescription:
-        identifiesS::ANY+ identifiesC::ANY+ selects::ANY+ organizedBy::ANY+ aggregates::ANY+
+        identifiesS::Stakeholder+ identifiesC::Concern+ selects::Viewpoint+ organizedBy::View+ aggregates::Model+
 View:
-        conformsTo::ANY consitsOf::ANY+
+        conformsTo::Viewpoint consitsOf::Model+
 Model:
-        participatesInV::ANY+ participatesInAD::ANY
+        participatesInV::View+ participatesInAD::ArchitecturalDescription
 Stakeholder:
-        has::ANY+
+        has::Concern+
 Concern:
-        isImportantTo::ANY+
+        isImportantTo::Stakeholder+
 Viewpoint:
-        hasSource::ANY usedToCover::ANY+ establishesMethodsFor::ANY+
+        hasSource::LibraryViewpoint usedToCover::Concern+ establishesMethodsFor::Model+
 LibraryViewpoint:
-        name::ANY content::ANY
+        name::String content::String

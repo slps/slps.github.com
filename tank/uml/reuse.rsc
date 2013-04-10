@@ -3,27 +3,27 @@ module Reuse
 
 syntax ReuseContract
         = 
-        ANY supplier ANY client
+        ProviderClause supplier ReuserClause client
  ;
 syntax Dependency
-        = 
-        ANY owningDependency ANY subDependency+
+        = ReuseContract
+        | Dependency owningDependency Dependency subDependency+
  ;
 syntax ProviderClause
-        = 
-        ()
+        = CompositeProvider
+        | BasicProvider
  ;
 syntax Package
-        = 
-        ()
+        = ProviderClause
+        | ReuserClause
  ;
 syntax ReuserClause
-        = 
-        ()
+        = CompositeReuser
+        | BasicReuser
  ;
 syntax CompositeProvider
         = 
-        subcontract: ANY
+        subcontract: ReuseContract
  ;
 syntax BasicProvider
         = 
@@ -31,7 +31,7 @@ syntax BasicProvider
  ;
 syntax CompositeReuser
         = 
-        ANY subreuser+
+        ReuserClause subreuser+
  ;
 syntax BasicReuser
         = 

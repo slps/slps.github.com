@@ -4,85 +4,153 @@ exports
   sorts
         LocatedElement Root Expression Integ Floa Str Ident ValidIdentifier SlotName JessVariable TemplateExpression SlotOp DefinitionExp GlobalDefinition VarDefinition FunctionDefinition AdviceDefinition UnDefAdvice FactDefinition RuleDefinition DeclareRule ModuleDefinition QueryDefinition DeclareVar TemplateDefinition DeclareBloc ASlotDef SlotDef MultiSlotDef SlotOptions UseFuncExp WhileExp ForExp ForeachExp FuncCall EngineExp ExitExp IfExpression ConditionAction ElifConditionAction Advice 
   context-free syntax
-         -> LocatedElement
+        Root -> LocatedElement
 
-        expressions::ANY+ -> Root
+        Expression -> LocatedElement
 
-         -> Expression
+        SlotOp -> LocatedElement
 
-        val::ANY -> Integ
+        VarDefinition -> LocatedElement
 
-        val::ANY -> Floa
+        DeclareRule -> LocatedElement
 
-        val::ANY -> Str
+        DeclareVar -> LocatedElement
 
-         -> Ident
+        DeclareBloc -> LocatedElement
 
-        val::ANY -> ValidIdentifier
+        ASlotDef -> LocatedElement
 
-        val::ANY -> SlotName
+        SlotOptions -> LocatedElement
 
-        val::ANY -> JessVariable
+        ConditionAction -> LocatedElement
 
-        templateName::ANY firstSlot::ANY slotOp::ANY+ -> TemplateExpression
+        ElifConditionAction -> LocatedElement
 
-        slotIdent::ANY operator::ANY exp::ANY -> SlotOp
+        expressions::Expression+ -> Root
 
-         -> DefinitionExp
+        Integ -> Expression
 
-        varDef::ANY+ -> GlobalDefinition
+        Floa -> Expression
 
-        jessVar::ANY eq::ANY expression::ANY -> VarDefinition
+        Str -> Expression
 
-        funcName::ANY parameters::ANY+ expressions::ANY+ -> FunctionDefinition
+        Ident -> Expression
 
-        direction::ANY op::ANY advice::ANY+ -> AdviceDefinition
+        TemplateExpression -> Expression
 
-        op::ANY -> UnDefAdvice
+        DefinitionExp -> Expression
 
-        factName::ANY documentation::ANY fact::ANY+ -> FactDefinition
+        UseFuncExp -> Expression
 
-        ruleName::ANY documentation::ANY declare::ANY conditions::ANY+ functionCall::ANY+ -> RuleDefinition
+        val::Integer -> Integ
 
-        salience::ANY nodeIndexHash::ANY autoFocus::ANY noLoop::ANY -> DeclareRule
+        val::Double -> Floa
 
-        moduleName::ANY documentation::ANY -> ModuleDefinition
+        val::String -> Str
 
-        queryName::ANY documentation::ANY declare::ANY expressions::ANY+ -> QueryDefinition
+        ValidIdentifier -> Ident
 
-        var::ANY+ node::ANY max::ANY -> DeclareVar
+        SlotName -> Ident
 
-        templateName::ANY inherits::ANY+ documentation::ANY declareBloc::ANY slotDef::ANY+ -> TemplateDefinition
+        JessVariable -> Ident
 
-        slotSpecific::ANY backchainReaction::ANY fromClass::ANY includeVariable::ANY order::ANY -> DeclareBloc
+        val::String -> ValidIdentifier
 
-        slotName::ANY optionals::ANY+ -> ASlotDef
+        val::String -> SlotName
+
+        val::String -> JessVariable
+
+        templateName::ValidIdentifier firstSlot::SlotOp slotOp::SlotOp+ -> TemplateExpression
+
+        slotIdent::SlotName operator::ValidIdentifier exp::Expression -> SlotOp
+
+        GlobalDefinition -> DefinitionExp
+
+        FunctionDefinition -> DefinitionExp
+
+        AdviceDefinition -> DefinitionExp
+
+        UnDefAdvice -> DefinitionExp
+
+        FactDefinition -> DefinitionExp
+
+        RuleDefinition -> DefinitionExp
+
+        ModuleDefinition -> DefinitionExp
+
+        QueryDefinition -> DefinitionExp
+
+        TemplateDefinition -> DefinitionExp
+
+        varDef::VarDefinition+ -> GlobalDefinition
+
+        jessVar::JessVariable eq::ValidIdentifier expression::Expression -> VarDefinition
+
+        funcName::ValidIdentifier parameters::JessVariable+ expressions::Expression+ -> FunctionDefinition
+
+        direction::Advice op::Ident advice::Expression+ -> AdviceDefinition
+
+        op::Expression -> UnDefAdvice
+
+        factName::ValidIdentifier documentation::Str fact::Expression+ -> FactDefinition
+
+        ruleName::ValidIdentifier documentation::Str declare::DeclareRule conditions::Expression+ functionCall::UseFuncExp+ -> RuleDefinition
+
+        salience::Expression nodeIndexHash::Expression autoFocus::ValidIdentifier noLoop::ValidIdentifier -> DeclareRule
+
+        moduleName::ValidIdentifier documentation::Str -> ModuleDefinition
+
+        queryName::ValidIdentifier documentation::Str declare::DeclareVar expressions::Expression+ -> QueryDefinition
+
+        var::JessVariable+ node::Expression max::Expression -> DeclareVar
+
+        templateName::ValidIdentifier inherits::ValidIdentifier+ documentation::Str declareBloc::DeclareBloc slotDef::ASlotDef+ -> TemplateDefinition
+
+        slotSpecific::ValidIdentifier backchainReaction::ValidIdentifier fromClass::ValidIdentifier includeVariable::ValidIdentifier order::ValidIdentifier -> DeclareBloc
+
+        SlotDef -> ASlotDef
+
+        MultiSlotDef -> ASlotDef
+
+        slotName::SlotName optionals::SlotOptions+ -> ASlotDef
 
          -> SlotDef
 
          -> MultiSlotDef
 
-        type::ANY def::ANY defaultDyn::ANY allowedValues::ANY+ -> SlotOptions
+        type::ValidIdentifier def::Expression defaultDyn::Expression allowedValues::Expression+ -> SlotOptions
 
-         -> UseFuncExp
+        WhileExp -> UseFuncExp
 
-        hasDo::ANY boolExp::ANY actions::ANY+ -> WhileExp
+        ForExp -> UseFuncExp
 
-        initializer::ANY condition::ANY increment::ANY expressions::ANY+ -> ForExp
+        ForeachExp -> UseFuncExp
 
-        var::ANY list::ANY expressions::ANY+ -> ForeachExp
+        FuncCall -> UseFuncExp
 
-        funcName::ANY funcParam::ANY+ -> FuncCall
+        EngineExp -> UseFuncExp
+
+        ExitExp -> UseFuncExp
+
+        IfExpression -> UseFuncExp
+
+        hasDo::Boolean boolExp::Expression actions::Expression+ -> WhileExp
+
+        initializer::Expression condition::Expression increment::Expression expressions::Expression+ -> ForExp
+
+        var::JessVariable list::Expression expressions::Expression+ -> ForeachExp
+
+        funcName::ValidIdentifier funcParam::Expression+ -> FuncCall
 
          -> EngineExp
 
          -> ExitExp
 
-        ifthen::ANY elifthen::ANY+ else::ANY+ -> IfExpression
+        ifthen::ConditionAction elifthen::ElifConditionAction+ else::Expression+ -> IfExpression
 
-        condition::ANY actions::ANY+ -> ConditionAction
+        condition::Expression actions::Expression+ -> ConditionAction
 
-        condAct::ANY -> ElifConditionAction
+        condAct::ConditionAction -> ElifConditionAction
 
         before:: -> Advice
         after:: -> Advice

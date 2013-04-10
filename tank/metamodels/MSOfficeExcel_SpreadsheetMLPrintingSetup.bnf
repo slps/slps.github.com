@@ -1,53 +1,67 @@
 DateTimeType:
-        year::ANY month::ANY day::ANY hour::ANY minute::ANY second::ANY
+        year::Integer month::Integer day::Integer hour::Integer minute::Integer second::Integer
 VersionType:
-        n::ANY nn::ANY
+        n::Integer nn::Integer
 ValueType:
-        EPSILON
+        StringValue
+ValueType:
+        NumberValue
+ValueType:
+        DateTimeTypeValue
+ValueType:
+        BooleanValue
+ValueType:
+        ErrorValue
 StringValue:
-        value::ANY
+        value::String
 NumberValue:
-        value::ANY
+        value::Double
 DateTimeTypeValue:
-        value::ANY
+        value::DateTimeType
 BooleanValue:
-        value::ANY
+        value::Boolean
 ErrorValue:
-        vt_data::ANY
+        vt_data::Data
 DocumentPropertiesCollection:
-        dp_workbook::ANY title::ANY subject::ANY keywords::ANY description::ANY category::ANY author::ANY lastAuthor::ANY manager::ANY company::ANY hyperlinkBase::ANY revision::ANY presentationFormat::ANY guid::ANY appName::ANY version::ANY totalTime::ANY lastPrinted::ANY created::ANY lastSaved::ANY pages::ANY words::ANY characters::ANY charactersWithSpaces::ANY bytes::ANY lines::ANY paragraphs::ANY
+        dp_workbook::Workbook title::String subject::String keywords::String description::String category::String author::String lastAuthor::String manager::String company::String hyperlinkBase::String revision::Integer presentationFormat::String guid::String appName::String version::VersionType totalTime::Integer lastPrinted::DateTimeType created::DateTimeType lastSaved::DateTimeType pages::Integer words::Integer characters::Integer charactersWithSpaces::Integer bytes::Integer lines::Integer paragraphs::Integer
 CustomDocumentPropertiesCollection:
-        cdp_workbook::ANY customDocumentProperties::ANY+
+        cdp_workbook::Workbook customDocumentProperties::CustomDocumentProperty+
 CustomDocumentProperty:
-        customDocumentProperty_cdpe::ANY name::ANY value::ANY
+        customDocumentProperty_cdpe::CustomDocumentPropertiesCollection name::String value::ValueType
 SmartTagType:
-        smartTagType_ste::ANY namespaceuri::ANY name::ANY url::ANY
+        smartTagType_ste::SmartTagsCollection namespaceuri::String name::String url::String
 SmartTagsCollection:
-        st_workbook::ANY st_cell::ANY smartTagTypes::ANY+
+        st_workbook::Workbook st_cell::Cell smartTagTypes::SmartTagType+
 Workbook:
-        wb_smartTags::ANY wb_docProperties::ANY wb_customDocProperties::ANY wb_excelWorkbook::ANY wb_worksheets::ANY+
+        wb_smartTags::SmartTagsCollection wb_docProperties::DocumentPropertiesCollection wb_customDocProperties::CustomDocumentPropertiesCollection wb_excelWorkbook::ExcelWorkbook wb_worksheets::Worksheet+
 Worksheet:
-        ws_workbook::ANY ws_table::ANY name::ANY protected::ANY rightToLeft::ANY w_worksheetOptions::ANY
+        ws_workbook::Workbook ws_table::Table name::String protected::Boolean rightToLeft::Boolean w_worksheetOptions::WorksheetOptionsElt
 StyledElement:
-        EPSILON
+        Table
+StyledElement:
+        TableElement
 Table:
-        t_worksheet::ANY t_cols::ANY+ t_rows::ANY+ defaultColumnWidth::ANY defaultRowHeight::ANY expandedColumnCount::ANY expandedRowCount::ANY leftCell::ANY topCell::ANY fullColumns::ANY fullRows::ANY
+        t_worksheet::Worksheet t_cols::Column+ t_rows::Row+ defaultColumnWidth::Double defaultRowHeight::Double expandedColumnCount::Integer expandedRowCount::Integer leftCell::Integer topCell::Integer fullColumns::Boolean fullRows::Boolean
 TableElement:
-        EPSILON
+        ColOrRowElement
+TableElement:
+        Cell
 ColOrRowElement:
-        EPSILON
+        Column
+ColOrRowElement:
+        Row
 Column:
-        c_table::ANY autoFitWidth::ANY width::ANY
+        c_table::Table autoFitWidth::Boolean width::Double
 Row:
-        r_table::ANY r_cells::ANY+ autoFitHeight::ANY height::ANY
+        r_table::Table r_cells::Cell+ autoFitHeight::Boolean height::Double
 Cell:
-        c_smartTags::ANY+ c_row::ANY arrayRange::ANY formula::ANY hRef::ANY mergeAcross::ANY mergeDown::ANY c_data::ANY c_comment::ANY
+        c_smartTags::SmartTagsCollection+ c_row::Row arrayRange::String formula::String hRef::String mergeAcross::Double mergeDown::Double c_data::Data c_comment::Comment
 Comment:
-        c_cell::ANY com_data::ANY author::ANY showAlways::ANY
+        c_cell::Cell com_data::Data author::String showAlways::Boolean
 Data:
-        d_cell::ANY d_comment::ANY value::ANY
+        d_cell::Cell d_comment::Comment value::ValueType
 ExcelWorkbook:
-        ew_workbook::ANY selectedSheets::ANY windowHidden::ANY hideHorizontalScrollBar::ANY hideVerticalScrollBar::ANY hideWorkbookTabs::ANY windowHeight::ANY windowWidth::ANY windowTopX::ANY windowTopY::ANY activeSheet::ANY activeChart::ANY firstVisibleSheet::ANY hidePivotTableFieldList::ANY protectStructure::ANY protectWindows::ANY displayInkNotes::ANY embedSaveSmartTags::ANY futureVer::ANY tabRatio::ANY windowIconic::ANY displayDrawingObjects::ANY createBackup::ANY calculation::ANY doNotCalculateBeforeSave::ANY date1904::ANY refModeR1C1::ANY iteration::ANY maxIterations::ANY maxChange::ANY precisionAsDisplayed::ANY doNotSaveLinkValues::ANY noAutoRecover::ANY acceptLabelsInFormulas::ANY uncalced::ANY
+        ew_workbook::Workbook selectedSheets::Integer windowHidden::Boolean hideHorizontalScrollBar::Boolean hideVerticalScrollBar::Boolean hideWorkbookTabs::Boolean windowHeight::Double windowWidth::Double windowTopX::Double windowTopY::Double activeSheet::Integer activeChart::String firstVisibleSheet::Integer hidePivotTableFieldList::Boolean protectStructure::Boolean protectWindows::Boolean displayInkNotes::Boolean embedSaveSmartTags::Boolean futureVer::String tabRatio::Integer windowIconic::Boolean displayDrawingObjects::DisplayDrawingObjectsType createBackup::Boolean calculation::CalculationWorkbookType doNotCalculateBeforeSave::Boolean date1904::Boolean refModeR1C1::Boolean iteration::Boolean maxIterations::Integer maxChange::Double precisionAsDisplayed::Boolean doNotSaveLinkValues::Boolean noAutoRecover::Boolean acceptLabelsInFormulas::Boolean uncalced::Boolean
 DisplayDrawingObjectsType:
         ddot_displayShapes::EPSILON
         ddot_placeHolders::EPSILON
@@ -57,7 +71,7 @@ CalculationWorkbookType:
         cwt_manualCalculation::EPSILON
         cwt_semiAutomaticCalculation::EPSILON
 WorksheetOptionsElt:
-        wo_worksheet::ANY fitToPage::ANY doNotDisplayColHeaders::ANY doNotDisplayRowHeaders::ANY gridlineColor::ANY name::ANY excelWorksheetType::ANY intlMacro::ANY unsynced::ANY selected::ANY codeName::ANY displayPageBreak::ANY transitionExpressionEvaluation::ANY transitionFormulaEntry::ANY zoom::ANY pageBreakZoom::ANY showPageBreakZoom::ANY defaultRowHeight::ANY defaultColumnWidth::ANY standardWidth::ANY visible::ANY leftColumnVisible::ANY displayRightToLeft::ANY gridlineColorIndex::ANY displayFormulas::ANY doNotDisplayGridlines::ANY doNotDisplayHeadings::ANY doNotDisplayOutline::ANY applyAutomaticOutlineStyles::ANY noSummaryRowsBelowDetail::ANY noSummaryColumnsRightDetail::ANY doNotDisplayZeros::ANY activeRow::ANY activeColumn::ANY filterOn::ANY rangeSelection::ANY topRowVisible::ANY topRowBottomPane::ANY leftColumnRightPane::ANY activePane::ANY splitHorizontal::ANY splitVertical::ANY freezePanes::ANY frozenNoSplit::ANY tabColorIndex::ANY protectContentst::ANY protectObjects::ANY protectScenarios::ANY enableSelection::ANY allowFormatCells::ANY allowSizeCols::ANY allowSizeRows::ANY allowInsertCols::ANY allowInsertRows::ANY allowInsertHyperlinks::ANY allowDeleteCols::ANY allowDeleteRows::ANY allowSort::ANY allowFilter::ANY allowUsePivotTables::ANY wo_pageSetup::ANY wo_print::ANY
+        wo_worksheet::Worksheet fitToPage::Boolean doNotDisplayColHeaders::Boolean doNotDisplayRowHeaders::Boolean gridlineColor::String name::String excelWorksheetType::ExcelWorksheetTypeType intlMacro::Boolean unsynced::Boolean selected::Boolean codeName::String displayPageBreak::Boolean transitionExpressionEvaluation::Boolean transitionFormulaEntry::Boolean zoom::Integer pageBreakZoom::Integer showPageBreakZoom::Boolean defaultRowHeight::Integer defaultColumnWidth::Integer standardWidth::Integer visible::VisibleType leftColumnVisible::Integer displayRightToLeft::Boolean gridlineColorIndex::Integer displayFormulas::Boolean doNotDisplayGridlines::Boolean doNotDisplayHeadings::Boolean doNotDisplayOutline::Boolean applyAutomaticOutlineStyles::Boolean noSummaryRowsBelowDetail::Boolean noSummaryColumnsRightDetail::Boolean doNotDisplayZeros::Boolean activeRow::Integer activeColumn::Integer filterOn::Boolean rangeSelection::String topRowVisible::Integer topRowBottomPane::Integer leftColumnRightPane::Integer activePane::Integer splitHorizontal::Integer splitVertical::Integer freezePanes::Boolean frozenNoSplit::Boolean tabColorIndex::Integer protectContentst::Boolean protectObjects::Boolean protectScenarios::Boolean enableSelection::EnableSelectionType allowFormatCells::Boolean allowSizeCols::Boolean allowSizeRows::Boolean allowInsertCols::Boolean allowInsertRows::Boolean allowInsertHyperlinks::Boolean allowDeleteCols::Boolean allowDeleteRows::Boolean allowSort::Boolean allowFilter::Boolean allowUsePivotTables::Boolean wo_pageSetup::PageSetup wo_print::Print
 ExcelWorksheetTypeType:
         ewt_Worksheet::EPSILON
         ewt_Chart::EPSILON
@@ -71,22 +85,24 @@ EnableSelectionType:
         est_UnlockedCells::EPSILON
         est_NoSelection::EPSILON
 PageSetup:
-        ps_worksheetOptions::ANY ps_layout::ANY ps_header::ANY ps_footer::ANY ps_pageMargins::ANY
+        ps_worksheetOptions::WorksheetOptionsElt ps_layout::Layout ps_header::Header ps_footer::Footer ps_pageMargins::PageMarginsInfo
 Layout:
-        l_pageSetup::ANY orientation::ANY centerHorizontal::ANY centerVertical::ANY startPageNumber::ANY
+        l_pageSetup::PageSetup orientation::OrientationType centerHorizontal::Boolean centerVertical::Boolean startPageNumber::String
 OrientationType:
         ot_Landscape::EPSILON
         ot_Portrait::EPSILON
 HeaderOrFooterElt:
-        EPSILON
+        Header
+HeaderOrFooterElt:
+        Footer
 Header:
-        h_pageSetup::ANY
+        h_pageSetup::PageSetup
 Footer:
-        f_pageSetup::ANY
+        f_pageSetup::PageSetup
 PageMarginsInfo:
-        pm_pageSetup::ANY left::ANY right::ANY top::ANY bottom::ANY
+        pm_pageSetup::PageSetup left::Double right::Double top::Double bottom::Double
 Print:
-        p_worksheetOptions::ANY fitWidth::ANY fitHeight::ANY leftToRight::ANY blackAndWhite::ANY draftQuality::ANY commentsLayout::ANY scale::ANY printErrors::ANY validPrinterInfo::ANY paperSizeIndex::ANY horizontalResolution::ANY verticalResolution::ANY gridlines::ANY numberOfCopies::ANY rowColHeadings::ANY
+        p_worksheetOptions::WorksheetOptionsElt fitWidth::Integer fitHeight::Integer leftToRight::Boolean blackAndWhite::Boolean draftQuality::Boolean commentsLayout::CommentsLayoutType scale::Integer printErrors::String validPrinterInfo::Boolean paperSizeIndex::Integer horizontalResolution::Integer verticalResolution::Integer gridlines::Boolean numberOfCopies::Integer rowColHeadings::Boolean
 CommentsLayoutType:
         clt_InPlace::EPSILON
         clt_PrintNone::EPSILON

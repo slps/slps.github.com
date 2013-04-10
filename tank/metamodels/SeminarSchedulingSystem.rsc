@@ -3,25 +3,25 @@ module SeminarSchedulingSystem
 
 syntax SeminarSchedulingSystem
         = 
-        ANY presenter+ ANY seminar+
+        Presenter presenter+ Seminar seminar+
  ;
 syntax Presenter
         = 
-        ANY name ANY seminarSchedulingSystem ANY qualifiedFor+ ANY offering+
+        String name SeminarSchedulingSystem seminarSchedulingSystem Seminar qualifiedFor+ Offering offering+
  ;
 syntax Seminar
         = 
-        ANY title ANY seminarSchedulingSystem ANY qualified+ ANY offering+
+        String title SeminarSchedulingSystem seminarSchedulingSystem Presenter qualified+ Offering offering+
  ;
 syntax Offering
         = 
-        ANY is_cancelled ANY date ANY attendee+ ANY presenter ANY seminar
+        Boolean is_cancelled Date date Attendee attendee+ Presenter presenter Seminar seminar
  ;
 syntax Date
         = 
-        ANY year ANY month ANY day
+        Integer year Integer month Integer day
  ;
 syntax Attendee
         = 
-        ANY name ANY offering+
+        String name Offering offering+
  ;

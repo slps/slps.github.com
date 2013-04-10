@@ -3,71 +3,78 @@ module Maude
 
 syntax MaudeSpec
         = 
-        ANY els+ ANY printableEls+
+        MaudeTopEl els+ MaudeTopEl printableEls+
  ;
 syntax MaudeTopEl
-        = 
-        ()
+        = Theory
+        | Module
+        | View
  ;
 syntax ModExpression
-        = 
-        ()
+        = InstModExp
+        | RenModExp
+        | CompModExp
+        | ModuleIdModExp
+        | TheoryIdModExp
+        | Parameter
  ;
 syntax InstModExp
         = 
-        ANY modExp ANY views+
+        ModExpression modExp View views+
  ;
 syntax RenModExp
         = 
-        ANY modExp ANY renamings+
+        ModExpression modExp RenMapping renamings+
  ;
 syntax CompModExp
         = 
-        modExps: ANY
+        modExps: ModExpression
  ;
 syntax ModuleIdModExp
         = 
-        module: ANY
+        module: Module
  ;
 syntax TheoryIdModExp
         = 
-        theory: ANY
+        theory: Theory
  ;
 syntax Parameter
         = 
-        ANY label ANY modExp
+        String label ModExpression modExp
  ;
 syntax Theory
-        = 
-        ()
+        = FTheory
+        | STheory
  ;
 syntax FTheory
         = 
-        ANY els+
+        ModElement els+
  ;
 syntax STheory
         = 
-        ANY els+
+        ModElement els+
  ;
 syntax Module
-        = 
-        ()
+        = FModule
+        | SModule
  ;
 syntax FModule
         = 
-        ANY els+ ANY params+
+        ModElement els+ Parameter params+
  ;
 syntax SModule
         = 
-        ANY els+ ANY params+
+        ModElement els+ Parameter params+
  ;
 syntax ModElement
-        = 
-        ()
+        = ModImportation
+        | SubsortRel
+        | Operation
+        | Statement
  ;
 syntax ModImportation
         = 
-        ANY imports ANY mode
+        ModExpression imports ImportationMode mode
  ;
 syntax ImportationMode
         = protecting: ()
@@ -76,113 +83,119 @@ syntax ImportationMode
  ;
 syntax Type
         = 
-        ()
+        Kind
  ;
 syntax Sort
         = 
-        ANY subsortRels+ ANY supersortRels+ ANY kind
+        SubsortRel subsortRels+ SubsortRel supersortRels+ Kind kind
  ;
 syntax Kind
         = 
-        ANY sorts+
+        Sort sorts+
  ;
 syntax SubsortRel
         = 
-        ANY subsorts+ ANY supersorts+
+        Sort subsorts+ Sort supersorts+
  ;
 syntax Operation
         = 
-        ANY name ANY coarity ANY arity+ ANY atts+
+        String name Type coarity Type arity+ String atts+
  ;
 syntax Statement
-        = 
-        ()
+        = Membership
+        | Equation
+        | Rule
  ;
 syntax Membership
         = 
-        ANY term ANY sort
+        Term term Sort sort
  ;
 syntax Equation
         = 
-        ANY lhs ANY rhs
+        Term lhs Term rhs
  ;
 syntax Rule
         = 
-        ANY lhs ANY rhs
+        Term lhs Term rhs
  ;
 syntax Condition
-        = 
-        ()
+        = EquationalCond
+        | RewriteCond
  ;
 syntax EquationalCond
-        = 
-        ()
+        = MembershipCond
+        | BooleanCond
+        | MatchingCond
+        | EqualCond
  ;
 syntax RewriteCond
         = 
-        rhs: ANY
+        rhs: Term
  ;
 syntax MembershipCond
         = 
-        rhs: ANY
+        rhs: Sort
  ;
 syntax BooleanCond
         = 
-        
+        ()
  ;
 syntax MatchingCond
         = 
-        rhs: ANY
+        rhs: Term
  ;
 syntax EqualCond
         = 
-        rhs: ANY
+        rhs: Term
  ;
 syntax Term
-        = 
-        ()
+        = Constant
+        | RecTerm
+        | Variable
  ;
 syntax Constant
         = 
-        op: ANY
+        op: String
  ;
 syntax RecTerm
         = 
-        ANY op ANY args+
+        String op Term args+
  ;
 syntax Variable
         = 
-        name: ANY
+        name: String
  ;
 syntax View
         = 
-        ANY from ANY to ANY els+
+        ModExpression from ModExpression to ViewMapping els+
  ;
 syntax ViewMapping
-        = 
-        ()
+        = RenMapping
+        | TermMapping
  ;
 syntax RenMapping
-        = 
-        ()
+        = SortMapping
+        | OpTypedMapping
+        | OpMapping
+        | LabelMapping
  ;
 syntax TermMapping
         = 
-        ANY from ANY to
+        Term from Term to
  ;
 syntax SortMapping
         = 
-        ANY from ANY to
+        Sort from String to
  ;
 syntax OpTypedMapping
         = 
-        ANY from ANY to ANY atts+
+        Operation from String to String atts+
  ;
 syntax OpMapping
         = 
-        ANY from ANY to
+        Operation from String to
  ;
 syntax LabelMapping
         = 
-        ANY from ANY to
+        String from String to
  ;

@@ -4,24 +4,37 @@ exports
   sorts
         Modifier Class Interface Method Field Value Parameter Type ReferenceType PrimitiveType Int 
   context-free syntax
-         -> Modifier
+        Class -> Modifier
 
-        superClass::ANY implement::ANY+ methods::ANY+ fields::ANY+ -> Class
+        Interface -> Modifier
 
-        superInterface::ANY+ implementedBy::ANY+ abstractMethods::ANY+ constants::ANY+ -> Interface
+        Method -> Modifier
 
-        share::ANY class::ANY interface::ANY resultOf::ANY parameters::ANY+ -> Method
+        Field -> Modifier
 
-        share::ANY class::ANY interface::ANY value::ANY typeOf::ANY -> Field
+        superClass::Class implement::Interface+ methods::Method+ fields::Field+ -> Class
+
+        superInterface::Interface+ implementedBy::Class+ abstractMethods::Method+ constants::Field+ -> Interface
+
+        share::Boolean class::Class interface::Interface resultOf::Type parameters::Parameter+ -> Method
+
+        share::Boolean class::Class interface::Interface value::Value typeOf::Type -> Field
 
          -> Value
 
-        name::ANY typeOf::ANY owner::ANY -> Parameter
+        name::String typeOf::Type owner::Method -> Parameter
 
-         -> Type
+        ReferenceType -> Type
 
-        reference::ANY -> ReferenceType
+        PrimitiveType -> Type
 
-         -> PrimitiveType
+        ReferenceType -> Type
+        PrimitiveType -> Type
+
+        reference::Class -> ReferenceType
+
+        Int -> PrimitiveType
+
+        Int -> PrimitiveType
 
          -> Int

@@ -2,104 +2,111 @@
 module ODP_EV
 
 syntax EnterpriseObject
-        = 
-        ANY eoConfigurations+ ANY eoRoles+ ANY eoArtefactActions+ ANY eoResourceActions+ ANY eoActorActions+ ANY eoPolicy+ ANY eoEOAR+ ANY eoEOPD
+        = ODPSystem
+        | Party
+        | CommunityObject
+        | Community eoConfigurations+ Role eoRoles+ Action eoArtefactActions+ Action eoResourceActions+ Action eoActorActions+ Policy eoPolicy+ EO_A_R eoEOAR+ EO_P_D eoEOPD
  ;
 syntax ODPSystem
         = 
-        ANY odpBehaviour ANY odpObjectives+ ANY odpSpecifier
+        Scope odpBehaviour Objective odpObjectives+ EnterpriseSpecification odpSpecifier
  ;
 syntax Party
         = 
-        ANY ptyAccountableAction+ ANY ptyEOPD
+        AccountableAction ptyAccountableAction+ EO_P_D ptyEOPD
  ;
 syntax Objective
         = 
-        ANY objFulfiller ANY objSpecifier ANY objRefiners+ ANY objRefinement ANY objAchievers+ ANY objFulfillers+
+        ODPSystem objFulfiller Contract objSpecifier Objective objRefiners+ Objective objRefinement Process objAchievers+ Behaviour objFulfillers+
  ;
 syntax Scope
         = 
-        scOdpSystem: ANY
+        scOdpSystem: ODPSystem
  ;
 syntax EnterpriseSpecification
         = 
-        ANY esDescribedSystems+ ANY esContext
+        ODPSystem esDescribedSystems+ FieldOfApplication esContext
  ;
 syntax FieldOfApplication
         = 
-        faEnterpriseSpecifications: ANY
+        faEnterpriseSpecifications: EnterpriseSpecification
  ;
 syntax Policy
-        = 
-        ANY poSpecifier ANY poOwner ANY poProcess+ ANY poBehaviour+ ANY poChanger+ ANY poRole+ ANY poEnterpriseObject+
+        = PolicyEnvelope
+        | PolicyValue
+        | AssigmentPolicy
+        | Contract poSpecifier Community poOwner Process poProcess+ Behaviour poBehaviour+ Behaviour poChanger+ Role poRole+ EnterpriseObject poEnterpriseObject+
  ;
 syntax PolicyEnvelope
         = 
-        ANY pePolicySetter ANY peBehaviour ANY peValues+ ANY peCurrentValue
+        Behaviour pePolicySetter Behaviour peBehaviour PolicyValue peValues+ PolicyValue peCurrentValue
  ;
 syntax PolicyValue
         = 
-        pvValue: ANY
+        pvValue: PolicyEnvelope
  ;
 syntax AssigmentPolicy
         = 
-        ANY apEOAR+
+        EO_A_R apEOAR+
  ;
 syntax Contract
         = 
-        ANY ctPolicies ANY ctObjective ANY ctBehaviours+
+        Policy ctPolicies Objective ctObjective Behaviour ctBehaviours+
  ;
 syntax Process
         = 
-        ANY prObjectives+ ANY prDetails+ ANY prRefinement ANY prConstrainer+
+        Objective prObjectives+ Step prDetails+ Step prRefinement Policy prConstrainer+
  ;
 syntax Step
-        = 
-        ANY stGraphs+ ANY stAbstraction
+        = Action
+        | Process stGraphs+ Process stAbstraction
  ;
 syntax Action
-        = 
-        ANY actBehaviours+ ANY actArtefactRoleFillers+ ANY actResourceRoleFillers+ ANY actActorRoleFillers+
+        = AccountableAction
+        | Behaviour actBehaviours+ EnterpriseObject actArtefactRoleFillers+ EnterpriseObject actResourceRoleFillers+ EnterpriseObject actActorRoleFillers+
  ;
 syntax AccountableAction
-        = 
-        ()
+        = Prescription
+        | Commitment
+        | Declaration
+        | Evaluation
+        | Delegation
  ;
 syntax Prescription
         = 
-        ()
+        Party aaAccountableParty+
  ;
 syntax Commitment
         = 
-        ()
+        Party aaAccountableParty+
  ;
 syntax Declaration
         = 
-        ()
+        Party aaAccountableParty+
  ;
 syntax Evaluation
         = 
-        ()
+        Party aaAccountableParty+
  ;
 syntax Delegation
         = 
-        dlgEOPD: ANY
+        dlgEOPD: EO_P_D
  ;
 syntax Behaviour
-        = 
-        ANY beObjectives+ ANY beSpecifiers+ ANY beActions+ ANY beIdentifier ANY bePolicyEnvelope ANY beConstrainer ANY bePolicyConstrainer+ ANY bePolicy+
+        = Violation
+        | Objective beObjectives+ Contract beSpecifiers+ Action beActions+ Role beIdentifier PolicyEnvelope bePolicyEnvelope PolicyEnvelope beConstrainer Policy bePolicyConstrainer+ Policy bePolicy+
  ;
 syntax Community
         = 
-        ANY coAbstraction ANY coMembers+ ANY coCommunityRoles+ ANY coPolicy+
+        CommunityObject coAbstraction EnterpriseObject coMembers+ Role coCommunityRoles+ Policy coPolicy+
  ;
 syntax CommunityObject
         = 
-        cobjRefinement: ANY
+        cobjRefinement: Community
  ;
 syntax Role
-        = 
-        ANY roleBehaviour ANY roleSpecifier ANY rolefillers+ ANY roleConstrainer+ ANY roleEOAR+
+        = InterfaceRole
+        | Behaviour roleBehaviour Community roleSpecifier EnterpriseObject rolefillers+ Policy roleConstrainer+ EO_A_R roleEOAR+
  ;
 syntax InterfaceRole
         = 
@@ -107,33 +114,35 @@ syntax InterfaceRole
  ;
 syntax Violation
         = 
-        vioProhibitor: ANY
+        vioProhibitor: Rule
  ;
 syntax Rule
-        = 
-        ()
+        = Obligation
+        | Authorisation
+        | Permission
+        | Prohibition
  ;
 syntax Obligation
         = 
-        ()
+        Violation ruViolation+
  ;
 syntax Authorisation
         = 
-        ()
+        Violation ruViolation+
  ;
 syntax Permission
         = 
-        ()
+        Violation ruViolation+
  ;
 syntax Prohibition
         = 
-        ()
+        Violation ruViolation+
  ;
 syntax EO_A_R
         = 
-        ANY eoarSubject+ ANY eoarSubjectRole+ ANY eoarGovernor+
+        EnterpriseObject eoarSubject+ Role eoarSubjectRole+ AssigmentPolicy eoarGovernor+
  ;
 syntax EO_P_D
         = 
-        ANY eopdAgent ANY eopdPrincipal ANY eopdAction
+        EnterpriseObject eopdAgent Party eopdPrincipal Delegation eopdAction
  ;

@@ -4,13 +4,15 @@ exports
   sorts
         IdedElement URI Color AnyElement RotationType ShapeType StyleType DecorationType AlignType PNMLDocument NetElement NetContent ToolSpecific LabeledElement Label Name Inscription InitialMarking NetContentElement Arc Node Place Transition Graphics NetGraphics NodeGraphics EdgeGraphics AnnotationGraphics Coordinate Position Offset Dimension Fill Line Font 
   context-free syntax
-         -> IdedElement
+        NetElement -> IdedElement
 
-        value::ANY -> URI
+        Node -> IdedElement
+
+        value::String -> URI
 
          -> Color
 
-        name::ANY text::ANY -> AnyElement
+        name::String text::String -> AnyElement
 
         rtvertical:: -> RotationType
         rthorizontal:: -> RotationType
@@ -31,54 +33,68 @@ exports
         atcenter:: -> AlignType
         atright:: -> AlignType
 
-        xmlns::ANY nets::ANY+ -> PNMLDocument
+        xmlns::URI nets::NetElement+ -> PNMLDocument
 
-        type::ANY document::ANY contents::ANY+ tools::ANY+ netgraphics::ANY name::ANY -> NetElement
+        type::URI document::PNMLDocument contents::NetContent+ tools::ToolSpecific+ netgraphics::NetGraphics name::Name -> NetElement
 
-         -> NetContent
+        NetContentElement -> NetContent
 
-        tool::ANY version::ANY anyelement::ANY+ net::ANY arc::ANY node::ANY -> ToolSpecific
+        tool::String version::String anyelement::AnyElement+ net::NetElement arc::Arc node::Node -> ToolSpecific
 
-         -> LabeledElement
+        Name -> LabeledElement
 
-        text::ANY namedelement::ANY -> Label
+        Inscription -> LabeledElement
 
-        net::ANY netcontent::ANY -> Name
+        InitialMarking -> LabeledElement
 
-        arc::ANY -> Inscription
+        text::String namedelement::LabeledElement -> Label
 
-        place::ANY -> InitialMarking
+        net::NetElement netcontent::NetContent -> Name
 
-         -> NetContentElement
+        arc::Arc -> Inscription
 
-        source::ANY target::ANY tools::ANY+ edgegraphics::ANY inscription::ANY -> Arc
+        place::Place -> InitialMarking
 
-        netcontentelement::ANY tools::ANY+ nodegraphics::ANY -> Node
+        Place -> NetContentElement
 
-        initialmarking::ANY -> Place
+        Transition -> NetContentElement
 
-        node::ANY -> Transition
+        source::NetContentElement target::NetContentElement tools::ToolSpecific+ edgegraphics::EdgeGraphics inscription::Inscription -> Arc
 
-         -> Graphics
+        netcontentelement::NetContentElement tools::ToolSpecific+ nodegraphics::NodeGraphics -> Node
 
-        net::ANY -> NetGraphics
+        initialmarking::InitialMarking -> Place
 
-        node::ANY position::ANY dimension::ANY fill::ANY line::ANY -> NodeGraphics
+        node::Node -> Transition
 
-        arc::ANY position::ANY+ fill::ANY line::ANY -> EdgeGraphics
+        NetGraphics -> Graphics
 
-        namedelement::ANY offset::ANY font::ANY fill::ANY line::ANY -> AnnotationGraphics
+        NodeGraphics -> Graphics
 
-         -> Coordinate
+        EdgeGraphics -> Graphics
 
-        nodegraphics::ANY edgegraphics::ANY -> Position
+        AnnotationGraphics -> Graphics
 
-        annotationgraphics::ANY -> Offset
+        net::NetElement -> NetGraphics
 
-        width::ANY height::ANY nodegraphics::ANY -> Dimension
+        node::Node position::Position dimension::Dimension fill::Fill line::Line -> NodeGraphics
 
-        gradientrotation::ANY interiorcolor::ANY gradientcolor::ANY image::ANY nodegraphics::ANY edgegraphics::ANY annotationgraphics::ANY -> Fill
+        arc::Arc position::Position+ fill::Fill line::Line -> EdgeGraphics
 
-        color::ANY width::ANY shape::ANY style::ANY nodegraphics::ANY edgegraphics::ANY annotationgraphics::ANY -> Line
+        namedelement::LabeledElement offset::Offset font::Font fill::Fill line::Line -> AnnotationGraphics
 
-        family::ANY style::ANY weight::ANY size::ANY decoration::ANY align::ANY rotation::ANY annotationgraphics::ANY -> Font
+        Position -> Coordinate
+
+        Offset -> Coordinate
+
+        nodegraphics::NodeGraphics edgegraphics::EdgeGraphics -> Position
+
+        annotationgraphics::AnnotationGraphics -> Offset
+
+        width::Integer height::Integer nodegraphics::NodeGraphics -> Dimension
+
+        gradientrotation::RotationType interiorcolor::Color gradientcolor::Color image::URI nodegraphics::NodeGraphics edgegraphics::EdgeGraphics annotationgraphics::AnnotationGraphics -> Fill
+
+        color::Color width::Integer shape::ShapeType style::StyleType nodegraphics::NodeGraphics edgegraphics::EdgeGraphics annotationgraphics::AnnotationGraphics -> Line
+
+        family::String style::String weight::String size::String decoration::DecorationType align::AlignType rotation::Integer annotationgraphics::AnnotationGraphics -> Font

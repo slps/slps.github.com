@@ -4,78 +4,124 @@ exports
   sorts
         Element StructuralElement Image Svg GroupingElement G Defs Symbol Use GraphicalElement Shape TextElement Rect Circle Ellipse Line Polyline Polygon Path Point Marker Text Tspan Tref Attribute Transform Scale Translate Rotate Visibility FontWeight FontStyle Dimension Coordinates RelativeCoord AbsoluteCoord ReferencedFile SvgFile 
   context-free syntax
-         -> Element
+        StructuralElement -> Element
 
-         -> StructuralElement
+        GraphicalElement -> Element
 
-        referee::ANY+ -> Image
+        Image -> StructuralElement
 
-        owner_SVG::ANY+ children::ANY+ namespace::ANY version::ANY baseProfile::ANY -> Svg
+        Svg -> StructuralElement
 
-         -> GroupingElement
+        GroupingElement -> StructuralElement
 
-        name::ANY -> G
+        Use -> StructuralElement
 
-        groupContent::ANY+ -> Defs
+        referee::ReferencedFile+ -> Image
 
-        groupContent::ANY+ -> Symbol
+        owner_SVG::SvgFile+ children::Element+ namespace::String version::String baseProfile::String -> Svg
 
-        use::ANY+ -> Use
+        G -> GroupingElement
 
-         -> GraphicalElement
+        Defs -> GroupingElement
 
-         -> Shape
+        Symbol -> GroupingElement
 
-         -> TextElement
+        name::String -> G
 
-        rx::ANY ry::ANY -> Rect
+        groupContent::Element+ -> Defs
+
+        groupContent::Element+ -> Symbol
+
+        use::Element+ -> Use
+
+        Shape -> GraphicalElement
+
+        TextElement -> GraphicalElement
+
+        Rect -> Shape
+
+        Circle -> Shape
+
+        Ellipse -> Shape
+
+        Line -> Shape
+
+        Polyline -> Shape
+
+        Polygon -> Shape
+
+        Path -> Shape
+
+        Point -> Shape
+
+        Marker -> Shape
+
+        Text -> TextElement
+
+        Tspan -> TextElement
+
+        Tref -> TextElement
+
+        rx::Double ry::Double -> Rect
 
          -> Circle
 
          -> Ellipse
 
-        between::ANY markerEnd::ANY markerStart::ANY -> Line
+        between::Point markerEnd::String markerStart::String -> Line
 
-        waypoints::ANY+ strokeDashArray::ANY markerEnd::ANY markerStart::ANY -> Polyline
+        waypoints::Point+ strokeDashArray::String markerEnd::String markerStart::String -> Polyline
 
-        waypoints::ANY+ markerEnd::ANY markerStart::ANY -> Polygon
+        waypoints::Point+ markerEnd::String markerStart::String -> Polygon
 
-        pathLength::ANY d::ANY markerEnd::ANY markerStart::ANY -> Path
+        pathLength::Double d::String markerEnd::String markerStart::String -> Path
 
          -> Point
 
-        markerUnits::ANY refX::ANY refY::ANY markerWidth::ANY markerHeight::ANY orient::ANY drawing::ANY+ -> Marker
+        markerUnits::String refX::Double refY::Double markerWidth::Double markerHeight::Double orient::String drawing::Element+ -> Marker
 
-        lengthAdjust::ANY content::ANY -> Text
+        lengthAdjust::String content::String -> Text
 
-        content::ANY -> Tspan
+        content::String -> Tspan
 
-        xlinkHref::ANY -> Tref
+        xlinkHref::TextElement -> Tref
 
-         -> Attribute
+        Transform -> Attribute
 
-         -> Transform
+        Visibility -> Attribute
 
-        sx::ANY sy::ANY -> Scale
+        FontWeight -> Attribute
 
-        tx::ANY ty::ANY -> Translate
+        FontStyle -> Attribute
 
-        angle::ANY cx::ANY cy::ANY -> Rotate
+        Scale -> Transform
 
-        visible::ANY -> Visibility
+        Translate -> Transform
 
-        bold::ANY -> FontWeight
+        Rotate -> Transform
 
-        italic::ANY -> FontStyle
+        sx::Double sy::Double -> Scale
 
-        width::ANY height::ANY -> Dimension
+        tx::Double ty::Double -> Translate
 
-         -> Coordinates
+        angle::Double cx::Double cy::Double -> Rotate
 
-        x::ANY y::ANY -> RelativeCoord
+        visible::Boolean -> Visibility
 
-        x::ANY y::ANY -> AbsoluteCoord
+        bold::Boolean -> FontWeight
 
-         -> ReferencedFile
+        italic::Boolean -> FontStyle
 
-        tag::ANY elements::ANY+ -> SvgFile
+        width::Double height::Double -> Dimension
+
+        RelativeCoord -> Coordinates
+
+        AbsoluteCoord -> Coordinates
+
+        x::Double y::Double -> RelativeCoord
+
+        x::Double y::Double -> AbsoluteCoord
+
+        SvgFile -> ReferencedFile
+
+        tag::Svg elements::Element+ -> SvgFile

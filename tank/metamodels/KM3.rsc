@@ -2,16 +2,19 @@
 module KM3
 
 syntax LocatedElement
-        = 
-        ()
+        = ModelElement
+        | Metamodel
  ;
 syntax ModelElement
-        = 
-        ()
+        = Classifier
+        | EnumLiteral
+        | StructuralFeature
+        | Package
  ;
 syntax Classifier
-        = 
-        ANY name ANY package
+        = DataType
+        | Enumeration
+        | Class
  ;
 syntax DataType
         = 
@@ -19,19 +22,20 @@ syntax DataType
  ;
 syntax Enumeration
         = 
-        ANY literals+
+        EnumLiteral literals+
  ;
 syntax EnumLiteral
         = 
-        ANY name ANY package
+        String name Package package
  ;
 syntax Class
         = 
-        ANY isAbstract ANY supertypes+ ANY structuralFeatures+
+        Boolean isAbstract Class supertypes+ StructuralFeature structuralFeatures+
  ;
 syntax StructuralFeature
-        = 
-        ANY lower ANY upper ANY isOrdered ANY isUnique ANY owner ANY type
+        = Attribute
+        | Reference
+        | Integer lower Integer upper Boolean isOrdered Boolean isUnique Class owner Classifier type
  ;
 syntax Attribute
         = 
@@ -39,13 +43,13 @@ syntax Attribute
  ;
 syntax Reference
         = 
-        ANY isContainer ANY opposite
+        Boolean isContainer Reference opposite
  ;
 syntax Package
         = 
-        ANY contents+ ANY metamodel
+        ModelElement contents+ Metamodel metamodel
  ;
 syntax Metamodel
         = 
-        ANY contents+
+        Package contents+
  ;

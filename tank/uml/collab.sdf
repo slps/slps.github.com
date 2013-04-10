@@ -6,26 +6,30 @@ exports
   context-free syntax
          -> Package
 
-        ownedEltColl::ANY ownedEltInt::ANY+ -> ProviderClause
+        Package -> ProviderClause
 
-        ownedElt::ANY -> CollaborationPackage
+        ownedEltColl::CollaborationPackage ownedEltInt::InteractionPackage+ -> ProviderClause
 
-        interaction::ANY+ ownedEltAss::ANY ownedEltClass::ANY -> Collaboration
+        ownedElt::Collaboration -> CollaborationPackage
 
-        providerClause::ANY ownedElt::ANY -> InteractionPackage
+        interaction::Interaction+ ownedEltAss::AssociationRole ownedEltClass::ClassifierRole -> Collaboration
 
-        context::ANY message::ANY+ -> Interaction
+        providerClause::ProviderClause ownedElt::Interaction -> InteractionPackage
 
-        connection::ANY -> AssociationRole
+        context::Collaboration message::Message+ -> Interaction
 
-        associationEndRole::ANY+ receiverMess::ANY senderMess::ANY availableFeature::ANY+ base::ANY -> ClassifierRole
+        connection::AssociationEndRole -> AssociationRole
 
-        associationRole::ANY type::ANY -> AssociationEndRole
+        associationEndRole::AssociationEndRole+ receiverMess::Message senderMess::Message availableFeature::Operation+ base::Interface -> ClassifierRole
 
-        message::ANY+ activator::ANY interaction::ANY+ receiver::ANY sender::ANY specification::ANY -> Message
+        associationRole::AssociationRole type::ClassifierRole -> AssociationEndRole
 
-        message::ANY+ -> Request
+        message::Message+ activator::Message interaction::Interaction+ receiver::ClassifierRole sender::ClassifierRole specification::Request -> Message
 
-        classifierRole::ANY+ owner::ANY -> Operation
+        Operation -> Request
 
-        classifierRole::ANY+ feature::ANY+ -> Interface
+        message::Message+ -> Request
+
+        classifierRole::ClassifierRole+ owner::Interface -> Operation
+
+        classifierRole::ClassifierRole+ feature::Operation+ -> Interface

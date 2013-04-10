@@ -13,23 +13,31 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable Cristal 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Youssef Srour, <code>Cristal.ecore</code>, 2006/07/28.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>9</strong></li><li>Number of top alternatives: <strong>9</strong></li><li>Number of defined nonterminal symbols: <strong>9</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>9</strong>: <code><a href="#Condition" class="nt">Condition</a>, <a href="#CompositeParDef" class="nt">CompositeParDef</a>, <a href="#ElementaryPartDef" class="nt">ElementaryPartDef</a>, <a href="#ElementaryActDef" class="nt">ElementaryActDef</a>, <a href="#CompositeActDef" class="nt">CompositeActDef</a>, <a href="#ActCompositeMember" class="nt">ActCompositeMember</a>, <a href="#ActivityDefinition" class="nt">ActivityDefinition</a>, <a href="#PartDefinition" class="nt">PartDefinition</a>, <a href="#PartCompositeMember" class="nt">PartCompositeMember</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Condition">Condition</a>:
-        <span class="sel">partCompositeMembers</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">actCompositeMembers</span>::<span class="meta">any</span><span class="meta">+</span>
+				</script></head><body><h1 class="l">Browsable Cristal 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Youssef Srour, <code>Cristal.ecore</code>, 2006/07/28.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>13</strong></li><li>Number of top alternatives: <strong>13</strong></li><li>Number of defined nonterminal symbols: <strong>9</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#Condition" class="nt">Condition</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Condition">Condition</a>:
+        <span class="sel">partCompositeMembers</span>::<a class="nt" href="#PartCompositeMember">PartCompositeMember</a><span class="meta">+</span> <span class="sel">actCompositeMembers</span>::<a class="nt" href="#ActCompositeMember">ActCompositeMember</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="CompositeParDef">CompositeParDef</a>:
-        <span class="sel">partCompositeMember</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">partCompositeMember</span>::<a class="nt" href="#PartCompositeMember">PartCompositeMember</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="ElementaryPartDef">ElementaryPartDef</a>:
         ε
 </pre><pre><a class="nt" name="ElementaryActDef">ElementaryActDef</a>:
         ε
 </pre><pre><a class="nt" name="CompositeActDef">CompositeActDef</a>:
-        <span class="sel">actCompositeMembers</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">actCompositeMembers</span>::<a class="nt" href="#ActCompositeMember">ActCompositeMember</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="ActCompositeMember">ActCompositeMember</a>:
-        <span class="sel">activityDefinitions</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">activityDefinitions</span>::<a class="nt" href="#ActivityDefinition">ActivityDefinition</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="ActivityDefinition">ActivityDefinition</a>:
-        <span class="sel">actCompositeMember</span>::<span class="meta">any</span>
+        <a class="nt" href="#ElementaryActDef">ElementaryActDef</a>
+</pre><pre><a class="nt" name="ActivityDefinition">ActivityDefinition</a>:
+        <a class="nt" href="#CompositeActDef">CompositeActDef</a>
+</pre><pre><a class="nt" name="ActivityDefinition">ActivityDefinition</a>:
+        <span class="sel">actCompositeMember</span>::<a class="nt" href="#ActCompositeMember">ActCompositeMember</a>
 </pre><pre><a class="nt" name="PartDefinition">PartDefinition</a>:
-        <span class="sel">partCompositeMembers</span>::<span class="meta">any</span><span class="meta">+</span>
+        <a class="nt" href="#CompositeParDef">CompositeParDef</a>
+</pre><pre><a class="nt" name="PartDefinition">PartDefinition</a>:
+        <a class="nt" href="#ElementaryPartDef">ElementaryPartDef</a>
+</pre><pre><a class="nt" name="PartDefinition">PartDefinition</a>:
+        <span class="sel">partCompositeMembers</span>::<a class="nt" href="#PartCompositeMember">PartCompositeMember</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="PartCompositeMember">PartCompositeMember</a>:
-        <span class="sel">partDefinitions</span>::<span class="meta">any</span>
+        <span class="sel">partDefinitions</span>::<a class="nt" href="#PartDefinition">PartDefinition</a>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

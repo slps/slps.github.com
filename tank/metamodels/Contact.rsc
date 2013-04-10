@@ -3,13 +3,13 @@ module Contact
 
 syntax Contact
         = 
-        ANY nom ANY prenom ANY num_fixes+ ANY num_portables+
+        String nom String prenom Num_fixe num_fixes+ Num_portable num_portables+
  ;
 syntax Num_fixe
         = 
-        ANY numero ANY contact_fixe
+        String numero Contact contact_fixe
  ;
 syntax Num_portable
         = 
-        ANY numero ANY contact_portable
+        String numero Contact contact_portable
  ;

@@ -4,15 +4,15 @@ exports
   sorts
         Airport Flight Airline Passenger Genre Time 
   context-free syntax
-        name::ANY departingFlight::ANY+ arrivingFlight::ANY+ -> Airport
+        name::String departingFlight::Flight+ arrivingFlight::Flight+ -> Airport
 
-        departTime::ANY duration::ANY maxnrPassengers::ANY passenger::ANY+ airline::ANY origin::ANY destination::ANY -> Flight
+        departTime::Time duration::Time maxnrPassengers::Integer passenger::Passenger+ airline::Airline origin::Airport destination::Airport -> Flight
 
-        name::ANY nationality::ANY flight::ANY+ -> Airline
+        name::String nationality::String flight::Flight+ -> Airline
 
-        name::ANY age::ANY gender::ANY needsAssistance::ANY flight::ANY -> Passenger
+        name::String age::Integer gender::Genre needsAssistance::Boolean flight::Flight -> Passenger
 
         male:: -> Genre
         female:: -> Genre
 
-        year::ANY month::ANY day::ANY hour::ANY minute::ANY second::ANY -> Time
+        year::Integer month::Integer day::Integer hour::Integer minute::Integer second::Integer -> Time

@@ -3,13 +3,13 @@ module Table
 
 syntax Table
         = 
-        ANY rows+
+        Row rows+
  ;
 syntax Row
         = 
-        ANY cells+
+        Cell cells+
  ;
 syntax Cell
         = 
-        content: ANY
+        content: String
  ;

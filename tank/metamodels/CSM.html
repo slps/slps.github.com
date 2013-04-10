@@ -13,24 +13,38 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable CSM 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Youssef Srour, <code>CSM.ecore</code>, 2006/07/28.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>21</strong></li><li>Number of top alternatives: <strong>21</strong></li><li>Number of defined nonterminal symbols: <strong>21</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>21</strong>: <code><a href="#CSM" class="nt">CSM</a>, <a href="#GeneralResource" class="nt">GeneralResource</a>, <a href="#Step" class="nt">Step</a>, <a href="#Scenarion" class="nt">Scenarion</a>, <a href="#Start" class="nt">Start</a>, <a href="#End" class="nt">End</a>, <a href="#ResourceAcquire" class="nt">ResourceAcquire</a>, <a href="#ResourceRelease" class="nt">ResourceRelease</a>, <a href="#Workload" class="nt">Workload</a>, <a href="#Component" class="nt">Component</a>, <a href="#ProcessingResource" class="nt">ProcessingResource</a>, <a href="#ExternalService" class="nt">ExternalService</a>, <a href="#ActiveResource" class="nt">ActiveResource</a>, <a href="#PassiveResource" class="nt">PassiveResource</a>, <a href="#Message" class="nt">Message</a>, <a href="#PathConnection" class="nt">PathConnection</a>, <a href="#Join" class="nt">Join</a>, <a href="#Fork" class="nt">Fork</a>, <a href="#Merge" class="nt">Merge</a>, <a href="#Branch" class="nt">Branch</a>, <a href="#Seqence" class="nt">Seqence</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="CSM">CSM</a>:
-        <span class="sel">step</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">generalResource</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">scenarion</span>::<span class="meta">any</span><span class="meta">+</span>
+				</script></head><body><h1 class="l">Browsable CSM 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Youssef Srour, <code>CSM.ecore</code>, 2006/07/28.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>36</strong></li><li>Number of top alternatives: <strong>36</strong></li><li>Number of defined nonterminal symbols: <strong>21</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#CSM" class="nt">CSM</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="CSM">CSM</a>:
+        <span class="sel">step</span>::<a class="nt" href="#Step">Step</a><span class="meta">+</span> <span class="sel">generalResource</span>::<a class="nt" href="#GeneralResource">GeneralResource</a><span class="meta">+</span> <span class="sel">scenarion</span>::<a class="nt" href="#Scenarion">Scenarion</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="GeneralResource">GeneralResource</a>:
-        <span class="sel">resourceAcquire</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">resourceRelease</span>::<span class="meta">any</span><span class="meta">+</span>
+        <a class="nt" href="#ActiveResource">ActiveResource</a>
+</pre><pre><a class="nt" name="GeneralResource">GeneralResource</a>:
+        <a class="nt" href="#PassiveResource">PassiveResource</a>
+</pre><pre><a class="nt" name="GeneralResource">GeneralResource</a>:
+        <span class="sel">resourceAcquire</span>::<a class="nt" href="#ResourceAcquire">ResourceAcquire</a><span class="meta">+</span> <span class="sel">resourceRelease</span>::<a class="nt" href="#ResourceRelease">ResourceRelease</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Step">Step</a>:
-        <span class="sel">postPath</span>::<span class="meta">any</span> <span class="sel">prePath</span>::<span class="meta">any</span> <span class="sel">activeResource</span>::<span class="meta">any</span>
+        <a class="nt" href="#Start">Start</a>
+</pre><pre><a class="nt" name="Step">Step</a>:
+        <a class="nt" href="#End">End</a>
+</pre><pre><a class="nt" name="Step">Step</a>:
+        <a class="nt" href="#ResourceAcquire">ResourceAcquire</a>
+</pre><pre><a class="nt" name="Step">Step</a>:
+        <a class="nt" href="#ResourceRelease">ResourceRelease</a>
+</pre><pre><a class="nt" name="Step">Step</a>:
+        <span class="sel">postPath</span>::<a class="nt" href="#PathConnection">PathConnection</a> <span class="sel">prePath</span>::<a class="nt" href="#PathConnection">PathConnection</a> <span class="sel">activeResource</span>::<a class="nt" href="#ActiveResource">ActiveResource</a>
 </pre><pre><a class="nt" name="Scenarion">Scenarion</a>:
-        <span class="sel">step</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">root</span>::<span class="meta">any</span><span class="meta">+</span>
+        <a class="nt" href="#Step">Step</a>
+</pre><pre><a class="nt" name="Scenarion">Scenarion</a>:
+        <span class="sel">step</span>::<a class="nt" href="#Step">Step</a><span class="meta">+</span> <span class="sel">root</span>::<a class="nt" href="#Start">Start</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Start">Start</a>:
-        <span class="sel">workload</span>::<span class="meta">any</span>
+        <span class="sel">workload</span>::<a class="nt" href="#Workload">Workload</a>
 </pre><pre><a class="nt" name="End">End</a>:
         ε
 </pre><pre><a class="nt" name="ResourceAcquire">ResourceAcquire</a>:
-        <span class="sel">generalResource</span>::<span class="meta">any</span>
+        <span class="sel">generalResource</span>::<a class="nt" href="#GeneralResource">GeneralResource</a>
 </pre><pre><a class="nt" name="ResourceRelease">ResourceRelease</a>:
-        <span class="sel">generalResource</span>::<span class="meta">any</span>
+        <span class="sel">generalResource</span>::<a class="nt" href="#GeneralResource">GeneralResource</a>
 </pre><pre><a class="nt" name="Workload">Workload</a>:
-        <span class="sel">start</span>::<span class="meta">any</span>
+        <span class="sel">start</span>::<a class="nt" href="#Start">Start</a>
 </pre><pre><a class="nt" name="Component">Component</a>:
         ε
 </pre><pre><a class="nt" name="ProcessingResource">ProcessingResource</a>:
@@ -38,13 +52,29 @@
 </pre><pre><a class="nt" name="ExternalService">ExternalService</a>:
         ε
 </pre><pre><a class="nt" name="ActiveResource">ActiveResource</a>:
-        <span class="sel">step</span>::<span class="meta">any</span><span class="meta">+</span>
+        <a class="nt" href="#ProcessingResource">ProcessingResource</a>
+</pre><pre><a class="nt" name="ActiveResource">ActiveResource</a>:
+        <a class="nt" href="#ExternalService">ExternalService</a>
+</pre><pre><a class="nt" name="ActiveResource">ActiveResource</a>:
+        <span class="sel">step</span>::<a class="nt" href="#Step">Step</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="PassiveResource">PassiveResource</a>:
-        ε
+        <a class="nt" href="#Component">Component</a>
+</pre><pre><a class="nt" name="PassiveResource">PassiveResource</a>:
+        <a class="nt" href="#Component">Component</a>
 </pre><pre><a class="nt" name="Message">Message</a>:
         ε
 </pre><pre><a class="nt" name="PathConnection">PathConnection</a>:
-        <span class="sel">message</span>::<span class="meta">any</span> <span class="sel">post</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">pre</span>::<span class="meta">any</span><span class="meta">+</span>
+        <a class="nt" href="#Join">Join</a>
+</pre><pre><a class="nt" name="PathConnection">PathConnection</a>:
+        <a class="nt" href="#Fork">Fork</a>
+</pre><pre><a class="nt" name="PathConnection">PathConnection</a>:
+        <a class="nt" href="#Merge">Merge</a>
+</pre><pre><a class="nt" name="PathConnection">PathConnection</a>:
+        <a class="nt" href="#Branch">Branch</a>
+</pre><pre><a class="nt" name="PathConnection">PathConnection</a>:
+        <a class="nt" href="#Seqence">Seqence</a>
+</pre><pre><a class="nt" name="PathConnection">PathConnection</a>:
+        <span class="sel">message</span>::<a class="nt" href="#Message">Message</a> <span class="sel">post</span>::<a class="nt" href="#Step">Step</a><span class="meta">+</span> <span class="sel">pre</span>::<a class="nt" href="#Step">Step</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Join">Join</a>:
         ε
 </pre><pre><a class="nt" name="Fork">Fork</a>:
@@ -56,4 +86,4 @@
 </pre><pre><a class="nt" name="Seqence">Seqence</a>:
         ε
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

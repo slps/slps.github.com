@@ -13,98 +13,140 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable MATLAB 1.2 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Youssef Srour, <code>Matlab.ecore</code>, 26/06/2006.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>46</strong></li><li>Number of top alternatives: <strong>47</strong></li><li>Number of defined nonterminal symbols: <strong>46</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>46</strong>: <code><a href="#Matlab" class="nt">Matlab</a>, <a href="#BlockDefaults" class="nt">BlockDefaults</a>, <a href="#Model" class="nt">Model</a>, <a href="#AnnotationDefaults" class="nt">AnnotationDefaults</a>, <a href="#LineDefaults" class="nt">LineDefaults</a>, <a href="#System" class="nt">System</a>, <a href="#Subsystem" class="nt">Subsystem</a>, <a href="#Block" class="nt">Block</a>, <a href="#Annotation" class="nt">Annotation</a>, <a href="#Line" class="nt">Line</a>, <a href="#DirectLine" class="nt">DirectLine</a>, <a href="#InputPort" class="nt">InputPort</a>, <a href="#Branch" class="nt">Branch</a>, <a href="#BranchedLine" class="nt">BranchedLine</a>, <a href="#Primitive" class="nt">Primitive</a>, <a href="#Port" class="nt">Port</a>, <a href="#Reference" class="nt">Reference</a>, <a href="#Masked" class="nt">Masked</a>, <a href="#Normal" class="nt">Normal</a>, <a href="#Parameter" class="nt">Parameter</a>, <a href="#OutputPort" class="nt">OutputPort</a>, <a href="#Type" class="nt">Type</a>, <a href="#Double" class="nt">Double</a>, <a href="#INteger" class="nt">INteger</a>, <a href="#Enumeration" class="nt">Enumeration</a>, <a href="#BOolean" class="nt">BOolean</a>, <a href="#TrueFalse" class="nt">TrueFalse</a>, <a href="#Text" class="nt">Text</a>, <a href="#Vector" class="nt">Vector</a>, <a href="#DirectBranch" class="nt">DirectBranch</a>, <a href="#NestedBranch" class="nt">NestedBranch</a>, <a href="#Machine" class="nt">Machine</a>, <a href="#Junction" class="nt">Junction</a>, <a href="#Transition" class="nt">Transition</a>, <a href="#Event" class="nt">Event</a>, <a href="#Data" class="nt">Data</a>, <a href="#Instance" class="nt">Instance</a>, <a href="#Target" class="nt">Target</a>, <a href="#Chart" class="nt">Chart</a>, <a href="#State" class="nt">State</a>, <a href="#Props" class="nt">Props</a>, <a href="#Range" class="nt">Range</a>, <a href="#Array" class="nt">Array</a>, <a href="#StateFlow" class="nt">StateFlow</a>, <a href="#TransitionTerminal" class="nt">TransitionTerminal</a>, <a href="#Simulink" class="nt">Simulink</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Matlab">Matlab</a>:
-        <span class="sel">model</span>::<span class="meta">any</span><span class="meta">+</span>
+				</script></head><body><h1 class="l">Browsable MATLAB 1.2 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Youssef Srour, <code>Matlab.ecore</code>, 26/06/2006.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>67</strong></li><li>Number of top alternatives: <strong>68</strong></li><li>Number of defined nonterminal symbols: <strong>46</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#TransitionTerminal" class="nt">TransitionTerminal</a></code></li><li>Bottom nonterminal symbols: <strong>1</strong>: <code><a href="#String" class="nt">String</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Matlab">Matlab</a>:
+        <span class="sel">model</span>::<a class="nt" href="#Model">Model</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="BlockDefaults">BlockDefaults</a>:
-        <span class="sel">blockDefaults</span>::<span class="meta">any</span> <span class="sel">model</span>::<span class="meta">any</span>
+        <a class="nt" href="#Block">Block</a>
+</pre><pre><a class="nt" name="BlockDefaults">BlockDefaults</a>:
+        <span class="sel">blockDefaults</span>::<a class="nt" href="#String">String</a> <span class="sel">model</span>::<a class="nt" href="#Model">Model</a>
 </pre><pre><a class="nt" name="Model">Model</a>:
-        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">matlab</span>::<span class="meta">any</span> <span class="sel">annotationDefaults</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">system</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">blockDefaults</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">lineDefaults</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">simulink</span>::<span class="meta">any</span>
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">matlab</span>::<a class="nt" href="#Matlab">Matlab</a> <span class="sel">annotationDefaults</span>::<a class="nt" href="#AnnotationDefaults">AnnotationDefaults</a><span class="meta">+</span> <span class="sel">system</span>::<a class="nt" href="#System">System</a><span class="meta">+</span> <span class="sel">blockDefaults</span>::<a class="nt" href="#BlockDefaults">BlockDefaults</a><span class="meta">+</span> <span class="sel">lineDefaults</span>::<a class="nt" href="#LineDefaults">LineDefaults</a><span class="meta">+</span> <span class="sel">simulink</span>::<a class="nt" href="#Simulink">Simulink</a>
 </pre><pre><a class="nt" name="AnnotationDefaults">AnnotationDefaults</a>:
-        <span class="sel">annotationDefaults</span>::<span class="meta">any</span> <span class="sel">model</span>::<span class="meta">any</span>
+        <a class="nt" href="#Annotation">Annotation</a>
+</pre><pre><a class="nt" name="AnnotationDefaults">AnnotationDefaults</a>:
+        <span class="sel">annotationDefaults</span>::<a class="nt" href="#String">String</a> <span class="sel">model</span>::<a class="nt" href="#Model">Model</a>
 </pre><pre><a class="nt" name="LineDefaults">LineDefaults</a>:
-        <span class="sel">lineDefaults</span>::<span class="meta">any</span> <span class="sel">model</span>::<span class="meta">any</span>
+        <a class="nt" href="#Line">Line</a>
+</pre><pre><a class="nt" name="LineDefaults">LineDefaults</a>:
+        <span class="sel">lineDefaults</span>::<a class="nt" href="#String">String</a> <span class="sel">model</span>::<a class="nt" href="#Model">Model</a>
 </pre><pre><a class="nt" name="System">System</a>:
-        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">blocks</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">lines</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">annotations</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">model</span>::<span class="meta">any</span> <span class="sel">parentSubsystem</span>::<span class="meta">any</span>
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">blocks</span>::<a class="nt" href="#Block">Block</a><span class="meta">+</span> <span class="sel">lines</span>::<a class="nt" href="#Line">Line</a><span class="meta">+</span> <span class="sel">annotations</span>::<a class="nt" href="#Annotation">Annotation</a><span class="meta">+</span> <span class="sel">model</span>::<a class="nt" href="#Model">Model</a> <span class="sel">parentSubsystem</span>::<a class="nt" href="#Subsystem">Subsystem</a>
 </pre><pre><a class="nt" name="Subsystem">Subsystem</a>:
-        <span class="sel">system</span>::<span class="meta">any</span>
+        <a class="nt" href="#Masked">Masked</a>
+</pre><pre><a class="nt" name="Subsystem">Subsystem</a>:
+        <a class="nt" href="#Normal">Normal</a>
+</pre><pre><a class="nt" name="Subsystem">Subsystem</a>:
+        <span class="sel">system</span>::<a class="nt" href="#System">System</a>
 </pre><pre><a class="nt" name="Block">Block</a>:
-        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">blockType</span>::<span class="meta">any</span> <span class="sel">description</span>::<span class="meta">any</span> <span class="sel">priority</span>::<span class="meta">any</span> <span class="sel">tag</span>::<span class="meta">any</span> <span class="sel">position</span>::<span class="meta">any</span> <span class="sel">mySystem</span>::<span class="meta">any</span> <span class="sel">ports</span>::<span class="meta">any</span><span class="meta">+</span>
+        <a class="nt" href="#Subsystem">Subsystem</a>
+</pre><pre><a class="nt" name="Block">Block</a>:
+        <a class="nt" href="#Primitive">Primitive</a>
+</pre><pre><a class="nt" name="Block">Block</a>:
+        <a class="nt" href="#Reference">Reference</a>
+</pre><pre><a class="nt" name="Block">Block</a>:
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">blockType</span>::<a class="nt" href="#String">String</a> <span class="sel">description</span>::<a class="nt" href="#String">String</a> <span class="sel">priority</span>::<a class="nt" href="#String">String</a> <span class="sel">tag</span>::<a class="nt" href="#String">String</a> <span class="sel">position</span>::<a class="nt" href="#String">String</a> <span class="sel">mySystem</span>::<a class="nt" href="#System">System</a> <span class="sel">ports</span>::<a class="nt" href="#Port">Port</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Annotation">Annotation</a>:
-        <span class="sel">position</span>::<span class="meta">any</span> <span class="sel">text</span>::<span class="meta">any</span> <span class="sel">system</span>::<span class="meta">any</span>
+        <span class="sel">position</span>::<a class="nt" href="#String">String</a> <span class="sel">text</span>::<a class="nt" href="#String">String</a> <span class="sel">system</span>::<a class="nt" href="#System">System</a>
 </pre><pre><a class="nt" name="Line">Line</a>:
-        <span class="sel">points</span>::<span class="meta">any</span> <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">srcPort</span>::<span class="meta">any</span> <span class="sel">system</span>::<span class="meta">any</span>
+        <a class="nt" href="#DirectLine">DirectLine</a>
+</pre><pre><a class="nt" name="Line">Line</a>:
+        <a class="nt" href="#BranchedLine">BranchedLine</a>
+</pre><pre><a class="nt" name="Line">Line</a>:
+        <span class="sel">points</span>::<a class="nt" href="#String">String</a> <span class="sel">id</span>::<a class="nt" href="#String">String</a> <span class="sel">srcPort</span>::<a class="nt" href="#OutputPort">OutputPort</a> <span class="sel">system</span>::<a class="nt" href="#System">System</a>
 </pre><pre><a class="nt" name="DirectLine">DirectLine</a>:
-        <span class="sel">destPort1</span>::<span class="meta">any</span>
+        <span class="sel">destPort1</span>::<a class="nt" href="#InputPort">InputPort</a>
 </pre><pre><a class="nt" name="InputPort">InputPort</a>:
-        <span class="sel">owningDirectLine</span>::<span class="meta">any</span> <span class="sel">owningDirectBranch</span>::<span class="meta">any</span>
+        <span class="sel">owningDirectLine</span>::<a class="nt" href="#DirectLine">DirectLine</a> <span class="sel">owningDirectBranch</span>::<a class="nt" href="#DirectBranch">DirectBranch</a>
 </pre><pre><a class="nt" name="Branch">Branch</a>:
-        <span class="sel">points</span>::<span class="meta">any</span> <span class="sel">branchedLine</span>::<span class="meta">any</span> <span class="sel">nestedBranch</span>::<span class="meta">any</span>
+        <a class="nt" href="#DirectBranch">DirectBranch</a>
+</pre><pre><a class="nt" name="Branch">Branch</a>:
+        <a class="nt" href="#NestedBranch">NestedBranch</a>
+</pre><pre><a class="nt" name="Branch">Branch</a>:
+        <span class="sel">points</span>::<a class="nt" href="#String">String</a> <span class="sel">branchedLine</span>::<a class="nt" href="#BranchedLine">BranchedLine</a> <span class="sel">nestedBranch</span>::<a class="nt" href="#NestedBranch">NestedBranch</a>
 </pre><pre><a class="nt" name="BranchedLine">BranchedLine</a>:
-        <span class="sel">branchs</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">branchs</span>::<a class="nt" href="#Branch">Branch</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Primitive">Primitive</a>:
-        <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">parameters</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">refPort</span>::<span class="meta">any</span>
+        <span class="sel">id</span>::<a class="nt" href="#String">String</a> <span class="sel">parameters</span>::<a class="nt" href="#Parameter">Parameter</a><span class="meta">+</span> <span class="sel">refPort</span>::<a class="nt" href="#Port">Port</a>
 </pre><pre><a class="nt" name="Port">Port</a>:
-        <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">number</span>::<span class="meta">any</span> <span class="sel">portBlock</span>::<span class="meta">any</span> <span class="sel">primitive</span>::<span class="meta">any</span>
+        <a class="nt" href="#InputPort">InputPort</a>
+</pre><pre><a class="nt" name="Port">Port</a>:
+        <a class="nt" href="#OutputPort">OutputPort</a>
+</pre><pre><a class="nt" name="Port">Port</a>:
+        <span class="sel">id</span>::<a class="nt" href="#String">String</a> <span class="sel">number</span>::<a class="nt" href="#String">String</a> <span class="sel">portBlock</span>::<a class="nt" href="#Block">Block</a> <span class="sel">primitive</span>::<a class="nt" href="#Primitive">Primitive</a>
 </pre><pre><a class="nt" name="Reference">Reference</a>:
-        <span class="sel">sourceType</span>::<span class="meta">any</span> <span class="sel">sourceBlock</span>::<span class="meta">any</span> <span class="sel">parameters</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">sourceType</span>::<a class="nt" href="#String">String</a> <span class="sel">sourceBlock</span>::<a class="nt" href="#String">String</a> <span class="sel">parameters</span>::<a class="nt" href="#Parameter">Parameter</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Masked">Masked</a>:
         ε
 </pre><pre><a class="nt" name="Normal">Normal</a>:
         ε
 </pre><pre><a class="nt" name="Parameter">Parameter</a>:
-        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">le_reference</span>::<span class="meta">any</span> <span class="sel">primitive</span>::<span class="meta">any</span>
+        <a class="nt" href="#Type">Type</a>
+</pre><pre><a class="nt" name="Parameter">Parameter</a>:
+        <a class="nt" href="#Double">Double</a>
+</pre><pre><a class="nt" name="Parameter">Parameter</a>:
+        <a class="nt" href="#INteger">INteger</a>
+</pre><pre><a class="nt" name="Parameter">Parameter</a>:
+        <a class="nt" href="#Enumeration">Enumeration</a>
+</pre><pre><a class="nt" name="Parameter">Parameter</a>:
+        <a class="nt" href="#BOolean">BOolean</a>
+</pre><pre><a class="nt" name="Parameter">Parameter</a>:
+        <a class="nt" href="#Text">Text</a>
+</pre><pre><a class="nt" name="Parameter">Parameter</a>:
+        <a class="nt" href="#Vector">Vector</a>
+</pre><pre><a class="nt" name="Parameter">Parameter</a>:
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">le_reference</span>::<a class="nt" href="#Reference">Reference</a> <span class="sel">primitive</span>::<a class="nt" href="#Primitive">Primitive</a>
 </pre><pre><a class="nt" name="OutputPort">OutputPort</a>:
-        <span class="sel">owningLine</span>::<span class="meta">any</span>
+        <span class="sel">owningLine</span>::<a class="nt" href="#Line">Line</a>
 </pre><pre><a class="nt" name="Type">Type</a>:
-        <span class="sel">value</span>::<span class="meta">any</span>
+        <span class="sel">value</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Double">Double</a>:
-        <span class="sel">value</span>::<span class="meta">any</span>
+        <span class="sel">value</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="INteger">INteger</a>:
-        <span class="sel">value</span>::<span class="meta">any</span>
+        <span class="sel">value</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Enumeration">Enumeration</a>:
-        <span class="sel">value</span>::<span class="meta">any</span>
+        <span class="sel">value</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="BOolean">BOolean</a>:
-        <span class="sel">value</span>::<span class="meta">any</span>
+        <span class="sel">value</span>::<a class="nt" href="#TrueFalse">TrueFalse</a>
 </pre><pre><a class="nt" name="TrueFalse">TrueFalse</a>:
         <span class="sel">True</span>::ε
         <span class="sel">False</span>::ε
 </pre><pre><a class="nt" name="Text">Text</a>:
-        <span class="sel">value</span>::<span class="meta">any</span>
+        <span class="sel">value</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Vector">Vector</a>:
-        <span class="sel">value</span>::<span class="meta">any</span>
+        <span class="sel">value</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="DirectBranch">DirectBranch</a>:
-        <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">destPort</span>::<span class="meta">any</span>
+        <span class="sel">id</span>::<a class="nt" href="#String">String</a> <span class="sel">destPort</span>::<a class="nt" href="#InputPort">InputPort</a>
 </pre><pre><a class="nt" name="NestedBranch">NestedBranch</a>:
-        <span class="sel">branchs</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">branchs</span>::<a class="nt" href="#Branch">Branch</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Machine">Machine</a>:
-        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">events</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">data</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">instances</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">targets</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">stateFlow</span>::<span class="meta">any</span>
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">id</span>::<a class="nt" href="#String">String</a> <span class="sel">events</span>::<a class="nt" href="#Event">Event</a><span class="meta">+</span> <span class="sel">data</span>::<a class="nt" href="#Data">Data</a><span class="meta">+</span> <span class="sel">instances</span>::<a class="nt" href="#Instance">Instance</a><span class="meta">+</span> <span class="sel">targets</span>::<a class="nt" href="#Target">Target</a><span class="meta">+</span> <span class="sel">stateFlow</span>::<a class="nt" href="#StateFlow">StateFlow</a>
 </pre><pre><a class="nt" name="Junction">Junction</a>:
-        <span class="sel">_id</span>::<span class="meta">any</span> <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">type</span>::<span class="meta">any</span> <span class="sel">position</span>::<span class="meta">any</span> <span class="sel">state</span>::<span class="meta">any</span> <span class="sel">chart</span>::<span class="meta">any</span>
+        <span class="sel">_id</span>::<a class="nt" href="#String">String</a> <span class="sel">id</span>::<a class="nt" href="#String">String</a> <span class="sel">type</span>::<a class="nt" href="#String">String</a> <span class="sel">position</span>::<a class="nt" href="#String">String</a> <span class="sel">state</span>::<a class="nt" href="#State">State</a> <span class="sel">chart</span>::<a class="nt" href="#Chart">Chart</a>
 </pre><pre><a class="nt" name="Transition">Transition</a>:
-        <span class="sel">_id</span>::<span class="meta">any</span> <span class="sel">dataLimites</span>::<span class="meta">any</span> <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">trigger</span>::<span class="meta">any</span> <span class="sel">condition</span>::<span class="meta">any</span> <span class="sel">conditionAction</span>::<span class="meta">any</span> <span class="sel">action</span>::<span class="meta">any</span> <span class="sel">chart</span>::<span class="meta">any</span> <span class="sel">state</span>::<span class="meta">any</span>
+        <span class="sel">_id</span>::<a class="nt" href="#String">String</a> <span class="sel">dataLimites</span>::<a class="nt" href="#String">String</a> <span class="sel">id</span>::<a class="nt" href="#String">String</a> <span class="sel">trigger</span>::<a class="nt" href="#String">String</a> <span class="sel">condition</span>::<a class="nt" href="#String">String</a> <span class="sel">conditionAction</span>::<a class="nt" href="#String">String</a> <span class="sel">action</span>::<a class="nt" href="#String">String</a> <span class="sel">chart</span>::<a class="nt" href="#Chart">Chart</a> <span class="sel">state</span>::<a class="nt" href="#State">State</a>
 </pre><pre><a class="nt" name="Event">Event</a>:
-        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">scope</span>::<span class="meta">any</span> <span class="sel">description</span>::<span class="meta">any</span> <span class="sel">trigger</span>::<span class="meta">any</span> <span class="sel">machine</span>::<span class="meta">any</span> <span class="sel">chart</span>::<span class="meta">any</span> <span class="sel">state</span>::<span class="meta">any</span>
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">id</span>::<a class="nt" href="#String">String</a> <span class="sel">scope</span>::<a class="nt" href="#String">String</a> <span class="sel">description</span>::<a class="nt" href="#String">String</a> <span class="sel">trigger</span>::<a class="nt" href="#String">String</a> <span class="sel">machine</span>::<a class="nt" href="#Machine">Machine</a> <span class="sel">chart</span>::<a class="nt" href="#Chart">Chart</a> <span class="sel">state</span>::<a class="nt" href="#State">State</a>
 </pre><pre><a class="nt" name="Data">Data</a>:
-        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">scope</span>::<span class="meta">any</span> <span class="sel">description</span>::<span class="meta">any</span> <span class="sel">units</span>::<span class="meta">any</span> <span class="sel">dataType</span>::<span class="meta">any</span> <span class="sel">props</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">state</span>::<span class="meta">any</span> <span class="sel">chart</span>::<span class="meta">any</span> <span class="sel">machine</span>::<span class="meta">any</span>
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">id</span>::<a class="nt" href="#String">String</a> <span class="sel">scope</span>::<a class="nt" href="#String">String</a> <span class="sel">description</span>::<a class="nt" href="#String">String</a> <span class="sel">units</span>::<a class="nt" href="#String">String</a> <span class="sel">dataType</span>::<a class="nt" href="#String">String</a> <span class="sel">props</span>::<a class="nt" href="#Props">Props</a><span class="meta">+</span> <span class="sel">state</span>::<a class="nt" href="#State">State</a> <span class="sel">chart</span>::<a class="nt" href="#Chart">Chart</a> <span class="sel">machine</span>::<a class="nt" href="#Machine">Machine</a>
 </pre><pre><a class="nt" name="Instance">Instance</a>:
-        <span class="sel">_id</span>::<span class="meta">any</span> <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">machine</span>::<span class="meta">any</span>
+        <span class="sel">_id</span>::<a class="nt" href="#String">String</a> <span class="sel">id</span>::<a class="nt" href="#String">String</a> <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">machine</span>::<a class="nt" href="#Machine">Machine</a>
 </pre><pre><a class="nt" name="Target">Target</a>:
-        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">codeCommand</span>::<span class="meta">any</span> <span class="sel">description</span>::<span class="meta">any</span> <span class="sel">makeCommand</span>::<span class="meta">any</span> <span class="sel">codeFlags</span>::<span class="meta">any</span> <span class="sel">checksumOld</span>::<span class="meta">any</span> <span class="sel">machine</span>::<span class="meta">any</span>
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">id</span>::<a class="nt" href="#String">String</a> <span class="sel">codeCommand</span>::<a class="nt" href="#String">String</a> <span class="sel">description</span>::<a class="nt" href="#String">String</a> <span class="sel">makeCommand</span>::<a class="nt" href="#String">String</a> <span class="sel">codeFlags</span>::<a class="nt" href="#String">String</a> <span class="sel">checksumOld</span>::<a class="nt" href="#String">String</a> <span class="sel">machine</span>::<a class="nt" href="#Machine">Machine</a>
 </pre><pre><a class="nt" name="Chart">Chart</a>:
-        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">_id</span>::<span class="meta">any</span> <span class="sel">decomposotion</span>::<span class="meta">any</span> <span class="sel">updateMethode</span>::<span class="meta">any</span> <span class="sel">sampleTime</span>::<span class="meta">any</span> <span class="sel">junctions</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">events</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">transitions</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">data</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">states</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">id</span>::<a class="nt" href="#String">String</a> <span class="sel">_id</span>::<a class="nt" href="#String">String</a> <span class="sel">decomposotion</span>::<a class="nt" href="#String">String</a> <span class="sel">updateMethode</span>::<a class="nt" href="#String">String</a> <span class="sel">sampleTime</span>::<a class="nt" href="#String">String</a> <span class="sel">junctions</span>::<a class="nt" href="#Junction">Junction</a><span class="meta">+</span> <span class="sel">events</span>::<a class="nt" href="#Event">Event</a><span class="meta">+</span> <span class="sel">transitions</span>::<a class="nt" href="#Transition">Transition</a><span class="meta">+</span> <span class="sel">data</span>::<a class="nt" href="#Data">Data</a><span class="meta">+</span> <span class="sel">states</span>::<a class="nt" href="#State">State</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="State">State</a>:
-        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">_id</span>::<span class="meta">any</span> <span class="sel">type</span>::<span class="meta">any</span> <span class="sel">entryAction</span>::<span class="meta">any</span> <span class="sel">exitAction</span>::<span class="meta">any</span> <span class="sel">duringAction</span>::<span class="meta">any</span> <span class="sel">eventActions</span>::<span class="meta">any</span> <span class="sel">decomposition</span>::<span class="meta">any</span> <span class="sel">position</span>::<span class="meta">any</span> <span class="sel">junctions</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">events</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">transitions</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">data</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">chart</span>::<span class="meta">any</span> <span class="sel">states</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">id</span>::<a class="nt" href="#String">String</a> <span class="sel">_id</span>::<a class="nt" href="#String">String</a> <span class="sel">type</span>::<a class="nt" href="#String">String</a> <span class="sel">entryAction</span>::<a class="nt" href="#String">String</a> <span class="sel">exitAction</span>::<a class="nt" href="#String">String</a> <span class="sel">duringAction</span>::<a class="nt" href="#String">String</a> <span class="sel">eventActions</span>::<a class="nt" href="#String">String</a> <span class="sel">decomposition</span>::<a class="nt" href="#String">String</a> <span class="sel">position</span>::<a class="nt" href="#String">String</a> <span class="sel">junctions</span>::<a class="nt" href="#Junction">Junction</a><span class="meta">+</span> <span class="sel">events</span>::<a class="nt" href="#Event">Event</a><span class="meta">+</span> <span class="sel">transitions</span>::<a class="nt" href="#Transition">Transition</a><span class="meta">+</span> <span class="sel">data</span>::<a class="nt" href="#Data">Data</a><span class="meta">+</span> <span class="sel">chart</span>::<a class="nt" href="#Chart">Chart</a> <span class="sel">states</span>::<a class="nt" href="#State">State</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Props">Props</a>:
-        <span class="sel">initialValue</span>::<span class="meta">any</span> <span class="sel">arrays</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">ranges</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">data</span>::<span class="meta">any</span>
+        <span class="sel">initialValue</span>::<a class="nt" href="#String">String</a> <span class="sel">arrays</span>::<a class="nt" href="#Array">Array</a><span class="meta">+</span> <span class="sel">ranges</span>::<a class="nt" href="#Range">Range</a><span class="meta">+</span> <span class="sel">data</span>::<a class="nt" href="#Data">Data</a>
 </pre><pre><a class="nt" name="Range">Range</a>:
-        <span class="sel">maximum</span>::<span class="meta">any</span> <span class="sel">minimum</span>::<span class="meta">any</span> <span class="sel">props</span>::<span class="meta">any</span>
+        <span class="sel">maximum</span>::<a class="nt" href="#String">String</a> <span class="sel">minimum</span>::<a class="nt" href="#String">String</a> <span class="sel">props</span>::<a class="nt" href="#Props">Props</a>
 </pre><pre><a class="nt" name="Array">Array</a>:
-        <span class="sel">firstIndex</span>::<span class="meta">any</span> <span class="sel">size</span>::<span class="meta">any</span> <span class="sel">props</span>::<span class="meta">any</span>
+        <span class="sel">firstIndex</span>::<a class="nt" href="#String">String</a> <span class="sel">size</span>::<a class="nt" href="#String">String</a> <span class="sel">props</span>::<a class="nt" href="#Props">Props</a>
 </pre><pre><a class="nt" name="StateFlow">StateFlow</a>:
-        <span class="sel">stateFlow</span>::<span class="meta">any</span> <span class="sel">machines</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">simulink</span>::<span class="meta">any</span>
+        <span class="sel">stateFlow</span>::<a class="nt" href="#String">String</a> <span class="sel">machines</span>::<a class="nt" href="#Machine">Machine</a><span class="meta">+</span> <span class="sel">simulink</span>::<a class="nt" href="#Simulink">Simulink</a>
 </pre><pre><a class="nt" name="TransitionTerminal">TransitionTerminal</a>:
-        <span class="sel">_id</span>::<span class="meta">any</span>
+        <span class="sel">_id</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Simulink">Simulink</a>:
-        <span class="sel">simulink</span>::<span class="meta">any</span> <span class="sel">stateFlows</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">models</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">simulink</span>::<a class="nt" href="#String">String</a> <span class="sel">stateFlows</span>::<a class="nt" href="#StateFlow">StateFlow</a><span class="meta">+</span> <span class="sel">models</span>::<a class="nt" href="#Model">Model</a><span class="meta">+</span>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

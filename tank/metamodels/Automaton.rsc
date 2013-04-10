@@ -3,13 +3,13 @@ module Automaton
 
 syntax FiniteAutomaton
         = 
-        ANY alphabet+ ANY transitionSet+ ANY initialState ANY finalStateSet+ ANY StateSet+
+        String alphabet+ Transition transitionSet+ State initialState State finalStateSet+ State StateSet+
  ;
 syntax Transition
         = 
-        ANY letter ANY source ANY target
+        String letter State source State target
  ;
 syntax State
         = 
-        ANY name ANY combination
+        String name State combination
  ;

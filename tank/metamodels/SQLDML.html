@@ -13,61 +13,97 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable SQLDML 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Marcos Didonet Del Fabro, <code>SQLDML.ecore</code>, 2006/08/28.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>28</strong></li><li>Number of top alternatives: <strong>28</strong></li><li>Number of defined nonterminal symbols: <strong>28</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>28</strong>: <code><a href="#LocatedElement" class="nt">LocatedElement</a>, <a href="#SQLRoot" class="nt">SQLRoot</a>, <a href="#Statement" class="nt">Statement</a>, <a href="#ViewStatement" class="nt">ViewStatement</a>, <a href="#InsertStmt" class="nt">InsertStmt</a>, <a href="#QueryStmt" class="nt">QueryStmt</a>, <a href="#QueryStmtCol" class="nt">QueryStmtCol</a>, <a href="#QueryStmtAllCol" class="nt">QueryStmtAllCol</a>, <a href="#NamedElement" class="nt">NamedElement</a>, <a href="#Table" class="nt">Table</a>, <a href="#WhereClause" class="nt">WhereClause</a>, <a href="#Expression" class="nt">Expression</a>, <a href="#BinaryExp" class="nt">BinaryExp</a>, <a href="#OrExp" class="nt">OrExp</a>, <a href="#AndExp" class="nt">AndExp</a>, <a href="#NotExp" class="nt">NotExp</a>, <a href="#LikeExp" class="nt">LikeExp</a>, <a href="#InExp" class="nt">InExp</a>, <a href="#OperationExp" class="nt">OperationExp</a>, <a href="#Predicate" class="nt">Predicate</a>, <a href="#QueryPredicate" class="nt">QueryPredicate</a>, <a href="#ColumnExp" class="nt">ColumnExp</a>, <a href="#ValueExp" class="nt">ValueExp</a>, <a href="#StringValueExp" class="nt">StringValueExp</a>, <a href="#IntegerValueExp" class="nt">IntegerValueExp</a>, <a href="#ListExp" class="nt">ListExp</a>, <a href="#FunctionExp" class="nt">FunctionExp</a>, <a href="#DataType" class="nt">DataType</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
-        ε
+				</script></head><body><h1 class="l">Browsable SQLDML 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Marcos Didonet Del Fabro, <code>SQLDML.ecore</code>, 2006/08/28.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>46</strong></li><li>Number of top alternatives: <strong>46</strong></li><li>Number of defined nonterminal symbols: <strong>28</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#LocatedElement" class="nt">LocatedElement</a></code></li><li>Bottom nonterminal symbols: <strong>2</strong>: <code><a href="#String" class="nt">String</a>, <a href="#Integer" class="nt">Integer</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
+        <a class="nt" href="#SQLRoot">SQLRoot</a>
+</pre><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
+        <a class="nt" href="#Statement">Statement</a>
+</pre><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
+        <a class="nt" href="#NamedElement">NamedElement</a>
+</pre><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
+        <a class="nt" href="#WhereClause">WhereClause</a>
+</pre><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
+        <a class="nt" href="#Expression">Expression</a>
 </pre><pre><a class="nt" name="SQLRoot">SQLRoot</a>:
-        <span class="sel">statements</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">statements</span>::<a class="nt" href="#Statement">Statement</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Statement">Statement</a>:
-        ε
+        <a class="nt" href="#ViewStatement">ViewStatement</a>
+</pre><pre><a class="nt" name="Statement">Statement</a>:
+        <a class="nt" href="#InsertStmt">InsertStmt</a>
+</pre><pre><a class="nt" name="Statement">Statement</a>:
+        <a class="nt" href="#QueryStmt">QueryStmt</a>
 </pre><pre><a class="nt" name="ViewStatement">ViewStatement</a>:
-        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">columns</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">query</span>::<span class="meta">any</span>
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">columns</span>::<a class="nt" href="#ColumnExp">ColumnExp</a><span class="meta">+</span> <span class="sel">query</span>::<a class="nt" href="#QueryStmt">QueryStmt</a>
 </pre><pre><a class="nt" name="InsertStmt">InsertStmt</a>:
-        <span class="sel">tableName</span>::<span class="meta">any</span> <span class="sel">values</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">tableName</span>::<a class="nt" href="#String">String</a> <span class="sel">values</span>::<a class="nt" href="#Expression">Expression</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="QueryStmt">QueryStmt</a>:
-        ε
+        <a class="nt" href="#QueryStmtCol">QueryStmtCol</a>
+</pre><pre><a class="nt" name="QueryStmt">QueryStmt</a>:
+        <a class="nt" href="#QueryStmtAllCol">QueryStmtAllCol</a>
 </pre><pre><a class="nt" name="QueryStmtCol">QueryStmtCol</a>:
-        <span class="sel">columns</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">columns</span>::<a class="nt" href="#Expression">Expression</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="QueryStmtAllCol">QueryStmtAllCol</a>:
-        <span class="sel">tables</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">condition</span>::<span class="meta">any</span>
+        <span class="sel">tables</span>::<a class="nt" href="#Table">Table</a><span class="meta">+</span> <span class="sel">condition</span>::<a class="nt" href="#WhereClause">WhereClause</a>
 </pre><pre><a class="nt" name="NamedElement">NamedElement</a>:
-        ε
+        <a class="nt" href="#Table">Table</a>
+</pre><pre><a class="nt" name="NamedElement">NamedElement</a>:
+        <a class="nt" href="#DataType">DataType</a>
 </pre><pre><a class="nt" name="Table">Table</a>:
-        <span class="sel">alias</span>::<span class="meta">any</span>
+        <span class="sel">alias</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="WhereClause">WhereClause</a>:
-        <span class="sel">expression</span>::<span class="meta">any</span>
+        <span class="sel">expression</span>::<a class="nt" href="#Expression">Expression</a>
 </pre><pre><a class="nt" name="Expression">Expression</a>:
-        ε
+        <a class="nt" href="#BinaryExp">BinaryExp</a>
+</pre><pre><a class="nt" name="Expression">Expression</a>:
+        <a class="nt" href="#NotExp">NotExp</a>
+</pre><pre><a class="nt" name="Expression">Expression</a>:
+        <a class="nt" href="#LikeExp">LikeExp</a>
+</pre><pre><a class="nt" name="Expression">Expression</a>:
+        <a class="nt" href="#InExp">InExp</a>
+</pre><pre><a class="nt" name="Expression">Expression</a>:
+        <a class="nt" href="#Predicate">Predicate</a>
+</pre><pre><a class="nt" name="Expression">Expression</a>:
+        <a class="nt" href="#QueryPredicate">QueryPredicate</a>
 </pre><pre><a class="nt" name="BinaryExp">BinaryExp</a>:
-        ε
+        <a class="nt" href="#OrExp">OrExp</a>
+</pre><pre><a class="nt" name="BinaryExp">BinaryExp</a>:
+        <a class="nt" href="#AndExp">AndExp</a>
+</pre><pre><a class="nt" name="BinaryExp">BinaryExp</a>:
+        <a class="nt" href="#OperationExp">OperationExp</a>
 </pre><pre><a class="nt" name="OrExp">OrExp</a>:
-        <span class="sel">opName</span>::<span class="meta">any</span> <span class="sel">leftExp</span>::<span class="meta">any</span> <span class="sel">rightExp</span>::<span class="meta">any</span>
+        <span class="sel">opName</span>::<a class="nt" href="#String">String</a> <span class="sel">leftExp</span>::<a class="nt" href="#Expression">Expression</a> <span class="sel">rightExp</span>::<a class="nt" href="#Expression">Expression</a>
 </pre><pre><a class="nt" name="AndExp">AndExp</a>:
-        <span class="sel">opName</span>::<span class="meta">any</span> <span class="sel">leftExp</span>::<span class="meta">any</span> <span class="sel">rightExp</span>::<span class="meta">any</span>
+        <span class="sel">opName</span>::<a class="nt" href="#String">String</a> <span class="sel">leftExp</span>::<a class="nt" href="#Expression">Expression</a> <span class="sel">rightExp</span>::<a class="nt" href="#Expression">Expression</a>
 </pre><pre><a class="nt" name="NotExp">NotExp</a>:
-        <span class="sel">opName</span>::<span class="meta">any</span> <span class="sel">valueExp</span>::<span class="meta">any</span> <span class="sel">unused</span>::<span class="meta">any</span>
+        <span class="sel">opName</span>::<a class="nt" href="#String">String</a> <span class="sel">valueExp</span>::<a class="nt" href="#Expression">Expression</a> <span class="sel">unused</span>::<a class="nt" href="#Expression">Expression</a>
 </pre><pre><a class="nt" name="LikeExp">LikeExp</a>:
-        <span class="sel">columnName</span>::<span class="meta">any</span> <span class="sel">expression</span>::<span class="meta">any</span>
+        <span class="sel">columnName</span>::<a class="nt" href="#String">String</a> <span class="sel">expression</span>::<a class="nt" href="#StringValueExp">StringValueExp</a>
 </pre><pre><a class="nt" name="InExp">InExp</a>:
-        <span class="sel">columnName</span>::<span class="meta">any</span> <span class="sel">elements</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">columnName</span>::<a class="nt" href="#String">String</a> <span class="sel">elements</span>::<a class="nt" href="#Predicate">Predicate</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="OperationExp">OperationExp</a>:
-        <span class="sel">optName</span>::<span class="meta">any</span>
+        <span class="sel">optName</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Predicate">Predicate</a>:
-        ε
+        <a class="nt" href="#ValueExp">ValueExp</a>
+</pre><pre><a class="nt" name="Predicate">Predicate</a>:
+        <a class="nt" href="#ListExp">ListExp</a>
+</pre><pre><a class="nt" name="Predicate">Predicate</a>:
+        <a class="nt" href="#FunctionExp">FunctionExp</a>
 </pre><pre><a class="nt" name="QueryPredicate">QueryPredicate</a>:
-        <span class="sel">query</span>::<span class="meta">any</span>
+        <span class="sel">query</span>::<a class="nt" href="#QueryStmt">QueryStmt</a>
 </pre><pre><a class="nt" name="ColumnExp">ColumnExp</a>:
-        <span class="sel">alias</span>::<span class="meta">any</span> <span class="sel">type</span>::<span class="meta">any</span>
+        <span class="sel">alias</span>::<a class="nt" href="#String">String</a> <span class="sel">type</span>::<a class="nt" href="#DataType">DataType</a>
 </pre><pre><a class="nt" name="ValueExp">ValueExp</a>:
-        ε
+        <a class="nt" href="#StringValueExp">StringValueExp</a>
+</pre><pre><a class="nt" name="ValueExp">ValueExp</a>:
+        <a class="nt" href="#IntegerValueExp">IntegerValueExp</a>
 </pre><pre><a class="nt" name="StringValueExp">StringValueExp</a>:
-        <span class="sel">aValue</span>::<span class="meta">any</span>
+        <span class="sel">aValue</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="IntegerValueExp">IntegerValueExp</a>:
-        <span class="sel">aValue</span>::<span class="meta">any</span>
+        <span class="sel">aValue</span>::<a class="nt" href="#Integer">Integer</a>
 </pre><pre><a class="nt" name="ListExp">ListExp</a>:
-        <span class="sel">elements</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">elements</span>::<a class="nt" href="#Expression">Expression</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="FunctionExp">FunctionExp</a>:
-        <span class="sel">arguments</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">name</span>::<span class="meta">any</span>
+        <span class="sel">arguments</span>::<a class="nt" href="#Expression">Expression</a><span class="meta">+</span> <span class="sel">name</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="DataType">DataType</a>:
-        <span class="sel">name</span>::<span class="meta">any</span>
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

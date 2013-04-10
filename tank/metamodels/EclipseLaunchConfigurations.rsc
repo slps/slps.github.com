@@ -3,33 +3,35 @@ module EclipseLaunchConfigurations
 
 syntax LaunchConfiguration
         = 
-        ANY type ANY attributes+
+        String type Attribute attributes+
  ;
 syntax Attribute
-        = 
-        ()
+        = StringAttribute
+        | BooleanAttribute
+        | MapAttribute
+        | ListAttribute
  ;
 syntax StringAttribute
-        = 
-        value: ANY
+        = MapEntry
+        | value: String
  ;
 syntax BooleanAttribute
         = 
-        value: ANY
+        value: Boolean
  ;
 syntax MapAttribute
         = 
-        ANY entries+
+        MapEntry entries+
  ;
 syntax MapEntry
         = 
-        mapAttribute: ANY
+        mapAttribute: MapAttribute
  ;
 syntax ListAttribute
         = 
-        ANY entries+
+        ListEntry entries+
  ;
 syntax ListEntry
         = 
-        ANY listAttribute ANY value
+        ListAttribute listAttribute String value
  ;

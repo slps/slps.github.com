@@ -2,16 +2,17 @@
 module TroposIntegratingActorConcept
 
 syntax Actor
-        = 
-        ()
+        = Agent
+        | Position
+        | Role
  ;
 syntax Agent
         = 
-        ANY occupy ANY play+
+        Position occupy Role play+
  ;
 syntax Position
         = 
-        ANY cover+
+        Role cover+
  ;
 syntax Role
         = 

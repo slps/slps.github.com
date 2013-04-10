@@ -3,41 +3,41 @@ module FlatSignalFlow
 
 syntax RootFolder
         = 
-        ANY rootContainer+
+        RootContainer rootContainer+
  ;
 syntax RootContainer
         = 
-        ANY name ANY position ANY rootFolder ANY actor+ ANY inputSignal+ ANY outputSignal+ ANY queue+
+        String name String position RootFolder rootFolder Actor actor+ InputSignal inputSignal+ OutputSignal outputSignal+ Queue queue+
  ;
 syntax Actor
         = 
-        ANY memory ANY script ANY file ANY WCET ANY name ANY position ANY rootContainer ANY transmitter+ ANY receiver+
+        String memory String script String file String WCET String name String position RootContainer rootContainer Transmitter transmitter+ Receiver receiver+
  ;
 syntax Transmitter
         = 
-        ANY name ANY position ANY actor ANY associationQueueTransmitter
+        String name String position Actor actor AssociationQueueTransmitter associationQueueTransmitter
  ;
 syntax Receiver
         = 
-        ANY name ANY position ANY actor ANY associationReceiverQueue
+        String name String position Actor actor AssociationReceiverQueue associationReceiverQueue
  ;
 syntax InputSignal
         = 
-        ANY name ANY position ANY rootContainer ANY associationReceiverQueue
+        String name String position RootContainer rootContainer AssociationReceiverQueue associationReceiverQueue
  ;
 syntax OutputSignal
         = 
-        ANY name ANY position ANY rootContainer ANY associationQueueTransmitter
+        String name String position RootContainer rootContainer AssociationQueueTransmitter associationQueueTransmitter
  ;
 syntax Queue
         = 
-        ANY name ANY position ANY rootContainer ANY associationReceiverQueue ANY associationQueueTransmitter
+        String name String position RootContainer rootContainer AssociationReceiverQueue associationReceiverQueue AssociationQueueTransmitter associationQueueTransmitter
  ;
 syntax AssociationReceiverQueue
         = 
-        ANY srcqueue+ ANY dstreceiver+ ANY inputSignal
+        Queue srcqueue+ Receiver dstreceiver+ InputSignal inputSignal
  ;
 syntax AssociationQueueTransmitter
         = 
-        ANY dstqueue+ ANY srctransmitter+ ANY outputSignal
+        Queue dstqueue+ Transmitter srctransmitter+ OutputSignal outputSignal
  ;

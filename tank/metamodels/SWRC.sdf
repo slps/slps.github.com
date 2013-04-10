@@ -4,59 +4,109 @@ exports
   sorts
         Bibliography Publication Article Book InBook Booklet InCollection InProceedings Proceedings Manual Misc Unpublished Thesis MasterThesis PhDThesis Report ProjectReport TechnicalReport Event Conference Workshop Exhibition Lecture Meeting ProjectMeeting Person Employee Manager AdministrativeStaff TechnicalStaff AcademicStaff Lecturer FacultyMember FullProfessor AssistantProfessor AssociateProfessor Student Undergraduate Graduate PhDStudent Organization ResearchGroup Association Department Institute Enterprise University Project ResearchProject DevelopmentProject SoftwareProject Product SoftwareComponent Topic ResearchTopic 
   context-free syntax
-        publications::ANY+ -> Bibliography
+        publications::Publication+ -> Bibliography
 
-         -> Publication
+        Article -> Publication
 
-        author::ANY+ journal::ANY month::ANY number::ANY pages::ANY volume::ANY -> Article
+        Book -> Publication
 
-        month::ANY number::ANY volume::ANY series::ANY source::ANY address::ANY edition::ANY isbn::ANY price::ANY editor::ANY publisher::ANY author::ANY+ -> Book
+        InBook -> Publication
 
-        author::ANY+ publisher::ANY editor::ANY month::ANY number::ANY pages::ANY volume::ANY series::ANY chapter::ANY type::ANY address::ANY -> InBook
+        Booklet -> Publication
 
-        author::ANY+ month::ANY address::ANY edition::ANY howpublished::ANY -> Booklet
+        InCollection -> Publication
 
-        editor::ANY author::ANY+ publisher::ANY month::ANY number::ANY pages::ANY address::ANY edition::ANY volume::ANY series::ANY chapter::ANY type::ANY booktitle::ANY -> InCollection
+        InProceedings -> Publication
 
-        editor::ANY author::ANY+ month::ANY number::ANY pages::ANY address::ANY volume::ANY series::ANY booktitle::ANY organization::ANY publisher::ANY -> InProceedings
+        Proceedings -> Publication
 
-        editor::ANY publisher::ANY organization::ANY month::ANY number::ANY volume::ANY address::ANY series::ANY -> Proceedings
+        Manual -> Publication
 
-        author::ANY+ organization::ANY month::ANY address::ANY edition::ANY -> Manual
+        Misc -> Publication
 
-        month::ANY howpublished::ANY -> Misc
+        Unpublished -> Publication
 
-        author::ANY+ month::ANY -> Unpublished
+        Thesis -> Publication
 
-         -> Thesis
+        Report -> Publication
 
-        author::ANY+ school::ANY month::ANY address::ANY type::ANY -> MasterThesis
+        author::Person+ journal::String month::String number::Integer pages::String volume::Integer -> Article
 
-        author::ANY+ school::ANY month::ANY address::ANY type::ANY -> PhDThesis
+        month::String number::Integer volume::Integer series::String source::String address::String edition::String isbn::String price::String editor::Person publisher::Organization author::Person+ -> Book
 
-         -> Report
+        author::Person+ publisher::Organization editor::Person month::String number::Integer pages::String volume::Integer series::String chapter::String type::String address::String -> InBook
 
-        describesProject::ANY -> ProjectReport
+        author::Person+ month::String address::String edition::String howpublished::String -> Booklet
 
-        series::ANY organization::ANY -> TechnicalReport
+        editor::Person author::Person+ publisher::Organization month::String number::Integer pages::String address::String edition::String volume::Integer series::String chapter::String type::String booktitle::String -> InCollection
 
-        name::ANY date::ANY eventTitle::ANY location::ANY atEvent::ANY hasPartEvent::ANY -> Event
+        editor::Person author::Person+ month::String number::Integer pages::String address::String volume::Integer series::String booktitle::String organization::Organization publisher::Organization -> InProceedings
 
-        series::ANY -> Conference
+        editor::Person publisher::Organization organization::Organization month::String number::String volume::String address::String series::String -> Proceedings
 
-        series::ANY -> Workshop
+        author::Person+ organization::Organization month::String address::String edition::String -> Manual
+
+        month::String howpublished::String -> Misc
+
+        author::Person+ month::String -> Unpublished
+
+        MasterThesis -> Thesis
+
+        PhDThesis -> Thesis
+
+        author::Person+ school::University month::String address::String type::String -> MasterThesis
+
+        author::Person+ school::University month::String address::String type::String -> PhDThesis
+
+        ProjectReport -> Report
+
+        TechnicalReport -> Report
+
+        describesProject::Project -> ProjectReport
+
+        series::String organization::Organization -> TechnicalReport
+
+        Conference -> Event
+
+        Workshop -> Event
+
+        Exhibition -> Event
+
+        Lecture -> Event
+
+        Meeting -> Event
+
+        name::String date::String eventTitle::String location::String atEvent::Event hasPartEvent::Event -> Event
+
+        series::String -> Conference
+
+        series::String -> Workshop
 
          -> Exhibition
 
-        givenBy::ANY -> Lecture
+        givenBy::Person -> Lecture
 
-        title::ANY participant::ANY+ -> Meeting
+        ProjectMeeting -> Meeting
+
+        title::String participant::Person+ -> Meeting
 
          -> ProjectMeeting
 
-        address::ANY name::ANY email::ANY fax::ANY homepage::ANY phone::ANY photo::ANY -> Person
+        Employee -> Person
 
-        affiliation::ANY -> Employee
+        AcademicStaff -> Person
+
+        Student -> Person
+
+        address::String name::String email::String fax::String homepage::String phone::String photo::String -> Person
+
+        Manager -> Employee
+
+        AdministrativeStaff -> Employee
+
+        TechnicalStaff -> Employee
+
+        affiliation::Organization -> Employee
 
          -> Manager
 
@@ -64,11 +114,23 @@ exports
 
          -> TechnicalStaff
 
-        cooperateWith::ANY+ editor::ANY headOf::ANY headOfGroup::ANY memberOfPC::ANY organizerOrChairOf::ANY publication::ANY+ supervises::ANY+ worksAtProject::ANY -> AcademicStaff
+        Lecturer -> AcademicStaff
+
+        FacultyMember -> AcademicStaff
+
+        cooperateWith::AcademicStaff+ editor::Publication headOf::Project headOfGroup::ResearchGroup memberOfPC::Event organizerOrChairOf::Event publication::Publication+ supervises::PhDStudent+ worksAtProject::ResearchTopic -> AcademicStaff
 
          -> Lecturer
 
-         -> FacultyMember
+        FullProfessor -> FacultyMember
+
+        AssistantProfessor -> FacultyMember
+
+        AssociateProfessor -> FacultyMember
+
+        FullProfessor -> FacultyMember
+        AssistantProfessor -> FacultyMember
+        AssociateProfessor -> FacultyMember
 
          -> FullProfessor
 
@@ -76,40 +138,66 @@ exports
 
          -> AssociateProfessor
 
-        studiesAt::ANY -> Student
+        Undergraduate -> Student
+
+        Graduate -> Student
+
+        studiesAt::University -> Student
 
          -> Undergraduate
 
-         -> Graduate
+        PhDStudent -> Graduate
 
-        publication::ANY+ worksAtProject::ANY supervisor::ANY -> PhDStudent
+        PhDStudent -> Graduate
 
-        location::ANY name::ANY carriesOut::ANY+ develops::ANY+ employs::ANY+ finances::ANY+ publishes::ANY+ technicalReport::ANY+ -> Organization
+        publication::Publication+ worksAtProject::Project supervisor::AcademicStaff -> PhDStudent
 
-        head::ANY member::ANY+ -> ResearchGroup
+        ResearchGroup -> Organization
+
+        Association -> Organization
+
+        Department -> Organization
+
+        Institute -> Organization
+
+        Enterprise -> Organization
+
+        University -> Organization
+
+        location::String name::String carriesOut::Project+ develops::Product+ employs::Employee+ finances::Project+ publishes::Publication+ technicalReport::TechnicalReport+ -> Organization
+
+        head::AcademicStaff member::Employee+ -> ResearchGroup
 
          -> Association
 
-        hasParts::ANY -> Department
+        hasParts::Institute -> Department
 
-        cooperateWith::ANY hasParts::ANY+ -> Institute
+        cooperateWith::Institute hasParts::ResearchGroup+ -> Institute
 
          -> Enterprise
 
-        hasParts::ANY+ student::ANY+ -> University
+        hasParts::Department+ student::Student+ -> University
 
-         -> Project
+        ResearchProject -> Project
 
-        name::ANY carriedOutBy::ANY financedBy::ANY head::ANY isAbout::ANY+ member::ANY+ projectInfo::ANY+ -> ResearchProject
+        DevelopmentProject -> Project
 
-        name::ANY carriedOutBy::ANY financedBy::ANY head::ANY isAbout::ANY+ member::ANY+ projectInfo::ANY+ -> DevelopmentProject
+        SoftwareProject -> Project
 
-        product::ANY -> SoftwareProject
+        name::String carriedOutBy::Organization financedBy::Organization head::AcademicStaff isAbout::ResearchTopic+ member::Person+ projectInfo::ProjectReport+ -> ResearchProject
 
-        name::ANY developedBy::ANY -> Product
+        name::String carriedOutBy::Organization financedBy::Organization head::AcademicStaff isAbout::ResearchTopic+ member::Person+ projectInfo::ProjectReport+ -> DevelopmentProject
 
-        hasPrice::ANY -> SoftwareComponent
+        product::Product -> SoftwareProject
 
-        name::ANY -> Topic
+        SoftwareComponent -> Product
 
-        dealWithIn::ANY isWorkedOnBy::ANY+ -> ResearchTopic
+        name::String developedBy::Organization -> Product
+
+        hasPrice::Integer -> SoftwareComponent
+
+        ResearchTopic -> Topic
+
+        name::String -> Topic
+
+        dealWithIn::Project isWorkedOnBy::AcademicStaff+ -> ResearchTopic

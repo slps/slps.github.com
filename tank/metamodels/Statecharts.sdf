@@ -4,18 +4,22 @@ exports
   sorts
         BooleanExpression StateMachine State CompositeState Transition StateVertex Guard Event 
   context-free syntax
-        value::ANY -> BooleanExpression
+        value::String -> BooleanExpression
 
-        transitions::ANY+ top::ANY+ -> StateMachine
+        transitions::Transition+ top::State+ -> StateMachine
 
-        state_container::ANY internalTransitions::ANY+ deferrableEvents::ANY+ -> State
+        CompositeState -> State
 
-        subVertexes::ANY+ isConcurrent::ANY -> CompositeState
+        state_container::StateMachine internalTransitions::Transition+ deferrableEvents::Event+ -> State
 
-        transSM_container::ANY transS_container::ANY trigger::ANY guard::ANY source::ANY target::ANY -> Transition
+        subVertexes::StateVertex+ isConcurrent::Boolean -> CompositeState
 
-        sv_container::ANY outgoing::ANY+ incoming::ANY+ -> StateVertex
+        transSM_container::StateMachine transS_container::State trigger::Event guard::Guard source::StateVertex target::StateVertex -> Transition
 
-        gua_container::ANY expression::ANY -> Guard
+        State -> StateVertex
 
-        evt_container::ANY+ targets::ANY+ -> Event
+        sv_container::CompositeState outgoing::Transition+ incoming::Transition+ -> StateVertex
+
+        gua_container::Transition expression::BooleanExpression -> Guard
+
+        evt_container::Transition+ targets::State+ -> Event

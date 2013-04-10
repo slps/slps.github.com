@@ -2,147 +2,264 @@ module Main
 
 exports
   sorts
-        TemplateExp ObjectTemplateExp CollectionTemplateExp PropertyTemplateItem ImperativeIterateExp AssignExp BlockExp SwitchExp VariableInitExp WhileExp ComputeExp AltExp UnlinkExp ReturnExp BreakExp TryExp RaiseExp ContinueExp ForExp TupleExp Typedef InstantiationExp DictionaryType DictLiteralExp DictLiteralPart TemplateParameterType LogExp AssertExp SeverityKind ImperativeLoopExp CollectorExp ImperativeExpression UnpackExp AnonymousTupleType AnonymousTupleLiteralExp AnonymousTupleLiteralPart ListType Class DataType Element Tag Enumeration NamedElement Extent Object Operation MultiplicityElement Package Type Parameter EnumerationLiteral Property TypedElement PrimitiveType URIExtent Comment MappingBody Helper ResolveExp ResolveInExp OperationalTransformation MappingParameter MappingOperation MappingCallExp Constructor ContextualProperty EntryOperation ImperativeCallExp ImperativeOperation DirectionKind Library ModelParameter ModelType Module ModuleImport ImportKind VarParameter OperationBody ConstructorBody ObjectExp Area Assignment BottomPattern GuardPattern Mapping RealizedVariable CoreDomain CorePattern EnforcementOperation EnforcementMode Domain Transformation TypedModel Rule Pattern Predicate Function FunctionParameter RelationalTransformation Relation RelationDomain DomainPattern RelationImplementation Key BooleanLiteralExp CallExp CollectionKind OclExpression UnlimitedNaturalExp IfExp LetExp Variable PropertyCallExp VariableExp TypeExp LoopExp IteratorExp StringLiteralExp IntegerLiteralExp OperationCallExp RealLiteralExp LiteralExp IterateExp PrimitiveLiteralExp NumericLiteralExp CollectionLiteralExp CollectionLiteralPart CollectionItem CollectionRange TupleLiteralExp NullLiteralExp ExpressionInOcl OpaqueExpression InvalidLiteralExp FeaturePropertyCall TupleLiteralPart BagType CollectionType EnumLiteralExp InvalidType OrderedSetType SequenceType SetType TupleType VoidType AnyType 
+        TemplateExp ObjectTemplateExp CollectionTemplateExp PropertyTemplateItem ImperativeIterateExp AssignExp BlockExp SwitchExp VariableInitExp WhileExp ComputeExp AltExp UnlinkExp ReturnExp BreakExp TryExp RaiseExp ContinueExp ForExp TupleExp Typedef InstantiationExp DictionaryType DictLiteralExp DictLiteralPart TemplateParameterType LogExp AssertExp SeverityKind ImperativeLoopExp CollectorExp ImperativeExpression UnpackExp AnonymousTupleType AnonymousTupleLiteralExp AnonymousTupleLiteralPart ListType Class DataType Element Tag Enumeration NamedElement Extent Object Operation Package Type Parameter EnumerationLiteral Property TypedElement PrimitiveType URIExtent Comment MappingBody Helper ResolveExp ResolveInExp OperationalTransformation MappingParameter MappingOperation MappingCallExp Constructor ContextualProperty EntryOperation ImperativeCallExp ImperativeOperation DirectionKind Library ModelParameter ModelType Module ModuleImport ImportKind VarParameter OperationBody ConstructorBody ObjectExp Assignment BottomPattern GuardPattern Mapping RealizedVariable CoreDomain CorePattern EnforcementOperation EnforcementMode Domain Transformation TypedModel Rule Pattern Predicate Function FunctionParameter RelationalTransformation Relation RelationDomain DomainPattern RelationImplementation Key BooleanLiteralExp CallExp CollectionKind OclExpression UnlimitedNaturalExp IfExp LetExp Variable PropertyCallExp VariableExp TypeExp LoopExp IteratorExp StringLiteralExp IntegerLiteralExp OperationCallExp RealLiteralExp LiteralExp IterateExp PrimitiveLiteralExp NumericLiteralExp CollectionLiteralExp CollectionLiteralPart CollectionItem CollectionRange TupleLiteralExp NullLiteralExp ExpressionInOcl OpaqueExpression InvalidLiteralExp FeaturePropertyCall TupleLiteralPart BagType CollectionType EnumLiteralExp InvalidType OrderedSetType SequenceType SetType TupleType VoidType AnyType 
   context-free syntax
-         -> TemplateExp
+        ObjectTemplateExp -> TemplateExp
 
-        part::ANY+ referredClass::ANY -> ObjectTemplateExp
+        CollectionTemplateExp -> TemplateExp
 
-        part::ANY+ kind::ANY referredCollectionType::ANY match::ANY -> CollectionTemplateExp
+        part::PropertyTemplateItem+ referredClass::Class -> ObjectTemplateExp
 
-        objContainer::ANY value::ANY referredProperty::ANY -> PropertyTemplateItem
+        part::OclExpression+ kind::CollectionKind referredCollectionType::CollectionType match::OclExpression -> CollectionTemplateExp
 
-        target::ANY -> ImperativeIterateExp
+        objContainer::ObjectTemplateExp value::OclExpression referredProperty::Property -> PropertyTemplateItem
 
-        value::ANY+ left::ANY defaultValue::ANY isReset::ANY -> AssignExp
+        target::Variable -> ImperativeIterateExp
 
-        body::ANY+ -> BlockExp
+        value::OclExpression+ left::OclExpression defaultValue::OclExpression isReset::Boolean -> AssignExp
 
-        alternativePart::ANY+ elsePart::ANY -> SwitchExp
+        body::OclExpression+ -> BlockExp
 
-        referredVariable::ANY withResult::ANY -> VariableInitExp
+        alternativePart::AltExp+ elsePart::OclExpression -> SwitchExp
 
-        condition::ANY body::ANY -> WhileExp
+        referredVariable::Variable withResult::Boolean -> VariableInitExp
 
-        returnedElement::ANY body::ANY -> ComputeExp
+        condition::OclExpression body::OclExpression -> WhileExp
 
-        condition::ANY body::ANY -> AltExp
+        returnedElement::Variable body::OclExpression -> ComputeExp
 
-        target::ANY item::ANY -> UnlinkExp
+        condition::OclExpression body::OclExpression -> AltExp
 
-        value::ANY -> ReturnExp
+        target::OclExpression item::OclExpression -> UnlinkExp
+
+        value::OclExpression -> ReturnExp
 
          -> BreakExp
 
-        tryBody::ANY exception::ANY+ exceptBody::ANY -> TryExp
+        tryBody::OclExpression exception::Type+ exceptBody::OclExpression -> TryExp
 
-        exception::ANY -> RaiseExp
+        exception::Type -> RaiseExp
 
          -> ContinueExp
 
-        condition::ANY -> ForExp
+        condition::OclExpression -> ForExp
 
-        element::ANY+ -> TupleExp
+        element::OclExpression+ -> TupleExp
 
-        base::ANY condition::ANY -> Typedef
+        base::Type condition::OclExpression -> Typedef
 
-        instantiatedClass::ANY extent::ANY argument::ANY+ -> InstantiationExp
+        ObjectExp -> InstantiationExp
 
-        keyType::ANY -> DictionaryType
+        instantiatedClass::Class extent::Variable argument::OclExpression+ -> InstantiationExp
 
-        part::ANY+ -> DictLiteralExp
+        keyType::Type -> DictionaryType
 
-        key::ANY value::ANY -> DictLiteralPart
+        part::DictLiteralPart+ -> DictLiteralExp
 
-        specification::ANY -> TemplateParameterType
+        key::OclExpression value::OclExpression -> DictLiteralPart
 
-        text::ANY level::ANY condition::ANY element::ANY -> LogExp
+        specification::String -> TemplateParameterType
 
-        severity::ANY log::ANY assertion::ANY -> AssertExp
+        text::String level::Integer condition::OclExpression element::Element -> LogExp
+
+        severity::SeverityKind log::LogExp assertion::OclExpression -> AssertExp
 
         error:: -> SeverityKind
         fatal:: -> SeverityKind
         warning:: -> SeverityKind
 
-         -> ImperativeLoopExp
+        ImperativeIterateExp -> ImperativeLoopExp
 
-        target::ANY -> CollectorExp
+        ForExp -> ImperativeLoopExp
 
-         -> ImperativeExpression
+        CollectorExp -> ImperativeLoopExp
 
-        variable::ANY+ -> UnpackExp
+        target::Variable -> CollectorExp
 
-        elementType::ANY+ -> AnonymousTupleType
+        AssignExp -> ImperativeExpression
 
-        part::ANY+ -> AnonymousTupleLiteralExp
+        BlockExp -> ImperativeExpression
 
-        value::ANY+ -> AnonymousTupleLiteralPart
+        VariableInitExp -> ImperativeExpression
 
-        elementType::ANY -> ListType
+        WhileExp -> ImperativeExpression
 
-        ownedAttribute::ANY+ ownedOperation::ANY+ superClass::ANY+ isAbstract::ANY -> Class
+        ComputeExp -> ImperativeExpression
 
-         -> DataType
+        AltExp -> ImperativeExpression
 
-         -> Element
+        UnlinkExp -> ImperativeExpression
 
-        element::ANY+ transformation::ANY owner::ANY value::ANY name::ANY -> Tag
+        ReturnExp -> ImperativeExpression
 
-        ownedLiteral::ANY+ -> Enumeration
+        BreakExp -> ImperativeExpression
 
-         -> NamedElement
+        TryExp -> ImperativeExpression
 
-         -> Extent
+        RaiseExp -> ImperativeExpression
 
-         -> Object
+        ContinueExp -> ImperativeExpression
 
-        class::ANY ownedParameter::ANY+ raisedException::ANY+ -> Operation
+        TupleExp -> ImperativeExpression
 
-         -> MultiplicityElement
+        InstantiationExp -> ImperativeExpression
 
-        ownedType::ANY+ nestedPackage::ANY+ uri::ANY -> Package
+        LogExp -> ImperativeExpression
 
-         -> Type
+        AssertExp -> ImperativeExpression
 
-        operation::ANY -> Parameter
+        UnpackExp -> ImperativeExpression
 
-        enumeration::ANY -> EnumerationLiteral
+        variable::Variable+ -> UnpackExp
 
-        Class::ANY opposite::ANY module::ANY isReadOnly::ANY isDerived::ANY isComposite::ANY isId::ANY default::ANY -> Property
+        elementType::Type+ -> AnonymousTupleType
 
-         -> TypedElement
+        part::AnonymousTupleLiteralPart+ -> AnonymousTupleLiteralExp
+
+        value::OclExpression+ -> AnonymousTupleLiteralPart
+
+        elementType::Type -> ListType
+
+        Typedef -> Class
+
+        AnonymousTupleType -> Class
+
+        ownedAttribute::Property+ ownedOperation::Operation+ superClass::Class+ isAbstract::Boolean -> Class
+
+        Enumeration -> DataType
+
+        PrimitiveType -> DataType
+
+        CollectionType -> DataType
+
+        PropertyTemplateItem -> Element
+
+        DictLiteralPart -> Element
+
+        AnonymousTupleLiteralPart -> Element
+
+        Tag -> Element
+
+        NamedElement -> Element
+
+        Comment -> Element
+
+        ModuleImport -> Element
+
+        OperationBody -> Element
+
+        Pattern -> Element
+
+        Predicate -> Element
+
+        RelationImplementation -> Element
+
+        Key -> Element
+
+        element::Element+ transformation::Transformation owner::Module value::String name::String -> Tag
+
+        ownedLiteral::EnumerationLiteral+ -> Enumeration
+
+        Package -> NamedElement
+
+        Type -> NamedElement
+
+        EnumerationLiteral -> NamedElement
+
+        TypedElement -> NamedElement
+
+        Domain -> NamedElement
+
+        TypedModel -> NamedElement
+
+        Rule -> NamedElement
+
+        URIExtent -> Extent
+
+        URIExtent -> Extent
+
+        Element -> Object
+
+        Extent -> Object
+
+        Element -> Object
+        Extent -> Object
+
+        ImperativeOperation -> Operation
+
+        Function -> Operation
+
+        class::Class ownedParameter::Parameter+ raisedException::Type+ -> Operation
+
+        ownedType::Type+ nestedPackage::Package+ uri::String -> Package
+
+        TemplateParameterType -> Type
+
+        Class -> Type
+
+        DataType -> Type
+
+        InvalidType -> Type
+
+        VoidType -> Type
+
+        operation::Operation -> Parameter
+
+        enumeration::Enumeration -> EnumerationLiteral
+
+        ContextualProperty -> Property
+
+        Class::Class opposite::Property module::Module isReadOnly::Boolean isDerived::Boolean isComposite::Boolean isId::Boolean default::String -> Property
+
+        OclExpression -> TypedElement
+
+        Variable -> TypedElement
+
+        CollectionLiteralPart -> TypedElement
+
+        TupleLiteralPart -> TypedElement
 
          -> PrimitiveType
 
          -> URIExtent
 
-        annotatedElement::ANY+ -> Comment
+        annotatedElement::NamedElement+ -> Comment
 
-        initSection::ANY+ endSection::ANY+ -> MappingBody
+        initSection::OclExpression+ endSection::OclExpression+ -> MappingBody
 
-        isQuery::ANY -> Helper
+        isQuery::Boolean -> Helper
 
-        condition::ANY one::ANY isInverse::ANY isDeferred::ANY -> ResolveExp
+        ResolveInExp -> ResolveExp
 
-        inMapping::ANY -> ResolveInExp
+        condition::OclExpression one::Boolean isInverse::Boolean isDeferred::Boolean -> ResolveExp
 
-        intermediateClass::ANY+ refined::ANY intermediateProperty::ANY+ modelParameter::ANY+ entry::ANY relation::ANY+ -> OperationalTransformation
+        inMapping::MappingOperation -> ResolveInExp
 
-        refinedDomain::ANY extent::ANY -> MappingParameter
+        intermediateClass::Class+ refined::Transformation intermediateProperty::Property+ modelParameter::ModelParameter+ entry::EntryOperation relation::Relation+ -> OperationalTransformation
 
-        disjunct::ANY+ refinedRelation::ANY merged::ANY+ inherited::ANY+ when::ANY+ -> MappingOperation
+        refinedDomain::RelationDomain extent::ModelParameter -> MappingParameter
 
-        isStrict::ANY -> MappingCallExp
+        disjunct::MappingOperation+ refinedRelation::Relation merged::MappingOperation+ inherited::MappingOperation+ when::OclExpression+ -> MappingOperation
+
+        isStrict::Boolean -> MappingCallExp
 
          -> Constructor
 
-        context::ANY overridden::ANY -> ContextualProperty
+        context::Class overridden::Property -> ContextualProperty
 
          -> EntryOperation
 
-        isVirtual::ANY -> ImperativeCallExp
+        MappingCallExp -> ImperativeCallExp
 
-        context::ANY result::ANY+ overridden::ANY body::ANY isBlackbox::ANY -> ImperativeOperation
+        isVirtual::Boolean -> ImperativeCallExp
+
+        Helper -> ImperativeOperation
+
+        Constructor -> ImperativeOperation
+
+        EntryOperation -> ImperativeOperation
+
+        context::VarParameter result::VarParameter+ overridden::ImperativeOperation body::OperationBody isBlackbox::Boolean -> ImperativeOperation
 
         in:: -> DirectionKind
         inout:: -> DirectionKind
@@ -152,155 +269,240 @@ exports
 
          -> ModelParameter
 
-        metamodel::ANY+ additionalCondition::ANY+ conformanceKind::ANY -> ModelType
+        metamodel::Package+ additionalCondition::OclExpression+ conformanceKind::String -> ModelType
 
-        ownedTag::ANY+ configProperty::ANY+ moduleImport::ANY+ usedModelType::ANY+ isBlackbox::ANY -> Module
+        OperationalTransformation -> Module
 
-        binding::ANY+ module::ANY importedModule::ANY kind::ANY -> ModuleImport
+        Library -> Module
+
+        ownedTag::Tag+ configProperty::Property+ moduleImport::ModuleImport+ usedModelType::ModelType+ isBlackbox::Boolean -> Module
+
+        binding::ModelType+ module::Module importedModule::Module kind::ImportKind -> ModuleImport
 
         extension:: -> ImportKind
         access:: -> ImportKind
 
-        ctxOwner::ANY resOwner::ANY kind::ANY -> VarParameter
+        MappingParameter -> VarParameter
 
-        operation::ANY content::ANY+ -> OperationBody
+        ModelParameter -> VarParameter
+
+        ctxOwner::ImperativeOperation resOwner::ImperativeOperation kind::DirectionKind -> VarParameter
+
+        MappingBody -> OperationBody
+
+        ConstructorBody -> OperationBody
+
+        operation::ImperativeOperation content::OclExpression+ -> OperationBody
 
          -> ConstructorBody
 
-        referredObject::ANY body::ANY -> ObjectExp
+        referredObject::Variable body::ConstructorBody -> ObjectExp
 
-         -> Area
+        bottomPattern::BottomPattern slotExpression::OclExpression value::OclExpression targetProperty::Property isDefault::Boolean -> Assignment
 
-        bottomPattern::ANY slotExpression::ANY value::ANY targetProperty::ANY isDefault::ANY -> Assignment
+        area::Area assignment::Assignment+ realizedVariable::RealizedVariable+ enforcementOperation::EnforcementOperation+ -> BottomPattern
 
-        area::ANY assignment::ANY+ realizedVariable::ANY+ enforcementOperation::ANY+ -> BottomPattern
+        area::Area -> GuardPattern
 
-        area::ANY -> GuardPattern
-
-        specification::ANY+ local::ANY+ context::ANY -> Mapping
+        specification::Mapping+ local::Mapping+ context::Mapping -> Mapping
 
          -> RealizedVariable
 
          -> CoreDomain
 
-         -> CorePattern
+        BottomPattern -> CorePattern
 
-        enforcementMode::ANY bottomPattern::ANY operationCallExp::ANY -> EnforcementOperation
+        GuardPattern -> CorePattern
+
+        BottomPattern -> CorePattern
+        GuardPattern -> CorePattern
+
+        enforcementMode::EnforcementMode bottomPattern::BottomPattern operationCallExp::OperationCallExp -> EnforcementOperation
 
         Deletion:: -> EnforcementMode
         Creation:: -> EnforcementMode
 
-        isCheckable::ANY isEnforceable::ANY rule::ANY typedModel::ANY -> Domain
+        RelationDomain -> Domain
 
-        ownedTag::ANY+ modelParameter::ANY+ rule::ANY+ extends::ANY -> Transformation
+        isCheckable::Boolean isEnforceable::Boolean rule::Rule typedModel::TypedModel -> Domain
 
-        transformation::ANY usedPackage::ANY+ dependsOn::ANY+ -> TypedModel
+        RelationalTransformation -> Transformation
 
-        domain::ANY+ transformation::ANY overrides::ANY -> Rule
+        ownedTag::Tag+ modelParameter::TypedModel+ rule::Rule+ extends::Transformation -> Transformation
 
-        predicate::ANY+ bindsTo::ANY+ whenOwner::ANY whereOwner::ANY -> Pattern
+        transformation::Transformation usedPackage::Package+ dependsOn::TypedModel+ -> TypedModel
 
-        conditionExpression::ANY pattern::ANY -> Predicate
+        Relation -> Rule
 
-        queryExpression::ANY -> Function
+        domain::Domain+ transformation::Transformation overrides::Rule -> Rule
+
+        CorePattern -> Pattern
+
+        DomainPattern -> Pattern
+
+        predicate::Predicate+ bindsTo::Variable+ whenOwner::Relation whereOwner::Relation -> Pattern
+
+        conditionExpression::OclExpression pattern::Pattern -> Predicate
+
+        queryExpression::OclExpression -> Function
 
          -> FunctionParameter
 
-        ownedKey::ANY+ -> RelationalTransformation
+        ownedKey::Key+ -> RelationalTransformation
 
-        isTopLevel::ANY variable::ANY+ operationalImpl::ANY+ where::ANY when::ANY -> Relation
+        isTopLevel::Boolean variable::Variable+ operationalImpl::RelationImplementation+ where::Pattern when::Pattern -> Relation
 
-        pattern::ANY rootVariable::ANY -> RelationDomain
+        pattern::DomainPattern rootVariable::Variable -> RelationDomain
 
-        templateExpression::ANY -> DomainPattern
+        templateExpression::TemplateExp -> DomainPattern
 
-        relation::ANY impl::ANY inDirectionOf::ANY -> RelationImplementation
+        relation::Relation impl::Operation inDirectionOf::TypedModel -> RelationImplementation
 
-        identifies::ANY part::ANY+ transformation::ANY -> Key
+        identifies::Class part::Property+ transformation::RelationalTransformation -> Key
 
-        booleanSymbol::ANY -> BooleanLiteralExp
+        booleanSymbol::Boolean -> BooleanLiteralExp
 
-         -> CallExp
+        ResolveExp -> CallExp
+
+        FeaturePropertyCall -> CallExp
 
         OrderedSet:: -> CollectionKind
         Set:: -> CollectionKind
         Bag:: -> CollectionKind
         Sequence:: -> CollectionKind
 
-         -> OclExpression
+        ImperativeExpression -> OclExpression
 
-        symbol::ANY -> UnlimitedNaturalExp
+        CallExp -> OclExpression
 
-        condition::ANY thenExpression::ANY elseExpression::ANY -> IfExp
+        IfExp -> OclExpression
 
-        in::ANY+ variable::ANY -> LetExp
+        LetExp -> OclExpression
 
-        initExpression::ANY LetExp::ANY computeOwner::ANY bindParameter::ANY -> Variable
+        VariableExp -> OclExpression
 
-        referredProperty::ANY -> PropertyCallExp
+        TypeExp -> OclExpression
 
-        referredVariable::ANY -> VariableExp
+        LiteralExp -> OclExpression
 
-        referredType::ANY -> TypeExp
+        symbol::UnlimitedNatural -> UnlimitedNaturalExp
 
-         -> LoopExp
+        condition::OclExpression thenExpression::OclExpression elseExpression::OclExpression -> IfExp
 
-        body::ANY iterator::ANY+ -> IteratorExp
+        in::OclExpression+ variable::Variable -> LetExp
 
-        stringSymbol::ANY -> StringLiteralExp
+        RealizedVariable -> Variable
 
-        integerSymbol::ANY -> IntegerLiteralExp
+        initExpression::OclExpression LetExp::LetExp computeOwner::ComputeExp bindParameter::Parameter -> Variable
 
-        argument::ANY+ referredOperation::ANY -> OperationCallExp
+        referredProperty::Property -> PropertyCallExp
 
-        realSymbol::ANY -> RealLiteralExp
+        referredVariable::Variable -> VariableExp
 
-         -> LiteralExp
+        referredType::Type -> TypeExp
 
-        result::ANY -> IterateExp
+        IteratorExp -> LoopExp
 
-         -> PrimitiveLiteralExp
+        IterateExp -> LoopExp
 
-         -> NumericLiteralExp
+        body::OclExpression iterator::Variable+ -> IteratorExp
 
-        kind::ANY part::ANY+ -> CollectionLiteralExp
+        stringSymbol::String -> StringLiteralExp
 
-         -> CollectionLiteralPart
+        integerSymbol::Integer -> IntegerLiteralExp
 
-        item::ANY -> CollectionItem
+        ImperativeCallExp -> OperationCallExp
 
-        first::ANY last::ANY -> CollectionRange
+        argument::OclExpression+ referredOperation::Operation -> OperationCallExp
 
-        part::ANY+ -> TupleLiteralExp
+        realSymbol::Real -> RealLiteralExp
+
+        TemplateExp -> LiteralExp
+
+        DictLiteralExp -> LiteralExp
+
+        AnonymousTupleLiteralExp -> LiteralExp
+
+        PrimitiveLiteralExp -> LiteralExp
+
+        CollectionLiteralExp -> LiteralExp
+
+        TupleLiteralExp -> LiteralExp
+
+        NullLiteralExp -> LiteralExp
+
+        InvalidLiteralExp -> LiteralExp
+
+        EnumLiteralExp -> LiteralExp
+
+        result::Variable -> IterateExp
+
+        BooleanLiteralExp -> PrimitiveLiteralExp
+
+        StringLiteralExp -> PrimitiveLiteralExp
+
+        NumericLiteralExp -> PrimitiveLiteralExp
+
+        UnlimitedNaturalExp -> NumericLiteralExp
+
+        IntegerLiteralExp -> NumericLiteralExp
+
+        RealLiteralExp -> NumericLiteralExp
+
+        kind::CollectionKind part::CollectionLiteralPart+ -> CollectionLiteralExp
+
+        CollectionItem -> CollectionLiteralPart
+
+        CollectionRange -> CollectionLiteralPart
+
+        item::OclExpression -> CollectionItem
+
+        first::OclExpression last::OclExpression -> CollectionRange
+
+        part::TupleLiteralPart+ -> TupleLiteralExp
 
          -> NullLiteralExp
 
-        bodyExpression::ANY context::ANY resultVariable::ANY parameterVariable::ANY -> ExpressionInOcl
+        bodyExpression::OclExpression context::Variable resultVariable::Variable parameterVariable::Variable -> ExpressionInOcl
 
-         -> OpaqueExpression
+        ExpressionInOcl -> OpaqueExpression
+
+        ExpressionInOcl -> OpaqueExpression
 
          -> InvalidLiteralExp
 
-         -> FeaturePropertyCall
+        PropertyCallExp -> FeaturePropertyCall
 
-        TupleLiteralExp::ANY attribute::ANY -> TupleLiteralPart
+        OperationCallExp -> FeaturePropertyCall
 
-        elementType::ANY -> BagType
+        TupleLiteralExp::TupleLiteralExp attribute::Property -> TupleLiteralPart
 
-         -> CollectionType
+        elementType::Type -> BagType
 
-        referredEnumLiteral::ANY -> EnumLiteralExp
+        DictionaryType -> CollectionType
 
-        package::ANY -> InvalidType
+        ListType -> CollectionType
 
-        elementType::ANY -> OrderedSetType
+        BagType -> CollectionType
 
-        elementType::ANY -> SequenceType
+        OrderedSetType -> CollectionType
 
-        elementType::ANY -> SetType
+        SequenceType -> CollectionType
+
+        SetType -> CollectionType
+
+        referredEnumLiteral::EnumerationLiteral -> EnumLiteralExp
+
+        package::Package -> InvalidType
+
+        elementType::Type -> OrderedSetType
+
+        elementType::Type -> SequenceType
+
+        elementType::Type -> SetType
 
          -> TupleType
 
-        package::ANY -> VoidType
+        package::Package -> VoidType
 
          -> AnyType

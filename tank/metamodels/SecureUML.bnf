@@ -1,20 +1,28 @@
 Group:
-        subjectGroup::ANY+
+        subjectGroup::Subject+
 User:
         EPSILON
 Subject:
-        group::ANY role::ANY+
+        Group
+Subject:
+        User
+Subject:
+        group::Group role::Role+
 Role:
-        roleHierarchy::ANY+ subjectAssignment::ANY+ permissionAssignment::ANY+
+        roleHierarchy::Role+ subjectAssignment::Subject+ permissionAssignment::Permission+
 Permission:
-        role::ANY+ constraintAssignment::ANY actionAssignment::ANY+
+        role::Role+ constraintAssignment::AuthorizationConstraint actionAssignment::Action+
 AuthorizationConstraint:
-        permission::ANY+
+        permission::Permission+
 AtomicAction:
         EPSILON
 CompositeAction:
-        subordinatedAction::ANY+
+        subordinatedAction::Action+
 Action:
-        permission::ANY+ resource::ANY actionHyerarchy::ANY+
+        AtomicAction
+Action:
+        CompositeAction
+Action:
+        permission::Permission+ resource::Resource actionHyerarchy::CompositeAction+
 Resource:
-        resourceAction::ANY+
+        resourceAction::Action+

@@ -1,31 +1,39 @@
 DateTimeType:
-        year::ANY month::ANY day::ANY hour::ANY minute::ANY second::ANY
+        year::Integer month::Integer day::Integer hour::Integer minute::Integer second::Integer
 VersionType:
-        n::ANY nn::ANY
+        n::Integer nn::Integer
 ValueType:
-        EPSILON
+        StringValue
+ValueType:
+        FloatValue
+ValueType:
+        DateTimeTypeValue
+ValueType:
+        BooleanValue
 StringValue:
-        value::ANY
+        value::String
 FloatValue:
-        value::ANY
+        value::Double
 DateTimeTypeValue:
-        value::ANY
+        value::DateTimeType
 BooleanValue:
-        value::ANY
+        value::Boolean
 DocumentPropertiesCollection:
-        dp_wordDocument::ANY title::ANY subject::ANY keywords::ANY description::ANY category::ANY author::ANY lastAuthor::ANY manager::ANY company::ANY hyperlinkBase::ANY revision::ANY presentationFormat::ANY guid::ANY appName::ANY version::ANY totalTime::ANY lastPrinted::ANY created::ANY lastSaved::ANY pages::ANY words::ANY characters::ANY charactersWithSpaces::ANY bytes::ANY lines::ANY paragraphs::ANY
+        dp_wordDocument::WordDocument title::String subject::String keywords::String description::String category::String author::String lastAuthor::String manager::String company::String hyperlinkBase::String revision::Integer presentationFormat::String guid::String appName::String version::VersionType totalTime::Integer lastPrinted::DateTimeType created::DateTimeType lastSaved::DateTimeType pages::Integer words::Integer characters::Integer charactersWithSpaces::Integer bytes::Integer lines::Integer paragraphs::Integer
 CustomDocumentPropertiesCollection:
-        cdp_wordDocument::ANY customDocumentProperties::ANY+
+        cdp_wordDocument::WordDocument customDocumentProperties::CustomDocumentProperty+
 CustomDocumentProperty:
-        customDocumentProperty_cdpe::ANY name::ANY value::ANY
+        customDocumentProperty_cdpe::CustomDocumentPropertiesCollection name::String value::ValueType
 SmartTagType:
-        smartTagType_ste::ANY namespaceuri::ANY name::ANY url::ANY
+        smartTagType_ste::SmartTagsCollection namespaceuri::String name::String url::String
 SmartTagsCollection:
-        st_wordDocument::ANY smartTagTypes::ANY+
+        st_wordDocument::WordDocument smartTagTypes::SmartTagType+
 StringProperty:
         EPSILON
 StringType:
-        val::ANY
+        StringProperty
+StringType:
+        val::String
 BreakType:
         bt_page::EPSILON
         bt_column::EPSILON
@@ -43,29 +51,57 @@ FldCharTypeProperty:
         fctp_separate::EPSILON
         fctp_end::EPSILON
 WordDocument:
-        wd_smartTags::ANY wd_docProperties::ANY wd_customDocProperties::ANY ignoreSubtree::ANY ignoreElements::ANY fonts::ANY lists::ANY styles::ANY docPr::ANY body::ANY
+        wd_smartTags::SmartTagsCollection wd_docProperties::DocumentPropertiesCollection wd_customDocProperties::CustomDocumentPropertiesCollection ignoreSubtree::StringProperty ignoreElements::StringProperty fonts::FontsListElt lists::ListsElt styles::StylesElt docPr::DocPrElt body::BodyElt
 DocPrElt:
-        dpe_wordDocument::ANY
+        dpe_wordDocument::WordDocument
 BodyElt:
-        be_wordDocument::ANY blockLevelElts::ANY+ sectPr::ANY
+        be_wordDocument::WordDocument blockLevelElts::BlockLevelElt+ sectPr::SectPrElt
 BlockLevelElt:
-        EPSILON
+        BlockLevelChunkElt
+BlockLevelElt:
+        CfChunk
 BlockLevelChunkElt:
-        EPSILON
+        ParaElt
+BlockLevelChunkElt:
+        RunLevelElt
 ParaElt:
-        pPr::ANY pContentElts::ANY+
+        pPr::ParaPrElt pContentElts::ParaContentElt+
 ParaPrElt:
-        ppe_pElt::ANY
+        ppe_pElt::ParaElt
 ParaContentElt:
-        EPSILON
+        RunElt
+ParaContentElt:
+        SimpleFieldElt
+ParaContentElt:
+        HLinkElt
+ParaContentElt:
+        SubDocElt
 RunElt:
-        rPr::ANY rContentElts::ANY+
+        rPr::RunPrElt rContentElts::RunContentElt+
 RunPrElt:
-        rpe_rElt::ANY
+        rpe_rElt::RunElt
 RunContentElt:
-        EPSILON
+        BreakElt
+RunContentElt:
+        NoBreakHyphen
+RunContentElt:
+        SoftHyphen
+RunContentElt:
+        AnnotationRef
+RunContentElt:
+        FootnoteRef
+RunContentElt:
+        EndnoteRef
+RunContentElt:
+        Separator
+RunContentElt:
+        ContinuationSeparator
+RunContentElt:
+        PgNum
+RunContentElt:
+        Cr
 BreakElt:
-        type::ANY
+        type::BreakType
 Text:
         EPSILON
 DelText:
@@ -75,59 +111,57 @@ InstrText:
 DelInstrText:
         EPSILON
 NoBreakHyphen:
-        rce_rElt::ANY
+        rce_rElt::RunElt
 SoftHyphen:
-        rce_rElt::ANY
+        rce_rElt::RunElt
 AnnotationRef:
-        rce_rElt::ANY
+        rce_rElt::RunElt
 FootnoteRef:
-        rce_rElt::ANY
+        rce_rElt::RunElt
 EndnoteRef:
-        rce_rElt::ANY
+        rce_rElt::RunElt
 Separator:
-        rce_rElt::ANY
+        rce_rElt::RunElt
 ContinuationSeparator:
-        rce_rElt::ANY
+        rce_rElt::RunElt
 PgNum:
-        rce_rElt::ANY
+        rce_rElt::RunElt
 Cr:
-        rce_rElt::ANY
+        rce_rElt::RunElt
 Footnote:
         EPSILON
 Endnote:
-        EPSILON
-NoteElt:
         EPSILON
 Picture:
         EPSILON
 Symbol:
         EPSILON
 SymElt:
-        font::ANY char::ANY
+        font::StringType char::StringType
 Tab:
         EPSILON
 FldChar:
         EPSILON
 FldCharElt:
-        fldData::ANY fldCharType::ANY fldLock::ANY
+        fldData::StringType fldCharType::FldCharTypeProperty fldLock::OnOffType
 FontsListElt:
-        fle_wordDocument::ANY
+        fle_wordDocument::WordDocument
 ListsElt:
-        le_wordDocument::ANY
+        le_wordDocument::WordDocument
 StylesElt:
-        se_wordDocument::ANY
+        se_wordDocument::WordDocument
 SectPrElt:
-        spe_bodyElt::ANY
+        spe_bodyElt::BodyElt
 RunLevelElt:
         
 CfChunk:
-        ble_bodyElt::ANY ble_note::ANY
+        ble_bodyElt::BodyElt ble_note::NoteElt
 SimpleFieldElt:
-        pce_pElt::ANY
+        pce_pElt::ParaElt
 HLinkElt:
-        pce_pElt::ANY
+        pce_pElt::ParaElt
 SubDocElt:
-        pce_pElt::ANY
+        pce_pElt::ParaElt
 PictureType:
         EPSILON
 TabElt:

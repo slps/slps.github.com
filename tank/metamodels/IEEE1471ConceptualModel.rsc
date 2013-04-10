@@ -2,58 +2,69 @@
 module IEEE1471ConceptualModel
 
 syntax Element
-        = 
-        ()
+        = IEEE1471Model
+        | System
+        | Mission
+        | Environment
+        | Architecture
+        | Rationale
+        | ArchitecturalDescription
+        | View
+        | Model
+        | Stakeholder
+        | Concern
+        | Viewpoint
+        | LibraryViewpoint
  ;
 syntax IEEE1471Model
         = 
-        ANY system ANY environment ANY missions+ ANY architecture ANY stakeholders+ ANY concerns+ ANY viewpoints+ ANY libraryViewpoints+ ANY architecturalDescription ANY rationale
+        System system Environment environment Mission missions+ Architecture architecture Stakeholder stakeholders+ Concern concerns+ Viewpoint viewpoints+ LibraryViewpoint libraryViewpoints+ ArchitecturalDescription architecturalDescription Rationale rationale
  ;
 syntax System
         = 
-        ANY fulfils+ ANY inhabits ANY hasAn ANY has+
+        Mission fulfils+ Environment inhabits Architecture hasAn Stakeholder has+
  ;
 syntax Mission
         = 
-        ANY name ANY content
+        String name String content
  ;
 syntax Environment
         = 
-        influences: ANY
+        influences: System
  ;
 syntax Architecture
         = 
-        describedBy: ANY
+        describedBy: ArchitecturalDescription
  ;
 syntax Rationale
         = 
-        provides: ANY
+        provides: ArchitecturalDescription
  ;
 syntax ArchitecturalDescription
         = 
-        ANY identifiesS+ ANY identifiesC+ ANY selects+ ANY organizedBy+ ANY aggregates+
+        Stakeholder identifiesS+ Concern identifiesC+ Viewpoint selects+ View organizedBy+ Model aggregates+
  ;
 syntax View
         = 
-        ANY conformsTo ANY consitsOf+
+        Viewpoint conformsTo Model consitsOf+
  ;
 syntax Model
         = 
-        ANY participatesInV+ ANY participatesInAD
+        View participatesInV+ ArchitecturalDescription participatesInAD
  ;
 syntax Stakeholder
         = 
-        ANY has+
+        Concern has+
  ;
 syntax Concern
         = 
-        ANY isImportantTo+
+        Stakeholder isImportantTo+
  ;
 syntax Viewpoint
         = 
-        ANY hasSource ANY usedToCover+ ANY establishesMethodsFor+
+        LibraryViewpoint hasSource Concern usedToCover+ Model establishesMethodsFor+
  ;
 syntax LibraryViewpoint
         = 
-        ANY name ANY content
+        String name String content
  ;

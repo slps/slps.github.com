@@ -4,43 +4,53 @@ exports
   sorts
         Agent Service Non Functionnal Requirement Requirement Organization Organizational Structure SafetyRule LivenessRule CooperationRules NCS FIPA-Platform Agent FIPA-Platform Task Task Role Representation Characteristic Skill Aptitude Ontology Concept Predicat Action Environnement Responsibility LivenessProperty SafetyProperty Resource Communication AIP Performative Message Scenario 
   context-free syntax
-        service::ANY+ non_Functionnal_Requirement::ANY+ requirement::ANY+ belongs::ANY cooperationRules::ANY+ fipa_Platform_Agent::ANY role::ANY representation::ANY characteristic::ANY skill::ANY aptitude::ANY -> Agent
+        service::Service+ non_Functionnal_Requirement::Non Functionnal Requirement+ requirement::Requirement+ belongs::Organization cooperationRules::CooperationRules+ fipa_Platform_Agent::FIPA-Platform Agent role::Role representation::Representation characteristic::Characteristic skill::Skill aptitude::Aptitude -> Agent
 
-        inputs::ANY outputs::ANY pre-conditions::ANY post-conditions::ANY -> Service
+        inputs::String outputs::String pre-conditions::String post-conditions::String -> Service
 
          -> Non Functionnal Requirement
 
          -> Requirement
 
-        observes::ANY+ organizational_Structure::ANY -> Organization
+        observes::Organizational Structure+ organizational_Structure::Organizational Structure -> Organization
 
-        organization::ANY+ -> Organizational Structure
+        SafetyRule -> Organizational Structure
+
+        LivenessRule -> Organizational Structure
+
+        organization::Organization+ -> Organizational Structure
 
          -> SafetyRule
 
          -> LivenessRule
 
-        ncs::ANY -> CooperationRules
+        ncs::NCS -> CooperationRules
 
-        cooperationRules::ANY -> NCS
+        cooperationRules::CooperationRules -> NCS
 
-        agentF::ANY fipa_Platform_Task::ANY+ -> FIPA-Platform Agent
+        agentF::Agent fipa_Platform_Task::FIPA-Platform Task+ -> FIPA-Platform Agent
 
-        fipa_Platform_AgentF::ANY task::ANY -> FIPA-Platform Task
+        fipa_Platform_AgentF::FIPA-Platform Agent task::Task -> FIPA-Platform Task
 
-        name::ANY fipa_Platform_TaskT::ANY -> Task
+        name::String fipa_Platform_TaskT::FIPA-Platform Task -> Task
 
-        agentR::ANY activity::ANY+ actsOn::ANY+ scenario::ANY+ participant::ANY+ has::ANY+ -> Role
+        agentR::Agent activity::Task+ actsOn::Resource+ scenario::Scenario+ participant::Communication+ has::Responsibility+ -> Role
 
-        agentRep::ANY ontology::ANY environnement::ANY -> Representation
+        agentRep::Agent ontology::Ontology environnement::Environnement -> Representation
 
-        agentC::ANY -> Characteristic
+        agentC::Agent -> Characteristic
 
-        agentS::ANY -> Skill
+        agentS::Agent -> Skill
 
-        agentA::ANY -> Aptitude
+        agentA::Agent -> Aptitude
 
-        environnement::ANY -> Ontology
+        Concept -> Ontology
+
+        Predicat -> Ontology
+
+        Action -> Ontology
+
+        environnement::Environnement -> Ontology
 
          -> Concept
 
@@ -48,22 +58,27 @@ exports
 
          -> Action
 
-        resource::ANY -> Environnement
+        resource::Resource -> Environnement
 
-         -> Responsibility
+        LivenessProperty -> Responsibility
+
+        SafetyProperty -> Responsibility
+
+        LivenessProperty -> Responsibility
+        SafetyProperty -> Responsibility
 
          -> LivenessProperty
 
          -> SafetyProperty
 
-        name::ANY environnement::ANY action::ANY -> Resource
+        name::String environnement::Environnement action::Action -> Resource
 
-        name::ANY Exchanged Knoledge::ANY scenario::ANY+ aip::ANY message::ANY+ -> Communication
+        name::String Exchanged Knoledge::Ontology scenario::Scenario+ aip::AIP message::Message+ -> Communication
 
-        name::ANY performative::ANY -> AIP
+        name::String performative::Performative -> AIP
 
-        aip::ANY -> Performative
+        aip::AIP -> Performative
 
-        communication::ANY Comm_Act::ANY -> Message
+        communication::Communication Comm_Act::Performative -> Message
 
          -> Scenario

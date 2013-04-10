@@ -4,71 +4,123 @@ exports
   sorts
         UIModel Windows Button Orients Image RadioGroup Radio ListBox ListItem MenuList MenuItem Vbox Hbox Containement GroupBox Container Interactor TabBox TextBox Spacer Label Grid Row Column CheckBox Caption Description HeaderCss HeaderJScript TabPanel Event Parameter OnClick Function 
   context-free syntax
-        windows::ANY functions::ANY+ -> UIModel
+        windows::Windows functions::Function+ -> UIModel
 
-        id::ANY title::ANY orient::ANY style::ANY headers::ANY+ headersJScript::ANY+ -> Windows
+        id::String title::String orient::Orients style::String headers::HeaderCss+ headersJScript::HeaderJScript+ -> Windows
 
-        tooltiptext::ANY image::ANY -> Button
+        tooltiptext::String image::String -> Button
 
         horizontal:: -> Orients
         vertical:: -> Orients
 
-        src::ANY -> Image
+        src::String -> Image
 
-        radiobuttons::ANY+ -> RadioGroup
+        radiobuttons::Radio+ -> RadioGroup
 
-        id::ANY label::ANY selected::ANY disabled::ANY -> Radio
+        id::String label::String selected::Boolean disabled::Boolean -> Radio
 
-        rows::ANY listitems::ANY+ -> ListBox
+        rows::Integer listitems::ListItem+ -> ListBox
 
-        label::ANY value::ANY -> ListItem
+        label::String value::String -> ListItem
 
-        menuitems::ANY+ -> MenuList
+        menuitems::MenuItem+ -> MenuList
 
-        label::ANY -> MenuItem
+        label::String -> MenuItem
 
          -> Vbox
 
          -> Hbox
 
-        style::ANY accesskey::ANY class::ANY maxlength::ANY label::ANY orient::ANY minlength::ANY onclick::ANY disabled::ANY -> Containement
+        Button -> Containement
+
+        Image -> Containement
+
+        RadioGroup -> Containement
+
+        ListBox -> Containement
+
+        MenuList -> Containement
+
+        TabBox -> Containement
+
+        TextBox -> Containement
+
+        Spacer -> Containement
+
+        Label -> Containement
+
+        Grid -> Containement
+
+        CheckBox -> Containement
+
+        Caption -> Containement
+
+        Description -> Containement
+
+        style::String accesskey::String class::String maxlength::Integer label::String orient::Orients minlength::String onclick::String disabled::String -> Containement
 
          -> GroupBox
 
-        xulInteractors::ANY+ -> Container
+        Windows -> Container
 
-        flex::ANY id::ANY stat::ANY style::ANY events::ANY+ -> Interactor
+        Vbox -> Container
 
-        tabPanels::ANY+ -> TabBox
+        Hbox -> Container
 
-        multiline::ANY value::ANY -> TextBox
+        GroupBox -> Container
+
+        Row -> Container
+
+        Column -> Container
+
+        TabPanel -> Container
+
+        xulInteractors::Interactor+ -> Container
+
+        Radio -> Interactor
+
+        ListItem -> Interactor
+
+        MenuItem -> Interactor
+
+        Containement -> Interactor
+
+        Container -> Interactor
+
+        flex::Integer id::String stat::String style::String events::Event+ -> Interactor
+
+        tabPanels::Interactor+ -> TabBox
+
+        multiline::Boolean value::String -> TextBox
 
          -> Spacer
 
-        value::ANY control::ANY -> Label
+        value::String control::String -> Label
 
-        columns::ANY+ rows::ANY+ -> Grid
+        columns::Column+ rows::Row+ -> Grid
 
          -> Row
 
          -> Column
 
-        checked::ANY -> CheckBox
+        checked::Boolean -> CheckBox
 
-        label::ANY -> Caption
+        label::String -> Caption
 
-        value::ANY -> Description
+        value::String -> Description
 
-        ref::ANY type::ANY -> HeaderCss
+        ref::String type::String -> HeaderCss
 
-        ref::ANY -> HeaderJScript
+        ref::String -> HeaderJScript
 
-        id::ANY orient::ANY -> TabPanel
+        id::String orient::Orients -> TabPanel
 
-        functionCallParameters::ANY+ functionCalledName::ANY name::ANY -> Event
+        OnClick -> Event
 
-        value::ANY name::ANY -> Parameter
+        functionCallParameters::Parameter+ functionCalledName::String name::String -> Event
+
+        value::String name::String -> Parameter
 
          -> OnClick
 
-        name::ANY functionUIModel::ANY body::ANY -> Function
+        name::String functionUIModel::UIModel body::String -> Function

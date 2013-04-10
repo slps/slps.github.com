@@ -3,35 +3,40 @@ module PtolemyII
 
 syntax EDataType
         = 
-        value: ANY
+        value: String
  ;
 syntax NamedObject
-        = 
-        name: ANY
+        = Attribute
+        | Entity
+        | Port
+        | Relation
+        | Director
+        | name: String
  ;
 syntax Attribute
-        = 
-        ANY att_container ANY value
+        = Parameter
+        | ComponentEntity
+        | Entity att_container String value
  ;
 syntax Entity
         = 
-        ANY attributes+ ANY parameters+ ANY ports+
+        Attribute attributes+ Parameter parameters+ Port ports+
  ;
 syntax Port
-        = 
-        ANY po_container ANY links+
+        = ComponentPort
+        | Entity po_container Relation links+
  ;
 syntax Relation
-        = 
-        ANY ports+
+        = ComponentRelation
+        | Port ports+
  ;
 syntax Director
         = 
-        ca_container: ANY
+        ca_container: CompositeActor
  ;
 syntax Parameter
         = 
-        ANY pa_container ANY dataType
+        Entity pa_container EDataType dataType
  ;
 syntax ComponentPort
         = 
@@ -39,19 +44,21 @@ syntax ComponentPort
  ;
 syntax ComponentRelation
         = 
-        re_container: ANY
+        re_container: CompositeEntity
  ;
 syntax ComponentEntity
-        = 
-        ce_container: ANY
+        = AtomicActor
+        | CompositeEntity
+        | ce_container: CompositeEntity
  ;
 syntax AtomicActor
         = 
         ()
  ;
 syntax CompositeEntity
-        = 
-        ANY containees+ ANY relations+
+        = WorkSpace
+        | CompositeActor
+        | ComponentEntity containees+ ComponentRelation relations+
  ;
 syntax WorkSpace
         = 
@@ -59,5 +66,5 @@ syntax WorkSpace
  ;
 syntax CompositeActor
         = 
-        directors: ANY
+        directors: Director
  ;

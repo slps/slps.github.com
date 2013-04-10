@@ -1,14 +1,14 @@
 Plan:
-        sub_plans::ANY+ super_plan::ANY objectives::ANY+ actions::ANY+
+        sub_plans::Plan+ super_plan::Plan objectives::Objective+ actions::Action+
 Objective:
-        objective_plan::ANY criterias::ANY+
+        objective_plan::Plan criterias::EvaluationCriteria+
 EvaluationCriteria:
-        criteria_objective::ANY
+        criteria_objective::Objective
 Action:
-        action_plan::ANY sub_actions::ANY+ super_action::ANY actor::ANY resources::ANY+ timeSpecs::ANY+
+        action_plan::Plan sub_actions::Action+ super_action::Action actor::Actor resources::Resource+ timeSpecs::TimeSpec+
 Actor:
-        actor_action::ANY sub_actors::ANY+ super_actor::ANY
+        actor_action::Action sub_actors::Actor+ super_actor::Actor
 Resource:
-        resource_action::ANY
+        resource_action::Action
 TimeSpec:
-        timeSpec_action::ANY
+        timeSpec_action::Action

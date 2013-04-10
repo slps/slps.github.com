@@ -2,130 +2,149 @@
 module CPL
 
 syntax Element
-        = 
-        ()
+        = CPL
+        | NodeContainer
+        | Node
  ;
 syntax CPL
         = 
-        ANY subActions+ ANY outgoing ANY incoming
+        SubAction subActions+ Outgoing outgoing Incoming incoming
  ;
 syntax NodeContainer
-        = 
-        ()
+        = SubAction
+        | Outgoing
+        | Incoming
+        | NotPresent
+        | Otherwise
+        | SwitchedAddress
+        | SwitchedString
+        | SwitchedLanguage
+        | SwitchedTime
+        | SwitchedPriority
+        | Busy
+        | NoAnswer
+        | Redirection
+        | Failure
+        | Default
  ;
 syntax SubAction
         = 
-        id: ANY
+        id: String
  ;
 syntax Outgoing
         = 
-        ANY contents
+        contents: Node
  ;
 syntax Incoming
         = 
-        ANY contents
+        contents: Node
  ;
 syntax NotPresent
         = 
-        ANY contents
+        contents: Node
  ;
 syntax Otherwise
         = 
-        ANY contents
+        contents: Node
  ;
 syntax SwitchedAddress
         = 
-        ANY is ANY contains ANY subDomainOf
+        String is String contains String subDomainOf
  ;
 syntax SwitchedString
         = 
-        ANY is ANY contains
+        String is String contains
  ;
 syntax SwitchedLanguage
         = 
-        matches: ANY
+        matches: String
  ;
 syntax SwitchedTime
         = 
-        ANY dtstart ANY dtend ANY duration ANY freq ANY until ANY count ANY interval ANY bySecond ANY byMinute ANY byHour ANY byDay ANY byMonthDay ANY byYearDay ANY byWeekNo ANY byMonth ANY wkst ANY bySetPos
+        String dtstart String dtend String duration String freq String until String count String interval String bySecond String byMinute String byHour String byDay String byMonthDay String byYearDay String byWeekNo String byMonth String wkst String bySetPos
  ;
 syntax SwitchedPriority
         = 
-        ANY less ANY greater ANY equal
+        String less String greater String equal
  ;
 syntax Busy
         = 
-        ANY contents
+        contents: Node
  ;
 syntax NoAnswer
         = 
-        ANY contents
+        contents: Node
  ;
 syntax Redirection
         = 
-        ANY contents
+        contents: Node
  ;
 syntax Failure
         = 
-        ANY contents
+        contents: Node
  ;
 syntax Default
         = 
-        ANY contents
+        contents: Node
  ;
 syntax Node
-        = 
-        ()
+        = Switch
+        | SubCall
+        | Action
  ;
 syntax Switch
-        = 
-        ()
+        = AddressSwitch
+        | StringSwitch
+        | LanguageSwitch
+        | TimeSwitch
+        | PrioritySwitch
  ;
 syntax AddressSwitch
         = 
-        ANY field ANY subField ANY addresses+
+        String field String subField SwitchedAddress addresses+
  ;
 syntax StringSwitch
         = 
-        ANY field ANY strings+
+        String field SwitchedString strings+
  ;
 syntax LanguageSwitch
         = 
-        ANY languages+
+        SwitchedLanguage languages+
  ;
 syntax TimeSwitch
         = 
-        ANY tzid ANY tzurl ANY times+
+        String tzid String tzurl SwitchedTime times+
  ;
 syntax PrioritySwitch
         = 
-        ANY priorities+
+        SwitchedPriority priorities+
  ;
 syntax Location
         = 
-        ANY url ANY priority ANY clear
+        String url String priority String clear
  ;
 syntax SubCall
         = 
-        ref: ANY
+        ref: String
  ;
 syntax Action
         = 
-        ()
+        SignallingAction
  ;
 syntax SignallingAction
-        = 
-        ()
+        = Proxy
+        | Redirect
+        | Reject
  ;
 syntax Proxy
         = 
-        ANY timeout ANY recurse ANY ordering ANY busy ANY noAnswer ANY redirection ANY failure ANY default
+        String timeout String recurse String ordering Busy busy NoAnswer noAnswer Redirection redirection Failure failure Default default
  ;
 syntax Redirect
         = 
-        permanent: ANY
+        permanent: String
  ;
 syntax Reject
         = 
-        ANY status ANY reason
+        String status String reason
  ;

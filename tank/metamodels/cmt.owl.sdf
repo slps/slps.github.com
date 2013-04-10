@@ -4,62 +4,94 @@ exports
   sorts
         Thing Meta-Reviewer Reviewer Decision Person Document Preference ProgramCommittee Bid Conference ConferenceChair ConferenceMember AssociatedChair ProgramCommitteeMember AuthorNotReviewer SubjectArea ExternalReviewer Chairman ProgramCommitteeChair Acceptance Rejection Review Paper Author User Co-author PaperAbstract PaperFullVersion Administrator Meta-Review 
   context-free syntax
-         -> Thing
+        Conference -> Thing
+
+        Conference -> Thing
 
          -> Meta-Reviewer
 
-        assignedByAdministrator::ANY adjustBid::ANY readPaper::ANY hasBeenAssigned::ANY writeReview::ANY assignExternalReviewer::ANY -> Reviewer
+        Meta-Reviewer -> Reviewer
 
-         -> Decision
+        assignedByAdministrator::Administrator adjustBid::Bid readPaper::Paper hasBeenAssigned::Paper writeReview::Review assignExternalReviewer::ExternalReviewer -> Reviewer
 
-        hasConflictOfInterest::ANY email::ANY -> Person
+        Acceptance -> Decision
 
-         -> Document
+        Rejection -> Decision
+
+        Acceptance -> Decision
+        Rejection -> Decision
+
+        ConferenceMember -> Person
+
+        ExternalReviewer -> Person
+
+        User -> Person
+
+        hasConflictOfInterest::Document email::String -> Person
+
+        Review -> Document
+
+        Paper -> Document
+
+        Review -> Document
+        Paper -> Document
 
          -> Preference
 
-        hasProgramCommitteeMember::ANY -> ProgramCommittee
+        hasProgramCommitteeMember::ProgramCommitteeMember -> ProgramCommittee
 
-        adjustedBy::ANY -> Bid
+        adjustedBy::Reviewer -> Bid
 
-        hasConferenceMember::ANY paperAssignmentFinalizedBy::ANY reviewCriteriaEnteredBy::ANY paperAssignmentToolsRunBy::ANY virtualMeetingEnabledBy::ANY hardcopyMailingManifestsPrintedBy::ANY detailsEnteredBy::ANY reviewerBiddingStartedBy::ANY date::ANY reviewsPerPaper::ANY logoURL::ANY acceptsHardcopySubmissions::ANY siteURL::ANY -> Conference
+        hasConferenceMember::ConferenceMember paperAssignmentFinalizedBy::Administrator reviewCriteriaEnteredBy::Administrator paperAssignmentToolsRunBy::Administrator virtualMeetingEnabledBy::Administrator hardcopyMailingManifestsPrintedBy::Administrator detailsEnteredBy::Administrator reviewerBiddingStartedBy::Administrator date::Date reviewsPerPaper::Integer logoURL::AnyURI acceptsHardcopySubmissions::Boolean siteURL::AnyURI -> Conference
 
          -> ConferenceChair
 
-        memberOfConference::ANY -> ConferenceMember
+        memberOfConference::Conference -> ConferenceMember
 
          -> AssociatedChair
 
-        memberOfProgramCommittee::ANY maxPapers::ANY addedBy::ANY -> ProgramCommitteeMember
+        memberOfProgramCommittee::ProgramCommittee maxPapers::Integer addedBy::Administrator -> ProgramCommitteeMember
 
          -> AuthorNotReviewer
 
          -> SubjectArea
 
-        assignedByReviewer::ANY -> ExternalReviewer
+        assignedByReviewer::Reviewer -> ExternalReviewer
 
          -> Chairman
 
-        endReview::ANY -> ProgramCommitteeChair
+        endReview::Review -> ProgramCommitteeChair
 
          -> Acceptance
 
          -> Rejection
 
-        writtenBy::ANY -> Review
+        Meta-Review -> Review
 
-        hasCo-author::ANY hasBid::ANY hasDecision::ANY assignedTo::ANY hasSubjectArea::ANY readByReviewer::ANY paperID::ANY title::ANY hasAuthor::ANY acceptedBy::ANY rejectedBy::ANY readByMeta-Reviewer::ANY -> Paper
+        writtenBy::Reviewer -> Review
 
-        submitPaper::ANY writePaper::ANY -> Author
+        PaperAbstract -> Paper
 
-         -> User
+        PaperFullVersion -> Paper
 
-        co-writePaper::ANY -> Co-author
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::UnsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer -> Paper
+
+        AuthorNotReviewer -> Author
+
+        Co-author -> Author
+
+        submitPaper::Paper writePaper::Paper -> Author
+
+        Administrator -> User
+
+        Administrator -> User
+
+        co-writePaper::Paper -> Co-author
 
          -> PaperAbstract
 
          -> PaperFullVersion
 
-        finalizePaperAssignment::ANY runPaperAssignmentTools::ANY enableVirtualMeeting::ANY startReviewerBidding::ANY assignReviewer::ANY rejectPaper::ANY enterConferenceDetails::ANY printHardcopyMailingManifests::ANY setMaxPapers::ANY enterReviewCriteria::ANY acceptPaper::ANY addProgramCommitteeMember::ANY -> Administrator
+        finalizePaperAssignment::Conference runPaperAssignmentTools::Conference enableVirtualMeeting::Conference startReviewerBidding::Conference assignReviewer::Reviewer rejectPaper::Paper enterConferenceDetails::Conference printHardcopyMailingManifests::Conference setMaxPapers::ProgramCommitteeMember enterReviewCriteria::Conference acceptPaper::Paper addProgramCommitteeMember::ProgramCommitteeMember -> Administrator
 
          -> Meta-Review

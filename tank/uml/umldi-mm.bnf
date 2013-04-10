@@ -1,27 +1,27 @@
 Element:
-        EPSILON
+        ModelElement
 ModelElement:
-        EPSILON
-GeneralizableElement:
-        EPSILON
-Namespace:
-        EPSILON
-Classifier:
-        EPSILON
-Feature:
-        EPSILON
+        GeneralizableElement
+ModelElement:
+        Namespace
+ModelElement:
+        Feature
+ModelElement:
+        Relationship
 Relationship:
-        EPSILON
+        Generalization
 Generalization:
-        parent::ANY powertype::ANY child::ANY discriminator::ANY
+        parent::GeneralizableElement powertype::Classifier child::GeneralizableElement discriminator::String
 Package:
-        elementImport::ANY+
+        Model
+Package:
+        elementImport::ElementImport+
 Model:
         EPSILON
 Subsystem:
-        isInstantiable::ANY
+        isInstantiable::Boolean
 ElementImport:
-        package::ANY importedElement::ANY visibility::ANY alias::ANY isSpecification::ANY
+        package::Package importedElement::ModelElement visibility::VisibilityKind alias::String isSpecification::Boolean
 ScopeKind:
         sk_instance::EPSILON
         sk_classifier::EPSILON

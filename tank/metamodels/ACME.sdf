@@ -2,36 +2,44 @@ module Main
 
 exports
   sorts
-        ACMEFile ACMEEntry Element Type System Representation Component ComponentInstance ComponentType Port Connector Role Property Link Attachment Binding 
+        ACMEFile Element Type System Representation Component ComponentInstance ComponentType Port Connector Role Property Link Attachment Binding 
   context-free syntax
-        entries::ANY+ -> ACMEFile
+        entries::ACMEEntry+ -> ACMEFile
 
-         -> ACMEEntry
+        Type -> Element
 
-         -> Element
+        Component -> Element
 
-        name::ANY representations::ANY+ property::ANY+ -> Type
+        Port -> Element
 
-        componentDeclaration::ANY+ connectorDeclaration::ANY+ attachments::ANY+ bindings::ANY+ -> System
+        Connector -> Element
 
-        systems::ANY+ -> Representation
+        Role -> Element
 
-         -> Component
+        name::String representations::Representation+ property::Property+ -> Type
 
-        instanceOf::ANY -> ComponentInstance
+        componentDeclaration::ComponentInstance+ connectorDeclaration::Connector+ attachments::Link+ bindings::Link+ -> System
 
-        extend::ANY -> ComponentType
+        systems::System+ -> Representation
 
-        name::ANY representations::ANY+ property::ANY+ -> Port
+        ComponentInstance -> Component
 
-        roles::ANY+ system::ANY -> Connector
+        instanceOf::String -> ComponentInstance
 
-        name::ANY representations::ANY+ property::ANY+ -> Role
+        extend::String -> ComponentType
 
-        name::ANY val::ANY -> Property
+        name::String representations::Representation+ property::Property+ -> Port
 
-         -> Link
+        roles::Role+ system::System -> Connector
 
-        comp::ANY port::ANY con::ANY role::ANY -> Attachment
+        name::String representations::Representation+ property::Property+ -> Role
 
-        compSrc::ANY portSrc::ANY compDest::ANY portDest::ANY -> Binding
+        name::String val::String -> Property
+
+        Attachment -> Link
+
+        Binding -> Link
+
+        comp::String port::String con::String role::String -> Attachment
+
+        compSrc::String portSrc::String compDest::String portDest::String -> Binding

@@ -3,119 +3,138 @@ module BmmOmg
 
 syntax Assessment
         = 
-        ANY motivatedDirective+ ANY affectedEnd+ ANY judgedInfluencer+ ANY assessingOrganizationUnit ANY affectedMeans+ ANY identifiedPotentialImpact+ ANY usedAssessment+ ANY usingAssessment+ ANY categorizingAssessmentCategory+
+        Directive motivatedDirective+ End affectedEnd+ Influencer judgedInfluencer+ OrganizationUnit assessingOrganizationUnit Means affectedMeans+ PotentialImpact identifiedPotentialImpact+ Assessment usedAssessment+ Assessment usingAssessment+ AssessmentCategory categorizingAssessmentCategory+
  ;
 syntax MotivationElement
-        = 
-        ()
+        = Assessment
+        | Means
+        | OrganizationUnit
+        | End
+        | BusinessProcess
+        | Asset
+        | Liability
+        | Influencer
+        | InfluencerCategory
+        | InfluencingOrganization
+        | OrganizationCategory
+        | PotentialImpact
+        | AssessmentCategory
  ;
 syntax Directive
-        = 
-        ANY supportedDesiredResult+ ANY governedCourseOfAction+ ANY derivedCourseOfAction+ ANY governedAsset+ ANY motivatingPotentialImpact+ ANY directiveRegulation+ ANY motivatingAssessment+
+        = BusinessPolicy
+        | BusinessRule
+        | DesiredResult supportedDesiredResult+ CourseOfAction governedCourseOfAction+ CourseOfAction derivedCourseOfAction+ Asset governedAsset+ PotentialImpact motivatingPotentialImpact+ Regulation directiveRegulation+ Assessment motivatingAssessment+
  ;
 syntax Means
-        = 
-        ANY establishingOrganizationUnit+ ANY judgingAssessment+
+        = Directive
+        | CourseOfAction
+        | Mission
+        | OrganizationUnit establishingOrganizationUnit+ Assessment judgingAssessment+
  ;
 syntax OrganizationUnit
         = 
-        ANY definedEnd+ ANY managedBusinessProces+ ANY managedLiability+ ANY managedAsset+ ANY determiningStrategy+ ANY recognizedInfluencer+ ANY internalInfluencingOrganization+ ANY madeAssessment+ ANY establishedMeans+
+        End definedEnd+ BusinessProcess managedBusinessProces+ Liability managedLiability+ Asset managedAsset+ Strategy determiningStrategy+ Influencer recognizedInfluencer+ InfluencingOrganization internalInfluencingOrganization+ Assessment madeAssessment+ Means establishedMeans+
  ;
 syntax End
-        = 
-        ANY judgingAssessment+ ANY definingOrganizationUnit+
+        = DesiredResult
+        | Vision
+        | Assessment judgingAssessment+ OrganizationUnit definingOrganizationUnit+
  ;
 syntax BusinessProcess
         = 
-        ANY deliveredOffering+ ANY realizedCourseOfAction+ ANY managedAsset+ ANY governingBusinessPolicy+ ANY guidingBusinessRule ANY responsibleOrganizationUnit+
+        Offering deliveredOffering+ CourseOfAction realizedCourseOfAction+ Asset managedAsset+ BusinessPolicy governingBusinessPolicy+ BusinessRule guidingBusinessRule OrganizationUnit responsibleOrganizationUnit+
  ;
 syntax Offering
         = 
-        ANY definingCourseOfAction+ ANY usedAsset+ ANY requiredResource+ ANY deliveringBusinessProcess+
+        CourseOfAction definingCourseOfAction+ FixedAsset usedAsset+ Resource requiredResource+ BusinessProcess deliveringBusinessProcess+
  ;
 syntax Asset
-        = 
-        ANY deployingCourseOfAction+ ANY governingDirective+ ANY responsibleOrganizationUnit+ ANY managingBusinessProcess+
+        = Resource
+        | FixedAsset
+        | CourseOfAction deployingCourseOfAction+ Directive governingDirective+ OrganizationUnit responsibleOrganizationUnit+ BusinessProcess managingBusinessProcess+
  ;
 syntax CourseOfAction
-        = 
-        ANY enabledCourseOfAction+ ANY enablingCourseOfAction+ ANY moreSpecficCourseOfAction+ ANY broaderCourseOfAction+ ANY supportedDesiredResult+ ANY definedOffering+ ANY dischargedLiability+ ANY realizingBusinessProcess ANY governingDirective+ ANY baseDirective+ ANY deployedAsset+
+        = Tactic
+        | Strategy
+        | CourseOfAction enabledCourseOfAction+ CourseOfAction enablingCourseOfAction+ CourseOfAction moreSpecficCourseOfAction+ CourseOfAction broaderCourseOfAction+ DesiredResult supportedDesiredResult+ Offering definedOffering+ Liability dischargedLiability+ BusinessProcess realizingBusinessProcess Directive governingDirective+ Directive baseDirective+ Asset deployedAsset+
  ;
 syntax DesiredResult
-        = 
-        ANY moreSpecificDesiredResult+ ANY broaderDesiredResult+ ANY supportingDirective+ ANY supportingCourseOfAction+
+        = Goal
+        | Objective
+        | DesiredResult moreSpecificDesiredResult+ DesiredResult broaderDesiredResult+ Directive supportingDirective+ CourseOfAction supportingCourseOfAction+
  ;
 syntax Liability
         = 
-        ANY claimedResource+ ANY responsibleOrganizationUnit+ ANY dischargingCourseOfAction+
+        Resource claimedResource+ OrganizationUnit responsibleOrganizationUnit+ CourseOfAction dischargingCourseOfAction+
  ;
 syntax Resource
         = 
-        ANY providingFixedAsset+ ANY requiringOffering+ ANY claimingLiability+
+        FixedAsset providingFixedAsset+ Offering requiringOffering+ Liability claimingLiability+
  ;
 syntax FixedAsset
         = 
-        ANY usingOffering+ ANY providedResource+
+        Offering usingOffering+ Resource providedResource+
  ;
 syntax BusinessPolicy
         = 
-        ANY moreSpecificBusinessPolicy+ ANY broaderBusinessPolicy+ ANY derivedBusinessRule+ ANY governedBusinessProcess+
+        BusinessPolicy moreSpecificBusinessPolicy+ BusinessPolicy broaderBusinessPolicy+ BusinessRule derivedBusinessRule+ BusinessProcess governedBusinessProcess+
  ;
 syntax BusinessRule
         = 
-        ANY effectingTactic+ ANY guidedBusinessProcess+ ANY baseBusinessPolicy+
+        Tactic effectingTactic+ BusinessProcess guidedBusinessProcess+ BusinessPolicy baseBusinessPolicy+
  ;
 syntax Tactic
         = 
-        ANY implementedStrategy+ ANY enforcedBusinessRule+
+        Strategy implementedStrategy+ BusinessRule enforcedBusinessRule+
  ;
 syntax Strategy
         = 
-        ANY determinedOrganizationUnit+ ANY plannedMission+ ANY implementingTactic+
+        OrganizationUnit determinedOrganizationUnit+ Mission plannedMission+ Tactic implementingTactic+
  ;
 syntax Mission
         = 
-        ANY operativeVision ANY componentStrategy+
+        Vision operativeVision Strategy componentStrategy+
  ;
 syntax Vision
         = 
-        ANY amplifyingGoal+ ANY deliveringMission+
+        Goal amplifyingGoal+ Mission deliveringMission+
  ;
 syntax Goal
         = 
-        ANY quantifyingObjective+ ANY amplifiedVision
+        Objective quantifyingObjective+ Vision amplifiedVision
  ;
 syntax Objective
         = 
-        ANY quantifiedGoal+
+        Goal quantifiedGoal+
  ;
 syntax Influencer
-        = 
-        ANY categorizingInfluencerCategory+ ANY sourceInfluencingOrganization+ ANY judgingAssessment+ ANY recognizingOrganizationUnit+
+        = Regulation
+        | InfluencerCategory categorizingInfluencerCategory+ InfluencingOrganization sourceInfluencingOrganization+ Assessment judgingAssessment+ OrganizationUnit recognizingOrganizationUnit+
  ;
 syntax InfluencerCategory
         = 
-        ANY categorizedInfluencer+
+        Influencer categorizedInfluencer+
  ;
 syntax InfluencingOrganization
         = 
-        ANY categorizingOrganizationCategory+ ANY influencingOrganizationUnit ANY providedInfluencer+
+        OrganizationCategory categorizingOrganizationCategory+ OrganizationUnit influencingOrganizationUnit Influencer providedInfluencer+
  ;
 syntax OrganizationCategory
         = 
-        ANY categorizedInfluencingOrganization+
+        InfluencingOrganization categorizedInfluencingOrganization+
  ;
 syntax PotentialImpact
-        = 
-        ANY identifyingAssessment+ ANY motivatedDirective+
+        = PotentialReward
+        | Risk
+        | Assessment identifyingAssessment+ Directive motivatedDirective+
  ;
 syntax Regulation
         = 
-        regulatingDirective: ANY
+        regulatingDirective: Directive
  ;
 syntax AssessmentCategory
         = 
-        ANY categorizedAssessment+
+        Assessment categorizedAssessment+
  ;
 syntax PotentialReward
         = 

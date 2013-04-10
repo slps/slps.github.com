@@ -2,120 +2,126 @@ module Main
 
 exports
   sorts
-        DateTimeType CellType VisioDocument DocumentPropertiesCollection CustomPropertiesCollection CustomProperty VBProjectData EmailRoutingData StyleSheetsCollection StyleSheet DocumentSheet PageSheet NamedElt IdentifiedElt UniqueIdElt Shape ShapeElt IXElt DelElt Geom XYElt LineTo MoveTo XYAElt ArcTo SplineKnot PolylineTo XYABElt InfiniteLine XYABCDElt Ellipse EllipticalArcTo SplineStart XYABCDEElt NURBSTo Text TextElt StringElt MastersCollection MasterShortCut Icon Master ShapesCollection ConnectsCollection Connect MasterElt PagesCollection Page PageElt DocumentSettingsElt ColorsTable PrintSetup FontsTable FaceNamesTable WindowsInfo EventList HeaderFooter SolutionXML 
+        DateTimeType CellType VisioDocument DocumentPropertiesCollection CustomPropertiesCollection CustomProperty VBProjectData EmailRoutingData StyleSheetsCollection StyleSheet DocumentSheet PageSheet Shape ShapeElt Geom XYElt LineTo MoveTo XYAElt ArcTo SplineKnot PolylineTo XYABElt InfiniteLine XYABCDElt Ellipse EllipticalArcTo SplineStart XYABCDEElt NURBSTo Text TextElt StringElt MastersCollection MasterShortCut Icon Master ShapesCollection ConnectsCollection Connect MasterElt PagesCollection Page DocumentSettingsElt ColorsTable PrintSetup FontsTable FaceNamesTable WindowsInfo EventList HeaderFooter SolutionXML 
   context-free syntax
-        year::ANY month::ANY day::ANY hour::ANY minute::ANY second::ANY -> DateTimeType
+        year::Integer month::Integer day::Integer hour::Integer minute::Integer second::Integer -> DateTimeType
 
-        unit::ANY formula::ANY err::ANY value::ANY -> CellType
+        unit::String formula::String err::String value::String -> CellType
 
-        start::ANY key::ANY metric::ANY buildnum::ANY version::ANY docLangId::ANY docProps::ANY docSettings::ANY docColors::ANY docPrintSetup::ANY docFonts::ANY docFaceNames::ANY docStyleSheets::ANY docDocumentSheet::ANY docMasters::ANY docPages::ANY docWindows::ANY docEventList::ANY docHeaderFooter::ANY docVBProjectData::ANY docEmailRoutingData::ANY docSolutionXML::ANY+ -> VisioDocument
+        start::Integer key::String metric::Boolean buildnum::Integer version::String docLangId::Integer docProps::DocumentPropertiesCollection docSettings::DocumentSettingsElt docColors::ColorsTable docPrintSetup::PrintSetup docFonts::FontsTable docFaceNames::FaceNamesTable docStyleSheets::StyleSheetsCollection docDocumentSheet::DocumentSheet docMasters::MastersCollection docPages::PagesCollection docWindows::WindowsInfo docEventList::EventList docHeaderFooter::HeaderFooter docVBProjectData::VBProjectData docEmailRoutingData::EmailRoutingData docSolutionXML::SolutionXML+ -> VisioDocument
 
-        dps_visioDocument::ANY title::ANY subject::ANY creator::ANY manager::ANY company::ANY category::ANY keywords::ANY description::ANY hyperlinkBase_href::ANY alternateNames::ANY template::ANY buildNumberCreated::ANY buildNumberEdited::ANY customProps::ANY timeCreated::ANY timeSaved::ANY timeEdited::ANY timePrinted::ANY -> DocumentPropertiesCollection
+        dps_visioDocument::VisioDocument title::String subject::String creator::String manager::String company::String category::String keywords::String description::String hyperlinkBase_href::String alternateNames::String template::String buildNumberCreated::String buildNumberEdited::String customProps::CustomPropertiesCollection timeCreated::DateTimeType timeSaved::DateTimeType timeEdited::DateTimeType timePrinted::DateTimeType -> DocumentPropertiesCollection
 
-        cps_docProp::ANY cps_customProps::ANY+ -> CustomPropertiesCollection
+        cps_docProp::DocumentPropertiesCollection cps_customProps::CustomProperty+ -> CustomPropertiesCollection
 
-        cp_customProps::ANY name::ANY dataType::ANY -> CustomProperty
+        cp_customProps::CustomPropertiesCollection name::String dataType::String -> CustomProperty
 
-        vpd_visioDocument::ANY data::ANY -> VBProjectData
+        vpd_visioDocument::VisioDocument data::String -> VBProjectData
 
-        erd_visioDocument::ANY data::ANY size::ANY -> EmailRoutingData
+        erd_visioDocument::VisioDocument data::String size::Integer -> EmailRoutingData
 
-        sss_visioDocument::ANY stylesSheets::ANY+ -> StyleSheetsCollection
+        sss_visioDocument::VisioDocument stylesSheets::StyleSheet+ -> StyleSheetsCollection
 
-        ss_stylesSheets::ANY -> StyleSheet
+        ss_stylesSheets::StyleSheetsCollection -> StyleSheet
 
-        ds_visioDocument::ANY -> DocumentSheet
+        ds_visioDocument::VisioDocument -> DocumentSheet
 
          -> PageSheet
 
-         -> NamedElt
+        ss_shapes::ShapesCollection lineStyle::Integer fillStyle::Integer textStyle::Integer shapeElts::ShapeElt+ -> Shape
 
-         -> IdentifiedElt
+        Text -> ShapeElt
 
-         -> UniqueIdElt
+        noFill::CellType noLine::CellType noShow::CellType noSnap::CellType linesTo::LineTo+ movesTo::MoveTo+ arcsTo::ArcTo+ splineKnots::SplineKnot+ polylinesTo::PolylineTo+ infiniteLines::InfiniteLine+ ellipses::Ellipse+ ellipticalArcsTo::EllipticalArcTo+ splineStarts::SplineStart+ nurbsTo::NURBSTo+ -> Geom
 
-        ss_shapes::ANY lineStyle::ANY fillStyle::ANY textStyle::ANY shapeElts::ANY+ -> Shape
+        LineTo -> XYElt
 
-         -> ShapeElt
+        MoveTo -> XYElt
 
-         -> IXElt
+        XYAElt -> XYElt
 
-         -> DelElt
+        lt_geom::Geom -> LineTo
 
-        noFill::ANY noLine::ANY noShow::ANY noSnap::ANY linesTo::ANY+ movesTo::ANY+ arcsTo::ANY+ splineKnots::ANY+ polylinesTo::ANY+ infiniteLines::ANY+ ellipses::ANY+ ellipticalArcsTo::ANY+ splineStarts::ANY+ nurbsTo::ANY+ -> Geom
+        mt_geom::Geom -> MoveTo
 
-         -> XYElt
+        ArcTo -> XYAElt
 
-        lt_geom::ANY -> LineTo
+        SplineKnot -> XYAElt
 
-        mt_geom::ANY -> MoveTo
+        PolylineTo -> XYAElt
 
-         -> XYAElt
+        XYABElt -> XYAElt
 
-        ac_geom::ANY -> ArcTo
+        ac_geom::Geom -> ArcTo
 
-        sk_geom::ANY -> SplineKnot
+        sk_geom::Geom -> SplineKnot
 
-        pt_geom::ANY -> PolylineTo
+        pt_geom::Geom -> PolylineTo
 
-         -> XYABElt
+        InfiniteLine -> XYABElt
 
-        il_geom::ANY -> InfiniteLine
+        XYABCDElt -> XYABElt
 
-         -> XYABCDElt
+        il_geom::Geom -> InfiniteLine
 
-        e_geom::ANY -> Ellipse
+        Ellipse -> XYABCDElt
 
-        eat_geom::ANY -> EllipticalArcTo
+        EllipticalArcTo -> XYABCDElt
 
-        ss_geom::ANY -> SplineStart
+        SplineStart -> XYABCDElt
 
-         -> XYABCDEElt
+        XYABCDEElt -> XYABCDElt
 
-        nt_geom::ANY -> NURBSTo
+        e_geom::Geom -> Ellipse
 
-        textElts::ANY+ -> Text
+        eat_geom::Geom -> EllipticalArcTo
 
-         -> TextElt
+        ss_geom::Geom -> SplineStart
 
-        value::ANY -> StringElt
+        NURBSTo -> XYABCDEElt
 
-        ms_visioDocument::ANY masters::ANY+ masterShortCuts::ANY+ -> MastersCollection
+        nt_geom::Geom -> NURBSTo
 
-        m_masterShortCuts::ANY iconSize::ANY patternFlags::ANY prompt::ANY shortcutURL::ANY shortcutHelp::ANY alignName::ANY icons::ANY+ -> MasterShortCut
+        textElts::TextElt+ -> Text
 
-        i_masterShortCut::ANY value::ANY -> Icon
+        StringElt -> TextElt
 
-        m_masters::ANY baseID::ANY matchByName::ANY iconSize::ANY patternFlags::ANY prompt::ANY hidden::ANY iconUpdate::ANY alignName::ANY masterElts::ANY+ -> Master
+        value::String -> StringElt
 
-        shapes::ANY+ -> ShapesCollection
+        ms_visioDocument::VisioDocument masters::Master+ masterShortCuts::MasterShortCut+ -> MastersCollection
 
-        connections::ANY+ -> ConnectsCollection
+        m_masterShortCuts::MastersCollection iconSize::Integer patternFlags::Integer prompt::String shortcutURL::String shortcutHelp::String alignName::Integer icons::Icon+ -> MasterShortCut
 
-        c_connects::ANY fromSheet::ANY toSheet::ANY fromCell::ANY toCell::ANY fromPart::ANY toPart::ANY -> Connect
+        i_masterShortCut::MasterShortCut value::String -> Icon
 
-         -> MasterElt
+        m_masters::MastersCollection baseID::String matchByName::Boolean iconSize::Integer patternFlags::Integer prompt::String hidden::Boolean iconUpdate::Boolean alignName::Integer masterElts::MasterElt+ -> Master
 
-        ps_visioDocument::ANY pages::ANY+ -> PagesCollection
+        shapes::Shape+ -> ShapesCollection
 
-        p_pages::ANY background::ANY backPage::ANY viewScale::ANY viewCenterX::ANY ViewCenterY::ANY reviewerID::ANY associatedPage::ANY pageElts::ANY+ -> Page
+        connections::Connect+ -> ConnectsCollection
 
-         -> PageElt
+        c_connects::ConnectsCollection fromSheet::Integer toSheet::Integer fromCell::String toCell::String fromPart::Integer toPart::Integer -> Connect
 
-        dss_visioDocument::ANY -> DocumentSettingsElt
+        Icon -> MasterElt
 
-        cs_visioDocument::ANY -> ColorsTable
+        ps_visioDocument::VisioDocument pages::Page+ -> PagesCollection
 
-        ps_visioDocument::ANY -> PrintSetup
+        p_pages::PagesCollection background::Boolean backPage::Integer viewScale::Double viewCenterX::Double ViewCenterY::Double reviewerID::Integer associatedPage::Integer pageElts::PageElt+ -> Page
 
-        fs_visioDocument::ANY -> FontsTable
+        dss_visioDocument::VisioDocument -> DocumentSettingsElt
 
-        fns_visioDocument::ANY -> FaceNamesTable
+        cs_visioDocument::VisioDocument -> ColorsTable
 
-        ws_visioDocument::ANY -> WindowsInfo
+        ps_visioDocument::VisioDocument -> PrintSetup
 
-        el_visioDocument::ANY -> EventList
+        fs_visioDocument::VisioDocument -> FontsTable
 
-        ef_visioDocument::ANY -> HeaderFooter
+        fns_visioDocument::VisioDocument -> FaceNamesTable
 
-        sx_visioDocument::ANY -> SolutionXML
+        ws_visioDocument::VisioDocument -> WindowsInfo
+
+        el_visioDocument::VisioDocument -> EventList
+
+        ef_visioDocument::VisioDocument -> HeaderFooter
+
+        sx_visioDocument::VisioDocument -> SolutionXML

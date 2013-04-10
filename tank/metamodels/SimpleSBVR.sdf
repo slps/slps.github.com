@@ -4,35 +4,81 @@ exports
   sorts
         Root Element Representation Designation Text Meaning Concept NounConcept ObjectType IndividualConcept DataType NonEmptyString NonNegativeInteger FactType BinaryFactType IsPropertyOfFactType AssociativeFactType CategorizationFactType ObjectificationFactType Role FactTypeRole LogicalFormulation AtomicFormulation BinaryAtomicFormulation NecessityFormulation Quantification UniversalQuantification AtLeastNQuantification ExactlyNQuantification AtMostNQuantification BindableTarget Variable RoleBinding 
   context-free syntax
-        elements::ANY+ -> Root
+        elements::Element+ -> Root
 
-        objectName::ANY -> Element
+        Representation -> Element
 
-        meaning::ANY -> Representation
+        Text -> Element
 
-        text::ANY -> Designation
+        Meaning -> Element
 
-        value::ANY -> Text
+        Role -> Element
 
-        representations::ANY+ -> Meaning
+        BindableTarget -> Element
 
-         -> Concept
+        RoleBinding -> Element
 
-         -> NounConcept
+        objectName::String -> Element
 
-        specializes::ANY generalizes::ANY+ -> ObjectType
+        Designation -> Representation
 
-        instanceOf::ANY -> IndividualConcept
+        meaning::Meaning -> Representation
 
-         -> DataType
+        text::Text -> Designation
 
-        value::ANY -> NonEmptyString
+        value::String -> Text
 
-        value::ANY -> NonNegativeInteger
+        Concept -> Meaning
 
-         -> FactType
+        LogicalFormulation -> Meaning
 
-        role1::ANY role2::ANY -> BinaryFactType
+        representations::Representation+ -> Meaning
+
+        NounConcept -> Concept
+
+        FactType -> Concept
+
+        NounConcept -> Concept
+        FactType -> Concept
+
+        ObjectType -> NounConcept
+
+        IndividualConcept -> NounConcept
+
+        DataType -> NounConcept
+
+        ObjectType -> NounConcept
+        IndividualConcept -> NounConcept
+        DataType -> NounConcept
+
+        specializes::ObjectType generalizes::ObjectType+ -> ObjectType
+
+        instanceOf::ObjectType -> IndividualConcept
+
+        NonEmptyString -> DataType
+
+        NonNegativeInteger -> DataType
+
+        NonEmptyString -> DataType
+        NonNegativeInteger -> DataType
+
+        value::String -> NonEmptyString
+
+        value::Integer -> NonNegativeInteger
+
+        BinaryFactType -> FactType
+
+        BinaryFactType -> FactType
+
+        IsPropertyOfFactType -> BinaryFactType
+
+        AssociativeFactType -> BinaryFactType
+
+        CategorizationFactType -> BinaryFactType
+
+        ObjectificationFactType -> BinaryFactType
+
+        role1::FactTypeRole role2::FactTypeRole -> BinaryFactType
 
          -> IsPropertyOfFactType
 
@@ -42,30 +88,52 @@ exports
 
          -> ObjectificationFactType
 
-        nounConcept::ANY -> Role
+        FactTypeRole -> Role
+
+        nounConcept::NounConcept -> Role
 
          -> FactTypeRole
 
-         -> LogicalFormulation
+        AtomicFormulation -> LogicalFormulation
 
-        isBasedOn::ANY -> AtomicFormulation
+        NecessityFormulation -> LogicalFormulation
 
-        roleBinding1::ANY roleBinding2::ANY -> BinaryAtomicFormulation
+        Quantification -> LogicalFormulation
+
+        AtomicFormulation -> LogicalFormulation
+        NecessityFormulation -> LogicalFormulation
+        Quantification -> LogicalFormulation
+
+        BinaryAtomicFormulation -> AtomicFormulation
+
+        isBasedOn::FactType -> AtomicFormulation
+
+        roleBinding1::RoleBinding roleBinding2::RoleBinding -> BinaryAtomicFormulation
 
          -> NecessityFormulation
 
-        introducedVariable::ANY scopesOver::ANY -> Quantification
+        UniversalQuantification -> Quantification
+
+        AtLeastNQuantification -> Quantification
+
+        ExactlyNQuantification -> Quantification
+
+        AtMostNQuantification -> Quantification
+
+        introducedVariable::Variable scopesOver::LogicalFormulation -> Quantification
 
          -> UniversalQuantification
 
-        minCardinality::ANY -> AtLeastNQuantification
+        minCardinality::NonNegativeInteger -> AtLeastNQuantification
 
-        cardinality::ANY -> ExactlyNQuantification
+        cardinality::NonNegativeInteger -> ExactlyNQuantification
 
-        maxCardinality::ANY -> AtMostNQuantification
+        maxCardinality::NonNegativeInteger -> AtMostNQuantification
 
-         -> BindableTarget
+        Variable -> BindableTarget
 
-        rangesOver::ANY -> Variable
+        Variable -> BindableTarget
 
-        occursIn::ANY isOf::ANY bindsTo::ANY -> RoleBinding
+        rangesOver::ObjectType -> Variable
+
+        occursIn::AtomicFormulation isOf::FactType bindsTo::BindableTarget -> RoleBinding

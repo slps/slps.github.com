@@ -2,61 +2,119 @@ module Main
 
 exports
   sorts
-        LocatedElement ACG ACGElement Function Attribute Parameter Node ASMNode CodeNode SimpleNode StatementBlock Statement CompoundStat ForEachStat OnceStat VariableStat OperationStat ConditionalStat LetStat AnalyzeStat ReportStat Severity FieldStat ParamStat EmitStat LabelStat NewStat DupStat DupX1Stat PopStat SwapStat IterateStat EndIterateStat GetAsmStat FindMEStat PushTStat PushFStat EmitWithOperandStat PushStat PushIStat PushDStat LoadStat StoreStat CallStat PCallStat SuperCallStat GetStat SetStat EmitWithLabelRefStat IfStat GotoStat VariableDecl Expression VariableExp SelfExp LastExp IfExp IsAExp LetExp PropertyCallExp NavigationExp IteratorExp OperationCallExp OperatorCallExp LiteralExp OclUndefinedExp CollectionExp SequenceExp BooleanExp IntegerExp StringExp 
+        LocatedElement ACG ACGElement Function Attribute Parameter Node ASMNode CodeNode SimpleNode Statement CompoundStat ForEachStat OnceStat VariableStat OperationStat ConditionalStat LetStat AnalyzeStat ReportStat Severity FieldStat ParamStat EmitStat LabelStat NewStat DupStat DupX1Stat PopStat SwapStat IterateStat EndIterateStat GetAsmStat FindMEStat PushTStat PushFStat EmitWithOperandStat PushStat PushIStat PushDStat LoadStat StoreStat CallStat PCallStat SuperCallStat GetStat SetStat EmitWithLabelRefStat IfStat GotoStat VariableDecl Expression VariableExp SelfExp LastExp IfExp IsAExp LetExp PropertyCallExp NavigationExp IteratorExp OperationCallExp OperatorCallExp LiteralExp OclUndefinedExp CollectionExp SequenceExp BooleanExp IntegerExp StringExp 
   context-free syntax
-         -> LocatedElement
+        ACG -> LocatedElement
 
-        metamodel::ANY startsWith::ANY elements::ANY+ -> ACG
+        ACGElement -> LocatedElement
 
-         -> ACGElement
+        StatementBlock -> LocatedElement
 
-        context::ANY name::ANY parameters::ANY+ body::ANY -> Function
+        Statement -> LocatedElement
 
-        context::ANY name::ANY body::ANY -> Attribute
+        VariableDecl -> LocatedElement
+
+        Expression -> LocatedElement
+
+        metamodel::String startsWith::String elements::ACGElement+ -> ACG
+
+        Function -> ACGElement
+
+        Attribute -> ACGElement
+
+        context::String name::String parameters::Parameter+ body::Expression -> Function
+
+        context::String name::String body::Expression -> Attribute
 
          -> Parameter
 
-         -> Node
+        ASMNode -> Node
 
-        name::ANY -> ASMNode
+        CodeNode -> Node
 
-        element::ANY mode::ANY guard::ANY -> CodeNode
+        SimpleNode -> Node
 
-        element::ANY mode::ANY guard::ANY -> SimpleNode
+        name::Expression -> ASMNode
 
-         -> StatementBlock
+        element::String mode::String guard::Expression -> CodeNode
 
-         -> Statement
+        element::String mode::String guard::Expression -> SimpleNode
 
-         -> CompoundStat
+        ReportStat -> Statement
 
-        iterator::ANY collection::ANY -> ForEachStat
+        FieldStat -> Statement
+
+        ParamStat -> Statement
+
+        EmitStat -> Statement
+
+        ForEachStat -> CompoundStat
+
+        OnceStat -> CompoundStat
+
+        VariableStat -> CompoundStat
+
+        OperationStat -> CompoundStat
+
+        ConditionalStat -> CompoundStat
+
+        LetStat -> CompoundStat
+
+        AnalyzeStat -> CompoundStat
+
+        iterator::VariableDecl collection::Expression -> ForEachStat
 
          -> OnceStat
 
-        definition::ANY name::ANY -> VariableStat
+        definition::Expression name::Expression -> VariableStat
 
-        context::ANY name::ANY -> OperationStat
+        context::Expression name::Expression -> OperationStat
 
-        condition::ANY elseStatements::ANY+ -> ConditionalStat
+        condition::Expression elseStatements::Statement+ -> ConditionalStat
 
-        variable::ANY value::ANY -> LetStat
+        variable::VariableDecl value::Expression -> LetStat
 
-        target::ANY mode::ANY -> AnalyzeStat
+        target::Expression mode::String -> AnalyzeStat
 
-        severity::ANY message::ANY -> ReportStat
+        severity::Severity message::Expression -> ReportStat
 
         critic:: -> Severity
         error:: -> Severity
         warning:: -> Severity
 
-        name::ANY type::ANY -> FieldStat
+        name::Expression type::Expression -> FieldStat
 
-        name::ANY type::ANY -> ParamStat
+        name::Expression type::Expression -> ParamStat
 
-         -> EmitStat
+        LabelStat -> EmitStat
 
-        name::ANY id::ANY -> LabelStat
+        NewStat -> EmitStat
+
+        DupStat -> EmitStat
+
+        DupX1Stat -> EmitStat
+
+        PopStat -> EmitStat
+
+        SwapStat -> EmitStat
+
+        IterateStat -> EmitStat
+
+        EndIterateStat -> EmitStat
+
+        GetAsmStat -> EmitStat
+
+        FindMEStat -> EmitStat
+
+        PushTStat -> EmitStat
+
+        PushFStat -> EmitStat
+
+        EmitWithOperandStat -> EmitStat
+
+        EmitWithLabelRefStat -> EmitStat
+
+        name::String id::Expression -> LabelStat
 
          -> NewStat
 
@@ -80,70 +138,120 @@ exports
 
          -> PushFStat
 
-         -> EmitWithOperandStat
+        PushStat -> EmitWithOperandStat
 
-        operand::ANY -> PushStat
+        PushIStat -> EmitWithOperandStat
 
-        operand::ANY -> PushIStat
+        PushDStat -> EmitWithOperandStat
 
-        operand::ANY -> PushDStat
+        LoadStat -> EmitWithOperandStat
 
-        operand::ANY -> LoadStat
+        StoreStat -> EmitWithOperandStat
 
-        operand::ANY -> StoreStat
+        CallStat -> EmitWithOperandStat
 
-        operand::ANY -> CallStat
+        PCallStat -> EmitWithOperandStat
 
-        operand::ANY -> PCallStat
+        SuperCallStat -> EmitWithOperandStat
 
-        operand::ANY -> SuperCallStat
+        GetStat -> EmitWithOperandStat
 
-        operand::ANY -> GetStat
+        SetStat -> EmitWithOperandStat
 
-        operand::ANY -> SetStat
+        operand::Expression -> PushStat
 
-         -> EmitWithLabelRefStat
+        operand::Expression -> PushIStat
 
-        label::ANY -> IfStat
+        operand::Expression -> PushDStat
 
-        label::ANY -> GotoStat
+        operand::Expression -> LoadStat
 
-        name::ANY -> VariableDecl
+        operand::Expression -> StoreStat
 
-         -> Expression
+        operand::Expression -> CallStat
 
-        variable::ANY -> VariableExp
+        operand::Expression -> PCallStat
+
+        operand::Expression -> SuperCallStat
+
+        operand::Expression -> GetStat
+
+        operand::Expression -> SetStat
+
+        IfStat -> EmitWithLabelRefStat
+
+        GotoStat -> EmitWithLabelRefStat
+
+        label::LabelStat -> IfStat
+
+        label::LabelStat -> GotoStat
+
+        Parameter -> VariableDecl
+
+        name::String -> VariableDecl
+
+        VariableExp -> Expression
+
+        SelfExp -> Expression
+
+        LastExp -> Expression
+
+        IfExp -> Expression
+
+        IsAExp -> Expression
+
+        LetExp -> Expression
+
+        PropertyCallExp -> Expression
+
+        LiteralExp -> Expression
+
+        variable::VariableDecl -> VariableExp
 
          -> SelfExp
 
          -> LastExp
 
-        condition::ANY thenExp::ANY elseExp::ANY -> IfExp
+        condition::Expression thenExp::Expression elseExp::Expression -> IfExp
 
-        source::ANY type::ANY -> IsAExp
+        source::Expression type::String -> IsAExp
 
-        variable::ANY value::ANY in::ANY -> LetExp
+        variable::VariableDecl value::Expression in::Expression -> LetExp
 
-         -> PropertyCallExp
+        NavigationExp -> PropertyCallExp
 
-        source::ANY name::ANY -> NavigationExp
+        IteratorExp -> PropertyCallExp
 
-        iterator::ANY body::ANY -> IteratorExp
+        OperationCallExp -> PropertyCallExp
 
-        arguments::ANY+ -> OperationCallExp
+        source::Expression name::String -> NavigationExp
+
+        iterator::VariableDecl body::Expression -> IteratorExp
+
+        OperatorCallExp -> OperationCallExp
+
+        arguments::Expression+ -> OperationCallExp
 
          -> OperatorCallExp
 
-         -> LiteralExp
+        OclUndefinedExp -> LiteralExp
+
+        CollectionExp -> LiteralExp
+
+        BooleanExp -> LiteralExp
+
+        IntegerExp -> LiteralExp
+
+        StringExp -> LiteralExp
 
          -> OclUndefinedExp
 
-         -> CollectionExp
+        SequenceExp -> CollectionExp
 
-        elements::ANY+ -> SequenceExp
+        elements::Expression+ -> SequenceExp
 
-        value::ANY -> BooleanExp
+        value::Boolean -> BooleanExp
 
-        value::ANY -> IntegerExp
+        value::Integer -> IntegerExp
 
-        value::ANY -> StringExp
+        value::String -> StringExp

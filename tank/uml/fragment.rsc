@@ -3,7 +3,7 @@ module Fragment
 
 syntax Class
         = 
-        ANY parent ANY child ANY dependency
+        Generalization parent Generalization child Dependency dependency
  ;
 syntax Generalization
         = 
@@ -11,23 +11,25 @@ syntax Generalization
  ;
 syntax Dependency
         = 
-        ANY supplier ANY client ANY stereotype
+        StateMachine supplier Class client Stereotype stereotype
  ;
 syntax Stereotype
         = 
-        ANY baseClass ANY extendedElement
+        String baseClass Dependency extendedElement
  ;
 syntax StateMachine
         = 
-        ANY context ANY top
+        Class context State top
  ;
 syntax State
-        = 
-        ANY stateMachine ANY internal
+        = CompositeState
+        | SimpleState
+        | FinalState
+        | StateMachine stateMachine Transition internal
  ;
 syntax CompositeState
         = 
-        subvertex: ANY
+        subvertex: StateVertex
  ;
 syntax SimpleState
         = 
@@ -38,8 +40,9 @@ syntax FinalState
         ()
  ;
 syntax StateVertex
-        = 
-        compositeState: ANY
+        = State
+        | PseudoState
+        | compositeState: CompositeState
  ;
 syntax PseudoState
         = 
@@ -47,7 +50,7 @@ syntax PseudoState
  ;
 syntax Transition
         = 
-        ANY trigger ANY source ANY target
+        Event trigger StateVertex source StateVertex target
  ;
 syntax Event
         = 

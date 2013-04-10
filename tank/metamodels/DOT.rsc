@@ -2,106 +2,112 @@
 module DOT
 
 syntax Label
-        = 
-        ()
+        = SimpleLabel
+        | ComplexLabel
  ;
 syntax SimpleLabel
         = 
-        content: ANY
+        content: String
  ;
 syntax ComplexLabel
         = 
-        ANY compartments+
+        Compartment compartments+
  ;
 syntax Compartment
-        = 
-        ()
+        = VerticalCompartment
+        | HorizontalCompartment
+        | SimpleCompartment
  ;
 syntax VerticalCompartment
         = 
-        ANY complexLabel ANY compartments ANY anchor
+        ComplexLabel complexLabel Compartment compartments Anchor anchor
  ;
 syntax HorizontalCompartment
         = 
-        ANY complexLabel ANY compartments ANY anchor
+        ComplexLabel complexLabel Compartment compartments Anchor anchor
  ;
 syntax SimpleCompartment
         = 
-        content: ANY
+        content: String
  ;
 syntax Anchor
         = 
-        ANY name ANY source
+        String name Compartment source
  ;
 syntax GraphElement
-        = 
-        ()
+        = Graph
+        | Layer
+        | Nodelike
+        | Arc
+        | Shape
  ;
 syntax Graph
         = 
-        ANY type ANY rankDir ANY labeljust ANY labelloc ANY concentrate ANY nodes+ ANY boundingBox ANY compound ANY layers+ ANY nodeSeparation ANY ordering ANY size ANY ratio ANY center
+        String type String rankDir String labeljust String labelloc Boolean concentrate Nodelike nodes+ String boundingBox Boolean compound Layer layers+ Double nodeSeparation String ordering String size String ratio Boolean center
  ;
 syntax Layer
         = 
-        ANY nodes+ ANY arcs+ ANY graph ANY layerSeparator
+        Nodelike nodes+ Arc arcs+ Graph graph String layerSeparator
  ;
 syntax Nodelike
-        = 
-        ()
+        = SubGraph
+        | Node
  ;
 syntax SubGraph
         = 
-        ANY nodes+ ANY labelloc
+        Nodelike nodes+ String labelloc
  ;
 syntax Node
         = 
-        ANY fixedSize ANY fontname ANY fontsize ANY height ANY width ANY shape
+        Boolean fixedSize String fontname Integer fontsize Integer height Integer width NodeShape shape
  ;
 syntax Arc
-        = 
-        ()
+        = DirectedArc
+        | UndirectedArc
  ;
 syntax DirectedArc
         = 
-        ANY arrowHead ANY headlabel ANY taillabel ANY arrowTail ANY tail_lp ANY head_lp
+        ArrowShape arrowHead Label headlabel Label taillabel ArrowShape arrowTail Double tail_lp Double head_lp
  ;
 syntax UndirectedArc
         = 
-        ANY fromNode ANY toNode ANY layers+ ANY constraint ANY group ANY minlen ANY sameHead ANY sameTail ANY lhead ANY ltail ANY decorate
+        Nodelike fromNode Nodelike toNode Layer layers+ Boolean constraint String group Integer minlen String sameHead String sameTail Nodelike lhead Nodelike ltail Boolean decorate
  ;
 syntax Shape
-        = 
-        ()
+        = NodeShape
+        | ArrowShape
  ;
 syntax NodeShape
-        = 
-        ()
+        = SimpleNodeShape
+        | PointNodeShape
+        | ComplexNodeShape
  ;
 syntax SimpleNodeShape
         = 
-        
+        ()
  ;
 syntax PointNodeShape
         = 
-        
+        ()
  ;
 syntax ComplexNodeShape
-        = 
-        ()
+        = PolygonNodeShape
+        | MNodeShape
+        | RecordNodeShape
  ;
 syntax PolygonNodeShape
         = 
-        ANY sides ANY skew ANY distortion ANY isRegular ANY orientation
+        Integer sides Integer skew Integer distortion Boolean isRegular Integer orientation
  ;
 syntax MNodeShape
         = 
-        ANY toplabel ANY bottomlabel
+        Label toplabel Label bottomlabel
  ;
 syntax RecordNodeShape
         = 
-        
+        ()
  ;
 syntax ArrowShape
         = 
-        ANY clipping ANY isPlain ANY size
+        String clipping Boolean isPlain Integer size
  ;

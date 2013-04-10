@@ -1,10 +1,12 @@
 NamedElement:
-        EPSILON
+        DataBase
+NamedElement:
+        Table
 DataBase:
-        SGBDname::ANY tables::ANY+
+        SGBDname::String tables::Table+
 Table:
-        database::ANY tuples::ANY+
+        database::DataBase tuples::Tuple+
 Tuple:
-        owner::ANY elements::ANY+
+        owner::Table elements::TupleElement+
 TupleElement:
-        tuple::ANY value::ANY
+        tuple::Tuple value::String

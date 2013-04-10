@@ -4,12 +4,18 @@ exports
   sorts
         ModelElement Attribute Relationship Generalization Association 
   context-free syntax
-        level::ANY name::ANY potency::ANY hasClass::ANY classElement::ANY+ elementTarget::ANY elementSource::ANY attributes::ANY+ attType::ANY -> ModelElement
+        Attribute -> ModelElement
 
-        type::ANY -> Attribute
+        Relationship -> ModelElement
 
-         -> Relationship
+        level::Integer name::String potency::String hasClass::ModelElement classElement::ModelElement+ elementTarget::Relationship elementSource::Relationship attributes::Attribute+ attType::Attribute -> ModelElement
 
-        target::ANY source::ANY -> Generalization
+        type::ModelElement -> Attribute
 
-        maxSource::ANY maxTarget::ANY minSource::ANY minTarget::ANY -> Association
+        Generalization -> Relationship
+
+        Association -> Relationship
+
+        target::ModelElement source::ModelElement -> Generalization
+
+        maxSource::String maxTarget::String minSource::String minTarget::String -> Association

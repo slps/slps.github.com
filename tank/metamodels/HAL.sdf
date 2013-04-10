@@ -4,75 +4,99 @@ exports
   sorts
         HAL Connexion Entry Article ArticleRecent ArticleRetro Notice ReferenceBiblioType ArtRevueType WorkshopType ArtOuvrageType OuvrageType TheseType BrevetType AutreType ArtRevue ArtJournal Workshop Communication Conference ArtOuvrage Ouvrage Brevet Autre These MetaType MetaArtType MetaArtNoticeType AutLabType Auteur Laboratoire AbstractMetaLab MetaLab AffiliationType TamponType DateVisibleEnum AbstractDepot Depot FormatEnum DepotWeb FormatWebEnum AbstractDepotType DepotsType WebLink Server 
   context-free syntax
-        connexion::ANY contents::ANY+ -> HAL
+        connexion::Connexion contents::Entry+ -> HAL
 
-        login::ANY password::ANY -> Connexion
+        login::String password::String -> Connexion
 
-         -> Entry
+        Article -> Entry
 
-         -> Article
+        Notice -> Entry
 
-        fichiers::ANY -> ArticleRecent
+        ArticleRecent -> Article
 
-        dateRedaction::ANY fichiers::ANY -> ArticleRetro
+        ArticleRetro -> Article
 
-        metaArtNotice::ANY -> Notice
+        fichiers::DepotsType -> ArticleRecent
 
-         -> ReferenceBiblioType
+        dateRedaction::String fichiers::AbstractDepot -> ArticleRetro
 
-         -> ArtRevueType
+        metaArtNotice::MetaArtNoticeType -> Notice
 
-         -> WorkshopType
+        ArtRevueType -> ReferenceBiblioType
 
-         -> ArtOuvrageType
+        WorkshopType -> ReferenceBiblioType
 
-         -> OuvrageType
+        ArtOuvrageType -> ReferenceBiblioType
 
-         -> TheseType
+        OuvrageType -> ReferenceBiblioType
 
-         -> BrevetType
+        TheseType -> ReferenceBiblioType
 
-         -> AutreType
+        BrevetType -> ReferenceBiblioType
 
-        urldoi::ANY journal::ANY volume::ANY page::ANY annee::ANY -> ArtRevue
+        AutreType -> ReferenceBiblioType
 
-        urldoi::ANY journal::ANY volume::ANY page::ANY annee::ANY -> ArtJournal
+        ArtRevue -> ArtRevueType
 
-        urldoi::ANY titconf::ANY ville::ANY pays::ANY edcom::ANY annee::ANY page::ANY edsci::ANY serie::ANY -> Workshop
+        ArtJournal -> ArtRevueType
 
-        urldoi::ANY titconf::ANY ville::ANY pays::ANY edcom::ANY annee::ANY page::ANY edsci::ANY serie::ANY -> Communication
+        Workshop -> WorkshopType
 
-        urldoi::ANY titconf::ANY ville::ANY pays::ANY edcom::ANY annee::ANY page::ANY edsci::ANY serie::ANY -> Conference
+        Communication -> WorkshopType
 
-        urldoi::ANY titouv::ANY edcom::ANY annee::ANY edsci::ANY serie::ANY -> ArtOuvrage
+        Conference -> WorkshopType
 
-        urldoi::ANY edcom::ANY annee::ANY page::ANY -> Ouvrage
+        ArtOuvrage -> ArtOuvrageType
 
-        datebrevet::ANY numbrevet::ANY page::ANY pays::ANY -> Brevet
+        Ouvrage -> OuvrageType
 
-        urldoi::ANY annee::ANY description::ANY -> Autre
+        These -> TheseType
 
-        orgthe::ANY niveau::ANY defencedate::ANY directeur::ANY codirecteur::ANY -> These
+        Brevet -> BrevetType
 
-         -> MetaType
+        Autre -> AutreType
 
-        domain::ANY abstract::ANY referenceBiblio::ANY -> MetaArtType
+        urldoi::String journal::String volume::String page::String annee::String -> ArtRevue
 
-        domain::ANY abstract::ANY referenceBiblio::ANY -> MetaArtNoticeType
+        urldoi::String journal::String volume::String page::String annee::String -> ArtJournal
 
-        auteurs::ANY+ laboratoires::ANY+ -> AutLabType
+        urldoi::String titconf::String ville::String pays::String edcom::String annee::String page::String edsci::String serie::String -> Workshop
 
-        nom::ANY prenom::ANY autrePrenom::ANY email::ANY urlPerso::ANY lab::ANY -> Auteur
+        urldoi::String titconf::String ville::String pays::String edcom::String annee::String page::String edsci::String serie::String -> Communication
 
-        id::ANY metas::ANY -> Laboratoire
+        urldoi::String titconf::String ville::String pays::String edcom::String annee::String page::String edsci::String serie::String -> Conference
 
-         -> AbstractMetaLab
+        urldoi::String titouv::String edcom::String annee::String edsci::String serie::String -> ArtOuvrage
 
-        id::ANY -> MetaLab
+        urldoi::String edcom::String annee::String page::String -> Ouvrage
 
-        institution::ANY+ prive::ANY+ ecole::ANY+ universite::ANY+ -> AffiliationType
+        datebrevet::String numbrevet::String page::String pays::String -> Brevet
 
-        id::ANY -> TamponType
+        urldoi::String annee::String description::String -> Autre
+
+        orgthe::String niveau::String defencedate::String directeur::String codirecteur::String -> These
+
+        MetaArtType -> MetaType
+
+        MetaArtNoticeType -> MetaType
+
+        domain::String abstract::String referenceBiblio::ReferenceBiblioType -> MetaArtType
+
+        domain::String abstract::String referenceBiblio::ReferenceBiblioType -> MetaArtNoticeType
+
+        auteurs::Auteur+ laboratoires::Laboratoire+ -> AutLabType
+
+        nom::String prenom::String autrePrenom::String email::String urlPerso::String lab::Laboratoire -> Auteur
+
+        id::Integer metas::AbstractMetaLab -> Laboratoire
+
+        MetaLab -> AbstractMetaLab
+
+        id::String -> MetaLab
+
+        institution::String+ prive::String+ ecole::String+ universite::String+ -> AffiliationType
+
+        id::String -> TamponType
 
         15J:: -> DateVisibleEnum
         1M:: -> DateVisibleEnum
@@ -81,9 +105,11 @@ exports
         2A:: -> DateVisibleEnum
         JAMAIS:: -> DateVisibleEnum
 
-         -> AbstractDepot
+        Depot -> AbstractDepot
 
-        format::ANY -> Depot
+        DepotWeb -> AbstractDepot
+
+        format::FormatEnum -> Depot
 
         PDF:: -> FormatEnum
         TEX:: -> FormatEnum
@@ -93,16 +119,18 @@ exports
         PS:: -> FormatEnum
         ANNEX:: -> FormatEnum
 
-        format::ANY -> DepotWeb
+        format::FormatWebEnum -> DepotWeb
 
         XML:: -> FormatWebEnum
         HTML:: -> FormatWebEnum
         HTM:: -> FormatWebEnum
 
-         -> AbstractDepotType
+        DepotsType -> AbstractDepotType
 
-        depots::ANY+ -> DepotsType
+        WebLink -> AbstractDepotType
 
-        identifiant::ANY server::ANY -> WebLink
+        depots::AbstractDepot+ -> DepotsType
+
+        identifiant::String server::Server -> WebLink
 
          -> Server

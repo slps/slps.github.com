@@ -3,53 +3,54 @@ module PetriNet_extended
 
 syntax LocatedElement
         = 
-        ()
+        NamedElement
  ;
 syntax NamedElement
-        = 
-        ()
+        = PetriNet
+        | Element
+        | Arc
  ;
 syntax PetriNet
         = 
-        ANY elements+ ANY arcs+ ANY execs+
+        Element elements+ Arc arcs+ Execution execs+
  ;
 syntax Element
-        = 
-        ()
+        = Place
+        | Transition
  ;
 syntax Place
         = 
-        ANY incomingArc+ ANY outgoingArc+
+        TransitionToPlace incomingArc+ PlaceToTransition outgoingArc+
  ;
 syntax Transition
         = 
-        ANY incomingArc+ ANY outgoingArc+
+        PlaceToTransition incomingArc+ TransitionToPlace outgoingArc+
  ;
 syntax Arc
-        = 
-        ()
+        = PlaceToTransition
+        | TransitionToPlace
  ;
 syntax PlaceToTransition
         = 
-        ANY from ANY to
+        Place from Transition to
  ;
 syntax TransitionToPlace
         = 
-        ANY from ANY to
+        Transition from Place to
  ;
 syntax Execution
         = 
-        ANY net ANY markings+ ANY movements+
+        PetriNet net Marking markings+ Movement movements+
  ;
 syntax Token
         = 
-        ANY placedAt ANY marking
+        Place placedAt Marking marking
  ;
 syntax Marking
         = 
-        ANY exec ANY tokens+
+        Execution exec Token tokens+
  ;
 syntax Movement
         = 
-        ANY exec ANY fire ANY source ANY target
+        Execution exec Transition fire Marking source Marking target
  ;

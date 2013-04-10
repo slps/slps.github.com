@@ -4,17 +4,17 @@ exports
   sorts
         DateType ControlsSequence Control ControlType BugTracking Bug BugStatusType 
   context-free syntax
-        day::ANY month::ANY year::ANY -> DateType
+        day::Integer month::Integer year::Integer -> DateType
 
-        controls::ANY+ -> ControlsSequence
+        controls::Control+ -> ControlsSequence
 
-        c_controlsSequence::ANY responsible::ANY component::ANY developmentPhase::ANY scope::ANY date::ANY controlledElt::ANY eltRef::ANY eltAuthor::ANY formRef::ANY type::ANY -> Control
+        c_controlsSequence::ControlsSequence responsible::String component::String developmentPhase::String scope::String date::DateType controlledElt::String eltRef::String eltAuthor::String formRef::String type::ControlType -> Control
 
-         -> ControlType
+        BugTracking -> ControlType
 
-        bugs::ANY+ -> BugTracking
+        bugs::Bug+ -> BugTracking
 
-        b_bugTracking::ANY number::ANY componentVersion::ANY description::ANY status::ANY originator::ANY responsible::ANY commentsAnswers::ANY openDate::ANY closeDate::ANY -> Bug
+        b_bugTracking::BugTracking number::Integer componentVersion::String description::String status::BugStatusType originator::String responsible::String commentsAnswers::String openDate::String closeDate::String -> Bug
 
         bst_open:: -> BugStatusType
         bst_closed:: -> BugStatusType

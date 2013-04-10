@@ -4,30 +4,50 @@ exports
   sorts
         Element Program Process State Transition Trans Strans Transall Guard Action Network Channel Message Variable 
   context-free syntax
-         -> Element
+        Program -> Element
 
-        processes::ANY+ networks::ANY+ -> Program
+        Process -> Element
 
-        minId::ANY maxId::ANY instancesNb::ANY states::ANY+ transitions::ANY+ initial::ANY variables::ANY+ connectedTo::ANY+ -> Process
+        State -> Element
 
-        isInitial::ANY incoming::ANY+ outgoing::ANY+ -> State
+        Guard -> Element
 
-         -> Transition
+        Action -> Element
 
-        waitFor::ANY -> Trans
+        Network -> Element
 
-        guard::ANY action::ANY source::ANY target::ANY -> Strans
+        Channel -> Element
 
-        waitFor::ANY -> Transall
+        Message -> Element
 
-        name::ANY -> Guard
+        Variable -> Element
 
-        name::ANY -> Action
+        processes::Process+ networks::Network+ -> Program
 
-        channels::ANY+ -> Network
+        minId::Integer maxId::Integer instancesNb::Integer states::State+ transitions::Transition+ initial::Action variables::Variable+ connectedTo::Network+ -> Process
 
-        messages::ANY+ source::ANY target::ANY -> Channel
+        isInitial::Boolean incoming::Transition+ outgoing::Transition+ -> State
 
-        name::ANY -> Message
+        Trans -> Transition
 
-        type::ANY initValue::ANY -> Variable
+        Strans -> Transition
+
+        Transall -> Transition
+
+        waitFor::Message -> Trans
+
+        guard::Guard action::Action source::State target::State -> Strans
+
+        waitFor::Message -> Transall
+
+        name::String -> Guard
+
+        name::String -> Action
+
+        channels::Channel+ -> Network
+
+        messages::Message+ source::Process target::Process -> Channel
+
+        name::String -> Message
+
+        type::String initValue::String -> Variable

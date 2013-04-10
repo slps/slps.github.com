@@ -4,50 +4,68 @@ exports
   sorts
         QoSComponent QoSProfile QoSContraints Operation CompoundProfile SimpleProfile ProfileTransition QoSStatement SingleQoSStatement CoumpoundQoSStatement QoSContraint QualificationKind QoSCharacteristic BooleanExpression MappingExpression StatisticalAttributekindKind Parameter DataType Domain DirectionKind Numeric Set Enumeration StringSet 
   context-free syntax
-        profile::ANY+ operations::ANY -> QoSComponent
+        profile::QoSProfile+ operations::Operation -> QoSComponent
 
-         -> QoSProfile
+        CompoundProfile -> QoSProfile
+
+        SimpleProfile -> QoSProfile
 
          -> QoSContraints
 
          -> Operation
 
-        profileTransition::ANY+ simpleProfile::ANY+ -> CompoundProfile
+        profileTransition::ProfileTransition+ simpleProfile::SimpleProfile+ -> CompoundProfile
 
-        compoundProfile::ANY use::ANY provides::ANY -> SimpleProfile
+        compoundProfile::CompoundProfile use::QoSStatement provides::QoSStatement -> SimpleProfile
 
-        operations::ANY+ from::ANY to::ANY compoundProfile::ANY -> ProfileTransition
+        operations::Operation+ from::SimpleProfile to::SimpleProfile compoundProfile::CompoundProfile -> ProfileTransition
 
-        contraints::ANY+ relation::ANY parameter::ANY+ -> QoSStatement
+        SingleQoSStatement -> QoSStatement
 
-        contraint::ANY -> SingleQoSStatement
+        CoumpoundQoSStatement -> QoSStatement
 
-        statement::ANY -> CoumpoundQoSStatement
+        contraints::QoSContraints+ relation::CoumpoundQoSStatement parameter::Parameter+ -> QoSStatement
 
-        qualification::ANY -> QoSContraint
+        contraint::QoSContraint -> SingleQoSStatement
 
-        value::ANY -> QualificationKind
+        statement::QoSStatement -> CoumpoundQoSStatement
 
-        invariant::ANY parallel_and_composition::ANY parallel_or_composition::ANY sequential_composition::ANY values::ANY statisticalAttribute::ANY+ parameter::ANY domain::ANY -> QoSCharacteristic
+        qualification::QualificationKind -> QoSContraint
 
-        value::ANY -> BooleanExpression
+        value::String -> QualificationKind
 
-        value::ANY -> MappingExpression
+        QoSContraints -> QoSCharacteristic
+
+        QualificationKind -> QoSCharacteristic
+
+        invariant::BooleanExpression parallel_and_composition::MappingExpression parallel_or_composition::MappingExpression sequential_composition::MappingExpression values::MappingExpression statisticalAttribute::StatisticalAttributekindKind+ parameter::Parameter domain::Domain -> QoSCharacteristic
+
+        value::String -> BooleanExpression
+
+        value::String -> MappingExpression
 
          -> StatisticalAttributekindKind
 
          -> Parameter
 
-         -> DataType
+        Domain -> DataType
 
-        direction::ANY -> Domain
+        Domain -> DataType
 
-        value::ANY -> DirectionKind
+        Numeric -> Domain
+
+        Set -> Domain
+
+        Enumeration -> Domain
+
+        direction::DirectionKind -> Domain
+
+        value::String -> DirectionKind
 
          -> Numeric
 
-        stringSet::ANY+ -> Set
+        stringSet::StringSet+ -> Set
 
          -> Enumeration
 
-        string::ANY+ -> StringSet
+        string::String+ -> StringSet

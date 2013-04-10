@@ -13,37 +13,35 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable XAML-Perspective 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Jean-Sébastien Sottet, <code>XAML-Perspective.ecore</code>, 2010/01/30.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>16</strong></li><li>Number of top alternatives: <strong>16</strong></li><li>Number of defined nonterminal symbols: <strong>16</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>16</strong>: <code><a href="#Page" class="nt">Page</a>, <a href="#NameSpace" class="nt">NameSpace</a>, <a href="#PageResource" class="nt">PageResource</a>, <a href="#GraphicalContainer" class="nt">GraphicalContainer</a>, <a href="#WinFXElement" class="nt">WinFXElement</a>, <a href="#PerspectiveElement" class="nt">PerspectiveElement</a>, <a href="#ResourceDictionary" class="nt">ResourceDictionary</a>, <a href="#Grid" class="nt">Grid</a>, <a href="#Object3D" class="nt">Object3D</a>, <a href="#Workshop3D" class="nt">Workshop3D</a>, <a href="#Element3D" class="nt">Element3D</a>, <a href="#UI3Delement" class="nt">UI3Delement</a>, <a href="#XyzAxis3D" class="nt">XyzAxis3D</a>, <a href="#Box3D" class="nt">Box3D</a>, <a href="#Square3D" class="nt">Square3D</a>, <a href="#Name" class="nt">Name</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Page">Page</a>:
-        <span class="sel">xmlns</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">title</span>::<span class="meta">any</span> <span class="sel">graphContainer</span>::<span class="meta">any</span> <span class="sel">pageResources</span>::<span class="meta">any</span>
+				</script></head><body><h1 class="l">Browsable XAML-Perspective 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Jean-Sébastien Sottet, <code>XAML-Perspective.ecore</code>, 2010/01/30.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>15</strong></li><li>Number of top alternatives: <strong>15</strong></li><li>Number of defined nonterminal symbols: <strong>14</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>6</strong>: <code><a href="#Page" class="nt">Page</a>, <a href="#WinFXElement" class="nt">WinFXElement</a>, <a href="#Workshop3D" class="nt">Workshop3D</a>, <a href="#XyzAxis3D" class="nt">XyzAxis3D</a>, <a href="#Box3D" class="nt">Box3D</a>, <a href="#Square3D" class="nt">Square3D</a></code></li><li>Bottom nonterminal symbols: <strong>3</strong>: <code><a href="#String" class="nt">String</a>, <a href="#Object3D" class="nt">Object3D</a>, <a href="#Double" class="nt">Double</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Page">Page</a>:
+        <span class="sel">xmlns</span>::<a class="nt" href="#NameSpace">NameSpace</a><span class="meta">+</span> <span class="sel">title</span>::<a class="nt" href="#String">String</a> <span class="sel">graphContainer</span>::<a class="nt" href="#GraphicalContainer">GraphicalContainer</a> <span class="sel">pageResources</span>::<a class="nt" href="#PageResource">PageResource</a>
 </pre><pre><a class="nt" name="NameSpace">NameSpace</a>:
-        <span class="sel">namespace</span>::<span class="meta">any</span> <span class="sel">identifier</span>::<span class="meta">any</span>
+        <span class="sel">namespace</span>::<a class="nt" href="#String">String</a> <span class="sel">identifier</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="PageResource">PageResource</a>:
-        <span class="sel">dictionaries</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">dictionaries</span>::<a class="nt" href="#ResourceDictionary">ResourceDictionary</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="GraphicalContainer">GraphicalContainer</a>:
-        ε
+        <a class="nt" href="#Grid">Grid</a>
 </pre><pre><a class="nt" name="WinFXElement">WinFXElement</a>:
-        ε
-</pre><pre><a class="nt" name="PerspectiveElement">PerspectiveElement</a>:
-        ε
+        <a class="nt" href="#Name">Name</a>
 </pre><pre><a class="nt" name="ResourceDictionary">ResourceDictionary</a>:
-        <span class="sel">source</span>::<span class="meta">any</span>
+        <span class="sel">source</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Grid">Grid</a>:
-        <span class="sel">object3D</span>::<span class="meta">any</span><span class="meta">+</span>
-</pre><pre><a class="nt" name="Object3D">Object3D</a>:
-        ε
+        <span class="sel">object3D</span>::<a class="nt" href="#Object3D">Object3D</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Workshop3D">Workshop3D</a>:
-        <span class="sel">elements3D</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">elements3D</span>::<a class="nt" href="#Element3D">Element3D</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Element3D">Element3D</a>:
-        ε
+        <a class="nt" href="#UI3Delement">UI3Delement</a>
+</pre><pre><a class="nt" name="Element3D">Element3D</a>:
+        <a class="nt" href="#UI3Delement">UI3Delement</a>
 </pre><pre><a class="nt" name="UI3Delement">UI3Delement</a>:
-        <span class="sel">transform</span>::<span class="meta">any</span> <span class="sel">material</span>::<span class="meta">any</span> <span class="sel">name</span>::<span class="meta">any</span>
+        <span class="sel">transform</span>::<a class="nt" href="#String">String</a> <span class="sel">material</span>::<a class="nt" href="#String">String</a> <span class="sel">name</span>::<a class="nt" href="#Name">Name</a>
 </pre><pre><a class="nt" name="XyzAxis3D">XyzAxis3D</a>:
-        <span class="sel">length</span>::<span class="meta">any</span>
+        <span class="sel">length</span>::<a class="nt" href="#Double">Double</a>
 </pre><pre><a class="nt" name="Box3D">Box3D</a>:
         ε
 </pre><pre><a class="nt" name="Square3D">Square3D</a>:
         ε
 </pre><pre><a class="nt" name="Name">Name</a>:
-        <span class="sel">name</span>::<span class="meta">any</span>
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

@@ -4,96 +4,144 @@ exports
   sorts
         MaudeSpec MaudeTopEl ModExpression InstModExp RenModExp CompModExp ModuleIdModExp TheoryIdModExp Parameter Theory FTheory STheory Module FModule SModule ModElement ModImportation ImportationMode Type Sort Kind SubsortRel Operation Statement Membership Equation Rule Condition EquationalCond RewriteCond MembershipCond BooleanCond MatchingCond EqualCond Term Constant RecTerm Variable View ViewMapping RenMapping TermMapping SortMapping OpTypedMapping OpMapping LabelMapping 
   context-free syntax
-        els::ANY+ printableEls::ANY+ -> MaudeSpec
+        els::MaudeTopEl+ printableEls::MaudeTopEl+ -> MaudeSpec
 
-         -> MaudeTopEl
+        Theory -> MaudeTopEl
 
-         -> ModExpression
+        Module -> MaudeTopEl
 
-        modExp::ANY views::ANY+ -> InstModExp
+        View -> MaudeTopEl
 
-        modExp::ANY renamings::ANY+ -> RenModExp
+        InstModExp -> ModExpression
 
-        modExps::ANY -> CompModExp
+        RenModExp -> ModExpression
 
-        module::ANY -> ModuleIdModExp
+        CompModExp -> ModExpression
 
-        theory::ANY -> TheoryIdModExp
+        ModuleIdModExp -> ModExpression
 
-        label::ANY modExp::ANY -> Parameter
+        TheoryIdModExp -> ModExpression
 
-         -> Theory
+        Parameter -> ModExpression
 
-        els::ANY+ -> FTheory
+        modExp::ModExpression views::View+ -> InstModExp
 
-        els::ANY+ -> STheory
+        modExp::ModExpression renamings::RenMapping+ -> RenModExp
 
-         -> Module
+        modExps::ModExpression -> CompModExp
 
-        els::ANY+ params::ANY+ -> FModule
+        module::Module -> ModuleIdModExp
 
-        els::ANY+ params::ANY+ -> SModule
+        theory::Theory -> TheoryIdModExp
 
-         -> ModElement
+        label::String modExp::ModExpression -> Parameter
 
-        imports::ANY mode::ANY -> ModImportation
+        FTheory -> Theory
+
+        STheory -> Theory
+
+        els::ModElement+ -> FTheory
+
+        els::ModElement+ -> STheory
+
+        FModule -> Module
+
+        SModule -> Module
+
+        els::ModElement+ params::Parameter+ -> FModule
+
+        els::ModElement+ params::Parameter+ -> SModule
+
+        ModImportation -> ModElement
+
+        SubsortRel -> ModElement
+
+        Operation -> ModElement
+
+        Statement -> ModElement
+
+        imports::ModExpression mode::ImportationMode -> ModImportation
 
         protecting:: -> ImportationMode
         including:: -> ImportationMode
         extending:: -> ImportationMode
 
-         -> Type
+        Kind -> Type
 
-        subsortRels::ANY+ supersortRels::ANY+ kind::ANY -> Sort
+        subsortRels::SubsortRel+ supersortRels::SubsortRel+ kind::Kind -> Sort
 
-        sorts::ANY+ -> Kind
+        sorts::Sort+ -> Kind
 
-        subsorts::ANY+ supersorts::ANY+ -> SubsortRel
+        subsorts::Sort+ supersorts::Sort+ -> SubsortRel
 
-        name::ANY coarity::ANY arity::ANY+ atts::ANY+ -> Operation
+        name::String coarity::Type arity::Type+ atts::String+ -> Operation
 
-         -> Statement
+        Membership -> Statement
 
-        term::ANY sort::ANY -> Membership
+        Equation -> Statement
 
-        lhs::ANY rhs::ANY -> Equation
+        Rule -> Statement
 
-        lhs::ANY rhs::ANY -> Rule
+        term::Term sort::Sort -> Membership
 
-         -> Condition
+        lhs::Term rhs::Term -> Equation
 
-         -> EquationalCond
+        lhs::Term rhs::Term -> Rule
 
-        rhs::ANY -> RewriteCond
+        EquationalCond -> Condition
 
-        rhs::ANY -> MembershipCond
+        RewriteCond -> Condition
+
+        MembershipCond -> EquationalCond
+
+        BooleanCond -> EquationalCond
+
+        MatchingCond -> EquationalCond
+
+        EqualCond -> EquationalCond
+
+        rhs::Term -> RewriteCond
+
+        rhs::Sort -> MembershipCond
 
          -> BooleanCond
 
-        rhs::ANY -> MatchingCond
+        rhs::Term -> MatchingCond
 
-        rhs::ANY -> EqualCond
+        rhs::Term -> EqualCond
 
-         -> Term
+        Constant -> Term
 
-        op::ANY -> Constant
+        RecTerm -> Term
 
-        op::ANY args::ANY+ -> RecTerm
+        Variable -> Term
 
-        name::ANY -> Variable
+        op::String -> Constant
 
-        from::ANY to::ANY els::ANY+ -> View
+        op::String args::Term+ -> RecTerm
 
-         -> ViewMapping
+        name::String -> Variable
 
-         -> RenMapping
+        from::ModExpression to::ModExpression els::ViewMapping+ -> View
 
-        from::ANY to::ANY -> TermMapping
+        RenMapping -> ViewMapping
 
-        from::ANY to::ANY -> SortMapping
+        TermMapping -> ViewMapping
 
-        from::ANY to::ANY atts::ANY+ -> OpTypedMapping
+        SortMapping -> RenMapping
 
-        from::ANY to::ANY -> OpMapping
+        OpTypedMapping -> RenMapping
 
-        from::ANY to::ANY -> LabelMapping
+        OpMapping -> RenMapping
+
+        LabelMapping -> RenMapping
+
+        from::Term to::Term -> TermMapping
+
+        from::Sort to::String -> SortMapping
+
+        from::Operation to::String atts::String+ -> OpTypedMapping
+
+        from::Operation to::String -> OpMapping
+
+        from::String to::String -> LabelMapping

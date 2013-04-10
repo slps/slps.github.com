@@ -4,38 +4,62 @@ exports
   sorts
         ModelElement VisualModelElement Point Model ActiveObjectClass Connector EmbeddedObject ActiveObjectClassRef Parameter Shape EmbeddedObjectPresentation Experiment SimulationExperiment Control Button Frame Text Font 
   context-free syntax
-        id::ANY name::ANY excludeFromBuild::ANY -> ModelElement
+        VisualModelElement -> ModelElement
 
-        position::ANY label::ANY publicFlag::ANY presentationFlag::ANY showLabel::ANY -> VisualModelElement
+        Model -> ModelElement
 
-        x::ANY y::ANY -> Point
+        ActiveObjectClass -> ModelElement
 
-        engineVersion::ANY javaPackageName::ANY activeObjectClasses::ANY+ experiments::ANY+ -> Model
+        Experiment -> ModelElement
 
-        clientAreaTopLeft::ANY presentationTopGroupPersistent::ANY iconTopGroupPersistent::ANY generic::ANY genericParameters::ANY agent::ANY environmentDefinesInitialLocation::ANY connectors::ANY+ embeddedObjects::ANY+ shapes::ANY+ -> ActiveObjectClass
+        id::Integer name::String excludeFromBuild::Boolean -> ModelElement
 
-        sourceEmbeddedObject::ANY sourceConnectableName::ANY targetEmbeddedObject::ANY targetConnectableName::ANY points::ANY+ -> Connector
+        Connector -> VisualModelElement
 
-        presentation::ANY activeObjectClass::ANY genericParametersSubstitute::ANY parameters::ANY+ -> EmbeddedObject
+        EmbeddedObject -> VisualModelElement
 
-        packageName::ANY className::ANY -> ActiveObjectClassRef
+        Shape -> VisualModelElement
 
-        name::ANY value::ANY -> Parameter
+        Control -> VisualModelElement
 
-        asObject::ANY embeddedIcon::ANY rotation::ANY -> Shape
+        position::Point label::Point publicFlag::Boolean presentationFlag::Boolean showLabel::Boolean -> VisualModelElement
+
+        x::Integer y::Integer -> Point
+
+        engineVersion::Integer javaPackageName::String activeObjectClasses::ActiveObjectClass+ experiments::Experiment+ -> Model
+
+        clientAreaTopLeft::Point presentationTopGroupPersistent::Boolean iconTopGroupPersistent::Boolean generic::Boolean genericParameters::String agent::Boolean environmentDefinesInitialLocation::Boolean connectors::Connector+ embeddedObjects::EmbeddedObject+ shapes::Shape+ -> ActiveObjectClass
+
+        sourceEmbeddedObject::EmbeddedObject sourceConnectableName::String targetEmbeddedObject::EmbeddedObject targetConnectableName::String points::Point+ -> Connector
+
+        presentation::EmbeddedObjectPresentation activeObjectClass::ActiveObjectClassRef genericParametersSubstitute::String parameters::Parameter+ -> EmbeddedObject
+
+        packageName::String className::String -> ActiveObjectClassRef
+
+        name::String value::String -> Parameter
+
+        EmbeddedObjectPresentation -> Shape
+
+        Text -> Shape
+
+        asObject::Boolean embeddedIcon::Boolean rotation::Double -> Shape
 
          -> EmbeddedObjectPresentation
 
-         -> Experiment
+        SimulationExperiment -> Experiment
 
-        activeObjectClass::ANY clientAreaTopLeft::ANY presentationTopGroupPersistent::ANY iconTopGroupPersistent::ANY frame::ANY commandLineArguments::ANY maximumMemory::ANY randomSeed::ANY seedValue::ANY vmArgs::ANY absoluteAccuracy::ANY relativeAccuracy::ANY timeAccuracy::ANY fixedTimeStep::ANY shapes::ANY+ controls::ANY+ parameters::ANY+ enableAdaptiveFrameManagement::ANY enableAntiAliasing::ANY enablePanning::ANY enableZoom::ANY executionMode::ANY cpuRatio::ANY title::ANY framesPerSecond::ANY realTimeScale::ANY uiProperties::ANY+ useCalendar::ANY stopOption::ANY initialDate::ANY initialTime::ANY finalDate::ANY finalTime::ANY modelTimeUnit::ANY -> SimulationExperiment
+        SimulationExperiment -> Experiment
 
-        width::ANY height::ANY asObject::ANY embeddedIcon::ANY fillColor::ANY textColor::ANY enableExpression::ANY actionCode::ANY labelText::ANY font::ANY -> Control
+        activeObjectClass::ActiveObjectClass clientAreaTopLeft::Point presentationTopGroupPersistent::Boolean iconTopGroupPersistent::Boolean frame::Frame commandLineArguments::String maximumMemory::Integer randomSeed::Boolean seedValue::Integer vmArgs::String absoluteAccuracy::Double relativeAccuracy::Double timeAccuracy::Double fixedTimeStep::Double shapes::Shape+ controls::Control+ parameters::Parameter+ enableAdaptiveFrameManagement::Boolean enableAntiAliasing::Boolean enablePanning::Boolean enableZoom::Boolean executionMode::String cpuRatio::String title::String framesPerSecond::String realTimeScale::String uiProperties::Parameter+ useCalendar::Boolean stopOption::String initialDate::String initialTime::String finalDate::String finalTime::String modelTimeUnit::String -> SimulationExperiment
+
+        Button -> Control
+
+        width::Integer height::Integer asObject::Boolean embeddedIcon::Boolean fillColor::Integer textColor::Integer enableExpression::String actionCode::String labelText::String font::Font -> Control
 
          -> Button
 
-        x::ANY y::ANY width::ANY height::ANY -> Frame
+        x::Integer y::Integer width::Integer height::Integer -> Frame
 
-        color::ANY text::ANY font::ANY alignment::ANY -> Text
+        color::Integer text::String font::Font alignment::String -> Text
 
-        name::ANY size::ANY style::ANY -> Font
+        name::String size::Integer style::Integer -> Font

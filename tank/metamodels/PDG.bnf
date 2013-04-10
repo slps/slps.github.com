@@ -1,8 +1,8 @@
 MProgramDependenceGraph:
-        node::ANY
+        node::EnterNode
 EnterNode:
-        name::ANY controlDependenceNodes::ANY+
+        name::String controlDependenceNodes::ExpressionNode+
 ExpressionNode:
-        name::ANY expression::ANY dataDependenceNodes::ANY+ controlDependenceNodes::ANY+
+        name::String expression::Expression dataDependenceNodes::ExpressionNode+ controlDependenceNodes::ExpressionNode+
 Expression:
-        name::ANY isIdentifier::ANY innerExpressions::ANY+
+        name::String isIdentifier::Boolean innerExpressions::Expression+

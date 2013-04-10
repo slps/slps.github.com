@@ -1,48 +1,68 @@
 Dimension:
-        width::ANY heigth::ANY
+        width::Double heigth::Double
 Point:
-        x::ANY y::ANY
+        BezierPoint
+Point:
+        x::Double y::Double
 BezierPoint:
-        controls::ANY
+        controls::Point
 Property:
-        key::ANY value::ANY
+        key::String value::String
 DiagramElement:
-        EPSILON
+        Reference
+DiagramElement:
+        GraphElement
+DiagramElement:
+        LeafElement
 Reference:
-        isIndividualRepresentation::ANY referenced::ANY
+        isIndividualRepresentation::Boolean referenced::DiagramElement
 GraphElement:
-        EPSILON
+        GraphEdge
+GraphElement:
+        GraphNode
 GraphEdge:
-        waypoints::ANY anchors::ANY
+        waypoints::Point anchors::GraphConnector
 GraphNode:
-        size::ANY
+        Diagram
+GraphNode:
+        size::Dimension
 GraphConnector:
-        position::ANY gc_graphElement::ANY graphEdges::ANY+
+        position::Point gc_graphElement::GraphElement graphEdges::GraphEdge+
 DiagramLink:
-        zoom::ANY viewPort::ANY dl_graphElement::ANY dl_diagram::ANY
+        zoom::Double viewPort::Point dl_graphElement::GraphElement dl_diagram::Diagram
 SemanticModelBridge:
-        EPSILON
+        SimpleSemanticModelElement
+SemanticModelBridge:
+        UML1SemanticModelBridge
+SemanticModelBridge:
+        CoreSemanticModelBridge
 Diagram:
-        name::ANY zoom::ANY viewPort::ANY diagramLinks::ANY+ namespace::ANY
+        name::String zoom::Double viewPort::Point diagramLinks::DiagramLink+ namespace::SemanticModelBridge
 SimpleSemanticModelElement:
-        typeInfo::ANY
+        typeInfo::String
 UML1SemanticModelBridge:
-        element::ANY
+        element::CoreElement
 CoreSemanticModelBridge:
-        element::ANY
+        element::ElementsElement
 CoreElement:
         EPSILON
 ElementsElement:
         EPSILON
 LeafElement:
-        EPSILON
+        TextElement
+LeafElement:
+        Image
+LeafElement:
+        GraphicPrimitive
 TextElement:
-        text::ANY
+        text::String
 Image:
-        uri::ANY mimeType::ANY
+        uri::String mimeType::String
 GraphicPrimitive:
-        EPSILON
+        Polyline
+GraphicPrimitive:
+        Ellipse
 Polyline:
-        waypoints::ANY closed::ANY
+        waypoints::Point closed::Boolean
 Ellipse:
-        center::ANY radiusX::ANY radiusY::ANY rotation::ANY startAngle::ANY endAngle::ANY
+        center::Point radiusX::Double radiusY::Double rotation::Double startAngle::Double endAngle::Double

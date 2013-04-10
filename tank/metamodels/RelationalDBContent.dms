@@ -1,5 +1,6 @@
-NamedElement = ;
-DataBase = SGBDname::ANY tables::ANY+ ;
-Table = database::ANY tuples::ANY+ ;
-Tuple = owner::ANY elements::ANY+ ;
-TupleElement = tuple::ANY value::ANY ;
+NamedElement = DataBase ;
+NamedElement = Table ;
+DataBase = SGBDname::String tables::Table+ ;
+Table = database::DataBase tuples::Tuple+ ;
+Tuple = owner::Table elements::TupleElement+ ;
+TupleElement = tuple::Tuple value::String ;

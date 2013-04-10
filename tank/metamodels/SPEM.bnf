@@ -1,27 +1,54 @@
 ArtifactUsageName:
-        isInput::ANY isOutput::ANY hasWorkPerArtifact::ANY artifactKind::ANY workDefinition::ANY
+        isInput::Boolean isOutput::Boolean hasWorkPerArtifact::Boolean artifactKind::ArtifactKind workDefinition::WorkDefinition
 ProcessDefinitionElement:
-        guidances::ANY+ processComponents::ANY+
+        Guidance
+ProcessDefinitionElement:
+        ArtifactKind
+ProcessDefinitionElement:
+        WorkItem
+ProcessDefinitionElement:
+        RoleKind
+ProcessDefinitionElement:
+        Condition
+ProcessDefinitionElement:
+        ProcessComponent
+ProcessDefinitionElement:
+        guidances::Guidance+ processComponents::ProcessComponent+
 Guidance:
-        processDefinitionElements::ANY+
+        processDefinitionElements::ProcessDefinitionElement+
 ArtifactKind:
-        artifactUsageNames::ANY+ responsible::ANY
+        artifactUsageNames::ArtifactUsageName+ responsible::RoleKind
 WorkItem:
-        EPSILON
+        WorkDefinition
+WorkItem:
+        WorkDefinition
 RoleKind:
-        artifactKinds::ANY+
+        artifactKinds::ArtifactKind+
 Condition:
-        EPSILON
+        Goal
+Condition:
+        Precondition
+Condition:
+        Goal
+        Precondition
 ProcessComponent:
-        processDefinitionElements::ANY+
+        processDefinitionElements::ProcessDefinitionElement+
 Goal:
-        workDefinition::ANY
+        workDefinition::WorkDefinition
 Precondition:
-        workDefinition::ANY
+        workDefinition::WorkDefinition
 WorkDefinition:
-        artifactUsageNames::ANY+ goal::ANY precondition::ANY
+        ActivityKind
+WorkDefinition:
+        Iteration
+WorkDefinition:
+        Phase
+WorkDefinition:
+        Lifecycle
+WorkDefinition:
+        artifactUsageNames::ArtifactUsageName+ goal::Goal precondition::Precondition
 ActivityKind:
-        performer::ANY+ assistant::ANY+
+        performer::RoleKind+ assistant::RoleKind+
 Iteration:
         EPSILON
 Phase:

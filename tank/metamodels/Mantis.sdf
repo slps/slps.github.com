@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        RelationshipType MantisRoot IdentifiedElt PrivateElt Issue ValueWithId Person Relationship TimeStampedElt Note Attachment 
+        RelationshipType MantisRoot IdentifiedElt Issue ValueWithId Person Relationship TimeStampedElt Note Attachment 
   context-free syntax
         rt_related to:: -> RelationshipType
         rt_parent of:: -> RelationshipType
@@ -10,22 +10,24 @@ exports
         rt_duplicate of:: -> RelationshipType
         rt_has duplicate:: -> RelationshipType
 
-        issues::ANY+ -> MantisRoot
+        issues::Issue+ -> MantisRoot
 
-         -> IdentifiedElt
+        ValueWithId -> IdentifiedElt
 
-         -> PrivateElt
+        Relationship -> IdentifiedElt
 
-        i_mantisRoot::ANY project::ANY category::ANY priority::ANY severity::ANY status::ANY reporter::ANY summary::ANY description::ANY version::ANY build::ANY platform::ANY os::ANY osVersion::ANY reproducibility::ANY stepsToReproduce::ANY additionalInfo::ANY dateSubmitted::ANY assignedTo::ANY projection::ANY eta::ANY resolution::ANY fixedInVersion::ANY attachments::ANY+ relationships::ANY+ notes::ANY+ lastUpdate::ANY -> Issue
+        i_mantisRoot::MantisRoot project::ValueWithId category::String priority::ValueWithId severity::ValueWithId status::ValueWithId reporter::Person summary::String description::String version::String build::String platform::String os::String osVersion::String reproducibility::ValueWithId stepsToReproduce::String additionalInfo::String dateSubmitted::Integer assignedTo::Person projection::ValueWithId eta::ValueWithId resolution::ValueWithId fixedInVersion::String attachments::Attachment+ relationships::Relationship+ notes::Note+ lastUpdate::Integer -> Issue
 
-        value::ANY -> ValueWithId
+        Person -> ValueWithId
 
-        login::ANY -> Person
+        value::String -> ValueWithId
 
-        type::ANY -> Relationship
+        login::String -> Person
 
-         -> TimeStampedElt
+        type::RelationshipType -> Relationship
 
-        author::ANY text::ANY -> Note
+        Attachment -> TimeStampedElt
 
-        filename::ANY size::ANY contentType::ANY downloadUrl::ANY -> Attachment
+        author::Person text::String -> Note
+
+        filename::String size::Integer contentType::String downloadUrl::String -> Attachment

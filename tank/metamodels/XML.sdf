@@ -4,12 +4,18 @@ exports
   sorts
         Node Attribute Text Element Root 
   context-free syntax
-         -> Node
+        Attribute -> Node
 
-        startLine::ANY startColumn::ANY endLine::ANY endColumn::ANY name::ANY value::ANY parent::ANY -> Attribute
+        Text -> Node
 
-        startLine::ANY startColumn::ANY endLine::ANY endColumn::ANY name::ANY value::ANY parent::ANY -> Text
+        Element -> Node
 
-        children::ANY+ -> Element
+        startLine::Integer startColumn::Integer endLine::Integer endColumn::Integer name::String value::String parent::Element -> Attribute
+
+        startLine::Integer startColumn::Integer endLine::Integer endColumn::Integer name::String value::String parent::Element -> Text
+
+        Root -> Element
+
+        children::Node+ -> Element
 
          -> Root

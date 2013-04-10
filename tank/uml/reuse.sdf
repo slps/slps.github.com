@@ -4,20 +4,37 @@ exports
   sorts
         ReuseContract Dependency ProviderClause Package ReuserClause CompositeProvider BasicProvider CompositeReuser BasicReuser 
   context-free syntax
-        supplier::ANY client::ANY -> ReuseContract
+        supplier::ProviderClause client::ReuserClause -> ReuseContract
 
-        owningDependency::ANY subDependency::ANY+ -> Dependency
+        ReuseContract -> Dependency
 
-         -> ProviderClause
+        owningDependency::Dependency subDependency::Dependency+ -> Dependency
 
-         -> Package
+        CompositeProvider -> ProviderClause
 
-         -> ReuserClause
+        BasicProvider -> ProviderClause
 
-        subcontract::ANY -> CompositeProvider
+        CompositeProvider -> ProviderClause
+        BasicProvider -> ProviderClause
+
+        ProviderClause -> Package
+
+        ReuserClause -> Package
+
+        ProviderClause -> Package
+        ReuserClause -> Package
+
+        CompositeReuser -> ReuserClause
+
+        BasicReuser -> ReuserClause
+
+        CompositeReuser -> ReuserClause
+        BasicReuser -> ReuserClause
+
+        subcontract::ReuseContract -> CompositeProvider
 
          -> BasicProvider
 
-        subreuser::ANY+ -> CompositeReuser
+        subreuser::ReuserClause+ -> CompositeReuser
 
          -> BasicReuser

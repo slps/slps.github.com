@@ -3,27 +3,27 @@ module SoftwareQualityControl
 
 syntax DateType
         = 
-        ANY day ANY month ANY year
+        Integer day Integer month Integer year
  ;
 syntax ControlsSequence
         = 
-        ANY controls+
+        Control controls+
  ;
 syntax Control
         = 
-        ANY c_controlsSequence ANY responsible ANY component ANY developmentPhase ANY scope ANY date ANY controlledElt ANY eltRef ANY eltAuthor ANY formRef ANY type
+        ControlsSequence c_controlsSequence String responsible String component String developmentPhase String scope DateType date String controlledElt String eltRef String eltAuthor String formRef ControlType type
  ;
 syntax ControlType
         = 
-        ()
+        BugTracking
  ;
 syntax BugTracking
         = 
-        ANY bugs+
+        Bug bugs+
  ;
 syntax Bug
         = 
-        ANY b_bugTracking ANY number ANY componentVersion ANY description ANY status ANY originator ANY responsible ANY commentsAnswers ANY openDate ANY closeDate
+        BugTracking b_bugTracking Integer number String componentVersion String description BugStatusType status String originator String responsible String commentsAnswers String openDate String closeDate
  ;
 syntax BugStatusType
         = bst_open: ()

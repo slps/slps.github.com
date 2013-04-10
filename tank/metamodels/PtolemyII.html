@@ -13,35 +13,61 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable PtolemyII 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Hugo Bruneliere, <code>PtolemyII.ecore</code>, 2005/08/03.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>15</strong></li><li>Number of top alternatives: <strong>15</strong></li><li>Number of defined nonterminal symbols: <strong>15</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>15</strong>: <code><a href="#EDataType" class="nt">EDataType</a>, <a href="#NamedObject" class="nt">NamedObject</a>, <a href="#Attribute" class="nt">Attribute</a>, <a href="#Entity" class="nt">Entity</a>, <a href="#Port" class="nt">Port</a>, <a href="#Relation" class="nt">Relation</a>, <a href="#Director" class="nt">Director</a>, <a href="#Parameter" class="nt">Parameter</a>, <a href="#ComponentPort" class="nt">ComponentPort</a>, <a href="#ComponentRelation" class="nt">ComponentRelation</a>, <a href="#ComponentEntity" class="nt">ComponentEntity</a>, <a href="#AtomicActor" class="nt">AtomicActor</a>, <a href="#CompositeEntity" class="nt">CompositeEntity</a>, <a href="#WorkSpace" class="nt">WorkSpace</a>, <a href="#CompositeActor" class="nt">CompositeActor</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="EDataType">EDataType</a>:
-        <span class="sel">value</span>::<span class="meta">any</span>
+				</script></head><body><h1 class="l">Browsable PtolemyII 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Hugo Bruneliere, <code>PtolemyII.ecore</code>, 2005/08/03.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>28</strong></li><li>Number of top alternatives: <strong>28</strong></li><li>Number of defined nonterminal symbols: <strong>15</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#NamedObject" class="nt">NamedObject</a></code></li><li>Bottom nonterminal symbols: <strong>1</strong>: <code><a href="#String" class="nt">String</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="EDataType">EDataType</a>:
+        <span class="sel">value</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="NamedObject">NamedObject</a>:
-        <span class="sel">name</span>::<span class="meta">any</span>
+        <a class="nt" href="#Attribute">Attribute</a>
+</pre><pre><a class="nt" name="NamedObject">NamedObject</a>:
+        <a class="nt" href="#Entity">Entity</a>
+</pre><pre><a class="nt" name="NamedObject">NamedObject</a>:
+        <a class="nt" href="#Port">Port</a>
+</pre><pre><a class="nt" name="NamedObject">NamedObject</a>:
+        <a class="nt" href="#Relation">Relation</a>
+</pre><pre><a class="nt" name="NamedObject">NamedObject</a>:
+        <a class="nt" href="#Director">Director</a>
+</pre><pre><a class="nt" name="NamedObject">NamedObject</a>:
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Attribute">Attribute</a>:
-        <span class="sel">att_container</span>::<span class="meta">any</span> <span class="sel">value</span>::<span class="meta">any</span>
+        <a class="nt" href="#Parameter">Parameter</a>
+</pre><pre><a class="nt" name="Attribute">Attribute</a>:
+        <a class="nt" href="#ComponentEntity">ComponentEntity</a>
+</pre><pre><a class="nt" name="Attribute">Attribute</a>:
+        <span class="sel">att_container</span>::<a class="nt" href="#Entity">Entity</a> <span class="sel">value</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Entity">Entity</a>:
-        <span class="sel">attributes</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">parameters</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">ports</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">attributes</span>::<a class="nt" href="#Attribute">Attribute</a><span class="meta">+</span> <span class="sel">parameters</span>::<a class="nt" href="#Parameter">Parameter</a><span class="meta">+</span> <span class="sel">ports</span>::<a class="nt" href="#Port">Port</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Port">Port</a>:
-        <span class="sel">po_container</span>::<span class="meta">any</span> <span class="sel">links</span>::<span class="meta">any</span><span class="meta">+</span>
+        <a class="nt" href="#ComponentPort">ComponentPort</a>
+</pre><pre><a class="nt" name="Port">Port</a>:
+        <span class="sel">po_container</span>::<a class="nt" href="#Entity">Entity</a> <span class="sel">links</span>::<a class="nt" href="#Relation">Relation</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Relation">Relation</a>:
-        <span class="sel">ports</span>::<span class="meta">any</span><span class="meta">+</span>
+        <a class="nt" href="#ComponentRelation">ComponentRelation</a>
+</pre><pre><a class="nt" name="Relation">Relation</a>:
+        <span class="sel">ports</span>::<a class="nt" href="#Port">Port</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Director">Director</a>:
-        <span class="sel">ca_container</span>::<span class="meta">any</span>
+        <span class="sel">ca_container</span>::<a class="nt" href="#CompositeActor">CompositeActor</a>
 </pre><pre><a class="nt" name="Parameter">Parameter</a>:
-        <span class="sel">pa_container</span>::<span class="meta">any</span> <span class="sel">dataType</span>::<span class="meta">any</span>
+        <span class="sel">pa_container</span>::<a class="nt" href="#Entity">Entity</a> <span class="sel">dataType</span>::<a class="nt" href="#EDataType">EDataType</a>
 </pre><pre><a class="nt" name="ComponentPort">ComponentPort</a>:
         ε
 </pre><pre><a class="nt" name="ComponentRelation">ComponentRelation</a>:
-        <span class="sel">re_container</span>::<span class="meta">any</span>
+        <span class="sel">re_container</span>::<a class="nt" href="#CompositeEntity">CompositeEntity</a>
 </pre><pre><a class="nt" name="ComponentEntity">ComponentEntity</a>:
-        <span class="sel">ce_container</span>::<span class="meta">any</span>
+        <a class="nt" href="#AtomicActor">AtomicActor</a>
+</pre><pre><a class="nt" name="ComponentEntity">ComponentEntity</a>:
+        <a class="nt" href="#CompositeEntity">CompositeEntity</a>
+</pre><pre><a class="nt" name="ComponentEntity">ComponentEntity</a>:
+        <span class="sel">ce_container</span>::<a class="nt" href="#CompositeEntity">CompositeEntity</a>
 </pre><pre><a class="nt" name="AtomicActor">AtomicActor</a>:
         ε
 </pre><pre><a class="nt" name="CompositeEntity">CompositeEntity</a>:
-        <span class="sel">containees</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">relations</span>::<span class="meta">any</span><span class="meta">+</span>
+        <a class="nt" href="#WorkSpace">WorkSpace</a>
+</pre><pre><a class="nt" name="CompositeEntity">CompositeEntity</a>:
+        <a class="nt" href="#CompositeActor">CompositeActor</a>
+</pre><pre><a class="nt" name="CompositeEntity">CompositeEntity</a>:
+        <span class="sel">containees</span>::<a class="nt" href="#ComponentEntity">ComponentEntity</a><span class="meta">+</span> <span class="sel">relations</span>::<a class="nt" href="#ComponentRelation">ComponentRelation</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="WorkSpace">WorkSpace</a>:
         ε
 </pre><pre><a class="nt" name="CompositeActor">CompositeActor</a>:
-        <span class="sel">directors</span>::<span class="meta">any</span>
+        <span class="sel">directors</span>::<a class="nt" href="#Director">Director</a>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

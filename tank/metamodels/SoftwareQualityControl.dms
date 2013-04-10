@@ -1,9 +1,9 @@
-DateType = day::ANY month::ANY year::ANY ;
-ControlsSequence = controls::ANY+ ;
-Control = c_controlsSequence::ANY responsible::ANY component::ANY developmentPhase::ANY scope::ANY date::ANY controlledElt::ANY eltRef::ANY eltAuthor::ANY formRef::ANY type::ANY ;
-ControlType = ;
-BugTracking = bugs::ANY+ ;
-Bug = b_bugTracking::ANY number::ANY componentVersion::ANY description::ANY status::ANY originator::ANY responsible::ANY commentsAnswers::ANY openDate::ANY closeDate::ANY ;
+DateType = day::Integer month::Integer year::Integer ;
+ControlsSequence = controls::Control+ ;
+Control = c_controlsSequence::ControlsSequence responsible::String component::String developmentPhase::String scope::String date::DateType controlledElt::String eltRef::String eltAuthor::String formRef::String type::ControlType ;
+ControlType = BugTracking ;
+BugTracking = bugs::Bug+ ;
+Bug = b_bugTracking::BugTracking number::Integer componentVersion::String description::String status::BugStatusType originator::String responsible::String commentsAnswers::String openDate::String closeDate::String ;
 BugStatusType = bst_open:: ;
 BugStatusType = bst_closed:: ;
 BugStatusType = bst_skipped:: ;

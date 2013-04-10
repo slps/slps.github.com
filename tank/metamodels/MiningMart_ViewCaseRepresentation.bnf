@@ -1,32 +1,57 @@
 Case:
-        name::ANY caseMode::ANY caseInput::ANY documentation::ANY listOfStep::ANY+
+        name::String caseMode::Boolean caseInput::Parameter documentation::String listOfStep::Step+
 Step:
-        name::ANY description::ANY belongsToCase::ANY embedsOperator::ANY predecessors::ANY+ successors::ANY+
+        LoopStep
+Step:
+        MultiStep
+Step:
+        name::String description::String belongsToCase::Case embedsOperator::Operator predecessors::Step+ successors::Step+
 LoopStep:
         EPSILON
 MultiStep:
-        iterationCondition::ANY
+        iterationCondition::String
 Operator:
-        EPSILON
+        FeatureConstruction
+Operator:
+        DataMinStep
+Operator:
+        TimeOperator
+Operator:
+        FeatureSelection
+Operator:
+        MultiRelFeatureConstr
+Operator:
+        RowSelection
 Parameter:
-        name::ANY place::ANY parameterType::ANY belongsToOperator::ANY
+        name::String place::String parameterType::ParameterType belongsToOperator::Operator
 ParameterType:
         Value::EPSILON
         Concept::EPSILON
         RelationShip::EPSILON
         FeatureAttribute::EPSILON
 FeatureConstruction:
-        scalingFactor::ANY
+        Scaling
+FeatureConstruction:
+        Discretization
+FeatureConstruction:
+        scalingFactor::Integer
 DataMinStep:
-        loopable::ANY numberOfInputParameters::ANY numberOfOutputParameters::ANY manual::ANY tool::ANY input::ANY+ output::ANY+ realizes::ANY
+        loopable::Boolean numberOfInputParameters::Integer numberOfOutputParameters::Integer manual::Boolean tool::String input::Parameter+ output::Parameter+ realizes::ExecutionElement
 TimeOperator:
-        loopable::ANY numberOfInputParameters::ANY numberOfOutputParameters::ANY manual::ANY tool::ANY input::ANY+ output::ANY+ realizes::ANY
+        loopable::Boolean numberOfInputParameters::Integer numberOfOutputParameters::Integer manual::Boolean tool::String input::Parameter+ output::Parameter+ realizes::ExecutionElement
 FeatureSelection:
-        loopable::ANY numberOfInputParameters::ANY numberOfOutputParameters::ANY manual::ANY tool::ANY input::ANY+ output::ANY+ realizes::ANY
+        loopable::Boolean numberOfInputParameters::Integer numberOfOutputParameters::Integer manual::Boolean tool::String input::Parameter+ output::Parameter+ realizes::ExecutionElement
 MultiRelFeatureConstr:
-        loopable::ANY numberOfInputParameters::ANY numberOfOutputParameters::ANY manual::ANY tool::ANY input::ANY+ output::ANY+ realizes::ANY
+        Agregation
+MultiRelFeatureConstr:
+        Agregation
 RowSelection:
-        loopable::ANY numberOfInputParameters::ANY numberOfOutputParameters::ANY manual::ANY tool::ANY input::ANY+ output::ANY+ realizes::ANY
+        Segmentation
+RowSelection:
+        Sampling
+RowSelection:
+        Segmentation
+        Sampling
 Agregation:
         EPSILON
 Scaling:
@@ -38,30 +63,63 @@ Segmentation:
 Sampling:
         EPSILON
 ExecutionElement:
-        source::ANY target::ANY
+        MSL-Tool
+ExecutionElement:
+        TransformationGroup
+ExecutionElement:
+        Transformation
+ExecutionElement:
+        source::DataObject target::DataObject
 DataObject:
-        source::ANY target::ANY
+        source::ExecutionElement target::ExecutionElement
 MSL-Tool:
         EPSILON
 TransformationGroup:
-        transformation::ANY+
+        transformation::Transformation+
 Transformation:
-        transformationGroup::ANY
+        Function
+Transformation:
+        StoredProcedure
+Transformation:
+        SQLQuery
+Transformation:
+        transformationGroup::TransformationGroup
 Function:
-        nameOf::ANY signature::ANY
+        nameOf::String signature::String
 StoredProcedure:
-        nameOf::ANY signature::ANY
+        nameOf::String signature::String
 SQLQuery:
         EPSILON
 ModelElement:
-        EPSILON
+        Case
+ModelElement:
+        Step
+ModelElement:
+        Operator
+ModelElement:
+        Classifier
+ModelElement:
+        StructuralFeature
+ModelElement:
+        Case
+        Step
+        Operator
+        Classifier
+        StructuralFeature
 Classifier:
-        EPSILON
+        Class
+Classifier:
+        DataType
+Classifier:
+        Class
+        DataType
 StructuralFeature:
-        EPSILON
+        Attribute
+StructuralFeature:
+        Attribute
 Class:
-        name::ANY attributes::ANY+
+        name::String attributes::Attribute+
 DataType:
-        attribute::ANY
+        attribute::Attribute
 Attribute:
-        class::ANY has::ANY
+        class::Class has::DataType

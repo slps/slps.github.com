@@ -1,9 +1,36 @@
 CDataType:
-        EPSILON
+        CIntegral
+CDataType:
+        CFloating
+CDataType:
+        CBitField
+CDataType:
+        CVoid
+CDataType:
+        CIntegral
+        CFloating
+        CBitField
+        CVoid
 CIntegral:
-        EPSILON
+        CEnumeration
+CIntegral:
+        CInt
+CIntegral:
+        CChar
+CIntegral:
+        CEnumeration
+        CInt
+        CChar
 CFloating:
-        EPSILON
+        CDouble
+CFloating:
+        CFloat
+CFloating:
+        CLongDouble
+CFloating:
+        CDouble
+        CFloat
+        CLongDouble
 CBitField:
         EPSILON
 CVoid:
@@ -11,9 +38,28 @@ CVoid:
 CEnumeration:
         EPSILON
 CInt:
-        EPSILON
+        CUnsignedInt
+CInt:
+        CLong
+CInt:
+        CLongLong
+CInt:
+        CShort
+CInt:
+        CUnsignedInt
+        CLong
+        CLongLong
+        CShort
 CChar:
-        EPSILON
+        CSignedChar
+CChar:
+        CUnsignedChar
+CChar:
+        CWChar
+CChar:
+        CSignedChar
+        CUnsignedChar
+        CWChar
 CDouble:
         EPSILON
 CFloat:
@@ -21,7 +67,15 @@ CFloat:
 CLongDouble:
         EPSILON
 CUnsignedInt:
-        EPSILON
+        UnsignedLong
+CUnsignedInt:
+        UnsignedLongLong
+CUnsignedInt:
+        UnsignedShort
+CUnsignedInt:
+        UnsignedLong
+        UnsignedLongLong
+        UnsignedShort
 CLong:
         EPSILON
 CLongLong:
@@ -41,28 +95,43 @@ UnsignedLongLong:
 UnsignedShort:
         EPSILON
 CClassifier:
-        EPSILON
+        CDataType
+CClassifier:
+        Derived
+CClassifier:
+        CDataType
+        Derived
 Derived:
         EPSILON
 CStructureContents:
-        sc_container::ANY
+        sc_container::CStructured
 CStructured:
-        contains::ANY+
+        CStruct
+CStructured:
+        CUnion
+CStructured:
+        contains::CStructureContents+
 CStruct:
         EPSILON
 CUnion:
         EPSILON
 CSourceText:
-        source::ANY fileName::ANY
+        source::String fileName::String
 CTypedElement:
-        type::ANY source::ANY
+        CParameter
+CTypedElement:
+        type::CClassifier source::CSourceText
 CStructuralFeature:
-        EPSILON
+        CField
+CStructuralFeature:
+        CField
 CField:
         EPSILON
 CParameter:
-        behavioralFeature::ANY
+        behavioralFeature::BehavioralFeature
 BehavioralFeature:
-        parameters::ANY+
+        CFunction
+BehavioralFeature:
+        parameters::CParameter+
 CFunction:
-        isVarArg::ANY
+        isVarArg::Boolean

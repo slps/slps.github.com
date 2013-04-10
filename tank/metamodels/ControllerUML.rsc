@@ -3,23 +3,24 @@ module ControllerUML
 
 syntax ControllerAttribute
         = 
-        controller: ANY
+        controller: Controller
  ;
 syntax Controller
         = 
-        ANY controllerAttribute+ ANY behavior
+        ControllerAttribute controllerAttribute+ StateMachine behavior
  ;
 syntax StateMachine
         = 
-        ANY states+
+        State states+
  ;
 syntax State
-        = 
-        ANY substates+ ANY theContainer ANY outGoing+ ANY incoming+
+        = SubControllerState
+        | ViewState
+        | State substates+ State theContainer StateTransition outGoing+ StateTransition incoming+
  ;
 syntax SubControllerState
         = 
-        controller: ANY
+        controller: Controller
  ;
 syntax ViewState
         = 
@@ -27,7 +28,7 @@ syntax ViewState
  ;
 syntax StateTransition
         = 
-        ANY source ANY target ANY trigger ANY effect
+        State source State target Event trigger StateMachineAction effect
  ;
 syntax StateMachineAction
         = 

@@ -1,48 +1,66 @@
 QoSComponent:
-        profile::ANY+ operations::ANY
+        profile::QoSProfile+ operations::Operation
 QoSProfile:
-        EPSILON
+        CompoundProfile
+QoSProfile:
+        SimpleProfile
 QoSContraints:
         EPSILON
 Operation:
         EPSILON
 CompoundProfile:
-        profileTransition::ANY+ simpleProfile::ANY+
+        profileTransition::ProfileTransition+ simpleProfile::SimpleProfile+
 SimpleProfile:
-        compoundProfile::ANY use::ANY provides::ANY
+        compoundProfile::CompoundProfile use::QoSStatement provides::QoSStatement
 ProfileTransition:
-        operations::ANY+ from::ANY to::ANY compoundProfile::ANY
+        operations::Operation+ from::SimpleProfile to::SimpleProfile compoundProfile::CompoundProfile
 QoSStatement:
-        contraints::ANY+ relation::ANY parameter::ANY+
+        SingleQoSStatement
+QoSStatement:
+        CoumpoundQoSStatement
+QoSStatement:
+        contraints::QoSContraints+ relation::CoumpoundQoSStatement parameter::Parameter+
 SingleQoSStatement:
-        contraint::ANY
+        contraint::QoSContraint
 CoumpoundQoSStatement:
-        statement::ANY
+        statement::QoSStatement
 QoSContraint:
-        qualification::ANY
+        qualification::QualificationKind
 QualificationKind:
-        value::ANY
+        value::String
 QoSCharacteristic:
-        invariant::ANY parallel_and_composition::ANY parallel_or_composition::ANY sequential_composition::ANY values::ANY statisticalAttribute::ANY+ parameter::ANY domain::ANY
+        QoSContraints
+QoSCharacteristic:
+        QualificationKind
+QoSCharacteristic:
+        invariant::BooleanExpression parallel_and_composition::MappingExpression parallel_or_composition::MappingExpression sequential_composition::MappingExpression values::MappingExpression statisticalAttribute::StatisticalAttributekindKind+ parameter::Parameter domain::Domain
 BooleanExpression:
-        value::ANY
+        value::String
 MappingExpression:
-        value::ANY
+        value::String
 StatisticalAttributekindKind:
         EPSILON
 Parameter:
         EPSILON
 DataType:
-        EPSILON
+        Domain
+DataType:
+        Domain
 Domain:
-        direction::ANY
+        Numeric
+Domain:
+        Set
+Domain:
+        Enumeration
+Domain:
+        direction::DirectionKind
 DirectionKind:
-        value::ANY
+        value::String
 Numeric:
         EPSILON
 Set:
-        stringSet::ANY+
+        stringSet::StringSet+
 Enumeration:
         EPSILON
 StringSet:
-        string::ANY+
+        string::String+

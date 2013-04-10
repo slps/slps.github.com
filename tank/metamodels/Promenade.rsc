@@ -26,8 +26,10 @@ syntax Grouping
         ()
  ;
 syntax Precedence
-        = 
-        ANY deprecs+ ANY parbind+
+        = DynPrecedence
+        | DerPrecedence
+        | BasPrecedence
+        | DerPrecedence deprecs+ ParBinding parbind+
  ;
 syntax DynPrecedence
         = 
@@ -35,7 +37,7 @@ syntax DynPrecedence
  ;
 syntax DerPrecedence
         = 
-        ANY precs+ ANY auxTasks+
+        Precedence precs+ MetaTaskOccurence auxTasks+
  ;
 syntax BasPrecedence
         = 
@@ -43,33 +45,34 @@ syntax BasPrecedence
  ;
 syntax MetaTaskOccurence
         = 
-        ANY dprecs+ ANY taskCl+
+        DerPrecedence dprecs+ MetaTask taskCl+
  ;
 syntax ParBinding
         = 
-        ANY inclusion ANY precs+ ANY targetPar ANY sourcePar
+        Boolean inclusion Precedence precs+ ParameterPrec targetPar ParameterPrec sourcePar
  ;
 syntax ParameterPrec
         = 
-        ANY parbindsTar+ ANY parbindsSour+ ANY dstParams+ ANY orParams+
+        ParBinding parbindsTar+ ParBinding parbindsSour+ ParameterPrec dstParams+ ParameterPrec orParams+
  ;
 syntax ModelElement
-        = 
-        ANY dependencyUMLsupp ANY dependencyUMLcli
+        = MetaTaskOccurence
+        | MetaTask
+        | DependancyUML dependencyUMLsupp DependancyUML dependencyUMLcli
  ;
 syntax DependancyUML
         = 
-        ANY suppier+ ANY client+
+        ModelElement suppier+ ModelElement client+
  ;
 syntax MetaTask
         = 
-        ANY params+ ANY occurs+
+        ParameterUML params+ MetaTaskOccurence occurs+
  ;
 syntax ParameterUML
-        = 
-        ANY task ANY doc+
+        = ParameterPrec
+        | MetaTask task MetaDocument doc+
  ;
 syntax MetaDocument
         = 
-        ANY params+
+        ParameterUML params+
  ;

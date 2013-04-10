@@ -3,27 +3,28 @@ module MSProject2
 
 syntax MSPProject
         = 
-        ANY resource+ ANY link+ ANY task+
+        MSPResource resource+ MSPLink link+ MSPTask task+
  ;
 syntax MSPTask
         = 
-        ANY finishDate ANY startDate ANY project ANY superTask ANY subTask+ ANY assignment+ ANY inLink+ ANY outLink+
+        Date finishDate Date startDate MSPProject project MSPTask superTask MSPTask subTask+ MSPAssignment assignment+ MSPLink inLink+ MSPLink outLink+
  ;
 syntax MSPLink
         = 
-        ANY project ANY succ ANY pred
+        MSPProject project MSPTask succ MSPTask pred
  ;
 syntax MSPAssignment
         = 
-        ANY task ANY resource
+        MSPTask task MSPResource resource
  ;
 syntax MSPResource
-        = 
-        ANY cost ANY project ANY assignment+
+        = MSPHumanResource
+        | MSPMachine
+        | Double cost MSPProject project MSPAssignment assignment+
  ;
 syntax MSPHumanResource
         = 
-        email: ANY
+        email: String
  ;
 syntax MSPMachine
         = 
@@ -31,5 +32,5 @@ syntax MSPMachine
  ;
 syntax Date
         = 
-        ANY day ANY month ANY year
+        Integer day Integer month Integer year
  ;

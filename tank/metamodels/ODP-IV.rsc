@@ -3,45 +3,45 @@ module ODP_IV
 
 syntax InvariantSchema
         = 
-        ANY constrainer_AT+ ANY constrainer_ATy+ ANY constrainer_SC+ ANY constrainer_S+ ANY constrainer_IOT+ ANY constrainer_IOTy+
+        ActionTemplate constrainer_AT+ ActionType constrainer_ATy+ StateChange constrainer_SC+ State constrainer_S+ InformationObjectTemplate constrainer_IOT+ InformationObjectType constrainer_IOTy+
  ;
 syntax InformationObjectTemplate
         = 
-        ANY IOT_IO+ ANY IOT_constrainer+
+        InformationObject IOT_IO+ InvariantSchema IOT_constrainer+
  ;
 syntax InformationObjectType
         = 
-        ANY IOTy_IO+ ANY IOTy_constrainer+
+        InformationObject IOTy_IO+ InvariantSchema IOTy_constrainer+
  ;
 syntax InformationObject
         = 
-        ANY describer+ ANY IO_IOT+ ANY IO_IOTy+ ANY IO_A+ ANY IO_S
+        StaticSchema describer+ InformationObjectTemplate IO_IOT+ InformationObjectType IO_IOTy+ Action IO_A+ State IO_S
  ;
 syntax State
         = 
-        ANY change ANY causeSC ANY S_IO ANY S_constrainer+
+        StateChange change StateChange causeSC InformationObject S_IO InvariantSchema S_constrainer+
  ;
 syntax StateChange
         = 
-        ANY startState ANY endState ANY specifier+ ANY cause+ ANY SC_constrainer+
+        State startState State endState DynamicSchema specifier+ Action cause+ InvariantSchema SC_constrainer+
  ;
 syntax DynamicSchema
         = 
-        ANY dsStateChange+
+        StateChange dsStateChange+
  ;
 syntax StaticSchema
         = 
-        ANY locationTime ANY SS_IO+
+        Double locationTime InformationObject SS_IO+
  ;
 syntax Action
         = 
-        ANY effect+ ANY A_AT+ ANY participant+ ANY A_ATy+
+        StateChange effect+ ActionTemplate A_AT+ InformationObject participant+ ActionType A_ATy+
  ;
 syntax ActionType
         = 
-        ANY ATy_A+ ANY ATy_constrainer+
+        Action ATy_A+ InvariantSchema ATy_constrainer+
  ;
 syntax ActionTemplate
         = 
-        ANY AT_A+ ANY AT_constrainer+
+        Action AT_A+ InvariantSchema AT_constrainer+
  ;

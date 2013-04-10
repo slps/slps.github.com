@@ -3,15 +3,15 @@ module QoS_Characteristic
 
 syntax QoSCharacteristic
         = 
-        ANY invariant ANY parallel_and_composition ANY parallel_or_composition ANY sequential_composition ANY values ANY statisticalAttribute+ ANY parameter ANY domain
+        BooleanExpression invariant MappingExpression parallel_and_composition MappingExpression parallel_or_composition MappingExpression sequential_composition MappingExpression values StatisticalAttributekindKind statisticalAttribute+ Parameter parameter Domain domain
  ;
 syntax BooleanExpression
         = 
-        value: ANY
+        value: String
  ;
 syntax MappingExpression
         = 
-        value: ANY
+        value: String
  ;
 syntax StatisticalAttributekindKind
         = 
@@ -23,15 +23,17 @@ syntax Parameter
  ;
 syntax DataType
         = 
-        ()
+        Domain
  ;
 syntax Domain
-        = 
-        direction: ANY
+        = Numeric
+        | Set
+        | Enumeration
+        | direction: DirectionKind
  ;
 syntax DirectionKind
         = 
-        value: ANY
+        value: String
  ;
 syntax Numeric
         = 
@@ -39,7 +41,7 @@ syntax Numeric
  ;
 syntax Set
         = 
-        ANY stringSet+
+        StringSet stringSet+
  ;
 syntax Enumeration
         = 
@@ -47,5 +49,5 @@ syntax Enumeration
  ;
 syntax StringSet
         = 
-        ANY string+
+        String string+
  ;

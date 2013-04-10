@@ -4,22 +4,22 @@ exports
   sorts
         RootFolder RootContainer Actor Transmitter Receiver InputSignal OutputSignal Queue AssociationReceiverQueue AssociationQueueTransmitter 
   context-free syntax
-        rootContainer::ANY+ -> RootFolder
+        rootContainer::RootContainer+ -> RootFolder
 
-        name::ANY position::ANY rootFolder::ANY actor::ANY+ inputSignal::ANY+ outputSignal::ANY+ queue::ANY+ -> RootContainer
+        name::String position::String rootFolder::RootFolder actor::Actor+ inputSignal::InputSignal+ outputSignal::OutputSignal+ queue::Queue+ -> RootContainer
 
-        memory::ANY script::ANY file::ANY WCET::ANY name::ANY position::ANY rootContainer::ANY transmitter::ANY+ receiver::ANY+ -> Actor
+        memory::String script::String file::String WCET::String name::String position::String rootContainer::RootContainer transmitter::Transmitter+ receiver::Receiver+ -> Actor
 
-        name::ANY position::ANY actor::ANY associationQueueTransmitter::ANY -> Transmitter
+        name::String position::String actor::Actor associationQueueTransmitter::AssociationQueueTransmitter -> Transmitter
 
-        name::ANY position::ANY actor::ANY associationReceiverQueue::ANY -> Receiver
+        name::String position::String actor::Actor associationReceiverQueue::AssociationReceiverQueue -> Receiver
 
-        name::ANY position::ANY rootContainer::ANY associationReceiverQueue::ANY -> InputSignal
+        name::String position::String rootContainer::RootContainer associationReceiverQueue::AssociationReceiverQueue -> InputSignal
 
-        name::ANY position::ANY rootContainer::ANY associationQueueTransmitter::ANY -> OutputSignal
+        name::String position::String rootContainer::RootContainer associationQueueTransmitter::AssociationQueueTransmitter -> OutputSignal
 
-        name::ANY position::ANY rootContainer::ANY associationReceiverQueue::ANY associationQueueTransmitter::ANY -> Queue
+        name::String position::String rootContainer::RootContainer associationReceiverQueue::AssociationReceiverQueue associationQueueTransmitter::AssociationQueueTransmitter -> Queue
 
-        srcqueue::ANY+ dstreceiver::ANY+ inputSignal::ANY -> AssociationReceiverQueue
+        srcqueue::Queue+ dstreceiver::Receiver+ inputSignal::InputSignal -> AssociationReceiverQueue
 
-        dstqueue::ANY+ srctransmitter::ANY+ outputSignal::ANY -> AssociationQueueTransmitter
+        dstqueue::Queue+ srctransmitter::Transmitter+ outputSignal::OutputSignal -> AssociationQueueTransmitter

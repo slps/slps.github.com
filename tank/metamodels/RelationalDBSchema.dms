@@ -1,4 +1,6 @@
-NamedElement = ;
-DataBase = SGBDname::ANY tables::ANY+ ;
-Table = database::ANY columns::ANY+ key::ANY+ ;
-Column = dataType::ANY null::ANY defaultValue::ANY owner::ANY keyOf::ANY ;
+NamedElement = DataBase ;
+NamedElement = Table ;
+NamedElement = Column ;
+DataBase = SGBDname::String tables::Table+ ;
+Table = database::DataBase columns::Column+ key::Column+ ;
+Column = dataType::String null::Boolean defaultValue::String owner::Table keyOf::Table ;

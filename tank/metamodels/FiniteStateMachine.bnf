@@ -1,12 +1,18 @@
 MgaObject:
-        name::ANY position::ANY
+        Transition
+MgaObject:
+        State
+MgaObject:
+        StateMachine
+MgaObject:
+        name::String position::String
 Transition:
-        stateMachine::ANY associationStateState::ANY
+        stateMachine::StateMachine associationStateState::AssociationStateState
 State:
-        stateMachine::ANY associationStateStatedst::ANY+ associationStateStatesrc::ANY+
+        stateMachine::StateMachine associationStateStatedst::AssociationStateState+ associationStateStatesrc::AssociationStateState+
 StateMachine:
-        rootFolder::ANY state::ANY+ transition::ANY+
+        rootFolder::RootFolder state::State+ transition::Transition+
 RootFolder:
-        name::ANY rootFolders::ANY+ stateMachine::ANY+
+        name::String rootFolders::RootFolder+ stateMachine::StateMachine+
 AssociationStateState:
-        transition::ANY dstTransition::ANY+ srcTransition::ANY+
+        transition::Transition dstTransition::State+ srcTransition::State+

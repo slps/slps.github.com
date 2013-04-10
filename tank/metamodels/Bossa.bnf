@@ -1,209 +1,297 @@
 BossaProgramm:
-        scheduler::ANY
+        scheduler::Scheduler
 Scheduler:
-        EPSILON
+        NormalScheduler
+Scheduler:
+        VirtualScheduler
 NormalScheduler:
-        schedulerDecl::ANY
+        schedulerDecl::SchedulerDecl
 VirtualScheduler:
-        vschedulerDecl::ANY
+        vschedulerDecl::VSchdulerDecl
 AbstractSchedulerDecl:
-        EPSILON
+        SchedulerDecl
+AbstractSchedulerDecl:
+        VSchdulerDecl
 SchedulerDecl:
-        processDef::ANY
+        processDef::ProcessDef
 VSchdulerDecl:
-        schedulerDef::ANY
+        schedulerDef::SchedulerDef
 ConstDef:
-        id::ANY expr::ANY bossaTypeExpr::ANY
+        id::String expr::Expression bossaTypeExpr::BossaTypeExpr
 TypeDef:
-        enumRang::ANY
+        enumRang::EnumRange
 EnumRange:
-        enumDef::ANY rangeDef::ANY
+        enumDef::EnumDef rangeDef::RangeDef
 EnumDef:
-        theIds::ANY+
+        theIds::String+
 BagId:
-        theValue::ANY
+        theValue::String
 RangeDef:
-        expr::ANY
+        expr::Expression
 ProcessDef:
-        processVarDecl::ANY+
+        processVarDecl::ProcessVarDecl+
 SchedulerDef:
-        processVarDecl::ANY+
+        processVarDecl::ProcessVarDecl+
 ProcessVarDecl:
-        id::ANY processDef::ANY schedulerDef::ANY
+        Timer_ProcessVarDecl
+ProcessVarDecl:
+        System_ProcessVarDecl
+ProcessVarDecl:
+        Normal_ProcessVarDecl
+ProcessVarDecl:
+        id::String processDef::ProcessDef schedulerDef::SchedulerDef
 Timer_ProcessVarDecl:
         EPSILON
 System_ProcessVarDecl:
-        system::ANY typeExpr::ANY
+        system::Boolean typeExpr::TypeExpr
 Normal_ProcessVarDecl:
-        typeExpr::ANY
+        typeExpr::TypeExpr
 HandlerDef:
-        id::ANY scheduler::ANY onHandlerDef::ANY+
+        id::String scheduler::Scheduler onHandlerDef::OnHandlerDef+
 InterfaceDef:
-        composantOfInterFunc::ANY+ scheduler::ANY
+        composantOfInterFunc::ComposantOfInterFunc+ scheduler::Scheduler
 FunctionDef:
-        composantOfInterFunc::ANY+ scheduler::ANY
+        composantOfInterFunc::ComposantOfInterFunc+ scheduler::Scheduler
 Expression:
-        EPSILON
+        Integer_Expression
+Expression:
+        Id_Expression
+Expression:
+        State_Expression
+Expression:
+        True_Expression
+Expression:
+        False_Expression
+Expression:
+        Unop_Expression
+Expression:
+        Etoile_Expression
+Expression:
+        ExpId_Expression
+Expression:
+        Select_Expression
+Expression:
+        FnName_Expression
+Expression:
+        Empty_Expression
+Expression:
+        SRCOnSched_Expression
+Expression:
+        SchedulerOf_Expression
+Expression:
+        In_Expression
+Expression:
+        Parenthese_Expression
+Expression:
+        Binop_Expression
 Integer_Expression:
-        theValue::ANY
+        theValue::Integer
 Id_Expression:
-        id::ANY
+        id::String
 State_Expression:
-        theValue::ANY
+        theValue::String
 True_Expression:
         
 False_Expression:
         
 Unop_Expression:
-        unop::ANY expr::ANY
+        unop::Unop expr::Expression
 Etoile_Expression:
-        expr::ANY
+        expr::Expression
 ExpId_Expression:
-        id::ANY expr::ANY
+        id::String expr::Expression
 Select_Expression:
         
 FnName_Expression:
-        expr::ANY+
+        expr::Expression+
 Empty_Expression:
-        classState::ANY
+        classState::ClassState
 SRCOnSched_Expression:
         
 SchedulerOf_Expression:
-        expr::ANY
+        expr::Expression
 In_Expression:
-        in::ANY expr::ANY classState::ANY
+        in::Boolean expr::Expression classState::ClassState
 Parenthese_Expression:
-        expr::ANY
+        expr::Expression
 Binop_Expression:
-        id_Expression::ANY compo_Binop_Expression::ANY
+        id_Expression::Id_Expression compo_Binop_Expression::Compo_Binop_Expression
 Compo_Binop_Expression:
-        binop::ANY id_Expression::ANY
+        binop::Binop id_Expression::Id_Expression
 ValDecl:
-        id::ANY abstractSchedulerDecl::ANY
+        Normal_ValDecl
+ValDecl:
+        System_ValDecl
+ValDecl:
+        Timer_ValDecl
+ValDecl:
+        id::String abstractSchedulerDecl::AbstractSchedulerDecl
 Normal_ValDecl:
-        nonProcType::ANY
+        nonProcType::NonProcType
 System_ValDecl:
-        nonProcType::ANY
+        nonProcType::NonProcType
 Timer_ValDecl:
         EPSILON
 FunDecl:
-        parameterTypes::ANY nonProcType::ANY abstractSchedulerDecl::ANY
+        parameterTypes::ParameterType nonProcType::NonProcType abstractSchedulerDecl::AbstractSchedulerDecl
 StateDef:
-        classNameStorage::ANY+ abstractSchedulerDecl::ANY
+        classNameStorage::ClassNameStorage+ abstractSchedulerDecl::AbstractSchedulerDecl
 ClassNameStorage:
-        id::ANY className::ANY storage::ANY
+        id::String className::ClassName storage::Storage
 OrderDef:
-        keyCritDecl::ANY critDecls::ANY abstractSchedulerDecl::ANY
+        keyCritDecl::KeyCritDecls critDecls::CritDecls abstractSchedulerDecl::AbstractSchedulerDecl
 AdmissionDef:
-        valDef::ANY+ admCrit::ANY attachDetach::ANY abstractSchedulerDecl::ANY
+        valDef::ValDef+ admCrit::AdmCrit attachDetach::AttachDetach abstractSchedulerDecl::AbstractSchedulerDecl
 TraceDef:
-        traceEvent::ANY traceExpr::ANY traceTest::ANY abstractSchedulerDecl::ANY
+        traceEvent::TraceEvent traceExpr::TraceExpr traceTest::TraceTest abstractSchedulerDecl::AbstractSchedulerDecl
 TypeExpr:
-        id::ANY bossaTypeExpr::ANY
+        id::String bossaTypeExpr::BossaTypeExpr
 TypeOrVoid:
-        isVoid::ANY typeExpr::ANY
+        isVoid::Boolean typeExpr::TypeExpr
 ParameterType:
-        typeExpr::ANY+
+        typeExpr::TypeExpr+
 Storage:
-        EPSILON
+        Process_Storage
+Storage:
+        Scheduler_Storage
+Storage:
+        Queue_Storage
 Process_Storage:
         
 Scheduler_Storage:
-        stateVisibility::ANY
+        stateVisibility::StateVisibility
 Queue_Storage:
-        stateVisibility::ANY queueType::ANY
+        stateVisibility::StateVisibility queueType::QueueType
 KeyCritDecls:
-        compoKeyCritDecls::ANY+
+        compoKeyCritDecls::CompoKeyCritDecls+
 CompoKeyCritDecls:
-        critDecl::ANY
+        critDecl::CritDecl
 CritDecls:
-        critDecl::ANY+
+        critDecl::CritDecl+
 CritDecl:
-        EPSILON
+        CritDeclWhithId
+CritDecl:
+        CritDeclWhithoutId
 CritDeclWhithId:
-        id::ANY
+        id::String
 CritDeclWhithoutId:
-        expr::ANY
+        expr::Expression
 ValDef:
-        id::ANY typeExpr::ANY expr::ANY
+        id::String typeExpr::TypeExpr expr::Expression
 AdmCrit:
-        paramVarDecl::ANY+ expr::ANY
+        paramVarDecl::ParamVarDecl+ expr::Expression
 AttachDetach:
-        procParam1::ANY procParam2::ANY seqStmt1::ANY seqStmt2::ANY
+        procParam1::ProcParam procParam2::ProcParam seqStmt1::SeqStmt seqStmt2::SeqStmt
 ParamVarDecl:
-        id::ANY typeExpr::ANY
+        id::String typeExpr::TypeExpr
 SeqStmt:
-        valDef::ANY+ stmt::ANY+
+        valDef::ValDef+ stmt::Statment+
 TraceEvent:
-        eventName::ANY+
+        eventName::EventName+
 TraceExpr:
-        id::ANY+
+        id::String+
 TraceTest:
-        expr::ANY
+        expr::Expression
 ProcParam:
-        id::ANY process::ANY scheduler::ANY
+        id::String process::Boolean scheduler::Boolean
 Statment:
-        EPSILON
+        IfStmt
+Statment:
+        ForStmt
+Statment:
+        ReturnStmt
+Statment:
+        SwitchStmt
+Statment:
+        AssignStmt
+Statment:
+        MoveStmt
+Statment:
+        DeferStmt
+Statment:
+        PrimStmt
+Statment:
+        ErrorStmt
+Statment:
+        BreakStmt
 IfStmt:
-        expr::ANY seqStmt::ANY
+        expr::Expression seqStmt::SeqStmt
 ForStmt:
-        EPSILON
+        ForeachForStmt
+ForStmt:
+        ForEachIncreasingForStmt
+ForStmt:
+        ForEachDecreasingForStmt
 ForeachForStmt:
-        id::ANY isIn::ANY classState::ANY+ seqStmt::ANY
+        id::String isIn::Boolean classState::ClassState+ seqStmt::SeqStmt
 ForEachIncreasingForStmt:
-        id::ANY seqStmt::ANY
+        id::String seqStmt::SeqStmt
 ForEachDecreasingForStmt:
-        id::ANY seqStmt::ANY
+        id::String seqStmt::SeqStmt
 ReturnStmt:
-        expr::ANY
+        expr::Expression
 SwitchStmt:
-        locExpr::ANY composantOfSwitchStmt::ANY+
+        locExpr::LocExpr composantOfSwitchStmt::ComposantOfSwitchStmt+
 AssignStmt:
-        locExpr::ANY assignUnop::ANY assignBinop::ANY expr::ANY
+        locExpr::LocExpr assignUnop::AssignUnop assignBinop::AssignBinop expr::Expression
 MoveStmt:
-        EPSILON
+        NormalMoveStmt
+MoveStmt:
+        ForwardMoveStmt
 NormalMoveStmt:
-        stateRef::ANY
+        stateRef::StateRef
 ForwardMoveStmt:
-        isHead::ANY isTail::ANY moveExpr::ANY
+        isHead::Boolean isTail::Boolean moveExpr::MoveExpr
 StateRef:
-        stateRef::ANY
+        stateRef::String
 DeferStmt:
-        deferStmt::ANY
+        deferStmt::String
 PrimStmt:
-        expr::ANY+
+        expr::Expression+
 ErrorStmt:
-        errorType::ANY
+        errorType::String
 BreakStmt:
         
 LocExpr:
-        stateName::ANY id::ANY+
+        stateName::String id::String+
 MoveExpr:
-        EPSILON
+        Select_MoveExpr
+MoveExpr:
+        SatateName_MoveExpr
+MoveExpr:
+        ID_MoveExpr
+MoveExpr:
+        IDSource_MoveExpr
+MoveExpr:
+        IDTarget_MoveExpr
 Select_MoveExpr:
         
 SatateName_MoveExpr:
         
 ID_MoveExpr:
-        id::ANY
+        id::String
 IDSource_MoveExpr:
-        id::ANY
+        id::String
 IDTarget_MoveExpr:
-        id::ANY
+        id::String
 ClassState:
-        state::ANY className::ANY
+        state::Boolean className::ClassName
 OnHandlerDef:
-        eventName::ANY+ seqStmt::ANY
+        eventName::EventName+ seqStmt::SeqStmt
 EventName:
-        eventNameLeft::ANY eventNameRight::ANY
+        eventNameLeft::String eventNameRight::String
 ComposantOfSwitchStmt:
-        classState::ANY+ seqStmt::ANY
+        classState::ClassState+ seqStmt::SeqStmt
 ComposantOfInterFunc:
-        id::ANY typeOrVoid::ANY paramVarDecl::ANY+ seqStmt::ANY
+        id::String typeOrVoid::TypeOrVoid paramVarDecl::ParamVarDecl+ seqStmt::SeqStmt
 BossaTypeExpr:
-        bossaTypeExpr::ANY
+        bossaTypeExpr::String
 QueueType:
-        EPSILON
+        Normal_QueueType
+QueueType:
+        Fifo_QueueType
+QueueType:
+        Lifo_QueueType
 Normal_QueueType:
         
 Fifo_QueueType:
@@ -211,18 +299,18 @@ Fifo_QueueType:
 Lifo_QueueType:
         
 Critop:
-        lowest::ANY highest::ANY
+        lowest::Boolean highest::Boolean
 StateVisibility:
-        public::ANY private::ANY
+        public::Boolean private::Boolean
 ClassName:
-        className::ANY
+        className::String
 NonProcType:
-        system::ANY struct::ANY id::ANY nonProcType::ANY
+        system::Boolean struct::Boolean id::Boolean nonProcType::String
 Unop:
-        plus::ANY minus::ANY excl::ANY tild::ANY
+        plus::Boolean minus::Boolean excl::Boolean tild::Boolean
 Binop:
-        plus::ANY minus::ANY star::ANY slash::ANY percentage::ANY doubleAnd::ANY doubleVerticalBar::ANY and::ANY eq::ANY ne::ANY lt::ANY gt::ANY le::ANY ge::ANY doubleLt::ANY doubleGt::ANY
+        plus::Boolean minus::Boolean star::Boolean slash::Boolean percentage::Boolean doubleAnd::Boolean doubleVerticalBar::Boolean and::Boolean eq::Boolean ne::Boolean lt::Boolean gt::Boolean le::Boolean ge::Boolean doubleLt::Boolean doubleGt::Boolean
 AssignUnop:
-        doublePlus::ANY doubleMoins::ANY
+        doublePlus::Boolean doubleMoins::Boolean
 AssignBinop:
-        affect::ANY plusEqual::ANY moinsEqual::ANY starEqual::ANY slashEqual::ANY percentageEqual::ANY andEqual::ANY orEqual::ANY doubleLtEqual::ANY doubleGtEqual::ANY
+        affect::Boolean plusEqual::Boolean moinsEqual::Boolean starEqual::Boolean slashEqual::Boolean percentageEqual::Boolean andEqual::Boolean orEqual::Boolean doubleLtEqual::Boolean doubleGtEqual::Boolean

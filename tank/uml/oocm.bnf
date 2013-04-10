@@ -6,24 +6,40 @@ ScopeKind:
         sk_instance_level::EPSILON
         sk_classifier_level::EPSILON
 MultiplicityType:
-        lower::ANY upper::ANY isOrdered::ANY isUnique::ANY
+        lower::Integer upper::Integer isOrdered::Boolean isUnique::Boolean
 ModelElement:
-        name::ANY
+        Feature
+ModelElement:
+        NameSpace
+ModelElement:
+        GeneralizableElement
+ModelElement:
+        name::String
 Feature:
-        ownerScope::ANY visibility::ANY owner::ANY
+        StructuralFeature
+Feature:
+        BehavioralFeature
+Feature:
+        ownerScope::ScopeKind visibility::VisibilityKind owner::Classifier
 NameSpace:
         EPSILON
 GeneralizableElement:
-        isRoot::ANY isLeaf::ANY isAbstract::ANY
+        isRoot::Boolean isLeaf::Boolean isAbstract::Boolean
 Classifier:
-        feature::ANY+
+        Class
+Classifier:
+        feature::Feature+
 Class:
-        isActive::ANY
+        isActive::Boolean
 StructuralFeature:
-        multiplicity::ANY isChangeable::ANY targetScope::ANY
+        Attribute
+StructuralFeature:
+        multiplicity::MultiplicityType isChangeable::Boolean targetScope::ScopeKind
 Attribute:
-        initialValue::ANY
+        initialValue::String
 BehavioralFeature:
-        isQuery::ANY
+        Operation
+BehavioralFeature:
+        isQuery::Boolean
 Operation:
-        isRoot::ANY isLeaf::ANY isAbstract::ANY specification::ANY
+        isRoot::Boolean isLeaf::Boolean isAbstract::Boolean specification::String

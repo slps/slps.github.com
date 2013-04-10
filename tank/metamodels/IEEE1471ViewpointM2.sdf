@@ -4,25 +4,38 @@ exports
   sorts
         Viewpoint Concern Stakeholder ViewpointImport ViewpointDependency Process Technique AnalysisMethod ArchitecturalConstruct Rule ModelOrganization ModellingRule Language Mapping Pattern 
   context-free syntax
-        source::ANY+ covers::ANY+ supplierDependency::ANY+ clientDependency::ANY+ isImportTo::ANY architecturalConstruct::ANY+ process::ANY -> Viewpoint
+        source::ViewpointImport+ covers::Concern+ supplierDependency::ViewpointDependency+ clientDependency::ViewpointDependency+ isImportTo::Stakeholder architecturalConstruct::ArchitecturalConstruct+ process::Process -> Viewpoint
 
          -> Concern
 
-        concerns::ANY -> Stakeholder
+        concerns::Concern -> Stakeholder
 
          -> ViewpointImport
 
-        supplier::ANY client::ANY -> ViewpointDependency
+        supplier::Viewpoint client::Viewpoint -> ViewpointDependency
 
-        methodology::ANY+ -> Process
+        methodology::Technique+ -> Process
 
-        methods::ANY+ applies::ANY+ -> Technique
+        methods::AnalysisMethod+ applies::Rule+ -> Technique
 
-        analysis::ANY -> AnalysisMethod
+        analysis::Language -> AnalysisMethod
 
-         -> ArchitecturalConstruct
+        Rule -> ArchitecturalConstruct
 
-        techniques::ANY+ guidance::ANY -> Rule
+        Language -> ArchitecturalConstruct
+
+        Mapping -> ArchitecturalConstruct
+
+        Pattern -> ArchitecturalConstruct
+
+        Rule -> ArchitecturalConstruct
+        Language -> ArchitecturalConstruct
+        Mapping -> ArchitecturalConstruct
+        Pattern -> ArchitecturalConstruct
+
+        ModelOrganization -> Rule
+
+        techniques::Technique+ guidance::Language -> Rule
 
          -> ModelOrganization
 
@@ -30,6 +43,6 @@ exports
 
          -> Language
 
-        input::ANY ouput::ANY -> Mapping
+        input::Language ouput::Language -> Mapping
 
          -> Pattern

@@ -4,19 +4,39 @@ exports
   sorts
         Type BasicType InstanceType EnumType OclAnyType OclTypeType CollectionType IntegerType RealType StringType BooleanType Classifier EnumLiteral SetType SequenceType BagType 
   context-free syntax
-         -> Type
+        BasicType -> Type
 
-         -> BasicType
+        InstanceType -> Type
 
-        classifier::ANY -> InstanceType
+        EnumType -> Type
 
-        enumLiteral::ANY+ -> EnumType
+        OclAnyType -> Type
 
-        supertype::ANY+ subtype::ANY+ collectionType::ANY+ -> OclAnyType
+        OclTypeType -> Type
 
-        supertype::ANY+ subtype::ANY+ collectionType::ANY+ -> OclTypeType
+        CollectionType -> Type
 
-         -> CollectionType
+        IntegerType -> BasicType
+
+        RealType -> BasicType
+
+        StringType -> BasicType
+
+        BooleanType -> BasicType
+
+        classifier::Classifier -> InstanceType
+
+        enumLiteral::EnumLiteral+ -> EnumType
+
+        supertype::Type+ subtype::Type+ collectionType::CollectionType+ -> OclAnyType
+
+        supertype::Type+ subtype::Type+ collectionType::CollectionType+ -> OclTypeType
+
+        SetType -> CollectionType
+
+        SequenceType -> CollectionType
+
+        BagType -> CollectionType
 
          -> IntegerType
 
@@ -26,12 +46,12 @@ exports
 
          -> BooleanType
 
-        instanceType::ANY -> Classifier
+        instanceType::InstanceType -> Classifier
 
-        enumType::ANY -> EnumLiteral
+        enumType::EnumType -> EnumLiteral
 
-        elementType::ANY -> SetType
+        elementType::Type -> SetType
 
-        elementType::ANY -> SequenceType
+        elementType::Type -> SequenceType
 
-        elementType::ANY -> BagType
+        elementType::Type -> BagType

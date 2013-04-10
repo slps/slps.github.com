@@ -3,35 +3,39 @@ module OpenQVT
 
 syntax Variable
         = 
-        ANY name ANY type ANY value ANY visibility ANY context
+        String name String type String value String visibility Context context
  ;
 syntax Context
         = 
-        ANY variables+ ANY rule
+        Variable variables+ Rule rule
  ;
 syntax Rule
-        = 
-        ANY context ANY subRule ANY superRule ANY services+
+        = RootRule
+        | RuleSetCall
+        | QARule
+        | Context context Rule subRule Rule superRule Service services+
  ;
 syntax RootRule
         = 
-        ruleSet: ANY
+        ruleSet: RuleSet
  ;
 syntax RuleSetCall
         = 
-        ruleSet: ANY
+        ruleSet: RuleSet
  ;
 syntax QARule
         = 
-        ANY query ANY action
+        Query query Action action
  ;
 syntax RuleSet
         = 
-        rootRule: ANY
+        rootRule: RootRule
  ;
 syntax Service
-        = 
-        ANY visibility ANY signature ANY rule
+        = OCLService
+        | RTransService
+        | JavaService
+        | String visibility String signature Rule rule
  ;
 syntax OCLService
         = 
@@ -46,12 +50,13 @@ syntax JavaService
         ()
  ;
 syntax RulePart
-        = 
-        ()
+        = Action
+        | Query
  ;
 syntax Action
-        = 
-        qARule: ANY
+        = RTransAction
+        | JavaAction
+        | qARule: QARule
  ;
 syntax RTransAction
         = 
@@ -62,8 +67,11 @@ syntax JavaAction
         ()
  ;
 syntax Query
-        = 
-        qARule: ANY
+        = OCLFilter
+        | RTransQuery
+        | JavaQuery
+        | JavaFilter
+        | qARule: QARule
  ;
 syntax OCLFilter
         = 

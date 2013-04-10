@@ -13,21 +13,29 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable SimpleUML 0.2 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Ivan Kurtev, <code>QVT_SimpleUML.ecore</code>, .</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>8</strong></li><li>Number of top alternatives: <strong>8</strong></li><li>Number of defined nonterminal symbols: <strong>8</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>8</strong>: <code><a href="#UMLModelElement" class="nt">UMLModelElement</a>, <a href="#Attribute" class="nt">Attribute</a>, <a href="#Package" class="nt">Package</a>, <a href="#PackageElement" class="nt">PackageElement</a>, <a href="#Classifier" class="nt">Classifier</a>, <a href="#Class" class="nt">Class</a>, <a href="#PrimitiveDataType" class="nt">PrimitiveDataType</a>, <a href="#Association" class="nt">Association</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="UMLModelElement">UMLModelElement</a>:
-        ε
+				</script></head><body><h1 class="l">Browsable SimpleUML 0.2 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Ivan Kurtev, <code>QVT_SimpleUML.ecore</code>, .</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>12</strong></li><li>Number of top alternatives: <strong>12</strong></li><li>Number of defined nonterminal symbols: <strong>8</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#UMLModelElement" class="nt">UMLModelElement</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="UMLModelElement">UMLModelElement</a>:
+        <a class="nt" href="#Attribute">Attribute</a>
+</pre><pre><a class="nt" name="UMLModelElement">UMLModelElement</a>:
+        <a class="nt" href="#Package">Package</a>
+</pre><pre><a class="nt" name="UMLModelElement">UMLModelElement</a>:
+        <a class="nt" href="#PackageElement">PackageElement</a>
 </pre><pre><a class="nt" name="Attribute">Attribute</a>:
-        <span class="sel">owner</span>::<span class="meta">any</span> <span class="sel">type</span>::<span class="meta">any</span>
+        <span class="sel">owner</span>::<a class="nt" href="#Class">Class</a> <span class="sel">type</span>::<a class="nt" href="#Classifier">Classifier</a>
 </pre><pre><a class="nt" name="Package">Package</a>:
-        <span class="sel">elements</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">elements</span>::<a class="nt" href="#PackageElement">PackageElement</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="PackageElement">PackageElement</a>:
-        ε
+        <a class="nt" href="#Classifier">Classifier</a>
+</pre><pre><a class="nt" name="PackageElement">PackageElement</a>:
+        <a class="nt" href="#Association">Association</a>
 </pre><pre><a class="nt" name="Classifier">Classifier</a>:
-        ε
+        <a class="nt" href="#Class">Class</a>
+</pre><pre><a class="nt" name="Classifier">Classifier</a>:
+        <a class="nt" href="#PrimitiveDataType">PrimitiveDataType</a>
 </pre><pre><a class="nt" name="Class">Class</a>:
-        <span class="sel">attribute</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">general</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">generalOpposite</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">reverse</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">forward</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">attribute</span>::<a class="nt" href="#Attribute">Attribute</a><span class="meta">+</span> <span class="sel">general</span>::<a class="nt" href="#Class">Class</a><span class="meta">+</span> <span class="sel">generalOpposite</span>::<a class="nt" href="#Class">Class</a><span class="meta">+</span> <span class="sel">reverse</span>::<a class="nt" href="#Association">Association</a><span class="meta">+</span> <span class="sel">forward</span>::<a class="nt" href="#Association">Association</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="PrimitiveDataType">PrimitiveDataType</a>:
-        <span class="sel">typeOpposite</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">typeOpposite</span>::<a class="nt" href="#Attribute">Attribute</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Association">Association</a>:
-        <span class="sel">source</span>::<span class="meta">any</span> <span class="sel">destination</span>::<span class="meta">any</span>
+        <span class="sel">source</span>::<a class="nt" href="#Class">Class</a> <span class="sel">destination</span>::<a class="nt" href="#Class">Class</a>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

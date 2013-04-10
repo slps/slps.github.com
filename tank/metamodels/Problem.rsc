@@ -8,5 +8,5 @@ syntax Severity
  ;
 syntax Problem
         = 
-        ANY severity ANY location ANY description
+        Severity severity String location String description
  ;

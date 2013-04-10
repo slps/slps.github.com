@@ -1,76 +1,122 @@
 Element:
-        EPSILON
+        StructuralElement
+Element:
+        GraphicalElement
 StructuralElement:
-        EPSILON
+        Image
+StructuralElement:
+        Svg
+StructuralElement:
+        GroupingElement
+StructuralElement:
+        Use
 Image:
-        referee::ANY+
+        referee::ReferencedFile+
 Svg:
-        owner_SVG::ANY+ children::ANY+ namespace::ANY version::ANY baseProfile::ANY
+        owner_SVG::SvgFile+ children::Element+ namespace::String version::String baseProfile::String
 GroupingElement:
-        EPSILON
+        G
+GroupingElement:
+        Defs
+GroupingElement:
+        Symbol
 G:
-        name::ANY
+        name::String
 Defs:
-        groupContent::ANY+
+        groupContent::Element+
 Symbol:
-        groupContent::ANY+
+        groupContent::Element+
 Use:
-        use::ANY+
+        use::Element+
 GraphicalElement:
-        EPSILON
+        Shape
+GraphicalElement:
+        TextElement
 Shape:
-        EPSILON
+        Rect
+Shape:
+        Circle
+Shape:
+        Ellipse
+Shape:
+        Line
+Shape:
+        Polyline
+Shape:
+        Polygon
+Shape:
+        Path
+Shape:
+        Point
+Shape:
+        Marker
 TextElement:
-        EPSILON
+        Text
+TextElement:
+        Tspan
+TextElement:
+        Tref
 Rect:
-        rx::ANY ry::ANY
+        rx::Double ry::Double
 Circle:
         
 Ellipse:
         
 Line:
-        between::ANY markerEnd::ANY markerStart::ANY
+        between::Point markerEnd::String markerStart::String
 Polyline:
-        waypoints::ANY+ strokeDashArray::ANY markerEnd::ANY markerStart::ANY
+        waypoints::Point+ strokeDashArray::String markerEnd::String markerStart::String
 Polygon:
-        waypoints::ANY+ markerEnd::ANY markerStart::ANY
+        waypoints::Point+ markerEnd::String markerStart::String
 Path:
-        pathLength::ANY d::ANY markerEnd::ANY markerStart::ANY
+        pathLength::Double d::String markerEnd::String markerStart::String
 Point:
         
 Marker:
-        markerUnits::ANY refX::ANY refY::ANY markerWidth::ANY markerHeight::ANY orient::ANY drawing::ANY+
+        markerUnits::String refX::Double refY::Double markerWidth::Double markerHeight::Double orient::String drawing::Element+
 Text:
-        lengthAdjust::ANY content::ANY
+        lengthAdjust::String content::String
 Tspan:
-        content::ANY
+        content::String
 Tref:
-        xlinkHref::ANY
+        xlinkHref::TextElement
 Attribute:
-        EPSILON
+        Transform
+Attribute:
+        Visibility
+Attribute:
+        FontWeight
+Attribute:
+        FontStyle
 Transform:
-        EPSILON
+        Scale
+Transform:
+        Translate
+Transform:
+        Rotate
 Scale:
-        sx::ANY sy::ANY
+        sx::Double sy::Double
 Translate:
-        tx::ANY ty::ANY
+        tx::Double ty::Double
 Rotate:
-        angle::ANY cx::ANY cy::ANY
+        angle::Double cx::Double cy::Double
 Visibility:
-        visible::ANY
+        visible::Boolean
 FontWeight:
-        bold::ANY
+        bold::Boolean
 FontStyle:
-        italic::ANY
+        italic::Boolean
 Dimension:
-        width::ANY height::ANY
+        width::Double height::Double
 Coordinates:
-        EPSILON
+        RelativeCoord
+Coordinates:
+        AbsoluteCoord
 RelativeCoord:
-        x::ANY y::ANY
+        x::Double y::Double
 AbsoluteCoord:
-        x::ANY y::ANY
+        x::Double y::Double
 ReferencedFile:
-        EPSILON
+        SvgFile
 SvgFile:
-        tag::ANY elements::ANY+
+        tag::Svg elements::Element+

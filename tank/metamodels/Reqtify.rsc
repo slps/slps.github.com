@@ -3,45 +3,46 @@ module Reqtify
 
 syntax Project
         = 
-        ANY documents+
+        Document documents+
  ;
 syntax TypedElement
-        = 
-        ()
+        = ElementWithIL
+        | CoverLink
+        | Attribute
  ;
 syntax ElementWithIL
-        = 
-        ()
+        = Document
+        | TextElement
  ;
 syntax Document
         = 
-        ANY project ANY sections+
+        Project project Section sections+
  ;
 syntax TextElement
-        = 
-        ()
+        = Section
+        | AbstractRequirement
  ;
 syntax Section
         = 
-        ANY document ANY sectionChildren+ ANY sectionParent ANY requirements+
+        Document document Section sectionChildren+ Section sectionParent AbstractRequirement requirements+
  ;
 syntax AbstractRequirement
-        = 
-        ()
+        = Requirement
+        | MacroRequirement
  ;
 syntax Requirement
         = 
-        ANY section ANY isContained ANY coverLinks+ ANY attribute+
+        Section section MacroRequirement isContained CoverLink coverLinks+ Attribute attribute+
  ;
 syntax MacroRequirement
         = 
-        ANY contains+
+        AbstractRequirement contains+
  ;
 syntax CoverLink
         = 
-        linkWith: ANY
+        linkWith: AbstractRequirement
  ;
 syntax Attribute
         = 
-        value: ANY
+        value: String
  ;

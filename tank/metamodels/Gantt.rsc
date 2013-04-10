@@ -3,31 +3,31 @@ module Gantt
 
 syntax Project
         = 
-        ANY name ANY company ANY viewDate ANY viewIndex ANY ganttDividerLocation ANY ressourceDividerLocation ANY webLink ANY tasks ANY ressources+ ANY allocations+
+        String name String company Date viewDate Date viewIndex Integer ganttDividerLocation Integer ressourceDividerLocation String webLink Tasks tasks Ressource ressources+ Allocation allocations+
  ;
 syntax Tasks
         = 
-        ANY color ANY tasks+
+        String color Task tasks+
  ;
 syntax Task
         = 
-        ANY id ANY name ANY meeting ANY color ANY expand ANY complete ANY duration ANY priority ANY start ANY depends+
+        String id String name Boolean meeting String color Boolean expand Integer complete Integer duration Integer priority Date start Depend depends+
  ;
 syntax Depend
         = 
-        ANY id ANY type ANY difference ANY hardness ANY task
+        String id Integer type Integer difference String hardness Task task
  ;
 syntax Ressource
         = 
-        ANY Id ANY name ANY fonction ANY contact ANY phone
+        String Id String name String fonction String contact String phone
  ;
 syntax Date
         = 
-        ANY year ANY month ANY day
+        Integer year Integer month Integer day
  ;
 syntax Allocation
         = 
-        ANY taskId ANY ressourceId ANY name ANY function ANY responsible ANY load
+        String taskId String ressourceId String name String function Boolean responsible Integer load
  ;
 syntax Vacation
         = 

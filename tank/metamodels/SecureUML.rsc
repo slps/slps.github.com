@@ -3,27 +3,28 @@ module SecureUML
 
 syntax Group
         = 
-        ANY subjectGroup+
+        Subject subjectGroup+
  ;
 syntax User
         = 
         ()
  ;
 syntax Subject
-        = 
-        ANY group ANY role+
+        = Group
+        | User
+        | Group group Role role+
  ;
 syntax Role
         = 
-        ANY roleHierarchy+ ANY subjectAssignment+ ANY permissionAssignment+
+        Role roleHierarchy+ Subject subjectAssignment+ Permission permissionAssignment+
  ;
 syntax Permission
         = 
-        ANY role+ ANY constraintAssignment ANY actionAssignment+
+        Role role+ AuthorizationConstraint constraintAssignment Action actionAssignment+
  ;
 syntax AuthorizationConstraint
         = 
-        ANY permission+
+        Permission permission+
  ;
 syntax AtomicAction
         = 
@@ -31,13 +32,14 @@ syntax AtomicAction
  ;
 syntax CompositeAction
         = 
-        ANY subordinatedAction+
+        Action subordinatedAction+
  ;
 syntax Action
-        = 
-        ANY permission+ ANY resource ANY actionHyerarchy+
+        = AtomicAction
+        | CompositeAction
+        | Permission permission+ Resource resource CompositeAction actionHyerarchy+
  ;
 syntax Resource
         = 
-        ANY resourceAction+
+        Action resourceAction+
  ;

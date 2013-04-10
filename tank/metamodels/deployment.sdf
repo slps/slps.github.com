@@ -4,12 +4,14 @@ exports
   sorts
         Node Device ExecutionEnvironment Specification CommunicationLink 
   context-free syntax
-         -> Node
+        Device -> Node
 
-        nestedNode::ANY+ name::ANY -> Device
+        ExecutionEnvironment -> Node
 
-        nestedNode::ANY+ name::ANY -> ExecutionEnvironment
+        nestedNode::Node+ name::String -> Device
 
-        ownedNode::ANY+ ownedCommunicationLink::ANY+ -> Specification
+        nestedNode::Node+ name::String -> ExecutionEnvironment
 
-        source::ANY target::ANY name::ANY -> CommunicationLink
+        ownedNode::Node+ ownedCommunicationLink::CommunicationLink+ -> Specification
+
+        source::Node target::Node name::String -> CommunicationLink

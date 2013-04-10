@@ -1,49 +1,87 @@
 Signal:
-        powertypeRange::ANY+ feature::ANY+
+        Exception
+Signal:
+        Exception
 Action:
-        EPSILON
+        CreateAction
+Action:
+        DestroyAction
+Action:
+        UninterpretedAction
+Action:
+        CallAction
+Action:
+        SendAction
+Action:
+        ActionSequence
+Action:
+        ReturnAction
+Action:
+        TerminateAction
 CreateAction:
-        instantiation::ANY
+        instantiation::Classifier
 DestroyAction:
-        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY
+        actualArgument::Argument+ actionSequence::ActionSequence recurrence::IterationExpression target::ObjectSetExpression isAsynchronous::Boolean script::ActionExpression
 UninterpretedAction:
-        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY
+        actualArgument::Argument+ actionSequence::ActionSequence recurrence::IterationExpression target::ObjectSetExpression isAsynchronous::Boolean script::ActionExpression
 CallAction:
-        operation::ANY
+        operation::Operation
 SendAction:
-        signal::ANY
+        signal::Signal
 ActionSequence:
-        action::ANY+
+        action::Action+
 Argument:
-        action::ANY value::ANY
+        action::Action value::Expression
 ReturnAction:
-        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY
+        actualArgument::Argument+ actionSequence::ActionSequence recurrence::IterationExpression target::ObjectSetExpression isAsynchronous::Boolean script::ActionExpression
 TerminateAction:
-        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY
+        actualArgument::Argument+ actionSequence::ActionSequence recurrence::IterationExpression target::ObjectSetExpression isAsynchronous::Boolean script::ActionExpression
 Exception:
         EPSILON
 Element:
-        EPSILON
+        ModelElement
 ModelElement:
-        EPSILON
-GeneralizableElement:
-        EPSILON
-Namespace:
-        EPSILON
+        Action
+ModelElement:
+        Argument
+ModelElement:
+        GeneralizableElement
+ModelElement:
+        Namespace
+ModelElement:
+        Feature
+ModelElement:
+        Relationship
+ModelElement:
+        Parameter
+ModelElement:
+        StateMachine
+ModelElement:
+        Event
+ModelElement:
+        StateVertex
+ModelElement:
+        Transition
+ModelElement:
+        Guard
+ModelElement:
+        Partition
 Classifier:
-        EPSILON
+        Signal
+Classifier:
+        ClassifierInState
 Feature:
-        EPSILON
+        BehavioralFeature
 Relationship:
-        EPSILON
+        Generalization
 BehavioralFeature:
-        EPSILON
+        Operation
 Operation:
-        concurrency::ANY isRoot::ANY isLeaf::ANY isAbstract::ANY specification::ANY
+        concurrency::CallConcurrencyKind isRoot::Boolean isLeaf::Boolean isAbstract::Boolean specification::String
 Parameter:
-        type::ANY behavioralFeature::ANY defaultValue::ANY kind::ANY
+        type::Classifier behavioralFeature::BehavioralFeature defaultValue::Expression kind::ParameterDirectionKind
 Generalization:
-        parent::ANY powertype::ANY child::ANY discriminator::ANY
+        parent::GeneralizableElement powertype::Classifier child::GeneralizableElement discriminator::String
 AggregationKind:
         ak_none::EPSILON
         ak_aggregate::EPSILON
@@ -81,11 +119,23 @@ VisibilityKind:
         vk_private::EPSILON
         vk_package::EPSILON
 Multiplicity:
-        range::ANY+
+        range::MultiplicityRange+
 MultiplicityRange:
-        multiplicity::ANY lower::ANY upper::ANY
+        multiplicity::Multiplicity lower::Integer upper::Integer
 Expression:
-        language::ANY body::ANY
+        BooleanExpression
+Expression:
+        ObjectSetExpression
+Expression:
+        ActionExpression
+Expression:
+        IterationExpression
+Expression:
+        TimeExpression
+Expression:
+        ArgListsExpression
+Expression:
+        language::String body::String
 BooleanExpression:
         EPSILON
 ObjectSetExpression:
@@ -99,50 +149,79 @@ TimeExpression:
 ArgListsExpression:
         EPSILON
 StateMachine:
-        context::ANY submachineState::ANY+ top::ANY transitions::ANY+
+        ActivityGraph
+StateMachine:
+        context::ModelElement submachineState::SubmachineState+ top::State transitions::Transition+
 Event:
-        EPSILON
+        TimeEvent
+Event:
+        CallEvent
+Event:
+        SignalEvent
+Event:
+        ChangeEvent
 StateVertex:
-        EPSILON
+        State
+StateVertex:
+        Pseudostate
+StateVertex:
+        SynchState
+StateVertex:
+        StubState
 State:
-        EPSILON
+        CompositeState
+State:
+        SimpleState
+State:
+        FinalState
 TimeEvent:
-        when::ANY
+        when::TimeExpression
 CallEvent:
-        operation::ANY
+        operation::Operation
 SignalEvent:
-        signal::ANY
+        signal::Signal
 Transition:
-        target::ANY trigger::ANY stateMachine::ANY source::ANY effect::ANY guard::ANY
+        target::StateVertex trigger::Event stateMachine::StateMachine source::StateVertex effect::Action guard::Guard
 CompositeState:
-        subvertex::ANY+ isConcurrent::ANY
+        SubmachineState
+CompositeState:
+        subvertex::StateVertex+ isConcurrent::Boolean
 ChangeEvent:
-        changeExpression::ANY
+        changeExpression::BooleanExpression
 Guard:
-        transition::ANY expression::ANY
+        transition::Transition expression::BooleanExpression
 Pseudostate:
-        kind::ANY
+        kind::PseudostateKind
 SimpleState:
-        deferrableEvent::ANY+ internalTransition::ANY+ exit::ANY doActivity::ANY entry::ANY stateMachine::ANY
+        ActionState
+SimpleState:
+        ObjectFlowState
+SimpleState:
+        ActionState
+        ObjectFlowState
 SubmachineState:
-        submachine::ANY
+        SubactivityState
+SubmachineState:
+        submachine::StateMachine
 SynchState:
-        bound::ANY
+        bound::Integer
 StubState:
-        referenceState::ANY
+        referenceState::String
 FinalState:
-        deferrableEvent::ANY+ internalTransition::ANY+ exit::ANY doActivity::ANY entry::ANY stateMachine::ANY
+        deferrableEvent::Event+ internalTransition::Transition+ exit::Action doActivity::Action entry::Action stateMachine::StateMachine
 ActivityGraph:
-        partition::ANY+
+        partition::Partition+
 Partition:
-        contents::ANY+ activityGraph::ANY
+        contents::ModelElement+ activityGraph::ActivityGraph
 SubactivityState:
-        isDynamic::ANY dynamicArguments::ANY dynamicMultiplicity::ANY
+        isDynamic::Boolean dynamicArguments::ArgListsExpression dynamicMultiplicity::Multiplicity
 ActionState:
-        isDynamic::ANY dynamicArguments::ANY dynamicMultiplicity::ANY
+        CallState
+ActionState:
+        isDynamic::Boolean dynamicArguments::ArgListsExpression dynamicMultiplicity::Multiplicity
 CallState:
         EPSILON
 ObjectFlowState:
-        type::ANY parameter::ANY+ isSynch::ANY
+        type::Classifier parameter::Parameter+ isSynch::Boolean
 ClassifierInState:
-        inState::ANY+ type::ANY
+        inState::State+ type::Classifier

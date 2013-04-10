@@ -2,18 +2,18 @@
 module CFG
 
 syntax AbstractNode
-        = 
-        ()
+        = Node
+        | ConditionalNode
  ;
 syntax Node
         = 
-        ANY inNode ANY outNode
+        Node inNode Node outNode
  ;
 syntax ConditionalNode
         = 
-        ANY trueConditionNode ANY falseConditionNode
+        Node trueConditionNode Node falseConditionNode
  ;
 syntax Expression
         = 
-        expressionName: ANY
+        expressionName: String
  ;

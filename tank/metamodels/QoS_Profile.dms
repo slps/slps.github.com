@@ -1,7 +1,8 @@
-QoSComponent = operations::ANY profile::ANY+ ;
+QoSComponent = operations::Operation profile::QoSProfile+ ;
 Operation = ;
-QoSProfile = ;
-CompoundProfile = profileTransition::ANY+ simpleProfile::ANY+ ;
-SimpleProfile = compoundProfile::ANY uses::ANY provides::ANY ;
+QoSProfile = CompoundProfile ;
+QoSProfile = SimpleProfile ;
+CompoundProfile = profileTransition::ProfileTransition+ simpleProfile::SimpleProfile+ ;
+SimpleProfile = compoundProfile::CompoundProfile uses::QoSStatement provides::QoSStatement ;
 QoSStatement = ;
-ProfileTransition = operations::ANY+ from::ANY to::ANY compoundProfile::ANY ;
+ProfileTransition = operations::Operation+ from::SimpleProfile to::SimpleProfile compoundProfile::CompoundProfile ;

@@ -1,5 +1,8 @@
-ModelElement = level::ANY name::ANY potency::ANY hasClass::ANY classElement::ANY+ elementTarget::ANY elementSource::ANY attributes::ANY+ attType::ANY ;
-Attribute = type::ANY ;
-Relationship = ;
-Generalization = target::ANY source::ANY ;
-Association = maxSource::ANY maxTarget::ANY minSource::ANY minTarget::ANY ;
+ModelElement = Attribute ;
+ModelElement = Relationship ;
+ModelElement = level::Integer name::String potency::String hasClass::ModelElement classElement::ModelElement+ elementTarget::Relationship elementSource::Relationship attributes::Attribute+ attType::Attribute ;
+Attribute = type::ModelElement ;
+Relationship = Generalization ;
+Relationship = Association ;
+Generalization = target::ModelElement source::ModelElement ;
+Association = maxSource::String maxTarget::String minSource::String minTarget::String ;

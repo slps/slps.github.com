@@ -3,17 +3,17 @@ module PDG
 
 syntax MProgramDependenceGraph
         = 
-        node: ANY
+        node: EnterNode
  ;
 syntax EnterNode
         = 
-        ANY name ANY controlDependenceNodes+
+        String name ExpressionNode controlDependenceNodes+
  ;
 syntax ExpressionNode
         = 
-        ANY name ANY expression ANY dataDependenceNodes+ ANY controlDependenceNodes+
+        String name Expression expression ExpressionNode dataDependenceNodes+ ExpressionNode controlDependenceNodes+
  ;
 syntax Expression
         = 
-        ANY name ANY isIdentifier ANY innerExpressions+
+        String name Boolean isIdentifier Expression innerExpressions+
  ;

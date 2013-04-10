@@ -3,43 +3,43 @@ module RSS_2_0
 
 syntax RSS
         = 
-        ANY version ANY channel
+        String version Channel channel
  ;
 syntax Channel
         = 
-        ANY title ANY link ANY description ANY language ANY copyright ANY managingEditor ANY webmaster ANY generator ANY docs ANY ttl ANY rating ANY skipHours+ ANY skipDays+ ANY rss ANY pubDate ANY lastBuildDate ANY image ANY textInput ANY cloud ANY category ANY items+
+        String title String link String description String language String copyright String managingEditor String webmaster String generator String docs Integer ttl String rating Integer skipHours+ DayKind skipDays+ RSS rss Date pubDate Date lastBuildDate Image image TextInput textInput Cloud cloud Category category Item items+
  ;
 syntax Item
         = 
-        ANY title ANY link ANY description ANY author ANY comments ANY guid ANY source ANY pubDate ANY enclosure ANY category ANY channel
+        String title String link String description String author String comments String guid Source source Date pubDate Enclosure enclosure Category category Channel channel
  ;
 syntax Image
         = 
-        ANY url ANY title ANY link ANY description ANY width ANY height ANY channel
+        String url String title String link String description Integer width Integer height Channel channel
  ;
 syntax TextInput
         = 
-        ANY title ANY description ANY name ANY link ANY channel
+        String title String description String name String link Channel channel
  ;
 syntax Cloud
         = 
-        ANY domain ANY port ANY path ANY registerProcedure ANY protocol ANY channel
+        String domain Integer port String path String registerProcedure String protocol Channel channel
  ;
 syntax Category
         = 
-        ANY domain ANY value
+        String domain String value
  ;
 syntax Enclosure
         = 
-        ANY url ANY lenght ANY type
+        String url Integer lenght String type
  ;
 syntax Source
         = 
-        ANY url ANY value
+        String url String value
  ;
 syntax Date
         = 
-        ANY eDay ANY day ANY month ANY year ANY hours ANY minutes ANY seconds
+        DayKind eDay Integer day Integer month Integer year Integer hours Integer minutes Integer seconds
  ;
 syntax DayKind
         = Monday: ()

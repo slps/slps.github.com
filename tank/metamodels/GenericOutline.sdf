@@ -4,14 +4,22 @@ exports
   sorts
         LocatedElement Outline Node Label LabelSuite Map 
   context-free syntax
-         -> LocatedElement
+        Outline -> LocatedElement
 
-        extension::ANY nodes::ANY+ -> Outline
+        Node -> LocatedElement
 
-        name::ANY label::ANY icon::ANY outline::ANY mapping::ANY+ -> Node
+        Label -> LocatedElement
 
-        label::ANY methodCall::ANY labelSuite::ANY+ -> Label
+        LabelSuite -> LocatedElement
 
-        label::ANY methodCall::ANY -> LabelSuite
+        Map -> LocatedElement
 
-        mapString::ANY -> Map
+        extension::String nodes::Node+ -> Outline
+
+        name::String label::Label icon::String outline::Outline mapping::Map+ -> Node
+
+        label::String methodCall::String labelSuite::LabelSuite+ -> Label
+
+        label::String methodCall::String -> LabelSuite
+
+        mapString::String -> Map

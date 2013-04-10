@@ -3,103 +3,106 @@ module MSOfficeExcel_SpreadsheetMLWorksheetOpt
 
 syntax DateTimeType
         = 
-        ANY year ANY month ANY day ANY hour ANY minute ANY second
+        Integer year Integer month Integer day Integer hour Integer minute Integer second
  ;
 syntax VersionType
         = 
-        ANY n ANY nn
+        Integer n Integer nn
  ;
 syntax ValueType
-        = 
-        ()
+        = StringValue
+        | NumberValue
+        | DateTimeTypeValue
+        | BooleanValue
+        | ErrorValue
  ;
 syntax StringValue
         = 
-        value: ANY
+        value: String
  ;
 syntax NumberValue
         = 
-        value: ANY
+        value: Double
  ;
 syntax DateTimeTypeValue
         = 
-        value: ANY
+        value: DateTimeType
  ;
 syntax BooleanValue
         = 
-        value: ANY
+        value: Boolean
  ;
 syntax ErrorValue
         = 
-        ANY vt_data
+        vt_data: Data
  ;
 syntax DocumentPropertiesCollection
         = 
-        ANY dp_workbook ANY title ANY subject ANY keywords ANY description ANY category ANY author ANY lastAuthor ANY manager ANY company ANY hyperlinkBase ANY revision ANY presentationFormat ANY guid ANY appName ANY version ANY totalTime ANY lastPrinted ANY created ANY lastSaved ANY pages ANY words ANY characters ANY charactersWithSpaces ANY bytes ANY lines ANY paragraphs
+        Workbook dp_workbook String title String subject String keywords String description String category String author String lastAuthor String manager String company String hyperlinkBase Integer revision String presentationFormat String guid String appName VersionType version Integer totalTime DateTimeType lastPrinted DateTimeType created DateTimeType lastSaved Integer pages Integer words Integer characters Integer charactersWithSpaces Integer bytes Integer lines Integer paragraphs
  ;
 syntax CustomDocumentPropertiesCollection
         = 
-        ANY cdp_workbook ANY customDocumentProperties+
+        Workbook cdp_workbook CustomDocumentProperty customDocumentProperties+
  ;
 syntax CustomDocumentProperty
         = 
-        ANY customDocumentProperty_cdpe ANY name ANY value
+        CustomDocumentPropertiesCollection customDocumentProperty_cdpe String name ValueType value
  ;
 syntax SmartTagType
         = 
-        ANY smartTagType_ste ANY namespaceuri ANY name ANY url
+        SmartTagsCollection smartTagType_ste String namespaceuri String name String url
  ;
 syntax SmartTagsCollection
         = 
-        ANY st_workbook ANY st_cell ANY smartTagTypes+
+        Workbook st_workbook Cell st_cell SmartTagType smartTagTypes+
  ;
 syntax Workbook
         = 
-        ANY wb_smartTags ANY wb_docProperties ANY wb_customDocProperties ANY wb_excelWorkbook ANY wb_worksheets+
+        SmartTagsCollection wb_smartTags DocumentPropertiesCollection wb_docProperties CustomDocumentPropertiesCollection wb_customDocProperties ExcelWorkbook wb_excelWorkbook Worksheet wb_worksheets+
  ;
 syntax Worksheet
         = 
-        ANY ws_workbook ANY ws_table ANY name ANY protected ANY rightToLeft ANY w_worksheetOptions
+        Workbook ws_workbook Table ws_table String name Boolean protected Boolean rightToLeft WorksheetOptionsElt w_worksheetOptions
  ;
 syntax StyledElement
-        = 
-        ()
+        = Table
+        | TableElement
  ;
 syntax Table
         = 
-        ANY t_worksheet ANY t_cols+ ANY t_rows+ ANY defaultColumnWidth ANY defaultRowHeight ANY expandedColumnCount ANY expandedRowCount ANY leftCell ANY topCell ANY fullColumns ANY fullRows
+        Worksheet t_worksheet Column t_cols+ Row t_rows+ Double defaultColumnWidth Double defaultRowHeight Integer expandedColumnCount Integer expandedRowCount Integer leftCell Integer topCell Boolean fullColumns Boolean fullRows
  ;
 syntax TableElement
-        = 
-        ()
+        = ColOrRowElement
+        | Cell
  ;
 syntax ColOrRowElement
-        = 
-        ()
+        = Column
+        | Row
  ;
 syntax Column
         = 
-        ANY c_table ANY autoFitWidth ANY width
+        Table c_table Boolean autoFitWidth Double width
  ;
 syntax Row
         = 
-        ANY r_table ANY r_cells+ ANY autoFitHeight ANY height
+        Table r_table Cell r_cells+ Boolean autoFitHeight Double height
  ;
 syntax Cell
         = 
-        ANY c_smartTags+ ANY c_row ANY arrayRange ANY formula ANY hRef ANY mergeAcross ANY mergeDown ANY c_data ANY c_comment
+        SmartTagsCollection c_smartTags+ Row c_row String arrayRange String formula String hRef Double mergeAcross Double mergeDown Data c_data Comment c_comment
  ;
 syntax Comment
         = 
-        ANY c_cell ANY com_data ANY author ANY showAlways
+        Cell c_cell Data com_data String author Boolean showAlways
  ;
 syntax Data
         = 
-        ANY d_cell ANY d_comment ANY value
+        Cell d_cell Comment d_comment ValueType value
  ;
 syntax ExcelWorkbook
         = 
-        ANY ew_workbook ANY selectedSheets ANY windowHidden ANY hideHorizontalScrollBar ANY hideVerticalScrollBar ANY hideWorkbookTabs ANY windowHeight ANY windowWidth ANY windowTopX ANY windowTopY ANY activeSheet ANY activeChart ANY firstVisibleSheet ANY hidePivotTableFieldList ANY protectStructure ANY protectWindows ANY displayInkNotes ANY embedSaveSmartTags ANY futureVer ANY tabRatio ANY windowIconic ANY displayDrawingObjects ANY createBackup ANY calculation ANY doNotCalculateBeforeSave ANY date1904 ANY refModeR1C1 ANY iteration ANY maxIterations ANY maxChange ANY precisionAsDisplayed ANY doNotSaveLinkValues ANY noAutoRecover ANY acceptLabelsInFormulas ANY uncalced
+        Workbook ew_workbook Integer selectedSheets Boolean windowHidden Boolean hideHorizontalScrollBar Boolean hideVerticalScrollBar Boolean hideWorkbookTabs Double windowHeight Double windowWidth Double windowTopX Double windowTopY Integer activeSheet String activeChart Integer firstVisibleSheet Boolean hidePivotTableFieldList Boolean protectStructure Boolean protectWindows Boolean displayInkNotes Boolean embedSaveSmartTags String futureVer Integer tabRatio Boolean windowIconic DisplayDrawingObjectsType displayDrawingObjects Boolean createBackup CalculationWorkbookType calculation Boolean doNotCalculateBeforeSave Boolean date1904 Boolean refModeR1C1 Boolean iteration Integer maxIterations Double maxChange Boolean precisionAsDisplayed Boolean doNotSaveLinkValues Boolean noAutoRecover Boolean acceptLabelsInFormulas Boolean uncalced
  ;
 syntax DisplayDrawingObjectsType
         = ddot_displayShapes: ()
@@ -113,7 +116,7 @@ syntax CalculationWorkbookType
  ;
 syntax WorksheetOptionsElt
         = 
-        ANY wo_worksheet ANY fitToPage ANY doNotDisplayColHeaders ANY doNotDisplayRowHeaders ANY gridlineColor ANY name ANY excelWorksheetType ANY intlMacro ANY unsynced ANY selected ANY codeName ANY displayPageBreak ANY transitionExpressionEvaluation ANY transitionFormulaEntry ANY zoom ANY pageBreakZoom ANY showPageBreakZoom ANY defaultRowHeight ANY defaultColumnWidth ANY standardWidth ANY visible ANY leftColumnVisible ANY displayRightToLeft ANY gridlineColorIndex ANY displayFormulas ANY doNotDisplayGridlines ANY doNotDisplayHeadings ANY doNotDisplayOutline ANY applyAutomaticOutlineStyles ANY noSummaryRowsBelowDetail ANY noSummaryColumnsRightDetail ANY doNotDisplayZeros ANY activeRow ANY activeColumn ANY filterOn ANY rangeSelection ANY topRowVisible ANY topRowBottomPane ANY leftColumnRightPane ANY activePane ANY splitHorizontal ANY splitVertical ANY freezePanes ANY frozenNoSplit ANY tabColorIndex ANY protectContentst ANY protectObjects ANY protectScenarios ANY enableSelection ANY allowFormatCells ANY allowSizeCols ANY allowSizeRows ANY allowInsertCols ANY allowInsertRows ANY allowInsertHyperlinks ANY allowDeleteCols ANY allowDeleteRows ANY allowSort ANY allowFilter ANY allowUsePivotTables
+        Worksheet wo_worksheet Boolean fitToPage Boolean doNotDisplayColHeaders Boolean doNotDisplayRowHeaders String gridlineColor String name ExcelWorksheetTypeType excelWorksheetType Boolean intlMacro Boolean unsynced Boolean selected String codeName Boolean displayPageBreak Boolean transitionExpressionEvaluation Boolean transitionFormulaEntry Integer zoom Integer pageBreakZoom Boolean showPageBreakZoom Integer defaultRowHeight Integer defaultColumnWidth Integer standardWidth VisibleType visible Integer leftColumnVisible Boolean displayRightToLeft Integer gridlineColorIndex Boolean displayFormulas Boolean doNotDisplayGridlines Boolean doNotDisplayHeadings Boolean doNotDisplayOutline Boolean applyAutomaticOutlineStyles Boolean noSummaryRowsBelowDetail Boolean noSummaryColumnsRightDetail Boolean doNotDisplayZeros Integer activeRow Integer activeColumn Boolean filterOn String rangeSelection Integer topRowVisible Integer topRowBottomPane Integer leftColumnRightPane Integer activePane Integer splitHorizontal Integer splitVertical Boolean freezePanes Boolean frozenNoSplit Integer tabColorIndex Boolean protectContentst Boolean protectObjects Boolean protectScenarios EnableSelectionType enableSelection Boolean allowFormatCells Boolean allowSizeCols Boolean allowSizeRows Boolean allowInsertCols Boolean allowInsertRows Boolean allowInsertHyperlinks Boolean allowDeleteCols Boolean allowDeleteRows Boolean allowSort Boolean allowFilter Boolean allowUsePivotTables
  ;
 syntax ExcelWorksheetTypeType
         = ewt_Worksheet: ()

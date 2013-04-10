@@ -3,5 +3,5 @@ module WebApplications_ConceptualModel
 
 syntax HyperLink
         = 
-        ANY server+
+        Server/ServerPage server+
  ;

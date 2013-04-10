@@ -2,154 +2,168 @@
 module SVG
 
 syntax Element
-        = 
-        ()
+        = StructuralElement
+        | GraphicalElement
  ;
 syntax StructuralElement
-        = 
-        ()
+        = Image
+        | Svg
+        | GroupingElement
+        | Use
  ;
 syntax Image
         = 
-        ANY referee+
+        ReferencedFile referee+
  ;
 syntax Svg
         = 
-        ANY owner_SVG+ ANY children+ ANY namespace ANY version ANY baseProfile
+        SvgFile owner_SVG+ Element children+ String namespace String version String baseProfile
  ;
 syntax GroupingElement
-        = 
-        ()
+        = G
+        | Defs
+        | Symbol
  ;
 syntax G
         = 
-        name: ANY
+        name: String
  ;
 syntax Defs
         = 
-        ANY groupContent+
+        Element groupContent+
  ;
 syntax Symbol
         = 
-        ANY groupContent+
+        Element groupContent+
  ;
 syntax Use
         = 
-        ANY use+
+        Element use+
  ;
 syntax GraphicalElement
-        = 
-        ()
+        = Shape
+        | TextElement
  ;
 syntax Shape
-        = 
-        ()
+        = Rect
+        | Circle
+        | Ellipse
+        | Line
+        | Polyline
+        | Polygon
+        | Path
+        | Point
+        | Marker
  ;
 syntax TextElement
-        = 
-        ()
+        = Text
+        | Tspan
+        | Tref
  ;
 syntax Rect
         = 
-        ANY rx ANY ry
+        Double rx Double ry
  ;
 syntax Circle
         = 
-        
+        ()
  ;
 syntax Ellipse
         = 
-        
+        ()
  ;
 syntax Line
         = 
-        ANY between ANY markerEnd ANY markerStart
+        Point between String markerEnd String markerStart
  ;
 syntax Polyline
         = 
-        ANY waypoints+ ANY strokeDashArray ANY markerEnd ANY markerStart
+        Point waypoints+ String strokeDashArray String markerEnd String markerStart
  ;
 syntax Polygon
         = 
-        ANY waypoints+ ANY markerEnd ANY markerStart
+        Point waypoints+ String markerEnd String markerStart
  ;
 syntax Path
         = 
-        ANY pathLength ANY d ANY markerEnd ANY markerStart
+        Double pathLength String d String markerEnd String markerStart
  ;
 syntax Point
         = 
-        
+        ()
  ;
 syntax Marker
         = 
-        ANY markerUnits ANY refX ANY refY ANY markerWidth ANY markerHeight ANY orient ANY drawing+
+        String markerUnits Double refX Double refY Double markerWidth Double markerHeight String orient Element drawing+
  ;
 syntax Text
         = 
-        ANY lengthAdjust ANY content
+        String lengthAdjust String content
  ;
 syntax Tspan
         = 
-        content: ANY
+        content: String
  ;
 syntax Tref
         = 
-        xlinkHref: ANY
+        xlinkHref: TextElement
  ;
 syntax Attribute
-        = 
-        ()
+        = Transform
+        | Visibility
+        | FontWeight
+        | FontStyle
  ;
 syntax Transform
-        = 
-        ()
+        = Scale
+        | Translate
+        | Rotate
  ;
 syntax Scale
         = 
-        ANY sx ANY sy
+        Double sx Double sy
  ;
 syntax Translate
         = 
-        ANY tx ANY ty
+        Double tx Double ty
  ;
 syntax Rotate
         = 
-        ANY angle ANY cx ANY cy
+        Double angle Double cx Double cy
  ;
 syntax Visibility
         = 
-        visible: ANY
+        visible: Boolean
  ;
 syntax FontWeight
         = 
-        bold: ANY
+        bold: Boolean
  ;
 syntax FontStyle
         = 
-        italic: ANY
+        italic: Boolean
  ;
 syntax Dimension
         = 
-        ANY width ANY height
+        Double width Double height
  ;
 syntax Coordinates
-        = 
-        ()
+        = RelativeCoord
+        | AbsoluteCoord
  ;
 syntax RelativeCoord
         = 
-        ANY x ANY y
+        Double x Double y
  ;
 syntax AbsoluteCoord
         = 
-        ANY x ANY y
+        Double x Double y
  ;
 syntax ReferencedFile
         = 
-        ()
+        SvgFile
  ;
 syntax SvgFile
         = 
-        ANY tag ANY elements+
+        Svg tag Element elements+
  ;

@@ -4,29 +4,48 @@ exports
   sorts
         Classifier Environnement Element CooperativeAgent Representation Skill Aptitude Characteristic Communication AIP CooperationRules NCS Incomprehension Ambiguity Incompetence Unproductiveness Concurrency Conflict Uselessness 
   context-free syntax
-         -> Classifier
+        Environnement -> Classifier
 
-        element::ANY -> Environnement
+        Element -> Classifier
 
-        environnement::ANY action::ANY perception::ANY -> Element
+        Environnement -> Classifier
+        Element -> Classifier
 
-        elementA::ANY elementP::ANY representation::ANY+ skill::ANY+ aptitude::ANY+ characteristic::ANY+ communication::ANY+ observes::ANY+ -> CooperativeAgent
+        element::Element -> Environnement
 
-        cooperativeAgentR::ANY element::ANY -> Representation
+        environnement::Environnement action::CooperativeAgent perception::CooperativeAgent -> Element
 
-        cooperativeAgentS::ANY -> Skill
+        elementA::Element elementP::Element representation::Representation+ skill::Skill+ aptitude::Aptitude+ characteristic::Characteristic+ communication::Communication+ observes::CooperationRules+ -> CooperativeAgent
 
-        cooperativeAgentA::ANY -> Aptitude
+        cooperativeAgentR::CooperativeAgent element::Element -> Representation
 
-        cooperativeAgentCha::ANY -> Characteristic
+        cooperativeAgentS::CooperativeAgent -> Skill
 
-        cooperativeAgentCom::ANY aip::ANY+ -> Communication
+        cooperativeAgentA::CooperativeAgent -> Aptitude
+
+        cooperativeAgentCha::CooperativeAgent -> Characteristic
+
+        cooperativeAgentCom::CooperativeAgent aip::AIP+ -> Communication
 
          -> AIP
 
-        detects::ANY+ -> CooperationRules
+        detects::NCS+ -> CooperationRules
 
-        cooperationRules::ANY -> NCS
+        Incomprehension -> NCS
+
+        Ambiguity -> NCS
+
+        Incompetence -> NCS
+
+        Unproductiveness -> NCS
+
+        Concurrency -> NCS
+
+        Conflict -> NCS
+
+        Uselessness -> NCS
+
+        cooperationRules::CooperationRules -> NCS
 
          -> Incomprehension
 

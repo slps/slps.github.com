@@ -3,233 +3,214 @@ module MSVisio_DatadiagramMLBasicDef
 
 syntax DateTimeType
         = 
-        ANY year ANY month ANY day ANY hour ANY minute ANY second
+        Integer year Integer month Integer day Integer hour Integer minute Integer second
  ;
 syntax CellType
         = 
-        ANY unit ANY formula ANY err ANY value
+        String unit String formula String err String value
  ;
 syntax VisioDocument
         = 
-        ANY start ANY key ANY metric ANY buildnum ANY version ANY docLangId ANY docProps ANY docSettings ANY docColors ANY docPrintSetup ANY docFonts ANY docFaceNames ANY docStyleSheets ANY docDocumentSheet ANY docMasters ANY docPages ANY docWindows ANY docEventList ANY docHeaderFooter ANY docVBProjectData ANY docEmailRoutingData ANY docSolutionXML+
+        Integer start String key Boolean metric Integer buildnum String version Integer docLangId DocumentPropertiesCollection docProps DocumentSettingsElt docSettings ColorsTable docColors PrintSetup docPrintSetup FontsTable docFonts FaceNamesTable docFaceNames StyleSheetsCollection docStyleSheets DocumentSheet docDocumentSheet MastersCollection docMasters PagesCollection docPages WindowsInfo docWindows EventList docEventList HeaderFooter docHeaderFooter VBProjectData docVBProjectData EmailRoutingData docEmailRoutingData SolutionXML docSolutionXML+
  ;
 syntax DocumentPropertiesCollection
         = 
-        ANY dps_visioDocument ANY title ANY subject ANY creator ANY manager ANY company ANY category ANY keywords ANY description ANY hyperlinkBase_href ANY alternateNames ANY template ANY buildNumberCreated ANY buildNumberEdited ANY customProps ANY timeCreated ANY timeSaved ANY timeEdited ANY timePrinted
+        VisioDocument dps_visioDocument String title String subject String creator String manager String company String category String keywords String description String hyperlinkBase_href String alternateNames String template String buildNumberCreated String buildNumberEdited CustomPropertiesCollection customProps DateTimeType timeCreated DateTimeType timeSaved DateTimeType timeEdited DateTimeType timePrinted
  ;
 syntax CustomPropertiesCollection
         = 
-        ANY cps_docProp ANY cps_customProps+
+        DocumentPropertiesCollection cps_docProp CustomProperty cps_customProps+
  ;
 syntax CustomProperty
         = 
-        ANY cp_customProps ANY name ANY dataType
+        CustomPropertiesCollection cp_customProps String name String dataType
  ;
 syntax VBProjectData
         = 
-        ANY vpd_visioDocument ANY data
+        VisioDocument vpd_visioDocument String data
  ;
 syntax EmailRoutingData
         = 
-        ANY erd_visioDocument ANY data ANY size
+        VisioDocument erd_visioDocument String data Integer size
  ;
 syntax StyleSheetsCollection
         = 
-        ANY sss_visioDocument ANY stylesSheets+
+        VisioDocument sss_visioDocument StyleSheet stylesSheets+
  ;
 syntax StyleSheet
         = 
-        ss_stylesSheets: ANY
+        ss_stylesSheets: StyleSheetsCollection
  ;
 syntax DocumentSheet
         = 
-        ds_visioDocument: ANY
+        ds_visioDocument: VisioDocument
  ;
 syntax PageSheet
         = 
         ()
  ;
-syntax NamedElt
-        = 
-        ()
- ;
-syntax IdentifiedElt
-        = 
-        ()
- ;
-syntax UniqueIdElt
-        = 
-        ()
- ;
 syntax Shape
         = 
-        ANY ss_shapes ANY lineStyle ANY fillStyle ANY textStyle ANY shapeElts+
+        ShapesCollection ss_shapes Integer lineStyle Integer fillStyle Integer textStyle ShapeElt shapeElts+
  ;
 syntax ShapeElt
         = 
-        ()
- ;
-syntax IXElt
-        = 
-        ()
- ;
-syntax DelElt
-        = 
-        ()
+        Text
  ;
 syntax Geom
         = 
-        ANY noFill ANY noLine ANY noShow ANY noSnap ANY linesTo+ ANY movesTo+ ANY arcsTo+ ANY splineKnots+ ANY polylinesTo+ ANY infiniteLines+ ANY ellipses+ ANY ellipticalArcsTo+ ANY splineStarts+ ANY nurbsTo+
+        CellType noFill CellType noLine CellType noShow CellType noSnap LineTo linesTo+ MoveTo movesTo+ ArcTo arcsTo+ SplineKnot splineKnots+ PolylineTo polylinesTo+ InfiniteLine infiniteLines+ Ellipse ellipses+ EllipticalArcTo ellipticalArcsTo+ SplineStart splineStarts+ NURBSTo nurbsTo+
  ;
 syntax XYElt
-        = 
-        ()
+        = LineTo
+        | MoveTo
+        | XYAElt
  ;
 syntax LineTo
         = 
-        lt_geom: ANY
+        lt_geom: Geom
  ;
 syntax MoveTo
         = 
-        mt_geom: ANY
+        mt_geom: Geom
  ;
 syntax XYAElt
-        = 
-        ()
+        = ArcTo
+        | SplineKnot
+        | PolylineTo
+        | XYABElt
  ;
 syntax ArcTo
         = 
-        ac_geom: ANY
+        ac_geom: Geom
  ;
 syntax SplineKnot
         = 
-        sk_geom: ANY
+        sk_geom: Geom
  ;
 syntax PolylineTo
         = 
-        pt_geom: ANY
+        pt_geom: Geom
  ;
 syntax XYABElt
-        = 
-        ()
+        = InfiniteLine
+        | XYABCDElt
  ;
 syntax InfiniteLine
         = 
-        il_geom: ANY
+        il_geom: Geom
  ;
 syntax XYABCDElt
-        = 
-        ()
+        = Ellipse
+        | EllipticalArcTo
+        | SplineStart
+        | XYABCDEElt
  ;
 syntax Ellipse
         = 
-        e_geom: ANY
+        e_geom: Geom
  ;
 syntax EllipticalArcTo
         = 
-        eat_geom: ANY
+        eat_geom: Geom
  ;
 syntax SplineStart
         = 
-        ss_geom: ANY
+        ss_geom: Geom
  ;
 syntax XYABCDEElt
         = 
-        ()
+        NURBSTo
  ;
 syntax NURBSTo
         = 
-        nt_geom: ANY
+        nt_geom: Geom
  ;
 syntax Text
         = 
-        ANY textElts+
+        TextElt textElts+
  ;
 syntax TextElt
         = 
-        ()
+        StringElt
  ;
 syntax StringElt
         = 
-        value: ANY
+        value: String
  ;
 syntax MastersCollection
         = 
-        ANY ms_visioDocument ANY masters+ ANY masterShortCuts+
+        VisioDocument ms_visioDocument Master masters+ MasterShortCut masterShortCuts+
  ;
 syntax MasterShortCut
         = 
-        ANY m_masterShortCuts ANY iconSize ANY patternFlags ANY prompt ANY shortcutURL ANY shortcutHelp ANY alignName ANY icons+
+        MastersCollection m_masterShortCuts Integer iconSize Integer patternFlags String prompt String shortcutURL String shortcutHelp Integer alignName Icon icons+
  ;
 syntax Icon
         = 
-        ANY i_masterShortCut ANY value
+        MasterShortCut i_masterShortCut String value
  ;
 syntax Master
         = 
-        ANY m_masters ANY baseID ANY matchByName ANY iconSize ANY patternFlags ANY prompt ANY hidden ANY iconUpdate ANY alignName ANY masterElts+
+        MastersCollection m_masters String baseID Boolean matchByName Integer iconSize Integer patternFlags String prompt Boolean hidden Boolean iconUpdate Integer alignName MasterElt masterElts+
  ;
 syntax ShapesCollection
         = 
-        ANY shapes+
+        Shape shapes+
  ;
 syntax ConnectsCollection
         = 
-        ANY connections+
+        Connect connections+
  ;
 syntax Connect
         = 
-        ANY c_connects ANY fromSheet ANY toSheet ANY fromCell ANY toCell ANY fromPart ANY toPart
+        ConnectsCollection c_connects Integer fromSheet Integer toSheet String fromCell String toCell Integer fromPart Integer toPart
  ;
 syntax MasterElt
         = 
-        ()
+        Icon
  ;
 syntax PagesCollection
         = 
-        ANY ps_visioDocument ANY pages+
+        VisioDocument ps_visioDocument Page pages+
  ;
 syntax Page
         = 
-        ANY p_pages ANY background ANY backPage ANY viewScale ANY viewCenterX ANY ViewCenterY ANY reviewerID ANY associatedPage ANY pageElts+
- ;
-syntax PageElt
-        = 
-        ()
+        PagesCollection p_pages Boolean background Integer backPage Double viewScale Double viewCenterX Double ViewCenterY Integer reviewerID Integer associatedPage PageElt pageElts+
  ;
 syntax DocumentSettingsElt
         = 
-        dss_visioDocument: ANY
+        dss_visioDocument: VisioDocument
  ;
 syntax ColorsTable
         = 
-        cs_visioDocument: ANY
+        cs_visioDocument: VisioDocument
  ;
 syntax PrintSetup
         = 
-        ps_visioDocument: ANY
+        ps_visioDocument: VisioDocument
  ;
 syntax FontsTable
         = 
-        fs_visioDocument: ANY
+        fs_visioDocument: VisioDocument
  ;
 syntax FaceNamesTable
         = 
-        fns_visioDocument: ANY
+        fns_visioDocument: VisioDocument
  ;
 syntax WindowsInfo
         = 
-        ws_visioDocument: ANY
+        ws_visioDocument: VisioDocument
  ;
 syntax EventList
         = 
-        el_visioDocument: ANY
+        el_visioDocument: VisioDocument
  ;
 syntax HeaderFooter
         = 
-        ef_visioDocument: ANY
+        ef_visioDocument: VisioDocument
  ;
 syntax SolutionXML
         = 
-        sx_visioDocument: ANY
+        sx_visioDocument: VisioDocument
  ;

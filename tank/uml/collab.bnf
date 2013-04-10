@@ -1,26 +1,30 @@
 Package:
         EPSILON
 ProviderClause:
-        ownedEltColl::ANY ownedEltInt::ANY+
+        Package
+ProviderClause:
+        ownedEltColl::CollaborationPackage ownedEltInt::InteractionPackage+
 CollaborationPackage:
-        ownedElt::ANY
+        ownedElt::Collaboration
 Collaboration:
-        interaction::ANY+ ownedEltAss::ANY ownedEltClass::ANY
+        interaction::Interaction+ ownedEltAss::AssociationRole ownedEltClass::ClassifierRole
 InteractionPackage:
-        providerClause::ANY ownedElt::ANY
+        providerClause::ProviderClause ownedElt::Interaction
 Interaction:
-        context::ANY message::ANY+
+        context::Collaboration message::Message+
 AssociationRole:
-        connection::ANY
+        connection::AssociationEndRole
 ClassifierRole:
-        associationEndRole::ANY+ receiverMess::ANY senderMess::ANY availableFeature::ANY+ base::ANY
+        associationEndRole::AssociationEndRole+ receiverMess::Message senderMess::Message availableFeature::Operation+ base::Interface
 AssociationEndRole:
-        associationRole::ANY type::ANY
+        associationRole::AssociationRole type::ClassifierRole
 Message:
-        message::ANY+ activator::ANY interaction::ANY+ receiver::ANY sender::ANY specification::ANY
+        message::Message+ activator::Message interaction::Interaction+ receiver::ClassifierRole sender::ClassifierRole specification::Request
 Request:
-        message::ANY+
+        Operation
+Request:
+        message::Message+
 Operation:
-        classifierRole::ANY+ owner::ANY
+        classifierRole::ClassifierRole+ owner::Interface
 Interface:
-        classifierRole::ANY+ feature::ANY+
+        classifierRole::ClassifierRole+ feature::Operation+

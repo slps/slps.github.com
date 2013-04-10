@@ -2,24 +2,24 @@
 module News
 
 syntax Element
-        = 
-        ()
+        = Newspaper
+        | News
  ;
 syntax Newspaper
         = 
-        ANY language ANY copyright ANY pubDate ANY category ANY news+
+        String language String copyright Date pubDate Category category News news+
  ;
 syntax News
         = 
-        ANY author ANY comments ANY pubDate ANY category ANY newspaper
+        String author String comments Date pubDate Category category Newspaper newspaper
  ;
 syntax Category
         = 
-        value: ANY
+        value: String
  ;
 syntax Date
         = 
-        ANY eDay ANY day ANY month ANY year ANY hours ANY minutes ANY seconds
+        DayKind eDay Integer day Integer month Integer year Integer hours Integer minutes Integer seconds
  ;
 syntax DayKind
         = Monday: ()

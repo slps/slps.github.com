@@ -6,9 +6,9 @@ TwoByteField:
 VariableLengthField:
         EPSILON
 IMSTransactionMessage:
-        OIMAPrefixFormat::ANY standardFieldsFlag::ANY OIMAPrefixComponent::ANY standardFieldComponent::ANY messageComponent::ANY
+        OIMAPrefixFormat::OIMAPrefixFormats standardFieldsFlag::Boolean OIMAPrefixComponent::OIMAPrefix standardFieldComponent::StandardFields messageComponent::ApplicationData
 OIMAPrefix:
-        controlDataComponent::ANY stateDataComponent::ANY securityDataComponent::ANY userDataComponent::ANY
+        controlDataComponent::ControlData stateDataComponent::StateData securityDataComponent::SecurityData userDataComponent::UserData
 ControlData:
         EPSILON
 StateData:
@@ -18,10 +18,10 @@ SecurityData:
 UserData:
         EPSILON
 StandardFields:
-        length::ANY reservedField::ANY transactionCode::ANY
+        length::TwoByteField reservedField::TwoByteField transactionCode::VariableLengthField
 ApplicationData:
-        languageElements::ANY+ fieldComponents::ANY+
+        languageElements::TDLangElement+ fieldComponents::Field+
 Field:
-        fieldContainer::ANY
+        fieldContainer::ApplicationData
 TDLangElement:
         EPSILON

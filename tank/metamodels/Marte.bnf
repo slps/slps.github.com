@@ -1,216 +1,334 @@
 Element:
-        EPSILON
+        Comment
+Element:
+        NamedElement
+Element:
+        TemplateableElement
+Element:
+        Relationship
+Element:
+        TemplateSignature
+Element:
+        TemplateParameter
+Element:
+        ParameterableElement
+Element:
+        TemplateParameterSubstitution
+Element:
+        MultiplicityElement
+Element:
+        Image
+Element:
+        ActivityGroup
+Element:
+        Slot
+Element:
+        ExceptionHandler
 Comment:
-        body::ANY annotatedElement::ANY+
+        body::MARTE_PrimitivesTypes/String annotatedElement::Element+
 Package:
-        ownedType::ANY+ packageMerge::ANY+ packagedElement::ANY+ nestedPackage::ANY+ nestingPackage::ANY profileApplication::ANY+
+        Profile
+Package:
+        ownedType::Type+ packageMerge::PackageMerge+ packagedElement::PackageableElement+ nestedPackage::Package+ nestingPackage::Package profileApplication::ProfileApplication+
 NamedElement:
-        EPSILON
-StructuralFeature:
-        EPSILON
-ConnectableElement:
-        EPSILON
-TemplateableElement:
-        EPSILON
+        Namespace
+NamedElement:
+        TypedElement
+NamedElement:
+        RedefinableElement
+NamedElement:
+        DeploymentTarget
+NamedElement:
+        CollaborationUse
+NamedElement:
+        Message
+NamedElement:
+        Lifeline
+NamedElement:
+        Trigger
+NamedElement:
+        Vertex
+NamedElement:
+        ParameterSet
+NamedElement:
+        DeployedArtifact
+NamedElement:
+        MessageEnd
+NamedElement:
+        InteractionFragment
+NamedElement:
+        GeneralOrdering
 Property:
-        class::ANY datatype::ANY owningAssociation::ANY association::ANY isDerived::ANY isDerivedUnion::ANY default::ANY aggregation::ANY isComposite::ANY redefinedProperty::ANY+ defaultValue::ANY opposite::ANY subsettedProperty::ANY+ qualifier::ANY+ associationEnd::ANY
+        Port
+Property:
+        class::Class datatype::DataType owningAssociation::Association association::Association isDerived::MARTE_PrimitivesTypes/Boolean isDerivedUnion::MARTE_PrimitivesTypes/Boolean default::MARTE_PrimitivesTypes/String aggregation::AggregationKind isComposite::MARTE_PrimitivesTypes/Boolean redefinedProperty::Property+ defaultValue::ValueSpecification opposite::Property subsettedProperty::Property+ qualifier::Property+ associationEnd::Property
 VisibilityKind:
         public::EPSILON
         private::EPSILON
         protected::EPSILON
         package::EPSILON
 Dependency:
-        supplier::ANY+ client::ANY+
+        Abstraction
+Dependency:
+        Deployment
+Dependency:
+        supplier::NamedElement+ client::NamedElement+
 DirectedRelationship:
-        EPSILON
+        ElementImport
+DirectedRelationship:
+        PackageImport
+DirectedRelationship:
+        TemplateBinding
+DirectedRelationship:
+        Generalization
+DirectedRelationship:
+        PackageMerge
+DirectedRelationship:
+        ProfileApplication
+DirectedRelationship:
+        ProtocolConformance
 Relationship:
-        EPSILON
-Namespace:
-        EPSILON
+        DirectedRelationship
 ElementImport:
-        visibility::ANY alias::ANY importedElement::ANY importingNamespace::ANY
+        visibility::VisibilityKind alias::MARTE_PrimitivesTypes/String importedElement::PackageableElement importingNamespace::Namespace
 PackageImport:
-        visibility::ANY importedPackage::ANY importingNamespace::ANY
+        visibility::VisibilityKind importedPackage::Package importingNamespace::Namespace
 Constraint:
-        constrainedElement::ANY+ specification::ANY context::ANY
-TypedElement:
-        EPSILON
-Type:
-        EPSILON
+        IntervalConstraint
+Constraint:
+        InteractionConstraint
+Constraint:
+        constrainedElement::Element+ specification::ValueSpecification context::Namespace
 Association:
-        isDerived::ANY ownedEnd::ANY+ endType::ANY+ memberEnd::ANY navigableOwnedEnd::ANY+
+        Extension
+Association:
+        isDerived::MARTE_PrimitivesTypes/Boolean ownedEnd::Property+ endType::Type+ memberEnd::Property navigableOwnedEnd::Property+
 Classifier:
-        EPSILON
+        BehavioredClassifier
+Classifier:
+        DataType
+Classifier:
+        Signal
+Classifier:
+        Interface
+Classifier:
+        StructuredClassifier
 RedefinableElement:
-        EPSILON
+        Feature
+RedefinableElement:
+        ExtensionPoint
+RedefinableElement:
+        ActivityNode
+RedefinableElement:
+        ActivityEdge
 TemplateBinding:
-        signature::ANY parameterSubstitution::ANY+ boundElement::ANY
+        signature::TemplateSignature parameterSubstitution::TemplateParameterSubstitution+ boundElement::TemplateableElement
 TemplateSignature:
-        parameter::ANY+ ownedParameter::ANY+ template::ANY
+        parameter::TemplateParameter+ ownedParameter::TemplateParameter+ template::TemplateableElement
 TemplateParameter:
-        signature::ANY parameteredElement::ANY ownedParameteredElement::ANY default::ANY ownedDefault::ANY
-ParameterableElement:
-        EPSILON
+        signature::TemplateSignature parameteredElement::ParameterableElement ownedParameteredElement::ParameterableElement default::ParameterableElement ownedDefault::ParameterableElement
 TemplateParameterSubstitution:
-        formal::ANY actual::ANY+ ownedActual::ANY+ templateBinding::ANY
+        formal::TemplateParameter actual::ParameterableElement+ ownedActual::ParameterableElement+ templateBinding::TemplateBinding
 Generalization:
-        isSubstitutable::ANY general::ANY generalizationSet::ANY+ specific::ANY
+        isSubstitutable::MARTE_PrimitivesTypes/Boolean general::Classifier generalizationSet::GeneralizationSet+ specific::Classifier
 GeneralizationSet:
-        isCovering::ANY isDisjoint::ANY powertype::ANY generalization::ANY+
+        isCovering::MARTE_PrimitivesTypes/Boolean isDisjoint::MARTE_PrimitivesTypes/Boolean powertype::Classifier generalization::Generalization+
 Feature:
-        EPSILON
+        Connector
 Substitution:
-        contract::ANY substitutingClassifier::ANY
+        contract::Classifier substitutingClassifier::Classifier
 PackageableElement:
-        EPSILON
+        Constraint
+PackageableElement:
+        Type
+PackageableElement:
+        GeneralizationSet
+PackageableElement:
+        Observation
+PackageableElement:
+        Event
 PackageMerge:
-        mergedPackage::ANY receivingPackage::ANY
+        mergedPackage::Package receivingPackage::Package
 ProfileApplication:
-        appliedProfile::ANY isStrict::ANY applyingPackage::ANY
+        appliedProfile::Profile isStrict::MARTE_PrimitivesTypes/Boolean applyingPackage::Package
 Profile:
-        ownedStereotype::ANY+ metaclassReference::ANY+ metamodelReference::ANY+
+        ownedStereotype::Stereotype+ metaclassReference::ElementImport+ metamodelReference::PackageImport+
 Stereotype:
-        icon::ANY+
+        icon::Image+
 Class:
-        nestedClassifier::ANY+ ownedOperation::ANY+ superClass::ANY+ isActive::ANY ownedReception::ANY+ extension::ANY+
+        Stereotype
+Class:
+        Behavior
+Class:
+        nestedClassifier::Classifier+ ownedOperation::Operation+ superClass::Class+ isActive::MARTE_PrimitivesTypes/Boolean ownedReception::Reception+ extension::Extension+
 StringExpression:
-        subExpression::ANY+ owningExpression::ANY
+        subExpression::StringExpression+ owningExpression::StringExpression
 Expression:
-        symbol::ANY operand::ANY+
+        symbol::MARTE_PrimitivesTypes/String operand::ValueSpecification+
 ValueSpecification:
-        EPSILON
+        Expression
+ValueSpecification:
+        OpaqueExpression
+ValueSpecification:
+        TimeExpression
+ValueSpecification:
+        Duration
+ValueSpecification:
+        Interval
 BehavioredClassifier:
-        EPSILON
+        UseCase
 Behavior:
-        EPSILON
+        StateMachine
+Behavior:
+        Activity
 MultiplicityElement:
-        EPSILON
-DeploymentTarget:
-        EPSILON
+        ConnectorEnd
 DataType:
-        ownedAttribute::ANY+ ownedOperation::ANY+
+        Enumeration
+DataType:
+        ownedAttribute::Property+ ownedOperation::Operation+
 AggregationKind:
         none::EPSILON
         shared::EPSILON
         composite::EPSILON
 CollaborationUse:
-        type::ANY roleBinding::ANY+
+        type::Collaboration roleBinding::Dependency+
 UseCase:
-        include::ANY+ extend::ANY+ extensionPoint::ANY+ subject::ANY+
+        include::Include+ extend::Extend+ extensionPoint::ExtensionPoint+ subject::Classifier+
 Realization:
-        EPSILON
+        Substitution
+Realization:
+        InterfaceRealization
+Realization:
+        Substitution
+        InterfaceRealization
 Abstraction:
-        mapping::ANY
+        Realization
+Abstraction:
+        Manifestation
+Abstraction:
+        mapping::OpaqueExpression
 Image:
-        content::ANY location::ANY format::ANY
+        content::MARTE_PrimitivesTypes/String location::MARTE_PrimitivesTypes/String format::MARTE_PrimitivesTypes/String
 OpaqueExpression:
-        body::ANY+ language::ANY+ result::ANY behavior::ANY
+        body::MARTE_PrimitivesTypes/String+ language::MARTE_PrimitivesTypes/String+ result::Parameter behavior::Behavior
 Parameter:
-        direction::ANY default::ANY defaultValue::ANY operation::ANY parameterSet::ANY+ isException::ANY isStream::ANY effect::ANY
-EncapsulatedClassifier:
-        EPSILON
+        direction::ParameterDirectionKind default::MARTE_PrimitivesTypes/String defaultValue::ValueSpecification operation::Operation parameterSet::ParameterSet+ isException::MARTE_PrimitivesTypes/Boolean isStream::MARTE_PrimitivesTypes/Boolean effect::ParameterEffectKind
 Operation:
-        interface::ANY class::ANY isQuery::ANY isOrdered::ANY isUnique::ANY lower::ANY upper::ANY precondition::ANY+ postcondition::ANY+ redefinedOperation::ANY+ datatype::ANY bodyCondition::ANY type::ANY
+        interface::Interface class::Class isQuery::MARTE_PrimitivesTypes/Boolean isOrdered::MARTE_PrimitivesTypes/Boolean isUnique::MARTE_PrimitivesTypes/Boolean lower::MARTE_PrimitivesTypes/Integer upper::MARTE_PrimitivesTypes/UnlimitedNatural precondition::Constraint+ postcondition::Constraint+ redefinedOperation::Operation+ datatype::DataType bodyCondition::Constraint type::Type
 Reception:
-        signal::ANY
+        signal::Signal
 Extension:
-        isRequired::ANY metaclass::ANY
+        isRequired::MARTE_PrimitivesTypes/Boolean metaclass::Class
 EnumerationLiteral:
-        enumeration::ANY
+        enumeration::Enumeration
 ActivityPartition:
-        isDimension::ANY isExternal::ANY node::ANY+ subpartition::ANY+ superPartition::ANY represents::ANY edge::ANY+
+        isDimension::MARTE_PrimitivesTypes/Boolean isExternal::MARTE_PrimitivesTypes/Boolean node::ActivityNode+ subpartition::ActivityPartition+ superPartition::ActivityPartition represents::Element edge::ActivityEdge+
 Enumeration:
-        ownedLiteral::ANY+
+        ownedLiteral::EnumerationLiteral+
 InstanceSpecification:
-        classifier::ANY+ slot::ANY+ specification::ANY
+        EnumerationLiteral
+InstanceSpecification:
+        classifier::Classifier+ slot::Slot+ specification::ValueSpecification
 BehavioralFeature:
-        EPSILON
+        Reception
 Signal:
-        ownedAttribute::ANY+
+        ownedAttribute::Property+
 TimeExpression:
-        expr::ANY observation::ANY+
+        expr::ValueSpecification observation::Observation+
 Observation:
-        EPSILON
+        TimeObservation
+Observation:
+        DurationObservation
 Duration:
-        expr::ANY observation::ANY+
+        expr::ValueSpecification observation::Observation+
 DurationInterval:
         EPSILON
 Interval:
-        min::ANY max::ANY
+        DurationInterval
+Interval:
+        TimeInterval
+Interval:
+        min::ValueSpecification max::ValueSpecification
 TimeConstraint:
-        firstEvent::ANY
+        firstEvent::MARTE_PrimitivesTypes/Boolean
 IntervalConstraint:
-        EPSILON
+        TimeConstraint
+IntervalConstraint:
+        DurationConstraint
+IntervalConstraint:
+        TimeConstraint
+        DurationConstraint
 TimeInterval:
         EPSILON
 DurationConstraint:
-        firstEvent::ANY
+        firstEvent::MARTE_PrimitivesTypes/Boolean
 TimeObservation:
-        event::ANY firstEvent::ANY
+        event::NamedElement firstEvent::MARTE_PrimitivesTypes/Boolean
 DurationObservation:
-        event::ANY firstEvent::ANY
+        event::NamedElement firstEvent::MARTE_PrimitivesTypes/Boolean
 ConnectorEnd:
-        definingEnd::ANY partWithPort::ANY role::ANY
+        definingEnd::Property partWithPort::Property role::ConnectableElement
 TimeEvent:
-        isRelative::ANY when::ANY
+        isRelative::MARTE_PrimitivesTypes/Boolean when::ValueSpecification
 Event:
-        EPSILON
+        TimeEvent
 Port:
-        isBehavior::ANY isService::ANY required::ANY+ redefinedPort::ANY+ provided::ANY+ protocol::ANY
+        isBehavior::MARTE_PrimitivesTypes/Boolean isService::MARTE_PrimitivesTypes/Boolean required::Interface+ redefinedPort::Port+ provided::Interface+ protocol::ProtocolStateMachine
 Action:
-        EPSILON
+        InvocationAction
 Message:
-        messageKind::ANY messageSort::ANY receiveEvent::ANY sendEvent::ANY connector::ANY interaction::ANY argument::ANY+ signature::ANY
+        messageKind::MessageKind messageSort::MessageSort receiveEvent::MessageEnd sendEvent::MessageEnd connector::Connector interaction::Interaction argument::ValueSpecification+ signature::NamedElement
 Lifeline:
-        represents::ANY interaction::ANY selector::ANY decomposedAs::ANY coveredBy::ANY+
-ExecutionSpecification:
-        EPSILON
-InvocationAction:
-        EPSILON
+        represents::ConnectableElement interaction::Interaction selector::ValueSpecification decomposedAs::PartDecomposition coveredBy::InteractionFragment+
 Connector:
-        type::ANY redefinedConnector::ANY+ end::ANY kind::ANY contract::ANY+
+        type::Association redefinedConnector::Connector+ end::ConnectorEnd kind::ConnectorKind contract::Behavior+
 Collaboration:
-        collaborationRole::ANY+
+        collaborationRole::ConnectableElement+
 Interface:
-        ownedAttribute::ANY+ ownedOperation::ANY+ nestedClassifier::ANY+ redefinedInterface::ANY+ ownedReception::ANY+ protocol::ANY
+        ownedAttribute::Property+ ownedOperation::Operation+ nestedClassifier::Classifier+ redefinedInterface::Interface+ ownedReception::Reception+ protocol::ProtocolStateMachine
 InterfaceRealization:
-        contract::ANY implementingClassifier::ANY
+        contract::Interface implementingClassifier::BehavioredClassifier
 Trigger:
-        event::ANY port::ANY+
+        event::Event port::Port+
 ProtocolStateMachine:
-        conformance::ANY+
+        conformance::ProtocolConformance+
 StateMachine:
-        region::ANY+ submachineState::ANY+ connectionPoint::ANY+ extendedStateMachine::ANY+
+        ProtocolStateMachine
+StateMachine:
+        region::Region+ submachineState::State+ connectionPoint::Pseudostate+ extendedStateMachine::StateMachine+
 ProtocolConformance:
-        generalMachine::ANY specificMachine::ANY
+        generalMachine::ProtocolStateMachine specificMachine::ProtocolStateMachine
 Deployment:
-        deployedArtifact::ANY+ configuration::ANY+ location::ANY
+        deployedArtifact::DeployedArtifact+ configuration::DeploymentSpecification+ location::DeploymentTarget
 Include:
-        addition::ANY includingCase::ANY
+        addition::UseCase includingCase::UseCase
 Extend:
-        extendedCase::ANY condition::ANY extensionLocation::ANY+ extension::ANY
+        extendedCase::UseCase condition::Constraint extensionLocation::ExtensionPoint+ extension::UseCase
 ExtensionPoint:
-        useCase::ANY
+        useCase::UseCase
 Region:
-        subvertex::ANY+ transition::ANY+ state::ANY extendedRegion::ANY stateMachine::ANY
+        subvertex::Vertex+ transition::Transition+ state::State extendedRegion::Region stateMachine::StateMachine
 StructuredClassifier:
-        EPSILON
+        EncapsulatedClassifier
 Vertex:
-        EPSILON
+        Pseudostate
+Vertex:
+        ConnectionPointReference
 Transition:
-        kind::ANY container::ANY redefinedTransition::ANY guard::ANY effect::ANY trigger::ANY+ target::ANY source::ANY
+        kind::TransitionKind container::Region redefinedTransition::Transition guard::Constraint effect::Behavior trigger::Trigger+ target::Vertex source::Vertex
 TransitionKind:
         internal::EPSILON
         local::EPSILON
         external::EPSILON
 State:
-        isComposite::ANY isOrthogonal::ANY isSimple::ANY isSubmachineState::ANY submachine::ANY connection::ANY+ connectionPoint::ANY+ redefinedState::ANY stateInvariant::ANY entry::ANY exit::ANY doActivity::ANY deferrableTrigger::ANY+ region::ANY+
+        isComposite::MARTE_PrimitivesTypes/Boolean isOrthogonal::MARTE_PrimitivesTypes/Boolean isSimple::MARTE_PrimitivesTypes/Boolean isSubmachineState::MARTE_PrimitivesTypes/Boolean submachine::StateMachine connection::ConnectionPointReference+ connectionPoint::Pseudostate+ redefinedState::State stateInvariant::Constraint entry::Behavior exit::Behavior doActivity::Behavior deferrableTrigger::Trigger+ region::Region+
 ParameterSet:
-        parameter::ANY+ condition::ANY+
+        parameter::Parameter+ condition::Constraint+
 ActivityNode:
-        EPSILON
+        ExecutableNode
 ActivityGroup:
-        EPSILON
+        InterruptibleActivityRegion
 ParameterDirectionKind:
         in::EPSILON
         inout::EPSILON
@@ -221,20 +339,20 @@ ParameterEffectKind:
         read::EPSILON
         update::EPSILON
         delete::EPSILON
-ActivityEdge:
-        EPSILON
 InterruptibleActivityRegion:
-        node::ANY+ interruptingEdge::ANY+
-DeployedArtifact:
-        EPSILON
+        node::ActivityNode+ interruptingEdge::ActivityEdge+
 Slot:
-        definingFeature::ANY value::ANY+ owningInstance::ANY
+        definingFeature::StructuralFeature value::ValueSpecification+ owningInstance::InstanceSpecification
 ExecutableNode:
-        EPSILON
+        Action
 OutputPin:
         EPSILON
 Pin:
-        isControl::ANY
+        OutputPin
+Pin:
+        InputPin
+Pin:
+        isControl::MARTE_PrimitivesTypes/Boolean
 InputPin:
         EPSILON
 MessageKind:
@@ -243,16 +361,14 @@ MessageKind:
         found::EPSILON
         unknown::EPSILON
 ExceptionHandler:
-        handlerBody::ANY exceptionInput::ANY exceptionType::ANY+ protectedNode::ANY
-ObjectNode:
-        EPSILON
+        handlerBody::ExecutableNode exceptionInput::ObjectNode exceptionType::Classifier+ protectedNode::ExecutableNode
 ObjectNodeOrderingKind:
         unordered::EPSILON
         ordered::EPSILON
         LIFO::EPSILON
         FIFO::EPSILON
 MessageEnd:
-        EPSILON
+        Gate
 MessageSort:
         synchCall::EPSILON
         asynchCall::EPSILON
@@ -261,18 +377,24 @@ MessageSort:
         deleteMessage::EPSILON
         reply::EPSILON
 Interaction:
-        lifeline::ANY+ fragment::ANY+ action::ANY+ formalGate::ANY+ message::ANY+
+        lifeline::Lifeline+ fragment::InteractionFragment+ action::Action+ formalGate::Gate+ message::Message+
 PartDecomposition:
         EPSILON
 InteractionUse:
-        refersTo::ANY actualGate::ANY+ argument::ANY+
+        PartDecomposition
+InteractionUse:
+        refersTo::Interaction actualGate::Gate+ argument::Action+
 InteractionFragment:
-        EPSILON
+        ExecutionSpecification
+InteractionFragment:
+        InteractionUse
+InteractionFragment:
+        OccurrenceSpecification
 ConnectorKind:
         assembly::EPSILON
         delegation::EPSILON
 Pseudostate:
-        kind::ANY stateMachine::ANY state::ANY
+        kind::PseudostateKind stateMachine::StateMachine state::State
 PseudostateKind:
         initial::EPSILON
         deepHistory::EPSILON
@@ -285,26 +407,28 @@ PseudostateKind:
         exitPoint::EPSILON
         terminate::EPSILON
 ConnectionPointReference:
-        entry::ANY+ exit::ANY+ state::ANY
+        entry::Pseudostate+ exit::Pseudostate+ state::State
 StructuredActivityNode:
-        variable::ANY+ edge::ANY+ mustIsolate::ANY node::ANY+
+        variable::Variable+ edge::ActivityEdge+ mustIsolate::MARTE_PrimitivesTypes/Boolean node::ActivityNode+
 Variable:
-        scope::ANY activityScope::ANY
+        scope::StructuredActivityNode activityScope::Activity
 Activity:
-        structuredNode::ANY+ variable::ANY+ node::ANY+ isReadOnly::ANY edge::ANY+ partition::ANY+ isSingleExecution::ANY group::ANY+
+        structuredNode::StructuredActivityNode+ variable::Variable+ node::ActivityNode+ isReadOnly::MARTE_PrimitivesTypes/Boolean edge::ActivityEdge+ partition::ActivityPartition+ isSingleExecution::MARTE_PrimitivesTypes/Boolean group::ActivityGroup+
 OccurrenceSpecification:
-        toBefore::ANY+ event::ANY toAfter::ANY+
+        toBefore::GeneralOrdering+ event::Event toAfter::GeneralOrdering+
 DeploymentSpecification:
-        deploymentLocation::ANY executionLocation::ANY deployment::ANY
+        deploymentLocation::MARTE_PrimitivesTypes/String executionLocation::MARTE_PrimitivesTypes/String deployment::Deployment
 Gate:
-        message::ANY
+        message::Message
 Artifact:
-        fileName::ANY nestedArtifact::ANY+ manifestation::ANY+ ownedOperation::ANY+ ownedAttribute::ANY+
+        DeploymentSpecification
+Artifact:
+        fileName::MARTE_PrimitivesTypes/String nestedArtifact::Artifact+ manifestation::Manifestation+ ownedOperation::Operation+ ownedAttribute::Property+
 GeneralOrdering:
-        before::ANY after::ANY
+        before::OccurrenceSpecification after::OccurrenceSpecification
 Manifestation:
-        utilizedElement::ANY
+        utilizedElement::PackageableElement
 InteractionOperand:
-        guard::ANY fragment::ANY+
+        guard::InteractionConstraint fragment::InteractionFragment+
 InteractionConstraint:
-        minint::ANY maxint::ANY
+        minint::ValueSpecification maxint::ValueSpecification

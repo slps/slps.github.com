@@ -1,20 +1,20 @@
 RootFolder:
-        rootContainer::ANY+
+        rootContainer::RootContainer+
 RootContainer:
-        name::ANY position::ANY rootFolder::ANY actor::ANY+ inputSignal::ANY+ outputSignal::ANY+ queue::ANY+
+        name::String position::String rootFolder::RootFolder actor::Actor+ inputSignal::InputSignal+ outputSignal::OutputSignal+ queue::Queue+
 Actor:
-        memory::ANY script::ANY file::ANY WCET::ANY name::ANY position::ANY rootContainer::ANY transmitter::ANY+ receiver::ANY+
+        memory::String script::String file::String WCET::String name::String position::String rootContainer::RootContainer transmitter::Transmitter+ receiver::Receiver+
 Transmitter:
-        name::ANY position::ANY actor::ANY associationQueueTransmitter::ANY
+        name::String position::String actor::Actor associationQueueTransmitter::AssociationQueueTransmitter
 Receiver:
-        name::ANY position::ANY actor::ANY associationReceiverQueue::ANY
+        name::String position::String actor::Actor associationReceiverQueue::AssociationReceiverQueue
 InputSignal:
-        name::ANY position::ANY rootContainer::ANY associationReceiverQueue::ANY
+        name::String position::String rootContainer::RootContainer associationReceiverQueue::AssociationReceiverQueue
 OutputSignal:
-        name::ANY position::ANY rootContainer::ANY associationQueueTransmitter::ANY
+        name::String position::String rootContainer::RootContainer associationQueueTransmitter::AssociationQueueTransmitter
 Queue:
-        name::ANY position::ANY rootContainer::ANY associationReceiverQueue::ANY associationQueueTransmitter::ANY
+        name::String position::String rootContainer::RootContainer associationReceiverQueue::AssociationReceiverQueue associationQueueTransmitter::AssociationQueueTransmitter
 AssociationReceiverQueue:
-        srcqueue::ANY+ dstreceiver::ANY+ inputSignal::ANY
+        srcqueue::Queue+ dstreceiver::Receiver+ inputSignal::InputSignal
 AssociationQueueTransmitter:
-        dstqueue::ANY+ srctransmitter::ANY+ outputSignal::ANY
+        dstqueue::Queue+ srctransmitter::Transmitter+ outputSignal::OutputSignal

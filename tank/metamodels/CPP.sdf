@@ -4,15 +4,32 @@ exports
   sorts
         CDerived CStructured CBehavorialFeature CFunction CStructureContents CField CDerivableType VisibilityKind CPPReference CPPExtern CPPConst CPPTemplate CPPClass CPPGeneralization CPPOperation CPPOperator CPPMember 
   context-free syntax
-         -> CDerived
+        CPPReference -> CDerived
 
-         -> CStructured
+        CPPExtern -> CDerived
 
-         -> CBehavorialFeature
+        CPPConst -> CDerived
 
-        isVsrArg::ANY -> CFunction
+        CPPTemplate -> CDerived
 
-         -> CStructureContents
+        CPPReference -> CDerived
+        CPPExtern -> CDerived
+        CPPConst -> CDerived
+        CPPTemplate -> CDerived
+
+        CPPClass -> CStructured
+
+        CPPClass -> CStructured
+
+        CFunction -> CBehavorialFeature
+
+        CFunction -> CBehavorialFeature
+
+        isVsrArg::Boolean -> CFunction
+
+        CPPOperator -> CStructureContents
+
+        CPPOperator -> CStructureContents
 
          -> CField
 
@@ -24,18 +41,18 @@ exports
 
          -> CPPReference
 
-        linkage::ANY -> CPPExtern
+        linkage::String -> CPPExtern
 
          -> CPPConst
 
-        classes::ANY+ -> CPPTemplate
+        classes::CPPClass+ -> CPPTemplate
 
-        isAbstract::ANY isVolatile::ANY visibility::ANY templates::ANY+ generalizations::ANY+ -> CPPClass
+        isAbstract::Boolean isVolatile::Boolean visibility::VisibilityKind templates::CPPTemplate+ generalizations::CPPGeneralization+ -> CPPClass
 
-        visibility::ANY isVirtual::ANY supertype::ANY -> CPPGeneralization
+        visibility::VisibilityKind isVirtual::Boolean supertype::CPPClass -> CPPGeneralization
 
-        isStatic::ANY isExtern::ANY isInline::ANY isVirtual::ANY isPure::ANY visibility::ANY isCtor::ANY isDtor::ANY throws::ANY+ -> CPPOperation
+        isStatic::Boolean isExtern::Boolean isInline::Boolean isVirtual::Boolean isPure::Boolean visibility::VisibilityKind isCtor::Boolean isDtor::Boolean throws::CPPClass+ -> CPPOperation
 
-        isInline::ANY visibility::ANY -> CPPOperator
+        isInline::Boolean visibility::VisibilityKind -> CPPOperator
 
-        isStatic::ANY isVolatile::ANY isRegister::ANY visibility::ANY -> CPPMember
+        isStatic::Boolean isVolatile::Boolean isRegister::Boolean visibility::VisibilityKind -> CPPMember

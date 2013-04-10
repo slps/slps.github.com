@@ -3,67 +3,69 @@ module DiagramInterchange
 
 syntax Dimension
         = 
-        ANY width ANY heigth
+        Double width Double heigth
  ;
 syntax Point
-        = 
-        ANY x ANY y
+        = BezierPoint
+        | Double x Double y
  ;
 syntax BezierPoint
         = 
-        controls: ANY
+        controls: Point
  ;
 syntax Property
         = 
-        ANY key ANY value
+        String key String value
  ;
 syntax DiagramElement
-        = 
-        ()
+        = Reference
+        | GraphElement
+        | LeafElement
  ;
 syntax Reference
         = 
-        ANY isIndividualRepresentation ANY referenced
+        Boolean isIndividualRepresentation DiagramElement referenced
  ;
 syntax GraphElement
-        = 
-        ()
+        = GraphEdge
+        | GraphNode
  ;
 syntax GraphEdge
         = 
-        ANY waypoints ANY anchors
+        Point waypoints GraphConnector anchors
  ;
 syntax GraphNode
-        = 
-        size: ANY
+        = Diagram
+        | size: Dimension
  ;
 syntax GraphConnector
         = 
-        ANY position ANY gc_graphElement ANY graphEdges+
+        Point position GraphElement gc_graphElement GraphEdge graphEdges+
  ;
 syntax DiagramLink
         = 
-        ANY zoom ANY viewPort ANY dl_graphElement ANY dl_diagram
+        Double zoom Point viewPort GraphElement dl_graphElement Diagram dl_diagram
  ;
 syntax SemanticModelBridge
-        = 
-        ()
+        = SimpleSemanticModelElement
+        | UML1SemanticModelBridge
+        | CoreSemanticModelBridge
  ;
 syntax Diagram
         = 
-        ANY name ANY zoom ANY viewPort ANY diagramLinks+ ANY namespace
+        String name Double zoom Point viewPort DiagramLink diagramLinks+ SemanticModelBridge namespace
  ;
 syntax SimpleSemanticModelElement
         = 
-        typeInfo: ANY
+        typeInfo: String
  ;
 syntax UML1SemanticModelBridge
         = 
-        element: ANY
+        element: CoreElement
  ;
 syntax CoreSemanticModelBridge
         = 
-        element: ANY
+        element: ElementsElement
  ;
 syntax CoreElement
         = 
@@ -74,26 +76,27 @@ syntax ElementsElement
         ()
  ;
 syntax LeafElement
-        = 
-        ()
+        = TextElement
+        | Image
+        | GraphicPrimitive
  ;
 syntax TextElement
         = 
-        text: ANY
+        text: String
  ;
 syntax Image
         = 
-        ANY uri ANY mimeType
+        String uri String mimeType
  ;
 syntax GraphicPrimitive
-        = 
-        ()
+        = Polyline
+        | Ellipse
  ;
 syntax Polyline
         = 
-        ANY waypoints ANY closed
+        Point waypoints Boolean closed
  ;
 syntax Ellipse
         = 
-        ANY center ANY radiusX ANY radiusY ANY rotation ANY startAngle ANY endAngle
+        Point center Double radiusX Double radiusY Double rotation Double startAngle Double endAngle
  ;

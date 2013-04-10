@@ -2,36 +2,34 @@ module Main
 
 exports
   sorts
-        Page NameSpace PageResource GraphicalContainer WinFXElement PerspectiveElement ResourceDictionary Grid Object3D Workshop3D Element3D UI3Delement XyzAxis3D Box3D Square3D Name 
+        Page NameSpace PageResource GraphicalContainer WinFXElement ResourceDictionary Grid Workshop3D Element3D UI3Delement XyzAxis3D Box3D Square3D Name 
   context-free syntax
-        xmlns::ANY+ title::ANY graphContainer::ANY pageResources::ANY -> Page
+        xmlns::NameSpace+ title::String graphContainer::GraphicalContainer pageResources::PageResource -> Page
 
-        namespace::ANY identifier::ANY -> NameSpace
+        namespace::String identifier::String -> NameSpace
 
-        dictionaries::ANY+ -> PageResource
+        dictionaries::ResourceDictionary+ -> PageResource
 
-         -> GraphicalContainer
+        Grid -> GraphicalContainer
 
-         -> WinFXElement
+        Name -> WinFXElement
 
-         -> PerspectiveElement
+        source::String -> ResourceDictionary
 
-        source::ANY -> ResourceDictionary
+        object3D::Object3D+ -> Grid
 
-        object3D::ANY+ -> Grid
+        elements3D::Element3D+ -> Workshop3D
 
-         -> Object3D
+        UI3Delement -> Element3D
 
-        elements3D::ANY+ -> Workshop3D
+        UI3Delement -> Element3D
 
-         -> Element3D
+        transform::String material::String name::Name -> UI3Delement
 
-        transform::ANY material::ANY name::ANY -> UI3Delement
-
-        length::ANY -> XyzAxis3D
+        length::Double -> XyzAxis3D
 
          -> Box3D
 
          -> Square3D
 
-        name::ANY -> Name
+        name::String -> Name

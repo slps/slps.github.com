@@ -1,14 +1,16 @@
 QoSComponent:
-        operations::ANY profile::ANY+
+        operations::Operation profile::QoSProfile+
 Operation:
         EPSILON
 QoSProfile:
-        EPSILON
+        CompoundProfile
+QoSProfile:
+        SimpleProfile
 CompoundProfile:
-        profileTransition::ANY+ simpleProfile::ANY+
+        profileTransition::ProfileTransition+ simpleProfile::SimpleProfile+
 SimpleProfile:
-        compoundProfile::ANY uses::ANY provides::ANY
+        compoundProfile::CompoundProfile uses::QoSStatement provides::QoSStatement
 QoSStatement:
         EPSILON
 ProfileTransition:
-        operations::ANY+ from::ANY to::ANY compoundProfile::ANY
+        operations::Operation+ from::SimpleProfile to::SimpleProfile compoundProfile::CompoundProfile

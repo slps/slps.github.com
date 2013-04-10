@@ -4,32 +4,40 @@ exports
   sorts
         ModelElement SyncChart ReferenceState Arc Vertex PseudoState PseudoStateKind State SimpleState CompositeState Stg Transition TransitionKind PseudoTransition PseudoTransitionKind 
   context-free syntax
-         -> ModelElement
+        Arc -> ModelElement
 
-        context::ANY referenceState::ANY+ -> SyncChart
+        Vertex -> ModelElement
 
-        subSyncChart::ANY containers::ANY -> ReferenceState
+        context::ModelElement referenceState::ReferenceState+ -> SyncChart
 
-         -> Arc
+        subSyncChart::SyncChart containers::Stg -> ReferenceState
 
-         -> Vertex
+        Transition -> Arc
 
-        kind::ANY -> PseudoState
+        PseudoTransition -> Arc
+
+        PseudoState -> Vertex
+
+        State -> Vertex
+
+        kind::PseudoStateKind -> PseudoState
 
          -> PseudoStateKind
 
-        isFinal::ANY -> State
+        SimpleState -> State
+
+        isFinal::Boolean -> State
 
          -> SimpleState
 
-        canTerminate::ANY isSuspendable::ANY stg::ANY+ -> CompositeState
+        canTerminate::Boolean isSuspendable::Boolean stg::Stg+ -> CompositeState
 
-        withFinal::ANY compositeState::ANY arc::ANY+ referenceState::ANY+ -> Stg
+        withFinal::Boolean compositeState::CompositeState arc::Arc+ referenceState::ReferenceState+ -> Stg
 
-        kind::ANY -> Transition
+        kind::TransitionKind -> Transition
 
          -> TransitionKind
 
-        kind::ANY -> PseudoTransition
+        kind::PseudoTransitionKind -> PseudoTransition
 
          -> PseudoTransitionKind

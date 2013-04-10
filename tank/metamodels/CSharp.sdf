@@ -4,22 +4,36 @@ exports
   sorts
         Member TypedAttribute Field Property MethodBase Constructor Method Type Parameter Assembly 
   context-free syntax
-        name::ANY owner::ANY -> Member
+        TypedAttribute -> Member
 
-        type::ANY -> TypedAttribute
+        MethodBase -> Member
+
+        Type -> Member
+
+        name::String owner::Type -> Member
+
+        Field -> TypedAttribute
+
+        Property -> TypedAttribute
+
+        type::Type -> TypedAttribute
 
          -> Field
 
-        isReadable::ANY isWritable::ANY -> Property
+        isReadable::Boolean isWritable::Boolean -> Property
 
-        visibility::ANY isAbstract::ANY isFinal::ANY isStatic::ANY parameters::ANY+ -> MethodBase
+        Constructor -> MethodBase
+
+        Method -> MethodBase
+
+        visibility::String isAbstract::Boolean isFinal::Boolean isStatic::Boolean parameters::Parameter+ -> MethodBase
 
          -> Constructor
 
-        returnType::ANY -> Method
+        returnType::Type -> Method
 
-        qualifiedName::ANY isAbstract::ANY visibility::ANY isSealed::ANY nameSpace::ANY members::ANY+ t_container::ANY super::ANY -> Type
+        qualifiedName::String isAbstract::Boolean visibility::String isSealed::Boolean nameSpace::String members::Member+ t_container::Assembly super::Type -> Type
 
-        isIn::ANY isOut::ANY name::ANY position::ANY method::ANY type::ANY -> Parameter
+        isIn::Boolean isOut::Boolean name::Boolean position::Integer method::MethodBase type::Type -> Parameter
 
-        name::ANY content::ANY+ -> Assembly
+        name::String content::Type+ -> Assembly

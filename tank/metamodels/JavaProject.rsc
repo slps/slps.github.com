@@ -3,35 +3,36 @@ module JavaProject
 
 syntax JavaProject
         = 
-        ANY ownedPackageFragment+
+        PackageFragment ownedPackageFragment+
  ;
 syntax PackageFragment
         = 
-        ANY ownedCompilationUnit+
+        CompilationUnit ownedCompilationUnit+
  ;
 syntax CompilationUnit
         = 
-        ANY importDeclaration+ ANY ownedType+ ANY declaration
+        ImportDeclaration importDeclaration+ Type ownedType+ PackageDeclaration declaration
  ;
 syntax ImportDeclaration
         = 
-        ANY name
+        name: String
  ;
 syntax Type
         = 
-        ANY nestedType+ ANY ownedSuperType+ ANY elementName ANY member_kind ANY methods+ ANY fields+
+        Type nestedType+ Type ownedSuperType+ String elementName MEMBER_KIND member_kind Method methods+ Field fields+
  ;
 syntax Field
         = 
-        
+        ()
  ;
 syntax Method
         = 
-        ANY returnType ANY parametersName+ ANY parametersType+
+        String returnType String parametersName+ String parametersType+
  ;
 syntax JavaElement
-        = 
-        ()
+        = Type
+        | Field
+        | Method
  ;
 syntax MEMBER_KIND
         = class: ()
@@ -40,10 +41,14 @@ syntax MEMBER_KIND
         | Annotation: ()
  ;
 syntax NamedElement
-        = 
-        ()
+        = JavaProject
+        | PackageFragment
+        | CompilationUnit
+        | ImportDeclaration
+        | JavaElement
+        | PackageDeclaration
  ;
 syntax PackageDeclaration
         = 
-        ANY name
+        name: String
  ;

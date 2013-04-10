@@ -30,29 +30,31 @@ syntax PredicateType
  ;
 syntax ReactionRuleSet
         = 
-        ANY rules+
+        Rules/ReactionRule rules+
  ;
 syntax ProductionRuleSet
         = 
-        ANY rules+
+        Rules/ProductionRule rules+
  ;
 syntax EventType
         = 
-        eventTypeID: ANY
+        eventTypeID: String
  ;
 syntax RuleSet
-        = 
-        ()
+        = ReactionRuleSet
+        | ProductionRuleSet
+        | IntegrityRuleSet
+        | DerivationRuleSet
  ;
 syntax RuleBase
         = 
-        ANY vocabularies ANY externalVocabulaires+ ANY rules+ ANY ruleBaseID
+        Vocabulary/VocBasic/Vocabulary vocabularies Vocabulary/VocBuiltin/ExternalVocabulary externalVocabulaires+ RuleSet rules+ String ruleBaseID
  ;
 syntax IntegrityRuleSet
         = 
-        ANY rules+
+        Rules/IntegrityRule rules+
  ;
 syntax DerivationRuleSet
         = 
-        ANY rules+
+        Rules/DerivationRule rules+
  ;

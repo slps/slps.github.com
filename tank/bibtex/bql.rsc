@@ -3,25 +3,25 @@ module Bql
 
 syntax LocatedElement
         = 
-        ()
+        Entry
  ;
 syntax Query
         = 
-        ANY entries+ ANY predicates+
+        Entry entries+ Predicate predicates+
  ;
 syntax Entry
         = 
-        ANY name ANY type ANY allFields ANY fields+ ANY predicate
+        String name String type Boolean allFields Field fields+ Predicate predicate
  ;
 syntax Field
         = 
-        ANY name ANY entry
+        String name Entry entry
  ;
 syntax Predicate
         = 
-        ANY entry ANY expression+
+        Entry entry Expression expression+
  ;
 syntax Expression
         = 
-        ANY field ANY value
+        String field String value
  ;

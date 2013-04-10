@@ -2,56 +2,72 @@
 module SPL
 
 syntax LocatedElement
-        = 
-        ()
+        = Program
+        | Service
+        | Session
+        | MethodName
+        | Branch
+        | TypeExpression
+        | Declaration
+        | StructureProperty
+        | FunctionCall
+        | Statement
+        | SelectMember
+        | Expression
+        | MessageField
+        | Constant
+        | Response
  ;
 syntax Program
         = 
-        service: ANY
+        service: Service
  ;
 syntax Service
         = 
-        ANY name ANY declarations+ ANY sessions+
+        String name Declaration declarations+ Session sessions+
  ;
 syntax Session
-        = 
-        ()
+        = Registration
+        | Dialog
+        | Event
+        | Method
  ;
 syntax Registration
         = 
-        ANY declarations+ ANY sessions+
+        Declaration declarations+ Session sessions+
  ;
 syntax Dialog
         = 
-        ANY declarations+ ANY methods+
+        Declaration declarations+ Method methods+
  ;
 syntax Event
         = 
-        ANY eventId ANY declarations+ ANY methods+
+        String eventId Declaration declarations+ Method methods+
  ;
 syntax Method
         = 
-        ANY type ANY direction ANY methodName ANY arguments+ ANY statements+ ANY branches+
+        TypeExpression type Direction direction MethodName methodName Argument arguments+ Statement statements+ Branch branches+
  ;
 syntax Argument
         = 
         ()
  ;
 syntax MethodName
-        = 
-        ()
+        = SIPMethodName
+        | ControlMethodName
  ;
 syntax SIPMethodName
         = 
-        name: ANY
+        name: SIPMethod
  ;
 syntax ControlMethodName
         = 
-        name: ANY
+        name: ControlMethod
  ;
 syntax Branch
-        = 
-        ANY statements+
+        = DefaultBranch
+        | NamedBranch
+        | Statement statements+
  ;
 syntax DefaultBranch
         = 
@@ -59,255 +75,283 @@ syntax DefaultBranch
  ;
 syntax NamedBranch
         = 
-        ANY name+
+        String name+
  ;
 syntax TypeExpression
-        = 
-        ()
+        = SimpleType
+        | SequenceType
+        | DefinedType
  ;
 syntax SimpleType
         = 
-        type: ANY
+        type: PrimitiveType
  ;
 syntax SequenceType
         = 
-        ANY modifier ANY type ANY size
+        Modifier modifier PrimitiveType type Integer size
  ;
 syntax DefinedType
         = 
-        typeName: ANY
+        typeName: String
  ;
 syntax Declaration
-        = 
-        ()
+        = VariableDeclaration
+        | FunctionDeclaration
+        | StructureDeclaration
  ;
 syntax VariableDeclaration
-        = 
-        ANY type ANY initExp
+        = Argument
+        | WhenHeader
+        | TypeExpression type Expression initExp
  ;
 syntax FunctionDeclaration
-        = 
-        ()
+        = RemoteFunctionDeclaration
+        | LocalFunctionDeclaration
  ;
 syntax RemoteFunctionDeclaration
         = 
-        functionLocation: ANY
+        functionLocation: FunctionLocation
  ;
 syntax LocalFunctionDeclaration
         = 
-        ANY statements+
+        Statement statements+
  ;
 syntax StructureDeclaration
         = 
-        ANY properties+
+        Argument properties+
  ;
 syntax StructureProperty
         = 
-        ANY name ANY type
+        String name TypeExpression type
  ;
 syntax FunctionCall
         = 
-        ANY function ANY parameters+
+        FunctionDeclaration function Expression parameters+
  ;
 syntax Statement
-        = 
-        ()
+        = CompoundStat
+        | SetStat
+        | DeclarationStat
+        | ReturnStat
+        | IfStat
+        | WhenStat
+        | ForeachStat
+        | SelectStat
+        | FunctionCallStat
+        | ContinueStat
+        | BreakStat
+        | PushStat
  ;
 syntax CompoundStat
         = 
-        ANY statements+
+        Statement statements+
  ;
 syntax SetStat
         = 
-        ANY target ANY setValue
+        Place target Expression setValue
  ;
 syntax DeclarationStat
         = 
-        declaration: ANY
+        declaration: Declaration
  ;
 syntax ReturnStat
         = 
-        ANY returnedValue ANY branch
+        Expression returnedValue NamedBranch branch
  ;
 syntax IfStat
         = 
-        ANY condition ANY thenStatements+ ANY elseStatements+
+        Expression condition Statement thenStatements+ Statement elseStatements+
  ;
 syntax WhenStat
         = 
-        ANY idExp ANY whenHeaders+ ANY statements+ ANY elseStatements+
+        Variable idExp WhenHeader whenHeaders+ Statement statements+ Statement elseStatements+
  ;
 syntax ForeachStat
         = 
-        ANY iteratorName ANY sequenceExp ANY statements+
+        String iteratorName Expression sequenceExp Statement statements+
  ;
 syntax SelectStat
         = 
-        ANY matchedExp ANY selectCases+ ANY selectDefault
+        Expression matchedExp SelectCase selectCases+ SelectDefault selectDefault
  ;
 syntax FunctionCallStat
         = 
-        functionCall: ANY
+        functionCall: FunctionCall
  ;
 syntax ContinueStat
         = 
-        
+        ()
  ;
 syntax BreakStat
         = 
-        
+        ()
  ;
 syntax PushStat
         = 
-        ANY target ANY pushedValue
+        Place target Expression pushedValue
  ;
 syntax WhenHeader
         = 
-        ANY headerId ANY value
+        String headerId Constant value
  ;
 syntax SelectMember
-        = 
-        ()
+        = SelectDefault
+        | SelectCase
  ;
 syntax SelectDefault
         = 
-        ANY statements+
+        Statement statements+
  ;
 syntax SelectCase
         = 
-        ANY values+
+        Constant values+
  ;
 syntax Expression
-        = 
-        ()
+        = ConstantExp
+        | OperatorExp
+        | ForwardExp
+        | WithExp
+        | BlockExp
+        | ReasonExp
+        | BODYExp
+        | RequestURIExp
+        | PopExp
+        | FunctionCallExp
+        | Place
  ;
 syntax ConstantExp
         = 
-        value: ANY
+        value: Constant
  ;
 syntax OperatorExp
         = 
-        ANY opName ANY leftExp ANY rightExp
+        String opName Expression leftExp Expression rightExp
  ;
 syntax ForwardExp
         = 
-        ANY isParallel ANY exp
+        Boolean isParallel Expression exp
  ;
 syntax WithExp
         = 
-        ANY exp ANY msgFields+
+        Expression exp MessageField msgFields+
  ;
 syntax BlockExp
         = 
-        exp: ANY
+        exp: Expression
  ;
 syntax ReasonExp
         = 
-        
+        ()
  ;
 syntax BODYExp
         = 
-        
+        ()
  ;
 syntax RequestURIExp
         = 
-        
+        ()
  ;
 syntax PopExp
         = 
-        source: ANY
+        source: Place
  ;
 syntax FunctionCallExp
         = 
-        functionCall: ANY
+        functionCall: FunctionCall
  ;
 syntax Place
-        = 
-        ()
+        = SIPHeaderPlace
+        | VariablePlace
  ;
 syntax SIPHeaderPlace
         = 
-        header: ANY
+        header: SIPHeader
  ;
 syntax VariablePlace
-        = 
-        ()
+        = PropertyCallPlace
+        | Variable
  ;
 syntax PropertyCallPlace
         = 
-        ANY propName ANY source
+        String propName VariablePlace source
  ;
 syntax Variable
         = 
-        source: ANY
+        source: Declaration
  ;
 syntax MessageField
-        = 
-        ()
+        = ReasonMessageField
+        | HeadedMessageField
  ;
 syntax ReasonMessageField
         = 
-        ANY exp
+        exp: Expression
  ;
 syntax HeadedMessageField
         = 
-        headerId: ANY
+        headerId: String
  ;
 syntax Constant
-        = 
-        ()
+        = BooleanConstant
+        | IntegerConstant
+        | StringConstant
+        | URIConstant
+        | SequenceConstant
+        | ResponseConstant
  ;
 syntax BooleanConstant
         = 
-        value: ANY
+        value: Boolean
  ;
 syntax IntegerConstant
         = 
-        value: ANY
+        value: Integer
  ;
 syntax StringConstant
         = 
-        value: ANY
+        value: String
  ;
 syntax URIConstant
         = 
-        uri: ANY
+        uri: String
  ;
 syntax SequenceConstant
         = 
-        ANY values+
+        Constant values+
  ;
 syntax ResponseConstant
         = 
-        response: ANY
+        response: Response
  ;
 syntax Response
-        = 
-        ()
+        = SuccessResponse
+        | ErrorResponse
  ;
 syntax SuccessResponse
         = 
-        successKind: ANY
+        successKind: SuccessKind
  ;
 syntax ErrorResponse
-        = 
-        
+        = ClientErrorResponse
+        | GlobalErrorResponse
+        | RedirectionErrorResponse
+        | ServerErrorResponse
  ;
 syntax ClientErrorResponse
         = 
-        errorKind: ANY
+        errorKind: ClientErrorKind
  ;
 syntax GlobalErrorResponse
         = 
-        errorKind: ANY
+        errorKind: GlobalErrorKind
  ;
 syntax RedirectionErrorResponse
         = 
-        errorKind: ANY
+        errorKind: RedirectionErrorKind
  ;
 syntax ServerErrorResponse
         = 
-        errorKind: ANY
+        errorKind: ServerErrorKind
  ;
 syntax Direction
         = inout: ()

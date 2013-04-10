@@ -1,12 +1,16 @@
 Node:
-        description::ANY preliminary::ANY object::ANY attributes::ANY+ no_dst::ANY+ nx_dst::ANY+ cn_dst::ANY+
+        Root
+Node:
+        Child
+Node:
+        description::String preliminary::Boolean object::String attributes::Attribute+ no_dst::ORGroup+ nx_dst::XORGroup+ cn_dst::Child+
 Attribute:
-        description::ANY editable::ANY key::ANY value::ANY name::ANY node::ANY
+        description::String editable::Boolean key::Boolean value::String name::String node::Node
 Root:
         EPSILON
 Child:
-        cn_src::ANY+ cx_src::ANY+ co_src::ANY+
+        cn_src::Node+ cx_src::XORGroup+ co_src::ORGroup+
 XORGroup:
-        preliminary::ANY name::ANY nx_src::ANY+ cx_dst::ANY+
+        preliminary::Boolean name::String nx_src::Node+ cx_dst::Child+
 ORGroup:
-        preliminary::ANY name::ANY no_src::ANY+ co_dst::ANY+
+        preliminary::Boolean name::String no_src::Node+ co_dst::Child+

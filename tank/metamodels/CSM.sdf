@@ -4,23 +4,37 @@ exports
   sorts
         CSM GeneralResource Step Scenarion Start End ResourceAcquire ResourceRelease Workload Component ProcessingResource ExternalService ActiveResource PassiveResource Message PathConnection Join Fork Merge Branch Seqence 
   context-free syntax
-        step::ANY+ generalResource::ANY+ scenarion::ANY+ -> CSM
+        step::Step+ generalResource::GeneralResource+ scenarion::Scenarion+ -> CSM
 
-        resourceAcquire::ANY+ resourceRelease::ANY+ -> GeneralResource
+        ActiveResource -> GeneralResource
 
-        postPath::ANY prePath::ANY activeResource::ANY -> Step
+        PassiveResource -> GeneralResource
 
-        step::ANY+ root::ANY+ -> Scenarion
+        resourceAcquire::ResourceAcquire+ resourceRelease::ResourceRelease+ -> GeneralResource
 
-        workload::ANY -> Start
+        Start -> Step
+
+        End -> Step
+
+        ResourceAcquire -> Step
+
+        ResourceRelease -> Step
+
+        postPath::PathConnection prePath::PathConnection activeResource::ActiveResource -> Step
+
+        Step -> Scenarion
+
+        step::Step+ root::Start+ -> Scenarion
+
+        workload::Workload -> Start
 
          -> End
 
-        generalResource::ANY -> ResourceAcquire
+        generalResource::GeneralResource -> ResourceAcquire
 
-        generalResource::ANY -> ResourceRelease
+        generalResource::GeneralResource -> ResourceRelease
 
-        start::ANY -> Workload
+        start::Start -> Workload
 
          -> Component
 
@@ -28,13 +42,29 @@ exports
 
          -> ExternalService
 
-        step::ANY+ -> ActiveResource
+        ProcessingResource -> ActiveResource
 
-         -> PassiveResource
+        ExternalService -> ActiveResource
+
+        step::Step+ -> ActiveResource
+
+        Component -> PassiveResource
+
+        Component -> PassiveResource
 
          -> Message
 
-        message::ANY post::ANY+ pre::ANY+ -> PathConnection
+        Join -> PathConnection
+
+        Fork -> PathConnection
+
+        Merge -> PathConnection
+
+        Branch -> PathConnection
+
+        Seqence -> PathConnection
+
+        message::Message post::Step+ pre::Step+ -> PathConnection
 
          -> Join
 

@@ -2,34 +2,37 @@
 module MySQL
 
 syntax NamedElement
-        = 
-        ()
+        = DataBase
+        | Table
+        | Column
+        | EnumItem
  ;
 syntax DataBase
         = 
-        ANY tables+
+        Table tables+
  ;
 syntax Table
         = 
-        ANY columns+ ANY database
+        Column columns+ DataBase database
  ;
 syntax Column
-        = 
-        ANY type ANY isPrimaryKey ANY null ANY defaultValue ANY comment ANY table
+        = IntegerColumn
+        | EnumColumn
+        | String type Boolean isPrimaryKey Boolean null String defaultValue String comment Table table
  ;
 syntax IntegerColumn
         = 
-        isAutoIncrement: ANY
+        isAutoIncrement: Boolean
  ;
 syntax EnumColumn
         = 
-        enumSet: ANY
+        enumSet: EnumSet
  ;
 syntax EnumSet
         = 
-        ANY enumItems+
+        EnumItem enumItems+
  ;
 syntax EnumItem
         = 
-        enumSet: ANY
+        enumSet: EnumSet
  ;

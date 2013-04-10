@@ -4,50 +4,68 @@ exports
   sorts
         MultyPartyCollaboration BusinessPartnerRole Performs AuthorizedRole Transaction BinaryCollaboration BusinessState Start Fork Join CompletionState Failure Success BusinessActivity BusinessTransactionActivity CollaborationActivity BusinessTransaction BusinessAction RequestingBusinessActivity RespondingBusinessActivity DocumentSecurity DocumentEnvelope Attachment BusinessDocument 
   context-free syntax
-        partners::ANY+ -> MultyPartyCollaboration
+        partners::BusinessPartnerRole+ -> MultyPartyCollaboration
 
-        collaboration::ANY transition::ANY performers::ANY+ -> BusinessPartnerRole
+        collaboration::MultyPartyCollaboration transition::Transaction performers::Performs+ -> BusinessPartnerRole
 
-        performedBy::ANY collaboration::ANY role::ANY -> Performs
+        performedBy::BusinessPartnerRole collaboration::BinaryCollaboration role::AuthorizedRole -> Performs
 
-        isInitiator::ANY performers::ANY+ -> AuthorizedRole
+        isInitiator::Boolean performers::Performs+ -> AuthorizedRole
 
-        onInitiation::ANY conditionGuard::ANY conditionExpression::ANY from::ANY to::ANY -> Transaction
+        onInitiation::String conditionGuard::String conditionExpression::String from::BusinessState to::BusinessState -> Transaction
 
-        pattern::ANY timeToPerform::ANY preCondition::ANY postCondition::ANY beginsWhen::ANY endsWhen::ANY roles::ANY+ transitions::ANY+ states::ANY+ -> BinaryCollaboration
+        pattern::String timeToPerform::String preCondition::String postCondition::String beginsWhen::String endsWhen::String roles::Performs+ transitions::Transaction+ states::BusinessState+ -> BinaryCollaboration
 
-         -> BusinessState
+        Start -> BusinessState
 
-        collaboration::ANY from::ANY to::ANY -> Start
+        Fork -> BusinessState
 
-        waitForAll::ANY -> Fork
+        Join -> BusinessState
 
-        collaboration::ANY from::ANY to::ANY -> Join
+        CompletionState -> BusinessState
 
-        guardCondition::ANY -> CompletionState
+        BusinessActivity -> BusinessState
+
+        collaboration::BinaryCollaboration from::AuthorizedRole to::AuthorizedRole -> Start
+
+        waitForAll::String -> Fork
+
+        collaboration::BinaryCollaboration from::AuthorizedRole to::AuthorizedRole -> Join
+
+        Failure -> CompletionState
+
+        Success -> CompletionState
+
+        guardCondition::String -> CompletionState
 
          -> Failure
 
          -> Success
 
-         -> BusinessActivity
+        BusinessTransactionActivity -> BusinessActivity
 
-        timeToPerform::ANY isConcurrent::ANY isLegallyBinding::ANY use::ANY -> BusinessTransactionActivity
+        CollaborationActivity -> BusinessActivity
 
-        use::ANY -> CollaborationActivity
+        timeToPerform::String isConcurrent::Boolean isLegallyBinding::Boolean use::BusinessTransaction -> BusinessTransactionActivity
 
-        pattern::ANY isGuaranteedDeliveryRequired::ANY preCondition::ANY postCondition::ANY beginsWhen::ANY endsWhen::ANY requester::ANY responder::ANY -> BusinessTransaction
+        use::BinaryCollaboration -> CollaborationActivity
 
-         -> BusinessAction
+        pattern::String isGuaranteedDeliveryRequired::Boolean preCondition::String postCondition::String beginsWhen::String endsWhen::String requester::RequestingBusinessActivity responder::RespondingBusinessActivity -> BusinessTransaction
 
-        timeToAcknowledgeAcceptance::ANY transaction::ANY documentEnvelope::ANY -> RequestingBusinessActivity
+        RequestingBusinessActivity -> BusinessAction
 
-        transaction::ANY documentEnvelope::ANY -> RespondingBusinessActivity
+        RespondingBusinessActivity -> BusinessAction
 
-         -> DocumentSecurity
+        timeToAcknowledgeAcceptance::String transaction::BusinessTransaction documentEnvelope::DocumentEnvelope -> RequestingBusinessActivity
 
-        isPositiveResponse::ANY requesting::ANY responding::ANY attachements::ANY+ document::ANY -> DocumentEnvelope
+        transaction::BusinessTransaction documentEnvelope::DocumentEnvelope -> RespondingBusinessActivity
 
-        mimeType::ANY specification::ANY version::ANY envelope::ANY document::ANY -> Attachment
+        DocumentEnvelope -> DocumentSecurity
 
-        specificationLocation::ANY specificationElement::ANY conditionExpression::ANY envelopes::ANY+ attachments::ANY+ -> BusinessDocument
+        Attachment -> DocumentSecurity
+
+        isPositiveResponse::Boolean requesting::RequestingBusinessActivity responding::RespondingBusinessActivity attachements::Attachment+ document::BusinessDocument -> DocumentEnvelope
+
+        mimeType::String specification::String version::String envelope::DocumentEnvelope document::BusinessDocument -> Attachment
+
+        specificationLocation::String specificationElement::String conditionExpression::String envelopes::DocumentEnvelope+ attachments::Attachment+ -> BusinessDocument

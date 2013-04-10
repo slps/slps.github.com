@@ -13,7 +13,445 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable Gnu C Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/zoo/">Grammar Zoo</a> for details. <br></br>Source used for this grammar: Andrew J. Malton, James R. Cordy, Christopher Dahn, <em>TXL Base Grammar for ANSI and K+R C</em>, with GNU C extensions and overrides to preserve comments, May 2004.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>97</strong></li><li>Number of top alternatives: <strong>376</strong></li><li>Number of defined nonterminal symbols: <strong>97</strong></li><li>Root nonterminal symbols: <code><a href="#program" class="nt">program</a></code></li><li>Other top nonterminal symbols: <strong>17</strong>: <code><a href="#comment_NL" class="nt">comment_NL</a>, <a href="#null_declaration" class="nt">null_declaration</a>, <a href="#local_label" class="nt">local_label</a>, <a href="#ptr_qualifier" class="nt">ptr_qualifier</a>, <a href="#designator" class="nt">designator</a>, <a href="#designator_assignment" class="nt">designator_assignment</a>, <a href="#bit_qualifier" class="nt">bit_qualifier</a>, <a href="#inline_qualifier" class="nt">inline_qualifier</a>, <a href="#attributes_or_asm" class="nt">attributes_or_asm</a>, <a href="#asm_statement" class="nt">asm_statement</a>, <a href="#compound_statement_expression" class="nt">compound_statement_expression</a>, <a href="#compound_literal" class="nt">compound_literal</a>, <a href="#typeof_expression" class="nt">typeof_expression</a>, <a href="#complex_specifier" class="nt">complex_specifier</a>, <a href="#gnu_long_int" class="nt">gnu_long_int</a>, <a href="#hexfloat" class="nt">hexfloat</a>, <a href="#argument_expression" class="nt">argument_expression</a></code></li><li>Bottom nonterminal symbols: <strong>27</strong>: <code><a href="#comment" class="nt">comment</a>, <a href="#NL" class="nt">NL</a>, <a href="#semi" class="nt">semi</a>, <a href="#cv_qualifier" class="nt">cv_qualifier</a>, <a href="#constant_expression" class="nt">constant_expression</a>, <a href="#postfix_extension" class="nt">postfix_extension</a>, <a href="#SP" class="nt">SP</a>, <a href="#id" class="nt">id</a>, <a href="#string" class="nt">string</a>, <a href="#number" class="nt">number</a>, <a href="#stringlit" class="nt">stringlit</a>, <a href="#expression" class="nt">expression</a>, <a href="#compound_statement" class="nt">compound_statement</a>, <a href="#struct_or_union_specifier" class="nt">struct_or_union_specifier</a>, <a href="#designated_initializer" class="nt">designated_initializer</a>, <a href="#type_specifiers" class="nt">type_specifiers</a>, <a href="#ptr_operator" class="nt">ptr_operator</a>, <a href="#array_declarator_extension" class="nt">array_declarator_extension</a>, <a href="#simple_type_name" class="nt">simple_type_name</a>, <a href="#type_qualifier" class="nt">type_qualifier</a>, <a href="#SPOFF" class="nt">SPOFF</a>, <a href="#SPON" class="nt">SPON</a>, <a href="#charlit" class="nt">charlit</a>, <a href="#hex" class="nt">hex</a>, <a href="#assignment_expression" class="nt">assignment_expression</a>, <a href="#type_name" class="nt">type_name</a>, <a href="#unary_expression" class="nt">unary_expression</a></code></li><li>Number of used terminal symbols: <strong>286</strong></li><li>Special terminal symbols: <strong>22</strong>: <code class="t">"[", "]", "...", ".", ":", "=", "('(", ",", ")')", "(", ")", ""default"", ""hidden"", ""protected"", ""internal"", ""global-dynamic"", ""local-dynamic"", ""initial-exec"", ""local-exec"", "{", "}", "L"</code></li><li>Keywords: <strong>264</strong>: <code class="t">"__label__", "__restrict", "restrict__", "restrict", "__restrict__", "__extension__", "long", "short", "signed", "unsigned", "__signed__", "__signed", "__inline", "__inline__", "inline__", "inline", "__attribute__", "__near__", "__near", "near__", "near", "__far__", "__far", "far__", "far", "__visibility__", "__visibility", "visibility__", "visibility", "__nonnull__", "__nonnull", "nonnull__", "nonnull", "__nothrow__", "__nothrow", "nothrow__", "nothrow", "__may_alias__", "__may_alias", "may_alias__", "may_alias", "__tls_model__", "__tls_model", "tls_model__", "tls_model", "__cleanup__", "__cleanup", "cleanup__", "cleanup", "__dllexport__", "__dllexport", "dllexport__", "dllexport", "__used__", "__used", "used__", "used", "__always_inline__", "__always_inline", "always_inline__", "always_inline", "__noinline__", "__noinline", "noinline__", "noinline", "__vector_size__", "__vector_size", "vector_size__", "vector_size", "__deprecated__", "__deprecated", "deprecated__", "deprecated", "__mode__", "__mode", "mode__", "mode", "__format__", "__format", "format__", "format", "__format_arg__", "__format_arg", "format_arg__", "format_arg", "__aligned__", "__aligned", "aligned__", "aligned", "weak", "__weak__", "__weak", "weak__", "alias", "__alias__", "__alias", "alias__", "no_check_memory_usage", "__no_check_memory_usage__", "__no_check_memory_usage", "no_check_memory_usage__", "regparm", "__regparm__", "__regparm", "regparm__", "stdcall", "__stdcall__", "__stdcall", "stdcall__", "cdecl", "__cdecl__", "__cdecl", "cdecl__", "longcall", "__longcall__", "__longcall", "longcall__", "long_call", "__long_call__", "__long_call", "long_call__", "short_call", "__short_call__", "__short_call", "short_call__", "dllimport", "__dllimport__", "__dllimport", "dllimport__", "exception", "__exception__", "__exception", "exception__", "function_vector", "__function_vector__", "__function_vector", "function_vector__", "interrupt", "__interrupt__", "__interrupt", "interrupt__", "interrupt_handler", "__interrupt_handler__", "__interrupt_handler", "interrupt_handler__", "sp_switch", "__sp_switch__", "__sp_switch", "sp_switch__", "trap_exit", "__trap_exit__", "__trap_exit", "trap_exit__", "eightbit_data", "__eightbit_data__", "__eightbit_data", "eightbit_data__", "tiny_data", "__tiny_data__", "__tiny_data", "tiny_data__", "signal", "__signal__", "__signal", "signal__", "naked", "__naked__", "__naked", "naked__", "model", "__model__", "__model", "model__", "small", "__small__", "__small", "small__", "medium", "__medium__", "__medium", "medium__", "large", "__large__", "__large", "large__", "nocommon", "__nocommon__", "nocommon__", "__nocommon", "shared", "__shared__", "__shared", "shared__", "malloc", "__malloc__", "__malloc", "malloc__", "printf", "__printf__", "__printf", "printf__", "scanf", "__scanf__", "__scanf", "scanf__", "strftime", "__strftime__", "__strftime", "strftime__", "strfmon", "__strfmon__", "__strfmon", "strfmon__", "__noreturn__", "__noreturn", "noreturn__", "noreturn", "__const__", "__const", "const__", "const", "__pure__", "__pure", "pure__", "pure", "__transparent_union__", "__transparent_union", "transparent_union__", "transparent_union", "__unused__", "__unused", "unused__", "unused", "__packed__", "__packed", "packed__", "packed", "no_instrument_function", "__no_instrument_function__", "__no_instrument_function", "no_instrument_function__", "section", "__section__", "__section", "section__", "constructor", "__constructor__", "__constructor", "constructor__", "destructor", "__destructor__", "__destructor", "destructor__", "__asm__", "asm", "asm__", "__asm", "__typeof", "typeof", "__typeof__", "typeof__", "_Complex", "__alignof__", "__alignof"</code></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="comment_NL">comment_NL</a>:
+				</script></head><body><h1 class="l">Browsable Gnu C Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/zoo/">Grammar Zoo</a> for details. <br></br>Source used for this grammar: Andrew J. Malton, James R. Cordy, Christopher Dahn, <em>TXL Base Grammar for ANSI and K+R C</em>, with GNU C extensions and overrides to preserve comments, May 2004.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>230</strong></li><li>Number of top alternatives: <strong>685</strong></li><li>Number of defined nonterminal symbols: <strong>180</strong></li><li>Root nonterminal symbols: <code><a href="#program" class="nt">program</a></code></li><li>Other top nonterminal symbols: —</li><li>Bottom nonterminal symbols: <strong>17</strong>: <code><a href="#number" class="nt">number</a>, <a href="#float" class="nt">float</a>, <a href="#hex" class="nt">hex</a>, <a href="#long" class="nt">long</a>, <a href="#SP" class="nt">SP</a>, <a href="#dotfloat" class="nt">dotfloat</a>, <a href="#charlit" class="nt">charlit</a>, <a href="#stringlit" class="nt">stringlit</a>, <a href="#SPOFF" class="nt">SPOFF</a>, <a href="#SPON" class="nt">SPON</a>, <a href="#id" class="nt">id</a>, <a href="#IN" class="nt">IN</a>, <a href="#NL" class="nt">NL</a>, <a href="#EX" class="nt">EX</a>, <a href="#integernumber" class="nt">integernumber</a>, <a href="#key" class="nt">key</a>, <a href="#comment" class="nt">comment</a></code></li><li>Number of used terminal symbols: <strong>365</strong></li><li>Special terminal symbols: <strong>71</strong>: <code class="t">"...", "=", "*=", "/=", "%=", "+=", "-=", "&gt;&gt;=", "&lt;&lt;=", "&amp;=", "^=", "|=", "?", ":", "+", "-", "*", "/", "%", "==", "!=", "&lt;", "&gt;", "&lt;=", "&gt;=", "||", "&amp;&amp;", "|", "^", "&amp;", "&lt;&lt;", "&gt;&gt;", "(", ")", "!", "~", "++", "--", "[", "]", ".", "-&gt;", ",", "{", "}", ";", "#define", "#else", "#endif", "#if", "#ifdef", "#ifndef", "#ident", "#include", "#line", "#undef", "#LINK", "#", "#pragma", "\", "('(", ")')", ""default"", ""hidden"", ""protected"", ""internal"", ""global-dynamic"", ""local-dynamic"", ""initial-exec"", ""local-exec"", "L"</code></li><li>Keywords: <strong>294</strong>: <code class="t">"sizeof", "auto", "register", "static", "extern", "typedef", "long", "short", "signed", "unsigned", "char", "int", "void", "float", "double", "struct", "union", "enum", "const", "volatile", "__const", "__const__", "const__", "__volatile__", "__volatile", "volatile__", "case", "default", "if", "switch", "else", "while", "do", "for", "goto", "continue", "break", "return", "__label__", "__restrict", "restrict__", "restrict", "__restrict__", "__extension__", "__signed__", "__signed", "__inline", "__inline__", "inline__", "inline", "__attribute__", "__near__", "__near", "near__", "near", "__far__", "__far", "far__", "far", "__visibility__", "__visibility", "visibility__", "visibility", "__nonnull__", "__nonnull", "nonnull__", "nonnull", "__nothrow__", "__nothrow", "nothrow__", "nothrow", "__may_alias__", "__may_alias", "may_alias__", "may_alias", "__tls_model__", "__tls_model", "tls_model__", "tls_model", "__cleanup__", "__cleanup", "cleanup__", "cleanup", "__dllexport__", "__dllexport", "dllexport__", "dllexport", "__used__", "__used", "used__", "used", "__always_inline__", "__always_inline", "always_inline__", "always_inline", "__noinline__", "__noinline", "noinline__", "noinline", "__vector_size__", "__vector_size", "vector_size__", "vector_size", "__deprecated__", "__deprecated", "deprecated__", "deprecated", "__mode__", "__mode", "mode__", "mode", "__format__", "__format", "format__", "format", "__format_arg__", "__format_arg", "format_arg__", "format_arg", "__aligned__", "__aligned", "aligned__", "aligned", "weak", "__weak__", "__weak", "weak__", "alias", "__alias__", "__alias", "alias__", "no_check_memory_usage", "__no_check_memory_usage__", "__no_check_memory_usage", "no_check_memory_usage__", "regparm", "__regparm__", "__regparm", "regparm__", "stdcall", "__stdcall__", "__stdcall", "stdcall__", "cdecl", "__cdecl__", "__cdecl", "cdecl__", "longcall", "__longcall__", "__longcall", "longcall__", "long_call", "__long_call__", "__long_call", "long_call__", "short_call", "__short_call__", "__short_call", "short_call__", "dllimport", "__dllimport__", "__dllimport", "dllimport__", "exception", "__exception__", "__exception", "exception__", "function_vector", "__function_vector__", "__function_vector", "function_vector__", "interrupt", "__interrupt__", "__interrupt", "interrupt__", "interrupt_handler", "__interrupt_handler__", "__interrupt_handler", "interrupt_handler__", "sp_switch", "__sp_switch__", "__sp_switch", "sp_switch__", "trap_exit", "__trap_exit__", "__trap_exit", "trap_exit__", "eightbit_data", "__eightbit_data__", "__eightbit_data", "eightbit_data__", "tiny_data", "__tiny_data__", "__tiny_data", "tiny_data__", "signal", "__signal__", "__signal", "signal__", "naked", "__naked__", "__naked", "naked__", "model", "__model__", "__model", "model__", "small", "__small__", "__small", "small__", "medium", "__medium__", "__medium", "medium__", "large", "__large__", "__large", "large__", "nocommon", "__nocommon__", "nocommon__", "__nocommon", "shared", "__shared__", "__shared", "shared__", "malloc", "__malloc__", "__malloc", "malloc__", "printf", "__printf__", "__printf", "printf__", "scanf", "__scanf__", "__scanf", "scanf__", "strftime", "__strftime__", "__strftime", "strftime__", "strfmon", "__strfmon__", "__strfmon", "strfmon__", "__noreturn__", "__noreturn", "noreturn__", "noreturn", "__pure__", "__pure", "pure__", "pure", "__transparent_union__", "__transparent_union", "transparent_union__", "transparent_union", "__unused__", "__unused", "unused__", "unused", "__packed__", "__packed", "packed__", "packed", "no_instrument_function", "__no_instrument_function__", "__no_instrument_function", "no_instrument_function__", "section", "__section__", "__section", "section__", "constructor", "__constructor__", "__constructor", "constructor__", "destructor", "__destructor__", "__destructor", "destructor__", "__asm__", "asm", "asm__", "__asm", "__typeof", "typeof", "__typeof__", "typeof__", "_Complex", "__alignof__", "__alignof"</code></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="C_compilation_unit">C_compilation_unit</a>:
+        <a class="nt" href="#declaration_or_function_definition">declaration_or_function_definition</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="constant">constant</a>:
+        <a class="nt" href="#number">number</a>
+        <a class="nt" href="#float">float</a>
+        <a class="nt" href="#hex">hex</a>
+        <a class="nt" href="#long">long</a>
+        <a class="nt" href="#SP">SP</a> <a class="nt" href="#dotfloat">dotfloat</a>
+        <a class="nt" href="#charlit">charlit</a>
+        <a class="nt" href="#string">string</a>
+</pre><pre><a class="nt" name="constant">constant</a>:
+        <a class="nt" href="#gnu_long_int">gnu_long_int</a>
+        <a class="nt" href="#gnu_long_int_string">gnu_long_int_string</a><span class="meta">+</span>
+        <a class="nt" href="#hexfloat">hexfloat</a>
+</pre><pre><a class="nt" name="string">string</a>:
+        <a class="nt" href="#stringlit">stringlit</a><span class="meta">+</span>
+</pre><pre><a class="nt" name="expression">expression</a>:
+        <a class="nt" href="#assignment_expression">assignment_expression</a><span class="meta">+</span>
+</pre><pre><a class="nt" name="expression">expression</a>:
+        <a class="nt" href="#comment_NL">comment_NL</a><span class="meta">*</span> <span class="t">"..."</span>
+</pre><pre><a class="nt" name="constant_expression">constant_expression</a>:
+        <a class="nt" href="#conditional_expression">conditional_expression</a>
+</pre><pre><a class="nt" name="constant_expression">constant_expression</a>:
+        <a class="nt" href="#restrict_qualifier">restrict_qualifier</a>
+</pre><pre><a class="nt" name="assignment_expression">assignment_expression</a>:
+        <a class="nt" href="#conditional_expression">conditional_expression</a> <a class="nt" href="#assignment_operation">assignment_operation</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="assignment_expression">assignment_expression</a>:
+        <a class="nt" href="#conditional_expression">conditional_expression</a>
+        <a class="nt" href="#conditional_expression">conditional_expression</a> <a class="nt" href="#assignment_operation">assignment_operation</a>
+</pre><pre><a class="nt" name="assignment_operation">assignment_operation</a>:
+        <a class="nt" href="#assignment_operator">assignment_operator</a> <a class="nt" href="#assignment_expression">assignment_expression</a>
+</pre><pre><a class="nt" name="assignment_operator">assignment_operator</a>:
+        <span class="t">"="</span>
+        <span class="t">"*="</span>
+        <span class="t">"/="</span>
+        <span class="t">"%="</span>
+        <span class="t">"+="</span>
+        <span class="t">"-="</span>
+        <span class="t">"&gt;&gt;="</span>
+        <span class="t">"&lt;&lt;="</span>
+        <span class="t">"&amp;="</span>
+        <span class="t">"^="</span>
+        <span class="t">"|="</span>
+</pre><pre><a class="nt" name="conditional_expression">conditional_expression</a>:
+        <a class="nt" href="#binary_expression">binary_expression</a> <a class="nt" href="#conditional_operation">conditional_operation</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="conditional_expression">conditional_expression</a>:
+        <a class="nt" href="#binary_expression">binary_expression</a> <a class="nt" href="#conditional_operation">conditional_operation</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="conditional_operation">conditional_operation</a>:
+        <span class="t">"?"</span> <a class="nt" href="#expression">expression</a> <span class="t">":"</span> <a class="nt" href="#conditional_expression">conditional_expression</a>
+</pre><pre><a class="nt" name="conditional_operation">conditional_operation</a>:
+        <span class="t">"?"</span> <a class="nt" href="#expression">expression</a><span class="meta">?</span> <span class="t">":"</span> <a class="nt" href="#binary_expression">binary_expression</a>
+</pre><pre><a class="nt" name="binary_expression">binary_expression</a>:
+        <a class="nt" href="#unary_expression">unary_expression</a>
+        <a class="nt" href="#binary_expression">binary_expression</a> <a class="nt" href="#binary_operator">binary_operator</a> <a class="nt" href="#unary_expression">unary_expression</a>
+</pre><pre><a class="nt" name="binary_operator">binary_operator</a>:
+        <span class="t">"+"</span>
+        <span class="t">"-"</span>
+        <span class="t">"*"</span>
+        <span class="t">"/"</span>
+        <span class="t">"%"</span>
+        <span class="t">"=="</span>
+        <span class="t">"!="</span>
+        <span class="t">"&lt;"</span>
+        <span class="t">"&gt;"</span>
+        <span class="t">"&lt;="</span>
+        <span class="t">"&gt;="</span>
+        <span class="t">"||"</span>
+        <span class="t">"&amp;&amp;"</span>
+        <span class="t">"|"</span>
+        <span class="t">"^"</span>
+        <span class="t">"&amp;"</span>
+        <span class="t">"&lt;&lt;"</span>
+        <span class="t">"&gt;&gt;"</span>
+</pre><pre><a class="nt" name="unary_expression">unary_expression</a>:
+        <a class="nt" href="#postfix_expression">postfix_expression</a>
+        <a class="nt" href="#unary_operator">unary_operator</a> <a class="nt" href="#SPOFF">SPOFF</a> <a class="nt" href="#unary_expression">unary_expression</a> <a class="nt" href="#SPON">SPON</a>
+        <span class="t">"("</span> <a class="nt" href="#type_name">type_name</a> <span class="t">")"</span> <a class="nt" href="#unary_expression">unary_expression</a>
+        <a class="nt" href="#sizeof_expression">sizeof_expression</a>
+</pre><pre><a class="nt" name="unary_expression">unary_expression</a>:
+        <a class="nt" href="#alignof_expression">alignof_expression</a>
+</pre><pre><a class="nt" name="sizeof_expression">sizeof_expression</a>:
+        <span class="t">"sizeof"</span> <span class="t">"("</span> <a class="nt" href="#type_name">type_name</a> <span class="t">")"</span>
+        <span class="t">"sizeof"</span> <a class="nt" href="#unary_expression">unary_expression</a>
+</pre><pre><a class="nt" name="sizeof_expression">sizeof_expression</a>:
+        <span class="t">"sizeof"</span> <a class="nt" href="#unary_expression">unary_expression</a>
+        <span class="t">"sizeof"</span> <span class="t">"("</span> <a class="nt" href="#type_name">type_name</a> <span class="t">")"</span>
+</pre><pre><a class="nt" name="unary_operator">unary_operator</a>:
+        <span class="t">"*"</span>
+        <span class="t">"&amp;"</span>
+        <span class="t">"+"</span>
+        <span class="t">"-"</span>
+        <span class="t">"!"</span>
+        <span class="t">"~"</span>
+        <span class="t">"++"</span>
+        <span class="t">"--"</span>
+</pre><pre><a class="nt" name="unary_operator">unary_operator</a>:
+        <span class="t">"&amp;&amp;"</span>
+</pre><pre><a class="nt" name="postfix_expression">postfix_expression</a>:
+        <a class="nt" href="#reference">reference</a>
+        <a class="nt" href="#nonreference">nonreference</a>
+</pre><pre><a class="nt" name="reference">reference</a>:
+        <a class="nt" href="#reference_id">reference_id</a>
+        <a class="nt" href="#reference_expression">reference_expression</a>
+</pre><pre><a class="nt" name="reference_id">reference_id</a>:
+        <a class="nt" href="#id">id</a>
+</pre><pre><a class="nt" name="reference_expression">reference_expression</a>:
+        <a class="nt" href="#unannotated_reference_base">unannotated_reference_base</a> <a class="nt" href="#postfix_extension">postfix_extension</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="unannotated_reference_base">unannotated_reference_base</a>:
+        <a class="nt" href="#reference_id">reference_id</a>
+        <a class="nt" href="#nonreferential_primary">nonreferential_primary</a>
+</pre><pre><a class="nt" name="nonreference">nonreference</a>:
+        <a class="nt" href="#nonreferential_primary">nonreferential_primary</a> <a class="nt" href="#postfix_extension">postfix_extension</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="nonreferential_primary">nonreferential_primary</a>:
+        <a class="nt" href="#constant">constant</a>
+        <a class="nt" href="#string">string</a>
+        <span class="t">"("</span> <a class="nt" href="#expression">expression</a> <span class="t">")"</span>
+</pre><pre><a class="nt" name="nonreferential_primary">nonreferential_primary</a>:
+        <a class="nt" href="#constant">constant</a>
+        <a class="nt" href="#string">string</a>
+        <span class="t">"("</span> <a class="nt" href="#expression">expression</a> <span class="t">")"</span>
+        <a class="nt" href="#compound_statement_expression">compound_statement_expression</a>
+        <a class="nt" href="#compound_literal">compound_literal</a>
+        <a class="nt" href="#extension_specifier">extension_specifier</a> <a class="nt" href="#compound_statement_expression">compound_statement_expression</a>
+        <a class="nt" href="#extension_specifier">extension_specifier</a> <span class="t">"("</span> <a class="nt" href="#expression">expression</a> <span class="t">")"</span>
+</pre><pre><a class="nt" name="postfix_extension">postfix_extension</a>:
+        <span class="t">"["</span> <a class="nt" href="#expression">expression</a> <span class="t">"]"</span>
+        <span class="t">"("</span> <a class="nt" href="#expression">expression</a><span class="meta">?</span> <span class="t">")"</span>
+        <span class="t">"."</span> <a class="nt" href="#id">id</a>
+        <span class="t">"-&gt;"</span> <a class="nt" href="#id">id</a>
+        <span class="t">"++"</span>
+        <span class="t">"--"</span>
+</pre><pre><a class="nt" name="postfix_extension">postfix_extension</a>:
+        <span class="t">"["</span> <a class="nt" href="#expression">expression</a> <span class="t">"]"</span>
+        <span class="t">"("</span> <span class="meta">{</span><a class="nt" href="#argument_expression">argument_expression</a> <span class="t">","</span><span class="meta">}*</span> <span class="t">")"</span>
+        <span class="t">"."</span> <a class="nt" href="#id">id</a>
+        <span class="t">"-&gt;"</span> <a class="nt" href="#id">id</a>
+        <span class="t">"++"</span>
+        <span class="t">"--"</span>
+</pre><pre><a class="nt" name="declaration">declaration</a>:
+        <a class="nt" href="#declaration_body">declaration_body</a> <a class="nt" href="#semi">semi</a>
+        <a class="nt" href="#preprocessor">preprocessor</a>
+</pre><pre><a class="nt" name="declaration">declaration</a>:
+        <a class="nt" href="#comment_NL">comment_NL</a>
+</pre><pre><a class="nt" name="declaration">declaration</a>:
+        <a class="nt" href="#null_declaration">null_declaration</a>
+        <a class="nt" href="#declaration_body">declaration_body</a> <a class="nt" href="#semi">semi</a>
+        <a class="nt" href="#preprocessor">preprocessor</a>
+</pre><pre><a class="nt" name="declaration_body">declaration_body</a>:
+        <a class="nt" href="#decl_specifiers">decl_specifiers</a> <a class="nt" href="#init_declarator">init_declarator</a><span class="meta">+</span>
+        <a class="nt" href="#enum_specifier">enum_specifier</a>
+        <a class="nt" href="#struct_or_union_specifier">struct_or_union_specifier</a>
+</pre><pre><a class="nt" name="declaration_body">declaration_body</a>:
+        <a class="nt" href="#decl_specifiers">decl_specifiers</a> <a class="nt" href="#init_declarator">init_declarator</a><span class="meta">+</span>
+        <a class="nt" href="#decl_qualifier">decl_qualifier</a><span class="meta">*</span> <a class="nt" href="#struct_or_union_specifier">struct_or_union_specifier</a>
+        <a class="nt" href="#decl_qualifier">decl_qualifier</a><span class="meta">*</span> <a class="nt" href="#enum_specifier">enum_specifier</a> <a class="nt" href="#attribute_spec">attribute_spec</a><span class="meta">*</span>
+        <a class="nt" href="#local_label">local_label</a> <a class="nt" href="#declarator">declarator</a><span class="meta">+</span>
+        <a class="nt" href="#asm_spec">asm_spec</a>
+</pre><pre><a class="nt" name="decl_specifiers">decl_specifiers</a>:
+        <a class="nt" href="#decl_qualifier">decl_qualifier</a><span class="meta">*</span> <a class="nt" href="#type_specifier">type_specifier</a><span class="meta">?</span> <a class="nt" href="#decl_qualifier">decl_qualifier</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="decl_specifiers">decl_specifiers</a>:
+        <a class="nt" href="#decl_qualifier">decl_qualifier</a><span class="meta">*</span> <a class="nt" href="#type_specifier">type_specifier</a> <a class="nt" href="#decl_qualifier">decl_qualifier</a><span class="meta">*</span>
+        <a class="nt" href="#decl_qualifier">decl_qualifier</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="struct_or_union_specifier">struct_or_union_specifier</a>:
+        <a class="nt" href="#struct_or_union">struct_or_union</a> <a class="nt" href="#tagged_reference_id">tagged_reference_id</a><span class="meta">?</span> <span class="t">"{"</span> <a class="nt" href="#IN">IN</a> <a class="nt" href="#NL">NL</a> <a class="nt" href="#member_declaration">member_declaration</a><span class="meta">*</span> <a class="nt" href="#EX">EX</a> <span class="t">"}"</span>
+        <a class="nt" href="#struct_or_union">struct_or_union</a> <a class="nt" href="#tagged_reference_id">tagged_reference_id</a>
+</pre><pre><a class="nt" name="struct_or_union_specifier">struct_or_union_specifier</a>:
+        <a class="nt" href="#struct_or_union">struct_or_union</a> <a class="nt" href="#attribute_spec">attribute_spec</a><span class="meta">*</span> <a class="nt" href="#tagged_reference_id">tagged_reference_id</a><span class="meta">?</span> <span class="t">"{"</span> <a class="nt" href="#IN">IN</a> <a class="nt" href="#NL">NL</a> <a class="nt" href="#member_declaration">member_declaration</a><span class="meta">*</span> <a class="nt" href="#EX">EX</a> <span class="t">"}"</span> <a class="nt" href="#attribute_spec">attribute_spec</a><span class="meta">*</span>
+        <a class="nt" href="#struct_or_union">struct_or_union</a> <a class="nt" href="#attribute_spec">attribute_spec</a><span class="meta">*</span> <a class="nt" href="#tagged_reference_id">tagged_reference_id</a>
+</pre><pre><a class="nt" name="tagged_reference_id">tagged_reference_id</a>:
+        <a class="nt" href="#reference_id">reference_id</a>
+</pre><pre><a class="nt" name="member_declaration">member_declaration</a>:
+        <a class="nt" href="#decl_specifiers">decl_specifiers</a> <a class="nt" href="#member_declarator">member_declarator</a><span class="meta">+</span> <a class="nt" href="#semi">semi</a>
+        <a class="nt" href="#preprocessor">preprocessor</a>
+</pre><pre><a class="nt" name="member_declaration">member_declaration</a>:
+        <a class="nt" href="#comment_NL">comment_NL</a>
+</pre><pre><a class="nt" name="member_declaration">member_declaration</a>:
+        <a class="nt" href="#decl_specifiers">decl_specifiers</a> <a class="nt" href="#member_declarator">member_declarator</a><span class="meta">+</span> <a class="nt" href="#semi">semi</a>
+        <a class="nt" href="#decl_qualifier">decl_qualifier</a><span class="meta">*</span> <a class="nt" href="#struct_or_union_specifier">struct_or_union_specifier</a> <a class="nt" href="#semi">semi</a>
+        <a class="nt" href="#semi">semi</a>
+        <a class="nt" href="#preprocessor">preprocessor</a>
+</pre><pre><a class="nt" name="member_declarator">member_declarator</a>:
+        <a class="nt" href="#declarator">declarator</a> <a class="nt" href="#bitfieldsize">bitfieldsize</a><span class="meta">?</span>
+        <a class="nt" href="#bitfieldsize">bitfieldsize</a>
+</pre><pre><a class="nt" name="member_declarator">member_declarator</a>:
+        <a class="nt" href="#declarator">declarator</a> <a class="nt" href="#bitfieldsize">bitfieldsize</a><span class="meta">?</span> <a class="nt" href="#attributes_or_asm">attributes_or_asm</a><span class="meta">*</span>
+        <a class="nt" href="#bitfieldsize">bitfieldsize</a>
+</pre><pre><a class="nt" name="bitfieldsize">bitfieldsize</a>:
+        <span class="t">":"</span> <a class="nt" href="#constant_expression">constant_expression</a>
+</pre><pre><a class="nt" name="decl_qualifier">decl_qualifier</a>:
+        <a class="nt" href="#sc_specifier">sc_specifier</a>
+        <a class="nt" href="#cv_qualifier">cv_qualifier</a>
+        <a class="nt" href="#type_qualifier">type_qualifier</a>
+</pre><pre><a class="nt" name="decl_qualifier">decl_qualifier</a>:
+        <a class="nt" href="#sc_specifier">sc_specifier</a>
+        <a class="nt" href="#type_qualifier">type_qualifier</a>
+        <a class="nt" href="#attribute_spec">attribute_spec</a>
+        <a class="nt" href="#extension_specifier">extension_specifier</a>
+</pre><pre><a class="nt" name="sc_specifier">sc_specifier</a>:
+        <span class="t">"auto"</span>
+        <span class="t">"register"</span>
+        <span class="t">"static"</span>
+        <span class="t">"extern"</span>
+        <span class="t">"typedef"</span>
+</pre><pre><a class="nt" name="type_specifier">type_specifier</a>:
+        <a class="nt" href="#simple_type_name">simple_type_name</a>
+        <a class="nt" href="#enum_specifier">enum_specifier</a>
+        <a class="nt" href="#struct_or_union_specifier">struct_or_union_specifier</a>
+</pre><pre><a class="nt" name="type_specifier">type_specifier</a>:
+        <a class="nt" href="#typeof_expression">typeof_expression</a>
+        <a class="nt" href="#complex_specifier">complex_specifier</a>
+</pre><pre><a class="nt" name="type_qualifier">type_qualifier</a>:
+        <span class="t">"long"</span>
+        <span class="t">"short"</span>
+        <span class="t">"signed"</span>
+        <span class="t">"unsigned"</span>
+</pre><pre><a class="nt" name="type_qualifier">type_qualifier</a>:
+        <a class="nt" href="#bit_qualifier">bit_qualifier</a>
+        <a class="nt" href="#inline_qualifier">inline_qualifier</a>
+        <a class="nt" href="#cv_qualifier">cv_qualifier</a>
+        <a class="nt" href="#restrict_qualifier">restrict_qualifier</a>
+</pre><pre><a class="nt" name="simple_type_name">simple_type_name</a>:
+        <span class="t">"char"</span>
+        <span class="t">"int"</span>
+        <span class="t">"void"</span>
+        <span class="t">"float"</span>
+        <span class="t">"double"</span>
+        <a class="nt" href="#type_id">type_id</a>
+</pre><pre><a class="nt" name="type_id">type_id</a>:
+        <a class="nt" href="#reference_id">reference_id</a>
+</pre><pre><a class="nt" name="struct_or_union">struct_or_union</a>:
+        <span class="t">"struct"</span>
+        <span class="t">"union"</span>
+</pre><pre><a class="nt" name="enum_specifier">enum_specifier</a>:
+        <span class="t">"enum"</span> <a class="nt" href="#tagged_reference_id">tagged_reference_id</a><span class="meta">?</span> <span class="t">"{"</span> <span class="meta">{</span><a class="nt" href="#enumerator">enumerator</a> <span class="t">","</span><span class="meta">}*</span> <span class="t">"}"</span>
+        <span class="t">"enum"</span> <a class="nt" href="#tagged_reference_id">tagged_reference_id</a>
+</pre><pre><a class="nt" name="enum_specifier">enum_specifier</a>:
+        <span class="t">"enum"</span> <a class="nt" href="#tagged_reference_id">tagged_reference_id</a>
+        <span class="t">"enum"</span> <a class="nt" href="#tagged_reference_id">tagged_reference_id</a><span class="meta">?</span> <span class="t">"{"</span> <span class="meta">{</span><a class="nt" href="#enumerator">enumerator</a> <span class="t">","</span><span class="meta">}*</span> <span class="t">","</span><span class="meta">?</span> <span class="t">"}"</span>
+</pre><pre><a class="nt" name="enumerator">enumerator</a>:
+        <a class="nt" href="#reference_id">reference_id</a> <a class="nt" href="#enumerator_value">enumerator_value</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="enumerator_value">enumerator_value</a>:
+        <span class="t">"="</span> <a class="nt" href="#constant_expression">constant_expression</a>
+</pre><pre><a class="nt" name="init_declarator">init_declarator</a>:
+        <a class="nt" href="#declarator">declarator</a> <a class="nt" href="#initialization">initialization</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="init_declarator">init_declarator</a>:
+        <a class="nt" href="#declarator">declarator</a> <a class="nt" href="#initialization">initialization</a><span class="meta">?</span> <a class="nt" href="#attributes_or_asm">attributes_or_asm</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="declarator">declarator</a>:
+        <a class="nt" href="#ptr_operator">ptr_operator</a><span class="meta">*</span> <a class="nt" href="#base_declarator">base_declarator</a> <a class="nt" href="#SPON">SPON</a> <a class="nt" href="#declarator_extension">declarator_extension</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="declarator">declarator</a>:
+        <a class="nt" href="#attribute_spec">attribute_spec</a><span class="meta">*</span> <a class="nt" href="#ptr_operator">ptr_operator</a><span class="meta">*</span> <a class="nt" href="#base_declarator">base_declarator</a> <a class="nt" href="#declarator_extension">declarator_extension</a><span class="meta">*</span> <a class="nt" href="#attribute_spec">attribute_spec</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="base_declarator">base_declarator</a>:
+        <a class="nt" href="#reference_id">reference_id</a>
+        <span class="t">"("</span> <a class="nt" href="#declarator">declarator</a> <span class="t">")"</span>
+</pre><pre><a class="nt" name="base_declarator">base_declarator</a>:
+        <a class="nt" href="#attribute_spec">attribute_spec</a><span class="meta">*</span> <a class="nt" href="#reference_id">reference_id</a>
+        <a class="nt" href="#attribute_spec">attribute_spec</a><span class="meta">*</span> <span class="t">"("</span> <a class="nt" href="#declarator">declarator</a> <span class="t">")"</span>
+</pre><pre><a class="nt" name="declarator_extension">declarator_extension</a>:
+        <a class="nt" href="#function_declarator_extension">function_declarator_extension</a>
+        <a class="nt" href="#array_declarator_extension">array_declarator_extension</a>
+</pre><pre><a class="nt" name="function_declarator_extension">function_declarator_extension</a>:
+        <span class="t">"("</span> <a class="nt" href="#argument_declaration_list">argument_declaration_list</a> <span class="t">")"</span> <a class="nt" href="#cv_qualifier">cv_qualifier</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="array_declarator_extension">array_declarator_extension</a>:
+        <span class="t">"["</span> <a class="nt" href="#constant_expression">constant_expression</a><span class="meta">?</span> <span class="t">"]"</span>
+</pre><pre><a class="nt" name="ptr_operator">ptr_operator</a>:
+        <span class="t">"*"</span> <a class="nt" href="#cv_qualifier">cv_qualifier</a><span class="meta">*</span> <a class="nt" href="#SPOFF">SPOFF</a>
+</pre><pre><a class="nt" name="ptr_operator">ptr_operator</a>:
+        <span class="t">"*"</span> <a class="nt" href="#ptr_qualifier">ptr_qualifier</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="cv_qualifier">cv_qualifier</a>:
+        <span class="t">"const"</span>
+        <span class="t">"volatile"</span>
+</pre><pre><a class="nt" name="cv_qualifier">cv_qualifier</a>:
+        <span class="t">"const"</span>
+        <span class="t">"volatile"</span>
+        <span class="t">"__const"</span>
+        <span class="t">"__const__"</span>
+        <span class="t">"const__"</span>
+        <span class="t">"__volatile__"</span>
+        <span class="t">"__volatile"</span>
+        <span class="t">"volatile__"</span>
+</pre><pre><a class="nt" name="type_name">type_name</a>:
+        <a class="nt" href="#type_specifiers">type_specifiers</a> <a class="nt" href="#abstract_declarator">abstract_declarator</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="type_specifiers">type_specifiers</a>:
+        <a class="nt" href="#type_qualifier">type_qualifier</a><span class="meta">+</span> <a class="nt" href="#type_specifier">type_specifier</a><span class="meta">?</span> <a class="nt" href="#type_qualifier">type_qualifier</a><span class="meta">*</span>
+        <a class="nt" href="#type_specifier">type_specifier</a> <a class="nt" href="#type_qualifier">type_qualifier</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="type_specifiers">type_specifiers</a>:
+        <a class="nt" href="#type_qualifier">type_qualifier</a><span class="meta">*</span> <a class="nt" href="#type_specifier">type_specifier</a> <a class="nt" href="#type_qualifier">type_qualifier</a><span class="meta">*</span>
+        <a class="nt" href="#type_qualifier">type_qualifier</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="abstract_declarator">abstract_declarator</a>:
+        <a class="nt" href="#ptr_operator">ptr_operator</a><span class="meta">+</span> <a class="nt" href="#declarator_extension">declarator_extension</a><span class="meta">*</span>
+        <span class="t">"("</span> <a class="nt" href="#abstract_declarator">abstract_declarator</a> <span class="t">")"</span> <a class="nt" href="#declarator_extension">declarator_extension</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="abstract_declarator">abstract_declarator</a>:
+        <a class="nt" href="#ptr_operator">ptr_operator</a><span class="meta">+</span> <a class="nt" href="#declarator_extension">declarator_extension</a><span class="meta">*</span>
+        <a class="nt" href="#array_declarator_extension">array_declarator_extension</a><span class="meta">*</span>
+        <span class="t">"("</span> <a class="nt" href="#abstract_declarator">abstract_declarator</a> <span class="t">")"</span> <a class="nt" href="#declarator_extension">declarator_extension</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="argument_declaration_list">argument_declaration_list</a>:
+        <span class="meta">{</span><a class="nt" href="#argument_declaration">argument_declaration</a> <span class="t">","</span><span class="meta">}*</span>
+</pre><pre><a class="nt" name="argument_declaration_list">argument_declaration_list</a>:
+        <span class="t">"..."</span> <a class="nt" href="#comment_NL">comment_NL</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="argument_declaration">argument_declaration</a>:
+        <a class="nt" href="#decl_specifiers">decl_specifiers</a> <a class="nt" href="#argument_declarator">argument_declarator</a><span class="meta">?</span>
+        <span class="t">"..."</span>
+</pre><pre><a class="nt" name="argument_declaration">argument_declaration</a>:
+        <a class="nt" href="#comment_NL">comment_NL</a><span class="meta">*</span> <span class="t">"..."</span>
+</pre><pre><a class="nt" name="argument_declaration">argument_declaration</a>:
+        <span class="t">"..."</span> <a class="nt" href="#comment_NL">comment_NL</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="argument_declarator">argument_declarator</a>:
+        <a class="nt" href="#declarator">declarator</a>
+        <a class="nt" href="#abstract_declarator">abstract_declarator</a>
+</pre><pre><a class="nt" name="initialization">initialization</a>:
+        <span class="t">"="</span> <a class="nt" href="#initializer">initializer</a>
+        <span class="t">"("</span> <a class="nt" href="#constant_expression">constant_expression</a> <span class="t">")"</span>
+</pre><pre><a class="nt" name="initialization">initialization</a>:
+        <a class="nt" href="#comment_NL">comment_NL</a><span class="meta">*</span> <span class="t">"..."</span>
+</pre><pre><a class="nt" name="initializer">initializer</a>:
+        <a class="nt" href="#expression">expression</a>
+        <a class="nt" href="#NL">NL</a> <span class="t">"{"</span> <a class="nt" href="#IN">IN</a> <span class="meta">{</span><a class="nt" href="#initializer">initializer</a> <span class="t">","</span><span class="meta">}*</span> <span class="t">","</span><span class="meta">?</span> <a class="nt" href="#EX">EX</a> <span class="t">"}"</span>
+</pre><pre><a class="nt" name="initializer">initializer</a>:
+        <a class="nt" href="#comment_NL">comment_NL</a><span class="meta">*</span> <span class="t">"..."</span>
+</pre><pre><a class="nt" name="initializer">initializer</a>:
+        <a class="nt" href="#assignment_expression">assignment_expression</a>
+        <a class="nt" href="#NL">NL</a> <span class="t">"{"</span> <a class="nt" href="#IN">IN</a> <span class="meta">{</span><a class="nt" href="#designated_initializer">designated_initializer</a> <span class="t">","</span><span class="meta">}*</span> <span class="t">","</span><span class="meta">?</span> <a class="nt" href="#EX">EX</a> <span class="t">"}"</span>
+</pre><pre><a class="nt" name="statement">statement</a>:
+        <a class="nt" href="#label">label</a><span class="meta">*</span> <a class="nt" href="#unlabeled_statement">unlabeled_statement</a>
+        <a class="nt" href="#preprocessor">preprocessor</a>
+</pre><pre><a class="nt" name="statement">statement</a>:
+        <a class="nt" href="#comment_NL">comment_NL</a>
+</pre><pre><a class="nt" name="statement">statement</a>:
+        <a class="nt" href="#label">label</a>
+</pre><pre><a class="nt" name="label">label</a>:
+        <a class="nt" href="#label_id">label_id</a> <span class="t">":"</span>
+        <a class="nt" href="#EX">EX</a> <a class="nt" href="#SP">SP</a> <a class="nt" href="#SP">SP</a> <span class="t">"case"</span> <a class="nt" href="#constant_expression">constant_expression</a> <span class="t">":"</span> <a class="nt" href="#IN">IN</a> <a class="nt" href="#NL">NL</a>
+        <a class="nt" href="#EX">EX</a> <a class="nt" href="#SP">SP</a> <a class="nt" href="#SP">SP</a> <span class="t">"default"</span> <span class="t">":"</span> <a class="nt" href="#IN">IN</a> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="label">label</a>:
+        <a class="nt" href="#label_id">label_id</a> <span class="t">":"</span> <a class="nt" href="#attribute_spec">attribute_spec</a><span class="meta">*</span>
+        <a class="nt" href="#EX">EX</a> <a class="nt" href="#SP">SP</a> <a class="nt" href="#SP">SP</a> <span class="t">"case"</span> <a class="nt" href="#constant_expression">constant_expression</a> <span class="t">":"</span> <a class="nt" href="#IN">IN</a> <a class="nt" href="#NL">NL</a>
+        <a class="nt" href="#EX">EX</a> <a class="nt" href="#SP">SP</a> <a class="nt" href="#SP">SP</a> <span class="t">"case"</span> <a class="nt" href="#constant_expression">constant_expression</a> <a class="nt" href="#SP">SP</a> <span class="t">"..."</span> <a class="nt" href="#SP">SP</a> <a class="nt" href="#constant_expression">constant_expression</a> <span class="t">":"</span> <a class="nt" href="#IN">IN</a> <a class="nt" href="#NL">NL</a>
+        <a class="nt" href="#EX">EX</a> <a class="nt" href="#SP">SP</a> <a class="nt" href="#SP">SP</a> <span class="t">"default"</span> <span class="t">":"</span> <a class="nt" href="#IN">IN</a> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="label_id">label_id</a>:
+        <a class="nt" href="#id">id</a>
+</pre><pre><a class="nt" name="unlabeled_statement">unlabeled_statement</a>:
+        <a class="nt" href="#expression_statement">expression_statement</a>
+        <a class="nt" href="#if_statement">if_statement</a>
+        <a class="nt" href="#for_statement">for_statement</a>
+        <a class="nt" href="#while_statement">while_statement</a>
+        <a class="nt" href="#switch_statement">switch_statement</a>
+        <a class="nt" href="#do_statement">do_statement</a>
+        <a class="nt" href="#null_statement">null_statement</a>
+        <a class="nt" href="#jump_statement">jump_statement</a>
+        <a class="nt" href="#compound_statement">compound_statement</a>
+</pre><pre><a class="nt" name="unlabeled_statement">unlabeled_statement</a>:
+        <a class="nt" href="#asm_statement">asm_statement</a>
+</pre><pre><a class="nt" name="null_statement">null_statement</a>:
+        <a class="nt" href="#semi">semi</a>
+</pre><pre><a class="nt" name="compound_statement">compound_statement</a>:
+        <span class="t">"{"</span> <a class="nt" href="#IN">IN</a> <a class="nt" href="#NL">NL</a> <a class="nt" href="#compound_statement_body">compound_statement_body</a> <span class="t">"}"</span> <span class="t">";"</span><span class="meta">?</span> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="compound_statement">compound_statement</a>:
+        <a class="nt" href="#comment_NL">comment_NL</a><span class="meta">*</span> <span class="t">"..."</span>
+</pre><pre><a class="nt" name="compound_statement">compound_statement</a>:
+        <span class="t">"{"</span> <a class="nt" href="#NL">NL</a> <a class="nt" href="#compound_statement_body">compound_statement_body</a><span class="meta">*</span> <span class="t">"}"</span> <span class="t">";"</span><span class="meta">?</span> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="compound_statement_body">compound_statement_body</a>:
+        <a class="nt" href="#statement">statement</a><span class="meta">*</span> <a class="nt" href="#EX">EX</a>
+        <a class="nt" href="#declaration">declaration</a> <a class="nt" href="#compound_statement_body">compound_statement_body</a>
+</pre><pre><a class="nt" name="compound_statement_body">compound_statement_body</a>:
+        <a class="nt" href="#IN">IN</a> <a class="nt" href="#declaration">declaration</a> <a class="nt" href="#EX">EX</a>
+        <a class="nt" href="#IN">IN</a> <a class="nt" href="#function_definition">function_definition</a> <a class="nt" href="#EX">EX</a>
+        <a class="nt" href="#IN">IN</a> <a class="nt" href="#statement">statement</a> <a class="nt" href="#EX">EX</a>
+</pre><pre><a class="nt" name="expression_statement">expression_statement</a>:
+        <a class="nt" href="#expression">expression</a> <a class="nt" href="#semi">semi</a>
+</pre><pre><a class="nt" name="if_statement">if_statement</a>:
+        <span class="t">"if"</span> <span class="t">"("</span> <a class="nt" href="#expression">expression</a> <span class="t">")"</span> <a class="nt" href="#statement">statement</a> <a class="nt" href="#else_statement">else_statement</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="if_statement">if_statement</a>:
+        <span class="t">"if"</span> <span class="t">"("</span> <a class="nt" href="#expression">expression</a> <span class="t">")"</span> <a class="nt" href="#comment_NL">comment_NL</a><span class="meta">*</span> <a class="nt" href="#statement">statement</a> <a class="nt" href="#else_statement">else_statement</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="switch_statement">switch_statement</a>:
+        <span class="t">"switch"</span> <span class="t">"("</span> <a class="nt" href="#expression">expression</a> <span class="t">")"</span> <a class="nt" href="#statement">statement</a>
+</pre><pre><a class="nt" name="switch_statement">switch_statement</a>:
+        <span class="t">"switch"</span> <span class="t">"("</span> <a class="nt" href="#expression">expression</a> <span class="t">")"</span> <a class="nt" href="#comment_NL">comment_NL</a><span class="meta">*</span> <a class="nt" href="#statement">statement</a>
+</pre><pre><a class="nt" name="else_statement">else_statement</a>:
+        <span class="t">"else"</span> <a class="nt" href="#statement">statement</a>
+</pre><pre><a class="nt" name="while_statement">while_statement</a>:
+        <span class="t">"while"</span> <span class="t">"("</span> <a class="nt" href="#expression">expression</a> <span class="t">")"</span> <a class="nt" href="#statement">statement</a>
+</pre><pre><a class="nt" name="do_statement">do_statement</a>:
+        <span class="t">"do"</span> <a class="nt" href="#statement">statement</a> <span class="t">"while"</span> <span class="t">"("</span> <a class="nt" href="#expression">expression</a> <span class="t">")"</span> <a class="nt" href="#semi">semi</a>
+</pre><pre><a class="nt" name="for_statement">for_statement</a>:
+        <span class="t">"for"</span> <span class="t">"("</span> <a class="nt" href="#expression">expression</a><span class="meta">?</span> <span class="t">";"</span> <a class="nt" href="#expression">expression</a><span class="meta">?</span> <span class="t">";"</span> <a class="nt" href="#expression">expression</a><span class="meta">?</span> <span class="t">")"</span> <a class="nt" href="#statement">statement</a>
+</pre><pre><a class="nt" name="for_statement">for_statement</a>:
+        <span class="t">"for"</span> <span class="t">"("</span> <a class="nt" href="#declaration_body">declaration_body</a> <span class="t">";"</span> <a class="nt" href="#expression">expression</a><span class="meta">?</span> <span class="t">";"</span> <a class="nt" href="#expression">expression</a><span class="meta">?</span> <span class="t">")"</span> <a class="nt" href="#statement">statement</a>
+</pre><pre><a class="nt" name="jump_statement">jump_statement</a>:
+        <span class="t">"goto"</span> <a class="nt" href="#label_id">label_id</a> <a class="nt" href="#semi">semi</a>
+        <span class="t">"continue"</span> <a class="nt" href="#semi">semi</a>
+        <span class="t">"break"</span> <a class="nt" href="#semi">semi</a>
+        <span class="t">"return"</span> <a class="nt" href="#expression">expression</a><span class="meta">?</span> <a class="nt" href="#semi">semi</a>
+</pre><pre><a class="nt" name="jump_statement">jump_statement</a>:
+        <span class="t">"goto"</span> <a class="nt" href="#ptr_operator">ptr_operator</a> <a class="nt" href="#expression">expression</a> <a class="nt" href="#semi">semi</a>
+</pre><pre><a class="nt" name="declaration_or_function_definition">declaration_or_function_definition</a>:
+        <a class="nt" href="#declaration">declaration</a>
+        <a class="nt" href="#function_definition">function_definition</a>
+</pre><pre><a class="nt" name="function_definition">function_definition</a>:
+        <a class="nt" href="#NL">NL</a> <a class="nt" href="#decl_specifiers">decl_specifiers</a> <a class="nt" href="#declarator">declarator</a> <a class="nt" href="#KR_parameter_decls">KR_parameter_decls</a><span class="meta">?</span> <a class="nt" href="#compound_statement">compound_statement</a> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="KR_parameter_decls">KR_parameter_decls</a>:
+        <a class="nt" href="#NL">NL</a> <a class="nt" href="#IN">IN</a> <a class="nt" href="#declaration">declaration</a><span class="meta">+</span> <a class="nt" href="#EX">EX</a>
+</pre><pre><a class="nt" name="semi">semi</a>:
+        <span class="t">";"</span> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="program">program</a>:
+        <a class="nt" href="#C_compilation_unit">C_compilation_unit</a>
+</pre><pre><a class="nt" name="preprocessor">preprocessor</a>:
+        <span class="t">"#define"</span> <a class="nt" href="#id">id</a> <span class="t">"("</span> <a class="nt" href="#id">id</a><span class="meta">+</span> <span class="t">")"</span> <a class="nt" href="#expression">expression</a> <a class="nt" href="#NL">NL</a>
+        <span class="t">"#define"</span> <a class="nt" href="#id">id</a> <a class="nt" href="#expression">expression</a> <a class="nt" href="#NL">NL</a>
+        <a class="nt" href="#EX">EX</a> <span class="t">"#else"</span> <a class="nt" href="#IN">IN</a> <a class="nt" href="#NL">NL</a>
+        <a class="nt" href="#EX">EX</a> <span class="t">"#endif"</span> <a class="nt" href="#NL">NL</a> <a class="nt" href="#NL">NL</a>
+        <a class="nt" href="#NL">NL</a> <span class="t">"#if"</span> <a class="nt" href="#expression">expression</a> <a class="nt" href="#IN">IN</a> <a class="nt" href="#NL">NL</a>
+        <a class="nt" href="#NL">NL</a> <span class="t">"#ifdef"</span> <a class="nt" href="#id">id</a> <a class="nt" href="#IN">IN</a> <a class="nt" href="#NL">NL</a>
+        <a class="nt" href="#NL">NL</a> <span class="t">"#ifndef"</span> <a class="nt" href="#id">id</a> <a class="nt" href="#IN">IN</a> <a class="nt" href="#NL">NL</a>
+        <span class="t">"#ident"</span> <a class="nt" href="#stringlit">stringlit</a> <a class="nt" href="#NL">NL</a>
+        <span class="t">"#include"</span> <a class="nt" href="#stringlit">stringlit</a> <a class="nt" href="#NL">NL</a>
+        <span class="t">"#include"</span> <span class="t">"&lt;"</span> <a class="nt" href="#SPOFF">SPOFF</a> <a class="nt" href="#filepath">filepath</a> <span class="t">"&gt;"</span> <a class="nt" href="#SPON">SPON</a> <a class="nt" href="#NL">NL</a>
+        <span class="t">"#line"</span> <a class="nt" href="#integernumber">integernumber</a> <a class="nt" href="#stringlit">stringlit</a><span class="meta">?</span> <a class="nt" href="#NL">NL</a>
+        <span class="t">"#undef"</span> <a class="nt" href="#id">id</a> <a class="nt" href="#NL">NL</a>
+        <span class="t">"#LINK"</span> <a class="nt" href="#stringlit">stringlit</a> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="preprocessor">preprocessor</a>:
+        <a class="nt" href="#EX">EX</a> <span class="t">"#endif"</span> <a class="nt" href="#comment_NL">comment_NL</a><span class="meta">?</span> <a class="nt" href="#NL">NL</a>
+        <span class="t">"..."</span>
+</pre><pre><a class="nt" name="preprocessor">preprocessor</a>:
+        <span class="t">"..."</span> <a class="nt" href="#comment_NL">comment_NL</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="preprocessor">preprocessor</a>:
+        <span class="t">"#"</span> <a class="nt" href="#integernumber">integernumber</a> <a class="nt" href="#string">string</a> <a class="nt" href="#integernumber">integernumber</a><span class="meta">*</span> <a class="nt" href="#NL">NL</a>
+        <span class="t">"#pragma"</span> <a class="nt" href="#SPON">SPON</a> <a class="nt" href="#id">id</a><span class="meta">*</span> <span class="t">"("</span> <span class="meta">{</span><a class="nt" href="#id">id</a> <span class="t">","</span><span class="meta">}*</span> <span class="t">")"</span> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="filepath">filepath</a>:
+        <a class="nt" href="#file_id">file_id</a> <a class="nt" href="#slash_fileid">slash_fileid</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="file_id">file_id</a>:
+        <a class="nt" href="#id">id</a>
+        <a class="nt" href="#key">key</a>
+</pre><pre><a class="nt" name="slash_fileid">slash_fileid</a>:
+        <a class="nt" href="#slash">slash</a> <a class="nt" href="#file_id">file_id</a>
+</pre><pre><a class="nt" name="slash">slash</a>:
+        <span class="t">"/"</span>
+        <span class="t">"\"</span>
+        <span class="t">"."</span>
+        <span class="t">":"</span>
+</pre><pre><a class="nt" name="comment_NL">comment_NL</a>:
         <a class="nt" href="#comment">comment</a> <a class="nt" href="#NL">NL</a>
 </pre><pre><a class="nt" name="null_declaration">null_declaration</a>:
         <a class="nt" href="#semi">semi</a>
@@ -486,5 +924,9 @@
         <span class="t">"__alignof"</span> <span class="t">"("</span> <a class="nt" href="#unary_expression">unary_expression</a> <span class="t">")"</span>
         <span class="t">"__alignof__"</span> <span class="t">"("</span> <a class="nt" href="#type_name">type_name</a> <span class="t">")"</span>
         <span class="t">"__alignof"</span> <span class="t">"("</span> <a class="nt" href="#type_name">type_name</a> <span class="t">")"</span>
+</pre><pre><a class="nt" name="designated_initializer">designated_initializer</a>:
+        <a class="nt" href="#assignment_expression">assignment_expression</a>
+        <a class="nt" href="#designator">designator</a><span class="meta">*</span> <a class="nt" href="#designator_assignment">designator_assignment</a><span class="meta">?</span> <a class="nt" href="#assignment_expression">assignment_expression</a>
+        <a class="nt" href="#designator">designator</a><span class="meta">*</span> <a class="nt" href="#designator_assignment">designator_assignment</a><span class="meta">?</span> <a class="nt" href="#NL">NL</a> <span class="t">"{"</span> <a class="nt" href="#IN">IN</a> <span class="meta">{</span><a class="nt" href="#designated_initializer">designated_initializer</a> <span class="t">","</span><span class="meta">}*</span> <span class="t">","</span><span class="meta">?</span> <a class="nt" href="#EX">EX</a> <span class="t">"}"</span>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 29/03/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

@@ -1,7 +1,7 @@
-Airport = name::ANY departingFlight::ANY+ arrivingFlight::ANY+ ;
-Flight = departTime::ANY duration::ANY maxnrPassengers::ANY passenger::ANY+ airline::ANY origin::ANY destination::ANY ;
-Airline = name::ANY nationality::ANY flight::ANY+ ;
-Passenger = name::ANY age::ANY gender::ANY needsAssistance::ANY flight::ANY ;
+Airport = name::String departingFlight::Flight+ arrivingFlight::Flight+ ;
+Flight = departTime::Time duration::Time maxnrPassengers::Integer passenger::Passenger+ airline::Airline origin::Airport destination::Airport ;
+Airline = name::String nationality::String flight::Flight+ ;
+Passenger = name::String age::Integer gender::Genre needsAssistance::Boolean flight::Flight ;
 Genre = male:: ;
 Genre = female:: ;
-Time = year::ANY month::ANY day::ANY hour::ANY minute::ANY second::ANY ;
+Time = year::Integer month::Integer day::Integer hour::Integer minute::Integer second::Integer ;

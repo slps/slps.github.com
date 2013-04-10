@@ -4,16 +4,22 @@ exports
   sorts
         QoSStatement SingleQoSStatement CoumpoundQoSStatement Parameter QoSContraint QualificationKind QoSCharacteristic 
   context-free syntax
-        relation::ANY parameter::ANY+ -> QoSStatement
+        SingleQoSStatement -> QoSStatement
 
-        contraint::ANY -> SingleQoSStatement
+        CoumpoundQoSStatement -> QoSStatement
 
-        statement::ANY -> CoumpoundQoSStatement
+        relation::CoumpoundQoSStatement parameter::Parameter+ -> QoSStatement
+
+        contraint::QoSContraint -> SingleQoSStatement
+
+        statement::QoSStatement -> CoumpoundQoSStatement
 
          -> Parameter
 
-        qualification::ANY -> QoSContraint
+        qualification::QualificationKind -> QoSContraint
 
-        value::ANY -> QualificationKind
+        value::String -> QualificationKind
 
-         -> QoSCharacteristic
+        QualificationKind -> QoSCharacteristic
+
+        QualificationKind -> QoSCharacteristic

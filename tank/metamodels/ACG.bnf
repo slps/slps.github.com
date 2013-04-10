@@ -1,57 +1,115 @@
 LocatedElement:
-        EPSILON
+        ACG
+LocatedElement:
+        ACGElement
+LocatedElement:
+        StatementBlock
+LocatedElement:
+        Statement
+LocatedElement:
+        VariableDecl
+LocatedElement:
+        Expression
 ACG:
-        metamodel::ANY startsWith::ANY elements::ANY+
+        metamodel::String startsWith::String elements::ACGElement+
 ACGElement:
-        EPSILON
+        Function
+ACGElement:
+        Attribute
 Function:
-        context::ANY name::ANY parameters::ANY+ body::ANY
+        context::String name::String parameters::Parameter+ body::Expression
 Attribute:
-        context::ANY name::ANY body::ANY
+        context::String name::String body::Expression
 Parameter:
         EPSILON
 Node:
-        EPSILON
+        ASMNode
+Node:
+        CodeNode
+Node:
+        SimpleNode
 ASMNode:
-        name::ANY
+        name::Expression
 CodeNode:
-        element::ANY mode::ANY guard::ANY
+        element::String mode::String guard::Expression
 SimpleNode:
-        element::ANY mode::ANY guard::ANY
-StatementBlock:
-        EPSILON
+        element::String mode::String guard::Expression
 Statement:
-        EPSILON
+        ReportStat
+Statement:
+        FieldStat
+Statement:
+        ParamStat
+Statement:
+        EmitStat
 CompoundStat:
-        EPSILON
+        ForEachStat
+CompoundStat:
+        OnceStat
+CompoundStat:
+        VariableStat
+CompoundStat:
+        OperationStat
+CompoundStat:
+        ConditionalStat
+CompoundStat:
+        LetStat
+CompoundStat:
+        AnalyzeStat
 ForEachStat:
-        iterator::ANY collection::ANY
+        iterator::VariableDecl collection::Expression
 OnceStat:
         
 VariableStat:
-        definition::ANY name::ANY
+        definition::Expression name::Expression
 OperationStat:
-        context::ANY name::ANY
+        context::Expression name::Expression
 ConditionalStat:
-        condition::ANY elseStatements::ANY+
+        condition::Expression elseStatements::Statement+
 LetStat:
-        variable::ANY value::ANY
+        variable::VariableDecl value::Expression
 AnalyzeStat:
-        target::ANY mode::ANY
+        target::Expression mode::String
 ReportStat:
-        severity::ANY message::ANY
+        severity::Severity message::Expression
 Severity:
         critic::EPSILON
         error::EPSILON
         warning::EPSILON
 FieldStat:
-        name::ANY type::ANY
+        name::Expression type::Expression
 ParamStat:
-        name::ANY type::ANY
+        name::Expression type::Expression
 EmitStat:
-        EPSILON
+        LabelStat
+EmitStat:
+        NewStat
+EmitStat:
+        DupStat
+EmitStat:
+        DupX1Stat
+EmitStat:
+        PopStat
+EmitStat:
+        SwapStat
+EmitStat:
+        IterateStat
+EmitStat:
+        EndIterateStat
+EmitStat:
+        GetAsmStat
+EmitStat:
+        FindMEStat
+EmitStat:
+        PushTStat
+EmitStat:
+        PushFStat
+EmitStat:
+        EmitWithOperandStat
+EmitStat:
+        EmitWithLabelRefStat
 LabelStat:
-        name::ANY id::ANY
+        name::String id::Expression
 NewStat:
         
 DupStat:
@@ -75,70 +133,120 @@ PushTStat:
 PushFStat:
         
 EmitWithOperandStat:
-        EPSILON
+        PushStat
+EmitWithOperandStat:
+        PushIStat
+EmitWithOperandStat:
+        PushDStat
+EmitWithOperandStat:
+        LoadStat
+EmitWithOperandStat:
+        StoreStat
+EmitWithOperandStat:
+        CallStat
+EmitWithOperandStat:
+        PCallStat
+EmitWithOperandStat:
+        SuperCallStat
+EmitWithOperandStat:
+        GetStat
+EmitWithOperandStat:
+        SetStat
 PushStat:
-        operand::ANY
+        operand::Expression
 PushIStat:
-        operand::ANY
+        operand::Expression
 PushDStat:
-        operand::ANY
+        operand::Expression
 LoadStat:
-        operand::ANY
+        operand::Expression
 StoreStat:
-        operand::ANY
+        operand::Expression
 CallStat:
-        operand::ANY
+        operand::Expression
 PCallStat:
-        operand::ANY
+        operand::Expression
 SuperCallStat:
-        operand::ANY
+        operand::Expression
 GetStat:
-        operand::ANY
+        operand::Expression
 SetStat:
-        operand::ANY
+        operand::Expression
 EmitWithLabelRefStat:
-        EPSILON
+        IfStat
+EmitWithLabelRefStat:
+        GotoStat
 IfStat:
-        label::ANY
+        label::LabelStat
 GotoStat:
-        label::ANY
+        label::LabelStat
 VariableDecl:
-        name::ANY
+        Parameter
+VariableDecl:
+        name::String
 Expression:
-        EPSILON
+        VariableExp
+Expression:
+        SelfExp
+Expression:
+        LastExp
+Expression:
+        IfExp
+Expression:
+        IsAExp
+Expression:
+        LetExp
+Expression:
+        PropertyCallExp
+Expression:
+        LiteralExp
 VariableExp:
-        variable::ANY
+        variable::VariableDecl
 SelfExp:
         
 LastExp:
         
 IfExp:
-        condition::ANY thenExp::ANY elseExp::ANY
+        condition::Expression thenExp::Expression elseExp::Expression
 IsAExp:
-        source::ANY type::ANY
+        source::Expression type::String
 LetExp:
-        variable::ANY value::ANY in::ANY
+        variable::VariableDecl value::Expression in::Expression
 PropertyCallExp:
-        EPSILON
+        NavigationExp
+PropertyCallExp:
+        IteratorExp
+PropertyCallExp:
+        OperationCallExp
 NavigationExp:
-        source::ANY name::ANY
+        source::Expression name::String
 IteratorExp:
-        iterator::ANY body::ANY
+        iterator::VariableDecl body::Expression
 OperationCallExp:
-        arguments::ANY+
+        OperatorCallExp
+OperationCallExp:
+        arguments::Expression+
 OperatorCallExp:
         EPSILON
 LiteralExp:
-        EPSILON
+        OclUndefinedExp
+LiteralExp:
+        CollectionExp
+LiteralExp:
+        BooleanExp
+LiteralExp:
+        IntegerExp
+LiteralExp:
+        StringExp
 OclUndefinedExp:
         
 CollectionExp:
-        EPSILON
+        SequenceExp
 SequenceExp:
-        elements::ANY+
+        elements::Expression+
 BooleanExp:
-        value::ANY
+        value::Boolean
 IntegerExp:
-        value::ANY
+        value::Integer
 StringExp:
-        value::ANY
+        value::String

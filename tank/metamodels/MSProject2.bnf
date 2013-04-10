@@ -1,16 +1,20 @@
 MSPProject:
-        resource::ANY+ link::ANY+ task::ANY+
+        resource::MSPResource+ link::MSPLink+ task::MSPTask+
 MSPTask:
-        finishDate::ANY startDate::ANY project::ANY superTask::ANY subTask::ANY+ assignment::ANY+ inLink::ANY+ outLink::ANY+
+        finishDate::Date startDate::Date project::MSPProject superTask::MSPTask subTask::MSPTask+ assignment::MSPAssignment+ inLink::MSPLink+ outLink::MSPLink+
 MSPLink:
-        project::ANY succ::ANY pred::ANY
+        project::MSPProject succ::MSPTask pred::MSPTask
 MSPAssignment:
-        task::ANY resource::ANY
+        task::MSPTask resource::MSPResource
 MSPResource:
-        cost::ANY project::ANY assignment::ANY+
+        MSPHumanResource
+MSPResource:
+        MSPMachine
+MSPResource:
+        cost::Double project::MSPProject assignment::MSPAssignment+
 MSPHumanResource:
-        email::ANY
+        email::String
 MSPMachine:
         EPSILON
 Date:
-        day::ANY month::ANY year::ANY
+        day::Integer month::Integer year::Integer

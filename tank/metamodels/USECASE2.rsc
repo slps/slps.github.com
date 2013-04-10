@@ -2,28 +2,30 @@
 module USECASE2
 
 syntax Requirement
-        = 
-        ()
+        = NonFunctionnelRequirement
+        | FunctionnelRequirement
  ;
 syntax NonFunctionnelRequirement
         = 
-        ANY scopes+
+        UseCase scopes+
  ;
 syntax FunctionnelRequirement
         = 
-        ANY specifies+
+        UseCase specifies+
  ;
 syntax UseCase
-        = 
-        ANY scenario+ ANY condition+ ANY interacter+ ANY specified_by+ ANY scoped_by+ ANY meet_by+
+        = Manage
+        | ScenarioDescription scenario+ Condition condition+ Role interacter+ FunctionnelRequirement specified_by+ NonFunctionnelRequirement scoped_by+ Goal meet_by+
  ;
 syntax Goal
         = 
-        ANY to_meet+
+        UseCase to_meet+
  ;
 syntax Role
-        = 
-        ANY interacted_with+
+        = HumanRole
+        | SystemRole
+        | EventRole
+        | UseCase interacted_with+
  ;
 syntax HumanRole
         = 
@@ -39,7 +41,7 @@ syntax EventRole
  ;
 syntax Manage
         = 
-        ANY managed_Resource+
+        Resource managed_Resource+
  ;
 syntax Resource
         = 
@@ -47,11 +49,12 @@ syntax Resource
  ;
 syntax ScenarioDescription
         = 
-        useCase: ANY
+        useCase: UseCase
  ;
 syntax Condition
-        = 
-        ANY constrained_with+
+        = Pre
+        | Post
+        | UseCase constrained_with+
  ;
 syntax Pre
         = 

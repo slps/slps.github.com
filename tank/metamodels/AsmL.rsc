@@ -2,144 +2,167 @@
 module AsmL
 
 syntax LocatedElement
-        = 
-        ()
+        = Body
+        | InWhereHolds
+        | AsmLFile
+        | AsmLElement
+        | VarOrCase
+        | VarOrMethod
+        | Enumerator
+        | Parameter
+        | Initially
+        | Rule
+        | Term
  ;
 syntax Body
         = 
-        ANY rules+
+        Rule rules+
  ;
 syntax InWhereHolds
         = 
-        ANY var ANY in ANY where ANY holds
+        Term var Term in Term where Term holds
  ;
 syntax AsmLFile
         = 
-        ANY elements+ ANY main
+        AsmLElement elements+ Main main
  ;
 syntax AsmLElement
-        = 
-        ()
+        = Namespace
+        | Structure
+        | Class
+        | Enumeration
+        | Function
+        | Type
  ;
 syntax VarDeclaration
         = 
-        ANY isConstant ANY isDeclaration ANY isLocal ANY name ANY type
+        Boolean isConstant Boolean isDeclaration Boolean isLocal String name Type type
  ;
 syntax Namespace
         = 
-        name: ANY
+        name: String
  ;
 syntax Structure
         = 
-        ANY name ANY varOrCase+ ANY superStructureName
+        String name VarOrCase varOrCase+ String superStructureName
  ;
 syntax VarOrCase
         = 
-        ()
+        Case
  ;
 syntax Case
         = 
-        ANY name ANY variables+
+        String name VarDeclaration variables+
  ;
 syntax Class
         = 
-        ANY name ANY isAbstract ANY superClassName ANY varOrMethod+
+        String name Boolean isAbstract String superClassName VarOrMethod varOrMethod+
  ;
 syntax VarOrMethod
         = 
-        ownerClass: ANY
+        ownerClass: Class
  ;
 syntax Enumeration
         = 
-        ANY name ANY enumerators+
+        String name Enumerator enumerators+
  ;
 syntax Enumerator
         = 
-        ANY name ANY value
+        String name Term value
  ;
 syntax Function
         = 
-        ()
+        Main
  ;
 syntax Method
         = 
-        ANY isAbstract ANY isShared ANY isEntryPoint ANY isOverride ANY returnType ANY parameters+
+        Boolean isAbstract Boolean isShared Boolean isEntryPoint Boolean isOverride Type returnType Parameter parameters+
  ;
 syntax Parameter
         = 
-        ANY name ANY type ANY ownerMethod
+        String name Type type Method ownerMethod
  ;
 syntax Main
         = 
-        ANY mainFile ANY initialisations+
+        AsmLFile mainFile Initially initialisations+
  ;
 syntax Initially
         = 
-        ANY id ANY val
+        VarTerm id Term val
  ;
 syntax Rule
-        = 
-        ()
+        = SkipRule
+        | Step
+        | MethodInvocation
+        | UpdateRule
+        | ChooseRule
+        | ForallRule
+        | ConditionalRule
+        | ReturnRule
+        | AddRule
+        | RemoveRule
  ;
 syntax SkipRule
         = 
-        ANY ownerBody
+        ownerBody: Body
  ;
 syntax Step
-        = 
-        ()
+        = StepUntilFixPoint
+        | StepExpression
+        | StepForEach
  ;
 syntax StepUntilFixPoint
         = 
-        ANY name
+        name: String
  ;
 syntax StepExpression
-        = 
-        ()
+        = StepWhile
+        | StepUntil
  ;
 syntax StepWhile
         = 
-        ANY expression
+        expression: Term
  ;
 syntax StepUntil
         = 
-        ANY expression
+        expression: Term
  ;
 syntax StepForEach
         = 
-        ANY expressions+
+        InWhereHolds expressions+
  ;
 syntax MethodInvocation
         = 
-        called: ANY
+        called: MethodCallTerm
  ;
 syntax UpdateRule
-        = 
-        ()
+        = UpdateVarRule
+        | UpdateFieldRule
+        | UpdateMapRule
  ;
 syntax UpdateVarRule
         = 
-        updateVar: ANY
+        updateVar: Term
  ;
 syntax UpdateFieldRule
         = 
-        path: ANY
+        path: VarTerm
  ;
 syntax UpdateMapRule
         = 
-        ANY updateMap ANY parameters+
+        VarTerm updateMap Term parameters+
  ;
 syntax ChooseRule
         = 
-        ANY expressions+ ANY ifChoosenRules ANY ifNotChoosenRule
+        InWhereHolds expressions+ Body ifChoosenRules Body ifNotChoosenRule
  ;
 syntax ForallRule
         = 
-        ANY expressions+ ANY doRule
+        InWhereHolds expressions+ Body doRule
  ;
 syntax ConditionalRule
-        = 
-        ANY condition ANY thenRule ANY elseRule ANY elseIfRule
+        = ElseIf
+        | Term condition Body thenRule Body elseRule ElseIf elseIfRule
  ;
 syntax ElseIf
         = 
@@ -147,71 +170,83 @@ syntax ElseIf
  ;
 syntax ReturnRule
         = 
-        term: ANY
+        term: Term
  ;
 syntax AddRule
         = 
-        ANY val ANY set
+        Term val VarTerm set
  ;
 syntax RemoveRule
         = 
-        ANY val ANY set
+        Term val VarTerm set
  ;
 syntax Type
-        = 
-        ()
+        = NamedType
+        | MapType
+        | TupletType
+        | SetType
+        | SequenceType
  ;
 syntax NamedType
         = 
-        name: ANY
+        name: String
  ;
 syntax MapType
         = 
-        ANY ofType ANY toType
+        Type ofType Type toType
  ;
 syntax TupletType
         = 
-        types: ANY
+        types: Type
  ;
 syntax SetType
         = 
-        of: ANY
+        of: Type
  ;
 syntax SequenceType
         = 
-        of: ANY
+        of: Type
  ;
 syntax Term
-        = 
-        ()
+        = VarTerm
+        | Operator
+        | MapTerm
+        | TulpletTerm
+        | MethodCallTerm
+        | PredicateTerm
+        | SetTerm
+        | SequenceTerm
+        | Constant
  ;
 syntax VarTerm
         = 
-        name: ANY
+        name: String
  ;
 syntax Operator
         = 
-        ANY opName ANY leftExp ANY rightExp
+        String opName Term leftExp Term rightExp
  ;
 syntax MapTerm
         = 
-        ANY ofTerm ANY toTerm ANY separator
+        Term ofTerm Term toTerm String separator
  ;
 syntax TulpletTerm
         = 
-        terms: ANY
+        terms: Term
  ;
 syntax MethodCallTerm
-        = 
-        ANY name ANY parameters+
+        = NewInstance
+        | String name Term parameters+
  ;
 syntax NewInstance
         = 
         ()
  ;
 syntax PredicateTerm
-        = 
-        ANY expressions+
+        = ForAllTerm
+        | ExistsTerm
+        | AnyIn
+        | InWhereHolds expressions+
  ;
 syntax ForAllTerm
         = 
@@ -219,57 +254,60 @@ syntax ForAllTerm
  ;
 syntax ExistsTerm
         = 
-        isUnique: ANY
+        isUnique: Boolean
  ;
 syntax AnyIn
         = 
         ()
  ;
 syntax SetTerm
-        = 
-        ()
+        = EnumerateSet
+        | RangeSet
+        | AlgorithmSet
  ;
 syntax EnumerateSet
         = 
-        ANY vals+
+        Term vals+
  ;
 syntax RangeSet
         = 
-        ANY minval ANY maxval
+        Term minval Term maxval
  ;
 syntax AlgorithmSet
         = 
-        ANY expressions+
+        InWhereHolds expressions+
  ;
 syntax SequenceTerm
-        = 
-        ()
+        = EnumerateSequence
+        | RangeSequence
  ;
 syntax EnumerateSequence
         = 
-        ANY vals+
+        Term vals+
  ;
 syntax RangeSequence
         = 
-        ANY minval ANY maxval
+        Term minval Term maxval
  ;
 syntax Constant
-        = 
-        ()
+        = BooleanConstant
+        | IntegerConstant
+        | StringConstant
+        | NullConstant
  ;
 syntax BooleanConstant
         = 
-        val: ANY
+        val: Boolean
  ;
 syntax IntegerConstant
         = 
-        val: ANY
+        val: Integer
  ;
 syntax StringConstant
         = 
-        val: ANY
+        val: String
  ;
 syntax NullConstant
         = 
-        
+        ()
  ;

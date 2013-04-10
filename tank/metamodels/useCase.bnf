@@ -1,16 +1,20 @@
 Actor:
-        name::ANY
+        name::String
 UseCase:
-        include::ANY+ extend::ANY+
+        include::Include+ extend::Extend+
 Extend:
-        extension::ANY+
+        extension::UseCase+
 Include:
-        includingCase::ANY+
+        includingCase::UseCase+
 UseCaseContainer:
-        ownedElement::ANY+
+        ownedElement::NamedElement+
 BehavioredClassifier:
         EPSILON
 NamedElement:
-        EPSILON
+        Actor
+NamedElement:
+        UseCase
+NamedElement:
+        Association
 Association:
-        actor::ANY useCase::ANY
+        actor::Actor useCase::UseCase

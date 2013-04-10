@@ -3,11 +3,14 @@ module EG
 
 syntax ExecutionGraph
         = 
-        ANY node+ ANY nodeNested
+        Node node+ Node nodeNested
  ;
 syntax Node
-        = 
-        ANY predecessor+ ANY successor+ ANY executionGraph ANY nested+
+        = Start
+        | End
+        | Control
+        | Basic
+        | Node predecessor+ Node successor+ ExecutionGraph executionGraph ExecutionGraph nested+
  ;
 syntax Start
         = 
@@ -18,8 +21,13 @@ syntax End
         ()
  ;
 syntax Control
-        = 
-        ()
+        = Branch
+        | Loop
+        | Fork
+        | Join
+        | Acquire
+        | Release
+        | Split
  ;
 syntax Basic
         = 

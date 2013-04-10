@@ -4,26 +4,38 @@ exports
   sorts
         QueryExpression CheckConstraint Column ColumnSet NamedColumnSet QueryColumnSet Table View Trigger SQLDataType SQLDistinctType SQLSimpleType 
   context-free syntax
-        expresssion::ANY -> QueryExpression
+        expresssion::String -> QueryExpression
 
-        constraintElements::ANY+ constrainedElements::ANY+ -> CheckConstraint
+        constraintElements::Column+ constrainedElements::Table+ -> CheckConstraint
 
-        precision::ANY scale::ANY isNullable::ANY length::ANY collectionName::ANY characterSetName::ANY column_constraints::ANY+ type::ANY owner::ANY optionScopeColumnSet::ANY -> Column
+        precision::Integer scale::Integer isNullable::Boolean length::Integer collectionName::String characterSetName::String column_constraints::CheckConstraint+ type::SQLDataType owner::ColumnSet optionScopeColumnSet::NamedColumnSet -> Column
 
-        features::ANY+ -> ColumnSet
+        NamedColumnSet -> ColumnSet
 
-        optionScopeColumn::ANY triggers::ANY+ -> NamedColumnSet
+        QueryColumnSet -> ColumnSet
 
-        query::ANY -> QueryColumnSet
+        features::Column+ -> ColumnSet
 
-        isTemporary::ANY temporaryScope::ANY isSystem::ANY table_constraints::ANY+ -> Table
+        Table -> NamedColumnSet
 
-        isReadOnly::ANY checkOption::ANY queryExpression::ANY -> View
+        View -> NamedColumnSet
 
-        namedColumnSet::ANY -> Trigger
+        optionScopeColumn::Column triggers::Trigger+ -> NamedColumnSet
 
-        typeNumber::ANY structuralFeatures::ANY+ -> SQLDataType
+        query::QueryExpression -> QueryColumnSet
 
-        length::ANY precision::ANY scale::ANY sqlSimpleType::ANY -> SQLDistinctType
+        isTemporary::Boolean temporaryScope::String isSystem::Boolean table_constraints::CheckConstraint+ -> Table
 
-        characterMaximumLength::ANY characterOctetLength::ANY numericPrecision::ANY numericPrecisionRadix::ANY numericScale::ANY dateTimePrecision::ANY sqlDistinctTypes::ANY+ -> SQLSimpleType
+        isReadOnly::Boolean checkOption::Boolean queryExpression::QueryExpression -> View
+
+        namedColumnSet::NamedColumnSet -> Trigger
+
+        SQLDistinctType -> SQLDataType
+
+        SQLSimpleType -> SQLDataType
+
+        typeNumber::Integer structuralFeatures::Column+ -> SQLDataType
+
+        length::Integer precision::Integer scale::Integer sqlSimpleType::SQLSimpleType -> SQLDistinctType
+
+        characterMaximumLength::Integer characterOctetLength::Integer numericPrecision::Integer numericPrecisionRadix::Integer numericScale::Integer dateTimePrecision::Integer sqlDistinctTypes::SQLDistinctType+ -> SQLSimpleType

@@ -4,27 +4,45 @@ exports
   sorts
         LocatedElement Root Element Key Graph Edge HyperEdge Node Port EndPoint Data ElemType AttrType EdgeType 
   context-free syntax
-         -> LocatedElement
+        Root -> LocatedElement
 
-        keys::ANY+ graphs::ANY+ -> Root
+        Element -> LocatedElement
 
-        id::ANY datas::ANY+ -> Element
+        Port -> LocatedElement
 
-        for::ANY attrName::ANY type::ANY defValue::ANY -> Key
+        EndPoint -> LocatedElement
 
-        contents::ANY+ edgeDefault::ANY -> Graph
+        Data -> LocatedElement
 
-        source::ANY target::ANY sourceport::ANY targetport::ANY -> Edge
+        keys::Key+ graphs::Graph+ -> Root
 
-        endpoints::ANY+ -> HyperEdge
+        Key -> Element
 
-        subgraph::ANY ports::ANY+ -> Node
+        Graph -> Element
 
-        name::ANY -> Port
+        Edge -> Element
 
-        node::ANY port::ANY -> EndPoint
+        HyperEdge -> Element
 
-        key::ANY value::ANY -> Data
+        Node -> Element
+
+        id::String datas::Data+ -> Element
+
+        for::ElemType attrName::String type::AttrType defValue::String -> Key
+
+        contents::Element+ edgeDefault::EdgeType -> Graph
+
+        source::Node target::Node sourceport::Port targetport::Port -> Edge
+
+        endpoints::EndPoint+ -> HyperEdge
+
+        subgraph::Graph ports::Port+ -> Node
+
+        name::String -> Port
+
+        node::Node port::Port -> EndPoint
+
+        key::String value::String -> Data
 
         edge:: -> ElemType
         node:: -> ElemType

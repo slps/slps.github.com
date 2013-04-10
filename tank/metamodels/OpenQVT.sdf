@@ -4,21 +4,33 @@ exports
   sorts
         Variable Context Rule RootRule RuleSetCall QARule RuleSet Service OCLService RTransService JavaService RulePart Action RTransAction JavaAction Query OCLFilter RTransQuery JavaQuery JavaFilter 
   context-free syntax
-        name::ANY type::ANY value::ANY visibility::ANY context::ANY -> Variable
+        name::String type::String value::String visibility::String context::Context -> Variable
 
-        variables::ANY+ rule::ANY -> Context
+        variables::Variable+ rule::Rule -> Context
 
-        context::ANY subRule::ANY superRule::ANY services::ANY+ -> Rule
+        RootRule -> Rule
 
-        ruleSet::ANY -> RootRule
+        RuleSetCall -> Rule
 
-        ruleSet::ANY -> RuleSetCall
+        QARule -> Rule
 
-        query::ANY action::ANY -> QARule
+        context::Context subRule::Rule superRule::Rule services::Service+ -> Rule
 
-        rootRule::ANY -> RuleSet
+        ruleSet::RuleSet -> RootRule
 
-        visibility::ANY signature::ANY rule::ANY -> Service
+        ruleSet::RuleSet -> RuleSetCall
+
+        query::Query action::Action -> QARule
+
+        rootRule::RootRule -> RuleSet
+
+        OCLService -> Service
+
+        RTransService -> Service
+
+        JavaService -> Service
+
+        visibility::String signature::String rule::Rule -> Service
 
          -> OCLService
 
@@ -26,15 +38,29 @@ exports
 
          -> JavaService
 
-         -> RulePart
+        Action -> RulePart
 
-        qARule::ANY -> Action
+        Query -> RulePart
+
+        RTransAction -> Action
+
+        JavaAction -> Action
+
+        qARule::QARule -> Action
 
          -> RTransAction
 
          -> JavaAction
 
-        qARule::ANY -> Query
+        OCLFilter -> Query
+
+        RTransQuery -> Query
+
+        JavaQuery -> Query
+
+        JavaFilter -> Query
+
+        qARule::QARule -> Query
 
          -> OCLFilter
 

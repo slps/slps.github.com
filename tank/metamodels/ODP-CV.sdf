@@ -4,72 +4,106 @@ exports
   sorts
         EnvironmentContract ComputationalTemplate ComputationalObject BindingObject ComputationalObjectTemplate ComputationalInterfaceTemplate Interface Binding SignalInterface OperationInterface StreamInterface InterfaceSignature SignalInterfaceSignature OperationInterfaceSignature StreamInterfaceSignature InteractionSignature Parameter AnnouncementSignature InterrogationSignature TerminationSignature SignalSignature FlowSignature ActionTemplate Behaviour Action State InternalAction Interaction Flow Signal Operation Announcement Interrogation Invocation Termination 
   context-free syntax
-        ec_to_a::ANY+ specifier_ec::ANY -> EnvironmentContract
+        ec_to_a::Action+ specifier_ec::ComputationalTemplate -> EnvironmentContract
 
-         -> ComputationalTemplate
+        ComputationalObjectTemplate -> ComputationalTemplate
 
-        co_to_i::ANY+ co_to_bh::ANY specifier_co::ANY co_to_st::ANY -> ComputationalObject
+        ComputationalInterfaceTemplate -> ComputationalTemplate
+
+        BindingObject -> ComputationalObject
+
+        co_to_i::Interface+ co_to_bh::Behaviour specifier_co::ComputationalObjectTemplate co_to_st::State -> ComputationalObject
 
          -> BindingObject
 
-        cot_to_co::ANY+ part_provide::ANY+ part_request::ANY+ -> ComputationalObjectTemplate
+        cot_to_co::ComputationalObject+ part_provide::ComputationalInterfaceTemplate+ part_request::ComputationalInterfaceTemplate+ -> ComputationalObjectTemplate
 
-        cit_to_i::ANY+ aggregate_provide::ANY+ aggregate_request::ANY+ cit_to_intsig::ANY -> ComputationalInterfaceTemplate
+        cit_to_i::Interface+ aggregate_provide::ComputationalObjectTemplate+ aggregate_request::ComputationalObjectTemplate+ cit_to_intsig::InterfaceSignature -> ComputationalInterfaceTemplate
 
-         -> Interface
+        SignalInterface -> Interface
 
-        bd_to_i::ANY -> Binding
+        OperationInterface -> Interface
 
-         -> SignalInterface
+        StreamInterface -> Interface
 
-         -> OperationInterface
+        bd_to_i::Interface -> Binding
 
-         -> StreamInterface
+        owner_i::ComputationalObject i_to_bd::Binding specifier_i::ComputationalInterfaceTemplate i_to_ina::Interaction+ -> SignalInterface
 
-         -> InterfaceSignature
+        owner_i::ComputationalObject i_to_bd::Binding specifier_i::ComputationalInterfaceTemplate i_to_ina::Interaction+ -> OperationInterface
 
-        sgisig_to_ssig::ANY+ -> SignalInterfaceSignature
+        owner_i::ComputationalObject i_to_bd::Binding specifier_i::ComputationalInterfaceTemplate i_to_ina::Interaction+ -> StreamInterface
 
-        optisig_to_ansig::ANY+ optisig_to_intsig::ANY+ -> OperationInterfaceSignature
+        SignalInterfaceSignature -> InterfaceSignature
 
-        strisig_to_fsig::ANY+ -> StreamInterfaceSignature
+        OperationInterfaceSignature -> InterfaceSignature
 
-         -> InteractionSignature
+        StreamInterfaceSignature -> InterfaceSignature
 
-        param_to_isig::ANY -> Parameter
+        sgisig_to_ssig::SignalSignature+ -> SignalInterfaceSignature
 
-        ansig_to_optisig::ANY -> AnnouncementSignature
+        optisig_to_ansig::AnnouncementSignature+ optisig_to_intsig::InterrogationSignature+ -> OperationInterfaceSignature
 
-        intsig_to_optisig::ANY intsig_to_tersig::ANY+ -> InterrogationSignature
+        strisig_to_fsig::FlowSignature+ -> StreamInterfaceSignature
 
-        tersig_to_intsig::ANY -> TerminationSignature
+        AnnouncementSignature -> InteractionSignature
 
-        ssig_to_sgisig::ANY -> SignalSignature
+        InterrogationSignature -> InteractionSignature
 
-        fsig_to_strisig::ANY -> FlowSignature
+        TerminationSignature -> InteractionSignature
 
-        at_to_a::ANY+ at_to_isig::ANY -> ActionTemplate
+        SignalSignature -> InteractionSignature
 
-        specifier_bh::ANY owner_bh::ANY bh_to_a::ANY+ -> Behaviour
+        FlowSignature -> InteractionSignature
 
-        constrainer_ec::ANY+ changedState::ANY+ specifier_a::ANY a_to_bh::ANY -> Action
+        param_to_isig::InteractionSignature -> Parameter
 
-        startState::ANY endState::ANY changer::ANY+ st_to_co::ANY -> State
+        ansig_to_optisig::OperationInterfaceSignature -> AnnouncementSignature
+
+        intsig_to_optisig::OperationInterfaceSignature intsig_to_tersig::TerminationSignature+ -> InterrogationSignature
+
+        tersig_to_intsig::InterrogationSignature -> TerminationSignature
+
+        ssig_to_sgisig::SignalInterfaceSignature -> SignalSignature
+
+        fsig_to_strisig::StreamInterfaceSignature -> FlowSignature
+
+        at_to_a::Action+ at_to_isig::InteractionSignature -> ActionTemplate
+
+        specifier_bh::ComputationalTemplate owner_bh::ComputationalObject bh_to_a::Action+ -> Behaviour
+
+        InternalAction -> Action
+
+        Interaction -> Action
+
+        constrainer_ec::EnvironmentContract+ changedState::State+ specifier_a::ActionTemplate a_to_bh::Behaviour -> Action
+
+        startState::State endState::State changer::Action+ st_to_co::ComputationalObject -> State
 
          -> InternalAction
 
-         -> Interaction
+        Flow -> Interaction
 
-         -> Flow
+        Signal -> Interaction
 
-         -> Signal
+        Operation -> Interaction
 
-         -> Operation
+        Invocation -> Interaction
 
-         -> Announcement
+        Termination -> Interaction
 
-        int_to_ter::ANY -> Interrogation
+        ina_to_i::Interface -> Flow
 
-        inv_to_ter::ANY inv_to_opt::ANY -> Invocation
+        ina_to_i::Interface -> Signal
 
-        owner_ter::ANY ter_to_inv::ANY -> Termination
+        Announcement -> Operation
+
+        Interrogation -> Operation
+
+        opt_to_inv::Invocation -> Announcement
+
+        int_to_ter::Termination -> Interrogation
+
+        inv_to_ter::Termination inv_to_opt::Operation -> Invocation
+
+        owner_ter::Interrogation ter_to_inv::Invocation -> Termination

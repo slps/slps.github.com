@@ -1,80 +1,86 @@
 CellType:
-        unit::ANY formula::ANY err::ANY value::ANY
+        unit::String formula::String err::String value::String
 VisioDocument:
-        docMasters::ANY docPages::ANY
+        docMasters::MastersCollection docPages::PagesCollection
 PageSheet:
         EPSILON
-NamedElt:
-        EPSILON
-IdentifiedElt:
-        EPSILON
-UniqueIdElt:
-        EPSILON
 Shape:
-        ss_shapes::ANY lineStyle::ANY fillStyle::ANY textStyle::ANY shapeElts::ANY+
+        ss_shapes::ShapesCollection lineStyle::Integer fillStyle::Integer textStyle::Integer shapeElts::ShapeElt+
 ShapeElt:
-        EPSILON
-IXElt:
-        EPSILON
-DelElt:
-        EPSILON
+        Text
 Geom:
-        noFill::ANY noLine::ANY noShow::ANY noSnap::ANY linesTo::ANY+ movesTo::ANY+ arcsTo::ANY+ splineKnots::ANY+ polylinesTo::ANY+ infiniteLines::ANY+ ellipses::ANY+ ellipticalArcsTo::ANY+ splineStarts::ANY+ nurbsTo::ANY+
+        noFill::CellType noLine::CellType noShow::CellType noSnap::CellType linesTo::LineTo+ movesTo::MoveTo+ arcsTo::ArcTo+ splineKnots::SplineKnot+ polylinesTo::PolylineTo+ infiniteLines::InfiniteLine+ ellipses::Ellipse+ ellipticalArcsTo::EllipticalArcTo+ splineStarts::SplineStart+ nurbsTo::NURBSTo+
 XYElt:
-        EPSILON
+        LineTo
+XYElt:
+        MoveTo
+XYElt:
+        XYAElt
 LineTo:
-        lt_geom::ANY
+        lt_geom::Geom
 MoveTo:
-        mt_geom::ANY
+        mt_geom::Geom
 XYAElt:
-        EPSILON
+        ArcTo
+XYAElt:
+        SplineKnot
+XYAElt:
+        PolylineTo
+XYAElt:
+        XYABElt
 ArcTo:
-        ac_geom::ANY
+        ac_geom::Geom
 SplineKnot:
-        sk_geom::ANY
+        sk_geom::Geom
 PolylineTo:
-        pt_geom::ANY
+        pt_geom::Geom
 XYABElt:
-        EPSILON
+        InfiniteLine
+XYABElt:
+        XYABCDElt
 InfiniteLine:
-        il_geom::ANY
+        il_geom::Geom
 XYABCDElt:
-        EPSILON
+        Ellipse
+XYABCDElt:
+        EllipticalArcTo
+XYABCDElt:
+        SplineStart
+XYABCDElt:
+        XYABCDEElt
 Ellipse:
-        e_geom::ANY
+        e_geom::Geom
 EllipticalArcTo:
-        eat_geom::ANY
+        eat_geom::Geom
 SplineStart:
-        ss_geom::ANY
+        ss_geom::Geom
 XYABCDEElt:
-        EPSILON
+        NURBSTo
 NURBSTo:
-        nt_geom::ANY
+        nt_geom::Geom
 Text:
-        textElts::ANY+
+        textElts::TextElt+
 TextElt:
-        EPSILON
+        StringElt
 StringElt:
-        value::ANY
+        value::String
 MastersCollection:
-        ms_visioDocument::ANY masters::ANY+ masterShortCuts::ANY+
+        ms_visioDocument::VisioDocument masters::Master+ masterShortCuts::MasterShortCut+
 MasterShortCut:
-        m_masterShortCuts::ANY iconSize::ANY patternFlags::ANY prompt::ANY shortcutURL::ANY shortcutHelp::ANY alignName::ANY icons::ANY+
+        m_masterShortCuts::MastersCollection iconSize::Integer patternFlags::Integer prompt::String shortcutURL::String shortcutHelp::String alignName::Integer icons::Icon+
 Icon:
-        i_masterShortCut::ANY value::ANY
+        i_masterShortCut::MasterShortCut value::String
 Master:
-        m_masters::ANY baseID::ANY matchByName::ANY iconSize::ANY patternFlags::ANY prompt::ANY hidden::ANY iconUpdate::ANY alignName::ANY masterElts::ANY+
+        m_masters::MastersCollection baseID::String matchByName::Boolean iconSize::Integer patternFlags::Integer prompt::String hidden::Boolean iconUpdate::Boolean alignName::Integer masterElts::MasterElt+
 ShapesCollection:
-        shapes::ANY+
+        shapes::Shape+
 ConnectsCollection:
-        connections::ANY+
+        connections::Connect+
 Connect:
-        c_connects::ANY fromSheet::ANY toSheet::ANY fromCell::ANY toCell::ANY fromPart::ANY toPart::ANY
+        c_connects::ConnectsCollection fromSheet::Integer toSheet::Integer fromCell::String toCell::String fromPart::Integer toPart::Integer
 MasterElt:
-        EPSILON
+        Icon
 PagesCollection:
-        ps_visioDocument::ANY pages::ANY+
+        ps_visioDocument::VisioDocument pages::Page+
 Page:
-        p_pages::ANY background::ANY backPage::ANY viewScale::ANY viewCenterX::ANY ViewCenterY::ANY reviewerID::ANY associatedPage::ANY pageElts::ANY+
-PageElt:
-        EPSILON
+        p_pages::PagesCollection background::Boolean backPage::Integer viewScale::Double viewCenterX::Double ViewCenterY::Double reviewerID::Integer associatedPage::Integer pageElts::PageElt+

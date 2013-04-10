@@ -2,68 +2,82 @@
 module LaTeX
 
 syntax ValuedElement
-        = 
-        ()
+        = Type
+        | Title
+        | Name
+        | Date
+        | Adress
+        | Phone
+        | Fax
+        | EMail
+        | Abstract
+        | Keywords
+        | Path
+        | Label
+        | Item
+        | Description
  ;
 syntax Type
         = 
-        ANY value
+        value: String
  ;
 syntax Title
         = 
-        ANY value
+        value: String
  ;
 syntax Name
         = 
-        ANY author ANY organisation
+        Author author Organisation organisation
  ;
 syntax Date
         = 
-        ANY value
+        value: String
  ;
 syntax Author
         = 
-        ANY names+
+        Name names+
  ;
 syntax Adress
         = 
-        ANY value
+        value: String
  ;
 syntax Organisation
         = 
-        ANY names+ ANY adress ANY heading
+        Name names+ Adress adress Heading heading
  ;
 syntax Phone
         = 
-        ANY value
+        value: String
  ;
 syntax Fax
         = 
-        ANY value
+        value: String
  ;
 syntax EMail
         = 
-        ANY value
+        value: String
  ;
 syntax Heading
         = 
-        ANY organisations+ ANY phone ANY fax ANY email
+        Organisation organisations+ Phone phone Fax fax EMail email
  ;
 syntax Abstract
         = 
-        ANY value
+        value: String
  ;
 syntax Keywords
         = 
-        ANY value
+        value: String
  ;
 syntax SectionBody
         = 
-        ANY corps+ ANY section
+        Corps corps+ Section section
  ;
 syntax Corps
-        = 
-        ()
+        = Figure
+        | Items
+        | Enumerate
+        | Section
  ;
 syntax Value
         = 
@@ -75,49 +89,49 @@ syntax Cite
  ;
 syntax Path
         = 
-        ANY value
+        value: String
  ;
 syntax Label
         = 
-        ANY value
+        value: String
  ;
 syntax Figure
         = 
-        ANY path ANY label ANY title
+        Path path Label label Title title
  ;
 syntax Item
         = 
-        ANY itemscontainer ANY enumeratecontainer
+        Items itemscontainer Enumerate enumeratecontainer
  ;
 syntax Items
         = 
-        ANY item+
+        Item item+
  ;
 syntax Enumerate
         = 
-        ANY item+
+        Item item+
  ;
 syntax Section
         = 
-        ANY title ANY sectionBody
+        Title title SectionBody sectionBody
  ;
 syntax Description
         = 
-        date: ANY
+        date: Date
  ;
 syntax Citation
         = 
-        ANY label ANY author ANY description ANY bibliography
+        Label label Author author Description description Bibliography bibliography
  ;
 syntax Bibliography
         = 
-        ANY citations+ ANY documentbody
+        Citation citations+ DocumentBody documentbody
  ;
 syntax DocumentBody
         = 
-        ANY sections+ ANY bibliography+ ANY document
+        Section sections+ Bibliography bibliography+ Document document
  ;
 syntax Document
         = 
-        ANY type ANY title ANY author ANY date ANY heading ANY abstract ANY keywords ANY documentbody
+        Type type Title title Author author Date date Heading heading Abstract abstract Keywords keywords DocumentBody documentbody
  ;

@@ -2,40 +2,125 @@
 module KML
 
 syntax Node
-        = 
-        ()
+        = ElementNode
+        | AttributeNode
  ;
 syntax ElementNode
-        = 
-        ()
+        = RootNode
+        | TextNode
+        | KMLNode
  ;
 syntax AttributeNode
         = 
-        value: ANY
+        value: String
  ;
 syntax RootNode
         = 
-        ()
+        KMLRootNode
  ;
 syntax TextNode
         = 
-        ANY nodes+
+        Node nodes+
  ;
 syntax KMLNode
-        = 
-        ()
+        = Address
+        | AltitudeMode
+        | BalloonStyle
+        | Color
+        | ColorMode
+        | Cookie
+        | Coordinates
+        | Coordinate
+        | Description
+        | Document
+        | DrawOrder
+        | East
+        | Extrude
+        | Fill
+        | FlyToView
+        | Folder
+        | GroundOverlay
+        | H
+        | Heading
+        | Href
+        | Icon
+        | IconStyle
+        | InnerBoundaryIs
+        | Key
+        | LabelStyle
+        | Latitude
+        | LatLonBox
+        | LinearRing
+        | LineString
+        | LineStyle
+        | LinkDescription
+        | LinkName
+        | Longitude
+        | LookAt
+        | Message
+        | MinRefreshPeriod
+        | MultiGeometry
+        | Name
+        | NetworkLink
+        | NetworkLinkControl
+        | North
+        | ObjArrayField
+        | ObjField
+        | Open
+        | OuterBoundaryIs
+        | Outline
+        | OverlayXY
+        | Pair
+        | Parent
+        | Placemark
+        | Point
+        | Polygon
+        | PolyStyle
+        | Range
+        | RefreshInterval
+        | RefreshMode
+        | RefreshVisibility
+        | Rotation
+        | Schema
+        | Scale
+        | ScreenOverlay
+        | ScreenXY
+        | SimpleArrayField
+        | SimpleField
+        | Size
+        | South
+        | Snippet
+        | Style
+        | StyleMap
+        | StyleUrl
+        | Tessellate
+        | Text
+        | TextColor
+        | Tilt
+        | Type
+        | Url
+        | ViewBoundScale
+        | ViewRefreshMode
+        | ViewRefreshTime
+        | ViewFormat
+        | Visibility
+        | W
+        | West
+        | Width
+        | X
+        | Y
  ;
 syntax KMLRootNode
         = 
-        
+        ()
  ;
 syntax Address
         = 
-        value: ANY
+        value: String
  ;
 syntax AltitudeMode
         = 
-        value: ANY
+        value: AltitudeModeValue
  ;
 syntax AltitudeModeValue
         = clampedToGround: ()
@@ -44,15 +129,15 @@ syntax AltitudeModeValue
  ;
 syntax BalloonStyle
         = 
-        
+        ()
  ;
 syntax Color
         = 
-        value: ANY
+        value: String
  ;
 syntax ColorMode
         = 
-        value: ANY
+        value: ColorModeValue
  ;
 syntax ColorModeValue
         = normal: ()
@@ -60,325 +145,325 @@ syntax ColorModeValue
  ;
 syntax Cookie
         = 
-        value: ANY
+        value: String
  ;
 syntax Coordinates
         = 
-        
+        ()
  ;
 syntax Coordinate
         = 
-        
+        ()
  ;
 syntax Description
         = 
-        value: ANY
+        value: String
  ;
 syntax Document
         = 
-        
+        ()
  ;
 syntax DrawOrder
         = 
-        value: ANY
+        value: Integer
  ;
 syntax East
         = 
-        value: ANY
+        value: Double
  ;
 syntax Extrude
         = 
-        value: ANY
+        value: Boolean
  ;
 syntax Fill
         = 
-        value: ANY
+        value: Boolean
  ;
 syntax FlyToView
         = 
-        value: ANY
+        value: Boolean
  ;
 syntax Folder
         = 
-        
+        ()
  ;
 syntax GroundOverlay
         = 
-        
+        ()
  ;
 syntax H
         = 
-        value: ANY
+        value: Integer
  ;
 syntax Heading
         = 
-        value: ANY
+        value: Double
  ;
 syntax Href
         = 
-        value: ANY
+        value: String
  ;
 syntax Icon
         = 
-        
+        ()
  ;
 syntax IconStyle
         = 
-        
+        ()
  ;
 syntax InnerBoundaryIs
         = 
-        
+        ()
  ;
 syntax Key
         = 
-        value: ANY
+        value: String
  ;
 syntax LabelStyle
         = 
-        
+        ()
  ;
 syntax Latitude
         = 
-        value: ANY
+        value: Double
  ;
 syntax LatLonBox
         = 
-        
+        ()
  ;
 syntax LinearRing
         = 
-        
+        ()
  ;
 syntax LineString
         = 
-        
+        ()
  ;
 syntax LineStyle
         = 
-        id: ANY
+        id: String
  ;
 syntax LinkDescription
         = 
-        value: ANY
+        value: String
  ;
 syntax LinkName
         = 
-        value: ANY
+        value: String
  ;
 syntax Longitude
         = 
-        value: ANY
+        value: Double
  ;
 syntax LookAt
         = 
-        
+        ()
  ;
 syntax Message
         = 
-        
+        ()
  ;
 syntax MinRefreshPeriod
         = 
-        value: ANY
+        value: String
  ;
 syntax MultiGeometry
         = 
-        
+        ()
  ;
 syntax Name
         = 
-        value: ANY
+        value: String
  ;
 syntax NetworkLink
         = 
-        
+        ()
  ;
 syntax NetworkLinkControl
         = 
-        
+        ()
  ;
 syntax North
         = 
-        value: ANY
+        value: Double
  ;
 syntax ObjArrayField
         = 
-        
+        ()
  ;
 syntax ObjField
         = 
-        
+        ()
  ;
 syntax Open
         = 
-        value: ANY
+        value: String
  ;
 syntax OuterBoundaryIs
         = 
-        
+        ()
  ;
 syntax Outline
         = 
-        value: ANY
+        value: String
  ;
 syntax OverlayXY
         = 
-        ANY x ANY y ANY xunits ANY yunits
+        String x String y String xunits String yunits
  ;
 syntax Pair
         = 
-        
+        ()
  ;
 syntax Parent
         = 
-        value: ANY
+        value: String
  ;
 syntax Placemark
         = 
-        
+        ()
  ;
 syntax Point
         = 
-        
+        ()
  ;
 syntax Polygon
         = 
-        
+        ()
  ;
 syntax PolyStyle
         = 
-        
+        ()
  ;
 syntax Range
         = 
-        value: ANY
+        value: String
  ;
 syntax RefreshInterval
         = 
-        value: ANY
+        value: String
  ;
 syntax RefreshMode
         = 
-        value: ANY
+        value: String
  ;
 syntax RefreshVisibility
         = 
-        value: ANY
+        value: String
  ;
 syntax Rotation
         = 
-        value: ANY
+        value: String
  ;
 syntax Schema
         = 
-        
+        ()
  ;
 syntax Scale
         = 
-        value: ANY
+        value: String
  ;
 syntax ScreenOverlay
         = 
-        id: ANY
+        id: String
  ;
 syntax ScreenXY
         = 
-        ANY x ANY y ANY xunits ANY yunits
+        String x String y String xunits String yunits
  ;
 syntax SimpleArrayField
         = 
-        
+        ()
  ;
 syntax SimpleField
         = 
-        
+        ()
  ;
 syntax Size
         = 
-        ANY x ANY y ANY xunits ANY yunits
+        String x String y String xunits String yunits
  ;
 syntax South
         = 
-        value: ANY
+        value: Double
  ;
 syntax Snippet
         = 
-        
+        ()
  ;
 syntax Style
         = 
-        id: ANY
+        id: String
  ;
 syntax StyleMap
         = 
-        
+        ()
  ;
 syntax StyleUrl
         = 
-        value: ANY
+        value: String
  ;
 syntax Tessellate
         = 
-        value: ANY
+        value: String
  ;
 syntax Text
         = 
-        
+        ()
  ;
 syntax TextColor
         = 
-        value: ANY
+        value: String
  ;
 syntax Tilt
         = 
-        value: ANY
+        value: String
  ;
 syntax Type
         = 
-        value: ANY
+        value: String
  ;
 syntax Url
         = 
-        
+        ()
  ;
 syntax ViewBoundScale
         = 
-        value: ANY
+        value: String
  ;
 syntax ViewRefreshMode
         = 
-        value: ANY
+        value: String
  ;
 syntax ViewRefreshTime
         = 
-        value: ANY
+        value: Integer
  ;
 syntax ViewFormat
         = 
-        value: ANY
+        value: String
  ;
 syntax Visibility
         = 
-        value: ANY
+        value: String
  ;
 syntax W
         = 
-        value: ANY
+        value: Integer
  ;
 syntax West
         = 
-        value: ANY
+        value: Double
  ;
 syntax Width
         = 
-        value: ANY
+        value: Double
  ;
 syntax X
         = 
-        value: ANY
+        value: Integer
  ;
 syntax Y
         = 
-        value: ANY
+        value: Integer
  ;

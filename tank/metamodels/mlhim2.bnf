@@ -8,12 +8,17 @@ ASKR:
         EPSILON
 ASKU:
         NAV
+ASKU:
+        NAV
 Attestation:
         attestedView::DvMedia proof::DvParsable reason::DvCodedString commiter::PartyProxy timeCommited::DvTemporal isPending::DvBoolean
 CareEntry:
         Action
+CareEntry:
         Evaluation
+CareEntry:
         Instruction
+CareEntry:
         Observation
 CCD:
         definition::Locatable metaData::MetaDataSet+ ontology::Ontology
@@ -23,9 +28,11 @@ Composition:
         attestation::Attestation links::Link+ original::DvToken predecessor::DvToken created::DvTemporal composer::PartyProxy territory::Location category::DvCodedString language::DvLanguage context::EventContext content::Locatable
 ContentItem:
         Entry
+ContentItem:
         Section
 DataStructure:
         History
+DataStructure:
         ItemStructure
 DER:
         EPSILON
@@ -33,14 +40,23 @@ Device:
         details::ItemStructure
 DvAny:
         DvBoolean
+DvAny:
         DvChar
+DvAny:
         DvEncapsulated
+DvAny:
         DvInterval
+DvAny:
         DvNumeric
+DvAny:
         DvOrdered
+DvAny:
         DvParagraph
+DvAny:
         DvURI
+DvAny:
         PartyProxy
+DvAny:
         ReferenceRange
 DvBoolean:
         dv::ANY
@@ -48,8 +64,11 @@ DvByte:
         dv::ANY
 DvChar:
         DvLanguage
+DvChar:
         DvNormalizedString
+DvChar:
         DvString
+DvChar:
         DvToken
 DvCodedString:
         codeString::ANY terminologyName::ANY terminologyAbbrev::ANY
@@ -65,6 +84,7 @@ DvDuration:
         dv::ANY
 DvEncapsulated:
         DvMedia
+DvEncapsulated:
         DvParsable
 DvIdentifier:
         issuer::ANY assigner::ANY name::ANY
@@ -80,12 +100,19 @@ DvLong:
         dv::ANY
 DvMedia:
         DvMediaApp
+DvMedia:
         DvMediaAudio
+DvMedia:
         DvMediaImage
+DvMedia:
         DvMediaModel
+DvMedia:
         DvMediaMsg
+DvMedia:
         DvMediaMultipart
+DvMedia:
         DvMediaText
+DvMedia:
         DvMediaVideo
 DvMediaApp:
         dv::ANY
@@ -113,21 +140,35 @@ DvNormalizedString:
         uuid::ANY language::ANY dv::ANY
 DvNumeric:
         DvByte
+DvNumeric:
         DvDecimal
+DvNumeric:
         DvInt
+DvNumeric:
         DvInteger
+DvNumeric:
         DvLong
+DvNumeric:
         DvNegativeInteger
+DvNumeric:
         DvNonNegativeInteger
+DvNumeric:
         DvNonPositiveInteger
+DvNumeric:
         DvPositiveInteger
+DvNumeric:
         DvShort
+DvNumeric:
         DvUnsignedByte
+DvNumeric:
         DvUnsignedInt
+DvNumeric:
         DvUnsignedLong
+DvNumeric:
         DvUnsignedShort
 DvOrdered:
         DvOrdinal
+DvOrdered:
         DvQuantified
 DvOrdinal:
         dv::ANY symbol::STR
@@ -141,7 +182,9 @@ DvProportion:
         proportionType::ANY
 DvQuantified:
         DvCount
+DvQuantified:
         DvQuantity
+DvQuantified:
         DvRatio
 DvQuantity:
         units::ANY
@@ -149,15 +192,23 @@ DvRate:
         rateType::ANY
 DvRatio:
         DvProportion
+DvRatio:
         DvRate
 DvShort:
         dv::ANY
 DvString:
+        DvCodedString
+DvString:
+        DvIdentifier
+DvString:
         uuid::ANY language::ANY dv::STR
 DvTemporal:
         DvDate
+DvTemporal:
         DvDateTime
+DvTemporal:
         DvDuration
+DvTemporal:
         DvTime
 DvTime:
         dv::ANY
@@ -179,11 +230,13 @@ EntityRef:
         EPSILON
 Entry:
         AdminEntry
+Entry:
         CareEntry
 Evaluation:
         data::ItemStructure
 Event:
         IntervalEvent
+Event:
         PointEvent
 EventContext:
         healthcareFacility::Organization startTime::DvTemporal endTime::DvTemporal participation::Participation location::Location setting::DvCodedString
@@ -205,11 +258,19 @@ IntervalEvent:
         width::DvDuration mathFunction::DvCodedString sampleCount::DvCount
 INV:
         DER
+INV:
+        OTH
+INV:
+        UNC
+INV:
+        DER
         OTH
         UNC
 Item:
         Cluster
+Item:
         Element
+Item:
         Slot
 ItemList:
         items::Item+
@@ -217,8 +278,11 @@ ItemSingle:
         item::Item
 ItemStructure:
         ItemList
+ItemStructure:
         ItemSingle
+ItemStructure:
         ItemTable
+ItemStructure:
         ItemTree
 ItemTable:
         rows::Cluster+
@@ -228,17 +292,29 @@ Link:
         relation::Relationship target::DvToken
 Locatable:
         Activity
+Locatable:
         Attestation
+Locatable:
         Composition
+Locatable:
         ContentItem
+Locatable:
         DataStructure
+Locatable:
         Event
+Locatable:
         EventContext
+Locatable:
         Folder
+Locatable:
         Item
+Locatable:
         Location
+Locatable:
         Party
+Locatable:
         Relationship
+Locatable:
         Role
 Location:
         details::ItemStructure description::DvString isPrimary::DvBoolean
@@ -256,6 +332,14 @@ NAV:
         EPSILON
 NI:
         INV
+NI:
+        MSK
+NI:
+        NA
+NI:
+        UNK
+NI:
+        INV
         MSK
         NA
         UNK
@@ -263,6 +347,8 @@ NINF:
         EPSILON
 NonHuman:
         details::ItemStructure
+ObjectRef:
+        EntityRef
 ObjectRef:
         uuid::ANY namespace::ANY objType::ANY
 Observation:
@@ -275,19 +361,30 @@ Organization:
         details::ItemStructure
 OTH:
         NINF
+OTH:
+        PINF
+OTH:
+        NINF
         PINF
 Participation:
         performer::PartyProxy function::DvCodedString mode::DvCodedString time::DvTemporal
 Party:
         Device
+Party:
         Group
+Party:
         NonHuman
+Party:
         Organization
+Party:
         Person
+PartyIdentified:
+        PartyRelated
 PartyIdentified:
         name::DvString identifiers::DvIdentifier+
 PartyProxy:
         PartyIdentified
+PartyProxy:
         PartySelf
 PartyRelated:
         relationship::Relationship
@@ -315,6 +412,16 @@ TRC:
         EPSILON
 UNC:
         EPSILON
+UNK:
+        ASKR
+UNK:
+        ASKU
+UNK:
+        NASK
+UNK:
+        QS
+UNK:
+        TRC
 UNK:
         ASKR
         ASKU

@@ -2,31 +2,47 @@ module Main
 
 exports
   sorts
-        Signal Action CreateAction DestroyAction UninterpretedAction CallAction SendAction ActionSequence Argument Reception ReturnAction TerminateAction Exception CallConcurrencyKind ParameterDirectionKind ScopeKind VisibilityKind Expression BooleanExpression ObjectSetExpression ActionExpression IterationExpression TimeExpression PseudostateKind StateMachine Event StateVertex State TimeEvent CallEvent SignalEvent Transition CompositeState ChangeEvent Guard Pseudostate SimpleState SubmachineState SynchState StubState FinalState Element ModelElement GeneralizableElement Namespace Classifier Feature Relationship BehavioralFeature Operation Parameter Generalization 
+        Signal Action CreateAction DestroyAction UninterpretedAction CallAction SendAction ActionSequence Argument Reception ReturnAction TerminateAction Exception CallConcurrencyKind ParameterDirectionKind ScopeKind VisibilityKind Expression BooleanExpression ObjectSetExpression ActionExpression IterationExpression TimeExpression PseudostateKind StateMachine Event StateVertex State TimeEvent CallEvent SignalEvent Transition CompositeState ChangeEvent Guard Pseudostate SimpleState SubmachineState SynchState StubState FinalState Element ModelElement Classifier Feature Relationship BehavioralFeature Operation Parameter Generalization 
   context-free syntax
-        powertypeRange::ANY+ feature::ANY+ -> Signal
+        Exception -> Signal
 
-         -> Action
+        Exception -> Signal
 
-        instantiation::ANY -> CreateAction
+        CreateAction -> Action
 
-        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY -> DestroyAction
+        DestroyAction -> Action
 
-        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY -> UninterpretedAction
+        UninterpretedAction -> Action
 
-        operation::ANY -> CallAction
+        CallAction -> Action
 
-        signal::ANY -> SendAction
+        SendAction -> Action
 
-        action::ANY+ -> ActionSequence
+        ActionSequence -> Action
 
-        action::ANY value::ANY -> Argument
+        ReturnAction -> Action
 
-        signal::ANY specification::ANY isRoot::ANY isLeaf::ANY isAbstract::ANY -> Reception
+        TerminateAction -> Action
 
-        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY -> ReturnAction
+        instantiation::Classifier -> CreateAction
 
-        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY -> TerminateAction
+        actualArgument::Argument+ actionSequence::ActionSequence recurrence::IterationExpression target::ObjectSetExpression isAsynchronous::Boolean script::ActionExpression -> DestroyAction
+
+        actualArgument::Argument+ actionSequence::ActionSequence recurrence::IterationExpression target::ObjectSetExpression isAsynchronous::Boolean script::ActionExpression -> UninterpretedAction
+
+        operation::Operation -> CallAction
+
+        signal::Signal -> SendAction
+
+        action::Action+ -> ActionSequence
+
+        action::Action value::Expression -> Argument
+
+        signal::Signal specification::String isRoot::Boolean isLeaf::Boolean isAbstract::Boolean -> Reception
+
+        actualArgument::Argument+ actionSequence::ActionSequence recurrence::IterationExpression target::ObjectSetExpression isAsynchronous::Boolean script::ActionExpression -> ReturnAction
+
+        actualArgument::Argument+ actionSequence::ActionSequence recurrence::IterationExpression target::ObjectSetExpression isAsynchronous::Boolean script::ActionExpression -> TerminateAction
 
          -> Exception
 
@@ -47,7 +63,17 @@ exports
         vk_private:: -> VisibilityKind
         vk_package:: -> VisibilityKind
 
-        language::ANY body::ANY -> Expression
+        BooleanExpression -> Expression
+
+        ObjectSetExpression -> Expression
+
+        ActionExpression -> Expression
+
+        IterationExpression -> Expression
+
+        TimeExpression -> Expression
+
+        language::String body::String -> Expression
 
          -> BooleanExpression
 
@@ -67,58 +93,96 @@ exports
         pk_junction:: -> PseudostateKind
         pk_shallowHistory:: -> PseudostateKind
 
-        context::ANY submachineState::ANY+ top::ANY transitions::ANY+ -> StateMachine
+        context::ModelElement submachineState::SubmachineState+ top::State transitions::Transition+ -> StateMachine
 
-         -> Event
+        TimeEvent -> Event
 
-         -> StateVertex
+        CallEvent -> Event
 
-         -> State
+        SignalEvent -> Event
 
-        when::ANY -> TimeEvent
+        ChangeEvent -> Event
 
-        operation::ANY -> CallEvent
+        State -> StateVertex
 
-        signal::ANY -> SignalEvent
+        Pseudostate -> StateVertex
 
-        target::ANY trigger::ANY stateMachine::ANY source::ANY effect::ANY guard::ANY -> Transition
+        SynchState -> StateVertex
 
-        subvertex::ANY+ isConcurrent::ANY -> CompositeState
+        StubState -> StateVertex
 
-        changeExpression::ANY -> ChangeEvent
+        CompositeState -> State
 
-        transition::ANY expression::ANY -> Guard
+        SimpleState -> State
 
-        kind::ANY -> Pseudostate
+        FinalState -> State
 
-        deferrableEvent::ANY+ internalTransition::ANY+ exit::ANY doActivity::ANY entry::ANY stateMachine::ANY -> SimpleState
+        when::TimeExpression -> TimeEvent
 
-        submachine::ANY -> SubmachineState
+        operation::Operation -> CallEvent
 
-        bound::ANY -> SynchState
+        signal::Signal -> SignalEvent
 
-        referenceState::ANY -> StubState
+        target::StateVertex trigger::Event stateMachine::StateMachine source::StateVertex effect::Action guard::Guard -> Transition
 
-        deferrableEvent::ANY+ internalTransition::ANY+ exit::ANY doActivity::ANY entry::ANY stateMachine::ANY -> FinalState
+        SubmachineState -> CompositeState
 
-         -> Element
+        subvertex::StateVertex+ isConcurrent::Boolean -> CompositeState
 
-         -> ModelElement
+        changeExpression::BooleanExpression -> ChangeEvent
 
-         -> GeneralizableElement
+        transition::Transition expression::BooleanExpression -> Guard
 
-         -> Namespace
+        kind::PseudostateKind -> Pseudostate
 
-         -> Classifier
+        deferrableEvent::Event+ internalTransition::Transition+ exit::Action doActivity::Action entry::Action stateMachine::StateMachine -> SimpleState
 
-         -> Feature
+        submachine::StateMachine -> SubmachineState
 
-         -> Relationship
+        bound::Integer -> SynchState
 
-         -> BehavioralFeature
+        referenceState::String -> StubState
 
-        concurrency::ANY isRoot::ANY isLeaf::ANY isAbstract::ANY specification::ANY -> Operation
+        deferrableEvent::Event+ internalTransition::Transition+ exit::Action doActivity::Action entry::Action stateMachine::StateMachine -> FinalState
 
-        type::ANY behavioralFeature::ANY defaultValue::ANY kind::ANY -> Parameter
+        ModelElement -> Element
 
-        parent::ANY powertype::ANY child::ANY discriminator::ANY -> Generalization
+        Action -> ModelElement
+
+        Argument -> ModelElement
+
+        StateMachine -> ModelElement
+
+        Event -> ModelElement
+
+        StateVertex -> ModelElement
+
+        Transition -> ModelElement
+
+        Guard -> ModelElement
+
+        GeneralizableElement -> ModelElement
+
+        Namespace -> ModelElement
+
+        Feature -> ModelElement
+
+        Relationship -> ModelElement
+
+        Parameter -> ModelElement
+
+        Signal -> Classifier
+
+        BehavioralFeature -> Feature
+
+        Generalization -> Relationship
+
+        Reception -> BehavioralFeature
+
+        Operation -> BehavioralFeature
+
+        concurrency::CallConcurrencyKind isRoot::Boolean isLeaf::Boolean isAbstract::Boolean specification::String -> Operation
+
+        type::Classifier behavioralFeature::BehavioralFeature defaultValue::Expression kind::ParameterDirectionKind -> Parameter
+
+        parent::GeneralizableElement powertype::Classifier child::GeneralizableElement discriminator::String -> Generalization

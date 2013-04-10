@@ -1,16 +1,24 @@
 UMLModelElement:
-        EPSILON
+        Attribute
+UMLModelElement:
+        Package
+UMLModelElement:
+        PackageElement
 Attribute:
-        owner::ANY type::ANY
+        owner::Class type::Classifier
 Package:
-        elements::ANY+
+        elements::PackageElement+
 PackageElement:
-        EPSILON
+        Classifier
+PackageElement:
+        Association
 Classifier:
-        EPSILON
+        Class
+Classifier:
+        PrimitiveDataType
 Class:
-        attribute::ANY+ general::ANY+ generalOpposite::ANY+ reverse::ANY+ forward::ANY+
+        attribute::Attribute+ general::Class+ generalOpposite::Class+ reverse::Association+ forward::Association+
 PrimitiveDataType:
-        typeOpposite::ANY+
+        typeOpposite::Attribute+
 Association:
-        source::ANY destination::ANY
+        source::Class destination::Class

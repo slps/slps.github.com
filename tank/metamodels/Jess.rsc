@@ -2,112 +2,135 @@
 module Jess
 
 syntax LocatedElement
-        = 
-        ()
+        = Root
+        | Expression
+        | SlotOp
+        | VarDefinition
+        | DeclareRule
+        | DeclareVar
+        | DeclareBloc
+        | ASlotDef
+        | SlotOptions
+        | ConditionAction
+        | ElifConditionAction
  ;
 syntax Root
         = 
-        ANY expressions+
+        Expression expressions+
  ;
 syntax Expression
-        = 
-        ()
+        = Integ
+        | Floa
+        | Str
+        | Ident
+        | TemplateExpression
+        | DefinitionExp
+        | UseFuncExp
  ;
 syntax Integ
         = 
-        val: ANY
+        val: Integer
  ;
 syntax Floa
         = 
-        val: ANY
+        val: Double
  ;
 syntax Str
         = 
-        val: ANY
+        val: String
  ;
 syntax Ident
-        = 
-        ()
+        = ValidIdentifier
+        | SlotName
+        | JessVariable
  ;
 syntax ValidIdentifier
         = 
-        val: ANY
+        val: String
  ;
 syntax SlotName
         = 
-        val: ANY
+        val: String
  ;
 syntax JessVariable
         = 
-        val: ANY
+        val: String
  ;
 syntax TemplateExpression
         = 
-        ANY templateName ANY firstSlot ANY slotOp+
+        ValidIdentifier templateName SlotOp firstSlot SlotOp slotOp+
  ;
 syntax SlotOp
         = 
-        ANY slotIdent ANY operator ANY exp
+        SlotName slotIdent ValidIdentifier operator Expression exp
  ;
 syntax DefinitionExp
-        = 
-        ()
+        = GlobalDefinition
+        | FunctionDefinition
+        | AdviceDefinition
+        | UnDefAdvice
+        | FactDefinition
+        | RuleDefinition
+        | ModuleDefinition
+        | QueryDefinition
+        | TemplateDefinition
  ;
 syntax GlobalDefinition
         = 
-        ANY varDef+
+        VarDefinition varDef+
  ;
 syntax VarDefinition
         = 
-        ANY jessVar ANY eq ANY expression
+        JessVariable jessVar ValidIdentifier eq Expression expression
  ;
 syntax FunctionDefinition
         = 
-        ANY funcName ANY parameters+ ANY expressions+
+        ValidIdentifier funcName JessVariable parameters+ Expression expressions+
  ;
 syntax AdviceDefinition
         = 
-        ANY direction ANY op ANY advice+
+        Advice direction Ident op Expression advice+
  ;
 syntax UnDefAdvice
         = 
-        op: ANY
+        op: Expression
  ;
 syntax FactDefinition
         = 
-        ANY factName ANY documentation ANY fact+
+        ValidIdentifier factName Str documentation Expression fact+
  ;
 syntax RuleDefinition
         = 
-        ANY ruleName ANY documentation ANY declare ANY conditions+ ANY functionCall+
+        ValidIdentifier ruleName Str documentation DeclareRule declare Expression conditions+ UseFuncExp functionCall+
  ;
 syntax DeclareRule
         = 
-        ANY salience ANY nodeIndexHash ANY autoFocus ANY noLoop
+        Expression salience Expression nodeIndexHash ValidIdentifier autoFocus ValidIdentifier noLoop
  ;
 syntax ModuleDefinition
         = 
-        ANY moduleName ANY documentation
+        ValidIdentifier moduleName Str documentation
  ;
 syntax QueryDefinition
         = 
-        ANY queryName ANY documentation ANY declare ANY expressions+
+        ValidIdentifier queryName Str documentation DeclareVar declare Expression expressions+
  ;
 syntax DeclareVar
         = 
-        ANY var+ ANY node ANY max
+        JessVariable var+ Expression node Expression max
  ;
 syntax TemplateDefinition
         = 
-        ANY templateName ANY inherits+ ANY documentation ANY declareBloc ANY slotDef+
+        ValidIdentifier templateName ValidIdentifier inherits+ Str documentation DeclareBloc declareBloc ASlotDef slotDef+
  ;
 syntax DeclareBloc
         = 
-        ANY slotSpecific ANY backchainReaction ANY fromClass ANY includeVariable ANY order
+        ValidIdentifier slotSpecific ValidIdentifier backchainReaction ValidIdentifier fromClass ValidIdentifier includeVariable ValidIdentifier order
  ;
 syntax ASlotDef
-        = 
-        ANY slotName ANY optionals+
+        = SlotDef
+        | MultiSlotDef
+        | SlotName slotName SlotOptions optionals+
  ;
 syntax SlotDef
         = 
@@ -119,47 +142,52 @@ syntax MultiSlotDef
  ;
 syntax SlotOptions
         = 
-        ANY type ANY def ANY defaultDyn ANY allowedValues+
+        ValidIdentifier type Expression def Expression defaultDyn Expression allowedValues+
  ;
 syntax UseFuncExp
-        = 
-        ()
+        = WhileExp
+        | ForExp
+        | ForeachExp
+        | FuncCall
+        | EngineExp
+        | ExitExp
+        | IfExpression
  ;
 syntax WhileExp
         = 
-        ANY hasDo ANY boolExp ANY actions+
+        Boolean hasDo Expression boolExp Expression actions+
  ;
 syntax ForExp
         = 
-        ANY initializer ANY condition ANY increment ANY expressions+
+        Expression initializer Expression condition Expression increment Expression expressions+
  ;
 syntax ForeachExp
         = 
-        ANY var ANY list ANY expressions+
+        JessVariable var Expression list Expression expressions+
  ;
 syntax FuncCall
         = 
-        ANY funcName ANY funcParam+
+        ValidIdentifier funcName Expression funcParam+
  ;
 syntax EngineExp
         = 
-        
+        ()
  ;
 syntax ExitExp
         = 
-        
+        ()
  ;
 syntax IfExpression
         = 
-        ANY ifthen ANY elifthen+ ANY else+
+        ConditionAction ifthen ElifConditionAction elifthen+ Expression else+
  ;
 syntax ConditionAction
         = 
-        ANY condition ANY actions+
+        Expression condition Expression actions+
  ;
 syntax ElifConditionAction
         = 
-        condAct: ANY
+        condAct: ConditionAction
  ;
 syntax Advice
         = before: ()

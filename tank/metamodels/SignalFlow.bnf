@@ -1,20 +1,30 @@
 RootFolder:
-        compoundComponent::ANY+
+        compoundComponent::CompoundComponent+
 CompoundComponent:
-        rootFolder::ANY baseComponent::ANY+ localPort::ANY+
+        rootFolder::RootFolder baseComponent::BaseComponent+ localPort::LocalPort+
 PrimitiveComponent:
         EPSILON
 BaseComponent:
-        name::ANY position::ANY signal::ANY+ outputPort::ANY+ inputPort::ANY+ compoundComponent::ANY
+        CompoundComponent
+BaseComponent:
+        PrimitiveComponent
+BaseComponent:
+        name::String position::String signal::Signal+ outputPort::OutputPort+ inputPort::InputPort+ compoundComponent::CompoundComponent
 InputPort:
-        baseComponent::ANY
+        baseComponent::BaseComponent
 LocalPort:
-        compoundComponent::ANY
+        compoundComponent::CompoundComponent
 OutputPort:
-        baseComponent::ANY
+        baseComponent::BaseComponent
 PortBase:
-        name::ANY position::ANY associationPortBase_PortBasesrc::ANY associationPortBase_PortBasedst::ANY
+        InputPort
+PortBase:
+        LocalPort
+PortBase:
+        OutputPort
+PortBase:
+        name::String position::String associationPortBase_PortBasesrc::AssociationPortBase_PortBase associationPortBase_PortBasedst::AssociationPortBase_PortBase
 Signal:
-        name::ANY position::ANY baseComponent::ANY associationPortBase_PortBase::ANY
+        name::String position::String baseComponent::BaseComponent associationPortBase_PortBase::AssociationPortBase_PortBase
 AssociationPortBase_PortBase:
-        srcPortBase::ANY+ dstPortBase::ANY+ signal::ANY
+        srcPortBase::PortBase+ dstPortBase::PortBase+ signal::Signal

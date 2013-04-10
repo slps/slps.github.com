@@ -1,18 +1,26 @@
 Condition:
-        partCompositeMembers::ANY+ actCompositeMembers::ANY+
+        partCompositeMembers::PartCompositeMember+ actCompositeMembers::ActCompositeMember+
 CompositeParDef:
-        partCompositeMember::ANY+
+        partCompositeMember::PartCompositeMember+
 ElementaryPartDef:
         EPSILON
 ElementaryActDef:
         EPSILON
 CompositeActDef:
-        actCompositeMembers::ANY+
+        actCompositeMembers::ActCompositeMember+
 ActCompositeMember:
-        activityDefinitions::ANY+
+        activityDefinitions::ActivityDefinition+
 ActivityDefinition:
-        actCompositeMember::ANY
+        ElementaryActDef
+ActivityDefinition:
+        CompositeActDef
+ActivityDefinition:
+        actCompositeMember::ActCompositeMember
 PartDefinition:
-        partCompositeMembers::ANY+
+        CompositeParDef
+PartDefinition:
+        ElementaryPartDef
+PartDefinition:
+        partCompositeMembers::PartCompositeMember+
 PartCompositeMember:
-        partDefinitions::ANY
+        partDefinitions::PartDefinition

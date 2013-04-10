@@ -3,31 +3,31 @@ module GraphVizDot
 
 syntax LocatedElement
         = 
-        ()
+        NamedElement
  ;
 syntax NamedElement
-        = 
-        ()
+        = Graph
+        | GraphElement
  ;
 syntax Graph
         = 
-        ANY type ANY rankDir ANY dim ANY contents+
+        String type String rankDir Integer dim GraphElement contents+
  ;
 syntax GraphElement
-        = 
-        ()
+        = DirectedArc
+        | Constraint
  ;
 syntax Node
         = 
-        ANY shape ANY style
+        String shape String style
  ;
 syntax DirectedArc
         = 
-        ANY sourceNode ANY sourcePart ANY targetNode ANY targetPart ANY shape
+        String sourceNode String sourcePart String targetNode String targetPart String shape
  ;
 syntax Constraint
         = 
-        ANY val ANY refers+
+        String val String refers+
  ;
 syntax SubGraph
         = 

@@ -1,5 +1,11 @@
 RelationSchip:
-        affectCharacteristic::ANY+ constraint::ANY steriotype::ANY+ packages::ANY+ associatePackages::ANY
+        Association
+RelationSchip:
+        Generalisation
+RelationSchip:
+        Dependency
+RelationSchip:
+        affectCharacteristic::Characteristic+ constraint::Constraint steriotype::Steriotype+ packages::Package+ associatePackages::Package
 ConstrainedRelationSchip:
         EPSILON
 Aggregation:
@@ -7,7 +13,12 @@ Aggregation:
 Composition:
         EPSILON
 Association:
-        EPSILON
+        Aggregation
+Association:
+        Composition
+Association:
+        Aggregation
+        Composition
 Generalisation:
         EPSILON
 Dependency:
@@ -15,38 +26,46 @@ Dependency:
 AssociationEnd:
         EPSILON
 Package:
-        steriotype::ANY children::ANY+ parent::ANY classes::ANY+ relationSchip::ANY+ connectedRelationSchip::ANY+
+        steriotype::Steriotype children::Package+ parent::Package classes::Class+ relationSchip::RelationSchip+ connectedRelationSchip::RelationSchip+
 Steriotype:
-        descriptiveAttribute::ANY+ operations::ANY+ relationSchip::ANY+ theClass::ANY+ thePackage::ANY+
+        PerceptorySteriotype
+Steriotype:
+        descriptiveAttribute::DescriptiveAttribute+ operations::Operation+ relationSchip::RelationSchip+ theClass::Class+ thePackage::Package+
 Class:
-        characteristic::ANY+ details::ANY operations::ANY myOperations::ANY+ constraint::ANY+ steriotype::ANY packages::ANY+
+        characteristic::Characteristic+ details::MetaData operations::Operation myOperations::Operation+ constraint::Constraint+ steriotype::Steriotype packages::Package+
 Constraint:
-        caracteristic::ANY theClass::ANY relationSchip::ANY+
+        caracteristic::Characteristic theClass::Class relationSchip::RelationSchip+
 Operation:
-        detail::ANY inCharacteristic::ANY+ affectFeature::ANY+ steriotype::ANY behaviour::ANY
+        detail::MetaData inCharacteristic::Characteristic+ affectFeature::Class+ steriotype::Steriotype behaviour::Class
 Characteristic:
-        details::ANY rule::ANY operations::ANY theClass::ANY relationSchip::ANY constraint::ANY
+        DescriptiveAttribute
+Characteristic:
+        details::MetaData rule::BusnissRule operations::Operation theClass::Class relationSchip::RelationSchip constraint::Constraint
 BusnissRule:
-        characteristic::ANY
+        characteristic::Characteristic
 MetaData:
-        source::ANY characteristic::ANY operations::ANY theClass::ANY
+        source::Source characteristic::Characteristic operations::Operation theClass::Class
 Source:
-        metaData::ANY
+        metaData::MetaData
 Domain:
-        descriptiveAttribute::ANY+
+        RangeDomain
+Domain:
+        EnumeratedDomain
+Domain:
+        descriptiveAttribute::DescriptiveAttribute+
 DescriptiveAttribute:
-        tempsDef::ANY specialDef::ANY steriotype::ANY domain::ANY
+        tempsDef::Temporality specialDef::Geometry steriotype::Steriotype domain::Domain
 Geometry:
-        tempsDef::ANY descriptiveAttributeg::ANY
+        tempsDef::Temporality descriptiveAttributeg::DescriptiveAttribute
 Temporality:
-        geometry::ANY descriptiveAttributet::ANY
+        geometry::Geometry descriptiveAttributet::DescriptiveAttribute
 VisualInfo:
         EPSILON
 Value:
-        enumeratedDomain::ANY
+        enumeratedDomain::EnumeratedDomain
 RangeDomain:
         EPSILON
 EnumeratedDomain:
-        value::ANY+
+        value::Value+
 PerceptorySteriotype:
         EPSILON

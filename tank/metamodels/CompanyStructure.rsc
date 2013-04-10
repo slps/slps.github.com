@@ -3,15 +3,15 @@ module CompanyStructure
 
 syntax Company
         = 
-        ANY corporateHQ ANY Store+
+        CorporateHQ corporateHQ Store Store+
  ;
 syntax CorporateHQ
         = 
-        ANY manages+ ANY corporateHQBackOffice
+        Store manages+ CorporateHQBackOffice corporateHQBackOffice
  ;
 syntax Store
         = 
-        ANY storeBackOffice ANY employee+ ANY cashRegister+
+        StoreBackOffice storeBackOffice Employee employee+ CashRegister cashRegister+
  ;
 syntax CorporateHQBackOffice
         = 

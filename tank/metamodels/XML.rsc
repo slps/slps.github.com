@@ -2,20 +2,21 @@
 module XML
 
 syntax Node
-        = 
-        ()
+        = Attribute
+        | Text
+        | Element
  ;
 syntax Attribute
         = 
-        ANY startLine ANY startColumn ANY endLine ANY endColumn ANY name ANY value ANY parent
+        Integer startLine Integer startColumn Integer endLine Integer endColumn String name String value Element parent
  ;
 syntax Text
         = 
-        ANY startLine ANY startColumn ANY endLine ANY endColumn ANY name ANY value ANY parent
+        Integer startLine Integer startColumn Integer endLine Integer endColumn String name String value Element parent
  ;
 syntax Element
-        = 
-        ANY children+
+        = Root
+        | Node children+
  ;
 syntax Root
         = 

@@ -8,122 +8,120 @@ syntax AttributeUseType
         | required: ()
  ;
 syntax AnnotedElement
-        = 
-        ()
+        = NamedElement
+        | XSchema
  ;
 syntax Annotation
         = 
-        ANY documentations+ ANY applicationInfos+ ANY annotedElement
+        Documentation documentations+ ApplicationInfo applicationInfos+ AnnotedElement annotedElement
  ;
 syntax Documentation
         = 
-        text: ANY
+        text: String
  ;
 syntax ApplicationInfo
         = 
-        text: ANY
+        text: String
  ;
 syntax NamedElement
         = 
-        ()
+        XSchemaContentElement
  ;
 syntax XSchema
         = 
-        ANY namespace ANY contents+
+        String namespace XSchemaContentElement contents+
  ;
 syntax XSchemaContentElement
-        = 
-        ()
- ;
-syntax Parameters
-        = 
-        ()
+        = Parameters
+        | AbstractType
  ;
 syntax Element
         = 
-        ANY references+
+        ElementRef references+
  ;
 syntax Occurable
-        = 
-        ()
+        = AbstractContent
+        | AbstractAttributeGroupContent
  ;
 syntax AbstractContent
-        = 
-        ()
+        = Container
+        | AtomicContent
  ;
 syntax Container
-        = 
-        ()
+        = All
+        | Choice
+        | Sequence
  ;
 syntax AtomicContent
-        = 
-        ()
+        = ElementRef
+        | GroupRef
  ;
 syntax ElementRef
         = 
-        referencedElement: ANY
+        referencedElement: Element
  ;
 syntax GroupRef
         = 
-        referencedGroup: ANY
+        referencedGroup: Group
  ;
 syntax All
         = 
-        ANY contents+
+        AbstractContent contents+
  ;
 syntax Group
         = 
-        ANY references+
+        GroupRef references+
  ;
 syntax Choice
         = 
-        ANY contents+
+        AbstractContent contents+
  ;
 syntax Sequence
         = 
-        ANY contents+
+        AbstractContent contents+
  ;
 syntax AbstractAttributeGroupContent
         = 
-        ()
+        AtomicAttributeGroupContent
  ;
 syntax AttributeGroup
         = 
-        ANY contents+ ANY references+
+        AbstractAttributeGroupContent contents+ AttributeGroupRef references+
  ;
 syntax AttributeGroupRef
         = 
-        referencedAttributeGroup: ANY
+        referencedAttributeGroup: AttributeGroup
  ;
 syntax AtomicAttributeGroupContent
-        = 
-        ()
+        = AttributeGroupRef
+        | AttributeRef
  ;
 syntax Attribute
         = 
-        ANY use ANY references+
+        AttributeUseType use AttributeRef references+
  ;
 syntax AttributeRef
         = 
-        referencedAttribute: ANY
+        referencedAttribute: Attribute
  ;
 syntax AbstractType
-        = 
-        ()
+        = SimpleType
+        | ComplexType
  ;
 syntax SimpleType
         = 
-        ANY extensions+
+        ComplexTypeSimpleContent extensions+
  ;
 syntax ComplexType
-        = 
-        ANY extensions+ ANY content ANY attributes+
+        = ComplexTypeSimpleContent
+        | ComplexTypeComplexContent
+        | ComplexTypeComplexContent extensions+ AbstractContent content AbstractAttributeGroupContent attributes+
  ;
 syntax ComplexTypeSimpleContent
         = 
-        base: ANY
+        base: SimpleType
  ;
 syntax ComplexTypeComplexContent
         = 
-        base: ANY
+        base: ComplexType
  ;

@@ -1,20 +1,33 @@
 ModelElement:
-        EPSILON
+        Classifier
+ModelElement:
+        Operation
+ModelElement:
+        BusinessRule
+ModelElement:
+        Flow
 Classifier:
-        EPSILON
+        Service
+Classifier:
+        BusinessObject
 Operation:
-        name::ANY
+        ServiceOperation
+Operation:
+        BusinessObjectOperation
+Operation:
+        ServiceOperation
+        BusinessObjectOperation
 Service:
-        operations::ANY+
+        operations::ServiceOperation+
 BusinessObject:
-        operations::ANY+
+        operations::BusinessObjectOperation+
 ServiceOperation:
-        BOFlows::ANY+ rules::ANY+
+        BOFlows::Service2BusinessObjectFlow+ rules::BusinessRule+
 BusinessObjectOperation:
-        rules::ANY+
+        rules::BusinessRule+
 BusinessRule:
-        expr::ANY
+        expr::String
 Flow:
-        EPSILON
+        Service2BusinessObjectFlow
 Service2BusinessObjectFlow:
-        source::ANY target::ANY
+        source::String target::String

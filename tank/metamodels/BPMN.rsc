@@ -3,7 +3,7 @@ module BPMN
 
 syntax Activity
         = 
-        ANY orderedMessages+ ANY incomingMessages+ ANY outgoingMessages+ ANY groups+ ANY activityType ANY eventHandlerFor ANY lane ANY looping
+        MessagingEdge orderedMessages+ MessagingEdge incomingMessages+ MessagingEdge outgoingMessages+ Group groups+ ActivityType activityType SubProcess eventHandlerFor Lane lane Boolean looping
  ;
 syntax ActivityType
         = SubProcess: ()
@@ -38,20 +38,22 @@ syntax ActivityType
         | EventIntermediateRule: ()
  ;
 syntax Artifact
-        = 
-        ANY associations+ ANY artifactsContainer
+        = DataObject
+        | Group
+        | TextAnnotation
+        | Association associations+ ArtifactsContainer artifactsContainer
  ;
 syntax ArtifactsContainer
         = 
-        ANY artifacts+
+        Artifact artifacts+
  ;
 syntax Association
         = 
-        ANY direction ANY source ANY target
+        DirectionType direction Artifact source IdentifiableNode target
  ;
 syntax BpmnDiagram
         = 
-        ANY pools+ ANY messages+ ANY author ANY title
+        Pool pools+ MessagingEdge messages+ String author String title
  ;
 syntax DataObject
         = 
@@ -65,43 +67,43 @@ syntax DirectionType
  ;
 syntax Graph
         = 
-        ANY vertices+ ANY sequenceEdges+
+        Vertex vertices+ SequenceEdge sequenceEdges+
  ;
 syntax Group
         = 
-        ANY activities+
+        Activity activities+
  ;
 syntax Identifiable
-        = 
-        iD: ANY
+        = IdentifiableNode
+        | iD: ID
  ;
 syntax IdentifiableNode
-        = 
-        ANY associations+
+        = Vertex
+        | Association associations+
  ;
 syntax Lane
         = 
-        ANY activities+ ANY pool
+        Activity activities+ Pool pool
  ;
 syntax MessagingEdge
         = 
-        ANY bpmnDiagram ANY source ANY target
+        BpmnDiagram bpmnDiagram Activity source Activity target
  ;
 syntax NamedBpmnObject
-        = 
-        ANY documentation ANY name ANY ncname
+        = ArtifactsContainer
+        | String documentation String name String ncname
  ;
 syntax Pool
         = 
-        ANY lanes+ ANY bpmnDiagram
+        Lane lanes+ BpmnDiagram bpmnDiagram
  ;
 syntax SequenceEdge
         = 
-        ANY graph ANY isDefault ANY source ANY target
+        Graph graph Boolean isDefault Vertex source Vertex target
  ;
 syntax SubProcess
         = 
-        ANY eventHandlers+ ANY isTransaction
+        Activity eventHandlers+ Boolean isTransaction
  ;
 syntax TextAnnotation
         = 
@@ -109,5 +111,5 @@ syntax TextAnnotation
  ;
 syntax Vertex
         = 
-        ANY outgoingEdges+ ANY incomingEdges+ ANY graph
+        SequenceEdge outgoingEdges+ SequenceEdge incomingEdges+ Graph graph
  ;

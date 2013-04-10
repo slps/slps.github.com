@@ -1,18 +1,22 @@
 Makefile:
-        name::ANY comment::ANY elements::ANY+
+        name::String comment::Comment elements::Element+
 Element:
-        EPSILON
+        Rule
+Element:
+        Macro
 Rule:
-        dependencies::ANY+ shellLines::ANY+
+        dependencies::Dependency+ shellLines::ShellLine+
 Macro:
-        value::ANY
+        value::String
 ShellLine:
-        command::ANY display::ANY ruleShellLine::ANY
+        command::String display::Boolean ruleShellLine::Rule
 Comment:
-        text::ANY
+        text::String
 Dependency:
-        EPSILON
+        RuleDep
+Dependency:
+        FileDep
 RuleDep:
-        ruledep::ANY
+        ruledep::Rule
 FileDep:
-        name::ANY
+        name::String

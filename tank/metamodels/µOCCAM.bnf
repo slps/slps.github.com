@@ -1,114 +1,168 @@
 Process:
-        EPSILON
+        StopProcess
+Process:
+        SkipProcess
+Process:
+        Action
+Process:
+        Construction
+Process:
+        Instance
+Process:
+        Specification
 StopProcess:
         
 SkipProcess:
         
 Action:
-        EPSILON
+        Assignment
+Action:
+        Input
+Action:
+        Output
 Construction:
-        
+        Sequence
+Construction:
+        Conditional
+Construction:
+        Loop
+Construction:
+        Parallel
+Construction:
+        Alternation
+Construction:
+        Sequence
+        Conditional
+        Loop
+        Parallel
+        Alternation
 Instance:
-        name::ANY
+        name::String
 Assignment:
-        variable::ANY expression::ANY
+        variable::Variable expression::Expression
 Input:
-        channel::ANY variable::ANY
+        channel::Channel variable::Variable
 Output:
-        channel::ANY expression::ANY
+        channel::Channel expression::Expression
 Sequence:
-        EPSILON
+        NormalSequence
+Sequence:
+        ReplicatorSequence
 NormalSequence:
-        process::ANY
+        process::Process
 ReplicatorSequence:
-        replicator::ANY
+        replicator::Replicator
 Conditional:
-        EPSILON
+        NormalConditional
+Conditional:
+        ReplicatorConditional
 NormalConditional:
-        choice::ANY
+        choice::Choice
 ReplicatorConditional:
-        replicator::ANY
+        replicator::Replicator
 Loop:
-        boolean::ANY process::ANY
+        boolean::BooleanRef process::Process
 Parallel:
-        EPSILON
+        NormalParallel
+Parallel:
+        ReplicatorParallel
+Parallel:
+        NormalAlternation
+Parallel:
+        ReplicatorAlternation
 NormalParallel:
-        process::ANY
+        process::Process
 ReplicatorParallel:
-        replicator::ANY
+        replicator::Replicator
 Alternation:
-        alternative::ANY
+        alternative::Alternative
 NormalAlternation:
-        process::ANY
+        process::Process
 ReplicatorAlternation:
-        replicator::ANY
+        replicator::Replicator
 Choice:
-        boolean::ANY process::ANY
+        boolean::BooleanRef process::Process
 BooleanRef:
-        expression::ANY
+        expression::Expression
 Alternative:
-        guard::ANY process::ANY
+        guard::Guard process::Process
 Guard:
-        EPSILON
+        InputGuard
+Guard:
+        BooleanGuard
 InputGuard:
-        input::ANY
+        input::Input
 BooleanGuard:
-        boolean::ANY
+        boolean::BooleanRef
 Replicator:
-        name::ANY base::ANY count::ANY
+        name::String base::Base count::Count
 Base:
-        expression::ANY
+        expression::Expression
 Count:
-        expression::ANY
+        expression::Expression
 Type:
-        primitiveType::ANY expression::ANY
+        primitiveType::PrimitiveType expression::Expression
 PrimitiveType:
-        isInt::ANY isChan::ANY
+        isInt::Boolean isChan::Boolean
 Literal:
-        integer::ANY
+        LiteralOperand
+Literal:
+        integer::Integer
 Element:
-        name::ANY subscript::ANY
+        name::String subscript::Subscript
 Subscript:
-        expression::ANY
+        expression::Expression
 Variable:
-        element::ANY
+        VariableOPerand
+Variable:
+        element::Element
 Channel:
-        element::ANY
-Operand:
-        EPSILON
+        element::Element
 VariableOPerand:
         EPSILON
 LiteralOperand:
         EPSILON
 ExpressionOperand:
-        operand::ANY
+        operand::Operand
 Expression:
-        EPSILON
+        ExpressionOperand
+Expression:
+        MonadicExpression
+Expression:
+        DyadicExpression
+Expression:
+        SimpleExpression
 MonadicExpression:
-        monadicOperator::ANY
+        monadicOperator::MonadicOperator
 DyadicExpression:
-        operandRight::ANY dyadicOperator::ANY
+        operandRight::Operand dyadicOperator::DyadicOperator
 SimpleExpression:
-        operand::ANY
+        operand::Operand
 Specification:
-        EPSILON
+        Declaration
+Specification:
+        Definition
 Declaration:
-        EPSILON
+        TypeDeclaration
+Declaration:
+        IntDeclaration
+Declaration:
+        ValDeclaration
 TypeDeclaration:
-        type::ANY
+        type::Type
 IntDeclaration:
-        name::ANY expression::ANY
+        name::String expression::Expression
 ValDeclaration:
-        name::ANY expression::ANY
+        name::String expression::Expression
 Definition:
-        name::ANY procedureBody::ANY
+        name::String procedureBody::ProcedureBody
 Formal:
-        name::ANY primitiveType::ANY
+        name::String primitiveType::PrimitiveType
 ProcedureBody:
-        name::ANY process::ANY
+        name::String process::Process
 Actual:
-        element::ANY
+        element::Element
 MonadicOperator:
-        minus::ANY not::ANY
+        minus::Boolean not::Boolean
 DyadicOperator:
-        plus::ANY minus::ANY star::ANY slash::ANY or::ANY inverseSlash::ANY and::ANY eq::ANY ne::ANY lt::ANY gt::ANY le::ANY ge::ANY
+        plus::Boolean minus::Boolean star::Boolean slash::Boolean or::Boolean inverseSlash::Boolean and::Boolean eq::Boolean ne::Boolean lt::Boolean gt::Boolean le::Boolean ge::Boolean

@@ -1,36 +1,60 @@
 ModelElement:
-        id::ANY name::ANY excludeFromBuild::ANY
+        VisualModelElement
+ModelElement:
+        Model
+ModelElement:
+        ActiveObjectClass
+ModelElement:
+        Experiment
+ModelElement:
+        id::Integer name::String excludeFromBuild::Boolean
 VisualModelElement:
-        position::ANY label::ANY publicFlag::ANY presentationFlag::ANY showLabel::ANY
+        Connector
+VisualModelElement:
+        EmbeddedObject
+VisualModelElement:
+        Shape
+VisualModelElement:
+        Control
+VisualModelElement:
+        position::Point label::Point publicFlag::Boolean presentationFlag::Boolean showLabel::Boolean
 Point:
-        x::ANY y::ANY
+        x::Integer y::Integer
 Model:
-        engineVersion::ANY javaPackageName::ANY activeObjectClasses::ANY+ experiments::ANY+
+        engineVersion::Integer javaPackageName::String activeObjectClasses::ActiveObjectClass+ experiments::Experiment+
 ActiveObjectClass:
-        clientAreaTopLeft::ANY presentationTopGroupPersistent::ANY iconTopGroupPersistent::ANY generic::ANY genericParameters::ANY agent::ANY environmentDefinesInitialLocation::ANY connectors::ANY+ embeddedObjects::ANY+ shapes::ANY+
+        clientAreaTopLeft::Point presentationTopGroupPersistent::Boolean iconTopGroupPersistent::Boolean generic::Boolean genericParameters::String agent::Boolean environmentDefinesInitialLocation::Boolean connectors::Connector+ embeddedObjects::EmbeddedObject+ shapes::Shape+
 Connector:
-        sourceEmbeddedObject::ANY sourceConnectableName::ANY targetEmbeddedObject::ANY targetConnectableName::ANY points::ANY+
+        sourceEmbeddedObject::EmbeddedObject sourceConnectableName::String targetEmbeddedObject::EmbeddedObject targetConnectableName::String points::Point+
 EmbeddedObject:
-        presentation::ANY activeObjectClass::ANY genericParametersSubstitute::ANY parameters::ANY+
+        presentation::EmbeddedObjectPresentation activeObjectClass::ActiveObjectClassRef genericParametersSubstitute::String parameters::Parameter+
 ActiveObjectClassRef:
-        packageName::ANY className::ANY
+        packageName::String className::String
 Parameter:
-        name::ANY value::ANY
+        name::String value::String
 Shape:
-        asObject::ANY embeddedIcon::ANY rotation::ANY
+        EmbeddedObjectPresentation
+Shape:
+        Text
+Shape:
+        asObject::Boolean embeddedIcon::Boolean rotation::Double
 EmbeddedObjectPresentation:
         EPSILON
 Experiment:
-        EPSILON
+        SimulationExperiment
+Experiment:
+        SimulationExperiment
 SimulationExperiment:
-        activeObjectClass::ANY clientAreaTopLeft::ANY presentationTopGroupPersistent::ANY iconTopGroupPersistent::ANY frame::ANY commandLineArguments::ANY maximumMemory::ANY randomSeed::ANY seedValue::ANY vmArgs::ANY absoluteAccuracy::ANY relativeAccuracy::ANY timeAccuracy::ANY fixedTimeStep::ANY shapes::ANY+ controls::ANY+ parameters::ANY+ enableAdaptiveFrameManagement::ANY enableAntiAliasing::ANY enablePanning::ANY enableZoom::ANY executionMode::ANY cpuRatio::ANY title::ANY framesPerSecond::ANY realTimeScale::ANY uiProperties::ANY+ useCalendar::ANY stopOption::ANY initialDate::ANY initialTime::ANY finalDate::ANY finalTime::ANY modelTimeUnit::ANY
+        activeObjectClass::ActiveObjectClass clientAreaTopLeft::Point presentationTopGroupPersistent::Boolean iconTopGroupPersistent::Boolean frame::Frame commandLineArguments::String maximumMemory::Integer randomSeed::Boolean seedValue::Integer vmArgs::String absoluteAccuracy::Double relativeAccuracy::Double timeAccuracy::Double fixedTimeStep::Double shapes::Shape+ controls::Control+ parameters::Parameter+ enableAdaptiveFrameManagement::Boolean enableAntiAliasing::Boolean enablePanning::Boolean enableZoom::Boolean executionMode::String cpuRatio::String title::String framesPerSecond::String realTimeScale::String uiProperties::Parameter+ useCalendar::Boolean stopOption::String initialDate::String initialTime::String finalDate::String finalTime::String modelTimeUnit::String
 Control:
-        width::ANY height::ANY asObject::ANY embeddedIcon::ANY fillColor::ANY textColor::ANY enableExpression::ANY actionCode::ANY labelText::ANY font::ANY
+        Button
+Control:
+        width::Integer height::Integer asObject::Boolean embeddedIcon::Boolean fillColor::Integer textColor::Integer enableExpression::String actionCode::String labelText::String font::Font
 Button:
         EPSILON
 Frame:
-        x::ANY y::ANY width::ANY height::ANY
+        x::Integer y::Integer width::Integer height::Integer
 Text:
-        color::ANY text::ANY font::ANY alignment::ANY
+        color::Integer text::String font::Font alignment::String
 Font:
-        name::ANY size::ANY style::ANY
+        name::String size::Integer style::Integer

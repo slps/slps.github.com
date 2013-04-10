@@ -3,13 +3,13 @@ module GeoTrans
 
 syntax GeoTransfos
         = 
-        ANY name ANY transfos+
+        String name GeoTransfo transfos+
  ;
 syntax GeoTransfo
         = 
-        ANY name ANY freeze ANY subGeoTransfos+ ANY superGeoTransfo ANY params+
+        String name Boolean freeze GeoTransfo subGeoTransfos+ GeoTransfo superGeoTransfo Param params+
  ;
 syntax Param
         = 
-        ANY name ANY param ANY geoTransfo
+        String name Double param GeoTransfo geoTransfo
  ;

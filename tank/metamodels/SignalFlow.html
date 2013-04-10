@@ -13,25 +13,35 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable Signal Flow 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Youssef Srour, <code>SignalFlow.ecore</code>, 2006/07/14.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>10</strong></li><li>Number of top alternatives: <strong>10</strong></li><li>Number of defined nonterminal symbols: <strong>10</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>10</strong>: <code><a href="#RootFolder" class="nt">RootFolder</a>, <a href="#CompoundComponent" class="nt">CompoundComponent</a>, <a href="#PrimitiveComponent" class="nt">PrimitiveComponent</a>, <a href="#BaseComponent" class="nt">BaseComponent</a>, <a href="#InputPort" class="nt">InputPort</a>, <a href="#LocalPort" class="nt">LocalPort</a>, <a href="#OutputPort" class="nt">OutputPort</a>, <a href="#PortBase" class="nt">PortBase</a>, <a href="#Signal" class="nt">Signal</a>, <a href="#AssociationPortBase_PortBase" class="nt">AssociationPortBase_PortBase</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="RootFolder">RootFolder</a>:
-        <span class="sel">compoundComponent</span>::<span class="meta">any</span><span class="meta">+</span>
+				</script></head><body><h1 class="l">Browsable Signal Flow 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Youssef Srour, <code>SignalFlow.ecore</code>, 2006/07/14.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>15</strong></li><li>Number of top alternatives: <strong>15</strong></li><li>Number of defined nonterminal symbols: <strong>10</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: —</li><li>Bottom nonterminal symbols: <strong>1</strong>: <code><a href="#String" class="nt">String</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="RootFolder">RootFolder</a>:
+        <span class="sel">compoundComponent</span>::<a class="nt" href="#CompoundComponent">CompoundComponent</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="CompoundComponent">CompoundComponent</a>:
-        <span class="sel">rootFolder</span>::<span class="meta">any</span> <span class="sel">baseComponent</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">localPort</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">rootFolder</span>::<a class="nt" href="#RootFolder">RootFolder</a> <span class="sel">baseComponent</span>::<a class="nt" href="#BaseComponent">BaseComponent</a><span class="meta">+</span> <span class="sel">localPort</span>::<a class="nt" href="#LocalPort">LocalPort</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="PrimitiveComponent">PrimitiveComponent</a>:
         ε
 </pre><pre><a class="nt" name="BaseComponent">BaseComponent</a>:
-        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">position</span>::<span class="meta">any</span> <span class="sel">signal</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">outputPort</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">inputPort</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">compoundComponent</span>::<span class="meta">any</span>
+        <a class="nt" href="#CompoundComponent">CompoundComponent</a>
+</pre><pre><a class="nt" name="BaseComponent">BaseComponent</a>:
+        <a class="nt" href="#PrimitiveComponent">PrimitiveComponent</a>
+</pre><pre><a class="nt" name="BaseComponent">BaseComponent</a>:
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">position</span>::<a class="nt" href="#String">String</a> <span class="sel">signal</span>::<a class="nt" href="#Signal">Signal</a><span class="meta">+</span> <span class="sel">outputPort</span>::<a class="nt" href="#OutputPort">OutputPort</a><span class="meta">+</span> <span class="sel">inputPort</span>::<a class="nt" href="#InputPort">InputPort</a><span class="meta">+</span> <span class="sel">compoundComponent</span>::<a class="nt" href="#CompoundComponent">CompoundComponent</a>
 </pre><pre><a class="nt" name="InputPort">InputPort</a>:
-        <span class="sel">baseComponent</span>::<span class="meta">any</span>
+        <span class="sel">baseComponent</span>::<a class="nt" href="#BaseComponent">BaseComponent</a>
 </pre><pre><a class="nt" name="LocalPort">LocalPort</a>:
-        <span class="sel">compoundComponent</span>::<span class="meta">any</span>
+        <span class="sel">compoundComponent</span>::<a class="nt" href="#CompoundComponent">CompoundComponent</a>
 </pre><pre><a class="nt" name="OutputPort">OutputPort</a>:
-        <span class="sel">baseComponent</span>::<span class="meta">any</span>
+        <span class="sel">baseComponent</span>::<a class="nt" href="#BaseComponent">BaseComponent</a>
 </pre><pre><a class="nt" name="PortBase">PortBase</a>:
-        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">position</span>::<span class="meta">any</span> <span class="sel">associationPortBase_PortBasesrc</span>::<span class="meta">any</span> <span class="sel">associationPortBase_PortBasedst</span>::<span class="meta">any</span>
+        <a class="nt" href="#InputPort">InputPort</a>
+</pre><pre><a class="nt" name="PortBase">PortBase</a>:
+        <a class="nt" href="#LocalPort">LocalPort</a>
+</pre><pre><a class="nt" name="PortBase">PortBase</a>:
+        <a class="nt" href="#OutputPort">OutputPort</a>
+</pre><pre><a class="nt" name="PortBase">PortBase</a>:
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">position</span>::<a class="nt" href="#String">String</a> <span class="sel">associationPortBase_PortBasesrc</span>::<a class="nt" href="#AssociationPortBase_PortBase">AssociationPortBase_PortBase</a> <span class="sel">associationPortBase_PortBasedst</span>::<a class="nt" href="#AssociationPortBase_PortBase">AssociationPortBase_PortBase</a>
 </pre><pre><a class="nt" name="Signal">Signal</a>:
-        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">position</span>::<span class="meta">any</span> <span class="sel">baseComponent</span>::<span class="meta">any</span> <span class="sel">associationPortBase_PortBase</span>::<span class="meta">any</span>
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">position</span>::<a class="nt" href="#String">String</a> <span class="sel">baseComponent</span>::<a class="nt" href="#BaseComponent">BaseComponent</a> <span class="sel">associationPortBase_PortBase</span>::<a class="nt" href="#AssociationPortBase_PortBase">AssociationPortBase_PortBase</a>
 </pre><pre><a class="nt" name="AssociationPortBase_PortBase">AssociationPortBase_PortBase</a>:
-        <span class="sel">srcPortBase</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">dstPortBase</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">signal</span>::<span class="meta">any</span>
+        <span class="sel">srcPortBase</span>::<a class="nt" href="#PortBase">PortBase</a><span class="meta">+</span> <span class="sel">dstPortBase</span>::<a class="nt" href="#PortBase">PortBase</a><span class="meta">+</span> <span class="sel">signal</span>::<a class="nt" href="#Signal">Signal</a>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

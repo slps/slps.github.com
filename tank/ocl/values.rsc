@@ -2,70 +2,67 @@
 module Values
 
 syntax Value
-        = 
-        ()
- ;
-syntax Type
-        = 
-        ()
+        = BasicValue
+        | ObjectValue
+        | EnumValue
+        | UndefinedValue
+        | CollectionValue
  ;
 syntax BasicValue
-        = 
-        ()
+        = IntegerValue
+        | RealValue
+        | StringValue
+        | BooleanValue
  ;
 syntax IntegerValue
         = 
-        val: ANY
+        val: Integer
  ;
 syntax RealValue
         = 
-        val: ANY
+        val: Double
  ;
 syntax StringValue
         = 
-        val: ANY
+        val: String
  ;
 syntax BooleanValue
         = 
-        val: ANY
+        val: Boolean
  ;
 syntax ObjectValue
         = 
-        object: ANY
+        object: Object
  ;
 syntax Object
         = 
-        objectValue: ANY
+        objectValue: ObjectValue
  ;
 syntax EnumValue
         = 
-        enumLiteral: ANY
+        enumLiteral: EnumLiteral
  ;
 syntax EnumLiteral
         = 
-        enumValue: ANY
+        enumValue: EnumValue
  ;
 syntax UndefinedValue
         = 
-        ANY type ANY bagValue+ ANY sequenceValue+ ANY setValue+
- ;
-syntax CollectionValue
-        = 
-        ()
+        Type type BagValue bagValue+ SequenceValue sequenceValue+ SetValue setValue+
  ;
 syntax BagValue
         = 
-        ANY elements+
+        Value elements+
  ;
 syntax SequenceValue
         = 
-        ANY elements+
+        Value elements+
  ;
 syntax SetValue
         = 
-        ANY elements+
+        Value elements+
  ;
 syntax Count
         = 
-        num: ANY
+        num: Integer
  ;

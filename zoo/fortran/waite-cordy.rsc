@@ -26,18 +26,20 @@ syntax ProgramUnit
         | FunctionSubprogram
         | SubroutineSubprogram
         | BlockDataSubprogram
+        | Module
  ;
 syntax MainProgram
         = 
         ProgramStmt? MainRange
  ;
 syntax MainRange
-        = 
-        Body? EndProgramStmt
+        = Body? EndProgramStmt
+        | BodyPlusInternals EndProgramStmt
  ;
 syntax EndProgramStmt
-        = 
-        LblDef "end" EOS
+        = LblDef "end" EOS
+        | LblDef "endprogram" EndName? EOS
+        | LblDef "end" "program" EndName? EOS
  ;
 syntax Body
         = 
@@ -54,6 +56,7 @@ syntax SpecificationPartConstruct
         | EntryStmt
         | DeclarationConstruct
         | IncludeStmt
+        | UseStmt
  ;
 syntax IncludeStmt
         = 
@@ -62,38 +65,48 @@ syntax IncludeStmt
 syntax DeclarationConstruct
         = TypeDeclarationStmt
         | SpecificationStmt
+        | DerivedTypeDef
+        | InterfaceBlock
  ;
 syntax FunctionSubprogram
         = 
         LblDef FunctionPrefix FunctionName FunctionRange
  ;
 syntax FunctionRange
-        = 
-        FunctionParList EOS Body? EndFunctionStmt
+        = FunctionParList EOS Body? EndFunctionStmt
+        | FunctionParList "result" "(" Name ")" EOS BodyPlusInternals EndFunctionStmt
+        | FunctionParList "result" "(" Name ")" EOS Body EndFunctionStmt
+        | FunctionParList "result" "(" Name ")" EOS EndFunctionStmt
+        | FunctionParList EOS BodyPlusInternals EndFunctionStmt
  ;
 syntax EndFunctionStmt
-        = 
-        LblDef "end" EOS
+        = LblDef "end" EOS
+        | LblDef "endfunction" EndName? EOS
+        | LblDef "end" "function" EndName? EOS
  ;
 syntax SubroutineSubprogram
-        = 
-        LblDef "subroutine" SubroutineName SubroutineRange
+        = LblDef "subroutine" SubroutineName SubroutineRange
+        | LblDef "recursive" "subroutine" SubroutineName SubroutineRange
  ;
 syntax SubroutineRange
-        = 
-        SubroutineParList EOS Body? EndSubroutineStmt
+        = SubroutineParList EOS Body? EndSubroutineStmt
+        | SubroutineParList EOS BodyPlusInternals EndSubroutineStmt
  ;
 syntax EndSubroutineStmt
-        = 
-        LblDef "end" EOS
+        = LblDef "end" EOS
+        | LblDef "endsubroutine" EndName? EOS
+        | LblDef "end" "subroutine" EndName? EOS
  ;
 syntax BlockDataSubprogram
         = BlockDataStmt BlockDataBody EndBlockDataStmt
         | BlockDataStmt EndBlockDataStmt
  ;
 syntax EndBlockDataStmt
-        = 
-        LblDef "end" EOS
+        = LblDef "end" EOS
+        | LblDef "endblockdata" EndName? EOS
+        | LblDef "end" "blockdata" EndName? EOS
+        | LblDef "endblock" "data" EndName? EOS
+        | LblDef "end" "block" "data" EndName? EOS
  ;
 syntax BlockDataBody
         = BlockDataBodyConstruct
@@ -111,17 +124,27 @@ syntax SpecificationStmt
         | ExternalStmt
         | IntrinsicStmt
         | SaveStmt
+        | AccessStmt
+        | AllocatableStmt
+        | IntentStmt
+        | NamelistStmt
+        | OptionalStmt
+        | PointerStmt
+        | TargetStmt
  ;
 syntax ExecutionPartConstruct
         = ExecutableConstruct
         | FormatStmt
         | DataStmt
         | EntryStmt
+        | LblDef DoubleDoStmt
  ;
 syntax ExecutableConstruct
         = ActionStmt
         | DoConstruct
         | IfConstruct
+        | CaseConstruct
+        | WhereConstruct
  ;
 syntax ActionStmt
         = ArithmeticIfStmt
@@ -146,6 +169,13 @@ syntax ActionStmt
         | StmtFunctionStmt
         | StopStmt
         | WriteStmt
+        | AllocateStmt
+        | CycleStmt
+        | DeallocateStmt
+        | ExitStmt
+        | NullifyStmt
+        | PointerAssignmentStmt
+        | WhereStmt
  ;
 syntax ProgramStmt
         = 
@@ -154,6 +184,9 @@ syntax ProgramStmt
 syntax FunctionPrefix
         = "function"
         | TypeSpec "function"
+        | "recursive" "function"
+        | "recursive" TypeSpec "function"
+        | TypeSpec "recursive" "function"
  ;
 syntax FunctionParList
         = "(" FunctionPars ")"
@@ -190,12 +223,12 @@ syntax EntryStmt
         LblDef "entry" EntryName SubroutineParList "result" "(" Name ")" EOS
  ;
 syntax BlockDataStmt
-        = 
-        LblDef "blockdata" BlockDataName? EOS
+        = LblDef "blockdata" BlockDataName? EOS
+        | LblDef "block" "data" BlockDataName? EOS
  ;
 syntax DimensionStmt
-        = 
-        LblDef "dimension" ArrayDeclaratorList EOS
+        = LblDef "dimension" ArrayDeclaratorList EOS
+        | LblDef "dimension" "::" ArrayDeclaratorList EOS
  ;
 syntax ArrayDeclaratorList
         = 
@@ -208,6 +241,8 @@ syntax ArrayDeclarator
 syntax ArraySpec
         = ExplicitShapeSpecList
         | AssumedSizeSpec
+        | AssumedShapeSpecList
+        | DeferredShapeSpecList
  ;
 syntax ExplicitShapeSpecList
         = 
@@ -269,8 +304,8 @@ syntax CommonBlockObject
         | ArrayDeclarator
  ;
 syntax TypeDeclarationStmt
-        = 
-        LblDef TypeSpec EntityDeclList EOS
+        = LblDef TypeSpec EntityDeclList EOS
+        | LblDef TypeSpec AttrSpecSeq? "::" EntityDeclList EOS
  ;
 syntax TypeSpec
         = "integer"
@@ -280,6 +315,13 @@ syntax TypeSpec
         | "logical"
         | "character"
         | "character" LengthSelector
+        | "integer" KindSelector
+        | "real" KindSelector
+        | "double" "precision"
+        | "complex" KindSelector
+        | "character" CharSelector
+        | "logical" KindSelector
+        | "type" "(" TypeName ")"
  ;
 syntax EntityDeclList
         = 
@@ -290,14 +332,18 @@ syntax EntityDecl
         | ObjectName "(" ArraySpec ")"
         | ObjectName "*" CharLength
         | ObjectName "(" ArraySpec ")" "*" CharLength
+        | ObjectName "=" Expr
+        | ObjectName "(" ArraySpec ")" "=" Expr
+        | ObjectName "*" CharLength "=" Expr
+        | ObjectName "*" CharLength "(" ArraySpec ")" "=" Expr
  ;
 syntax LengthSelector
-        = 
-        "*" CharLength
+        = "*" CharLength
+        | "(" TypeParamValue ")"
  ;
 syntax ImplicitStmt
-        = 
-        LblDef "implicit" ImplicitSpecList EOS
+        = LblDef "implicit" ImplicitSpecList EOS
+        | LblDef "implicit" "none" EOS
  ;
 syntax ImplicitSpecList
         = 
@@ -365,6 +411,7 @@ syntax IntrinsicList
 syntax SaveStmt
         = LblDef "save" EOS
         | LblDef "save" SavedEntityList EOS
+        | LblDef "save" "::" SavedEntityList EOS
  ;
 syntax SavedEntityList
         = 
@@ -418,10 +465,12 @@ syntax DataIDoObjectList
 syntax DataIDoObject
         = ArrayElement
         | DataImpliedDo
+        | StructureComponent
  ;
 syntax AssignmentStmt
-        = 
-        LblDef Name SFExprListRef? SubstringRange? "=" Expr EOS
+        = LblDef Name SFExprListRef? SubstringRange? "=" Expr EOS
+        | LblDef Name SFExprListRef? "%" NameDataRef "=" Expr EOS
+        | LblDef Name "(" SFDummyArgNameList ")" "%" NameDataRef "=" Expr EOS
  ;
 syntax SFExprListRef
         = 
@@ -430,6 +479,8 @@ syntax SFExprListRef
 syntax SFExprList
         = Expr ":"? Expr?
         | ":" Expr?
+        | Expr? ":" Expr ":" Expr
+        | Expr? "::" Expr
  ;
 syntax CommaSectionSubscript
         = 
@@ -444,8 +495,8 @@ syntax GotoStmt
         LblDef GoToKw LblRef EOS
  ;
 syntax GoToKw
-        = 
-        "goto"
+        = "goto"
+        | "go" "to"
  ;
 syntax ComputedGotoStmt
         = 
@@ -497,20 +548,20 @@ syntax IfThenStmt
         LblDef "if" "(" Expr ")" "then" EOS IN_2
  ;
 syntax ElseIfStmt
-        = 
-        LblDef EX_2 "elseif" "(" Expr ")" "then" EOS IN_2
+        = LblDef EX_2 "elseif" "(" Expr ")" "then" EOS IN_2
+        | LblDef EX_2 "else" "if" "(" Expr ")" "then" EOS IN_2
  ;
 syntax ElseStmt
         = 
         LblDef EX_2 "else" EOS IN_2
  ;
 syntax EndIfStmt
-        = 
-        LblDef EX_2 "endif" EOS
+        = LblDef EX_2 "endif" EOS
+        | LblDef EX_2 "end" "if" EOS
  ;
 syntax DoConstruct
-        = 
-        LabelDoStmt
+        = LabelDoStmt
+        | BlockDoConstruct
  ;
 syntax LabelDoStmt
         = 
@@ -522,11 +573,11 @@ syntax CommaLoopControl
  ;
 syntax DoLblRef
         = 
-        
+        Icon
  ;
 syntax DoLblDef
         = 
-        TAB_2 TAB_9
+        TAB_2 Icon TAB_9
  ;
 syntax DoubleDoStmt
         = 
@@ -537,8 +588,8 @@ syntax DoLabelStmt
         ActionStmt
  ;
 syntax LoopControl
-        = 
-        VariableName "=" Expr "," Expr CommaExpr?
+        = VariableName "=" Expr "," Expr CommaExpr?
+        | "while" "(" Expr ")"
  ;
 syntax ContinueStmt
         = 
@@ -611,6 +662,10 @@ syntax IoControlSpec
         | "end=" LblRef
         | "err=" LblRef
         | "iostat=" ScalarVariable
+        | "nml=" NamelistGroupName
+        | "advance=" CExpr
+        | "size=" Variable
+        | "eor=" LblRef
  ;
 syntax InputItemList
         = 
@@ -668,6 +723,10 @@ syntax ConnectSpec
         | "recl=" Expr
         | "blank=" CExpr
         | "iostat=" ScalarVariable
+        | "position=" CExpr
+        | "action=" CExpr
+        | "delim=" CExpr
+        | "pad=" CExpr
  ;
 syntax CloseStmt
         = 
@@ -687,8 +746,8 @@ syntax CloseSpec
         | "iostat=" ScalarVariable
  ;
 syntax InquireStmt
-        = 
-        LblDef "inquire" "(" InquireSpecList ")" EOS
+        = LblDef "inquire" "(" InquireSpecList ")" EOS
+        | LblDef "inquire" "(" "iolength=" ScalarVariable ")" OutputItemList EOS
  ;
 syntax InquireSpecList
         = 
@@ -716,6 +775,13 @@ syntax InquireSpec
         | "recl=" Expr
         | "nextrec=" ScalarVariable
         | "blank=" ScalarVariable
+        | "position=" ScalarVariable
+        | "action=" ScalarVariable
+        | "read=" ScalarVariable
+        | "write=" ScalarVariable
+        | "readwrite=" ScalarVariable
+        | "delim=" ScalarVariable
+        | "pad=" ScalarVariable
  ;
 syntax BackspaceStmt
         = LblDef "backspace" UnitIdentifier EOS
@@ -724,6 +790,8 @@ syntax BackspaceStmt
 syntax EndfileStmt
         = LblDef "endfile" UnitIdentifier EOS
         | LblDef "endfile" "(" PositionSpecList ")" EOS
+        | LblDef "end" "file" UnitIdentifier EOS
+        | LblDef "end" "file" "(" PositionSpecList ")" EOS
  ;
 syntax RewindStmt
         = LblDef "rewind" UnitIdentifier EOS
@@ -812,22 +880,25 @@ syntax SubroutineArg
         = Expr
         | Hcon
         | "*" LblRef
+        | Name "=" Expr
+        | Name "=" Hcon
+        | Name "=" "*" LblRef
  ;
 syntax ReturnStmt
         = 
         LblDef "return" Expr? EOS
  ;
 syntax FunctionReference
-        = 
-        Name "(" ")"
+        = Name "(" ")"
+        | Name "(" FunctionArgList ")"
  ;
 syntax NameDataRef
         = 
         Name ComplexDataRefTail*
  ;
 syntax ComplexDataRefTail
-        = 
-        SectionSubscriptRef
+        = SectionSubscriptRef
+        | "%" Name
  ;
 syntax SectionSubscriptRef
         = 
@@ -842,18 +913,21 @@ syntax SectionSubscript
         | SubscriptTripletTail
  ;
 syntax Expr
-        = 
-        Level5Expr
+        = Level5Expr
+        | Expr DefinedBinaryOp Level5Expr
  ;
 syntax Primary
         = UnsignedArithmeticConstant
         | NameDataRef
         | FunctionReference
         | "(" Expr ")"
+        | Scon
+        | LogicalConstant
+        | ArrayConstructor
  ;
 syntax Level1Expr
-        = 
-        Primary
+        = Primary
+        | DefinedUnaryOp Primary
  ;
 syntax MultOperand
         = 
@@ -1004,18 +1078,25 @@ syntax RelOp
         | SP ".le." SP
         | SP ".gt." SP
         | SP ".ge." SP
+        | "=="
+        | "/="
+        | "\<"
+        | "\<="
+        | "\>"
+        | "\>="
  ;
 syntax ArrayElement
-        = 
-        VariableName "(" SectionSubscriptList ")"
+        = VariableName "(" SectionSubscriptList ")"
+        | StructureComponent "(" SectionSubscriptList ")"
  ;
 syntax SubstringRange
         = 
         "(" Expr? SubscriptTripletTail ")"
  ;
 syntax SubscriptTripletTail
-        = 
-        ":" Expr?
+        = ":" Expr?
+        | ":" Expr ":" Expr
+        | "::" Expr
  ;
 syntax Name
         = 
@@ -1027,6 +1108,10 @@ syntax Constant
         | Scon
         | Hcon
         | LogicalConstant
+        | Icon "_" Scon
+        | NamedConstantUse "_" Scon
+        | StructureConstructor
+        | BozLiteralConstant
  ;
 syntax PlusMinus
         = "+"
@@ -1036,6 +1121,8 @@ syntax UnsignedArithmeticConstant
         = Icon
         | RDcon
         | ComplexConst
+        | Icon "_" KindParam
+        | RDcon "_" KindParam
  ;
 syntax ComplexConst
         = 
@@ -1049,6 +1136,8 @@ syntax ComplexComponent
 syntax LogicalConstant
         = SP ".true." SP
         | SP ".false." SP
+        | SP ".true." SP "_" KindParam
+        | SP ".false." SP "_" KindParam "."
  ;
 syntax Label
         = 

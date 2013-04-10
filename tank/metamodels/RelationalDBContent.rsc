@@ -2,22 +2,22 @@
 module RelationalDBContent
 
 syntax NamedElement
-        = 
-        ()
+        = DataBase
+        | Table
  ;
 syntax DataBase
         = 
-        ANY SGBDname ANY tables+
+        String SGBDname Table tables+
  ;
 syntax Table
         = 
-        ANY database ANY tuples+
+        DataBase database Tuple tuples+
  ;
 syntax Tuple
         = 
-        ANY owner ANY elements+
+        Table owner TupleElement elements+
  ;
 syntax TupleElement
         = 
-        ANY tuple ANY value
+        Tuple tuple String value
  ;

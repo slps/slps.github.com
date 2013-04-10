@@ -2,32 +2,48 @@ module Main
 
 exports
   sorts
-        OperationExp PropertyOperation OclOperation ConstExp IntegerConstExp StringConstExp RealConstExp AttributeExp Attribute NaviguationExp AssocationEnd ClassifierOperation Operation OclExpression 
+        OperationExp PropertyOperation OclOperation ConstExp IntegerConstExp StringConstExp RealConstExp AttributeExp Attribute NaviguationExp AssocationEnd ClassifierOperation Operation 
   context-free syntax
-         -> OperationExp
+        PropertyOperation -> OperationExp
 
-        isMarkedPre::ANY source::ANY -> PropertyOperation
+        OclOperation -> OperationExp
 
-        arguments::ANY -> OclOperation
+        ConstExp -> OperationExp
 
-         -> ConstExp
+        AttributeExp -> PropertyOperation
 
-        value::ANY -> IntegerConstExp
+        NaviguationExp -> PropertyOperation
 
-        value::ANY -> StringConstExp
+        ClassifierOperation -> PropertyOperation
 
-        value::ANY -> RealConstExp
+        isMarkedPre::Boolean source::OclExpression -> PropertyOperation
 
-        attr::ANY -> AttributeExp
+        arguments::OclExpression -> OclOperation
 
-        attrExp::ANY+ -> Attribute
+        IntegerConstExp -> ConstExp
 
-        assEnd::ANY qualifierValues::ANY -> NaviguationExp
+        StringConstExp -> ConstExp
 
-        navExp::ANY+ -> AssocationEnd
+        RealConstExp -> ConstExp
 
-        op::ANY arguments::ANY -> ClassifierOperation
+        IntegerConstExp -> ConstExp
+        StringConstExp -> ConstExp
+        RealConstExp -> ConstExp
 
-        classOp::ANY+ -> Operation
+        value::Integer -> IntegerConstExp
 
-         -> OclExpression
+        value::String -> StringConstExp
+
+        value::Double -> RealConstExp
+
+        attr::Attribute -> AttributeExp
+
+        attrExp::AttributeExp+ -> Attribute
+
+        assEnd::AssocationEnd qualifierValues::OclExpression -> NaviguationExp
+
+        navExp::NaviguationExp+ -> AssocationEnd
+
+        op::Operation arguments::OclExpression -> ClassifierOperation
+
+        classOp::ClassifierOperation+ -> Operation

@@ -2,42 +2,44 @@
 module Sharengo
 
 syntax ModelElement
-        = 
-        ()
+        = Classifier
+        | Operation
+        | BusinessRule
+        | Flow
  ;
 syntax Classifier
-        = 
-        ()
+        = Service
+        | BusinessObject
  ;
 syntax Operation
-        = 
-        ANY name
+        = ServiceOperation
+        | BusinessObjectOperation
  ;
 syntax Service
         = 
-        ANY operations+
+        ServiceOperation operations+
  ;
 syntax BusinessObject
         = 
-        ANY operations+
+        BusinessObjectOperation operations+
  ;
 syntax ServiceOperation
         = 
-        ANY BOFlows+ ANY rules+
+        Service2BusinessObjectFlow BOFlows+ BusinessRule rules+
  ;
 syntax BusinessObjectOperation
         = 
-        ANY rules+
+        BusinessRule rules+
  ;
 syntax BusinessRule
         = 
-        expr: ANY
+        expr: String
  ;
 syntax Flow
         = 
-        ()
+        Service2BusinessObjectFlow
  ;
 syntax Service2BusinessObjectFlow
         = 
-        ANY source ANY target
+        String source String target
  ;

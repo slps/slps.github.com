@@ -13,41 +13,63 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable XQuery 1.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Peter Rosendal, <code>XQuery.ecore</code>, 2005/06/13.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>18</strong></li><li>Number of top alternatives: <strong>18</strong></li><li>Number of defined nonterminal symbols: <strong>18</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>18</strong>: <code><a href="#XQueryProgram" class="nt">XQueryProgram</a>, <a href="#Expression" class="nt">Expression</a>, <a href="#ExecutableExpression" class="nt">ExecutableExpression</a>, <a href="#Node" class="nt">Node</a>, <a href="#FLWOR" class="nt">FLWOR</a>, <a href="#FunctionCall" class="nt">FunctionCall</a>, <a href="#FunctionDeclaration" class="nt">FunctionDeclaration</a>, <a href="#ElementNode" class="nt">ElementNode</a>, <a href="#AttributeNode" class="nt">AttributeNode</a>, <a href="#TextNode" class="nt">TextNode</a>, <a href="#ReturnXPath" class="nt">ReturnXPath</a>, <a href="#XPath" class="nt">XPath</a>, <a href="#BooleanExp" class="nt">BooleanExp</a>, <a href="#For" class="nt">For</a>, <a href="#Let" class="nt">Let</a>, <a href="#Where" class="nt">Where</a>, <a href="#OrderBy" class="nt">OrderBy</a>, <a href="#Return" class="nt">Return</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="XQueryProgram">XQueryProgram</a>:
-        <span class="sel">expressions</span>::<span class="meta">any</span><span class="meta">+</span>
+				</script></head><body><h1 class="l">Browsable XQuery 1.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Peter Rosendal, <code>XQuery.ecore</code>, 2005/06/13.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>29</strong></li><li>Number of top alternatives: <strong>29</strong></li><li>Number of defined nonterminal symbols: <strong>18</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: —</li><li>Bottom nonterminal symbols: <strong>1</strong>: <code><a href="#String" class="nt">String</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="XQueryProgram">XQueryProgram</a>:
+        <span class="sel">expressions</span>::<a class="nt" href="#ExecutableExpression">ExecutableExpression</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Expression">Expression</a>:
-        <span class="sel">parentNode</span>::<span class="meta">any</span> <span class="sel">returnEx</span>::<span class="meta">any</span>
+        <a class="nt" href="#ExecutableExpression">ExecutableExpression</a>
+</pre><pre><a class="nt" name="Expression">Expression</a>:
+        <a class="nt" href="#Node">Node</a>
+</pre><pre><a class="nt" name="Expression">Expression</a>:
+        <a class="nt" href="#ReturnXPath">ReturnXPath</a>
+</pre><pre><a class="nt" name="Expression">Expression</a>:
+        <span class="sel">parentNode</span>::<a class="nt" href="#ElementNode">ElementNode</a> <span class="sel">returnEx</span>::<a class="nt" href="#Return">Return</a>
 </pre><pre><a class="nt" name="ExecutableExpression">ExecutableExpression</a>:
-        <span class="sel">xQueryProgram</span>::<span class="meta">any</span> <span class="sel">functionDeclaration</span>::<span class="meta">any</span>
+        <a class="nt" href="#FLWOR">FLWOR</a>
+</pre><pre><a class="nt" name="ExecutableExpression">ExecutableExpression</a>:
+        <a class="nt" href="#FunctionCall">FunctionCall</a>
+</pre><pre><a class="nt" name="ExecutableExpression">ExecutableExpression</a>:
+        <a class="nt" href="#FunctionDeclaration">FunctionDeclaration</a>
+</pre><pre><a class="nt" name="ExecutableExpression">ExecutableExpression</a>:
+        <span class="sel">xQueryProgram</span>::<a class="nt" href="#XQueryProgram">XQueryProgram</a> <span class="sel">functionDeclaration</span>::<a class="nt" href="#FunctionDeclaration">FunctionDeclaration</a>
 </pre><pre><a class="nt" name="Node">Node</a>:
-        <span class="sel">name</span>::<span class="meta">any</span>
+        <a class="nt" href="#ElementNode">ElementNode</a>
+</pre><pre><a class="nt" name="Node">Node</a>:
+        <a class="nt" href="#AttributeNode">AttributeNode</a>
+</pre><pre><a class="nt" name="Node">Node</a>:
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="FLWOR">FLWOR</a>:
-        <span class="sel">for</span>::<span class="meta">any</span> <span class="sel">let</span>::<span class="meta">any</span> <span class="sel">where</span>::<span class="meta">any</span> <span class="sel">orderBy</span>::<span class="meta">any</span> <span class="sel">return</span>::<span class="meta">any</span>
+        <span class="sel">for</span>::<a class="nt" href="#For">For</a> <span class="sel">let</span>::<a class="nt" href="#Let">Let</a> <span class="sel">where</span>::<a class="nt" href="#Where">Where</a> <span class="sel">orderBy</span>::<a class="nt" href="#OrderBy">OrderBy</a> <span class="sel">return</span>::<a class="nt" href="#Return">Return</a>
 </pre><pre><a class="nt" name="FunctionCall">FunctionCall</a>:
-        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">parameters</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">parameters</span>::<a class="nt" href="#XPath">XPath</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="FunctionDeclaration">FunctionDeclaration</a>:
-        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">expression</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">expression</span>::<a class="nt" href="#ExecutableExpression">ExecutableExpression</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="ElementNode">ElementNode</a>:
-        <span class="sel">nodes</span>::<span class="meta">any</span><span class="meta">+</span>
+        <a class="nt" href="#TextNode">TextNode</a>
+</pre><pre><a class="nt" name="ElementNode">ElementNode</a>:
+        <span class="sel">nodes</span>::<a class="nt" href="#Expression">Expression</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="AttributeNode">AttributeNode</a>:
-        <span class="sel">value</span>::<span class="meta">any</span>
+        <span class="sel">value</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="TextNode">TextNode</a>:
         ε
 </pre><pre><a class="nt" name="ReturnXPath">ReturnXPath</a>:
-        <span class="sel">value</span>::<span class="meta">any</span>
+        <a class="nt" href="#XPath">XPath</a>
+</pre><pre><a class="nt" name="ReturnXPath">ReturnXPath</a>:
+        <span class="sel">value</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="XPath">XPath</a>:
-        <span class="sel">functionCall</span>::<span class="meta">any</span> <span class="sel">for</span>::<span class="meta">any</span> <span class="sel">let</span>::<span class="meta">any</span>
+        <a class="nt" href="#BooleanExp">BooleanExp</a>
+</pre><pre><a class="nt" name="XPath">XPath</a>:
+        <span class="sel">functionCall</span>::<a class="nt" href="#FunctionCall">FunctionCall</a> <span class="sel">for</span>::<a class="nt" href="#For">For</a> <span class="sel">let</span>::<a class="nt" href="#Let">Let</a>
 </pre><pre><a class="nt" name="BooleanExp">BooleanExp</a>:
-        <span class="sel">where</span>::<span class="meta">any</span>
+        <span class="sel">where</span>::<a class="nt" href="#Where">Where</a>
 </pre><pre><a class="nt" name="For">For</a>:
-        <span class="sel">var</span>::<span class="meta">any</span> <span class="sel">flwor</span>::<span class="meta">any</span> <span class="sel">expression</span>::<span class="meta">any</span>
+        <span class="sel">var</span>::<a class="nt" href="#String">String</a> <span class="sel">flwor</span>::<a class="nt" href="#FLWOR">FLWOR</a> <span class="sel">expression</span>::<a class="nt" href="#XPath">XPath</a>
 </pre><pre><a class="nt" name="Let">Let</a>:
-        <span class="sel">var</span>::<span class="meta">any</span> <span class="sel">flwor</span>::<span class="meta">any</span> <span class="sel">expression</span>::<span class="meta">any</span>
+        <span class="sel">var</span>::<a class="nt" href="#String">String</a> <span class="sel">flwor</span>::<a class="nt" href="#FLWOR">FLWOR</a> <span class="sel">expression</span>::<a class="nt" href="#XPath">XPath</a>
 </pre><pre><a class="nt" name="Where">Where</a>:
-        <span class="sel">flwor</span>::<span class="meta">any</span> <span class="sel">expression</span>::<span class="meta">any</span>
+        <span class="sel">flwor</span>::<a class="nt" href="#FLWOR">FLWOR</a> <span class="sel">expression</span>::<a class="nt" href="#BooleanExp">BooleanExp</a>
 </pre><pre><a class="nt" name="OrderBy">OrderBy</a>:
-        <span class="sel">flwor</span>::<span class="meta">any</span>
+        <span class="sel">flwor</span>::<a class="nt" href="#FLWOR">FLWOR</a>
 </pre><pre><a class="nt" name="Return">Return</a>:
-        <span class="sel">flwor</span>::<span class="meta">any</span> <span class="sel">expressions</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">flwor</span>::<a class="nt" href="#FLWOR">FLWOR</a> <span class="sel">expressions</span>::<a class="nt" href="#Expression">Expression</a><span class="meta">+</span>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

@@ -3,41 +3,33 @@ module AntScripts
 
 syntax NamedElement
         = 
-        ()
- ;
-syntax DescribableElement
-        = 
-        ()
- ;
-syntax CommentableElement
-        = 
-        ()
+        Attribute
  ;
 syntax Project
         = 
-        ANY properties+ ANY targets+ ANY defaultTarget
+        Property properties+ Target targets+ Target defaultTarget
  ;
 syntax Property
         = 
-        ANY name ANY value ANY location ANY refid ANY resource ANY file ANY url ANY environment ANY classpath ANY classpathref ANY prefix
+        String name String value String location String refid String resource String file String url String environment String classpath String classpathref String prefix
  ;
 syntax Target
         = 
-        ANY if ANY unless ANY tasks+ ANY depends+
+        String if String unless Task tasks+ Target depends+
  ;
 syntax TaskElement
-        = 
-        ()
+        = Task
+        | TaskParameter
  ;
 syntax Attribute
         = 
-        value: ANY
+        value: String
  ;
 syntax Task
         = 
-        ANY attributes+ ANY elements+
+        Attribute attributes+ TaskElement elements+
  ;
 syntax TaskParameter
         = 
-        ANY attributes+ ANY elements+
+        Attribute attributes+ TaskElement elements+
  ;

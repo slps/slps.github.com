@@ -10,41 +10,37 @@ syntax RelationshipType
  ;
 syntax MantisRoot
         = 
-        ANY issues+
+        Issue issues+
  ;
 syntax IdentifiedElt
-        = 
-        ()
- ;
-syntax PrivateElt
-        = 
-        ()
+        = ValueWithId
+        | Relationship
  ;
 syntax Issue
         = 
-        ANY i_mantisRoot ANY project ANY category ANY priority ANY severity ANY status ANY reporter ANY summary ANY description ANY version ANY build ANY platform ANY os ANY osVersion ANY reproducibility ANY stepsToReproduce ANY additionalInfo ANY dateSubmitted ANY assignedTo ANY projection ANY eta ANY resolution ANY fixedInVersion ANY attachments+ ANY relationships+ ANY notes+ ANY lastUpdate
+        MantisRoot i_mantisRoot ValueWithId project String category ValueWithId priority ValueWithId severity ValueWithId status Person reporter String summary String description String version String build String platform String os String osVersion ValueWithId reproducibility String stepsToReproduce String additionalInfo Integer dateSubmitted Person assignedTo ValueWithId projection ValueWithId eta ValueWithId resolution String fixedInVersion Attachment attachments+ Relationship relationships+ Note notes+ Integer lastUpdate
  ;
 syntax ValueWithId
-        = 
-        value: ANY
+        = Person
+        | value: String
  ;
 syntax Person
         = 
-        login: ANY
+        login: String
  ;
 syntax Relationship
         = 
-        type: ANY
+        type: RelationshipType
  ;
 syntax TimeStampedElt
         = 
-        ()
+        Attachment
  ;
 syntax Note
         = 
-        ANY author ANY text
+        Person author String text
  ;
 syntax Attachment
         = 
-        ANY filename ANY size ANY contentType ANY downloadUrl
+        String filename Integer size String contentType String downloadUrl
  ;

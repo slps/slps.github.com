@@ -1,11 +1,37 @@
 Resource:
-        graph::ANY uriRef::ANY+ subjectStatement::ANY+ objectStatement::ANY+ label::ANY+ type::ANY+ seeAlso::ANY+ referringResource::ANY+ member::ANY+ container::ANY+ list::ANY+
+        Graph
+Resource:
+        List
+Resource:
+        Container
+Resource:
+        Property
+Resource:
+        Statement
+Resource:
+        URIReferenceNode
+Resource:
+        BlankNode
+Resource:
+        Class
+Resource:
+        Literal
+Resource:
+        graph::Graph uriRef::URIReference+ subjectStatement::Statement+ objectStatement::Statement+ label::PlainLiteral+ type::Class+ seeAlso::Resource+ referringResource::Resource+ member::Resource+ container::Resource+ list::List+
 Graph:
-        graphName::ANY resources::ANY+
+        graphName::URIReference resources::Resource+
 List:
-        first::ANY rest::ANY originalList::ANY+
+        first::Resource rest::List originalList::List+
 Container:
-        EPSILON
+        Alt
+Container:
+        Bag
+Container:
+        Seq
+Container:
+        Alt
+        Bag
+        Seq
 Alt:
         EPSILON
 Bag:
@@ -13,28 +39,38 @@ Bag:
 Seq:
         EPSILON
 Property:
-        predicateStatement::ANY+ subPropertyOf::ANY+ superProperty::ANY+ domain::ANY+ range::ANY+
+        predicateStatement::Statement+ subPropertyOf::Property+ superProperty::Property+ domain::Class+ range::Class+
 ContainerMembershipProperty:
         EPSILON
 Statement:
-        predicate::ANY object::ANY subject::ANY isReifiedOnly::ANY isReified::ANY nameForReification::ANY+
+        predicate::Property object::Resource subject::Resource isReifiedOnly::Boolean isReified::Boolean nameForReification::URIReference+
 URIReferenceNode:
         EPSILON
 BlankNode:
-        nodeId::ANY
+        nodeId::String
 Class:
-        subClassOf::ANY+ superClass::ANY+ typedResource::ANY+ propertyForDomain::ANY+ propertyForRange::ANY+
+        Datatype
+Class:
+        subClassOf::Class+ superClass::Class+ typedResource::Resource+ propertyForDomain::Property+ propertyForRange::Property+
 Datatype:
         EPSILON
 Literal:
-        lexicalForm::ANY
+        PlainLiteral
+Literal:
+        TypedLiteral
+Literal:
+        lexicalForm::String
 PlainLiteral:
-        language::ANY labeledResource::ANY
+        language::String labeledResource::Resource
 TypedLiteral:
-        datatypeURI::ANY
+        RDFXMLLiteral
+TypedLiteral:
+        datatypeURI::URIReference
 RDFXMLLiteral:
         EPSILON
 URIReference:
-        uri::ANY resource::ANY literal::ANY namedGraph::ANY reifiedStatement::ANY+
+        UniformResourceIdentifier
+URIReference:
+        uri::UniformResourceIdentifier resource::Resource literal::TypedLiteral namedGraph::Graph reifiedStatement::Statement+
 UniformResourceIdentifier:
-        name::ANY uriRef::ANY+
+        name::String uriRef::URIReference+

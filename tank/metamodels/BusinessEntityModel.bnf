@@ -1,20 +1,28 @@
 DataType:
-        EPSILON
+        BusinessEntityPropertySet
+DataType:
+        BusinessEntityPropertySet
 Action:
-        EPSILON
+        BusinessRole
+Action:
+        BusinessRole
 Class:
-        EPSILON
-BusinessEntityPropertySet:
-        EPSILON
+        BusinessEntity
+Class:
+        BusinessEntity
 BusinessRole:
-        EPSILON
+        ArtifactRole
+BusinessRole:
+        PerformerRole
+BusinessRole:
+        OrganisationalUnit
 Task:
-        associatedWith::ANY+ needs::ANY+
+        associatedWith::BusinessRole+ needs::ArtifactRole+
 ArtifactRole:
-        characterisedby::ANY typ::ANY task::ANY+ fille::ANY+
+        characterisedby::BusinessEntityPropertySet typ::Class task::Task+ fille::BusinessEntity+
 PerformerRole:
-        perform::ANY
+        perform::Task
 OrganisationalUnit:
-        characterisedby::ANY typ::ANY task::ANY+ fille::ANY+
+        characterisedby::BusinessEntityPropertySet typ::Class task::Task+ fille::BusinessEntity+
 BusinessEntity:
-        placehold::ANY+
+        placehold::BusinessRole+

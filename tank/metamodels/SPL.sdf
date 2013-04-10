@@ -4,105 +4,203 @@ exports
   sorts
         LocatedElement Program Service Session Registration Dialog Event Method Argument MethodName SIPMethodName ControlMethodName Branch DefaultBranch NamedBranch TypeExpression SimpleType SequenceType DefinedType Declaration VariableDeclaration FunctionDeclaration RemoteFunctionDeclaration LocalFunctionDeclaration StructureDeclaration StructureProperty FunctionCall Statement CompoundStat SetStat DeclarationStat ReturnStat IfStat WhenStat ForeachStat SelectStat FunctionCallStat ContinueStat BreakStat PushStat WhenHeader SelectMember SelectDefault SelectCase Expression ConstantExp OperatorExp ForwardExp WithExp BlockExp ReasonExp BODYExp RequestURIExp PopExp FunctionCallExp Place SIPHeaderPlace VariablePlace PropertyCallPlace Variable MessageField ReasonMessageField HeadedMessageField Constant BooleanConstant IntegerConstant StringConstant URIConstant SequenceConstant ResponseConstant Response SuccessResponse ErrorResponse ClientErrorResponse GlobalErrorResponse RedirectionErrorResponse ServerErrorResponse Direction SIPMethod ControlMethod PrimitiveType Modifier FunctionLocation SIPHeader SuccessKind ClientErrorKind GlobalErrorKind RedirectionErrorKind ServerErrorKind 
   context-free syntax
-         -> LocatedElement
+        Program -> LocatedElement
 
-        service::ANY -> Program
+        Service -> LocatedElement
 
-        name::ANY declarations::ANY+ sessions::ANY+ -> Service
+        Session -> LocatedElement
 
-         -> Session
+        MethodName -> LocatedElement
 
-        declarations::ANY+ sessions::ANY+ -> Registration
+        Branch -> LocatedElement
 
-        declarations::ANY+ methods::ANY+ -> Dialog
+        TypeExpression -> LocatedElement
 
-        eventId::ANY declarations::ANY+ methods::ANY+ -> Event
+        Declaration -> LocatedElement
 
-        type::ANY direction::ANY methodName::ANY arguments::ANY+ statements::ANY+ branches::ANY+ -> Method
+        StructureProperty -> LocatedElement
+
+        FunctionCall -> LocatedElement
+
+        Statement -> LocatedElement
+
+        SelectMember -> LocatedElement
+
+        Expression -> LocatedElement
+
+        MessageField -> LocatedElement
+
+        Constant -> LocatedElement
+
+        Response -> LocatedElement
+
+        service::Service -> Program
+
+        name::String declarations::Declaration+ sessions::Session+ -> Service
+
+        Registration -> Session
+
+        Dialog -> Session
+
+        Event -> Session
+
+        Method -> Session
+
+        declarations::Declaration+ sessions::Session+ -> Registration
+
+        declarations::Declaration+ methods::Method+ -> Dialog
+
+        eventId::String declarations::Declaration+ methods::Method+ -> Event
+
+        type::TypeExpression direction::Direction methodName::MethodName arguments::Argument+ statements::Statement+ branches::Branch+ -> Method
 
          -> Argument
 
-         -> MethodName
+        SIPMethodName -> MethodName
 
-        name::ANY -> SIPMethodName
+        ControlMethodName -> MethodName
 
-        name::ANY -> ControlMethodName
+        name::SIPMethod -> SIPMethodName
 
-        statements::ANY+ -> Branch
+        name::ControlMethod -> ControlMethodName
+
+        DefaultBranch -> Branch
+
+        NamedBranch -> Branch
+
+        statements::Statement+ -> Branch
 
          -> DefaultBranch
 
-        name::ANY+ -> NamedBranch
+        name::String+ -> NamedBranch
 
-         -> TypeExpression
+        SimpleType -> TypeExpression
 
-        type::ANY -> SimpleType
+        SequenceType -> TypeExpression
 
-        modifier::ANY type::ANY size::ANY -> SequenceType
+        DefinedType -> TypeExpression
 
-        typeName::ANY -> DefinedType
+        type::PrimitiveType -> SimpleType
 
-         -> Declaration
+        modifier::Modifier type::PrimitiveType size::Integer -> SequenceType
 
-        type::ANY initExp::ANY -> VariableDeclaration
+        typeName::String -> DefinedType
 
-         -> FunctionDeclaration
+        VariableDeclaration -> Declaration
 
-        functionLocation::ANY -> RemoteFunctionDeclaration
+        FunctionDeclaration -> Declaration
 
-        statements::ANY+ -> LocalFunctionDeclaration
+        StructureDeclaration -> Declaration
 
-        properties::ANY+ -> StructureDeclaration
+        Argument -> VariableDeclaration
 
-        name::ANY type::ANY -> StructureProperty
+        WhenHeader -> VariableDeclaration
 
-        function::ANY parameters::ANY+ -> FunctionCall
+        type::TypeExpression initExp::Expression -> VariableDeclaration
 
-         -> Statement
+        RemoteFunctionDeclaration -> FunctionDeclaration
 
-        statements::ANY+ -> CompoundStat
+        LocalFunctionDeclaration -> FunctionDeclaration
 
-        target::ANY setValue::ANY -> SetStat
+        functionLocation::FunctionLocation -> RemoteFunctionDeclaration
 
-        declaration::ANY -> DeclarationStat
+        statements::Statement+ -> LocalFunctionDeclaration
 
-        returnedValue::ANY branch::ANY -> ReturnStat
+        properties::Argument+ -> StructureDeclaration
 
-        condition::ANY thenStatements::ANY+ elseStatements::ANY+ -> IfStat
+        name::String type::TypeExpression -> StructureProperty
 
-        idExp::ANY whenHeaders::ANY+ statements::ANY+ elseStatements::ANY+ -> WhenStat
+        function::FunctionDeclaration parameters::Expression+ -> FunctionCall
 
-        iteratorName::ANY sequenceExp::ANY statements::ANY+ -> ForeachStat
+        CompoundStat -> Statement
 
-        matchedExp::ANY selectCases::ANY+ selectDefault::ANY -> SelectStat
+        SetStat -> Statement
 
-        functionCall::ANY -> FunctionCallStat
+        DeclarationStat -> Statement
+
+        ReturnStat -> Statement
+
+        IfStat -> Statement
+
+        WhenStat -> Statement
+
+        ForeachStat -> Statement
+
+        SelectStat -> Statement
+
+        FunctionCallStat -> Statement
+
+        ContinueStat -> Statement
+
+        BreakStat -> Statement
+
+        PushStat -> Statement
+
+        statements::Statement+ -> CompoundStat
+
+        target::Place setValue::Expression -> SetStat
+
+        declaration::Declaration -> DeclarationStat
+
+        returnedValue::Expression branch::NamedBranch -> ReturnStat
+
+        condition::Expression thenStatements::Statement+ elseStatements::Statement+ -> IfStat
+
+        idExp::Variable whenHeaders::WhenHeader+ statements::Statement+ elseStatements::Statement+ -> WhenStat
+
+        iteratorName::String sequenceExp::Expression statements::Statement+ -> ForeachStat
+
+        matchedExp::Expression selectCases::SelectCase+ selectDefault::SelectDefault -> SelectStat
+
+        functionCall::FunctionCall -> FunctionCallStat
 
          -> ContinueStat
 
          -> BreakStat
 
-        target::ANY pushedValue::ANY -> PushStat
+        target::Place pushedValue::Expression -> PushStat
 
-        headerId::ANY value::ANY -> WhenHeader
+        headerId::String value::Constant -> WhenHeader
 
-         -> SelectMember
+        SelectDefault -> SelectMember
 
-        statements::ANY+ -> SelectDefault
+        SelectCase -> SelectMember
 
-        values::ANY+ -> SelectCase
+        statements::Statement+ -> SelectDefault
 
-         -> Expression
+        values::Constant+ -> SelectCase
 
-        value::ANY -> ConstantExp
+        ConstantExp -> Expression
 
-        opName::ANY leftExp::ANY rightExp::ANY -> OperatorExp
+        OperatorExp -> Expression
 
-        isParallel::ANY exp::ANY -> ForwardExp
+        ForwardExp -> Expression
 
-        exp::ANY msgFields::ANY+ -> WithExp
+        WithExp -> Expression
 
-        exp::ANY -> BlockExp
+        BlockExp -> Expression
+
+        ReasonExp -> Expression
+
+        BODYExp -> Expression
+
+        RequestURIExp -> Expression
+
+        PopExp -> Expression
+
+        FunctionCallExp -> Expression
+
+        Place -> Expression
+
+        value::Constant -> ConstantExp
+
+        opName::String leftExp::Expression rightExp::Expression -> OperatorExp
+
+        isParallel::Boolean exp::Expression -> ForwardExp
+
+        exp::Expression msgFields::MessageField+ -> WithExp
+
+        exp::Expression -> BlockExp
 
          -> ReasonExp
 
@@ -110,53 +208,82 @@ exports
 
          -> RequestURIExp
 
-        source::ANY -> PopExp
+        source::Place -> PopExp
 
-        functionCall::ANY -> FunctionCallExp
+        functionCall::FunctionCall -> FunctionCallExp
 
-         -> Place
+        SIPHeaderPlace -> Place
 
-        header::ANY -> SIPHeaderPlace
+        VariablePlace -> Place
 
-         -> VariablePlace
+        header::SIPHeader -> SIPHeaderPlace
 
-        propName::ANY source::ANY -> PropertyCallPlace
+        PropertyCallPlace -> VariablePlace
 
-        source::ANY -> Variable
+        Variable -> VariablePlace
 
-         -> MessageField
+        propName::String source::VariablePlace -> PropertyCallPlace
 
-        exp::ANY -> ReasonMessageField
+        source::Declaration -> Variable
 
-        headerId::ANY -> HeadedMessageField
+        ReasonMessageField -> MessageField
 
-         -> Constant
+        HeadedMessageField -> MessageField
 
-        value::ANY -> BooleanConstant
+        exp::Expression -> ReasonMessageField
 
-        value::ANY -> IntegerConstant
+        headerId::String -> HeadedMessageField
 
-        value::ANY -> StringConstant
+        BooleanConstant -> Constant
 
-        uri::ANY -> URIConstant
+        IntegerConstant -> Constant
 
-        values::ANY+ -> SequenceConstant
+        StringConstant -> Constant
 
-        response::ANY -> ResponseConstant
+        URIConstant -> Constant
 
-         -> Response
+        SequenceConstant -> Constant
 
-        successKind::ANY -> SuccessResponse
+        ResponseConstant -> Constant
 
-         -> ErrorResponse
+        value::Boolean -> BooleanConstant
 
-        errorKind::ANY -> ClientErrorResponse
+        value::Integer -> IntegerConstant
 
-        errorKind::ANY -> GlobalErrorResponse
+        value::String -> StringConstant
 
-        errorKind::ANY -> RedirectionErrorResponse
+        uri::String -> URIConstant
 
-        errorKind::ANY -> ServerErrorResponse
+        values::Constant+ -> SequenceConstant
+
+        response::Response -> ResponseConstant
+
+        SuccessResponse -> Response
+
+        ErrorResponse -> Response
+
+        successKind::SuccessKind -> SuccessResponse
+
+        ClientErrorResponse -> ErrorResponse
+
+        GlobalErrorResponse -> ErrorResponse
+
+        RedirectionErrorResponse -> ErrorResponse
+
+        ServerErrorResponse -> ErrorResponse
+
+        ClientErrorResponse -> ErrorResponse
+        GlobalErrorResponse -> ErrorResponse
+        RedirectionErrorResponse -> ErrorResponse
+        ServerErrorResponse -> ErrorResponse
+
+        errorKind::ClientErrorKind -> ClientErrorResponse
+
+        errorKind::GlobalErrorKind -> GlobalErrorResponse
+
+        errorKind::RedirectionErrorKind -> RedirectionErrorResponse
+
+        errorKind::ServerErrorKind -> ServerErrorResponse
 
         inout:: -> Direction
         in:: -> Direction

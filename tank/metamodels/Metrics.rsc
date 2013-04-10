@@ -3,25 +3,27 @@ module Metrics
 
 syntax Metric
         = 
-        ANY name ANY values+
+        String name MetricValue values+
  ;
 syntax MetricValue
-        = 
-        ()
+        = StringMetricValue
+        | BooleanMetricValue
+        | IntegerMetricValue
+        | DoubleMetricValue
  ;
 syntax StringMetricValue
         = 
-        value: ANY
+        value: String
  ;
 syntax BooleanMetricValue
         = 
-        value: ANY
+        value: Boolean
  ;
 syntax IntegerMetricValue
         = 
-        value: ANY
+        value: Integer
  ;
 syntax DoubleMetricValue
         = 
-        value: ANY
+        value: Double
  ;

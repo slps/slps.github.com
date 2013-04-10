@@ -1,16 +1,20 @@
 BooleanExpression:
-        value::ANY
+        value::String
 StateMachine:
-        transitions::ANY+ top::ANY+
+        transitions::Transition+ top::State+
 State:
-        state_container::ANY internalTransitions::ANY+ deferrableEvents::ANY+
+        CompositeState
+State:
+        state_container::StateMachine internalTransitions::Transition+ deferrableEvents::Event+
 CompositeState:
-        subVertexes::ANY+ isConcurrent::ANY
+        subVertexes::StateVertex+ isConcurrent::Boolean
 Transition:
-        transSM_container::ANY transS_container::ANY trigger::ANY guard::ANY source::ANY target::ANY
+        transSM_container::StateMachine transS_container::State trigger::Event guard::Guard source::StateVertex target::StateVertex
 StateVertex:
-        sv_container::ANY outgoing::ANY+ incoming::ANY+
+        State
+StateVertex:
+        sv_container::CompositeState outgoing::Transition+ incoming::Transition+
 Guard:
-        gua_container::ANY expression::ANY
+        gua_container::Transition expression::BooleanExpression
 Event:
-        evt_container::ANY+ targets::ANY+
+        evt_container::Transition+ targets::State+

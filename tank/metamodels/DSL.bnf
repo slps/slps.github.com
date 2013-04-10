@@ -1,26 +1,40 @@
 NamedElement:
-        EPSILON
+        Namespace
+NamedElement:
+        Role
+NamedElement:
+        ValueProperty
+NamedElement:
+        EnumerationLiteral
 LoadedElement:
-        EPSILON
+        DomainModel
+LoadedElement:
+        Classifier
 Namespace:
-        EPSILON
+        LoadedElement
+Namespace:
+        Type
 DomainModel:
-        classifiers::ANY+ types::ANY+
+        classifiers::Classifier+ types::Type+
 Classifier:
-        EPSILON
+        Class
+Classifier:
+        Relationship
 Class:
-        isSerializationRoot::ANY
+        isSerializationRoot::PrimitiveTypes/Boolean
 Relationship:
-        isEmbedding::ANY roles::ANY
+        isEmbedding::PrimitiveTypes/Boolean roles::Role
 Role:
-        min::ANY max::ANY isUnbounded::ANY accepts::ANY isOrdered::ANY isNavigableFrom::ANY isPropertyGenerator::ANY source::ANY type::ANY relation::ANY
+        min::PrimitiveTypes/Integer max::PrimitiveTypes/Integer isUnbounded::PrimitiveTypes/Boolean accepts::PrimitiveTypes/String isOrdered::PrimitiveTypes/Boolean isNavigableFrom::PrimitiveTypes/Boolean isPropertyGenerator::PrimitiveTypes/Boolean source::Classifier type::Classifier relation::Relationship
 ValueProperty:
-        owner::ANY type::ANY
+        owner::Classifier type::Type
 Type:
-        EPSILON
+        SimpleType
+Type:
+        Enumeration
 SimpleType:
-        EPSILON
+        
 EnumerationLiteral:
-        value::ANY
+        value::PrimitiveTypes/Integer
 Enumeration:
-        literals::ANY+
+        literals::EnumerationLiteral+

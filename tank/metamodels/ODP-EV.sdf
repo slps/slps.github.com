@@ -4,70 +4,104 @@ exports
   sorts
         EnterpriseObject ODPSystem Party Objective Scope EnterpriseSpecification FieldOfApplication Policy PolicyEnvelope PolicyValue AssigmentPolicy Contract Process Step Action AccountableAction Prescription Commitment Declaration Evaluation Delegation Behaviour Community CommunityObject Role InterfaceRole Violation Rule Obligation Authorisation Permission Prohibition EO-A-R EO-P-D 
   context-free syntax
-        eoConfigurations::ANY+ eoRoles::ANY+ eoArtefactActions::ANY+ eoResourceActions::ANY+ eoActorActions::ANY+ eoPolicy::ANY+ eoEOAR::ANY+ eoEOPD::ANY -> EnterpriseObject
+        ODPSystem -> EnterpriseObject
 
-        odpBehaviour::ANY odpObjectives::ANY+ odpSpecifier::ANY -> ODPSystem
+        Party -> EnterpriseObject
 
-        ptyAccountableAction::ANY+ ptyEOPD::ANY -> Party
+        CommunityObject -> EnterpriseObject
 
-        objFulfiller::ANY objSpecifier::ANY objRefiners::ANY+ objRefinement::ANY objAchievers::ANY+ objFulfillers::ANY+ -> Objective
+        eoConfigurations::Community+ eoRoles::Role+ eoArtefactActions::Action+ eoResourceActions::Action+ eoActorActions::Action+ eoPolicy::Policy+ eoEOAR::EO-A-R+ eoEOPD::EO-P-D -> EnterpriseObject
 
-        scOdpSystem::ANY -> Scope
+        odpBehaviour::Scope odpObjectives::Objective+ odpSpecifier::EnterpriseSpecification -> ODPSystem
 
-        esDescribedSystems::ANY+ esContext::ANY -> EnterpriseSpecification
+        ptyAccountableAction::AccountableAction+ ptyEOPD::EO-P-D -> Party
 
-        faEnterpriseSpecifications::ANY -> FieldOfApplication
+        objFulfiller::ODPSystem objSpecifier::Contract objRefiners::Objective+ objRefinement::Objective objAchievers::Process+ objFulfillers::Behaviour+ -> Objective
 
-        poSpecifier::ANY poOwner::ANY poProcess::ANY+ poBehaviour::ANY+ poChanger::ANY+ poRole::ANY+ poEnterpriseObject::ANY+ -> Policy
+        scOdpSystem::ODPSystem -> Scope
 
-        pePolicySetter::ANY peBehaviour::ANY peValues::ANY+ peCurrentValue::ANY -> PolicyEnvelope
+        esDescribedSystems::ODPSystem+ esContext::FieldOfApplication -> EnterpriseSpecification
 
-        pvValue::ANY -> PolicyValue
+        faEnterpriseSpecifications::EnterpriseSpecification -> FieldOfApplication
 
-        apEOAR::ANY+ -> AssigmentPolicy
+        PolicyEnvelope -> Policy
 
-        ctPolicies::ANY ctObjective::ANY ctBehaviours::ANY+ -> Contract
+        PolicyValue -> Policy
 
-        prObjectives::ANY+ prDetails::ANY+ prRefinement::ANY prConstrainer::ANY+ -> Process
+        AssigmentPolicy -> Policy
 
-        stGraphs::ANY+ stAbstraction::ANY -> Step
+        poSpecifier::Contract poOwner::Community poProcess::Process+ poBehaviour::Behaviour+ poChanger::Behaviour+ poRole::Role+ poEnterpriseObject::EnterpriseObject+ -> Policy
 
-        actBehaviours::ANY+ actArtefactRoleFillers::ANY+ actResourceRoleFillers::ANY+ actActorRoleFillers::ANY+ -> Action
+        pePolicySetter::Behaviour peBehaviour::Behaviour peValues::PolicyValue+ peCurrentValue::PolicyValue -> PolicyEnvelope
 
-         -> AccountableAction
+        pvValue::PolicyEnvelope -> PolicyValue
 
-         -> Prescription
+        apEOAR::EO-A-R+ -> AssigmentPolicy
 
-         -> Commitment
+        ctPolicies::Policy ctObjective::Objective ctBehaviours::Behaviour+ -> Contract
 
-         -> Declaration
+        prObjectives::Objective+ prDetails::Step+ prRefinement::Step prConstrainer::Policy+ -> Process
 
-         -> Evaluation
+        Action -> Step
 
-        dlgEOPD::ANY -> Delegation
+        stGraphs::Process+ stAbstraction::Process -> Step
 
-        beObjectives::ANY+ beSpecifiers::ANY+ beActions::ANY+ beIdentifier::ANY bePolicyEnvelope::ANY beConstrainer::ANY bePolicyConstrainer::ANY+ bePolicy::ANY+ -> Behaviour
+        AccountableAction -> Action
 
-        coAbstraction::ANY coMembers::ANY+ coCommunityRoles::ANY+ coPolicy::ANY+ -> Community
+        actBehaviours::Behaviour+ actArtefactRoleFillers::EnterpriseObject+ actResourceRoleFillers::EnterpriseObject+ actActorRoleFillers::EnterpriseObject+ -> Action
 
-        cobjRefinement::ANY -> CommunityObject
+        Prescription -> AccountableAction
 
-        roleBehaviour::ANY roleSpecifier::ANY rolefillers::ANY+ roleConstrainer::ANY+ roleEOAR::ANY+ -> Role
+        Commitment -> AccountableAction
+
+        Declaration -> AccountableAction
+
+        Evaluation -> AccountableAction
+
+        Delegation -> AccountableAction
+
+        aaAccountableParty::Party+ -> Prescription
+
+        aaAccountableParty::Party+ -> Commitment
+
+        aaAccountableParty::Party+ -> Declaration
+
+        aaAccountableParty::Party+ -> Evaluation
+
+        dlgEOPD::EO-P-D -> Delegation
+
+        Violation -> Behaviour
+
+        beObjectives::Objective+ beSpecifiers::Contract+ beActions::Action+ beIdentifier::Role bePolicyEnvelope::PolicyEnvelope beConstrainer::PolicyEnvelope bePolicyConstrainer::Policy+ bePolicy::Policy+ -> Behaviour
+
+        coAbstraction::CommunityObject coMembers::EnterpriseObject+ coCommunityRoles::Role+ coPolicy::Policy+ -> Community
+
+        cobjRefinement::Community -> CommunityObject
+
+        InterfaceRole -> Role
+
+        roleBehaviour::Behaviour roleSpecifier::Community rolefillers::EnterpriseObject+ roleConstrainer::Policy+ roleEOAR::EO-A-R+ -> Role
 
          -> InterfaceRole
 
-        vioProhibitor::ANY -> Violation
+        vioProhibitor::Rule -> Violation
 
-         -> Rule
+        Obligation -> Rule
 
-         -> Obligation
+        Authorisation -> Rule
 
-         -> Authorisation
+        Permission -> Rule
 
-         -> Permission
+        Prohibition -> Rule
 
-         -> Prohibition
+        ruViolation::Violation+ -> Obligation
 
-        eoarSubject::ANY+ eoarSubjectRole::ANY+ eoarGovernor::ANY+ -> EO-A-R
+        ruViolation::Violation+ -> Authorisation
 
-        eopdAgent::ANY eopdPrincipal::ANY eopdAction::ANY -> EO-P-D
+        ruViolation::Violation+ -> Permission
+
+        ruViolation::Violation+ -> Prohibition
+
+        eoarSubject::EnterpriseObject+ eoarSubjectRole::Role+ eoarGovernor::AssigmentPolicy+ -> EO-A-R
+
+        eopdAgent::EnterpriseObject eopdPrincipal::Party eopdAction::Delegation -> EO-P-D

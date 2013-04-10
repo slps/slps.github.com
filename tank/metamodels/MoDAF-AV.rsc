@@ -2,194 +2,231 @@
 module MoDAF_AV
 
 syntax Element
-        = 
-        ()
+        = MoDAFModel
+        | Enterprise
+        | OperationalMission
+        | Architecture
+        | ArchitecturalDescription
+        | ArchitecturalReference
+        | ArchitecturalProduct
+        | Elements
+        | ArchitecturalFramework
+        | View
+        | Concern
+        | Stakeholder
+        | Taxonomy
+        | ClassifiedElement
  ;
 syntax MoDAFModel
         = 
-        ANY enterprise ANY environment ANY operationalMissions+ ANY architectures+ ANY architecturalDescription+ ANY architecturalReferences+ ANY architecturalFrameworks+ ANY architectureMetadatas+ ANY metaDatas+ ANY stakeholders+ ANY stakeholderHasConcerns+
+        Enterprise enterprise Environment environment OperationalMission operationalMissions+ Architecture architectures+ ArchitecturalDescription architecturalDescription+ ArchitecturalReference architecturalReferences+ ArchitecturalFramework architecturalFrameworks+ ArchitectureMetaData architectureMetadatas+ MetaData metaDatas+ Stakeholder stakeholders+ StakeholderHasConcern stakeholderHasConcerns+
  ;
 syntax Enterprise
         = 
-        ANY inhabits ANY fulfills+
+        Environment inhabits OperationalMission fulfills+
  ;
 syntax Environment
         = 
-        influences: ANY
+        influences: Enterprise
  ;
 syntax OperationalMission
         = 
-        ANY name ANY content
+        String name String content
  ;
 syntax Architecture
         = 
-        ANY enterprise ANY describedBy
+        Enterprise enterprise ArchitecturalDescription describedBy
  ;
 syntax ArchitecturalDescription
         = 
-        ANY approvialAuthority ANY architect ANY assumptionAndConstraints ANY creatingOrganisation ANY dateCompleted ANY purpose ANY recommendations ANY summaryOfFindings ANY tollsUsed ANY viewpoints+ ANY products+ ANY taxonomy
+        String approvialAuthority String architect String assumptionAndConstraints String creatingOrganisation String dateCompleted String purpose String recommendations String summaryOfFindings String tollsUsed View viewpoints+ ArchitecturalProduct products+ Taxonomy taxonomy
  ;
 syntax ArchitecturalReference
         = 
-        ANY referred ANY referrer
+        ArchitecturalDescription referred ArchitecturalDescription referrer
  ;
 syntax ArchitecturalProduct
         = 
-        ANY description ANY architecturalElements+ ANY definingView ANY addresses+
+        String description Elements architecturalElements+ View definingView Concern addresses+
  ;
 syntax Elements
         = 
-        ANY name ANY content
+        String name String content
  ;
 syntax ArchitecturalFramework
         = 
-        ANY ownedMember+
+        View ownedMember+
  ;
 syntax View
         = 
-        ANY framework ANY frameworkWebsite ANY viewCode ANY viewDescription ANY viewName ANY definingFramework ANY usedToCover+
+        String framework String frameworkWebsite String viewCode String viewDescription String viewName ArchitecturalFramework definingFramework Concern usedToCover+
  ;
 syntax Concern
         = 
-        ANY adressedBy+
+        ArchitecturalProduct adressedBy+
  ;
 syntax StakeholderHasConcern
         = 
-        ANY client ANY supplier ANY owner
+        Stakeholder client Concern supplier MoDAFModel owner
  ;
 syntax Stakeholder
         = 
-        ANY name ANY content
+        String name String content
  ;
 syntax MetaData
-        = 
-        ANY dublinCoreElement ANY modMetaDataElement ANY name ANY body
+        = ArchitectureMetaData
+        | String dublinCoreElement String modMetaDataElement String name String body
  ;
 syntax ArchitectureMetaData
         = 
-        annotatedArchitecture: ANY
+        annotatedArchitecture: ArchitecturalDescription
  ;
 syntax Taxonomy
         = 
-        ANY date ANY url ANY version ANY contents+
+        String date String url String version ClassifiedElement contents+
  ;
 syntax ClassifiedElement
-        = 
-        ()
+        = Environment
+        | Standard
+        | MeasurableProperty
+        | CapabilityRequirement
+        | Effect
+        | EnduringTask
+        | OperationalConstraint
+        | PostType
+        | OrganisationType
+        | RoleInOrganisation
+        | LocationType
+        | OperationalActivity
+        | Node
+        | InformationExchange
+        | Competence
+        | InformationElement
+        | NodeConnectionType
+        | System
+        | DataElement
+        | SystemFunction
+        | SystemConnectionSpecification
+        | ProjectType
+        | Service
+        | Unit
+        | Dimension
+        | OrganisationProjectRelationship
+        | ProjectThreadType
  ;
 syntax Standard
         = 
-        ANY identifier ANY publishedWebsite ANY publisher ANY ratificationDate ANY version ANY withdrawalDate
+        String identifier String publishedWebsite String publisher TimeExpression ratificationDate String version TimeExpression withdrawalDate
  ;
 syntax MeasurableProperty
         = 
-        ANY maxValue ANY minValue
+        LiteralSpecification maxValue LiteralSpecification minValue
  ;
 syntax CapabilityRequirement
         = 
-        ANY taxonomy
+        taxonomy: Taxonomy
  ;
 syntax Effect
         = 
-        ANY taxonomy
+        taxonomy: Taxonomy
  ;
 syntax EnduringTask
         = 
-        ANY taxonomy
+        taxonomy: Taxonomy
  ;
 syntax OperationalConstraint
         = 
-        nodeUsageContext: ANY
+        nodeUsageContext: Property
  ;
 syntax PostType
         = 
-        ANY taxonomy
+        taxonomy: Taxonomy
  ;
 syntax OrganisationType
         = 
-        ANY taxonomy
+        taxonomy: Taxonomy
  ;
 syntax RoleInOrganisation
         = 
-        ANY taxonomy
+        taxonomy: Taxonomy
  ;
 syntax LocationType
         = 
-        ANY taxonomy
+        taxonomy: Taxonomy
  ;
 syntax OperationalActivity
         = 
-        ANY taxonomy
+        taxonomy: Taxonomy
  ;
 syntax Node
         = 
-        ANY taxonomy
+        taxonomy: Taxonomy
  ;
 syntax InformationExchange
         = 
-        ANY identifier ANY requirementText
+        String identifier String requirementText
  ;
 syntax Competence
         = 
-        ANY taxonomy
+        taxonomy: Taxonomy
  ;
 syntax InformationElement
         = 
-        ANY taxonomy
+        taxonomy: Taxonomy
  ;
 syntax NodeConnectionType
         = 
-        ANY taxonomy
+        taxonomy: Taxonomy
  ;
 syntax System
         = 
-        ANY taxonomy
+        taxonomy: Taxonomy
  ;
 syntax DataElement
         = 
-        ANY taxonomy
+        taxonomy: Taxonomy
  ;
 syntax SystemFunction
         = 
-        systemUsageContext: ANY
+        systemUsageContext: Property
  ;
 syntax SystemConnectionSpecification
         = 
-        ANY taxonomy
+        taxonomy: Taxonomy
  ;
 syntax ProjectType
         = 
-        ANY taxonomy
+        taxonomy: Taxonomy
  ;
 syntax Service
         = 
-        ANY taxonomy
+        taxonomy: Taxonomy
  ;
 syntax Unit
         = 
-        ANY taxonomy
+        taxonomy: Taxonomy
  ;
 syntax Dimension
         = 
-        ANY taxonomy
+        taxonomy: Taxonomy
  ;
 syntax OrganisationProjectRelationship
         = 
-        ANY taxonomy
+        taxonomy: Taxonomy
  ;
 syntax ProjectThreadType
         = 
-        ANY taxonomy
+        taxonomy: Taxonomy
  ;
 syntax TimeExpression
         = 
-        value: ANY
+        value: String
  ;
 syntax LiteralSpecification
         = 
-        value: ANY
+        value: String
  ;
 syntax Property
         = 
-        value: ANY
+        value: String
  ;

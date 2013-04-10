@@ -4,7 +4,7 @@ exports
   sorts
         Activity ActivityType Artifact ArtifactsContainer Association BpmnDiagram DataObject DirectionType Graph Group Identifiable IdentifiableNode Lane MessagingEdge NamedBpmnObject Pool SequenceEdge SubProcess TextAnnotation Vertex 
   context-free syntax
-        orderedMessages::ANY+ incomingMessages::ANY+ outgoingMessages::ANY+ groups::ANY+ activityType::ANY eventHandlerFor::ANY lane::ANY looping::ANY -> Activity
+        orderedMessages::MessagingEdge+ incomingMessages::MessagingEdge+ outgoingMessages::MessagingEdge+ groups::Group+ activityType::ActivityType eventHandlerFor::SubProcess lane::Lane looping::Boolean -> Activity
 
         SubProcess:: -> ActivityType
         EventEndMultiple:: -> ActivityType
@@ -37,13 +37,19 @@ exports
         GatewayEventBasedExclusive:: -> ActivityType
         EventIntermediateRule:: -> ActivityType
 
-        associations::ANY+ artifactsContainer::ANY -> Artifact
+        DataObject -> Artifact
 
-        artifacts::ANY+ -> ArtifactsContainer
+        Group -> Artifact
 
-        direction::ANY source::ANY target::ANY -> Association
+        TextAnnotation -> Artifact
 
-        pools::ANY+ messages::ANY+ author::ANY title::ANY -> BpmnDiagram
+        associations::Association+ artifactsContainer::ArtifactsContainer -> Artifact
+
+        artifacts::Artifact+ -> ArtifactsContainer
+
+        direction::DirectionType source::Artifact target::IdentifiableNode -> Association
+
+        pools::Pool+ messages::MessagingEdge+ author::String title::String -> BpmnDiagram
 
          -> DataObject
 
@@ -52,26 +58,32 @@ exports
         To:: -> DirectionType
         None:: -> DirectionType
 
-        vertices::ANY+ sequenceEdges::ANY+ -> Graph
+        vertices::Vertex+ sequenceEdges::SequenceEdge+ -> Graph
 
-        activities::ANY+ -> Group
+        activities::Activity+ -> Group
 
-        iD::ANY -> Identifiable
+        IdentifiableNode -> Identifiable
 
-        associations::ANY+ -> IdentifiableNode
+        iD::ID -> Identifiable
 
-        activities::ANY+ pool::ANY -> Lane
+        Vertex -> IdentifiableNode
 
-        bpmnDiagram::ANY source::ANY target::ANY -> MessagingEdge
+        associations::Association+ -> IdentifiableNode
 
-        documentation::ANY name::ANY ncname::ANY -> NamedBpmnObject
+        activities::Activity+ pool::Pool -> Lane
 
-        lanes::ANY+ bpmnDiagram::ANY -> Pool
+        bpmnDiagram::BpmnDiagram source::Activity target::Activity -> MessagingEdge
 
-        graph::ANY isDefault::ANY source::ANY target::ANY -> SequenceEdge
+        ArtifactsContainer -> NamedBpmnObject
 
-        eventHandlers::ANY+ isTransaction::ANY -> SubProcess
+        documentation::String name::String ncname::String -> NamedBpmnObject
+
+        lanes::Lane+ bpmnDiagram::BpmnDiagram -> Pool
+
+        graph::Graph isDefault::Boolean source::Vertex target::Vertex -> SequenceEdge
+
+        eventHandlers::Activity+ isTransaction::Boolean -> SubProcess
 
          -> TextAnnotation
 
-        outgoingEdges::ANY+ incomingEdges::ANY+ graph::ANY -> Vertex
+        outgoingEdges::SequenceEdge+ incomingEdges::SequenceEdge+ graph::Graph -> Vertex

@@ -4,18 +4,26 @@ exports
   sorts
         UMLModelElement Attribute Package PackageElement Classifier Class PrimitiveDataType Association 
   context-free syntax
-         -> UMLModelElement
+        Attribute -> UMLModelElement
 
-        owner::ANY type::ANY -> Attribute
+        Package -> UMLModelElement
 
-        elements::ANY+ -> Package
+        PackageElement -> UMLModelElement
 
-         -> PackageElement
+        owner::Class type::Classifier -> Attribute
 
-         -> Classifier
+        elements::PackageElement+ -> Package
 
-        attribute::ANY+ general::ANY+ generalOpposite::ANY+ reverse::ANY+ forward::ANY+ -> Class
+        Classifier -> PackageElement
 
-        typeOpposite::ANY+ -> PrimitiveDataType
+        Association -> PackageElement
 
-        source::ANY destination::ANY -> Association
+        Class -> Classifier
+
+        PrimitiveDataType -> Classifier
+
+        attribute::Attribute+ general::Class+ generalOpposite::Class+ reverse::Association+ forward::Association+ -> Class
+
+        typeOpposite::Attribute+ -> PrimitiveDataType
+
+        source::Class destination::Class -> Association

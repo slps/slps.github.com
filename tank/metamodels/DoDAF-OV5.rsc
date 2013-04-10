@@ -2,56 +2,79 @@
 module DoDAF_OV5
 
 syntax Element
-        = 
-        ()
+        = DoDAFModel
+        | Document
+        | AMSpecificationElement
+        | PAExchangeRequirement
+        | ArchitectureDocument
+        | IE
+        | AMIERole
+        | InformationAssetDocument
+        | AMPA
+        | PACapability
+        | PA
+        | InformationAsset
+        | Task
+        | Organization
+        | OrganizationType
+        | OperationalRole
+        | Occupation
+        | PersonType
+        | Skill
+        | DOSCR
  ;
 syntax DoDAFModel
         = 
-        ANY document+ ANY am+ ANY task+ ANY iaDocument+ ANY amSpecification+ ANY doscr+ ANY organizationType+
+        Document document+ AM am+ Task task+ InformationAssetDocument iaDocument+ AMSpecification amSpecification+ DOSCR doscr+ OrganizationType organizationType+
  ;
 syntax Document
-        = 
-        ANY type ANY cites+ ANY records+ ANY isTheReferenceFor+ ANY isThePrimaryReferenceFor+
+        = AMSpecification
+        | String type InformationAssetDocument cites+ ArchitectureDocument records+ IE isTheReferenceFor+ PA isThePrimaryReferenceFor+
  ;
 syntax AMSpecification
         = 
-        ANY isSpecifiedUsing+
+        AMSpecificationElement isSpecifiedUsing+
  ;
 syntax AMSpecificationElement
         = 
-        subject: ANY
+        subject: PAExchangeRequirement
  ;
 syntax PAExchangeRequirement
         = 
-        ANY isTheSubjectOf+
+        AMSpecificationElement isTheSubjectOf+
  ;
 syntax ArchitectureDocument
         = 
-        ANY name ANY description ANY view
+        String name String description String view
  ;
 syntax IE
         = 
-        ANY isAssociatedWith+ ANY isOrdinateOf+ ANY isSubordinateOf+
+        AMIERole isAssociatedWith+ IE isOrdinateOf+ IE isSubordinateOf+
  ;
 syntax AMIERole
-        = 
-        ANY defines+
+        = Control
+        | Input
+        | Output
+        | Mechanism
+        | AMPA defines+
  ;
 syntax Control
         = 
-        ANY source ANY destination
+        String source String destination
  ;
 syntax Input
         = 
-        ANY isTheInputThatIsDefinedBy+ ANY source ANY destination ANY information
+        Output isTheInputThatIsDefinedBy+ String source String destination String information
  ;
 syntax Output
         = 
-        ANY source ANY destination ANY information
+        String source String destination String information
  ;
 syntax Mechanism
-        = 
-        ANY source ANY destination ANY resourceType
+        = MechanismSystem
+        | MechanismReference
+        | MechanismFacility
+        | String source String destination String resourceType
  ;
 syntax MechanismSystem
         = 
@@ -67,61 +90,61 @@ syntax MechanismFacility
  ;
 syntax InformationAssetDocument
         = 
-        ANY name ANY description ANY view
+        String name String description String view
  ;
 syntax AMPA
         = 
-        ANY isOrdinateOf+ ANY isSubordinateOf+ ANY defines+
+        AMPA isOrdinateOf+ AMPA isSubordinateOf+ AMIERole defines+
  ;
 syntax PACapability
         = 
-        ANY name ANY description ANY view
+        String name String description String view
  ;
 syntax PA
         = 
-        ANY isTheProducerFor+ ANY isTheConsumerFor+ ANY isParentFor+ ANY isChildFor+ ANY has+ ANY isIncludedIn+ ANY correspondsTo+
+        PAExchangeRequirement isTheProducerFor+ PAExchangeRequirement isTheConsumerFor+ PA isParentFor+ PA isChildFor+ PACapability has+ AMPA isIncludedIn+ PATask correspondsTo+
  ;
 syntax AM
         = 
-        ANY type ANY specifies+ ANY includes+ ANY paTask+
+        String type AMSpecification specifies+ AMPA includes+ PATask paTask+
  ;
 syntax InformationAsset
         = 
-        ()
+        AM
  ;
 syntax Task
-        = 
-        ANY levelIdentifier ANY references ANY cost
+        = PATask
+        | String levelIdentifier String references String cost
  ;
 syntax PATask
         = 
-        isCitedBy: ANY
+        isCitedBy: InformationAsset
  ;
 syntax Organization
         = 
-        ANY type ANY supplies+ ANY providesStewardshipFor+ ANY owns+ ANY develops+ ANY isCitedAs+
+        OrganizationType type InformationAsset supplies+ InformationAsset providesStewardshipFor+ InformationAsset owns+ IE develops+ MechanismReference isCitedAs+
  ;
 syntax OrganizationType
         = 
-        ANY isTheTypeOf+ ANY isCitedAs+
+        Organization isTheTypeOf+ MechanismReference isCitedAs+
  ;
 syntax OperationalRole
         = 
-        ANY isCitedAs+
+        MechanismReference isCitedAs+
  ;
 syntax Occupation
         = 
-        ANY mayBeCitedForOR+ ANY mayBeCitedForPT+
+        OperationalRole mayBeCitedForOR+ PersonType mayBeCitedForPT+
  ;
 syntax PersonType
         = 
-        ANY mayBeCitedFor+ ANY can+
+        OperationalRole mayBeCitedFor+ Skill can+
  ;
 syntax Skill
         = 
-        ANY mayBeCitedFor+
+        OperationalRole mayBeCitedFor+
  ;
 syntax DOSCR
         = 
-        ANY mayBeAn ANY appliesTo+ ANY mayBeCitedFor+
+        Occupation mayBeAn PersonType appliesTo+ OperationalRole mayBeCitedFor+
  ;

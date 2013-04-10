@@ -4,12 +4,14 @@ exports
   sorts
         JavaSource NamedElement ClassDeclaration MethodDefinition MethodInvocation 
   context-free syntax
-        classes::ANY+ -> JavaSource
+        classes::ClassDeclaration+ -> JavaSource
 
-         -> NamedElement
+        ClassDeclaration -> NamedElement
 
-        superclass::ANY methods::ANY+ -> ClassDeclaration
+        MethodDefinition -> NamedElement
 
-        class::ANY invocations::ANY+ -> MethodDefinition
+        superclass::ClassDeclaration methods::MethodDefinition+ -> ClassDeclaration
 
-        method::ANY -> MethodInvocation
+        class::ClassDeclaration invocations::MethodInvocation+ -> MethodDefinition
+
+        method::MethodDefinition -> MethodInvocation

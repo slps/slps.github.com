@@ -1,136 +1,240 @@
 LocatedElement:
-        EPSILON
+        Body
+LocatedElement:
+        InWhereHolds
+LocatedElement:
+        AsmLFile
+LocatedElement:
+        AsmLElement
+LocatedElement:
+        VarOrCase
+LocatedElement:
+        VarOrMethod
+LocatedElement:
+        Enumerator
+LocatedElement:
+        Parameter
+LocatedElement:
+        Initially
+LocatedElement:
+        Rule
+LocatedElement:
+        Term
 Body:
-        rules::ANY+
+        rules::Rule+
 InWhereHolds:
-        var::ANY in::ANY where::ANY holds::ANY
+        var::Term in::Term where::Term holds::Term
 AsmLFile:
-        elements::ANY+ main::ANY
+        elements::AsmLElement+ main::Main
 AsmLElement:
-        EPSILON
+        Namespace
+AsmLElement:
+        Structure
+AsmLElement:
+        Class
+AsmLElement:
+        Enumeration
+AsmLElement:
+        Function
+AsmLElement:
+        Type
 VarDeclaration:
-        isConstant::ANY isDeclaration::ANY isLocal::ANY name::ANY type::ANY
+        isConstant::Boolean isDeclaration::Boolean isLocal::Boolean name::String type::Type
 Namespace:
-        name::ANY
+        name::String
 Structure:
-        name::ANY varOrCase::ANY+ superStructureName::ANY
+        name::String varOrCase::VarOrCase+ superStructureName::String
 VarOrCase:
-        EPSILON
+        Case
 Case:
-        name::ANY variables::ANY+
+        name::String variables::VarDeclaration+
 Class:
-        name::ANY isAbstract::ANY superClassName::ANY varOrMethod::ANY+
+        name::String isAbstract::Boolean superClassName::String varOrMethod::VarOrMethod+
 VarOrMethod:
-        ownerClass::ANY
+        ownerClass::Class
 Enumeration:
-        name::ANY enumerators::ANY+
+        name::String enumerators::Enumerator+
 Enumerator:
-        name::ANY value::ANY
+        name::String value::Term
 Function:
-        EPSILON
+        Main
 Method:
-        isAbstract::ANY isShared::ANY isEntryPoint::ANY isOverride::ANY returnType::ANY parameters::ANY+
+        isAbstract::Boolean isShared::Boolean isEntryPoint::Boolean isOverride::Boolean returnType::Type parameters::Parameter+
 Parameter:
-        name::ANY type::ANY ownerMethod::ANY
+        name::String type::Type ownerMethod::Method
 Main:
-        mainFile::ANY initialisations::ANY+
+        mainFile::AsmLFile initialisations::Initially+
 Initially:
-        id::ANY val::ANY
+        id::VarTerm val::Term
 Rule:
-        EPSILON
+        SkipRule
+Rule:
+        Step
+Rule:
+        MethodInvocation
+Rule:
+        UpdateRule
+Rule:
+        ChooseRule
+Rule:
+        ForallRule
+Rule:
+        ConditionalRule
+Rule:
+        ReturnRule
+Rule:
+        AddRule
+Rule:
+        RemoveRule
 SkipRule:
-        ownerBody::ANY
+        ownerBody::Body
 Step:
-        EPSILON
+        StepUntilFixPoint
+Step:
+        StepExpression
+Step:
+        StepForEach
 StepUntilFixPoint:
-        name::ANY
+        name::String
 StepExpression:
-        EPSILON
+        StepWhile
+StepExpression:
+        StepUntil
 StepWhile:
-        expression::ANY
+        expression::Term
 StepUntil:
-        expression::ANY
+        expression::Term
 StepForEach:
-        expressions::ANY+
+        expressions::InWhereHolds+
 MethodInvocation:
-        called::ANY
+        called::MethodCallTerm
 UpdateRule:
-        EPSILON
+        UpdateVarRule
+UpdateRule:
+        UpdateFieldRule
+UpdateRule:
+        UpdateMapRule
 UpdateVarRule:
-        updateVar::ANY
+        updateVar::Term
 UpdateFieldRule:
-        path::ANY
+        path::VarTerm
 UpdateMapRule:
-        updateMap::ANY parameters::ANY+
+        updateMap::VarTerm parameters::Term+
 ChooseRule:
-        expressions::ANY+ ifChoosenRules::ANY ifNotChoosenRule::ANY
+        expressions::InWhereHolds+ ifChoosenRules::Body ifNotChoosenRule::Body
 ForallRule:
-        expressions::ANY+ doRule::ANY
+        expressions::InWhereHolds+ doRule::Body
 ConditionalRule:
-        condition::ANY thenRule::ANY elseRule::ANY elseIfRule::ANY
+        ElseIf
+ConditionalRule:
+        condition::Term thenRule::Body elseRule::Body elseIfRule::ElseIf
 ElseIf:
         EPSILON
 ReturnRule:
-        term::ANY
+        term::Term
 AddRule:
-        val::ANY set::ANY
+        val::Term set::VarTerm
 RemoveRule:
-        val::ANY set::ANY
+        val::Term set::VarTerm
 Type:
-        EPSILON
+        NamedType
+Type:
+        MapType
+Type:
+        TupletType
+Type:
+        SetType
+Type:
+        SequenceType
 NamedType:
-        name::ANY
+        name::String
 MapType:
-        ofType::ANY toType::ANY
+        ofType::Type toType::Type
 TupletType:
-        types::ANY
+        types::Type
 SetType:
-        of::ANY
+        of::Type
 SequenceType:
-        of::ANY
+        of::Type
 Term:
-        EPSILON
+        VarTerm
+Term:
+        Operator
+Term:
+        MapTerm
+Term:
+        TulpletTerm
+Term:
+        MethodCallTerm
+Term:
+        PredicateTerm
+Term:
+        SetTerm
+Term:
+        SequenceTerm
+Term:
+        Constant
 VarTerm:
-        name::ANY
+        name::String
 Operator:
-        opName::ANY leftExp::ANY rightExp::ANY
+        opName::String leftExp::Term rightExp::Term
 MapTerm:
-        ofTerm::ANY toTerm::ANY separator::ANY
+        ofTerm::Term toTerm::Term separator::String
 TulpletTerm:
-        terms::ANY
+        terms::Term
 MethodCallTerm:
-        name::ANY parameters::ANY+
+        NewInstance
+MethodCallTerm:
+        name::String parameters::Term+
 NewInstance:
         EPSILON
 PredicateTerm:
-        expressions::ANY+
+        ForAllTerm
+PredicateTerm:
+        ExistsTerm
+PredicateTerm:
+        AnyIn
+PredicateTerm:
+        expressions::InWhereHolds+
 ForAllTerm:
         EPSILON
 ExistsTerm:
-        isUnique::ANY
+        isUnique::Boolean
 AnyIn:
         EPSILON
 SetTerm:
-        EPSILON
+        EnumerateSet
+SetTerm:
+        RangeSet
+SetTerm:
+        AlgorithmSet
 EnumerateSet:
-        vals::ANY+
+        vals::Term+
 RangeSet:
-        minval::ANY maxval::ANY
+        minval::Term maxval::Term
 AlgorithmSet:
-        expressions::ANY+
+        expressions::InWhereHolds+
 SequenceTerm:
-        EPSILON
+        EnumerateSequence
+SequenceTerm:
+        RangeSequence
 EnumerateSequence:
-        vals::ANY+
+        vals::Term+
 RangeSequence:
-        minval::ANY maxval::ANY
+        minval::Term maxval::Term
 Constant:
-        EPSILON
+        BooleanConstant
+Constant:
+        IntegerConstant
+Constant:
+        StringConstant
+Constant:
+        NullConstant
 BooleanConstant:
-        val::ANY
+        val::Boolean
 IntegerConstant:
-        val::ANY
+        val::Integer
 StringConstant:
-        val::ANY
+        val::String
 NullConstant:
         

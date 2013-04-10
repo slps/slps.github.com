@@ -13,28 +13,46 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable GraphML 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Guillaume Doux, <code>GraphML.ecore</code>, 2009/03/16.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>14</strong></li><li>Number of top alternatives: <strong>20</strong></li><li>Number of defined nonterminal symbols: <strong>14</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>14</strong>: <code><a href="#LocatedElement" class="nt">LocatedElement</a>, <a href="#Root" class="nt">Root</a>, <a href="#Element" class="nt">Element</a>, <a href="#Key" class="nt">Key</a>, <a href="#Graph" class="nt">Graph</a>, <a href="#Edge" class="nt">Edge</a>, <a href="#HyperEdge" class="nt">HyperEdge</a>, <a href="#Node" class="nt">Node</a>, <a href="#Port" class="nt">Port</a>, <a href="#EndPoint" class="nt">EndPoint</a>, <a href="#Data" class="nt">Data</a>, <a href="#ElemType" class="nt">ElemType</a>, <a href="#AttrType" class="nt">AttrType</a>, <a href="#EdgeType" class="nt">EdgeType</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
-        ε
+				</script></head><body><h1 class="l">Browsable GraphML 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Guillaume Doux, <code>GraphML.ecore</code>, 2009/03/16.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>23</strong></li><li>Number of top alternatives: <strong>29</strong></li><li>Number of defined nonterminal symbols: <strong>14</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#LocatedElement" class="nt">LocatedElement</a></code></li><li>Bottom nonterminal symbols: <strong>1</strong>: <code><a href="#String" class="nt">String</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
+        <a class="nt" href="#Root">Root</a>
+</pre><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
+        <a class="nt" href="#Element">Element</a>
+</pre><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
+        <a class="nt" href="#Port">Port</a>
+</pre><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
+        <a class="nt" href="#EndPoint">EndPoint</a>
+</pre><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
+        <a class="nt" href="#Data">Data</a>
 </pre><pre><a class="nt" name="Root">Root</a>:
-        <span class="sel">keys</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">graphs</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">keys</span>::<a class="nt" href="#Key">Key</a><span class="meta">+</span> <span class="sel">graphs</span>::<a class="nt" href="#Graph">Graph</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Element">Element</a>:
-        <span class="sel">id</span>::<span class="meta">any</span> <span class="sel">datas</span>::<span class="meta">any</span><span class="meta">+</span>
+        <a class="nt" href="#Key">Key</a>
+</pre><pre><a class="nt" name="Element">Element</a>:
+        <a class="nt" href="#Graph">Graph</a>
+</pre><pre><a class="nt" name="Element">Element</a>:
+        <a class="nt" href="#Edge">Edge</a>
+</pre><pre><a class="nt" name="Element">Element</a>:
+        <a class="nt" href="#HyperEdge">HyperEdge</a>
+</pre><pre><a class="nt" name="Element">Element</a>:
+        <a class="nt" href="#Node">Node</a>
+</pre><pre><a class="nt" name="Element">Element</a>:
+        <span class="sel">id</span>::<a class="nt" href="#String">String</a> <span class="sel">datas</span>::<a class="nt" href="#Data">Data</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Key">Key</a>:
-        <span class="sel">for</span>::<span class="meta">any</span> <span class="sel">attrName</span>::<span class="meta">any</span> <span class="sel">type</span>::<span class="meta">any</span> <span class="sel">defValue</span>::<span class="meta">any</span>
+        <span class="sel">for</span>::<a class="nt" href="#ElemType">ElemType</a> <span class="sel">attrName</span>::<a class="nt" href="#String">String</a> <span class="sel">type</span>::<a class="nt" href="#AttrType">AttrType</a> <span class="sel">defValue</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Graph">Graph</a>:
-        <span class="sel">contents</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">edgeDefault</span>::<span class="meta">any</span>
+        <span class="sel">contents</span>::<a class="nt" href="#Element">Element</a><span class="meta">+</span> <span class="sel">edgeDefault</span>::<a class="nt" href="#EdgeType">EdgeType</a>
 </pre><pre><a class="nt" name="Edge">Edge</a>:
-        <span class="sel">source</span>::<span class="meta">any</span> <span class="sel">target</span>::<span class="meta">any</span> <span class="sel">sourceport</span>::<span class="meta">any</span> <span class="sel">targetport</span>::<span class="meta">any</span>
+        <span class="sel">source</span>::<a class="nt" href="#Node">Node</a> <span class="sel">target</span>::<a class="nt" href="#Node">Node</a> <span class="sel">sourceport</span>::<a class="nt" href="#Port">Port</a> <span class="sel">targetport</span>::<a class="nt" href="#Port">Port</a>
 </pre><pre><a class="nt" name="HyperEdge">HyperEdge</a>:
-        <span class="sel">endpoints</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">endpoints</span>::<a class="nt" href="#EndPoint">EndPoint</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Node">Node</a>:
-        <span class="sel">subgraph</span>::<span class="meta">any</span> <span class="sel">ports</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">subgraph</span>::<a class="nt" href="#Graph">Graph</a> <span class="sel">ports</span>::<a class="nt" href="#Port">Port</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Port">Port</a>:
-        <span class="sel">name</span>::<span class="meta">any</span>
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="EndPoint">EndPoint</a>:
-        <span class="sel">node</span>::<span class="meta">any</span> <span class="sel">port</span>::<span class="meta">any</span>
+        <span class="sel">node</span>::<a class="nt" href="#Node">Node</a> <span class="sel">port</span>::<a class="nt" href="#Port">Port</a>
 </pre><pre><a class="nt" name="Data">Data</a>:
-        <span class="sel">key</span>::<span class="meta">any</span> <span class="sel">value</span>::<span class="meta">any</span>
+        <span class="sel">key</span>::<a class="nt" href="#String">String</a> <span class="sel">value</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="ElemType">ElemType</a>:
         <span class="sel">edge</span>::ε
         <span class="sel">node</span>::ε
@@ -48,4 +66,4 @@
         <span class="sel">directed</span>::ε
         <span class="sel">undirected</span>::ε
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

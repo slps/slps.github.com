@@ -4,16 +4,38 @@ exports
   sorts
         Element NamedElement ExtendedIdentifier Extended Definition RuleSet ImportDefinition 
   context-free syntax
-        location::ANY commentsBefore::ANY+ commentsAfter::ANY+ -> Element
+        NamedElement -> Element
 
-         -> NamedElement
+        Extended -> Element
 
-        parentIdentifier::ANY extendedIdentifierOwner::ANY -> ExtendedIdentifier
+        Typed -> Element
 
-         -> Extended
+        RuleSetDeclaration -> Element
 
-         -> Definition
+        Binding -> Element
 
-        importDefinitions::ANY+ propertyDefinitions::ANY rulesetElementDefinitions::ANY+ -> RuleSet
+        RuleCondition -> Element
 
-        importDefinitionOwners::ANY dotStar::ANY -> ImportDefinition
+        RuleAction -> Element
+
+        location::String commentsBefore::String+ commentsAfter::String+ -> Element
+
+        ExtendedIdentifier -> NamedElement
+
+        RuleSet -> NamedElement
+
+        Type -> NamedElement
+
+        RulesetElementDefinition -> NamedElement
+
+        parentIdentifier::ExtendedIdentifier extendedIdentifierOwner::Extended -> ExtendedIdentifier
+
+        Definition -> Extended
+
+        ImportDefinition -> Definition
+
+        PropertyDefinition -> Definition
+
+        importDefinitions::ImportDefinition+ propertyDefinitions::IRLDeclarations/PropertyDefinition rulesetElementDefinitions::IRLRules/RulesetElementDefinition+ -> RuleSet
+
+        importDefinitionOwners::RuleSet dotStar::Boolean -> ImportDefinition

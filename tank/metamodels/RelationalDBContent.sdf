@@ -4,12 +4,14 @@ exports
   sorts
         NamedElement DataBase Table Tuple TupleElement 
   context-free syntax
-         -> NamedElement
+        DataBase -> NamedElement
 
-        SGBDname::ANY tables::ANY+ -> DataBase
+        Table -> NamedElement
 
-        database::ANY tuples::ANY+ -> Table
+        SGBDname::String tables::Table+ -> DataBase
 
-        owner::ANY elements::ANY+ -> Tuple
+        database::DataBase tuples::Tuple+ -> Table
 
-        tuple::ANY value::ANY -> TupleElement
+        owner::Table elements::TupleElement+ -> Tuple
+
+        tuple::Tuple value::String -> TupleElement

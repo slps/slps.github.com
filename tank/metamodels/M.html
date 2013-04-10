@@ -13,31 +13,49 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable M 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Hugo Brunelière, <code>M.ecore</code>, 2009.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>13</strong></li><li>Number of top alternatives: <strong>13</strong></li><li>Number of defined nonterminal symbols: <strong>13</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>13</strong>: <code><a href="#IdentifiedElement" class="nt">IdentifiedElement</a>, <a href="#MElement" class="nt">MElement</a>, <a href="#MElementReference" class="nt">MElementReference</a>, <a href="#Module" class="nt">Module</a>, <a href="#ModuleMember" class="nt">ModuleMember</a>, <a href="#ImportDirective" class="nt">ImportDirective</a>, <a href="#ExportDirective" class="nt">ExportDirective</a>, <a href="#Value" class="nt">Value</a>, <a href="#NumericalValue" class="nt">NumericalValue</a>, <a href="#StringValue" class="nt">StringValue</a>, <a href="#IntegerValue" class="nt">IntegerValue</a>, <a href="#DecimalValue" class="nt">DecimalValue</a>, <a href="#BooleanValue" class="nt">BooleanValue</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="IdentifiedElement">IdentifiedElement</a>:
-        ε
+				</script></head><body><h1 class="l">Browsable M 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Hugo Brunelière, <code>M.ecore</code>, 2009.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>22</strong></li><li>Number of top alternatives: <strong>22</strong></li><li>Number of defined nonterminal symbols: <strong>13</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>2</strong>: <code><a href="#IdentifiedElement" class="nt">IdentifiedElement</a>, <a href="#Value" class="nt">Value</a></code></li><li>Bottom nonterminal symbols: <strong>10</strong>: <code><a href="#Field" class="nt">Field</a>, <a href="#Collection" class="nt">Collection</a>, <a href="#ComputedValue" class="nt">ComputedValue</a>, <a href="#String" class="nt">String</a>, <a href="#DerivedType" class="nt">DerivedType</a>, <a href="#Language" class="nt">Language</a>, <a href="#Entity" class="nt">Entity</a>, <a href="#Integer" class="nt">Integer</a>, <a href="#Double" class="nt">Double</a>, <a href="#Boolean" class="nt">Boolean</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="IdentifiedElement">IdentifiedElement</a>:
+        <a class="nt" href="#MElement">MElement</a>
+</pre><pre><a class="nt" name="IdentifiedElement">IdentifiedElement</a>:
+        <a class="nt" href="#Field">Field</a>
+</pre><pre><a class="nt" name="IdentifiedElement">IdentifiedElement</a>:
+        <a class="nt" href="#Collection">Collection</a>
+</pre><pre><a class="nt" name="IdentifiedElement">IdentifiedElement</a>:
+        <a class="nt" href="#ComputedValue">ComputedValue</a>
 </pre><pre><a class="nt" name="MElement">MElement</a>:
-        ε
+        <a class="nt" href="#Module">Module</a>
+</pre><pre><a class="nt" name="MElement">MElement</a>:
+        <a class="nt" href="#ModuleMember">ModuleMember</a>
 </pre><pre><a class="nt" name="MElementReference">MElementReference</a>:
-        <span class="sel">alias</span>::<span class="meta">any</span> <span class="sel">referencedElement</span>::<span class="meta">any</span>
+        <span class="sel">alias</span>::<a class="nt" href="#String">String</a> <span class="sel">referencedElement</span>::<a class="nt" href="#MElement">MElement</a>
 </pre><pre><a class="nt" name="Module">Module</a>:
-        <span class="sel">imports</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">exports</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">moduleMembers</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">imports</span>::<a class="nt" href="#ImportDirective">ImportDirective</a><span class="meta">+</span> <span class="sel">exports</span>::<a class="nt" href="#ExportDirective">ExportDirective</a><span class="meta">+</span> <span class="sel">moduleMembers</span>::<a class="nt" href="#ModuleMember">ModuleMember</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="ModuleMember">ModuleMember</a>:
-        ε
+        <a class="nt" href="#DerivedType">DerivedType</a>
+</pre><pre><a class="nt" name="ModuleMember">ModuleMember</a>:
+        <a class="nt" href="#Language">Language</a>
+</pre><pre><a class="nt" name="ModuleMember">ModuleMember</a>:
+        <a class="nt" href="#Entity">Entity</a>
 </pre><pre><a class="nt" name="ImportDirective">ImportDirective</a>:
-        <span class="sel">module</span>::<span class="meta">any</span> <span class="sel">importedElements</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">module</span>::<a class="nt" href="#Module">Module</a> <span class="sel">importedElements</span>::<a class="nt" href="#MElementReference">MElementReference</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="ExportDirective">ExportDirective</a>:
-        <span class="sel">module</span>::<span class="meta">any</span> <span class="sel">exportedElements</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">module</span>::<a class="nt" href="#Module">Module</a> <span class="sel">exportedElements</span>::<a class="nt" href="#ModuleMember">ModuleMember</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Value">Value</a>:
-        ε
+        <a class="nt" href="#NumericalValue">NumericalValue</a>
+</pre><pre><a class="nt" name="Value">Value</a>:
+        <a class="nt" href="#StringValue">StringValue</a>
+</pre><pre><a class="nt" name="Value">Value</a>:
+        <a class="nt" href="#BooleanValue">BooleanValue</a>
 </pre><pre><a class="nt" name="NumericalValue">NumericalValue</a>:
-        ε
+        <a class="nt" href="#IntegerValue">IntegerValue</a>
+</pre><pre><a class="nt" name="NumericalValue">NumericalValue</a>:
+        <a class="nt" href="#DecimalValue">DecimalValue</a>
 </pre><pre><a class="nt" name="StringValue">StringValue</a>:
-        <span class="sel">value</span>::<span class="meta">any</span>
+        <span class="sel">value</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="IntegerValue">IntegerValue</a>:
-        <span class="sel">value</span>::<span class="meta">any</span>
+        <span class="sel">value</span>::<a class="nt" href="#Integer">Integer</a>
 </pre><pre><a class="nt" name="DecimalValue">DecimalValue</a>:
-        <span class="sel">value</span>::<span class="meta">any</span>
+        <span class="sel">value</span>::<a class="nt" href="#Double">Double</a>
 </pre><pre><a class="nt" name="BooleanValue">BooleanValue</a>:
-        <span class="sel">value</span>::<span class="meta">any</span>
+        <span class="sel">value</span>::<a class="nt" href="#Boolean">Boolean</a>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

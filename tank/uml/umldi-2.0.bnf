@@ -1,31 +1,31 @@
 Collaboration:
-        usedCollaboration::ANY+ representedOperation::ANY representedClassifier::ANY interaction::ANY+ constrainingElement::ANY+
+        usedCollaboration::Collaboration+ representedOperation::Operation representedClassifier::Classifier interaction::Interaction+ constrainingElement::ModelElement+
 ClassifierRole:
-        availableContents::ANY+ base::ANY+ conformingInstance::ANY+ availableFeature::ANY+ multiplicity::ANY
+        availableContents::ModelElement+ base::Classifier+ conformingInstance::Instance+ availableFeature::Feature+ multiplicity::Multiplicity
 AssociationRole:
-        base::ANY conformingLink::ANY+ message::ANY+ multiplicity::ANY
+        base::Association conformingLink::Link+ message::Message+ multiplicity::Multiplicity
 AssociationEndRole:
-        base::ANY availableQualifier::ANY+ collaborationMultiplicity::ANY
+        base::AssociationEnd availableQualifier::Attribute+ collaborationMultiplicity::Multiplicity
 Message:
-        interaction::ANY conformingStimulus::ANY+ action::ANY communicationConnection::ANY activator::ANY receiver::ANY sender::ANY predecessor::ANY+
+        interaction::Interaction conformingStimulus::Stimulus+ action::Action communicationConnection::AssociationRole activator::Message receiver::ClassifierRole sender::ClassifierRole predecessor::Message+
 Interaction:
-        message::ANY+ context::ANY
+        message::Message+ context::Collaboration
 InteractionInstanceSet:
-        interaction::ANY context::ANY participatingStimulus::ANY+
+        interaction::Interaction context::CollaborationInstanceSet participatingStimulus::Stimulus+
 CollaborationInstanceSet:
-        collaboration::ANY constrainingElement::ANY+ participatingInstance::ANY+ interactionInstanceSet::ANY+ participatingLink::ANY+
+        collaboration::Collaboration constrainingElement::ModelElement+ participatingInstance::Instance+ interactionInstanceSet::InteractionInstanceSet+ participatingLink::Link+
 UseCase:
-        include::ANY+ extend::ANY+ extensionPoint::ANY+
+        include::Include+ extend::Extend+ extensionPoint::ExtensionPoint+
 Actor:
-        powertypeRange::ANY+ feature::ANY+
+        powertypeRange::Generalization+ feature::Feature+
 UseCaseInstance:
-        ownedInstance::ANY+ linkEnd::ANY+ classifier::ANY+ componentInstance::ANY slot::ANY+ ownedLink::ANY+
+        ownedInstance::Instance+ linkEnd::LinkEnd+ classifier::Classifier+ componentInstance::ComponentInstance slot::AttributeLink+ ownedLink::Link+
 Extend:
-        extensionPoint::ANY+ extension::ANY base::ANY condition::ANY
+        extensionPoint::ExtensionPoint+ extension::UseCase base::UseCase condition::BooleanExpression
 Include:
-        addition::ANY base::ANY
+        addition::UseCase base::UseCase
 ExtensionPoint:
-        useCase::ANY location::ANY
+        useCase::UseCase location::String
 AggregationKind:
         ak_none::EPSILON
         ak_aggregate::EPSILON
@@ -55,11 +55,29 @@ VisibilityKind:
         vk_private::EPSILON
         vk_package::EPSILON
 Multiplicity:
-        range::ANY+
+        range::MultiplicityRange+
 MultiplicityRange:
-        multiplicity::ANY lower::ANY upper::ANY
+        multiplicity::Multiplicity lower::Integer upper::Integer
 Expression:
-        language::ANY body::ANY
+        BooleanExpression
+Expression:
+        TypeExpression
+Expression:
+        MappingExpression
+Expression:
+        ProcedureExpression
+Expression:
+        ObjectSetExpression
+Expression:
+        ActionExpression
+Expression:
+        IterationExpression
+Expression:
+        TimeExpression
+Expression:
+        ArgListsExpression
+Expression:
+        language::String body::String
 BooleanExpression:
         EPSILON
 TypeExpression:
@@ -87,234 +105,417 @@ PseudostateKind:
         pk_junction::EPSILON
         pk_shallowHistory::EPSILON
 Instance:
-        EPSILON
+        UseCaseInstance
+Instance:
+        Object
+Instance:
+        DataValue
+Instance:
+        ComponentInstance
+Instance:
+        NodeInstance
+Instance:
+        SubsystemInstance
 Signal:
-        powertypeRange::ANY+ feature::ANY+
+        Exception
+Signal:
+        Exception
 Action:
-        EPSILON
+        CreateAction
+Action:
+        DestroyAction
+Action:
+        UninterpretedAction
+Action:
+        CallAction
+Action:
+        SendAction
+Action:
+        ActionSequence
+Action:
+        ReturnAction
+Action:
+        TerminateAction
 CreateAction:
-        instantiation::ANY
+        instantiation::Classifier
 DestroyAction:
-        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY
+        actualArgument::Argument+ actionSequence::ActionSequence recurrence::IterationExpression target::ObjectSetExpression isAsynchronous::Boolean script::ActionExpression
 UninterpretedAction:
-        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY
+        actualArgument::Argument+ actionSequence::ActionSequence recurrence::IterationExpression target::ObjectSetExpression isAsynchronous::Boolean script::ActionExpression
 AttributeLink:
-        instance::ANY value::ANY linkEnd::ANY attribute::ANY
+        instance::Instance value::Instance linkEnd::LinkEnd attribute::Attribute
 Object:
-        ownedInstance::ANY+ linkEnd::ANY+ classifier::ANY+ componentInstance::ANY slot::ANY+ ownedLink::ANY+
+        ownedInstance::Instance+ linkEnd::LinkEnd+ classifier::Classifier+ componentInstance::ComponentInstance slot::AttributeLink+ ownedLink::Link+
 Link:
-        association::ANY connection::ANY
+        association::Association connection::LinkEnd
 LinkObject:
         EPSILON
 DataValue:
-        ownedInstance::ANY+ linkEnd::ANY+ classifier::ANY+ componentInstance::ANY slot::ANY+ ownedLink::ANY+
+        ownedInstance::Instance+ linkEnd::LinkEnd+ classifier::Classifier+ componentInstance::ComponentInstance slot::AttributeLink+ ownedLink::Link+
 CallAction:
-        operation::ANY
+        operation::Operation
 SendAction:
-        signal::ANY
+        signal::Signal
 ActionSequence:
-        action::ANY+
+        action::Action+
 Argument:
-        action::ANY value::ANY
+        action::Action value::Expression
 Reception:
-        signal::ANY specification::ANY isRoot::ANY isLeaf::ANY isAbstract::ANY
+        signal::Signal specification::String isRoot::Boolean isLeaf::Boolean isAbstract::Boolean
 LinkEnd:
-        link::ANY qualifiedValue::ANY+ instance::ANY associationEnd::ANY
+        link::Link qualifiedValue::AttributeLink+ instance::Instance associationEnd::AssociationEnd
 ReturnAction:
-        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY
+        actualArgument::Argument+ actionSequence::ActionSequence recurrence::IterationExpression target::ObjectSetExpression isAsynchronous::Boolean script::ActionExpression
 TerminateAction:
-        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY
+        actualArgument::Argument+ actionSequence::ActionSequence recurrence::IterationExpression target::ObjectSetExpression isAsynchronous::Boolean script::ActionExpression
 Stimulus:
-        argument::ANY+ communicationLink::ANY receiver::ANY dispatchAction::ANY sender::ANY
+        argument::Instance+ communicationLink::Link receiver::Instance dispatchAction::Action sender::Instance
 Exception:
         EPSILON
 ComponentInstance:
-        resident::ANY+ nodeInstance::ANY
+        resident::Instance+ nodeInstance::NodeInstance
 NodeInstance:
-        resident::ANY+
+        resident::ComponentInstance+
 SubsystemInstance:
-        ownedInstance::ANY+ linkEnd::ANY+ classifier::ANY+ componentInstance::ANY slot::ANY+ ownedLink::ANY+
+        ownedInstance::Instance+ linkEnd::LinkEnd+ classifier::Classifier+ componentInstance::ComponentInstance slot::AttributeLink+ ownedLink::Link+
 ActivityGraph:
-        partition::ANY+
+        partition::Partition+
 Partition:
-        contents::ANY+ activityGraph::ANY
+        contents::ModelElement+ activityGraph::ActivityGraph
 SubactivityState:
-        isDynamic::ANY dynamicArguments::ANY dynamicMultiplicity::ANY
+        isDynamic::Boolean dynamicArguments::ArgListsExpression dynamicMultiplicity::Multiplicity
 ActionState:
-        isDynamic::ANY dynamicArguments::ANY dynamicMultiplicity::ANY
+        CallState
+ActionState:
+        isDynamic::Boolean dynamicArguments::ArgListsExpression dynamicMultiplicity::Multiplicity
 CallState:
         EPSILON
 ObjectFlowState:
-        type::ANY parameter::ANY+ isSynch::ANY
+        type::Classifier parameter::Parameter+ isSynch::Boolean
 ClassifierInState:
-        inState::ANY+ type::ANY
+        inState::State+ type::Classifier
 StateMachine:
-        context::ANY submachineState::ANY+ top::ANY transitions::ANY+
+        ActivityGraph
+StateMachine:
+        context::ModelElement submachineState::SubmachineState+ top::State transitions::Transition+
 Event:
-        EPSILON
+        TimeEvent
+Event:
+        CallEvent
+Event:
+        SignalEvent
+Event:
+        ChangeEvent
 StateVertex:
-        EPSILON
+        State
+StateVertex:
+        Pseudostate
+StateVertex:
+        SynchState
+StateVertex:
+        StubState
 State:
-        EPSILON
+        CompositeState
+State:
+        SimpleState
+State:
+        FinalState
 TimeEvent:
-        when::ANY
+        when::TimeExpression
 CallEvent:
-        operation::ANY
+        operation::Operation
 SignalEvent:
-        signal::ANY
+        signal::Signal
 Transition:
-        target::ANY trigger::ANY stateMachine::ANY source::ANY effect::ANY guard::ANY
+        target::StateVertex trigger::Event stateMachine::StateMachine source::StateVertex effect::Action guard::Guard
 CompositeState:
-        subvertex::ANY+ isConcurrent::ANY
+        SubmachineState
+CompositeState:
+        subvertex::StateVertex+ isConcurrent::Boolean
 ChangeEvent:
-        changeExpression::ANY
+        changeExpression::BooleanExpression
 Guard:
-        transition::ANY expression::ANY
+        transition::Transition expression::BooleanExpression
 Pseudostate:
-        kind::ANY
+        kind::PseudostateKind
 SimpleState:
-        deferrableEvent::ANY+ internalTransition::ANY+ exit::ANY doActivity::ANY entry::ANY stateMachine::ANY
+        ActionState
+SimpleState:
+        ObjectFlowState
+SimpleState:
+        ActionState
+        ObjectFlowState
 SubmachineState:
-        submachine::ANY
+        SubactivityState
+SubmachineState:
+        submachine::StateMachine
 SynchState:
-        bound::ANY
+        bound::Integer
 StubState:
-        referenceState::ANY
+        referenceState::String
 FinalState:
-        deferrableEvent::ANY+ internalTransition::ANY+ exit::ANY doActivity::ANY entry::ANY stateMachine::ANY
+        deferrableEvent::Event+ internalTransition::Transition+ exit::Action doActivity::Action entry::Action stateMachine::StateMachine
 Point:
-        x::ANY y::ANY
+        x::Double y::Double
 Dimension:
-        width::ANY height::ANY
+        width::Double height::Double
 BezierPoint:
-        base::ANY control1::ANY control2::ANY
+        base::Point control1::Point control2::Point
 DiagramElement:
-        EPSILON
+        GraphElement
+DiagramElement:
+        LeafElement
+DiagramElement:
+        Reference
 GraphElement:
-        EPSILON
+        GraphEdge
+GraphElement:
+        GraphNode
 SemanticModelBridge:
-        EPSILON
+        SimpleSemanticModelElement
+SemanticModelBridge:
+        Uml1SemanticModelBridge
+SemanticModelBridge:
+        CoreSemanticModelBridge
 GraphEdge:
-        anchor::ANY waypoints::ANY
+        anchor::GraphConnector waypoints::BezierPoint
 GraphNode:
-        size::ANY
+        Diagram
+GraphNode:
+        size::Dimension
 GraphConnector:
-        graphElement::ANY graphEdge::ANY+ position::ANY
+        graphElement::GraphElement graphEdge::GraphEdge+ position::Point
 LeafElement:
-        EPSILON
+        TextElement
+LeafElement:
+        GraphicPrimitive
+LeafElement:
+        Image
 Reference:
-        referenced::ANY
+        referenced::DiagramElement
 TextElement:
-        text::ANY
+        text::String
 GraphicPrimitive:
-        EPSILON
+        Polyline
+GraphicPrimitive:
+        Ellipse
 Polyline:
-        waypoints::ANY closed::ANY
+        waypoints::BezierPoint closed::Boolean
 Ellipse:
-        center::ANY radiusX::ANY radiusY::ANY rotation::ANY startAngle::ANY endAngle::ANY
+        center::Point radiusX::Double radiusY::Double rotation::Double startAngle::Double endAngle::Double
 Image:
-        uri::ANY mimeType::ANY
+        uri::String mimeType::String
 Property:
-        key::ANY value::ANY
+        key::String value::String
 SimpleSemanticModelElement:
-        typeInfo::ANY
+        typeInfo::String
 Uml1SemanticModelBridge:
-        element::ANY
+        element::Element
 CoreSemanticModelBridge:
-        diagram::ANY graphElement::ANY presentation::ANY
+        diagram::Diagram graphElement::GraphElement presentation::String
 DiagramLink:
-        graphElement::ANY diagram::ANY zoom::ANY viewport::ANY
+        graphElement::GraphElement diagram::Diagram zoom::Double viewport::Point
 Diagram:
-        owner::ANY diagramLink::ANY+ name::ANY zoom::ANY viewport::ANY
+        owner::SemanticModelBridge diagramLink::DiagramLink+ name::String zoom::Double viewport::Point
 Element:
-        EPSILON
+        ModelElement
+Element:
+        PresentationElement
 ModelElement:
-        EPSILON
+        Message
+ModelElement:
+        Interaction
+ModelElement:
+        InteractionInstanceSet
+ModelElement:
+        CollaborationInstanceSet
+ModelElement:
+        ExtensionPoint
+ModelElement:
+        Instance
+ModelElement:
+        Action
+ModelElement:
+        AttributeLink
+ModelElement:
+        Link
+ModelElement:
+        Argument
+ModelElement:
+        LinkEnd
+ModelElement:
+        Stimulus
+ModelElement:
+        Partition
+ModelElement:
+        StateMachine
+ModelElement:
+        Event
+ModelElement:
+        StateVertex
+ModelElement:
+        Transition
+ModelElement:
+        Guard
+ModelElement:
+        GeneralizableElement
+ModelElement:
+        Namespace
+ModelElement:
+        Feature
+ModelElement:
+        AssociationEnd
+ModelElement:
+        Constraint
+ModelElement:
+        Relationship
+ModelElement:
+        Parameter
+ModelElement:
+        Comment
+ModelElement:
+        EnumerationLiteral
+ModelElement:
+        TagDefinition
+ModelElement:
+        TaggedValue
 GeneralizableElement:
-        EPSILON
-Namespace:
-        EPSILON
+        Stereotype
 Classifier:
-        EPSILON
+        ClassifierRole
+Classifier:
+        UseCase
+Classifier:
+        Actor
+Classifier:
+        Signal
+Classifier:
+        ClassifierInState
+Classifier:
+        Class
+Classifier:
+        DataType
+Classifier:
+        Interface
+Classifier:
+        Component
+Classifier:
+        Node
+Classifier:
+        Artifact
 Class:
-        isActive::ANY
+        isActive::Boolean
 DataType:
-        powertypeRange::ANY+ feature::ANY+
+        Primitive
+DataType:
+        Enumeration
+DataType:
+        ProgrammingLanguageDataType
+DataType:
+        Primitive
+        Enumeration
+        ProgrammingLanguageDataType
 Feature:
-        EPSILON
+        StructuralFeature
+Feature:
+        BehavioralFeature
 StructuralFeature:
-        EPSILON
+        Attribute
 AssociationEnd:
-        association::ANY specification::ANY+ participant::ANY qualifier::ANY+ isNavigable::ANY ordering::ANY aggregation::ANY targetScope::ANY multiplicity::ANY changeability::ANY
+        AssociationEndRole
+AssociationEnd:
+        association::Association specification::Classifier+ participant::Classifier qualifier::Attribute+ isNavigable::Boolean ordering::OrderingKind aggregation::AggregationKind targetScope::ScopeKind multiplicity::Multiplicity changeability::ChangeableKind
 Interface:
-        powertypeRange::ANY+ feature::ANY+
+        powertypeRange::Generalization+ feature::Feature+
 Constraint:
-        constrainedElement::ANY+ body::ANY
+        constrainedElement::ModelElement+ body::BooleanExpression
 Relationship:
-        EPSILON
+        Extend
+Relationship:
+        Include
+Relationship:
+        Generalization
+Relationship:
+        Dependency
+Relationship:
+        Flow
 Association:
-        connection::ANY
+        AssociationRole
+Association:
+        connection::AssociationEnd
 Attribute:
-        associationEnd::ANY initialValue::ANY
+        associationEnd::AssociationEnd initialValue::Expression
 BehavioralFeature:
-        EPSILON
+        Reception
+BehavioralFeature:
+        Operation
+BehavioralFeature:
+        Method
 Operation:
-        concurrency::ANY isRoot::ANY isLeaf::ANY isAbstract::ANY specification::ANY
+        concurrency::CallConcurrencyKind isRoot::Boolean isLeaf::Boolean isAbstract::Boolean specification::String
 Parameter:
-        type::ANY behavioralFeature::ANY defaultValue::ANY kind::ANY
+        type::Classifier behavioralFeature::BehavioralFeature defaultValue::Expression kind::ParameterDirectionKind
 Method:
-        specification::ANY body::ANY
+        specification::Operation body::ProcedureExpression
 Generalization:
-        parent::ANY powertype::ANY child::ANY discriminator::ANY
+        parent::GeneralizableElement powertype::Classifier child::GeneralizableElement discriminator::String
 AssociationClass:
         EPSILON
 Dependency:
-        client::ANY+ supplier::ANY+
+        Abstraction
+Dependency:
+        Usage
+Dependency:
+        Binding
+Dependency:
+        Permission
+Dependency:
+        client::ModelElement+ supplier::ModelElement+
 Abstraction:
-        mapping::ANY
-PresentationElement:
-        EPSILON
+        mapping::MappingExpression
 Usage:
         EPSILON
 Binding:
-        argument::ANY+
+        argument::TemplateArgument+
 Component:
-        deploymentLocation::ANY+ residentElement::ANY+ implementation::ANY+
+        deploymentLocation::Node+ residentElement::ElementResidence+ implementation::Artifact+
 Node:
-        deployedComponent::ANY+
+        deployedComponent::Component+
 Permission:
         EPSILON
 Comment:
-        annotatedElement::ANY+ body::ANY
+        annotatedElement::ModelElement+ body::String
 Flow:
-        source::ANY+ target::ANY+
+        source::ModelElement+ target::ModelElement+
 ElementResidence:
-        container::ANY resident::ANY visibility::ANY
+        container::Component resident::ModelElement visibility::VisibilityKind
 TemplateParameter:
-        template::ANY parameter::ANY defaultElement::ANY
+        template::ModelElement parameter::ModelElement defaultElement::ModelElement
 Primitive:
         EPSILON
 Enumeration:
-        literal::ANY+
+        literal::EnumerationLiteral+
 EnumerationLiteral:
-        enumeration::ANY
+        enumeration::Enumeration
 Stereotype:
-        stereotypeConstraint::ANY+ definedTag::ANY+ icon::ANY baseClass::ANY+
+        stereotypeConstraint::Constraint+ definedTag::TagDefinition+ icon::String baseClass::String+
 TagDefinition:
-        owner::ANY tagType::ANY multiplicity::ANY
+        owner::Stereotype tagType::String multiplicity::Multiplicity
 TaggedValue:
-        type::ANY referenceValue::ANY+ modelElement::ANY dataValue::ANY+
+        type::TagDefinition referenceValue::ModelElement+ modelElement::ModelElement dataValue::String+
 ProgrammingLanguageDataType:
-        expression::ANY
+        expression::TypeExpression
 Artifact:
-        powertypeRange::ANY+ feature::ANY+
+        powertypeRange::Generalization+ feature::Feature+
 TemplateArgument:
-        binding::ANY modelElement::ANY
+        binding::Binding modelElement::ModelElement
 Package:
-        elementImport::ANY+
+        Model
+Package:
+        elementImport::ElementImport+
 Model:
         EPSILON
 Subsystem:
-        isInstantiable::ANY
+        isInstantiable::Boolean
 ElementImport:
-        package::ANY importedElement::ANY visibility::ANY alias::ANY isSpecification::ANY
+        package::Package importedElement::ModelElement visibility::VisibilityKind alias::String isSpecification::Boolean

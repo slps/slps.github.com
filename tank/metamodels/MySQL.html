@@ -13,21 +13,31 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable MySQL 0.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Marcos Didonet Del Fabro, <code>MySQL.ecore</code>, 2005/11/01.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>8</strong></li><li>Number of top alternatives: <strong>8</strong></li><li>Number of defined nonterminal symbols: <strong>8</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>8</strong>: <code><a href="#NamedElement" class="nt">NamedElement</a>, <a href="#DataBase" class="nt">DataBase</a>, <a href="#Table" class="nt">Table</a>, <a href="#Column" class="nt">Column</a>, <a href="#IntegerColumn" class="nt">IntegerColumn</a>, <a href="#EnumColumn" class="nt">EnumColumn</a>, <a href="#EnumSet" class="nt">EnumSet</a>, <a href="#EnumItem" class="nt">EnumItem</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="NamedElement">NamedElement</a>:
-        ε
+				</script></head><body><h1 class="l">Browsable MySQL 0.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Marcos Didonet Del Fabro, <code>MySQL.ecore</code>, 2005/11/01.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>13</strong></li><li>Number of top alternatives: <strong>13</strong></li><li>Number of defined nonterminal symbols: <strong>8</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#NamedElement" class="nt">NamedElement</a></code></li><li>Bottom nonterminal symbols: <strong>2</strong>: <code><a href="#String" class="nt">String</a>, <a href="#Boolean" class="nt">Boolean</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="NamedElement">NamedElement</a>:
+        <a class="nt" href="#DataBase">DataBase</a>
+</pre><pre><a class="nt" name="NamedElement">NamedElement</a>:
+        <a class="nt" href="#Table">Table</a>
+</pre><pre><a class="nt" name="NamedElement">NamedElement</a>:
+        <a class="nt" href="#Column">Column</a>
+</pre><pre><a class="nt" name="NamedElement">NamedElement</a>:
+        <a class="nt" href="#EnumItem">EnumItem</a>
 </pre><pre><a class="nt" name="DataBase">DataBase</a>:
-        <span class="sel">tables</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">tables</span>::<a class="nt" href="#Table">Table</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Table">Table</a>:
-        <span class="sel">columns</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">database</span>::<span class="meta">any</span>
+        <span class="sel">columns</span>::<a class="nt" href="#Column">Column</a><span class="meta">+</span> <span class="sel">database</span>::<a class="nt" href="#DataBase">DataBase</a>
 </pre><pre><a class="nt" name="Column">Column</a>:
-        <span class="sel">type</span>::<span class="meta">any</span> <span class="sel">isPrimaryKey</span>::<span class="meta">any</span> <span class="sel">null</span>::<span class="meta">any</span> <span class="sel">defaultValue</span>::<span class="meta">any</span> <span class="sel">comment</span>::<span class="meta">any</span> <span class="sel">table</span>::<span class="meta">any</span>
+        <a class="nt" href="#IntegerColumn">IntegerColumn</a>
+</pre><pre><a class="nt" name="Column">Column</a>:
+        <a class="nt" href="#EnumColumn">EnumColumn</a>
+</pre><pre><a class="nt" name="Column">Column</a>:
+        <span class="sel">type</span>::<a class="nt" href="#String">String</a> <span class="sel">isPrimaryKey</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">null</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">defaultValue</span>::<a class="nt" href="#String">String</a> <span class="sel">comment</span>::<a class="nt" href="#String">String</a> <span class="sel">table</span>::<a class="nt" href="#Table">Table</a>
 </pre><pre><a class="nt" name="IntegerColumn">IntegerColumn</a>:
-        <span class="sel">isAutoIncrement</span>::<span class="meta">any</span>
+        <span class="sel">isAutoIncrement</span>::<a class="nt" href="#Boolean">Boolean</a>
 </pre><pre><a class="nt" name="EnumColumn">EnumColumn</a>:
-        <span class="sel">enumSet</span>::<span class="meta">any</span>
+        <span class="sel">enumSet</span>::<a class="nt" href="#EnumSet">EnumSet</a>
 </pre><pre><a class="nt" name="EnumSet">EnumSet</a>:
-        <span class="sel">enumItems</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">enumItems</span>::<a class="nt" href="#EnumItem">EnumItem</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="EnumItem">EnumItem</a>:
-        <span class="sel">enumSet</span>::<span class="meta">any</span>
+        <span class="sel">enumSet</span>::<a class="nt" href="#EnumSet">EnumSet</a>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

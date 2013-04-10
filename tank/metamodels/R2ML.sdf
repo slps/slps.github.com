@@ -27,16 +27,22 @@ exports
         DatatypePredicate:: -> PredicateType
         DataClassificationPredicate:: -> PredicateType
 
-        rules::ANY+ -> ReactionRuleSet
+        rules::Rules/ReactionRule+ -> ReactionRuleSet
 
-        rules::ANY+ -> ProductionRuleSet
+        rules::Rules/ProductionRule+ -> ProductionRuleSet
 
-        eventTypeID::ANY -> EventType
+        eventTypeID::String -> EventType
 
-         -> RuleSet
+        ReactionRuleSet -> RuleSet
 
-        vocabularies::ANY externalVocabulaires::ANY+ rules::ANY+ ruleBaseID::ANY -> RuleBase
+        ProductionRuleSet -> RuleSet
 
-        rules::ANY+ -> IntegrityRuleSet
+        IntegrityRuleSet -> RuleSet
 
-        rules::ANY+ -> DerivationRuleSet
+        DerivationRuleSet -> RuleSet
+
+        vocabularies::Vocabulary/VocBasic/Vocabulary externalVocabulaires::Vocabulary/VocBuiltin/ExternalVocabulary+ rules::RuleSet+ ruleBaseID::String -> RuleBase
+
+        rules::Rules/IntegrityRule+ -> IntegrityRuleSet
+
+        rules::Rules/DerivationRule+ -> DerivationRuleSet

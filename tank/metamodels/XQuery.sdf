@@ -4,38 +4,60 @@ exports
   sorts
         XQueryProgram Expression ExecutableExpression Node FLWOR FunctionCall FunctionDeclaration ElementNode AttributeNode TextNode ReturnXPath XPath BooleanExp For Let Where OrderBy Return 
   context-free syntax
-        expressions::ANY+ -> XQueryProgram
+        expressions::ExecutableExpression+ -> XQueryProgram
 
-        parentNode::ANY returnEx::ANY -> Expression
+        ExecutableExpression -> Expression
 
-        xQueryProgram::ANY functionDeclaration::ANY -> ExecutableExpression
+        Node -> Expression
 
-        name::ANY -> Node
+        ReturnXPath -> Expression
 
-        for::ANY let::ANY where::ANY orderBy::ANY return::ANY -> FLWOR
+        parentNode::ElementNode returnEx::Return -> Expression
 
-        name::ANY parameters::ANY+ -> FunctionCall
+        FLWOR -> ExecutableExpression
 
-        name::ANY expression::ANY+ -> FunctionDeclaration
+        FunctionCall -> ExecutableExpression
 
-        nodes::ANY+ -> ElementNode
+        FunctionDeclaration -> ExecutableExpression
 
-        value::ANY -> AttributeNode
+        xQueryProgram::XQueryProgram functionDeclaration::FunctionDeclaration -> ExecutableExpression
+
+        ElementNode -> Node
+
+        AttributeNode -> Node
+
+        name::String -> Node
+
+        for::For let::Let where::Where orderBy::OrderBy return::Return -> FLWOR
+
+        name::String parameters::XPath+ -> FunctionCall
+
+        name::String expression::ExecutableExpression+ -> FunctionDeclaration
+
+        TextNode -> ElementNode
+
+        nodes::Expression+ -> ElementNode
+
+        value::String -> AttributeNode
 
          -> TextNode
 
-        value::ANY -> ReturnXPath
+        XPath -> ReturnXPath
 
-        functionCall::ANY for::ANY let::ANY -> XPath
+        value::String -> ReturnXPath
 
-        where::ANY -> BooleanExp
+        BooleanExp -> XPath
 
-        var::ANY flwor::ANY expression::ANY -> For
+        functionCall::FunctionCall for::For let::Let -> XPath
 
-        var::ANY flwor::ANY expression::ANY -> Let
+        where::Where -> BooleanExp
 
-        flwor::ANY expression::ANY -> Where
+        var::String flwor::FLWOR expression::XPath -> For
 
-        flwor::ANY -> OrderBy
+        var::String flwor::FLWOR expression::XPath -> Let
 
-        flwor::ANY expressions::ANY+ -> Return
+        flwor::FLWOR expression::BooleanExp -> Where
+
+        flwor::FLWOR -> OrderBy
+
+        flwor::FLWOR expressions::Expression+ -> Return

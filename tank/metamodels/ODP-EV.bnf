@@ -1,68 +1,102 @@
 EnterpriseObject:
-        eoConfigurations::ANY+ eoRoles::ANY+ eoArtefactActions::ANY+ eoResourceActions::ANY+ eoActorActions::ANY+ eoPolicy::ANY+ eoEOAR::ANY+ eoEOPD::ANY
+        ODPSystem
+EnterpriseObject:
+        Party
+EnterpriseObject:
+        CommunityObject
+EnterpriseObject:
+        eoConfigurations::Community+ eoRoles::Role+ eoArtefactActions::Action+ eoResourceActions::Action+ eoActorActions::Action+ eoPolicy::Policy+ eoEOAR::EO_A_R+ eoEOPD::EO_P_D
 ODPSystem:
-        odpBehaviour::ANY odpObjectives::ANY+ odpSpecifier::ANY
+        odpBehaviour::Scope odpObjectives::Objective+ odpSpecifier::EnterpriseSpecification
 Party:
-        ptyAccountableAction::ANY+ ptyEOPD::ANY
+        ptyAccountableAction::AccountableAction+ ptyEOPD::EO_P_D
 Objective:
-        objFulfiller::ANY objSpecifier::ANY objRefiners::ANY+ objRefinement::ANY objAchievers::ANY+ objFulfillers::ANY+
+        objFulfiller::ODPSystem objSpecifier::Contract objRefiners::Objective+ objRefinement::Objective objAchievers::Process+ objFulfillers::Behaviour+
 Scope:
-        scOdpSystem::ANY
+        scOdpSystem::ODPSystem
 EnterpriseSpecification:
-        esDescribedSystems::ANY+ esContext::ANY
+        esDescribedSystems::ODPSystem+ esContext::FieldOfApplication
 FieldOfApplication:
-        faEnterpriseSpecifications::ANY
+        faEnterpriseSpecifications::EnterpriseSpecification
 Policy:
-        poSpecifier::ANY poOwner::ANY poProcess::ANY+ poBehaviour::ANY+ poChanger::ANY+ poRole::ANY+ poEnterpriseObject::ANY+
+        PolicyEnvelope
+Policy:
+        PolicyValue
+Policy:
+        AssigmentPolicy
+Policy:
+        poSpecifier::Contract poOwner::Community poProcess::Process+ poBehaviour::Behaviour+ poChanger::Behaviour+ poRole::Role+ poEnterpriseObject::EnterpriseObject+
 PolicyEnvelope:
-        pePolicySetter::ANY peBehaviour::ANY peValues::ANY+ peCurrentValue::ANY
+        pePolicySetter::Behaviour peBehaviour::Behaviour peValues::PolicyValue+ peCurrentValue::PolicyValue
 PolicyValue:
-        pvValue::ANY
+        pvValue::PolicyEnvelope
 AssigmentPolicy:
-        apEOAR::ANY+
+        apEOAR::EO_A_R+
 Contract:
-        ctPolicies::ANY ctObjective::ANY ctBehaviours::ANY+
+        ctPolicies::Policy ctObjective::Objective ctBehaviours::Behaviour+
 Process:
-        prObjectives::ANY+ prDetails::ANY+ prRefinement::ANY prConstrainer::ANY+
+        prObjectives::Objective+ prDetails::Step+ prRefinement::Step prConstrainer::Policy+
 Step:
-        stGraphs::ANY+ stAbstraction::ANY
+        Action
+Step:
+        stGraphs::Process+ stAbstraction::Process
 Action:
-        actBehaviours::ANY+ actArtefactRoleFillers::ANY+ actResourceRoleFillers::ANY+ actActorRoleFillers::ANY+
+        AccountableAction
+Action:
+        actBehaviours::Behaviour+ actArtefactRoleFillers::EnterpriseObject+ actResourceRoleFillers::EnterpriseObject+ actActorRoleFillers::EnterpriseObject+
 AccountableAction:
-        EPSILON
+        Prescription
+AccountableAction:
+        Commitment
+AccountableAction:
+        Declaration
+AccountableAction:
+        Evaluation
+AccountableAction:
+        Delegation
 Prescription:
-        EPSILON
+        aaAccountableParty::Party+
 Commitment:
-        EPSILON
+        aaAccountableParty::Party+
 Declaration:
-        EPSILON
+        aaAccountableParty::Party+
 Evaluation:
-        EPSILON
+        aaAccountableParty::Party+
 Delegation:
-        dlgEOPD::ANY
+        dlgEOPD::EO_P_D
 Behaviour:
-        beObjectives::ANY+ beSpecifiers::ANY+ beActions::ANY+ beIdentifier::ANY bePolicyEnvelope::ANY beConstrainer::ANY bePolicyConstrainer::ANY+ bePolicy::ANY+
+        Violation
+Behaviour:
+        beObjectives::Objective+ beSpecifiers::Contract+ beActions::Action+ beIdentifier::Role bePolicyEnvelope::PolicyEnvelope beConstrainer::PolicyEnvelope bePolicyConstrainer::Policy+ bePolicy::Policy+
 Community:
-        coAbstraction::ANY coMembers::ANY+ coCommunityRoles::ANY+ coPolicy::ANY+
+        coAbstraction::CommunityObject coMembers::EnterpriseObject+ coCommunityRoles::Role+ coPolicy::Policy+
 CommunityObject:
-        cobjRefinement::ANY
+        cobjRefinement::Community
 Role:
-        roleBehaviour::ANY roleSpecifier::ANY rolefillers::ANY+ roleConstrainer::ANY+ roleEOAR::ANY+
+        InterfaceRole
+Role:
+        roleBehaviour::Behaviour roleSpecifier::Community rolefillers::EnterpriseObject+ roleConstrainer::Policy+ roleEOAR::EO_A_R+
 InterfaceRole:
         EPSILON
 Violation:
-        vioProhibitor::ANY
+        vioProhibitor::Rule
 Rule:
-        EPSILON
+        Obligation
+Rule:
+        Authorisation
+Rule:
+        Permission
+Rule:
+        Prohibition
 Obligation:
-        EPSILON
+        ruViolation::Violation+
 Authorisation:
-        EPSILON
+        ruViolation::Violation+
 Permission:
-        EPSILON
+        ruViolation::Violation+
 Prohibition:
-        EPSILON
+        ruViolation::Violation+
 EO_A_R:
-        eoarSubject::ANY+ eoarSubjectRole::ANY+ eoarGovernor::ANY+
+        eoarSubject::EnterpriseObject+ eoarSubjectRole::Role+ eoarGovernor::AssigmentPolicy+
 EO_P_D:
-        eopdAgent::ANY eopdPrincipal::ANY eopdAction::ANY
+        eopdAgent::EnterpriseObject eopdPrincipal::Party eopdAction::Delegation

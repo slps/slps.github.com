@@ -1,27 +1,39 @@
 DeploymentReport:
-        import::ANY+ applications::ANY binding::ANY logicalServers::ANY errors::ANY
+        import::DeploymentImport+ applications::Applications binding::Binding logicalServers::LogicalServers errors::ErrorCollection
 DeploymentImport:
-        alias::ANY identity::ANY
+        alias::SimpleName identity::ImportNamespaceIdentity
 ImportNamespaceIdentity:
-        import::ANY
+        import::DeploymentImport
 NamespaceIdentity:
-        name::ANY version::ANY publicKey::ANY publicKeyToken::ANY culture::ANY platform::ANY
+        ImportNamespaceIdentity
+NamespaceIdentity:
+        name::Path version::FourPartVersionType publicKey::PublicKeyType publicKeyToken::PublicKeyTokenType culture::CultureNeutral platform::Platform
 Applications:
-        system::ANY+ application::ANY+
+        system::OuterSystem+ application::Application+
 LogicalServers:
-        zone::ANY+ logicalServer::ANY+
+        zone::Zone+ logicalServer::LogicalServer+
 OuterSystem:
-        system::ANY+ application::ANY+ name::ANY
+        system::OuterSystem+ application::Application+ name::String
 Binding:
-        zone::ANY+ boundLogicalServer::ANY+
+        zone::Zone+ boundLogicalServer::BoundLogicalServer+
 Zone:
-        zone::ANY+ boundLogicalServer::ANY+ logicalServer::ANY+ name::ANY
+        zone::Zone+ boundLogicalServer::BoundLogicalServer+ logicalServer::LogicalServer+ name::String
 ReportObject:
-        sequence::ANY+ name::ANY definition::ANY extends::ANY instanceId::ANY hostedOn::ANY
+        LogicalServer
+ReportObject:
+        Application
+ReportObject:
+        ReportSystem
+ReportObject:
+        ReportResource
+ReportObject:
+        ReportEndpoint
+ReportObject:
+        sequence::SequenceReport+ name::String definition::String extends::String instanceId::Guid hostedOn::String
 SequenceReport:
-        report::ANY setting::ANY system::ANY+ resource::ANY+ endpoint::ANY+
+        report::ReportObject setting::Setting system::ReportSystem+ resource::ReportResource+ endpoint::ReportEndpoint+
 BoundLogicalServer:
-        setting::ANY+ application::ANY+ name::ANY definition::ANY extends::ANY
+        setting::Setting+ application::Application+ name::String definition::String extends::String
 LogicalServer:
         EPSILON
 Application:
@@ -33,27 +45,31 @@ ReportResource:
 ReportEndpoint:
         EPSILON
 Setting:
-        value::ANY+ facet::ANY+ settingAttributes::ANY
+        value::SettingInstanceValue+ facet::SettingFacet+ settingAttributes::SettingAttributes
 SettingFacet:
-        value::ANY settingAttributes::ANY
+        value::SettingInstanceValue settingAttributes::SettingAttributes
 SettingInstanceValue:
-        contents::ANY+ null::ANY
+        contents::String+ null::Boolean
 SettingAttributes:
-        name::ANY definition::ANY state::ANY fixed::ANY list::ANY null::ANY secure::ANY failedToSerialize::ANY
+        name::String definition::String state::SettingState fixed::Boolean list::Boolean null::Boolean secure::Boolean failedToSerialize::Boolean
 SettingValue:
-        contents::ANY+ Null::ANY Secure::ANY
+        contents::String+ Null::Boolean Secure::Boolean
 ErrorCollection:
-        documentError::ANY+ documentResolutionError::ANY+ documentConstraintError::ANY+
+        documentError::DocumentError+ documentResolutionError::DocumentResolutionError+ documentConstraintError::DocumentConstraintError+
 DocumentError:
-        description::ANY+ Code::ANY Level::ANY File::ANY
+        DocumentResolutionError
+DocumentError:
+        DocumentConstraintError
+DocumentError:
+        description::Description+ Code::Integer Level::Integer File::String
 DocumentResolutionError:
-        Statement::ANY
+        Statement::String
 DocumentConstraintError:
-        failedInput::ANY+ constraintMember::ANY constraintDefinition::ANY targetInstancePath::ANY ownerInstancePath::ANY constraintErrorCode::ANY constraintErrorMessage::ANY
+        failedInput::FailedInput+ constraintMember::String constraintDefinition::String targetInstancePath::String ownerInstancePath::String constraintErrorCode::String constraintErrorMessage::String
 FailedInput:
-        contents::ANY+
+        contents::String+
 Description:
-        contents::ANY+
+        contents::String+
 Guid:
         EPSILON
 SimpleName:
@@ -95,4 +111,20 @@ SettingState:
         NotSet::EPSILON
         Error::EPSILON
 Element:
-        value::ANY
+        Guid
+Element:
+        SimpleName
+Element:
+        Path
+Element:
+        FourPartVersionType
+Element:
+        PublicKeyType
+Element:
+        PublicKeyTokenType
+Element:
+        Culture
+Element:
+        CultureNeutral
+Element:
+        value::String

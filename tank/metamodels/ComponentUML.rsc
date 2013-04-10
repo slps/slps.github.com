@@ -3,21 +3,21 @@ module ComponentUML
 
 syntax Entity
         = 
-        ANY methods+ ANY attributes+ ANY associationEnds+
+        Method methods+ Attribute attributes+ AssociationEnd associationEnds+
  ;
 syntax AssociationEnd
         = 
-        ANY type ANY association
+        Entity type Association association
  ;
 syntax Association
         = 
-        associationEnds: ANY
+        associationEnds: AssociationEnd
  ;
 syntax Method
         = 
-        entity: ANY
+        entity: Entity
  ;
 syntax Attribute
         = 
-        entity: ANY
+        entity: Entity
  ;

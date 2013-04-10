@@ -1,164 +1,274 @@
 AbstractTypeDeclaration:
-        EPSILON
+        AnnotationTypeDeclaration
+AbstractTypeDeclaration:
+        EnumDeclaration
+AbstractTypeDeclaration:
+        TypeDeclaration
 Annotation:
-        type::ANY values::ANY+
+        type::NamedElementRef values::AnnotationMemberValuePair+
 AnnotationMemberValuePair:
-        member::ANY value::ANY
+        member::NamedElementRef value::Expression
 AnnotationTypeDeclaration:
-        originalFileContent::ANY package::ANY bodyDeclarations::ANY+ superInterfaces::ANY+ commentsAfterBody::ANY+ imports::ANY+ commentsBeforeBody::ANY+
+        originalFileContent::String package::PackageDeclaration bodyDeclarations::BodyDeclaration+ superInterfaces::NamedElementRef+ commentsAfterBody::Comment+ imports::ImportDeclaration+ commentsBeforeBody::Comment+
 AnnotationTypeMemberDeclaration:
-        type::ANY default::ANY
+        type::NamedElementRef default::Expression
 AnonymousClassDeclaration:
-        bodyDeclarations::ANY+
+        bodyDeclarations::BodyDeclaration+
 ArrayAccess:
-        index::ANY array::ANY
+        index::Expression array::Expression
 ArrayCreation:
-        dimensions::ANY+ initializer::ANY type::ANY
+        dimensions::Expression+ initializer::ArrayInitializer type::NamedElementRef
 ArrayInitializer:
-        expressions::ANY+
+        expressions::Expression+
 ArrayLengthAccess:
-        array::ANY
+        array::Expression
 AssertStatement:
-        message::ANY expression::ANY
+        message::Expression expression::Expression
 Assignment:
-        operator::ANY rightHandSide::ANY leftHandSide::ANY
+        operator::String rightHandSide::Expression leftHandSide::Expression
 ASTNode:
-        EPSILON
+        AnnotationMemberValuePair
+ASTNode:
+        AnonymousClassDeclaration
+ASTNode:
+        BodyDeclaration
+ASTNode:
+        CatchClause
+ASTNode:
+        Comment
+ASTNode:
+        Expression
+ASTNode:
+        ImportDeclaration
+ASTNode:
+        MemberRef
+ASTNode:
+        MethodRef
+ASTNode:
+        MethodRefParameter
+ASTNode:
+        Statement
+ASTNode:
+        TagElement
+ASTNode:
+        TextElement
 BodyDeclaration:
-        EPSILON
+        Initializer
 Block:
-        statements::ANY+
+        statements::Statement+
 BlockComment:
-        content::ANY isEnclosedByParent::ANY isPrefixOfParent::ANY
+        content::String isEnclosedByParent::Boolean isPrefixOfParent::Boolean
 BreakStatement:
-        label::ANY
+        label::NamedElementRef
 CastExpression:
-        type::ANY expression::ANY
+        type::NamedElementRef expression::Expression
 CatchClause:
-        exception::ANY body::ANY
+        exception::SingleVariableDeclaration body::Block
 ClassInstanceCreation:
-        arguments::ANY+ type::ANY expression::ANY anonymousClassDeclaration::ANY
+        arguments::Expression+ type::NamedElementRef expression::Expression anonymousClassDeclaration::AnonymousClassDeclaration
 Comment:
-        EPSILON
+        BlockComment
+Comment:
+        Javadoc
+Comment:
+        LineComment
 ConditionalExpression:
-        elseExpression::ANY thenExpression::ANY expression::ANY
+        elseExpression::Expression thenExpression::Expression expression::Expression
 ContinueStatement:
-        label::ANY
+        label::NamedElementRef
 ConstructorInvocation:
-        arguments::ANY+
+        arguments::Expression+
 DoStatement:
-        expression::ANY body::ANY
+        expression::Expression body::Statement
 EmptyStatement:
         
 EnhancedForStatement:
-        parameter::ANY expression::ANY body::ANY
+        parameter::SingleVariableDeclaration expression::Expression body::Statement
 EnumConstantDeclaration:
-        arguments::ANY+ anonymousClassDeclaration::ANY
+        arguments::Expression+ anonymousClassDeclaration::AnonymousClassDeclaration
 EnumDeclaration:
-        enumConstants::ANY+
+        enumConstants::EnumConstantDeclaration+
 Expression:
-        EPSILON
+        Annotation
+Expression:
+        ArrayAccess
+Expression:
+        ArrayCreation
+Expression:
+        ArrayInitializer
+Expression:
+        ArrayLengthAccess
+Expression:
+        Assignment
+Expression:
+        CastExpression
+Expression:
+        ClassInstanceCreation
+Expression:
+        ConditionalExpression
+Expression:
+        FieldAccess
+Expression:
+        InfixExpression
+Expression:
+        InstanceofExpression
+Expression:
+        MethodInvocation
+Expression:
+        NamedElementRef
+Expression:
+        ParenthesizedExpression
+Expression:
+        PostfixExpression
+Expression:
+        PrefixExpression
+Expression:
+        SuperFieldAccess
+Expression:
+        SuperMethodInvocation
+Expression:
+        ThisExpression
+Expression:
+        TypeLiteral
 ExpressionStatement:
-        expression::ANY
+        expression::Expression
 FieldAccess:
-        field::ANY expression::ANY
+        field::NamedElementRef expression::Expression
 FieldDeclaration:
-        type::ANY
+        type::NamedElementRef
 ForStatement:
-        body::ANY expression::ANY initializers::ANY+ updaters::ANY+
+        body::Statement expression::Expression initializers::Expression+ updaters::Expression+
 InfixExpression:
-        operator::ANY extendedOperands::ANY+ rightOperand::ANY leftOperand::ANY
+        operator::String extendedOperands::Expression+ rightOperand::Expression leftOperand::Expression
 IfStatement:
-        expression::ANY elseStatement::ANY thenStatement::ANY
+        expression::Expression elseStatement::Statement thenStatement::Statement
 ImportDeclaration:
-        static::ANY importedElement::ANY
+        static::Boolean importedElement::NamedElementRef
 Initializer:
-        body::ANY
+        body::Block
 InstanceofExpression:
-        leftOperand::ANY rightOperand::ANY
+        leftOperand::Expression rightOperand::NamedElementRef
 Javadoc:
-        tags::ANY+
+        tags::TagElement+
 LabeledStatement:
-        body::ANY
+        body::Statement
 LineComment:
-        content::ANY isEnclosedByParent::ANY isPrefixOfParent::ANY
+        content::String isEnclosedByParent::Boolean isPrefixOfParent::Boolean
 MemberRef:
-        qualifier::ANY member::ANY
+        qualifier::NamedElementRef member::NamedElementRef
 MethodDeclaration:
-        extraArrayDimensions::ANY constructor::ANY varargs::ANY body::ANY parameters::ANY+ typeParameters::ANY+ thrownExceptions::ANY+ returnType::ANY
+        extraArrayDimensions::Integer constructor::Boolean varargs::Boolean body::Block parameters::SingleVariableDeclaration+ typeParameters::TypeParameter+ thrownExceptions::NamedElementRef+ returnType::NamedElementRef
 MethodInvocation:
-        method::ANY arguments::ANY+ expression::ANY
+        method::NamedElementRef arguments::Expression+ expression::Expression
 MethodRef:
-        qualifier::ANY parameters::ANY+ method::ANY
+        qualifier::NamedElementRef parameters::MethodRefParameter+ method::NamedElementRef
 MethodRefParameter:
-        name::ANY isVarargs::ANY type::ANY
+        name::String isVarargs::Boolean type::NamedElementRef
 Model:
-        name::ANY ownedElements::ANY+ orphanTypes::ANY+
-MultipleValuedNamedElement:
-        EPSILON
+        name::String ownedElements::PackageDeclaration+ orphanTypes::OrphanType+
 NamedElement:
-        EPSILON
+        OrphanType
+NamedElement:
+        ValuedNamedElement
 NamedElementRef:
-        extraArrayDimensions::ANY element::ANY qualifier::ANY
+        extraArrayDimensions::Integer element::NamedElement qualifier::NamedElementRef
 OrphanType:
-        name::ANY proxy::ANY
+        name::String proxy::Boolean
 PackageDeclaration:
-        model::ANY ownedElements::ANY+
+        model::Model ownedElements::AbstractTypeDeclaration+
 ParameterizedType:
-        typeArguments::ANY+ type::ANY
+        typeArguments::NamedElementRef+ type::NamedElementRef
 ParenthesizedExpression:
-        expression::ANY
+        expression::Expression
 PostfixExpression:
-        operator::ANY operand::ANY
+        operator::String operand::Expression
 PrefixExpression:
-        operator::ANY operand::ANY
+        operator::String operand::Expression
 PrimitiveType:
         EPSILON
 ReturnStatement:
-        expression::ANY
+        expression::Expression
 ThrowStatement:
-        expression::ANY
+        expression::Expression
 SingleVariableDeclaration:
-        modifiers::ANY isVarargs::ANY type::ANY
+        modifiers::String isVarargs::Boolean type::NamedElementRef
 Statement:
-        EPSILON
+        AssertStatement
+Statement:
+        Block
+Statement:
+        BreakStatement
+Statement:
+        ContinueStatement
+Statement:
+        ConstructorInvocation
+Statement:
+        DoStatement
+Statement:
+        EmptyStatement
+Statement:
+        EnhancedForStatement
+Statement:
+        ExpressionStatement
+Statement:
+        ForStatement
+Statement:
+        IfStatement
+Statement:
+        ReturnStatement
+Statement:
+        ThrowStatement
+Statement:
+        SuperConstructorInvocation
+Statement:
+        SwitchCase
+Statement:
+        SwitchStatement
+Statement:
+        SynchronizedStatement
+Statement:
+        TryStatement
+Statement:
+        TypeDeclarationStatement
+Statement:
+        WhileStatement
 SuperConstructorInvocation:
-        arguments::ANY+ expression::ANY
+        arguments::Expression+ expression::Expression
 SuperFieldAccess:
-        qualifier::ANY field::ANY
+        qualifier::NamedElementRef field::NamedElementRef
 SuperMethodInvocation:
-        arguments::ANY+ qualifier::ANY method::ANY
+        arguments::Expression+ qualifier::NamedElementRef method::NamedElementRef
 SwitchCase:
-        expressionInitialized::ANY expression::ANY
+        expressionInitialized::Boolean expression::Expression
 SwitchStatement:
-        statements::ANY+ expression::ANY
+        statements::Statement+ expression::Expression
 SynchronizedStatement:
-        body::ANY expression::ANY
+        body::Block expression::Expression
 TagElement:
-        tagName::ANY fragments::ANY+
+        tagName::String fragments::ASTNode+
 TextElement:
-        text::ANY
+        text::String
 ThisExpression:
-        qualifier::ANY
+        qualifier::NamedElementRef
 TryStatement:
-        finally::ANY body::ANY catchClauses::ANY+
+        finally::Block body::Block catchClauses::CatchClause+
 TypeDeclaration:
-        isInterface::ANY typeParameters::ANY+ superclass::ANY
+        isInterface::Boolean typeParameters::TypeParameter+ superclass::NamedElementRef
 TypeDeclarationStatement:
-        declaration::ANY
+        declaration::AbstractTypeDeclaration
 TypeLiteral:
-        type::ANY
+        type::NamedElementRef
 TypeParameter:
-        bounds::ANY+
+        bounds::NamedElementRef+
 UnresolvedItem:
         EPSILON
 ValuedNamedElement:
-        EPSILON
+        MultipleValuedNamedElement
 VariableDeclarationExpression:
-        modifiers::ANY type::ANY
+        modifiers::String type::NamedElementRef
 VariableDeclarationStatement:
-        modifiers::ANY type::ANY
+        modifiers::String type::NamedElementRef
 WildCardType:
-        isUpperBound::ANY bound::ANY
+        isUpperBound::Boolean bound::NamedElementRef
 WhileStatement:
-        expression::ANY body::ANY
+        expression::Expression body::Statement

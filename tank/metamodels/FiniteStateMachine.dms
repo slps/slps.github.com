@@ -1,6 +1,9 @@
-MgaObject = name::ANY position::ANY ;
-Transition = stateMachine::ANY associationStateState::ANY ;
-State = stateMachine::ANY associationStateStatedst::ANY+ associationStateStatesrc::ANY+ ;
-StateMachine = rootFolder::ANY state::ANY+ transition::ANY+ ;
-RootFolder = name::ANY rootFolders::ANY+ stateMachine::ANY+ ;
-AssociationStateState = transition::ANY dstTransition::ANY+ srcTransition::ANY+ ;
+MgaObject = Transition ;
+MgaObject = State ;
+MgaObject = StateMachine ;
+MgaObject = name::String position::String ;
+Transition = stateMachine::StateMachine associationStateState::AssociationStateState ;
+State = stateMachine::StateMachine associationStateStatedst::AssociationStateState+ associationStateStatesrc::AssociationStateState+ ;
+StateMachine = rootFolder::RootFolder state::State+ transition::Transition+ ;
+RootFolder = name::String rootFolders::RootFolder+ stateMachine::StateMachine+ ;
+AssociationStateState = transition::Transition dstTransition::State+ srcTransition::State+ ;

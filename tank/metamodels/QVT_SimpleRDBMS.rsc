@@ -2,26 +2,29 @@
 module QVT_SimpleRDBMS
 
 syntax RModelElement
-        = 
-        ()
+        = Schema
+        | Table
+        | Column
+        | Key
+        | ForeignKey
  ;
 syntax Schema
         = 
-        ANY tables+
+        Table tables+
  ;
 syntax Table
         = 
-        ANY schema ANY column+ ANY key+ ANY foreignKey+
+        Schema schema Column column+ Key key+ ForeignKey foreignKey+
  ;
 syntax Column
         = 
-        ANY type ANY owner ANY key+ ANY foreignKey+
+        String type Table owner Key key+ ForeignKey foreignKey+
  ;
 syntax Key
         = 
-        ANY owner ANY column+ ANY refersToOpposite+
+        Table owner Column column+ ForeignKey refersToOpposite+
  ;
 syntax ForeignKey
         = 
-        ANY column+ ANY owner ANY refersTo
+        Column column+ Table owner Key refersTo
  ;

@@ -1,56 +1,92 @@
 LocatedElement:
-        EPSILON
+        SQLRoot
+LocatedElement:
+        Statement
+LocatedElement:
+        NamedElement
+LocatedElement:
+        WhereClause
+LocatedElement:
+        Expression
 SQLRoot:
-        statements::ANY+
+        statements::Statement+
 Statement:
-        EPSILON
+        ViewStatement
+Statement:
+        InsertStmt
+Statement:
+        QueryStmt
 ViewStatement:
-        name::ANY columns::ANY+ query::ANY
+        name::String columns::ColumnExp+ query::QueryStmt
 InsertStmt:
-        tableName::ANY values::ANY+
+        tableName::String values::Expression+
 QueryStmt:
-        EPSILON
+        QueryStmtCol
+QueryStmt:
+        QueryStmtAllCol
 QueryStmtCol:
-        columns::ANY+
+        columns::Expression+
 QueryStmtAllCol:
-        tables::ANY+ condition::ANY
+        tables::Table+ condition::WhereClause
 NamedElement:
-        EPSILON
+        Table
+NamedElement:
+        DataType
 Table:
-        alias::ANY
+        alias::String
 WhereClause:
-        expression::ANY
+        expression::Expression
 Expression:
-        EPSILON
+        BinaryExp
+Expression:
+        NotExp
+Expression:
+        LikeExp
+Expression:
+        InExp
+Expression:
+        Predicate
+Expression:
+        QueryPredicate
 BinaryExp:
-        EPSILON
+        OrExp
+BinaryExp:
+        AndExp
+BinaryExp:
+        OperationExp
 OrExp:
-        opName::ANY leftExp::ANY rightExp::ANY
+        opName::String leftExp::Expression rightExp::Expression
 AndExp:
-        opName::ANY leftExp::ANY rightExp::ANY
+        opName::String leftExp::Expression rightExp::Expression
 NotExp:
-        opName::ANY valueExp::ANY unused::ANY
+        opName::String valueExp::Expression unused::Expression
 LikeExp:
-        columnName::ANY expression::ANY
+        columnName::String expression::StringValueExp
 InExp:
-        columnName::ANY elements::ANY+
+        columnName::String elements::Predicate+
 OperationExp:
-        optName::ANY
+        optName::String
 Predicate:
-        EPSILON
+        ValueExp
+Predicate:
+        ListExp
+Predicate:
+        FunctionExp
 QueryPredicate:
-        query::ANY
+        query::QueryStmt
 ColumnExp:
-        alias::ANY type::ANY
+        alias::String type::DataType
 ValueExp:
-        EPSILON
+        StringValueExp
+ValueExp:
+        IntegerValueExp
 StringValueExp:
-        aValue::ANY
+        aValue::String
 IntegerValueExp:
-        aValue::ANY
+        aValue::Integer
 ListExp:
-        elements::ANY+
+        elements::Expression+
 FunctionExp:
-        arguments::ANY+ name::ANY
+        arguments::Expression+ name::String
 DataType:
-        name::ANY
+        name::String

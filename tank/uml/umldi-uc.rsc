@@ -2,100 +2,102 @@
 module Umldi_uc
 
 syntax Instance
-        = 
-        ()
+        = ComponentInstance
+        | NodeInstance
+        | UseCaseInstance
  ;
 syntax AttributeLink
         = 
-        ANY instance ANY value ANY linkEnd ANY attribute
+        Instance instance Instance value LinkEnd linkEnd Attribute attribute
  ;
 syntax Link
         = 
-        ANY association ANY connection
+        Association association LinkEnd connection
  ;
 syntax LinkEnd
         = 
-        ANY link ANY qualifiedValue+ ANY instance ANY associationEnd
+        Link link AttributeLink qualifiedValue+ Instance instance AssociationEnd associationEnd
  ;
 syntax ComponentInstance
         = 
-        ANY resident+ ANY nodeInstance
+        Instance resident+ NodeInstance nodeInstance
  ;
 syntax NodeInstance
         = 
-        ANY resident+
+        ComponentInstance resident+
  ;
 syntax UseCase
         = 
-        ANY include+ ANY extend+ ANY extensionPoint+
+        Include include+ Extend extend+ ExtensionPoint extensionPoint+
  ;
 syntax Actor
         = 
-        ANY powertypeRange+ ANY feature+
+        Generalization powertypeRange+ Feature feature+
  ;
 syntax UseCaseInstance
         = 
-        ANY ownedInstance+ ANY linkEnd+ ANY classifier+ ANY componentInstance ANY slot+ ANY ownedLink+
+        Instance ownedInstance+ LinkEnd linkEnd+ Classifier classifier+ ComponentInstance componentInstance AttributeLink slot+ Link ownedLink+
  ;
 syntax Extend
         = 
-        ANY extensionPoint+ ANY extension ANY base ANY condition
+        ExtensionPoint extensionPoint+ UseCase extension UseCase base BooleanExpression condition
  ;
 syntax Include
         = 
-        ANY addition ANY base
+        UseCase addition UseCase base
  ;
 syntax ExtensionPoint
         = 
-        ANY useCase ANY location
+        UseCase useCase String location
  ;
 syntax Element
         = 
-        ()
+        ModelElement
  ;
 syntax ModelElement
-        = 
-        ()
- ;
-syntax GeneralizableElement
-        = 
-        ()
- ;
-syntax Namespace
-        = 
-        ()
+        = Instance
+        | AttributeLink
+        | Link
+        | LinkEnd
+        | ExtensionPoint
+        | GeneralizableElement
+        | Namespace
+        | Feature
+        | AssociationEnd
+        | Relationship
  ;
 syntax Classifier
-        = 
-        ()
+        = UseCase
+        | Actor
  ;
 syntax Feature
         = 
-        ()
+        StructuralFeature
  ;
 syntax StructuralFeature
         = 
-        ()
+        Attribute
  ;
 syntax AssociationEnd
         = 
-        ANY association ANY specification+ ANY participant ANY qualifier+ ANY isNavigable ANY ordering ANY aggregation ANY targetScope ANY multiplicity ANY changeability
+        Association association Classifier specification+ Classifier participant Attribute qualifier+ Boolean isNavigable OrderingKind ordering AggregationKind aggregation ScopeKind targetScope Multiplicity multiplicity ChangeableKind changeability
  ;
 syntax Relationship
-        = 
-        ()
+        = Extend
+        | Include
+        | Generalization
  ;
 syntax Association
         = 
-        connection: ANY
+        connection: AssociationEnd
  ;
 syntax Attribute
         = 
-        ANY associationEnd ANY initialValue
+        AssociationEnd associationEnd Expression initialValue
  ;
 syntax Generalization
         = 
-        ANY parent ANY powertype ANY child ANY discriminator
+        GeneralizableElement parent Classifier powertype GeneralizableElement child String discriminator
  ;
 syntax AggregationKind
         = ak_none: ()
@@ -123,15 +125,15 @@ syntax VisibilityKind
  ;
 syntax Multiplicity
         = 
-        ANY range+
+        MultiplicityRange range+
  ;
 syntax MultiplicityRange
         = 
-        ANY multiplicity ANY lower ANY upper
+        Multiplicity multiplicity Integer lower Integer upper
  ;
 syntax Expression
-        = 
-        ANY language ANY body
+        = BooleanExpression
+        | String language String body
  ;
 syntax BooleanExpression
         = 

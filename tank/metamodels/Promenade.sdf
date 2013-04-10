@@ -16,26 +16,38 @@ exports
 
          -> Grouping
 
-        deprecs::ANY+ parbind::ANY+ -> Precedence
+        DynPrecedence -> Precedence
+
+        DerPrecedence -> Precedence
+
+        BasPrecedence -> Precedence
+
+        deprecs::DerPrecedence+ parbind::ParBinding+ -> Precedence
 
          -> DynPrecedence
 
-        precs::ANY+ auxTasks::ANY+ -> DerPrecedence
+        precs::Precedence+ auxTasks::MetaTaskOccurence+ -> DerPrecedence
 
          -> BasPrecedence
 
-        dprecs::ANY+ taskCl::ANY+ -> MetaTaskOccurence
+        dprecs::DerPrecedence+ taskCl::MetaTask+ -> MetaTaskOccurence
 
-        inclusion::ANY precs::ANY+ targetPar::ANY sourcePar::ANY -> ParBinding
+        inclusion::Boolean precs::Precedence+ targetPar::ParameterPrec sourcePar::ParameterPrec -> ParBinding
 
-        parbindsTar::ANY+ parbindsSour::ANY+ dstParams::ANY+ orParams::ANY+ -> ParameterPrec
+        parbindsTar::ParBinding+ parbindsSour::ParBinding+ dstParams::ParameterPrec+ orParams::ParameterPrec+ -> ParameterPrec
 
-        dependencyUMLsupp::ANY dependencyUMLcli::ANY -> ModelElement
+        MetaTaskOccurence -> ModelElement
 
-        suppier::ANY+ client::ANY+ -> DependancyUML
+        MetaTask -> ModelElement
 
-        params::ANY+ occurs::ANY+ -> MetaTask
+        dependencyUMLsupp::DependancyUML dependencyUMLcli::DependancyUML -> ModelElement
 
-        task::ANY doc::ANY+ -> ParameterUML
+        suppier::ModelElement+ client::ModelElement+ -> DependancyUML
 
-        params::ANY+ -> MetaDocument
+        params::ParameterUML+ occurs::MetaTaskOccurence+ -> MetaTask
+
+        ParameterPrec -> ParameterUML
+
+        task::MetaTask doc::MetaDocument+ -> ParameterUML
+
+        params::ParameterUML+ -> MetaDocument

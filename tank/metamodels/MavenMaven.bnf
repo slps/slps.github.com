@@ -1,116 +1,182 @@
 Project:
-        xmlns::ANY+ default::ANY path::ANY properties::ANY+ taskdefs::ANY+ prePostGoals::ANY+ goals::ANY+
+        xmlns::Xmlns+ default::Goal path::Path properties::AntProperty+ taskdefs::AntTaskDef+ prePostGoals::PrePostGoal+ goals::Goal+
 Xmlns:
-        name::ANY value::ANY
+        name::String value::String
 AntProperty:
-        EPSILON
+        AntPropertyName
+AntProperty:
+        AntPropertyFile
+AntProperty:
+        AntPropertyEnv
 AntPropertyName:
-        EPSILON
+        AntPropertyValue
+AntPropertyName:
+        AntPropertyLocation
 AntPropertyValue:
-        value::ANY
+        value::String
 AntPropertyLocation:
-        location::ANY
+        location::String
 AntPropertyFile:
-        file::ANY
+        file::String
 AntPropertyEnv:
-        environment::ANY
+        environment::String
 JellyCommand:
-        EPSILON
+        JellySet
+JellyCommand:
+        JellyForEach
 JellySet:
-        var::ANY value::ANY
+        var::String value::String
 JellyForEach:
-        items::ANY var::ANY indexVar::ANY contents::ANY
+        items::String var::String indexVar::String contents::ContentsGoal
 AbstractGoal:
-        EPSILON
+        PrePostGoal
+AbstractGoal:
+        Goal
 ContentsGoal:
-        EPSILON
+        AntProperty
+ContentsGoal:
+        JellyCommand
+ContentsGoal:
+        AttainGoal
+ContentsGoal:
+        Task
+ContentsGoal:
+        AntTaskDef
 AttainGoal:
-        attainGoal::ANY
+        attainGoal::Goal
 PrePostGoal:
-        EPSILON
+        PreGoal
+PrePostGoal:
+        PostGoal
 PreGoal:
-        centralGoal::ANY
+        centralGoal::Goal
 PostGoal:
-        centralGoal::ANY
+        centralGoal::Goal
 Goal:
-        name::ANY preGoal::ANY postGoal::ANY
+        name::String preGoal::PreGoal postGoal::PostGoal
 Pattern:
-        EPSILON
+        Basic
+Pattern:
+        Set
 Basic:
-        EPSILON
+        Mapper
+Basic:
+        InExcludes
+Basic:
+        FileList
+Basic:
+        Filter
+Basic:
+        FiltersFile
+Basic:
+        PathElement
 Mapper:
-        type::ANY classname::ANY classpath::ANY classpathref::ANY from::ANY to::ANY
+        type::String classname::String classpath::String classpathref::String from::String to::String
 InExcludes:
-        EPSILON
+        Includes
+InExcludes:
+        Excludes
+InExcludes:
+        IncludesFile
+InExcludes:
+        ExcludesFile
 Includes:
-        name::ANY ifCondition::ANY unless::ANY
+        name::String ifCondition::String unless::String
 Excludes:
-        name::ANY ifCondition::ANY unless::ANY
+        name::String ifCondition::String unless::String
 IncludesFile:
-        name::ANY ifCondition::ANY unless::ANY
+        name::String ifCondition::String unless::String
 ExcludesFile:
-        name::ANY ifCondition::ANY unless::ANY
+        name::String ifCondition::String unless::String
 FileList:
-        dir::ANY files::ANY
+        dir::String files::String
 Filter:
-        token::ANY value::ANY
+        token::String value::String
 FiltersFile:
-        file::ANY
+        file::String
 PathElement:
-        path::ANY location::ANY
+        path::String location::String
 Set:
-        EPSILON
+        PatternSet
+Set:
+        FileSet
+Set:
+        FilterSet
+Set:
+        Path
+Set:
+        ClassPath
 PatternSet:
-        inexcludes::ANY+
+        inexcludes::InExcludes+
 FileSet:
-        dir::ANY patternset::ANY+ include::ANY+ exclude::ANY+
+        dir::String patternset::PatternSet+ include::Includes+ exclude::Excludes+
 FilterSet:
-        starttoken::ANY endtoken::ANY filter::ANY+ filtersfile::ANY+
+        starttoken::String endtoken::String filter::Filter+ filtersfile::FiltersFile+
 Path:
-        id::ANY refid::ANY path::ANY pathElement::ANY+ fileset::ANY+
+        id::String refid::String path::Path pathElement::PathElement+ fileset::FileSet+
 ClassPath:
-        refid::ANY pathElement::ANY+ fileset::ANY+
+        refid::String pathElement::PathElement+ fileset::FileSet+
 Task:
-        EPSILON
+        NewTask
+Task:
+        PreDefinedTask
 AntTaskDef:
-        name::ANY classname::ANY
+        name::String classname::String
 NewTask:
-        taskName::ANY attributes::ANY+
+        taskName::AntTaskDef attributes::Attribut+
 Attribut:
-        name::ANY value::ANY
+        name::String value::String
 PreDefinedTask:
-        EPSILON
+        ExecutionTask
+PreDefinedTask:
+        MiscellaneousTask
+PreDefinedTask:
+        CompileTask
+PreDefinedTask:
+        DocumentationTask
+PreDefinedTask:
+        ArchiveTask
+PreDefinedTask:
+        FileTask
 ExecutionTask:
-        EPSILON
+        Exec
+ExecutionTask:
+        Java
 Exec:
-        executable::ANY dir::ANY
+        executable::String dir::String
 Java:
-        classname::ANY jar::ANY fork::ANY classPath::ANY
+        classname::String jar::String fork::String classPath::ClassPath
 MiscellaneousTask:
-        EPSILON
+        Echo
+MiscellaneousTask:
+        Tstamp
 Echo:
-        message::ANY file::ANY append::ANY
+        message::String file::String append::String
 Tstamp:
-        format::ANY+
+        format::FormatTstamp+
 FormatTstamp:
-        property::ANY pattern::ANY offset::ANY unit::ANY locale::ANY
+        property::String pattern::String offset::String unit::String locale::String
 CompileTask:
-        EPSILON
+        Javac
 Javac:
-        srcdir::ANY destdir::ANY debug::ANY fork::ANY optimize::ANY deprecation::ANY inExcludes::ANY+ classPath::ANY
+        srcdir::String destdir::String debug::String fork::String optimize::String deprecation::String inExcludes::InExcludes+ classPath::ClassPath
 DocumentationTask:
-        EPSILON
+        Javadoc
 Javadoc:
-        sourcepath::ANY destdir::ANY packagenames::ANY defaultexcludes::ANY author::ANY version::ANY use::ANY windowtitle::ANY
+        sourcepath::String destdir::String packagenames::String defaultexcludes::String author::String version::String use::String windowtitle::String
 ArchiveTask:
-        EPSILON
+        Jar
 Jar:
-        jarfile::ANY basedir::ANY compress::ANY encoding::ANY manifest::ANY
+        jarfile::String basedir::String compress::String encoding::String manifest::String
 FileTask:
-        EPSILON
+        Mkdir
+FileTask:
+        Copy
+FileTask:
+        Delete
 Mkdir:
-        dir::ANY
+        dir::String
 Copy:
-        file::ANY presservelastmodified::ANY tofile::ANY todir::ANY overwrite::ANY filtering::ANY flatten::ANY includeEmptyDirs::ANY fileset::ANY filterset::ANY mapper::ANY
+        file::String presservelastmodified::String tofile::String todir::String overwrite::String filtering::String flatten::String includeEmptyDirs::String fileset::FileSet filterset::FilterSet mapper::Mapper
 Delete:
-        file::ANY dir::ANY verbose::ANY quiet::ANY failonerror::ANY includeEmptyDirs::ANY includes::ANY includesfile::ANY excludes::ANY excludesfile::ANY defaultexcludes::ANY
+        file::String dir::String verbose::String quiet::String failonerror::String includeEmptyDirs::String includes::String includesfile::String excludes::String excludesfile::String defaultexcludes::String

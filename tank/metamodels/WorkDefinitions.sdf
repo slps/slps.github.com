@@ -4,20 +4,30 @@ exports
   sorts
         WorkDefinition ProcessPerformer Role WorkProduct Lifecycle Phase Iteration Activity Step 
   context-free syntax
-        parentWorks::ANY+ subWorks::ANY+ owner::ANY -> WorkDefinition
+        Lifecycle -> WorkDefinition
 
-        features::ANY+ -> ProcessPerformer
+        Phase -> WorkDefinition
 
-        products::ANY+ -> Role
+        Iteration -> WorkDefinition
 
-        responsible::ANY -> WorkProduct
+        Activity -> WorkDefinition
 
-        phases::ANY+ -> Lifecycle
+        parentWorks::WorkDefinition+ subWorks::WorkDefinition+ owner::ProcessPerformer -> WorkDefinition
 
-        lifeCycle::ANY iterations::ANY+ -> Phase
+        Role -> ProcessPerformer
 
-        phase::ANY activities::ANY+ -> Iteration
+        features::WorkDefinition+ -> ProcessPerformer
 
-        iteration::ANY steps::ANY+ -> Activity
+        products::WorkProduct+ -> Role
+
+        responsible::Role -> WorkProduct
+
+        phases::Phase+ -> Lifecycle
+
+        lifeCycle::Lifecycle iterations::Iteration+ -> Phase
+
+        phase::Phase activities::Activity+ -> Iteration
+
+        iteration::Iteration steps::Step+ -> Activity
 
          -> Step

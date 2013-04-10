@@ -17,78 +17,82 @@ syntax OtherAttributeTypeEnum
         | nmtakens: ()
  ;
 syntax TypeDescription
-        = 
-        ()
+        = Notation
+        | Entity
+        | Element
+        | AttributeList
+        | AttributeDescription
  ;
 syntax Notation
         = 
-        content: ANY
+        content: String
  ;
 syntax Entity
         = 
-        ANY content ANY isInternal
+        String content Boolean isInternal
  ;
 syntax Element
-        = 
-        ()
+        = AnyElement
+        | RestrictedElement
  ;
 syntax AnyElement
         = 
-        
+        ()
  ;
 syntax RestrictedElement
         = 
-        content: ANY
+        content: ElementContent
  ;
 syntax ElementContent
-        = 
-        ()
+        = Mixed
+        | Children
  ;
 syntax Mixed
         = 
-        elements: ANY
+        elements: String
  ;
 syntax Children
-        = 
-        ()
+        = Sequence
+        | Leaf
+        | Choice
  ;
 syntax Sequence
         = 
-        children: ANY
+        children: Children
  ;
 syntax Leaf
         = 
-        elementName: ANY
+        elementName: String
  ;
 syntax Choice
         = 
-        childrenChoice: ANY
+        childrenChoice: Children
  ;
 syntax AttributeList
         = 
-        ANY containsAttributes+
+        AttributeDescription containsAttributes+
  ;
 syntax AttributeDescription
-        = 
-        ()
+        = NoDefaultValue
+        | DefaultValue
  ;
 syntax NoDefaultValue
         = 
-        isRequired: ANY
+        isRequired: Boolean
  ;
 syntax DefaultValue
         = 
-        ANY value ANY isFixed
+        String value Boolean isFixed
  ;
 syntax AttributeType
         = 
-        ()
+        Enumeration
  ;
 syntax Enumeration
         = 
-        values: ANY
+        values: String
  ;
 syntax OtherAttributeType
         = 
-        type: ANY
+        type: OtherAttributeTypeEnum
  ;

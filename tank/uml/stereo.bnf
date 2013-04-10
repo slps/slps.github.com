@@ -1,18 +1,22 @@
 ModelElement:
-        referenceTag::ANY+ stereotype::ANY+ constraint::ANY+ taggedValue::ANY+
+        TagDefinition
+ModelElement:
+        referenceTag::TaggedValue+ stereotype::Stereotype+ constraint::Constraint+ taggedValue::TaggedValue+
 Constraint:
-        constrainedElement::ANY+ constrainedStereotype::ANY
+        constrainedElement::ModelElement+ constrainedStereotype::Stereotype
 TaggedValue:
-        dataValue::ANY referenceValue::ANY+ type::ANY
+        dataValue::String referenceValue::ModelElement+ type::TagDefinition
 TagDefinition:
-        tagType::ANY multiplicity::ANY typedValue::ANY+ owner::ANY
+        tagType::String multiplicity::Multiplicity typedValue::TaggedValue+ owner::Stereotype
 Multiplicity:
-        value::ANY
+        value::String
 GeneralizableElement:
-        EPSILON
+        Stereotype
+GeneralizableElement:
+        Stereotype
 Stereotype:
-        icon::ANY baseClass::ANY+ definedTag::ANY+ stereotypeConstraint::ANY+ extendedElement::ANY+
+        icon::Geometry baseClass::Name+ definedTag::TagDefinition+ stereotypeConstraint::Constraint+ extendedElement::ModelElement+
 Geometry:
-        value::ANY
+        value::String
 Name:
-        value::ANY
+        value::String

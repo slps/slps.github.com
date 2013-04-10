@@ -1,16 +1,38 @@
 Element:
-        location::ANY commentsBefore::ANY+ commentsAfter::ANY+
+        NamedElement
+Element:
+        RuleSet
+Element:
+        RuleAction
+Element:
+        RuleCondition
+Element:
+        Binding
+Element:
+        OclExpression
+Element:
+        VariableDeclaration
+Element:
+        location::String commentsBefore::String+ commentsAfter::String+
 NamedElement:
-        EPSILON
+        Rule
+NamedElement:
+        OclType
 RuleSet:
-        rules::ANY+
+        rules::Rule+
 Rule:
-        binding::ANY condition::ANY actions::ANY+ ruleOwner::ANY
+        binding::Binding condition::RuleCondition actions::RuleAction+ ruleOwner::RuleSet
 RuleAction:
-        actionOwner::ANY
+        DeleteAction
+RuleAction:
+        AssignAction
+RuleAction:
+        InvokeAction
+RuleAction:
+        actionOwner::Rule
 RuleCondition:
-        ruleConditionOwner::ANY conditionExp::ANY
+        ruleConditionOwner::Rule conditionExp::PRRExpressions/OclExpression
 Binding:
-        bindingOwner::ANY ruleVariable::ANY+
+        bindingOwner::Rule ruleVariable::RuleVariable+
 RuleVariable:
-        ruleVariableOwner::ANY filter::ANY
+        ruleVariableOwner::Binding filter::PRRExpressions/OclExpression

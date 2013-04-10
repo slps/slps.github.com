@@ -4,14 +4,14 @@ exports
   sorts
         WorkflowProcessDefinition WorkflowApplicationDeclaration WorkflowRelevantData WorkflowParticipantSpecification WorkflowProcessActivity TransitionInformation 
   context-free syntax
-        participantSpecificatons::ANY+ revelantDatas::ANY+ applicationDeclarations::ANY+ processActivities::ANY+ transitionInformations::ANY+ -> WorkflowProcessDefinition
+        participantSpecificatons::WorkflowParticipantSpecification+ revelantDatas::WorkflowRelevantData+ applicationDeclarations::WorkflowApplicationDeclaration+ processActivities::WorkflowProcessActivity+ transitionInformations::TransitionInformation+ -> WorkflowProcessDefinition
 
-        processDefinition::ANY processActivities::ANY+ revelantDatas::ANY+ -> WorkflowApplicationDeclaration
+        processDefinition::WorkflowProcessDefinition processActivities::WorkflowProcessActivity+ revelantDatas::WorkflowRelevantData+ -> WorkflowApplicationDeclaration
 
-        processDefinition::ANY applicationDeclarations::ANY+ processActivities::ANY+ participantSpecifications::ANY+ transitionInformations::ANY+ -> WorkflowRelevantData
+        processDefinition::WorkflowProcessDefinition applicationDeclarations::WorkflowApplicationDeclaration+ processActivities::WorkflowProcessActivity+ participantSpecifications::WorkflowParticipantSpecification+ transitionInformations::TransitionInformation+ -> WorkflowRelevantData
 
-        processDefinition::ANY revelantDatas::ANY+ processActivities::ANY+ -> WorkflowParticipantSpecification
+        processDefinition::WorkflowProcessDefinition revelantDatas::WorkflowRelevantData+ processActivities::WorkflowProcessActivity+ -> WorkflowParticipantSpecification
 
-        processDefinition::ANY applicationDeclarations::ANY+ revelantDatas::ANY+ participantSpecifications::ANY+ to_transitionInformation::ANY from_transitionInformation::ANY -> WorkflowProcessActivity
+        processDefinition::WorkflowProcessDefinition applicationDeclarations::WorkflowApplicationDeclaration+ revelantDatas::WorkflowRelevantData+ participantSpecifications::WorkflowParticipantSpecification+ to_transitionInformation::TransitionInformation from_transitionInformation::TransitionInformation -> WorkflowProcessActivity
 
-        processDefinition::ANY revelantDatas::ANY+ to_processActivity::ANY from_processActivity::ANY -> TransitionInformation
+        processDefinition::WorkflowProcessDefinition revelantDatas::WorkflowRelevantData+ to_processActivity::WorkflowProcessActivity from_processActivity::WorkflowProcessActivity -> TransitionInformation

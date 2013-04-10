@@ -3,23 +3,23 @@ module UsiXML_task
 
 syntax Task
         = 
-        ANY id ANY name ANY category ANY frequency ANY importance ANY structurationLevel ANY complexityLevel ANY criticity ANY centrality ANY terminationValue ANY taskType ANY taskItem ANY decompositionTasks+ ANY decomposedTask ANY leftOperator ANY rightOperator ANY decoration
+        String id String name String category Integer frequency Integer importance Integer structurationLevel Integer complexityLevel Integer criticity Integer centrality String terminationValue String taskType String taskItem Task decompositionTasks+ Task decomposedTask BinaryOperator leftOperator BinaryOperator rightOperator UnaryOperator decoration
  ;
 syntax Operator
-        = 
-        ()
+        = BinaryOperator
+        | UnaryOperator
  ;
 syntax BinaryOperator
         = 
-        ANY type ANY leftTask ANY rightTask
+        BinaryType type Task leftTask Task rightTask
  ;
 syntax UnaryOperator
-        = 
-        ANY UnaryType ANY decoratedTask
+        = FiniteInteration
+        | UnaryType UnaryType Task decoratedTask
  ;
 syntax FiniteInteration
         = 
-        interation: ANY
+        interation: Integer
  ;
 syntax BinaryType
         = Enabling: ()

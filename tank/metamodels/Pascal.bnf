@@ -1,29 +1,55 @@
 Program:
-        name::ANY variables::ANY+ types::ANY+ procedures::ANY+
+        name::String variables::Variable+ types::Type+ procedures::Procedure+
 Variable:
-        name::ANY program::ANY procedure::ANY type::ANY
+        Parameter
+Variable:
+        name::String program::Program procedure::Procedure type::Type
 Type:
-        name::ANY program::ANY variables::ANY+
+        name::String program::Program variables::Variable+
 Parameter:
-        procedure_parameter::ANY
+        procedure_parameter::Procedure
 Instruction:
-        block::ANY
+        Calculation
+Instruction:
+        Control
+Instruction:
+        Assignment
+Instruction:
+        Block
+Instruction:
+        block::Block
 Calculation:
         EPSILON
 Control:
-        EPSILON
+        Conditional
+Control:
+        Loop
+Control:
+        Procedure
+Control:
+        Conditional
+        Loop
+        Procedure
 Assignment:
         EPSILON
 Block:
-        instructions::ANY+ procedure::ANY loop::ANY conditional::ANY
+        instructions::Instruction+ procedure::Procedure loop::Loop conditional::Conditional
 Conditional:
-        blocks::ANY
+        blocks::Block
 Loop:
-        block_loop::ANY
+        For
+Loop:
+        While
+Loop:
+        Repeat
+Loop:
+        block_loop::Block
 Procedure:
-        name::ANY program::ANY variables::ANY+ parameters::ANY+ block_procedure::ANY
+        Function
+Procedure:
+        name::String program::Program variables::Variable+ parameters::Parameter+ block_procedure::Block
 Function:
-        returnType::ANY
+        returnType::Type
 For:
         EPSILON
 While:

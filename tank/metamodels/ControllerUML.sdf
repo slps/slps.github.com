@@ -4,19 +4,23 @@ exports
   sorts
         ControllerAttribute Controller StateMachine State SubControllerState ViewState StateTransition StateMachineAction Event 
   context-free syntax
-        controller::ANY -> ControllerAttribute
+        controller::Controller -> ControllerAttribute
 
-        controllerAttribute::ANY+ behavior::ANY -> Controller
+        controllerAttribute::ControllerAttribute+ behavior::StateMachine -> Controller
 
-        states::ANY+ -> StateMachine
+        states::State+ -> StateMachine
 
-        substates::ANY+ theContainer::ANY outGoing::ANY+ incoming::ANY+ -> State
+        SubControllerState -> State
 
-        controller::ANY -> SubControllerState
+        ViewState -> State
+
+        substates::State+ theContainer::State outGoing::StateTransition+ incoming::StateTransition+ -> State
+
+        controller::Controller -> SubControllerState
 
          -> ViewState
 
-        source::ANY target::ANY trigger::ANY effect::ANY -> StateTransition
+        source::State target::State trigger::Event effect::StateMachineAction -> StateTransition
 
          -> StateMachineAction
 

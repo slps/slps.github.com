@@ -13,8 +13,8 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable BPMN 1.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Frédéric Jouault, <code>BPMN.ecore</code>, 2007/03/06.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>20</strong></li><li>Number of top alternatives: <strong>52</strong></li><li>Number of defined nonterminal symbols: <strong>20</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>20</strong>: <code><a href="#Activity" class="nt">Activity</a>, <a href="#ActivityType" class="nt">ActivityType</a>, <a href="#Artifact" class="nt">Artifact</a>, <a href="#ArtifactsContainer" class="nt">ArtifactsContainer</a>, <a href="#Association" class="nt">Association</a>, <a href="#BpmnDiagram" class="nt">BpmnDiagram</a>, <a href="#DataObject" class="nt">DataObject</a>, <a href="#DirectionType" class="nt">DirectionType</a>, <a href="#Graph" class="nt">Graph</a>, <a href="#Group" class="nt">Group</a>, <a href="#Identifiable" class="nt">Identifiable</a>, <a href="#IdentifiableNode" class="nt">IdentifiableNode</a>, <a href="#Lane" class="nt">Lane</a>, <a href="#MessagingEdge" class="nt">MessagingEdge</a>, <a href="#NamedBpmnObject" class="nt">NamedBpmnObject</a>, <a href="#Pool" class="nt">Pool</a>, <a href="#SequenceEdge" class="nt">SequenceEdge</a>, <a href="#SubProcess" class="nt">SubProcess</a>, <a href="#TextAnnotation" class="nt">TextAnnotation</a>, <a href="#Vertex" class="nt">Vertex</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Activity">Activity</a>:
-        <span class="sel">orderedMessages</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">incomingMessages</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">outgoingMessages</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">groups</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">activityType</span>::<span class="meta">any</span> <span class="sel">eventHandlerFor</span>::<span class="meta">any</span> <span class="sel">lane</span>::<span class="meta">any</span> <span class="sel">looping</span>::<span class="meta">any</span>
+				</script></head><body><h1 class="l">Browsable BPMN 1.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Frédéric Jouault, <code>BPMN.ecore</code>, 2007/03/06.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>26</strong></li><li>Number of top alternatives: <strong>58</strong></li><li>Number of defined nonterminal symbols: <strong>20</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>2</strong>: <code><a href="#Identifiable" class="nt">Identifiable</a>, <a href="#NamedBpmnObject" class="nt">NamedBpmnObject</a></code></li><li>Bottom nonterminal symbols: <strong>3</strong>: <code><a href="#Boolean" class="nt">Boolean</a>, <a href="#String" class="nt">String</a>, <a href="#ID" class="nt">ID</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Activity">Activity</a>:
+        <span class="sel">orderedMessages</span>::<a class="nt" href="#MessagingEdge">MessagingEdge</a><span class="meta">+</span> <span class="sel">incomingMessages</span>::<a class="nt" href="#MessagingEdge">MessagingEdge</a><span class="meta">+</span> <span class="sel">outgoingMessages</span>::<a class="nt" href="#MessagingEdge">MessagingEdge</a><span class="meta">+</span> <span class="sel">groups</span>::<a class="nt" href="#Group">Group</a><span class="meta">+</span> <span class="sel">activityType</span>::<a class="nt" href="#ActivityType">ActivityType</a> <span class="sel">eventHandlerFor</span>::<a class="nt" href="#SubProcess">SubProcess</a> <span class="sel">lane</span>::<a class="nt" href="#Lane">Lane</a> <span class="sel">looping</span>::<a class="nt" href="#Boolean">Boolean</a>
 </pre><pre><a class="nt" name="ActivityType">ActivityType</a>:
         <span class="sel">SubProcess</span>::ε
         <span class="sel">EventEndMultiple</span>::ε
@@ -47,13 +47,19 @@
         <span class="sel">GatewayEventBasedExclusive</span>::ε
         <span class="sel">EventIntermediateRule</span>::ε
 </pre><pre><a class="nt" name="Artifact">Artifact</a>:
-        <span class="sel">associations</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">artifactsContainer</span>::<span class="meta">any</span>
+        <a class="nt" href="#DataObject">DataObject</a>
+</pre><pre><a class="nt" name="Artifact">Artifact</a>:
+        <a class="nt" href="#Group">Group</a>
+</pre><pre><a class="nt" name="Artifact">Artifact</a>:
+        <a class="nt" href="#TextAnnotation">TextAnnotation</a>
+</pre><pre><a class="nt" name="Artifact">Artifact</a>:
+        <span class="sel">associations</span>::<a class="nt" href="#Association">Association</a><span class="meta">+</span> <span class="sel">artifactsContainer</span>::<a class="nt" href="#ArtifactsContainer">ArtifactsContainer</a>
 </pre><pre><a class="nt" name="ArtifactsContainer">ArtifactsContainer</a>:
-        <span class="sel">artifacts</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">artifacts</span>::<a class="nt" href="#Artifact">Artifact</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Association">Association</a>:
-        <span class="sel">direction</span>::<span class="meta">any</span> <span class="sel">source</span>::<span class="meta">any</span> <span class="sel">target</span>::<span class="meta">any</span>
+        <span class="sel">direction</span>::<a class="nt" href="#DirectionType">DirectionType</a> <span class="sel">source</span>::<a class="nt" href="#Artifact">Artifact</a> <span class="sel">target</span>::<a class="nt" href="#IdentifiableNode">IdentifiableNode</a>
 </pre><pre><a class="nt" name="BpmnDiagram">BpmnDiagram</a>:
-        <span class="sel">pools</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">messages</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">author</span>::<span class="meta">any</span> <span class="sel">title</span>::<span class="meta">any</span>
+        <span class="sel">pools</span>::<a class="nt" href="#Pool">Pool</a><span class="meta">+</span> <span class="sel">messages</span>::<a class="nt" href="#MessagingEdge">MessagingEdge</a><span class="meta">+</span> <span class="sel">author</span>::<a class="nt" href="#String">String</a> <span class="sel">title</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="DataObject">DataObject</a>:
         ε
 </pre><pre><a class="nt" name="DirectionType">DirectionType</a>:
@@ -62,28 +68,34 @@
         <span class="sel">To</span>::ε
         <span class="sel">None</span>::ε
 </pre><pre><a class="nt" name="Graph">Graph</a>:
-        <span class="sel">vertices</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">sequenceEdges</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">vertices</span>::<a class="nt" href="#Vertex">Vertex</a><span class="meta">+</span> <span class="sel">sequenceEdges</span>::<a class="nt" href="#SequenceEdge">SequenceEdge</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Group">Group</a>:
-        <span class="sel">activities</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">activities</span>::<a class="nt" href="#Activity">Activity</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Identifiable">Identifiable</a>:
-        <span class="sel">iD</span>::<span class="meta">any</span>
+        <a class="nt" href="#IdentifiableNode">IdentifiableNode</a>
+</pre><pre><a class="nt" name="Identifiable">Identifiable</a>:
+        <span class="sel">iD</span>::<span class="meta">id</span>
 </pre><pre><a class="nt" name="IdentifiableNode">IdentifiableNode</a>:
-        <span class="sel">associations</span>::<span class="meta">any</span><span class="meta">+</span>
+        <a class="nt" href="#Vertex">Vertex</a>
+</pre><pre><a class="nt" name="IdentifiableNode">IdentifiableNode</a>:
+        <span class="sel">associations</span>::<a class="nt" href="#Association">Association</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Lane">Lane</a>:
-        <span class="sel">activities</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">pool</span>::<span class="meta">any</span>
+        <span class="sel">activities</span>::<a class="nt" href="#Activity">Activity</a><span class="meta">+</span> <span class="sel">pool</span>::<a class="nt" href="#Pool">Pool</a>
 </pre><pre><a class="nt" name="MessagingEdge">MessagingEdge</a>:
-        <span class="sel">bpmnDiagram</span>::<span class="meta">any</span> <span class="sel">source</span>::<span class="meta">any</span> <span class="sel">target</span>::<span class="meta">any</span>
+        <span class="sel">bpmnDiagram</span>::<a class="nt" href="#BpmnDiagram">BpmnDiagram</a> <span class="sel">source</span>::<a class="nt" href="#Activity">Activity</a> <span class="sel">target</span>::<a class="nt" href="#Activity">Activity</a>
 </pre><pre><a class="nt" name="NamedBpmnObject">NamedBpmnObject</a>:
-        <span class="sel">documentation</span>::<span class="meta">any</span> <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">ncname</span>::<span class="meta">any</span>
+        <a class="nt" href="#ArtifactsContainer">ArtifactsContainer</a>
+</pre><pre><a class="nt" name="NamedBpmnObject">NamedBpmnObject</a>:
+        <span class="sel">documentation</span>::<a class="nt" href="#String">String</a> <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">ncname</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Pool">Pool</a>:
-        <span class="sel">lanes</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">bpmnDiagram</span>::<span class="meta">any</span>
+        <span class="sel">lanes</span>::<a class="nt" href="#Lane">Lane</a><span class="meta">+</span> <span class="sel">bpmnDiagram</span>::<a class="nt" href="#BpmnDiagram">BpmnDiagram</a>
 </pre><pre><a class="nt" name="SequenceEdge">SequenceEdge</a>:
-        <span class="sel">graph</span>::<span class="meta">any</span> <span class="sel">isDefault</span>::<span class="meta">any</span> <span class="sel">source</span>::<span class="meta">any</span> <span class="sel">target</span>::<span class="meta">any</span>
+        <span class="sel">graph</span>::<a class="nt" href="#Graph">Graph</a> <span class="sel">isDefault</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">source</span>::<a class="nt" href="#Vertex">Vertex</a> <span class="sel">target</span>::<a class="nt" href="#Vertex">Vertex</a>
 </pre><pre><a class="nt" name="SubProcess">SubProcess</a>:
-        <span class="sel">eventHandlers</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">isTransaction</span>::<span class="meta">any</span>
+        <span class="sel">eventHandlers</span>::<a class="nt" href="#Activity">Activity</a><span class="meta">+</span> <span class="sel">isTransaction</span>::<a class="nt" href="#Boolean">Boolean</a>
 </pre><pre><a class="nt" name="TextAnnotation">TextAnnotation</a>:
         ε
 </pre><pre><a class="nt" name="Vertex">Vertex</a>:
-        <span class="sel">outgoingEdges</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">incomingEdges</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">graph</span>::<span class="meta">any</span>
+        <span class="sel">outgoingEdges</span>::<a class="nt" href="#SequenceEdge">SequenceEdge</a><span class="meta">+</span> <span class="sel">incomingEdges</span>::<a class="nt" href="#SequenceEdge">SequenceEdge</a><span class="meta">+</span> <span class="sel">graph</span>::<a class="nt" href="#Graph">Graph</a>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

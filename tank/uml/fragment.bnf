@@ -1,26 +1,36 @@
 Class:
-        parent::ANY child::ANY dependency::ANY
+        parent::Generalization child::Generalization dependency::Dependency
 Generalization:
         EPSILON
 Dependency:
-        supplier::ANY client::ANY stereotype::ANY
+        supplier::StateMachine client::Class stereotype::Stereotype
 Stereotype:
-        baseClass::ANY extendedElement::ANY
+        baseClass::String extendedElement::Dependency
 StateMachine:
-        context::ANY top::ANY
+        context::Class top::State
 State:
-        stateMachine::ANY internal::ANY
+        CompositeState
+State:
+        SimpleState
+State:
+        FinalState
+State:
+        stateMachine::StateMachine internal::Transition
 CompositeState:
-        subvertex::ANY
+        subvertex::StateVertex
 SimpleState:
         EPSILON
 FinalState:
         EPSILON
 StateVertex:
-        compositeState::ANY
+        State
+StateVertex:
+        PseudoState
+StateVertex:
+        compositeState::CompositeState
 PseudoState:
         EPSILON
 Transition:
-        trigger::ANY source::ANY target::ANY
+        trigger::Event source::StateVertex target::StateVertex
 Event:
         EPSILON

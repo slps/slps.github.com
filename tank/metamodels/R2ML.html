@@ -13,7 +13,7 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable R2ML 4.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Adrian Giurca (giurca at tu-cottbus.de), Milan Milanovic (milan at milanovic.org), <code>R2ML.ecore</code>, 2006/12/15.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>11</strong></li><li>Number of top alternatives: <strong>26</strong></li><li>Number of defined nonterminal symbols: <strong>11</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>11</strong>: <code><a href="#CollectionTypes" class="nt">CollectionTypes</a>, <a href="#PredicateCategory" class="nt">PredicateCategory</a>, <a href="#ExternalVocabularyLanguage" class="nt">ExternalVocabularyLanguage</a>, <a href="#PredicateType" class="nt">PredicateType</a>, <a href="#ReactionRuleSet" class="nt">ReactionRuleSet</a>, <a href="#ProductionRuleSet" class="nt">ProductionRuleSet</a>, <a href="#EventType" class="nt">EventType</a>, <a href="#RuleSet" class="nt">RuleSet</a>, <a href="#RuleBase" class="nt">RuleBase</a>, <a href="#IntegrityRuleSet" class="nt">IntegrityRuleSet</a>, <a href="#DerivationRuleSet" class="nt">DerivationRuleSet</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="CollectionTypes">CollectionTypes</a>:
+				</script></head><body><h1 class="l">Browsable R2ML 4.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Adrian Giurca (giurca at tu-cottbus.de), Milan Milanovic (milan at milanovic.org), <code>R2ML.ecore</code>, 2006/12/15.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>14</strong></li><li>Number of top alternatives: <strong>29</strong></li><li>Number of defined nonterminal symbols: <strong>11</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>6</strong>: <code><a href="#CollectionTypes" class="nt">CollectionTypes</a>, <a href="#PredicateCategory" class="nt">PredicateCategory</a>, <a href="#ExternalVocabularyLanguage" class="nt">ExternalVocabularyLanguage</a>, <a href="#PredicateType" class="nt">PredicateType</a>, <a href="#EventType" class="nt">EventType</a>, <a href="#RuleBase" class="nt">RuleBase</a></code></li><li>Bottom nonterminal symbols: <strong>7</strong>: <code><a href="#Rules/ReactionRule" class="nt">Rules/ReactionRule</a>, <a href="#Rules/ProductionRule" class="nt">Rules/ProductionRule</a>, <a href="#String" class="nt">String</a>, <a href="#Vocabulary/VocBasic/Vocabulary" class="nt">Vocabulary/VocBasic/Vocabulary</a>, <a href="#Vocabulary/VocBuiltin/ExternalVocabulary" class="nt">Vocabulary/VocBuiltin/ExternalVocabulary</a>, <a href="#Rules/IntegrityRule" class="nt">Rules/IntegrityRule</a>, <a href="#Rules/DerivationRule" class="nt">Rules/DerivationRule</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="CollectionTypes">CollectionTypes</a>:
         <span class="sel">individual</span>::ε
         <span class="sel">set</span>::ε
         <span class="sel">orderedSet</span>::ε
@@ -37,18 +37,24 @@
         <span class="sel">DatatypePredicate</span>::ε
         <span class="sel">DataClassificationPredicate</span>::ε
 </pre><pre><a class="nt" name="ReactionRuleSet">ReactionRuleSet</a>:
-        <span class="sel">rules</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">rules</span>::<a class="nt" href="#Rules/ReactionRule">Rules/ReactionRule</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="ProductionRuleSet">ProductionRuleSet</a>:
-        <span class="sel">rules</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">rules</span>::<a class="nt" href="#Rules/ProductionRule">Rules/ProductionRule</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="EventType">EventType</a>:
-        <span class="sel">eventTypeID</span>::<span class="meta">any</span>
+        <span class="sel">eventTypeID</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="RuleSet">RuleSet</a>:
-        ε
+        <a class="nt" href="#ReactionRuleSet">ReactionRuleSet</a>
+</pre><pre><a class="nt" name="RuleSet">RuleSet</a>:
+        <a class="nt" href="#ProductionRuleSet">ProductionRuleSet</a>
+</pre><pre><a class="nt" name="RuleSet">RuleSet</a>:
+        <a class="nt" href="#IntegrityRuleSet">IntegrityRuleSet</a>
+</pre><pre><a class="nt" name="RuleSet">RuleSet</a>:
+        <a class="nt" href="#DerivationRuleSet">DerivationRuleSet</a>
 </pre><pre><a class="nt" name="RuleBase">RuleBase</a>:
-        <span class="sel">vocabularies</span>::<span class="meta">any</span> <span class="sel">externalVocabulaires</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">rules</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">ruleBaseID</span>::<span class="meta">any</span>
+        <span class="sel">vocabularies</span>::<a class="nt" href="#Vocabulary/VocBasic/Vocabulary">Vocabulary/VocBasic/Vocabulary</a> <span class="sel">externalVocabulaires</span>::<a class="nt" href="#Vocabulary/VocBuiltin/ExternalVocabulary">Vocabulary/VocBuiltin/ExternalVocabulary</a><span class="meta">+</span> <span class="sel">rules</span>::<a class="nt" href="#RuleSet">RuleSet</a><span class="meta">+</span> <span class="sel">ruleBaseID</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="IntegrityRuleSet">IntegrityRuleSet</a>:
-        <span class="sel">rules</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">rules</span>::<a class="nt" href="#Rules/IntegrityRule">Rules/IntegrityRule</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="DerivationRuleSet">DerivationRuleSet</a>:
-        <span class="sel">rules</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">rules</span>::<a class="nt" href="#Rules/DerivationRule">Rules/DerivationRule</a><span class="meta">+</span>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

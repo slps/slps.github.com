@@ -1,64 +1,112 @@
 Element:
-        EPSILON
+        CPL
+Element:
+        NodeContainer
+Element:
+        Node
 CPL:
-        subActions::ANY+ outgoing::ANY incoming::ANY
+        subActions::SubAction+ outgoing::Outgoing incoming::Incoming
 NodeContainer:
-        EPSILON
+        SubAction
+NodeContainer:
+        Outgoing
+NodeContainer:
+        Incoming
+NodeContainer:
+        NotPresent
+NodeContainer:
+        Otherwise
+NodeContainer:
+        SwitchedAddress
+NodeContainer:
+        SwitchedString
+NodeContainer:
+        SwitchedLanguage
+NodeContainer:
+        SwitchedTime
+NodeContainer:
+        SwitchedPriority
+NodeContainer:
+        Busy
+NodeContainer:
+        NoAnswer
+NodeContainer:
+        Redirection
+NodeContainer:
+        Failure
+NodeContainer:
+        Default
 SubAction:
-        id::ANY
+        id::String
 Outgoing:
-        contents::ANY
+        contents::Node
 Incoming:
-        contents::ANY
+        contents::Node
 NotPresent:
-        contents::ANY
+        contents::Node
 Otherwise:
-        contents::ANY
+        contents::Node
 SwitchedAddress:
-        is::ANY contains::ANY subDomainOf::ANY
+        is::String contains::String subDomainOf::String
 SwitchedString:
-        is::ANY contains::ANY
+        is::String contains::String
 SwitchedLanguage:
-        matches::ANY
+        matches::String
 SwitchedTime:
-        dtstart::ANY dtend::ANY duration::ANY freq::ANY until::ANY count::ANY interval::ANY bySecond::ANY byMinute::ANY byHour::ANY byDay::ANY byMonthDay::ANY byYearDay::ANY byWeekNo::ANY byMonth::ANY wkst::ANY bySetPos::ANY
+        dtstart::String dtend::String duration::String freq::String until::String count::String interval::String bySecond::String byMinute::String byHour::String byDay::String byMonthDay::String byYearDay::String byWeekNo::String byMonth::String wkst::String bySetPos::String
 SwitchedPriority:
-        less::ANY greater::ANY equal::ANY
+        less::String greater::String equal::String
 Busy:
-        contents::ANY
+        contents::Node
 NoAnswer:
-        contents::ANY
+        contents::Node
 Redirection:
-        contents::ANY
+        contents::Node
 Failure:
-        contents::ANY
+        contents::Node
 Default:
-        contents::ANY
+        contents::Node
 Node:
-        EPSILON
+        Switch
+Node:
+        SubCall
+Node:
+        Action
 Switch:
-        EPSILON
+        AddressSwitch
+Switch:
+        StringSwitch
+Switch:
+        LanguageSwitch
+Switch:
+        TimeSwitch
+Switch:
+        PrioritySwitch
 AddressSwitch:
-        field::ANY subField::ANY addresses::ANY+
+        field::String subField::String addresses::SwitchedAddress+
 StringSwitch:
-        field::ANY strings::ANY+
+        field::String strings::SwitchedString+
 LanguageSwitch:
-        languages::ANY+
+        languages::SwitchedLanguage+
 TimeSwitch:
-        tzid::ANY tzurl::ANY times::ANY+
+        tzid::String tzurl::String times::SwitchedTime+
 PrioritySwitch:
-        priorities::ANY+
+        priorities::SwitchedPriority+
 Location:
-        url::ANY priority::ANY clear::ANY
+        url::String priority::String clear::String
 SubCall:
-        ref::ANY
+        ref::String
 Action:
-        EPSILON
+        SignallingAction
 SignallingAction:
-        EPSILON
+        Proxy
+SignallingAction:
+        Redirect
+SignallingAction:
+        Reject
 Proxy:
-        timeout::ANY recurse::ANY ordering::ANY busy::ANY noAnswer::ANY redirection::ANY failure::ANY default::ANY
+        timeout::String recurse::String ordering::String busy::Busy noAnswer::NoAnswer redirection::Redirection failure::Failure default::Default
 Redirect:
-        permanent::ANY
+        permanent::String
 Reject:
-        status::ANY reason::ANY
+        status::String reason::String

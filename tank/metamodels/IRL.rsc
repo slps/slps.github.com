@@ -2,30 +2,38 @@
 module IRL
 
 syntax Element
-        = 
-        ANY location ANY commentsBefore+ ANY commentsAfter+
+        = NamedElement
+        | Extended
+        | Typed
+        | RuleSetDeclaration
+        | Binding
+        | RuleCondition
+        | RuleAction
+        | String location String commentsBefore+ String commentsAfter+
  ;
 syntax NamedElement
-        = 
-        ()
+        = ExtendedIdentifier
+        | RuleSet
+        | Type
+        | RulesetElementDefinition
  ;
 syntax ExtendedIdentifier
         = 
-        ANY parentIdentifier ANY extendedIdentifierOwner
+        ExtendedIdentifier parentIdentifier Extended extendedIdentifierOwner
  ;
 syntax Extended
         = 
-        ()
+        Definition
  ;
 syntax Definition
-        = 
-        ()
+        = ImportDefinition
+        | PropertyDefinition
  ;
 syntax RuleSet
         = 
-        ANY importDefinitions+ ANY propertyDefinitions ANY rulesetElementDefinitions+
+        ImportDefinition importDefinitions+ IRLDeclarations/PropertyDefinition propertyDefinitions IRLRules/RulesetElementDefinition rulesetElementDefinitions+
  ;
 syntax ImportDefinition
         = 
-        ANY importDefinitionOwners ANY dotStar
+        RuleSet importDefinitionOwners Boolean dotStar
  ;

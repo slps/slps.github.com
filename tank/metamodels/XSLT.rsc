@@ -2,28 +2,36 @@
 module XSLT
 
 syntax Node
-        = 
-        ()
+        = ElementNode
+        | AttributeNode
  ;
 syntax ElementNode
-        = 
-        ANY nodes+
+        = RootNode
+        | TextNode
+        | XSLTNode
+        | Node nodes+
  ;
 syntax AttributeNode
         = 
-        ANY name ANY parentNode
+        String name ElementNode parentNode
  ;
 syntax RootNode
-        = 
-        document: ANY
+        = XSLTRootNode
+        | document: Document
  ;
 syntax TextNode
         = 
-        value: ANY
+        value: String
  ;
 syntax XSLTNode
-        = 
-        ()
+        = ApplyTemplates
+        | If
+        | Template
+        | ValueOf
+        | When
+        | Choose
+        | Otherwise
+        | Sort
  ;
 syntax XSLTRootNode
         = 
@@ -31,37 +39,37 @@ syntax XSLTRootNode
  ;
 syntax Document
         = 
-        ANY documentName ANY document
+        String documentName RootNode document
  ;
 syntax ApplyTemplates
         = 
-        select: ANY
+        select: String
  ;
 syntax If
         = 
-        test: ANY
+        test: String
  ;
 syntax Template
         = 
-        match: ANY
+        match: String
  ;
 syntax ValueOf
         = 
-        select: ANY
+        select: String
  ;
 syntax When
         = 
-        test: ANY
+        test: String
  ;
 syntax Choose
         = 
-        ANY when ANY otherwise
+        When when Otherwise otherwise
  ;
 syntax Otherwise
         = 
-        
+        ()
  ;
 syntax Sort
         = 
-        select: ANY
+        select: String
  ;

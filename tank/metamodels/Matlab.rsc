@@ -3,71 +3,77 @@ module Matlab
 
 syntax Matlab
         = 
-        ANY model+
+        Model model+
  ;
 syntax BlockDefaults
-        = 
-        ANY blockDefaults ANY model
+        = Block
+        | String blockDefaults Model model
  ;
 syntax Model
         = 
-        ANY name ANY matlab ANY annotationDefaults+ ANY system+ ANY blockDefaults+ ANY lineDefaults+ ANY simulink
+        String name Matlab matlab AnnotationDefaults annotationDefaults+ System system+ BlockDefaults blockDefaults+ LineDefaults lineDefaults+ Simulink simulink
  ;
 syntax AnnotationDefaults
-        = 
-        ANY annotationDefaults ANY model
+        = Annotation
+        | String annotationDefaults Model model
  ;
 syntax LineDefaults
-        = 
-        ANY lineDefaults ANY model
+        = Line
+        | String lineDefaults Model model
  ;
 syntax System
         = 
-        ANY name ANY blocks+ ANY lines+ ANY annotations+ ANY model ANY parentSubsystem
+        String name Block blocks+ Line lines+ Annotation annotations+ Model model Subsystem parentSubsystem
  ;
 syntax Subsystem
-        = 
-        system: ANY
+        = Masked
+        | Normal
+        | system: System
  ;
 syntax Block
-        = 
-        ANY name ANY blockType ANY description ANY priority ANY tag ANY position ANY mySystem ANY ports+
+        = Subsystem
+        | Primitive
+        | Reference
+        | String name String blockType String description String priority String tag String position System mySystem Port ports+
  ;
 syntax Annotation
         = 
-        ANY position ANY text ANY system
+        String position String text System system
  ;
 syntax Line
-        = 
-        ANY points ANY id ANY srcPort ANY system
+        = DirectLine
+        | BranchedLine
+        | String points String id OutputPort srcPort System system
  ;
 syntax DirectLine
         = 
-        destPort1: ANY
+        destPort1: InputPort
  ;
 syntax InputPort
         = 
-        ANY owningDirectLine ANY owningDirectBranch
+        DirectLine owningDirectLine DirectBranch owningDirectBranch
  ;
 syntax Branch
-        = 
-        ANY points ANY branchedLine ANY nestedBranch
+        = DirectBranch
+        | NestedBranch
+        | String points BranchedLine branchedLine NestedBranch nestedBranch
  ;
 syntax BranchedLine
         = 
-        ANY branchs+
+        Branch branchs+
  ;
 syntax Primitive
         = 
-        ANY id ANY parameters+ ANY refPort
+        String id Parameter parameters+ Port refPort
  ;
 syntax Port
-        = 
-        ANY id ANY number ANY portBlock ANY primitive
+        = InputPort
+        | OutputPort
+        | String id String number Block portBlock Primitive primitive
  ;
 syntax Reference
         = 
-        ANY sourceType ANY sourceBlock ANY parameters+
+        String sourceType String sourceBlock Parameter parameters+
  ;
 syntax Masked
         = 
@@ -78,32 +84,38 @@ syntax Normal
         ()
  ;
 syntax Parameter
-        = 
-        ANY name ANY le_reference ANY primitive
+        = Type
+        | Double
+        | INteger
+        | Enumeration
+        | BOolean
+        | Text
+        | Vector
+        | String name Reference le_reference Primitive primitive
  ;
 syntax OutputPort
         = 
-        owningLine: ANY
+        owningLine: Line
  ;
 syntax Type
         = 
-        value: ANY
+        value: String
  ;
 syntax Double
         = 
-        value: ANY
+        value: String
  ;
 syntax INteger
         = 
-        value: ANY
+        value: String
  ;
 syntax Enumeration
         = 
-        value: ANY
+        value: String
  ;
 syntax BOolean
         = 
-        value: ANY
+        value: TrueFalse
  ;
 syntax TrueFalse
         = True: ()
@@ -111,77 +123,77 @@ syntax TrueFalse
  ;
 syntax Text
         = 
-        value: ANY
+        value: String
  ;
 syntax Vector
         = 
-        value: ANY
+        value: String
  ;
 syntax DirectBranch
         = 
-        ANY id ANY destPort
+        String id InputPort destPort
  ;
 syntax NestedBranch
         = 
-        ANY branchs+
+        Branch branchs+
  ;
 syntax Machine
         = 
-        ANY name ANY id ANY events+ ANY data+ ANY instances+ ANY targets+ ANY stateFlow
+        String name String id Event events+ Data data+ Instance instances+ Target targets+ StateFlow stateFlow
  ;
 syntax Junction
         = 
-        ANY _id ANY id ANY type ANY position ANY state ANY chart
+        String _id String id String type String position State state Chart chart
  ;
 syntax Transition
         = 
-        ANY _id ANY dataLimites ANY id ANY trigger ANY condition ANY conditionAction ANY action ANY chart ANY state
+        String _id String dataLimites String id String trigger String condition String conditionAction String action Chart chart State state
  ;
 syntax Event
         = 
-        ANY name ANY id ANY scope ANY description ANY trigger ANY machine ANY chart ANY state
+        String name String id String scope String description String trigger Machine machine Chart chart State state
  ;
 syntax Data
         = 
-        ANY name ANY id ANY scope ANY description ANY units ANY dataType ANY props+ ANY state ANY chart ANY machine
+        String name String id String scope String description String units String dataType Props props+ State state Chart chart Machine machine
  ;
 syntax Instance
         = 
-        ANY _id ANY id ANY name ANY machine
+        String _id String id String name Machine machine
  ;
 syntax Target
         = 
-        ANY name ANY id ANY codeCommand ANY description ANY makeCommand ANY codeFlags ANY checksumOld ANY machine
+        String name String id String codeCommand String description String makeCommand String codeFlags String checksumOld Machine machine
  ;
 syntax Chart
         = 
-        ANY name ANY id ANY _id ANY decomposotion ANY updateMethode ANY sampleTime ANY junctions+ ANY events+ ANY transitions+ ANY data+ ANY states+
+        String name String id String _id String decomposotion String updateMethode String sampleTime Junction junctions+ Event events+ Transition transitions+ Data data+ State states+
  ;
 syntax State
         = 
-        ANY name ANY id ANY _id ANY type ANY entryAction ANY exitAction ANY duringAction ANY eventActions ANY decomposition ANY position ANY junctions+ ANY events+ ANY transitions+ ANY data+ ANY chart ANY states+
+        String name String id String _id String type String entryAction String exitAction String duringAction String eventActions String decomposition String position Junction junctions+ Event events+ Transition transitions+ Data data+ Chart chart State states+
  ;
 syntax Props
         = 
-        ANY initialValue ANY arrays+ ANY ranges+ ANY data
+        String initialValue Array arrays+ Range ranges+ Data data
  ;
 syntax Range
         = 
-        ANY maximum ANY minimum ANY props
+        String maximum String minimum Props props
  ;
 syntax Array
         = 
-        ANY firstIndex ANY size ANY props
+        String firstIndex String size Props props
  ;
 syntax StateFlow
         = 
-        ANY stateFlow ANY machines+ ANY simulink
+        String stateFlow Machine machines+ Simulink simulink
  ;
 syntax TransitionTerminal
         = 
-        _id: ANY
+        _id: String
  ;
 syntax Simulink
         = 
-        ANY simulink ANY stateFlows+ ANY models+
+        String simulink StateFlow stateFlows+ Model models+
  ;

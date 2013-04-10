@@ -1,13 +1,17 @@
 Task:
-        id::ANY name::ANY category::ANY frequency::ANY importance::ANY structurationLevel::ANY complexityLevel::ANY criticity::ANY centrality::ANY terminationValue::ANY taskType::ANY taskItem::ANY decompositionTasks::ANY+ decomposedTask::ANY leftOperator::ANY rightOperator::ANY decoration::ANY
+        id::String name::String category::String frequency::Integer importance::Integer structurationLevel::Integer complexityLevel::Integer criticity::Integer centrality::Integer terminationValue::String taskType::String taskItem::String decompositionTasks::Task+ decomposedTask::Task leftOperator::BinaryOperator rightOperator::BinaryOperator decoration::UnaryOperator
 Operator:
-        EPSILON
+        BinaryOperator
+Operator:
+        UnaryOperator
 BinaryOperator:
-        type::ANY leftTask::ANY rightTask::ANY
+        type::BinaryType leftTask::Task rightTask::Task
 UnaryOperator:
-        UnaryType::ANY decoratedTask::ANY
+        FiniteInteration
+UnaryOperator:
+        UnaryType::UnaryType decoratedTask::Task
 FiniteInteration:
-        interation::ANY
+        interation::Integer
 BinaryType:
         Enabling::EPSILON
         Disabling::EPSILON

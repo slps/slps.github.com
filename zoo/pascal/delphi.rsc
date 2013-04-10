@@ -919,3 +919,7 @@ syntax At_address
         = 
         "at" Expr
  ;
+syntax Anynumber
+        = Hexnumber
+        | Number
+ ;

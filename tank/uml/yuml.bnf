@@ -1,29 +1,47 @@
 LocatedElement:
-        EPSILON
+        Model
+LocatedElement:
+        Class
+LocatedElement:
+        ModelElement
+LocatedElement:
+        ClassDefinition
+LocatedElement:
+        Cardinality
+LocatedElement:
+        ClassMember
 Model:
-        classes::ANY+ elements::ANY+
+        classes::Class+ elements::ModelElement+
 Class:
-        name::ANY
+        name::String
 ModelElement:
-        EPSILON
+        ColorableElement
+ModelElement:
+        Relationship
 ColorableElement:
-        EPSILON
+        ClassReference
+ColorableElement:
+        Note
 ClassReference:
-        class::ANY stereotype::ANY definition::ANY
+        class::Class stereotype::String definition::ClassDefinition
 AssociationType:
         simpleAssociation::EPSILON
         aggregation::EPSILON
         composition::EPSILON
 Relationship:
-        EPSILON
+        Association
+Relationship:
+        Inheritance
+Relationship:
+        NoteAssociation
 ClassDefinition:
-        attributes::ANY+ methods::ANY+
+        attributes::Attribute+ methods::Method+
 Association:
-        type::ANY sourceCardinality::ANY sourceLabel::ANY navigableSource::ANY sourceVisibility::ANY targetCardinality::ANY targetLabel::ANY navigableTarget::ANY targetVisibility::ANY
+        type::AssociationType sourceCardinality::Cardinality sourceLabel::String navigableSource::Boolean sourceVisibility::Visibility targetCardinality::Cardinality targetLabel::String navigableTarget::Boolean targetVisibility::Visibility
 Inheritance:
-        source::ANY target::ANY
+        source::ClassReference target::ClassReference
 Cardinality:
-        lowerBound::ANY upperBound::ANY
+        lowerBound::Integer upperBound::Integer
 Visibility:
         unspecified::EPSILON
         public::EPSILON
@@ -31,12 +49,14 @@ Visibility:
         protected::EPSILON
         package::EPSILON
 ClassMember:
-        EPSILON
+        Attribute
+ClassMember:
+        Method
 Attribute:
-        type::ANY
+        type::String
 Method:
-        arguments::ANY+
+        arguments::String+
 Note:
-        text::ANY+
+        text::String+
 NoteAssociation:
-        note::ANY
+        note::Note

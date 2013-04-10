@@ -1,13 +1,30 @@
 CDerived:
-        EPSILON
+        CPPReference
+CDerived:
+        CPPExtern
+CDerived:
+        CPPConst
+CDerived:
+        CPPTemplate
+CDerived:
+        CPPReference
+        CPPExtern
+        CPPConst
+        CPPTemplate
 CStructured:
-        EPSILON
+        CPPClass
+CStructured:
+        CPPClass
 CBehavorialFeature:
-        EPSILON
+        CFunction
+CBehavorialFeature:
+        CFunction
 CFunction:
-        isVsrArg::ANY
+        isVsrArg::Boolean
 CStructureContents:
-        EPSILON
+        CPPOperator
+CStructureContents:
+        CPPOperator
 CField:
         EPSILON
 CDerivableType:
@@ -19,18 +36,18 @@ VisibilityKind:
 CPPReference:
         EPSILON
 CPPExtern:
-        linkage::ANY
+        linkage::String
 CPPConst:
         EPSILON
 CPPTemplate:
-        classes::ANY+
+        classes::CPPClass+
 CPPClass:
-        isAbstract::ANY isVolatile::ANY visibility::ANY templates::ANY+ generalizations::ANY+
+        isAbstract::Boolean isVolatile::Boolean visibility::VisibilityKind templates::CPPTemplate+ generalizations::CPPGeneralization+
 CPPGeneralization:
-        visibility::ANY isVirtual::ANY supertype::ANY
+        visibility::VisibilityKind isVirtual::Boolean supertype::CPPClass
 CPPOperation:
-        isStatic::ANY isExtern::ANY isInline::ANY isVirtual::ANY isPure::ANY visibility::ANY isCtor::ANY isDtor::ANY throws::ANY+
+        isStatic::Boolean isExtern::Boolean isInline::Boolean isVirtual::Boolean isPure::Boolean visibility::VisibilityKind isCtor::Boolean isDtor::Boolean throws::CPPClass+
 CPPOperator:
-        isInline::ANY visibility::ANY
+        isInline::Boolean visibility::VisibilityKind
 CPPMember:
-        isStatic::ANY isVolatile::ANY isRegister::ANY visibility::ANY
+        isStatic::Boolean isVolatile::Boolean isRegister::Boolean visibility::VisibilityKind

@@ -13,27 +13,31 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable AWKPrograms 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Hugo Bruneliere, <code>AWKPrograms.ecore</code>, 2005/08/09.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>11</strong></li><li>Number of top alternatives: <strong>11</strong></li><li>Number of defined nonterminal symbols: <strong>11</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>11</strong>: <code><a href="#AWKProgram" class="nt">AWKProgram</a>, <a href="#File" class="nt">File</a>, <a href="#Record" class="nt">Record</a>, <a href="#Field" class="nt">Field</a>, <a href="#Script" class="nt">Script</a>, <a href="#Rule" class="nt">Rule</a>, <a href="#Pattern" class="nt">Pattern</a>, <a href="#Action" class="nt">Action</a>, <a href="#Instruction" class="nt">Instruction</a>, <a href="#InitialRule" class="nt">InitialRule</a>, <a href="#FinalRule" class="nt">FinalRule</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="AWKProgram">AWKProgram</a>:
-        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">input</span>::<span class="meta">any</span> <span class="sel">output</span>::<span class="meta">any</span> <span class="sel">script</span>::<span class="meta">any</span>
+				</script></head><body><h1 class="l">Browsable AWKPrograms 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Hugo Bruneliere, <code>AWKPrograms.ecore</code>, 2005/08/09.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>13</strong></li><li>Number of top alternatives: <strong>13</strong></li><li>Number of defined nonterminal symbols: <strong>11</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#AWKProgram" class="nt">AWKProgram</a></code></li><li>Bottom nonterminal symbols: <strong>1</strong>: <code><a href="#String" class="nt">String</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="AWKProgram">AWKProgram</a>:
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">input</span>::<a class="nt" href="#File">File</a> <span class="sel">output</span>::<a class="nt" href="#File">File</a> <span class="sel">script</span>::<a class="nt" href="#Script">Script</a>
 </pre><pre><a class="nt" name="File">File</a>:
-        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">records</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">records</span>::<a class="nt" href="#Record">Record</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Record">Record</a>:
-        <span class="sel">r_file</span>::<span class="meta">any</span> <span class="sel">fields</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">r_file</span>::<a class="nt" href="#File">File</a> <span class="sel">fields</span>::<a class="nt" href="#Field">Field</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Field">Field</a>:
-        <span class="sel">value</span>::<span class="meta">any</span> <span class="sel">f_record</span>::<span class="meta">any</span>
+        <span class="sel">value</span>::<a class="nt" href="#String">String</a> <span class="sel">f_record</span>::<a class="nt" href="#Record">Record</a>
 </pre><pre><a class="nt" name="Script">Script</a>:
-        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">rules</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">rules</span>::<a class="nt" href="#Rule">Rule</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Rule">Rule</a>:
-        <span class="sel">r_script</span>::<span class="meta">any</span> <span class="sel">pattern</span>::<span class="meta">any</span> <span class="sel">action</span>::<span class="meta">any</span>
+        <a class="nt" href="#InitialRule">InitialRule</a>
+</pre><pre><a class="nt" name="Rule">Rule</a>:
+        <a class="nt" href="#FinalRule">FinalRule</a>
+</pre><pre><a class="nt" name="Rule">Rule</a>:
+        <span class="sel">r_script</span>::<a class="nt" href="#Script">Script</a> <span class="sel">pattern</span>::<a class="nt" href="#Pattern">Pattern</a> <span class="sel">action</span>::<a class="nt" href="#Action">Action</a>
 </pre><pre><a class="nt" name="Pattern">Pattern</a>:
-        <span class="sel">regularExpression</span>::<span class="meta">any</span>
+        <span class="sel">regularExpression</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Action">Action</a>:
-        <span class="sel">instructions</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">instructions</span>::<a class="nt" href="#Instruction">Instruction</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Instruction">Instruction</a>:
-        <span class="sel">value</span>::<span class="meta">any</span> <span class="sel">i_action</span>::<span class="meta">any</span>
+        <span class="sel">value</span>::<a class="nt" href="#String">String</a> <span class="sel">i_action</span>::<a class="nt" href="#Action">Action</a>
 </pre><pre><a class="nt" name="InitialRule">InitialRule</a>:
         ε
 </pre><pre><a class="nt" name="FinalRule">FinalRule</a>:
         ε
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

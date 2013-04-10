@@ -3,57 +3,59 @@ module WSDL
 
 syntax Port
         = 
-        ANY name ANY service ANY binding
+        String name Service service Binding binding
  ;
 syntax Service
         = 
-        ANY name ANY ports+
+        String name Port ports+
  ;
 syntax Param
-        = 
-        ANY name ANY message
+        = Input
+        | Output
+        | String name Message message
  ;
 syntax Input
         = 
-        operation: ANY
+        operation: Operation
  ;
 syntax Output
         = 
-        operation: ANY
+        operation: Operation
  ;
 syntax PortType
         = 
-        ANY name ANY operations+ ANY bindings+
+        String name Operation operations+ Binding bindings+
  ;
 syntax Operation
         = 
-        ANY name ANY input ANY output ANY type ANY faults+
+        String name Input input Output output PortType type Fault faults+
  ;
 syntax StartWithExtensions
-        = 
-        ()
+        = Binding
+        | BindingFault
+        | BindingOperation
  ;
 syntax Binding
         = 
-        ANY name ANY ports+ ANY type ANY operations+
+        String name Port ports+ PortType type BindingOperation operations+
  ;
 syntax BindingFault
         = 
-        ANY operation ANY binding
+        BindingOperation operation Fault binding
  ;
 syntax BindingOperation
         = 
-        ANY name ANY bind ANY binding ANY input ANY output ANY faults+
+        String name Binding bind Operation binding StartWithExtensions input StartWithExtensions output BindingFault faults+
  ;
 syntax Fault
         = 
-        ANY name ANY operation ANY message
+        String name Operation operation Message message
  ;
 syntax Message
         = 
-        ANY name ANY params+ ANY faults+ ANY parts+
+        String name Param params+ Fault faults+ Part parts+
  ;
 syntax Part
         = 
-        ANY name ANY message
+        String name Message message
  ;

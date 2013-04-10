@@ -2,69 +2,89 @@ module Main
 
 exports
   sorts
-        AttributeUseType AnnotedElement Annotation Documentation ApplicationInfo NamedElement XSchema XSchemaContentElement Parameters Element Occurable AbstractContent Container AtomicContent ElementRef GroupRef All Group Choice Sequence AbstractAttributeGroupContent AttributeGroup AttributeGroupRef AtomicAttributeGroupContent Attribute AttributeRef AbstractType SimpleType ComplexType ComplexTypeSimpleContent ComplexTypeComplexContent 
+        AttributeUseType AnnotedElement Annotation Documentation ApplicationInfo NamedElement XSchema XSchemaContentElement Element Occurable AbstractContent Container AtomicContent ElementRef GroupRef All Group Choice Sequence AbstractAttributeGroupContent AttributeGroup AttributeGroupRef AtomicAttributeGroupContent Attribute AttributeRef AbstractType SimpleType ComplexType ComplexTypeSimpleContent ComplexTypeComplexContent 
   context-free syntax
         null:: -> AttributeUseType
         optional:: -> AttributeUseType
         prohibited:: -> AttributeUseType
         required:: -> AttributeUseType
 
-         -> AnnotedElement
+        NamedElement -> AnnotedElement
 
-        documentations::ANY+ applicationInfos::ANY+ annotedElement::ANY -> Annotation
+        XSchema -> AnnotedElement
 
-        text::ANY -> Documentation
+        documentations::Documentation+ applicationInfos::ApplicationInfo+ annotedElement::AnnotedElement -> Annotation
 
-        text::ANY -> ApplicationInfo
+        text::String -> Documentation
 
-         -> NamedElement
+        text::String -> ApplicationInfo
 
-        namespace::ANY contents::ANY+ -> XSchema
+        XSchemaContentElement -> NamedElement
 
-         -> XSchemaContentElement
+        namespace::String contents::XSchemaContentElement+ -> XSchema
 
-         -> Parameters
+        Parameters -> XSchemaContentElement
 
-        references::ANY+ -> Element
+        AbstractType -> XSchemaContentElement
 
-         -> Occurable
+        references::ElementRef+ -> Element
 
-         -> AbstractContent
+        AbstractContent -> Occurable
 
-         -> Container
+        AbstractAttributeGroupContent -> Occurable
 
-         -> AtomicContent
+        Container -> AbstractContent
 
-        referencedElement::ANY -> ElementRef
+        AtomicContent -> AbstractContent
 
-        referencedGroup::ANY -> GroupRef
+        All -> Container
 
-        contents::ANY+ -> All
+        Choice -> Container
 
-        references::ANY+ -> Group
+        Sequence -> Container
 
-        contents::ANY+ -> Choice
+        ElementRef -> AtomicContent
 
-        contents::ANY+ -> Sequence
+        GroupRef -> AtomicContent
 
-         -> AbstractAttributeGroupContent
+        referencedElement::Element -> ElementRef
 
-        contents::ANY+ references::ANY+ -> AttributeGroup
+        referencedGroup::Group -> GroupRef
 
-        referencedAttributeGroup::ANY -> AttributeGroupRef
+        contents::AbstractContent+ -> All
 
-         -> AtomicAttributeGroupContent
+        references::GroupRef+ -> Group
 
-        use::ANY references::ANY+ -> Attribute
+        contents::AbstractContent+ -> Choice
 
-        referencedAttribute::ANY -> AttributeRef
+        contents::AbstractContent+ -> Sequence
 
-         -> AbstractType
+        AtomicAttributeGroupContent -> AbstractAttributeGroupContent
 
-        extensions::ANY+ -> SimpleType
+        contents::AbstractAttributeGroupContent+ references::AttributeGroupRef+ -> AttributeGroup
 
-        extensions::ANY+ content::ANY attributes::ANY+ -> ComplexType
+        referencedAttributeGroup::AttributeGroup -> AttributeGroupRef
 
-        base::ANY -> ComplexTypeSimpleContent
+        AttributeGroupRef -> AtomicAttributeGroupContent
 
-        base::ANY -> ComplexTypeComplexContent
+        AttributeRef -> AtomicAttributeGroupContent
+
+        use::AttributeUseType references::AttributeRef+ -> Attribute
+
+        referencedAttribute::Attribute -> AttributeRef
+
+        SimpleType -> AbstractType
+
+        ComplexType -> AbstractType
+
+        extensions::ComplexTypeSimpleContent+ -> SimpleType
+
+        ComplexTypeSimpleContent -> ComplexType
+
+        ComplexTypeComplexContent -> ComplexType
+
+        extensions::ComplexTypeComplexContent+ content::AbstractContent attributes::AbstractAttributeGroupContent+ -> ComplexType
+
+        base::SimpleType -> ComplexTypeSimpleContent
+
+        base::ComplexType -> ComplexTypeComplexContent

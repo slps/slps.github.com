@@ -1,12 +1,12 @@
 WorkflowProcessDefinition:
-        participantSpecificatons::ANY+ revelantDatas::ANY+ applicationDeclarations::ANY+ processActivities::ANY+ transitionInformations::ANY+
+        participantSpecificatons::WorkflowParticipantSpecification+ revelantDatas::WorkflowRelevantData+ applicationDeclarations::WorkflowApplicationDeclaration+ processActivities::WorkflowProcessActivity+ transitionInformations::TransitionInformation+
 WorkflowApplicationDeclaration:
-        processDefinition::ANY processActivities::ANY+ revelantDatas::ANY+
+        processDefinition::WorkflowProcessDefinition processActivities::WorkflowProcessActivity+ revelantDatas::WorkflowRelevantData+
 WorkflowRelevantData:
-        processDefinition::ANY applicationDeclarations::ANY+ processActivities::ANY+ participantSpecifications::ANY+ transitionInformations::ANY+
+        processDefinition::WorkflowProcessDefinition applicationDeclarations::WorkflowApplicationDeclaration+ processActivities::WorkflowProcessActivity+ participantSpecifications::WorkflowParticipantSpecification+ transitionInformations::TransitionInformation+
 WorkflowParticipantSpecification:
-        processDefinition::ANY revelantDatas::ANY+ processActivities::ANY+
+        processDefinition::WorkflowProcessDefinition revelantDatas::WorkflowRelevantData+ processActivities::WorkflowProcessActivity+
 WorkflowProcessActivity:
-        processDefinition::ANY applicationDeclarations::ANY+ revelantDatas::ANY+ participantSpecifications::ANY+ to_transitionInformation::ANY from_transitionInformation::ANY
+        processDefinition::WorkflowProcessDefinition applicationDeclarations::WorkflowApplicationDeclaration+ revelantDatas::WorkflowRelevantData+ participantSpecifications::WorkflowParticipantSpecification+ to_transitionInformation::TransitionInformation from_transitionInformation::TransitionInformation
 TransitionInformation:
-        processDefinition::ANY revelantDatas::ANY+ to_processActivity::ANY from_processActivity::ANY
+        processDefinition::WorkflowProcessDefinition revelantDatas::WorkflowRelevantData+ to_processActivity::WorkflowProcessActivity from_processActivity::WorkflowProcessActivity

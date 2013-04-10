@@ -2,38 +2,48 @@ module Main
 
 exports
   sorts
-        Value Type BasicValue IntegerValue RealValue StringValue BooleanValue ObjectValue Object EnumValue EnumLiteral UndefinedValue CollectionValue BagValue SequenceValue SetValue Count 
+        Value BasicValue IntegerValue RealValue StringValue BooleanValue ObjectValue Object EnumValue EnumLiteral UndefinedValue BagValue SequenceValue SetValue Count 
   context-free syntax
-         -> Value
+        BasicValue -> Value
 
-         -> Type
+        ObjectValue -> Value
 
-         -> BasicValue
+        EnumValue -> Value
 
-        val::ANY -> IntegerValue
+        UndefinedValue -> Value
 
-        val::ANY -> RealValue
+        CollectionValue -> Value
 
-        val::ANY -> StringValue
+        IntegerValue -> BasicValue
 
-        val::ANY -> BooleanValue
+        RealValue -> BasicValue
 
-        object::ANY -> ObjectValue
+        StringValue -> BasicValue
 
-        objectValue::ANY -> Object
+        BooleanValue -> BasicValue
 
-        enumLiteral::ANY -> EnumValue
+        val::Integer -> IntegerValue
 
-        enumValue::ANY -> EnumLiteral
+        val::Double -> RealValue
 
-        type::ANY bagValue::ANY+ sequenceValue::ANY+ setValue::ANY+ -> UndefinedValue
+        val::String -> StringValue
 
-         -> CollectionValue
+        val::Boolean -> BooleanValue
 
-        elements::ANY+ -> BagValue
+        object::Object -> ObjectValue
 
-        elements::ANY+ -> SequenceValue
+        objectValue::ObjectValue -> Object
 
-        elements::ANY+ -> SetValue
+        enumLiteral::EnumLiteral -> EnumValue
 
-        num::ANY -> Count
+        enumValue::EnumValue -> EnumLiteral
+
+        type::Type bagValue::BagValue+ sequenceValue::SequenceValue+ setValue::SetValue+ -> UndefinedValue
+
+        elements::Value+ -> BagValue
+
+        elements::Value+ -> SequenceValue
+
+        elements::Value+ -> SetValue
+
+        num::Integer -> Count

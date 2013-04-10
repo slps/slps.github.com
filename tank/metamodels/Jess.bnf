@@ -1,83 +1,151 @@
 LocatedElement:
-        EPSILON
+        Root
+LocatedElement:
+        Expression
+LocatedElement:
+        SlotOp
+LocatedElement:
+        VarDefinition
+LocatedElement:
+        DeclareRule
+LocatedElement:
+        DeclareVar
+LocatedElement:
+        DeclareBloc
+LocatedElement:
+        ASlotDef
+LocatedElement:
+        SlotOptions
+LocatedElement:
+        ConditionAction
+LocatedElement:
+        ElifConditionAction
 Root:
-        expressions::ANY+
+        expressions::Expression+
 Expression:
-        EPSILON
+        Integ
+Expression:
+        Floa
+Expression:
+        Str
+Expression:
+        Ident
+Expression:
+        TemplateExpression
+Expression:
+        DefinitionExp
+Expression:
+        UseFuncExp
 Integ:
-        val::ANY
+        val::Integer
 Floa:
-        val::ANY
+        val::Double
 Str:
-        val::ANY
+        val::String
 Ident:
-        EPSILON
+        ValidIdentifier
+Ident:
+        SlotName
+Ident:
+        JessVariable
 ValidIdentifier:
-        val::ANY
+        val::String
 SlotName:
-        val::ANY
+        val::String
 JessVariable:
-        val::ANY
+        val::String
 TemplateExpression:
-        templateName::ANY firstSlot::ANY slotOp::ANY+
+        templateName::ValidIdentifier firstSlot::SlotOp slotOp::SlotOp+
 SlotOp:
-        slotIdent::ANY operator::ANY exp::ANY
+        slotIdent::SlotName operator::ValidIdentifier exp::Expression
 DefinitionExp:
-        EPSILON
+        GlobalDefinition
+DefinitionExp:
+        FunctionDefinition
+DefinitionExp:
+        AdviceDefinition
+DefinitionExp:
+        UnDefAdvice
+DefinitionExp:
+        FactDefinition
+DefinitionExp:
+        RuleDefinition
+DefinitionExp:
+        ModuleDefinition
+DefinitionExp:
+        QueryDefinition
+DefinitionExp:
+        TemplateDefinition
 GlobalDefinition:
-        varDef::ANY+
+        varDef::VarDefinition+
 VarDefinition:
-        jessVar::ANY eq::ANY expression::ANY
+        jessVar::JessVariable eq::ValidIdentifier expression::Expression
 FunctionDefinition:
-        funcName::ANY parameters::ANY+ expressions::ANY+
+        funcName::ValidIdentifier parameters::JessVariable+ expressions::Expression+
 AdviceDefinition:
-        direction::ANY op::ANY advice::ANY+
+        direction::Advice op::Ident advice::Expression+
 UnDefAdvice:
-        op::ANY
+        op::Expression
 FactDefinition:
-        factName::ANY documentation::ANY fact::ANY+
+        factName::ValidIdentifier documentation::Str fact::Expression+
 RuleDefinition:
-        ruleName::ANY documentation::ANY declare::ANY conditions::ANY+ functionCall::ANY+
+        ruleName::ValidIdentifier documentation::Str declare::DeclareRule conditions::Expression+ functionCall::UseFuncExp+
 DeclareRule:
-        salience::ANY nodeIndexHash::ANY autoFocus::ANY noLoop::ANY
+        salience::Expression nodeIndexHash::Expression autoFocus::ValidIdentifier noLoop::ValidIdentifier
 ModuleDefinition:
-        moduleName::ANY documentation::ANY
+        moduleName::ValidIdentifier documentation::Str
 QueryDefinition:
-        queryName::ANY documentation::ANY declare::ANY expressions::ANY+
+        queryName::ValidIdentifier documentation::Str declare::DeclareVar expressions::Expression+
 DeclareVar:
-        var::ANY+ node::ANY max::ANY
+        var::JessVariable+ node::Expression max::Expression
 TemplateDefinition:
-        templateName::ANY inherits::ANY+ documentation::ANY declareBloc::ANY slotDef::ANY+
+        templateName::ValidIdentifier inherits::ValidIdentifier+ documentation::Str declareBloc::DeclareBloc slotDef::ASlotDef+
 DeclareBloc:
-        slotSpecific::ANY backchainReaction::ANY fromClass::ANY includeVariable::ANY order::ANY
+        slotSpecific::ValidIdentifier backchainReaction::ValidIdentifier fromClass::ValidIdentifier includeVariable::ValidIdentifier order::ValidIdentifier
 ASlotDef:
-        slotName::ANY optionals::ANY+
+        SlotDef
+ASlotDef:
+        MultiSlotDef
+ASlotDef:
+        slotName::SlotName optionals::SlotOptions+
 SlotDef:
         EPSILON
 MultiSlotDef:
         EPSILON
 SlotOptions:
-        type::ANY def::ANY defaultDyn::ANY allowedValues::ANY+
+        type::ValidIdentifier def::Expression defaultDyn::Expression allowedValues::Expression+
 UseFuncExp:
-        EPSILON
+        WhileExp
+UseFuncExp:
+        ForExp
+UseFuncExp:
+        ForeachExp
+UseFuncExp:
+        FuncCall
+UseFuncExp:
+        EngineExp
+UseFuncExp:
+        ExitExp
+UseFuncExp:
+        IfExpression
 WhileExp:
-        hasDo::ANY boolExp::ANY actions::ANY+
+        hasDo::Boolean boolExp::Expression actions::Expression+
 ForExp:
-        initializer::ANY condition::ANY increment::ANY expressions::ANY+
+        initializer::Expression condition::Expression increment::Expression expressions::Expression+
 ForeachExp:
-        var::ANY list::ANY expressions::ANY+
+        var::JessVariable list::Expression expressions::Expression+
 FuncCall:
-        funcName::ANY funcParam::ANY+
+        funcName::ValidIdentifier funcParam::Expression+
 EngineExp:
         
 ExitExp:
         
 IfExpression:
-        ifthen::ANY elifthen::ANY+ else::ANY+
+        ifthen::ConditionAction elifthen::ElifConditionAction+ else::Expression+
 ConditionAction:
-        condition::ANY actions::ANY+
+        condition::Expression actions::Expression+
 ElifConditionAction:
-        condAct::ANY
+        condAct::ConditionAction
 Advice:
         before::EPSILON
         after::EPSILON

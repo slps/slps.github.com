@@ -3,15 +3,15 @@ module GAIA
 
 syntax OrganizationalStructure
         = 
-        ANY organization+
+        Organization organization+
  ;
 syntax Organization
         = 
-        ANY collaborates ANY interacts ANY member+ ANY observes+
+        Organization collaborates Organization interacts AgentType member+ OrganizationalRule observes+
  ;
 syntax OrganizationalRule
-        = 
-        ()
+        = SafetyRule
+        | LivenessRule
  ;
 syntax SafetyRule
         = 
@@ -23,23 +23,23 @@ syntax LivenessRule
  ;
 syntax AgentType
         = 
-        ANY provides+ ANY collaborates ANY agentType ANY plays+
+        Service provides+ AgentType collaborates AgentType agentType Role plays+
  ;
 syntax Service
         = 
-        ANY inputs ANY outputs ANY pre-conditions ANY post-conditions
+        String inputs String outputs String pre-conditions String post-conditions
  ;
 syntax Role
         = 
-        ANY activity+ ANY communication+ ANY responsibility+ ANY actsOn
+        Activity activity+ Communication communication+ Responsibility responsibility+ AssociationConnector actsOn
  ;
 syntax Activity
         = 
         ()
  ;
 syntax Responsibility
-        = 
-        ()
+        = LivenessProperty
+        | SafetyProperty
  ;
 syntax LivenessProperty
         = 
@@ -51,29 +51,29 @@ syntax SafetyProperty
  ;
 syntax AssociationConnector
         = 
-        ANY actsOn+ ANY role ANY permission+
+        Resource actsOn+ Role role Permission permission+
  ;
 syntax Permission
         = 
-        association: ANY
+        association: AssociationConnector
  ;
 syntax Resource
         = 
-        ANY name ANY description ANY permitted_action+ ANY environnement
+        String name String description Action permitted_action+ Environnement environnement
  ;
 syntax Environnement
         = 
-        ANY resource+
+        Resource resource+
  ;
 syntax Action
         = 
-        type: ANY
+        type: String
  ;
 syntax Communication
         = 
-        ANY observes+ ANY protocol
+        OrganizationalRule observes+ Protocol protocol
  ;
 syntax Protocol
         = 
-        ANY name ANY initiator ANY partner ANY inputs ANY outputs ANY description
+        String name String initiator String partner String inputs String outputs String description
  ;

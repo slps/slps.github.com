@@ -4,34 +4,54 @@ exports
   sorts
         LocatedElement Named GUI Tab Composant Layout Group Label TextArea Table Column ComboBox Row Item Button 
   context-free syntax
-         -> LocatedElement
+        Named -> LocatedElement
 
-         -> Named
+        Column -> LocatedElement
 
-        guiTabs::ANY+ -> GUI
+        GUI -> Named
 
-        title::ANY gui::ANY group::ANY -> Tab
+        Tab -> Named
 
-         -> Composant
+        Composant -> Named
+
+        guiTabs::Tab+ -> GUI
+
+        title::String gui::GUI group::Group -> Tab
+
+        Group -> Composant
+
+        Label -> Composant
+
+        TextArea -> Composant
+
+        Table -> Composant
+
+        ComboBox -> Composant
+
+        Row -> Composant
+
+        Item -> Composant
+
+        Button -> Composant
 
         default:: -> Layout
         horizontal:: -> Layout
         vertical:: -> Layout
 
-        title::ANY layout::ANY description::ANY tabGroup::ANY composants::ANY+ -> Group
+        title::String layout::Layout description::String tabGroup::Tab composants::Composant+ -> Group
 
-        text::ANY -> Label
+        text::String -> Label
 
-        text::ANY nbRows::ANY -> TextArea
+        text::String nbRows::Integer -> TextArea
 
-        tabColumns::ANY+ -> Table
+        tabColumns::Column+ -> Table
 
-        title::ANY columnTab::ANY -> Column
+        title::String columnTab::Table -> Column
 
-        listRows::ANY+ -> ComboBox
+        listRows::Row+ -> ComboBox
 
-        rowList::ANY text::ANY listItems::ANY+ -> Row
+        rowList::ComboBox text::String listItems::Item+ -> Row
 
-        itemList::ANY text::ANY -> Item
+        itemList::Row text::String -> Item
 
-        title::ANY -> Button
+        title::String -> Button

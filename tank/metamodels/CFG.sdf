@@ -4,10 +4,12 @@ exports
   sorts
         AbstractNode Node ConditionalNode Expression 
   context-free syntax
-         -> AbstractNode
+        Node -> AbstractNode
 
-        inNode::ANY outNode::ANY -> Node
+        ConditionalNode -> AbstractNode
 
-        trueConditionNode::ANY falseConditionNode::ANY -> ConditionalNode
+        inNode::Node outNode::Node -> Node
 
-        expressionName::ANY -> Expression
+        trueConditionNode::Node falseConditionNode::Node -> ConditionalNode
+
+        expressionName::String -> Expression

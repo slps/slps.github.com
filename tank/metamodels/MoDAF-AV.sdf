@@ -4,98 +4,178 @@ exports
   sorts
         Element MoDAFModel Enterprise Environment OperationalMission Architecture ArchitecturalDescription ArchitecturalReference ArchitecturalProduct Elements ArchitecturalFramework View Concern StakeholderHasConcern Stakeholder MetaData ArchitectureMetaData Taxonomy ClassifiedElement Standard MeasurableProperty CapabilityRequirement Effect EnduringTask OperationalConstraint PostType OrganisationType RoleInOrganisation LocationType OperationalActivity Node InformationExchange Competence InformationElement NodeConnectionType System DataElement SystemFunction SystemConnectionSpecification ProjectType Service Unit Dimension OrganisationProjectRelationship ProjectThreadType TimeExpression LiteralSpecification Property 
   context-free syntax
-         -> Element
+        MoDAFModel -> Element
 
-        enterprise::ANY environment::ANY operationalMissions::ANY+ architectures::ANY+ architecturalDescription::ANY+ architecturalReferences::ANY+ architecturalFrameworks::ANY+ architectureMetadatas::ANY+ metaDatas::ANY+ stakeholders::ANY+ stakeholderHasConcerns::ANY+ -> MoDAFModel
+        Enterprise -> Element
 
-        inhabits::ANY fulfills::ANY+ -> Enterprise
+        OperationalMission -> Element
 
-        influences::ANY -> Environment
+        Architecture -> Element
 
-        name::ANY content::ANY -> OperationalMission
+        ArchitecturalDescription -> Element
 
-        enterprise::ANY describedBy::ANY -> Architecture
+        ArchitecturalReference -> Element
 
-        approvialAuthority::ANY architect::ANY assumptionAndConstraints::ANY creatingOrganisation::ANY dateCompleted::ANY purpose::ANY recommendations::ANY summaryOfFindings::ANY tollsUsed::ANY viewpoints::ANY+ products::ANY+ taxonomy::ANY -> ArchitecturalDescription
+        ArchitecturalProduct -> Element
 
-        referred::ANY referrer::ANY -> ArchitecturalReference
+        Elements -> Element
 
-        description::ANY architecturalElements::ANY+ definingView::ANY addresses::ANY+ -> ArchitecturalProduct
+        ArchitecturalFramework -> Element
 
-        name::ANY content::ANY -> Elements
+        View -> Element
 
-        ownedMember::ANY+ -> ArchitecturalFramework
+        Concern -> Element
 
-        framework::ANY frameworkWebsite::ANY viewCode::ANY viewDescription::ANY viewName::ANY definingFramework::ANY usedToCover::ANY+ -> View
+        Stakeholder -> Element
 
-        adressedBy::ANY+ -> Concern
+        Taxonomy -> Element
 
-        client::ANY supplier::ANY owner::ANY -> StakeholderHasConcern
+        ClassifiedElement -> Element
 
-        name::ANY content::ANY -> Stakeholder
+        enterprise::Enterprise environment::Environment operationalMissions::OperationalMission+ architectures::Architecture+ architecturalDescription::ArchitecturalDescription+ architecturalReferences::ArchitecturalReference+ architecturalFrameworks::ArchitecturalFramework+ architectureMetadatas::ArchitectureMetaData+ metaDatas::MetaData+ stakeholders::Stakeholder+ stakeholderHasConcerns::StakeholderHasConcern+ -> MoDAFModel
 
-        dublinCoreElement::ANY modMetaDataElement::ANY name::ANY body::ANY -> MetaData
+        inhabits::Environment fulfills::OperationalMission+ -> Enterprise
 
-        annotatedArchitecture::ANY -> ArchitectureMetaData
+        influences::Enterprise -> Environment
 
-        date::ANY url::ANY version::ANY contents::ANY+ -> Taxonomy
+        name::String content::String -> OperationalMission
 
-         -> ClassifiedElement
+        enterprise::Enterprise describedBy::ArchitecturalDescription -> Architecture
 
-        identifier::ANY publishedWebsite::ANY publisher::ANY ratificationDate::ANY version::ANY withdrawalDate::ANY -> Standard
+        approvialAuthority::String architect::String assumptionAndConstraints::String creatingOrganisation::String dateCompleted::String purpose::String recommendations::String summaryOfFindings::String tollsUsed::String viewpoints::View+ products::ArchitecturalProduct+ taxonomy::Taxonomy -> ArchitecturalDescription
 
-        maxValue::ANY minValue::ANY -> MeasurableProperty
+        referred::ArchitecturalDescription referrer::ArchitecturalDescription -> ArchitecturalReference
 
-        taxonomy::ANY -> CapabilityRequirement
+        description::String architecturalElements::Elements+ definingView::View addresses::Concern+ -> ArchitecturalProduct
 
-        taxonomy::ANY -> Effect
+        name::String content::String -> Elements
 
-        taxonomy::ANY -> EnduringTask
+        ownedMember::View+ -> ArchitecturalFramework
 
-        nodeUsageContext::ANY -> OperationalConstraint
+        framework::String frameworkWebsite::String viewCode::String viewDescription::String viewName::String definingFramework::ArchitecturalFramework usedToCover::Concern+ -> View
 
-        taxonomy::ANY -> PostType
+        adressedBy::ArchitecturalProduct+ -> Concern
 
-        taxonomy::ANY -> OrganisationType
+        client::Stakeholder supplier::Concern owner::MoDAFModel -> StakeholderHasConcern
 
-        taxonomy::ANY -> RoleInOrganisation
+        name::String content::String -> Stakeholder
 
-        taxonomy::ANY -> LocationType
+        ArchitectureMetaData -> MetaData
 
-        taxonomy::ANY -> OperationalActivity
+        dublinCoreElement::String modMetaDataElement::String name::String body::String -> MetaData
 
-        taxonomy::ANY -> Node
+        annotatedArchitecture::ArchitecturalDescription -> ArchitectureMetaData
 
-        identifier::ANY requirementText::ANY -> InformationExchange
+        date::String url::String version::String contents::ClassifiedElement+ -> Taxonomy
 
-        taxonomy::ANY -> Competence
+        Environment -> ClassifiedElement
 
-        taxonomy::ANY -> InformationElement
+        Standard -> ClassifiedElement
 
-        taxonomy::ANY -> NodeConnectionType
+        MeasurableProperty -> ClassifiedElement
 
-        taxonomy::ANY -> System
+        CapabilityRequirement -> ClassifiedElement
 
-        taxonomy::ANY -> DataElement
+        Effect -> ClassifiedElement
 
-        systemUsageContext::ANY -> SystemFunction
+        EnduringTask -> ClassifiedElement
 
-        taxonomy::ANY -> SystemConnectionSpecification
+        OperationalConstraint -> ClassifiedElement
 
-        taxonomy::ANY -> ProjectType
+        PostType -> ClassifiedElement
 
-        taxonomy::ANY -> Service
+        OrganisationType -> ClassifiedElement
 
-        taxonomy::ANY -> Unit
+        RoleInOrganisation -> ClassifiedElement
 
-        taxonomy::ANY -> Dimension
+        LocationType -> ClassifiedElement
 
-        taxonomy::ANY -> OrganisationProjectRelationship
+        OperationalActivity -> ClassifiedElement
 
-        taxonomy::ANY -> ProjectThreadType
+        Node -> ClassifiedElement
 
-        value::ANY -> TimeExpression
+        InformationExchange -> ClassifiedElement
 
-        value::ANY -> LiteralSpecification
+        Competence -> ClassifiedElement
 
-        value::ANY -> Property
+        InformationElement -> ClassifiedElement
+
+        NodeConnectionType -> ClassifiedElement
+
+        System -> ClassifiedElement
+
+        DataElement -> ClassifiedElement
+
+        SystemFunction -> ClassifiedElement
+
+        SystemConnectionSpecification -> ClassifiedElement
+
+        ProjectType -> ClassifiedElement
+
+        Service -> ClassifiedElement
+
+        Unit -> ClassifiedElement
+
+        Dimension -> ClassifiedElement
+
+        OrganisationProjectRelationship -> ClassifiedElement
+
+        ProjectThreadType -> ClassifiedElement
+
+        identifier::String publishedWebsite::String publisher::String ratificationDate::TimeExpression version::String withdrawalDate::TimeExpression -> Standard
+
+        maxValue::LiteralSpecification minValue::LiteralSpecification -> MeasurableProperty
+
+        taxonomy::Taxonomy -> CapabilityRequirement
+
+        taxonomy::Taxonomy -> Effect
+
+        taxonomy::Taxonomy -> EnduringTask
+
+        nodeUsageContext::Property -> OperationalConstraint
+
+        taxonomy::Taxonomy -> PostType
+
+        taxonomy::Taxonomy -> OrganisationType
+
+        taxonomy::Taxonomy -> RoleInOrganisation
+
+        taxonomy::Taxonomy -> LocationType
+
+        taxonomy::Taxonomy -> OperationalActivity
+
+        taxonomy::Taxonomy -> Node
+
+        identifier::String requirementText::String -> InformationExchange
+
+        taxonomy::Taxonomy -> Competence
+
+        taxonomy::Taxonomy -> InformationElement
+
+        taxonomy::Taxonomy -> NodeConnectionType
+
+        taxonomy::Taxonomy -> System
+
+        taxonomy::Taxonomy -> DataElement
+
+        systemUsageContext::Property -> SystemFunction
+
+        taxonomy::Taxonomy -> SystemConnectionSpecification
+
+        taxonomy::Taxonomy -> ProjectType
+
+        taxonomy::Taxonomy -> Service
+
+        taxonomy::Taxonomy -> Unit
+
+        taxonomy::Taxonomy -> Dimension
+
+        taxonomy::Taxonomy -> OrganisationProjectRelationship
+
+        taxonomy::Taxonomy -> ProjectThreadType
+
+        value::String -> TimeExpression
+
+        value::String -> LiteralSpecification
+
+        value::String -> Property

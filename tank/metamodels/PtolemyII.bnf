@@ -1,30 +1,56 @@
 EDataType:
-        value::ANY
+        value::String
 NamedObject:
-        name::ANY
+        Attribute
+NamedObject:
+        Entity
+NamedObject:
+        Port
+NamedObject:
+        Relation
+NamedObject:
+        Director
+NamedObject:
+        name::String
 Attribute:
-        att_container::ANY value::ANY
+        Parameter
+Attribute:
+        ComponentEntity
+Attribute:
+        att_container::Entity value::String
 Entity:
-        attributes::ANY+ parameters::ANY+ ports::ANY+
+        attributes::Attribute+ parameters::Parameter+ ports::Port+
 Port:
-        po_container::ANY links::ANY+
+        ComponentPort
+Port:
+        po_container::Entity links::Relation+
 Relation:
-        ports::ANY+
+        ComponentRelation
+Relation:
+        ports::Port+
 Director:
-        ca_container::ANY
+        ca_container::CompositeActor
 Parameter:
-        pa_container::ANY dataType::ANY
+        pa_container::Entity dataType::EDataType
 ComponentPort:
         EPSILON
 ComponentRelation:
-        re_container::ANY
+        re_container::CompositeEntity
 ComponentEntity:
-        ce_container::ANY
+        AtomicActor
+ComponentEntity:
+        CompositeEntity
+ComponentEntity:
+        ce_container::CompositeEntity
 AtomicActor:
         EPSILON
 CompositeEntity:
-        containees::ANY+ relations::ANY+
+        WorkSpace
+CompositeEntity:
+        CompositeActor
+CompositeEntity:
+        containees::ComponentEntity+ relations::ComponentRelation+
 WorkSpace:
         EPSILON
 CompositeActor:
-        directors::ANY
+        directors::Director

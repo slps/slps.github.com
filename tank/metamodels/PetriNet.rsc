@@ -2,30 +2,31 @@
 module PetriNet
 
 syntax Element
-        = 
-        ()
+        = PetriNet
+        | Place
+        | Transition
  ;
 syntax PetriNet
         = 
-        ANY places+ ANY transitions+ ANY arcs+
+        Place places+ Transition transitions+ Arc arcs+
  ;
 syntax Place
         = 
-        ANY incoming+ ANY outgoing+
+        TransToPlaceArc incoming+ PlaceToTransArc outgoing+
  ;
 syntax Transition
         = 
-        ANY incoming+ ANY outgoing+
+        PlaceToTransArc incoming+ TransToPlaceArc outgoing+
  ;
 syntax Arc
-        = 
-        ()
+        = PlaceToTransArc
+        | TransToPlaceArc
  ;
 syntax PlaceToTransArc
         = 
-        ANY source ANY target
+        Place source Transition target
  ;
 syntax TransToPlaceArc
         = 
-        ANY source ANY target
+        Transition source Place target
  ;

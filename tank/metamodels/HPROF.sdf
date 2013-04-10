@@ -4,27 +4,43 @@ exports
   sorts
         LocatedElement Profile Method ThreadAction ThreadStart ThreadEnd Trace StackTraceElement Times Time Date Day Month 
   context-free syntax
-         -> LocatedElement
+        Profile -> LocatedElement
 
-        header::ANY threadActions::ANY+ traces::ANY+ times::ANY methods::ANY+ -> Profile
+        Method -> LocatedElement
 
-        fullyQualifiedName::ANY stackTraceElements::ANY+ -> Method
+        ThreadAction -> LocatedElement
 
-         -> ThreadAction
+        Trace -> LocatedElement
 
-        obj::ANY name::ANY group::ANY -> ThreadStart
+        StackTraceElement -> LocatedElement
 
-        id::ANY -> ThreadEnd
+        Times -> LocatedElement
 
-        id::ANY threadId::ANY elements::ANY+ times::ANY+ -> Trace
+        Time -> LocatedElement
 
-        method::ANY fileName::ANY line::ANY trace::ANY -> StackTraceElement
+        Date -> LocatedElement
 
-        unit::ANY total::ANY date::ANY elements::ANY+ -> Times
+        header::String threadActions::ThreadAction+ traces::Trace+ times::Times methods::Method+ -> Profile
 
-        rank::ANY self::ANY accum::ANY count::ANY trace::ANY method::ANY -> Time
+        fullyQualifiedName::String stackTraceElements::StackTraceElement+ -> Method
 
-        day::ANY month::ANY dayOfMonth::ANY hour::ANY minutes::ANY seconds::ANY year::ANY -> Date
+        ThreadStart -> ThreadAction
+
+        ThreadEnd -> ThreadAction
+
+        obj::Integer name::String group::String -> ThreadStart
+
+        id::Integer -> ThreadEnd
+
+        id::Integer threadId::Integer elements::StackTraceElement+ times::Time+ -> Trace
+
+        method::Method fileName::String line::Integer trace::Trace -> StackTraceElement
+
+        unit::String total::Integer date::Date elements::Time+ -> Times
+
+        rank::Integer self::Double accum::Double count::Integer trace::Trace method::Method -> Time
+
+        day::Day month::Month dayOfMonth::Integer hour::Integer minutes::Integer seconds::Integer year::Integer -> Date
 
         Monday:: -> Day
         Tuesday:: -> Day

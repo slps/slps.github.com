@@ -1,25 +1,43 @@
 LocatedElement:
-        EPSILON
+        Root
+LocatedElement:
+        Element
+LocatedElement:
+        Port
+LocatedElement:
+        EndPoint
+LocatedElement:
+        Data
 Root:
-        keys::ANY+ graphs::ANY+
+        keys::Key+ graphs::Graph+
 Element:
-        id::ANY datas::ANY+
+        Key
+Element:
+        Graph
+Element:
+        Edge
+Element:
+        HyperEdge
+Element:
+        Node
+Element:
+        id::String datas::Data+
 Key:
-        for::ANY attrName::ANY type::ANY defValue::ANY
+        for::ElemType attrName::String type::AttrType defValue::String
 Graph:
-        contents::ANY+ edgeDefault::ANY
+        contents::Element+ edgeDefault::EdgeType
 Edge:
-        source::ANY target::ANY sourceport::ANY targetport::ANY
+        source::Node target::Node sourceport::Port targetport::Port
 HyperEdge:
-        endpoints::ANY+
+        endpoints::EndPoint+
 Node:
-        subgraph::ANY ports::ANY+
+        subgraph::Graph ports::Port+
 Port:
-        name::ANY
+        name::String
 EndPoint:
-        node::ANY port::ANY
+        node::Node port::Port
 Data:
-        key::ANY value::ANY
+        key::String value::String
 ElemType:
         edge::EPSILON
         node::EPSILON

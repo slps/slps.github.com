@@ -1,69 +1,121 @@
 UIModel:
-        windows::ANY functions::ANY+
+        windows::Windows functions::Function+
 Windows:
-        id::ANY title::ANY orient::ANY style::ANY headers::ANY+ headersJScript::ANY+
+        id::String title::String orient::Orients style::String headers::HeaderCss+ headersJScript::HeaderJScript+
 Button:
-        tooltiptext::ANY image::ANY
+        tooltiptext::String image::String
 Orients:
         horizontal::EPSILON
         vertical::EPSILON
 Image:
-        src::ANY
+        src::String
 RadioGroup:
-        radiobuttons::ANY+
+        radiobuttons::Radio+
 Radio:
-        id::ANY label::ANY selected::ANY disabled::ANY
+        id::String label::String selected::Boolean disabled::Boolean
 ListBox:
-        rows::ANY listitems::ANY+
+        rows::Integer listitems::ListItem+
 ListItem:
-        label::ANY value::ANY
+        label::String value::String
 MenuList:
-        menuitems::ANY+
+        menuitems::MenuItem+
 MenuItem:
-        label::ANY
+        label::String
 vbox:
         EPSILON
 hbox:
         EPSILON
 Containement:
-        style::ANY accesskey::ANY class::ANY maxlength::ANY label::ANY orient::ANY minlength::ANY onclick::ANY disabled::ANY
+        Button
+Containement:
+        Image
+Containement:
+        RadioGroup
+Containement:
+        ListBox
+Containement:
+        MenuList
+Containement:
+        TabBox
+Containement:
+        TextBox
+Containement:
+        Spacer
+Containement:
+        Label
+Containement:
+        Grid
+Containement:
+        CheckBox
+Containement:
+        Caption
+Containement:
+        Description
+Containement:
+        style::String accesskey::String class::String maxlength::Integer label::String orient::Orients minlength::String onclick::String disabled::String
 GroupBox:
         EPSILON
 Container:
-        xulInteractors::ANY+
+        Windows
+Container:
+        vbox
+Container:
+        hbox
+Container:
+        GroupBox
+Container:
+        row
+Container:
+        column
+Container:
+        TabPanel
+Container:
+        xulInteractors::Interactor+
 Interactor:
-        flex::ANY id::ANY stat::ANY style::ANY events::ANY+
+        Radio
+Interactor:
+        ListItem
+Interactor:
+        MenuItem
+Interactor:
+        Containement
+Interactor:
+        Container
+Interactor:
+        flex::Integer id::String stat::String style::String events::Event+
 TabBox:
-        tabPanels::ANY+
+        tabPanels::Interactor+
 TextBox:
-        multiline::ANY value::ANY
+        multiline::Boolean value::String
 Spacer:
         EPSILON
 Label:
-        value::ANY control::ANY
+        value::String control::String
 Grid:
-        columns::ANY+ rows::ANY+
+        columns::column+ rows::row+
 row:
         EPSILON
 column:
         EPSILON
 CheckBox:
-        checked::ANY
+        checked::Boolean
 Caption:
-        label::ANY
+        label::String
 Description:
-        value::ANY
+        value::String
 HeaderCss:
-        ref::ANY type::ANY
+        ref::String type::String
 HeaderJScript:
-        ref::ANY
+        ref::String
 TabPanel:
-        id::ANY orient::ANY
+        id::String orient::Orients
 Event:
-        functionCallParameters::ANY+ functionCalledName::ANY name::ANY
+        onClick
+Event:
+        functionCallParameters::Parameter+ functionCalledName::String name::String
 Parameter:
-        value::ANY name::ANY
+        value::String name::String
 onClick:
         EPSILON
 Function:
-        name::ANY functionUIModel::ANY body::ANY
+        name::String functionUIModel::UIModel body::String

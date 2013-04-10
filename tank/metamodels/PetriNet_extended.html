@@ -13,31 +13,39 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable PetriNet_extended 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Hugo Bruneliere, <code>PetriNet_extended.ecore</code>, 2005/08/11.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>13</strong></li><li>Number of top alternatives: <strong>13</strong></li><li>Number of defined nonterminal symbols: <strong>13</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>13</strong>: <code><a href="#LocatedElement" class="nt">LocatedElement</a>, <a href="#NamedElement" class="nt">NamedElement</a>, <a href="#PetriNet" class="nt">PetriNet</a>, <a href="#Element" class="nt">Element</a>, <a href="#Place" class="nt">Place</a>, <a href="#Transition" class="nt">Transition</a>, <a href="#Arc" class="nt">Arc</a>, <a href="#PlaceToTransition" class="nt">PlaceToTransition</a>, <a href="#TransitionToPlace" class="nt">TransitionToPlace</a>, <a href="#Execution" class="nt">Execution</a>, <a href="#Token" class="nt">Token</a>, <a href="#Marking" class="nt">Marking</a>, <a href="#Movement" class="nt">Movement</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
-        ε
+				</script></head><body><h1 class="l">Browsable PetriNet_extended 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Hugo Bruneliere, <code>PetriNet_extended.ecore</code>, 2005/08/11.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>17</strong></li><li>Number of top alternatives: <strong>17</strong></li><li>Number of defined nonterminal symbols: <strong>13</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#LocatedElement" class="nt">LocatedElement</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
+        <a class="nt" href="#NamedElement">NamedElement</a>
 </pre><pre><a class="nt" name="NamedElement">NamedElement</a>:
-        ε
+        <a class="nt" href="#PetriNet">PetriNet</a>
+</pre><pre><a class="nt" name="NamedElement">NamedElement</a>:
+        <a class="nt" href="#Element">Element</a>
+</pre><pre><a class="nt" name="NamedElement">NamedElement</a>:
+        <a class="nt" href="#Arc">Arc</a>
 </pre><pre><a class="nt" name="PetriNet">PetriNet</a>:
-        <span class="sel">elements</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">arcs</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">execs</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">elements</span>::<a class="nt" href="#Element">Element</a><span class="meta">+</span> <span class="sel">arcs</span>::<a class="nt" href="#Arc">Arc</a><span class="meta">+</span> <span class="sel">execs</span>::<a class="nt" href="#Execution">Execution</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Element">Element</a>:
-        ε
+        <a class="nt" href="#Place">Place</a>
+</pre><pre><a class="nt" name="Element">Element</a>:
+        <a class="nt" href="#Transition">Transition</a>
 </pre><pre><a class="nt" name="Place">Place</a>:
-        <span class="sel">incomingArc</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">outgoingArc</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">incomingArc</span>::<a class="nt" href="#TransitionToPlace">TransitionToPlace</a><span class="meta">+</span> <span class="sel">outgoingArc</span>::<a class="nt" href="#PlaceToTransition">PlaceToTransition</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Transition">Transition</a>:
-        <span class="sel">incomingArc</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">outgoingArc</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">incomingArc</span>::<a class="nt" href="#PlaceToTransition">PlaceToTransition</a><span class="meta">+</span> <span class="sel">outgoingArc</span>::<a class="nt" href="#TransitionToPlace">TransitionToPlace</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Arc">Arc</a>:
-        ε
+        <a class="nt" href="#PlaceToTransition">PlaceToTransition</a>
+</pre><pre><a class="nt" name="Arc">Arc</a>:
+        <a class="nt" href="#TransitionToPlace">TransitionToPlace</a>
 </pre><pre><a class="nt" name="PlaceToTransition">PlaceToTransition</a>:
-        <span class="sel">from</span>::<span class="meta">any</span> <span class="sel">to</span>::<span class="meta">any</span>
+        <span class="sel">from</span>::<a class="nt" href="#Place">Place</a> <span class="sel">to</span>::<a class="nt" href="#Transition">Transition</a>
 </pre><pre><a class="nt" name="TransitionToPlace">TransitionToPlace</a>:
-        <span class="sel">from</span>::<span class="meta">any</span> <span class="sel">to</span>::<span class="meta">any</span>
+        <span class="sel">from</span>::<a class="nt" href="#Transition">Transition</a> <span class="sel">to</span>::<a class="nt" href="#Place">Place</a>
 </pre><pre><a class="nt" name="Execution">Execution</a>:
-        <span class="sel">net</span>::<span class="meta">any</span> <span class="sel">markings</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">movements</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">net</span>::<a class="nt" href="#PetriNet">PetriNet</a> <span class="sel">markings</span>::<a class="nt" href="#Marking">Marking</a><span class="meta">+</span> <span class="sel">movements</span>::<a class="nt" href="#Movement">Movement</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Token">Token</a>:
-        <span class="sel">placedAt</span>::<span class="meta">any</span> <span class="sel">marking</span>::<span class="meta">any</span>
+        <span class="sel">placedAt</span>::<a class="nt" href="#Place">Place</a> <span class="sel">marking</span>::<a class="nt" href="#Marking">Marking</a>
 </pre><pre><a class="nt" name="Marking">Marking</a>:
-        <span class="sel">exec</span>::<span class="meta">any</span> <span class="sel">tokens</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">exec</span>::<a class="nt" href="#Execution">Execution</a> <span class="sel">tokens</span>::<a class="nt" href="#Token">Token</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Movement">Movement</a>:
-        <span class="sel">exec</span>::<span class="meta">any</span> <span class="sel">fire</span>::<span class="meta">any</span> <span class="sel">source</span>::<span class="meta">any</span> <span class="sel">target</span>::<span class="meta">any</span>
+        <span class="sel">exec</span>::<a class="nt" href="#Execution">Execution</a> <span class="sel">fire</span>::<a class="nt" href="#Transition">Transition</a> <span class="sel">source</span>::<a class="nt" href="#Marking">Marking</a> <span class="sel">target</span>::<a class="nt" href="#Marking">Marking</a>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

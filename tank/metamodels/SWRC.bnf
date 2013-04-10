@@ -1,57 +1,107 @@
 Bibliography:
-        publications::ANY+
+        publications::Publication+
 Publication:
-        EPSILON
+        Article
+Publication:
+        Book
+Publication:
+        InBook
+Publication:
+        Booklet
+Publication:
+        InCollection
+Publication:
+        InProceedings
+Publication:
+        Proceedings
+Publication:
+        Manual
+Publication:
+        Misc
+Publication:
+        Unpublished
+Publication:
+        Thesis
+Publication:
+        Report
 Article:
-        author::ANY+ journal::ANY month::ANY number::ANY pages::ANY volume::ANY
+        author::Person+ journal::String month::String number::Integer pages::String volume::Integer
 Book:
-        month::ANY number::ANY volume::ANY series::ANY source::ANY address::ANY edition::ANY isbn::ANY price::ANY editor::ANY publisher::ANY author::ANY+
+        month::String number::Integer volume::Integer series::String source::String address::String edition::String isbn::String price::String editor::Person publisher::Organization author::Person+
 InBook:
-        author::ANY+ publisher::ANY editor::ANY month::ANY number::ANY pages::ANY volume::ANY series::ANY chapter::ANY type::ANY address::ANY
+        author::Person+ publisher::Organization editor::Person month::String number::Integer pages::String volume::Integer series::String chapter::String type::String address::String
 Booklet:
-        author::ANY+ month::ANY address::ANY edition::ANY howpublished::ANY
+        author::Person+ month::String address::String edition::String howpublished::String
 InCollection:
-        editor::ANY author::ANY+ publisher::ANY month::ANY number::ANY pages::ANY address::ANY edition::ANY volume::ANY series::ANY chapter::ANY type::ANY booktitle::ANY
+        editor::Person author::Person+ publisher::Organization month::String number::Integer pages::String address::String edition::String volume::Integer series::String chapter::String type::String booktitle::String
 InProceedings:
-        editor::ANY author::ANY+ month::ANY number::ANY pages::ANY address::ANY volume::ANY series::ANY booktitle::ANY organization::ANY publisher::ANY
+        editor::Person author::Person+ month::String number::Integer pages::String address::String volume::Integer series::String booktitle::String organization::Organization publisher::Organization
 Proceedings:
-        editor::ANY publisher::ANY organization::ANY month::ANY number::ANY volume::ANY address::ANY series::ANY
+        editor::Person publisher::Organization organization::Organization month::String number::String volume::String address::String series::String
 Manual:
-        author::ANY+ organization::ANY month::ANY address::ANY edition::ANY
+        author::Person+ organization::Organization month::String address::String edition::String
 Misc:
-        month::ANY howpublished::ANY
+        month::String howpublished::String
 Unpublished:
-        author::ANY+ month::ANY
+        author::Person+ month::String
 Thesis:
-        EPSILON
+        MasterThesis
+Thesis:
+        PhDThesis
 MasterThesis:
-        author::ANY+ school::ANY month::ANY address::ANY type::ANY
+        author::Person+ school::University month::String address::String type::String
 PhDThesis:
-        author::ANY+ school::ANY month::ANY address::ANY type::ANY
+        author::Person+ school::University month::String address::String type::String
 Report:
-        EPSILON
+        ProjectReport
+Report:
+        TechnicalReport
 ProjectReport:
-        describesProject::ANY
+        describesProject::Project
 TechnicalReport:
-        series::ANY organization::ANY
+        series::String organization::Organization
 Event:
-        name::ANY date::ANY eventTitle::ANY location::ANY atEvent::ANY hasPartEvent::ANY
+        Conference
+Event:
+        Workshop
+Event:
+        Exhibition
+Event:
+        Lecture
+Event:
+        Meeting
+Event:
+        name::String date::String eventTitle::String location::String atEvent::Event hasPartEvent::Event
 Conference:
-        series::ANY
+        series::String
 Workshop:
-        series::ANY
+        series::String
 Exhibition:
         EPSILON
 Lecture:
-        givenBy::ANY
+        givenBy::Person
 Meeting:
-        title::ANY participant::ANY+
+        ProjectMeeting
+Meeting:
+        title::String participant::Person+
 ProjectMeeting:
         EPSILON
 Person:
-        address::ANY name::ANY email::ANY fax::ANY homepage::ANY phone::ANY photo::ANY
+        Employee
+Person:
+        AcademicStaff
+Person:
+        Student
+Person:
+        address::String name::String email::String fax::String homepage::String phone::String photo::String
 Employee:
-        affiliation::ANY
+        Manager
+Employee:
+        AdministrativeStaff
+Employee:
+        TechnicalStaff
+Employee:
+        affiliation::Organization
 Manager:
         EPSILON
 AdministrativeStaff:
@@ -59,11 +109,23 @@ AdministrativeStaff:
 TechnicalStaff:
         EPSILON
 AcademicStaff:
-        cooperateWith::ANY+ editor::ANY headOf::ANY headOfGroup::ANY memberOfPC::ANY organizerOrChairOf::ANY publication::ANY+ supervises::ANY+ worksAtProject::ANY
+        Lecturer
+AcademicStaff:
+        FacultyMember
+AcademicStaff:
+        cooperateWith::AcademicStaff+ editor::Publication headOf::Project headOfGroup::ResearchGroup memberOfPC::Event organizerOrChairOf::Event publication::Publication+ supervises::PhDStudent+ worksAtProject::ResearchTopic
 Lecturer:
         EPSILON
 FacultyMember:
-        EPSILON
+        FullProfessor
+FacultyMember:
+        AssistantProfessor
+FacultyMember:
+        AssociateProfessor
+FacultyMember:
+        FullProfessor
+        AssistantProfessor
+        AssociateProfessor
 FullProfessor:
         EPSILON
 AssistantProfessor:
@@ -71,40 +133,66 @@ AssistantProfessor:
 AssociateProfessor:
         EPSILON
 Student:
-        studiesAt::ANY
+        Undergraduate
+Student:
+        Graduate
+Student:
+        studiesAt::University
 Undergraduate:
         EPSILON
 Graduate:
-        EPSILON
+        PhDStudent
+Graduate:
+        PhDStudent
 PhDStudent:
-        publication::ANY+ worksAtProject::ANY supervisor::ANY
+        publication::Publication+ worksAtProject::Project supervisor::AcademicStaff
 Organization:
-        location::ANY name::ANY carriesOut::ANY+ develops::ANY+ employs::ANY+ finances::ANY+ publishes::ANY+ technicalReport::ANY+
+        ResearchGroup
+Organization:
+        Association
+Organization:
+        Department
+Organization:
+        Institute
+Organization:
+        Enterprise
+Organization:
+        University
+Organization:
+        location::String name::String carriesOut::Project+ develops::Product+ employs::Employee+ finances::Project+ publishes::Publication+ technicalReport::TechnicalReport+
 ResearchGroup:
-        head::ANY member::ANY+
+        head::AcademicStaff member::Employee+
 Association:
         EPSILON
 Department:
-        hasParts::ANY
+        hasParts::Institute
 Institute:
-        cooperateWith::ANY hasParts::ANY+
+        cooperateWith::Institute hasParts::ResearchGroup+
 Enterprise:
         EPSILON
 University:
-        hasParts::ANY+ student::ANY+
+        hasParts::Department+ student::Student+
 Project:
-        EPSILON
+        ResearchProject
+Project:
+        DevelopmentProject
+Project:
+        SoftwareProject
 ResearchProject:
-        name::ANY carriedOutBy::ANY financedBy::ANY head::ANY isAbout::ANY+ member::ANY+ projectInfo::ANY+
+        name::String carriedOutBy::Organization financedBy::Organization head::AcademicStaff isAbout::ResearchTopic+ member::Person+ projectInfo::ProjectReport+
 DevelopmentProject:
-        name::ANY carriedOutBy::ANY financedBy::ANY head::ANY isAbout::ANY+ member::ANY+ projectInfo::ANY+
+        name::String carriedOutBy::Organization financedBy::Organization head::AcademicStaff isAbout::ResearchTopic+ member::Person+ projectInfo::ProjectReport+
 SoftwareProject:
-        product::ANY
+        product::Product
 Product:
-        name::ANY developedBy::ANY
+        SoftwareComponent
+Product:
+        name::String developedBy::Organization
 SoftwareComponent:
-        hasPrice::ANY
+        hasPrice::Integer
 Topic:
-        name::ANY
+        ResearchTopic
+Topic:
+        name::String
 ResearchTopic:
-        dealWithIn::ANY isWorkedOnBy::ANY+
+        dealWithIn::Project isWorkedOnBy::AcademicStaff+

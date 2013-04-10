@@ -3,9 +3,9 @@ module Parameters
 
 syntax ParametersList
         = 
-        ANY parameters+
+        Parameter parameters+
  ;
 syntax Parameter
         = 
-        ANY name ANY value
+        String name String value
  ;

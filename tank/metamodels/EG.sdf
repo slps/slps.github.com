@@ -4,15 +4,43 @@ exports
   sorts
         ExecutionGraph Node Start End Control Basic Branch Loop Fork Join Acquire Release Split 
   context-free syntax
-        node::ANY+ nodeNested::ANY -> ExecutionGraph
+        node::Node+ nodeNested::Node -> ExecutionGraph
 
-        predecessor::ANY+ successor::ANY+ executionGraph::ANY nested::ANY+ -> Node
+        Start -> Node
+
+        End -> Node
+
+        Control -> Node
+
+        Basic -> Node
+
+        predecessor::Node+ successor::Node+ executionGraph::ExecutionGraph nested::ExecutionGraph+ -> Node
 
          -> Start
 
          -> End
 
-         -> Control
+        Branch -> Control
+
+        Loop -> Control
+
+        Fork -> Control
+
+        Join -> Control
+
+        Acquire -> Control
+
+        Release -> Control
+
+        Split -> Control
+
+        Branch -> Control
+        Loop -> Control
+        Fork -> Control
+        Join -> Control
+        Acquire -> Control
+        Release -> Control
+        Split -> Control
 
          -> Basic
 

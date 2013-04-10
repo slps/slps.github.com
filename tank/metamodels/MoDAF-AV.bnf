@@ -1,96 +1,176 @@
 Element:
-        EPSILON
+        MoDAFModel
+Element:
+        Enterprise
+Element:
+        OperationalMission
+Element:
+        Architecture
+Element:
+        ArchitecturalDescription
+Element:
+        ArchitecturalReference
+Element:
+        ArchitecturalProduct
+Element:
+        Elements
+Element:
+        ArchitecturalFramework
+Element:
+        View
+Element:
+        Concern
+Element:
+        Stakeholder
+Element:
+        Taxonomy
+Element:
+        ClassifiedElement
 MoDAFModel:
-        enterprise::ANY environment::ANY operationalMissions::ANY+ architectures::ANY+ architecturalDescription::ANY+ architecturalReferences::ANY+ architecturalFrameworks::ANY+ architectureMetadatas::ANY+ metaDatas::ANY+ stakeholders::ANY+ stakeholderHasConcerns::ANY+
+        enterprise::Enterprise environment::Environment operationalMissions::OperationalMission+ architectures::Architecture+ architecturalDescription::ArchitecturalDescription+ architecturalReferences::ArchitecturalReference+ architecturalFrameworks::ArchitecturalFramework+ architectureMetadatas::ArchitectureMetaData+ metaDatas::MetaData+ stakeholders::Stakeholder+ stakeholderHasConcerns::StakeholderHasConcern+
 Enterprise:
-        inhabits::ANY fulfills::ANY+
+        inhabits::Environment fulfills::OperationalMission+
 Environment:
-        influences::ANY
+        influences::Enterprise
 OperationalMission:
-        name::ANY content::ANY
+        name::String content::String
 Architecture:
-        enterprise::ANY describedBy::ANY
+        enterprise::Enterprise describedBy::ArchitecturalDescription
 ArchitecturalDescription:
-        approvialAuthority::ANY architect::ANY assumptionAndConstraints::ANY creatingOrganisation::ANY dateCompleted::ANY purpose::ANY recommendations::ANY summaryOfFindings::ANY tollsUsed::ANY viewpoints::ANY+ products::ANY+ taxonomy::ANY
+        approvialAuthority::String architect::String assumptionAndConstraints::String creatingOrganisation::String dateCompleted::String purpose::String recommendations::String summaryOfFindings::String tollsUsed::String viewpoints::View+ products::ArchitecturalProduct+ taxonomy::Taxonomy
 ArchitecturalReference:
-        referred::ANY referrer::ANY
+        referred::ArchitecturalDescription referrer::ArchitecturalDescription
 ArchitecturalProduct:
-        description::ANY architecturalElements::ANY+ definingView::ANY addresses::ANY+
+        description::String architecturalElements::Elements+ definingView::View addresses::Concern+
 Elements:
-        name::ANY content::ANY
+        name::String content::String
 ArchitecturalFramework:
-        ownedMember::ANY+
+        ownedMember::View+
 View:
-        framework::ANY frameworkWebsite::ANY viewCode::ANY viewDescription::ANY viewName::ANY definingFramework::ANY usedToCover::ANY+
+        framework::String frameworkWebsite::String viewCode::String viewDescription::String viewName::String definingFramework::ArchitecturalFramework usedToCover::Concern+
 Concern:
-        adressedBy::ANY+
+        adressedBy::ArchitecturalProduct+
 StakeholderHasConcern:
-        client::ANY supplier::ANY owner::ANY
+        client::Stakeholder supplier::Concern owner::MoDAFModel
 Stakeholder:
-        name::ANY content::ANY
+        name::String content::String
 MetaData:
-        dublinCoreElement::ANY modMetaDataElement::ANY name::ANY body::ANY
+        ArchitectureMetaData
+MetaData:
+        dublinCoreElement::String modMetaDataElement::String name::String body::String
 ArchitectureMetaData:
-        annotatedArchitecture::ANY
+        annotatedArchitecture::ArchitecturalDescription
 Taxonomy:
-        date::ANY url::ANY version::ANY contents::ANY+
+        date::String url::String version::String contents::ClassifiedElement+
 ClassifiedElement:
-        EPSILON
+        Environment
+ClassifiedElement:
+        Standard
+ClassifiedElement:
+        MeasurableProperty
+ClassifiedElement:
+        CapabilityRequirement
+ClassifiedElement:
+        Effect
+ClassifiedElement:
+        EnduringTask
+ClassifiedElement:
+        OperationalConstraint
+ClassifiedElement:
+        PostType
+ClassifiedElement:
+        OrganisationType
+ClassifiedElement:
+        RoleInOrganisation
+ClassifiedElement:
+        LocationType
+ClassifiedElement:
+        OperationalActivity
+ClassifiedElement:
+        Node
+ClassifiedElement:
+        InformationExchange
+ClassifiedElement:
+        Competence
+ClassifiedElement:
+        InformationElement
+ClassifiedElement:
+        NodeConnectionType
+ClassifiedElement:
+        System
+ClassifiedElement:
+        DataElement
+ClassifiedElement:
+        SystemFunction
+ClassifiedElement:
+        SystemConnectionSpecification
+ClassifiedElement:
+        ProjectType
+ClassifiedElement:
+        Service
+ClassifiedElement:
+        Unit
+ClassifiedElement:
+        Dimension
+ClassifiedElement:
+        OrganisationProjectRelationship
+ClassifiedElement:
+        ProjectThreadType
 Standard:
-        identifier::ANY publishedWebsite::ANY publisher::ANY ratificationDate::ANY version::ANY withdrawalDate::ANY
+        identifier::String publishedWebsite::String publisher::String ratificationDate::TimeExpression version::String withdrawalDate::TimeExpression
 MeasurableProperty:
-        maxValue::ANY minValue::ANY
+        maxValue::LiteralSpecification minValue::LiteralSpecification
 CapabilityRequirement:
-        taxonomy::ANY
+        taxonomy::Taxonomy
 Effect:
-        taxonomy::ANY
+        taxonomy::Taxonomy
 EnduringTask:
-        taxonomy::ANY
+        taxonomy::Taxonomy
 OperationalConstraint:
-        nodeUsageContext::ANY
+        nodeUsageContext::Property
 PostType:
-        taxonomy::ANY
+        taxonomy::Taxonomy
 OrganisationType:
-        taxonomy::ANY
+        taxonomy::Taxonomy
 RoleInOrganisation:
-        taxonomy::ANY
+        taxonomy::Taxonomy
 LocationType:
-        taxonomy::ANY
+        taxonomy::Taxonomy
 OperationalActivity:
-        taxonomy::ANY
+        taxonomy::Taxonomy
 Node:
-        taxonomy::ANY
+        taxonomy::Taxonomy
 InformationExchange:
-        identifier::ANY requirementText::ANY
+        identifier::String requirementText::String
 Competence:
-        taxonomy::ANY
+        taxonomy::Taxonomy
 InformationElement:
-        taxonomy::ANY
+        taxonomy::Taxonomy
 NodeConnectionType:
-        taxonomy::ANY
+        taxonomy::Taxonomy
 System:
-        taxonomy::ANY
+        taxonomy::Taxonomy
 DataElement:
-        taxonomy::ANY
+        taxonomy::Taxonomy
 SystemFunction:
-        systemUsageContext::ANY
+        systemUsageContext::Property
 SystemConnectionSpecification:
-        taxonomy::ANY
+        taxonomy::Taxonomy
 ProjectType:
-        taxonomy::ANY
+        taxonomy::Taxonomy
 Service:
-        taxonomy::ANY
+        taxonomy::Taxonomy
 Unit:
-        taxonomy::ANY
+        taxonomy::Taxonomy
 Dimension:
-        taxonomy::ANY
+        taxonomy::Taxonomy
 OrganisationProjectRelationship:
-        taxonomy::ANY
+        taxonomy::Taxonomy
 ProjectThreadType:
-        taxonomy::ANY
+        taxonomy::Taxonomy
 TimeExpression:
-        value::ANY
+        value::String
 LiteralSpecification:
-        value::ANY
+        value::String
 Property:
-        value::ANY
+        value::String

@@ -1,7 +1,9 @@
-Subsystem = classes::ANY+ relations::ANY+ ;
-Relation = subsystem::ANY classes::ANY ;
-Class = name::ANY is_deferred::ANY features::ANY+ parentSubsystem::ANY subsystem::ANY relations::ANY+ ;
-Feature = theClass::ANY type::ANY ;
-Type = name::ANY ;
+Subsystem = classes::Class+ relations::Relation+ ;
+Relation = subsystem::Subsystem classes::Class ;
+Class = name::String is_deferred::Boolean features::Feature+ parentSubsystem::Subsystem subsystem::Subsystem relations::Relation+ ;
+Feature = Entity ;
+Feature = Routine ;
+Feature = theClass::Class type::Type ;
+Type = name::String ;
 Entity = ;
 Routine = ;

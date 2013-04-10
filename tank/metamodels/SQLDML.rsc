@@ -2,114 +2,124 @@
 module SQLDML
 
 syntax LocatedElement
-        = 
-        ()
+        = SQLRoot
+        | Statement
+        | NamedElement
+        | WhereClause
+        | Expression
  ;
 syntax SQLRoot
         = 
-        ANY statements+
+        Statement statements+
  ;
 syntax Statement
-        = 
-        ()
+        = ViewStatement
+        | InsertStmt
+        | QueryStmt
  ;
 syntax ViewStatement
         = 
-        ANY name ANY columns+ ANY query
+        String name ColumnExp columns+ QueryStmt query
  ;
 syntax InsertStmt
         = 
-        ANY tableName ANY values+
+        String tableName Expression values+
  ;
 syntax QueryStmt
-        = 
-        ()
+        = QueryStmtCol
+        | QueryStmtAllCol
  ;
 syntax QueryStmtCol
         = 
-        ANY columns+
+        Expression columns+
  ;
 syntax QueryStmtAllCol
         = 
-        ANY tables+ ANY condition
+        Table tables+ WhereClause condition
  ;
 syntax NamedElement
-        = 
-        ()
+        = Table
+        | DataType
  ;
 syntax Table
         = 
-        alias: ANY
+        alias: String
  ;
 syntax WhereClause
         = 
-        expression: ANY
+        expression: Expression
  ;
 syntax Expression
-        = 
-        ()
+        = BinaryExp
+        | NotExp
+        | LikeExp
+        | InExp
+        | Predicate
+        | QueryPredicate
  ;
 syntax BinaryExp
-        = 
-        ()
+        = OrExp
+        | AndExp
+        | OperationExp
  ;
 syntax OrExp
         = 
-        ANY opName ANY leftExp ANY rightExp
+        String opName Expression leftExp Expression rightExp
  ;
 syntax AndExp
         = 
-        ANY opName ANY leftExp ANY rightExp
+        String opName Expression leftExp Expression rightExp
  ;
 syntax NotExp
         = 
-        ANY opName ANY valueExp ANY unused
+        String opName Expression valueExp Expression unused
  ;
 syntax LikeExp
         = 
-        ANY columnName ANY expression
+        String columnName StringValueExp expression
  ;
 syntax InExp
         = 
-        ANY columnName ANY elements+
+        String columnName Predicate elements+
  ;
 syntax OperationExp
         = 
-        optName: ANY
+        optName: String
  ;
 syntax Predicate
-        = 
-        ()
+        = ValueExp
+        | ListExp
+        | FunctionExp
  ;
 syntax QueryPredicate
         = 
-        query: ANY
+        query: QueryStmt
  ;
 syntax ColumnExp
         = 
-        ANY alias ANY type
+        String alias DataType type
  ;
 syntax ValueExp
-        = 
-        ()
+        = StringValueExp
+        | IntegerValueExp
  ;
 syntax StringValueExp
         = 
-        aValue: ANY
+        aValue: String
  ;
 syntax IntegerValueExp
         = 
-        aValue: ANY
+        aValue: Integer
  ;
 syntax ListExp
         = 
-        ANY elements+
+        Expression elements+
  ;
 syntax FunctionExp
         = 
-        ANY arguments+ ANY name
+        Expression arguments+ String name
  ;
 syntax DataType
         = 
-        ANY name
+        name: String
  ;

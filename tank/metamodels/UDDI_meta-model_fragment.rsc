@@ -15,7 +15,7 @@ syntax BusinessService
  ;
 syntax BusinessEntity
         = 
-        ANY businessContacts+ ANY businessServices+ ANY identifierBag
+        BusinessContact businessContacts+ BusinessService businessServices+ IdentifierBag identifierBag
  ;
 syntax IdentifierBag
         = 
@@ -23,7 +23,7 @@ syntax IdentifierBag
  ;
 syntax TModel
         = 
-        ANY overviewDocuments+ ANY identifierBag
+        OverviewDocument overviewDocuments+ IdentifierBag identifierBag
  ;
 syntax OverviewDocument
         = 

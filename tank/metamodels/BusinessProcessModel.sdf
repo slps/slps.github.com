@@ -4,47 +4,90 @@ exports
   sorts
         Namespace Task DataSet Parameter DataElement ModelElement Flow DataFlow ControlFlow ControlPoint Input Output OutputSet InputSet Exception SimpleTask CoumpoundTask MutliTask InvokerTask TerminatorTask ApplicationTask Decision Clock SendCommunication ReceiveCommunication BusinessProcess 
   context-free syntax
-         -> Namespace
+        Task -> Namespace
 
-         -> Task
+        DataSet -> Namespace
 
-         -> DataSet
+        SimpleTask -> Task
 
-         -> Parameter
+        CoumpoundTask -> Task
 
-         -> DataElement
+        OutputSet -> DataSet
 
-         -> ModelElement
+        InputSet -> DataSet
 
-         -> Flow
+        DataElement -> Parameter
+
+        DataElement -> Parameter
+
+        Input -> DataElement
+
+        Output -> DataElement
+
+        Flow -> ModelElement
+
+        ControlPoint -> ModelElement
+
+        DataFlow -> Flow
+
+        ControlFlow -> Flow
+
+        DataFlow -> Flow
+        ControlFlow -> Flow
 
          -> DataFlow
 
          -> ControlFlow
 
-        sink::ANY+ -> ControlPoint
+        sink::ControlFlow+ -> ControlPoint
 
-        sink::ANY source::ANY -> Input
+        sink::DataFlow source::DataFlow -> Input
 
-        sink::ANY source::ANY -> Output
+        Exception -> Output
 
-        containsOutput::ANY+ -> OutputSet
+        Exception -> Output
 
-        containsInput::ANY+ -> InputSet
+        containsOutput::Output+ -> OutputSet
+
+        containsInput::Input+ -> InputSet
 
          -> Exception
 
-        containsDataSet::ANY containsControlPoint::ANY+ invoker::ANY+ terminator::ANY+ -> SimpleTask
+        InvokerTask -> SimpleTask
 
-        containsTask::ANY+ containsFlow::ANY+ realizes::ANY -> CoumpoundTask
+        TerminatorTask -> SimpleTask
+
+        ApplicationTask -> SimpleTask
+
+        InvokerTask -> SimpleTask
+        TerminatorTask -> SimpleTask
+        ApplicationTask -> SimpleTask
+
+        MutliTask -> CoumpoundTask
+
+        containsTask::Task+ containsFlow::Flow+ realizes::BusinessProcess -> CoumpoundTask
 
          -> MutliTask
 
-        invokes::ANY+ -> InvokerTask
+        invokes::Task+ -> InvokerTask
 
-        terminates::ANY+ -> TerminatorTask
+        terminates::Task+ -> TerminatorTask
 
-         -> ApplicationTask
+        Decision -> ApplicationTask
+
+        Clock -> ApplicationTask
+
+        SendCommunication -> ApplicationTask
+
+        ReceiveCommunication -> ApplicationTask
+
+        BusinessProcess -> ApplicationTask
+
+        Decision -> ApplicationTask
+        Clock -> ApplicationTask
+        SendCommunication -> ApplicationTask
+        ReceiveCommunication -> ApplicationTask
+        BusinessProcess -> ApplicationTask
 
          -> Decision
 

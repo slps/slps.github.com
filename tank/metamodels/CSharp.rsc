@@ -2,12 +2,15 @@
 module CSharp
 
 syntax Member
-        = 
-        ANY name ANY owner
+        = TypedAttribute
+        | MethodBase
+        | Type
+        | String name Type owner
  ;
 syntax TypedAttribute
-        = 
-        type: ANY
+        = Field
+        | Property
+        | type: Type
  ;
 syntax Field
         = 
@@ -15,11 +18,12 @@ syntax Field
  ;
 syntax Property
         = 
-        ANY isReadable ANY isWritable
+        Boolean isReadable Boolean isWritable
  ;
 syntax MethodBase
-        = 
-        ANY visibility ANY isAbstract ANY isFinal ANY isStatic ANY parameters+
+        = Constructor
+        | Method
+        | String visibility Boolean isAbstract Boolean isFinal Boolean isStatic Parameter parameters+
  ;
 syntax Constructor
         = 
@@ -27,17 +31,17 @@ syntax Constructor
  ;
 syntax Method
         = 
-        returnType: ANY
+        returnType: Type
  ;
 syntax Type
         = 
-        ANY qualifiedName ANY isAbstract ANY visibility ANY isSealed ANY nameSpace ANY members+ ANY t_container ANY super
+        String qualifiedName Boolean isAbstract String visibility Boolean isSealed String nameSpace Member members+ Assembly t_container Type super
  ;
 syntax Parameter
         = 
-        ANY isIn ANY isOut ANY name ANY position ANY method ANY type
+        Boolean isIn Boolean isOut Boolean name Integer position MethodBase method Type type
  ;
 syntax Assembly
         = 
-        ANY name ANY content+
+        String name Type content+
  ;

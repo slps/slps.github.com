@@ -4,11 +4,11 @@ exports
   sorts
         Company CorporateHQ Store CorporateHQBackOffice StoreBackOffice Employee CashRegister 
   context-free syntax
-        corporateHQ::ANY Store::ANY+ -> Company
+        corporateHQ::CorporateHQ Store::Store+ -> Company
 
-        manages::ANY+ corporateHQBackOffice::ANY -> CorporateHQ
+        manages::Store+ corporateHQBackOffice::CorporateHQBackOffice -> CorporateHQ
 
-        storeBackOffice::ANY employee::ANY+ cashRegister::ANY+ -> Store
+        storeBackOffice::StoreBackOffice employee::Employee+ cashRegister::CashRegister+ -> Store
 
          -> CorporateHQBackOffice
 

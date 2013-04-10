@@ -5,22 +5,24 @@ RelationshipType:
         rt_duplicate of::EPSILON
         rt_has duplicate::EPSILON
 MantisRoot:
-        issues::ANY+
+        issues::Issue+
 IdentifiedElt:
-        EPSILON
-PrivateElt:
-        EPSILON
+        ValueWithId
+IdentifiedElt:
+        Relationship
 Issue:
-        i_mantisRoot::ANY project::ANY category::ANY priority::ANY severity::ANY status::ANY reporter::ANY summary::ANY description::ANY version::ANY build::ANY platform::ANY os::ANY osVersion::ANY reproducibility::ANY stepsToReproduce::ANY additionalInfo::ANY dateSubmitted::ANY assignedTo::ANY projection::ANY eta::ANY resolution::ANY fixedInVersion::ANY attachments::ANY+ relationships::ANY+ notes::ANY+ lastUpdate::ANY
+        i_mantisRoot::MantisRoot project::ValueWithId category::String priority::ValueWithId severity::ValueWithId status::ValueWithId reporter::Person summary::String description::String version::String build::String platform::String os::String osVersion::String reproducibility::ValueWithId stepsToReproduce::String additionalInfo::String dateSubmitted::Integer assignedTo::Person projection::ValueWithId eta::ValueWithId resolution::ValueWithId fixedInVersion::String attachments::Attachment+ relationships::Relationship+ notes::Note+ lastUpdate::Integer
 ValueWithId:
-        value::ANY
+        Person
+ValueWithId:
+        value::String
 Person:
-        login::ANY
+        login::String
 Relationship:
-        type::ANY
+        type::RelationshipType
 TimeStampedElt:
-        EPSILON
+        Attachment
 Note:
-        author::ANY text::ANY
+        author::Person text::String
 Attachment:
-        filename::ANY size::ANY contentType::ANY downloadUrl::ANY
+        filename::String size::Integer contentType::String downloadUrl::String

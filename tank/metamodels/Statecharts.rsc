@@ -3,33 +3,33 @@ module Statecharts
 
 syntax BooleanExpression
         = 
-        value: ANY
+        value: String
  ;
 syntax StateMachine
         = 
-        ANY transitions+ ANY top+
+        Transition transitions+ State top+
  ;
 syntax State
-        = 
-        ANY state_container ANY internalTransitions+ ANY deferrableEvents+
+        = CompositeState
+        | StateMachine state_container Transition internalTransitions+ Event deferrableEvents+
  ;
 syntax CompositeState
         = 
-        ANY subVertexes+ ANY isConcurrent
+        StateVertex subVertexes+ Boolean isConcurrent
  ;
 syntax Transition
         = 
-        ANY transSM_container ANY transS_container ANY trigger ANY guard ANY source ANY target
+        StateMachine transSM_container State transS_container Event trigger Guard guard StateVertex source StateVertex target
  ;
 syntax StateVertex
-        = 
-        ANY sv_container ANY outgoing+ ANY incoming+
+        = State
+        | CompositeState sv_container Transition outgoing+ Transition incoming+
  ;
 syntax Guard
         = 
-        ANY gua_container ANY expression
+        Transition gua_container BooleanExpression expression
  ;
 syntax Event
         = 
-        ANY evt_container+ ANY targets+
+        Transition evt_container+ State targets+
  ;

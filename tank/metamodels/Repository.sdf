@@ -4,15 +4,19 @@ exports
   sorts
         Subsystem Relation Class Feature Type Entity Routine 
   context-free syntax
-        classes::ANY+ relations::ANY+ -> Subsystem
+        classes::Class+ relations::Relation+ -> Subsystem
 
-        subsystem::ANY classes::ANY -> Relation
+        subsystem::Subsystem classes::Class -> Relation
 
-        name::ANY is_deferred::ANY features::ANY+ parentSubsystem::ANY subsystem::ANY relations::ANY+ -> Class
+        name::String is_deferred::Boolean features::Feature+ parentSubsystem::Subsystem subsystem::Subsystem relations::Relation+ -> Class
 
-        theClass::ANY type::ANY -> Feature
+        Entity -> Feature
 
-        name::ANY -> Type
+        Routine -> Feature
+
+        theClass::Class type::Type -> Feature
+
+        name::String -> Type
 
          -> Entity
 

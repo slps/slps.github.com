@@ -13,77 +13,135 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable UEML (Extended) 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: SIMON Eric, <code>UEMLExtended.ecore</code>, 2006/07/18.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>36</strong></li><li>Number of top alternatives: <strong>36</strong></li><li>Number of defined nonterminal symbols: <strong>36</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>36</strong>: <code><a href="#UEMLObject" class="nt">UEMLObject</a>, <a href="#UEMLModel" class="nt">UEMLModel</a>, <a href="#Geometry" class="nt">Geometry</a>, <a href="#Port" class="nt">Port</a>, <a href="#Flow" class="nt">Flow</a>, <a href="#Activity" class="nt">Activity</a>, <a href="#Object" class="nt">Object</a>, <a href="#InformationObject" class="nt">InformationObject</a>, <a href="#Resource" class="nt">Resource</a>, <a href="#MaterialResource" class="nt">MaterialResource</a>, <a href="#HumanResource" class="nt">HumanResource</a>, <a href="#ResourceFlow" class="nt">ResourceFlow</a>, <a href="#IOFlow" class="nt">IOFlow</a>, <a href="#ControlFlow" class="nt">ControlFlow</a>, <a href="#TriggerFlow" class="nt">TriggerFlow</a>, <a href="#ConstraintFlow" class="nt">ConstraintFlow</a>, <a href="#ResourceRole" class="nt">ResourceRole</a>, <a href="#RoleType" class="nt">RoleType</a>, <a href="#Anchor" class="nt">Anchor</a>, <a href="#OutputPort" class="nt">OutputPort</a>, <a href="#InputPort" class="nt">InputPort</a>, <a href="#ConnectionOperator" class="nt">ConnectionOperator</a>, <a href="#AssociationConnector" class="nt">AssociationConnector</a>, <a href="#FlowObject" class="nt">FlowObject</a>, <a href="#Event" class="nt">Event</a>, <a href="#ResourceType" class="nt">ResourceType</a>, <a href="#ActivityType" class="nt">ActivityType</a>, <a href="#PassiveObject" class="nt">PassiveObject</a>, <a href="#Commitment" class="nt">Commitment</a>, <a href="#Software" class="nt">Software</a>, <a href="#Organisation" class="nt">Organisation</a>, <a href="#Process" class="nt">Process</a>, <a href="#Service" class="nt">Service</a>, <a href="#Agent" class="nt">Agent</a>, <a href="#Contract" class="nt">Contract</a>, <a href="#Task" class="nt">Task</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="UEMLObject">UEMLObject</a>:
-        <span class="sel">has</span>::<span class="meta">any</span> <span class="sel">model</span>::<span class="meta">any</span>
+				</script></head><body><h1 class="l">Browsable UEML (Extended) 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: SIMON Eric, <code>UEMLExtended.ecore</code>, 2006/07/18.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>63</strong></li><li>Number of top alternatives: <strong>67</strong></li><li>Number of defined nonterminal symbols: <strong>36</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#ConnectionOperator" class="nt">ConnectionOperator</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="UEMLObject">UEMLObject</a>:
+        <a class="nt" href="#UEMLModel">UEMLModel</a>
+</pre><pre><a class="nt" name="UEMLObject">UEMLObject</a>:
+        <a class="nt" href="#Port">Port</a>
+</pre><pre><a class="nt" name="UEMLObject">UEMLObject</a>:
+        <a class="nt" href="#Flow">Flow</a>
+</pre><pre><a class="nt" name="UEMLObject">UEMLObject</a>:
+        <a class="nt" href="#Object">Object</a>
+</pre><pre><a class="nt" name="UEMLObject">UEMLObject</a>:
+        <span class="sel">has</span>::<a class="nt" href="#Geometry">Geometry</a> <span class="sel">model</span>::<a class="nt" href="#UEMLModel">UEMLModel</a>
 </pre><pre><a class="nt" name="UEMLModel">UEMLModel</a>:
-        <span class="sel">contains</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">contains</span>::<a class="nt" href="#UEMLObject">UEMLObject</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Geometry">Geometry</a>:
-        <span class="sel">object</span>::<span class="meta">any</span>
+        <span class="sel">object</span>::<a class="nt" href="#UEMLObject">UEMLObject</a>
 </pre><pre><a class="nt" name="Port">Port</a>:
-        ε
+        <a class="nt" href="#ResourceRole">ResourceRole</a>
+</pre><pre><a class="nt" name="Port">Port</a>:
+        <a class="nt" href="#Anchor">Anchor</a>
+</pre><pre><a class="nt" name="Port">Port</a>:
+        <a class="nt" href="#ResourceRole">ResourceRole</a>
+        <a class="nt" href="#Anchor">Anchor</a>
 </pre><pre><a class="nt" name="Flow">Flow</a>:
-        <span class="sel">associationConnector</span>::<span class="meta">any</span>
+        <a class="nt" href="#ResourceFlow">ResourceFlow</a>
+</pre><pre><a class="nt" name="Flow">Flow</a>:
+        <a class="nt" href="#IOFlow">IOFlow</a>
+</pre><pre><a class="nt" name="Flow">Flow</a>:
+        <a class="nt" href="#ControlFlow">ControlFlow</a>
+</pre><pre><a class="nt" name="Flow">Flow</a>:
+        <span class="sel">associationConnector</span>::<a class="nt" href="#AssociationConnector">AssociationConnector</a>
 </pre><pre><a class="nt" name="Activity">Activity</a>:
-        <span class="sel">resourceRole</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">parent</span>::<span class="meta">any</span> <span class="sel">hasOutput</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">hasInput</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">activityType</span>::<span class="meta">any</span>
+        <a class="nt" href="#Process">Process</a>
+</pre><pre><a class="nt" name="Activity">Activity</a>:
+        <a class="nt" href="#Task">Task</a>
+</pre><pre><a class="nt" name="Activity">Activity</a>:
+        <span class="sel">resourceRole</span>::<a class="nt" href="#ResourceRole">ResourceRole</a><span class="meta">+</span> <span class="sel">parent</span>::<a class="nt" href="#Process">Process</a> <span class="sel">hasOutput</span>::<a class="nt" href="#OutputPort">OutputPort</a><span class="meta">+</span> <span class="sel">hasInput</span>::<a class="nt" href="#InputPort">InputPort</a><span class="meta">+</span> <span class="sel">activityType</span>::<a class="nt" href="#ActivityType">ActivityType</a>
 </pre><pre><a class="nt" name="Object">Object</a>:
-        <span class="sel">ioFlow</span>::<span class="meta">any</span>
+        <a class="nt" href="#InformationObject">InformationObject</a>
+</pre><pre><a class="nt" name="Object">Object</a>:
+        <a class="nt" href="#Resource">Resource</a>
+</pre><pre><a class="nt" name="Object">Object</a>:
+        <span class="sel">ioFlow</span>::<a class="nt" href="#IOFlow">IOFlow</a>
 </pre><pre><a class="nt" name="InformationObject">InformationObject</a>:
-        <span class="sel">controlFlow</span>::<span class="meta">any</span>
+        <span class="sel">controlFlow</span>::<a class="nt" href="#ControlFlow">ControlFlow</a>
 </pre><pre><a class="nt" name="Resource">Resource</a>:
-        <span class="sel">carries</span>::<span class="meta">any</span> <span class="sel">plays</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">resourceType</span>::<span class="meta">any</span> <span class="sel">commitment</span>::<span class="meta">any</span><span class="meta">+</span>
+        <a class="nt" href="#PassiveObject">PassiveObject</a>
+</pre><pre><a class="nt" name="Resource">Resource</a>:
+        <a class="nt" href="#Service">Service</a>
+</pre><pre><a class="nt" name="Resource">Resource</a>:
+        <a class="nt" href="#Agent">Agent</a>
+</pre><pre><a class="nt" name="Resource">Resource</a>:
+        <span class="sel">carries</span>::<a class="nt" href="#ResourceFlow">ResourceFlow</a> <span class="sel">plays</span>::<a class="nt" href="#ResourceRole">ResourceRole</a><span class="meta">+</span> <span class="sel">resourceType</span>::<a class="nt" href="#ResourceType">ResourceType</a> <span class="sel">commitment</span>::<a class="nt" href="#Commitment">Commitment</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="MaterialResource">MaterialResource</a>:
         ε
 </pre><pre><a class="nt" name="HumanResource">HumanResource</a>:
         ε
 </pre><pre><a class="nt" name="ResourceFlow">ResourceFlow</a>:
-        <span class="sel">resourceCarries</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">resourceCarries</span>::<a class="nt" href="#Resource">Resource</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="IOFlow">IOFlow</a>:
-        <span class="sel">carries</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">carries</span>::<a class="nt" href="#Object">Object</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="ControlFlow">ControlFlow</a>:
-        <span class="sel">carries</span>::<span class="meta">any</span><span class="meta">+</span>
+        <a class="nt" href="#TriggerFlow">TriggerFlow</a>
+</pre><pre><a class="nt" name="ControlFlow">ControlFlow</a>:
+        <a class="nt" href="#ConstraintFlow">ConstraintFlow</a>
+</pre><pre><a class="nt" name="ControlFlow">ControlFlow</a>:
+        <span class="sel">carries</span>::<a class="nt" href="#InformationObject">InformationObject</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="TriggerFlow">TriggerFlow</a>:
         ε
 </pre><pre><a class="nt" name="ConstraintFlow">ConstraintFlow</a>:
         ε
 </pre><pre><a class="nt" name="ResourceRole">ResourceRole</a>:
-        <span class="sel">resourcePlays</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">roleQualifier</span>::<span class="meta">any</span> <span class="sel">in</span>::<span class="meta">any</span>
+        <span class="sel">resourcePlays</span>::<a class="nt" href="#Resource">Resource</a><span class="meta">+</span> <span class="sel">roleQualifier</span>::<a class="nt" href="#RoleType">RoleType</a> <span class="sel">in</span>::<a class="nt" href="#Activity">Activity</a>
 </pre><pre><a class="nt" name="RoleType">RoleType</a>:
         ε
 </pre><pre><a class="nt" name="Anchor">Anchor</a>:
-        ε
+        <a class="nt" href="#OutputPort">OutputPort</a>
+</pre><pre><a class="nt" name="Anchor">Anchor</a>:
+        <a class="nt" href="#InputPort">InputPort</a>
+</pre><pre><a class="nt" name="Anchor">Anchor</a>:
+        <a class="nt" href="#OutputPort">OutputPort</a>
+        <a class="nt" href="#InputPort">InputPort</a>
 </pre><pre><a class="nt" name="OutputPort">OutputPort</a>:
-        <span class="sel">activity</span>::<span class="meta">any</span>
+        <span class="sel">activity</span>::<a class="nt" href="#Activity">Activity</a>
 </pre><pre><a class="nt" name="InputPort">InputPort</a>:
-        <span class="sel">activity</span>::<span class="meta">any</span>
+        <span class="sel">activity</span>::<a class="nt" href="#Activity">Activity</a>
 </pre><pre><a class="nt" name="ConnectionOperator">ConnectionOperator</a>:
         ε
 </pre><pre><a class="nt" name="AssociationConnector">AssociationConnector</a>:
-        <span class="sel">origin</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">target</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">classAssociation</span>::<span class="meta">any</span>
+        <span class="sel">origin</span>::<a class="nt" href="#FlowObject">FlowObject</a><span class="meta">+</span> <span class="sel">target</span>::<a class="nt" href="#FlowObject">FlowObject</a><span class="meta">+</span> <span class="sel">classAssociation</span>::<a class="nt" href="#Flow">Flow</a>
 </pre><pre><a class="nt" name="FlowObject">FlowObject</a>:
-        <span class="sel">target</span>::<span class="meta">any</span> <span class="sel">origin</span>::<span class="meta">any</span>
+        <a class="nt" href="#Event">Event</a>
+</pre><pre><a class="nt" name="FlowObject">FlowObject</a>:
+        <span class="sel">target</span>::<a class="nt" href="#AssociationConnector">AssociationConnector</a> <span class="sel">origin</span>::<a class="nt" href="#AssociationConnector">AssociationConnector</a>
 </pre><pre><a class="nt" name="Event">Event</a>:
         ε
 </pre><pre><a class="nt" name="ResourceType">ResourceType</a>:
-        <span class="sel">resource</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">resource</span>::<a class="nt" href="#Resource">Resource</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="ActivityType">ActivityType</a>:
-        <span class="sel">activityT</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">activityT</span>::<a class="nt" href="#Activity">Activity</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="PassiveObject">PassiveObject</a>:
-        ε
+        <a class="nt" href="#MaterialResource">MaterialResource</a>
+</pre><pre><a class="nt" name="PassiveObject">PassiveObject</a>:
+        <a class="nt" href="#Commitment">Commitment</a>
+</pre><pre><a class="nt" name="PassiveObject">PassiveObject</a>:
+        <a class="nt" href="#Contract">Contract</a>
+</pre><pre><a class="nt" name="PassiveObject">PassiveObject</a>:
+        <a class="nt" href="#MaterialResource">MaterialResource</a>
+        <a class="nt" href="#Commitment">Commitment</a>
+        <a class="nt" href="#Contract">Contract</a>
 </pre><pre><a class="nt" name="Commitment">Commitment</a>:
-        <span class="sel">resource</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">task</span>::<span class="meta">any</span> <span class="sel">agentO</span>::<span class="meta">any</span> <span class="sel">agentC</span>::<span class="meta">any</span> <span class="sel">contract</span>::<span class="meta">any</span>
+        <span class="sel">resource</span>::<a class="nt" href="#Resource">Resource</a><span class="meta">+</span> <span class="sel">task</span>::<a class="nt" href="#Task">Task</a> <span class="sel">agentO</span>::<a class="nt" href="#Agent">Agent</a> <span class="sel">agentC</span>::<a class="nt" href="#Agent">Agent</a> <span class="sel">contract</span>::<a class="nt" href="#Contract">Contract</a>
 </pre><pre><a class="nt" name="Software">Software</a>:
         ε
 </pre><pre><a class="nt" name="Organisation">Organisation</a>:
         ε
 </pre><pre><a class="nt" name="Process">Process</a>:
-        <span class="sel">child</span>::<span class="meta">any</span> <span class="sel">fulfills</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">realises</span>::<span class="meta">any</span>
+        <span class="sel">child</span>::<a class="nt" href="#Activity">Activity</a> <span class="sel">fulfills</span>::<a class="nt" href="#Contract">Contract</a><span class="meta">+</span> <span class="sel">realises</span>::<a class="nt" href="#Service">Service</a>
 </pre><pre><a class="nt" name="Service">Service</a>:
-        <span class="sel">process</span>::<span class="meta">any</span>
+        <span class="sel">process</span>::<a class="nt" href="#Process">Process</a>
 </pre><pre><a class="nt" name="Agent">Agent</a>:
-        <span class="sel">obliger</span>::<span class="meta">any</span> <span class="sel">claimer</span>::<span class="meta">any</span> <span class="sel">has_parties</span>::<span class="meta">any</span>
+        <a class="nt" href="#HumanResource">HumanResource</a>
+</pre><pre><a class="nt" name="Agent">Agent</a>:
+        <a class="nt" href="#Software">Software</a>
+</pre><pre><a class="nt" name="Agent">Agent</a>:
+        <a class="nt" href="#Organisation">Organisation</a>
+</pre><pre><a class="nt" name="Agent">Agent</a>:
+        <span class="sel">obliger</span>::<a class="nt" href="#Commitment">Commitment</a> <span class="sel">claimer</span>::<a class="nt" href="#Commitment">Commitment</a> <span class="sel">has_parties</span>::<a class="nt" href="#Contract">Contract</a>
 </pre><pre><a class="nt" name="Contract">Contract</a>:
-        <span class="sel">process</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">agent</span>::<span class="meta">any</span> <span class="sel">collection_of</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">process</span>::<a class="nt" href="#Process">Process</a><span class="meta">+</span> <span class="sel">agent</span>::<a class="nt" href="#Agent">Agent</a> <span class="sel">collection_of</span>::<a class="nt" href="#Commitment">Commitment</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Task">Task</a>:
-        <span class="sel">fulfills</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">fulfills</span>::<a class="nt" href="#Commitment">Commitment</a><span class="meta">+</span>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

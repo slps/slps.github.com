@@ -4,35 +4,50 @@ exports
   sorts
         Simulink System Connector Line BranchPoint Port Block BlockRef Primitive OutPut TriggerPort EnablePort Reference Annotation Parameter Units TriggerEnum EnableEnum 
   context-free syntax
-        subSystem::ANY+ -> Simulink
+        subSystem::System+ -> Simulink
 
-        name::ANY simulink::ANY blocks::ANY lines::ANY subSystem::ANY+ -> System
+        name::String simulink::Simulink blocks::Block lines::Line subSystem::System+ -> System
 
-         -> Connector
+        BranchPoint -> Connector
 
-        name::ANY block::ANY system::ANY -> Line
+        Port -> Connector
+
+        BranchPoint -> Connector
+        Port -> Connector
+
+        name::String block::Block system::System -> Line
 
          -> BranchPoint
 
-        units::ANY -> Port
+        OutPut -> Port
 
-        description::ANY name::ANY priority::ANY natagme::ANY blockType::ANY lines::ANY+ parameters::ANY+ annotations::ANY+ blockRefs::ANY+ system::ANY -> Block
+        TriggerPort -> Port
+
+        EnablePort -> Port
+
+        units::Units -> Port
+
+        Primitive -> Block
+
+        Reference -> Block
+
+        description::String name::String priority::String natagme::String blockType::String lines::Line+ parameters::Parameter+ annotations::Annotation+ blockRefs::BlockRef+ system::System -> Block
 
          -> BlockRef
 
-        deadLine::ANY period::ANY executionTime::ANY -> Primitive
+        deadLine::String period::String executionTime::String -> Primitive
 
-        number::ANY -> OutPut
+        number::Integer -> OutPut
 
-        triggerType::ANY -> TriggerPort
+        triggerType::TriggerEnum -> TriggerPort
 
-        statesWhenEnabling::ANY -> EnablePort
+        statesWhenEnabling::EnableEnum -> EnablePort
 
-        sourceBlock::ANY sourceType::ANY -> Reference
+        sourceBlock::String sourceType::String -> Reference
 
-        text::ANY block::ANY -> Annotation
+        text::String block::Block -> Annotation
 
-        value::ANY block::ANY -> Parameter
+        value::String block::Block -> Parameter
 
         alpha:: -> Units
         beta:: -> Units

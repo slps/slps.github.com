@@ -4,14 +4,18 @@ exports
   sorts
         Node Attribute Root Child XORGroup ORGroup 
   context-free syntax
-        description::ANY preliminary::ANY object::ANY attributes::ANY+ no_dst::ANY+ nx_dst::ANY+ cn_dst::ANY+ -> Node
+        Root -> Node
 
-        description::ANY editable::ANY key::ANY value::ANY name::ANY node::ANY -> Attribute
+        Child -> Node
+
+        description::String preliminary::Boolean object::String attributes::Attribute+ no_dst::ORGroup+ nx_dst::XORGroup+ cn_dst::Child+ -> Node
+
+        description::String editable::Boolean key::Boolean value::String name::String node::Node -> Attribute
 
          -> Root
 
-        cn_src::ANY+ cx_src::ANY+ co_src::ANY+ -> Child
+        cn_src::Node+ cx_src::XORGroup+ co_src::ORGroup+ -> Child
 
-        preliminary::ANY name::ANY nx_src::ANY+ cx_dst::ANY+ -> XORGroup
+        preliminary::Boolean name::String nx_src::Node+ cx_dst::Child+ -> XORGroup
 
-        preliminary::ANY name::ANY no_src::ANY+ co_dst::ANY+ -> ORGroup
+        preliminary::Boolean name::String no_src::Node+ co_dst::Child+ -> ORGroup

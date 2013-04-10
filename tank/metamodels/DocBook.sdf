@@ -4,14 +4,16 @@ exports
   sorts
         DocBook Book TitledElement Article Sect1 Para 
   context-free syntax
-        books::ANY+ -> DocBook
+        books::Book+ -> DocBook
 
-        articles::ANY+ -> Book
+        articles::Article+ -> Book
 
-         -> TitledElement
+        Article -> TitledElement
 
-        sections_1::ANY+ -> Article
+        Sect1 -> TitledElement
 
-        paras::ANY+ -> Sect1
+        sections_1::Sect1+ -> Article
 
-        content::ANY -> Para
+        paras::Para+ -> Sect1
+
+        content::String -> Para

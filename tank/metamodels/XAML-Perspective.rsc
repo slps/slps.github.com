@@ -3,55 +3,47 @@ module XAML_Perspective
 
 syntax Page
         = 
-        ANY xmlns+ ANY title ANY graphContainer ANY pageResources
+        NameSpace xmlns+ String title GraphicalContainer graphContainer PageResource pageResources
  ;
 syntax NameSpace
         = 
-        ANY namespace ANY identifier
+        String namespace String identifier
  ;
 syntax PageResource
         = 
-        ANY dictionaries+
+        ResourceDictionary dictionaries+
  ;
 syntax GraphicalContainer
         = 
-        ()
+        Grid
  ;
 syntax WinFXElement
         = 
-        ()
- ;
-syntax PerspectiveElement
-        = 
-        ()
+        Name
  ;
 syntax ResourceDictionary
         = 
-        source: ANY
+        source: String
  ;
 syntax Grid
         = 
-        ANY object3D+
- ;
-syntax Object3D
-        = 
-        ()
+        Object3D object3D+
  ;
 syntax Workshop3D
         = 
-        ANY elements3D+
+        Element3D elements3D+
  ;
 syntax Element3D
         = 
-        ()
+        UI3Delement
  ;
 syntax UI3Delement
         = 
-        ANY transform ANY material ANY name
+        String transform String material Name name
  ;
 syntax XyzAxis3D
         = 
-        length: ANY
+        length: Double
  ;
 syntax Box3D
         = 
@@ -63,5 +55,5 @@ syntax Square3D
  ;
 syntax Name
         = 
-        name: ANY
+        name: String
  ;

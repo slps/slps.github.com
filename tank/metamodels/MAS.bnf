@@ -1,41 +1,51 @@
 Agent:
-        service::ANY+ non_Functionnal_Requirement::ANY+ requirement::ANY+ belongs::ANY cooperationRules::ANY+ fipa_Platform_Agent::ANY role::ANY representation::ANY characteristic::ANY skill::ANY aptitude::ANY
+        service::Service+ non_Functionnal_Requirement::Non Functionnal Requirement+ requirement::Requirement+ belongs::Organization cooperationRules::CooperationRules+ fipa_Platform_Agent::FIPA-Platform Agent role::Role representation::Representation characteristic::Characteristic skill::Skill aptitude::Aptitude
 Service:
-        inputs::ANY outputs::ANY pre-conditions::ANY post-conditions::ANY
+        inputs::String outputs::String pre-conditions::String post-conditions::String
 Non Functionnal Requirement:
         EPSILON
 Requirement:
         EPSILON
 Organization:
-        observes::ANY+ organizational_Structure::ANY
+        observes::Organizational Structure+ organizational_Structure::Organizational Structure
 Organizational Structure:
-        organization::ANY+
+        SafetyRule
+Organizational Structure:
+        LivenessRule
+Organizational Structure:
+        organization::Organization+
 SafetyRule:
         EPSILON
 LivenessRule:
         EPSILON
 CooperationRules:
-        ncs::ANY
+        ncs::NCS
 NCS:
-        cooperationRules::ANY
+        cooperationRules::CooperationRules
 FIPA-Platform Agent:
-        agentF::ANY fipa_Platform_Task::ANY+
+        agentF::Agent fipa_Platform_Task::FIPA-Platform Task+
 FIPA-Platform Task:
-        fipa_Platform_AgentF::ANY task::ANY
+        fipa_Platform_AgentF::FIPA-Platform Agent task::Task
 Task:
-        name::ANY fipa_Platform_TaskT::ANY
+        name::String fipa_Platform_TaskT::FIPA-Platform Task
 Role:
-        agentR::ANY activity::ANY+ actsOn::ANY+ scenario::ANY+ participant::ANY+ has::ANY+
+        agentR::Agent activity::Task+ actsOn::Resource+ scenario::Scenario+ participant::Communication+ has::Responsibility+
 Representation:
-        agentRep::ANY ontology::ANY environnement::ANY
+        agentRep::Agent ontology::Ontology environnement::Environnement
 Characteristic:
-        agentC::ANY
+        agentC::Agent
 Skill:
-        agentS::ANY
+        agentS::Agent
 Aptitude:
-        agentA::ANY
+        agentA::Agent
 Ontology:
-        environnement::ANY
+        Concept
+Ontology:
+        Predicat
+Ontology:
+        Action
+Ontology:
+        environnement::Environnement
 Concept:
         EPSILON
 Predicat:
@@ -43,22 +53,27 @@ Predicat:
 Action:
         EPSILON
 Environnement:
-        resource::ANY
+        resource::Resource
 Responsibility:
-        EPSILON
+        LivenessProperty
+Responsibility:
+        SafetyProperty
+Responsibility:
+        LivenessProperty
+        SafetyProperty
 LivenessProperty:
         EPSILON
 SafetyProperty:
         EPSILON
 Resource:
-        name::ANY environnement::ANY action::ANY
+        name::String environnement::Environnement action::Action
 Communication:
-        name::ANY Exchanged Knoledge::ANY scenario::ANY+ aip::ANY message::ANY+
+        name::String Exchanged Knoledge::Ontology scenario::Scenario+ aip::AIP message::Message+
 AIP:
-        name::ANY performative::ANY
+        name::String performative::Performative
 Performative:
-        aip::ANY
+        aip::AIP
 Message:
-        communication::ANY Comm_Act::ANY
+        communication::Communication Comm_Act::Performative
 Scenario:
         EPSILON

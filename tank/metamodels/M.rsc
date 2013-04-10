@@ -2,54 +2,58 @@
 module M
 
 syntax IdentifiedElement
-        = 
-        ()
+        = MElement
+        | Field
+        | Collection
+        | ComputedValue
  ;
 syntax MElement
-        = 
-        ()
+        = Module
+        | ModuleMember
  ;
 syntax MElementReference
         = 
-        ANY alias ANY referencedElement
+        String alias MElement referencedElement
  ;
 syntax Module
         = 
-        ANY imports+ ANY exports+ ANY moduleMembers+
+        ImportDirective imports+ ExportDirective exports+ ModuleMember moduleMembers+
  ;
 syntax ModuleMember
-        = 
-        ()
+        = DerivedType
+        | Language
+        | Entity
  ;
 syntax ImportDirective
         = 
-        ANY module ANY importedElements+
+        Module module MElementReference importedElements+
  ;
 syntax ExportDirective
         = 
-        ANY module ANY exportedElements+
+        Module module ModuleMember exportedElements+
  ;
 syntax Value
-        = 
-        ()
+        = NumericalValue
+        | StringValue
+        | BooleanValue
  ;
 syntax NumericalValue
-        = 
-        ()
+        = IntegerValue
+        | DecimalValue
  ;
 syntax StringValue
         = 
-        value: ANY
+        value: String
  ;
 syntax IntegerValue
         = 
-        value: ANY
+        value: Integer
  ;
 syntax DecimalValue
         = 
-        value: ANY
+        value: Double
  ;
 syntax BooleanValue
         = 
-        value: ANY
+        value: Boolean
  ;

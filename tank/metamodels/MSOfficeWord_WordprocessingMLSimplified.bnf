@@ -1,7 +1,9 @@
 StringProperty:
         EPSILON
 StringType:
-        val::ANY
+        StringProperty
+StringType:
+        val::String
 BreakType:
         bt_page::EPSILON
         bt_column::EPSILON
@@ -19,23 +21,45 @@ FldCharTypeProperty:
         fctp_separate::EPSILON
         fctp_end::EPSILON
 WordDocument:
-        ignoreSubtree::ANY ignoreElements::ANY body::ANY
+        ignoreSubtree::StringProperty ignoreElements::StringProperty body::BodyElt
 BodyElt:
-        be_wordDocument::ANY blockLevelElts::ANY+
+        be_wordDocument::WordDocument blockLevelElts::BlockLevelElt+
 BlockLevelElt:
-        EPSILON
+        BlockLevelChunkElt
 BlockLevelChunkElt:
-        EPSILON
+        ParaElt
 ParaElt:
-        pContentElts::ANY+
+        pContentElts::ParaContentElt+
 ParaContentElt:
-        EPSILON
+        RunElt
 RunElt:
-        rContentElts::ANY+
+        rContentElts::RunContentElt+
 RunContentElt:
-        EPSILON
+        BreakElt
+RunContentElt:
+        NoBreakHyphen
+RunContentElt:
+        SoftHyphen
+RunContentElt:
+        AnnotationRef
+RunContentElt:
+        FootnoteRef
+RunContentElt:
+        EndnoteRef
+RunContentElt:
+        Separator
+RunContentElt:
+        ContinuationSeparator
+RunContentElt:
+        PgNum
+RunContentElt:
+        Cr
+RunContentElt:
+        Picture
+RunContentElt:
+        Tab
 BreakElt:
-        type::ANY
+        type::BreakType
 Text:
         EPSILON
 DelText:
@@ -45,38 +69,36 @@ InstrText:
 DelInstrText:
         EPSILON
 NoBreakHyphen:
-        rce_rElt::ANY
+        rce_rElt::RunElt
 SoftHyphen:
-        rce_rElt::ANY
+        rce_rElt::RunElt
 AnnotationRef:
-        rce_rElt::ANY
+        rce_rElt::RunElt
 FootnoteRef:
-        rce_rElt::ANY
+        rce_rElt::RunElt
 EndnoteRef:
-        rce_rElt::ANY
+        rce_rElt::RunElt
 Separator:
-        rce_rElt::ANY
+        rce_rElt::RunElt
 ContinuationSeparator:
-        rce_rElt::ANY
+        rce_rElt::RunElt
 PgNum:
-        rce_rElt::ANY
+        rce_rElt::RunElt
 Cr:
-        rce_rElt::ANY
+        rce_rElt::RunElt
 Footnote:
         EPSILON
 Endnote:
         EPSILON
-NoteElt:
-        EPSILON
 Picture:
-        rce_rElt::ANY
+        rce_rElt::RunElt
 Symbol:
         EPSILON
 SymElt:
-        font::ANY char::ANY
+        font::StringType char::StringType
 Tab:
-        rce_rElt::ANY
+        rce_rElt::RunElt
 FldChar:
         EPSILON
 FldCharElt:
-        fldData::ANY fldCharType::ANY fldLock::ANY
+        fldData::StringType fldCharType::FldCharTypeProperty fldLock::OnOffType

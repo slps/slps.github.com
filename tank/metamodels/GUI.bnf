@@ -1,32 +1,52 @@
 LocatedElement:
-        EPSILON
+        Named
+LocatedElement:
+        Column
 Named:
-        EPSILON
+        GUI
+Named:
+        Tab
+Named:
+        Composant
 GUI:
-        guiTabs::ANY+
+        guiTabs::Tab+
 Tab:
-        title::ANY gui::ANY group::ANY
+        title::String gui::GUI group::Group
 Composant:
-        EPSILON
+        Group
+Composant:
+        Label
+Composant:
+        TextArea
+Composant:
+        Table
+Composant:
+        ComboBox
+Composant:
+        Row
+Composant:
+        Item
+Composant:
+        Button
 Layout:
         default::EPSILON
         horizontal::EPSILON
         vertical::EPSILON
 Group:
-        title::ANY layout::ANY description::ANY tabGroup::ANY composants::ANY+
+        title::String layout::Layout description::String tabGroup::Tab composants::Composant+
 Label:
-        text::ANY
+        text::String
 TextArea:
-        text::ANY nbRows::ANY
+        text::String nbRows::Integer
 Table:
-        tabColumns::ANY+
+        tabColumns::Column+
 Column:
-        title::ANY columnTab::ANY
+        title::String columnTab::Table
 ComboBox:
-        listRows::ANY+
+        listRows::Row+
 Row:
-        rowList::ANY text::ANY listItems::ANY+
+        rowList::ComboBox text::String listItems::Item+
 Item:
-        itemList::ANY text::ANY
+        itemList::Row text::String
 Button:
-        title::ANY
+        title::String

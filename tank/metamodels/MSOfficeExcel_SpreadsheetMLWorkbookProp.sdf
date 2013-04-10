@@ -4,55 +4,69 @@ exports
   sorts
         DateTimeType VersionType ValueType StringValue NumberValue DateTimeTypeValue BooleanValue ErrorValue DocumentPropertiesCollection CustomDocumentPropertiesCollection CustomDocumentProperty SmartTagType SmartTagsCollection Workbook Worksheet StyledElement Table TableElement ColOrRowElement Column Row Cell Comment Data ExcelWorkbook DisplayDrawingObjectsType CalculationWorkbookType 
   context-free syntax
-        year::ANY month::ANY day::ANY hour::ANY minute::ANY second::ANY -> DateTimeType
+        year::Integer month::Integer day::Integer hour::Integer minute::Integer second::Integer -> DateTimeType
 
-        n::ANY nn::ANY -> VersionType
+        n::Integer nn::Integer -> VersionType
 
-         -> ValueType
+        StringValue -> ValueType
 
-        value::ANY -> StringValue
+        NumberValue -> ValueType
 
-        value::ANY -> NumberValue
+        DateTimeTypeValue -> ValueType
 
-        value::ANY -> DateTimeTypeValue
+        BooleanValue -> ValueType
 
-        value::ANY -> BooleanValue
+        ErrorValue -> ValueType
 
-        vt_data::ANY -> ErrorValue
+        value::String -> StringValue
 
-        dp_workbook::ANY title::ANY subject::ANY keywords::ANY description::ANY category::ANY author::ANY lastAuthor::ANY manager::ANY company::ANY hyperlinkBase::ANY revision::ANY presentationFormat::ANY guid::ANY appName::ANY version::ANY totalTime::ANY lastPrinted::ANY created::ANY lastSaved::ANY pages::ANY words::ANY characters::ANY charactersWithSpaces::ANY bytes::ANY lines::ANY paragraphs::ANY -> DocumentPropertiesCollection
+        value::Double -> NumberValue
 
-        cdp_workbook::ANY customDocumentProperties::ANY+ -> CustomDocumentPropertiesCollection
+        value::DateTimeType -> DateTimeTypeValue
 
-        customDocumentProperty_cdpe::ANY name::ANY value::ANY -> CustomDocumentProperty
+        value::Boolean -> BooleanValue
 
-        smartTagType_ste::ANY namespaceuri::ANY name::ANY url::ANY -> SmartTagType
+        vt_data::Data -> ErrorValue
 
-        st_workbook::ANY st_cell::ANY smartTagTypes::ANY+ -> SmartTagsCollection
+        dp_workbook::Workbook title::String subject::String keywords::String description::String category::String author::String lastAuthor::String manager::String company::String hyperlinkBase::String revision::Integer presentationFormat::String guid::String appName::String version::VersionType totalTime::Integer lastPrinted::DateTimeType created::DateTimeType lastSaved::DateTimeType pages::Integer words::Integer characters::Integer charactersWithSpaces::Integer bytes::Integer lines::Integer paragraphs::Integer -> DocumentPropertiesCollection
 
-        wb_smartTags::ANY wb_docProperties::ANY wb_customDocProperties::ANY wb_excelWorkbook::ANY wb_worksheets::ANY+ -> Workbook
+        cdp_workbook::Workbook customDocumentProperties::CustomDocumentProperty+ -> CustomDocumentPropertiesCollection
 
-        ws_workbook::ANY ws_table::ANY name::ANY -> Worksheet
+        customDocumentProperty_cdpe::CustomDocumentPropertiesCollection name::String value::ValueType -> CustomDocumentProperty
 
-         -> StyledElement
+        smartTagType_ste::SmartTagsCollection namespaceuri::String name::String url::String -> SmartTagType
 
-        t_worksheet::ANY t_cols::ANY+ t_rows::ANY+ defaultColumnWidth::ANY defaultRowHeight::ANY expandedColumnCount::ANY expandedRowCount::ANY leftCell::ANY topCell::ANY fullColumns::ANY fullRows::ANY -> Table
+        st_workbook::Workbook st_cell::Cell smartTagTypes::SmartTagType+ -> SmartTagsCollection
 
-         -> TableElement
+        wb_smartTags::SmartTagsCollection wb_docProperties::DocumentPropertiesCollection wb_customDocProperties::CustomDocumentPropertiesCollection wb_excelWorkbook::ExcelWorkbook wb_worksheets::Worksheet+ -> Workbook
 
-         -> ColOrRowElement
+        ws_workbook::Workbook ws_table::Table name::String -> Worksheet
 
-        c_table::ANY autoFitWidth::ANY width::ANY -> Column
+        Table -> StyledElement
 
-        r_table::ANY r_cells::ANY+ autoFitHeight::ANY height::ANY -> Row
+        TableElement -> StyledElement
 
-        c_smartTags::ANY+ c_row::ANY arrayRange::ANY formula::ANY hRef::ANY mergeAcross::ANY mergeDown::ANY c_data::ANY c_comment::ANY -> Cell
+        t_worksheet::Worksheet t_cols::Column+ t_rows::Row+ defaultColumnWidth::Double defaultRowHeight::Double expandedColumnCount::Integer expandedRowCount::Integer leftCell::Integer topCell::Integer fullColumns::Boolean fullRows::Boolean -> Table
 
-        c_cell::ANY com_data::ANY author::ANY showAlways::ANY -> Comment
+        ColOrRowElement -> TableElement
 
-        d_cell::ANY d_comment::ANY value::ANY -> Data
+        Cell -> TableElement
 
-        ew_workbook::ANY selectedSheets::ANY windowHidden::ANY hideHorizontalScrollBar::ANY hideVerticalScrollBar::ANY hideWorkbookTabs::ANY windowHeight::ANY windowWidth::ANY windowTopX::ANY windowTopY::ANY activeSheet::ANY activeChart::ANY firstVisibleSheet::ANY hidePivotTableFieldList::ANY protectStructure::ANY protectWindows::ANY displayInkNotes::ANY embedSaveSmartTags::ANY futureVer::ANY tabRatio::ANY windowIconic::ANY displayDrawingObjects::ANY createBackup::ANY calculation::ANY doNotCalculateBeforeSave::ANY date1904::ANY refModeR1C1::ANY iteration::ANY maxIterations::ANY maxChange::ANY precisionAsDisplayed::ANY doNotSaveLinkValues::ANY noAutoRecover::ANY acceptLabelsInFormulas::ANY uncalced::ANY -> ExcelWorkbook
+        Column -> ColOrRowElement
+
+        Row -> ColOrRowElement
+
+        c_table::Table autoFitWidth::Boolean width::Double -> Column
+
+        r_table::Table r_cells::Cell+ autoFitHeight::Boolean height::Double -> Row
+
+        c_smartTags::SmartTagsCollection+ c_row::Row arrayRange::String formula::String hRef::String mergeAcross::Double mergeDown::Double c_data::Data c_comment::Comment -> Cell
+
+        c_cell::Cell com_data::Data author::String showAlways::Boolean -> Comment
+
+        d_cell::Cell d_comment::Comment value::ValueType -> Data
+
+        ew_workbook::Workbook selectedSheets::Integer windowHidden::Boolean hideHorizontalScrollBar::Boolean hideVerticalScrollBar::Boolean hideWorkbookTabs::Boolean windowHeight::Double windowWidth::Double windowTopX::Double windowTopY::Double activeSheet::Integer activeChart::String firstVisibleSheet::Integer hidePivotTableFieldList::Boolean protectStructure::Boolean protectWindows::Boolean displayInkNotes::Boolean embedSaveSmartTags::Boolean futureVer::String tabRatio::Integer windowIconic::Boolean displayDrawingObjects::DisplayDrawingObjectsType createBackup::Boolean calculation::CalculationWorkbookType doNotCalculateBeforeSave::Boolean date1904::Boolean refModeR1C1::Boolean iteration::Boolean maxIterations::Integer maxChange::Double precisionAsDisplayed::Boolean doNotSaveLinkValues::Boolean noAutoRecover::Boolean acceptLabelsInFormulas::Boolean uncalced::Boolean -> ExcelWorkbook
 
         ddot_displayShapes:: -> DisplayDrawingObjectsType
         ddot_placeHolders:: -> DisplayDrawingObjectsType

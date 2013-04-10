@@ -3,21 +3,21 @@ module JavaSource
 
 syntax JavaSource
         = 
-        ANY classes+
+        ClassDeclaration classes+
  ;
 syntax NamedElement
-        = 
-        ()
+        = ClassDeclaration
+        | MethodDefinition
  ;
 syntax ClassDeclaration
         = 
-        ANY superclass ANY methods+
+        ClassDeclaration superclass MethodDefinition methods+
  ;
 syntax MethodDefinition
         = 
-        ANY class ANY invocations+
+        ClassDeclaration class MethodInvocation invocations+
  ;
 syntax MethodInvocation
         = 
-        method: ANY
+        method: MethodDefinition
  ;

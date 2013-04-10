@@ -2,40 +2,31 @@
 module Expressions
 
 syntax OclExpression
-        = 
-        ()
+        = SelfExp
+        | ResultExp
+        | VariableExp
+        | OperationExp
+        | QueryExp
  ;
 syntax SelfExp
         = 
-        ANY queryArg+ ANY querySrc+ ANY resultType ANY varDec+ ANY varInit+
+        QueryExp queryArg+ QueryExp querySrc+ Type resultType VariableDeclaration varDec+ VariableInitialisation varInit+
  ;
 syntax ResultExp
         = 
-        ANY queryArg+ ANY querySrc+ ANY resultType ANY varDec+ ANY varInit+
+        QueryExp queryArg+ QueryExp querySrc+ Type resultType VariableDeclaration varDec+ VariableInitialisation varInit+
  ;
 syntax VariableExp
         = 
-        var: ANY
- ;
-syntax OperationExp
-        = 
-        ()
- ;
-syntax QueryExp
-        = 
-        ()
- ;
-syntax Type
-        = 
-        ()
+        var: String
  ;
 syntax VariableDeclaration
         = 
-        ANY var ANY varType ANY oclExpression+ ANY queryExp+ ANY varInit+
+        String var Type varType OclExpression oclExpression+ QueryExp queryExp+ VariableInitialisation varInit+
  ;
 syntax VariableInitialisation
         = 
-        ANY initExpression ANY varDec ANY iterateExp
+        OclExpression initExpression VariableDeclaration varDec IterateExp iterateExp
  ;
 syntax ForAllExp
         = 
@@ -59,5 +50,5 @@ syntax CollectExp
  ;
 syntax IterateExp
         = 
-        varInit: ANY
+        varInit: VariableInitialisation
  ;

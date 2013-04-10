@@ -4,31 +4,85 @@ exports
   sorts
         Element DoDAFModel Document AMSpecification AMSpecificationElement PAExchangeRequirement ArchitectureDocument IE AMIERole Control Input Output Mechanism MechanismSystem MechanismReference MechanismFacility InformationAssetDocument AMPA PACapability PA AM InformationAsset Task PATask Organization OrganizationType OperationalRole Occupation PersonType Skill DOSCR 
   context-free syntax
-         -> Element
+        DoDAFModel -> Element
 
-        document::ANY+ am::ANY+ task::ANY+ iaDocument::ANY+ amSpecification::ANY+ doscr::ANY+ organizationType::ANY+ -> DoDAFModel
+        Document -> Element
 
-        type::ANY cites::ANY+ records::ANY+ isTheReferenceFor::ANY+ isThePrimaryReferenceFor::ANY+ -> Document
+        AMSpecificationElement -> Element
 
-        isSpecifiedUsing::ANY+ -> AMSpecification
+        PAExchangeRequirement -> Element
 
-        subject::ANY -> AMSpecificationElement
+        ArchitectureDocument -> Element
 
-        isTheSubjectOf::ANY+ -> PAExchangeRequirement
+        IE -> Element
 
-        name::ANY description::ANY view::ANY -> ArchitectureDocument
+        AMIERole -> Element
 
-        isAssociatedWith::ANY+ isOrdinateOf::ANY+ isSubordinateOf::ANY+ -> IE
+        InformationAssetDocument -> Element
 
-        defines::ANY+ -> AMIERole
+        AMPA -> Element
 
-        source::ANY destination::ANY -> Control
+        PACapability -> Element
 
-        isTheInputThatIsDefinedBy::ANY+ source::ANY destination::ANY information::ANY -> Input
+        PA -> Element
 
-        source::ANY destination::ANY information::ANY -> Output
+        InformationAsset -> Element
 
-        source::ANY destination::ANY resourceType::ANY -> Mechanism
+        Task -> Element
+
+        Organization -> Element
+
+        OrganizationType -> Element
+
+        OperationalRole -> Element
+
+        Occupation -> Element
+
+        PersonType -> Element
+
+        Skill -> Element
+
+        DOSCR -> Element
+
+        document::Document+ am::AM+ task::Task+ iaDocument::InformationAssetDocument+ amSpecification::AMSpecification+ doscr::DOSCR+ organizationType::OrganizationType+ -> DoDAFModel
+
+        AMSpecification -> Document
+
+        type::String cites::InformationAssetDocument+ records::ArchitectureDocument+ isTheReferenceFor::IE+ isThePrimaryReferenceFor::PA+ -> Document
+
+        isSpecifiedUsing::AMSpecificationElement+ -> AMSpecification
+
+        subject::PAExchangeRequirement -> AMSpecificationElement
+
+        isTheSubjectOf::AMSpecificationElement+ -> PAExchangeRequirement
+
+        name::String description::String view::String -> ArchitectureDocument
+
+        isAssociatedWith::AMIERole+ isOrdinateOf::IE+ isSubordinateOf::IE+ -> IE
+
+        Control -> AMIERole
+
+        Input -> AMIERole
+
+        Output -> AMIERole
+
+        Mechanism -> AMIERole
+
+        defines::AMPA+ -> AMIERole
+
+        source::String destination::String -> Control
+
+        isTheInputThatIsDefinedBy::Output+ source::String destination::String information::String -> Input
+
+        source::String destination::String information::String -> Output
+
+        MechanismSystem -> Mechanism
+
+        MechanismReference -> Mechanism
+
+        MechanismFacility -> Mechanism
+
+        source::String destination::String resourceType::String -> Mechanism
 
          -> MechanismSystem
 
@@ -36,32 +90,34 @@ exports
 
          -> MechanismFacility
 
-        name::ANY description::ANY view::ANY -> InformationAssetDocument
+        name::String description::String view::String -> InformationAssetDocument
 
-        isOrdinateOf::ANY+ isSubordinateOf::ANY+ defines::ANY+ -> AMPA
+        isOrdinateOf::AMPA+ isSubordinateOf::AMPA+ defines::AMIERole+ -> AMPA
 
-        name::ANY description::ANY view::ANY -> PACapability
+        name::String description::String view::String -> PACapability
 
-        isTheProducerFor::ANY+ isTheConsumerFor::ANY+ isParentFor::ANY+ isChildFor::ANY+ has::ANY+ isIncludedIn::ANY+ correspondsTo::ANY+ -> PA
+        isTheProducerFor::PAExchangeRequirement+ isTheConsumerFor::PAExchangeRequirement+ isParentFor::PA+ isChildFor::PA+ has::PACapability+ isIncludedIn::AMPA+ correspondsTo::PATask+ -> PA
 
-        type::ANY specifies::ANY+ includes::ANY+ paTask::ANY+ -> AM
+        type::String specifies::AMSpecification+ includes::AMPA+ paTask::PATask+ -> AM
 
-         -> InformationAsset
+        AM -> InformationAsset
 
-        levelIdentifier::ANY references::ANY cost::ANY -> Task
+        PATask -> Task
 
-        isCitedBy::ANY -> PATask
+        levelIdentifier::String references::String cost::String -> Task
 
-        type::ANY supplies::ANY+ providesStewardshipFor::ANY+ owns::ANY+ develops::ANY+ isCitedAs::ANY+ -> Organization
+        isCitedBy::InformationAsset -> PATask
 
-        isTheTypeOf::ANY+ isCitedAs::ANY+ -> OrganizationType
+        type::OrganizationType supplies::InformationAsset+ providesStewardshipFor::InformationAsset+ owns::InformationAsset+ develops::IE+ isCitedAs::MechanismReference+ -> Organization
 
-        isCitedAs::ANY+ -> OperationalRole
+        isTheTypeOf::Organization+ isCitedAs::MechanismReference+ -> OrganizationType
 
-        mayBeCitedForOR::ANY+ mayBeCitedForPT::ANY+ -> Occupation
+        isCitedAs::MechanismReference+ -> OperationalRole
 
-        mayBeCitedFor::ANY+ can::ANY+ -> PersonType
+        mayBeCitedForOR::OperationalRole+ mayBeCitedForPT::PersonType+ -> Occupation
 
-        mayBeCitedFor::ANY+ -> Skill
+        mayBeCitedFor::OperationalRole+ can::Skill+ -> PersonType
 
-        mayBeAn::ANY appliesTo::ANY+ mayBeCitedFor::ANY+ -> DOSCR
+        mayBeCitedFor::OperationalRole+ -> Skill
+
+        mayBeAn::Occupation appliesTo::PersonType+ mayBeCitedFor::OperationalRole+ -> DOSCR

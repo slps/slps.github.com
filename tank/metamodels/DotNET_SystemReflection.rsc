@@ -2,56 +2,61 @@
 module DotNET_SystemReflection
 
 syntax NamedElement
-        = 
-        ()
+        = Assembly
+        | Module
+        | MemberInfo
+        | ParameterInfo
  ;
 syntax Assembly
         = 
-        ANY location ANY imageRuntimeVersion ANY evidence ANY codeBase ANY entryPoint ANY modules+ ANY manifestModule ANY referencedAssembly+ ANY manifest
+        String location String imageRuntimeVersion String evidence String codeBase MethodInfo entryPoint Module modules+ Module manifestModule Assembly referencedAssembly+ ManifestResource manifest
  ;
 syntax ManifestResource
         = 
-        ANY content ANY assembly
+        String content Assembly assembly
  ;
 syntax Module
         = 
-        ANY qualifiedName ANY scopeName ANY assembly ANY types+
+        String qualifiedName String scopeName Assembly assembly Type types+
  ;
 syntax MemberInfo
-        = 
-        ()
+        = PropertyInfo
+        | FieldInfo
+        | EventInfo
+        | MethodBase
+        | Type
  ;
 syntax PropertyInfo
         = 
-        ANY propertyType ANY attributes+
+        Type propertyType PropertyAttributes attributes+
  ;
 syntax FieldInfo
         = 
-        ANY fieldType ANY attributes+
+        Type fieldType FieldAttributes attributes+
  ;
 syntax EventInfo
         = 
-        ANY isMulticast ANY attributes ANY eventHandlerType
+        Boolean isMulticast EventAttributes attributes Type eventHandlerType
  ;
 syntax ParameterInfo
         = 
-        ANY defaultValue ANY position ANY attributes+ ANY parameterType ANY member
+        String defaultValue Integer position ParameterAttributes attributes+ Type parameterType MethodBase member
  ;
 syntax MethodBase
-        = 
-        ()
+        = MethodInfo
+        | ConstructorInfo
  ;
 syntax MethodInfo
         = 
-        returnType: ANY
+        returnType: Type
  ;
 syntax ConstructorInfo
         = 
-        ANY attributes+ ANY parameters+
+        MethodAttributes attributes+ ParameterInfo parameters+
  ;
 syntax Type
         = 
-        ANY namespace ANY genericParameterAttributes+ ANY typeAttributes+ ANY baseType ANY module ANY interfaces+ ANY members+
+        String namespace GenericParameterAttributes genericParameterAttributes+ TypeAttributes typeAttributes+ Type baseType Module module Type interfaces+ MemberInfo members+
  ;
 syntax EventAttributes
         = None: ()

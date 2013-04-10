@@ -1,25 +1,39 @@
 JavaProject:
-        ownedPackageFragment::ANY+
+        ownedPackageFragment::PackageFragment+
 PackageFragment:
-        ownedCompilationUnit::ANY+
+        ownedCompilationUnit::CompilationUnit+
 CompilationUnit:
-        importDeclaration::ANY+ ownedType::ANY+ declaration::ANY
+        importDeclaration::ImportDeclaration+ ownedType::Type+ declaration::PackageDeclaration
 ImportDeclaration:
-        name::ANY
+        name::String
 Type:
-        nestedType::ANY+ ownedSuperType::ANY+ elementName::ANY member_kind::ANY methods::ANY+ fields::ANY+
+        nestedType::Type+ ownedSuperType::Type+ elementName::String member_kind::MEMBER_KIND methods::Method+ fields::Field+
 Field:
         
 Method:
-        returnType::ANY parametersName::ANY+ parametersType::ANY+
+        returnType::String parametersName::String+ parametersType::String+
 JavaElement:
-        EPSILON
+        Type
+JavaElement:
+        Field
+JavaElement:
+        Method
 MEMBER_KIND:
         class::EPSILON
         enum::EPSILON
         interface::EPSILON
         Annotation::EPSILON
 NamedElement:
-        EPSILON
+        JavaProject
+NamedElement:
+        PackageFragment
+NamedElement:
+        CompilationUnit
+NamedElement:
+        ImportDeclaration
+NamedElement:
+        JavaElement
+NamedElement:
+        PackageDeclaration
 PackageDeclaration:
-        name::ANY
+        name::String

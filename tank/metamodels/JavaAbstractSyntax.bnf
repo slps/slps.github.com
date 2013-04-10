@@ -1,19 +1,115 @@
 AST:
         root::ANY
 ASTNode:
-        EPSILON
+        AnonymousClassDeclaration
+ASTNode:
+        BodyDeclaration
+ASTNode:
+        CatchClause
+ASTNode:
+        Comment
+ASTNode:
+        CompilationUnit
+ASTNode:
+        Expression
+ASTNode:
+        ImportDeclaration
+ASTNode:
+        MemberRef
+ASTNode:
+        MemberValuePair
+ASTNode:
+        MethodRef
+ASTNode:
+        MethodRefParameter
+ASTNode:
+        PackageDeclaration
+ASTNode:
+        Statement
+ASTNode:
+        TagElement
+ASTNode:
+        TextElement
+ASTNode:
+        Type
+ASTNode:
+        TypeParameter
+ASTNode:
+        VariableDeclaration
 AnonymousClassDeclaration:
         bodyDeclarations::ANY+
 BodyDeclaration:
-        EPSILON
+        AbstractTypeDeclaration
+BodyDeclaration:
+        AnnotationTypeMemberDeclaration
+BodyDeclaration:
+        EnumConstantDeclaration
+BodyDeclaration:
+        FieldDeclaration
+BodyDeclaration:
+        Initializer
+BodyDeclaration:
+        MethodDeclaration
 CatchClause:
         body::ANY exception::ANY
 Comment:
-        EPSILON
+        BlockComment
+Comment:
+        Javadoc
+Comment:
+        LineComment
 CompilationUnit:
         comments::ANY+ package::ANY imports::ANY+ types::ANY+
 Expression:
-        EPSILON
+        ArrayAccess
+Expression:
+        ArrayCreation
+Expression:
+        ArrayInitializer
+Expression:
+        Assignment
+Expression:
+        BooleanLiteral
+Expression:
+        CastExpression
+Expression:
+        CharacterLiteral
+Expression:
+        ClassInstanceCreation
+Expression:
+        ConditionalExpression
+Expression:
+        FieldAccess
+Expression:
+        InfixExpression
+Expression:
+        InstanceofExpression
+Expression:
+        MethodInvocation
+Expression:
+        Name
+Expression:
+        NullLiteral
+Expression:
+        NumberLiteral
+Expression:
+        ParenthesizedExpression
+Expression:
+        PostfixExpression
+Expression:
+        PrefixExpression
+Expression:
+        StringLiteral
+Expression:
+        SuperFieldAccess
+Expression:
+        SuperMethodInvocation
+Expression:
+        ThisExpression
+Expression:
+        TypeLiteral
+Expression:
+        VariableDeclarationExpression
 ImportDeclaration:
         onDemand::ANY static::ANY name::ANY
 MemberRef:
@@ -24,26 +120,82 @@ MethodRef:
         name::ANY qualifier::ANY parameters::ANY+
 MethodRefParameter:
         name::ANY type::ANY varargs::ANY
-ExtendedModifier:
-        EPSILON
 Modifier:
         abstract::ANY final::ANY native::ANY none::ANY private::ANY protected::ANY public::ANY static::ANY strictfp::ANY synchronized::ANY transient::ANY volatile::ANY
 PackageDeclaration:
         annotations::ANY+ javadoc::ANY name::ANY
 Statement:
-        EPSILON
+        AssertStatement
+Statement:
+        Block
+Statement:
+        BreakStatement
+Statement:
+        ConstructorInvocation
+Statement:
+        ContinueStatement
+Statement:
+        DoStatement
+Statement:
+        EmptyStatement
+Statement:
+        EnhancedForStatement
+Statement:
+        ExpressionStatement
+Statement:
+        ForStatement
+Statement:
+        IfStatement
+Statement:
+        LabeledStatement
+Statement:
+        ReturnStatement
+Statement:
+        SuperConstructorInvocation
+Statement:
+        SwitchCase
+Statement:
+        SwitchStatement
+Statement:
+        SynchronizedStatement
+Statement:
+        ThrowStatement
+Statement:
+        TryStatement
+Statement:
+        TypeDeclarationStatement
+Statement:
+        VariableDeclarationStatement
+Statement:
+        WhileStatement
 TagElement:
         fragments::ANY+ tagName::ANY nested::ANY
 TextElement:
         text::ANY
 Type:
-        EPSILON
+        ArrayType
+Type:
+        ParameterizedType
+Type:
+        PrimitiveType
+Type:
+        QualifiedType
+Type:
+        SimpleType
+Type:
+        WildcardType
 TypeParameter:
         name::ANY typeBounds::ANY+
 VariableDeclaration:
-        EPSILON
+        SingleVariableDeclaration
+VariableDeclaration:
+        VariableDeclarationFragment
 AbstractTypeDeclaration:
-        EPSILON
+        AnnotationTypeDeclaration
+AbstractTypeDeclaration:
+        EnumDeclaration
+AbstractTypeDeclaration:
+        TypeDeclaration
 AnnotationTypeMemberDeclaration:
         default::ANY name::ANY type::ANY
 EnumConstantDeclaration:
@@ -55,19 +207,23 @@ Initializer:
 MethodDeclaration:
         body::ANY extraDimensions::ANY name::ANY returnType::ANY constructor::ANY varargs::ANY parameters::ANY+ thrownExceptions::ANY+ typeParameters::ANY+
 AnnotationTypeDeclaration:
-        EPSILON
+        bodyDeclarations::ANY+ name::ANY localTypeDeclaration::ANY memberTypeDeclaration::ANY packageMemberTypeDeclaration::ANY
 EnumDeclaration:
         superInterfaceTypes::ANY+ enumConstants::ANY+
 TypeDeclaration:
         superclassType::ANY interface::ANY superInterfaceTypes::ANY+ typeParameters::ANY+
 BlockComment:
-        EPSILON
+        alternateRoot::ANY
 Javadoc:
         tags::ANY+
 LineComment:
-        EPSILON
+        alternateRoot::ANY
 Annotation:
-        EPSILON
+        MarkerAnnotation
+Annotation:
+        NormalAnnotation
+Annotation:
+        SingleMemberAnnotation
 ArrayAccess:
         array::ANY index::ANY
 ArrayCreation:
@@ -128,9 +284,11 @@ InstanceofExpression:
 MethodInvocation:
         arguments::ANY+ expression::ANY name::ANY typeArguments::ANY+
 Name:
-        EPSILON
+        QualifiedName
+Name:
+        SimpleName
 NullLiteral:
-        EPSILON
+        resolveBoxing::ANY resolveUnboxing::ANY
 NumberLiteral:
         token::ANY
 ParenthesizedExpression:
@@ -174,7 +332,7 @@ ContinueStatement:
 DoStatement:
         body::ANY expression::ANY
 EmptyStatement:
-        EPSILON
+        
 EnhancedForStatement:
         body::ANY expression::ANY parameter::ANY
 ExpressionStatement:
@@ -220,13 +378,13 @@ WildcardType:
 SingleVariableDeclaration:
         type::ANY varargs::ANY modifiers::ANY+
 VariableDeclarationFragment:
-        EPSILON
+        extraDimensions::ANY initializer::ANY name::ANY
 QualifiedName:
         name::ANY qualifier::ANY
 SimpleName:
         identifier::ANY declaration::ANY
 MarkerAnnotation:
-        EPSILON
+        typeName::ANY
 NormalAnnotation:
         values::ANY+
 SingleMemberAnnotation:

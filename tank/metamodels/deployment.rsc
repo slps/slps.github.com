@@ -2,22 +2,22 @@
 module Deployment
 
 syntax Node
-        = 
-        ()
+        = Device
+        | ExecutionEnvironment
  ;
 syntax Device
         = 
-        ANY nestedNode+ ANY name
+        Node nestedNode+ String name
  ;
 syntax ExecutionEnvironment
         = 
-        ANY nestedNode+ ANY name
+        Node nestedNode+ String name
  ;
 syntax Specification
         = 
-        ANY ownedNode+ ANY ownedCommunicationLink+
+        Node ownedNode+ CommunicationLink ownedCommunicationLink+
  ;
 syntax CommunicationLink
         = 
-        ANY source ANY target ANY name
+        Node source Node target String name
  ;

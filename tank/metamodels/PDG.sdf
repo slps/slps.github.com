@@ -4,10 +4,10 @@ exports
   sorts
         MProgramDependenceGraph EnterNode ExpressionNode Expression 
   context-free syntax
-        node::ANY -> MProgramDependenceGraph
+        node::EnterNode -> MProgramDependenceGraph
 
-        name::ANY controlDependenceNodes::ANY+ -> EnterNode
+        name::String controlDependenceNodes::ExpressionNode+ -> EnterNode
 
-        name::ANY expression::ANY dataDependenceNodes::ANY+ controlDependenceNodes::ANY+ -> ExpressionNode
+        name::String expression::Expression dataDependenceNodes::ExpressionNode+ controlDependenceNodes::ExpressionNode+ -> ExpressionNode
 
-        name::ANY isIdentifier::ANY innerExpressions::ANY+ -> Expression
+        name::String isIdentifier::Boolean innerExpressions::Expression+ -> Expression

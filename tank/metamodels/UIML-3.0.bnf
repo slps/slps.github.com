@@ -1,29 +1,29 @@
 UIML:
-        head::ANY templates::ANY+ interfaces::ANY+ peers::ANY+
+        head::Header templates::Template+ interfaces::Interface+ peers::Peer+
 Header:
-        metas::ANY+
+        metas::MetaData+
 MetaData:
-        name::ANY content::ANY
+        name::String content::String
 Peer:
-        id::ANY how::ANY export::ANY source::ANY presentations::ANY+ logics::ANY+
+        id::String how::HowKind export::ExportKind source::Source presentations::Presentation+ logics::Logic+
 Presentation:
-        id::ANY how::ANY export::ANY base::ANY source::ANY dClasses::ANY+
+        id::String how::HowKind export::ExportKind base::String source::Source dClasses::DClass+
 Logic:
-        id::ANY how::ANY export::ANY source::ANY dComponents::ANY+
+        id::String how::HowKind export::ExportKind source::Source dComponents::DComponent+
 DComponent:
-        id::ANY how::ANY export::ANY mapsTo::ANY location::ANY source::ANY dMethods::ANY+
+        id::String how::HowKind export::ExportKind mapsTo::String location::String source::Source dMethods::DMethod+
 DClass:
-        id::ANY how::ANY export::ANY mapsTo::ANY mapsType::ANY source::ANY dMethods::ANY+ dProperties::ANY+ events::ANY+ listeners::ANY+
+        id::String how::HowKind export::ExportKind mapsTo::String mapsType::String source::Source dMethods::DMethod+ dProperties::DProperty+ events::Event+ listeners::Listener+
 DProperty:
-        id::ANY mapsType::ANY mapsTo::ANY returnType::ANY dMethods::ANY+ dParams::ANY+
+        id::String mapsType::MapsTypeKind mapsTo::String returnType::String dMethods::DMethod+ dParams::DParam+
 DMethod:
-        id::ANY how::ANY export::ANY mapsTo::ANY returnType::ANY source::ANY dParams::ANY+ script::ANY
+        id::String how::HowKind export::ExportKind mapsTo::String returnType::String source::Source dParams::DParam+ script::Script
 DParam:
-        id::ANY type::ANY value::ANY
+        id::String type::String value::String
 Script:
-        id::ANY type::ANY how::ANY export::ANY value::ANY source::ANY
+        id::String type::String how::HowKind export::ExportKind value::String source::String
 Listener:
-        class::ANY attacher::ANY
+        class::String attacher::String
 UsedInTagKind:
         event::EPSILON
         listener::EPSILON
@@ -34,95 +34,168 @@ MapsTypeKind:
         setMethod::EPSILON
         method::EPSILON
 ExtensibleElement:
-        EPSILON
+        Peer
+ExtensibleElement:
+        Presentation
+ExtensibleElement:
+        Logic
+ExtensibleElement:
+        DComponent
+ExtensibleElement:
+        DClass
+ExtensibleElement:
+        DMethod
+ExtensibleElement:
+        Script
+ExtensibleElement:
+        Interface
+ExtensibleElement:
+        Structure
+ExtensibleElement:
+        Part
+ExtensibleElement:
+        Style
+ExtensibleElement:
+        Property
+ExtensibleElement:
+        Content
+ExtensibleElement:
+        Behavior
+ExtensibleElement:
+        Constant
+ExtensibleElement:
+        Rule
+ExtensibleElement:
+        Restructure
 Source:
-        EPSILON
+        LocalSource
+Source:
+        RemoteSource
 LocalSource:
-        source::ANY
+        source::ExtensibleElement
 RemoteSource:
-        location::ANY
+        location::String
 Interface:
-        id::ANY how::ANY export::ANY source::ANY structure::ANY+ style::ANY+ content::ANY+ behavior::ANY+
+        id::String how::HowKind export::ExportKind source::Source structure::Structure+ style::Style+ content::Content+ behavior::Behavior+
 Structure:
-        id::ANY how::ANY export::ANY source::ANY parts::ANY+
+        id::String how::HowKind export::ExportKind source::Source parts::Part+
 Part:
-        id::ANY how::ANY export::ANY class::ANY wherePart::ANY source::ANY style::ANY content::ANY behavior::ANY parts::ANY+ repeats::ANY+
+        id::String how::HowKind export::ExportKind class::String wherePart::String source::Source style::Style content::Content behavior::Behavior parts::Part+ repeats::Repeat+
 Style:
-        id::ANY how::ANY export::ANY source::ANY properties::ANY+
+        id::String how::HowKind export::ExportKind source::Source properties::Property+
 Property:
-        name::ANY how::ANY export::ANY values::ANY+ parts::ANY+ events::ANY+ source::ANY constants::ANY+ properties::ANY+ references::ANY+ calls::ANY+ iterators::ANY+
+        name::String how::HowKind export::ExportKind values::String+ parts::Part+ events::Event+ source::Source constants::Constant+ properties::Property+ references::Reference+ calls::Call+ iterators::Iterator+
 Content:
-        id::ANY how::ANY export::ANY source::ANY constants::ANY+
+        id::String how::HowKind export::ExportKind source::Source constants::Constant+
 Behavior:
-        id::ANY how::ANY export::ANY source::ANY rules::ANY+
+        id::String how::HowKind export::ExportKind source::Source rules::Rule+
 Repeat:
-        iterator::ANY parts::ANY+
+        iterator::Iterator parts::Part+
 Constant:
-        id::ANY how::ANY export::ANY model::ANY value::ANY source::ANY constants::ANY+
+        id::String how::HowKind export::ExportKind model::String value::String source::Source constants::Constant+
 Reference:
-        constant::ANY
+        constant::Constant
 Rule:
-        id::ANY how::ANY export::ANY source::ANY condition::ANY action::ANY
+        id::String how::HowKind export::ExportKind source::Source condition::Condition action::Action
 Condition:
-        EPSILON
+        EventCondition
+Condition:
+        EqualCondition
+Condition:
+        OpCondition
 EventCondition:
-        event::ANY
+        event::Event
 EqualCondition:
-        equal::ANY
+        equal::Equal
 OpCondition:
-        op::ANY
+        op::Operation
 Action:
-        EPSILON
+        Action_1
+Action:
+        Action_2
+Action:
+        Action_1
+        Action_2
 Action_1:
-        event::ANY properties::ANY+ calls::ANY+ restructures::ANY+
+        event::Event properties::Property+ calls::Call+ restructures::Restructure+
 Action_2:
-        whenTrue::ANY whenFalse::ANY byDefault::ANY
+        whenTrue::WhenTrue whenFalse::WhenFalse byDefault::ByDefault
 Call:
-        name::ANY params::ANY+
+        name::String params::Parameter+
 Parameter:
-        EPSILON
+        PropertyParameter
+Parameter:
+        ReferenceParameter
+Parameter:
+        CallParameter
+Parameter:
+        OperationParameter
+Parameter:
+        EventParameter
+Parameter:
+        ConstantParameter
+Parameter:
+        IteratorParameter
 PropertyParameter:
-        property::ANY
+        property::Property
 ReferenceParameter:
-        reference::ANY
+        reference::Reference
 CallParameter:
-        call::ANY
+        call::Call
 OperationParameter:
-        op::ANY
+        op::Operation
 EventParameter:
-        event::ANY
+        event::Event
 ConstantParameter:
-        constant::ANY
+        constant::Constant
 IteratorParameter:
-        iterator::ANY
+        iterator::Iterator
 Iterator:
-        EPSILON
+        ConstantIterator
+Iterator:
+        PropertyIterator
+Iterator:
+        CallIterator
+Iterator:
+        TextIterator
 ConstantIterator:
-        constant::ANY
+        constant::Constant
 PropertyIterator:
-        property::ANY
+        property::Property
 CallIterator:
-        call::ANY
+        call::Call
 TextIterator:
-        value::ANY
+        value::Integer
 Event:
-        class::ANY parts::ANY+
+        class::String parts::Part+
 Equal:
-        EPSILON
+        EqualToConstant
+Equal:
+        EqualToProperty
+Equal:
+        EqualToReference
+Equal:
+        EqualToOperation
 EqualToConstant:
-        constant::ANY
+        constant::Constant
 EqualToProperty:
-        property::ANY
+        property::Property
 EqualToReference:
-        reference::ANY
+        reference::Reference
 EqualToOperation:
-        op::ANY
+        op::Operation
 Operation:
-        name::ANY constants::ANY+ properties::ANY+ references::ANY+ calls::ANY+ ops::ANY+ events::ANY+
+        name::String constants::Constant+ properties::Property+ references::Reference+ calls::Call+ ops::Operation+ events::Event+
 Restructure:
-        how::ANY atPart::ANY wherePart::ANY source::ANY template::ANY
+        how::HowKind atPart::Part wherePart::Part source::Source template::Template
 Branch:
-        properties::ANY+ calls::ANY+ restructure::ANY op::ANY equal::ANY event::ANY
+        WhenTrue
+Branch:
+        WhenFalse
+Branch:
+        ByDefault
+Branch:
+        properties::Property+ calls::Call+ restructure::Restructure op::Operation equal::Equal event::Event
 WhenTrue:
         EPSILON
 WhenFalse:
@@ -145,36 +218,66 @@ WhereKind:
         before::EPSILON
         after::EPSILON
 Template:
-        EPSILON
+        BehaviorTemplate
+Template:
+        DClassTemplate
+Template:
+        DComponentTemplate
+Template:
+        ConstantTemplate
+Template:
+        ContentTemplate
+Template:
+        InterfaceTemplate
+Template:
+        LogicTemplate
+Template:
+        PartTemplate
+Template:
+        PeerTemplate
+Template:
+        PresentationTemplate
+Template:
+        PropertyTemplate
+Template:
+        RestructureTemplate
+Template:
+        RuleTemplate
+Template:
+        ScriptTemplate
+Template:
+        StructureTemplate
+Template:
+        StyleTemplate
 BehaviorTemplate:
-        behavior::ANY
+        behavior::Behavior
 DClassTemplate:
-        dClass::ANY
+        dClass::DClass
 DComponentTemplate:
-        dComponent::ANY
+        dComponent::DComponent
 ConstantTemplate:
-        constant::ANY
+        constant::Constant
 ContentTemplate:
-        content::ANY
+        content::Content
 InterfaceTemplate:
-        interface::ANY
+        interface::Interface
 LogicTemplate:
-        logic::ANY
+        logic::Logic
 PartTemplate:
-        part::ANY
+        part::Part
 PeerTemplate:
-        peer::ANY
+        peer::Peer
 PresentationTemplate:
-        presentation::ANY
+        presentation::Presentation
 PropertyTemplate:
-        property::ANY
+        property::Property
 RestructureTemplate:
-        restructure::ANY
+        restructure::Restructure
 RuleTemplate:
-        rule::ANY
+        rule::Rule
 ScriptTemplate:
-        script::ANY
+        script::Script
 StructureTemplate:
-        structure::ANY
+        structure::Structure
 StyleTemplate:
-        style::ANY
+        style::Style

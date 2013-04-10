@@ -1,7 +1,7 @@
-Application = name::ANY version::ANY author::ANY extensionPoints::ANY+ ;
-ExtensionPoint = name::ANY id::ANY application::ANY descriptions::ANY+ plugIn::ANY ;
-Description = xmlSchema::ANY extensionPoints::ANY+ ;
-Extension = name::ANY id::ANY isConfiguredInto::ANY ;
-PlugIn = id::ANY displayableName::ANY version::ANY supplier::ANY configures::ANY+ extensionPoints::ANY+ requires::ANY+ uses::ANY+ ;
-Librairy = name::ANY plugIn::ANY classes::ANY+ ;
-Class = name::ANY librairy::ANY ;
+Application = name::String version::String author::String extensionPoints::ExtensionPoint+ ;
+ExtensionPoint = name::String id::String application::Application descriptions::Description+ plugIn::PlugIn ;
+Description = xmlSchema::String extensionPoints::ExtensionPoint+ ;
+Extension = name::String id::String isConfiguredInto::ExtensionPoint ;
+PlugIn = id::String displayableName::String version::String supplier::String configures::Extension+ extensionPoints::ExtensionPoint+ requires::PlugIn+ uses::Librairy+ ;
+Librairy = name::String plugIn::PlugIn classes::Class+ ;
+Class = name::String librairy::Librairy ;

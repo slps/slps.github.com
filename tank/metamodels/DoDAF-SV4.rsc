@@ -2,16 +2,46 @@
 module DoDAF_SV4
 
 syntax Element
-        = 
-        ()
+        = DoDAFModel
+        | Document
+        | SystemDocument
+        | ArchitectureDocument
+        | System
+        | SystemPA
+        | IE
+        | AMIERole
+        | AMIERoleGraphic
+        | InformationAssetDocument
+        | AMPA
+        | AMPAGraphic
+        | PA
+        | PACapability
+        | InformationAsset
+        | SystemPAStandard
+        | InformationTechnologyStandard
+        | LineOfBusiness
+        | Task
+        | BusinessSubfunction
+        | ArchitectureBusinessSubFunction
+        | OperationalRolePA
+        | OperationalRole
+        | OrganizationTypeOperationalRole
+        | OrganizationOperationalRole
+        | Occupation
+        | PersonType
+        | PersonTypeCapabilityNorm
+        | Skill
+        | Position
  ;
 syntax DoDAFModel
         = 
-        ANY document+ ANY sfd+ ANY amSpecification+ ANY sd+ ANY task+ ANY iaDocument+ ANY position+ ANY occupation+ ANY ad+ ANY system+ ANY am+ ANY spas+ ANY its+ ANY orpa+ ANY ptcn+
+        Document document+ SystemFunctionalityDescription sfd+ AMSpecification amSpecification+ SystemDocument sd+ Task task+ InformationAssetDocument iaDocument+ Position position+ Occupation occupation+ ArchitectureDocument ad+ System system+ AM am+ SystemPAStandard spas+ InformationTechnologyStandard its+ OperationalRolePA orpa+ PersonTypeCapabilityNorm ptcn+
  ;
 syntax Document
-        = 
-        ANY type ANY cites+ ANY describes+ ANY records+ ANY isTheReferenceFor+ ANY isThePrimaryReferenceFor+
+        = SystemFunctionalityDescription
+        | FunctionalSpecification
+        | AMSpecification
+        | String type InformationAssetDocument cites+ SystemDocument describes+ ArchitectureDocument records+ IE isTheReferenceFor+ PA isThePrimaryReferenceFor+
  ;
 syntax SystemFunctionalityDescription
         = 
@@ -19,75 +49,77 @@ syntax SystemFunctionalityDescription
  ;
 syntax FunctionalSpecification
         = 
-        mayBeA: ANY
+        mayBeA: SystemDocument
  ;
 syntax AMSpecification
         = 
-        ANY isUsedIn+
+        FunctionalSpecification isUsedIn+
  ;
 syntax SystemDocument
         = 
-        ANY name ANY description ANY view
+        String name String description String view
  ;
 syntax ArchitectureDocument
         = 
-        ANY name ANY description ANY view
+        String name String description String view
  ;
 syntax System
         = 
-        ANY isDesignedToProvide+ ANY isDescribedBy+
+        SystemPA isDesignedToProvide+ SystemDocument isDescribedBy+
  ;
 syntax SystemPA
         = 
-        ANY isDefinedUsing+
+        SystemPAStandard isDefinedUsing+
  ;
 syntax IE
         = 
-        ANY isAssociatedWith+ ANY isOrdinateOf+ ANY isSubordinateOf+
+        AMIERole isAssociatedWith+ IE isOrdinateOf+ IE isSubordinateOf+
  ;
 syntax AMIERole
-        = 
-        ANY defines+ ANY isRepresentedBy+
+        = Input
+        | Output
+        | AMPA defines+ AMIERoleGraphic isRepresentedBy+
  ;
 syntax AMIERoleGraphic
         = 
-        ANY name ANY description ANY view
+        String name String description String view
  ;
 syntax Input
         = 
-        ANY isTheInputThatIsDefinedBy+ ANY source ANY destination ANY information
+        Output isTheInputThatIsDefinedBy+ String source String destination String information
  ;
 syntax Output
         = 
-        ANY source ANY destination ANY information
+        String source String destination String information
  ;
 syntax InformationAssetDocument
         = 
-        ANY name ANY description ANY view
+        String name String description String view
  ;
 syntax AMPA
         = 
-        ANY isOrdinateOf+ ANY isSubordinateOf+ ANY defines+ ANY isRepresentedBy+
+        AMPA isOrdinateOf+ AMPA isSubordinateOf+ AMIERole defines+ AMPAGraphic isRepresentedBy+
  ;
 syntax AMPAGraphic
         = 
-        ANY name ANY description ANY view
+        String name String description String view
  ;
 syntax PA
-        = 
-        ANY isParentFor+ ANY isChildFor+ ANY isIncludedIn+ ANY isAssignedTo+ ANY represents+ ANY correspondsTo+ ANY has+ ANY isPerformedBy+
+        = DataStore
+        | SystemFunction
+        | PA isParentFor+ PA isChildFor+ AMPA isIncludedIn+ SystemPA isAssignedTo+ ArchitectureBusinessSubFunction represents+ PATask correspondsTo+ PACapability has+ OperationalRolePA isPerformedBy+
  ;
 syntax PACapability
         = 
-        ANY name ANY description ANY view
+        String name String description String view
  ;
 syntax AM
         = 
-        ANY type ANY isCitedBy+ ANY specifies+ ANY includes+ ANY isUsedToDescribe+ ANY defines+
+        String type PATask isCitedBy+ AMSpecification specifies+ AMPA includes+ SystemFunctionalityDescription isUsedToDescribe+ LineOfBusiness defines+
  ;
 syntax InformationAsset
-        = 
-        ANY isCitedIn+ ANY describes+
+        = AM
+        | InformationAssetDocument isCitedIn+ DataStore describes+
  ;
 syntax DataStore
         = 
@@ -99,19 +131,22 @@ syntax SystemFunction
  ;
 syntax SystemPAStandard
         = 
-        ANY isUsedToDefine+
+        InformationTechnologyStandard isUsedToDefine+
  ;
 syntax InformationTechnologyStandard
         = 
-        ANY isUsedToDefine+
+        SystemPAStandard isUsedToDefine+
  ;
 syntax LineOfBusiness
         = 
-        ANY appliesToTask+ ANY appliesToBS+
+        Task appliesToTask+ BusinessSubfunction appliesToBS+
  ;
 syntax Task
-        = 
-        ANY levelIdentifier ANY references ANY cost ANY correspondsTo+ ANY supports+
+        = HumanBehaviourTask
+        | OperationalCapabilityTask
+        | TaskMissionArea
+        | PATask
+        | String levelIdentifier String references String cost PATask correspondsTo+ TaskMissionArea supports+
  ;
 syntax HumanBehaviourTask
         = 
@@ -123,7 +158,7 @@ syntax OperationalCapabilityTask
  ;
 syntax TaskMissionArea
         = 
-        ANY hasContributionFrom+
+        OperationalCapabilityTask hasContributionFrom+
  ;
 syntax PATask
         = 
@@ -131,45 +166,45 @@ syntax PATask
  ;
 syntax BusinessSubfunction
         = 
-        ANY appliesTo+
+        ArchitectureBusinessSubFunction appliesTo+
  ;
 syntax ArchitectureBusinessSubFunction
         = 
-        ANY name ANY description ANY view
+        String name String description String view
  ;
 syntax OperationalRolePA
         = 
-        ANY name ANY description ANY view
+        String name String description String view
  ;
 syntax OperationalRole
         = 
-        ANY performs+ ANY isPerformedByOTOR+ ANY isPerformedByOOR+
+        OperationalRolePA performs+ OrganizationTypeOperationalRole isPerformedByOTOR+ OrganizationOperationalRole isPerformedByOOR+
  ;
 syntax OrganizationTypeOperationalRole
         = 
-        ANY name ANY description ANY view
+        String name String description String view
  ;
 syntax OrganizationOperationalRole
         = 
-        ANY name ANY description ANY view
+        String name String description String view
  ;
 syntax Occupation
         = 
-        ANY mayBeCitedForOR+ ANY mayBeCitedForPT+
+        OperationalRole mayBeCitedForOR+ PersonType mayBeCitedForPT+
  ;
 syntax PersonType
         = 
-        ANY mayBeCitedFor+ ANY performsTo+ ANY can+
+        OperationalRole mayBeCitedFor+ PersonTypeCapabilityNorm performsTo+ Skill can+
  ;
 syntax PersonTypeCapabilityNorm
         = 
-        ANY name ANY description ANY view
+        String name String description String view
  ;
 syntax Skill
         = 
-        ANY mayBeCitedFor+
+        OperationalRole mayBeCitedFor+
  ;
 syntax Position
         = 
-        ANY mayBeCitedFor+
+        OperationalRole mayBeCitedFor+
  ;

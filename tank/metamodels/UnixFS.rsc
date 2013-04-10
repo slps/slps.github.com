@@ -3,15 +3,15 @@ module UnixFS
 
 syntax NamedElement
         = 
-        ()
+        File
  ;
 syntax File
-        = 
-        ()
+        = Directory
+        | TextFile
  ;
 syntax Directory
-        = 
-        ANY contents+
+        = FileSystemRoot
+        | File contents+
  ;
 syntax FileSystemRoot
         = 
@@ -19,5 +19,5 @@ syntax FileSystemRoot
  ;
 syntax TextFile
         = 
-        ANY owner ANY group
+        String owner String group
  ;

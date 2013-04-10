@@ -1,6 +1,498 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module Malton_dahn
 
+syntax C_compilation_unit
+        = 
+        Declaration_or_function_definition*
+ ;
+syntax Constant
+        = Number
+        | Float
+        | Hex
+        | Long
+        | SP Dotfloat
+        | Charlit
+        | String
+        | Gnu_long_int
+        | Gnu_long_int_string+
+        | Hexfloat
+ ;
+syntax String
+        = 
+        Stringlit+
+ ;
+syntax Expression
+        = Assignment_expression+
+        | Comment_NL* "..."
+ ;
+syntax Constant_expression
+        = Conditional_expression
+        | Restrict_qualifier
+ ;
+syntax Assignment_expression
+        = Conditional_expression Assignment_operation?
+        | Conditional_expression
+        | Conditional_expression Assignment_operation
+ ;
+syntax Assignment_operation
+        = 
+        Assignment_operator Assignment_expression
+ ;
+syntax Assignment_operator
+        = "="
+        | "*="
+        | "/="
+        | "%="
+        | "+="
+        | "-="
+        | "\>\>="
+        | "\<\<="
+        | "&="
+        | "^="
+        | "|="
+ ;
+syntax Conditional_expression
+        = Binary_expression Conditional_operation?
+        | Binary_expression Conditional_operation*
+ ;
+syntax Conditional_operation
+        = "?" Expression ":" Conditional_expression
+        | "?" Expression? ":" Binary_expression
+ ;
+syntax Binary_expression
+        = Unary_expression
+        | Binary_expression Binary_operator Unary_expression
+ ;
+syntax Binary_operator
+        = "+"
+        | "-"
+        | "*"
+        | "/"
+        | "%"
+        | "=="
+        | "!="
+        | "\<"
+        | "\>"
+        | "\<="
+        | "\>="
+        | "||"
+        | "&&"
+        | "|"
+        | "^"
+        | "&"
+        | "\<\<"
+        | "\>\>"
+ ;
+syntax Unary_expression
+        = Postfix_expression
+        | Unary_operator SPOFF Unary_expression SPON
+        | "(" Type_name ")" Unary_expression
+        | Sizeof_expression
+        | Alignof_expression
+ ;
+syntax Sizeof_expression
+        = "sizeof" Unary_expression
+        | "sizeof" "(" Type_name ")"
+ ;
+syntax Unary_operator
+        = "*"
+        | "&"
+        | "+"
+        | "-"
+        | "!"
+        | "~"
+        | "++"
+        | "--"
+        | "&&"
+ ;
+syntax Postfix_expression
+        = Reference
+        | Nonreference
+ ;
+syntax Reference
+        = Reference_id
+        | Reference_expression
+ ;
+syntax Reference_id
+        = 
+        Id
+ ;
+syntax Reference_expression
+        = 
+        Unannotated_reference_base Postfix_extension*
+ ;
+syntax Unannotated_reference_base
+        = Reference_id
+        | Nonreferential_primary
+ ;
+syntax Nonreference
+        = 
+        Nonreferential_primary Postfix_extension*
+ ;
+syntax Nonreferential_primary
+        = Constant
+        | String
+        | "(" Expression ")"
+        | Compound_statement_expression
+        | Compound_literal
+        | Extension_specifier Compound_statement_expression
+        | Extension_specifier "(" Expression ")"
+ ;
+syntax Postfix_extension
+        = "(" Expression? ")"
+        | "[" Expression "]"
+        | "(" 
+		Argument_expression
+		","
+	       ")"
+        | "." Id
+        | "-\>" Id
+        | "++"
+        | "--"
+ ;
+syntax Declaration
+        = Comment_NL
+        | Null_declaration
+        | Declaration_body Semi
+        | Preprocessor
+ ;
+syntax Declaration_body
+        = Enum_specifier
+        | Struct_or_union_specifier
+        | Decl_specifiers Init_declarator+
+        | Decl_qualifier* Struct_or_union_specifier
+        | Decl_qualifier* Enum_specifier Attribute_spec*
+        | Local_label Declarator+
+        | Asm_spec
+ ;
+syntax Decl_specifiers
+        = Decl_qualifier* Type_specifier? Decl_qualifier*
+        | Decl_qualifier* Type_specifier Decl_qualifier*
+        | Decl_qualifier*
+ ;
+syntax Struct_or_union_specifier
+        = Struct_or_union Tagged_reference_id? "{" IN NL Member_declaration* EX "}"
+        | Struct_or_union Tagged_reference_id
+        | Struct_or_union Attribute_spec* Tagged_reference_id? "{" IN NL Member_declaration* EX "}" Attribute_spec*
+        | Struct_or_union Attribute_spec* Tagged_reference_id
+ ;
+syntax Tagged_reference_id
+        = 
+        Reference_id
+ ;
+syntax Member_declaration
+        = Comment_NL
+        | Decl_specifiers Member_declarator+ Semi
+        | Decl_qualifier* Struct_or_union_specifier Semi
+        | Semi
+        | Preprocessor
+ ;
+syntax Member_declarator
+        = Declarator Bitfieldsize?
+        | Declarator Bitfieldsize? Attributes_or_asm*
+        | Bitfieldsize
+ ;
+syntax Bitfieldsize
+        = 
+        ":" Constant_expression
+ ;
+syntax Decl_qualifier
+        = Cv_qualifier
+        | Sc_specifier
+        | Type_qualifier
+        | Attribute_spec
+        | Extension_specifier
+ ;
+syntax Sc_specifier
+        = "auto"
+        | "register"
+        | "static"
+        | "extern"
+        | "typedef"
+ ;
+syntax Type_specifier
+        = Simple_type_name
+        | Enum_specifier
+        | Struct_or_union_specifier
+        | Typeof_expression
+        | Complex_specifier
+ ;
+syntax Type_qualifier
+        = "long"
+        | "short"
+        | "signed"
+        | "unsigned"
+        | Bit_qualifier
+        | Inline_qualifier
+        | Cv_qualifier
+        | Restrict_qualifier
+ ;
+syntax Simple_type_name
+        = "char"
+        | "int"
+        | "void"
+        | "float"
+        | "double"
+        | Type_id
+ ;
+syntax Type_id
+        = 
+        Reference_id
+ ;
+syntax Struct_or_union
+        = "struct"
+        | "union"
+ ;
+syntax Enum_specifier
+        = "enum" Tagged_reference_id? "{" 
+		Enumerator
+		","
+	       "}"
+        | "enum" Tagged_reference_id
+        | "enum" Tagged_reference_id? "{" 
+		Enumerator
+		","
+	       ","? "}"
+ ;
+syntax Enumerator
+        = 
+        Reference_id Enumerator_value?
+ ;
+syntax Enumerator_value
+        = 
+        "=" Constant_expression
+ ;
+syntax Init_declarator
+        = Declarator Initialization?
+        | Declarator Initialization? Attributes_or_asm*
+ ;
+syntax Declarator
+        = Ptr_operator* Base_declarator SPON Declarator_extension*
+        | Attribute_spec* Ptr_operator* Base_declarator Declarator_extension* Attribute_spec*
+ ;
+syntax Base_declarator
+        = Reference_id
+        | "(" Declarator ")"
+        | Attribute_spec* Reference_id
+        | Attribute_spec* "(" Declarator ")"
+ ;
+syntax Declarator_extension
+        = Function_declarator_extension
+        | Array_declarator_extension
+ ;
+syntax Function_declarator_extension
+        = 
+        "(" Argument_declaration_list ")" Cv_qualifier*
+ ;
+syntax Array_declarator_extension
+        = 
+        "[" Constant_expression? "]"
+ ;
+syntax Ptr_operator
+        = "*" Cv_qualifier* SPOFF
+        | "*" Ptr_qualifier*
+ ;
+syntax Cv_qualifier
+        = "const"
+        | "volatile"
+        | "__const"
+        | "__const__"
+        | "const__"
+        | "__volatile__"
+        | "__volatile"
+        | "volatile__"
+ ;
+syntax Type_name
+        = 
+        Type_specifiers Abstract_declarator?
+ ;
+syntax Type_specifiers
+        = Type_qualifier+ Type_specifier? Type_qualifier*
+        | Type_specifier Type_qualifier*
+        | Type_qualifier* Type_specifier Type_qualifier*
+        | Type_qualifier*
+ ;
+syntax Abstract_declarator
+        = Ptr_operator+ Declarator_extension*
+        | Array_declarator_extension*
+        | "(" Abstract_declarator ")" Declarator_extension*
+ ;
+syntax Argument_declaration_list
+        = 
+	    Argument_declaration
+	    ","
+	  
+        | "..." Comment_NL*
+ ;
+syntax Argument_declaration
+        = Decl_specifiers Argument_declarator?
+        | "..."
+        | Comment_NL* "..."
+        | "..." Comment_NL*
+ ;
+syntax Argument_declarator
+        = Declarator
+        | Abstract_declarator
+ ;
+syntax Initialization
+        = "=" Initializer
+        | "(" Constant_expression ")"
+        | Comment_NL* "..."
+ ;
+syntax Initializer
+        = Expression
+        | NL "{" IN 
+		Initializer
+		","
+	       ","? EX "}"
+        | Comment_NL* "..."
+        | Assignment_expression
+        | NL "{" IN 
+		Designated_initializer
+		","
+	       ","? EX "}"
+ ;
+syntax Statement
+        = Label* Unlabeled_statement
+        | Preprocessor
+        | Comment_NL
+        | Label
+ ;
+syntax Label
+        = Label_id ":"
+        | Label_id ":" Attribute_spec*
+        | EX SP SP "case" Constant_expression ":" IN NL
+        | EX SP SP "case" Constant_expression SP "..." SP Constant_expression ":" IN NL
+        | EX SP SP "default" ":" IN NL
+ ;
+syntax Label_id
+        = 
+        Id
+ ;
+syntax Unlabeled_statement
+        = Expression_statement
+        | If_statement
+        | For_statement
+        | While_statement
+        | Switch_statement
+        | Do_statement
+        | Null_statement
+        | Jump_statement
+        | Compound_statement
+        | Asm_statement
+ ;
+syntax Null_statement
+        = 
+        Semi
+ ;
+syntax Compound_statement
+        = "{" IN NL Compound_statement_body "}" ";"? NL
+        | Comment_NL* "..."
+        | "{" NL Compound_statement_body* "}" ";"? NL
+ ;
+syntax Compound_statement_body
+        = Statement* EX
+        | Declaration Compound_statement_body
+        | IN Declaration EX
+        | IN Function_definition EX
+        | IN Statement EX
+ ;
+syntax Expression_statement
+        = 
+        Expression Semi
+ ;
+syntax If_statement
+        = "if" "(" Expression ")" Statement Else_statement?
+        | "if" "(" Expression ")" Comment_NL* Statement Else_statement?
+ ;
+syntax Switch_statement
+        = "switch" "(" Expression ")" Statement
+        | "switch" "(" Expression ")" Comment_NL* Statement
+ ;
+syntax Else_statement
+        = 
+        "else" Statement
+ ;
+syntax While_statement
+        = 
+        "while" "(" Expression ")" Statement
+ ;
+syntax Do_statement
+        = 
+        "do" Statement "while" "(" Expression ")" Semi
+ ;
+syntax For_statement
+        = "for" "(" Expression? ";" Expression? ";" Expression? ")" Statement
+        | "for" "(" Declaration_body ";" Expression? ";" Expression? ")" Statement
+ ;
+syntax Jump_statement
+        = "goto" Label_id Semi
+        | "continue" Semi
+        | "break" Semi
+        | "return" Expression? Semi
+        | "goto" Ptr_operator Expression Semi
+ ;
+syntax Declaration_or_function_definition
+        = Declaration
+        | Function_definition
+ ;
+syntax Function_definition
+        = 
+        NL Decl_specifiers Declarator KR_parameter_decls? Compound_statement NL
+ ;
+syntax KR_parameter_decls
+        = 
+        NL IN Declaration+ EX
+ ;
+syntax Semi
+        = 
+        ";" NL
+ ;
+syntax Program
+        = 
+        C_compilation_unit
+ ;
+syntax Preprocessor
+        = "#define" Id "(" Id+ ")" Expression NL
+        | "#define" Id Expression NL
+        | EX "#else" IN NL
+        | EX "#endif" NL NL
+        | NL "#if" Expression IN NL
+        | NL "#ifdef" Id IN NL
+        | NL "#ifndef" Id IN NL
+        | "#ident" Stringlit NL
+        | "#include" Stringlit NL
+        | "#include" "\<" SPOFF Filepath "\>" SPON NL
+        | "#line" Integernumber Stringlit? NL
+        | "#undef" Id NL
+        | "#LINK" Stringlit NL
+        | EX "#endif" Comment_NL? NL
+        | "..."
+        | "..." Comment_NL?
+        | "#" Integernumber String Integernumber* NL
+        | "#pragma" SPON Id* "(" 
+		Id
+		","
+	       ")" NL
+ ;
+syntax Filepath
+        = 
+        File_id Slash_fileid*
+ ;
+syntax File_id
+        = Id
+        | Key
+ ;
+syntax Slash_fileid
+        = 
+        Slash File_id
+ ;
+syntax Slash
+        = "/"
+        | "\\"
+        | "."
+        | ":"
+ ;
 syntax Comment_NL
         = 
         Comment NL
@@ -612,4 +1104,12 @@ syntax Alignof_expression
         | "__alignof" "(" Unary_expression ")"
         | "__alignof__" "(" Type_name ")"
         | "__alignof" "(" Type_name ")"
+ ;
+syntax Designated_initializer
+        = Assignment_expression
+        | Designator* Designator_assignment? Assignment_expression
+        | Designator* Designator_assignment? NL "{" IN 
+		Designated_initializer
+		","
+	       ","? EX "}"
  ;

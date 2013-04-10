@@ -3,7 +3,7 @@ module IEEE1471ViewpointM2
 
 syntax Viewpoint
         = 
-        ANY source+ ANY covers+ ANY supplierDependency+ ANY clientDependency+ ANY isImportTo ANY architecturalConstruct+ ANY process
+        ViewpointImport source+ Concern covers+ ViewpointDependency supplierDependency+ ViewpointDependency clientDependency+ Stakeholder isImportTo ArchitecturalConstruct architecturalConstruct+ Process process
  ;
 syntax Concern
         = 
@@ -11,7 +11,7 @@ syntax Concern
  ;
 syntax Stakeholder
         = 
-        concerns: ANY
+        concerns: Concern
  ;
 syntax ViewpointImport
         = 
@@ -19,27 +19,29 @@ syntax ViewpointImport
  ;
 syntax ViewpointDependency
         = 
-        ANY supplier ANY client
+        Viewpoint supplier Viewpoint client
  ;
 syntax Process
         = 
-        ANY methodology+
+        Technique methodology+
  ;
 syntax Technique
         = 
-        ANY methods+ ANY applies+
+        AnalysisMethod methods+ Rule applies+
  ;
 syntax AnalysisMethod
         = 
-        analysis: ANY
+        analysis: Language
  ;
 syntax ArchitecturalConstruct
-        = 
-        ()
+        = Rule
+        | Language
+        | Mapping
+        | Pattern
  ;
 syntax Rule
-        = 
-        ANY techniques+ ANY guidance
+        = ModelOrganization
+        | Technique techniques+ Language guidance
  ;
 syntax ModelOrganization
         = 
@@ -55,7 +57,7 @@ syntax Language
  ;
 syntax Mapping
         = 
-        ANY input ANY ouput
+        Language input Language ouput
  ;
 syntax Pattern
         = 

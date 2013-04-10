@@ -3,57 +3,62 @@ module METAH
 
 syntax METAHFile
         = 
-        ANY entries+
+        METAHEntry entries+
  ;
 syntax METAHEntry
-        = 
-        ()
+        = Package
+        | PackageImplementation
+        | ProcessDeclaration
+        | ProcessImplementation
+        | Connection
+        | MacroDeclaration
+        | MacroImplementation
  ;
 syntax Package
         = 
-        ANY packName ANY data+
+        String packName Data data+
  ;
 syntax PackageImplementation
         = 
-        ANY implementationName ANY implements ANY attributes+
+        String implementationName String implements Attribute attributes+
  ;
 syntax Data
         = 
-        dataName: ANY
+        dataName: String
  ;
 syntax Attribute
         = 
-        ANY attName ANY attValue ANY attValueType ANY attType
+        String attName Integer attValue String attValueType String attType
  ;
 syntax ProcessDeclaration
         = 
-        ANY procDecName ANY ports+
+        String procDecName Port ports+
  ;
 syntax ProcessImplementation
         = 
-        ANY procImpName ANY declaration ANY processAttributes+
+        String procImpName String declaration ProcessAttribute processAttributes+
  ;
 syntax ProcessAttribute
         = 
-        ANY attName ANY attValue ANY attValueType
+        String attName Integer attValue String attValueType
  ;
 syntax Process
         = 
-        ANY procName ANY periodic ANY declaration ANY implementation
+        String procName String periodic String declaration String implementation
  ;
 syntax Port
         = 
-        ANY portName ANY portCom ANY portPackage ANY portType
+        String portName String portCom String portPackage String portType
  ;
 syntax Connection
         = 
-        ANY compSrc ANY portSrc ANY compDest ANY portDest
+        String compSrc String portSrc String compDest String portDest
  ;
 syntax MacroDeclaration
         = 
-        ANY name ANY ports+
+        String name Port ports+
  ;
 syntax MacroImplementation
         = 
-        ANY macroImpName ANY declaration ANY process+ ANY connections+
+        String macroImpName String declaration Process process+ Connection connections+
  ;

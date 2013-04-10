@@ -2,36 +2,47 @@
 module Marte
 
 syntax Element
-        = 
-        ()
+        = Comment
+        | NamedElement
+        | TemplateableElement
+        | Relationship
+        | TemplateSignature
+        | TemplateParameter
+        | ParameterableElement
+        | TemplateParameterSubstitution
+        | MultiplicityElement
+        | Image
+        | ActivityGroup
+        | Slot
+        | ExceptionHandler
  ;
 syntax Comment
         = 
-        ANY body ANY annotatedElement+
+        MARTE_PrimitivesTypes/String body Element annotatedElement+
  ;
 syntax Package
-        = 
-        ANY ownedType+ ANY packageMerge+ ANY packagedElement+ ANY nestedPackage+ ANY nestingPackage ANY profileApplication+
+        = Profile
+        | Type ownedType+ PackageMerge packageMerge+ PackageableElement packagedElement+ Package nestedPackage+ Package nestingPackage ProfileApplication profileApplication+
  ;
 syntax NamedElement
-        = 
-        ()
- ;
-syntax StructuralFeature
-        = 
-        ()
- ;
-syntax ConnectableElement
-        = 
-        ()
- ;
-syntax TemplateableElement
-        = 
-        ()
+        = Namespace
+        | TypedElement
+        | RedefinableElement
+        | DeploymentTarget
+        | CollaborationUse
+        | Message
+        | Lifeline
+        | Trigger
+        | Vertex
+        | ParameterSet
+        | DeployedArtifact
+        | MessageEnd
+        | InteractionFragment
+        | GeneralOrdering
  ;
 syntax Property
-        = 
-        ANY class ANY datatype ANY owningAssociation ANY association ANY isDerived ANY isDerivedUnion ANY default ANY aggregation ANY isComposite ANY redefinedProperty+ ANY defaultValue ANY opposite ANY subsettedProperty+ ANY qualifier+ ANY associationEnd
+        = Port
+        | Class class DataType datatype Association owningAssociation Association association MARTE_PrimitivesTypes/Boolean isDerived MARTE_PrimitivesTypes/Boolean isDerivedUnion MARTE_PrimitivesTypes/String default AggregationKind aggregation MARTE_PrimitivesTypes/Boolean isComposite Property redefinedProperty+ ValueSpecification defaultValue Property opposite Property subsettedProperty+ Property qualifier+ Property associationEnd
  ;
 syntax VisibilityKind
         = public: ()
@@ -40,144 +51,143 @@ syntax VisibilityKind
         | package: ()
  ;
 syntax Dependency
-        = 
-        ANY supplier+ ANY client+
+        = Abstraction
+        | Deployment
+        | NamedElement supplier+ NamedElement client+
  ;
 syntax DirectedRelationship
-        = 
-        ()
+        = ElementImport
+        | PackageImport
+        | TemplateBinding
+        | Generalization
+        | PackageMerge
+        | ProfileApplication
+        | ProtocolConformance
  ;
 syntax Relationship
         = 
-        ()
- ;
-syntax Namespace
-        = 
-        ()
+        DirectedRelationship
  ;
 syntax ElementImport
         = 
-        ANY visibility ANY alias ANY importedElement ANY importingNamespace
+        VisibilityKind visibility MARTE_PrimitivesTypes/String alias PackageableElement importedElement Namespace importingNamespace
  ;
 syntax PackageImport
         = 
-        ANY visibility ANY importedPackage ANY importingNamespace
+        VisibilityKind visibility Package importedPackage Namespace importingNamespace
  ;
 syntax Constraint
-        = 
-        ANY constrainedElement+ ANY specification ANY context
- ;
-syntax TypedElement
-        = 
-        ()
- ;
-syntax Type
-        = 
-        ()
+        = IntervalConstraint
+        | InteractionConstraint
+        | Element constrainedElement+ ValueSpecification specification Namespace context
  ;
 syntax Association
-        = 
-        ANY isDerived ANY ownedEnd+ ANY endType+ ANY memberEnd ANY navigableOwnedEnd+
+        = Extension
+        | MARTE_PrimitivesTypes/Boolean isDerived Property ownedEnd+ Type endType+ Property memberEnd Property navigableOwnedEnd+
  ;
 syntax Classifier
-        = 
-        ()
+        = BehavioredClassifier
+        | DataType
+        | Signal
+        | Interface
+        | StructuredClassifier
  ;
 syntax RedefinableElement
-        = 
-        ()
+        = Feature
+        | ExtensionPoint
+        | ActivityNode
+        | ActivityEdge
  ;
 syntax TemplateBinding
         = 
-        ANY signature ANY parameterSubstitution+ ANY boundElement
+        TemplateSignature signature TemplateParameterSubstitution parameterSubstitution+ TemplateableElement boundElement
  ;
 syntax TemplateSignature
         = 
-        ANY parameter+ ANY ownedParameter+ ANY template
+        TemplateParameter parameter+ TemplateParameter ownedParameter+ TemplateableElement template
  ;
 syntax TemplateParameter
         = 
-        ANY signature ANY parameteredElement ANY ownedParameteredElement ANY default ANY ownedDefault
- ;
-syntax ParameterableElement
-        = 
-        ()
+        TemplateSignature signature ParameterableElement parameteredElement ParameterableElement ownedParameteredElement ParameterableElement default ParameterableElement ownedDefault
  ;
 syntax TemplateParameterSubstitution
         = 
-        ANY formal ANY actual+ ANY ownedActual+ ANY templateBinding
+        TemplateParameter formal ParameterableElement actual+ ParameterableElement ownedActual+ TemplateBinding templateBinding
  ;
 syntax Generalization
         = 
-        ANY isSubstitutable ANY general ANY generalizationSet+ ANY specific
+        MARTE_PrimitivesTypes/Boolean isSubstitutable Classifier general GeneralizationSet generalizationSet+ Classifier specific
  ;
 syntax GeneralizationSet
         = 
-        ANY isCovering ANY isDisjoint ANY powertype ANY generalization+
+        MARTE_PrimitivesTypes/Boolean isCovering MARTE_PrimitivesTypes/Boolean isDisjoint Classifier powertype Generalization generalization+
  ;
 syntax Feature
         = 
-        ()
+        Connector
  ;
 syntax Substitution
         = 
-        ANY contract ANY substitutingClassifier
+        Classifier contract Classifier substitutingClassifier
  ;
 syntax PackageableElement
-        = 
-        ()
+        = Constraint
+        | Type
+        | GeneralizationSet
+        | Observation
+        | Event
  ;
 syntax PackageMerge
         = 
-        ANY mergedPackage ANY receivingPackage
+        Package mergedPackage Package receivingPackage
  ;
 syntax ProfileApplication
         = 
-        ANY appliedProfile ANY isStrict ANY applyingPackage
+        Profile appliedProfile MARTE_PrimitivesTypes/Boolean isStrict Package applyingPackage
  ;
 syntax Profile
         = 
-        ANY ownedStereotype+ ANY metaclassReference+ ANY metamodelReference+
+        Stereotype ownedStereotype+ ElementImport metaclassReference+ PackageImport metamodelReference+
  ;
 syntax Stereotype
         = 
-        ANY icon+
+        Image icon+
  ;
 syntax Class
-        = 
-        ANY nestedClassifier+ ANY ownedOperation+ ANY superClass+ ANY isActive ANY ownedReception+ ANY extension+
+        = Stereotype
+        | Behavior
+        | Classifier nestedClassifier+ Operation ownedOperation+ Class superClass+ MARTE_PrimitivesTypes/Boolean isActive Reception ownedReception+ Extension extension+
  ;
 syntax StringExpression
         = 
-        ANY subExpression+ ANY owningExpression
+        StringExpression subExpression+ StringExpression owningExpression
  ;
 syntax Expression
         = 
-        ANY symbol ANY operand+
+        MARTE_PrimitivesTypes/String symbol ValueSpecification operand+
  ;
 syntax ValueSpecification
-        = 
-        ()
+        = Expression
+        | OpaqueExpression
+        | TimeExpression
+        | Duration
+        | Interval
  ;
 syntax BehavioredClassifier
         = 
-        ()
+        UseCase
  ;
 syntax Behavior
-        = 
-        ()
+        = StateMachine
+        | Activity
  ;
 syntax MultiplicityElement
         = 
-        ()
- ;
-syntax DeploymentTarget
-        = 
-        ()
+        ConnectorEnd
  ;
 syntax DataType
-        = 
-        ANY ownedAttribute+ ANY ownedOperation+
+        = Enumeration
+        | Property ownedAttribute+ Operation ownedOperation+
  ;
 syntax AggregationKind
         = none: ()
@@ -186,99 +196,97 @@ syntax AggregationKind
  ;
 syntax CollaborationUse
         = 
-        ANY type ANY roleBinding+
+        Collaboration type Dependency roleBinding+
  ;
 syntax UseCase
         = 
-        ANY include+ ANY extend+ ANY extensionPoint+ ANY subject+
+        Include include+ Extend extend+ ExtensionPoint extensionPoint+ Classifier subject+
  ;
 syntax Realization
-        = 
-        ()
+        = Substitution
+        | InterfaceRealization
  ;
 syntax Abstraction
-        = 
-        mapping: ANY
+        = Realization
+        | Manifestation
+        | mapping: OpaqueExpression
  ;
 syntax Image
         = 
-        ANY content ANY location ANY format
+        MARTE_PrimitivesTypes/String content MARTE_PrimitivesTypes/String location MARTE_PrimitivesTypes/String format
  ;
 syntax OpaqueExpression
         = 
-        ANY body+ ANY language+ ANY result ANY behavior
+        MARTE_PrimitivesTypes/String body+ MARTE_PrimitivesTypes/String language+ Parameter result Behavior behavior
  ;
 syntax Parameter
         = 
-        ANY direction ANY default ANY defaultValue ANY operation ANY parameterSet+ ANY isException ANY isStream ANY effect
- ;
-syntax EncapsulatedClassifier
-        = 
-        ()
+        ParameterDirectionKind direction MARTE_PrimitivesTypes/String default ValueSpecification defaultValue Operation operation ParameterSet parameterSet+ MARTE_PrimitivesTypes/Boolean isException MARTE_PrimitivesTypes/Boolean isStream ParameterEffectKind effect
  ;
 syntax Operation
         = 
-        ANY interface ANY class ANY isQuery ANY isOrdered ANY isUnique ANY lower ANY upper ANY precondition+ ANY postcondition+ ANY redefinedOperation+ ANY datatype ANY bodyCondition ANY type
+        Interface interface Class class MARTE_PrimitivesTypes/Boolean isQuery MARTE_PrimitivesTypes/Boolean isOrdered MARTE_PrimitivesTypes/Boolean isUnique MARTE_PrimitivesTypes/Integer lower MARTE_PrimitivesTypes/UnlimitedNatural upper Constraint precondition+ Constraint postcondition+ Operation redefinedOperation+ DataType datatype Constraint bodyCondition Type type
  ;
 syntax Reception
         = 
-        signal: ANY
+        signal: Signal
  ;
 syntax Extension
         = 
-        ANY isRequired ANY metaclass
+        MARTE_PrimitivesTypes/Boolean isRequired Class metaclass
  ;
 syntax EnumerationLiteral
         = 
-        enumeration: ANY
+        enumeration: Enumeration
  ;
 syntax ActivityPartition
         = 
-        ANY isDimension ANY isExternal ANY node+ ANY subpartition+ ANY superPartition ANY represents ANY edge+
+        MARTE_PrimitivesTypes/Boolean isDimension MARTE_PrimitivesTypes/Boolean isExternal ActivityNode node+ ActivityPartition subpartition+ ActivityPartition superPartition Element represents ActivityEdge edge+
  ;
 syntax Enumeration
         = 
-        ANY ownedLiteral+
+        EnumerationLiteral ownedLiteral+
  ;
 syntax InstanceSpecification
-        = 
-        ANY classifier+ ANY slot+ ANY specification
+        = EnumerationLiteral
+        | Classifier classifier+ Slot slot+ ValueSpecification specification
  ;
 syntax BehavioralFeature
         = 
-        ()
+        Reception
  ;
 syntax Signal
         = 
-        ANY ownedAttribute+
+        Property ownedAttribute+
  ;
 syntax TimeExpression
         = 
-        ANY expr ANY observation+
+        ValueSpecification expr Observation observation+
  ;
 syntax Observation
-        = 
-        ()
+        = TimeObservation
+        | DurationObservation
  ;
 syntax Duration
         = 
-        ANY expr ANY observation+
+        ValueSpecification expr Observation observation+
  ;
 syntax DurationInterval
         = 
         ()
  ;
 syntax Interval
-        = 
-        ANY min ANY max
+        = DurationInterval
+        | TimeInterval
+        | ValueSpecification min ValueSpecification max
  ;
 syntax TimeConstraint
         = 
-        firstEvent: ANY
+        firstEvent: MARTE_PrimitivesTypes/Boolean
  ;
 syntax IntervalConstraint
-        = 
-        ()
+        = TimeConstraint
+        | DurationConstraint
  ;
 syntax TimeInterval
         = 
@@ -286,115 +294,107 @@ syntax TimeInterval
  ;
 syntax DurationConstraint
         = 
-        firstEvent: ANY
+        firstEvent: MARTE_PrimitivesTypes/Boolean
  ;
 syntax TimeObservation
         = 
-        ANY event ANY firstEvent
+        NamedElement event MARTE_PrimitivesTypes/Boolean firstEvent
  ;
 syntax DurationObservation
         = 
-        ANY event ANY firstEvent
+        NamedElement event MARTE_PrimitivesTypes/Boolean firstEvent
  ;
 syntax ConnectorEnd
         = 
-        ANY definingEnd ANY partWithPort ANY role
+        Property definingEnd Property partWithPort ConnectableElement role
  ;
 syntax TimeEvent
         = 
-        ANY isRelative ANY when
+        MARTE_PrimitivesTypes/Boolean isRelative ValueSpecification when
  ;
 syntax Event
         = 
-        ()
+        TimeEvent
  ;
 syntax Port
         = 
-        ANY isBehavior ANY isService ANY required+ ANY redefinedPort+ ANY provided+ ANY protocol
+        MARTE_PrimitivesTypes/Boolean isBehavior MARTE_PrimitivesTypes/Boolean isService Interface required+ Port redefinedPort+ Interface provided+ ProtocolStateMachine protocol
  ;
 syntax Action
         = 
-        ()
+        InvocationAction
  ;
 syntax Message
         = 
-        ANY messageKind ANY messageSort ANY receiveEvent ANY sendEvent ANY connector ANY interaction ANY argument+ ANY signature
+        MessageKind messageKind MessageSort messageSort MessageEnd receiveEvent MessageEnd sendEvent Connector connector Interaction interaction ValueSpecification argument+ NamedElement signature
  ;
 syntax Lifeline
         = 
-        ANY represents ANY interaction ANY selector ANY decomposedAs ANY coveredBy+
- ;
-syntax ExecutionSpecification
-        = 
-        ()
- ;
-syntax InvocationAction
-        = 
-        ()
+        ConnectableElement represents Interaction interaction ValueSpecification selector PartDecomposition decomposedAs InteractionFragment coveredBy+
  ;
 syntax Connector
         = 
-        ANY type ANY redefinedConnector+ ANY end ANY kind ANY contract+
+        Association type Connector redefinedConnector+ ConnectorEnd end ConnectorKind kind Behavior contract+
  ;
 syntax Collaboration
         = 
-        ANY collaborationRole+
+        ConnectableElement collaborationRole+
  ;
 syntax Interface
         = 
-        ANY ownedAttribute+ ANY ownedOperation+ ANY nestedClassifier+ ANY redefinedInterface+ ANY ownedReception+ ANY protocol
+        Property ownedAttribute+ Operation ownedOperation+ Classifier nestedClassifier+ Interface redefinedInterface+ Reception ownedReception+ ProtocolStateMachine protocol
  ;
 syntax InterfaceRealization
         = 
-        ANY contract ANY implementingClassifier
+        Interface contract BehavioredClassifier implementingClassifier
  ;
 syntax Trigger
         = 
-        ANY event ANY port+
+        Event event Port port+
  ;
 syntax ProtocolStateMachine
         = 
-        ANY conformance+
+        ProtocolConformance conformance+
  ;
 syntax StateMachine
-        = 
-        ANY region+ ANY submachineState+ ANY connectionPoint+ ANY extendedStateMachine+
+        = ProtocolStateMachine
+        | Region region+ State submachineState+ Pseudostate connectionPoint+ StateMachine extendedStateMachine+
  ;
 syntax ProtocolConformance
         = 
-        ANY generalMachine ANY specificMachine
+        ProtocolStateMachine generalMachine ProtocolStateMachine specificMachine
  ;
 syntax Deployment
         = 
-        ANY deployedArtifact+ ANY configuration+ ANY location
+        DeployedArtifact deployedArtifact+ DeploymentSpecification configuration+ DeploymentTarget location
  ;
 syntax Include
         = 
-        ANY addition ANY includingCase
+        UseCase addition UseCase includingCase
  ;
 syntax Extend
         = 
-        ANY extendedCase ANY condition ANY extensionLocation+ ANY extension
+        UseCase extendedCase Constraint condition ExtensionPoint extensionLocation+ UseCase extension
  ;
 syntax ExtensionPoint
         = 
-        useCase: ANY
+        useCase: UseCase
  ;
 syntax Region
         = 
-        ANY subvertex+ ANY transition+ ANY state ANY extendedRegion ANY stateMachine
+        Vertex subvertex+ Transition transition+ State state Region extendedRegion StateMachine stateMachine
  ;
 syntax StructuredClassifier
         = 
-        ()
+        EncapsulatedClassifier
  ;
 syntax Vertex
-        = 
-        ()
+        = Pseudostate
+        | ConnectionPointReference
  ;
 syntax Transition
         = 
-        ANY kind ANY container ANY redefinedTransition ANY guard ANY effect ANY trigger+ ANY target ANY source
+        TransitionKind kind Region container Transition redefinedTransition Constraint guard Behavior effect Trigger trigger+ Vertex target Vertex source
  ;
 syntax TransitionKind
         = internal: ()
@@ -403,19 +403,19 @@ syntax TransitionKind
  ;
 syntax State
         = 
-        ANY isComposite ANY isOrthogonal ANY isSimple ANY isSubmachineState ANY submachine ANY connection+ ANY connectionPoint+ ANY redefinedState ANY stateInvariant ANY entry ANY exit ANY doActivity ANY deferrableTrigger+ ANY region+
+        MARTE_PrimitivesTypes/Boolean isComposite MARTE_PrimitivesTypes/Boolean isOrthogonal MARTE_PrimitivesTypes/Boolean isSimple MARTE_PrimitivesTypes/Boolean isSubmachineState StateMachine submachine ConnectionPointReference connection+ Pseudostate connectionPoint+ State redefinedState Constraint stateInvariant Behavior entry Behavior exit Behavior doActivity Trigger deferrableTrigger+ Region region+
  ;
 syntax ParameterSet
         = 
-        ANY parameter+ ANY condition+
+        Parameter parameter+ Constraint condition+
  ;
 syntax ActivityNode
         = 
-        ()
+        ExecutableNode
  ;
 syntax ActivityGroup
         = 
-        ()
+        InterruptibleActivityRegion
  ;
 syntax ParameterDirectionKind
         = in: ()
@@ -429,33 +429,26 @@ syntax ParameterEffectKind
         | update: ()
         | delete: ()
  ;
-syntax ActivityEdge
-        = 
-        ()
- ;
 syntax InterruptibleActivityRegion
         = 
-        ANY node+ ANY interruptingEdge+
- ;
-syntax DeployedArtifact
-        = 
-        ()
+        ActivityNode node+ ActivityEdge interruptingEdge+
  ;
 syntax Slot
         = 
-        ANY definingFeature ANY value+ ANY owningInstance
+        StructuralFeature definingFeature ValueSpecification value+ InstanceSpecification owningInstance
  ;
 syntax ExecutableNode
         = 
-        ()
+        Action
  ;
 syntax OutputPin
         = 
         ()
  ;
 syntax Pin
-        = 
-        isControl: ANY
+        = OutputPin
+        | InputPin
+        | isControl: MARTE_PrimitivesTypes/Boolean
  ;
 syntax InputPin
         = 
@@ -469,11 +462,7 @@ syntax MessageKind
  ;
 syntax ExceptionHandler
         = 
-        ANY handlerBody ANY exceptionInput ANY exceptionType+ ANY protectedNode
- ;
-syntax ObjectNode
-        = 
-        ()
+        ExecutableNode handlerBody ObjectNode exceptionInput Classifier exceptionType+ ExecutableNode protectedNode
  ;
 syntax ObjectNodeOrderingKind
         = unordered: ()
@@ -483,7 +472,7 @@ syntax ObjectNodeOrderingKind
  ;
 syntax MessageEnd
         = 
-        ()
+        Gate
  ;
 syntax MessageSort
         = synchCall: ()
@@ -495,19 +484,20 @@ syntax MessageSort
  ;
 syntax Interaction
         = 
-        ANY lifeline+ ANY fragment+ ANY action+ ANY formalGate+ ANY message+
+        Lifeline lifeline+ InteractionFragment fragment+ Action action+ Gate formalGate+ Message message+
  ;
 syntax PartDecomposition
         = 
         ()
  ;
 syntax InteractionUse
-        = 
-        ANY refersTo ANY actualGate+ ANY argument+
+        = PartDecomposition
+        | Interaction refersTo Gate actualGate+ Action argument+
  ;
 syntax InteractionFragment
-        = 
-        ()
+        = ExecutionSpecification
+        | InteractionUse
+        | OccurrenceSpecification
  ;
 syntax ConnectorKind
         = assembly: ()
@@ -515,7 +505,7 @@ syntax ConnectorKind
  ;
 syntax Pseudostate
         = 
-        ANY kind ANY stateMachine ANY state
+        PseudostateKind kind StateMachine stateMachine State state
  ;
 syntax PseudostateKind
         = initial: ()
@@ -531,49 +521,49 @@ syntax PseudostateKind
  ;
 syntax ConnectionPointReference
         = 
-        ANY entry+ ANY exit+ ANY state
+        Pseudostate entry+ Pseudostate exit+ State state
  ;
 syntax StructuredActivityNode
         = 
-        ANY variable+ ANY edge+ ANY mustIsolate ANY node+
+        Variable variable+ ActivityEdge edge+ MARTE_PrimitivesTypes/Boolean mustIsolate ActivityNode node+
  ;
 syntax Variable
         = 
-        ANY scope ANY activityScope
+        StructuredActivityNode scope Activity activityScope
  ;
 syntax Activity
         = 
-        ANY structuredNode+ ANY variable+ ANY node+ ANY isReadOnly ANY edge+ ANY partition+ ANY isSingleExecution ANY group+
+        StructuredActivityNode structuredNode+ Variable variable+ ActivityNode node+ MARTE_PrimitivesTypes/Boolean isReadOnly ActivityEdge edge+ ActivityPartition partition+ MARTE_PrimitivesTypes/Boolean isSingleExecution ActivityGroup group+
  ;
 syntax OccurrenceSpecification
         = 
-        ANY toBefore+ ANY event ANY toAfter+
+        GeneralOrdering toBefore+ Event event GeneralOrdering toAfter+
  ;
 syntax DeploymentSpecification
         = 
-        ANY deploymentLocation ANY executionLocation ANY deployment
+        MARTE_PrimitivesTypes/String deploymentLocation MARTE_PrimitivesTypes/String executionLocation Deployment deployment
  ;
 syntax Gate
         = 
-        ANY message
+        message: Message
  ;
 syntax Artifact
-        = 
-        ANY fileName ANY nestedArtifact+ ANY manifestation+ ANY ownedOperation+ ANY ownedAttribute+
+        = DeploymentSpecification
+        | MARTE_PrimitivesTypes/String fileName Artifact nestedArtifact+ Manifestation manifestation+ Operation ownedOperation+ Property ownedAttribute+
  ;
 syntax GeneralOrdering
         = 
-        ANY before ANY after
+        OccurrenceSpecification before OccurrenceSpecification after
  ;
 syntax Manifestation
         = 
-        utilizedElement: ANY
+        utilizedElement: PackageableElement
  ;
 syntax InteractionOperand
         = 
-        ANY guard ANY fragment+
+        InteractionConstraint guard InteractionFragment fragment+
  ;
 syntax InteractionConstraint
         = 
-        ANY minint ANY maxint
+        ValueSpecification minint ValueSpecification maxint
  ;

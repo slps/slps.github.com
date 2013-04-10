@@ -1,57 +1,112 @@
 UEMLObject:
-        has::ANY model::ANY
+        UEMLModel
+UEMLObject:
+        Port
+UEMLObject:
+        Flow
+UEMLObject:
+        Activity
+UEMLObject:
+        Object
+UEMLObject:
+        has::Geometry model::UEMLModel
 UEMLModel:
-        contains::ANY+
+        contains::UEMLObject+
 Geometry:
-        object::ANY
+        object::UEMLObject
 Port:
-        EPSILON
+        ResourceRole
+Port:
+        Anchor
+Port:
+        ResourceRole
+        Anchor
 Flow:
-        associationConnector::ANY
+        ResourceFlow
+Flow:
+        IOFlow
+Flow:
+        ControlFlow
+Flow:
+        associationConnector::AssociationConnector
 Activity:
-        resourceRole::ANY+ child::ANY+ parent::ANY hasOutput::ANY+ hasInput::ANY+
+        resourceRole::ResourceRole+ child::Activity+ parent::Activity hasOutput::OutputPort+ hasInput::InputPort+
 Object:
-        ioFlow::ANY
+        InformationObject
+Object:
+        Resource
+Object:
+        ioFlow::IOFlow
 InformationObject:
-        controlFlow::ANY
+        controlFlow::ControlFlow
 Resource:
-        carries::ANY plays::ANY+ commitment::ANY+
+        PassiveObject
+Resource:
+        Agent
+Resource:
+        carries::ResourceFlow plays::ResourceRole+ commitment::Commitment+
 MaterialResource:
         EPSILON
 HumanResource:
         EPSILON
 ResourceFlow:
-        resourceCarries::ANY+
+        resourceCarries::Resource+
 IOFlow:
-        carries::ANY+
+        carries::Object+
 ControlFlow:
-        carries::ANY+
+        TriggerFlow
+ControlFlow:
+        ConstraintFlow
+ControlFlow:
+        carries::InformationObject+
 TriggerFlow:
         EPSILON
 ConstraintFlow:
         EPSILON
 ResourceRole:
-        resourcePlays::ANY+ roleQualifier::ANY in::ANY
+        resourcePlays::Resource+ roleQualifier::RoleType in::Activity
 RoleType:
         EPSILON
 Anchor:
-        target::ANY origin::ANY
+        OutputPort
+Anchor:
+        InputPort
+Anchor:
+        ConnectionOperator
+Anchor:
+        target::AssociationConnector origin::AssociationConnector
 OutputPort:
-        activity::ANY
+        activity::Activity
 InputPort:
-        activity::ANY
+        activity::Activity
 ConnectionOperator:
         EPSILON
 AssociationConnector:
-        origin::ANY+ target::ANY+ classAssociation::ANY
+        origin::Anchor+ target::Anchor+ classAssociation::Flow
 PassiveObject:
-        EPSILON
+        MaterialResource
+PassiveObject:
+        Commitment
+PassiveObject:
+        Contract
+PassiveObject:
+        MaterialResource
+        Commitment
+        Contract
 Commitment:
-        resource::ANY+
+        resource::Resource+
 Contract:
         EPSILON
 Agent:
-        EPSILON
+        HumanResource
+Agent:
+        Software
+Agent:
+        Organisation
+Agent:
+        HumanResource
+        Software
+        Organisation
 Software:
         EPSILON
 Organisation:

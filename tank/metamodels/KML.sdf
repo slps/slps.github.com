@@ -4,23 +4,199 @@ exports
   sorts
         Node ElementNode AttributeNode RootNode TextNode KMLNode KMLRootNode Address AltitudeMode AltitudeModeValue BalloonStyle Color ColorMode ColorModeValue Cookie Coordinates Coordinate Description Document DrawOrder East Extrude Fill FlyToView Folder GroundOverlay H Heading Href Icon IconStyle InnerBoundaryIs Key LabelStyle Latitude LatLonBox LinearRing LineString LineStyle LinkDescription LinkName Longitude LookAt Message MinRefreshPeriod MultiGeometry Name NetworkLink NetworkLinkControl North ObjArrayField ObjField Open OuterBoundaryIs Outline OverlayXY Pair Parent Placemark Point Polygon PolyStyle Range RefreshInterval RefreshMode RefreshVisibility Rotation Schema Scale ScreenOverlay ScreenXY SimpleArrayField SimpleField Size South Snippet Style StyleMap StyleUrl Tessellate Text TextColor Tilt Type Url ViewBoundScale ViewRefreshMode ViewRefreshTime ViewFormat Visibility W West Width X Y 
   context-free syntax
-         -> Node
+        ElementNode -> Node
 
-         -> ElementNode
+        AttributeNode -> Node
 
-        value::ANY -> AttributeNode
+        RootNode -> ElementNode
 
-         -> RootNode
+        TextNode -> ElementNode
 
-        nodes::ANY+ -> TextNode
+        KMLNode -> ElementNode
 
-         -> KMLNode
+        value::String -> AttributeNode
+
+        KMLRootNode -> RootNode
+
+        nodes::Node+ -> TextNode
+
+        Address -> KMLNode
+
+        AltitudeMode -> KMLNode
+
+        BalloonStyle -> KMLNode
+
+        Color -> KMLNode
+
+        ColorMode -> KMLNode
+
+        Cookie -> KMLNode
+
+        Coordinates -> KMLNode
+
+        Coordinate -> KMLNode
+
+        Description -> KMLNode
+
+        Document -> KMLNode
+
+        DrawOrder -> KMLNode
+
+        East -> KMLNode
+
+        Extrude -> KMLNode
+
+        Fill -> KMLNode
+
+        FlyToView -> KMLNode
+
+        Folder -> KMLNode
+
+        GroundOverlay -> KMLNode
+
+        H -> KMLNode
+
+        Heading -> KMLNode
+
+        Href -> KMLNode
+
+        Icon -> KMLNode
+
+        IconStyle -> KMLNode
+
+        InnerBoundaryIs -> KMLNode
+
+        Key -> KMLNode
+
+        LabelStyle -> KMLNode
+
+        Latitude -> KMLNode
+
+        LatLonBox -> KMLNode
+
+        LinearRing -> KMLNode
+
+        LineString -> KMLNode
+
+        LineStyle -> KMLNode
+
+        LinkDescription -> KMLNode
+
+        LinkName -> KMLNode
+
+        Longitude -> KMLNode
+
+        LookAt -> KMLNode
+
+        Message -> KMLNode
+
+        MinRefreshPeriod -> KMLNode
+
+        MultiGeometry -> KMLNode
+
+        Name -> KMLNode
+
+        NetworkLink -> KMLNode
+
+        NetworkLinkControl -> KMLNode
+
+        North -> KMLNode
+
+        ObjArrayField -> KMLNode
+
+        ObjField -> KMLNode
+
+        Open -> KMLNode
+
+        OuterBoundaryIs -> KMLNode
+
+        Outline -> KMLNode
+
+        OverlayXY -> KMLNode
+
+        Pair -> KMLNode
+
+        Parent -> KMLNode
+
+        Placemark -> KMLNode
+
+        Point -> KMLNode
+
+        Polygon -> KMLNode
+
+        PolyStyle -> KMLNode
+
+        Range -> KMLNode
+
+        RefreshInterval -> KMLNode
+
+        RefreshMode -> KMLNode
+
+        RefreshVisibility -> KMLNode
+
+        Rotation -> KMLNode
+
+        Schema -> KMLNode
+
+        Scale -> KMLNode
+
+        ScreenOverlay -> KMLNode
+
+        ScreenXY -> KMLNode
+
+        SimpleArrayField -> KMLNode
+
+        SimpleField -> KMLNode
+
+        Size -> KMLNode
+
+        South -> KMLNode
+
+        Snippet -> KMLNode
+
+        Style -> KMLNode
+
+        StyleMap -> KMLNode
+
+        StyleUrl -> KMLNode
+
+        Tessellate -> KMLNode
+
+        Text -> KMLNode
+
+        TextColor -> KMLNode
+
+        Tilt -> KMLNode
+
+        Type -> KMLNode
+
+        Url -> KMLNode
+
+        ViewBoundScale -> KMLNode
+
+        ViewRefreshMode -> KMLNode
+
+        ViewRefreshTime -> KMLNode
+
+        ViewFormat -> KMLNode
+
+        Visibility -> KMLNode
+
+        W -> KMLNode
+
+        West -> KMLNode
+
+        Width -> KMLNode
+
+        X -> KMLNode
+
+        Y -> KMLNode
 
          -> KMLRootNode
 
-        value::ANY -> Address
+        value::String -> Address
 
-        value::ANY -> AltitudeMode
+        value::AltitudeModeValue -> AltitudeMode
 
         clampedToGround:: -> AltitudeModeValue
         relativeToGround:: -> AltitudeModeValue
@@ -28,42 +204,42 @@ exports
 
          -> BalloonStyle
 
-        value::ANY -> Color
+        value::String -> Color
 
-        value::ANY -> ColorMode
+        value::ColorModeValue -> ColorMode
 
         normal:: -> ColorModeValue
         random:: -> ColorModeValue
 
-        value::ANY -> Cookie
+        value::String -> Cookie
 
          -> Coordinates
 
          -> Coordinate
 
-        value::ANY -> Description
+        value::String -> Description
 
          -> Document
 
-        value::ANY -> DrawOrder
+        value::Integer -> DrawOrder
 
-        value::ANY -> East
+        value::Double -> East
 
-        value::ANY -> Extrude
+        value::Boolean -> Extrude
 
-        value::ANY -> Fill
+        value::Boolean -> Fill
 
-        value::ANY -> FlyToView
+        value::Boolean -> FlyToView
 
          -> Folder
 
          -> GroundOverlay
 
-        value::ANY -> H
+        value::Integer -> H
 
-        value::ANY -> Heading
+        value::Double -> Heading
 
-        value::ANY -> Href
+        value::String -> Href
 
          -> Icon
 
@@ -71,11 +247,11 @@ exports
 
          -> InnerBoundaryIs
 
-        value::ANY -> Key
+        value::String -> Key
 
          -> LabelStyle
 
-        value::ANY -> Latitude
+        value::Double -> Latitude
 
          -> LatLonBox
 
@@ -83,45 +259,45 @@ exports
 
          -> LineString
 
-        id::ANY -> LineStyle
+        id::String -> LineStyle
 
-        value::ANY -> LinkDescription
+        value::String -> LinkDescription
 
-        value::ANY -> LinkName
+        value::String -> LinkName
 
-        value::ANY -> Longitude
+        value::Double -> Longitude
 
          -> LookAt
 
          -> Message
 
-        value::ANY -> MinRefreshPeriod
+        value::String -> MinRefreshPeriod
 
          -> MultiGeometry
 
-        value::ANY -> Name
+        value::String -> Name
 
          -> NetworkLink
 
          -> NetworkLinkControl
 
-        value::ANY -> North
+        value::Double -> North
 
          -> ObjArrayField
 
          -> ObjField
 
-        value::ANY -> Open
+        value::String -> Open
 
          -> OuterBoundaryIs
 
-        value::ANY -> Outline
+        value::String -> Outline
 
-        x::ANY y::ANY xunits::ANY yunits::ANY -> OverlayXY
+        x::String y::String xunits::String yunits::String -> OverlayXY
 
          -> Pair
 
-        value::ANY -> Parent
+        value::String -> Parent
 
          -> Placemark
 
@@ -131,68 +307,68 @@ exports
 
          -> PolyStyle
 
-        value::ANY -> Range
+        value::String -> Range
 
-        value::ANY -> RefreshInterval
+        value::String -> RefreshInterval
 
-        value::ANY -> RefreshMode
+        value::String -> RefreshMode
 
-        value::ANY -> RefreshVisibility
+        value::String -> RefreshVisibility
 
-        value::ANY -> Rotation
+        value::String -> Rotation
 
          -> Schema
 
-        value::ANY -> Scale
+        value::String -> Scale
 
-        id::ANY -> ScreenOverlay
+        id::String -> ScreenOverlay
 
-        x::ANY y::ANY xunits::ANY yunits::ANY -> ScreenXY
+        x::String y::String xunits::String yunits::String -> ScreenXY
 
          -> SimpleArrayField
 
          -> SimpleField
 
-        x::ANY y::ANY xunits::ANY yunits::ANY -> Size
+        x::String y::String xunits::String yunits::String -> Size
 
-        value::ANY -> South
+        value::Double -> South
 
          -> Snippet
 
-        id::ANY -> Style
+        id::String -> Style
 
          -> StyleMap
 
-        value::ANY -> StyleUrl
+        value::String -> StyleUrl
 
-        value::ANY -> Tessellate
+        value::String -> Tessellate
 
          -> Text
 
-        value::ANY -> TextColor
+        value::String -> TextColor
 
-        value::ANY -> Tilt
+        value::String -> Tilt
 
-        value::ANY -> Type
+        value::String -> Type
 
          -> Url
 
-        value::ANY -> ViewBoundScale
+        value::String -> ViewBoundScale
 
-        value::ANY -> ViewRefreshMode
+        value::String -> ViewRefreshMode
 
-        value::ANY -> ViewRefreshTime
+        value::Integer -> ViewRefreshTime
 
-        value::ANY -> ViewFormat
+        value::String -> ViewFormat
 
-        value::ANY -> Visibility
+        value::String -> Visibility
 
-        value::ANY -> W
+        value::Integer -> W
 
-        value::ANY -> West
+        value::Double -> West
 
-        value::ANY -> Width
+        value::Double -> Width
 
-        value::ANY -> X
+        value::Integer -> X
 
-        value::ANY -> Y
+        value::Integer -> Y

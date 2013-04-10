@@ -4,13 +4,39 @@ exports
   sorts
         Resource Graph List Container Alt Bag Seq Property ContainerMembershipProperty Statement URIReferenceNode BlankNode Class Datatype Literal PlainLiteral TypedLiteral RDFXMLLiteral URIReference UniformResourceIdentifier 
   context-free syntax
-        graph::ANY uriRef::ANY+ subjectStatement::ANY+ objectStatement::ANY+ label::ANY+ type::ANY+ seeAlso::ANY+ referringResource::ANY+ member::ANY+ container::ANY+ list::ANY+ -> Resource
+        Graph -> Resource
 
-        graphName::ANY resources::ANY+ -> Graph
+        List -> Resource
 
-        first::ANY rest::ANY originalList::ANY+ -> List
+        Container -> Resource
 
-         -> Container
+        Property -> Resource
+
+        Statement -> Resource
+
+        URIReferenceNode -> Resource
+
+        BlankNode -> Resource
+
+        Class -> Resource
+
+        Literal -> Resource
+
+        graph::Graph uriRef::URIReference+ subjectStatement::Statement+ objectStatement::Statement+ label::PlainLiteral+ type::Class+ seeAlso::Resource+ referringResource::Resource+ member::Resource+ container::Resource+ list::List+ -> Resource
+
+        graphName::URIReference resources::Resource+ -> Graph
+
+        first::Resource rest::List originalList::List+ -> List
+
+        Alt -> Container
+
+        Bag -> Container
+
+        Seq -> Container
+
+        Alt -> Container
+        Bag -> Container
+        Seq -> Container
 
          -> Alt
 
@@ -18,28 +44,38 @@ exports
 
          -> Seq
 
-        predicateStatement::ANY+ subPropertyOf::ANY+ superProperty::ANY+ domain::ANY+ range::ANY+ -> Property
+        predicateStatement::Statement+ subPropertyOf::Property+ superProperty::Property+ domain::Class+ range::Class+ -> Property
 
          -> ContainerMembershipProperty
 
-        predicate::ANY object::ANY subject::ANY isReifiedOnly::ANY isReified::ANY nameForReification::ANY+ -> Statement
+        predicate::Property object::Resource subject::Resource isReifiedOnly::Boolean isReified::Boolean nameForReification::URIReference+ -> Statement
 
          -> URIReferenceNode
 
-        nodeId::ANY -> BlankNode
+        nodeId::String -> BlankNode
 
-        subClassOf::ANY+ superClass::ANY+ typedResource::ANY+ propertyForDomain::ANY+ propertyForRange::ANY+ -> Class
+        Datatype -> Class
+
+        subClassOf::Class+ superClass::Class+ typedResource::Resource+ propertyForDomain::Property+ propertyForRange::Property+ -> Class
 
          -> Datatype
 
-        lexicalForm::ANY -> Literal
+        PlainLiteral -> Literal
 
-        language::ANY labeledResource::ANY -> PlainLiteral
+        TypedLiteral -> Literal
 
-        datatypeURI::ANY -> TypedLiteral
+        lexicalForm::String -> Literal
+
+        language::String labeledResource::Resource -> PlainLiteral
+
+        RDFXMLLiteral -> TypedLiteral
+
+        datatypeURI::URIReference -> TypedLiteral
 
          -> RDFXMLLiteral
 
-        uri::ANY resource::ANY literal::ANY namedGraph::ANY reifiedStatement::ANY+ -> URIReference
+        UniformResourceIdentifier -> URIReference
 
-        name::ANY uriRef::ANY+ -> UniformResourceIdentifier
+        uri::UniformResourceIdentifier resource::Resource literal::TypedLiteral namedGraph::Graph reifiedStatement::Statement+ -> URIReference
+
+        name::String uriRef::URIReference+ -> UniformResourceIdentifier

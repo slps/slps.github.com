@@ -1,14 +1,14 @@
 Application:
-        name::ANY version::ANY author::ANY extensionPoints::ANY+
+        name::String version::String author::String extensionPoints::ExtensionPoint+
 ExtensionPoint:
-        name::ANY id::ANY application::ANY descriptions::ANY+ plugIn::ANY
+        name::String id::String application::Application descriptions::Description+ plugIn::PlugIn
 Description:
-        xmlSchema::ANY extensionPoints::ANY+
+        xmlSchema::String extensionPoints::ExtensionPoint+
 Extension:
-        name::ANY id::ANY isConfiguredInto::ANY
+        name::String id::String isConfiguredInto::ExtensionPoint
 PlugIn:
-        id::ANY displayableName::ANY version::ANY supplier::ANY configures::ANY+ extensionPoints::ANY+ requires::ANY+ uses::ANY+
+        id::String displayableName::String version::String supplier::String configures::Extension+ extensionPoints::ExtensionPoint+ requires::PlugIn+ uses::Librairy+
 Librairy:
-        name::ANY plugIn::ANY classes::ANY+
+        name::String plugIn::PlugIn classes::Class+
 Class:
-        name::ANY librairy::ANY
+        name::String librairy::Librairy

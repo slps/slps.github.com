@@ -1,15 +1,15 @@
 DateType:
-        day::ANY month::ANY year::ANY
+        day::Integer month::Integer year::Integer
 ControlsSequence:
-        controls::ANY+
+        controls::Control+
 Control:
-        c_controlsSequence::ANY responsible::ANY component::ANY developmentPhase::ANY scope::ANY date::ANY controlledElt::ANY eltRef::ANY eltAuthor::ANY formRef::ANY type::ANY
+        c_controlsSequence::ControlsSequence responsible::String component::String developmentPhase::String scope::String date::DateType controlledElt::String eltRef::String eltAuthor::String formRef::String type::ControlType
 ControlType:
-        EPSILON
+        BugTracking
 BugTracking:
-        bugs::ANY+
+        bugs::Bug+
 Bug:
-        b_bugTracking::ANY number::ANY componentVersion::ANY description::ANY status::ANY originator::ANY responsible::ANY commentsAnswers::ANY openDate::ANY closeDate::ANY
+        b_bugTracking::BugTracking number::Integer componentVersion::String description::String status::BugStatusType originator::String responsible::String commentsAnswers::String openDate::String closeDate::String
 BugStatusType:
         bst_open::EPSILON
         bst_closed::EPSILON

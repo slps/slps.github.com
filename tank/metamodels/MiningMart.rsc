@@ -7,5 +7,5 @@ syntax InOut
  ;
 syntax LinkPackage
         = 
-        ANY type ANY dataObject ANY value ANY column ANY columnSet
+        InOut type CaseRepresentation/DataObject dataObject DataRepresentation/Value value DataRepresentation/Column column DataRepresentation/ColumnSet columnSet
  ;

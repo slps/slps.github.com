@@ -2,62 +2,64 @@
 module XAML_ResourceDictionary
 
 syntax Transformation
-        = 
-        ()
+        = TranslateTransform3D
+        | ScaleTransform3D
+        | RotateTransform3D
  ;
 syntax WinFXElement
         = 
-        ()
+        Key
  ;
 syntax NameSpace
         = 
-        ANY namespace ANY identifier
+        String namespace String identifier
  ;
 syntax ResourceGroup
-        = 
-        key: ANY
+        = Transform3DGroup
+        | MaterialGroup
+        | key: Key
  ;
 syntax Material
         = 
-        ()
+        DiffuseMaterial
  ;
 syntax Key
         = 
-        name: ANY
+        name: String
  ;
 syntax ResourceDictionary
         = 
-        ANY resourcegroups+ ANY xmlns+
+        ResourceGroup resourcegroups+ NameSpace xmlns+
  ;
 syntax Transform3DGroup
         = 
-        ANY transformations+
+        Transformation transformations+
  ;
 syntax MaterialGroup
         = 
-        ANY materials+
+        Material materials+
  ;
 syntax DiffuseMaterial
         = 
-        Brush: ANY
+        Brush: String
  ;
 syntax TranslateTransform3D
         = 
-        ANY OffsetX ANY OffsetY ANY OffsetZ
+        Double OffsetX Double OffsetY Double OffsetZ
  ;
 syntax ScaleTransform3D
         = 
-        ANY ScaleX ANY ScaleY ANY ScaleZ
+        Double ScaleX Double ScaleY Double ScaleZ
  ;
 syntax RotateTransform3D
         = 
-        ANY CenterX ANY CenterY ANY rotation
+        Double CenterX Double CenterY RotateTransformat3DRotation rotation
  ;
 syntax RotateTransformat3DRotation
         = 
-        axisAngleRotation3D: ANY
+        axisAngleRotation3D: AxisAngleRotation3D
  ;
 syntax AxisAngleRotation3D
         = 
-        ANY angle ANY axis
+        Integer angle String axis
  ;

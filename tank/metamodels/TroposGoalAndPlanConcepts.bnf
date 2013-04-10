@@ -1,21 +1,27 @@
 Actor:
-        decomposition::ANY+ contribution::ANY+ meansEnd::ANY+
+        decomposition::Decomposition+ contribution::Contribution+ meansEnd::MeansEnd+
 Decomposition:
-        PointOfView::ANY
+        BooleanDecomposition
+Decomposition:
+        PointOfView::Actor
 Contribution:
-        metric::ANY contributer::ANY contributed::ANY PointOfView::ANY
+        metric::String contributer::Goal contributed::Goal PointOfView::Actor
 Goal:
-        contributionR::ANY+ contributionD::ANY+ meansEndS::ANY+ meansEndD::ANY+ booleanDecomposition::ANY booleanDecLink::ANY+
+        contributionR::Contribution+ contributionD::Contribution+ meansEndS::MeansEnd+ meansEndD::MeansEnd+ booleanDecomposition::BooleanDecomposition booleanDecLink::BooleanDecLink+
 MeansEnd:
-        meansR::ANY means::ANY end::ANY PointOfView::ANY meansP::ANY
+        meansR::Resource means::Goal end::Goal PointOfView::Actor meansP::Plan
 Resource:
-        meansEndR::ANY+
+        meansEndR::MeansEnd+
 Plan:
-        meansEndP::ANY+ booleanDecompositionP::ANY booleanDecLinkP::ANY+
+        meansEndP::MeansEnd+ booleanDecompositionP::BooleanDecomposition booleanDecLinkP::BooleanDecLink+
 BooleanDecomposition:
-        type::ANY root::ANY rootP::ANY booleanDecLinkD::ANY+
+        type::String root::Goal rootP::Plan booleanDecLinkD::BooleanDecLink+
 BooleanDecLink:
-        booleanDecompositionB::ANY target::ANY targetP::ANY
+        AndDecLink
+BooleanDecLink:
+        OrDecLink
+BooleanDecLink:
+        booleanDecompositionB::BooleanDecomposition target::Goal targetP::Plan
 AndDecLink:
         EPSILON
 OrDecLink:

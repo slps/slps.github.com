@@ -2,60 +2,66 @@ module Main
 
 exports
   sorts
-        BibtexFile Author Entry AuthoredEntry BookTitledEntry InstitutionEntry EditoredEntry DatedEntry JournalEntry TitledEntry NotedEntry PublisheredEntry SchoolEntry Article Book Booklet InBook InCollection Manual TechReport ThesisEntry PhdThesis MastersThesis Proceedings InProceedings Conference Unpublished Misc 
+        BibtexFile Author Entry Article Book Booklet InBook InCollection Manual TechReport ThesisEntry PhdThesis MastersThesis Proceedings InProceedings Conference Unpublished Misc 
   context-free syntax
-        entries::ANY+ -> BibtexFile
+        entries::Entry+ -> BibtexFile
 
-        name::ANY -> Author
+        name::String -> Author
 
-         -> Entry
+        AuthoredEntry -> Entry
 
-         -> AuthoredEntry
+        BookTitledEntry -> Entry
 
-         -> BookTitledEntry
+        InstitutionEntry -> Entry
 
-         -> InstitutionEntry
+        EditoredEntry -> Entry
 
-         -> EditoredEntry
+        DatedEntry -> Entry
 
-         -> DatedEntry
+        JournalEntry -> Entry
 
-         -> JournalEntry
+        TitledEntry -> Entry
 
-         -> TitledEntry
+        NotedEntry -> Entry
 
-         -> NotedEntry
+        PublisheredEntry -> Entry
 
-         -> PublisheredEntry
+        SchoolEntry -> Entry
 
-         -> SchoolEntry
+        Misc -> Entry
 
-        volume::ANY number::ANY pages::ANY note::ANY -> Article
+        volume::String number::String pages::String note::String -> Article
 
-        volume::ANY number::ANY series::ANY address::ANY edition::ANY note::ANY -> Book
+        InBook -> Book
 
-        authors::ANY+ howpublished::ANY address::ANY note::ANY -> Booklet
+        volume::String number::String series::String address::String edition::String note::String -> Book
 
-        chapter::ANY type::ANY -> InBook
+        authors::Author+ howpublished::String address::String note::String -> Booklet
 
-        chapter::ANY type::ANY -> InCollection
+        chapter::String type::String -> InBook
 
-        organization::ANY address::ANY edition::ANY note::ANY -> Manual
+        chapter::String type::String -> InCollection
 
-        type::ANY number::ANY address::ANY note::ANY -> TechReport
+        organization::String address::String edition::String note::String -> Manual
 
-         -> ThesisEntry
+        type::String number::String address::String note::String -> TechReport
 
-        type::ANY address::ANY note::ANY -> PhdThesis
+        PhdThesis -> ThesisEntry
 
-        type::ANY address::ANY note::ANY -> MastersThesis
+        MastersThesis -> ThesisEntry
 
-        editor::ANY volume::ANY number::ANY series::ANY address::ANY organization::ANY publisher::ANY note::ANY -> Proceedings
+        type::String address::String note::String -> PhdThesis
 
-        pages::ANY -> InProceedings
+        type::String address::String note::String -> MastersThesis
+
+        editor::String volume::String number::String series::String address::String organization::String publisher::String note::String -> Proceedings
+
+        Conference -> InProceedings
+
+        pages::String -> InProceedings
 
          -> Conference
 
          -> Unpublished
 
-        authors::ANY+ title::ANY howpublished::ANY month::ANY year::ANY note::ANY -> Misc
+        authors::Author+ title::String howpublished::String month::String year::String note::String -> Misc

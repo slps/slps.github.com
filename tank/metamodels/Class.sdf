@@ -4,12 +4,16 @@ exports
   sorts
         NamedElt Classifier DataType Class Attribute 
   context-free syntax
-         -> NamedElt
+        Classifier -> NamedElt
 
-         -> Classifier
+        Attribute -> NamedElt
+
+        DataType -> Classifier
+
+        Class -> Classifier
 
          -> DataType
 
-        super::ANY+ attr::ANY+ isAbstract::ANY -> Class
+        super::Class+ attr::Attribute+ isAbstract::Boolean -> Class
 
-        multiValued::ANY type::ANY owner::ANY -> Attribute
+        multiValued::Boolean type::Classifier owner::Class -> Attribute

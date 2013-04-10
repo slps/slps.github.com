@@ -2,160 +2,166 @@
 module µOCCAM
 
 syntax Process
-        = 
-        ()
+        = StopProcess
+        | SkipProcess
+        | Action
+        | Construction
+        | Instance
+        | Specification
  ;
 syntax StopProcess
         = 
-        
+        ()
  ;
 syntax SkipProcess
         = 
-        
- ;
-syntax Action
-        = 
         ()
  ;
+syntax Action
+        = Assignment
+        | Input
+        | Output
+ ;
 syntax Construction
-        = 
-        
+        = Sequence
+        | Conditional
+        | Loop
+        | Parallel
+        | Alternation
  ;
 syntax Instance
         = 
-        name: ANY
+        name: String
  ;
 syntax Assignment
         = 
-        ANY variable ANY expression
+        Variable variable Expression expression
  ;
 syntax Input
         = 
-        ANY channel ANY variable
+        Channel channel Variable variable
  ;
 syntax Output
         = 
-        ANY channel ANY expression
+        Channel channel Expression expression
  ;
 syntax Sequence
-        = 
-        ()
+        = NormalSequence
+        | ReplicatorSequence
  ;
 syntax NormalSequence
         = 
-        ANY process
+        process: Process
  ;
 syntax ReplicatorSequence
         = 
-        replicator: ANY
+        replicator: Replicator
  ;
 syntax Conditional
-        = 
-        ()
+        = NormalConditional
+        | ReplicatorConditional
  ;
 syntax NormalConditional
         = 
-        ANY choice
+        choice: Choice
  ;
 syntax ReplicatorConditional
         = 
-        replicator: ANY
+        replicator: Replicator
  ;
 syntax Loop
         = 
-        ANY boolean ANY process
+        BooleanRef boolean Process process
  ;
 syntax Parallel
-        = 
-        ()
+        = NormalParallel
+        | ReplicatorParallel
+        | NormalAlternation
+        | ReplicatorAlternation
  ;
 syntax NormalParallel
         = 
-        ANY process
+        process: Process
  ;
 syntax ReplicatorParallel
         = 
-        replicator: ANY
+        replicator: Replicator
  ;
 syntax Alternation
         = 
-        alternative: ANY
+        alternative: Alternative
  ;
 syntax NormalAlternation
         = 
-        ANY process
+        process: Process
  ;
 syntax ReplicatorAlternation
         = 
-        replicator: ANY
+        replicator: Replicator
  ;
 syntax Choice
         = 
-        ANY boolean ANY process
+        BooleanRef boolean Process process
  ;
 syntax BooleanRef
         = 
-        expression: ANY
+        expression: Expression
  ;
 syntax Alternative
         = 
-        ANY guard ANY process
+        Guard guard Process process
  ;
 syntax Guard
-        = 
-        ()
+        = InputGuard
+        | BooleanGuard
  ;
 syntax InputGuard
         = 
-        ANY input
+        input: Input
  ;
 syntax BooleanGuard
         = 
-        boolean: ANY
+        boolean: BooleanRef
  ;
 syntax Replicator
         = 
-        ANY name ANY base ANY count
+        String name Base base Count count
  ;
 syntax Base
         = 
-        expression: ANY
+        expression: Expression
  ;
 syntax Count
         = 
-        expression: ANY
+        expression: Expression
  ;
 syntax Type
         = 
-        ANY primitiveType ANY expression
+        PrimitiveType primitiveType Expression expression
  ;
 syntax PrimitiveType
         = 
-        ANY isInt ANY isChan
+        Boolean isInt Boolean isChan
  ;
 syntax Literal
-        = 
-        integer: ANY
+        = LiteralOperand
+        | integer: Integer
  ;
 syntax Element
         = 
-        ANY name ANY subscript
+        String name Subscript subscript
  ;
 syntax Subscript
         = 
-        expression: ANY
+        expression: Expression
  ;
 syntax Variable
-        = 
-        element: ANY
+        = VariableOPerand
+        | element: Element
  ;
 syntax Channel
         = 
-        element: ANY
- ;
-syntax Operand
-        = 
-        ()
+        element: Element
  ;
 syntax VariableOPerand
         = 
@@ -167,65 +173,68 @@ syntax LiteralOperand
  ;
 syntax ExpressionOperand
         = 
-        ANY operand
+        operand: Operand
  ;
 syntax Expression
-        = 
-        ()
+        = ExpressionOperand
+        | MonadicExpression
+        | DyadicExpression
+        | SimpleExpression
  ;
 syntax MonadicExpression
         = 
-        monadicOperator: ANY
+        monadicOperator: MonadicOperator
  ;
 syntax DyadicExpression
         = 
-        ANY operandRight ANY dyadicOperator
+        Operand operandRight DyadicOperator dyadicOperator
  ;
 syntax SimpleExpression
         = 
-        ANY operand
+        operand: Operand
  ;
 syntax Specification
-        = 
-        ()
+        = Declaration
+        | Definition
  ;
 syntax Declaration
-        = 
-        ()
+        = TypeDeclaration
+        | IntDeclaration
+        | ValDeclaration
  ;
 syntax TypeDeclaration
         = 
-        type: ANY
+        type: Type
  ;
 syntax IntDeclaration
         = 
-        ANY name ANY expression
+        String name Expression expression
  ;
 syntax ValDeclaration
         = 
-        ANY name ANY expression
+        String name Expression expression
  ;
 syntax Definition
         = 
-        ANY name ANY procedureBody
+        String name ProcedureBody procedureBody
  ;
 syntax Formal
         = 
-        ANY name ANY primitiveType
+        String name PrimitiveType primitiveType
  ;
 syntax ProcedureBody
         = 
-        ANY name ANY process
+        String name Process process
  ;
 syntax Actual
         = 
-        element: ANY
+        element: Element
  ;
 syntax MonadicOperator
         = 
-        ANY minus ANY not
+        Boolean minus Boolean not
  ;
 syntax DyadicOperator
         = 
-        ANY plus ANY minus ANY star ANY slash ANY or ANY inverseSlash ANY and ANY eq ANY ne ANY lt ANY gt ANY le ANY ge
+        Boolean plus Boolean minus Boolean star Boolean slash Boolean or Boolean inverseSlash Boolean and Boolean eq Boolean ne Boolean lt Boolean gt Boolean le Boolean ge
  ;

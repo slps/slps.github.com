@@ -4,22 +4,32 @@ exports
   sorts
         RootFolder CompoundComponent PrimitiveComponent BaseComponent InputPort LocalPort OutputPort PortBase Signal AssociationPortBase-PortBase 
   context-free syntax
-        compoundComponent::ANY+ -> RootFolder
+        compoundComponent::CompoundComponent+ -> RootFolder
 
-        rootFolder::ANY baseComponent::ANY+ localPort::ANY+ -> CompoundComponent
+        rootFolder::RootFolder baseComponent::BaseComponent+ localPort::LocalPort+ -> CompoundComponent
 
          -> PrimitiveComponent
 
-        name::ANY position::ANY signal::ANY+ outputPort::ANY+ inputPort::ANY+ compoundComponent::ANY -> BaseComponent
+        CompoundComponent -> BaseComponent
 
-        baseComponent::ANY -> InputPort
+        PrimitiveComponent -> BaseComponent
 
-        compoundComponent::ANY -> LocalPort
+        name::String position::String signal::Signal+ outputPort::OutputPort+ inputPort::InputPort+ compoundComponent::CompoundComponent -> BaseComponent
 
-        baseComponent::ANY -> OutputPort
+        baseComponent::BaseComponent -> InputPort
 
-        name::ANY position::ANY associationPortBase_PortBasesrc::ANY associationPortBase_PortBasedst::ANY -> PortBase
+        compoundComponent::CompoundComponent -> LocalPort
 
-        name::ANY position::ANY baseComponent::ANY associationPortBase_PortBase::ANY -> Signal
+        baseComponent::BaseComponent -> OutputPort
 
-        srcPortBase::ANY+ dstPortBase::ANY+ signal::ANY -> AssociationPortBase-PortBase
+        InputPort -> PortBase
+
+        LocalPort -> PortBase
+
+        OutputPort -> PortBase
+
+        name::String position::String associationPortBase_PortBasesrc::AssociationPortBase-PortBase associationPortBase_PortBasedst::AssociationPortBase-PortBase -> PortBase
+
+        name::String position::String baseComponent::BaseComponent associationPortBase_PortBase::AssociationPortBase-PortBase -> Signal
+
+        srcPortBase::PortBase+ dstPortBase::PortBase+ signal::Signal -> AssociationPortBase-PortBase

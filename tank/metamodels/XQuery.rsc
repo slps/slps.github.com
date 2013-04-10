@@ -3,73 +3,78 @@ module XQuery
 
 syntax XQueryProgram
         = 
-        ANY expressions+
+        ExecutableExpression expressions+
  ;
 syntax Expression
-        = 
-        ANY parentNode ANY returnEx
+        = ExecutableExpression
+        | Node
+        | ReturnXPath
+        | ElementNode parentNode Return returnEx
  ;
 syntax ExecutableExpression
-        = 
-        ANY xQueryProgram ANY functionDeclaration
+        = FLWOR
+        | FunctionCall
+        | FunctionDeclaration
+        | XQueryProgram xQueryProgram FunctionDeclaration functionDeclaration
  ;
 syntax Node
-        = 
-        name: ANY
+        = ElementNode
+        | AttributeNode
+        | name: String
  ;
 syntax FLWOR
         = 
-        ANY for ANY let ANY where ANY orderBy ANY return
+        For for Let let Where where OrderBy orderBy Return return
  ;
 syntax FunctionCall
         = 
-        ANY name ANY parameters+
+        String name XPath parameters+
  ;
 syntax FunctionDeclaration
         = 
-        ANY name ANY expression+
+        String name ExecutableExpression expression+
  ;
 syntax ElementNode
-        = 
-        ANY nodes+
+        = TextNode
+        | Expression nodes+
  ;
 syntax AttributeNode
         = 
-        value: ANY
+        value: String
  ;
 syntax TextNode
         = 
         ()
  ;
 syntax ReturnXPath
-        = 
-        value: ANY
+        = XPath
+        | value: String
  ;
 syntax XPath
-        = 
-        ANY functionCall ANY for ANY let
+        = BooleanExp
+        | FunctionCall functionCall For for Let let
  ;
 syntax BooleanExp
         = 
-        where: ANY
+        where: Where
  ;
 syntax For
         = 
-        ANY var ANY flwor ANY expression
+        String var FLWOR flwor XPath expression
  ;
 syntax Let
         = 
-        ANY var ANY flwor ANY expression
+        String var FLWOR flwor XPath expression
  ;
 syntax Where
         = 
-        ANY flwor ANY expression
+        FLWOR flwor BooleanExp expression
  ;
 syntax OrderBy
         = 
-        flwor: ANY
+        flwor: FLWOR
  ;
 syntax Return
         = 
-        ANY flwor ANY expressions+
+        FLWOR flwor Expression expressions+
  ;

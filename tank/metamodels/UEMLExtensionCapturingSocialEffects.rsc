@@ -2,40 +2,51 @@
 module UEMLExtensionCapturingSocialEffects
 
 syntax UEMLObject
-        = 
-        ANY has ANY model
+        = UEMLModel
+        | Port
+        | Flow
+        | Activity
+        | Object
+        | Geometry has UEMLModel model
  ;
 syntax UEMLModel
         = 
-        ANY contains+
+        UEMLObject contains+
  ;
 syntax Geometry
         = 
-        object: ANY
+        object: UEMLObject
  ;
 syntax Port
-        = 
-        ()
+        = ResourceRole
+        | Anchor
  ;
 syntax Flow
-        = 
-        associationConnector: ANY
+        = ResourceFlow
+        | IOFlow
+        | ControlFlow
+        | associationConnector: AssociationConnector
  ;
 syntax Activity
-        = 
-        ANY resourceRole+ ANY parent ANY hasOutput
+        = Process
+        | Task
+        | ResourceRole resourceRole+ Process parent OutputPort hasOutput
  ;
 syntax Object
-        = 
-        ioFlow: ANY
+        = InformationObject
+        | Resource
+        | ioFlow: IOFlow
  ;
 syntax InformationObject
         = 
-        controlFlow: ANY
+        controlFlow: ControlFlow
  ;
 syntax Resource
-        = 
-        ANY carries ANY plays+
+        = MaterialResource
+        | HumanResource
+        | Service
+        | Agent
+        | ResourceFlow carries ResourceRole plays+
  ;
 syntax MaterialResource
         = 
@@ -47,15 +58,16 @@ syntax HumanResource
  ;
 syntax ResourceFlow
         = 
-        ANY resourceCarries+
+        Resource resourceCarries+
  ;
 syntax IOFlow
         = 
-        ANY carries+
+        Object carries+
  ;
 syntax ControlFlow
-        = 
-        ANY carries+
+        = TriggerFlow
+        | ConstraintFlow
+        | InformationObject carries+
  ;
 syntax TriggerFlow
         = 
@@ -67,19 +79,21 @@ syntax ConstraintFlow
  ;
 syntax ResourceRole
         = 
-        ANY resourcePlays+ ANY roleQualifier ANY in
+        Resource resourcePlays+ RoleType roleQualifier Activity in
  ;
 syntax RoleType
         = 
         ()
  ;
 syntax Anchor
-        = 
-        ANY target ANY origin
+        = OutputPort
+        | InputPort
+        | ConnectionOperator
+        | AssociationConnector target AssociationConnector origin
  ;
 syntax OutputPort
         = 
-        activity: ANY
+        activity: Activity
  ;
 syntax InputPort
         = 
@@ -91,29 +105,29 @@ syntax ConnectionOperator
  ;
 syntax AssociationConnector
         = 
-        ANY origin+ ANY target+ ANY classAssociation
+        Anchor origin+ Anchor target+ Flow classAssociation
  ;
 syntax Process
         = 
-        ANY child ANY fulfills+ ANY realises
+        Activity child Contract fulfills+ Service realises
  ;
 syntax Service
         = 
-        process: ANY
+        process: Process
  ;
 syntax Agent
         = 
-        ANY obliger ANY claimer ANY has_parties
+        Commitment obliger Commitment claimer Contract has_parties
  ;
 syntax Contract
         = 
-        ANY process+ ANY agent ANY collection_of+
+        Process process+ Agent agent Commitment collection_of+
  ;
 syntax Task
         = 
-        ANY fulfills+
+        Commitment fulfills+
  ;
 syntax Commitment
         = 
-        ANY task ANY agentO ANY agentC ANY contract
+        Task task Agent agentO Agent agentC Contract contract
  ;

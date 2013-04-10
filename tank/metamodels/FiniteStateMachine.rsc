@@ -2,26 +2,28 @@
 module FiniteStateMachine
 
 syntax MgaObject
-        = 
-        ANY name ANY position
+        = Transition
+        | State
+        | StateMachine
+        | String name String position
  ;
 syntax Transition
         = 
-        ANY stateMachine ANY associationStateState
+        StateMachine stateMachine AssociationStateState associationStateState
  ;
 syntax State
         = 
-        ANY stateMachine ANY associationStateStatedst+ ANY associationStateStatesrc+
+        StateMachine stateMachine AssociationStateState associationStateStatedst+ AssociationStateState associationStateStatesrc+
  ;
 syntax StateMachine
         = 
-        ANY rootFolder ANY state+ ANY transition+
+        RootFolder rootFolder State state+ Transition transition+
  ;
 syntax RootFolder
         = 
-        ANY name ANY rootFolders+ ANY stateMachine+
+        String name RootFolder rootFolders+ StateMachine stateMachine+
  ;
 syntax AssociationStateState
         = 
-        ANY transition ANY dstTransition+ ANY srcTransition+
+        Transition transition State dstTransition+ State srcTransition+
  ;

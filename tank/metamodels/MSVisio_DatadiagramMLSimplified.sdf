@@ -2,84 +2,90 @@ module Main
 
 exports
   sorts
-        CellType VisioDocument PageSheet NamedElt IdentifiedElt UniqueIdElt Shape ShapeElt IXElt DelElt Geom XYElt LineTo MoveTo XYAElt ArcTo SplineKnot PolylineTo XYABElt InfiniteLine XYABCDElt Ellipse EllipticalArcTo SplineStart XYABCDEElt NURBSTo Text TextElt StringElt MastersCollection MasterShortCut Icon Master ShapesCollection ConnectsCollection Connect MasterElt PagesCollection Page PageElt 
+        CellType VisioDocument PageSheet Shape ShapeElt Geom XYElt LineTo MoveTo XYAElt ArcTo SplineKnot PolylineTo XYABElt InfiniteLine XYABCDElt Ellipse EllipticalArcTo SplineStart XYABCDEElt NURBSTo Text TextElt StringElt MastersCollection MasterShortCut Icon Master ShapesCollection ConnectsCollection Connect MasterElt PagesCollection Page 
   context-free syntax
-        unit::ANY formula::ANY err::ANY value::ANY -> CellType
+        unit::String formula::String err::String value::String -> CellType
 
-        docMasters::ANY docPages::ANY -> VisioDocument
+        docMasters::MastersCollection docPages::PagesCollection -> VisioDocument
 
          -> PageSheet
 
-         -> NamedElt
+        ss_shapes::ShapesCollection lineStyle::Integer fillStyle::Integer textStyle::Integer shapeElts::ShapeElt+ -> Shape
 
-         -> IdentifiedElt
+        Text -> ShapeElt
 
-         -> UniqueIdElt
+        noFill::CellType noLine::CellType noShow::CellType noSnap::CellType linesTo::LineTo+ movesTo::MoveTo+ arcsTo::ArcTo+ splineKnots::SplineKnot+ polylinesTo::PolylineTo+ infiniteLines::InfiniteLine+ ellipses::Ellipse+ ellipticalArcsTo::EllipticalArcTo+ splineStarts::SplineStart+ nurbsTo::NURBSTo+ -> Geom
 
-        ss_shapes::ANY lineStyle::ANY fillStyle::ANY textStyle::ANY shapeElts::ANY+ -> Shape
+        LineTo -> XYElt
 
-         -> ShapeElt
+        MoveTo -> XYElt
 
-         -> IXElt
+        XYAElt -> XYElt
 
-         -> DelElt
+        lt_geom::Geom -> LineTo
 
-        noFill::ANY noLine::ANY noShow::ANY noSnap::ANY linesTo::ANY+ movesTo::ANY+ arcsTo::ANY+ splineKnots::ANY+ polylinesTo::ANY+ infiniteLines::ANY+ ellipses::ANY+ ellipticalArcsTo::ANY+ splineStarts::ANY+ nurbsTo::ANY+ -> Geom
+        mt_geom::Geom -> MoveTo
 
-         -> XYElt
+        ArcTo -> XYAElt
 
-        lt_geom::ANY -> LineTo
+        SplineKnot -> XYAElt
 
-        mt_geom::ANY -> MoveTo
+        PolylineTo -> XYAElt
 
-         -> XYAElt
+        XYABElt -> XYAElt
 
-        ac_geom::ANY -> ArcTo
+        ac_geom::Geom -> ArcTo
 
-        sk_geom::ANY -> SplineKnot
+        sk_geom::Geom -> SplineKnot
 
-        pt_geom::ANY -> PolylineTo
+        pt_geom::Geom -> PolylineTo
 
-         -> XYABElt
+        InfiniteLine -> XYABElt
 
-        il_geom::ANY -> InfiniteLine
+        XYABCDElt -> XYABElt
 
-         -> XYABCDElt
+        il_geom::Geom -> InfiniteLine
 
-        e_geom::ANY -> Ellipse
+        Ellipse -> XYABCDElt
 
-        eat_geom::ANY -> EllipticalArcTo
+        EllipticalArcTo -> XYABCDElt
 
-        ss_geom::ANY -> SplineStart
+        SplineStart -> XYABCDElt
 
-         -> XYABCDEElt
+        XYABCDEElt -> XYABCDElt
 
-        nt_geom::ANY -> NURBSTo
+        e_geom::Geom -> Ellipse
 
-        textElts::ANY+ -> Text
+        eat_geom::Geom -> EllipticalArcTo
 
-         -> TextElt
+        ss_geom::Geom -> SplineStart
 
-        value::ANY -> StringElt
+        NURBSTo -> XYABCDEElt
 
-        ms_visioDocument::ANY masters::ANY+ masterShortCuts::ANY+ -> MastersCollection
+        nt_geom::Geom -> NURBSTo
 
-        m_masterShortCuts::ANY iconSize::ANY patternFlags::ANY prompt::ANY shortcutURL::ANY shortcutHelp::ANY alignName::ANY icons::ANY+ -> MasterShortCut
+        textElts::TextElt+ -> Text
 
-        i_masterShortCut::ANY value::ANY -> Icon
+        StringElt -> TextElt
 
-        m_masters::ANY baseID::ANY matchByName::ANY iconSize::ANY patternFlags::ANY prompt::ANY hidden::ANY iconUpdate::ANY alignName::ANY masterElts::ANY+ -> Master
+        value::String -> StringElt
 
-        shapes::ANY+ -> ShapesCollection
+        ms_visioDocument::VisioDocument masters::Master+ masterShortCuts::MasterShortCut+ -> MastersCollection
 
-        connections::ANY+ -> ConnectsCollection
+        m_masterShortCuts::MastersCollection iconSize::Integer patternFlags::Integer prompt::String shortcutURL::String shortcutHelp::String alignName::Integer icons::Icon+ -> MasterShortCut
 
-        c_connects::ANY fromSheet::ANY toSheet::ANY fromCell::ANY toCell::ANY fromPart::ANY toPart::ANY -> Connect
+        i_masterShortCut::MasterShortCut value::String -> Icon
 
-         -> MasterElt
+        m_masters::MastersCollection baseID::String matchByName::Boolean iconSize::Integer patternFlags::Integer prompt::String hidden::Boolean iconUpdate::Boolean alignName::Integer masterElts::MasterElt+ -> Master
 
-        ps_visioDocument::ANY pages::ANY+ -> PagesCollection
+        shapes::Shape+ -> ShapesCollection
 
-        p_pages::ANY background::ANY backPage::ANY viewScale::ANY viewCenterX::ANY ViewCenterY::ANY reviewerID::ANY associatedPage::ANY pageElts::ANY+ -> Page
+        connections::Connect+ -> ConnectsCollection
 
-         -> PageElt
+        c_connects::ConnectsCollection fromSheet::Integer toSheet::Integer fromCell::String toCell::String fromPart::Integer toPart::Integer -> Connect
+
+        Icon -> MasterElt
+
+        ps_visioDocument::VisioDocument pages::Page+ -> PagesCollection
+
+        p_pages::PagesCollection background::Boolean backPage::Integer viewScale::Double viewCenterX::Double ViewCenterY::Double reviewerID::Integer associatedPage::Integer pageElts::PageElt+ -> Page

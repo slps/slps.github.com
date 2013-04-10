@@ -4,30 +4,42 @@ exports
   sorts
         METAHFile METAHEntry Package PackageImplementation Data Attribute ProcessDeclaration ProcessImplementation ProcessAttribute Process Port Connection MacroDeclaration MacroImplementation 
   context-free syntax
-        entries::ANY+ -> METAHFile
+        entries::METAHEntry+ -> METAHFile
 
-         -> METAHEntry
+        Package -> METAHEntry
 
-        packName::ANY data::ANY+ -> Package
+        PackageImplementation -> METAHEntry
 
-        implementationName::ANY implements::ANY attributes::ANY+ -> PackageImplementation
+        ProcessDeclaration -> METAHEntry
 
-        dataName::ANY -> Data
+        ProcessImplementation -> METAHEntry
 
-        attName::ANY attValue::ANY attValueType::ANY attType::ANY -> Attribute
+        Connection -> METAHEntry
 
-        procDecName::ANY ports::ANY+ -> ProcessDeclaration
+        MacroDeclaration -> METAHEntry
 
-        procImpName::ANY declaration::ANY processAttributes::ANY+ -> ProcessImplementation
+        MacroImplementation -> METAHEntry
 
-        attName::ANY attValue::ANY attValueType::ANY -> ProcessAttribute
+        packName::String data::Data+ -> Package
 
-        procName::ANY periodic::ANY declaration::ANY implementation::ANY -> Process
+        implementationName::String implements::String attributes::Attribute+ -> PackageImplementation
 
-        portName::ANY portCom::ANY portPackage::ANY portType::ANY -> Port
+        dataName::String -> Data
 
-        compSrc::ANY portSrc::ANY compDest::ANY portDest::ANY -> Connection
+        attName::String attValue::Integer attValueType::String attType::String -> Attribute
 
-        name::ANY ports::ANY+ -> MacroDeclaration
+        procDecName::String ports::Port+ -> ProcessDeclaration
 
-        macroImpName::ANY declaration::ANY process::ANY+ connections::ANY+ -> MacroImplementation
+        procImpName::String declaration::String processAttributes::ProcessAttribute+ -> ProcessImplementation
+
+        attName::String attValue::Integer attValueType::String -> ProcessAttribute
+
+        procName::String periodic::String declaration::String implementation::String -> Process
+
+        portName::String portCom::String portPackage::String portType::String -> Port
+
+        compSrc::String portSrc::String compDest::String portDest::String -> Connection
+
+        name::String ports::Port+ -> MacroDeclaration
+
+        macroImpName::String declaration::String process::Process+ connections::Connection+ -> MacroImplementation

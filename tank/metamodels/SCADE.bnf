@@ -1,103 +1,173 @@
 ListString:
-        value::ANY
+        value::String
 ListInteger:
-        value::ANY
+        value::Integer
 Model:
-        library::ANY pathname::ANY descriptor::ANY project::ANY fileRef::ANY storageUnitM::ANY+ enumsBlock::ANY importedOperator::ANY+ client::ANY+ libraries::ANY+ allLibry::ANY+ typeM::ANY+ model::ANY coverageFileM::ANY criterionFileM::ANY root::ANY all::ANY+ application::ANY reference::ANY+ tmpNode::ANY+ constBlockK::ANY node::ANY varBlockK::ANY typeBlock::ANY refinement::ANY implementation::ANY constant::ANY allConstant::ANY allvariable::ANY variable::ANY allConstVar::ANY constVar::ANY constBlock::ANY varBlock::ANY allNamedType::ANY namedType::ANY
+        library::Boolean pathname::String descriptor::Descriptor project::Project fileRef::FileRef storageUnitM::StorageUnit+ enumsBlock::ConstBlock importedOperator::Operator+ client::Model+ libraries::Model+ allLibry::Model+ typeM::Type+ model::Model coverageFileM::CoverageFile criterionFileM::CriterionFile root::Instance all::Operator+ application::MtcApplication reference::Reference+ tmpNode::Node+ constBlockK::ConstBlock node::Node varBlockK::VarBlock typeBlock::TypeBlock refinement::NamedType implementation::Implementation constant::Constant allConstant::Constant allvariable::GlobalVariable variable::GlobalVariable allConstVar::ConstVar constVar::ConstVar constBlock::ConstBlock varBlock::VarBlock allNamedType::NamedType namedType::NamedType
 Implementation:
-        key::ANY namedTypeI::ANY+
+        key::Model namedTypeI::NamedType+
 ConstBlock:
-        modelC::ANY keyC::ANY key::ANY constant::ANY
+        modelC::Model keyC::Model key::Model constant::Constant
 VarBlock:
-        variable::ANY keyVB::ANY key::ANY
+        variable::GlobalVariable keyVB::Model key::Model
 GlobalVariable:
-        key::ANY
+        key::VarBlock
 TypeBlock:
-        type::ANY key::ANY
+        type::NamedType key::Model
 Session:
-        descriptor::ANY model::ANY loadsModel::ANY+ DefinedIn::ANY loader::ANY
+        descriptor::Descriptor model::Model loadsModel::Model+ DefinedIn::String loader::Loader
 Descriptor:
-        modelFileName::ANY sernFileName::ANY sernPersistAs::ANY rnetFileName::ANY rnetPersistAs::ANY occBase::ANY size::ANY nameVerify::ANY checked::ANY libraryModels::ANY+ annTypeFiles::ANY+ modelD::ANY
+        modelFileName::String sernFileName::String sernPersistAs::String rnetFileName::String rnetPersistAs::String occBase::Integer size::Integer nameVerify::Boolean checked::Boolean libraryModels::ListString+ annTypeFiles::ListString+ modelD::Model
 StorageUnit:
-        saoFileName::ANY annFileName::ANY persistAs::ANY loaded::ANY saoModified::ANY annModified::ANY fileRef::ANY modelS::ANY element::ANY+
+        saoFileName::String annFileName::String persistAs::String loaded::Boolean saoModified::Boolean annModified::Boolean fileRef::FileRef modelS::Model element::StorageElement+
 StorageElement:
-        EPSILON
+        Block
 Object:
-        EPSILON
+        Implementation
+Object:
+        Descriptor
+Object:
+        StorageUnit
+Object:
+        Expression
+Object:
+        Label
+Object:
+        CompositeElement
+Object:
+        Annotable
+Object:
+        Edge
+Object:
+        StateMachine
 Block:
-        EPSILON
+        NodeBlock
+Block:
+        ModelBlock
 NodeBlock:
-        node::ANY
+        ParamBlock
+NodeBlock:
+        EqBlock
+NodeBlock:
+        node::Node
 ModelBlock:
-        EPSILON
+        ConstBlock
+ModelBlock:
+        VarBlock
+ModelBlock:
+        TypeBlock
 Expression:
-        EPSILON
+        ExprNull
+Expression:
+        ConstValue
+Expression:
+        ExprContact
+Expression:
+        ExprCall
+Expression:
+        ExprId
 Label:
-        expression::ANY
+        expression::Expression
 ExprNull:
-        label::ANY exprContactE::ANY exprCallE::ANY dependance::ANY subExprId::ANY+ paramArray::ANY constant::ANY equationE::ANY assertionE::ANY
+        label::Label exprContactE::ExprContact exprCallE::ExprCall dependance::ConstVar subExprId::ExprId+ paramArray::ParamArray constant::Constant equationE::Equation assertionE::Assertion
 ConstValue:
-        value::ANY kind::ANY
+        value::String kind::Object
 ExprContact:
-        boolAct::ANY initValue::ANY+ calledOpr::ANY
+        boolAct::ExprId initValue::Expression+ calledOpr::ExprCall
 ExprCall:
-        numOcc::ANY predefOpr::ANY parameter::ANY+ exprContactEC::ANY operator::ANY
+        numOcc::Integer predefOpr::Integer parameter::Expression+ exprContactEC::ExprContact operator::Operator
 Operator:
-        category::ANY conversion::ANY state::ANY index::ANY variable::ANY input::ANY+ output::ANY+ hidden::ANY+ client::ANY+ modelO::ANY modelOp::ANY criterionO::ANY intanceO::ANY+ operator::ANY
+        Node
+Operator:
+        category::String conversion::Boolean state::Boolean index::Integer variable::LocalVariable input::LocalVariable+ output::LocalVariable+ hidden::LocalVariable+ client::EqBlock+ modelO::Model modelOp::Model criterionO::Criterion intanceO::Instance+ operator::Operator
 ExprId:
-        exprContactEI::ANY reference::ANY
+        exprContactEI::ExprContact reference::ConstVar
 LocalVariable:
-        optional::ANY const::ANY probe::ANY pure::ANY initValue::ANY operatorI::ANY operatorO::ANY operatorH::ANY nodeL::ANY nodeI::ANY
+        optional::Boolean const::Boolean probe::Boolean pure::Boolean initValue::String operatorI::Operator operatorO::Operator operatorH::Operator nodeL::Node nodeI::Node
 Node:
-        nodeKind::ANY eqBlock::ANY paramBlock::ANY local::ANY+ internal::ANY+ key::ANY stateMachine::ANY modelN::ANY
+        nodeKind::Object eqBlock::EqBlock paramBlock::ParamBlock local::LocalVariable+ internal::LocalVariable+ key::Model stateMachine::StateMachine modelN::Model
 ParamBlock:
-        key::ANY columnsSize::ANY+ array::ANY+
+        key::Node columnsSize::ListInteger+ array::ParamArray+
 ParamArray:
-        notes::ANY+ paramBlock::ANY operator::ANY value::ANY+
+        notes::ListString+ paramBlock::ParamBlock operator::Operator value::Expression+
 ConstVar:
-        kind::ANY type::ANY client::ANY+
+        Constant
+ConstVar:
+        Variable
+ConstVar:
+        kind::Object type::Type client::EqBlock+
 Constant:
-        imported::ANY value::ANY enumeration::ANY key::ANY
+        imported::Boolean value::Expression enumeration::Enumeration key::ConstBlock
 Variable:
-        clock::ANY definition::ANY+
+        GlobalVariable
+Variable:
+        LocalVariable
+Variable:
+        clock::Variable definition::Equation+
 Type:
-        EPSILON
+        Table
+Type:
+        NamedType
+Type:
+        Enumeration
+Type:
+        Composite
 Table:
-        size::ANY typeT::ANY
+        size::Integer typeT::Type
 NamedType:
-        kind::ANY refinement::ANY+ refined::ANY+ to::ANY from::ANY implementation::ANY definition::ANY keyM::ANY key::ANY
+        kind::Object refinement::NamedType+ refined::NamedType+ to::Operator from::Operator implementation::Implementation definition::Type keyM::Model key::TypeBlock
 Enumeration:
-        value::ANY+
+        value::Constant+
 Composite:
-        EPSILON
+        Structure
+Composite:
+        Tuple
 CompositeElement:
-        typeC::ANY key::ANY
+        typeC::Type key::Composite
 Structure:
-        element::ANY
+        element::CompositeElement
 Tuple:
-        element::ANY
+        element::CompositeElement
 EqBlock:
-        equation::ANY+ assertion::ANY key::ANY calledOperator::ANY+ referencedId::ANY+
+        equation::Equation+ assertion::Assertion key::Node calledOperator::Operator+ referencedId::ConstVar+
 Equation:
-        rotation::ANY symetrical::ANY terminator::ANY eqBlock::ANY left::ANY+ right::ANY outEdge::ANY+ position::ANY size::ANY
+        rotation::Integer symetrical::Boolean terminator::Boolean eqBlock::EqBlock left::Variable+ right::Expression outEdge::Edge+ position::RPoint size::RSize
 Assertion:
-        key::ANY expression::ANY edge::ANY position::ANY
+        key::EqBlock expression::Expression edge::Edge position::RPoint
 Annotable:
-        EPSILON
+        StorageElement
+Annotable:
+        ParamArray
+Annotable:
+        ConstVar
+Annotable:
+        Type
+Annotable:
+        Equation
+Annotable:
+        Assertion
+Annotable:
+        Project
 Prop:
-        name::ANY values::ANY+ entity::ANY configurationP::ANY
+        name::String values::ListString+ entity::Annotable configurationP::Configuration
 Configuration:
-        name::ANY propC::ANY+ projectC::ANY
+        name::String propC::Prop+ projectC::Project
 Project:
-        pathname::ANY configuration::ANY+ fileRef::ANY+ owner::ANY+
+        pathname::String configuration::Configuration+ fileRef::FileRef+ owner::Element+
 Element:
-        EPSILON
+        FileRef
+Element:
+        Folder
 FileRef:
-        pathname::ANY persistAs::ANY DefinedIn::ANY
+        pathname::String persistAs::String DefinedIn::String
 Folder:
-        extensions::ANY element::ANY+
+        extensions::String element::Element+
 Reference:
-        EPSILON
+        TypeReference
+Reference:
+        OperatorReference
+Reference:
+        VariableReference
 TypeReference:
         
 OperatorReference:
@@ -107,55 +177,81 @@ VariableReference:
 Error:
         EPSILON
 Edge:
-        leftVarIndex::ANY labelOrientation::ANY leftVar::ANY rightExpression::ANY srcEquation::ANY assertion::ANY position::ANY+ dstEquation::ANY
+        leftVarIndex::Integer labelOrientation::Integer leftVar::Variable rightExpression::ExprId srcEquation::Equation assertion::Assertion position::RPoint+ dstEquation::Equation
 RPoint:
         EPSILON
 RSize:
         EPSILON
 Entity:
-        EPSILON
+        StateObj
 StateObj:
-        EPSILON
+        GraphicalObject
 GraphicalObject:
-        EPSILON
+        StInputOutput
+GraphicalObject:
+        Transition
+GraphicalObject:
+        State
+GraphicalObject:
+        InitialStPtr
 StInputOutput:
-        EPSILON
+        StInitInput
+StInputOutput:
+        StInput
+StInputOutput:
+        StOutput
 StInitInput:
-        name::ANY type::ANY clock::ANY const::ANY optional::ANY
+        name::String type::String clock::Boolean const::Boolean optional::Boolean
 StInput:
-        name::ANY type::ANY clock::ANY const::ANY optional::ANY
+        name::String type::String clock::Boolean const::Boolean optional::Boolean
 StOutput:
-        name::ANY type::ANY clock::ANY const::ANY optional::ANY
+        name::String type::String clock::Boolean const::Boolean optional::Boolean
 Transition:
-        conditions::ANY transKind::ANY state1::ANY state2::ANY
+        conditions::String transKind::Integer state1::State state2::State
 State:
-        name::ANY cx::ANY cy::ANY transition1::ANY+ transition2::ANY+ stOutput::ANY
+        name::String cx::Double cy::Double transition1::Transition+ transition2::Transition+ stOutput::StOutput
 InitialStPtr:
-        cx::ANY cy::ANY state::ANY
+        cx::Double cy::Double state::State
 StateMachine:
-        initialStPtr::ANY state::ANY+ transition::ANY+
+        initialStPtr::InitialStPtr state::State+ transition::Transition+
 Base:
-        EPSILON
+        StateBase
 StateBase:
-        DefineIn::ANY
+        DefineIn::String
 AnnNote:
-        name::ANY modified::ANY annNoteType::ANY annotable::ANY annAttValue::ANY+
+        name::String modified::Boolean annNoteType::AnnNoteType annotable::Annotable annAttValue::AnnAttValue+
 AnnAttValue:
-        EPSILON
+        AnnAttIntValue
+AnnAttValue:
+        AnnAttBoolValue
+AnnAttValue:
+        AnnAttCharValue
+AnnAttValue:
+        AnnAttRealValue
+AnnAttValue:
+        AnnAttStringValue
 AnnNoteType:
-        name::ANY annAttDefinition::ANY annAttGroup::ANY key::ANY
+        name::String annAttDefinition::AnnAttDefinition annAttGroup::AnnAttGroup key::AnnotSchema
 AnnAttDefinition:
-        name::ANY type::ANY annAttGroup::ANY key::ANY annProperty::ANY
+        name::String type::Integer annAttGroup::AnnAttGroup key::AnnNoteType annProperty::AnnProperty
 AnnAttIntValue:
-        value::ANY
+        value::Integer
 AnnAttBoolValue:
-        value::ANY
+        value::Boolean
 AnnAttCharValue:
-        value::ANY
+        value::Char
 AnnAttRealValue:
-        value::ANY
+        value::Double
 AnnAttStringValue:
-        value::ANY
+        AnnAttFileValue
+AnnAttStringValue:
+        AnnAttDateValue
+AnnAttStringValue:
+        AnnAttOidValue
+AnnAttStringValue:
+        AnnAttEnumValue
+AnnAttStringValue:
+        value::String
 AnnAttFileValue:
         EPSILON
 AnnAttDateValue:
@@ -165,48 +261,74 @@ AnnAttOidValue:
 AnnAttEnumValue:
         EPSILON
 AnnProperty:
-        name::ANY type::ANY key::ANY
+        AnnPropertyInt
+AnnProperty:
+        AnnPropertyBool
+AnnProperty:
+        AnnPropertyChar
+AnnProperty:
+        AnnPropertyReal
+AnnProperty:
+        AnnPropertyString
+AnnProperty:
+        AnnPropertyEnum
+AnnProperty:
+        name::String type::Integer key::AnnAttDefinition
 AnnPropertyInt:
-        value::ANY
+        value::Integer
 AnnPropertyBool:
-        value::ANY
+        value::Boolean
 AnnPropertyChar:
-        value::ANY
+        value::Char
 AnnPropertyReal:
-        value::ANY
+        value::Double
 AnnPropertyString:
-        value::ANY
+        value::String
 AnnPropertyEnum:
-        value::ANY
+        value::Object
 AnnotSchema:
-        pathname::ANY annNoteType::ANY annCategory::ANY
+        pathname::String annNoteType::AnnNoteType annCategory::AnnCategory
 AnnCategory:
-        name::ANY key::ANY anootability::ANY+
+        name::String key::AnnotSchema anootability::Annotability+
 Annotability:
-        minCardinality::ANY maxCardinality::ANY defaultNote::ANY annNoteType::ANY
+        minCardinality::Integer maxCardinality::Integer defaultNote::Boolean annNoteType::AnnNoteType
 AnnAttGroup:
-        name::ANY key::ANY
+        name::String key::AnnNoteType
 File:
-        EPSILON
+        CoverageFile
+File:
+        CriterionFile
 MtcApplication:
-        coverageFileCov::ANY+ criterionFileCri::ANY+ modelM::ANY
+        coverageFileCov::CoverageFile+ criterionFileCri::CriterionFile+ modelM::Model
 CoverageFile:
-        record::ANY modelCov::ANY application::ANY recordCov::ANY
+        record::Record modelCov::Model application::MtcApplication recordCov::Record
 CriterionFile:
-        application::ANY modelCri::ANY criterionC::ANY+
+        application::MtcApplication modelCri::Model criterionC::Criterion+
 MtcEntity:
-        EPSILON
+        Element
+MtcEntity:
+        File
+MtcEntity:
+        HistoryEntry
+MtcEntity:
+        Criterion
+MtcEntity:
+        Instance
+MtcEntity:
+        Result
+MtcEntity:
+        Record
 HistoryEntry:
-        file::ANY
+        file::File
 Criterion:
-        ident::ANY name::ANY description::ANY criterionFileC::ANY operatorC::ANY element::ANY+
+        ident::String name::String description::String criterionFileC::CriterionFile operatorC::Operator element::Element+
 Instance:
-        index::ANY occ::ANY modelI::ANY operatorI::ANY associationClassI::ANY caller::ANY called::ANY+ origin::ANY related::ANY+
+        index::Integer occ::String modelI::Model operatorI::Operator associationClassI::AssociationClass caller::Instance called::Instance+ origin::Instance related::Instance+
 AssociationClass:
-        resultA::ANY recordA::ANY+ instanceA::ANY+
+        resultA::Result recordA::Record+ instanceA::Instance+
 Result:
-        elementCount::ANY associationClassRs::ANY record::ANY
+        elementCount::Integer associationClassRs::AssociationClass record::Record
 Record:
-        creator::ANY name::ANY date::ANY author::ANY description::ANY key::ANY associationClassRc::ANY coverageFileR::ANY result::ANY+
+        creator::String name::String date::String author::String description::String key::CoverageFile associationClassRc::AssociationClass coverageFileR::CoverageFile result::Result+
 Loader:
-        descriptor::ANY session::ANY
+        descriptor::Descriptor session::Session

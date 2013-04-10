@@ -1,22 +1,24 @@
 AddressInfo:
-        EPSILON
+        Office
+AddressInfo:
+        Customer
 Date:
-        year::ANY month::ANY day::ANY
+        year::Integer month::Integer day::Integer
 ClassicModels:
-        offices::ANY+ productLines::ANY+ customers::ANY+
+        offices::Office+ productLines::ProductLine+ customers::Customer+
 ProductLine:
-        productLineOwner::ANY products::ANY+ name::ANY textDescription::ANY htmlDescription::ANY
+        productLineOwner::ClassicModels products::Product+ name::String textDescription::String htmlDescription::String
 Product:
-        productLine::ANY code::ANY name::ANY scale::ANY vendor::ANY description::ANY quantityInStock::ANY buyPrice::ANY MSRP::ANY
+        productLine::ProductLine code::String name::String scale::String vendor::String description::String quantityInStock::Integer buyPrice::Double MSRP::Double
 Office:
-        officeOwner::ANY code::ANY employees::ANY+ territory::ANY
+        officeOwner::ClassicModels code::String employees::Employee+ territory::String
 Employee:
-        office::ANY number::ANY employeeCustomers::ANY+ lastName::ANY firstName::ANY extension::ANY email::ANY reportsTo::ANY jobTitle::ANY
+        office::Office number::Integer employeeCustomers::Customer+ lastName::String firstName::String extension::String email::String reportsTo::Employee jobTitle::String
 Customer:
-        customerOwner::ANY number::ANY orders::ANY+ payments::ANY+ salesRepEmployee::ANY name::ANY contactLastName::ANY contactFirstName::ANY creditLimit::ANY
+        customerOwner::ClassicModels number::Integer orders::Order+ payments::Payment+ salesRepEmployee::Employee name::String contactLastName::String contactFirstName::String creditLimit::Double
 Payment:
-        customer::ANY checkNumber::ANY date::ANY amount::ANY
+        customer::Customer checkNumber::String date::Date amount::Double
 Order:
-        customer::ANY orderDetails::ANY+ number::ANY date::ANY requiredDate::ANY shippedDate::ANY status::ANY comments::ANY
+        customer::Customer orderDetails::OrderDetail+ number::Integer date::Date requiredDate::Date shippedDate::Date status::String comments::String
 OrderDetail:
-        order::ANY product::ANY quantityOrdered::ANY priceEach::ANY
+        order::Order product::Product quantityOrdered::Integer priceEach::Double

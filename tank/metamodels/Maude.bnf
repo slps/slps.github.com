@@ -1,94 +1,142 @@
 MaudeSpec:
-        els::ANY+ printableEls::ANY+
+        els::MaudeTopEl+ printableEls::MaudeTopEl+
 MaudeTopEl:
-        EPSILON
+        Theory
+MaudeTopEl:
+        Module
+MaudeTopEl:
+        View
 ModExpression:
-        EPSILON
+        InstModExp
+ModExpression:
+        RenModExp
+ModExpression:
+        CompModExp
+ModExpression:
+        ModuleIdModExp
+ModExpression:
+        TheoryIdModExp
+ModExpression:
+        Parameter
 InstModExp:
-        modExp::ANY views::ANY+
+        modExp::ModExpression views::View+
 RenModExp:
-        modExp::ANY renamings::ANY+
+        modExp::ModExpression renamings::RenMapping+
 CompModExp:
-        modExps::ANY
+        modExps::ModExpression
 ModuleIdModExp:
-        module::ANY
+        module::Module
 TheoryIdModExp:
-        theory::ANY
+        theory::Theory
 Parameter:
-        label::ANY modExp::ANY
+        label::String modExp::ModExpression
 Theory:
-        EPSILON
+        FTheory
+Theory:
+        STheory
 FTheory:
-        els::ANY+
+        els::ModElement+
 STheory:
-        els::ANY+
+        els::ModElement+
 Module:
-        EPSILON
+        FModule
+Module:
+        SModule
 FModule:
-        els::ANY+ params::ANY+
+        els::ModElement+ params::Parameter+
 SModule:
-        els::ANY+ params::ANY+
+        els::ModElement+ params::Parameter+
 ModElement:
-        EPSILON
+        ModImportation
+ModElement:
+        SubsortRel
+ModElement:
+        Operation
+ModElement:
+        Statement
 ModImportation:
-        imports::ANY mode::ANY
+        imports::ModExpression mode::ImportationMode
 ImportationMode:
         protecting::EPSILON
         including::EPSILON
         extending::EPSILON
 Type:
-        EPSILON
+        Kind
 Sort:
-        subsortRels::ANY+ supersortRels::ANY+ kind::ANY
+        subsortRels::SubsortRel+ supersortRels::SubsortRel+ kind::Kind
 Kind:
-        sorts::ANY+
+        sorts::Sort+
 SubsortRel:
-        subsorts::ANY+ supersorts::ANY+
+        subsorts::Sort+ supersorts::Sort+
 Operation:
-        name::ANY coarity::ANY arity::ANY+ atts::ANY+
+        name::String coarity::Type arity::Type+ atts::String+
 Statement:
-        EPSILON
+        Membership
+Statement:
+        Equation
+Statement:
+        Rule
 Membership:
-        term::ANY sort::ANY
+        term::Term sort::Sort
 Equation:
-        lhs::ANY rhs::ANY
+        lhs::Term rhs::Term
 Rule:
-        lhs::ANY rhs::ANY
+        lhs::Term rhs::Term
 Condition:
-        EPSILON
+        EquationalCond
+Condition:
+        RewriteCond
 EquationalCond:
-        EPSILON
+        MembershipCond
+EquationalCond:
+        BooleanCond
+EquationalCond:
+        MatchingCond
+EquationalCond:
+        EqualCond
 RewriteCond:
-        rhs::ANY
+        rhs::Term
 MembershipCond:
-        rhs::ANY
+        rhs::Sort
 BooleanCond:
         
 MatchingCond:
-        rhs::ANY
+        rhs::Term
 EqualCond:
-        rhs::ANY
+        rhs::Term
 Term:
-        EPSILON
+        Constant
+Term:
+        RecTerm
+Term:
+        Variable
 Constant:
-        op::ANY
+        op::String
 RecTerm:
-        op::ANY args::ANY+
+        op::String args::Term+
 Variable:
-        name::ANY
+        name::String
 View:
-        from::ANY to::ANY els::ANY+
+        from::ModExpression to::ModExpression els::ViewMapping+
 ViewMapping:
-        EPSILON
+        RenMapping
+ViewMapping:
+        TermMapping
 RenMapping:
-        EPSILON
+        SortMapping
+RenMapping:
+        OpTypedMapping
+RenMapping:
+        OpMapping
+RenMapping:
+        LabelMapping
 TermMapping:
-        from::ANY to::ANY
+        from::Term to::Term
 SortMapping:
-        from::ANY to::ANY
+        from::Sort to::String
 OpTypedMapping:
-        from::ANY to::ANY atts::ANY+
+        from::Operation to::String atts::String+
 OpMapping:
-        from::ANY to::ANY
+        from::Operation to::String
 LabelMapping:
-        from::ANY to::ANY
+        from::String to::String

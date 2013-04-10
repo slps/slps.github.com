@@ -1,5 +1,5 @@
 Activity:
-        orderedMessages::ANY+ incomingMessages::ANY+ outgoingMessages::ANY+ groups::ANY+ activityType::ANY eventHandlerFor::ANY lane::ANY looping::ANY
+        orderedMessages::MessagingEdge+ incomingMessages::MessagingEdge+ outgoingMessages::MessagingEdge+ groups::Group+ activityType::ActivityType eventHandlerFor::SubProcess lane::Lane looping::Boolean
 ActivityType:
         SubProcess::EPSILON
         EventEndMultiple::EPSILON
@@ -32,13 +32,19 @@ ActivityType:
         GatewayEventBasedExclusive::EPSILON
         EventIntermediateRule::EPSILON
 Artifact:
-        associations::ANY+ artifactsContainer::ANY
+        DataObject
+Artifact:
+        Group
+Artifact:
+        TextAnnotation
+Artifact:
+        associations::Association+ artifactsContainer::ArtifactsContainer
 ArtifactsContainer:
-        artifacts::ANY+
+        artifacts::Artifact+
 Association:
-        direction::ANY source::ANY target::ANY
+        direction::DirectionType source::Artifact target::IdentifiableNode
 BpmnDiagram:
-        pools::ANY+ messages::ANY+ author::ANY title::ANY
+        pools::Pool+ messages::MessagingEdge+ author::String title::String
 DataObject:
         EPSILON
 DirectionType:
@@ -47,26 +53,32 @@ DirectionType:
         To::EPSILON
         None::EPSILON
 Graph:
-        vertices::ANY+ sequenceEdges::ANY+
+        vertices::Vertex+ sequenceEdges::SequenceEdge+
 Group:
-        activities::ANY+
+        activities::Activity+
 Identifiable:
-        iD::ANY
+        IdentifiableNode
+Identifiable:
+        iD::ID
 IdentifiableNode:
-        associations::ANY+
+        Vertex
+IdentifiableNode:
+        associations::Association+
 Lane:
-        activities::ANY+ pool::ANY
+        activities::Activity+ pool::Pool
 MessagingEdge:
-        bpmnDiagram::ANY source::ANY target::ANY
+        bpmnDiagram::BpmnDiagram source::Activity target::Activity
 NamedBpmnObject:
-        documentation::ANY name::ANY ncname::ANY
+        ArtifactsContainer
+NamedBpmnObject:
+        documentation::String name::String ncname::String
 Pool:
-        lanes::ANY+ bpmnDiagram::ANY
+        lanes::Lane+ bpmnDiagram::BpmnDiagram
 SequenceEdge:
-        graph::ANY isDefault::ANY source::ANY target::ANY
+        graph::Graph isDefault::Boolean source::Vertex target::Vertex
 SubProcess:
-        eventHandlers::ANY+ isTransaction::ANY
+        eventHandlers::Activity+ isTransaction::Boolean
 TextAnnotation:
         EPSILON
 Vertex:
-        outgoingEdges::ANY+ incomingEdges::ANY+ graph::ANY
+        outgoingEdges::SequenceEdge+ incomingEdges::SequenceEdge+ graph::Graph

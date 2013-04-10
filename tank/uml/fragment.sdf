@@ -4,28 +4,38 @@ exports
   sorts
         Class Generalization Dependency Stereotype StateMachine State CompositeState SimpleState FinalState StateVertex PseudoState Transition Event 
   context-free syntax
-        parent::ANY child::ANY dependency::ANY -> Class
+        parent::Generalization child::Generalization dependency::Dependency -> Class
 
          -> Generalization
 
-        supplier::ANY client::ANY stereotype::ANY -> Dependency
+        supplier::StateMachine client::Class stereotype::Stereotype -> Dependency
 
-        baseClass::ANY extendedElement::ANY -> Stereotype
+        baseClass::String extendedElement::Dependency -> Stereotype
 
-        context::ANY top::ANY -> StateMachine
+        context::Class top::State -> StateMachine
 
-        stateMachine::ANY internal::ANY -> State
+        CompositeState -> State
 
-        subvertex::ANY -> CompositeState
+        SimpleState -> State
+
+        FinalState -> State
+
+        stateMachine::StateMachine internal::Transition -> State
+
+        subvertex::StateVertex -> CompositeState
 
          -> SimpleState
 
          -> FinalState
 
-        compositeState::ANY -> StateVertex
+        State -> StateVertex
+
+        PseudoState -> StateVertex
+
+        compositeState::CompositeState -> StateVertex
 
          -> PseudoState
 
-        trigger::ANY source::ANY target::ANY -> Transition
+        trigger::Event source::StateVertex target::StateVertex -> Transition
 
          -> Event

@@ -1,8 +1,12 @@
 NamedElement:
-        EPSILON
+        DataBase
+NamedElement:
+        Table
+NamedElement:
+        Column
 DataBase:
-        SGBDname::ANY tables::ANY+
+        SGBDname::String tables::Table+
 Table:
-        database::ANY columns::ANY+ key::ANY+
+        database::DataBase columns::Column+ key::Column+
 Column:
-        dataType::ANY null::ANY defaultValue::ANY owner::ANY keyOf::ANY
+        dataType::String null::Boolean defaultValue::String owner::Table keyOf::Table

@@ -3,65 +3,68 @@ module MSOfficeExcel_SpreadsheetMLSimplified
 
 syntax DateTimeType
         = 
-        ANY year ANY month ANY day ANY hour ANY minute ANY second
+        Integer year Integer month Integer day Integer hour Integer minute Integer second
  ;
 syntax ValueType
-        = 
-        ()
+        = StringValue
+        | NumberValue
+        | DateTimeTypeValue
+        | BooleanValue
+        | ErrorValue
  ;
 syntax StringValue
         = 
-        value: ANY
+        value: String
  ;
 syntax NumberValue
         = 
-        value: ANY
+        value: Double
  ;
 syntax DateTimeTypeValue
         = 
-        value: ANY
+        value: DateTimeType
  ;
 syntax BooleanValue
         = 
-        value: ANY
+        value: Boolean
  ;
 syntax ErrorValue
         = 
-        ANY vt_data
+        vt_data: Data
  ;
 syntax Workbook
         = 
-        ANY wb_worksheets+
+        Worksheet wb_worksheets+
  ;
 syntax Worksheet
         = 
-        ANY ws_workbook ANY ws_table ANY name
+        Workbook ws_workbook Table ws_table String name
  ;
 syntax Table
         = 
-        ANY t_worksheet ANY t_cols+ ANY t_rows+
+        Worksheet t_worksheet Column t_cols+ Row t_rows+
  ;
 syntax TableElement
-        = 
-        ()
+        = ColOrRowElement
+        | Cell
  ;
 syntax ColOrRowElement
-        = 
-        ()
+        = Column
+        | Row
  ;
 syntax Column
         = 
-        ANY c_table ANY autoFitWidth ANY width
+        Table c_table Boolean autoFitWidth Double width
  ;
 syntax Row
         = 
-        ANY r_table ANY r_cells+ ANY autoFitHeight ANY height
+        Table r_table Cell r_cells+ Boolean autoFitHeight Double height
  ;
 syntax Cell
         = 
-        ANY c_row ANY arrayRange ANY formula ANY hRef ANY mergeAcross ANY mergeDown ANY c_data
+        Row c_row String arrayRange String formula String hRef Double mergeAcross Double mergeDown Data c_data
  ;
 syntax Data
         = 
-        ANY d_cell ANY value
+        Cell d_cell ValueType value
  ;

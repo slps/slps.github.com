@@ -4,54 +4,102 @@ exports
   sorts
         Element Architecture Organization Guidance Document Action Agreement Standard Task InformationAsset ConceptualDataModel ActivityModel Node Network Requirement InfoExchRequirement ExchangeNeedLineReq MissionArea System Mission FunctionalArea Capability MaterielItem EquipmentType SoftwareItem Facility 
   context-free syntax
-        name::ANY content::ANY -> Element
+        Architecture -> Element
 
-        isAssociatedWith::ANY+ missions::ANY+ isFocusOf::ANY+ uses::ANY+ -> Architecture
+        Organization -> Element
 
-        isAssociatedWith::ANY+ softwareItems::ANY+ owns::ANY+ includes::ANY+ performsTo::ANY+ hasRequirement::ANY+ hasMissionArea::ANY+ associatedSystems::ANY+ isProponentOf::ANY+ -> Organization
+        Guidance -> Element
 
-        isAssocitatedWith::ANY+ isImplementedBy::ANY+ isSpecifiedIn::ANY+ providesAuthorityFor::ANY+ defines::ANY+ -> Guidance
+        Document -> Element
 
-        isAssociatedWith::ANY+ describesArchitecture::ANY describesSystem::ANY+ isSpecifiedUsing::ANY+ cites::ANY+ -> Document
+        Action -> Element
 
-        mayBeA::ANY isAssociatedWith::ANY+ involvedIn::ANY+ -> Action
+        Agreement -> Element
 
-        isAssociatedWith::ANY+ isCitedBy::ANY+ appliesTo::ANY+ implements::ANY+ -> Agreement
+        Task -> Element
+
+        InformationAsset -> Element
+
+        Network -> Element
+
+        MissionArea -> Element
+
+        System -> Element
+
+        Mission -> Element
+
+        FunctionalArea -> Element
+
+        Capability -> Element
+
+        MaterielItem -> Element
+
+        Facility -> Element
+
+        name::String content::String -> Element
+
+        isAssociatedWith::Architecture+ missions::Mission+ isFocusOf::FunctionalArea+ uses::Organization+ -> Architecture
+
+        isAssociatedWith::Organization+ softwareItems::SoftwareItem+ owns::InformationAsset+ includes::Node+ performsTo::Capability+ hasRequirement::Requirement+ hasMissionArea::MissionArea+ associatedSystems::System+ isProponentOf::FunctionalArea+ -> Organization
+
+        Requirement -> Guidance
+
+        isAssocitatedWith::Guidance+ isImplementedBy::Architecture+ isSpecifiedIn::Document+ providesAuthorityFor::InformationAsset+ defines::MissionArea+ -> Guidance
+
+        isAssociatedWith::Document+ describesArchitecture::Architecture describesSystem::System+ isSpecifiedUsing::Agreement+ cites::InformationAsset+ -> Document
+
+        mayBeA::Task isAssociatedWith::Action+ involvedIn::ActivityModel+ -> Action
+
+        Standard -> Agreement
+
+        isAssociatedWith::Agreement+ isCitedBy::Agreement+ appliesTo::InformationAsset+ implements::Guidance+ -> Agreement
 
          -> Standard
 
-        isAssociatedWith::ANY+ isPerformedBy::ANY+ isPerformedUsing::ANY+ specifies::ANY+ -> Task
+        isAssociatedWith::Task+ isPerformedBy::Node+ isPerformedUsing::System+ specifies::Requirement+ -> Task
 
-        isAssociatedWith::ANY+ -> InformationAsset
+        ConceptualDataModel -> InformationAsset
+
+        ActivityModel -> InformationAsset
+
+        isAssociatedWith::InformationAsset+ -> InformationAsset
 
          -> ConceptualDataModel
 
          -> ActivityModel
 
-        isAssociatedWith::ANY+ describes::ANY+ hasServicesProvidedBy::ANY+ involvedIn::ANY+ uses::ANY+ involves::ANY+ isParticipedInBy::ANY+ supports::ANY+ -> Node
+        isAssociatedWith::Node+ describes::Architecture+ hasServicesProvidedBy::Facility+ involvedIn::ActivityModel+ uses::InformationAsset+ involves::InfoExchRequirement+ isParticipedInBy::Network+ supports::System+ -> Node
 
-        isAssociatedWith::ANY+ isDescribedIn::ANY+ compliesWith::ANY+ has::ANY+ performsTo::ANY+ -> Network
+        isAssociatedWith::Network+ isDescribedIn::Document+ compliesWith::Standard+ has::Organization+ performsTo::Capability+ -> Network
 
-        mayBeSatifiedBy::ANY+ isSpecifiedUsing::ANY+ specifiesNeedFor::ANY+ cites::ANY+ -> Requirement
+        InfoExchRequirement -> Requirement
 
-        isCitedIn::ANY+ isSpecifiedInInfos::ANY+ -> InfoExchRequirement
+        ExchangeNeedLineReq -> Requirement
+
+        mayBeSatifiedBy::Architecture+ isSpecifiedUsing::InformationAsset+ specifiesNeedFor::MaterielItem+ cites::MissionArea+ -> Requirement
+
+        isCitedIn::Document+ isSpecifiedInInfos::InformationAsset+ -> InfoExchRequirement
 
          -> ExchangeNeedLineReq
 
-        supports::ANY+ -> MissionArea
+        supports::Task+ -> MissionArea
 
-        isAssociatedWith::ANY+ citedIn::ANY+ compliesWith::ANY+ isDescribedBy::ANY+ uses::ANY+ operatesUsing::ANY+ performsTo::ANY+ associatedOrganization::ANY+ appliesTo::ANY+ -> System
+        isAssociatedWith::System+ citedIn::Architecture+ compliesWith::Standard+ isDescribedBy::InformationAsset+ uses::MaterielItem+ operatesUsing::Network+ performsTo::Capability+ associatedOrganization::Organization+ appliesTo::Requirement+ -> System
 
-        isCitedBy::ANY requires::ANY+ isAssigned::ANY+ mayCite::ANY+ -> Mission
+        isCitedBy::Architecture requires::Task+ isAssigned::Organization+ mayCite::FunctionalArea+ -> Mission
 
-        isPartOf::ANY+ supports::ANY+ cites::ANY+ -> FunctionalArea
+        isPartOf::FunctionalArea+ supports::System+ cites::MissionArea+ -> FunctionalArea
 
-        specifiesRequired::ANY+ -> Capability
+        specifiesRequired::Requirement+ -> Capability
 
-        establishedAs::ANY+ conformsTo::ANY+ performsTo::ANY+ -> MaterielItem
+        EquipmentType -> MaterielItem
+
+        SoftwareItem -> MaterielItem
+
+        establishedAs::MaterielItem+ conformsTo::Standard+ performsTo::Capability+ -> MaterielItem
 
          -> EquipmentType
 
-        uses::ANY+ isSourceFor::ANY -> SoftwareItem
+        uses::EquipmentType+ isSourceFor::Organization -> SoftwareItem
 
          -> Facility

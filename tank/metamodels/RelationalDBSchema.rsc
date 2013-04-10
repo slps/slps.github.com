@@ -2,18 +2,19 @@
 module RelationalDBSchema
 
 syntax NamedElement
-        = 
-        ()
+        = DataBase
+        | Table
+        | Column
  ;
 syntax DataBase
         = 
-        ANY SGBDname ANY tables+
+        String SGBDname Table tables+
  ;
 syntax Table
         = 
-        ANY database ANY columns+ ANY key+
+        DataBase database Column columns+ Column key+
  ;
 syntax Column
         = 
-        ANY dataType ANY null ANY defaultValue ANY owner ANY keyOf
+        String dataType Boolean null String defaultValue Table owner Table keyOf
  ;

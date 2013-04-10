@@ -1,19 +1,31 @@
 Variable:
-        name::ANY type::ANY value::ANY visibility::ANY context::ANY
+        name::String type::String value::String visibility::String context::Context
 Context:
-        variables::ANY+ rule::ANY
+        variables::Variable+ rule::Rule
 Rule:
-        context::ANY subRule::ANY superRule::ANY services::ANY+
+        RootRule
+Rule:
+        RuleSetCall
+Rule:
+        QARule
+Rule:
+        context::Context subRule::Rule superRule::Rule services::Service+
 RootRule:
-        ruleSet::ANY
+        ruleSet::RuleSet
 RuleSetCall:
-        ruleSet::ANY
+        ruleSet::RuleSet
 QARule:
-        query::ANY action::ANY
+        query::Query action::Action
 RuleSet:
-        rootRule::ANY
+        rootRule::RootRule
 Service:
-        visibility::ANY signature::ANY rule::ANY
+        OCLService
+Service:
+        RTransService
+Service:
+        JavaService
+Service:
+        visibility::String signature::String rule::Rule
 OCLService:
         EPSILON
 RTransService:
@@ -21,15 +33,29 @@ RTransService:
 JavaService:
         EPSILON
 RulePart:
-        EPSILON
+        Action
+RulePart:
+        Query
 Action:
-        qARule::ANY
+        RTransAction
+Action:
+        JavaAction
+Action:
+        qARule::QARule
 RTransAction:
         EPSILON
 JavaAction:
         EPSILON
 Query:
-        qARule::ANY
+        OCLFilter
+Query:
+        RTransQuery
+Query:
+        JavaQuery
+Query:
+        JavaFilter
+Query:
+        qARule::QARule
 OCLFilter:
         EPSILON
 RTransQuery:

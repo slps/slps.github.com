@@ -1,14 +1,20 @@
 Element:
-        EPSILON
+        PetriNet
+Element:
+        Place
+Element:
+        Transition
 PetriNet:
-        places::ANY+ transitions::ANY+ arcs::ANY+
+        places::Place+ transitions::Transition+ arcs::Arc+
 Place:
-        incoming::ANY+ outgoing::ANY+
+        incoming::TransToPlaceArc+ outgoing::PlaceToTransArc+
 Transition:
-        incoming::ANY+ outgoing::ANY+
+        incoming::PlaceToTransArc+ outgoing::TransToPlaceArc+
 Arc:
-        EPSILON
+        PlaceToTransArc
+Arc:
+        TransToPlaceArc
 PlaceToTransArc:
-        source::ANY target::ANY
+        source::Place target::Transition
 TransToPlaceArc:
-        source::ANY target::ANY
+        source::Transition target::Place

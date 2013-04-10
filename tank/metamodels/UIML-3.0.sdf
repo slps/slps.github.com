@@ -4,31 +4,31 @@ exports
   sorts
         UIML Header MetaData Peer Presentation Logic DComponent DClass DProperty DMethod DParam Script Listener UsedInTagKind MapsTypeKind ExtensibleElement Source LocalSource RemoteSource Interface Structure Part Style Property Content Behavior Repeat Constant Reference Rule Condition EventCondition EqualCondition OpCondition Action Action-1 Action-2 Call Parameter PropertyParameter ReferenceParameter CallParameter OperationParameter EventParameter ConstantParameter IteratorParameter Iterator ConstantIterator PropertyIterator CallIterator TextIterator Event Equal EqualToConstant EqualToProperty EqualToReference EqualToOperation Operation Restructure Branch WhenTrue WhenFalse ByDefault HowKind ExportKind WhereKind Template BehaviorTemplate DClassTemplate DComponentTemplate ConstantTemplate ContentTemplate InterfaceTemplate LogicTemplate PartTemplate PeerTemplate PresentationTemplate PropertyTemplate RestructureTemplate RuleTemplate ScriptTemplate StructureTemplate StyleTemplate 
   context-free syntax
-        head::ANY templates::ANY+ interfaces::ANY+ peers::ANY+ -> UIML
+        head::Header templates::Template+ interfaces::Interface+ peers::Peer+ -> UIML
 
-        metas::ANY+ -> Header
+        metas::MetaData+ -> Header
 
-        name::ANY content::ANY -> MetaData
+        name::String content::String -> MetaData
 
-        id::ANY how::ANY export::ANY source::ANY presentations::ANY+ logics::ANY+ -> Peer
+        id::String how::HowKind export::ExportKind source::Source presentations::Presentation+ logics::Logic+ -> Peer
 
-        id::ANY how::ANY export::ANY base::ANY source::ANY dClasses::ANY+ -> Presentation
+        id::String how::HowKind export::ExportKind base::String source::Source dClasses::DClass+ -> Presentation
 
-        id::ANY how::ANY export::ANY source::ANY dComponents::ANY+ -> Logic
+        id::String how::HowKind export::ExportKind source::Source dComponents::DComponent+ -> Logic
 
-        id::ANY how::ANY export::ANY mapsTo::ANY location::ANY source::ANY dMethods::ANY+ -> DComponent
+        id::String how::HowKind export::ExportKind mapsTo::String location::String source::Source dMethods::DMethod+ -> DComponent
 
-        id::ANY how::ANY export::ANY mapsTo::ANY mapsType::ANY source::ANY dMethods::ANY+ dProperties::ANY+ events::ANY+ listeners::ANY+ -> DClass
+        id::String how::HowKind export::ExportKind mapsTo::String mapsType::String source::Source dMethods::DMethod+ dProperties::DProperty+ events::Event+ listeners::Listener+ -> DClass
 
-        id::ANY mapsType::ANY mapsTo::ANY returnType::ANY dMethods::ANY+ dParams::ANY+ -> DProperty
+        id::String mapsType::MapsTypeKind mapsTo::String returnType::String dMethods::DMethod+ dParams::DParam+ -> DProperty
 
-        id::ANY how::ANY export::ANY mapsTo::ANY returnType::ANY source::ANY dParams::ANY+ script::ANY -> DMethod
+        id::String how::HowKind export::ExportKind mapsTo::String returnType::String source::Source dParams::DParam+ script::Script -> DMethod
 
-        id::ANY type::ANY value::ANY -> DParam
+        id::String type::String value::String -> DParam
 
-        id::ANY type::ANY how::ANY export::ANY value::ANY source::ANY -> Script
+        id::String type::String how::HowKind export::ExportKind value::String source::String -> Script
 
-        class::ANY attacher::ANY -> Listener
+        class::String attacher::String -> Listener
 
         event:: -> UsedInTagKind
         listener:: -> UsedInTagKind
@@ -39,95 +39,168 @@ exports
         setMethod:: -> MapsTypeKind
         method:: -> MapsTypeKind
 
-         -> ExtensibleElement
+        Peer -> ExtensibleElement
 
-         -> Source
+        Presentation -> ExtensibleElement
 
-        source::ANY -> LocalSource
+        Logic -> ExtensibleElement
 
-        location::ANY -> RemoteSource
+        DComponent -> ExtensibleElement
 
-        id::ANY how::ANY export::ANY source::ANY structure::ANY+ style::ANY+ content::ANY+ behavior::ANY+ -> Interface
+        DClass -> ExtensibleElement
 
-        id::ANY how::ANY export::ANY source::ANY parts::ANY+ -> Structure
+        DMethod -> ExtensibleElement
 
-        id::ANY how::ANY export::ANY class::ANY wherePart::ANY source::ANY style::ANY content::ANY behavior::ANY parts::ANY+ repeats::ANY+ -> Part
+        Script -> ExtensibleElement
 
-        id::ANY how::ANY export::ANY source::ANY properties::ANY+ -> Style
+        Interface -> ExtensibleElement
 
-        name::ANY how::ANY export::ANY values::ANY+ parts::ANY+ events::ANY+ source::ANY constants::ANY+ properties::ANY+ references::ANY+ calls::ANY+ iterators::ANY+ -> Property
+        Structure -> ExtensibleElement
 
-        id::ANY how::ANY export::ANY source::ANY constants::ANY+ -> Content
+        Part -> ExtensibleElement
 
-        id::ANY how::ANY export::ANY source::ANY rules::ANY+ -> Behavior
+        Style -> ExtensibleElement
 
-        iterator::ANY parts::ANY+ -> Repeat
+        Property -> ExtensibleElement
 
-        id::ANY how::ANY export::ANY model::ANY value::ANY source::ANY constants::ANY+ -> Constant
+        Content -> ExtensibleElement
 
-        constant::ANY -> Reference
+        Behavior -> ExtensibleElement
 
-        id::ANY how::ANY export::ANY source::ANY condition::ANY action::ANY -> Rule
+        Constant -> ExtensibleElement
 
-         -> Condition
+        Rule -> ExtensibleElement
 
-        event::ANY -> EventCondition
+        Restructure -> ExtensibleElement
 
-        equal::ANY -> EqualCondition
+        LocalSource -> Source
 
-        op::ANY -> OpCondition
+        RemoteSource -> Source
 
-         -> Action
+        source::ExtensibleElement -> LocalSource
 
-        event::ANY properties::ANY+ calls::ANY+ restructures::ANY+ -> Action-1
+        location::String -> RemoteSource
 
-        whenTrue::ANY whenFalse::ANY byDefault::ANY -> Action-2
+        id::String how::HowKind export::ExportKind source::Source structure::Structure+ style::Style+ content::Content+ behavior::Behavior+ -> Interface
 
-        name::ANY params::ANY+ -> Call
+        id::String how::HowKind export::ExportKind source::Source parts::Part+ -> Structure
 
-         -> Parameter
+        id::String how::HowKind export::ExportKind class::String wherePart::String source::Source style::Style content::Content behavior::Behavior parts::Part+ repeats::Repeat+ -> Part
 
-        property::ANY -> PropertyParameter
+        id::String how::HowKind export::ExportKind source::Source properties::Property+ -> Style
 
-        reference::ANY -> ReferenceParameter
+        name::String how::HowKind export::ExportKind values::String+ parts::Part+ events::Event+ source::Source constants::Constant+ properties::Property+ references::Reference+ calls::Call+ iterators::Iterator+ -> Property
 
-        call::ANY -> CallParameter
+        id::String how::HowKind export::ExportKind source::Source constants::Constant+ -> Content
 
-        op::ANY -> OperationParameter
+        id::String how::HowKind export::ExportKind source::Source rules::Rule+ -> Behavior
 
-        event::ANY -> EventParameter
+        iterator::Iterator parts::Part+ -> Repeat
 
-        constant::ANY -> ConstantParameter
+        id::String how::HowKind export::ExportKind model::String value::String source::Source constants::Constant+ -> Constant
 
-        iterator::ANY -> IteratorParameter
+        constant::Constant -> Reference
 
-         -> Iterator
+        id::String how::HowKind export::ExportKind source::Source condition::Condition action::Action -> Rule
 
-        constant::ANY -> ConstantIterator
+        EventCondition -> Condition
 
-        property::ANY -> PropertyIterator
+        EqualCondition -> Condition
 
-        call::ANY -> CallIterator
+        OpCondition -> Condition
 
-        value::ANY -> TextIterator
+        event::Event -> EventCondition
 
-        class::ANY parts::ANY+ -> Event
+        equal::Equal -> EqualCondition
 
-         -> Equal
+        op::Operation -> OpCondition
 
-        constant::ANY -> EqualToConstant
+        Action-1 -> Action
 
-        property::ANY -> EqualToProperty
+        Action-2 -> Action
 
-        reference::ANY -> EqualToReference
+        Action-1 -> Action
+        Action-2 -> Action
 
-        op::ANY -> EqualToOperation
+        event::Event properties::Property+ calls::Call+ restructures::Restructure+ -> Action-1
 
-        name::ANY constants::ANY+ properties::ANY+ references::ANY+ calls::ANY+ ops::ANY+ events::ANY+ -> Operation
+        whenTrue::WhenTrue whenFalse::WhenFalse byDefault::ByDefault -> Action-2
 
-        how::ANY atPart::ANY wherePart::ANY source::ANY template::ANY -> Restructure
+        name::String params::Parameter+ -> Call
 
-        properties::ANY+ calls::ANY+ restructure::ANY op::ANY equal::ANY event::ANY -> Branch
+        PropertyParameter -> Parameter
+
+        ReferenceParameter -> Parameter
+
+        CallParameter -> Parameter
+
+        OperationParameter -> Parameter
+
+        EventParameter -> Parameter
+
+        ConstantParameter -> Parameter
+
+        IteratorParameter -> Parameter
+
+        property::Property -> PropertyParameter
+
+        reference::Reference -> ReferenceParameter
+
+        call::Call -> CallParameter
+
+        op::Operation -> OperationParameter
+
+        event::Event -> EventParameter
+
+        constant::Constant -> ConstantParameter
+
+        iterator::Iterator -> IteratorParameter
+
+        ConstantIterator -> Iterator
+
+        PropertyIterator -> Iterator
+
+        CallIterator -> Iterator
+
+        TextIterator -> Iterator
+
+        constant::Constant -> ConstantIterator
+
+        property::Property -> PropertyIterator
+
+        call::Call -> CallIterator
+
+        value::Integer -> TextIterator
+
+        class::String parts::Part+ -> Event
+
+        EqualToConstant -> Equal
+
+        EqualToProperty -> Equal
+
+        EqualToReference -> Equal
+
+        EqualToOperation -> Equal
+
+        constant::Constant -> EqualToConstant
+
+        property::Property -> EqualToProperty
+
+        reference::Reference -> EqualToReference
+
+        op::Operation -> EqualToOperation
+
+        name::String constants::Constant+ properties::Property+ references::Reference+ calls::Call+ ops::Operation+ events::Event+ -> Operation
+
+        how::HowKind atPart::Part wherePart::Part source::Source template::Template -> Restructure
+
+        WhenTrue -> Branch
+
+        WhenFalse -> Branch
+
+        ByDefault -> Branch
+
+        properties::Property+ calls::Call+ restructure::Restructure op::Operation equal::Equal event::Event -> Branch
 
          -> WhenTrue
 
@@ -150,36 +223,66 @@ exports
         before:: -> WhereKind
         after:: -> WhereKind
 
-         -> Template
+        BehaviorTemplate -> Template
 
-        behavior::ANY -> BehaviorTemplate
+        DClassTemplate -> Template
 
-        dClass::ANY -> DClassTemplate
+        DComponentTemplate -> Template
 
-        dComponent::ANY -> DComponentTemplate
+        ConstantTemplate -> Template
 
-        constant::ANY -> ConstantTemplate
+        ContentTemplate -> Template
 
-        content::ANY -> ContentTemplate
+        InterfaceTemplate -> Template
 
-        interface::ANY -> InterfaceTemplate
+        LogicTemplate -> Template
 
-        logic::ANY -> LogicTemplate
+        PartTemplate -> Template
 
-        part::ANY -> PartTemplate
+        PeerTemplate -> Template
 
-        peer::ANY -> PeerTemplate
+        PresentationTemplate -> Template
 
-        presentation::ANY -> PresentationTemplate
+        PropertyTemplate -> Template
 
-        property::ANY -> PropertyTemplate
+        RestructureTemplate -> Template
 
-        restructure::ANY -> RestructureTemplate
+        RuleTemplate -> Template
 
-        rule::ANY -> RuleTemplate
+        ScriptTemplate -> Template
 
-        script::ANY -> ScriptTemplate
+        StructureTemplate -> Template
 
-        structure::ANY -> StructureTemplate
+        StyleTemplate -> Template
 
-        style::ANY -> StyleTemplate
+        behavior::Behavior -> BehaviorTemplate
+
+        dClass::DClass -> DClassTemplate
+
+        dComponent::DComponent -> DComponentTemplate
+
+        constant::Constant -> ConstantTemplate
+
+        content::Content -> ContentTemplate
+
+        interface::Interface -> InterfaceTemplate
+
+        logic::Logic -> LogicTemplate
+
+        part::Part -> PartTemplate
+
+        peer::Peer -> PeerTemplate
+
+        presentation::Presentation -> PresentationTemplate
+
+        property::Property -> PropertyTemplate
+
+        restructure::Restructure -> RestructureTemplate
+
+        rule::Rule -> RuleTemplate
+
+        script::Script -> ScriptTemplate
+
+        structure::Structure -> StructureTemplate
+
+        style::Style -> StyleTemplate

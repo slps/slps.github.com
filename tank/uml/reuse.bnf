@@ -1,18 +1,35 @@
 ReuseContract:
-        supplier::ANY client::ANY
+        supplier::ProviderClause client::ReuserClause
 Dependency:
-        owningDependency::ANY subDependency::ANY+
+        ReuseContract
+Dependency:
+        owningDependency::Dependency subDependency::Dependency+
 ProviderClause:
-        EPSILON
+        CompositeProvider
+ProviderClause:
+        BasicProvider
+ProviderClause:
+        CompositeProvider
+        BasicProvider
 Package:
-        EPSILON
+        ProviderClause
+Package:
+        ReuserClause
+Package:
+        ProviderClause
+        ReuserClause
 ReuserClause:
-        EPSILON
+        CompositeReuser
+ReuserClause:
+        BasicReuser
+ReuserClause:
+        CompositeReuser
+        BasicReuser
 CompositeProvider:
-        subcontract::ANY
+        subcontract::ReuseContract
 BasicProvider:
         EPSILON
 CompositeReuser:
-        subreuser::ANY+
+        subreuser::ReuserClause+
 BasicReuser:
         EPSILON

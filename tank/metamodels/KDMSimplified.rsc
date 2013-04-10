@@ -2,58 +2,48 @@
 module KDMSimplified
 
 syntax Element
-        = 
-        ()
+        = ModelElement
+        | Annotation
+        | Attribute
+        | KDMExtensionFamily
+        | Stereotype
+        | TagDefinition
+        | TaggedValue
+        | KDMFramework
  ;
 syntax ModelElement
-        = 
-        ()
+        = KDMEntity
+        | KDMRelationship
  ;
 syntax KDMEntity
-        = 
-        ()
- ;
-syntax KDMContainer
-        = 
-        ()
- ;
-syntax KDMGroup
-        = 
-        ()
- ;
-syntax KDMRelationship
-        = 
-        ()
+        = KDMContainer
+        | KDMGroup
  ;
 syntax Annotation
         = 
-        note: ANY
+        note: String
  ;
 syntax Attribute
         = 
-        ANY tag ANY value
+        String tag String value
  ;
 syntax KDMExtensionFamily
         = 
-        ANY name ANY stereotype+
+        String name Stereotype stereotype+
  ;
 syntax Stereotype
         = 
-        ANY baseClass ANY name ANY family ANY extendedElement ANY tag+
+        String baseClass String name KDMExtensionFamily family ModelElement extendedElement TagDefinition tag+
  ;
 syntax TagDefinition
         = 
-        ANY tag ANY type
+        String tag String type
  ;
 syntax TaggedValue
         = 
-        ANY value ANY tag
+        String value TagDefinition tag
  ;
 syntax KDMFramework
         = 
-        ()
- ;
-syntax KDMModel
-        = 
-        ()
+        KDMModel
  ;

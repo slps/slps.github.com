@@ -3,103 +3,72 @@ module Bibtex_1_2
 
 syntax BibtexFile
         = 
-        ANY entries+
+        Entry entries+
  ;
 syntax Author
         = 
-        name: ANY
+        name: String
  ;
 syntax Entry
-        = 
-        ()
- ;
-syntax AuthoredEntry
-        = 
-        ()
- ;
-syntax BookTitledEntry
-        = 
-        ()
- ;
-syntax InstitutionEntry
-        = 
-        ()
- ;
-syntax EditoredEntry
-        = 
-        ()
- ;
-syntax DatedEntry
-        = 
-        ()
- ;
-syntax JournalEntry
-        = 
-        ()
- ;
-syntax TitledEntry
-        = 
-        ()
- ;
-syntax NotedEntry
-        = 
-        ()
- ;
-syntax PublisheredEntry
-        = 
-        ()
- ;
-syntax SchoolEntry
-        = 
-        ()
+        = AuthoredEntry
+        | BookTitledEntry
+        | InstitutionEntry
+        | EditoredEntry
+        | DatedEntry
+        | JournalEntry
+        | TitledEntry
+        | NotedEntry
+        | PublisheredEntry
+        | SchoolEntry
+        | Misc
  ;
 syntax Article
         = 
-        ANY volume ANY number ANY pages ANY note
+        String volume String number String pages String note
  ;
 syntax Book
-        = 
-        ANY volume ANY number ANY series ANY address ANY edition ANY note
+        = InBook
+        | String volume String number String series String address String edition String note
  ;
 syntax Booklet
         = 
-        ANY authors+ ANY howpublished ANY address ANY note
+        Author authors+ String howpublished String address String note
  ;
 syntax InBook
         = 
-        ANY chapter ANY type
+        String chapter String type
  ;
 syntax InCollection
         = 
-        ANY chapter ANY type
+        String chapter String type
  ;
 syntax Manual
         = 
-        ANY organization ANY address ANY edition ANY note
+        String organization String address String edition String note
  ;
 syntax TechReport
         = 
-        ANY type ANY number ANY address ANY note
+        String type String number String address String note
  ;
 syntax ThesisEntry
-        = 
-        ()
+        = PhdThesis
+        | MastersThesis
  ;
 syntax PhdThesis
         = 
-        ANY type ANY address ANY note
+        String type String address String note
  ;
 syntax MastersThesis
         = 
-        ANY type ANY address ANY note
+        String type String address String note
  ;
 syntax Proceedings
         = 
-        ANY editor ANY volume ANY number ANY series ANY address ANY organization ANY publisher ANY note
+        String editor String volume String number String series String address String organization String publisher String note
  ;
 syntax InProceedings
-        = 
-        pages: ANY
+        = Conference
+        | pages: String
  ;
 syntax Conference
         = 
@@ -111,5 +80,5 @@ syntax Unpublished
  ;
 syntax Misc
         = 
-        ANY authors+ ANY title ANY howpublished ANY month ANY year ANY note
+        Author authors+ String title String howpublished String month String year String note
  ;

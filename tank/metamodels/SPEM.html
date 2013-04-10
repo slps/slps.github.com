@@ -13,30 +13,57 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable SPEM 0.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Hugo Bruneliere, <code>SPEM.ecore</code>, 2005/08/10.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>15</strong></li><li>Number of top alternatives: <strong>15</strong></li><li>Number of defined nonterminal symbols: <strong>15</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>15</strong>: <code><a href="#ArtifactUsageName" class="nt">ArtifactUsageName</a>, <a href="#ProcessDefinitionElement" class="nt">ProcessDefinitionElement</a>, <a href="#Guidance" class="nt">Guidance</a>, <a href="#ArtifactKind" class="nt">ArtifactKind</a>, <a href="#WorkItem" class="nt">WorkItem</a>, <a href="#RoleKind" class="nt">RoleKind</a>, <a href="#Condition" class="nt">Condition</a>, <a href="#ProcessComponent" class="nt">ProcessComponent</a>, <a href="#Goal" class="nt">Goal</a>, <a href="#Precondition" class="nt">Precondition</a>, <a href="#WorkDefinition" class="nt">WorkDefinition</a>, <a href="#ActivityKind" class="nt">ActivityKind</a>, <a href="#Iteration" class="nt">Iteration</a>, <a href="#Phase" class="nt">Phase</a>, <a href="#Lifecycle" class="nt">Lifecycle</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="ArtifactUsageName">ArtifactUsageName</a>:
-        <span class="sel">isInput</span>::<span class="meta">any</span> <span class="sel">isOutput</span>::<span class="meta">any</span> <span class="sel">hasWorkPerArtifact</span>::<span class="meta">any</span> <span class="sel">artifactKind</span>::<span class="meta">any</span> <span class="sel">workDefinition</span>::<span class="meta">any</span>
+				</script></head><body><h1 class="l">Browsable SPEM 0.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Hugo Bruneliere, <code>SPEM.ecore</code>, 2005/08/10.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>28</strong></li><li>Number of top alternatives: <strong>29</strong></li><li>Number of defined nonterminal symbols: <strong>15</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: —</li><li>Bottom nonterminal symbols: <strong>1</strong>: <code><a href="#Boolean" class="nt">Boolean</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="ArtifactUsageName">ArtifactUsageName</a>:
+        <span class="sel">isInput</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">isOutput</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">hasWorkPerArtifact</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">artifactKind</span>::<a class="nt" href="#ArtifactKind">ArtifactKind</a> <span class="sel">workDefinition</span>::<a class="nt" href="#WorkDefinition">WorkDefinition</a>
 </pre><pre><a class="nt" name="ProcessDefinitionElement">ProcessDefinitionElement</a>:
-        <span class="sel">guidances</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">processComponents</span>::<span class="meta">any</span><span class="meta">+</span>
+        <a class="nt" href="#Guidance">Guidance</a>
+</pre><pre><a class="nt" name="ProcessDefinitionElement">ProcessDefinitionElement</a>:
+        <a class="nt" href="#ArtifactKind">ArtifactKind</a>
+</pre><pre><a class="nt" name="ProcessDefinitionElement">ProcessDefinitionElement</a>:
+        <a class="nt" href="#WorkItem">WorkItem</a>
+</pre><pre><a class="nt" name="ProcessDefinitionElement">ProcessDefinitionElement</a>:
+        <a class="nt" href="#RoleKind">RoleKind</a>
+</pre><pre><a class="nt" name="ProcessDefinitionElement">ProcessDefinitionElement</a>:
+        <a class="nt" href="#Condition">Condition</a>
+</pre><pre><a class="nt" name="ProcessDefinitionElement">ProcessDefinitionElement</a>:
+        <a class="nt" href="#ProcessComponent">ProcessComponent</a>
+</pre><pre><a class="nt" name="ProcessDefinitionElement">ProcessDefinitionElement</a>:
+        <span class="sel">guidances</span>::<a class="nt" href="#Guidance">Guidance</a><span class="meta">+</span> <span class="sel">processComponents</span>::<a class="nt" href="#ProcessComponent">ProcessComponent</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Guidance">Guidance</a>:
-        <span class="sel">processDefinitionElements</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">processDefinitionElements</span>::<a class="nt" href="#ProcessDefinitionElement">ProcessDefinitionElement</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="ArtifactKind">ArtifactKind</a>:
-        <span class="sel">artifactUsageNames</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">responsible</span>::<span class="meta">any</span>
+        <span class="sel">artifactUsageNames</span>::<a class="nt" href="#ArtifactUsageName">ArtifactUsageName</a><span class="meta">+</span> <span class="sel">responsible</span>::<a class="nt" href="#RoleKind">RoleKind</a>
 </pre><pre><a class="nt" name="WorkItem">WorkItem</a>:
-        ε
+        <a class="nt" href="#WorkDefinition">WorkDefinition</a>
+</pre><pre><a class="nt" name="WorkItem">WorkItem</a>:
+        <a class="nt" href="#WorkDefinition">WorkDefinition</a>
 </pre><pre><a class="nt" name="RoleKind">RoleKind</a>:
-        <span class="sel">artifactKinds</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">artifactKinds</span>::<a class="nt" href="#ArtifactKind">ArtifactKind</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Condition">Condition</a>:
-        ε
+        <a class="nt" href="#Goal">Goal</a>
+</pre><pre><a class="nt" name="Condition">Condition</a>:
+        <a class="nt" href="#Precondition">Precondition</a>
+</pre><pre><a class="nt" name="Condition">Condition</a>:
+        <a class="nt" href="#Goal">Goal</a>
+        <a class="nt" href="#Precondition">Precondition</a>
 </pre><pre><a class="nt" name="ProcessComponent">ProcessComponent</a>:
-        <span class="sel">processDefinitionElements</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">processDefinitionElements</span>::<a class="nt" href="#ProcessDefinitionElement">ProcessDefinitionElement</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Goal">Goal</a>:
-        <span class="sel">workDefinition</span>::<span class="meta">any</span>
+        <span class="sel">workDefinition</span>::<a class="nt" href="#WorkDefinition">WorkDefinition</a>
 </pre><pre><a class="nt" name="Precondition">Precondition</a>:
-        <span class="sel">workDefinition</span>::<span class="meta">any</span>
+        <span class="sel">workDefinition</span>::<a class="nt" href="#WorkDefinition">WorkDefinition</a>
 </pre><pre><a class="nt" name="WorkDefinition">WorkDefinition</a>:
-        <span class="sel">artifactUsageNames</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">goal</span>::<span class="meta">any</span> <span class="sel">precondition</span>::<span class="meta">any</span>
+        <a class="nt" href="#ActivityKind">ActivityKind</a>
+</pre><pre><a class="nt" name="WorkDefinition">WorkDefinition</a>:
+        <a class="nt" href="#Iteration">Iteration</a>
+</pre><pre><a class="nt" name="WorkDefinition">WorkDefinition</a>:
+        <a class="nt" href="#Phase">Phase</a>
+</pre><pre><a class="nt" name="WorkDefinition">WorkDefinition</a>:
+        <a class="nt" href="#Lifecycle">Lifecycle</a>
+</pre><pre><a class="nt" name="WorkDefinition">WorkDefinition</a>:
+        <span class="sel">artifactUsageNames</span>::<a class="nt" href="#ArtifactUsageName">ArtifactUsageName</a><span class="meta">+</span> <span class="sel">goal</span>::<a class="nt" href="#Goal">Goal</a> <span class="sel">precondition</span>::<a class="nt" href="#Precondition">Precondition</a>
 </pre><pre><a class="nt" name="ActivityKind">ActivityKind</a>:
-        <span class="sel">performer</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">assistant</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">performer</span>::<a class="nt" href="#RoleKind">RoleKind</a><span class="meta">+</span> <span class="sel">assistant</span>::<a class="nt" href="#RoleKind">RoleKind</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Iteration">Iteration</a>:
         ε
 </pre><pre><a class="nt" name="Phase">Phase</a>:
@@ -44,4 +71,4 @@
 </pre><pre><a class="nt" name="Lifecycle">Lifecycle</a>:
         ε
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

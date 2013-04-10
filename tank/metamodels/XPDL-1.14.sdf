@@ -58,73 +58,162 @@ exports
         Other:: -> ImplementationKind
         Unspecified:: -> ImplementationKind
 
-         -> Element
+        Package -> Element
 
-        script::ANY externalPackages::ANY+ typeDeclarations::ANY+ participants::ANY+ applications::ANY+ dataFields::ANY+ pools::ANY+ messageFlows::ANY+ associations::ANY+ artifacts::ANY+ workflowProcesses::ANY+ -> Package
+        MessageFlow -> Element
 
-        targetActivity::ANY sourceActivity::ANY targetPool::ANY sourcePool::ANY object::ANY -> MessageFlow
+        Association -> Element
 
-        associationDirection::ANY targetArtifact::ANY sourceArtifact::ANY targetPool::ANY sourcePool::ANY targetActivity::ANY sourceActivity::ANY object::ANY -> Association
+        Pool -> Element
 
-        orientation::ANY boundaryVisible::ANY lanes::ANY+ object::ANY participant::ANY process::ANY -> Pool
+        Lane -> Element
 
-        object::ANY parentLane::ANY parentPool::ANY -> Lane
+        Participant -> Element
 
-        id::ANY name::ANY -> Participant
+        Artifact -> Element
 
-        textAnnotation::ANY group::ANY object::ANY dataObject::ANY -> Artifact
+        TypeDeclaration -> Element
 
-        state::ANY requiredForStart::ANY producedAtCompletion::ANY dataFields::ANY+ -> DataObject
+        Application -> Element
+
+        Activity -> Element
+
+        Process -> Element
+
+        Transition -> Element
+
+        ActivitySet -> Element
+
+        Object -> Element
+
+        ExternalPackage -> Element
+
+        Category -> Element
+
+        DataField -> Element
+
+        script::Script externalPackages::ExternalPackage+ typeDeclarations::TypeDeclaration+ participants::Participant+ applications::Application+ dataFields::DataField+ pools::Pool+ messageFlows::MessageFlow+ associations::Association+ artifacts::Artifact+ workflowProcesses::Process+ -> Package
+
+        targetActivity::Activity sourceActivity::Activity targetPool::Pool sourcePool::Pool object::Object -> MessageFlow
+
+        associationDirection::AssociationDirectionKind targetArtifact::Artifact sourceArtifact::Artifact targetPool::Pool sourcePool::Pool targetActivity::Activity sourceActivity::Activity object::Object -> Association
+
+        orientation::OrientationKind boundaryVisible::Boolean lanes::Lane+ object::Object participant::Participant process::Process -> Pool
+
+        object::Object parentLane::Lane parentPool::Pool -> Lane
+
+        id::String name::String -> Participant
+
+        DataObject -> Artifact
+
+        Group -> Artifact
+
+        Annotation -> Artifact
+
+        textAnnotation::String group::String object::Object dataObject::DataObject -> Artifact
+
+        state::String requiredForStart::Boolean producedAtCompletion::Boolean dataFields::DataField+ -> DataObject
 
          -> Group
 
          -> Annotation
 
-        id::ANY name::ANY -> TypeDeclaration
+        id::String name::String -> TypeDeclaration
 
-        id::ANY name::ANY -> Application
+        ParametrizedApplication -> Application
+
+        ReferencedApplication -> Application
+
+        ParametrizedApplication -> Application
+        ReferencedApplication -> Application
 
          -> ParametrizedApplication
 
-        externalReference::ANY -> ReferencedApplication
+        externalReference::ExternalReference -> ReferencedApplication
 
-        isStartActivity::ANY status::ANY startMode::ANY finishMode::ANY startQuantity::ANY isATransaction::ANY dataFields::ANY+ object::ANY -> Activity
+        Task -> Activity
 
-         -> Task
+        Route -> Activity
 
-        implementation::ANY -> TaskService
+        SubFlow -> Activity
 
-        instantiate::ANY implementation::ANY -> TaskReceive
+        BlockActivity -> Activity
+
+        Event -> Activity
+
+        isStartActivity::Boolean status::StatusKind startMode::ModeKind finishMode::ModeKind startQuantity::Integer isATransaction::Boolean dataFields::DataField+ object::Object -> Activity
+
+        TaskService -> Task
+
+        TaskReceive -> Task
+
+        TaskManual -> Task
+
+        TaskReference -> Task
+
+        TaskScript -> Task
+
+        TaskSend -> Task
+
+        TaskUser -> Task
+
+        TaskApplication -> Task
+
+        implementation::ImplementationKind -> TaskService
+
+        instantiate::Boolean implementation::ImplementationKind -> TaskReceive
 
          -> TaskManual
 
-        taskRef::ANY -> TaskReference
+        taskRef::Task -> TaskReference
 
-        script::ANY -> TaskScript
+        script::Script -> TaskScript
 
-        implementation::ANY -> TaskSend
+        implementation::ImplementationKind -> TaskSend
 
-        implementation::ANY -> TaskUser
+        implementation::ImplementationKind -> TaskUser
 
-        packageRef::ANY -> TaskApplication
+        packageRef::Package -> TaskApplication
 
-        gatewayType::ANY instantiate::ANY markerVisiable::ANY -> Route
+        Gateway -> Route
 
-        execution::ANY instanceDataField::ANY packageRef::ANY startActivitySet::ANY startActivity::ANY -> SubFlow
+        gatewayType::GatewayTypeKind instantiate::Boolean markerVisiable::Boolean -> Route
 
-        activitySet::ANY startActivity::ANY -> BlockActivity
+        execution::ExecutionKind instanceDataField::String packageRef::Package startActivitySet::ActivitySet startActivity::Activity -> SubFlow
 
-         -> Event
+        activitySet::ActivitySet startActivity::Activity -> BlockActivity
 
-         -> Trigger
+        StartEvent -> Event
 
-        activity::ANY -> ResultCompensation
+        IntermediateEvent -> Event
 
-        errorCode::ANY -> ResultError
+        EndEvent -> Event
+
+        ResultCompensation -> Trigger
+
+        ResultError -> Trigger
+
+        ResultMultiple -> Trigger
+
+        TriggerResultLink -> Trigger
+
+        TriggerResultMessage -> Trigger
+
+        TriggerIntermediateMultiple -> Trigger
+
+        TriggerMultiple -> Trigger
+
+        TriggerRule -> Trigger
+
+        TriggerTimer -> Trigger
+
+        activity::Activity -> ResultCompensation
+
+        errorCode::String -> ResultError
 
          -> ResultMultiple
 
-        processRef::ANY -> TriggerResultLink
+        processRef::Process -> TriggerResultLink
 
          -> TriggerResultMessage
 
@@ -132,32 +221,32 @@ exports
 
          -> TriggerMultiple
 
-        ruleName::ANY -> TriggerRule
+        ruleName::String -> TriggerRule
 
-        timeDate::ANY timeCycle::ANY -> TriggerTimer
+        timeDate::String timeCycle::String -> TriggerTimer
 
-        triggerKind::ANY implementation::ANY trigger::ANY -> StartEvent
+        triggerKind::TriggerKind implementation::ImplementationKind trigger::Trigger -> StartEvent
 
-        target::ANY -> IntermediateEvent
+        target::Activity -> IntermediateEvent
 
-        triggerKind::ANY implementation::ANY trigger::ANY -> EndEvent
+        triggerKind::TriggerKind implementation::ImplementationKind trigger::Trigger -> EndEvent
 
          -> Gateway
 
-        accessLevel::ANY processType::ANY status::ANY suppressJoinFailure::ANY enableInstanceCompensation::ANY adHoc::ANY adHocOrdering::ANY adHocCompletionCondition::ANY participant::ANY+ applications::ANY+ dataField::ANY activitySets::ANY+ activities::ANY+ transitions::ANY+ object::ANY defaultStartActivitySet::ANY defaultStartActivity::ANY -> Process
+        accessLevel::AccessLevelKind processType::ProcessTypeKind status::StatusKind suppressJoinFailure::Boolean enableInstanceCompensation::Boolean adHoc::Boolean adHocOrdering::AdHocOrderingKind adHocCompletionCondition::String participant::Participant+ applications::Application+ dataField::DataField activitySets::ActivitySet+ activities::Activity+ transitions::Transition+ object::Object defaultStartActivitySet::ActivitySet defaultStartActivity::Activity -> Process
 
-        quantity::ANY object::ANY to::ANY from::ANY -> Transition
+        quantity::Integer object::Object to::Activity from::Activity -> Transition
 
-        adHoc::ANY adHocOrdering::ANY adHocCompletionCondition::ANY defaultStartActivity::ANY activities::ANY+ transitions::ANY+ object::ANY -> ActivitySet
+        adHoc::Boolean adHocOrdering::AdHocOrderingKind adHocCompletionCondition::String defaultStartActivity::Activity activities::Activity+ transitions::Transition+ object::Object -> ActivitySet
 
-        xref::ANY location::ANY namespace::ANY -> ExternalReference
+        xref::String location::String namespace::String -> ExternalReference
 
-        categories::ANY+ -> Object
+        categories::Category+ -> Object
 
-        href::ANY -> ExternalPackage
+        href::String -> ExternalPackage
 
-        id::ANY name::ANY -> Category
+        id::String name::String -> Category
 
-        isArray::ANY correlation::ANY dataType::ANY -> DataField
+        isArray::Boolean correlation::Boolean dataType::TypeDeclaration -> DataField
 
-        type::ANY version::ANY grammar::ANY -> Script
+        type::String version::String grammar::String -> Script

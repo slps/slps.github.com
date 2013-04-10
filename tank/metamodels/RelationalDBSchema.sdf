@@ -4,10 +4,14 @@ exports
   sorts
         NamedElement DataBase Table Column 
   context-free syntax
-         -> NamedElement
+        DataBase -> NamedElement
 
-        SGBDname::ANY tables::ANY+ -> DataBase
+        Table -> NamedElement
 
-        database::ANY columns::ANY+ key::ANY+ -> Table
+        Column -> NamedElement
 
-        dataType::ANY null::ANY defaultValue::ANY owner::ANY keyOf::ANY -> Column
+        SGBDname::String tables::Table+ -> DataBase
+
+        database::DataBase columns::Column+ key::Column+ -> Table
+
+        dataType::String null::Boolean defaultValue::String owner::Table keyOf::Table -> Column

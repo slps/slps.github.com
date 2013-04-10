@@ -11,26 +11,38 @@ Weak:
 Grouping:
         EPSILON
 Precedence:
-        deprecs::ANY+ parbind::ANY+
+        DynPrecedence
+Precedence:
+        DerPrecedence
+Precedence:
+        BasPrecedence
+Precedence:
+        deprecs::DerPrecedence+ parbind::ParBinding+
 DynPrecedence:
         EPSILON
 DerPrecedence:
-        precs::ANY+ auxTasks::ANY+
+        precs::Precedence+ auxTasks::MetaTaskOccurence+
 BasPrecedence:
         EPSILON
 MetaTaskOccurence:
-        dprecs::ANY+ taskCl::ANY+
+        dprecs::DerPrecedence+ taskCl::MetaTask+
 ParBinding:
-        inclusion::ANY precs::ANY+ targetPar::ANY sourcePar::ANY
+        inclusion::Boolean precs::Precedence+ targetPar::ParameterPrec sourcePar::ParameterPrec
 ParameterPrec:
-        parbindsTar::ANY+ parbindsSour::ANY+ dstParams::ANY+ orParams::ANY+
+        parbindsTar::ParBinding+ parbindsSour::ParBinding+ dstParams::ParameterPrec+ orParams::ParameterPrec+
 ModelElement:
-        dependencyUMLsupp::ANY dependencyUMLcli::ANY
+        MetaTaskOccurence
+ModelElement:
+        MetaTask
+ModelElement:
+        dependencyUMLsupp::DependancyUML dependencyUMLcli::DependancyUML
 DependancyUML:
-        suppier::ANY+ client::ANY+
+        suppier::ModelElement+ client::ModelElement+
 MetaTask:
-        params::ANY+ occurs::ANY+
+        params::ParameterUML+ occurs::MetaTaskOccurence+
 ParameterUML:
-        task::ANY doc::ANY+
+        ParameterPrec
+ParameterUML:
+        task::MetaTask doc::MetaDocument+
 MetaDocument:
-        params::ANY+
+        params::ParameterUML+

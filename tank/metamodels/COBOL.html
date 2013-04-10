@@ -13,7 +13,7 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable COBOL 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Hugo Bruneliere, <code>COBOL.ecore</code>, 2005/08/08.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>14</strong></li><li>Number of top alternatives: <strong>29</strong></li><li>Number of defined nonterminal symbols: <strong>14</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>14</strong>: <code><a href="#COBOLUsageValue" class="nt">COBOLUsageValue</a>, <a href="#COBOLInitialValueKind" class="nt">COBOLInitialValueKind</a>, <a href="#COBOLElement" class="nt">COBOLElement</a>, <a href="#COBOLClassifier" class="nt">COBOLClassifier</a>, <a href="#COBOLSimpleType" class="nt">COBOLSimpleType</a>, <a href="#COBOLComposedType" class="nt">COBOLComposedType</a>, <a href="#COBOLElementInitialValue" class="nt">COBOLElementInitialValue</a>, <a href="#COBOL88Element" class="nt">COBOL88Element</a>, <a href="#COBOL88ElementValue" class="nt">COBOL88ElementValue</a>, <a href="#COBOLRedefiningElement" class="nt">COBOLRedefiningElement</a>, <a href="#COBOL66Element" class="nt">COBOL66Element</a>, <a href="#COBOLSourceText" class="nt">COBOLSourceText</a>, <a href="#COBOLFixedLengthArray" class="nt">COBOLFixedLengthArray</a>, <a href="#COBOLVariableLengthArray" class="nt">COBOLVariableLengthArray</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="COBOLUsageValue">COBOLUsageValue</a>:
+				</script></head><body><h1 class="l">Browsable COBOL 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Hugo Bruneliere, <code>COBOL.ecore</code>, 2005/08/08.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>18</strong></li><li>Number of top alternatives: <strong>33</strong></li><li>Number of defined nonterminal symbols: <strong>14</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#COBOL66Element" class="nt">COBOL66Element</a></code></li><li>Bottom nonterminal symbols: <strong>3</strong>: <code><a href="#String" class="nt">String</a>, <a href="#Boolean" class="nt">Boolean</a>, <a href="#Integer" class="nt">Integer</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="COBOLUsageValue">COBOLUsageValue</a>:
         <span class="sel">cuv_binary</span>::ε
         <span class="sel">cuv_dbcs</span>::ε
         <span class="sel">cuv_double</span>::ε
@@ -33,28 +33,36 @@
         <span class="sel">civk_null</span>::ε
         <span class="sel">civk_all_literal</span>::ε
 </pre><pre><a class="nt" name="COBOLElement">COBOLElement</a>:
-        <span class="sel">level</span>::<span class="meta">any</span> <span class="sel">refined</span>::<span class="meta">any</span> <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">sharedType</span>::<span class="meta">any</span> <span class="sel">group</span>::<span class="meta">any</span> <span class="sel">initial</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">contains</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">source</span>::<span class="meta">any</span> <span class="sel">array</span>::<span class="meta">any</span>
+        <a class="nt" href="#COBOLRedefiningElement">COBOLRedefiningElement</a>
+</pre><pre><a class="nt" name="COBOLElement">COBOLElement</a>:
+        <span class="sel">level</span>::<a class="nt" href="#String">String</a> <span class="sel">refined</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">sharedType</span>::<a class="nt" href="#COBOLClassifier">COBOLClassifier</a> <span class="sel">group</span>::<a class="nt" href="#COBOLComposedType">COBOLComposedType</a> <span class="sel">initial</span>::<a class="nt" href="#COBOLElementInitialValue">COBOLElementInitialValue</a><span class="meta">+</span> <span class="sel">contains</span>::<a class="nt" href="#COBOL88Element">COBOL88Element</a><span class="meta">+</span> <span class="sel">source</span>::<a class="nt" href="#COBOLSourceText">COBOLSourceText</a> <span class="sel">array</span>::<a class="nt" href="#COBOLFixedLengthArray">COBOLFixedLengthArray</a>
 </pre><pre><a class="nt" name="COBOLClassifier">COBOLClassifier</a>:
-        <span class="sel">typeded</span>::<span class="meta">any</span> <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">typedElements</span>::<span class="meta">any</span><span class="meta">+</span>
+        <a class="nt" href="#COBOLSimpleType">COBOLSimpleType</a>
+</pre><pre><a class="nt" name="COBOLClassifier">COBOLClassifier</a>:
+        <a class="nt" href="#COBOLComposedType">COBOLComposedType</a>
+</pre><pre><a class="nt" name="COBOLClassifier">COBOLClassifier</a>:
+        <span class="sel">typeded</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">typedElements</span>::<a class="nt" href="#COBOLElement">COBOLElement</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="COBOLSimpleType">COBOLSimpleType</a>:
-        <span class="sel">usageValue</span>::<span class="meta">any</span> <span class="sel">pictureString</span>::<span class="meta">any</span> <span class="sel">usage</span>::<span class="meta">any</span>
+        <span class="sel">usageValue</span>::<a class="nt" href="#COBOLUsageValue">COBOLUsageValue</a> <span class="sel">pictureString</span>::<a class="nt" href="#String">String</a> <span class="sel">usage</span>::<a class="nt" href="#Boolean">Boolean</a>
 </pre><pre><a class="nt" name="COBOLComposedType">COBOLComposedType</a>:
-        <span class="sel">elements</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">elements</span>::<a class="nt" href="#COBOLElement">COBOLElement</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="COBOLElementInitialValue">COBOLElementInitialValue</a>:
-        <span class="sel">initVal</span>::<span class="meta">any</span> <span class="sel">valueKind</span>::<span class="meta">any</span>
+        <span class="sel">initVal</span>::<a class="nt" href="#String">String</a> <span class="sel">valueKind</span>::<a class="nt" href="#COBOLInitialValueKind">COBOLInitialValueKind</a>
 </pre><pre><a class="nt" name="COBOL88Element">COBOL88Element</a>:
-        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">has</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">has</span>::<a class="nt" href="#COBOL88ElementValue">COBOL88ElementValue</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="COBOL88ElementValue">COBOL88ElementValue</a>:
-        <span class="sel">lowerLimit</span>::<span class="meta">any</span> <span class="sel">upperLimit</span>::<span class="meta">any</span> <span class="sel">range</span>::<span class="meta">any</span>
+        <span class="sel">lowerLimit</span>::<a class="nt" href="#String">String</a> <span class="sel">upperLimit</span>::<a class="nt" href="#String">String</a> <span class="sel">range</span>::<a class="nt" href="#Boolean">Boolean</a>
 </pre><pre><a class="nt" name="COBOLRedefiningElement">COBOLRedefiningElement</a>:
-        <span class="sel">redefines</span>::<span class="meta">any</span>
+        <span class="sel">redefines</span>::<a class="nt" href="#COBOLElement">COBOLElement</a>
 </pre><pre><a class="nt" name="COBOL66Element">COBOL66Element</a>:
-        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">end</span>::<span class="meta">any</span> <span class="sel">start</span>::<span class="meta">any</span>
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">end</span>::<a class="nt" href="#COBOLElement">COBOLElement</a> <span class="sel">start</span>::<a class="nt" href="#COBOLElement">COBOLElement</a>
 </pre><pre><a class="nt" name="COBOLSourceText">COBOLSourceText</a>:
-        <span class="sel">source</span>::<span class="meta">any</span> <span class="sel">fileName</span>::<span class="meta">any</span>
+        <span class="sel">source</span>::<a class="nt" href="#String">String</a> <span class="sel">fileName</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="COBOLFixedLengthArray">COBOLFixedLengthArray</a>:
-        <span class="sel">maxUpper</span>::<span class="meta">any</span>
+        <a class="nt" href="#COBOLVariableLengthArray">COBOLVariableLengthArray</a>
+</pre><pre><a class="nt" name="COBOLFixedLengthArray">COBOLFixedLengthArray</a>:
+        <span class="sel">maxUpper</span>::<a class="nt" href="#Integer">Integer</a>
 </pre><pre><a class="nt" name="COBOLVariableLengthArray">COBOLVariableLengthArray</a>:
-        <span class="sel">minUpper</span>::<span class="meta">any</span> <span class="sel">dependingOn</span>::<span class="meta">any</span>
+        <span class="sel">minUpper</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">dependingOn</span>::<a class="nt" href="#COBOLElement">COBOLElement</a>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

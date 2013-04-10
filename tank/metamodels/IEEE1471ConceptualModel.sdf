@@ -4,30 +4,54 @@ exports
   sorts
         Element IEEE1471Model System Mission Environment Architecture Rationale ArchitecturalDescription View Model Stakeholder Concern Viewpoint LibraryViewpoint 
   context-free syntax
-         -> Element
+        IEEE1471Model -> Element
 
-        system::ANY environment::ANY missions::ANY+ architecture::ANY stakeholders::ANY+ concerns::ANY+ viewpoints::ANY+ libraryViewpoints::ANY+ architecturalDescription::ANY rationale::ANY -> IEEE1471Model
+        System -> Element
 
-        fulfils::ANY+ inhabits::ANY hasAn::ANY has::ANY+ -> System
+        Mission -> Element
 
-        name::ANY content::ANY -> Mission
+        Environment -> Element
 
-        influences::ANY -> Environment
+        Architecture -> Element
 
-        describedBy::ANY -> Architecture
+        Rationale -> Element
 
-        provides::ANY -> Rationale
+        ArchitecturalDescription -> Element
 
-        identifiesS::ANY+ identifiesC::ANY+ selects::ANY+ organizedBy::ANY+ aggregates::ANY+ -> ArchitecturalDescription
+        View -> Element
 
-        conformsTo::ANY consitsOf::ANY+ -> View
+        Model -> Element
 
-        participatesInV::ANY+ participatesInAD::ANY -> Model
+        Stakeholder -> Element
 
-        has::ANY+ -> Stakeholder
+        Concern -> Element
 
-        isImportantTo::ANY+ -> Concern
+        Viewpoint -> Element
 
-        hasSource::ANY usedToCover::ANY+ establishesMethodsFor::ANY+ -> Viewpoint
+        LibraryViewpoint -> Element
 
-        name::ANY content::ANY -> LibraryViewpoint
+        system::System environment::Environment missions::Mission+ architecture::Architecture stakeholders::Stakeholder+ concerns::Concern+ viewpoints::Viewpoint+ libraryViewpoints::LibraryViewpoint+ architecturalDescription::ArchitecturalDescription rationale::Rationale -> IEEE1471Model
+
+        fulfils::Mission+ inhabits::Environment hasAn::Architecture has::Stakeholder+ -> System
+
+        name::String content::String -> Mission
+
+        influences::System -> Environment
+
+        describedBy::ArchitecturalDescription -> Architecture
+
+        provides::ArchitecturalDescription -> Rationale
+
+        identifiesS::Stakeholder+ identifiesC::Concern+ selects::Viewpoint+ organizedBy::View+ aggregates::Model+ -> ArchitecturalDescription
+
+        conformsTo::Viewpoint consitsOf::Model+ -> View
+
+        participatesInV::View+ participatesInAD::ArchitecturalDescription -> Model
+
+        has::Concern+ -> Stakeholder
+
+        isImportantTo::Stakeholder+ -> Concern
+
+        hasSource::LibraryViewpoint usedToCover::Concern+ establishesMethodsFor::Model+ -> Viewpoint
+
+        name::String content::String -> LibraryViewpoint

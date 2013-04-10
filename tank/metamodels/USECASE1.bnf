@@ -1,32 +1,38 @@
 Task:
-        service::ANY+
+        service::Service+
 User:
-        useCase::ANY+ actor::ANY+
+        useCase::UseCase+ actor::Actor+
 Actor:
-        useCase::ANY+ goal::ANY+ user::ANY+
+        useCase::UseCase+ goal::Goal+ user::User+
 Goal:
-        service::ANY+ actor::ANY+
+        service::Service+ actor::Actor+
 UseCase:
-        context::ANY service::ANY+ user::ANY+ actor::ANY+
+        context::Context service::Service+ user::User+ actor::Actor+
 Service:
-        useCase::ANY+ goal::ANY+ task::ANY+
+        useCase::UseCase+ goal::Goal+ task::Task+
 Scenario:
         EPSILON
 Context:
-        preCondition::ANY+ postCondition::ANY+ useCase::ANY+
+        preCondition::PreCondition+ postCondition::PostCondition+ useCase::UseCase+
 PreCondition:
-        context::ANY+
+        context::Context+
 PostCondition:
-        context::ANY+
+        context::Context+
 Episode:
-        event::ANY+
+        event::Event+
 Event:
-        episode::ANY+
+        Action
+Event:
+        Responce
+Event:
+        Stimilus
+Event:
+        episode::Episode+
 Action:
         EPSILON
 Responce:
-        parameter::ANY+
+        parameter::Parameter+
 Stimilus:
-        parameter::ANY+
+        parameter::Parameter+
 Parameter:
-        stimilus::ANY+ responce::ANY+
+        stimilus::Stimilus+ responce::Responce+

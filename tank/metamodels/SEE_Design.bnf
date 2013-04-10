@@ -1,23 +1,41 @@
 LogFile:
-        file::ANY instance::ANY logger::ANY
+        file::String instance::LogFile logger::Logger
 Logger:
-        instance::ANY expression::ANY logFile::ANY
+        instance::Logger expression::Expression logFile::LogFile
 Expression:
-        loggingOn::ANY logger::ANY
+        Literal
+Expression:
+        UnaryOperator
+Expression:
+        BinaryOperator
+Expression:
+        loggingOn::Boolean logger::Logger
 Literal:
-        value::ANY
+        VariableExpression
+Literal:
+        NumberExpression
+Literal:
+        value::Integer
 VariableExpression:
-        name::ANY
+        name::String
 NumberExpression:
         EPSILON
 UnaryOperator:
-        operand::ANY
+        UnaryPlusOp
+UnaryOperator:
+        UnaryMinusOp
+UnaryOperator:
+        operand::Expression
 UnaryPlusOp:
         EPSILON
 UnaryMinusOp:
         EPSILON
 BinaryOperator:
-        operand1::ANY operand2::ANY
+        PlusOperator
+BinaryOperator:
+        MinusOperator
+BinaryOperator:
+        operand1::Expression operand2::Expression
 PlusOperator:
         EPSILON
 MinusOperator:

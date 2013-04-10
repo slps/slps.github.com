@@ -2,26 +2,29 @@
 module GenericOutline
 
 syntax LocatedElement
-        = 
-        ()
+        = Outline
+        | Node
+        | Label
+        | LabelSuite
+        | Map
  ;
 syntax Outline
         = 
-        ANY extension ANY nodes+
+        String extension Node nodes+
  ;
 syntax Node
         = 
-        ANY name ANY label ANY icon ANY outline ANY mapping+
+        String name Label label String icon Outline outline Map mapping+
  ;
 syntax Label
         = 
-        ANY label ANY methodCall ANY labelSuite+
+        String label String methodCall LabelSuite labelSuite+
  ;
 syntax LabelSuite
         = 
-        ANY label ANY methodCall
+        String label String methodCall
  ;
 syntax Map
         = 
-        mapString: ANY
+        mapString: String
  ;

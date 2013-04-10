@@ -1,51 +1,75 @@
 Instance:
-        EPSILON
+        ComponentInstance
+Instance:
+        NodeInstance
+Instance:
+        UseCaseInstance
 AttributeLink:
-        instance::ANY value::ANY linkEnd::ANY attribute::ANY
+        instance::Instance value::Instance linkEnd::LinkEnd attribute::Attribute
 Link:
-        association::ANY connection::ANY
+        association::Association connection::LinkEnd
 LinkEnd:
-        link::ANY qualifiedValue::ANY+ instance::ANY associationEnd::ANY
+        link::Link qualifiedValue::AttributeLink+ instance::Instance associationEnd::AssociationEnd
 ComponentInstance:
-        resident::ANY+ nodeInstance::ANY
+        resident::Instance+ nodeInstance::NodeInstance
 NodeInstance:
-        resident::ANY+
+        resident::ComponentInstance+
 UseCase:
-        include::ANY+ extend::ANY+ extensionPoint::ANY+
+        include::Include+ extend::Extend+ extensionPoint::ExtensionPoint+
 Actor:
-        powertypeRange::ANY+ feature::ANY+
+        powertypeRange::Generalization+ feature::Feature+
 UseCaseInstance:
-        ownedInstance::ANY+ linkEnd::ANY+ classifier::ANY+ componentInstance::ANY slot::ANY+ ownedLink::ANY+
+        ownedInstance::Instance+ linkEnd::LinkEnd+ classifier::Classifier+ componentInstance::ComponentInstance slot::AttributeLink+ ownedLink::Link+
 Extend:
-        extensionPoint::ANY+ extension::ANY base::ANY condition::ANY
+        extensionPoint::ExtensionPoint+ extension::UseCase base::UseCase condition::BooleanExpression
 Include:
-        addition::ANY base::ANY
+        addition::UseCase base::UseCase
 ExtensionPoint:
-        useCase::ANY location::ANY
+        useCase::UseCase location::String
 Element:
-        EPSILON
+        ModelElement
 ModelElement:
-        EPSILON
-GeneralizableElement:
-        EPSILON
-Namespace:
-        EPSILON
+        Instance
+ModelElement:
+        AttributeLink
+ModelElement:
+        Link
+ModelElement:
+        LinkEnd
+ModelElement:
+        ExtensionPoint
+ModelElement:
+        GeneralizableElement
+ModelElement:
+        Namespace
+ModelElement:
+        Feature
+ModelElement:
+        AssociationEnd
+ModelElement:
+        Relationship
 Classifier:
-        EPSILON
+        UseCase
+Classifier:
+        Actor
 Feature:
-        EPSILON
+        StructuralFeature
 StructuralFeature:
-        EPSILON
+        Attribute
 AssociationEnd:
-        association::ANY specification::ANY+ participant::ANY qualifier::ANY+ isNavigable::ANY ordering::ANY aggregation::ANY targetScope::ANY multiplicity::ANY changeability::ANY
+        association::Association specification::Classifier+ participant::Classifier qualifier::Attribute+ isNavigable::Boolean ordering::OrderingKind aggregation::AggregationKind targetScope::ScopeKind multiplicity::Multiplicity changeability::ChangeableKind
 Relationship:
-        EPSILON
+        Extend
+Relationship:
+        Include
+Relationship:
+        Generalization
 Association:
-        connection::ANY
+        connection::AssociationEnd
 Attribute:
-        associationEnd::ANY initialValue::ANY
+        associationEnd::AssociationEnd initialValue::Expression
 Generalization:
-        parent::ANY powertype::ANY child::ANY discriminator::ANY
+        parent::GeneralizableElement powertype::Classifier child::GeneralizableElement discriminator::String
 AggregationKind:
         ak_none::EPSILON
         ak_aggregate::EPSILON
@@ -66,10 +90,12 @@ VisibilityKind:
         vk_private::EPSILON
         vk_package::EPSILON
 Multiplicity:
-        range::ANY+
+        range::MultiplicityRange+
 MultiplicityRange:
-        multiplicity::ANY lower::ANY upper::ANY
+        multiplicity::Multiplicity lower::Integer upper::Integer
 Expression:
-        language::ANY body::ANY
+        BooleanExpression
+Expression:
+        language::String body::String
 BooleanExpression:
         EPSILON

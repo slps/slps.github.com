@@ -4,105 +4,175 @@ exports
   sorts
         ListString ListInteger Model Implementation ConstBlock VarBlock GlobalVariable TypeBlock Session Descriptor StorageUnit StorageElement Object Block NodeBlock ModelBlock Expression Label ExprNull ConstValue ExprContact ExprCall Operator ExprId LocalVariable Node ParamBlock ParamArray ConstVar Constant Variable Type Table NamedType Enumeration Composite CompositeElement Structure Tuple EqBlock Equation Assertion Annotable Prop Configuration Project Element FileRef Folder Reference TypeReference OperatorReference VariableReference Error Edge RPoint RSize Entity StateObj GraphicalObject StInputOutput StInitInput StInput StOutput Transition State InitialStPtr StateMachine Base StateBase AnnNote AnnAttValue AnnNoteType AnnAttDefinition AnnAttIntValue AnnAttBoolValue AnnAttCharValue AnnAttRealValue AnnAttStringValue AnnAttFileValue AnnAttDateValue AnnAttOidValue AnnAttEnumValue AnnProperty AnnPropertyInt AnnPropertyBool AnnPropertyChar AnnPropertyReal AnnPropertyString AnnPropertyEnum AnnotSchema AnnCategory Annotability AnnAttGroup File MtcApplication CoverageFile CriterionFile MtcEntity HistoryEntry Criterion Instance AssociationClass Result Record Loader 
   context-free syntax
-        value::ANY -> ListString
+        value::String -> ListString
 
-        value::ANY -> ListInteger
+        value::Integer -> ListInteger
 
-        library::ANY pathname::ANY descriptor::ANY project::ANY fileRef::ANY storageUnitM::ANY+ enumsBlock::ANY importedOperator::ANY+ client::ANY+ libraries::ANY+ allLibry::ANY+ typeM::ANY+ model::ANY coverageFileM::ANY criterionFileM::ANY root::ANY all::ANY+ application::ANY reference::ANY+ tmpNode::ANY+ constBlockK::ANY node::ANY varBlockK::ANY typeBlock::ANY refinement::ANY implementation::ANY constant::ANY allConstant::ANY allvariable::ANY variable::ANY allConstVar::ANY constVar::ANY constBlock::ANY varBlock::ANY allNamedType::ANY namedType::ANY -> Model
+        library::Boolean pathname::String descriptor::Descriptor project::Project fileRef::FileRef storageUnitM::StorageUnit+ enumsBlock::ConstBlock importedOperator::Operator+ client::Model+ libraries::Model+ allLibry::Model+ typeM::Type+ model::Model coverageFileM::CoverageFile criterionFileM::CriterionFile root::Instance all::Operator+ application::MtcApplication reference::Reference+ tmpNode::Node+ constBlockK::ConstBlock node::Node varBlockK::VarBlock typeBlock::TypeBlock refinement::NamedType implementation::Implementation constant::Constant allConstant::Constant allvariable::GlobalVariable variable::GlobalVariable allConstVar::ConstVar constVar::ConstVar constBlock::ConstBlock varBlock::VarBlock allNamedType::NamedType namedType::NamedType -> Model
 
-        key::ANY namedTypeI::ANY+ -> Implementation
+        key::Model namedTypeI::NamedType+ -> Implementation
 
-        modelC::ANY keyC::ANY key::ANY constant::ANY -> ConstBlock
+        modelC::Model keyC::Model key::Model constant::Constant -> ConstBlock
 
-        variable::ANY keyVB::ANY key::ANY -> VarBlock
+        variable::GlobalVariable keyVB::Model key::Model -> VarBlock
 
-        key::ANY -> GlobalVariable
+        key::VarBlock -> GlobalVariable
 
-        type::ANY key::ANY -> TypeBlock
+        type::NamedType key::Model -> TypeBlock
 
-        descriptor::ANY model::ANY loadsModel::ANY+ DefinedIn::ANY loader::ANY -> Session
+        descriptor::Descriptor model::Model loadsModel::Model+ DefinedIn::String loader::Loader -> Session
 
-        modelFileName::ANY sernFileName::ANY sernPersistAs::ANY rnetFileName::ANY rnetPersistAs::ANY occBase::ANY size::ANY nameVerify::ANY checked::ANY libraryModels::ANY+ annTypeFiles::ANY+ modelD::ANY -> Descriptor
+        modelFileName::String sernFileName::String sernPersistAs::String rnetFileName::String rnetPersistAs::String occBase::Integer size::Integer nameVerify::Boolean checked::Boolean libraryModels::ListString+ annTypeFiles::ListString+ modelD::Model -> Descriptor
 
-        saoFileName::ANY annFileName::ANY persistAs::ANY loaded::ANY saoModified::ANY annModified::ANY fileRef::ANY modelS::ANY element::ANY+ -> StorageUnit
+        saoFileName::String annFileName::String persistAs::String loaded::Boolean saoModified::Boolean annModified::Boolean fileRef::FileRef modelS::Model element::StorageElement+ -> StorageUnit
 
-         -> StorageElement
+        Block -> StorageElement
 
-         -> Object
+        Implementation -> Object
 
-         -> Block
+        Descriptor -> Object
 
-        node::ANY -> NodeBlock
+        StorageUnit -> Object
 
-         -> ModelBlock
+        Expression -> Object
 
-         -> Expression
+        Label -> Object
 
-        expression::ANY -> Label
+        CompositeElement -> Object
 
-        label::ANY exprContactE::ANY exprCallE::ANY dependance::ANY subExprId::ANY+ paramArray::ANY constant::ANY equationE::ANY assertionE::ANY -> ExprNull
+        Annotable -> Object
 
-        value::ANY kind::ANY -> ConstValue
+        Edge -> Object
 
-        boolAct::ANY initValue::ANY+ calledOpr::ANY -> ExprContact
+        StateMachine -> Object
 
-        numOcc::ANY predefOpr::ANY parameter::ANY+ exprContactEC::ANY operator::ANY -> ExprCall
+        NodeBlock -> Block
 
-        category::ANY conversion::ANY state::ANY index::ANY variable::ANY input::ANY+ output::ANY+ hidden::ANY+ client::ANY+ modelO::ANY modelOp::ANY criterionO::ANY intanceO::ANY+ operator::ANY -> Operator
+        ModelBlock -> Block
 
-        exprContactEI::ANY reference::ANY -> ExprId
+        ParamBlock -> NodeBlock
 
-        optional::ANY const::ANY probe::ANY pure::ANY initValue::ANY operatorI::ANY operatorO::ANY operatorH::ANY nodeL::ANY nodeI::ANY -> LocalVariable
+        EqBlock -> NodeBlock
 
-        nodeKind::ANY eqBlock::ANY paramBlock::ANY local::ANY+ internal::ANY+ key::ANY stateMachine::ANY modelN::ANY -> Node
+        node::Node -> NodeBlock
 
-        key::ANY columnsSize::ANY+ array::ANY+ -> ParamBlock
+        ConstBlock -> ModelBlock
 
-        notes::ANY+ paramBlock::ANY operator::ANY value::ANY+ -> ParamArray
+        VarBlock -> ModelBlock
 
-        kind::ANY type::ANY client::ANY+ -> ConstVar
+        TypeBlock -> ModelBlock
 
-        imported::ANY value::ANY enumeration::ANY key::ANY -> Constant
+        ExprNull -> Expression
 
-        clock::ANY definition::ANY+ -> Variable
+        ConstValue -> Expression
 
-         -> Type
+        ExprContact -> Expression
 
-        size::ANY typeT::ANY -> Table
+        ExprCall -> Expression
 
-        kind::ANY refinement::ANY+ refined::ANY+ to::ANY from::ANY implementation::ANY definition::ANY keyM::ANY key::ANY -> NamedType
+        ExprId -> Expression
 
-        value::ANY+ -> Enumeration
+        expression::Expression -> Label
 
-         -> Composite
+        label::Label exprContactE::ExprContact exprCallE::ExprCall dependance::ConstVar subExprId::ExprId+ paramArray::ParamArray constant::Constant equationE::Equation assertionE::Assertion -> ExprNull
 
-        typeC::ANY key::ANY -> CompositeElement
+        value::String kind::Object -> ConstValue
 
-        element::ANY -> Structure
+        boolAct::ExprId initValue::Expression+ calledOpr::ExprCall -> ExprContact
 
-        element::ANY -> Tuple
+        numOcc::Integer predefOpr::Integer parameter::Expression+ exprContactEC::ExprContact operator::Operator -> ExprCall
 
-        equation::ANY+ assertion::ANY key::ANY calledOperator::ANY+ referencedId::ANY+ -> EqBlock
+        Node -> Operator
 
-        rotation::ANY symetrical::ANY terminator::ANY eqBlock::ANY left::ANY+ right::ANY outEdge::ANY+ position::ANY size::ANY -> Equation
+        category::String conversion::Boolean state::Boolean index::Integer variable::LocalVariable input::LocalVariable+ output::LocalVariable+ hidden::LocalVariable+ client::EqBlock+ modelO::Model modelOp::Model criterionO::Criterion intanceO::Instance+ operator::Operator -> Operator
 
-        key::ANY expression::ANY edge::ANY position::ANY -> Assertion
+        exprContactEI::ExprContact reference::ConstVar -> ExprId
 
-         -> Annotable
+        optional::Boolean const::Boolean probe::Boolean pure::Boolean initValue::String operatorI::Operator operatorO::Operator operatorH::Operator nodeL::Node nodeI::Node -> LocalVariable
 
-        name::ANY values::ANY+ entity::ANY configurationP::ANY -> Prop
+        nodeKind::Object eqBlock::EqBlock paramBlock::ParamBlock local::LocalVariable+ internal::LocalVariable+ key::Model stateMachine::StateMachine modelN::Model -> Node
 
-        name::ANY propC::ANY+ projectC::ANY -> Configuration
+        key::Node columnsSize::ListInteger+ array::ParamArray+ -> ParamBlock
 
-        pathname::ANY configuration::ANY+ fileRef::ANY+ owner::ANY+ -> Project
+        notes::ListString+ paramBlock::ParamBlock operator::Operator value::Expression+ -> ParamArray
 
-         -> Element
+        Constant -> ConstVar
 
-        pathname::ANY persistAs::ANY DefinedIn::ANY -> FileRef
+        Variable -> ConstVar
 
-        extensions::ANY element::ANY+ -> Folder
+        kind::Object type::Type client::EqBlock+ -> ConstVar
 
-         -> Reference
+        imported::Boolean value::Expression enumeration::Enumeration key::ConstBlock -> Constant
+
+        GlobalVariable -> Variable
+
+        LocalVariable -> Variable
+
+        clock::Variable definition::Equation+ -> Variable
+
+        Table -> Type
+
+        NamedType -> Type
+
+        Enumeration -> Type
+
+        Composite -> Type
+
+        size::Integer typeT::Type -> Table
+
+        kind::Object refinement::NamedType+ refined::NamedType+ to::Operator from::Operator implementation::Implementation definition::Type keyM::Model key::TypeBlock -> NamedType
+
+        value::Constant+ -> Enumeration
+
+        Structure -> Composite
+
+        Tuple -> Composite
+
+        typeC::Type key::Composite -> CompositeElement
+
+        element::CompositeElement -> Structure
+
+        element::CompositeElement -> Tuple
+
+        equation::Equation+ assertion::Assertion key::Node calledOperator::Operator+ referencedId::ConstVar+ -> EqBlock
+
+        rotation::Integer symetrical::Boolean terminator::Boolean eqBlock::EqBlock left::Variable+ right::Expression outEdge::Edge+ position::RPoint size::RSize -> Equation
+
+        key::EqBlock expression::Expression edge::Edge position::RPoint -> Assertion
+
+        StorageElement -> Annotable
+
+        ParamArray -> Annotable
+
+        ConstVar -> Annotable
+
+        Type -> Annotable
+
+        Equation -> Annotable
+
+        Assertion -> Annotable
+
+        Project -> Annotable
+
+        name::String values::ListString+ entity::Annotable configurationP::Configuration -> Prop
+
+        name::String propC::Prop+ projectC::Project -> Configuration
+
+        pathname::String configuration::Configuration+ fileRef::FileRef+ owner::Element+ -> Project
+
+        FileRef -> Element
+
+        Folder -> Element
+
+        pathname::String persistAs::String DefinedIn::String -> FileRef
+
+        extensions::String element::Element+ -> Folder
+
+        TypeReference -> Reference
+
+        OperatorReference -> Reference
+
+        VariableReference -> Reference
 
          -> TypeReference
 
@@ -112,55 +182,81 @@ exports
 
          -> Error
 
-        leftVarIndex::ANY labelOrientation::ANY leftVar::ANY rightExpression::ANY srcEquation::ANY assertion::ANY position::ANY+ dstEquation::ANY -> Edge
+        leftVarIndex::Integer labelOrientation::Integer leftVar::Variable rightExpression::ExprId srcEquation::Equation assertion::Assertion position::RPoint+ dstEquation::Equation -> Edge
 
          -> RPoint
 
          -> RSize
 
-         -> Entity
+        StateObj -> Entity
 
-         -> StateObj
+        GraphicalObject -> StateObj
 
-         -> GraphicalObject
+        StInputOutput -> GraphicalObject
 
-         -> StInputOutput
+        Transition -> GraphicalObject
 
-        name::ANY type::ANY clock::ANY const::ANY optional::ANY -> StInitInput
+        State -> GraphicalObject
 
-        name::ANY type::ANY clock::ANY const::ANY optional::ANY -> StInput
+        InitialStPtr -> GraphicalObject
 
-        name::ANY type::ANY clock::ANY const::ANY optional::ANY -> StOutput
+        StInitInput -> StInputOutput
 
-        conditions::ANY transKind::ANY state1::ANY state2::ANY -> Transition
+        StInput -> StInputOutput
 
-        name::ANY cx::ANY cy::ANY transition1::ANY+ transition2::ANY+ stOutput::ANY -> State
+        StOutput -> StInputOutput
 
-        cx::ANY cy::ANY state::ANY -> InitialStPtr
+        name::String type::String clock::Boolean const::Boolean optional::Boolean -> StInitInput
 
-        initialStPtr::ANY state::ANY+ transition::ANY+ -> StateMachine
+        name::String type::String clock::Boolean const::Boolean optional::Boolean -> StInput
 
-         -> Base
+        name::String type::String clock::Boolean const::Boolean optional::Boolean -> StOutput
 
-        DefineIn::ANY -> StateBase
+        conditions::String transKind::Integer state1::State state2::State -> Transition
 
-        name::ANY modified::ANY annNoteType::ANY annotable::ANY annAttValue::ANY+ -> AnnNote
+        name::String cx::Double cy::Double transition1::Transition+ transition2::Transition+ stOutput::StOutput -> State
 
-         -> AnnAttValue
+        cx::Double cy::Double state::State -> InitialStPtr
 
-        name::ANY annAttDefinition::ANY annAttGroup::ANY key::ANY -> AnnNoteType
+        initialStPtr::InitialStPtr state::State+ transition::Transition+ -> StateMachine
 
-        name::ANY type::ANY annAttGroup::ANY key::ANY annProperty::ANY -> AnnAttDefinition
+        StateBase -> Base
 
-        value::ANY -> AnnAttIntValue
+        DefineIn::String -> StateBase
 
-        value::ANY -> AnnAttBoolValue
+        name::String modified::Boolean annNoteType::AnnNoteType annotable::Annotable annAttValue::AnnAttValue+ -> AnnNote
 
-        value::ANY -> AnnAttCharValue
+        AnnAttIntValue -> AnnAttValue
 
-        value::ANY -> AnnAttRealValue
+        AnnAttBoolValue -> AnnAttValue
 
-        value::ANY -> AnnAttStringValue
+        AnnAttCharValue -> AnnAttValue
+
+        AnnAttRealValue -> AnnAttValue
+
+        AnnAttStringValue -> AnnAttValue
+
+        name::String annAttDefinition::AnnAttDefinition annAttGroup::AnnAttGroup key::AnnotSchema -> AnnNoteType
+
+        name::String type::Integer annAttGroup::AnnAttGroup key::AnnNoteType annProperty::AnnProperty -> AnnAttDefinition
+
+        value::Integer -> AnnAttIntValue
+
+        value::Boolean -> AnnAttBoolValue
+
+        value::Char -> AnnAttCharValue
+
+        value::Double -> AnnAttRealValue
+
+        AnnAttFileValue -> AnnAttStringValue
+
+        AnnAttDateValue -> AnnAttStringValue
+
+        AnnAttOidValue -> AnnAttStringValue
+
+        AnnAttEnumValue -> AnnAttStringValue
+
+        value::String -> AnnAttStringValue
 
          -> AnnAttFileValue
 
@@ -170,48 +266,74 @@ exports
 
          -> AnnAttEnumValue
 
-        name::ANY type::ANY key::ANY -> AnnProperty
+        AnnPropertyInt -> AnnProperty
 
-        value::ANY -> AnnPropertyInt
+        AnnPropertyBool -> AnnProperty
 
-        value::ANY -> AnnPropertyBool
+        AnnPropertyChar -> AnnProperty
 
-        value::ANY -> AnnPropertyChar
+        AnnPropertyReal -> AnnProperty
 
-        value::ANY -> AnnPropertyReal
+        AnnPropertyString -> AnnProperty
 
-        value::ANY -> AnnPropertyString
+        AnnPropertyEnum -> AnnProperty
 
-        value::ANY -> AnnPropertyEnum
+        name::String type::Integer key::AnnAttDefinition -> AnnProperty
 
-        pathname::ANY annNoteType::ANY annCategory::ANY -> AnnotSchema
+        value::Integer -> AnnPropertyInt
 
-        name::ANY key::ANY anootability::ANY+ -> AnnCategory
+        value::Boolean -> AnnPropertyBool
 
-        minCardinality::ANY maxCardinality::ANY defaultNote::ANY annNoteType::ANY -> Annotability
+        value::Char -> AnnPropertyChar
 
-        name::ANY key::ANY -> AnnAttGroup
+        value::Double -> AnnPropertyReal
 
-         -> File
+        value::String -> AnnPropertyString
 
-        coverageFileCov::ANY+ criterionFileCri::ANY+ modelM::ANY -> MtcApplication
+        value::Object -> AnnPropertyEnum
 
-        record::ANY modelCov::ANY application::ANY recordCov::ANY -> CoverageFile
+        pathname::String annNoteType::AnnNoteType annCategory::AnnCategory -> AnnotSchema
 
-        application::ANY modelCri::ANY criterionC::ANY+ -> CriterionFile
+        name::String key::AnnotSchema anootability::Annotability+ -> AnnCategory
 
-         -> MtcEntity
+        minCardinality::Integer maxCardinality::Integer defaultNote::Boolean annNoteType::AnnNoteType -> Annotability
 
-        file::ANY -> HistoryEntry
+        name::String key::AnnNoteType -> AnnAttGroup
 
-        ident::ANY name::ANY description::ANY criterionFileC::ANY operatorC::ANY element::ANY+ -> Criterion
+        CoverageFile -> File
 
-        index::ANY occ::ANY modelI::ANY operatorI::ANY associationClassI::ANY caller::ANY called::ANY+ origin::ANY related::ANY+ -> Instance
+        CriterionFile -> File
 
-        resultA::ANY recordA::ANY+ instanceA::ANY+ -> AssociationClass
+        coverageFileCov::CoverageFile+ criterionFileCri::CriterionFile+ modelM::Model -> MtcApplication
 
-        elementCount::ANY associationClassRs::ANY record::ANY -> Result
+        record::Record modelCov::Model application::MtcApplication recordCov::Record -> CoverageFile
 
-        creator::ANY name::ANY date::ANY author::ANY description::ANY key::ANY associationClassRc::ANY coverageFileR::ANY result::ANY+ -> Record
+        application::MtcApplication modelCri::Model criterionC::Criterion+ -> CriterionFile
 
-        descriptor::ANY session::ANY -> Loader
+        Element -> MtcEntity
+
+        File -> MtcEntity
+
+        HistoryEntry -> MtcEntity
+
+        Criterion -> MtcEntity
+
+        Instance -> MtcEntity
+
+        Result -> MtcEntity
+
+        Record -> MtcEntity
+
+        file::File -> HistoryEntry
+
+        ident::String name::String description::String criterionFileC::CriterionFile operatorC::Operator element::Element+ -> Criterion
+
+        index::Integer occ::String modelI::Model operatorI::Operator associationClassI::AssociationClass caller::Instance called::Instance+ origin::Instance related::Instance+ -> Instance
+
+        resultA::Result recordA::Record+ instanceA::Instance+ -> AssociationClass
+
+        elementCount::Integer associationClassRs::AssociationClass record::Record -> Result
+
+        creator::String name::String date::String author::String description::String key::CoverageFile associationClassRc::AssociationClass coverageFileR::CoverageFile result::Result+ -> Record
+
+        descriptor::Descriptor session::Session -> Loader

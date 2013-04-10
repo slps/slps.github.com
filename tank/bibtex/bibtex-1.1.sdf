@@ -2,46 +2,54 @@ module Main
 
 exports
   sorts
-        BibTeXFile Author BibTeXEntry AuthoredEntry DatedEntry TitledEntry BookTitledEntry Article TechReport Unpublished Manual Proceedings InProceedings Booklet Book InCollection InBook Misc ThesisEntry PhDThesis MasterThesis 
+        BibTeXFile Author BibTeXEntry DatedEntry TitledEntry Article TechReport Unpublished Manual Proceedings InProceedings Booklet Book InCollection InBook Misc ThesisEntry PhDThesis MasterThesis 
   context-free syntax
-        entries::ANY+ -> BibTeXFile
+        entries::BibTeXEntry+ -> BibTeXFile
 
-        author::ANY -> Author
+        author::String -> Author
 
-         -> BibTeXEntry
+        AuthoredEntry -> BibTeXEntry
 
-         -> AuthoredEntry
+        DatedEntry -> BibTeXEntry
 
-         -> DatedEntry
+        TitledEntry -> BibTeXEntry
 
-         -> TitledEntry
+        BookTitledEntry -> BibTeXEntry
 
-         -> BookTitledEntry
+        Misc -> BibTeXEntry
 
-        journal::ANY -> Article
+        Booklet -> DatedEntry
+
+        Manual -> TitledEntry
+
+        journal::String -> Article
 
          -> TechReport
 
-        note::ANY -> Unpublished
+        note::String -> Unpublished
 
-        title::ANY -> Manual
+        title::String -> Manual
 
          -> Proceedings
 
          -> InProceedings
 
-        year::ANY -> Booklet
+        year::String -> Booklet
 
-        publisher::ANY -> Book
+        InBook -> Book
+
+        publisher::String -> Book
 
          -> InCollection
 
-        chapter::ANY -> InBook
+        chapter::Integer -> InBook
 
-        id::ANY -> Misc
+        id::String -> Misc
 
-         -> ThesisEntry
+        PhDThesis -> ThesisEntry
 
-        school::ANY -> PhDThesis
+        MasterThesis -> ThesisEntry
 
-        school::ANY -> MasterThesis
+        school::String -> PhDThesis
+
+        school::String -> MasterThesis

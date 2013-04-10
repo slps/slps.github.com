@@ -2,40 +2,40 @@
 module ADELFE
 
 syntax Classifier
-        = 
-        ()
+        = Environnement
+        | Element
  ;
 syntax Environnement
         = 
-        element: ANY
+        element: Element
  ;
 syntax Element
         = 
-        ANY environnement ANY action ANY perception
+        Environnement environnement CooperativeAgent action CooperativeAgent perception
  ;
 syntax CooperativeAgent
         = 
-        ANY elementA ANY elementP ANY representation+ ANY skill+ ANY aptitude+ ANY characteristic+ ANY communication+ ANY observes+
+        Element elementA Element elementP Representation representation+ Skill skill+ Aptitude aptitude+ Characteristic characteristic+ Communication communication+ CooperationRules observes+
  ;
 syntax Representation
         = 
-        ANY cooperativeAgentR ANY element
+        CooperativeAgent cooperativeAgentR Element element
  ;
 syntax Skill
         = 
-        cooperativeAgentS: ANY
+        cooperativeAgentS: CooperativeAgent
  ;
 syntax Aptitude
         = 
-        cooperativeAgentA: ANY
+        cooperativeAgentA: CooperativeAgent
  ;
 syntax Characteristic
         = 
-        cooperativeAgentCha: ANY
+        cooperativeAgentCha: CooperativeAgent
  ;
 syntax Communication
         = 
-        ANY cooperativeAgentCom ANY aip+
+        CooperativeAgent cooperativeAgentCom AIP aip+
  ;
 syntax AIP
         = 
@@ -43,11 +43,17 @@ syntax AIP
  ;
 syntax CooperationRules
         = 
-        ANY detects+
+        NCS detects+
  ;
 syntax NCS
-        = 
-        cooperationRules: ANY
+        = Incomprehension
+        | Ambiguity
+        | Incompetence
+        | Unproductiveness
+        | Concurrency
+        | Conflict
+        | Uselessness
+        | cooperationRules: CooperationRules
  ;
 syntax Incomprehension
         = 

@@ -4,18 +4,28 @@ exports
   sorts
         NamedElement DataBase Table Column IntegerColumn EnumColumn EnumSet EnumItem 
   context-free syntax
-         -> NamedElement
+        DataBase -> NamedElement
 
-        tables::ANY+ -> DataBase
+        Table -> NamedElement
 
-        columns::ANY+ database::ANY -> Table
+        Column -> NamedElement
 
-        type::ANY isPrimaryKey::ANY null::ANY defaultValue::ANY comment::ANY table::ANY -> Column
+        EnumItem -> NamedElement
 
-        isAutoIncrement::ANY -> IntegerColumn
+        tables::Table+ -> DataBase
 
-        enumSet::ANY -> EnumColumn
+        columns::Column+ database::DataBase -> Table
 
-        enumItems::ANY+ -> EnumSet
+        IntegerColumn -> Column
 
-        enumSet::ANY -> EnumItem
+        EnumColumn -> Column
+
+        type::String isPrimaryKey::Boolean null::Boolean defaultValue::String comment::String table::Table -> Column
+
+        isAutoIncrement::Boolean -> IntegerColumn
+
+        enumSet::EnumSet -> EnumColumn
+
+        enumItems::EnumItem+ -> EnumSet
+
+        enumSet::EnumSet -> EnumItem

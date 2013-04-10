@@ -13,30 +13,30 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable UML Diagram Interchange Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: David Touzet, <em>UMLDI ModelManagement 0.1</em>, <code>UMLDI-ModelManagement.ecore</code>, 2006/02/21.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>14</strong></li><li>Number of top alternatives: <strong>18</strong></li><li>Number of defined nonterminal symbols: <strong>14</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>14</strong>: <code><a href="#Element" class="nt">Element</a>, <a href="#ModelElement" class="nt">ModelElement</a>, <a href="#GeneralizableElement" class="nt">GeneralizableElement</a>, <a href="#Namespace" class="nt">Namespace</a>, <a href="#Classifier" class="nt">Classifier</a>, <a href="#Feature" class="nt">Feature</a>, <a href="#Relationship" class="nt">Relationship</a>, <a href="#Generalization" class="nt">Generalization</a>, <a href="#Package" class="nt">Package</a>, <a href="#Model" class="nt">Model</a>, <a href="#Subsystem" class="nt">Subsystem</a>, <a href="#ElementImport" class="nt">ElementImport</a>, <a href="#ScopeKind" class="nt">ScopeKind</a>, <a href="#VisibilityKind" class="nt">VisibilityKind</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Element">Element</a>:
-        ε
+				</script></head><body><h1 class="l">Browsable UML Diagram Interchange Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: David Touzet, <em>UMLDI ModelManagement 0.1</em>, <code>UMLDI-ModelManagement.ecore</code>, 2006/02/21.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>14</strong></li><li>Number of top alternatives: <strong>18</strong></li><li>Number of defined nonterminal symbols: <strong>10</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>3</strong>: <code><a href="#Element" class="nt">Element</a>, <a href="#Subsystem" class="nt">Subsystem</a>, <a href="#ScopeKind" class="nt">ScopeKind</a></code></li><li>Bottom nonterminal symbols: <strong>6</strong>: <code><a href="#GeneralizableElement" class="nt">GeneralizableElement</a>, <a href="#Namespace" class="nt">Namespace</a>, <a href="#Feature" class="nt">Feature</a>, <a href="#Classifier" class="nt">Classifier</a>, <a href="#String" class="nt">String</a>, <a href="#Boolean" class="nt">Boolean</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Element">Element</a>:
+        <a class="nt" href="#ModelElement">ModelElement</a>
 </pre><pre><a class="nt" name="ModelElement">ModelElement</a>:
-        ε
-</pre><pre><a class="nt" name="GeneralizableElement">GeneralizableElement</a>:
-        ε
-</pre><pre><a class="nt" name="Namespace">Namespace</a>:
-        ε
-</pre><pre><a class="nt" name="Classifier">Classifier</a>:
-        ε
-</pre><pre><a class="nt" name="Feature">Feature</a>:
-        ε
+        <a class="nt" href="#GeneralizableElement">GeneralizableElement</a>
+</pre><pre><a class="nt" name="ModelElement">ModelElement</a>:
+        <a class="nt" href="#Namespace">Namespace</a>
+</pre><pre><a class="nt" name="ModelElement">ModelElement</a>:
+        <a class="nt" href="#Feature">Feature</a>
+</pre><pre><a class="nt" name="ModelElement">ModelElement</a>:
+        <a class="nt" href="#Relationship">Relationship</a>
 </pre><pre><a class="nt" name="Relationship">Relationship</a>:
-        ε
+        <a class="nt" href="#Generalization">Generalization</a>
 </pre><pre><a class="nt" name="Generalization">Generalization</a>:
-        <span class="sel">parent</span>::<span class="meta">any</span> <span class="sel">powertype</span>::<span class="meta">any</span> <span class="sel">child</span>::<span class="meta">any</span> <span class="sel">discriminator</span>::<span class="meta">any</span>
+        <span class="sel">parent</span>::<a class="nt" href="#GeneralizableElement">GeneralizableElement</a> <span class="sel">powertype</span>::<a class="nt" href="#Classifier">Classifier</a> <span class="sel">child</span>::<a class="nt" href="#GeneralizableElement">GeneralizableElement</a> <span class="sel">discriminator</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Package">Package</a>:
-        <span class="sel">elementImport</span>::<span class="meta">any</span><span class="meta">+</span>
+        <a class="nt" href="#Model">Model</a>
+</pre><pre><a class="nt" name="Package">Package</a>:
+        <span class="sel">elementImport</span>::<a class="nt" href="#ElementImport">ElementImport</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Model">Model</a>:
         ε
 </pre><pre><a class="nt" name="Subsystem">Subsystem</a>:
-        <span class="sel">isInstantiable</span>::<span class="meta">any</span>
+        <span class="sel">isInstantiable</span>::<a class="nt" href="#Boolean">Boolean</a>
 </pre><pre><a class="nt" name="ElementImport">ElementImport</a>:
-        <span class="sel">package</span>::<span class="meta">any</span> <span class="sel">importedElement</span>::<span class="meta">any</span> <span class="sel">visibility</span>::<span class="meta">any</span> <span class="sel">alias</span>::<span class="meta">any</span> <span class="sel">isSpecification</span>::<span class="meta">any</span>
+        <span class="sel">package</span>::<a class="nt" href="#Package">Package</a> <span class="sel">importedElement</span>::<a class="nt" href="#ModelElement">ModelElement</a> <span class="sel">visibility</span>::<a class="nt" href="#VisibilityKind">VisibilityKind</a> <span class="sel">alias</span>::<a class="nt" href="#String">String</a> <span class="sel">isSpecification</span>::<a class="nt" href="#Boolean">Boolean</a>
 </pre><pre><a class="nt" name="ScopeKind">ScopeKind</a>:
         <span class="sel">sk_instance</span>::ε
         <span class="sel">sk_classifier</span>::ε
@@ -46,4 +46,4 @@
         <span class="sel">vk_private</span>::ε
         <span class="sel">vk_package</span>::ε
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

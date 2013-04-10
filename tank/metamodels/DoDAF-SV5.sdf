@@ -4,51 +4,103 @@ exports
   sorts
         Element DoDAFModel Document SystemFunctionTraceabilityMatrix SystemFunctionTraceabilityElement SystemDocument ArchitectureDocument PA SystemFunction SystemPA SoftwareApplicationProcedurePA AM InformationAsset AMPA System Task ArchitectureTask OperationalCapabilityTask SystemOperationalCapabilityTask PATask Capability CapabilityDocument SystemCapability NetworkCapability NodeLinkCapability MaterielItemCapabilityNorm OrganizationTypeCapabilityNorm RequiredInformationTechnologyCapability InformationTechnologyRequirement InformationExchangeRequirement PAExchangeRequirement SupportStatusCode 
   context-free syntax
-         -> Element
+        DoDAFModel -> Element
 
-        document::ANY+ sftm::ANY+ sd::ANY+ am::ANY+ system::ANY+ task::ANY+ capability::ANY+ capabilityDocument::ANY+ systemCapability::ANY+ -> DoDAFModel
+        Document -> Element
 
-        type::ANY cites::ANY+ describes::ANY+ records::ANY+ isThePrimaryReferenceFor::ANY+ -> Document
+        SystemFunctionTraceabilityElement -> Element
 
-        isDefinedBy::ANY+ -> SystemFunctionTraceabilityMatrix
+        SystemDocument -> Element
 
-        systemFunction::ANY operationalActivity::ANY systemProcessActivity::ANY system::ANY capability::ANY supportStatusCode::ANY -> SystemFunctionTraceabilityElement
+        ArchitectureDocument -> Element
 
-        name::ANY description::ANY view::ANY -> SystemDocument
+        PA -> Element
 
-        name::ANY description::ANY view::ANY -> ArchitectureDocument
+        SystemPA -> Element
 
-        isParentFor::ANY+ isChildFor::ANY+ correspondsTo::ANY+ isIncludedIn::ANY+ isAssignedTo::ANY+ isSupportedBy::ANY+ isTheConsumerFor::ANY+ isTheProducerFor::ANY+ -> PA
+        SoftwareApplicationProcedurePA -> Element
 
-        isCitedFor::ANY+ -> SystemFunction
+        InformationAsset -> Element
 
-        mayBeCitedFor::ANY+ provides::ANY+ enables::ANY+ -> SystemPA
+        AMPA -> Element
 
-        name::ANY description::ANY view::ANY -> SoftwareApplicationProcedurePA
+        System -> Element
 
-        type::ANY isCitedBy::ANY+ includes::ANY+ -> AM
+        Task -> Element
 
-         -> InformationAsset
+        ArchitectureTask -> Element
 
-        isOrdinateOf::ANY+ isSubordinateOf::ANY+ -> AMPA
+        Capability -> Element
 
-        isDesignedToProvide::ANY+ isDescribedBy::ANY+ performs::ANY+ isUsedToAccomplish::ANY+ -> System
+        CapabilityDocument -> Element
 
-        levelIdentifier::ANY references::ANY cost::ANY correspondsTo::ANY+ isSupportedBy::ANY+ isTheSourceOfNeedFor::ANY+ isTheDestinationOfNeedFor::ANY+ isCitedFor::ANY+ -> Task
+        SystemCapability -> Element
 
-        name::ANY description::ANY view::ANY -> ArchitectureTask
+        InformationTechnologyRequirement -> Element
 
-        isAccomplishedA::ANY -> OperationalCapabilityTask
+        document::Document+ sftm::SystemFunctionTraceabilityMatrix+ sd::SystemDocument+ am::AM+ system::System+ task::Task+ capability::Capability+ capabilityDocument::CapabilityDocument+ systemCapability::SystemCapability+ -> DoDAFModel
+
+        SystemFunctionTraceabilityMatrix -> Document
+
+        type::String cites::CapabilityDocument+ describes::SystemDocument+ records::ArchitectureDocument+ isThePrimaryReferenceFor::PA+ -> Document
+
+        isDefinedBy::SystemFunctionTraceabilityElement+ -> SystemFunctionTraceabilityMatrix
+
+        systemFunction::SystemFunction operationalActivity::Task systemProcessActivity::SystemPA system::System capability::Capability supportStatusCode::SupportStatusCode -> SystemFunctionTraceabilityElement
+
+        name::String description::String view::String -> SystemDocument
+
+        name::String description::String view::String -> ArchitectureDocument
+
+        SystemFunction -> PA
+
+        isParentFor::PA+ isChildFor::PA+ correspondsTo::PATask+ isIncludedIn::AMPA+ isAssignedTo::SystemPA+ isSupportedBy::SoftwareApplicationProcedurePA+ isTheConsumerFor::PAExchangeRequirement+ isTheProducerFor::PAExchangeRequirement+ -> PA
+
+        isCitedFor::SystemFunctionTraceabilityElement+ -> SystemFunction
+
+        mayBeCitedFor::SystemFunctionTraceabilityElement+ provides::SystemCapability+ enables::SystemOperationalCapabilityTask+ -> SystemPA
+
+        name::String description::String view::String -> SoftwareApplicationProcedurePA
+
+        type::String isCitedBy::PATask+ includes::AMPA+ -> AM
+
+        AM -> InformationAsset
+
+        isOrdinateOf::AMPA+ isSubordinateOf::AMPA+ -> AMPA
+
+        isDesignedToProvide::SystemPA+ isDescribedBy::SystemDocument+ performs::SystemCapability+ isUsedToAccomplish::SystemOperationalCapabilityTask+ -> System
+
+        OperationalCapabilityTask -> Task
+
+        SystemOperationalCapabilityTask -> Task
+
+        PATask -> Task
+
+        levelIdentifier::String references::String cost::String correspondsTo::PATask+ isSupportedBy::ArchitectureTask+ isTheSourceOfNeedFor::InformationExchangeRequirement+ isTheDestinationOfNeedFor::InformationExchangeRequirement+ isCitedFor::SystemFunctionTraceabilityElement+ -> Task
+
+        name::String description::String view::String -> ArchitectureTask
+
+        isAccomplishedA::SystemOperationalCapabilityTask -> OperationalCapabilityTask
 
          -> SystemOperationalCapabilityTask
 
          -> PATask
 
-        isPerformedBy::ANY+ isOrdinateFor::ANY+ isSubordinateOf::ANY+ isPerformedByNC::ANY+ isPerformedByNLC::ANY+ isPerformedBySC::ANY+ isCitedInCD::ANY+ isUsedInMICN::ANY+ isUsedInOTCN::ANY+ isAttainedFor::ANY+ -> Capability
+        NetworkCapability -> Capability
 
-        isCitedIn::ANY+ -> CapabilityDocument
+        NodeLinkCapability -> Capability
 
-        isCitedIn::ANY+ -> SystemCapability
+        MaterielItemCapabilityNorm -> Capability
+
+        OrganizationTypeCapabilityNorm -> Capability
+
+        RequiredInformationTechnologyCapability -> Capability
+
+        isPerformedBy::SystemCapability+ isOrdinateFor::Capability+ isSubordinateOf::Capability+ isPerformedByNC::NetworkCapability+ isPerformedByNLC::NodeLinkCapability+ isPerformedBySC::SystemCapability+ isCitedInCD::CapabilityDocument+ isUsedInMICN::MaterielItemCapabilityNorm+ isUsedInOTCN::OrganizationTypeCapabilityNorm+ isAttainedFor::RequiredInformationTechnologyCapability+ -> Capability
+
+        isCitedIn::Capability+ -> CapabilityDocument
+
+        isCitedIn::Capability+ -> SystemCapability
 
          -> NetworkCapability
 
@@ -60,11 +112,15 @@ exports
 
          -> RequiredInformationTechnologyCapability
 
-        specifies::ANY+ -> InformationTechnologyRequirement
+        InformationExchangeRequirement -> InformationTechnologyRequirement
+
+        PAExchangeRequirement -> InformationTechnologyRequirement
+
+        specifies::RequiredInformationTechnologyCapability+ -> InformationTechnologyRequirement
 
          -> InformationExchangeRequirement
 
-        isCitedIn::ANY+ -> PAExchangeRequirement
+        isCitedIn::InformationExchangeRequirement+ -> PAExchangeRequirement
 
         red:: -> SupportStatusCode
         yellow:: -> SupportStatusCode

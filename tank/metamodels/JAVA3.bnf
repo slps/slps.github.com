@@ -1,22 +1,35 @@
 Modifier:
-        EPSILON
+        Class
+Modifier:
+        Interface
+Modifier:
+        Method
+Modifier:
+        Field
 Class:
-        superClass::ANY implement::ANY+ methods::ANY+ fields::ANY+
+        superClass::Class implement::Interface+ methods::Method+ fields::Field+
 Interface:
-        superInterface::ANY+ implementedBy::ANY+ abstractMethods::ANY+ constants::ANY+
+        superInterface::Interface+ implementedBy::Class+ abstractMethods::Method+ constants::Field+
 Method:
-        share::ANY class::ANY interface::ANY resultOf::ANY parameters::ANY+
+        share::Boolean class::Class interface::Interface resultOf::Type parameters::Parameter+
 Field:
-        share::ANY class::ANY interface::ANY value::ANY typeOf::ANY
+        share::Boolean class::Class interface::Interface value::Value typeOf::Type
 Value:
         EPSILON
 Parameter:
-        name::ANY typeOf::ANY owner::ANY
+        name::String typeOf::Type owner::Method
 Type:
-        EPSILON
+        ReferenceType
+Type:
+        PrimitiveType
+Type:
+        ReferenceType
+        PrimitiveType
 ReferenceType:
-        reference::ANY
+        reference::Class
 PrimitiveType:
-        EPSILON
+        Int
+PrimitiveType:
+        Int
 Int:
         EPSILON

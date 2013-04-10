@@ -8,16 +8,16 @@ exports
 
          -> MetaModel
 
-        name::ANY mode::ANY metaDest::ANY+ metaSource::ANY+ rules::ANY+ -> Module
+        name::String mode::String metaDest::MetaModel+ metaSource::MetaModel+ rules::Rule+ -> Module
 
-        isAbstract::ANY isEntryPoint::ANY name::ANY module::ANY target::ANY source::ANY declaration::ANY sections::ANY+ guard::ANY inheritances::ANY+ -> Rule
+        isAbstract::Boolean isEntryPoint::Boolean name::String module::Module target::MetaClass source::MetaClass declaration::Variable sections::Section+ guard::Expression inheritances::Inheritance+ -> Rule
 
-        rule::ANY expressions::ANY+ inheritedRules::ANY+ -> Inheritance
+        rule::Rule expressions::Expression+ inheritedRules::Rule+ -> Inheritance
 
-        operator::ANY inheritance::ANY rule::ANY instruction::ANY -> Expression
+        operator::String inheritance::Inheritance rule::Rule instruction::Instruction -> Expression
 
-        kind::ANY rule::ANY instructions::ANY+ -> Section
+        kind::String rule::Rule instructions::Instruction+ -> Section
 
-        body::ANY section::ANY -> Instruction
+        body::Expression section::Section -> Instruction
 
-        name::ANY rule::ANY -> Variable
+        name::String rule::Rule -> Variable

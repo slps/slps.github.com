@@ -1,33 +1,63 @@
 Node:
-        location::ANY manager::ANY capsules::ANY+
+        location::String manager::Nucleus capsules::Capsule+
 Nucleus:
-        otherEngObjects::ANY+ beos::ANY+
+        otherEngObjects::EngineeringObject+ beos::BEO+
 Capsule:
-        otherEngObjects::ANY+ capsuleManager::ANY clusterManagers::ANY+ clusters::ANY+
+        otherEngObjects::EngineeringObject+ capsuleManager::CapsuleManager clusterManagers::ClusterManager+ clusters::Cluster+
 EngineeringObject:
-        nodeManager::ANY
+        Nucleus
+EngineeringObject:
+        CapsuleManager
+EngineeringObject:
+        ClusterManager
+EngineeringObject:
+        BEO
+EngineeringObject:
+        Stub
+EngineeringObject:
+        Binder
+EngineeringObject:
+        ProtocolObject
+EngineeringObject:
+        Interceptor
+EngineeringObject:
+        ControllingObject
+EngineeringObject:
+        ControlledObject
+EngineeringObject:
+        nodeManager::Nucleus
 CapsuleManager:
-        cmClusterManagers::ANY+
+        cmClusterManagers::ClusterManager+
 Cluster:
-        clusterManager::ANY clusterBeos::ANY+
+        clusterManager::ClusterManager clusterBeos::BEO+
 ClusterManager:
-        clusters::ANY+ clustermanagerBeos::ANY+ capsuleManager::ANY
+        clusters::Cluster+ clustermanagerBeos::BEO+ capsuleManager::CapsuleManager
 BEO:
-        beoNodeManager::ANY locallyBoundObjects::ANY+ localbinds::ANY+ beoManager::ANY beoChannel::ANY+ beoStub::ANY+
+        beoNodeManager::Nucleus locallyBoundObjects::BEO+ localbinds::BEO+ beoManager::ClusterManager beoChannel::Channel+ beoStub::Stub+
 Stub:
-        stChannel::ANY stBinder::ANY stBeo::ANY
+        stChannel::Channel stBinder::Binder stBeo::BEO
 Binder:
-        bdChannel::ANY chBinder::ANY bdProtocolObject::ANY+
+        bdChannel::Channel chBinder::Stub bdProtocolObject::ProtocolObject+
 ProtocolObject:
-        type::ANY poChannel::ANY poBinder::ANY poInterceptor::ANY+ poBoundProtocolObject::ANY+
+        type::String poChannel::Channel poBinder::Binder poInterceptor::Interceptor+ poBoundProtocolObject::ProtocolObject+
 Interceptor:
-        intChannel::ANY intProtocolObject::ANY
+        intChannel::Channel intProtocolObject::ProtocolObject
 Channel:
-        chStub::ANY chBinder::ANY chPObject::ANY chInterceptor::ANY+ chEndPoint::ANY
+        ClientServerChannel
+Channel:
+        chStub::Stub chBinder::Binder chPObject::ProtocolObject chInterceptor::Interceptor+ chEndPoint::BEO
 ClientServerChannel:
         EPSILON
 ControllingObject:
-        coDomain::ANY+
+        SecurityAuthority
+ControllingObject:
+        ManagementAuthority
+ControllingObject:
+        AddressingAuthority
+ControllingObject:
+        NamingAuthority
+ControllingObject:
+        coDomain::Domain+
 SecurityAuthority:
         EPSILON
 ManagementAuthority:
@@ -37,9 +67,17 @@ AddressingAuthority:
 NamingAuthority:
         EPSILON
 ControlledObject:
-        cdoDomain::ANY+
+        cdoDomain::Domain+
 Domain:
-        parentDomain::ANY subDomain::ANY+ domControllingObject::ANY domMember::ANY+
+        SecurityDomain
+Domain:
+        ManagementDomain
+Domain:
+        AddressingDomain
+Domain:
+        NamingDomain
+Domain:
+        parentDomain::Domain subDomain::Domain+ domControllingObject::ControllingObject domMember::ControlledObject+
 SecurityDomain:
         EPSILON
 ManagementDomain:
@@ -47,10 +85,12 @@ ManagementDomain:
 AddressingDomain:
         EPSILON
 NamingDomain:
-        EPSILON
+        EngineeringInterfaceReferenceManagementDomain
+NamingDomain:
+        EngineeringInterfaceReferenceManagementDomain
 EngineeringInterfaceReferenceManagementDomain:
-        eirmdReference::ANY+ eirmdManagementPolicy::ANY
+        eirmdReference::EngineeringInterfaceReference+ eirmdManagementPolicy::EngineeringInterfaceReferenceManagementPolicy
 EngineeringInterfaceReferenceManagementPolicy:
-        eirmpManagementDomain::ANY+
+        eirmpManagementDomain::EngineeringInterfaceReferenceManagementDomain+
 EngineeringInterfaceReference:
-        eirManagementDomain::ANY
+        eirManagementDomain::EngineeringInterfaceReferenceManagementDomain

@@ -1,9 +1,17 @@
 ModelElement:
-        name::ANY
+        AssociationEnd
+ModelElement:
+        Namespace
+ModelElement:
+        Key
+ModelElement:
+        Feature
+ModelElement:
+        name::Name
 Name:
         EPSILON
 AssociationEnd:
-        isNavigable::ANY isOrdered::ANY aggregation::ANY multiplicity::ANY changeable::ANY TargetScope::ANY rfIntegrety::ANY rlIntegrety::ANY
+        isNavigable::Boolean isOrdered::Boolean aggregation::AggregationKind multiplicity::Multiplicity changeable::ChangeableKind TargetScope::ScopeKind rfIntegrety::RlIntegretyKind rlIntegrety::RlIntegretyKind
 AggregationKind:
         EPSILON
 Multiplicity:
@@ -17,22 +25,31 @@ RfIntegretyKind:
 RlIntegretyKind:
         EPSILON
 Namespace:
-        EPSILON
+        GeneralizableElement
+Namespace:
+        GeneralizableElement
 GeneralizableElement:
-        EPSILON
+        Classifier
+GeneralizableElement:
+        Classifier
 Classifier:
-        EPSILON
+        Class
+Classifier:
+        Class
 Class:
-        isActive::ANY mutliplicity::ANY key::ANY+
-Key:
-        EPSILON
+        isActive::Boolean mutliplicity::Multiplicity key::Key+
 Feature:
-        EPSILON
+        StructureFeature
+Feature:
+        Constraint
+Feature:
+        StructureFeature
+        Constraint
 StructureFeature:
-        EPSILON
-Constraint:
-        EPSILON
+        Attribute
+StructureFeature:
+        Attribute
 Attribute:
-        initialValue::ANY isKey::ANY isUnique::ANY
+        initialValue::Expression isKey::Boolean isUnique::Boolean
 Expression:
         EPSILON

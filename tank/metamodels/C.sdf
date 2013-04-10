@@ -4,11 +4,38 @@ exports
   sorts
         CDataType CIntegral CFloating CBitField CVoid CEnumeration CInt CChar CDouble CFloat CLongDouble CUnsignedInt CLong CLongLong CShort CSignedChar CUnsignedChar CWChar UnsignedLong UnsignedLongLong UnsignedShort CClassifier Derived CStructureContents CStructured CStruct CUnion CSourceText CTypedElement CStructuralFeature CField CParameter BehavioralFeature CFunction 
   context-free syntax
-         -> CDataType
+        CIntegral -> CDataType
 
-         -> CIntegral
+        CFloating -> CDataType
 
-         -> CFloating
+        CBitField -> CDataType
+
+        CVoid -> CDataType
+
+        CIntegral -> CDataType
+        CFloating -> CDataType
+        CBitField -> CDataType
+        CVoid -> CDataType
+
+        CEnumeration -> CIntegral
+
+        CInt -> CIntegral
+
+        CChar -> CIntegral
+
+        CEnumeration -> CIntegral
+        CInt -> CIntegral
+        CChar -> CIntegral
+
+        CDouble -> CFloating
+
+        CFloat -> CFloating
+
+        CLongDouble -> CFloating
+
+        CDouble -> CFloating
+        CFloat -> CFloating
+        CLongDouble -> CFloating
 
          -> CBitField
 
@@ -16,9 +43,28 @@ exports
 
          -> CEnumeration
 
-         -> CInt
+        CUnsignedInt -> CInt
 
-         -> CChar
+        CLong -> CInt
+
+        CLongLong -> CInt
+
+        CShort -> CInt
+
+        CUnsignedInt -> CInt
+        CLong -> CInt
+        CLongLong -> CInt
+        CShort -> CInt
+
+        CSignedChar -> CChar
+
+        CUnsignedChar -> CChar
+
+        CWChar -> CChar
+
+        CSignedChar -> CChar
+        CUnsignedChar -> CChar
+        CWChar -> CChar
 
          -> CDouble
 
@@ -26,7 +72,15 @@ exports
 
          -> CLongDouble
 
-         -> CUnsignedInt
+        UnsignedLong -> CUnsignedInt
+
+        UnsignedLongLong -> CUnsignedInt
+
+        UnsignedShort -> CUnsignedInt
+
+        UnsignedLong -> CUnsignedInt
+        UnsignedLongLong -> CUnsignedInt
+        UnsignedShort -> CUnsignedInt
 
          -> CLong
 
@@ -46,28 +100,43 @@ exports
 
          -> UnsignedShort
 
-         -> CClassifier
+        CDataType -> CClassifier
+
+        Derived -> CClassifier
+
+        CDataType -> CClassifier
+        Derived -> CClassifier
 
          -> Derived
 
-        sc_container::ANY -> CStructureContents
+        sc_container::CStructured -> CStructureContents
 
-        contains::ANY+ -> CStructured
+        CStruct -> CStructured
+
+        CUnion -> CStructured
+
+        contains::CStructureContents+ -> CStructured
 
          -> CStruct
 
          -> CUnion
 
-        source::ANY fileName::ANY -> CSourceText
+        source::String fileName::String -> CSourceText
 
-        type::ANY source::ANY -> CTypedElement
+        CParameter -> CTypedElement
 
-         -> CStructuralFeature
+        type::CClassifier source::CSourceText -> CTypedElement
+
+        CField -> CStructuralFeature
+
+        CField -> CStructuralFeature
 
          -> CField
 
-        behavioralFeature::ANY -> CParameter
+        behavioralFeature::BehavioralFeature -> CParameter
 
-        parameters::ANY+ -> BehavioralFeature
+        CFunction -> BehavioralFeature
 
-        isVarArg::ANY -> CFunction
+        parameters::CParameter+ -> BehavioralFeature
+
+        isVarArg::Boolean -> CFunction

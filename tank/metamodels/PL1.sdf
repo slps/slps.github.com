@@ -4,15 +4,25 @@ exports
   sorts
         PLIClassifier PLISimpleType PLINamedType PLIComposedType PLIAlias PLIAttribute PLIComputationalType PLINonComputationalType PLIElement PLIElementInitialValue PLISourceText PLIArray PLIFixedBoundArray PLIFixedLboundArray PLIHBoundArray PLIVariableBoundArray 
   context-free syntax
-        name::ANY typedElements::ANY+ -> PLIClassifier
+        PLISimpleType -> PLIClassifier
 
-        alias::ANY -> PLISimpleType
+        PLINamedType -> PLIClassifier
+
+        PLIComposedType -> PLIClassifier
+
+        name::String typedElements::PLIElement+ -> PLIClassifier
+
+        PLIComputationalType -> PLISimpleType
+
+        PLINonComputationalType -> PLISimpleType
+
+        alias::PLIAlias -> PLISimpleType
 
          -> PLINamedType
 
-        elements::ANY+ -> PLIComposedType
+        elements::PLIElement+ -> PLIComposedType
 
-        type::ANY contains::ANY+ -> PLIAlias
+        type::PLISimpleType contains::PLIAttribute+ -> PLIAlias
 
          -> PLIAttribute
 
@@ -20,18 +30,26 @@ exports
 
          -> PLINonComputationalType
 
-        level::ANY name::ANY sharedType::ANY group::ANY initial::ANY source::ANY array::ANY -> PLIElement
+        level::String name::String sharedType::PLIClassifier group::PLIComposedType initial::PLIElementInitialValue source::PLISourceText array::PLIArray -> PLIElement
 
-        initialValue::ANY -> PLIElementInitialValue
+        initialValue::String -> PLIElementInitialValue
 
-        source::ANY fileName::ANY -> PLISourceText
+        source::String fileName::String -> PLISourceText
 
-        arrayOf::ANY -> PLIArray
+        PLIFixedBoundArray -> PLIArray
 
-        IBound::ANY uBound::ANY referredTo::ANY -> PLIFixedBoundArray
+        PLIFixedLboundArray -> PLIArray
 
-        IBound::ANY uBoundToAllocate::ANY referredTo::ANY -> PLIFixedLboundArray
+        PLIHBoundArray -> PLIArray
 
-        uBound::ANY IBoundToAllocate::ANY referredTo::ANY -> PLIHBoundArray
+        PLIVariableBoundArray -> PLIArray
 
-        IBoundToAllocate::ANY hBoundToAllocate::ANY referredTo::ANY -> PLIVariableBoundArray
+        arrayOf::PLIElement -> PLIArray
+
+        IBound::Integer uBound::Integer referredTo::PLIElement -> PLIFixedBoundArray
+
+        IBound::Integer uBoundToAllocate::String referredTo::PLIElement -> PLIFixedLboundArray
+
+        uBound::Integer IBoundToAllocate::String referredTo::PLIElement -> PLIHBoundArray
+
+        IBoundToAllocate::String hBoundToAllocate::String referredTo::PLIElement -> PLIVariableBoundArray

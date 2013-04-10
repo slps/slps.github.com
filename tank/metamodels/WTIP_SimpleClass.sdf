@@ -4,12 +4,16 @@ exports
   sorts
         Classifier Class PrimitiveDataType Association Attribute 
   context-free syntax
-        name::ANY -> Classifier
+        Class -> Classifier
 
-        is_persistent::ANY parent::ANY attrs::ANY+ -> Class
+        PrimitiveDataType -> Classifier
+
+        name::String -> Classifier
+
+        is_persistent::Boolean parent::Class attrs::Attribute+ -> Class
 
          -> PrimitiveDataType
 
-        name::ANY src::ANY dest::ANY -> Association
+        name::String src::Class dest::Class -> Association
 
-        name::ANY is_primary::ANY type::ANY -> Attribute
+        name::String is_primary::Boolean type::Classifier -> Attribute

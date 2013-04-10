@@ -18,26 +18,34 @@ COBOLInitialValueKind:
         civk_null::EPSILON
         civk_all_literal::EPSILON
 COBOLElement:
-        level::ANY refined::ANY name::ANY sharedType::ANY group::ANY initial::ANY+ contains::ANY+ source::ANY array::ANY
+        COBOLRedefiningElement
+COBOLElement:
+        level::String refined::Boolean name::String sharedType::COBOLClassifier group::COBOLComposedType initial::COBOLElementInitialValue+ contains::COBOL88Element+ source::COBOLSourceText array::COBOLFixedLengthArray
 COBOLClassifier:
-        typeded::ANY name::ANY typedElements::ANY+
+        COBOLSimpleType
+COBOLClassifier:
+        COBOLComposedType
+COBOLClassifier:
+        typeded::Boolean name::String typedElements::COBOLElement+
 COBOLSimpleType:
-        usageValue::ANY pictureString::ANY usage::ANY
+        usageValue::COBOLUsageValue pictureString::String usage::Boolean
 COBOLComposedType:
-        elements::ANY+
+        elements::COBOLElement+
 COBOLElementInitialValue:
-        initVal::ANY valueKind::ANY
+        initVal::String valueKind::COBOLInitialValueKind
 COBOL88Element:
-        name::ANY has::ANY+
+        name::String has::COBOL88ElementValue+
 COBOL88ElementValue:
-        lowerLimit::ANY upperLimit::ANY range::ANY
+        lowerLimit::String upperLimit::String range::Boolean
 COBOLRedefiningElement:
-        redefines::ANY
+        redefines::COBOLElement
 COBOL66Element:
-        name::ANY end::ANY start::ANY
+        name::String end::COBOLElement start::COBOLElement
 COBOLSourceText:
-        source::ANY fileName::ANY
+        source::String fileName::String
 COBOLFixedLengthArray:
-        maxUpper::ANY
+        COBOLVariableLengthArray
+COBOLFixedLengthArray:
+        maxUpper::Integer
 COBOLVariableLengthArray:
-        minUpper::ANY dependingOn::ANY
+        minUpper::Integer dependingOn::COBOLElement

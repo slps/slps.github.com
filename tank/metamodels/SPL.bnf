@@ -1,103 +1,201 @@
 LocatedElement:
-        EPSILON
+        Program
+LocatedElement:
+        Service
+LocatedElement:
+        Session
+LocatedElement:
+        MethodName
+LocatedElement:
+        Branch
+LocatedElement:
+        TypeExpression
+LocatedElement:
+        Declaration
+LocatedElement:
+        StructureProperty
+LocatedElement:
+        FunctionCall
+LocatedElement:
+        Statement
+LocatedElement:
+        SelectMember
+LocatedElement:
+        Expression
+LocatedElement:
+        MessageField
+LocatedElement:
+        Constant
+LocatedElement:
+        Response
 Program:
-        service::ANY
+        service::Service
 Service:
-        name::ANY declarations::ANY+ sessions::ANY+
+        name::String declarations::Declaration+ sessions::Session+
 Session:
-        EPSILON
+        Registration
+Session:
+        Dialog
+Session:
+        Event
+Session:
+        Method
 Registration:
-        declarations::ANY+ sessions::ANY+
+        declarations::Declaration+ sessions::Session+
 Dialog:
-        declarations::ANY+ methods::ANY+
+        declarations::Declaration+ methods::Method+
 Event:
-        eventId::ANY declarations::ANY+ methods::ANY+
+        eventId::String declarations::Declaration+ methods::Method+
 Method:
-        type::ANY direction::ANY methodName::ANY arguments::ANY+ statements::ANY+ branches::ANY+
+        type::TypeExpression direction::Direction methodName::MethodName arguments::Argument+ statements::Statement+ branches::Branch+
 Argument:
         EPSILON
 MethodName:
-        EPSILON
+        SIPMethodName
+MethodName:
+        ControlMethodName
 SIPMethodName:
-        name::ANY
+        name::SIPMethod
 ControlMethodName:
-        name::ANY
+        name::ControlMethod
 Branch:
-        statements::ANY+
+        DefaultBranch
+Branch:
+        NamedBranch
+Branch:
+        statements::Statement+
 DefaultBranch:
         EPSILON
 NamedBranch:
-        name::ANY+
+        name::String+
 TypeExpression:
-        EPSILON
+        SimpleType
+TypeExpression:
+        SequenceType
+TypeExpression:
+        DefinedType
 SimpleType:
-        type::ANY
+        type::PrimitiveType
 SequenceType:
-        modifier::ANY type::ANY size::ANY
+        modifier::Modifier type::PrimitiveType size::Integer
 DefinedType:
-        typeName::ANY
+        typeName::String
 Declaration:
-        EPSILON
+        VariableDeclaration
+Declaration:
+        FunctionDeclaration
+Declaration:
+        StructureDeclaration
 VariableDeclaration:
-        type::ANY initExp::ANY
+        Argument
+VariableDeclaration:
+        WhenHeader
+VariableDeclaration:
+        type::TypeExpression initExp::Expression
 FunctionDeclaration:
-        EPSILON
+        RemoteFunctionDeclaration
+FunctionDeclaration:
+        LocalFunctionDeclaration
 RemoteFunctionDeclaration:
-        functionLocation::ANY
+        functionLocation::FunctionLocation
 LocalFunctionDeclaration:
-        statements::ANY+
+        statements::Statement+
 StructureDeclaration:
-        properties::ANY+
+        properties::Argument+
 StructureProperty:
-        name::ANY type::ANY
+        name::String type::TypeExpression
 FunctionCall:
-        function::ANY parameters::ANY+
+        function::FunctionDeclaration parameters::Expression+
 Statement:
-        EPSILON
+        CompoundStat
+Statement:
+        SetStat
+Statement:
+        DeclarationStat
+Statement:
+        ReturnStat
+Statement:
+        IfStat
+Statement:
+        WhenStat
+Statement:
+        ForeachStat
+Statement:
+        SelectStat
+Statement:
+        FunctionCallStat
+Statement:
+        ContinueStat
+Statement:
+        BreakStat
+Statement:
+        PushStat
 CompoundStat:
-        statements::ANY+
+        statements::Statement+
 SetStat:
-        target::ANY setValue::ANY
+        target::Place setValue::Expression
 DeclarationStat:
-        declaration::ANY
+        declaration::Declaration
 ReturnStat:
-        returnedValue::ANY branch::ANY
+        returnedValue::Expression branch::NamedBranch
 IfStat:
-        condition::ANY thenStatements::ANY+ elseStatements::ANY+
+        condition::Expression thenStatements::Statement+ elseStatements::Statement+
 WhenStat:
-        idExp::ANY whenHeaders::ANY+ statements::ANY+ elseStatements::ANY+
+        idExp::Variable whenHeaders::WhenHeader+ statements::Statement+ elseStatements::Statement+
 ForeachStat:
-        iteratorName::ANY sequenceExp::ANY statements::ANY+
+        iteratorName::String sequenceExp::Expression statements::Statement+
 SelectStat:
-        matchedExp::ANY selectCases::ANY+ selectDefault::ANY
+        matchedExp::Expression selectCases::SelectCase+ selectDefault::SelectDefault
 FunctionCallStat:
-        functionCall::ANY
+        functionCall::FunctionCall
 ContinueStat:
         
 BreakStat:
         
 PushStat:
-        target::ANY pushedValue::ANY
+        target::Place pushedValue::Expression
 WhenHeader:
-        headerId::ANY value::ANY
+        headerId::String value::Constant
 SelectMember:
-        EPSILON
+        SelectDefault
+SelectMember:
+        SelectCase
 SelectDefault:
-        statements::ANY+
+        statements::Statement+
 SelectCase:
-        values::ANY+
+        values::Constant+
 Expression:
-        EPSILON
+        ConstantExp
+Expression:
+        OperatorExp
+Expression:
+        ForwardExp
+Expression:
+        WithExp
+Expression:
+        BlockExp
+Expression:
+        ReasonExp
+Expression:
+        BODYExp
+Expression:
+        RequestURIExp
+Expression:
+        PopExp
+Expression:
+        FunctionCallExp
+Expression:
+        Place
 ConstantExp:
-        value::ANY
+        value::Constant
 OperatorExp:
-        opName::ANY leftExp::ANY rightExp::ANY
+        opName::String leftExp::Expression rightExp::Expression
 ForwardExp:
-        isParallel::ANY exp::ANY
+        isParallel::Boolean exp::Expression
 WithExp:
-        exp::ANY msgFields::ANY+
+        exp::Expression msgFields::MessageField+
 BlockExp:
-        exp::ANY
+        exp::Expression
 ReasonExp:
         
 BODYExp:
@@ -105,53 +203,82 @@ BODYExp:
 RequestURIExp:
         
 PopExp:
-        source::ANY
+        source::Place
 FunctionCallExp:
-        functionCall::ANY
+        functionCall::FunctionCall
 Place:
-        EPSILON
+        SIPHeaderPlace
+Place:
+        VariablePlace
 SIPHeaderPlace:
-        header::ANY
+        header::SIPHeader
 VariablePlace:
-        EPSILON
+        PropertyCallPlace
+VariablePlace:
+        Variable
 PropertyCallPlace:
-        propName::ANY source::ANY
+        propName::String source::VariablePlace
 Variable:
-        source::ANY
+        source::Declaration
 MessageField:
-        EPSILON
+        ReasonMessageField
+MessageField:
+        HeadedMessageField
 ReasonMessageField:
-        exp::ANY
+        exp::Expression
 HeadedMessageField:
-        headerId::ANY
+        headerId::String
 Constant:
-        EPSILON
+        BooleanConstant
+Constant:
+        IntegerConstant
+Constant:
+        StringConstant
+Constant:
+        URIConstant
+Constant:
+        SequenceConstant
+Constant:
+        ResponseConstant
 BooleanConstant:
-        value::ANY
+        value::Boolean
 IntegerConstant:
-        value::ANY
+        value::Integer
 StringConstant:
-        value::ANY
+        value::String
 URIConstant:
-        uri::ANY
+        uri::String
 SequenceConstant:
-        values::ANY+
+        values::Constant+
 ResponseConstant:
-        response::ANY
+        response::Response
 Response:
-        EPSILON
+        SuccessResponse
+Response:
+        ErrorResponse
 SuccessResponse:
-        successKind::ANY
+        successKind::SuccessKind
 ErrorResponse:
-        
+        ClientErrorResponse
+ErrorResponse:
+        GlobalErrorResponse
+ErrorResponse:
+        RedirectionErrorResponse
+ErrorResponse:
+        ServerErrorResponse
+ErrorResponse:
+        ClientErrorResponse
+        GlobalErrorResponse
+        RedirectionErrorResponse
+        ServerErrorResponse
 ClientErrorResponse:
-        errorKind::ANY
+        errorKind::ClientErrorKind
 GlobalErrorResponse:
-        errorKind::ANY
+        errorKind::GlobalErrorKind
 RedirectionErrorResponse:
-        errorKind::ANY
+        errorKind::RedirectionErrorKind
 ServerErrorResponse:
-        errorKind::ANY
+        errorKind::ServerErrorKind
 Direction:
         inout::EPSILON
         in::EPSILON

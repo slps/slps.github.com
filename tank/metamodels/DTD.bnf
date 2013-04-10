@@ -12,40 +12,58 @@ OtherAttributeTypeEnum:
         nmtoken::EPSILON
         nmtakens::EPSILON
 TypeDescription:
-        EPSILON
+        Notation
+TypeDescription:
+        Entity
+TypeDescription:
+        Element
+TypeDescription:
+        AttributeList
+TypeDescription:
+        AttributeDescription
 Notation:
-        content::ANY
+        content::String
 Entity:
-        content::ANY isInternal::ANY
+        content::String isInternal::Boolean
 Element:
-        EPSILON
+        AnyElement
+Element:
+        RestrictedElement
 AnyElement:
         
 RestrictedElement:
-        content::ANY
+        content::ElementContent
 ElementContent:
-        EPSILON
+        Mixed
+ElementContent:
+        Children
 Mixed:
-        elements::ANY
+        elements::String
 Children:
-        EPSILON
+        Sequence
+Children:
+        Leaf
+Children:
+        Choice
 Sequence:
-        children::ANY
+        children::Children
 Leaf:
-        elementName::ANY
+        elementName::String
 Choice:
-        childrenChoice::ANY
+        childrenChoice::Children
 AttributeList:
-        containsAttributes::ANY+
+        containsAttributes::AttributeDescription+
 AttributeDescription:
-        EPSILON
+        NoDefaultValue
+AttributeDescription:
+        DefaultValue
 NoDefaultValue:
-        isRequired::ANY
+        isRequired::Boolean
 DefaultValue:
-        value::ANY isFixed::ANY
+        value::String isFixed::Boolean
 AttributeType:
-        EPSILON
+        Enumeration
 Enumeration:
-        values::ANY
+        values::String
 OtherAttributeType:
-        type::ANY
+        type::OtherAttributeTypeEnum

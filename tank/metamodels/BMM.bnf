@@ -1,61 +1,125 @@
 MotivationElement:
-        name::ANY description::ANY
+        Assessment
+MotivationElement:
+        End
+MotivationElement:
+        Influencer
+MotivationElement:
+        InfluencingOrganization
+MotivationElement:
+        Means
+MotivationElement:
+        PotentialImpact
+MotivationElement:
+        AssessmentCategory
+MotivationElement:
+        InfluencerCategory
+MotivationElement:
+        OrganizationCategory
+MotivationElement:
+        OrganizationUnit
+MotivationElement:
+        BusinessProcess
+MotivationElement:
+        Asset
+MotivationElement:
+        Liability
+MotivationElement:
+        name::String description::String
 Assessment:
-        usingAssessmentUsesUsedAssessment::ANY+ assessmentProvidesImpetusForDirective::ANY+ assessmentIdentifiesPotentialImpact::ANY+ assessmentJudgmentOfInfluencer::ANY+
+        usingAssessmentUsesUsedAssessment::Assessment+ assessmentProvidesImpetusForDirective::Directive+ assessmentIdentifiesPotentialImpact::PotentialImpact+ assessmentJudgmentOfInfluencer::Influencer+
 End:
-        EPSILON
+        Vision
+End:
+        DesiredResult
+End:
+        Vision
+        DesiredResult
 Influencer:
-        EPSILON
+        Regulation
+Influencer:
+        Regulation
 InfluencingOrganization:
-        influencingOrganizationIsSourceOfInfluencer::ANY+
+        influencingOrganizationIsSourceOfInfluencer::Influencer+
 Means:
-        EPSILON
+        Mission
+Means:
+        CourseOfAction
+Means:
+        Directive
+Means:
+        Mission
+        CourseOfAction
+        Directive
 PotentialImpact:
-        potentialImpactProvidesImpetusForDirective::ANY+
+        PotentialReward
+PotentialImpact:
+        Risk
+PotentialImpact:
+        potentialImpactProvidesImpetusForDirective::Directive+
 AssessmentCategory:
-        assessmentCategoryCategoriesAssessment::ANY+
+        assessmentCategoryCategoriesAssessment::Assessment+
 InfluencerCategory:
-        influencerCategoryCategorizesInfluencer::ANY+
+        influencerCategoryCategorizesInfluencer::Influencer+
 OrganizationCategory:
-        organizationCategoryCategorizesInfluencingOrganization::ANY+
+        organizationCategoryCategorizesInfluencingOrganization::InfluencingOrganization+
 OrganizationUnit:
-        organizationUnitDefinesEnd::ANY+ organizationUnitEstablishesMeans::ANY+ organizationUnitIsResponsibleForAsset::ANY+ organizationUnitIsResponsibleForLiability::ANY+ organizationUnitRecognizesInfluencer::ANY+ organizationUnitActAsInfluencingOrganization::ANY+ organizationUnitMakesAssessment::ANY+ organizationUnitIsResponsibleForBusinessProcess::ANY+
+        organizationUnitDefinesEnd::End+ organizationUnitEstablishesMeans::Means+ organizationUnitIsResponsibleForAsset::Asset+ organizationUnitIsResponsibleForLiability::Liability+ organizationUnitRecognizesInfluencer::Influencer+ organizationUnitActAsInfluencingOrganization::InfluencingOrganization+ organizationUnitMakesAssessment::Assessment+ organizationUnitIsResponsibleForBusinessProcess::BusinessProcess+
 BusinessProcess:
-        businessProcessRealizesCourseOfAction::ANY+ businessProcessManagerAsset::ANY+ businessProcessDeliversOfeering::ANY+
+        businessProcessRealizesCourseOfAction::CourseOfAction+ businessProcessManagerAsset::Asset+ businessProcessDeliversOfeering::Offering+
 Asset:
-        EPSILON
+        Resource
+Asset:
+        FixedAsset
+Asset:
+        Resource
+        FixedAsset
 Liability:
-        liabilityClaimsResource::ANY+
+        liabilityClaimsResource::Resource+
 Resource:
         EPSILON
 Mission:
-        missionMakesOperativeVision::ANY
+        Strategy
+Mission:
+        missionMakesOperativeVision::Vision
 CourseOfAction:
-        enablingCourseofActionEnablesEnabledCourseOfAction::ANY+ broaderCourseofActionIncludesMoreSpecificCourseOfAction::ANY+ courseOfActionChanneIsEffortsTowardsDesiredResult::ANY courseOfActionDeployAsset::ANY+ courseOfActionDefiensOffering::ANY+
+        Tactic
+CourseOfAction:
+        enablingCourseofActionEnablesEnabledCourseOfAction::CourseOfAction+ broaderCourseofActionIncludesMoreSpecificCourseOfAction::CourseOfAction+ courseOfActionChanneIsEffortsTowardsDesiredResult::DesiredResult courseOfActionDeployAsset::Asset+ courseOfActionDefiensOffering::Offering+
 FixedAsset:
-        fixedAssetProvidesResource::ANY+
+        Offering
+FixedAsset:
+        fixedAssetProvidesResource::Resource+
 Offering:
-        offeringRequiresResource::ANY+ offeringUsesFixedAsset::ANY+
+        offeringRequiresResource::Resource+ offeringUsesFixedAsset::FixedAsset+
 Directive:
-        directiveGovernsCourseOfAction::ANY+ directiveIsSourceOfCourseOfAction::ANY+ directiveActAsRegulation::ANY+ directiveSupportsAchievementOfDesiredResult::ANY+ directiveGovernsUseOfAsset::ANY+
+        BusinessRule
+Directive:
+        BusinessPolicy
+Directive:
+        directiveGovernsCourseOfAction::CourseOfAction+ directiveIsSourceOfCourseOfAction::CourseOfAction+ directiveActAsRegulation::Regulation+ directiveSupportsAchievementOfDesiredResult::DesiredResult+ directiveGovernsUseOfAsset::Asset+
 Strategy:
-        strategyIsAComponentOfThePlanForMission::ANY+ strategyDeterminesOrganizationUnit::ANY+
+        strategyIsAComponentOfThePlanForMission::Mission+ strategyDeterminesOrganizationUnit::OrganizationUnit+
 Tactic:
-        tacticImplementsStrategy::ANY+ tacticEffectsEnforcementLevelOfBusinessRule::ANY+
+        tacticImplementsStrategy::Strategy+ tacticEffectsEnforcementLevelOfBusinessRule::BusinessRule+
 BusinessRule:
-        businessRuleGuidesBusinessProcess::ANY+
+        businessRuleGuidesBusinessProcess::BusinessProcess+
 BusinessPolicy:
-        businessPolicyIsBasisForBusinessRule::ANY+ broaderBusinessPolicyIncludesMoreSpecificBusinessPolicy::ANY+ businessPolicyGovernsBusinessProcess::ANY+
+        businessPolicyIsBasisForBusinessRule::BusinessRule+ broaderBusinessPolicyIncludesMoreSpecificBusinessPolicy::BusinessPolicy+ businessPolicyGovernsBusinessProcess::BusinessProcess+
 Regulation:
         EPSILON
 Vision:
         EPSILON
 DesiredResult:
-        broaderDesiredResultIncludesMoreSpecificDesiredResult::ANY+
+        Goal
+DesiredResult:
+        Objective
+DesiredResult:
+        broaderDesiredResultIncludesMoreSpecificDesiredResult::DesiredResult+
 Goal:
-        goalAmplidfiesVision::ANY
+        goalAmplidfiesVision::Vision
 Objective:
-        objectiveQuantifiesGoal::ANY+
+        objectiveQuantifiesGoal::Goal+
 PotentialReward:
         EPSILON
 Risk:

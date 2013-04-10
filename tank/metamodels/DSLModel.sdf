@@ -4,30 +4,44 @@ exports
   sorts
         Model Element ModelElement ModelElementLink EmbeddingLink ReferenceLink NamedElement Property Role Value IntegerValue DoubleValue BooleanValue StringValue 
   context-free syntax
-        domainModel::ANY contents::ANY+ -> Model
+        domainModel::PrimitiveTypes/String contents::ModelElement+ -> Model
 
-         -> Element
+        ModelElement -> Element
 
-        parentLink::ANY properties::ANY+ embeddinglinks::ANY+ referencelinks::ANY+ -> ModelElement
+        ReferenceLink -> Element
 
-        links::ANY+ -> ModelElementLink
+        ModelElementLink -> ModelElement
 
-        owner::ANY elements::ANY+ -> EmbeddingLink
+        parentLink::EmbeddingLink properties::Property+ embeddinglinks::EmbeddingLink+ referencelinks::ReferenceLink+ -> ModelElement
 
-        owner::ANY modelElement::ANY roles::ANY -> ReferenceLink
+        links::ReferenceLink+ -> ModelElementLink
 
-         -> NamedElement
+        owner::ModelElement elements::ModelElement+ -> EmbeddingLink
 
-        owner::ANY value::ANY -> Property
+        owner::ModelElement modelElement::ModelElementLink roles::Role -> ReferenceLink
 
-        element::ANY owner::ANY -> Role
+        EmbeddingLink -> NamedElement
 
-         -> Value
+        Property -> NamedElement
 
-        value::ANY -> IntegerValue
+        Role -> NamedElement
 
-        value::ANY -> DoubleValue
+        owner::ModelElement value::Value -> Property
 
-        value::ANY -> BooleanValue
+        element::ModelElement owner::ReferenceLink -> Role
 
-        value::ANY -> StringValue
+        IntegerValue -> Value
+
+        DoubleValue -> Value
+
+        BooleanValue -> Value
+
+        StringValue -> Value
+
+        value::PrimitiveTypes/Integer -> IntegerValue
+
+        value::PrimitiveTypes/Double -> DoubleValue
+
+        value::PrimitiveTypes/Boolean -> BooleanValue
+
+        value::PrimitiveTypes/String -> StringValue

@@ -3,13 +3,13 @@ module DXF
 
 syntax DXF
         = 
-        ANY meshes+
+        Mesh meshes+
  ;
 syntax Mesh
         = 
-        ANY name ANY points+
+        String name Point points+
  ;
 syntax Point
         = 
-        ANY name ANY mesh ANY x ANY y ANY z
+        String name Mesh mesh Double x Double y Double z
  ;

@@ -4,62 +4,82 @@ AttributeUseType:
         prohibited::EPSILON
         required::EPSILON
 AnnotedElement:
-        EPSILON
+        NamedElement
+AnnotedElement:
+        XSchema
 Annotation:
-        documentations::ANY+ applicationInfos::ANY+ annotedElement::ANY
+        documentations::Documentation+ applicationInfos::ApplicationInfo+ annotedElement::AnnotedElement
 Documentation:
-        text::ANY
+        text::String
 ApplicationInfo:
-        text::ANY
+        text::String
 NamedElement:
-        EPSILON
+        XSchemaContentElement
 XSchema:
-        namespace::ANY contents::ANY+
+        namespace::String contents::XSchemaContentElement+
 XSchemaContentElement:
-        EPSILON
-Parameters:
-        EPSILON
+        Parameters
+XSchemaContentElement:
+        AbstractType
 Element:
-        references::ANY+
+        references::ElementRef+
 Occurable:
-        EPSILON
+        AbstractContent
+Occurable:
+        AbstractAttributeGroupContent
 AbstractContent:
-        EPSILON
+        Container
+AbstractContent:
+        AtomicContent
 Container:
-        EPSILON
+        All
+Container:
+        Choice
+Container:
+        Sequence
 AtomicContent:
-        EPSILON
+        ElementRef
+AtomicContent:
+        GroupRef
 ElementRef:
-        referencedElement::ANY
+        referencedElement::Element
 GroupRef:
-        referencedGroup::ANY
+        referencedGroup::Group
 All:
-        contents::ANY+
+        contents::AbstractContent+
 Group:
-        references::ANY+
+        references::GroupRef+
 Choice:
-        contents::ANY+
+        contents::AbstractContent+
 Sequence:
-        contents::ANY+
+        contents::AbstractContent+
 AbstractAttributeGroupContent:
-        EPSILON
+        AtomicAttributeGroupContent
 AttributeGroup:
-        contents::ANY+ references::ANY+
+        contents::AbstractAttributeGroupContent+ references::AttributeGroupRef+
 AttributeGroupRef:
-        referencedAttributeGroup::ANY
+        referencedAttributeGroup::AttributeGroup
 AtomicAttributeGroupContent:
-        EPSILON
+        AttributeGroupRef
+AtomicAttributeGroupContent:
+        AttributeRef
 Attribute:
-        use::ANY references::ANY+
+        use::AttributeUseType references::AttributeRef+
 AttributeRef:
-        referencedAttribute::ANY
+        referencedAttribute::Attribute
 AbstractType:
-        EPSILON
+        SimpleType
+AbstractType:
+        ComplexType
 SimpleType:
-        extensions::ANY+
+        extensions::ComplexTypeSimpleContent+
 ComplexType:
-        extensions::ANY+ content::ANY attributes::ANY+
+        ComplexTypeSimpleContent
+ComplexType:
+        ComplexTypeComplexContent
+ComplexType:
+        extensions::ComplexTypeComplexContent+ content::AbstractContent attributes::AbstractAttributeGroupContent+
 ComplexTypeSimpleContent:
-        base::ANY
+        base::SimpleType
 ComplexTypeComplexContent:
-        base::ANY
+        base::ComplexType

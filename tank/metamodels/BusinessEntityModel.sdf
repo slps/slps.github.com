@@ -2,24 +2,32 @@ module Main
 
 exports
   sorts
-        DataType Action Class BusinessEntityPropertySet BusinessRole Task ArtifactRole PerformerRole OrganisationalUnit BusinessEntity 
+        DataType Action Class BusinessRole Task ArtifactRole PerformerRole OrganisationalUnit BusinessEntity 
   context-free syntax
-         -> DataType
+        BusinessEntityPropertySet -> DataType
 
-         -> Action
+        BusinessEntityPropertySet -> DataType
 
-         -> Class
+        BusinessRole -> Action
 
-         -> BusinessEntityPropertySet
+        BusinessRole -> Action
 
-         -> BusinessRole
+        BusinessEntity -> Class
 
-        associatedWith::ANY+ needs::ANY+ -> Task
+        BusinessEntity -> Class
 
-        characterisedby::ANY typ::ANY task::ANY+ fille::ANY+ -> ArtifactRole
+        ArtifactRole -> BusinessRole
 
-        perform::ANY -> PerformerRole
+        PerformerRole -> BusinessRole
 
-        characterisedby::ANY typ::ANY task::ANY+ fille::ANY+ -> OrganisationalUnit
+        OrganisationalUnit -> BusinessRole
 
-        placehold::ANY+ -> BusinessEntity
+        associatedWith::BusinessRole+ needs::ArtifactRole+ -> Task
+
+        characterisedby::BusinessEntityPropertySet typ::Class task::Task+ fille::BusinessEntity+ -> ArtifactRole
+
+        perform::Task -> PerformerRole
+
+        characterisedby::BusinessEntityPropertySet typ::Class task::Task+ fille::BusinessEntity+ -> OrganisationalUnit
+
+        placehold::BusinessRole+ -> BusinessEntity

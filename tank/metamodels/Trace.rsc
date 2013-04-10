@@ -3,17 +3,17 @@ module Trace
 
 syntax Trace
         = 
-        ANY levels+ ANY name
+        Level levels+ String name
  ;
 syntax Level
         = 
-        ANY trace ANY calls+
+        Trace trace Call calls+
  ;
 syntax Call
         = 
-        ANY level ANY indexes+ ANY methodName ANY DBAccessesNumber ANY DBRowsNumber ANY CPUTime
+        Level level Index indexes+ String methodName Integer DBAccessesNumber Integer DBRowsNumber Integer CPUTime
  ;
 syntax Index
         = 
-        value: ANY
+        value: Integer
  ;

@@ -4,95 +4,137 @@ exports
   sorts
         Matlab BlockDefaults Model AnnotationDefaults LineDefaults System Subsystem Block Annotation Line DirectLine InputPort Branch BranchedLine Primitive Port Reference Masked Normal Parameter OutputPort Type Double INteger Enumeration BOolean TrueFalse Text Vector DirectBranch NestedBranch Machine Junction Transition Event Data Instance Target Chart State Props Range Array StateFlow TransitionTerminal Simulink 
   context-free syntax
-        model::ANY+ -> Matlab
+        model::Model+ -> Matlab
 
-        blockDefaults::ANY model::ANY -> BlockDefaults
+        Block -> BlockDefaults
 
-        name::ANY matlab::ANY annotationDefaults::ANY+ system::ANY+ blockDefaults::ANY+ lineDefaults::ANY+ simulink::ANY -> Model
+        blockDefaults::String model::Model -> BlockDefaults
 
-        annotationDefaults::ANY model::ANY -> AnnotationDefaults
+        name::String matlab::Matlab annotationDefaults::AnnotationDefaults+ system::System+ blockDefaults::BlockDefaults+ lineDefaults::LineDefaults+ simulink::Simulink -> Model
 
-        lineDefaults::ANY model::ANY -> LineDefaults
+        Annotation -> AnnotationDefaults
 
-        name::ANY blocks::ANY+ lines::ANY+ annotations::ANY+ model::ANY parentSubsystem::ANY -> System
+        annotationDefaults::String model::Model -> AnnotationDefaults
 
-        system::ANY -> Subsystem
+        Line -> LineDefaults
 
-        name::ANY blockType::ANY description::ANY priority::ANY tag::ANY position::ANY mySystem::ANY ports::ANY+ -> Block
+        lineDefaults::String model::Model -> LineDefaults
 
-        position::ANY text::ANY system::ANY -> Annotation
+        name::String blocks::Block+ lines::Line+ annotations::Annotation+ model::Model parentSubsystem::Subsystem -> System
 
-        points::ANY id::ANY srcPort::ANY system::ANY -> Line
+        Masked -> Subsystem
 
-        destPort1::ANY -> DirectLine
+        Normal -> Subsystem
 
-        owningDirectLine::ANY owningDirectBranch::ANY -> InputPort
+        system::System -> Subsystem
 
-        points::ANY branchedLine::ANY nestedBranch::ANY -> Branch
+        Subsystem -> Block
 
-        branchs::ANY+ -> BranchedLine
+        Primitive -> Block
 
-        id::ANY parameters::ANY+ refPort::ANY -> Primitive
+        Reference -> Block
 
-        id::ANY number::ANY portBlock::ANY primitive::ANY -> Port
+        name::String blockType::String description::String priority::String tag::String position::String mySystem::System ports::Port+ -> Block
 
-        sourceType::ANY sourceBlock::ANY parameters::ANY+ -> Reference
+        position::String text::String system::System -> Annotation
+
+        DirectLine -> Line
+
+        BranchedLine -> Line
+
+        points::String id::String srcPort::OutputPort system::System -> Line
+
+        destPort1::InputPort -> DirectLine
+
+        owningDirectLine::DirectLine owningDirectBranch::DirectBranch -> InputPort
+
+        DirectBranch -> Branch
+
+        NestedBranch -> Branch
+
+        points::String branchedLine::BranchedLine nestedBranch::NestedBranch -> Branch
+
+        branchs::Branch+ -> BranchedLine
+
+        id::String parameters::Parameter+ refPort::Port -> Primitive
+
+        InputPort -> Port
+
+        OutputPort -> Port
+
+        id::String number::String portBlock::Block primitive::Primitive -> Port
+
+        sourceType::String sourceBlock::String parameters::Parameter+ -> Reference
 
          -> Masked
 
          -> Normal
 
-        name::ANY le_reference::ANY primitive::ANY -> Parameter
+        Type -> Parameter
 
-        owningLine::ANY -> OutputPort
+        Double -> Parameter
 
-        value::ANY -> Type
+        INteger -> Parameter
 
-        value::ANY -> Double
+        Enumeration -> Parameter
 
-        value::ANY -> INteger
+        BOolean -> Parameter
 
-        value::ANY -> Enumeration
+        Text -> Parameter
 
-        value::ANY -> BOolean
+        Vector -> Parameter
+
+        name::String le_reference::Reference primitive::Primitive -> Parameter
+
+        owningLine::Line -> OutputPort
+
+        value::String -> Type
+
+        value::String -> Double
+
+        value::String -> INteger
+
+        value::String -> Enumeration
+
+        value::TrueFalse -> BOolean
 
         True:: -> TrueFalse
         False:: -> TrueFalse
 
-        value::ANY -> Text
+        value::String -> Text
 
-        value::ANY -> Vector
+        value::String -> Vector
 
-        id::ANY destPort::ANY -> DirectBranch
+        id::String destPort::InputPort -> DirectBranch
 
-        branchs::ANY+ -> NestedBranch
+        branchs::Branch+ -> NestedBranch
 
-        name::ANY id::ANY events::ANY+ data::ANY+ instances::ANY+ targets::ANY+ stateFlow::ANY -> Machine
+        name::String id::String events::Event+ data::Data+ instances::Instance+ targets::Target+ stateFlow::StateFlow -> Machine
 
-        _id::ANY id::ANY type::ANY position::ANY state::ANY chart::ANY -> Junction
+        _id::String id::String type::String position::String state::State chart::Chart -> Junction
 
-        _id::ANY dataLimites::ANY id::ANY trigger::ANY condition::ANY conditionAction::ANY action::ANY chart::ANY state::ANY -> Transition
+        _id::String dataLimites::String id::String trigger::String condition::String conditionAction::String action::String chart::Chart state::State -> Transition
 
-        name::ANY id::ANY scope::ANY description::ANY trigger::ANY machine::ANY chart::ANY state::ANY -> Event
+        name::String id::String scope::String description::String trigger::String machine::Machine chart::Chart state::State -> Event
 
-        name::ANY id::ANY scope::ANY description::ANY units::ANY dataType::ANY props::ANY+ state::ANY chart::ANY machine::ANY -> Data
+        name::String id::String scope::String description::String units::String dataType::String props::Props+ state::State chart::Chart machine::Machine -> Data
 
-        _id::ANY id::ANY name::ANY machine::ANY -> Instance
+        _id::String id::String name::String machine::Machine -> Instance
 
-        name::ANY id::ANY codeCommand::ANY description::ANY makeCommand::ANY codeFlags::ANY checksumOld::ANY machine::ANY -> Target
+        name::String id::String codeCommand::String description::String makeCommand::String codeFlags::String checksumOld::String machine::Machine -> Target
 
-        name::ANY id::ANY _id::ANY decomposotion::ANY updateMethode::ANY sampleTime::ANY junctions::ANY+ events::ANY+ transitions::ANY+ data::ANY+ states::ANY+ -> Chart
+        name::String id::String _id::String decomposotion::String updateMethode::String sampleTime::String junctions::Junction+ events::Event+ transitions::Transition+ data::Data+ states::State+ -> Chart
 
-        name::ANY id::ANY _id::ANY type::ANY entryAction::ANY exitAction::ANY duringAction::ANY eventActions::ANY decomposition::ANY position::ANY junctions::ANY+ events::ANY+ transitions::ANY+ data::ANY+ chart::ANY states::ANY+ -> State
+        name::String id::String _id::String type::String entryAction::String exitAction::String duringAction::String eventActions::String decomposition::String position::String junctions::Junction+ events::Event+ transitions::Transition+ data::Data+ chart::Chart states::State+ -> State
 
-        initialValue::ANY arrays::ANY+ ranges::ANY+ data::ANY -> Props
+        initialValue::String arrays::Array+ ranges::Range+ data::Data -> Props
 
-        maximum::ANY minimum::ANY props::ANY -> Range
+        maximum::String minimum::String props::Props -> Range
 
-        firstIndex::ANY size::ANY props::ANY -> Array
+        firstIndex::String size::String props::Props -> Array
 
-        stateFlow::ANY machines::ANY+ simulink::ANY -> StateFlow
+        stateFlow::String machines::Machine+ simulink::Simulink -> StateFlow
 
-        _id::ANY -> TransitionTerminal
+        _id::String -> TransitionTerminal
 
-        simulink::ANY stateFlows::ANY+ models::ANY+ -> Simulink
+        simulink::String stateFlows::StateFlow+ models::Model+ -> Simulink

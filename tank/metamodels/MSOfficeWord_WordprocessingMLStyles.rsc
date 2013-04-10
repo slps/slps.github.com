@@ -3,59 +3,61 @@ module MSOfficeWord_WordprocessingMLStyles
 
 syntax DateTimeType
         = 
-        ANY year ANY month ANY day ANY hour ANY minute ANY second
+        Integer year Integer month Integer day Integer hour Integer minute Integer second
  ;
 syntax VersionType
         = 
-        ANY n ANY nn
+        Integer n Integer nn
  ;
 syntax ValueType
-        = 
-        ()
+        = StringValue
+        | FloatValue
+        | DateTimeTypeValue
+        | BooleanValue
  ;
 syntax StringValue
         = 
-        value: ANY
+        value: String
  ;
 syntax FloatValue
         = 
-        value: ANY
+        value: Double
  ;
 syntax DateTimeTypeValue
         = 
-        value: ANY
+        value: DateTimeType
  ;
 syntax BooleanValue
         = 
-        value: ANY
+        value: Boolean
  ;
 syntax DocumentPropertiesCollection
         = 
-        ANY dp_wordDocument ANY title ANY subject ANY keywords ANY description ANY category ANY author ANY lastAuthor ANY manager ANY company ANY hyperlinkBase ANY revision ANY presentationFormat ANY guid ANY appName ANY version ANY totalTime ANY lastPrinted ANY created ANY lastSaved ANY pages ANY words ANY characters ANY charactersWithSpaces ANY bytes ANY lines ANY paragraphs
+        WordDocument dp_wordDocument String title String subject String keywords String description String category String author String lastAuthor String manager String company String hyperlinkBase Integer revision String presentationFormat String guid String appName VersionType version Integer totalTime DateTimeType lastPrinted DateTimeType created DateTimeType lastSaved Integer pages Integer words Integer characters Integer charactersWithSpaces Integer bytes Integer lines Integer paragraphs
  ;
 syntax CustomDocumentPropertiesCollection
         = 
-        ANY cdp_wordDocument ANY customDocumentProperties+
+        WordDocument cdp_wordDocument CustomDocumentProperty customDocumentProperties+
  ;
 syntax CustomDocumentProperty
         = 
-        ANY customDocumentProperty_cdpe ANY name ANY value
+        CustomDocumentPropertiesCollection customDocumentProperty_cdpe String name ValueType value
  ;
 syntax SmartTagType
         = 
-        ANY smartTagType_ste ANY namespaceuri ANY name ANY url
+        SmartTagsCollection smartTagType_ste String namespaceuri String name String url
  ;
 syntax SmartTagsCollection
         = 
-        ANY st_wordDocument ANY smartTagTypes+
+        WordDocument st_wordDocument SmartTagType smartTagTypes+
  ;
 syntax StringProperty
         = 
         ()
  ;
 syntax StringType
-        = 
-        val: ANY
+        = StringProperty
+        | val: String
  ;
 syntax BreakType
         = bt_page: ()
@@ -90,7 +92,7 @@ syntax StyleKindValue
  ;
 syntax UnderlineProperty
         = 
-        ANY val ANY color
+        UnderlineValues val String color
  ;
 syntax UnderlineValues
         = uv_single: ()
@@ -144,55 +146,66 @@ syntax JustificationValue
  ;
 syntax WordDocument
         = 
-        ANY wd_smartTags ANY wd_docProperties ANY wd_customDocProperties ANY ignoreSubtree ANY ignoreElements ANY fonts ANY lists ANY styles ANY docPr ANY body
+        SmartTagsCollection wd_smartTags DocumentPropertiesCollection wd_docProperties CustomDocumentPropertiesCollection wd_customDocProperties StringProperty ignoreSubtree StringProperty ignoreElements FontsListElt fonts ListsElt lists StylesElt styles DocPrElt docPr BodyElt body
  ;
 syntax DocPrElt
         = 
-        dpe_wordDocument: ANY
+        dpe_wordDocument: WordDocument
  ;
 syntax BodyElt
         = 
-        ANY be_wordDocument ANY blockLevelElts+ ANY sectPr
+        WordDocument be_wordDocument BlockLevelElt blockLevelElts+ SectPrElt sectPr
  ;
 syntax BlockLevelElt
-        = 
-        ()
+        = BlockLevelChunkElt
+        | CfChunk
  ;
 syntax BlockLevelChunkElt
-        = 
-        ()
+        = ParaElt
+        | TableElt
+        | RunLevelElt
  ;
 syntax ParaElt
         = 
-        ANY pPr ANY pContentElts+
+        ParaPrElt pPr ParaContentElt pContentElts+
  ;
 syntax ParaPrElt
         = 
-        ANY ppe_pElt ANY ppe_styleElt ANY pStyle ANY keepNext ANY keepLines ANY pageBreakBefore ANY supressLineNumbers ANY suppressAutoHyphens ANY contextualSpacing ANY bidi ANY justification
+        ParaElt ppe_pElt StyleElt ppe_styleElt StringProperty pStyle OnOffType keepNext OnOffType keepLines OnOffType pageBreakBefore OnOffType supressLineNumbers OnOffType suppressAutoHyphens OnOffType contextualSpacing OnOffType bidi JustificationValue justification
  ;
 syntax ParaContentElt
-        = 
-        ()
+        = RunElt
+        | SimpleFieldElt
+        | HLinkElt
+        | SubDocElt
  ;
 syntax RunElt
         = 
-        ANY rPr ANY rContentElts+
+        RunPrElt rPr RunContentElt rContentElts+
  ;
 syntax RunPrElt
         = 
-        ANY rpe_rElt ANY rpe_styleElt ANY rStyle ANY rFonts ANY bold ANY bold_cs ANY italic ANY italic_cs ANY capitals ANY smallCapitals ANY strike ANY doubleStrike ANY outline ANY shadow ANY emboss ANY imprint ANY noProof ANY vanish ANY specVanish ANY rtl ANY cs ANY underline ANY color ANY highlight ANY verticalAlign ANY language
+        RunElt rpe_rElt StyleElt rpe_styleElt StringProperty rStyle FontsElt rFonts OnOffType bold OnOffType bold_cs OnOffType italic OnOffType italic_cs OnOffType capitals OnOffType smallCapitals OnOffType strike OnOffType doubleStrike OnOffType outline OnOffType shadow OnOffType emboss OnOffType imprint OnOffType noProof OnOffType vanish OnOffType specVanish OnOffType rtl OnOffType cs UnderlineProperty underline String color HighlightColorValues highlight VerticalAlignRunType verticalAlign LangElt language
  ;
 syntax LangElt
         = 
-        ANY le_runPrElt ANY val ANY bidi
+        RunPrElt le_runPrElt String val String bidi
  ;
 syntax RunContentElt
-        = 
-        ()
+        = BreakElt
+        | NoBreakHyphen
+        | SoftHyphen
+        | AnnotationRef
+        | FootnoteRef
+        | EndnoteRef
+        | Separator
+        | ContinuationSeparator
+        | PgNum
+        | Cr
  ;
 syntax BreakElt
         = 
-        type: ANY
+        type: BreakType
  ;
 syntax Text
         = 
@@ -212,49 +225,45 @@ syntax DelInstrText
  ;
 syntax NoBreakHyphen
         = 
-        ANY rce_rElt
+        rce_rElt: RunElt
  ;
 syntax SoftHyphen
         = 
-        ANY rce_rElt
+        rce_rElt: RunElt
  ;
 syntax AnnotationRef
         = 
-        ANY rce_rElt
+        rce_rElt: RunElt
  ;
 syntax FootnoteRef
         = 
-        ANY rce_rElt
+        rce_rElt: RunElt
  ;
 syntax EndnoteRef
         = 
-        ANY rce_rElt
+        rce_rElt: RunElt
  ;
 syntax Separator
         = 
-        ANY rce_rElt
+        rce_rElt: RunElt
  ;
 syntax ContinuationSeparator
         = 
-        ANY rce_rElt
+        rce_rElt: RunElt
  ;
 syntax PgNum
         = 
-        ANY rce_rElt
+        rce_rElt: RunElt
  ;
 syntax Cr
         = 
-        ANY rce_rElt
+        rce_rElt: RunElt
  ;
 syntax Footnote
         = 
         ()
  ;
 syntax Endnote
-        = 
-        ()
- ;
-syntax NoteElt
         = 
         ()
  ;
@@ -268,7 +277,7 @@ syntax Symbol
  ;
 syntax SymElt
         = 
-        ANY font ANY char
+        StringType font StringType char
  ;
 syntax Tab
         = 
@@ -280,95 +289,95 @@ syntax FldChar
  ;
 syntax FldCharElt
         = 
-        ANY fldData ANY fldCharType ANY fldLock
+        StringType fldData FldCharTypeProperty fldCharType OnOffType fldLock
  ;
 syntax TableElt
         = 
-        ANY tblPr ANY tblGrid ANY tblContent+
+        TablePrElt tblPr TableGridElt tblGrid TableContentElt tblContent+
  ;
 syntax TablePrElt
         = 
-        ANY tpe_tblElt ANY tpe_styleElt
+        TableElt tpe_tblElt StyleElt tpe_styleElt
  ;
 syntax TableGridElt
         = 
-        tge_tblElt: ANY
+        tge_tblElt: TableElt
  ;
 syntax TableContentElt
         = 
-        ANY tce_tblElt ANY tr+ ANY tce_runLevelElts
+        TableElt tce_tblElt RowElt tr+ RunLevelElt tce_runLevelElts
  ;
 syntax RowElt
         = 
-        ANY re_tblContentElt ANY tblPrEx ANY trPr ANY rowContent+
+        TableContentElt re_tblContentElt TablePrExElt tblPrEx TableRowPrElt trPr RowContentElt rowContent+
  ;
 syntax TablePrExElt
         = 
-        tpee_rowElt: ANY
+        tpee_rowElt: RowElt
  ;
 syntax TableRowPrElt
         = 
-        ANY tpe_rowElt ANY trpe_styleElt
+        RowElt tpe_rowElt StyleElt trpe_styleElt
  ;
 syntax RowContentElt
         = 
-        ANY rce_rowElt ANY tc+ ANY rce_runLevelElts
+        RowElt rce_rowElt TableCellElt tc+ RunLevelElt rce_runLevelElts
  ;
 syntax TableCellElt
         = 
-        ANY tce_rowContentElt ANY tcPr ANY tce_content+
+        RowContentElt tce_rowContentElt TableCellPrElt tcPr BlockLevelElt tce_content+
  ;
 syntax TableCellPrElt
         = 
-        ANY tcpe_tableCellElt ANY tcpe_styleElt
+        TableCellElt tcpe_tableCellElt StyleElt tcpe_styleElt
  ;
 syntax FontsListElt
         = 
-        ANY fle_wordDocument ANY defaultFonts ANY fonts+
+        WordDocument fle_wordDocument FontsElt defaultFonts FontElt fonts+
  ;
 syntax FontsElt
         = 
-        ANY fse_fontsListElt ANY fse_runPrElt ANY hint ANY ascii ANY h_ansi ANY fareast ANY cs
+        FontsListElt fse_fontsListElt RunPrElt fse_runPrElt HintType hint StringType ascii StringType h_ansi StringType fareast StringType cs
  ;
 syntax FontElt
         = 
-        ANY fe_fontsListElt ANY name ANY altName
+        FontsListElt fe_fontsListElt StringType name StringProperty altName
  ;
 syntax StylesElt
         = 
-        ANY se_wordDocument ANY versionOfBuiltInStylenames ANY styles+
+        WordDocument se_wordDocument Double versionOfBuiltInStylenames StyleElt styles+
  ;
 syntax StyleElt
         = 
-        ANY se_stylesElt ANY type ANY styleId ANY default ANY name ANY aliases ANY sti ANY basedOn ANY next ANY link ANY autoRedefine ANY hidden ANY semiHidden ANY locked ANY personal ANY personalCompose ANY personalReply ANY rsid ANY se_pPr ANY se_rPr ANY se_tblPr ANY se_trPr ANY se_tcPr
+        StylesElt se_stylesElt StyleKindValue type StringType styleId OnOffType default StringProperty name StringProperty aliases Double sti StringProperty basedOn StringProperty next StringProperty link OnOffType autoRedefine OnOffType hidden OnOffType semiHidden OnOffType locked OnOffType personal OnOffType personalCompose OnOffType personalReply StringType rsid ParaPrElt se_pPr RunPrElt se_rPr TablePrElt se_tblPr TableRowPrElt se_trPr TableCellPrElt se_tcPr
  ;
 syntax ListsElt
         = 
-        le_wordDocument: ANY
+        le_wordDocument: WordDocument
  ;
 syntax SectPrElt
         = 
-        spe_bodyElt: ANY
+        spe_bodyElt: BodyElt
  ;
 syntax RunLevelElt
         = 
-        ANY rle_tblContentElt ANY rle_rowContentElt
+        TableContentElt rle_tblContentElt RowContentElt rle_rowContentElt
  ;
 syntax CfChunk
         = 
-        ANY ble_bodyElt ANY ble_note ANY ble_tableCellElt
+        BodyElt ble_bodyElt NoteElt ble_note TableCellElt ble_tableCellElt
  ;
 syntax SimpleFieldElt
         = 
-        ANY pce_pElt
+        pce_pElt: ParaElt
  ;
 syntax HLinkElt
         = 
-        ANY pce_pElt
+        pce_pElt: ParaElt
  ;
 syntax SubDocElt
         = 
-        ANY pce_pElt
+        pce_pElt: ParaElt
  ;
 syntax PictureType
         = 

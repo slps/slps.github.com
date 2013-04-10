@@ -1,20 +1,34 @@
 Member:
-        name::ANY owner::ANY
+        TypedAttribute
+Member:
+        MethodBase
+Member:
+        Type
+Member:
+        name::String owner::Type
 TypedAttribute:
-        type::ANY
+        Field
+TypedAttribute:
+        Property
+TypedAttribute:
+        type::Type
 Field:
         EPSILON
 Property:
-        isReadable::ANY isWritable::ANY
+        isReadable::Boolean isWritable::Boolean
 MethodBase:
-        visibility::ANY isAbstract::ANY isFinal::ANY isStatic::ANY parameters::ANY+
+        Constructor
+MethodBase:
+        Method
+MethodBase:
+        visibility::String isAbstract::Boolean isFinal::Boolean isStatic::Boolean parameters::Parameter+
 Constructor:
         EPSILON
 Method:
-        returnType::ANY
+        returnType::Type
 Type:
-        qualifiedName::ANY isAbstract::ANY visibility::ANY isSealed::ANY nameSpace::ANY members::ANY+ t_container::ANY super::ANY
+        qualifiedName::String isAbstract::Boolean visibility::String isSealed::Boolean nameSpace::String members::Member+ t_container::Assembly super::Type
 Parameter:
-        isIn::ANY isOut::ANY name::ANY position::ANY method::ANY type::ANY
+        isIn::Boolean isOut::Boolean name::Boolean position::Integer method::MethodBase type::Type
 Assembly:
-        name::ANY content::ANY+
+        name::String content::Type+

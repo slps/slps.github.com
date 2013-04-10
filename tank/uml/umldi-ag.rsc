@@ -3,47 +3,53 @@ module Umldi_ag
 
 syntax Signal
         = 
-        ANY powertypeRange+ ANY feature+
+        Exception
  ;
 syntax Action
-        = 
-        ()
+        = CreateAction
+        | DestroyAction
+        | UninterpretedAction
+        | CallAction
+        | SendAction
+        | ActionSequence
+        | ReturnAction
+        | TerminateAction
  ;
 syntax CreateAction
         = 
-        instantiation: ANY
+        instantiation: Classifier
  ;
 syntax DestroyAction
         = 
-        ANY actualArgument+ ANY actionSequence ANY recurrence ANY target ANY isAsynchronous ANY script
+        Argument actualArgument+ ActionSequence actionSequence IterationExpression recurrence ObjectSetExpression target Boolean isAsynchronous ActionExpression script
  ;
 syntax UninterpretedAction
         = 
-        ANY actualArgument+ ANY actionSequence ANY recurrence ANY target ANY isAsynchronous ANY script
+        Argument actualArgument+ ActionSequence actionSequence IterationExpression recurrence ObjectSetExpression target Boolean isAsynchronous ActionExpression script
  ;
 syntax CallAction
         = 
-        operation: ANY
+        operation: Operation
  ;
 syntax SendAction
         = 
-        signal: ANY
+        signal: Signal
  ;
 syntax ActionSequence
         = 
-        ANY action+
+        Action action+
  ;
 syntax Argument
         = 
-        ANY action ANY value
+        Action action Expression value
  ;
 syntax ReturnAction
         = 
-        ANY actualArgument+ ANY actionSequence ANY recurrence ANY target ANY isAsynchronous ANY script
+        Argument actualArgument+ ActionSequence actionSequence IterationExpression recurrence ObjectSetExpression target Boolean isAsynchronous ActionExpression script
  ;
 syntax TerminateAction
         = 
-        ANY actualArgument+ ANY actionSequence ANY recurrence ANY target ANY isAsynchronous ANY script
+        Argument actualArgument+ ActionSequence actionSequence IterationExpression recurrence ObjectSetExpression target Boolean isAsynchronous ActionExpression script
  ;
 syntax Exception
         = 
@@ -51,47 +57,50 @@ syntax Exception
  ;
 syntax Element
         = 
-        ()
+        ModelElement
  ;
 syntax ModelElement
-        = 
-        ()
- ;
-syntax GeneralizableElement
-        = 
-        ()
- ;
-syntax Namespace
-        = 
-        ()
+        = Action
+        | Argument
+        | GeneralizableElement
+        | Namespace
+        | Feature
+        | Relationship
+        | Parameter
+        | StateMachine
+        | Event
+        | StateVertex
+        | Transition
+        | Guard
+        | Partition
  ;
 syntax Classifier
-        = 
-        ()
+        = Signal
+        | ClassifierInState
  ;
 syntax Feature
         = 
-        ()
+        BehavioralFeature
  ;
 syntax Relationship
         = 
-        ()
+        Generalization
  ;
 syntax BehavioralFeature
         = 
-        ()
+        Operation
  ;
 syntax Operation
         = 
-        ANY concurrency ANY isRoot ANY isLeaf ANY isAbstract ANY specification
+        CallConcurrencyKind concurrency Boolean isRoot Boolean isLeaf Boolean isAbstract String specification
  ;
 syntax Parameter
         = 
-        ANY type ANY behavioralFeature ANY defaultValue ANY kind
+        Classifier type BehavioralFeature behavioralFeature Expression defaultValue ParameterDirectionKind kind
  ;
 syntax Generalization
         = 
-        ANY parent ANY powertype ANY child ANY discriminator
+        GeneralizableElement parent Classifier powertype GeneralizableElement child String discriminator
  ;
 syntax AggregationKind
         = ak_none: ()
@@ -139,15 +148,20 @@ syntax VisibilityKind
  ;
 syntax Multiplicity
         = 
-        ANY range+
+        MultiplicityRange range+
  ;
 syntax MultiplicityRange
         = 
-        ANY multiplicity ANY lower ANY upper
+        Multiplicity multiplicity Integer lower Integer upper
  ;
 syntax Expression
-        = 
-        ANY language ANY body
+        = BooleanExpression
+        | ObjectSetExpression
+        | ActionExpression
+        | IterationExpression
+        | TimeExpression
+        | ArgListsExpression
+        | String language String body
  ;
 syntax BooleanExpression
         = 
@@ -174,88 +188,93 @@ syntax ArgListsExpression
         ()
  ;
 syntax StateMachine
-        = 
-        ANY context ANY submachineState+ ANY top ANY transitions+
+        = ActivityGraph
+        | ModelElement context SubmachineState submachineState+ State top Transition transitions+
  ;
 syntax Event
-        = 
-        ()
+        = TimeEvent
+        | CallEvent
+        | SignalEvent
+        | ChangeEvent
  ;
 syntax StateVertex
-        = 
-        ()
+        = State
+        | Pseudostate
+        | SynchState
+        | StubState
  ;
 syntax State
-        = 
-        ()
+        = CompositeState
+        | SimpleState
+        | FinalState
  ;
 syntax TimeEvent
         = 
-        when: ANY
+        when: TimeExpression
  ;
 syntax CallEvent
         = 
-        operation: ANY
+        operation: Operation
  ;
 syntax SignalEvent
         = 
-        signal: ANY
+        signal: Signal
  ;
 syntax Transition
         = 
-        ANY target ANY trigger ANY stateMachine ANY source ANY effect ANY guard
+        StateVertex target Event trigger StateMachine stateMachine StateVertex source Action effect Guard guard
  ;
 syntax CompositeState
-        = 
-        ANY subvertex+ ANY isConcurrent
+        = SubmachineState
+        | StateVertex subvertex+ Boolean isConcurrent
  ;
 syntax ChangeEvent
         = 
-        changeExpression: ANY
+        changeExpression: BooleanExpression
  ;
 syntax Guard
         = 
-        ANY transition ANY expression
+        Transition transition BooleanExpression expression
  ;
 syntax Pseudostate
         = 
-        kind: ANY
+        kind: PseudostateKind
  ;
 syntax SimpleState
-        = 
-        ANY deferrableEvent+ ANY internalTransition+ ANY exit ANY doActivity ANY entry ANY stateMachine
+        = ActionState
+        | ObjectFlowState
  ;
 syntax SubmachineState
-        = 
-        submachine: ANY
+        = SubactivityState
+        | submachine: StateMachine
  ;
 syntax SynchState
         = 
-        bound: ANY
+        bound: Integer
  ;
 syntax StubState
         = 
-        referenceState: ANY
+        referenceState: String
  ;
 syntax FinalState
         = 
-        ANY deferrableEvent+ ANY internalTransition+ ANY exit ANY doActivity ANY entry ANY stateMachine
+        Event deferrableEvent+ Transition internalTransition+ Action exit Action doActivity Action entry StateMachine stateMachine
  ;
 syntax ActivityGraph
         = 
-        ANY partition+
+        Partition partition+
  ;
 syntax Partition
         = 
-        ANY contents+ ANY activityGraph
+        ModelElement contents+ ActivityGraph activityGraph
  ;
 syntax SubactivityState
         = 
-        ANY isDynamic ANY dynamicArguments ANY dynamicMultiplicity
+        Boolean isDynamic ArgListsExpression dynamicArguments Multiplicity dynamicMultiplicity
  ;
 syntax ActionState
-        = 
-        ANY isDynamic ANY dynamicArguments ANY dynamicMultiplicity
+        = CallState
+        | Boolean isDynamic ArgListsExpression dynamicArguments Multiplicity dynamicMultiplicity
  ;
 syntax CallState
         = 
@@ -263,9 +282,9 @@ syntax CallState
  ;
 syntax ObjectFlowState
         = 
-        ANY type ANY parameter+ ANY isSynch
+        Classifier type Parameter parameter+ Boolean isSynch
  ;
 syntax ClassifierInState
         = 
-        ANY inState+ ANY type
+        State inState+ Classifier type
  ;

@@ -2,24 +2,22 @@ module Main
 
 exports
   sorts
-        NamedElement DescribableElement CommentableElement Project Property Target TaskElement Attribute Task TaskParameter 
+        NamedElement Project Property Target TaskElement Attribute Task TaskParameter 
   context-free syntax
-         -> NamedElement
+        Attribute -> NamedElement
 
-         -> DescribableElement
+        properties::Property+ targets::Target+ defaultTarget::Target -> Project
 
-         -> CommentableElement
+        name::String value::String location::String refid::String resource::String file::String url::String environment::String classpath::String classpathref::String prefix::String -> Property
 
-        properties::ANY+ targets::ANY+ defaultTarget::ANY -> Project
+        if::String unless::String tasks::Task+ depends::Target+ -> Target
 
-        name::ANY value::ANY location::ANY refid::ANY resource::ANY file::ANY url::ANY environment::ANY classpath::ANY classpathref::ANY prefix::ANY -> Property
+        Task -> TaskElement
 
-        if::ANY unless::ANY tasks::ANY+ depends::ANY+ -> Target
+        TaskParameter -> TaskElement
 
-         -> TaskElement
+        value::String -> Attribute
 
-        value::ANY -> Attribute
+        attributes::Attribute+ elements::TaskElement+ -> Task
 
-        attributes::ANY+ elements::ANY+ -> Task
-
-        attributes::ANY+ elements::ANY+ -> TaskParameter
+        attributes::Attribute+ elements::TaskElement+ -> TaskParameter

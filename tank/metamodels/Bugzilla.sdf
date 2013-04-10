@@ -93,20 +93,26 @@ exports
         rt_WORKSFORME:: -> ResolutionType
         rt_MOVED:: -> ResolutionType
 
-        version::ANY urlbase::ANY maintainer::ANY exporter::ANY bugs::ANY+ -> BugzillaRoot
+        version::String urlbase::String maintainer::String exporter::String bugs::Bug+ -> BugzillaRoot
 
-        bug_bugzillaRoot::ANY error::ANY bug_id::ANY exporter::ANY urlbase::ANY bug_status::ANY resolution::ANY product::ANY priority::ANY version::ANY rep_platform::ANY assigned_to::ANY delta_ts::ANY component::ANY reporter::ANY target_milestone::ANY bug_severity::ANY creation_ts::ANY qa_contact::ANY status_whiteboard::ANY op_sys::ANY bug_file_loc::ANY short_desc::ANY keywords::ANY+ dependson::ANY+ blocks::ANY+ cc::ANY+ long_desc::ANY+ attachment::ANY+ -> Bug
+        bug_bugzillaRoot::BugzillaRoot error::ErrorType bug_id::String exporter::String urlbase::String bug_status::StatusType resolution::ResolutionType product::String priority::PriorityType version::String rep_platform::ReportedPlatformType assigned_to::String delta_ts::String component::String reporter::String target_milestone::String bug_severity::SeverityType creation_ts::String qa_contact::String status_whiteboard::String op_sys::OperatingSystemType bug_file_loc::String short_desc::String keywords::Keywords+ dependson::Dependson+ blocks::Blocks+ cc::Cc+ long_desc::LongDesc+ attachment::Attachment+ -> Bug
 
-         -> StringElt
+        Keywords -> StringElt
 
-        value::ANY -> Keywords
+        Dependson -> StringElt
 
-        value::ANY -> Dependson
+        Blocks -> StringElt
 
-        value::ANY -> Blocks
+        Cc -> StringElt
 
-        value::ANY -> Cc
+        value::String -> Keywords
 
-        isPrivate::ANY who::ANY bug_when::ANY thetext::ANY -> LongDesc
+        value::String -> Dependson
 
-        isObsolete::ANY isPatch::ANY isPrivate::ANY id::ANY date::ANY desc::ANY type::ANY data::ANY -> Attachment
+        value::String -> Blocks
+
+        value::String -> Cc
+
+        isPrivate::Boolean who::String bug_when::String thetext::String -> LongDesc
+
+        isObsolete::Boolean isPatch::Boolean isPrivate::Boolean id::String date::String desc::String type::String data::String -> Attachment

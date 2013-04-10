@@ -4,53 +4,83 @@ exports
   sorts
         LocatedElement NamedElement Structure ProcContainerElement Program Monitor Procedure VariableDeclaration Parameter Direction Type Expression VariableExp PropertyCallExp OperatorCallExp AttributeCallExp ProcedureCallExp LiteralExp BooleanExp IntegerExp Statement AssignmentStat ConditionalStat WhileStat ExpressionStat 
   context-free syntax
-         -> LocatedElement
+        NamedElement -> LocatedElement
 
-         -> NamedElement
+        Expression -> LocatedElement
 
-         -> Structure
+        Statement -> LocatedElement
 
-         -> ProcContainerElement
+        Structure -> NamedElement
 
-        monitors::ANY+ -> Program
+        VariableDeclaration -> NamedElement
 
-        program::ANY -> Monitor
+        Type -> NamedElement
 
-        container::ANY parameters::ANY+ statements::ANY+ -> Procedure
+        ProcContainerElement -> Structure
 
-        type::ANY initialValue::ANY structure::ANY -> VariableDeclaration
+        Procedure -> Structure
 
-        direction::ANY procedure::ANY -> Parameter
+        Program -> ProcContainerElement
+
+        Monitor -> ProcContainerElement
+
+        monitors::Monitor+ -> Program
+
+        program::Program -> Monitor
+
+        container::ProcContainerElement parameters::Parameter+ statements::Statement+ -> Procedure
+
+        Parameter -> VariableDeclaration
+
+        type::Type initialValue::Expression structure::Structure -> VariableDeclaration
+
+        direction::Direction procedure::Procedure -> Parameter
 
         in:: -> Direction
         out:: -> Direction
 
-        name::ANY -> Type
+        name::String -> Type
 
-         -> Expression
+        VariableExp -> Expression
 
-        declaration::ANY -> VariableExp
+        PropertyCallExp -> Expression
 
-         -> PropertyCallExp
+        LiteralExp -> Expression
 
-        right::ANY -> OperatorCallExp
+        declaration::VariableDeclaration -> VariableExp
 
-        source::ANY name::ANY -> AttributeCallExp
+        OperatorCallExp -> PropertyCallExp
 
-        arguments::ANY+ -> ProcedureCallExp
+        AttributeCallExp -> PropertyCallExp
 
-         -> LiteralExp
+        ProcedureCallExp -> PropertyCallExp
 
-        symbol::ANY -> BooleanExp
+        right::Expression -> OperatorCallExp
 
-        symbol::ANY -> IntegerExp
+        source::Expression name::String -> AttributeCallExp
 
-         -> Statement
+        arguments::Expression+ -> ProcedureCallExp
 
-        target::ANY value::ANY -> AssignmentStat
+        BooleanExp -> LiteralExp
 
-        condition::ANY thenStats::ANY+ elseStats::ANY+ -> ConditionalStat
+        IntegerExp -> LiteralExp
 
-        condition::ANY doStats::ANY+ -> WhileStat
+        symbol::Boolean -> BooleanExp
 
-        expression::ANY -> ExpressionStat
+        symbol::Integer -> IntegerExp
+
+        AssignmentStat -> Statement
+
+        ConditionalStat -> Statement
+
+        WhileStat -> Statement
+
+        ExpressionStat -> Statement
+
+        target::VariableExp value::Expression -> AssignmentStat
+
+        condition::Expression thenStats::Statement+ elseStats::Statement+ -> ConditionalStat
+
+        condition::Expression doStats::Statement+ -> WhileStat
+
+        expression::Expression -> ExpressionStat

@@ -4,12 +4,14 @@ exports
   sorts
         TextualPathExp Path Transition AlternativeTrans PrimitiveTrans 
   context-free syntax
-        path::ANY -> TextualPathExp
+        path::Path -> TextualPathExp
 
-        transitions::ANY+ -> Path
+        transitions::Transition+ -> Path
 
-         -> Transition
+        AlternativeTrans -> Transition
 
-        altPaths::ANY+ -> AlternativeTrans
+        PrimitiveTrans -> Transition
 
-        name::ANY -> PrimitiveTrans
+        altPaths::Path+ -> AlternativeTrans
+
+        name::String -> PrimitiveTrans

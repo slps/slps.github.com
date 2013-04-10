@@ -2,12 +2,15 @@
 module PL1
 
 syntax PLIClassifier
-        = 
-        ANY name ANY typedElements+
+        = PLISimpleType
+        | PLINamedType
+        | PLIComposedType
+        | String name PLIElement typedElements+
  ;
 syntax PLISimpleType
-        = 
-        alias: ANY
+        = PLIComputationalType
+        | PLINonComputationalType
+        | alias: PLIAlias
  ;
 syntax PLINamedType
         = 
@@ -15,11 +18,11 @@ syntax PLINamedType
  ;
 syntax PLIComposedType
         = 
-        ANY elements+
+        PLIElement elements+
  ;
 syntax PLIAlias
         = 
-        ANY type ANY contains+
+        PLISimpleType type PLIAttribute contains+
  ;
 syntax PLIAttribute
         = 
@@ -35,33 +38,36 @@ syntax PLINonComputationalType
  ;
 syntax PLIElement
         = 
-        ANY level ANY name ANY sharedType ANY group ANY initial ANY source ANY array
+        String level String name PLIClassifier sharedType PLIComposedType group PLIElementInitialValue initial PLISourceText source PLIArray array
  ;
 syntax PLIElementInitialValue
         = 
-        initialValue: ANY
+        initialValue: String
  ;
 syntax PLISourceText
         = 
-        ANY source ANY fileName
+        String source String fileName
  ;
 syntax PLIArray
-        = 
-        arrayOf: ANY
+        = PLIFixedBoundArray
+        | PLIFixedLboundArray
+        | PLIHBoundArray
+        | PLIVariableBoundArray
+        | arrayOf: PLIElement
  ;
 syntax PLIFixedBoundArray
         = 
-        ANY IBound ANY uBound ANY referredTo
+        Integer IBound Integer uBound PLIElement referredTo
  ;
 syntax PLIFixedLboundArray
         = 
-        ANY IBound ANY uBoundToAllocate ANY referredTo
+        Integer IBound String uBoundToAllocate PLIElement referredTo
  ;
 syntax PLIHBoundArray
         = 
-        ANY uBound ANY IBoundToAllocate ANY referredTo
+        Integer uBound String IBoundToAllocate PLIElement referredTo
  ;
 syntax PLIVariableBoundArray
         = 
-        ANY IBoundToAllocate ANY hBoundToAllocate ANY referredTo
+        String IBoundToAllocate String hBoundToAllocate PLIElement referredTo
  ;

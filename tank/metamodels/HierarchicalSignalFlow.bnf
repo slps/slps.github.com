@@ -1,18 +1,28 @@
 Port:
-        asso_Port_Signalsrc::ANY asso_Port_Signaldst::ANY
+        InputPort
+Port:
+        OutputPort
+Port:
+        LocalPort
+Port:
+        asso_Port_Signalsrc::Asso_Port_Signal asso_Port_Signaldst::Asso_Port_Signal
 Signal:
-        base::ANY asso_Port_Signal::ANY
+        base::Base asso_Port_Signal::Asso_Port_Signal
 Base:
-        compound::ANY inputPort::ANY+ outputPort::ANY+ signal::ANY+
+        Compound
+Base:
+        Primitive
+Base:
+        compound::Compound inputPort::InputPort+ outputPort::OutputPort+ signal::Signal+
 Compound:
-        localPort::ANY+ base::ANY+
+        localPort::LocalPort+ base::Base+
 InputPort:
-        base::ANY
+        base::Base
 OutputPort:
-        base::ANY
+        base::Base
 LocalPort:
-        compound::ANY
+        compound::Compound
 Primitive:
         EPSILON
 Asso_Port_Signal:
-        src::ANY+ dst::ANY+ signal::ANY
+        src::Port+ dst::Port+ signal::Signal

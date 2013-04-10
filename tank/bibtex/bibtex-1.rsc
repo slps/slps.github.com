@@ -3,181 +3,218 @@ module Bibtex_1
 
 syntax LocatedElement
         = 
-        ()
+        Entry
  ;
 syntax Bibtex
         = 
-        ANY entries+
+        Entry entries+
  ;
 syntax Entry
-        = 
-        ()
+        = Article
+        | Book
+        | Inbook
+        | Booklet
+        | Inproceedings
+        | Proceedings
+        | Incollection
+        | Techreport
+        | PhdThesis
+        | MastersThesis
+        | Manual
+        | Misc
  ;
 syntax Article
         = 
-        ANY key ANY fields+
+        String key Field fields+
  ;
 syntax Book
         = 
-        ANY key ANY fields+
+        String key Field fields+
  ;
 syntax Inbook
         = 
-        ANY key ANY fields+
+        String key Field fields+
  ;
 syntax Booklet
         = 
-        ANY key ANY fields+
+        String key Field fields+
  ;
 syntax Inproceedings
         = 
-        ANY key ANY fields+
+        String key Field fields+
  ;
 syntax Proceedings
         = 
-        ANY key ANY fields+
+        String key Field fields+
  ;
 syntax Incollection
         = 
-        ANY key ANY fields+
+        String key Field fields+
  ;
 syntax Techreport
         = 
-        ANY key ANY fields+
+        String key Field fields+
  ;
 syntax PhdThesis
         = 
-        ANY key ANY fields+
+        String key Field fields+
  ;
 syntax MastersThesis
         = 
-        ANY key ANY fields+
+        String key Field fields+
  ;
 syntax Manual
         = 
-        ANY key ANY fields+
+        String key Field fields+
  ;
 syntax Misc
         = 
-        ANY key ANY fields+
+        String key Field fields+
  ;
 syntax Field
-        = 
-        ()
+        = Authors
+        | AuthorUrls
+        | Title
+        | Journal
+        | BookTitle
+        | Institution
+        | Organization
+        | Type
+        | Day
+        | Number
+        | Chapter
+        | Volume
+        | Series
+        | Pages
+        | Publisher
+        | Howpublished
+        | School
+        | Editor
+        | Edition
+        | Address
+        | Year
+        | Month
+        | Note
+        | Text
+        | AbstractField
+        | Isbn
+        | Issn
+        | Url
+        | Doi
  ;
 syntax Authors
         = 
-        ANY value
+        value: String
  ;
 syntax AuthorUrls
         = 
-        ANY value
+        value: String
  ;
 syntax Title
         = 
-        ANY value
+        value: String
  ;
 syntax Journal
         = 
-        ANY value
+        value: String
  ;
 syntax BookTitle
         = 
-        ANY value
+        value: String
  ;
 syntax Institution
         = 
-        ANY value
+        value: String
  ;
 syntax Organization
         = 
-        ANY value
+        value: String
  ;
 syntax Type
         = 
-        ANY value
+        value: String
  ;
 syntax Day
         = 
-        ANY value
+        value: String
  ;
 syntax Number
         = 
-        ANY value
+        value: String
  ;
 syntax Chapter
         = 
-        ANY value
+        value: String
  ;
 syntax Volume
         = 
-        ANY value
+        value: String
  ;
 syntax Series
         = 
-        ANY value
+        value: String
  ;
 syntax Pages
         = 
-        ANY value
+        value: String
  ;
 syntax Publisher
         = 
-        ANY value
+        value: String
  ;
 syntax Howpublished
         = 
-        ANY value
+        value: String
  ;
 syntax School
         = 
-        ANY value
+        value: String
  ;
 syntax Editor
         = 
-        ANY value
+        value: String
  ;
 syntax Edition
         = 
-        ANY value
+        value: String
  ;
 syntax Address
         = 
-        ANY value
+        value: String
  ;
 syntax Year
         = 
-        ANY value
+        value: String
  ;
 syntax Month
         = 
-        ANY value
+        value: String
  ;
 syntax Note
         = 
-        ANY value
+        value: String
  ;
 syntax Text
         = 
-        ANY value
+        value: String
  ;
 syntax AbstractField
         = 
-        ANY value
+        value: String
  ;
 syntax Isbn
         = 
-        ANY value
+        value: String
  ;
 syntax Issn
         = 
-        ANY value
+        value: String
  ;
 syntax Url
         = 
-        ANY value
+        value: String
  ;
 syntax Doi
         = 
-        ANY value
+        value: String
  ;

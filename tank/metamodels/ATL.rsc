@@ -2,208 +2,241 @@
 module ATL
 
 syntax LocatedElement
-        = 
-        ()
+        = Unit
+        | ModuleElement
+        | InPattern
+        | OutPattern
+        | Binding
+        | LibraryRef
+        | ActionBlock
+        | Statement
+        | OclExpression
+        | MapElement
+        | VariableDeclaration
+        | TupleTypeAttribute
+        | OclFeatureDefinition
+        | OclContextDefinition
+        | OclFeature
+        | OclModel
  ;
 syntax Unit
-        = 
-        ANY libraries+ ANY name
+        = Library
+        | Query
+        | Module
+        | LibraryRef libraries+ String name
  ;
 syntax Library
         = 
-        ANY helpers+
+        Helper helpers+
  ;
 syntax Query
         = 
-        ANY body ANY helpers+
+        OclExpression body Helper helpers+
  ;
 syntax Module
         = 
-        ANY isRefining ANY inModels+ ANY outModels+ ANY elements+
+        Boolean isRefining OclModel inModels+ OclModel outModels+ ModuleElement elements+
  ;
 syntax ModuleElement
-        = 
-        ()
+        = Helper
+        | Rule
  ;
 syntax Helper
         = 
-        ANY query ANY library ANY definition
+        Query query Library library OclFeatureDefinition definition
  ;
 syntax Rule
-        = 
-        ()
+        = MatchedRule
+        | CalledRule
  ;
 syntax MatchedRule
-        = 
-        ANY inPattern ANY children+ ANY superRule ANY isAbstract ANY isRefining ANY isNoDefault
+        = LazyMatchedRule
+        | InPattern inPattern MatchedRule children+ MatchedRule superRule Boolean isAbstract Boolean isRefining Boolean isNoDefault
  ;
 syntax LazyMatchedRule
         = 
-        isUnique: ANY
+        isUnique: Boolean
  ;
 syntax CalledRule
         = 
-        ANY parameters+ ANY isEntrypoint ANY isEndpoint
+        Parameter parameters+ Boolean isEntrypoint Boolean isEndpoint
  ;
 syntax InPattern
         = 
-        ANY elements+ ANY rule ANY filter
+        InPatternElement elements+ MatchedRule rule OclExpression filter
  ;
 syntax OutPattern
         = 
-        ANY rule ANY elements+
+        Rule rule OutPatternElement elements+
  ;
 syntax PatternElement
-        = 
-        ()
+        = InPatternElement
+        | OutPatternElement
  ;
 syntax InPatternElement
         = 
-        ()
+        SimpleInPatternElement
  ;
 syntax SimpleInPatternElement
         = 
-        ANY mapsTo ANY inPattern ANY models+
+        OutPatternElement mapsTo InPattern inPattern OclModel models+
  ;
 syntax OutPatternElement
-        = 
-        ()
+        = SimpleOutPatternElement
+        | ForEachOutPatternElement
  ;
 syntax SimpleOutPatternElement
         = 
-        ANY reverseBindings+
+        OclExpression reverseBindings+
  ;
 syntax ForEachOutPatternElement
         = 
-        ANY collection ANY iterator
+        OclExpression collection Iterator iterator
  ;
 syntax Binding
         = 
-        ANY value ANY outPatternElement ANY propertyName ANY isAssignment
+        OclExpression value OutPatternElement outPatternElement String propertyName Boolean isAssignment
  ;
 syntax RuleVariableDeclaration
         = 
-        rule: ANY
+        rule: Rule
  ;
 syntax LibraryRef
         = 
-        ANY unit ANY name
+        Unit unit String name
  ;
 syntax ActionBlock
         = 
-        ANY rule ANY statements+
+        Rule rule Statement statements+
  ;
 syntax Statement
-        = 
-        ()
+        = ExpressionStat
+        | BindingStat
+        | IfStat
+        | ForStat
  ;
 syntax ExpressionStat
         = 
-        expression: ANY
+        expression: OclExpression
  ;
 syntax BindingStat
         = 
-        ANY source ANY propertyName ANY isAssignment ANY value
+        OclExpression source String propertyName Boolean isAssignment OclExpression value
  ;
 syntax IfStat
         = 
-        ANY condition ANY thenStatements+ ANY elseStatements+
+        OclExpression condition Statement thenStatements+ Statement elseStatements+
  ;
 syntax ForStat
         = 
-        ANY iterator ANY collection ANY statements+
+        Iterator iterator OclExpression collection Statement statements+
  ;
 syntax OclExpression
-        = 
-        ()
+        = VariableExp
+        | SuperExp
+        | PrimitiveExp
+        | CollectionExp
+        | TupleExp
+        | MapExp
+        | EnumLiteralExp
+        | OclUndefinedExp
+        | PropertyCallExp
+        | LetExp
+        | IfExp
+        | OclType
  ;
 syntax VariableExp
         = 
-        referredVariable: ANY
+        referredVariable: VariableDeclaration
  ;
 syntax SuperExp
         = 
-        ANY type ANY ifExp3 ANY appliedProperty ANY collection ANY letExp ANY loopExp ANY parentOperation ANY initializedVariable ANY ifExp2 ANY owningOperation ANY ifExp1 ANY owningAttribute
+        OclType type IfExp ifExp3 PropertyCallExp appliedProperty CollectionExp collection LetExp letExp LoopExp loopExp OperationCallExp parentOperation VariableDeclaration initializedVariable IfExp ifExp2 Operation owningOperation IfExp ifExp1 Attribute owningAttribute
  ;
 syntax PrimitiveExp
-        = 
-        ()
+        = StringExp
+        | BooleanExp
+        | NumericExp
  ;
 syntax StringExp
         = 
-        stringSymbol: ANY
+        stringSymbol: String
  ;
 syntax BooleanExp
         = 
-        booleanSymbol: ANY
+        booleanSymbol: Boolean
  ;
 syntax NumericExp
-        = 
-        ()
+        = RealExp
+        | IntegerExp
  ;
 syntax RealExp
         = 
-        realSymbol: ANY
+        realSymbol: Double
  ;
 syntax IntegerExp
         = 
-        integerSymbol: ANY
+        integerSymbol: Integer
  ;
 syntax CollectionExp
-        = 
-        ()
+        = BagExp
+        | OrderedSetExp
+        | SequenceExp
+        | SetExp
  ;
 syntax BagExp
         = 
-        ANY elements+
+        OclExpression elements+
  ;
 syntax OrderedSetExp
         = 
-        ANY elements+
+        OclExpression elements+
  ;
 syntax SequenceExp
         = 
-        ANY elements+
+        OclExpression elements+
  ;
 syntax SetExp
         = 
-        ANY elements+
+        OclExpression elements+
  ;
 syntax TupleExp
         = 
-        ANY tuplePart+
+        TuplePart tuplePart+
  ;
 syntax TuplePart
         = 
-        tuple: ANY
+        tuple: TupleExp
  ;
 syntax MapExp
         = 
-        ANY elements+
+        MapElement elements+
  ;
 syntax MapElement
         = 
-        ANY map ANY key ANY value
+        MapExp map OclExpression key OclExpression value
  ;
 syntax EnumLiteralExp
         = 
-        name: ANY
+        name: String
  ;
 syntax OclUndefinedExp
         = 
-        ANY type ANY ifExp3 ANY appliedProperty ANY collection ANY letExp ANY loopExp ANY parentOperation ANY initializedVariable ANY ifExp2 ANY owningOperation ANY ifExp1 ANY owningAttribute
+        OclType type IfExp ifExp3 PropertyCallExp appliedProperty CollectionExp collection LetExp letExp LoopExp loopExp OperationCallExp parentOperation VariableDeclaration initializedVariable IfExp ifExp2 Operation owningOperation IfExp ifExp1 Attribute owningAttribute
  ;
 syntax PropertyCallExp
-        = 
-        ()
+        = NavigationOrAttributeCallExp
+        | OperationCallExp
+        | LoopExp
  ;
 syntax NavigationOrAttributeCallExp
         = 
-        name: ANY
+        name: String
  ;
 syntax OperationCallExp
-        = 
-        ANY arguments+ ANY operationName
+        = OperatorCallExp
+        | CollectionOperationCallExp
+        | OclExpression arguments+ String operationName
  ;
 syntax OperatorCallExp
         = 
@@ -214,68 +247,81 @@ syntax CollectionOperationCallExp
         ()
  ;
 syntax LoopExp
-        = 
-        ()
+        = IterateExp
+        | IteratorExp
  ;
 syntax IterateExp
         = 
-        result: ANY
+        result: VariableDeclaration
  ;
 syntax IteratorExp
         = 
-        name: ANY
+        name: String
  ;
 syntax LetExp
         = 
-        ANY variable ANY in_
+        VariableDeclaration variable OclExpression in_
  ;
 syntax IfExp
         = 
-        ANY thenExpression ANY condition ANY elseExpression
+        OclExpression thenExpression OclExpression condition OclExpression elseExpression
  ;
 syntax VariableDeclaration
-        = 
-        ANY id ANY varName ANY type ANY initExpression ANY letExp ANY baseExp ANY variableExp+
+        = PatternElement
+        | RuleVariableDeclaration
+        | TuplePart
+        | Iterator
+        | Parameter
+        | String id String varName OclType type OclExpression initExpression LetExp letExp IterateExp baseExp VariableExp variableExp+
  ;
 syntax Iterator
         = 
-        loopExpr: ANY
+        loopExpr: LoopExp
  ;
 syntax Parameter
         = 
-        operation: ANY
+        operation: Operation
  ;
 syntax CollectionType
-        = 
-        elementType: ANY
+        = BagType
+        | OrderedSetType
+        | SequenceType
+        | SetType
+        | elementType: OclType
  ;
 syntax OclType
-        = 
-        ANY name ANY definitions ANY oclExpression ANY operation ANY mapType2 ANY attribute ANY mapType ANY collectionTypes ANY tupleTypeAttribute ANY variableDeclaration
+        = CollectionType
+        | Primitive
+        | OclAnyType
+        | TupleType
+        | OclModelElement
+        | MapType
+        | String name OclContextDefinition definitions OclExpression oclExpression Operation operation MapType mapType2 Attribute attribute MapType mapType CollectionType collectionTypes TupleTypeAttribute tupleTypeAttribute VariableDeclaration variableDeclaration
  ;
 syntax Primitive
-        = 
-        ()
+        = StringType
+        | BooleanType
+        | NumericType
  ;
 syntax StringType
         = 
-        
+        ()
  ;
 syntax BooleanType
         = 
-        
+        ()
  ;
 syntax NumericType
-        = 
-        ()
+        = IntegerType
+        | RealType
  ;
 syntax IntegerType
         = 
-        
+        ()
  ;
 syntax RealType
         = 
-        
+        ()
  ;
 syntax BagType
         = 
@@ -299,41 +345,41 @@ syntax OclAnyType
  ;
 syntax TupleType
         = 
-        ANY attributes+
+        TupleTypeAttribute attributes+
  ;
 syntax TupleTypeAttribute
         = 
-        ANY type ANY tupleType ANY name
+        OclType type TupleType tupleType String name
  ;
 syntax OclModelElement
         = 
-        model: ANY
+        model: OclModel
  ;
 syntax MapType
         = 
-        ANY valueType ANY keyType
+        OclType valueType OclType keyType
  ;
 syntax OclFeatureDefinition
         = 
-        ANY feature ANY context_
+        OclFeature feature OclContextDefinition context_
  ;
 syntax OclContextDefinition
         = 
-        ANY definition ANY context_
+        OclFeatureDefinition definition OclType context_
  ;
 syntax OclFeature
-        = 
-        ()
+        = Attribute
+        | Operation
  ;
 syntax Attribute
         = 
-        ANY name ANY initExpression ANY type
+        String name OclExpression initExpression OclType type
  ;
 syntax Operation
         = 
-        ANY name ANY parameters+ ANY returnType ANY body
+        String name Parameter parameters+ OclType returnType OclExpression body
  ;
 syntax OclModel
         = 
-        ANY name ANY metamodel ANY elements+ ANY model+
+        String name OclModel metamodel OclModelElement elements+ OclModel model+
  ;

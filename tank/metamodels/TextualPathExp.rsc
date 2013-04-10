@@ -3,21 +3,21 @@ module TextualPathExp
 
 syntax TextualPathExp
         = 
-        path: ANY
+        path: Path
  ;
 syntax Path
         = 
-        ANY transitions+
+        Transition transitions+
  ;
 syntax Transition
-        = 
-        ()
+        = AlternativeTrans
+        | PrimitiveTrans
  ;
 syntax AlternativeTrans
         = 
-        ANY altPaths+
+        Path altPaths+
  ;
 syntax PrimitiveTrans
         = 
-        name: ANY
+        name: String
  ;

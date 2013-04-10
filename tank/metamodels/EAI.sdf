@@ -4,14 +4,20 @@ exports
   sorts
         FCMSource EAISource FCMSink EAISink EAIResource EAIQueue 
   context-free syntax
-         -> FCMSource
+        EAISource -> FCMSource
 
-        resources::ANY+ -> EAISource
+        EAISource -> FCMSource
 
-         -> FCMSink
+        resources::EAIResource+ -> EAISource
 
-        resources::ANY+ -> EAISink
+        EAISink -> FCMSink
 
-         -> EAIResource
+        EAISink -> FCMSink
 
-        maxLength::ANY name::ANY -> EAIQueue
+        resources::EAIResource+ -> EAISink
+
+        EAIQueue -> EAIResource
+
+        EAIQueue -> EAIResource
+
+        maxLength::Integer name::String -> EAIQueue

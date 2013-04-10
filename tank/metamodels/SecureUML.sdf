@@ -4,22 +4,30 @@ exports
   sorts
         Group User Subject Role Permission AuthorizationConstraint AtomicAction CompositeAction Action Resource 
   context-free syntax
-        subjectGroup::ANY+ -> Group
+        subjectGroup::Subject+ -> Group
 
          -> User
 
-        group::ANY role::ANY+ -> Subject
+        Group -> Subject
 
-        roleHierarchy::ANY+ subjectAssignment::ANY+ permissionAssignment::ANY+ -> Role
+        User -> Subject
 
-        role::ANY+ constraintAssignment::ANY actionAssignment::ANY+ -> Permission
+        group::Group role::Role+ -> Subject
 
-        permission::ANY+ -> AuthorizationConstraint
+        roleHierarchy::Role+ subjectAssignment::Subject+ permissionAssignment::Permission+ -> Role
+
+        role::Role+ constraintAssignment::AuthorizationConstraint actionAssignment::Action+ -> Permission
+
+        permission::Permission+ -> AuthorizationConstraint
 
          -> AtomicAction
 
-        subordinatedAction::ANY+ -> CompositeAction
+        subordinatedAction::Action+ -> CompositeAction
 
-        permission::ANY+ resource::ANY actionHyerarchy::ANY+ -> Action
+        AtomicAction -> Action
 
-        resourceAction::ANY+ -> Resource
+        CompositeAction -> Action
+
+        permission::Permission+ resource::Resource actionHyerarchy::CompositeAction+ -> Action
+
+        resourceAction::Action+ -> Resource

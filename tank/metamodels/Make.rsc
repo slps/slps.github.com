@@ -3,37 +3,37 @@ module Make
 
 syntax Makefile
         = 
-        ANY name ANY comment ANY elements+
+        String name Comment comment Element elements+
  ;
 syntax Element
-        = 
-        ()
+        = Rule
+        | Macro
  ;
 syntax Rule
         = 
-        ANY dependencies+ ANY shellLines+
+        Dependency dependencies+ ShellLine shellLines+
  ;
 syntax Macro
         = 
-        value: ANY
+        value: String
  ;
 syntax ShellLine
         = 
-        ANY command ANY display ANY ruleShellLine
+        String command Boolean display Rule ruleShellLine
  ;
 syntax Comment
         = 
-        text: ANY
+        text: String
  ;
 syntax Dependency
-        = 
-        ()
+        = RuleDep
+        | FileDep
  ;
 syntax RuleDep
         = 
-        ruledep: ANY
+        ruledep: Rule
  ;
 syntax FileDep
         = 
-        name: ANY
+        name: String
  ;

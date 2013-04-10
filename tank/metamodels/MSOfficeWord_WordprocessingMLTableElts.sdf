@@ -2,35 +2,43 @@ module Main
 
 exports
   sorts
-        DateTimeType VersionType ValueType StringValue FloatValue DateTimeTypeValue BooleanValue DocumentPropertiesCollection CustomDocumentPropertiesCollection CustomDocumentProperty SmartTagType SmartTagsCollection StringProperty StringType BreakType NoteValue OnOffType FldCharTypeProperty WordDocument DocPrElt BodyElt BlockLevelElt BlockLevelChunkElt ParaElt ParaPrElt ParaContentElt RunElt RunPrElt RunContentElt BreakElt Text DelText InstrText DelInstrText NoBreakHyphen SoftHyphen AnnotationRef FootnoteRef EndnoteRef Separator ContinuationSeparator PgNum Cr Footnote Endnote NoteElt Picture Symbol SymElt Tab FldChar FldCharElt TableElt TablePrElt TableGridElt TableContentElt RowElt TablePrExElt TableRowPrElt RowContentElt TableCellElt TableCellPrElt FontsListElt ListsElt StylesElt SectPrElt RunLevelElt CfChunk SimpleFieldElt HLinkElt SubDocElt PictureType TabElt 
+        DateTimeType VersionType ValueType StringValue FloatValue DateTimeTypeValue BooleanValue DocumentPropertiesCollection CustomDocumentPropertiesCollection CustomDocumentProperty SmartTagType SmartTagsCollection StringProperty StringType BreakType NoteValue OnOffType FldCharTypeProperty WordDocument DocPrElt BodyElt BlockLevelElt BlockLevelChunkElt ParaElt ParaPrElt ParaContentElt RunElt RunPrElt RunContentElt BreakElt Text DelText InstrText DelInstrText NoBreakHyphen SoftHyphen AnnotationRef FootnoteRef EndnoteRef Separator ContinuationSeparator PgNum Cr Footnote Endnote Picture Symbol SymElt Tab FldChar FldCharElt TableElt TablePrElt TableGridElt TableContentElt RowElt TablePrExElt TableRowPrElt RowContentElt TableCellElt TableCellPrElt FontsListElt ListsElt StylesElt SectPrElt RunLevelElt CfChunk SimpleFieldElt HLinkElt SubDocElt PictureType TabElt 
   context-free syntax
-        year::ANY month::ANY day::ANY hour::ANY minute::ANY second::ANY -> DateTimeType
+        year::Integer month::Integer day::Integer hour::Integer minute::Integer second::Integer -> DateTimeType
 
-        n::ANY nn::ANY -> VersionType
+        n::Integer nn::Integer -> VersionType
 
-         -> ValueType
+        StringValue -> ValueType
 
-        value::ANY -> StringValue
+        FloatValue -> ValueType
 
-        value::ANY -> FloatValue
+        DateTimeTypeValue -> ValueType
 
-        value::ANY -> DateTimeTypeValue
+        BooleanValue -> ValueType
 
-        value::ANY -> BooleanValue
+        value::String -> StringValue
 
-        dp_wordDocument::ANY title::ANY subject::ANY keywords::ANY description::ANY category::ANY author::ANY lastAuthor::ANY manager::ANY company::ANY hyperlinkBase::ANY revision::ANY presentationFormat::ANY guid::ANY appName::ANY version::ANY totalTime::ANY lastPrinted::ANY created::ANY lastSaved::ANY pages::ANY words::ANY characters::ANY charactersWithSpaces::ANY bytes::ANY lines::ANY paragraphs::ANY -> DocumentPropertiesCollection
+        value::Double -> FloatValue
 
-        cdp_wordDocument::ANY customDocumentProperties::ANY+ -> CustomDocumentPropertiesCollection
+        value::DateTimeType -> DateTimeTypeValue
 
-        customDocumentProperty_cdpe::ANY name::ANY value::ANY -> CustomDocumentProperty
+        value::Boolean -> BooleanValue
 
-        smartTagType_ste::ANY namespaceuri::ANY name::ANY url::ANY -> SmartTagType
+        dp_wordDocument::WordDocument title::String subject::String keywords::String description::String category::String author::String lastAuthor::String manager::String company::String hyperlinkBase::String revision::Integer presentationFormat::String guid::String appName::String version::VersionType totalTime::Integer lastPrinted::DateTimeType created::DateTimeType lastSaved::DateTimeType pages::Integer words::Integer characters::Integer charactersWithSpaces::Integer bytes::Integer lines::Integer paragraphs::Integer -> DocumentPropertiesCollection
 
-        st_wordDocument::ANY smartTagTypes::ANY+ -> SmartTagsCollection
+        cdp_wordDocument::WordDocument customDocumentProperties::CustomDocumentProperty+ -> CustomDocumentPropertiesCollection
+
+        customDocumentProperty_cdpe::CustomDocumentPropertiesCollection name::String value::ValueType -> CustomDocumentProperty
+
+        smartTagType_ste::SmartTagsCollection namespaceuri::String name::String url::String -> SmartTagType
+
+        st_wordDocument::WordDocument smartTagTypes::SmartTagType+ -> SmartTagsCollection
 
          -> StringProperty
 
-        val::ANY -> StringType
+        StringProperty -> StringType
+
+        val::String -> StringType
 
         bt_page:: -> BreakType
         bt_column:: -> BreakType
@@ -48,29 +56,59 @@ exports
         fctp_separate:: -> FldCharTypeProperty
         fctp_end:: -> FldCharTypeProperty
 
-        wd_smartTags::ANY wd_docProperties::ANY wd_customDocProperties::ANY ignoreSubtree::ANY ignoreElements::ANY fonts::ANY lists::ANY styles::ANY docPr::ANY body::ANY -> WordDocument
+        wd_smartTags::SmartTagsCollection wd_docProperties::DocumentPropertiesCollection wd_customDocProperties::CustomDocumentPropertiesCollection ignoreSubtree::StringProperty ignoreElements::StringProperty fonts::FontsListElt lists::ListsElt styles::StylesElt docPr::DocPrElt body::BodyElt -> WordDocument
 
-        dpe_wordDocument::ANY -> DocPrElt
+        dpe_wordDocument::WordDocument -> DocPrElt
 
-        be_wordDocument::ANY blockLevelElts::ANY+ sectPr::ANY -> BodyElt
+        be_wordDocument::WordDocument blockLevelElts::BlockLevelElt+ sectPr::SectPrElt -> BodyElt
 
-         -> BlockLevelElt
+        BlockLevelChunkElt -> BlockLevelElt
 
-         -> BlockLevelChunkElt
+        CfChunk -> BlockLevelElt
 
-        pPr::ANY pContentElts::ANY+ -> ParaElt
+        ParaElt -> BlockLevelChunkElt
 
-        ppe_pElt::ANY -> ParaPrElt
+        TableElt -> BlockLevelChunkElt
 
-         -> ParaContentElt
+        RunLevelElt -> BlockLevelChunkElt
 
-        rPr::ANY rContentElts::ANY+ -> RunElt
+        pPr::ParaPrElt pContentElts::ParaContentElt+ -> ParaElt
 
-        rpe_rElt::ANY -> RunPrElt
+        ppe_pElt::ParaElt -> ParaPrElt
 
-         -> RunContentElt
+        RunElt -> ParaContentElt
 
-        type::ANY -> BreakElt
+        SimpleFieldElt -> ParaContentElt
+
+        HLinkElt -> ParaContentElt
+
+        SubDocElt -> ParaContentElt
+
+        rPr::RunPrElt rContentElts::RunContentElt+ -> RunElt
+
+        rpe_rElt::RunElt -> RunPrElt
+
+        BreakElt -> RunContentElt
+
+        NoBreakHyphen -> RunContentElt
+
+        SoftHyphen -> RunContentElt
+
+        AnnotationRef -> RunContentElt
+
+        FootnoteRef -> RunContentElt
+
+        EndnoteRef -> RunContentElt
+
+        Separator -> RunContentElt
+
+        ContinuationSeparator -> RunContentElt
+
+        PgNum -> RunContentElt
+
+        Cr -> RunContentElt
+
+        type::BreakType -> BreakElt
 
          -> Text
 
@@ -80,79 +118,77 @@ exports
 
          -> DelInstrText
 
-        rce_rElt::ANY -> NoBreakHyphen
+        rce_rElt::RunElt -> NoBreakHyphen
 
-        rce_rElt::ANY -> SoftHyphen
+        rce_rElt::RunElt -> SoftHyphen
 
-        rce_rElt::ANY -> AnnotationRef
+        rce_rElt::RunElt -> AnnotationRef
 
-        rce_rElt::ANY -> FootnoteRef
+        rce_rElt::RunElt -> FootnoteRef
 
-        rce_rElt::ANY -> EndnoteRef
+        rce_rElt::RunElt -> EndnoteRef
 
-        rce_rElt::ANY -> Separator
+        rce_rElt::RunElt -> Separator
 
-        rce_rElt::ANY -> ContinuationSeparator
+        rce_rElt::RunElt -> ContinuationSeparator
 
-        rce_rElt::ANY -> PgNum
+        rce_rElt::RunElt -> PgNum
 
-        rce_rElt::ANY -> Cr
+        rce_rElt::RunElt -> Cr
 
          -> Footnote
 
          -> Endnote
 
-         -> NoteElt
-
          -> Picture
 
          -> Symbol
 
-        font::ANY char::ANY -> SymElt
+        font::StringType char::StringType -> SymElt
 
          -> Tab
 
          -> FldChar
 
-        fldData::ANY fldCharType::ANY fldLock::ANY -> FldCharElt
+        fldData::StringType fldCharType::FldCharTypeProperty fldLock::OnOffType -> FldCharElt
 
-        tblPr::ANY tblGrid::ANY tblContent::ANY+ -> TableElt
+        tblPr::TablePrElt tblGrid::TableGridElt tblContent::TableContentElt+ -> TableElt
 
-        tpe_tblElt::ANY -> TablePrElt
+        tpe_tblElt::TableElt -> TablePrElt
 
-        tge_tblElt::ANY -> TableGridElt
+        tge_tblElt::TableElt -> TableGridElt
 
-        tce_tblElt::ANY tr::ANY+ tce_runLevelElts::ANY -> TableContentElt
+        tce_tblElt::TableElt tr::RowElt+ tce_runLevelElts::RunLevelElt -> TableContentElt
 
-        re_tblContentElt::ANY tblPrEx::ANY trPr::ANY rowContent::ANY+ -> RowElt
+        re_tblContentElt::TableContentElt tblPrEx::TablePrExElt trPr::TableRowPrElt rowContent::RowContentElt+ -> RowElt
 
-        tpee_rowElt::ANY -> TablePrExElt
+        tpee_rowElt::RowElt -> TablePrExElt
 
-        tpe_rowElt::ANY -> TableRowPrElt
+        tpe_rowElt::RowElt -> TableRowPrElt
 
-        rce_rowElt::ANY tc::ANY+ rce_runLevelElts::ANY -> RowContentElt
+        rce_rowElt::RowElt tc::TableCellElt+ rce_runLevelElts::RunLevelElt -> RowContentElt
 
-        tce_rowContentElt::ANY tcPr::ANY tce_content::ANY+ -> TableCellElt
+        tce_rowContentElt::RowContentElt tcPr::TableCellPrElt tce_content::BlockLevelElt+ -> TableCellElt
 
-        tcpe_tableCellElt::ANY -> TableCellPrElt
+        tcpe_tableCellElt::TableCellElt -> TableCellPrElt
 
-        fle_wordDocument::ANY -> FontsListElt
+        fle_wordDocument::WordDocument -> FontsListElt
 
-        le_wordDocument::ANY -> ListsElt
+        le_wordDocument::WordDocument -> ListsElt
 
-        se_wordDocument::ANY -> StylesElt
+        se_wordDocument::WordDocument -> StylesElt
 
-        spe_bodyElt::ANY -> SectPrElt
+        spe_bodyElt::BodyElt -> SectPrElt
 
-        rle_tblContentElt::ANY rle_rowContentElt::ANY -> RunLevelElt
+        rle_tblContentElt::TableContentElt rle_rowContentElt::RowContentElt -> RunLevelElt
 
-        ble_bodyElt::ANY ble_note::ANY ble_tableCellElt::ANY -> CfChunk
+        ble_bodyElt::BodyElt ble_note::NoteElt ble_tableCellElt::TableCellElt -> CfChunk
 
-        pce_pElt::ANY -> SimpleFieldElt
+        pce_pElt::ParaElt -> SimpleFieldElt
 
-        pce_pElt::ANY -> HLinkElt
+        pce_pElt::ParaElt -> HLinkElt
 
-        pce_pElt::ANY -> SubDocElt
+        pce_pElt::ParaElt -> SubDocElt
 
          -> PictureType
 

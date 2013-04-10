@@ -3,47 +3,51 @@ module EbXML
 
 syntax MultyPartyCollaboration
         = 
-        ANY partners+
+        BusinessPartnerRole partners+
  ;
 syntax BusinessPartnerRole
         = 
-        ANY collaboration ANY transition ANY performers+
+        MultyPartyCollaboration collaboration Transaction transition Performs performers+
  ;
 syntax Performs
         = 
-        ANY performedBy ANY collaboration ANY role
+        BusinessPartnerRole performedBy BinaryCollaboration collaboration AuthorizedRole role
  ;
 syntax AuthorizedRole
         = 
-        ANY isInitiator ANY performers+
+        Boolean isInitiator Performs performers+
  ;
 syntax Transaction
         = 
-        ANY onInitiation ANY conditionGuard ANY conditionExpression ANY from ANY to
+        String onInitiation String conditionGuard String conditionExpression BusinessState from BusinessState to
  ;
 syntax BinaryCollaboration
         = 
-        ANY pattern ANY timeToPerform ANY preCondition ANY postCondition ANY beginsWhen ANY endsWhen ANY roles+ ANY transitions+ ANY states+
+        String pattern String timeToPerform String preCondition String postCondition String beginsWhen String endsWhen Performs roles+ Transaction transitions+ BusinessState states+
  ;
 syntax BusinessState
-        = 
-        ()
+        = Start
+        | Fork
+        | Join
+        | CompletionState
+        | BusinessActivity
  ;
 syntax Start
         = 
-        ANY collaboration ANY from ANY to
+        BinaryCollaboration collaboration AuthorizedRole from AuthorizedRole to
  ;
 syntax Fork
         = 
-        waitForAll: ANY
+        waitForAll: String
  ;
 syntax Join
         = 
-        ANY collaboration ANY from ANY to
+        BinaryCollaboration collaboration AuthorizedRole from AuthorizedRole to
  ;
 syntax CompletionState
-        = 
-        guardCondition: ANY
+        = Failure
+        | Success
+        | guardCondition: String
  ;
 syntax Failure
         = 
@@ -54,46 +58,46 @@ syntax Success
         ()
  ;
 syntax BusinessActivity
-        = 
-        ()
+        = BusinessTransactionActivity
+        | CollaborationActivity
  ;
 syntax BusinessTransactionActivity
         = 
-        ANY timeToPerform ANY isConcurrent ANY isLegallyBinding ANY use
+        String timeToPerform Boolean isConcurrent Boolean isLegallyBinding BusinessTransaction use
  ;
 syntax CollaborationActivity
         = 
-        use: ANY
+        use: BinaryCollaboration
  ;
 syntax BusinessTransaction
         = 
-        ANY pattern ANY isGuaranteedDeliveryRequired ANY preCondition ANY postCondition ANY beginsWhen ANY endsWhen ANY requester ANY responder
+        String pattern Boolean isGuaranteedDeliveryRequired String preCondition String postCondition String beginsWhen String endsWhen RequestingBusinessActivity requester RespondingBusinessActivity responder
  ;
 syntax BusinessAction
-        = 
-        ()
+        = RequestingBusinessActivity
+        | RespondingBusinessActivity
  ;
 syntax RequestingBusinessActivity
         = 
-        ANY timeToAcknowledgeAcceptance ANY transaction ANY documentEnvelope
+        String timeToAcknowledgeAcceptance BusinessTransaction transaction DocumentEnvelope documentEnvelope
  ;
 syntax RespondingBusinessActivity
         = 
-        ANY transaction ANY documentEnvelope
+        BusinessTransaction transaction DocumentEnvelope documentEnvelope
  ;
 syntax DocumentSecurity
-        = 
-        ()
+        = DocumentEnvelope
+        | Attachment
  ;
 syntax DocumentEnvelope
         = 
-        ANY isPositiveResponse ANY requesting ANY responding ANY attachements+ ANY document
+        Boolean isPositiveResponse RequestingBusinessActivity requesting RespondingBusinessActivity responding Attachment attachements+ BusinessDocument document
  ;
 syntax Attachment
         = 
-        ANY mimeType ANY specification ANY version ANY envelope ANY document
+        String mimeType String specification String version DocumentEnvelope envelope BusinessDocument document
  ;
 syntax BusinessDocument
         = 
-        ANY specificationLocation ANY specificationElement ANY conditionExpression ANY envelopes+ ANY attachments+
+        String specificationLocation String specificationElement String conditionExpression DocumentEnvelope envelopes+ Attachment attachments+
  ;

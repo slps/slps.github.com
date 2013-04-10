@@ -1,5 +1,6 @@
-Node = ;
-Device = nestedNode::ANY+ name::ANY ;
-ExecutionEnvironment = nestedNode::ANY+ name::ANY ;
-Specification = ownedNode::ANY+ ownedCommunicationLink::ANY+ ;
-CommunicationLink = source::ANY target::ANY name::ANY ;
+Node = Device ;
+Node = ExecutionEnvironment ;
+Device = nestedNode::Node+ name::String ;
+ExecutionEnvironment = nestedNode::Node+ name::String ;
+Specification = ownedNode::Node+ ownedCommunicationLink::CommunicationLink+ ;
+CommunicationLink = source::Node target::Node name::String ;

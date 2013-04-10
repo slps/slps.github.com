@@ -1,28 +1,44 @@
 OperationExp:
-        EPSILON
+        PropertyOperation
+OperationExp:
+        OclOperation
+OperationExp:
+        ConstExp
 PropertyOperation:
-        isMarkedPre::ANY source::ANY
+        AttributeExp
+PropertyOperation:
+        NaviguationExp
+PropertyOperation:
+        ClassifierOperation
+PropertyOperation:
+        isMarkedPre::Boolean source::OclExpression
 OclOperation:
-        arguments::ANY
+        arguments::OclExpression
 ConstExp:
-        
+        IntegerConstExp
+ConstExp:
+        StringConstExp
+ConstExp:
+        RealConstExp
+ConstExp:
+        IntegerConstExp
+        StringConstExp
+        RealConstExp
 IntegerConstExp:
-        value::ANY
+        value::Integer
 StringConstExp:
-        value::ANY
+        value::String
 RealConstExp:
-        value::ANY
+        value::Double
 AttributeExp:
-        attr::ANY
+        attr::Attribute
 Attribute:
-        attrExp::ANY+
+        attrExp::AttributeExp+
 NaviguationExp:
-        assEnd::ANY qualifierValues::ANY
+        assEnd::AssocationEnd qualifierValues::OclExpression
 AssocationEnd:
-        navExp::ANY+
+        navExp::NaviguationExp+
 ClassifierOperation:
-        op::ANY arguments::ANY
+        op::Operation arguments::OclExpression
 Operation:
-        classOp::ANY+
-OclExpression:
-        EPSILON
+        classOp::ClassifierOperation+

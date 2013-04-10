@@ -1,8 +1,10 @@
-MSPProject = resource::ANY+ link::ANY+ task::ANY+ ;
-MSPTask = finishDate::ANY startDate::ANY project::ANY superTask::ANY subTask::ANY+ assignment::ANY+ inLink::ANY+ outLink::ANY+ ;
-MSPLink = project::ANY succ::ANY pred::ANY ;
-MSPAssignment = task::ANY resource::ANY ;
-MSPResource = cost::ANY project::ANY assignment::ANY+ ;
-MSPHumanResource = email::ANY ;
+MSPProject = resource::MSPResource+ link::MSPLink+ task::MSPTask+ ;
+MSPTask = finishDate::Date startDate::Date project::MSPProject superTask::MSPTask subTask::MSPTask+ assignment::MSPAssignment+ inLink::MSPLink+ outLink::MSPLink+ ;
+MSPLink = project::MSPProject succ::MSPTask pred::MSPTask ;
+MSPAssignment = task::MSPTask resource::MSPResource ;
+MSPResource = MSPHumanResource ;
+MSPResource = MSPMachine ;
+MSPResource = cost::Double project::MSPProject assignment::MSPAssignment+ ;
+MSPHumanResource = email::String ;
 MSPMachine = ;
-Date = day::ANY month::ANY year::ANY ;
+Date = day::Integer month::Integer year::Integer ;

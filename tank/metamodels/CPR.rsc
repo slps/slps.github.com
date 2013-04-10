@@ -3,29 +3,29 @@ module CPR
 
 syntax Plan
         = 
-        ANY sub_plans+ ANY super_plan ANY objectives+ ANY actions+
+        Plan sub_plans+ Plan super_plan Objective objectives+ Action actions+
  ;
 syntax Objective
         = 
-        ANY objective_plan ANY criterias+
+        Plan objective_plan EvaluationCriteria criterias+
  ;
 syntax EvaluationCriteria
         = 
-        criteria_objective: ANY
+        criteria_objective: Objective
  ;
 syntax Action
         = 
-        ANY action_plan ANY sub_actions+ ANY super_action ANY actor ANY resources+ ANY timeSpecs+
+        Plan action_plan Action sub_actions+ Action super_action Actor actor Resource resources+ TimeSpec timeSpecs+
  ;
 syntax Actor
         = 
-        ANY actor_action ANY sub_actors+ ANY super_actor
+        Action actor_action Actor sub_actors+ Actor super_actor
  ;
 syntax Resource
         = 
-        resource_action: ANY
+        resource_action: Action
  ;
 syntax TimeSpec
         = 
-        timeSpec_action: ANY
+        timeSpec_action: Action
  ;

@@ -2,118 +2,172 @@ module Main
 
 exports
   sorts
-        Process StopProcess SkipProcess Action Construction Instance Assignment Input Output Sequence NormalSequence ReplicatorSequence Conditional NormalConditional ReplicatorConditional Loop Parallel NormalParallel ReplicatorParallel Alternation NormalAlternation ReplicatorAlternation Choice BooleanRef Alternative Guard InputGuard BooleanGuard Replicator Base Count Type PrimitiveType Literal Element Subscript Variable Channel Operand VariableOPerand LiteralOperand ExpressionOperand Expression MonadicExpression DyadicExpression SimpleExpression Specification Declaration TypeDeclaration IntDeclaration ValDeclaration Definition Formal ProcedureBody Actual MonadicOperator DyadicOperator 
+        Process StopProcess SkipProcess Action Construction Instance Assignment Input Output Sequence NormalSequence ReplicatorSequence Conditional NormalConditional ReplicatorConditional Loop Parallel NormalParallel ReplicatorParallel Alternation NormalAlternation ReplicatorAlternation Choice BooleanRef Alternative Guard InputGuard BooleanGuard Replicator Base Count Type PrimitiveType Literal Element Subscript Variable Channel VariableOPerand LiteralOperand ExpressionOperand Expression MonadicExpression DyadicExpression SimpleExpression Specification Declaration TypeDeclaration IntDeclaration ValDeclaration Definition Formal ProcedureBody Actual MonadicOperator DyadicOperator 
   context-free syntax
-         -> Process
+        StopProcess -> Process
+
+        SkipProcess -> Process
+
+        Action -> Process
+
+        Construction -> Process
+
+        Instance -> Process
+
+        Specification -> Process
 
          -> StopProcess
 
          -> SkipProcess
 
-         -> Action
+        Assignment -> Action
 
-         -> Construction
+        Input -> Action
 
-        name::ANY -> Instance
+        Output -> Action
 
-        variable::ANY expression::ANY -> Assignment
+        Sequence -> Construction
 
-        channel::ANY variable::ANY -> Input
+        Conditional -> Construction
 
-        channel::ANY expression::ANY -> Output
+        Loop -> Construction
 
-         -> Sequence
+        Parallel -> Construction
 
-        process::ANY -> NormalSequence
+        Alternation -> Construction
 
-        replicator::ANY -> ReplicatorSequence
+        Sequence -> Construction
+        Conditional -> Construction
+        Loop -> Construction
+        Parallel -> Construction
+        Alternation -> Construction
 
-         -> Conditional
+        name::String -> Instance
 
-        choice::ANY -> NormalConditional
+        variable::Variable expression::Expression -> Assignment
 
-        replicator::ANY -> ReplicatorConditional
+        channel::Channel variable::Variable -> Input
 
-        boolean::ANY process::ANY -> Loop
+        channel::Channel expression::Expression -> Output
 
-         -> Parallel
+        NormalSequence -> Sequence
 
-        process::ANY -> NormalParallel
+        ReplicatorSequence -> Sequence
 
-        replicator::ANY -> ReplicatorParallel
+        process::Process -> NormalSequence
 
-        alternative::ANY -> Alternation
+        replicator::Replicator -> ReplicatorSequence
 
-        process::ANY -> NormalAlternation
+        NormalConditional -> Conditional
 
-        replicator::ANY -> ReplicatorAlternation
+        ReplicatorConditional -> Conditional
 
-        boolean::ANY process::ANY -> Choice
+        choice::Choice -> NormalConditional
 
-        expression::ANY -> BooleanRef
+        replicator::Replicator -> ReplicatorConditional
 
-        guard::ANY process::ANY -> Alternative
+        boolean::BooleanRef process::Process -> Loop
 
-         -> Guard
+        NormalParallel -> Parallel
 
-        input::ANY -> InputGuard
+        ReplicatorParallel -> Parallel
 
-        boolean::ANY -> BooleanGuard
+        NormalAlternation -> Parallel
 
-        name::ANY base::ANY count::ANY -> Replicator
+        ReplicatorAlternation -> Parallel
 
-        expression::ANY -> Base
+        process::Process -> NormalParallel
 
-        expression::ANY -> Count
+        replicator::Replicator -> ReplicatorParallel
 
-        primitiveType::ANY expression::ANY -> Type
+        alternative::Alternative -> Alternation
 
-        isInt::ANY isChan::ANY -> PrimitiveType
+        process::Process -> NormalAlternation
 
-        integer::ANY -> Literal
+        replicator::Replicator -> ReplicatorAlternation
 
-        name::ANY subscript::ANY -> Element
+        boolean::BooleanRef process::Process -> Choice
 
-        expression::ANY -> Subscript
+        expression::Expression -> BooleanRef
 
-        element::ANY -> Variable
+        guard::Guard process::Process -> Alternative
 
-        element::ANY -> Channel
+        InputGuard -> Guard
 
-         -> Operand
+        BooleanGuard -> Guard
+
+        input::Input -> InputGuard
+
+        boolean::BooleanRef -> BooleanGuard
+
+        name::String base::Base count::Count -> Replicator
+
+        expression::Expression -> Base
+
+        expression::Expression -> Count
+
+        primitiveType::PrimitiveType expression::Expression -> Type
+
+        isInt::Boolean isChan::Boolean -> PrimitiveType
+
+        LiteralOperand -> Literal
+
+        integer::Integer -> Literal
+
+        name::String subscript::Subscript -> Element
+
+        expression::Expression -> Subscript
+
+        VariableOPerand -> Variable
+
+        element::Element -> Variable
+
+        element::Element -> Channel
 
          -> VariableOPerand
 
          -> LiteralOperand
 
-        operand::ANY -> ExpressionOperand
+        operand::Operand -> ExpressionOperand
 
-         -> Expression
+        ExpressionOperand -> Expression
 
-        monadicOperator::ANY -> MonadicExpression
+        MonadicExpression -> Expression
 
-        operandRight::ANY dyadicOperator::ANY -> DyadicExpression
+        DyadicExpression -> Expression
 
-        operand::ANY -> SimpleExpression
+        SimpleExpression -> Expression
 
-         -> Specification
+        monadicOperator::MonadicOperator -> MonadicExpression
 
-         -> Declaration
+        operandRight::Operand dyadicOperator::DyadicOperator -> DyadicExpression
 
-        type::ANY -> TypeDeclaration
+        operand::Operand -> SimpleExpression
 
-        name::ANY expression::ANY -> IntDeclaration
+        Declaration -> Specification
 
-        name::ANY expression::ANY -> ValDeclaration
+        Definition -> Specification
 
-        name::ANY procedureBody::ANY -> Definition
+        TypeDeclaration -> Declaration
 
-        name::ANY primitiveType::ANY -> Formal
+        IntDeclaration -> Declaration
 
-        name::ANY process::ANY -> ProcedureBody
+        ValDeclaration -> Declaration
 
-        element::ANY -> Actual
+        type::Type -> TypeDeclaration
 
-        minus::ANY not::ANY -> MonadicOperator
+        name::String expression::Expression -> IntDeclaration
 
-        plus::ANY minus::ANY star::ANY slash::ANY or::ANY inverseSlash::ANY and::ANY eq::ANY ne::ANY lt::ANY gt::ANY le::ANY ge::ANY -> DyadicOperator
+        name::String expression::Expression -> ValDeclaration
+
+        name::String procedureBody::ProcedureBody -> Definition
+
+        name::String primitiveType::PrimitiveType -> Formal
+
+        name::String process::Process -> ProcedureBody
+
+        element::Element -> Actual
+
+        minus::Boolean not::Boolean -> MonadicOperator
+
+        plus::Boolean minus::Boolean star::Boolean slash::Boolean or::Boolean inverseSlash::Boolean and::Boolean eq::Boolean ne::Boolean lt::Boolean gt::Boolean le::Boolean ge::Boolean -> DyadicOperator

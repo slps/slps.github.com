@@ -2,29 +2,39 @@ module Main
 
 exports
   sorts
-        LocatedElement IdedElement URI PNMLDocument NetElement NetContent LabeledElement Label Name NetContentElement Arc Place Transition 
+        LocatedElement IdedElement URI PNMLDocument NetElement LabeledElement Label Name NetContentElement Arc Place Transition 
   context-free syntax
-         -> LocatedElement
+        IdedElement -> LocatedElement
 
-         -> IdedElement
+        URI -> LocatedElement
 
-        value::ANY -> URI
+        PNMLDocument -> LocatedElement
 
-        xmlns::ANY nets::ANY+ -> PNMLDocument
+        NetContent -> LocatedElement
 
-        type::ANY document::ANY contents::ANY+ name::ANY -> NetElement
+        LabeledElement -> LocatedElement
 
-         -> NetContent
+        Label -> LocatedElement
 
-         -> LabeledElement
+        NetElement -> IdedElement
 
-        text::ANY labeledElement::ANY -> Label
+        value::String -> URI
 
-        net::ANY netContent::ANY -> Name
+        xmlns::URI nets::NetElement+ -> PNMLDocument
 
-         -> NetContentElement
+        type::URI document::PNMLDocument contents::NetContent+ name::Name -> NetElement
 
-        source::ANY target::ANY -> Arc
+        Name -> LabeledElement
+
+        text::String labeledElement::LabeledElement -> Label
+
+        net::NetElement netContent::NetContent -> Name
+
+        Place -> NetContentElement
+
+        Transition -> NetContentElement
+
+        source::NetContentElement target::NetContentElement -> Arc
 
          -> Place
 

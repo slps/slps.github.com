@@ -13,43 +13,53 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable GAIA 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Carole Bernon, Massimo Cossentino, Marie-Pierre Gleizes, Paola Turci, Franco Zambonelli, SIMON Eric, <code>GAIA.ecore</code>, 2006/07/13.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>19</strong></li><li>Number of top alternatives: <strong>19</strong></li><li>Number of defined nonterminal symbols: <strong>19</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>19</strong>: <code><a href="#OrganizationalStructure" class="nt">OrganizationalStructure</a>, <a href="#Organization" class="nt">Organization</a>, <a href="#OrganizationalRule" class="nt">OrganizationalRule</a>, <a href="#SafetyRule" class="nt">SafetyRule</a>, <a href="#LivenessRule" class="nt">LivenessRule</a>, <a href="#AgentType" class="nt">AgentType</a>, <a href="#Service" class="nt">Service</a>, <a href="#Role" class="nt">Role</a>, <a href="#Activity" class="nt">Activity</a>, <a href="#Responsibility" class="nt">Responsibility</a>, <a href="#LivenessProperty" class="nt">LivenessProperty</a>, <a href="#SafetyProperty" class="nt">SafetyProperty</a>, <a href="#AssociationConnector" class="nt">AssociationConnector</a>, <a href="#Permission" class="nt">Permission</a>, <a href="#Resource" class="nt">Resource</a>, <a href="#Environnement" class="nt">Environnement</a>, <a href="#Action" class="nt">Action</a>, <a href="#Communication" class="nt">Communication</a>, <a href="#Protocol" class="nt">Protocol</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="OrganizationalStructure">OrganizationalStructure</a>:
-        <span class="sel">organization</span>::<span class="meta">any</span><span class="meta">+</span>
+				</script></head><body><h1 class="l">Browsable GAIA 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Carole Bernon, Massimo Cossentino, Marie-Pierre Gleizes, Paola Turci, Franco Zambonelli, SIMON Eric, <code>GAIA.ecore</code>, 2006/07/13.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>23</strong></li><li>Number of top alternatives: <strong>25</strong></li><li>Number of defined nonterminal symbols: <strong>19</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#OrganizationalStructure" class="nt">OrganizationalStructure</a></code></li><li>Bottom nonterminal symbols: <strong>1</strong>: <code><a href="#String" class="nt">String</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="OrganizationalStructure">OrganizationalStructure</a>:
+        <span class="sel">organization</span>::<a class="nt" href="#Organization">Organization</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Organization">Organization</a>:
-        <span class="sel">collaborates</span>::<span class="meta">any</span> <span class="sel">interacts</span>::<span class="meta">any</span> <span class="sel">member</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">observes</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">collaborates</span>::<a class="nt" href="#Organization">Organization</a> <span class="sel">interacts</span>::<a class="nt" href="#Organization">Organization</a> <span class="sel">member</span>::<a class="nt" href="#AgentType">AgentType</a><span class="meta">+</span> <span class="sel">observes</span>::<a class="nt" href="#OrganizationalRule">OrganizationalRule</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="OrganizationalRule">OrganizationalRule</a>:
-        ε
+        <a class="nt" href="#SafetyRule">SafetyRule</a>
+</pre><pre><a class="nt" name="OrganizationalRule">OrganizationalRule</a>:
+        <a class="nt" href="#LivenessRule">LivenessRule</a>
+</pre><pre><a class="nt" name="OrganizationalRule">OrganizationalRule</a>:
+        <a class="nt" href="#SafetyRule">SafetyRule</a>
+        <a class="nt" href="#LivenessRule">LivenessRule</a>
 </pre><pre><a class="nt" name="SafetyRule">SafetyRule</a>:
         ε
 </pre><pre><a class="nt" name="LivenessRule">LivenessRule</a>:
         ε
 </pre><pre><a class="nt" name="AgentType">AgentType</a>:
-        <span class="sel">provides</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">collaborates</span>::<span class="meta">any</span> <span class="sel">agentType</span>::<span class="meta">any</span> <span class="sel">plays</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">provides</span>::<a class="nt" href="#Service">Service</a><span class="meta">+</span> <span class="sel">collaborates</span>::<a class="nt" href="#AgentType">AgentType</a> <span class="sel">agentType</span>::<a class="nt" href="#AgentType">AgentType</a> <span class="sel">plays</span>::<a class="nt" href="#Role">Role</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Service">Service</a>:
-        <span class="sel">inputs</span>::<span class="meta">any</span> <span class="sel">outputs</span>::<span class="meta">any</span> <span class="sel">pre-conditions</span>::<span class="meta">any</span> <span class="sel">post-conditions</span>::<span class="meta">any</span>
+        <span class="sel">inputs</span>::<a class="nt" href="#String">String</a> <span class="sel">outputs</span>::<a class="nt" href="#String">String</a> <span class="sel">pre-conditions</span>::<a class="nt" href="#String">String</a> <span class="sel">post-conditions</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Role">Role</a>:
-        <span class="sel">activity</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">communication</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">responsibility</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">actsOn</span>::<span class="meta">any</span>
+        <span class="sel">activity</span>::<a class="nt" href="#Activity">Activity</a><span class="meta">+</span> <span class="sel">communication</span>::<a class="nt" href="#Communication">Communication</a><span class="meta">+</span> <span class="sel">responsibility</span>::<a class="nt" href="#Responsibility">Responsibility</a><span class="meta">+</span> <span class="sel">actsOn</span>::<a class="nt" href="#AssociationConnector">AssociationConnector</a>
 </pre><pre><a class="nt" name="Activity">Activity</a>:
         ε
 </pre><pre><a class="nt" name="Responsibility">Responsibility</a>:
-        ε
+        <a class="nt" href="#LivenessProperty">LivenessProperty</a>
+</pre><pre><a class="nt" name="Responsibility">Responsibility</a>:
+        <a class="nt" href="#SafetyProperty">SafetyProperty</a>
+</pre><pre><a class="nt" name="Responsibility">Responsibility</a>:
+        <a class="nt" href="#LivenessProperty">LivenessProperty</a>
+        <a class="nt" href="#SafetyProperty">SafetyProperty</a>
 </pre><pre><a class="nt" name="LivenessProperty">LivenessProperty</a>:
         ε
 </pre><pre><a class="nt" name="SafetyProperty">SafetyProperty</a>:
         ε
 </pre><pre><a class="nt" name="AssociationConnector">AssociationConnector</a>:
-        <span class="sel">actsOn</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">role</span>::<span class="meta">any</span> <span class="sel">permission</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">actsOn</span>::<a class="nt" href="#Resource">Resource</a><span class="meta">+</span> <span class="sel">role</span>::<a class="nt" href="#Role">Role</a> <span class="sel">permission</span>::<a class="nt" href="#Permission">Permission</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Permission">Permission</a>:
-        <span class="sel">association</span>::<span class="meta">any</span>
+        <span class="sel">association</span>::<a class="nt" href="#AssociationConnector">AssociationConnector</a>
 </pre><pre><a class="nt" name="Resource">Resource</a>:
-        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">description</span>::<span class="meta">any</span> <span class="sel">permitted_action</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">environnement</span>::<span class="meta">any</span>
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">description</span>::<a class="nt" href="#String">String</a> <span class="sel">permitted_action</span>::<a class="nt" href="#Action">Action</a><span class="meta">+</span> <span class="sel">environnement</span>::<a class="nt" href="#Environnement">Environnement</a>
 </pre><pre><a class="nt" name="Environnement">Environnement</a>:
-        <span class="sel">resource</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">resource</span>::<a class="nt" href="#Resource">Resource</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Action">Action</a>:
-        <span class="sel">type</span>::<span class="meta">any</span>
+        <span class="sel">type</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Communication">Communication</a>:
-        <span class="sel">observes</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">protocol</span>::<span class="meta">any</span>
+        <span class="sel">observes</span>::<a class="nt" href="#OrganizationalRule">OrganizationalRule</a><span class="meta">+</span> <span class="sel">protocol</span>::<a class="nt" href="#Protocol">Protocol</a>
 </pre><pre><a class="nt" name="Protocol">Protocol</a>:
-        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">initiator</span>::<span class="meta">any</span> <span class="sel">partner</span>::<span class="meta">any</span> <span class="sel">inputs</span>::<span class="meta">any</span> <span class="sel">outputs</span>::<span class="meta">any</span> <span class="sel">description</span>::<span class="meta">any</span>
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">initiator</span>::<a class="nt" href="#String">String</a> <span class="sel">partner</span>::<a class="nt" href="#String">String</a> <span class="sel">inputs</span>::<a class="nt" href="#String">String</a> <span class="sel">outputs</span>::<a class="nt" href="#String">String</a> <span class="sel">description</span>::<a class="nt" href="#String">String</a>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

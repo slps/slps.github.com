@@ -1,60 +1,92 @@
 Thing:
-        EPSILON
+        Conference
+Thing:
+        Conference
 Meta-Reviewer:
         EPSILON
 Reviewer:
-        assignedByAdministrator::ANY adjustBid::ANY readPaper::ANY hasBeenAssigned::ANY writeReview::ANY assignExternalReviewer::ANY
+        Meta-Reviewer
+Reviewer:
+        assignedByAdministrator::Administrator adjustBid::Bid readPaper::Paper hasBeenAssigned::Paper writeReview::Review assignExternalReviewer::ExternalReviewer
 Decision:
-        EPSILON
+        Acceptance
+Decision:
+        Rejection
+Decision:
+        Acceptance
+        Rejection
 Person:
-        hasConflictOfInterest::ANY email::ANY
+        ConferenceMember
+Person:
+        ExternalReviewer
+Person:
+        User
+Person:
+        hasConflictOfInterest::Document email::String
 Document:
-        EPSILON
+        Review
+Document:
+        Paper
+Document:
+        Review
+        Paper
 Preference:
         EPSILON
 ProgramCommittee:
-        hasProgramCommitteeMember::ANY
+        hasProgramCommitteeMember::ProgramCommitteeMember
 Bid:
-        adjustedBy::ANY
+        adjustedBy::Reviewer
 Conference:
-        hasConferenceMember::ANY paperAssignmentFinalizedBy::ANY reviewCriteriaEnteredBy::ANY paperAssignmentToolsRunBy::ANY virtualMeetingEnabledBy::ANY hardcopyMailingManifestsPrintedBy::ANY detailsEnteredBy::ANY reviewerBiddingStartedBy::ANY date::ANY reviewsPerPaper::ANY logoURL::ANY acceptsHardcopySubmissions::ANY siteURL::ANY
+        hasConferenceMember::ConferenceMember paperAssignmentFinalizedBy::Administrator reviewCriteriaEnteredBy::Administrator paperAssignmentToolsRunBy::Administrator virtualMeetingEnabledBy::Administrator hardcopyMailingManifestsPrintedBy::Administrator detailsEnteredBy::Administrator reviewerBiddingStartedBy::Administrator date::date reviewsPerPaper::Integer logoURL::anyURI acceptsHardcopySubmissions::Boolean siteURL::anyURI
 ConferenceChair:
         EPSILON
 ConferenceMember:
-        memberOfConference::ANY
+        memberOfConference::Conference
 AssociatedChair:
         EPSILON
 ProgramCommitteeMember:
-        memberOfProgramCommittee::ANY maxPapers::ANY addedBy::ANY
+        memberOfProgramCommittee::ProgramCommittee maxPapers::Integer addedBy::Administrator
 AuthorNotReviewer:
         EPSILON
 SubjectArea:
         EPSILON
 ExternalReviewer:
-        assignedByReviewer::ANY
+        assignedByReviewer::Reviewer
 Chairman:
         EPSILON
 ProgramCommitteeChair:
-        endReview::ANY
+        endReview::Review
 Acceptance:
         EPSILON
 Rejection:
         EPSILON
 Review:
-        writtenBy::ANY
+        Meta-Review
+Review:
+        writtenBy::Reviewer
 Paper:
-        hasCo-author::ANY hasBid::ANY hasDecision::ANY assignedTo::ANY hasSubjectArea::ANY readByReviewer::ANY paperID::ANY title::ANY hasAuthor::ANY acceptedBy::ANY rejectedBy::ANY readByMeta-Reviewer::ANY
+        PaperAbstract
+Paper:
+        PaperFullVersion
+Paper:
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::unsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer
 Author:
-        submitPaper::ANY writePaper::ANY
+        AuthorNotReviewer
+Author:
+        Co-author
+Author:
+        submitPaper::Paper writePaper::Paper
 User:
-        EPSILON
+        Administrator
+User:
+        Administrator
 Co-author:
-        co-writePaper::ANY
+        co-writePaper::Paper
 PaperAbstract:
         EPSILON
 PaperFullVersion:
         EPSILON
 Administrator:
-        finalizePaperAssignment::ANY runPaperAssignmentTools::ANY enableVirtualMeeting::ANY startReviewerBidding::ANY assignReviewer::ANY rejectPaper::ANY enterConferenceDetails::ANY printHardcopyMailingManifests::ANY setMaxPapers::ANY enterReviewCriteria::ANY acceptPaper::ANY addProgramCommitteeMember::ANY
+        finalizePaperAssignment::Conference runPaperAssignmentTools::Conference enableVirtualMeeting::Conference startReviewerBidding::Conference assignReviewer::Reviewer rejectPaper::Paper enterConferenceDetails::Conference printHardcopyMailingManifests::Conference setMaxPapers::ProgramCommitteeMember enterReviewCriteria::Conference acceptPaper::Paper addProgramCommitteeMember::ProgramCommitteeMember
 Meta-Review:
         EPSILON

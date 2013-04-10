@@ -13,81 +13,127 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable SVG 1.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Jean Paliès, <code>SVG.ecore</code>, 2005/04/07.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>38</strong></li><li>Number of top alternatives: <strong>38</strong></li><li>Number of defined nonterminal symbols: <strong>38</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>38</strong>: <code><a href="#Element" class="nt">Element</a>, <a href="#StructuralElement" class="nt">StructuralElement</a>, <a href="#Image" class="nt">Image</a>, <a href="#Svg" class="nt">Svg</a>, <a href="#GroupingElement" class="nt">GroupingElement</a>, <a href="#G" class="nt">G</a>, <a href="#Defs" class="nt">Defs</a>, <a href="#Symbol" class="nt">Symbol</a>, <a href="#Use" class="nt">Use</a>, <a href="#GraphicalElement" class="nt">GraphicalElement</a>, <a href="#Shape" class="nt">Shape</a>, <a href="#TextElement" class="nt">TextElement</a>, <a href="#Rect" class="nt">Rect</a>, <a href="#Circle" class="nt">Circle</a>, <a href="#Ellipse" class="nt">Ellipse</a>, <a href="#Line" class="nt">Line</a>, <a href="#Polyline" class="nt">Polyline</a>, <a href="#Polygon" class="nt">Polygon</a>, <a href="#Path" class="nt">Path</a>, <a href="#Point" class="nt">Point</a>, <a href="#Marker" class="nt">Marker</a>, <a href="#Text" class="nt">Text</a>, <a href="#Tspan" class="nt">Tspan</a>, <a href="#Tref" class="nt">Tref</a>, <a href="#Attribute" class="nt">Attribute</a>, <a href="#Transform" class="nt">Transform</a>, <a href="#Scale" class="nt">Scale</a>, <a href="#Translate" class="nt">Translate</a>, <a href="#Rotate" class="nt">Rotate</a>, <a href="#Visibility" class="nt">Visibility</a>, <a href="#FontWeight" class="nt">FontWeight</a>, <a href="#FontStyle" class="nt">FontStyle</a>, <a href="#Dimension" class="nt">Dimension</a>, <a href="#Coordinates" class="nt">Coordinates</a>, <a href="#RelativeCoord" class="nt">RelativeCoord</a>, <a href="#AbsoluteCoord" class="nt">AbsoluteCoord</a>, <a href="#ReferencedFile" class="nt">ReferencedFile</a>, <a href="#SvgFile" class="nt">SvgFile</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Element">Element</a>:
-        ε
+				</script></head><body><h1 class="l">Browsable SVG 1.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Jean Paliès, <code>SVG.ecore</code>, 2005/04/07.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>61</strong></li><li>Number of top alternatives: <strong>61</strong></li><li>Number of defined nonterminal symbols: <strong>38</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>3</strong>: <code><a href="#Attribute" class="nt">Attribute</a>, <a href="#Dimension" class="nt">Dimension</a>, <a href="#Coordinates" class="nt">Coordinates</a></code></li><li>Bottom nonterminal symbols: <strong>3</strong>: <code><a href="#String" class="nt">String</a>, <a href="#Double" class="nt">Double</a>, <a href="#Boolean" class="nt">Boolean</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Element">Element</a>:
+        <a class="nt" href="#StructuralElement">StructuralElement</a>
+</pre><pre><a class="nt" name="Element">Element</a>:
+        <a class="nt" href="#GraphicalElement">GraphicalElement</a>
 </pre><pre><a class="nt" name="StructuralElement">StructuralElement</a>:
-        ε
+        <a class="nt" href="#Image">Image</a>
+</pre><pre><a class="nt" name="StructuralElement">StructuralElement</a>:
+        <a class="nt" href="#Svg">Svg</a>
+</pre><pre><a class="nt" name="StructuralElement">StructuralElement</a>:
+        <a class="nt" href="#GroupingElement">GroupingElement</a>
+</pre><pre><a class="nt" name="StructuralElement">StructuralElement</a>:
+        <a class="nt" href="#Use">Use</a>
 </pre><pre><a class="nt" name="Image">Image</a>:
-        <span class="sel">referee</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">referee</span>::<a class="nt" href="#ReferencedFile">ReferencedFile</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Svg">Svg</a>:
-        <span class="sel">owner_SVG</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">children</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">namespace</span>::<span class="meta">any</span> <span class="sel">version</span>::<span class="meta">any</span> <span class="sel">baseProfile</span>::<span class="meta">any</span>
+        <span class="sel">owner_SVG</span>::<a class="nt" href="#SvgFile">SvgFile</a><span class="meta">+</span> <span class="sel">children</span>::<a class="nt" href="#Element">Element</a><span class="meta">+</span> <span class="sel">namespace</span>::<a class="nt" href="#String">String</a> <span class="sel">version</span>::<a class="nt" href="#String">String</a> <span class="sel">baseProfile</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="GroupingElement">GroupingElement</a>:
-        ε
+        <a class="nt" href="#G">G</a>
+</pre><pre><a class="nt" name="GroupingElement">GroupingElement</a>:
+        <a class="nt" href="#Defs">Defs</a>
+</pre><pre><a class="nt" name="GroupingElement">GroupingElement</a>:
+        <a class="nt" href="#Symbol">Symbol</a>
 </pre><pre><a class="nt" name="G">G</a>:
-        <span class="sel">name</span>::<span class="meta">any</span>
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Defs">Defs</a>:
-        <span class="sel">groupContent</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">groupContent</span>::<a class="nt" href="#Element">Element</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Symbol">Symbol</a>:
-        <span class="sel">groupContent</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">groupContent</span>::<a class="nt" href="#Element">Element</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Use">Use</a>:
-        <span class="sel">use</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">use</span>::<a class="nt" href="#Element">Element</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="GraphicalElement">GraphicalElement</a>:
-        ε
+        <a class="nt" href="#Shape">Shape</a>
+</pre><pre><a class="nt" name="GraphicalElement">GraphicalElement</a>:
+        <a class="nt" href="#TextElement">TextElement</a>
 </pre><pre><a class="nt" name="Shape">Shape</a>:
-        ε
+        <a class="nt" href="#Rect">Rect</a>
+</pre><pre><a class="nt" name="Shape">Shape</a>:
+        <a class="nt" href="#Circle">Circle</a>
+</pre><pre><a class="nt" name="Shape">Shape</a>:
+        <a class="nt" href="#Ellipse">Ellipse</a>
+</pre><pre><a class="nt" name="Shape">Shape</a>:
+        <a class="nt" href="#Line">Line</a>
+</pre><pre><a class="nt" name="Shape">Shape</a>:
+        <a class="nt" href="#Polyline">Polyline</a>
+</pre><pre><a class="nt" name="Shape">Shape</a>:
+        <a class="nt" href="#Polygon">Polygon</a>
+</pre><pre><a class="nt" name="Shape">Shape</a>:
+        <a class="nt" href="#Path">Path</a>
+</pre><pre><a class="nt" name="Shape">Shape</a>:
+        <a class="nt" href="#Point">Point</a>
+</pre><pre><a class="nt" name="Shape">Shape</a>:
+        <a class="nt" href="#Marker">Marker</a>
 </pre><pre><a class="nt" name="TextElement">TextElement</a>:
-        ε
+        <a class="nt" href="#Text">Text</a>
+</pre><pre><a class="nt" name="TextElement">TextElement</a>:
+        <a class="nt" href="#Tspan">Tspan</a>
+</pre><pre><a class="nt" name="TextElement">TextElement</a>:
+        <a class="nt" href="#Tref">Tref</a>
 </pre><pre><a class="nt" name="Rect">Rect</a>:
-        <span class="sel">rx</span>::<span class="meta">any</span> <span class="sel">ry</span>::<span class="meta">any</span>
+        <span class="sel">rx</span>::<a class="nt" href="#Double">Double</a> <span class="sel">ry</span>::<a class="nt" href="#Double">Double</a>
 </pre><pre><a class="nt" name="Circle">Circle</a>:
         
 </pre><pre><a class="nt" name="Ellipse">Ellipse</a>:
         
 </pre><pre><a class="nt" name="Line">Line</a>:
-        <span class="sel">between</span>::<span class="meta">any</span> <span class="sel">markerEnd</span>::<span class="meta">any</span> <span class="sel">markerStart</span>::<span class="meta">any</span>
+        <span class="sel">between</span>::<a class="nt" href="#Point">Point</a> <span class="sel">markerEnd</span>::<a class="nt" href="#String">String</a> <span class="sel">markerStart</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Polyline">Polyline</a>:
-        <span class="sel">waypoints</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">strokeDashArray</span>::<span class="meta">any</span> <span class="sel">markerEnd</span>::<span class="meta">any</span> <span class="sel">markerStart</span>::<span class="meta">any</span>
+        <span class="sel">waypoints</span>::<a class="nt" href="#Point">Point</a><span class="meta">+</span> <span class="sel">strokeDashArray</span>::<a class="nt" href="#String">String</a> <span class="sel">markerEnd</span>::<a class="nt" href="#String">String</a> <span class="sel">markerStart</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Polygon">Polygon</a>:
-        <span class="sel">waypoints</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">markerEnd</span>::<span class="meta">any</span> <span class="sel">markerStart</span>::<span class="meta">any</span>
+        <span class="sel">waypoints</span>::<a class="nt" href="#Point">Point</a><span class="meta">+</span> <span class="sel">markerEnd</span>::<a class="nt" href="#String">String</a> <span class="sel">markerStart</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Path">Path</a>:
-        <span class="sel">pathLength</span>::<span class="meta">any</span> <span class="sel">d</span>::<span class="meta">any</span> <span class="sel">markerEnd</span>::<span class="meta">any</span> <span class="sel">markerStart</span>::<span class="meta">any</span>
+        <span class="sel">pathLength</span>::<a class="nt" href="#Double">Double</a> <span class="sel">d</span>::<a class="nt" href="#String">String</a> <span class="sel">markerEnd</span>::<a class="nt" href="#String">String</a> <span class="sel">markerStart</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Point">Point</a>:
         
 </pre><pre><a class="nt" name="Marker">Marker</a>:
-        <span class="sel">markerUnits</span>::<span class="meta">any</span> <span class="sel">refX</span>::<span class="meta">any</span> <span class="sel">refY</span>::<span class="meta">any</span> <span class="sel">markerWidth</span>::<span class="meta">any</span> <span class="sel">markerHeight</span>::<span class="meta">any</span> <span class="sel">orient</span>::<span class="meta">any</span> <span class="sel">drawing</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">markerUnits</span>::<a class="nt" href="#String">String</a> <span class="sel">refX</span>::<a class="nt" href="#Double">Double</a> <span class="sel">refY</span>::<a class="nt" href="#Double">Double</a> <span class="sel">markerWidth</span>::<a class="nt" href="#Double">Double</a> <span class="sel">markerHeight</span>::<a class="nt" href="#Double">Double</a> <span class="sel">orient</span>::<a class="nt" href="#String">String</a> <span class="sel">drawing</span>::<a class="nt" href="#Element">Element</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Text">Text</a>:
-        <span class="sel">lengthAdjust</span>::<span class="meta">any</span> <span class="sel">content</span>::<span class="meta">any</span>
+        <span class="sel">lengthAdjust</span>::<a class="nt" href="#String">String</a> <span class="sel">content</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Tspan">Tspan</a>:
-        <span class="sel">content</span>::<span class="meta">any</span>
+        <span class="sel">content</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Tref">Tref</a>:
-        <span class="sel">xlinkHref</span>::<span class="meta">any</span>
+        <span class="sel">xlinkHref</span>::<a class="nt" href="#TextElement">TextElement</a>
 </pre><pre><a class="nt" name="Attribute">Attribute</a>:
-        ε
+        <a class="nt" href="#Transform">Transform</a>
+</pre><pre><a class="nt" name="Attribute">Attribute</a>:
+        <a class="nt" href="#Visibility">Visibility</a>
+</pre><pre><a class="nt" name="Attribute">Attribute</a>:
+        <a class="nt" href="#FontWeight">FontWeight</a>
+</pre><pre><a class="nt" name="Attribute">Attribute</a>:
+        <a class="nt" href="#FontStyle">FontStyle</a>
 </pre><pre><a class="nt" name="Transform">Transform</a>:
-        ε
+        <a class="nt" href="#Scale">Scale</a>
+</pre><pre><a class="nt" name="Transform">Transform</a>:
+        <a class="nt" href="#Translate">Translate</a>
+</pre><pre><a class="nt" name="Transform">Transform</a>:
+        <a class="nt" href="#Rotate">Rotate</a>
 </pre><pre><a class="nt" name="Scale">Scale</a>:
-        <span class="sel">sx</span>::<span class="meta">any</span> <span class="sel">sy</span>::<span class="meta">any</span>
+        <span class="sel">sx</span>::<a class="nt" href="#Double">Double</a> <span class="sel">sy</span>::<a class="nt" href="#Double">Double</a>
 </pre><pre><a class="nt" name="Translate">Translate</a>:
-        <span class="sel">tx</span>::<span class="meta">any</span> <span class="sel">ty</span>::<span class="meta">any</span>
+        <span class="sel">tx</span>::<a class="nt" href="#Double">Double</a> <span class="sel">ty</span>::<a class="nt" href="#Double">Double</a>
 </pre><pre><a class="nt" name="Rotate">Rotate</a>:
-        <span class="sel">angle</span>::<span class="meta">any</span> <span class="sel">cx</span>::<span class="meta">any</span> <span class="sel">cy</span>::<span class="meta">any</span>
+        <span class="sel">angle</span>::<a class="nt" href="#Double">Double</a> <span class="sel">cx</span>::<a class="nt" href="#Double">Double</a> <span class="sel">cy</span>::<a class="nt" href="#Double">Double</a>
 </pre><pre><a class="nt" name="Visibility">Visibility</a>:
-        <span class="sel">visible</span>::<span class="meta">any</span>
+        <span class="sel">visible</span>::<a class="nt" href="#Boolean">Boolean</a>
 </pre><pre><a class="nt" name="FontWeight">FontWeight</a>:
-        <span class="sel">bold</span>::<span class="meta">any</span>
+        <span class="sel">bold</span>::<a class="nt" href="#Boolean">Boolean</a>
 </pre><pre><a class="nt" name="FontStyle">FontStyle</a>:
-        <span class="sel">italic</span>::<span class="meta">any</span>
+        <span class="sel">italic</span>::<a class="nt" href="#Boolean">Boolean</a>
 </pre><pre><a class="nt" name="Dimension">Dimension</a>:
-        <span class="sel">width</span>::<span class="meta">any</span> <span class="sel">height</span>::<span class="meta">any</span>
+        <span class="sel">width</span>::<a class="nt" href="#Double">Double</a> <span class="sel">height</span>::<a class="nt" href="#Double">Double</a>
 </pre><pre><a class="nt" name="Coordinates">Coordinates</a>:
-        ε
+        <a class="nt" href="#RelativeCoord">RelativeCoord</a>
+</pre><pre><a class="nt" name="Coordinates">Coordinates</a>:
+        <a class="nt" href="#AbsoluteCoord">AbsoluteCoord</a>
 </pre><pre><a class="nt" name="RelativeCoord">RelativeCoord</a>:
-        <span class="sel">x</span>::<span class="meta">any</span> <span class="sel">y</span>::<span class="meta">any</span>
+        <span class="sel">x</span>::<a class="nt" href="#Double">Double</a> <span class="sel">y</span>::<a class="nt" href="#Double">Double</a>
 </pre><pre><a class="nt" name="AbsoluteCoord">AbsoluteCoord</a>:
-        <span class="sel">x</span>::<span class="meta">any</span> <span class="sel">y</span>::<span class="meta">any</span>
+        <span class="sel">x</span>::<a class="nt" href="#Double">Double</a> <span class="sel">y</span>::<a class="nt" href="#Double">Double</a>
 </pre><pre><a class="nt" name="ReferencedFile">ReferencedFile</a>:
-        ε
+        <a class="nt" href="#SvgFile">SvgFile</a>
 </pre><pre><a class="nt" name="SvgFile">SvgFile</a>:
-        <span class="sel">tag</span>::<span class="meta">any</span> <span class="sel">elements</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">tag</span>::<a class="nt" href="#Svg">Svg</a> <span class="sel">elements</span>::<a class="nt" href="#Element">Element</a><span class="meta">+</span>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

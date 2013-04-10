@@ -4,12 +4,16 @@ exports
   sorts
         LocatedElement Network Services WebService RSS 
   context-free syntax
-         -> LocatedElement
+        Network -> LocatedElement
 
-        services::ANY+ name::ANY -> Network
+        Services -> LocatedElement
 
-         -> Services
+        services::Services+ name::String -> Network
 
-        linkedServices::ANY+ -> WebService
+        WebService -> Services
 
-        name::ANY URL::ANY descriptions::ANY -> RSS
+        RSS -> Services
+
+        linkedServices::Services+ -> WebService
+
+        name::String URL::String descriptions::String -> RSS

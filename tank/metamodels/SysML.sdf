@@ -4,75 +4,174 @@ exports
   sorts
         Entity NamedElement Dependency Conform Package View Class Viewpoint Comment Rationale Problem Block ConstraintBlock Property BlockProperty ConstraintProperty DistributedProperty DataType ValueType Unit Dimension ConnectorEnd NestedConnectorEnd Port FlowPort FlowProperty Interface FlowSpecification FlowDirection Classifier InformationItem InformationFlow ItemFlow Parameter ActivityEdge ParameterSet Optional Rate InstanceSpecification Continous Discrete Probability ValueSpecification Behavior Operation ControlOperation ObjectNode NoBuffer Overwrite Abstraction Allocate Allocated ActivityPartition AllocateActivityPartition Trace DeriveReqt Verify Copy Realization Satisfy Requirement TestCase RequirementRelated BasicInterval Interval Uniform Normal 
   context-free syntax
-         -> Entity
+        NamedElement -> Entity
 
-         -> NamedElement
+        Comment -> Entity
 
-        name::ANY -> Dependency
+        Property -> Entity
 
-        target::ANY source::ANY -> Conform
+        DataType -> Entity
 
-        name::ANY -> Package
+        ConnectorEnd -> Entity
 
-        conformsTo::ANY -> View
+        Interface -> Entity
 
-        name::ANY -> Class
+        Classifier -> Entity
 
-        stakeholders::ANY+ purpose::ANY concerns::ANY+ languages::ANY+ methods::ANY+ -> Viewpoint
+        InformationFlow -> Entity
 
-        content::ANY -> Comment
+        Parameter -> Entity
+
+        ActivityEdge -> Entity
+
+        ParameterSet -> Entity
+
+        InstanceSpecification -> Entity
+
+        ValueSpecification -> Entity
+
+        Behavior -> Entity
+
+        Operation -> Entity
+
+        ObjectNode -> Entity
+
+        Abstraction -> Entity
+
+        ActivityPartition -> Entity
+
+        Trace -> Entity
+
+        Realization -> Entity
+
+        Dependency -> NamedElement
+
+        Package -> NamedElement
+
+        Allocated -> NamedElement
+
+        RequirementRelated -> NamedElement
+
+        Conform -> Dependency
+
+        Conform -> Dependency
+
+        target::Viewpoint source::View -> Conform
+
+        View -> Package
+
+        View -> Package
+
+        conformsTo::Viewpoint -> View
+
+        Viewpoint -> Class
+
+        Block -> Class
+
+        Requirement -> Class
+
+        name::String -> Class
+
+        stakeholders::String+ purpose::String concerns::String+ languages::String+ methods::String+ -> Viewpoint
+
+        Rationale -> Comment
+
+        Problem -> Comment
+
+        content::String -> Comment
 
          -> Rationale
 
          -> Problem
 
-        isEncapsulated::ANY -> Block
+        ConstraintBlock -> Block
+
+        isEncapsulated::Boolean -> Block
 
          -> ConstraintBlock
 
-         -> Property
+        BlockProperty -> Property
 
-         -> BlockProperty
+        Port -> Property
+
+        FlowProperty -> Property
+
+        BlockProperty -> Property
+        Port -> Property
+        FlowProperty -> Property
+
+        ConstraintProperty -> BlockProperty
+
+        DistributedProperty -> BlockProperty
+
+        ConstraintProperty -> BlockProperty
+        DistributedProperty -> BlockProperty
 
          -> ConstraintProperty
 
-         -> DistributedProperty
+        BasicInterval -> DistributedProperty
 
-         -> DataType
+        Normal -> DistributedProperty
 
-        unit::ANY dimension::ANY -> ValueType
+        BasicInterval -> DistributedProperty
+        Normal -> DistributedProperty
+
+        ValueType -> DataType
+
+        ValueType -> DataType
+
+        Unit -> ValueType
+
+        Dimension -> ValueType
+
+        unit::Unit dimension::Dimension -> ValueType
 
          -> Unit
 
          -> Dimension
 
-         -> ConnectorEnd
+        NestedConnectorEnd -> ConnectorEnd
 
-        propertyPath::ANY -> NestedConnectorEnd
+        NestedConnectorEnd -> ConnectorEnd
 
-        isBehavior::ANY -> Port
+        propertyPath::Property -> NestedConnectorEnd
 
-        isAtomic::ANY direction::ANY isConjugated::ANY -> FlowPort
+        FlowPort -> Port
 
-        direction::ANY -> FlowProperty
+        isBehavior::Boolean -> Port
 
-         -> Interface
+        isAtomic::Boolean direction::FlowDirection isConjugated::Boolean -> FlowPort
 
-        ownedFlowProperty::ANY+ -> FlowSpecification
+        direction::FlowDirection -> FlowProperty
+
+        FlowSpecification -> Interface
+
+        FlowSpecification -> Interface
+
+        ownedFlowProperty::FlowProperty+ -> FlowSpecification
 
         in:: -> FlowDirection
         out:: -> FlowDirection
         inout:: -> FlowDirection
 
-         -> Classifier
+        Class -> Classifier
 
-        represented::ANY+ -> InformationItem
+        InformationItem -> Classifier
 
-        conveyed::ANY+ source::ANY+ target::ANY+ -> InformationFlow
+        Class -> Classifier
+        InformationItem -> Classifier
 
-        itemProperty::ANY -> ItemFlow
+        represented::Classifier+ -> InformationItem
 
-         -> Parameter
+        ItemFlow -> InformationFlow
+
+        conveyed::Classifier+ source::NamedElement+ target::NamedElement+ -> InformationFlow
+
+        itemProperty::BlockProperty -> ItemFlow
+
+        Optional -> Parameter
+
+        Optional -> Parameter
 
          -> ActivityEdge
 
@@ -80,7 +179,11 @@ exports
 
          -> Optional
 
-        instance::ANY -> Rate
+        Continous -> Rate
+
+        Discrete -> Rate
+
+        instance::InstanceSpecification -> Rate
 
          -> InstanceSpecification
 
@@ -88,7 +191,7 @@ exports
 
          -> Discrete
 
-        probability::ANY -> Probability
+        probability::ValueSpecification -> Probability
 
          -> ValueSpecification
 
@@ -98,23 +201,40 @@ exports
 
          -> ControlOperation
 
-         -> ObjectNode
+        NoBuffer -> ObjectNode
+
+        Overwrite -> ObjectNode
+
+        NoBuffer -> ObjectNode
+        Overwrite -> ObjectNode
 
          -> NoBuffer
 
          -> Overwrite
 
-         -> Abstraction
+        Allocate -> Abstraction
+
+        Allocate -> Abstraction
 
          -> Allocate
 
-        allocatedFrom::ANY+ allocatedTo::ANY+ -> Allocated
+        allocatedFrom::NamedElement+ allocatedTo::NamedElement+ -> Allocated
 
-         -> ActivityPartition
+        AllocateActivityPartition -> ActivityPartition
+
+        AllocateActivityPartition -> ActivityPartition
 
          -> AllocateActivityPartition
 
-         -> Trace
+        DeriveReqt -> Trace
+
+        Verify -> Trace
+
+        Copy -> Trace
+
+        DeriveReqt -> Trace
+        Verify -> Trace
+        Copy -> Trace
 
          -> DeriveReqt
 
@@ -122,20 +242,26 @@ exports
 
          -> Copy
 
-         -> Realization
+        Satisfy -> Realization
+
+        Satisfy -> Realization
 
          -> Satisfy
 
-        text::ANY id::ANY derived::ANY+ derivedFrom::ANY+ satisfiedBy::ANY+ refinedBy::ANY+ tracedTo::ANY+ verifiedBy::ANY+ master::ANY -> Requirement
+        text::String id::String derived::Requirement+ derivedFrom::Requirement+ satisfiedBy::NamedElement+ refinedBy::NamedElement+ tracedTo::NamedElement+ verifiedBy::TestCase+ master::Requirement -> Requirement
 
          -> TestCase
 
-        verifies::ANY+ tracedFrom::ANY+ satisfies::ANY+ refines::ANY+ -> RequirementRelated
+        verifies::Requirement+ tracedFrom::Requirement+ satisfies::Requirement+ refines::Requirement+ -> RequirementRelated
 
-        min::ANY max::ANY -> BasicInterval
+        Interval -> BasicInterval
+
+        Uniform -> BasicInterval
+
+        min::Integer max::Integer -> BasicInterval
 
          -> Interval
 
          -> Uniform
 
-        mean::ANY standardDeviation::ANY -> Normal
+        mean::Integer standardDeviation::Integer -> Normal

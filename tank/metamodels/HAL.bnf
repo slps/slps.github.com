@@ -1,73 +1,97 @@
 HAL:
-        connexion::ANY contents::ANY+
+        connexion::Connexion contents::Entry+
 Connexion:
-        login::ANY password::ANY
+        login::String password::String
 Entry:
-        EPSILON
+        Article
+Entry:
+        Notice
 Article:
-        EPSILON
+        ArticleRecent
+Article:
+        ArticleRetro
 ArticleRecent:
-        fichiers::ANY
+        fichiers::DepotsType
 ArticleRetro:
-        dateRedaction::ANY fichiers::ANY
+        dateRedaction::String fichiers::AbstractDepot
 Notice:
-        metaArtNotice::ANY
+        metaArtNotice::MetaArtNoticeType
 ReferenceBiblioType:
-        EPSILON
+        ArtRevueType
+ReferenceBiblioType:
+        WorkshopType
+ReferenceBiblioType:
+        ArtOuvrageType
+ReferenceBiblioType:
+        OuvrageType
+ReferenceBiblioType:
+        TheseType
+ReferenceBiblioType:
+        BrevetType
+ReferenceBiblioType:
+        AutreType
 ArtRevueType:
-        EPSILON
+        ArtRevue
+ArtRevueType:
+        ArtJournal
 WorkshopType:
-        EPSILON
+        Workshop
+WorkshopType:
+        Communication
+WorkshopType:
+        Conference
 ArtOuvrageType:
-        EPSILON
+        ArtOuvrage
 OuvrageType:
-        EPSILON
+        Ouvrage
 TheseType:
-        EPSILON
+        These
 BrevetType:
-        EPSILON
+        Brevet
 AutreType:
-        EPSILON
+        Autre
 ArtRevue:
-        urldoi::ANY journal::ANY volume::ANY page::ANY annee::ANY
+        urldoi::String journal::String volume::String page::String annee::String
 ArtJournal:
-        urldoi::ANY journal::ANY volume::ANY page::ANY annee::ANY
+        urldoi::String journal::String volume::String page::String annee::String
 Workshop:
-        urldoi::ANY titconf::ANY ville::ANY pays::ANY edcom::ANY annee::ANY page::ANY edsci::ANY serie::ANY
+        urldoi::String titconf::String ville::String pays::String edcom::String annee::String page::String edsci::String serie::String
 Communication:
-        urldoi::ANY titconf::ANY ville::ANY pays::ANY edcom::ANY annee::ANY page::ANY edsci::ANY serie::ANY
+        urldoi::String titconf::String ville::String pays::String edcom::String annee::String page::String edsci::String serie::String
 Conference:
-        urldoi::ANY titconf::ANY ville::ANY pays::ANY edcom::ANY annee::ANY page::ANY edsci::ANY serie::ANY
+        urldoi::String titconf::String ville::String pays::String edcom::String annee::String page::String edsci::String serie::String
 ArtOuvrage:
-        urldoi::ANY titouv::ANY edcom::ANY annee::ANY edsci::ANY serie::ANY
+        urldoi::String titouv::String edcom::String annee::String edsci::String serie::String
 Ouvrage:
-        urldoi::ANY edcom::ANY annee::ANY page::ANY
+        urldoi::String edcom::String annee::String page::String
 Brevet:
-        datebrevet::ANY numbrevet::ANY page::ANY pays::ANY
+        datebrevet::String numbrevet::String page::String pays::String
 Autre:
-        urldoi::ANY annee::ANY description::ANY
+        urldoi::String annee::String description::String
 These:
-        orgthe::ANY niveau::ANY defencedate::ANY directeur::ANY codirecteur::ANY
+        orgthe::String niveau::String defencedate::String directeur::String codirecteur::String
 MetaType:
-        EPSILON
+        MetaArtType
+MetaType:
+        MetaArtNoticeType
 MetaArtType:
-        domain::ANY abstract::ANY referenceBiblio::ANY
+        domain::String abstract::String referenceBiblio::ReferenceBiblioType
 MetaArtNoticeType:
-        domain::ANY abstract::ANY referenceBiblio::ANY
+        domain::String abstract::String referenceBiblio::ReferenceBiblioType
 AutLabType:
-        auteurs::ANY+ laboratoires::ANY+
+        auteurs::Auteur+ laboratoires::Laboratoire+
 Auteur:
-        nom::ANY prenom::ANY autrePrenom::ANY email::ANY urlPerso::ANY lab::ANY
+        nom::String prenom::String autrePrenom::String email::String urlPerso::String lab::Laboratoire
 Laboratoire:
-        id::ANY metas::ANY
+        id::Integer metas::AbstractMetaLab
 AbstractMetaLab:
-        EPSILON
+        MetaLab
 MetaLab:
-        id::ANY
+        id::String
 AffiliationType:
-        institution::ANY+ prive::ANY+ ecole::ANY+ universite::ANY+
+        institution::String+ prive::String+ ecole::String+ universite::String+
 TamponType:
-        id::ANY
+        id::String
 DateVisibleEnum:
         15J::EPSILON
         1M::EPSILON
@@ -76,9 +100,11 @@ DateVisibleEnum:
         2A::EPSILON
         JAMAIS::EPSILON
 AbstractDepot:
-        EPSILON
+        Depot
+AbstractDepot:
+        DepotWeb
 Depot:
-        format::ANY
+        format::FormatEnum
 FormatEnum:
         PDF::EPSILON
         TEX::EPSILON
@@ -88,16 +114,18 @@ FormatEnum:
         PS::EPSILON
         ANNEX::EPSILON
 DepotWeb:
-        format::ANY
+        format::FormatWebEnum
 FormatWebEnum:
         XML::EPSILON
         HTML::EPSILON
         HTM::EPSILON
 AbstractDepotType:
-        EPSILON
+        DepotsType
+AbstractDepotType:
+        WebLink
 DepotsType:
-        depots::ANY+
+        depots::AbstractDepot+
 WebLink:
-        identifiant::ANY server::ANY
+        identifiant::String server::Server
 Server:
         EPSILON

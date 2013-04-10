@@ -1,21 +1,25 @@
 AWKProgram:
-        name::ANY input::ANY output::ANY script::ANY
+        name::String input::File output::File script::Script
 File:
-        name::ANY records::ANY+
+        name::String records::Record+
 Record:
-        r_file::ANY fields::ANY+
+        r_file::File fields::Field+
 Field:
-        value::ANY f_record::ANY
+        value::String f_record::Record
 Script:
-        name::ANY rules::ANY+
+        name::String rules::Rule+
 Rule:
-        r_script::ANY pattern::ANY action::ANY
+        InitialRule
+Rule:
+        FinalRule
+Rule:
+        r_script::Script pattern::Pattern action::Action
 Pattern:
-        regularExpression::ANY
+        regularExpression::String
 Action:
-        instructions::ANY+
+        instructions::Instruction+
 Instruction:
-        value::ANY i_action::ANY
+        value::String i_action::Action
 InitialRule:
         EPSILON
 FinalRule:

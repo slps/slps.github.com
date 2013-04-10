@@ -1,8 +1,10 @@
-Task = id::ANY name::ANY category::ANY frequency::ANY importance::ANY structurationLevel::ANY complexityLevel::ANY criticity::ANY centrality::ANY terminationValue::ANY taskType::ANY taskItem::ANY decompositionTasks::ANY+ decomposedTask::ANY leftOperator::ANY rightOperator::ANY decoration::ANY ;
-Operator = ;
-BinaryOperator = type::ANY leftTask::ANY rightTask::ANY ;
-UnaryOperator = UnaryType::ANY decoratedTask::ANY ;
-FiniteInteration = interation::ANY ;
+Task = id::String name::String category::String frequency::Integer importance::Integer structurationLevel::Integer complexityLevel::Integer criticity::Integer centrality::Integer terminationValue::String taskType::String taskItem::String decompositionTasks::Task+ decomposedTask::Task leftOperator::BinaryOperator rightOperator::BinaryOperator decoration::UnaryOperator ;
+Operator = BinaryOperator ;
+Operator = UnaryOperator ;
+BinaryOperator = type::BinaryType leftTask::Task rightTask::Task ;
+UnaryOperator = FiniteInteration ;
+UnaryOperator = UnaryType::UnaryType decoratedTask::Task ;
+FiniteInteration = interation::Integer ;
 BinaryType = Enabling:: ;
 BinaryType = Disabling:: ;
 BinaryType = SuspendResume:: ;

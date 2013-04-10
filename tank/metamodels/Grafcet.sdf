@@ -4,20 +4,28 @@ exports
   sorts
         LocatedElement NamedElement Grafcet Element Step Transition Connection StepToTransition TransitionToStep 
   context-free syntax
-         -> LocatedElement
+        NamedElement -> LocatedElement
 
-         -> NamedElement
+        Grafcet -> NamedElement
 
-        elements::ANY+ connections::ANY+ -> Grafcet
+        Element -> NamedElement
 
-         -> Element
+        Connection -> NamedElement
 
-        isInitial::ANY isActive::ANY action::ANY incomingConnections::ANY+ outgoingConnections::ANY+ -> Step
+        elements::Element+ connections::Connection+ -> Grafcet
 
-        condition::ANY incomingConnections::ANY+ outgoingConnections::ANY+ -> Transition
+        Step -> Element
 
-         -> Connection
+        Transition -> Element
 
-        from::ANY to::ANY -> StepToTransition
+        isInitial::Boolean isActive::Boolean action::String incomingConnections::TransitionToStep+ outgoingConnections::StepToTransition+ -> Step
 
-        from::ANY to::ANY -> TransitionToStep
+        condition::String incomingConnections::StepToTransition+ outgoingConnections::TransitionToStep+ -> Transition
+
+        StepToTransition -> Connection
+
+        TransitionToStep -> Connection
+
+        from::Step to::Transition -> StepToTransition
+
+        from::Transition to::Step -> TransitionToStep

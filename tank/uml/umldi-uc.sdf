@@ -2,55 +2,79 @@ module Main
 
 exports
   sorts
-        Instance AttributeLink Link LinkEnd ComponentInstance NodeInstance UseCase Actor UseCaseInstance Extend Include ExtensionPoint Element ModelElement GeneralizableElement Namespace Classifier Feature StructuralFeature AssociationEnd Relationship Association Attribute Generalization AggregationKind ChangeableKind OrderingKind ScopeKind VisibilityKind Multiplicity MultiplicityRange Expression BooleanExpression 
+        Instance AttributeLink Link LinkEnd ComponentInstance NodeInstance UseCase Actor UseCaseInstance Extend Include ExtensionPoint Element ModelElement Classifier Feature StructuralFeature AssociationEnd Relationship Association Attribute Generalization AggregationKind ChangeableKind OrderingKind ScopeKind VisibilityKind Multiplicity MultiplicityRange Expression BooleanExpression 
   context-free syntax
-         -> Instance
+        ComponentInstance -> Instance
 
-        instance::ANY value::ANY linkEnd::ANY attribute::ANY -> AttributeLink
+        NodeInstance -> Instance
 
-        association::ANY connection::ANY -> Link
+        UseCaseInstance -> Instance
 
-        link::ANY qualifiedValue::ANY+ instance::ANY associationEnd::ANY -> LinkEnd
+        instance::Instance value::Instance linkEnd::LinkEnd attribute::Attribute -> AttributeLink
 
-        resident::ANY+ nodeInstance::ANY -> ComponentInstance
+        association::Association connection::LinkEnd -> Link
 
-        resident::ANY+ -> NodeInstance
+        link::Link qualifiedValue::AttributeLink+ instance::Instance associationEnd::AssociationEnd -> LinkEnd
 
-        include::ANY+ extend::ANY+ extensionPoint::ANY+ -> UseCase
+        resident::Instance+ nodeInstance::NodeInstance -> ComponentInstance
 
-        powertypeRange::ANY+ feature::ANY+ -> Actor
+        resident::ComponentInstance+ -> NodeInstance
 
-        ownedInstance::ANY+ linkEnd::ANY+ classifier::ANY+ componentInstance::ANY slot::ANY+ ownedLink::ANY+ -> UseCaseInstance
+        include::Include+ extend::Extend+ extensionPoint::ExtensionPoint+ -> UseCase
 
-        extensionPoint::ANY+ extension::ANY base::ANY condition::ANY -> Extend
+        powertypeRange::Generalization+ feature::Feature+ -> Actor
 
-        addition::ANY base::ANY -> Include
+        ownedInstance::Instance+ linkEnd::LinkEnd+ classifier::Classifier+ componentInstance::ComponentInstance slot::AttributeLink+ ownedLink::Link+ -> UseCaseInstance
 
-        useCase::ANY location::ANY -> ExtensionPoint
+        extensionPoint::ExtensionPoint+ extension::UseCase base::UseCase condition::BooleanExpression -> Extend
 
-         -> Element
+        addition::UseCase base::UseCase -> Include
 
-         -> ModelElement
+        useCase::UseCase location::String -> ExtensionPoint
 
-         -> GeneralizableElement
+        ModelElement -> Element
 
-         -> Namespace
+        Instance -> ModelElement
 
-         -> Classifier
+        AttributeLink -> ModelElement
 
-         -> Feature
+        Link -> ModelElement
 
-         -> StructuralFeature
+        LinkEnd -> ModelElement
 
-        association::ANY specification::ANY+ participant::ANY qualifier::ANY+ isNavigable::ANY ordering::ANY aggregation::ANY targetScope::ANY multiplicity::ANY changeability::ANY -> AssociationEnd
+        ExtensionPoint -> ModelElement
 
-         -> Relationship
+        GeneralizableElement -> ModelElement
 
-        connection::ANY -> Association
+        Namespace -> ModelElement
 
-        associationEnd::ANY initialValue::ANY -> Attribute
+        Feature -> ModelElement
 
-        parent::ANY powertype::ANY child::ANY discriminator::ANY -> Generalization
+        AssociationEnd -> ModelElement
+
+        Relationship -> ModelElement
+
+        UseCase -> Classifier
+
+        Actor -> Classifier
+
+        StructuralFeature -> Feature
+
+        Attribute -> StructuralFeature
+
+        association::Association specification::Classifier+ participant::Classifier qualifier::Attribute+ isNavigable::Boolean ordering::OrderingKind aggregation::AggregationKind targetScope::ScopeKind multiplicity::Multiplicity changeability::ChangeableKind -> AssociationEnd
+
+        Extend -> Relationship
+
+        Include -> Relationship
+
+        Generalization -> Relationship
+
+        connection::AssociationEnd -> Association
+
+        associationEnd::AssociationEnd initialValue::Expression -> Attribute
+
+        parent::GeneralizableElement powertype::Classifier child::GeneralizableElement discriminator::String -> Generalization
 
         ak_none:: -> AggregationKind
         ak_aggregate:: -> AggregationKind
@@ -71,10 +95,12 @@ exports
         vk_private:: -> VisibilityKind
         vk_package:: -> VisibilityKind
 
-        range::ANY+ -> Multiplicity
+        range::MultiplicityRange+ -> Multiplicity
 
-        multiplicity::ANY lower::ANY upper::ANY -> MultiplicityRange
+        multiplicity::Multiplicity lower::Integer upper::Integer -> MultiplicityRange
 
-        language::ANY body::ANY -> Expression
+        BooleanExpression -> Expression
+
+        language::String body::String -> Expression
 
          -> BooleanExpression

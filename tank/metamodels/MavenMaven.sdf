@@ -4,118 +4,184 @@ exports
   sorts
         Project Xmlns AntProperty AntPropertyName AntPropertyValue AntPropertyLocation AntPropertyFile AntPropertyEnv JellyCommand JellySet JellyForEach AbstractGoal ContentsGoal AttainGoal PrePostGoal PreGoal PostGoal Goal Pattern Basic Mapper InExcludes Includes Excludes IncludesFile ExcludesFile FileList Filter FiltersFile PathElement Set PatternSet FileSet FilterSet Path ClassPath Task AntTaskDef NewTask Attribut PreDefinedTask ExecutionTask Exec Java MiscellaneousTask Echo Tstamp FormatTstamp CompileTask Javac DocumentationTask Javadoc ArchiveTask Jar FileTask Mkdir Copy Delete 
   context-free syntax
-        xmlns::ANY+ default::ANY path::ANY properties::ANY+ taskdefs::ANY+ prePostGoals::ANY+ goals::ANY+ -> Project
+        xmlns::Xmlns+ default::Goal path::Path properties::AntProperty+ taskdefs::AntTaskDef+ prePostGoals::PrePostGoal+ goals::Goal+ -> Project
 
-        name::ANY value::ANY -> Xmlns
+        name::String value::String -> Xmlns
 
-         -> AntProperty
+        AntPropertyName -> AntProperty
 
-         -> AntPropertyName
+        AntPropertyFile -> AntProperty
 
-        value::ANY -> AntPropertyValue
+        AntPropertyEnv -> AntProperty
 
-        location::ANY -> AntPropertyLocation
+        AntPropertyValue -> AntPropertyName
 
-        file::ANY -> AntPropertyFile
+        AntPropertyLocation -> AntPropertyName
 
-        environment::ANY -> AntPropertyEnv
+        value::String -> AntPropertyValue
 
-         -> JellyCommand
+        location::String -> AntPropertyLocation
 
-        var::ANY value::ANY -> JellySet
+        file::String -> AntPropertyFile
 
-        items::ANY var::ANY indexVar::ANY contents::ANY -> JellyForEach
+        environment::String -> AntPropertyEnv
 
-         -> AbstractGoal
+        JellySet -> JellyCommand
 
-         -> ContentsGoal
+        JellyForEach -> JellyCommand
 
-        attainGoal::ANY -> AttainGoal
+        var::String value::String -> JellySet
 
-         -> PrePostGoal
+        items::String var::String indexVar::String contents::ContentsGoal -> JellyForEach
 
-        centralGoal::ANY -> PreGoal
+        PrePostGoal -> AbstractGoal
 
-        centralGoal::ANY -> PostGoal
+        Goal -> AbstractGoal
 
-        name::ANY preGoal::ANY postGoal::ANY -> Goal
+        AntProperty -> ContentsGoal
 
-         -> Pattern
+        JellyCommand -> ContentsGoal
 
-         -> Basic
+        AttainGoal -> ContentsGoal
 
-        type::ANY classname::ANY classpath::ANY classpathref::ANY from::ANY to::ANY -> Mapper
+        Task -> ContentsGoal
 
-         -> InExcludes
+        AntTaskDef -> ContentsGoal
 
-        name::ANY ifCondition::ANY unless::ANY -> Includes
+        attainGoal::Goal -> AttainGoal
 
-        name::ANY ifCondition::ANY unless::ANY -> Excludes
+        PreGoal -> PrePostGoal
 
-        name::ANY ifCondition::ANY unless::ANY -> IncludesFile
+        PostGoal -> PrePostGoal
 
-        name::ANY ifCondition::ANY unless::ANY -> ExcludesFile
+        centralGoal::Goal -> PreGoal
 
-        dir::ANY files::ANY -> FileList
+        centralGoal::Goal -> PostGoal
 
-        token::ANY value::ANY -> Filter
+        name::String preGoal::PreGoal postGoal::PostGoal -> Goal
 
-        file::ANY -> FiltersFile
+        Basic -> Pattern
 
-        path::ANY location::ANY -> PathElement
+        Set -> Pattern
 
-         -> Set
+        Mapper -> Basic
 
-        inexcludes::ANY+ -> PatternSet
+        InExcludes -> Basic
 
-        dir::ANY patternset::ANY+ include::ANY+ exclude::ANY+ -> FileSet
+        FileList -> Basic
 
-        starttoken::ANY endtoken::ANY filter::ANY+ filtersfile::ANY+ -> FilterSet
+        Filter -> Basic
 
-        id::ANY refid::ANY path::ANY pathElement::ANY+ fileset::ANY+ -> Path
+        FiltersFile -> Basic
 
-        refid::ANY pathElement::ANY+ fileset::ANY+ -> ClassPath
+        PathElement -> Basic
 
-         -> Task
+        type::String classname::String classpath::String classpathref::String from::String to::String -> Mapper
 
-        name::ANY classname::ANY -> AntTaskDef
+        Includes -> InExcludes
 
-        taskName::ANY attributes::ANY+ -> NewTask
+        Excludes -> InExcludes
 
-        name::ANY value::ANY -> Attribut
+        IncludesFile -> InExcludes
 
-         -> PreDefinedTask
+        ExcludesFile -> InExcludes
 
-         -> ExecutionTask
+        name::String ifCondition::String unless::String -> Includes
 
-        executable::ANY dir::ANY -> Exec
+        name::String ifCondition::String unless::String -> Excludes
 
-        classname::ANY jar::ANY fork::ANY classPath::ANY -> Java
+        name::String ifCondition::String unless::String -> IncludesFile
 
-         -> MiscellaneousTask
+        name::String ifCondition::String unless::String -> ExcludesFile
 
-        message::ANY file::ANY append::ANY -> Echo
+        dir::String files::String -> FileList
 
-        format::ANY+ -> Tstamp
+        token::String value::String -> Filter
 
-        property::ANY pattern::ANY offset::ANY unit::ANY locale::ANY -> FormatTstamp
+        file::String -> FiltersFile
 
-         -> CompileTask
+        path::String location::String -> PathElement
 
-        srcdir::ANY destdir::ANY debug::ANY fork::ANY optimize::ANY deprecation::ANY inExcludes::ANY+ classPath::ANY -> Javac
+        PatternSet -> Set
 
-         -> DocumentationTask
+        FileSet -> Set
 
-        sourcepath::ANY destdir::ANY packagenames::ANY defaultexcludes::ANY author::ANY version::ANY use::ANY windowtitle::ANY -> Javadoc
+        FilterSet -> Set
 
-         -> ArchiveTask
+        Path -> Set
 
-        jarfile::ANY basedir::ANY compress::ANY encoding::ANY manifest::ANY -> Jar
+        ClassPath -> Set
 
-         -> FileTask
+        inexcludes::InExcludes+ -> PatternSet
 
-        dir::ANY -> Mkdir
+        dir::String patternset::PatternSet+ include::Includes+ exclude::Excludes+ -> FileSet
 
-        file::ANY presservelastmodified::ANY tofile::ANY todir::ANY overwrite::ANY filtering::ANY flatten::ANY includeEmptyDirs::ANY fileset::ANY filterset::ANY mapper::ANY -> Copy
+        starttoken::String endtoken::String filter::Filter+ filtersfile::FiltersFile+ -> FilterSet
 
-        file::ANY dir::ANY verbose::ANY quiet::ANY failonerror::ANY includeEmptyDirs::ANY includes::ANY includesfile::ANY excludes::ANY excludesfile::ANY defaultexcludes::ANY -> Delete
+        id::String refid::String path::Path pathElement::PathElement+ fileset::FileSet+ -> Path
+
+        refid::String pathElement::PathElement+ fileset::FileSet+ -> ClassPath
+
+        NewTask -> Task
+
+        PreDefinedTask -> Task
+
+        name::String classname::String -> AntTaskDef
+
+        taskName::AntTaskDef attributes::Attribut+ -> NewTask
+
+        name::String value::String -> Attribut
+
+        ExecutionTask -> PreDefinedTask
+
+        MiscellaneousTask -> PreDefinedTask
+
+        CompileTask -> PreDefinedTask
+
+        DocumentationTask -> PreDefinedTask
+
+        ArchiveTask -> PreDefinedTask
+
+        FileTask -> PreDefinedTask
+
+        Exec -> ExecutionTask
+
+        Java -> ExecutionTask
+
+        executable::String dir::String -> Exec
+
+        classname::String jar::String fork::String classPath::ClassPath -> Java
+
+        Echo -> MiscellaneousTask
+
+        Tstamp -> MiscellaneousTask
+
+        message::String file::String append::String -> Echo
+
+        format::FormatTstamp+ -> Tstamp
+
+        property::String pattern::String offset::String unit::String locale::String -> FormatTstamp
+
+        Javac -> CompileTask
+
+        srcdir::String destdir::String debug::String fork::String optimize::String deprecation::String inExcludes::InExcludes+ classPath::ClassPath -> Javac
+
+        Javadoc -> DocumentationTask
+
+        sourcepath::String destdir::String packagenames::String defaultexcludes::String author::String version::String use::String windowtitle::String -> Javadoc
+
+        Jar -> ArchiveTask
+
+        jarfile::String basedir::String compress::String encoding::String manifest::String -> Jar
+
+        Mkdir -> FileTask
+
+        Copy -> FileTask
+
+        Delete -> FileTask
+
+        dir::String -> Mkdir
+
+        file::String presservelastmodified::String tofile::String todir::String overwrite::String filtering::String flatten::String includeEmptyDirs::String fileset::FileSet filterset::FilterSet mapper::Mapper -> Copy
+
+        file::String dir::String verbose::String quiet::String failonerror::String includeEmptyDirs::String includes::String includesfile::String excludes::String excludesfile::String defaultexcludes::String -> Delete

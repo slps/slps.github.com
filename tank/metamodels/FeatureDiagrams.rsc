@@ -2,12 +2,13 @@
 module FeatureDiagrams
 
 syntax Node
-        = 
-        ANY description ANY preliminary ANY object ANY attributes+ ANY no_dst+ ANY nx_dst+ ANY cn_dst+
+        = Root
+        | Child
+        | String description Boolean preliminary String object Attribute attributes+ ORGroup no_dst+ XORGroup nx_dst+ Child cn_dst+
  ;
 syntax Attribute
         = 
-        ANY description ANY editable ANY key ANY value ANY name ANY node
+        String description Boolean editable Boolean key String value String name Node node
  ;
 syntax Root
         = 
@@ -15,13 +16,13 @@ syntax Root
  ;
 syntax Child
         = 
-        ANY cn_src+ ANY cx_src+ ANY co_src+
+        Node cn_src+ XORGroup cx_src+ ORGroup co_src+
  ;
 syntax XORGroup
         = 
-        ANY preliminary ANY name ANY nx_src+ ANY cx_dst+
+        Boolean preliminary String name Node nx_src+ Child cx_dst+
  ;
 syntax ORGroup
         = 
-        ANY preliminary ANY name ANY no_src+ ANY co_dst+
+        Boolean preliminary String name Node no_src+ Child co_dst+
  ;

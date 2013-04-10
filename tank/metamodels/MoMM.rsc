@@ -2,22 +2,23 @@
 module MoMM
 
 syntax ModelElement
-        = 
-        ANY level ANY name ANY potency ANY hasClass ANY classElement+ ANY elementTarget ANY elementSource ANY attributes+ ANY attType
+        = Attribute
+        | Relationship
+        | Integer level String name String potency ModelElement hasClass ModelElement classElement+ Relationship elementTarget Relationship elementSource Attribute attributes+ Attribute attType
  ;
 syntax Attribute
         = 
-        type: ANY
+        type: ModelElement
  ;
 syntax Relationship
-        = 
-        ()
+        = Generalization
+        | Association
  ;
 syntax Generalization
         = 
-        ANY target ANY source
+        ModelElement target ModelElement source
  ;
 syntax Association
         = 
-        ANY maxSource ANY maxTarget ANY minSource ANY minTarget
+        String maxSource String maxTarget String minSource String minTarget
  ;

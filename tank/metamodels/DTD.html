@@ -13,7 +13,7 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable DTD 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Pierrick Guyard, <code>DTD.ecore</code>, 2005/06/20.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>21</strong></li><li>Number of top alternatives: <strong>30</strong></li><li>Number of defined nonterminal symbols: <strong>21</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>21</strong>: <code><a href="#Occurence" class="nt">Occurence</a>, <a href="#OtherAttributeTypeEnum" class="nt">OtherAttributeTypeEnum</a>, <a href="#TypeDescription" class="nt">TypeDescription</a>, <a href="#Notation" class="nt">Notation</a>, <a href="#Entity" class="nt">Entity</a>, <a href="#Element" class="nt">Element</a>, <a href="#AnyElement" class="nt">AnyElement</a>, <a href="#RestrictedElement" class="nt">RestrictedElement</a>, <a href="#ElementContent" class="nt">ElementContent</a>, <a href="#Mixed" class="nt">Mixed</a>, <a href="#Children" class="nt">Children</a>, <a href="#Sequence" class="nt">Sequence</a>, <a href="#Leaf" class="nt">Leaf</a>, <a href="#Choice" class="nt">Choice</a>, <a href="#AttributeList" class="nt">AttributeList</a>, <a href="#AttributeDescription" class="nt">AttributeDescription</a>, <a href="#NoDefaultValue" class="nt">NoDefaultValue</a>, <a href="#DefaultValue" class="nt">DefaultValue</a>, <a href="#AttributeType" class="nt">AttributeType</a>, <a href="#Enumeration" class="nt">Enumeration</a>, <a href="#OtherAttributeType" class="nt">OtherAttributeType</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Occurence">Occurence</a>:
+				</script></head><body><h1 class="l">Browsable DTD 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Pierrick Guyard, <code>DTD.ecore</code>, 2005/06/20.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>30</strong></li><li>Number of top alternatives: <strong>39</strong></li><li>Number of defined nonterminal symbols: <strong>21</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>4</strong>: <code><a href="#Occurence" class="nt">Occurence</a>, <a href="#TypeDescription" class="nt">TypeDescription</a>, <a href="#AttributeType" class="nt">AttributeType</a>, <a href="#OtherAttributeType" class="nt">OtherAttributeType</a></code></li><li>Bottom nonterminal symbols: <strong>2</strong>: <code><a href="#String" class="nt">String</a>, <a href="#Boolean" class="nt">Boolean</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Occurence">Occurence</a>:
         <span class="sel">zeroOrOne</span>::ε
         <span class="sel">zeroOrMore</span>::ε
         <span class="sel">oneOrMore</span>::ε
@@ -27,42 +27,60 @@
         <span class="sel">nmtoken</span>::ε
         <span class="sel">nmtakens</span>::ε
 </pre><pre><a class="nt" name="TypeDescription">TypeDescription</a>:
-        ε
+        <a class="nt" href="#Notation">Notation</a>
+</pre><pre><a class="nt" name="TypeDescription">TypeDescription</a>:
+        <a class="nt" href="#Entity">Entity</a>
+</pre><pre><a class="nt" name="TypeDescription">TypeDescription</a>:
+        <a class="nt" href="#Element">Element</a>
+</pre><pre><a class="nt" name="TypeDescription">TypeDescription</a>:
+        <a class="nt" href="#AttributeList">AttributeList</a>
+</pre><pre><a class="nt" name="TypeDescription">TypeDescription</a>:
+        <a class="nt" href="#AttributeDescription">AttributeDescription</a>
 </pre><pre><a class="nt" name="Notation">Notation</a>:
-        <span class="sel">content</span>::<span class="meta">any</span>
+        <span class="sel">content</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Entity">Entity</a>:
-        <span class="sel">content</span>::<span class="meta">any</span> <span class="sel">isInternal</span>::<span class="meta">any</span>
+        <span class="sel">content</span>::<a class="nt" href="#String">String</a> <span class="sel">isInternal</span>::<a class="nt" href="#Boolean">Boolean</a>
 </pre><pre><a class="nt" name="Element">Element</a>:
-        ε
+        <a class="nt" href="#AnyElement">AnyElement</a>
+</pre><pre><a class="nt" name="Element">Element</a>:
+        <a class="nt" href="#RestrictedElement">RestrictedElement</a>
 </pre><pre><a class="nt" name="AnyElement">AnyElement</a>:
         
 </pre><pre><a class="nt" name="RestrictedElement">RestrictedElement</a>:
-        <span class="sel">content</span>::<span class="meta">any</span>
+        <span class="sel">content</span>::<a class="nt" href="#ElementContent">ElementContent</a>
 </pre><pre><a class="nt" name="ElementContent">ElementContent</a>:
-        ε
+        <a class="nt" href="#Mixed">Mixed</a>
+</pre><pre><a class="nt" name="ElementContent">ElementContent</a>:
+        <a class="nt" href="#Children">Children</a>
 </pre><pre><a class="nt" name="Mixed">Mixed</a>:
-        <span class="sel">elements</span>::<span class="meta">any</span>
+        <span class="sel">elements</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Children">Children</a>:
-        ε
+        <a class="nt" href="#Sequence">Sequence</a>
+</pre><pre><a class="nt" name="Children">Children</a>:
+        <a class="nt" href="#Leaf">Leaf</a>
+</pre><pre><a class="nt" name="Children">Children</a>:
+        <a class="nt" href="#Choice">Choice</a>
 </pre><pre><a class="nt" name="Sequence">Sequence</a>:
-        <span class="sel">children</span>::<span class="meta">any</span>
+        <span class="sel">children</span>::<a class="nt" href="#Children">Children</a>
 </pre><pre><a class="nt" name="Leaf">Leaf</a>:
-        <span class="sel">elementName</span>::<span class="meta">any</span>
+        <span class="sel">elementName</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Choice">Choice</a>:
-        <span class="sel">childrenChoice</span>::<span class="meta">any</span>
+        <span class="sel">childrenChoice</span>::<a class="nt" href="#Children">Children</a>
 </pre><pre><a class="nt" name="AttributeList">AttributeList</a>:
-        <span class="sel">containsAttributes</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">containsAttributes</span>::<a class="nt" href="#AttributeDescription">AttributeDescription</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="AttributeDescription">AttributeDescription</a>:
-        ε
+        <a class="nt" href="#NoDefaultValue">NoDefaultValue</a>
+</pre><pre><a class="nt" name="AttributeDescription">AttributeDescription</a>:
+        <a class="nt" href="#DefaultValue">DefaultValue</a>
 </pre><pre><a class="nt" name="NoDefaultValue">NoDefaultValue</a>:
-        <span class="sel">isRequired</span>::<span class="meta">any</span>
+        <span class="sel">isRequired</span>::<a class="nt" href="#Boolean">Boolean</a>
 </pre><pre><a class="nt" name="DefaultValue">DefaultValue</a>:
-        <span class="sel">value</span>::<span class="meta">any</span> <span class="sel">isFixed</span>::<span class="meta">any</span>
+        <span class="sel">value</span>::<a class="nt" href="#String">String</a> <span class="sel">isFixed</span>::<a class="nt" href="#Boolean">Boolean</a>
 </pre><pre><a class="nt" name="AttributeType">AttributeType</a>:
-        ε
+        <a class="nt" href="#Enumeration">Enumeration</a>
 </pre><pre><a class="nt" name="Enumeration">Enumeration</a>:
-        <span class="sel">values</span>::<span class="meta">any</span>
+        <span class="sel">values</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="OtherAttributeType">OtherAttributeType</a>:
-        <span class="sel">type</span>::<span class="meta">any</span>
+        <span class="sel">type</span>::<a class="nt" href="#OtherAttributeTypeEnum">OtherAttributeTypeEnum</a>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

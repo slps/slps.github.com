@@ -2,11 +2,13 @@ module Main
 
 exports
   sorts
-        StringProperty StringType BreakType NoteValue OnOffType FldCharTypeProperty WordDocument BodyElt BlockLevelElt BlockLevelChunkElt ParaElt ParaContentElt RunElt RunContentElt BreakElt Text DelText InstrText DelInstrText NoBreakHyphen SoftHyphen AnnotationRef FootnoteRef EndnoteRef Separator ContinuationSeparator PgNum Cr Footnote Endnote NoteElt Picture Symbol SymElt Tab FldChar FldCharElt 
+        StringProperty StringType BreakType NoteValue OnOffType FldCharTypeProperty WordDocument BodyElt BlockLevelElt BlockLevelChunkElt ParaElt ParaContentElt RunElt RunContentElt BreakElt Text DelText InstrText DelInstrText NoBreakHyphen SoftHyphen AnnotationRef FootnoteRef EndnoteRef Separator ContinuationSeparator PgNum Cr Footnote Endnote Picture Symbol SymElt Tab FldChar FldCharElt 
   context-free syntax
          -> StringProperty
 
-        val::ANY -> StringType
+        StringProperty -> StringType
+
+        val::String -> StringType
 
         bt_page:: -> BreakType
         bt_column:: -> BreakType
@@ -24,23 +26,45 @@ exports
         fctp_separate:: -> FldCharTypeProperty
         fctp_end:: -> FldCharTypeProperty
 
-        ignoreSubtree::ANY ignoreElements::ANY body::ANY -> WordDocument
+        ignoreSubtree::StringProperty ignoreElements::StringProperty body::BodyElt -> WordDocument
 
-        be_wordDocument::ANY blockLevelElts::ANY+ -> BodyElt
+        be_wordDocument::WordDocument blockLevelElts::BlockLevelElt+ -> BodyElt
 
-         -> BlockLevelElt
+        BlockLevelChunkElt -> BlockLevelElt
 
-         -> BlockLevelChunkElt
+        ParaElt -> BlockLevelChunkElt
 
-        pContentElts::ANY+ -> ParaElt
+        pContentElts::ParaContentElt+ -> ParaElt
 
-         -> ParaContentElt
+        RunElt -> ParaContentElt
 
-        rContentElts::ANY+ -> RunElt
+        rContentElts::RunContentElt+ -> RunElt
 
-         -> RunContentElt
+        BreakElt -> RunContentElt
 
-        type::ANY -> BreakElt
+        NoBreakHyphen -> RunContentElt
+
+        SoftHyphen -> RunContentElt
+
+        AnnotationRef -> RunContentElt
+
+        FootnoteRef -> RunContentElt
+
+        EndnoteRef -> RunContentElt
+
+        Separator -> RunContentElt
+
+        ContinuationSeparator -> RunContentElt
+
+        PgNum -> RunContentElt
+
+        Cr -> RunContentElt
+
+        Picture -> RunContentElt
+
+        Tab -> RunContentElt
+
+        type::BreakType -> BreakElt
 
          -> Text
 
@@ -50,38 +74,36 @@ exports
 
          -> DelInstrText
 
-        rce_rElt::ANY -> NoBreakHyphen
+        rce_rElt::RunElt -> NoBreakHyphen
 
-        rce_rElt::ANY -> SoftHyphen
+        rce_rElt::RunElt -> SoftHyphen
 
-        rce_rElt::ANY -> AnnotationRef
+        rce_rElt::RunElt -> AnnotationRef
 
-        rce_rElt::ANY -> FootnoteRef
+        rce_rElt::RunElt -> FootnoteRef
 
-        rce_rElt::ANY -> EndnoteRef
+        rce_rElt::RunElt -> EndnoteRef
 
-        rce_rElt::ANY -> Separator
+        rce_rElt::RunElt -> Separator
 
-        rce_rElt::ANY -> ContinuationSeparator
+        rce_rElt::RunElt -> ContinuationSeparator
 
-        rce_rElt::ANY -> PgNum
+        rce_rElt::RunElt -> PgNum
 
-        rce_rElt::ANY -> Cr
+        rce_rElt::RunElt -> Cr
 
          -> Footnote
 
          -> Endnote
 
-         -> NoteElt
-
-        rce_rElt::ANY -> Picture
+        rce_rElt::RunElt -> Picture
 
          -> Symbol
 
-        font::ANY char::ANY -> SymElt
+        font::StringType char::StringType -> SymElt
 
-        rce_rElt::ANY -> Tab
+        rce_rElt::RunElt -> Tab
 
          -> FldChar
 
-        fldData::ANY fldCharType::ANY fldLock::ANY -> FldCharElt
+        fldData::StringType fldCharType::FldCharTypeProperty fldLock::OnOffType -> FldCharElt

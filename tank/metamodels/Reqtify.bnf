@@ -1,22 +1,32 @@
 Project:
-        documents::ANY+
+        documents::Document+
 TypedElement:
-        EPSILON
+        ElementWithIL
+TypedElement:
+        CoverLink
+TypedElement:
+        Attribute
 ElementWithIL:
-        EPSILON
+        Document
+ElementWithIL:
+        TextElement
 Document:
-        project::ANY sections::ANY+
+        project::Project sections::Section+
 TextElement:
-        EPSILON
+        Section
+TextElement:
+        AbstractRequirement
 Section:
-        document::ANY sectionChildren::ANY+ sectionParent::ANY requirements::ANY+
+        document::Document sectionChildren::Section+ sectionParent::Section requirements::AbstractRequirement+
 AbstractRequirement:
-        EPSILON
+        Requirement
+AbstractRequirement:
+        MacroRequirement
 Requirement:
-        section::ANY isContained::ANY coverLinks::ANY+ attribute::ANY+
+        section::Section isContained::MacroRequirement coverLinks::CoverLink+ attribute::Attribute+
 MacroRequirement:
-        contains::ANY+
+        contains::AbstractRequirement+
 CoverLink:
-        linkWith::ANY
+        linkWith::AbstractRequirement
 Attribute:
-        value::ANY
+        value::String

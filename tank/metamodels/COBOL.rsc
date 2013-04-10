@@ -23,50 +23,51 @@ syntax COBOLInitialValueKind
         | civk_all_literal: ()
  ;
 syntax COBOLElement
-        = 
-        ANY level ANY refined ANY name ANY sharedType ANY group ANY initial+ ANY contains+ ANY source ANY array
+        = COBOLRedefiningElement
+        | String level Boolean refined String name COBOLClassifier sharedType COBOLComposedType group COBOLElementInitialValue initial+ COBOL88Element contains+ COBOLSourceText source COBOLFixedLengthArray array
  ;
 syntax COBOLClassifier
-        = 
-        ANY typeded ANY name ANY typedElements+
+        = COBOLSimpleType
+        | COBOLComposedType
+        | Boolean typeded String name COBOLElement typedElements+
  ;
 syntax COBOLSimpleType
         = 
-        ANY usageValue ANY pictureString ANY usage
+        COBOLUsageValue usageValue String pictureString Boolean usage
  ;
 syntax COBOLComposedType
         = 
-        ANY elements+
+        COBOLElement elements+
  ;
 syntax COBOLElementInitialValue
         = 
-        ANY initVal ANY valueKind
+        String initVal COBOLInitialValueKind valueKind
  ;
 syntax COBOL88Element
         = 
-        ANY name ANY has+
+        String name COBOL88ElementValue has+
  ;
 syntax COBOL88ElementValue
         = 
-        ANY lowerLimit ANY upperLimit ANY range
+        String lowerLimit String upperLimit Boolean range
  ;
 syntax COBOLRedefiningElement
         = 
-        redefines: ANY
+        redefines: COBOLElement
  ;
 syntax COBOL66Element
         = 
-        ANY name ANY end ANY start
+        String name COBOLElement end COBOLElement start
  ;
 syntax COBOLSourceText
         = 
-        ANY source ANY fileName
+        String source String fileName
  ;
 syntax COBOLFixedLengthArray
-        = 
-        maxUpper: ANY
+        = COBOLVariableLengthArray
+        | maxUpper: Integer
  ;
 syntax COBOLVariableLengthArray
         = 
-        ANY minUpper ANY dependingOn
+        Integer minUpper COBOLElement dependingOn
  ;

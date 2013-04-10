@@ -3,17 +3,17 @@ module ODP_TV
 
 syntax TechnologyObject
         = 
-        ANY implStandard+ ANY toImplementation+
+        ImplementableStandard implStandard+ Implementation toImplementation+
  ;
 syntax Implementation
         = 
-        ANY implIXIT+ ANY implProduct+
+        IXIT implIXIT+ TechnologyObject implProduct+
  ;
 syntax IXIT
         = 
-        ANY ixitImplementation+
+        Implementation ixitImplementation+
  ;
 syntax ImplementableStandard
         = 
-        ANY techObject+
+        TechnologyObject techObject+
  ;

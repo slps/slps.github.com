@@ -2,58 +2,58 @@
 module Operations
 
 syntax OperationExp
-        = 
-        ()
+        = PropertyOperation
+        | OclOperation
+        | ConstExp
  ;
 syntax PropertyOperation
-        = 
-        ANY isMarkedPre ANY source
+        = AttributeExp
+        | NaviguationExp
+        | ClassifierOperation
+        | Boolean isMarkedPre OclExpression source
  ;
 syntax OclOperation
         = 
-        arguments: ANY
+        arguments: OclExpression
  ;
 syntax ConstExp
-        = 
-        
+        = IntegerConstExp
+        | StringConstExp
+        | RealConstExp
  ;
 syntax IntegerConstExp
         = 
-        value: ANY
+        value: Integer
  ;
 syntax StringConstExp
         = 
-        value: ANY
+        value: String
  ;
 syntax RealConstExp
         = 
-        value: ANY
+        value: Double
  ;
 syntax AttributeExp
         = 
-        attr: ANY
+        attr: Attribute
  ;
 syntax Attribute
         = 
-        ANY attrExp+
+        AttributeExp attrExp+
  ;
 syntax NaviguationExp
         = 
-        ANY assEnd ANY qualifierValues
+        AssocationEnd assEnd OclExpression qualifierValues
  ;
 syntax AssocationEnd
         = 
-        ANY navExp+
+        NaviguationExp navExp+
  ;
 syntax ClassifierOperation
         = 
-        ANY op ANY arguments
+        Operation op OclExpression arguments
  ;
 syntax Operation
         = 
-        ANY classOp+
- ;
-syntax OclExpression
-        = 
-        ()
+        ClassifierOperation classOp+
  ;

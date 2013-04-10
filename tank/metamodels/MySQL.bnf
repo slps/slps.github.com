@@ -1,16 +1,26 @@
 NamedElement:
-        EPSILON
+        DataBase
+NamedElement:
+        Table
+NamedElement:
+        Column
+NamedElement:
+        EnumItem
 DataBase:
-        tables::ANY+
+        tables::Table+
 Table:
-        columns::ANY+ database::ANY
+        columns::Column+ database::DataBase
 Column:
-        type::ANY isPrimaryKey::ANY null::ANY defaultValue::ANY comment::ANY table::ANY
+        IntegerColumn
+Column:
+        EnumColumn
+Column:
+        type::String isPrimaryKey::Boolean null::Boolean defaultValue::String comment::String table::Table
 IntegerColumn:
-        isAutoIncrement::ANY
+        isAutoIncrement::Boolean
 EnumColumn:
-        enumSet::ANY
+        enumSet::EnumSet
 EnumSet:
-        enumItems::ANY+
+        enumItems::EnumItem+
 EnumItem:
-        enumSet::ANY
+        enumSet::EnumSet

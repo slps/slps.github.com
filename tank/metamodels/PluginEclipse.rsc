@@ -2,8 +2,15 @@
 module PluginEclipse
 
 syntax LocatedElement
-        = 
-        ()
+        = Eclipse
+        | Bundle
+        | RequireBundleAttribute
+        | Version
+        | RequiredBundle
+        | ImportedPackage
+        | ExportedPackage
+        | Package
+        | Xfriends
  ;
 syntax Resolution
         = Mandatory: ()
@@ -15,53 +22,54 @@ syntax Visibility
  ;
 syntax Eclipse
         = 
-        ANY bundles+ ANY packages+
+        Bundle bundles+ Package packages+
  ;
 syntax Bundle
         = 
-        ANY symbolicName ANY singleton ANY manifestVersion ANY require+ ANY version ANY export+ ANY import+ ANY packages+
+        String symbolicName Boolean singleton Integer manifestVersion RequiredBundle require+ Version version ExportedPackage export+ ImportedPackage import+ Package packages+
  ;
 syntax RequireBundleAttribute
-        = 
-        ()
+        = AttResolution
+        | AttVisibility
+        | Range
  ;
 syntax AttResolution
         = 
-        value: ANY
+        value: Resolution
  ;
 syntax AttVisibility
         = 
-        value: ANY
+        value: Visibility
  ;
 syntax Range
         = 
-        ANY isLeftInclusive ANY isRightInclusive ANY lowerBound ANY upperBound
+        Boolean isLeftInclusive Boolean isRightInclusive Version lowerBound Version upperBound
  ;
 syntax Version
         = 
-        ANY major ANY minor ANY micro ANY qualification
+        Integer major Integer minor Integer micro String qualification
  ;
 syntax RequiredBundle
         = 
-        ANY requireBundleAttribute+ ANY bundle
+        RequireBundleAttribute requireBundleAttribute+ Bundle bundle
  ;
 syntax ImportedPackage
         = 
-        ANY resolution ANY package ANY range
+        Resolution resolution Package package Range range
  ;
 syntax ExportedPackage
-        = 
-        ANY package ANY version ANY xFriends
+        = Xinternal
+        | Package package Version version Xfriends xFriends
  ;
 syntax Package
         = 
-        ANY fqn ANY importedBy+ ANY exportedBy
+        String fqn ImportedPackage importedBy+ ExportedPackage exportedBy
  ;
 syntax Xfriends
         = 
-        ANY bundles+
+        Bundle bundles+
  ;
 syntax Xinternal
         = 
-        value: ANY
+        value: Boolean
  ;

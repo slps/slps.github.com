@@ -13,99 +13,147 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable Maude 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: José Eduardo Rivera, <code>Maude.ecore</code>, 2010.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>46</strong></li><li>Number of top alternatives: <strong>48</strong></li><li>Number of defined nonterminal symbols: <strong>46</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>46</strong>: <code><a href="#MaudeSpec" class="nt">MaudeSpec</a>, <a href="#MaudeTopEl" class="nt">MaudeTopEl</a>, <a href="#ModExpression" class="nt">ModExpression</a>, <a href="#InstModExp" class="nt">InstModExp</a>, <a href="#RenModExp" class="nt">RenModExp</a>, <a href="#CompModExp" class="nt">CompModExp</a>, <a href="#ModuleIdModExp" class="nt">ModuleIdModExp</a>, <a href="#TheoryIdModExp" class="nt">TheoryIdModExp</a>, <a href="#Parameter" class="nt">Parameter</a>, <a href="#Theory" class="nt">Theory</a>, <a href="#FTheory" class="nt">FTheory</a>, <a href="#STheory" class="nt">STheory</a>, <a href="#Module" class="nt">Module</a>, <a href="#FModule" class="nt">FModule</a>, <a href="#SModule" class="nt">SModule</a>, <a href="#ModElement" class="nt">ModElement</a>, <a href="#ModImportation" class="nt">ModImportation</a>, <a href="#ImportationMode" class="nt">ImportationMode</a>, <a href="#Type" class="nt">Type</a>, <a href="#Sort" class="nt">Sort</a>, <a href="#Kind" class="nt">Kind</a>, <a href="#SubsortRel" class="nt">SubsortRel</a>, <a href="#Operation" class="nt">Operation</a>, <a href="#Statement" class="nt">Statement</a>, <a href="#Membership" class="nt">Membership</a>, <a href="#Equation" class="nt">Equation</a>, <a href="#Rule" class="nt">Rule</a>, <a href="#Condition" class="nt">Condition</a>, <a href="#EquationalCond" class="nt">EquationalCond</a>, <a href="#RewriteCond" class="nt">RewriteCond</a>, <a href="#MembershipCond" class="nt">MembershipCond</a>, <a href="#BooleanCond" class="nt">BooleanCond</a>, <a href="#MatchingCond" class="nt">MatchingCond</a>, <a href="#EqualCond" class="nt">EqualCond</a>, <a href="#Term" class="nt">Term</a>, <a href="#Constant" class="nt">Constant</a>, <a href="#RecTerm" class="nt">RecTerm</a>, <a href="#Variable" class="nt">Variable</a>, <a href="#View" class="nt">View</a>, <a href="#ViewMapping" class="nt">ViewMapping</a>, <a href="#RenMapping" class="nt">RenMapping</a>, <a href="#TermMapping" class="nt">TermMapping</a>, <a href="#SortMapping" class="nt">SortMapping</a>, <a href="#OpTypedMapping" class="nt">OpTypedMapping</a>, <a href="#OpMapping" class="nt">OpMapping</a>, <a href="#LabelMapping" class="nt">LabelMapping</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="MaudeSpec">MaudeSpec</a>:
-        <span class="sel">els</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">printableEls</span>::<span class="meta">any</span><span class="meta">+</span>
+				</script></head><body><h1 class="l">Browsable Maude 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: José Eduardo Rivera, <code>Maude.ecore</code>, 2010.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>70</strong></li><li>Number of top alternatives: <strong>72</strong></li><li>Number of defined nonterminal symbols: <strong>46</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>2</strong>: <code><a href="#MaudeSpec" class="nt">MaudeSpec</a>, <a href="#Condition" class="nt">Condition</a></code></li><li>Bottom nonterminal symbols: <strong>1</strong>: <code><a href="#String" class="nt">String</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="MaudeSpec">MaudeSpec</a>:
+        <span class="sel">els</span>::<a class="nt" href="#MaudeTopEl">MaudeTopEl</a><span class="meta">+</span> <span class="sel">printableEls</span>::<a class="nt" href="#MaudeTopEl">MaudeTopEl</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="MaudeTopEl">MaudeTopEl</a>:
-        ε
+        <a class="nt" href="#Theory">Theory</a>
+</pre><pre><a class="nt" name="MaudeTopEl">MaudeTopEl</a>:
+        <a class="nt" href="#Module">Module</a>
+</pre><pre><a class="nt" name="MaudeTopEl">MaudeTopEl</a>:
+        <a class="nt" href="#View">View</a>
 </pre><pre><a class="nt" name="ModExpression">ModExpression</a>:
-        ε
+        <a class="nt" href="#InstModExp">InstModExp</a>
+</pre><pre><a class="nt" name="ModExpression">ModExpression</a>:
+        <a class="nt" href="#RenModExp">RenModExp</a>
+</pre><pre><a class="nt" name="ModExpression">ModExpression</a>:
+        <a class="nt" href="#CompModExp">CompModExp</a>
+</pre><pre><a class="nt" name="ModExpression">ModExpression</a>:
+        <a class="nt" href="#ModuleIdModExp">ModuleIdModExp</a>
+</pre><pre><a class="nt" name="ModExpression">ModExpression</a>:
+        <a class="nt" href="#TheoryIdModExp">TheoryIdModExp</a>
+</pre><pre><a class="nt" name="ModExpression">ModExpression</a>:
+        <a class="nt" href="#Parameter">Parameter</a>
 </pre><pre><a class="nt" name="InstModExp">InstModExp</a>:
-        <span class="sel">modExp</span>::<span class="meta">any</span> <span class="sel">views</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">modExp</span>::<a class="nt" href="#ModExpression">ModExpression</a> <span class="sel">views</span>::<a class="nt" href="#View">View</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="RenModExp">RenModExp</a>:
-        <span class="sel">modExp</span>::<span class="meta">any</span> <span class="sel">renamings</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">modExp</span>::<a class="nt" href="#ModExpression">ModExpression</a> <span class="sel">renamings</span>::<a class="nt" href="#RenMapping">RenMapping</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="CompModExp">CompModExp</a>:
-        <span class="sel">modExps</span>::<span class="meta">any</span>
+        <span class="sel">modExps</span>::<a class="nt" href="#ModExpression">ModExpression</a>
 </pre><pre><a class="nt" name="ModuleIdModExp">ModuleIdModExp</a>:
-        <span class="sel">module</span>::<span class="meta">any</span>
+        <span class="sel">module</span>::<a class="nt" href="#Module">Module</a>
 </pre><pre><a class="nt" name="TheoryIdModExp">TheoryIdModExp</a>:
-        <span class="sel">theory</span>::<span class="meta">any</span>
+        <span class="sel">theory</span>::<a class="nt" href="#Theory">Theory</a>
 </pre><pre><a class="nt" name="Parameter">Parameter</a>:
-        <span class="sel">label</span>::<span class="meta">any</span> <span class="sel">modExp</span>::<span class="meta">any</span>
+        <span class="sel">label</span>::<a class="nt" href="#String">String</a> <span class="sel">modExp</span>::<a class="nt" href="#ModExpression">ModExpression</a>
 </pre><pre><a class="nt" name="Theory">Theory</a>:
-        ε
+        <a class="nt" href="#FTheory">FTheory</a>
+</pre><pre><a class="nt" name="Theory">Theory</a>:
+        <a class="nt" href="#STheory">STheory</a>
 </pre><pre><a class="nt" name="FTheory">FTheory</a>:
-        <span class="sel">els</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">els</span>::<a class="nt" href="#ModElement">ModElement</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="STheory">STheory</a>:
-        <span class="sel">els</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">els</span>::<a class="nt" href="#ModElement">ModElement</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Module">Module</a>:
-        ε
+        <a class="nt" href="#FModule">FModule</a>
+</pre><pre><a class="nt" name="Module">Module</a>:
+        <a class="nt" href="#SModule">SModule</a>
 </pre><pre><a class="nt" name="FModule">FModule</a>:
-        <span class="sel">els</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">params</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">els</span>::<a class="nt" href="#ModElement">ModElement</a><span class="meta">+</span> <span class="sel">params</span>::<a class="nt" href="#Parameter">Parameter</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="SModule">SModule</a>:
-        <span class="sel">els</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">params</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">els</span>::<a class="nt" href="#ModElement">ModElement</a><span class="meta">+</span> <span class="sel">params</span>::<a class="nt" href="#Parameter">Parameter</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="ModElement">ModElement</a>:
-        ε
+        <a class="nt" href="#ModImportation">ModImportation</a>
+</pre><pre><a class="nt" name="ModElement">ModElement</a>:
+        <a class="nt" href="#SubsortRel">SubsortRel</a>
+</pre><pre><a class="nt" name="ModElement">ModElement</a>:
+        <a class="nt" href="#Operation">Operation</a>
+</pre><pre><a class="nt" name="ModElement">ModElement</a>:
+        <a class="nt" href="#Statement">Statement</a>
 </pre><pre><a class="nt" name="ModImportation">ModImportation</a>:
-        <span class="sel">imports</span>::<span class="meta">any</span> <span class="sel">mode</span>::<span class="meta">any</span>
+        <span class="sel">imports</span>::<a class="nt" href="#ModExpression">ModExpression</a> <span class="sel">mode</span>::<a class="nt" href="#ImportationMode">ImportationMode</a>
 </pre><pre><a class="nt" name="ImportationMode">ImportationMode</a>:
         <span class="sel">protecting</span>::ε
         <span class="sel">including</span>::ε
         <span class="sel">extending</span>::ε
 </pre><pre><a class="nt" name="Type">Type</a>:
-        ε
+        <a class="nt" href="#Kind">Kind</a>
 </pre><pre><a class="nt" name="Sort">Sort</a>:
-        <span class="sel">subsortRels</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">supersortRels</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">kind</span>::<span class="meta">any</span>
+        <span class="sel">subsortRels</span>::<a class="nt" href="#SubsortRel">SubsortRel</a><span class="meta">+</span> <span class="sel">supersortRels</span>::<a class="nt" href="#SubsortRel">SubsortRel</a><span class="meta">+</span> <span class="sel">kind</span>::<a class="nt" href="#Kind">Kind</a>
 </pre><pre><a class="nt" name="Kind">Kind</a>:
-        <span class="sel">sorts</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">sorts</span>::<a class="nt" href="#Sort">Sort</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="SubsortRel">SubsortRel</a>:
-        <span class="sel">subsorts</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">supersorts</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">subsorts</span>::<a class="nt" href="#Sort">Sort</a><span class="meta">+</span> <span class="sel">supersorts</span>::<a class="nt" href="#Sort">Sort</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Operation">Operation</a>:
-        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">coarity</span>::<span class="meta">any</span> <span class="sel">arity</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">atts</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">coarity</span>::<a class="nt" href="#Type">Type</a> <span class="sel">arity</span>::<a class="nt" href="#Type">Type</a><span class="meta">+</span> <span class="sel">atts</span>::<a class="nt" href="#String">String</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Statement">Statement</a>:
-        ε
+        <a class="nt" href="#Membership">Membership</a>
+</pre><pre><a class="nt" name="Statement">Statement</a>:
+        <a class="nt" href="#Equation">Equation</a>
+</pre><pre><a class="nt" name="Statement">Statement</a>:
+        <a class="nt" href="#Rule">Rule</a>
 </pre><pre><a class="nt" name="Membership">Membership</a>:
-        <span class="sel">term</span>::<span class="meta">any</span> <span class="sel">sort</span>::<span class="meta">any</span>
+        <span class="sel">term</span>::<a class="nt" href="#Term">Term</a> <span class="sel">sort</span>::<a class="nt" href="#Sort">Sort</a>
 </pre><pre><a class="nt" name="Equation">Equation</a>:
-        <span class="sel">lhs</span>::<span class="meta">any</span> <span class="sel">rhs</span>::<span class="meta">any</span>
+        <span class="sel">lhs</span>::<a class="nt" href="#Term">Term</a> <span class="sel">rhs</span>::<a class="nt" href="#Term">Term</a>
 </pre><pre><a class="nt" name="Rule">Rule</a>:
-        <span class="sel">lhs</span>::<span class="meta">any</span> <span class="sel">rhs</span>::<span class="meta">any</span>
+        <span class="sel">lhs</span>::<a class="nt" href="#Term">Term</a> <span class="sel">rhs</span>::<a class="nt" href="#Term">Term</a>
 </pre><pre><a class="nt" name="Condition">Condition</a>:
-        ε
+        <a class="nt" href="#EquationalCond">EquationalCond</a>
+</pre><pre><a class="nt" name="Condition">Condition</a>:
+        <a class="nt" href="#RewriteCond">RewriteCond</a>
 </pre><pre><a class="nt" name="EquationalCond">EquationalCond</a>:
-        ε
+        <a class="nt" href="#MembershipCond">MembershipCond</a>
+</pre><pre><a class="nt" name="EquationalCond">EquationalCond</a>:
+        <a class="nt" href="#BooleanCond">BooleanCond</a>
+</pre><pre><a class="nt" name="EquationalCond">EquationalCond</a>:
+        <a class="nt" href="#MatchingCond">MatchingCond</a>
+</pre><pre><a class="nt" name="EquationalCond">EquationalCond</a>:
+        <a class="nt" href="#EqualCond">EqualCond</a>
 </pre><pre><a class="nt" name="RewriteCond">RewriteCond</a>:
-        <span class="sel">rhs</span>::<span class="meta">any</span>
+        <span class="sel">rhs</span>::<a class="nt" href="#Term">Term</a>
 </pre><pre><a class="nt" name="MembershipCond">MembershipCond</a>:
-        <span class="sel">rhs</span>::<span class="meta">any</span>
+        <span class="sel">rhs</span>::<a class="nt" href="#Sort">Sort</a>
 </pre><pre><a class="nt" name="BooleanCond">BooleanCond</a>:
         
 </pre><pre><a class="nt" name="MatchingCond">MatchingCond</a>:
-        <span class="sel">rhs</span>::<span class="meta">any</span>
+        <span class="sel">rhs</span>::<a class="nt" href="#Term">Term</a>
 </pre><pre><a class="nt" name="EqualCond">EqualCond</a>:
-        <span class="sel">rhs</span>::<span class="meta">any</span>
+        <span class="sel">rhs</span>::<a class="nt" href="#Term">Term</a>
 </pre><pre><a class="nt" name="Term">Term</a>:
-        ε
+        <a class="nt" href="#Constant">Constant</a>
+</pre><pre><a class="nt" name="Term">Term</a>:
+        <a class="nt" href="#RecTerm">RecTerm</a>
+</pre><pre><a class="nt" name="Term">Term</a>:
+        <a class="nt" href="#Variable">Variable</a>
 </pre><pre><a class="nt" name="Constant">Constant</a>:
-        <span class="sel">op</span>::<span class="meta">any</span>
+        <span class="sel">op</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="RecTerm">RecTerm</a>:
-        <span class="sel">op</span>::<span class="meta">any</span> <span class="sel">args</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">op</span>::<a class="nt" href="#String">String</a> <span class="sel">args</span>::<a class="nt" href="#Term">Term</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Variable">Variable</a>:
-        <span class="sel">name</span>::<span class="meta">any</span>
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="View">View</a>:
-        <span class="sel">from</span>::<span class="meta">any</span> <span class="sel">to</span>::<span class="meta">any</span> <span class="sel">els</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">from</span>::<a class="nt" href="#ModExpression">ModExpression</a> <span class="sel">to</span>::<a class="nt" href="#ModExpression">ModExpression</a> <span class="sel">els</span>::<a class="nt" href="#ViewMapping">ViewMapping</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="ViewMapping">ViewMapping</a>:
-        ε
+        <a class="nt" href="#RenMapping">RenMapping</a>
+</pre><pre><a class="nt" name="ViewMapping">ViewMapping</a>:
+        <a class="nt" href="#TermMapping">TermMapping</a>
 </pre><pre><a class="nt" name="RenMapping">RenMapping</a>:
-        ε
+        <a class="nt" href="#SortMapping">SortMapping</a>
+</pre><pre><a class="nt" name="RenMapping">RenMapping</a>:
+        <a class="nt" href="#OpTypedMapping">OpTypedMapping</a>
+</pre><pre><a class="nt" name="RenMapping">RenMapping</a>:
+        <a class="nt" href="#OpMapping">OpMapping</a>
+</pre><pre><a class="nt" name="RenMapping">RenMapping</a>:
+        <a class="nt" href="#LabelMapping">LabelMapping</a>
 </pre><pre><a class="nt" name="TermMapping">TermMapping</a>:
-        <span class="sel">from</span>::<span class="meta">any</span> <span class="sel">to</span>::<span class="meta">any</span>
+        <span class="sel">from</span>::<a class="nt" href="#Term">Term</a> <span class="sel">to</span>::<a class="nt" href="#Term">Term</a>
 </pre><pre><a class="nt" name="SortMapping">SortMapping</a>:
-        <span class="sel">from</span>::<span class="meta">any</span> <span class="sel">to</span>::<span class="meta">any</span>
+        <span class="sel">from</span>::<a class="nt" href="#Sort">Sort</a> <span class="sel">to</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="OpTypedMapping">OpTypedMapping</a>:
-        <span class="sel">from</span>::<span class="meta">any</span> <span class="sel">to</span>::<span class="meta">any</span> <span class="sel">atts</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">from</span>::<a class="nt" href="#Operation">Operation</a> <span class="sel">to</span>::<a class="nt" href="#String">String</a> <span class="sel">atts</span>::<a class="nt" href="#String">String</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="OpMapping">OpMapping</a>:
-        <span class="sel">from</span>::<span class="meta">any</span> <span class="sel">to</span>::<span class="meta">any</span>
+        <span class="sel">from</span>::<a class="nt" href="#Operation">Operation</a> <span class="sel">to</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="LabelMapping">LabelMapping</a>:
-        <span class="sel">from</span>::<span class="meta">any</span> <span class="sel">to</span>::<span class="meta">any</span>
+        <span class="sel">from</span>::<a class="nt" href="#String">String</a> <span class="sel">to</span>::<a class="nt" href="#String">String</a>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

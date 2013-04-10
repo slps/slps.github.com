@@ -2,12 +2,13 @@
 module WTIP_SimpleClass
 
 syntax Classifier
-        = 
-        name: ANY
+        = Class
+        | PrimitiveDataType
+        | name: String
  ;
 syntax Class
         = 
-        ANY is_persistent ANY parent ANY attrs+
+        Boolean is_persistent Class parent Attribute attrs+
  ;
 syntax PrimitiveDataType
         = 
@@ -15,9 +16,9 @@ syntax PrimitiveDataType
  ;
 syntax Association
         = 
-        ANY name ANY src ANY dest
+        String name Class src Class dest
  ;
 syntax Attribute
         = 
-        ANY name ANY is_primary ANY type
+        String name Boolean is_primary Classifier type
  ;

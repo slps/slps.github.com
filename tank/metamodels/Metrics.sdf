@@ -4,14 +4,20 @@ exports
   sorts
         Metric MetricValue StringMetricValue BooleanMetricValue IntegerMetricValue DoubleMetricValue 
   context-free syntax
-        name::ANY values::ANY+ -> Metric
+        name::String values::MetricValue+ -> Metric
 
-         -> MetricValue
+        StringMetricValue -> MetricValue
 
-        value::ANY -> StringMetricValue
+        BooleanMetricValue -> MetricValue
 
-        value::ANY -> BooleanMetricValue
+        IntegerMetricValue -> MetricValue
 
-        value::ANY -> IntegerMetricValue
+        DoubleMetricValue -> MetricValue
 
-        value::ANY -> DoubleMetricValue
+        value::String -> StringMetricValue
+
+        value::Boolean -> BooleanMetricValue
+
+        value::Integer -> IntegerMetricValue
+
+        value::Double -> DoubleMetricValue

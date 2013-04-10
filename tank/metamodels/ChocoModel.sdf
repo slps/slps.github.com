@@ -4,7 +4,15 @@ exports
   sorts
         LocatedElement OpConstraint Package Import ChocoProblem Element Expression ConstraintDef IntVar Domain IntConstant SymbolicTerm IntValue IntExp Constraint PostConstraint 
   context-free syntax
-         -> LocatedElement
+        Package -> LocatedElement
+
+        Import -> LocatedElement
+
+        ChocoProblem -> LocatedElement
+
+        Element -> LocatedElement
+
+        Domain -> LocatedElement
 
         eq:: -> OpConstraint
         and2:: -> OpConstraint
@@ -15,30 +23,44 @@ exports
         le:: -> OpConstraint
         plus:: -> OpConstraint
 
-        name::ANY import::ANY+ problem::ANY -> Package
+        name::String import::Import+ problem::ChocoProblem -> Package
 
-        fqn::ANY -> Import
+        fqn::String -> Import
 
-        name::ANY elements::ANY+ -> ChocoProblem
+        name::String elements::Element+ -> ChocoProblem
 
-         -> Element
+        Expression -> Element
 
-         -> Expression
+        PostConstraint -> Element
 
-        op::ANY left::ANY right::ANY -> ConstraintDef
+        ConstraintDef -> Expression
 
-        domain::ANY -> IntVar
+        IntVar -> Expression
 
-        lower::ANY upper::ANY -> Domain
+        IntConstant -> Expression
 
-        val::ANY -> IntConstant
+        SymbolicTerm -> Expression
 
-        term::ANY -> SymbolicTerm
+        IntValue -> Expression
 
-        val::ANY -> IntValue
+        IntExp -> Expression
 
-        op::ANY left::ANY right::ANY -> IntExp
+        Constraint -> Expression
 
-        op::ANY left::ANY right::ANY -> Constraint
+        op::OpConstraint left::Expression right::Expression -> ConstraintDef
 
-        op::ANY constraint::ANY -> PostConstraint
+        domain::Domain -> IntVar
+
+        lower::Integer upper::Integer -> Domain
+
+        val::Integer -> IntConstant
+
+        term::Expression -> SymbolicTerm
+
+        val::Integer -> IntValue
+
+        op::OpConstraint left::Expression right::Expression -> IntExp
+
+        op::OpConstraint left::Expression right::Expression -> Constraint
+
+        op::OpConstraint constraint::ConstraintDef -> PostConstraint

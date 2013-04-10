@@ -2,8 +2,11 @@
 module ChocoModel
 
 syntax LocatedElement
-        = 
-        ()
+        = Package
+        | Import
+        | ChocoProblem
+        | Element
+        | Domain
  ;
 syntax OpConstraint
         = eq: ()
@@ -17,57 +20,62 @@ syntax OpConstraint
  ;
 syntax Package
         = 
-        ANY name ANY import+ ANY problem
+        String name Import import+ ChocoProblem problem
  ;
 syntax Import
         = 
-        fqn: ANY
+        fqn: String
  ;
 syntax ChocoProblem
         = 
-        ANY name ANY elements+
+        String name Element elements+
  ;
 syntax Element
-        = 
-        ()
+        = Expression
+        | PostConstraint
  ;
 syntax Expression
-        = 
-        ()
+        = ConstraintDef
+        | IntVar
+        | IntConstant
+        | SymbolicTerm
+        | IntValue
+        | IntExp
+        | Constraint
  ;
 syntax ConstraintDef
         = 
-        ANY op ANY left ANY right
+        OpConstraint op Expression left Expression right
  ;
 syntax IntVar
         = 
-        domain: ANY
+        domain: Domain
  ;
 syntax Domain
         = 
-        ANY lower ANY upper
+        Integer lower Integer upper
  ;
 syntax IntConstant
         = 
-        val: ANY
+        val: Integer
  ;
 syntax SymbolicTerm
         = 
-        term: ANY
+        term: Expression
  ;
 syntax IntValue
         = 
-        val: ANY
+        val: Integer
  ;
 syntax IntExp
         = 
-        ANY op ANY left ANY right
+        OpConstraint op Expression left Expression right
  ;
 syntax Constraint
         = 
-        ANY op ANY left ANY right
+        OpConstraint op Expression left Expression right
  ;
 syntax PostConstraint
         = 
-        ANY op ANY constraint
+        OpConstraint op ConstraintDef constraint
  ;

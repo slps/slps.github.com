@@ -2,12 +2,12 @@
 module PNML_basic
 
 syntax IdedElement
-        = 
-        ()
+        = NetElement
+        | Node
  ;
 syntax URI
         = 
-        value: ANY
+        value: String
  ;
 syntax Color
         = 
@@ -15,7 +15,7 @@ syntax Color
  ;
 syntax AnyElement
         = 
-        ANY name ANY text
+        String name String text
  ;
 syntax RotationType
         = rtvertical: ()
@@ -43,105 +43,108 @@ syntax AlignType
  ;
 syntax PNMLDocument
         = 
-        ANY xmlns ANY nets+
+        URI xmlns NetElement nets+
  ;
 syntax NetElement
         = 
-        ANY type ANY document ANY contents+ ANY tools+ ANY netgraphics ANY name
+        URI type PNMLDocument document NetContent contents+ ToolSpecific tools+ NetGraphics netgraphics Name name
  ;
 syntax NetContent
         = 
-        ()
+        NetContentElement
  ;
 syntax ToolSpecific
         = 
-        ANY tool ANY version ANY anyelement+ ANY net ANY arc ANY node
+        String tool String version AnyElement anyelement+ NetElement net Arc arc Node node
  ;
 syntax LabeledElement
-        = 
-        ()
+        = Name
+        | Inscription
+        | InitialMarking
  ;
 syntax Label
         = 
-        ANY text ANY namedelement
+        String text LabeledElement namedelement
  ;
 syntax Name
         = 
-        ANY net ANY netcontent
+        NetElement net NetContent netcontent
  ;
 syntax Inscription
         = 
-        arc: ANY
+        arc: Arc
  ;
 syntax InitialMarking
         = 
-        place: ANY
+        place: Place
  ;
 syntax NetContentElement
-        = 
-        ()
+        = Place
+        | Transition
  ;
 syntax Arc
         = 
-        ANY source ANY target ANY tools+ ANY edgegraphics ANY inscription
+        NetContentElement source NetContentElement target ToolSpecific tools+ EdgeGraphics edgegraphics Inscription inscription
  ;
 syntax Node
         = 
-        ANY netcontentelement ANY tools+ ANY nodegraphics
+        NetContentElement netcontentelement ToolSpecific tools+ NodeGraphics nodegraphics
  ;
 syntax Place
         = 
-        initialmarking: ANY
+        initialmarking: InitialMarking
  ;
 syntax Transition
         = 
-        ANY node
+        node: Node
  ;
 syntax Graphics
-        = 
-        ()
+        = NetGraphics
+        | NodeGraphics
+        | EdgeGraphics
+        | AnnotationGraphics
  ;
 syntax NetGraphics
         = 
-        net: ANY
+        net: NetElement
  ;
 syntax NodeGraphics
         = 
-        ANY node ANY position ANY dimension ANY fill ANY line
+        Node node Position position Dimension dimension Fill fill Line line
  ;
 syntax EdgeGraphics
         = 
-        ANY arc ANY position+ ANY fill ANY line
+        Arc arc Position position+ Fill fill Line line
  ;
 syntax AnnotationGraphics
         = 
-        ANY namedelement ANY offset ANY font ANY fill ANY line
+        LabeledElement namedelement Offset offset Font font Fill fill Line line
  ;
 syntax Coordinate
-        = 
-        ()
+        = Position
+        | Offset
  ;
 syntax Position
         = 
-        ANY nodegraphics ANY edgegraphics
+        NodeGraphics nodegraphics EdgeGraphics edgegraphics
  ;
 syntax Offset
         = 
-        annotationgraphics: ANY
+        annotationgraphics: AnnotationGraphics
  ;
 syntax Dimension
         = 
-        ANY width ANY height ANY nodegraphics
+        Integer width Integer height NodeGraphics nodegraphics
  ;
 syntax Fill
         = 
-        ANY gradientrotation ANY interiorcolor ANY gradientcolor ANY image ANY nodegraphics ANY edgegraphics ANY annotationgraphics
+        RotationType gradientrotation Color interiorcolor Color gradientcolor URI image NodeGraphics nodegraphics EdgeGraphics edgegraphics AnnotationGraphics annotationgraphics
  ;
 syntax Line
         = 
-        ANY color ANY width ANY shape ANY style ANY nodegraphics ANY edgegraphics ANY annotationgraphics
+        Color color Integer width ShapeType shape StyleType style NodeGraphics nodegraphics EdgeGraphics edgegraphics AnnotationGraphics annotationgraphics
  ;
 syntax Font
         = 
-        ANY family ANY style ANY weight ANY size ANY decoration ANY align ANY rotation ANY annotationgraphics
+        String family String style String weight String size DecorationType decoration AlignType align Integer rotation AnnotationGraphics annotationgraphics
  ;

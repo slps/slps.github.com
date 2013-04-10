@@ -1,24 +1,44 @@
 LocatedElement:
-        EPSILON
+        ModelElement
+LocatedElement:
+        Metamodel
 ModelElement:
-        EPSILON
+        Classifier
+ModelElement:
+        EnumLiteral
+ModelElement:
+        StructuralFeature
+ModelElement:
+        Package
 Classifier:
-        name::ANY package::ANY
+        DataType
+Classifier:
+        Enumeration
+Classifier:
+        Class
+Classifier:
+        DataType
+        Enumeration
+        Class
 DataType:
         EPSILON
 Enumeration:
-        literals::ANY+
+        literals::EnumLiteral+
 EnumLiteral:
-        name::ANY package::ANY
+        name::String package::Package
 Class:
-        isAbstract::ANY supertypes::ANY+ structuralFeatures::ANY+
+        isAbstract::Boolean supertypes::Class+ structuralFeatures::StructuralFeature+
 StructuralFeature:
-        lower::ANY upper::ANY isOrdered::ANY isUnique::ANY owner::ANY type::ANY
+        Attribute
+StructuralFeature:
+        Reference
+StructuralFeature:
+        lower::Integer upper::Integer isOrdered::Boolean isUnique::Boolean owner::Class type::Classifier
 Attribute:
         EPSILON
 Reference:
-        isContainer::ANY opposite::ANY
+        isContainer::Boolean opposite::Reference
 Package:
-        contents::ANY+ metamodel::ANY
+        contents::ModelElement+ metamodel::Metamodel
 Metamodel:
-        contents::ANY+
+        contents::Package+

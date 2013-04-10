@@ -2,13 +2,21 @@ module Main
 
 exports
   sorts
-        ModelElement Name AssociationEnd AggregationKind Multiplicity ChangeableKind ScopeKind RfIntegretyKind RlIntegretyKind Namespace GeneralizableElement Classifier Class Key Feature StructureFeature Constraint Attribute Expression 
+        ModelElement Name AssociationEnd AggregationKind Multiplicity ChangeableKind ScopeKind RfIntegretyKind RlIntegretyKind Namespace GeneralizableElement Classifier Class Feature StructureFeature Attribute Expression 
   context-free syntax
-        name::ANY -> ModelElement
+        AssociationEnd -> ModelElement
+
+        Namespace -> ModelElement
+
+        Key -> ModelElement
+
+        Feature -> ModelElement
+
+        name::Name -> ModelElement
 
          -> Name
 
-        isNavigable::ANY isOrdered::ANY aggregation::ANY multiplicity::ANY changeable::ANY TargetScope::ANY rfIntegrety::ANY rlIntegrety::ANY -> AssociationEnd
+        isNavigable::Boolean isOrdered::Boolean aggregation::AggregationKind multiplicity::Multiplicity changeable::ChangeableKind TargetScope::ScopeKind rfIntegrety::RlIntegretyKind rlIntegrety::RlIntegretyKind -> AssociationEnd
 
          -> AggregationKind
 
@@ -22,22 +30,31 @@ exports
 
          -> RlIntegretyKind
 
-         -> Namespace
+        GeneralizableElement -> Namespace
 
-         -> GeneralizableElement
+        GeneralizableElement -> Namespace
 
-         -> Classifier
+        Classifier -> GeneralizableElement
 
-        isActive::ANY mutliplicity::ANY key::ANY+ -> Class
+        Classifier -> GeneralizableElement
 
-         -> Key
+        Class -> Classifier
 
-         -> Feature
+        Class -> Classifier
 
-         -> StructureFeature
+        isActive::Boolean mutliplicity::Multiplicity key::Key+ -> Class
 
-         -> Constraint
+        StructureFeature -> Feature
 
-        initialValue::ANY isKey::ANY isUnique::ANY -> Attribute
+        Constraint -> Feature
+
+        StructureFeature -> Feature
+        Constraint -> Feature
+
+        Attribute -> StructureFeature
+
+        Attribute -> StructureFeature
+
+        initialValue::Expression isKey::Boolean isUnique::Boolean -> Attribute
 
          -> Expression

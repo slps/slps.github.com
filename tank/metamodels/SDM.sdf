@@ -4,189 +4,351 @@ exports
   sorts
         SystemDefinitionModel Information Import ImportNamespaceIdentity SDMCommunicationDefinition SDMContainmentDefinition SDMDelegationDefinition SDMReferenceDefinition SDMEndpointDefinition SDMResourceDefinition SDMSystemDefinition SDMConstraintDefinition SDMManager ManagerDeclaration ObjectDefinition OBFlow OBRelationshipConstraint OBConstraint OBConstraintGroup OBEndpointDefinition OBSystemDefinition OBResourceDefinition OBCommunicationDefinition OBContainmentDefinition OBDelegationDefinition OBReferenceDefinition OBHostingDefinition OBEndpoint OBSubsystem OBResource OBHosting OBContainment OBConnection OBDelegation OBReference SystemDefinition EndpointDefinition ResourceDefinition RelationshipDefinition RDObjectConstraint RDConstraint RDConstraintGroup RDFlow RDConnection RDHosting RDDelegation RDReference RDContainment CommunicationDefinition HostingDefinition ContainmentDefinition DelegationDefinition ReferenceDefinition Member MembSettingValue MembSettingValueList ObjectMember RelationshipMember SystemMember EndpointMember ResourceMember HostingMember CommunicationMember ContainmentMember DelegationMember ReferenceMember DesignData NameSpace ObjectConstraint OCConstraint OCRelationshipConstraint OCConstraintGroup RelationshipConstraint RCConstraint RCRelationshipConstraint RCObjectConstraint RCConstraintGroup ConstraintGroup CGConstraint CGRelationshipConstraint CGObjectConstraint StructuralConstraint ConstraintDefinition CDRelationshipConstraint CDConstraintGroup CDObjectConstraint CDConstraint ConstraintMember Definition DefSettingDeclaration DefSettingValue DefSettingValueList SimpleName QualifiedName Path SettingPath NamespaceIdentity FlowDefinition FlowMember ValueTransfer Output Input SettingDefinitions SettingMember SettingsAttributes SettingMemberAccess SettingMemberSecure Facet SettingValue SettingValueList Value SettingValueAttributes Description Entry DescriptionEntry Substitute PathList MaxOccurs MinOccurs FourPartVersionType PublicKeyType PublicKeyTokenType CompilationHashType RolesList Culture CultureNeutral ProcessorArchitectures Platform ConstraintEvaluation Element 
   context-free syntax
-        information::ANY import::ANY+ designData::ANY settingDefinitions::ANY communicationDefinition::ANY+ containmentDefinition::ANY+ delegationDefinition::ANY+ referenceDefinition::ANY+ endpointDefinition::ANY+ resourceDefinition::ANY+ systemDefinition::ANY+ constraintDefinition::ANY+ manager::ANY+ nameSpace::ANY namespaceIdentity::ANY documentLanguage::ANY+ compilationHash::ANY+ -> SystemDefinitionModel
+        information::Information import::Import+ designData::DesignData settingDefinitions::SettingDefinitions communicationDefinition::SDMCommunicationDefinition+ containmentDefinition::SDMContainmentDefinition+ delegationDefinition::SDMDelegationDefinition+ referenceDefinition::SDMReferenceDefinition+ endpointDefinition::SDMEndpointDefinition+ resourceDefinition::SDMResourceDefinition+ systemDefinition::SDMSystemDefinition+ constraintDefinition::SDMConstraintDefinition+ manager::SDMManager+ nameSpace::NameSpace namespaceIdentity::NamespaceIdentity documentLanguage::Culture+ compilationHash::CompilationHashType+ -> SystemDefinitionModel
 
-        sdm::ANY friendlyname::ANY companyname::ANY copyright::ANY trademark::ANY description::ANY comments::ANY compilerversion::ANY -> Information
+        sdm::SystemDefinitionModel friendlyname::String companyname::String copyright::String trademark::String description::Description comments::String compilerversion::FourPartVersionType -> Information
 
-        sdm::ANY alias::ANY identity::ANY -> Import
+        sdm::SystemDefinitionModel alias::SimpleName identity::ImportNamespaceIdentity -> Import
 
-        import::ANY -> ImportNamespaceIdentity
+        import::Import -> ImportNamespaceIdentity
 
-        sdm::ANY -> SDMCommunicationDefinition
+        sdm::SystemDefinitionModel -> SDMCommunicationDefinition
 
-        sdm::ANY -> SDMContainmentDefinition
+        sdm::SystemDefinitionModel -> SDMContainmentDefinition
 
-        sdm::ANY -> SDMDelegationDefinition
+        sdm::SystemDefinitionModel -> SDMDelegationDefinition
 
-        sdm::ANY -> SDMReferenceDefinition
+        sdm::SystemDefinitionModel -> SDMReferenceDefinition
 
-        sdm::ANY -> SDMEndpointDefinition
+        sdm::SystemDefinitionModel -> SDMEndpointDefinition
 
-        sdm::ANY -> SDMResourceDefinition
+        sdm::SystemDefinitionModel -> SDMResourceDefinition
 
-        sdm::ANY -> SDMSystemDefinition
+        sdm::SystemDefinitionModel -> SDMSystemDefinition
 
-        sdm::ANY -> SDMConstraintDefinition
+        sdm::SystemDefinitionModel -> SDMConstraintDefinition
 
-        sdm::ANY -> SDMManager
+        sdm::SystemDefinitionModel -> SDMManager
 
-        description::ANY name::ANY assemblyName::ANY version::ANY publicKeyToken::ANY culture::ANY platform::ANY sourcePath::ANY -> ManagerDeclaration
+        SDMManager -> ManagerDeclaration
 
-        flow::ANY+ relationshipConstraint::ANY+ constraint::ANY+ constraintGroup::ANY+ endpointDefinition::ANY+ systemDefinition::ANY+ resourceDefinition::ANY+ communicationDefinition::ANY+ containmentDefinition::ANY+ delegationDefinition::ANY+ referenceDefinition::ANY+ hostingDefinition::ANY+ endpoint::ANY+ subsystem::ANY+ resource::ANY+ hosting::ANY+ containment::ANY+ connection::ANY+ delegation::ANY+ obreference::ANY+ layer::ANY extends::ANY abstract::ANY -> ObjectDefinition
+        description::Description name::SimpleName assemblyName::String version::FourPartVersionType publicKeyToken::PublicKeyTokenType culture::CultureNeutral platform::Platform sourcePath::Path -> ManagerDeclaration
 
-        objectDefinition::ANY -> OBFlow
+        SystemDefinition -> ObjectDefinition
 
-        objectDefinition::ANY -> OBRelationshipConstraint
+        EndpointDefinition -> ObjectDefinition
 
-        objectDefinition::ANY -> OBConstraint
+        ResourceDefinition -> ObjectDefinition
 
-        objectDefinition::ANY -> OBConstraintGroup
+        flow::OBFlow+ relationshipConstraint::OBRelationshipConstraint+ constraint::OBConstraint+ constraintGroup::OBConstraintGroup+ endpointDefinition::OBEndpointDefinition+ systemDefinition::OBSystemDefinition+ resourceDefinition::OBResourceDefinition+ communicationDefinition::OBCommunicationDefinition+ containmentDefinition::OBContainmentDefinition+ delegationDefinition::OBDelegationDefinition+ referenceDefinition::OBReferenceDefinition+ hostingDefinition::OBHostingDefinition+ endpoint::OBEndpoint+ subsystem::OBSubsystem+ resource::OBResource+ hosting::OBHosting+ containment::OBContainment+ connection::OBConnection+ delegation::OBDelegation+ obreference::OBReference+ layer::String extends::QualifiedName abstract::Boolean -> ObjectDefinition
 
-        objectDefinition::ANY -> OBEndpointDefinition
+        objectDefinition::ObjectDefinition -> OBFlow
 
-        objectDefinition::ANY -> OBSystemDefinition
+        objectDefinition::ObjectDefinition -> OBRelationshipConstraint
 
-        objectDefinition::ANY -> OBResourceDefinition
+        objectDefinition::ObjectDefinition -> OBConstraint
 
-        objectDefinition::ANY -> OBCommunicationDefinition
+        objectDefinition::ObjectDefinition -> OBConstraintGroup
 
-        objectDefinition::ANY -> OBContainmentDefinition
+        objectDefinition::ObjectDefinition -> OBEndpointDefinition
 
-        objectDefinition::ANY -> OBDelegationDefinition
+        objectDefinition::ObjectDefinition -> OBSystemDefinition
 
-        objectDefinition::ANY -> OBReferenceDefinition
+        objectDefinition::ObjectDefinition -> OBResourceDefinition
 
-        objectDefinition::ANY -> OBHostingDefinition
+        objectDefinition::ObjectDefinition -> OBCommunicationDefinition
 
-        objectDefinition::ANY -> OBEndpoint
+        objectDefinition::ObjectDefinition -> OBContainmentDefinition
 
-        objectDefinition::ANY -> OBSubsystem
+        objectDefinition::ObjectDefinition -> OBDelegationDefinition
 
-        objectDefinition::ANY -> OBResource
+        objectDefinition::ObjectDefinition -> OBReferenceDefinition
 
-        objectDefinition::ANY -> OBHosting
+        objectDefinition::ObjectDefinition -> OBHostingDefinition
 
-        objectDefinition::ANY -> OBContainment
+        objectDefinition::ObjectDefinition -> OBEndpoint
 
-        objectDefinition::ANY -> OBConnection
+        objectDefinition::ObjectDefinition -> OBSubsystem
 
-        objectDefinition::ANY -> OBDelegation
+        objectDefinition::ObjectDefinition -> OBResource
 
-        objectDefinition::ANY -> OBReference
+        objectDefinition::ObjectDefinition -> OBHosting
 
-        simulationRoot::ANY -> SystemDefinition
+        objectDefinition::ObjectDefinition -> OBContainment
 
-         -> EndpointDefinition
+        objectDefinition::ObjectDefinition -> OBConnection
 
-         -> ResourceDefinition
+        objectDefinition::ObjectDefinition -> OBDelegation
 
-        objectConstraint::ANY+ constraint::ANY+ constraintGroup::ANY+ flow::ANY+ connection::ANY+ hosting::ANY+ delegation::ANY+ reference::ANY+ containment::ANY+ extends::ANY abstract::ANY -> RelationshipDefinition
+        objectDefinition::ObjectDefinition -> OBReference
 
-        relationshipDefinition::ANY -> RDObjectConstraint
+        SDMSystemDefinition -> SystemDefinition
 
-        relationshipDefinition::ANY -> RDConstraint
+        OBSystemDefinition -> SystemDefinition
 
-        relationshipDefinition::ANY -> RDConstraintGroup
+        simulationRoot::Boolean -> SystemDefinition
 
-        relationshipDefinition::ANY -> RDFlow
+        SDMEndpointDefinition -> EndpointDefinition
 
-        relationshipDefinition::ANY -> RDConnection
+        OBEndpointDefinition -> EndpointDefinition
 
-        relationshipDefinition::ANY -> RDHosting
+        SDMEndpointDefinition -> EndpointDefinition
+        OBEndpointDefinition -> EndpointDefinition
 
-        relationshipDefinition::ANY -> RDDelegation
+        SDMResourceDefinition -> ResourceDefinition
 
-        relationshipDefinition::ANY -> RDReference
+        OBResourceDefinition -> ResourceDefinition
 
-        relationshipDefinition::ANY -> RDContainment
+        SDMResourceDefinition -> ResourceDefinition
+        OBResourceDefinition -> ResourceDefinition
 
-        clientDefinition::ANY serverDefinition::ANY -> CommunicationDefinition
+        CommunicationDefinition -> RelationshipDefinition
 
-        guestDefinition::ANY hostDefinition::ANY simulationRoot::ANY -> HostingDefinition
+        HostingDefinition -> RelationshipDefinition
 
-        parentDefinition::ANY memberDefinition::ANY -> ContainmentDefinition
+        ContainmentDefinition -> RelationshipDefinition
 
-        proxyDefinition::ANY delegateDefinition::ANY -> DelegationDefinition
+        DelegationDefinition -> RelationshipDefinition
 
-        dependentDefinition::ANY sourceDefinition::ANY -> ReferenceDefinition
+        ReferenceDefinition -> RelationshipDefinition
 
-        description::ANY+ designData::ANY settingValue::ANY+ settingValueList::ANY+ name::ANY definition::ANY -> Member
+        objectConstraint::RDObjectConstraint+ constraint::RDConstraint+ constraintGroup::RDConstraintGroup+ flow::RDFlow+ connection::RDConnection+ hosting::RDHosting+ delegation::RDDelegation+ reference::RDReference+ containment::RDContainment+ extends::QualifiedName abstract::Boolean -> RelationshipDefinition
 
-        member::ANY -> MembSettingValue
+        relationshipDefinition::RelationshipDefinition -> RDObjectConstraint
 
-        member::ANY -> MembSettingValueList
+        relationshipDefinition::RelationshipDefinition -> RDConstraint
 
-        minOccurs::ANY maxOccurs::ANY reference::ANY proxy::ANY -> ObjectMember
+        relationshipDefinition::RelationshipDefinition -> RDConstraintGroup
 
-         -> RelationshipMember
+        relationshipDefinition::RelationshipDefinition -> RDFlow
 
-         -> SystemMember
+        relationshipDefinition::RelationshipDefinition -> RDConnection
 
-         -> EndpointMember
+        relationshipDefinition::RelationshipDefinition -> RDHosting
 
-         -> ResourceMember
+        relationshipDefinition::RelationshipDefinition -> RDDelegation
 
-        guestMember::ANY hostMember::ANY -> HostingMember
+        relationshipDefinition::RelationshipDefinition -> RDReference
 
-        clientMember::ANY serverMember::ANY -> CommunicationMember
+        relationshipDefinition::RelationshipDefinition -> RDContainment
 
-        childMember::ANY -> ContainmentMember
+        SDMCommunicationDefinition -> CommunicationDefinition
 
-        proxyMember::ANY delegateMember::ANY -> DelegationMember
+        OBCommunicationDefinition -> CommunicationDefinition
 
-        dependentMember::ANY sourceMember::ANY -> ReferenceMember
+        clientDefinition::QualifiedName serverDefinition::QualifiedName -> CommunicationDefinition
 
-        nameSpace::ANY+ -> DesignData
+        OBHostingDefinition -> HostingDefinition
 
-        designData::ANY -> NameSpace
+        guestDefinition::QualifiedName hostDefinition::QualifiedName simulationRoot::Boolean -> HostingDefinition
 
-        constraint::ANY+ relationshipConstraint::ANY+ constraintGroup::ANY+ primaryRole::ANY primaryObjectDefinition::ANY secondaryRole::ANY+ secondaryObjectDefinition::ANY+ minOccurs::ANY+ maxOccurs::ANY+ -> ObjectConstraint
+        SDMContainmentDefinition -> ContainmentDefinition
 
-        objectConstraint::ANY -> OCConstraint
+        OBContainmentDefinition -> ContainmentDefinition
 
-        objectConstraint_OC::ANY -> OCRelationshipConstraint
+        parentDefinition::QualifiedName memberDefinition::QualifiedName -> ContainmentDefinition
 
-        objectConstraint_OC::ANY -> OCConstraintGroup
+        SDMDelegationDefinition -> DelegationDefinition
 
-        constraint::ANY+ relationshipConstraint::ANY+ objectConstraint::ANY+ constraintGroup::ANY+ relationshipDefinition::ANY targetRole::ANY targetObjectDefinition::ANY minOccurs::ANY maxOccurs::ANY delegationAware::ANY -> RelationshipConstraint
+        OBDelegationDefinition -> DelegationDefinition
 
-        relationshipConstraint::ANY -> RCConstraint
+        proxyDefinition::QualifiedName delegateDefinition::QualifiedName -> DelegationDefinition
 
-        relationshipConstraint_RC::ANY -> RCRelationshipConstraint
+        SDMReferenceDefinition -> ReferenceDefinition
 
-        relationshipConstraint_RC::ANY -> RCObjectConstraint
+        OBReferenceDefinition -> ReferenceDefinition
 
-        relationshipConstraint_RC::ANY -> RCConstraintGroup
+        dependentDefinition::QualifiedName sourceDefinition::QualifiedName -> ReferenceDefinition
 
-        constraint::ANY+ relationshipConstraint::ANY+ objectConstraint::ANY+ -> ConstraintGroup
+        ObjectMember -> Member
 
-        constraintGroup::ANY -> CGConstraint
+        RelationshipMember -> Member
 
-        constraintGroup_CG::ANY -> CGRelationshipConstraint
+        ConstraintMember -> Member
 
-        constraintGroup_CG::ANY -> CGObjectConstraint
+        FlowMember -> Member
 
-        description::ANY designData::ANY name::ANY evaluate::ANY raiseError::ANY returnEarly::ANY -> StructuralConstraint
+        SettingMember -> Member
 
-        relationshipConstraint::ANY+ constraintGroup::ANY+ objectConstraint::ANY+ constraint::ANY+ targetDefinition::ANY returnEarly::ANY -> ConstraintDefinition
+        description::Description+ designData::DesignData settingValue::MembSettingValue+ settingValueList::MembSettingValueList+ name::SimpleName definition::QualifiedName -> Member
 
-        constraintDefinition::ANY -> CDRelationshipConstraint
+        member::Member -> MembSettingValue
 
-        constraintDefinition::ANY -> CDConstraintGroup
+        member::Member -> MembSettingValueList
 
-        constraintDefinition::ANY -> CDObjectConstraint
+        SystemMember -> ObjectMember
 
-        constraintDefinition::ANY -> CDConstraint
+        EndpointMember -> ObjectMember
 
-        input::ANY+ raiseError::ANY evaluate::ANY -> ConstraintMember
+        ResourceMember -> ObjectMember
 
-        description::ANY designData::ANY settingDeclaration::ANY+ settingValue::ANY+ settingValueList::ANY+ name::ANY manager::ANY className::ANY -> Definition
+        minOccurs::MinOccurs maxOccurs::MaxOccurs reference::Boolean proxy::Boolean -> ObjectMember
 
-        definition_DSD::ANY -> DefSettingDeclaration
+        HostingMember -> RelationshipMember
 
-        definition::ANY -> DefSettingValue
+        CommunicationMember -> RelationshipMember
 
-        definition::ANY -> DefSettingValueList
+        ContainmentMember -> RelationshipMember
+
+        DelegationMember -> RelationshipMember
+
+        ReferenceMember -> RelationshipMember
+
+        HostingMember -> RelationshipMember
+        CommunicationMember -> RelationshipMember
+        ContainmentMember -> RelationshipMember
+        DelegationMember -> RelationshipMember
+        ReferenceMember -> RelationshipMember
+
+        OBSubsystem -> SystemMember
+
+        OBSubsystem -> SystemMember
+
+        OBEndpoint -> EndpointMember
+
+        OBEndpoint -> EndpointMember
+
+        OBResource -> ResourceMember
+
+        OBResource -> ResourceMember
+
+        OBHosting -> HostingMember
+
+        RDHosting -> HostingMember
+
+        guestMember::Path hostMember::Path -> HostingMember
+
+        OBConnection -> CommunicationMember
+
+        RDConnection -> CommunicationMember
+
+        clientMember::Path serverMember::Path -> CommunicationMember
+
+        OBContainment -> ContainmentMember
+
+        RDContainment -> ContainmentMember
+
+        childMember::Path -> ContainmentMember
+
+        OBDelegation -> DelegationMember
+
+        RDDelegation -> DelegationMember
+
+        proxyMember::Path delegateMember::Path -> DelegationMember
+
+        OBReference -> ReferenceMember
+
+        RDReference -> ReferenceMember
+
+        dependentMember::Path sourceMember::Path -> ReferenceMember
+
+        nameSpace::NameSpace+ -> DesignData
+
+        designData::DesignData -> NameSpace
+
+        RDObjectConstraint -> ObjectConstraint
+
+        RCObjectConstraint -> ObjectConstraint
+
+        CGObjectConstraint -> ObjectConstraint
+
+        CDObjectConstraint -> ObjectConstraint
+
+        constraint::OCConstraint+ relationshipConstraint::OCRelationshipConstraint+ constraintGroup::OCConstraintGroup+ primaryRole::RolesList primaryObjectDefinition::QualifiedName secondaryRole::RolesList+ secondaryObjectDefinition::QualifiedName+ minOccurs::MinOccurs+ maxOccurs::MaxOccurs+ -> ObjectConstraint
+
+        objectConstraint::ObjectConstraint -> OCConstraint
+
+        objectConstraint_OC::ObjectConstraint -> OCRelationshipConstraint
+
+        objectConstraint_OC::ObjectConstraint -> OCConstraintGroup
+
+        OBRelationshipConstraint -> RelationshipConstraint
+
+        OCRelationshipConstraint -> RelationshipConstraint
+
+        RCRelationshipConstraint -> RelationshipConstraint
+
+        CGRelationshipConstraint -> RelationshipConstraint
+
+        CDRelationshipConstraint -> RelationshipConstraint
+
+        constraint::RCConstraint+ relationshipConstraint::RCRelationshipConstraint+ objectConstraint::RCObjectConstraint+ constraintGroup::RCConstraintGroup+ relationshipDefinition::QualifiedName targetRole::RolesList targetObjectDefinition::QualifiedName minOccurs::MinOccurs maxOccurs::MaxOccurs delegationAware::Boolean -> RelationshipConstraint
+
+        relationshipConstraint::RelationshipConstraint -> RCConstraint
+
+        relationshipConstraint_RC::RelationshipConstraint -> RCRelationshipConstraint
+
+        relationshipConstraint_RC::RelationshipConstraint -> RCObjectConstraint
+
+        relationshipConstraint_RC::RelationshipConstraint -> RCConstraintGroup
+
+        OBConstraintGroup -> ConstraintGroup
+
+        RDConstraintGroup -> ConstraintGroup
+
+        OCConstraintGroup -> ConstraintGroup
+
+        RCConstraintGroup -> ConstraintGroup
+
+        CDConstraintGroup -> ConstraintGroup
+
+        constraint::CGConstraint+ relationshipConstraint::CGRelationshipConstraint+ objectConstraint::CGObjectConstraint+ -> ConstraintGroup
+
+        constraintGroup::ConstraintGroup -> CGConstraint
+
+        constraintGroup_CG::ConstraintGroup -> CGRelationshipConstraint
+
+        constraintGroup_CG::ConstraintGroup -> CGObjectConstraint
+
+        ObjectConstraint -> StructuralConstraint
+
+        RelationshipConstraint -> StructuralConstraint
+
+        ConstraintGroup -> StructuralConstraint
+
+        description::Description designData::DesignData name::SimpleName evaluate::ConstraintEvaluation raiseError::Boolean returnEarly::Boolean -> StructuralConstraint
+
+        SDMConstraintDefinition -> ConstraintDefinition
+
+        relationshipConstraint::CDRelationshipConstraint+ constraintGroup::CDConstraintGroup+ objectConstraint::CDObjectConstraint+ constraint::CDConstraint+ targetDefinition::QualifiedName returnEarly::Boolean -> ConstraintDefinition
+
+        constraintDefinition::ConstraintDefinition -> CDRelationshipConstraint
+
+        constraintDefinition::ConstraintDefinition -> CDConstraintGroup
+
+        constraintDefinition::ConstraintDefinition -> CDObjectConstraint
+
+        constraintDefinition::ConstraintDefinition -> CDConstraint
+
+        OBConstraint -> ConstraintMember
+
+        RDConstraint -> ConstraintMember
+
+        OCConstraint -> ConstraintMember
+
+        RCConstraint -> ConstraintMember
+
+        CGConstraint -> ConstraintMember
+
+        CDConstraint -> ConstraintMember
+
+        input::Input+ raiseError::Boolean evaluate::ConstraintEvaluation -> ConstraintMember
+
+        ObjectDefinition -> Definition
+
+        RelationshipDefinition -> Definition
+
+        ConstraintDefinition -> Definition
+
+        FlowDefinition -> Definition
+
+        description::Description designData::DesignData settingDeclaration::DefSettingDeclaration+ settingValue::DefSettingValue+ settingValueList::DefSettingValueList+ name::SimpleName manager::QualifiedName className::String -> Definition
+
+        definition_DSD::Definition -> DefSettingDeclaration
+
+        definition::Definition -> DefSettingValue
+
+        definition::Definition -> DefSettingValueList
 
          -> SimpleName
 
@@ -196,23 +358,35 @@ exports
 
          -> SettingPath
 
-        name::ANY version::ANY publicKey::ANY publicKeyToken::ANY culture::ANY platform::ANY -> NamespaceIdentity
+        ImportNamespaceIdentity -> NamespaceIdentity
+
+        name::Path version::FourPartVersionType publicKey::PublicKeyType publicKeyToken::PublicKeyTokenType culture::CultureNeutral platform::Platform -> NamespaceIdentity
 
          -> FlowDefinition
 
-        input::ANY+ output::ANY+ -> FlowMember
+        OBFlow -> FlowMember
 
-        name::ANY path::ANY cast::ANY convert::ANY -> ValueTransfer
+        RDFlow -> FlowMember
 
-        fixed::ANY replace::ANY -> Output
+        input::Input+ output::Output+ -> FlowMember
+
+        Output -> ValueTransfer
+
+        Input -> ValueTransfer
+
+        name::SimpleName path::SettingPath cast::Boolean convert::Boolean -> ValueTransfer
+
+        fixed::Boolean replace::Boolean -> Output
 
          -> Input
 
-        nameSpace::ANY manager::ANY clrNameSpace::ANY -> SettingDefinitions
+        nameSpace::NameSpace manager::QualifiedName clrNameSpace::String -> SettingDefinitions
 
-        facet::ANY+ settingAttributes::ANY -> SettingMember
+        DefSettingDeclaration -> SettingMember
 
-        list::ANY access::ANY secure::ANY deploymentTime::ANY required::ANY canBeNull::ANY elementsCanBeNull::ANY defaultRead::ANY defaultWrite::ANY -> SettingsAttributes
+        facet::Facet+ settingAttributes::SettingsAttributes -> SettingMember
+
+        list::Boolean access::SettingMemberAccess secure::SettingMemberSecure deploymentTime::Boolean required::Boolean canBeNull::Boolean elementsCanBeNull::Boolean defaultRead::String defaultWrite::String -> SettingsAttributes
 
         ReadWrite:: -> SettingMemberAccess
         ReadOnly:: -> SettingMemberAccess
@@ -222,25 +396,37 @@ exports
         PerInstance:: -> SettingMemberSecure
         Never:: -> SettingMemberSecure
 
-        name::ANY -> Facet
+        name::SimpleName -> Facet
 
-        contents::ANY+ settingValueAttributes::ANY -> SettingValue
+        MembSettingValue -> SettingValue
 
-        value::ANY+ settingValueAttributes::ANY -> SettingValueList
+        DefSettingValue -> SettingValue
 
-        contents::ANY+ null::ANY -> Value
+        contents::String+ settingValueAttributes::SettingValueAttributes -> SettingValue
 
-        path::ANY null::ANY fixed::ANY unset::ANY definition::ANY convert::ANY secure::ANY reference::ANY -> SettingValueAttributes
+        MembSettingValueList -> SettingValueList
 
-        entry::ANY+ resourceId::ANY manager::ANY -> Description
+        DefSettingValueList -> SettingValueList
 
-        description::ANY -> Entry
+        value::Value+ settingValueAttributes::SettingValueAttributes -> SettingValueList
 
-        name::ANY resourceId::ANY manager::ANY substitute::ANY -> DescriptionEntry
+        contents::String+ null::Boolean -> Value
 
-        descriptionEntry::ANY -> Substitute
+        path::SettingPath null::Boolean fixed::Boolean unset::Boolean definition::QualifiedName convert::Boolean secure::Boolean reference::Boolean -> SettingValueAttributes
 
-        settingPath::ANY+ -> PathList
+        entry::Entry+ resourceId::String manager::QualifiedName -> Description
+
+        description::Description -> Entry
+
+        Entry -> DescriptionEntry
+
+        name::String resourceId::String manager::QualifiedName substitute::Substitute -> DescriptionEntry
+
+        descriptionEntry::DescriptionEntry -> Substitute
+
+        Substitute -> PathList
+
+        settingPath::SettingPath+ -> PathList
 
          -> MaxOccurs
 
@@ -292,4 +478,30 @@ exports
         Design:: -> ConstraintEvaluation
         Never:: -> ConstraintEvaluation
 
-        value::ANY -> Element
+        NameSpace -> Element
+
+        SimpleName -> Element
+
+        QualifiedName -> Element
+
+        Path -> Element
+
+        SettingPath -> Element
+
+        MaxOccurs -> Element
+
+        MinOccurs -> Element
+
+        FourPartVersionType -> Element
+
+        PublicKeyType -> Element
+
+        PublicKeyTokenType -> Element
+
+        CompilationHashType -> Element
+
+        Culture -> Element
+
+        CultureNeutral -> Element
+
+        value::String -> Element

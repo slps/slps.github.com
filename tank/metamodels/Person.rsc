@@ -3,5 +3,5 @@ module Person
 
 syntax Person
         = 
-        ANY name ANY firstName ANY phone
+        String name String firstName String phone
  ;

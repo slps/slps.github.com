@@ -1,45 +1,88 @@
 Namespace:
-        EPSILON
+        Task
+Namespace:
+        DataSet
 Task:
-        EPSILON
+        SimpleTask
+Task:
+        CoumpoundTask
 DataSet:
-        EPSILON
+        OutputSet
+DataSet:
+        InputSet
 Parameter:
-        EPSILON
+        DataElement
+Parameter:
+        DataElement
 DataElement:
-        EPSILON
+        Input
+DataElement:
+        Output
 ModelElement:
-        EPSILON
+        Flow
+ModelElement:
+        ControlPoint
 Flow:
-        
+        DataFlow
+Flow:
+        ControlFlow
+Flow:
+        DataFlow
+        ControlFlow
 DataFlow:
         EPSILON
 ControlFlow:
         EPSILON
 ControlPoint:
-        sink::ANY+
+        sink::ControlFlow+
 Input:
-        sink::ANY source::ANY
+        sink::DataFlow source::DataFlow
 Output:
-        sink::ANY source::ANY
+        Exception
+Output:
+        Exception
 OutputSet:
-        containsOutput::ANY+
+        containsOutput::Output+
 InputSet:
-        containsInput::ANY+
+        containsInput::Input+
 Exception:
         EPSILON
 SimpleTask:
-        containsDataSet::ANY containsControlPoint::ANY+ invoker::ANY+ terminator::ANY+
+        InvokerTask
+SimpleTask:
+        TerminatorTask
+SimpleTask:
+        ApplicationTask
+SimpleTask:
+        InvokerTask
+        TerminatorTask
+        ApplicationTask
 CoumpoundTask:
-        containsTask::ANY+ containsFlow::ANY+ realizes::ANY
+        MutliTask
+CoumpoundTask:
+        containsTask::Task+ containsFlow::Flow+ realizes::BusinessProcess
 MutliTask:
         EPSILON
 InvokerTask:
-        invokes::ANY+
+        invokes::Task+
 TerminatorTask:
-        terminates::ANY+
+        terminates::Task+
 ApplicationTask:
-        EPSILON
+        Decision
+ApplicationTask:
+        Clock
+ApplicationTask:
+        SendCommunication
+ApplicationTask:
+        ReceiveCommunication
+ApplicationTask:
+        BusinessProcess
+ApplicationTask:
+        Decision
+        Clock
+        SendCommunication
+        ReceiveCommunication
+        BusinessProcess
 Decision:
         EPSILON
 Clock:

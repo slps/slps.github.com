@@ -4,20 +4,30 @@ exports
   sorts
         Port Signal Base Compound InputPort OutputPort LocalPort Primitive Asso-Port-Signal 
   context-free syntax
-        asso_Port_Signalsrc::ANY asso_Port_Signaldst::ANY -> Port
+        InputPort -> Port
 
-        base::ANY asso_Port_Signal::ANY -> Signal
+        OutputPort -> Port
 
-        compound::ANY inputPort::ANY+ outputPort::ANY+ signal::ANY+ -> Base
+        LocalPort -> Port
 
-        localPort::ANY+ base::ANY+ -> Compound
+        asso_Port_Signalsrc::Asso-Port-Signal asso_Port_Signaldst::Asso-Port-Signal -> Port
 
-        base::ANY -> InputPort
+        base::Base asso_Port_Signal::Asso-Port-Signal -> Signal
 
-        base::ANY -> OutputPort
+        Compound -> Base
 
-        compound::ANY -> LocalPort
+        Primitive -> Base
+
+        compound::Compound inputPort::InputPort+ outputPort::OutputPort+ signal::Signal+ -> Base
+
+        localPort::LocalPort+ base::Base+ -> Compound
+
+        base::Base -> InputPort
+
+        base::Base -> OutputPort
+
+        compound::Compound -> LocalPort
 
          -> Primitive
 
-        src::ANY+ dst::ANY+ signal::ANY -> Asso-Port-Signal
+        src::Port+ dst::Port+ signal::Signal -> Asso-Port-Signal

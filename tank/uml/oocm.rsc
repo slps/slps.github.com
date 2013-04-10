@@ -12,15 +12,18 @@ syntax ScopeKind
  ;
 syntax MultiplicityType
         = 
-        ANY lower ANY upper ANY isOrdered ANY isUnique
+        Integer lower Integer upper Boolean isOrdered Boolean isUnique
  ;
 syntax ModelElement
-        = 
-        name: ANY
+        = Feature
+        | NameSpace
+        | GeneralizableElement
+        | name: String
  ;
 syntax Feature
-        = 
-        ANY ownerScope ANY visibility ANY owner
+        = StructuralFeature
+        | BehavioralFeature
+        | ScopeKind ownerScope VisibilityKind visibility Classifier owner
  ;
 syntax NameSpace
         = 
@@ -28,29 +31,29 @@ syntax NameSpace
  ;
 syntax GeneralizableElement
         = 
-        ANY isRoot ANY isLeaf ANY isAbstract
+        Boolean isRoot Boolean isLeaf Boolean isAbstract
  ;
 syntax Classifier
-        = 
-        ANY feature+
+        = Class
+        | Feature feature+
  ;
 syntax Class
         = 
-        isActive: ANY
+        isActive: Boolean
  ;
 syntax StructuralFeature
-        = 
-        ANY multiplicity ANY isChangeable ANY targetScope
+        = Attribute
+        | MultiplicityType multiplicity Boolean isChangeable ScopeKind targetScope
  ;
 syntax Attribute
         = 
-        initialValue: ANY
+        initialValue: String
  ;
 syntax BehavioralFeature
-        = 
-        isQuery: ANY
+        = Operation
+        | isQuery: Boolean
  ;
 syntax Operation
         = 
-        ANY isRoot ANY isLeaf ANY isAbstract ANY specification
+        Boolean isRoot Boolean isLeaf Boolean isAbstract String specification
  ;

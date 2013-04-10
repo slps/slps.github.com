@@ -2,44 +2,46 @@
 module DSLtools
 
 syntax NamedElement
-        = 
-        ()
+        = Namespace
+        | Role
+        | ValueProperty
+        | EnumerationLiteral
  ;
 syntax LoadedElement
-        = 
-        ()
+        = DomainModel
+        | Classifier
  ;
 syntax Namespace
-        = 
-        ()
+        = LoadedElement
+        | Type
  ;
 syntax DomainModel
         = 
-        ANY classifiers+ ANY types+
+        Classifier classifiers+ Type types+
  ;
 syntax Classifier
-        = 
-        ()
+        = Class
+        | Relationship
  ;
 syntax Class
         = 
-        isSerializationRoot: ANY
+        isSerializationRoot: PrimitiveTypes/Boolean
  ;
 syntax Relationship
         = 
-        ANY isEmbedding ANY roles
+        PrimitiveTypes/Boolean isEmbedding Role roles
  ;
 syntax Role
         = 
-        ANY min ANY max ANY isUnbounded ANY accepts ANY isOrdered ANY isNavigableFrom ANY isPropertyGenerator ANY source ANY type ANY relation
+        PrimitiveTypes/Integer min PrimitiveTypes/Integer max PrimitiveTypes/Boolean isUnbounded PrimitiveTypes/String accepts PrimitiveTypes/Boolean isOrdered PrimitiveTypes/Boolean isNavigableFrom PrimitiveTypes/Boolean isPropertyGenerator Classifier source Classifier type Relationship relation
  ;
 syntax ValueProperty
         = 
-        ANY owner ANY type
+        Classifier owner Type type
  ;
 syntax Type
-        = 
-        ()
+        = SimpleType
+        | Enumeration
  ;
 syntax SimpleType
         = 
@@ -47,9 +49,9 @@ syntax SimpleType
  ;
 syntax EnumerationLiteral
         = 
-        value: ANY
+        value: PrimitiveTypes/Integer
  ;
 syntax Enumeration
         = 
-        ANY literals+
+        EnumerationLiteral literals+
  ;

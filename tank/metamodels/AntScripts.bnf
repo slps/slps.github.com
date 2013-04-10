@@ -1,20 +1,18 @@
 NamedElement:
-        EPSILON
-DescribableElement:
-        EPSILON
-CommentableElement:
-        EPSILON
+        Attribute
 Project:
-        properties::ANY+ targets::ANY+ defaultTarget::ANY
+        properties::Property+ targets::Target+ defaultTarget::Target
 Property:
-        name::ANY value::ANY location::ANY refid::ANY resource::ANY file::ANY url::ANY environment::ANY classpath::ANY classpathref::ANY prefix::ANY
+        name::String value::String location::String refid::String resource::String file::String url::String environment::String classpath::String classpathref::String prefix::String
 Target:
-        if::ANY unless::ANY tasks::ANY+ depends::ANY+
+        if::String unless::String tasks::Task+ depends::Target+
 TaskElement:
-        EPSILON
+        Task
+TaskElement:
+        TaskParameter
 Attribute:
-        value::ANY
+        value::String
 Task:
-        attributes::ANY+ elements::ANY+
+        attributes::Attribute+ elements::TaskElement+
 TaskParameter:
-        attributes::ANY+ elements::ANY+
+        attributes::Attribute+ elements::TaskElement+

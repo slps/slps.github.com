@@ -1,10 +1,8 @@
-DescribedElt = ;
-NamedElt = ;
-ContainerElt = ;
-Project = content::ANY+ packages::ANY+ ;
-Package = parentPackage::ANY ;
-ContainedElt = ;
-TypedElt = ;
+ContainerElt = Project ;
+ContainerElt = Package ;
+Project = content::ContainedElt+ packages::Package+ ;
+Package = parentPackage::ContainerElt ;
+TypedElt = Attribute ;
 Document = ;
-Attribute = value::ANY ;
-Requirement = text::ANY attributes::ANY+ location::ANY parent::ANY children::ANY+ coverLink::ANY+ ;
+Attribute = value::String ;
+Requirement = text::String attributes::Attribute+ location::Document parent::Requirement children::Requirement+ coverLink::Requirement+ ;

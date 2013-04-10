@@ -1,5 +1,13 @@
 LocatedElement:
-        EPSILON
+        Package
+LocatedElement:
+        Import
+LocatedElement:
+        ChocoProblem
+LocatedElement:
+        Element
+LocatedElement:
+        Domain
 OpConstraint:
         eq::EPSILON
         and2::EPSILON
@@ -10,30 +18,44 @@ OpConstraint:
         le::EPSILON
         plus::EPSILON
 Package:
-        name::ANY import::ANY+ problem::ANY
+        name::String import::Import+ problem::ChocoProblem
 Import:
-        fqn::ANY
+        fqn::String
 ChocoProblem:
-        name::ANY elements::ANY+
+        name::String elements::Element+
 Element:
-        EPSILON
+        Expression
+Element:
+        PostConstraint
 Expression:
-        EPSILON
+        ConstraintDef
+Expression:
+        IntVar
+Expression:
+        IntConstant
+Expression:
+        SymbolicTerm
+Expression:
+        IntValue
+Expression:
+        IntExp
+Expression:
+        Constraint
 ConstraintDef:
-        op::ANY left::ANY right::ANY
+        op::OpConstraint left::Expression right::Expression
 IntVar:
-        domain::ANY
+        domain::Domain
 Domain:
-        lower::ANY upper::ANY
+        lower::Integer upper::Integer
 IntConstant:
-        val::ANY
+        val::Integer
 SymbolicTerm:
-        term::ANY
+        term::Expression
 IntValue:
-        val::ANY
+        val::Integer
 IntExp:
-        op::ANY left::ANY right::ANY
+        op::OpConstraint left::Expression right::Expression
 Constraint:
-        op::ANY left::ANY right::ANY
+        op::OpConstraint left::Expression right::Expression
 PostConstraint:
-        op::ANY constraint::ANY
+        op::OpConstraint constraint::ConstraintDef

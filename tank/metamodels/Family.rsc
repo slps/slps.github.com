@@ -3,9 +3,9 @@ module Family
 
 syntax Family
         = 
-        ANY name ANY members+
+        String name Person members+
  ;
 syntax Person
         = 
-        ANY firstName ANY closestFriend ANY emailAddresses+
+        String firstName Person closestFriend String emailAddresses+
  ;

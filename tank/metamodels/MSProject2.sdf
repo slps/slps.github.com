@@ -4,18 +4,22 @@ exports
   sorts
         MSPProject MSPTask MSPLink MSPAssignment MSPResource MSPHumanResource MSPMachine Date 
   context-free syntax
-        resource::ANY+ link::ANY+ task::ANY+ -> MSPProject
+        resource::MSPResource+ link::MSPLink+ task::MSPTask+ -> MSPProject
 
-        finishDate::ANY startDate::ANY project::ANY superTask::ANY subTask::ANY+ assignment::ANY+ inLink::ANY+ outLink::ANY+ -> MSPTask
+        finishDate::Date startDate::Date project::MSPProject superTask::MSPTask subTask::MSPTask+ assignment::MSPAssignment+ inLink::MSPLink+ outLink::MSPLink+ -> MSPTask
 
-        project::ANY succ::ANY pred::ANY -> MSPLink
+        project::MSPProject succ::MSPTask pred::MSPTask -> MSPLink
 
-        task::ANY resource::ANY -> MSPAssignment
+        task::MSPTask resource::MSPResource -> MSPAssignment
 
-        cost::ANY project::ANY assignment::ANY+ -> MSPResource
+        MSPHumanResource -> MSPResource
 
-        email::ANY -> MSPHumanResource
+        MSPMachine -> MSPResource
+
+        cost::Double project::MSPProject assignment::MSPAssignment+ -> MSPResource
+
+        email::String -> MSPHumanResource
 
          -> MSPMachine
 
-        day::ANY month::ANY year::ANY -> Date
+        day::Integer month::Integer year::Integer -> Date

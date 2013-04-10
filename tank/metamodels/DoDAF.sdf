@@ -4,23 +4,87 @@ exports
   sorts
         Element System SystemRole SystemFunction Service SystemRoleInterface ServiceDependency ServiceProvider ServiceMediator ServiceRegistry ServiceLocator ServiceBroker SystemAtNode SystemAtNodeInterface SystemsNode COI Vocabulary DataReference Performer OperationalRole OperationalActivity Product Material Data SystemProductFlow ConstraintOrRequirement Constraint QualityRequirement DIA NMJIC HigherEchelon JFC F2C2 ComponentCommand DJFLCC JFACC JFMCC JFSOCC SubordinateAirCommand MAW WOC AOCCID AOCCombatPlanStrategyCells ResultData CombatReport WSV MISREP Imagery CollectionRequirement BDAReport MunitionsEffectsAssesment ATO RestrikeRecommendation TargetNomination TargetMaterialsAnalysis Target MIDB 
   context-free syntax
-         -> Element
+        System -> Element
 
-        decomposes::ANY+ fulfills::ANY+ -> System
+        SystemRole -> Element
 
-        decomposes::ANY+ performs::ANY+ terminatesAt::ANY -> SystemRole
+        SystemFunction -> Element
 
-        decomposes::ANY+ consumes::ANY+ produces::ANY+ terminatesAt::ANY mesuredBy::ANY+ -> SystemFunction
+        SystemRoleInterface -> Element
+
+        SystemAtNode -> Element
+
+        SystemAtNodeInterface -> Element
+
+        SystemsNode -> Element
+
+        COI -> Element
+
+        Vocabulary -> Element
+
+        DataReference -> Element
+
+        Performer -> Element
+
+        OperationalRole -> Element
+
+        OperationalActivity -> Element
+
+        Product -> Element
+
+        SystemProductFlow -> Element
+
+        ConstraintOrRequirement -> Element
+
+        DIA -> Element
+
+        NMJIC -> Element
+
+        HigherEchelon -> Element
+
+        JFC -> Element
+
+        F2C2 -> Element
+
+        ComponentCommand -> Element
+
+        SubordinateAirCommand -> Element
+
+        AOCCID -> Element
+
+        AOCCombatPlanStrategyCells -> Element
+
+        decomposes::System+ fulfills::SystemRole+ -> System
+
+        ServiceProvider -> SystemRole
+
+        decomposes::SystemRole+ performs::SystemFunction+ terminatesAt::SystemRoleInterface -> SystemRole
+
+        Service -> SystemFunction
+
+        decomposes::SystemFunction+ consumes::Product+ produces::Product+ terminatesAt::SystemProductFlow mesuredBy::ConstraintOrRequirement+ -> SystemFunction
 
          -> Service
 
-        originatesFrom::ANY -> SystemRoleInterface
+        ServiceDependency -> SystemRoleInterface
+
+        originatesFrom::SystemRole -> SystemRoleInterface
 
          -> ServiceDependency
 
-         -> ServiceProvider
+        ServiceMediator -> ServiceProvider
 
-         -> ServiceMediator
+        ServiceMediator -> ServiceProvider
+
+        ServiceRegistry -> ServiceMediator
+
+        ServiceLocator -> ServiceMediator
+
+        ServiceBroker -> ServiceMediator
+
+        ServiceRegistry -> ServiceMediator
+        ServiceLocator -> ServiceMediator
+        ServiceBroker -> ServiceMediator
 
          -> ServiceRegistry
 
@@ -28,92 +92,119 @@ exports
 
          -> ServiceBroker
 
-        references::ANY terminatesAt::ANY -> SystemAtNode
+        references::System terminatesAt::SystemAtNodeInterface -> SystemAtNode
 
-        originatesFrom::ANY -> SystemAtNodeInterface
+        originatesFrom::SystemAtNode -> SystemAtNodeInterface
 
-        groups::ANY+ -> SystemsNode
+        groups::SystemAtNode+ -> SystemsNode
 
-        comprises::ANY+ defines::ANY -> COI
+        comprises::Performer+ defines::Vocabulary -> COI
 
-        comprises::ANY+ -> Vocabulary
+        comprises::DataReference+ -> Vocabulary
 
-        defineBy::ANY -> DataReference
+        defineBy::Data -> DataReference
 
-        decomposes::ANY+ fulfills::ANY+ -> Performer
+        decomposes::Performer+ fulfills::OperationalRole+ -> Performer
 
-        decomposes::ANY+ accomplishes::ANY+ -> OperationalRole
+        decomposes::OperationalRole+ accomplishes::OperationalActivity+ -> OperationalRole
 
-        decomposes::ANY+ supports::ANY+ -> OperationalActivity
+        decomposes::OperationalRole+ supports::SystemFunction+ -> OperationalActivity
 
-        name::ANY content::ANY -> Product
+        Material -> Product
+
+        Data -> Product
+
+        Material -> Product
+        Data -> Product
 
          -> Material
 
          -> Data
 
-        transports::ANY+ originatesFrom::ANY -> SystemProductFlow
+        transports::Product+ originatesFrom::SystemFunction -> SystemProductFlow
 
-         -> ConstraintOrRequirement
+        Constraint -> ConstraintOrRequirement
+
+        QualityRequirement -> ConstraintOrRequirement
 
          -> Constraint
 
          -> QualityRequirement
 
-        nmjic::ANY higherEchelon::ANY -> DIA
+        nmjic::NMJIC higherEchelon::HigherEchelon -> DIA
 
-        dia::ANY -> NMJIC
+        dia::DIA -> NMJIC
 
-        dia::ANY jfc::ANY -> HigherEchelon
+        dia::DIA jfc::JFC -> HigherEchelon
 
-        higherEchelon::ANY f2c2::ANY componentComand::ANY -> JFC
+        higherEchelon::HigherEchelon f2c2::F2C2 componentComand::ComponentCommand -> JFC
 
-        jfc::ANY -> F2C2
+        jfc::JFC -> F2C2
 
-        jfc::ANY -> ComponentCommand
+        DJFLCC -> ComponentCommand
+
+        JFACC -> ComponentCommand
+
+        JFMCC -> ComponentCommand
+
+        JFSOCC -> ComponentCommand
+
+        jfc::JFC -> ComponentCommand
 
          -> DJFLCC
 
-        subordinateAirCommand::ANY aoccid::ANY+ aoccpsc::ANY+ -> JFACC
+        subordinateAirCommand::SubordinateAirCommand aoccid::AOCCID+ aoccpsc::AOCCombatPlanStrategyCells+ -> JFACC
 
          -> JFMCC
 
          -> JFSOCC
 
-        jfacc::ANY -> SubordinateAirCommand
+        MAW -> SubordinateAirCommand
+
+        WOC -> SubordinateAirCommand
+
+        jfacc::JFACC -> SubordinateAirCommand
 
          -> MAW
 
          -> WOC
 
-        name::ANY content::ANY -> AOCCID
+        name::String content::String -> AOCCID
 
-        name::ANY content::ANY -> AOCCombatPlanStrategyCells
+        name::String content::String -> AOCCombatPlanStrategyCells
 
-        sourceID::ANY timeStamp::ANY cr::ANY+ bdaReport::ANY+ -> ResultData
+        CombatReport -> ResultData
 
-        friendlyUnitsInvolved::ANY combatLocation::ANY resultsAssessment::ANY duration::ANY -> CombatReport
+        WSV -> ResultData
 
-        missionID::ANY weaponfSystemID::ANY videoType::ANY -> WSV
+        MISREP -> ResultData
 
-        missionID::ANY missionObjectives::ANY missionAssesments::ANY -> MISREP
+        Imagery -> ResultData
 
-        imageType::ANY spectralData::ANY geospacialLocation::ANY imageSize::ANY -> Imagery
+        sourceID::String timeStamp::String cr::CollectionRequirement+ bdaReport::BDAReport+ -> ResultData
 
-        sourceID::ANY collectionTargetID::ANY toBeDoneByTime::ANY specialNeeds::ANY rd::ANY+ ato::ANY+ isContainedIn::ANY+ -> CollectionRequirement
+        friendlyUnitsInvolved::String combatLocation::String resultsAssessment::String duration::String -> CombatReport
 
-        targetID::ANY reportSourceID::ANY assesmentSumart::ANY validityDuration::ANY rd::ANY+ mea::ANY -> BDAReport
+        missionID::String weaponfSystemID::String videoType::String -> WSV
 
-        bdaReport::ANY ato::ANY tn::ANY -> MunitionsEffectsAssesment
+        missionID::String missionObjectives::String missionAssesments::String -> MISREP
 
-        timePeriod::ANY cr::ANY+ mea::ANY tn::ANY+ rr::ANY -> ATO
+        imageType::String spectralData::String geospacialLocation::String imageSize::Integer -> Imagery
 
-        ato::ANY tn::ANY -> RestrikeRecommendation
+        sourceID::String collectionTargetID::String toBeDoneByTime::String specialNeeds::String rd::ResultData+ ato::ATO+ isContainedIn::Target+ -> CollectionRequirement
 
-        ato::ANY+ mea::ANY+ rr::ANY target::ANY -> TargetNomination
+        targetID::String reportSourceID::String assesmentSumart::String validityDuration::String rd::ResultData+ mea::MunitionsEffectsAssesment -> BDAReport
 
-        targetID::ANY target::ANY -> TargetMaterialsAnalysis
+        bdaReport::BDAReport ato::ATO tn::TargetNomination -> MunitionsEffectsAssesment
 
-        cr::ANY+ tn::ANY holds::ANY describes::ANY+ -> Target
+        timePeriod::String cr::CollectionRequirement+ mea::MunitionsEffectsAssesment tn::TargetNomination+ rr::RestrikeRecommendation -> ATO
 
-        target::ANY+ -> MIDB
+        ato::ATO tn::TargetNomination -> RestrikeRecommendation
+
+        ato::ATO+ mea::MunitionsEffectsAssesment+ rr::RestrikeRecommendation target::Target -> TargetNomination
+
+        targetID::String target::Target -> TargetMaterialsAnalysis
+
+        cr::CollectionRequirement+ tn::TargetNomination holds::MIDB describes::TargetMaterialsAnalysis+ -> Target
+
+        target::Target+ -> MIDB

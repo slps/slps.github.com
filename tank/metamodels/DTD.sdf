@@ -17,40 +17,58 @@ exports
         nmtoken:: -> OtherAttributeTypeEnum
         nmtakens:: -> OtherAttributeTypeEnum
 
-         -> TypeDescription
+        Notation -> TypeDescription
 
-        content::ANY -> Notation
+        Entity -> TypeDescription
 
-        content::ANY isInternal::ANY -> Entity
+        Element -> TypeDescription
 
-         -> Element
+        AttributeList -> TypeDescription
+
+        AttributeDescription -> TypeDescription
+
+        content::String -> Notation
+
+        content::String isInternal::Boolean -> Entity
+
+        AnyElement -> Element
+
+        RestrictedElement -> Element
 
          -> AnyElement
 
-        content::ANY -> RestrictedElement
+        content::ElementContent -> RestrictedElement
 
-         -> ElementContent
+        Mixed -> ElementContent
 
-        elements::ANY -> Mixed
+        Children -> ElementContent
 
-         -> Children
+        elements::String -> Mixed
 
-        children::ANY -> Sequence
+        Sequence -> Children
 
-        elementName::ANY -> Leaf
+        Leaf -> Children
 
-        childrenChoice::ANY -> Choice
+        Choice -> Children
 
-        containsAttributes::ANY+ -> AttributeList
+        children::Children -> Sequence
 
-         -> AttributeDescription
+        elementName::String -> Leaf
 
-        isRequired::ANY -> NoDefaultValue
+        childrenChoice::Children -> Choice
 
-        value::ANY isFixed::ANY -> DefaultValue
+        containsAttributes::AttributeDescription+ -> AttributeList
 
-         -> AttributeType
+        NoDefaultValue -> AttributeDescription
 
-        values::ANY -> Enumeration
+        DefaultValue -> AttributeDescription
 
-        type::ANY -> OtherAttributeType
+        isRequired::Boolean -> NoDefaultValue
+
+        value::String isFixed::Boolean -> DefaultValue
+
+        Enumeration -> AttributeType
+
+        values::String -> Enumeration
+
+        type::OtherAttributeTypeEnum -> OtherAttributeType

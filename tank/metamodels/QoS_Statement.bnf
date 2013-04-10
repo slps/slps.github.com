@@ -1,14 +1,20 @@
 QoSStatement:
-        relation::ANY parameter::ANY+
+        SingleQoSStatement
+QoSStatement:
+        CoumpoundQoSStatement
+QoSStatement:
+        relation::CoumpoundQoSStatement parameter::Parameter+
 SingleQoSStatement:
-        contraint::ANY
+        contraint::QoSContraint
 CoumpoundQoSStatement:
-        statement::ANY
+        statement::QoSStatement
 Parameter:
         EPSILON
 QoSContraint:
-        qualification::ANY
+        qualification::QualificationKind
 QualificationKind:
-        value::ANY
+        value::String
 QoSCharacteristic:
-        EPSILON
+        QualificationKind
+QoSCharacteristic:
+        QualificationKind

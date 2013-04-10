@@ -1,5 +1,6 @@
-JavaSource = classes::ANY+ ;
-NamedElement = ;
-ClassDeclaration = superclass::ANY methods::ANY+ ;
-MethodDefinition = class::ANY invocations::ANY+ ;
-MethodInvocation = method::ANY ;
+JavaSource = classes::ClassDeclaration+ ;
+NamedElement = ClassDeclaration ;
+NamedElement = MethodDefinition ;
+ClassDeclaration = superclass::ClassDeclaration methods::MethodDefinition+ ;
+MethodDefinition = class::ClassDeclaration invocations::MethodInvocation+ ;
+MethodInvocation = method::MethodDefinition ;

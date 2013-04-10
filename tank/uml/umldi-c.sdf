@@ -2,37 +2,75 @@ module Main
 
 exports
   sorts
-        Element ModelElement GeneralizableElement Namespace Classifier Feature StructuralFeature AssociationEnd Relationship Association Attribute BehavioralFeature Operation Parameter Generalization AggregationKind ChangeableKind OrderingKind CallConcurrencyKind ParameterDirectionKind ScopeKind VisibilityKind Multiplicity MultiplicityRange Expression BooleanExpression ObjectSetExpression ActionExpression IterationExpression Instance Signal Action CreateAction DestroyAction UninterpretedAction AttributeLink Object Link LinkObject DataValue CallAction SendAction ActionSequence Argument Reception LinkEnd ReturnAction TerminateAction Stimulus Exception ComponentInstance NodeInstance SubsystemInstance Collaboration ClassifierRole AssociationRole AssociationEndRole Message Interaction InteractionInstanceSet CollaborationInstanceSet 
+        Element ModelElement Classifier Feature StructuralFeature AssociationEnd Relationship Association Attribute BehavioralFeature Operation Parameter Generalization AggregationKind ChangeableKind OrderingKind CallConcurrencyKind ParameterDirectionKind ScopeKind VisibilityKind Multiplicity MultiplicityRange Expression BooleanExpression ObjectSetExpression ActionExpression IterationExpression Instance Signal Action CreateAction DestroyAction UninterpretedAction AttributeLink Object Link LinkObject DataValue CallAction SendAction ActionSequence Argument Reception LinkEnd ReturnAction TerminateAction Stimulus Exception ComponentInstance NodeInstance SubsystemInstance Collaboration ClassifierRole AssociationRole AssociationEndRole Message Interaction InteractionInstanceSet CollaborationInstanceSet 
   context-free syntax
-         -> Element
+        ModelElement -> Element
 
-         -> ModelElement
+        GeneralizableElement -> ModelElement
 
-         -> GeneralizableElement
+        Namespace -> ModelElement
 
-         -> Namespace
+        Feature -> ModelElement
 
-         -> Classifier
+        AssociationEnd -> ModelElement
 
-         -> Feature
+        Relationship -> ModelElement
 
-         -> StructuralFeature
+        Parameter -> ModelElement
 
-        association::ANY specification::ANY+ participant::ANY qualifier::ANY+ isNavigable::ANY ordering::ANY aggregation::ANY targetScope::ANY multiplicity::ANY changeability::ANY -> AssociationEnd
+        Instance -> ModelElement
 
-         -> Relationship
+        Action -> ModelElement
 
-        connection::ANY -> Association
+        AttributeLink -> ModelElement
 
-        associationEnd::ANY initialValue::ANY -> Attribute
+        Link -> ModelElement
 
-         -> BehavioralFeature
+        Argument -> ModelElement
 
-        concurrency::ANY isRoot::ANY isLeaf::ANY isAbstract::ANY specification::ANY -> Operation
+        LinkEnd -> ModelElement
 
-        type::ANY behavioralFeature::ANY defaultValue::ANY kind::ANY -> Parameter
+        Stimulus -> ModelElement
 
-        parent::ANY powertype::ANY child::ANY discriminator::ANY -> Generalization
+        Message -> ModelElement
+
+        Interaction -> ModelElement
+
+        InteractionInstanceSet -> ModelElement
+
+        CollaborationInstanceSet -> ModelElement
+
+        Signal -> Classifier
+
+        ClassifierRole -> Classifier
+
+        StructuralFeature -> Feature
+
+        BehavioralFeature -> Feature
+
+        Attribute -> StructuralFeature
+
+        AssociationEndRole -> AssociationEnd
+
+        association::Association specification::Classifier+ participant::Classifier qualifier::Attribute+ isNavigable::Boolean ordering::OrderingKind aggregation::AggregationKind targetScope::ScopeKind multiplicity::Multiplicity changeability::ChangeableKind -> AssociationEnd
+
+        Generalization -> Relationship
+
+        AssociationRole -> Association
+
+        connection::AssociationEnd -> Association
+
+        associationEnd::AssociationEnd initialValue::Expression -> Attribute
+
+        Operation -> BehavioralFeature
+
+        Reception -> BehavioralFeature
+
+        concurrency::CallConcurrencyKind isRoot::Boolean isLeaf::Boolean isAbstract::Boolean specification::String -> Operation
+
+        type::Classifier behavioralFeature::BehavioralFeature defaultValue::Expression kind::ParameterDirectionKind -> Parameter
+
+        parent::GeneralizableElement powertype::Classifier child::GeneralizableElement discriminator::String -> Generalization
 
         ak_none:: -> AggregationKind
         ak_aggregate:: -> AggregationKind
@@ -62,11 +100,19 @@ exports
         vk_private:: -> VisibilityKind
         vk_package:: -> VisibilityKind
 
-        range::ANY+ -> Multiplicity
+        range::MultiplicityRange+ -> Multiplicity
 
-        multiplicity::ANY lower::ANY upper::ANY -> MultiplicityRange
+        multiplicity::Multiplicity lower::Integer upper::Integer -> MultiplicityRange
 
-        language::ANY body::ANY -> Expression
+        BooleanExpression -> Expression
+
+        ObjectSetExpression -> Expression
+
+        ActionExpression -> Expression
+
+        IterationExpression -> Expression
+
+        language::String body::String -> Expression
 
          -> BooleanExpression
 
@@ -76,66 +122,90 @@ exports
 
          -> IterationExpression
 
-         -> Instance
+        Object -> Instance
 
-        powertypeRange::ANY+ feature::ANY+ -> Signal
+        DataValue -> Instance
 
-         -> Action
+        ComponentInstance -> Instance
 
-        instantiation::ANY -> CreateAction
+        NodeInstance -> Instance
 
-        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY -> DestroyAction
+        SubsystemInstance -> Instance
 
-        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY -> UninterpretedAction
+        Exception -> Signal
 
-        instance::ANY value::ANY linkEnd::ANY attribute::ANY -> AttributeLink
+        Exception -> Signal
 
-        ownedInstance::ANY+ linkEnd::ANY+ classifier::ANY+ componentInstance::ANY slot::ANY+ ownedLink::ANY+ -> Object
+        CreateAction -> Action
 
-        association::ANY connection::ANY -> Link
+        DestroyAction -> Action
+
+        UninterpretedAction -> Action
+
+        CallAction -> Action
+
+        SendAction -> Action
+
+        ActionSequence -> Action
+
+        ReturnAction -> Action
+
+        TerminateAction -> Action
+
+        instantiation::Classifier -> CreateAction
+
+        actualArgument::Argument+ actionSequence::ActionSequence recurrence::IterationExpression target::ObjectSetExpression isAsynchronous::Boolean script::ActionExpression -> DestroyAction
+
+        actualArgument::Argument+ actionSequence::ActionSequence recurrence::IterationExpression target::ObjectSetExpression isAsynchronous::Boolean script::ActionExpression -> UninterpretedAction
+
+        instance::Instance value::Instance linkEnd::LinkEnd attribute::Attribute -> AttributeLink
+
+        ownedInstance::Instance+ linkEnd::LinkEnd+ classifier::Classifier+ componentInstance::ComponentInstance slot::AttributeLink+ ownedLink::Link+ -> Object
+
+        association::Association connection::LinkEnd -> Link
 
          -> LinkObject
 
-        ownedInstance::ANY+ linkEnd::ANY+ classifier::ANY+ componentInstance::ANY slot::ANY+ ownedLink::ANY+ -> DataValue
+        ownedInstance::Instance+ linkEnd::LinkEnd+ classifier::Classifier+ componentInstance::ComponentInstance slot::AttributeLink+ ownedLink::Link+ -> DataValue
 
-        operation::ANY -> CallAction
+        operation::Operation -> CallAction
 
-        signal::ANY -> SendAction
+        signal::Signal -> SendAction
 
-        action::ANY+ -> ActionSequence
+        action::Action+ -> ActionSequence
 
-        action::ANY value::ANY -> Argument
+        action::Action value::Expression -> Argument
 
-        signal::ANY specification::ANY isRoot::ANY isLeaf::ANY isAbstract::ANY -> Reception
+        signal::Signal specification::String isRoot::Boolean isLeaf::Boolean isAbstract::Boolean -> Reception
 
-        link::ANY qualifiedValue::ANY+ instance::ANY associationEnd::ANY -> LinkEnd
+        link::Link qualifiedValue::AttributeLink+ instance::Instance associationEnd::AssociationEnd -> LinkEnd
 
-        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY -> ReturnAction
+        actualArgument::Argument+ actionSequence::ActionSequence recurrence::IterationExpression target::ObjectSetExpression isAsynchronous::Boolean script::ActionExpression -> ReturnAction
 
-        actualArgument::ANY+ actionSequence::ANY recurrence::ANY target::ANY isAsynchronous::ANY script::ANY -> TerminateAction
+        actualArgument::Argument+ actionSequence::ActionSequence recurrence::IterationExpression target::ObjectSetExpression isAsynchronous::Boolean script::ActionExpression -> TerminateAction
 
-        argument::ANY+ communicationLink::ANY receiver::ANY dispatchAction::ANY sender::ANY -> Stimulus
+        argument::Instance+ communicationLink::Link receiver::Instance dispatchAction::Action sender::Instance -> Stimulus
 
          -> Exception
 
-        resident::ANY+ nodeInstance::ANY -> ComponentInstance
+        resident::Instance+ nodeInstance::NodeInstance -> ComponentInstance
 
-        resident::ANY+ -> NodeInstance
+        resident::ComponentInstance+ -> NodeInstance
 
-        ownedInstance::ANY+ linkEnd::ANY+ classifier::ANY+ componentInstance::ANY slot::ANY+ ownedLink::ANY+ -> SubsystemInstance
+        ownedInstance::Instance+ linkEnd::LinkEnd+ classifier::Classifier+ componentInstance::ComponentInstance slot::AttributeLink+ ownedLink::Link+ -> SubsystemInstance
 
-        usedCollaboration::ANY+ representedOperation::ANY representedClassifier::ANY interaction::ANY+ constrainingElement::ANY+ -> Collaboration
+        usedCollaboration::Collaboration+ representedOperation::Operation representedClassifier::Classifier interaction::Interaction+ constrainingElement::ModelElement+ -> Collaboration
 
-        availableContents::ANY+ base::ANY+ conformingInstance::ANY+ availableFeature::ANY+ multiplicity::ANY -> ClassifierRole
+        availableContents::ModelElement+ base::Classifier+ conformingInstance::Instance+ availableFeature::Feature+ multiplicity::Multiplicity -> ClassifierRole
 
-        base::ANY conformingLink::ANY+ message::ANY+ multiplicity::ANY -> AssociationRole
+        base::Association conformingLink::Link+ message::Message+ multiplicity::Multiplicity -> AssociationRole
 
-        base::ANY availableQualifier::ANY+ collaborationMultiplicity::ANY -> AssociationEndRole
+        base::AssociationEnd availableQualifier::Attribute+ collaborationMultiplicity::Multiplicity -> AssociationEndRole
 
-        interaction::ANY conformingStimulus::ANY+ action::ANY communicationConnection::ANY activator::ANY receiver::ANY sender::ANY predecessor::ANY+ -> Message
+        interaction::Interaction conformingStimulus::Stimulus+ action::Action communicationConnection::AssociationRole activator::Message receiver::ClassifierRole sender::ClassifierRole predecessor::Message+ -> Message
 
-        message::ANY+ context::ANY -> Interaction
+        message::Message+ context::Collaboration -> Interaction
 
-        interaction::ANY context::ANY participatingStimulus::ANY+ -> InteractionInstanceSet
+        interaction::Interaction context::CollaborationInstanceSet participatingStimulus::Stimulus+ -> InteractionInstanceSet
 
-        collaboration::ANY constrainingElement::ANY+ participatingInstance::ANY+ interactionInstanceSet::ANY+ participatingLink::ANY+ -> CollaborationInstanceSet
+        collaboration::Collaboration constrainingElement::ModelElement+ participatingInstance::Instance+ interactionInstanceSet::InteractionInstanceSet+ participatingLink::Link+ -> CollaborationInstanceSet

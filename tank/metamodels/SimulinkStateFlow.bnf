@@ -1,33 +1,48 @@
 Simulink:
-        subSystem::ANY+
+        subSystem::System+
 System:
-        name::ANY simulink::ANY blocks::ANY lines::ANY subSystem::ANY+
+        name::String simulink::Simulink blocks::Block lines::Line subSystem::System+
 Connector:
-        EPSILON
+        BranchPoint
+Connector:
+        Port
+Connector:
+        BranchPoint
+        Port
 Line:
-        name::ANY block::ANY system::ANY
+        name::String block::Block system::System
 BranchPoint:
         EPSILON
 Port:
-        units::ANY
+        OutPut
+Port:
+        TriggerPort
+Port:
+        EnablePort
+Port:
+        units::Units
 Block:
-        description::ANY name::ANY priority::ANY natagme::ANY blockType::ANY lines::ANY+ parameters::ANY+ annotations::ANY+ blockRefs::ANY+ system::ANY
+        Primitive
+Block:
+        Reference
+Block:
+        description::String name::String priority::String natagme::String blockType::String lines::Line+ parameters::Parameter+ annotations::Annotation+ blockRefs::BlockRef+ system::System
 BlockRef:
         EPSILON
 Primitive:
-        deadLine::ANY period::ANY executionTime::ANY
+        deadLine::String period::String executionTime::String
 OutPut:
-        number::ANY
+        number::Integer
 TriggerPort:
-        triggerType::ANY
+        triggerType::TriggerEnum
 EnablePort:
-        statesWhenEnabling::ANY
+        statesWhenEnabling::EnableEnum
 Reference:
-        sourceBlock::ANY sourceType::ANY
+        sourceBlock::String sourceType::String
 Annotation:
-        text::ANY block::ANY
+        text::String block::Block
 Parameter:
-        value::ANY block::ANY
+        value::String block::Block
 Units:
         alpha::EPSILON
         beta::EPSILON

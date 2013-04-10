@@ -3,5 +3,5 @@ module Publication
 
 syntax Publication
         = 
-        ANY title ANY authors ANY nbPages
+        String title String authors Integer nbPages
  ;

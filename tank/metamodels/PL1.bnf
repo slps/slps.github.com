@@ -1,13 +1,23 @@
 PLIClassifier:
-        name::ANY typedElements::ANY+
+        PLISimpleType
+PLIClassifier:
+        PLINamedType
+PLIClassifier:
+        PLIComposedType
+PLIClassifier:
+        name::String typedElements::PLIElement+
 PLISimpleType:
-        alias::ANY
+        PLIComputationalType
+PLISimpleType:
+        PLINonComputationalType
+PLISimpleType:
+        alias::PLIAlias
 PLINamedType:
         EPSILON
 PLIComposedType:
-        elements::ANY+
+        elements::PLIElement+
 PLIAlias:
-        type::ANY contains::ANY+
+        type::PLISimpleType contains::PLIAttribute+
 PLIAttribute:
         EPSILON
 PLIComputationalType:
@@ -15,18 +25,26 @@ PLIComputationalType:
 PLINonComputationalType:
         EPSILON
 PLIElement:
-        level::ANY name::ANY sharedType::ANY group::ANY initial::ANY source::ANY array::ANY
+        level::String name::String sharedType::PLIClassifier group::PLIComposedType initial::PLIElementInitialValue source::PLISourceText array::PLIArray
 PLIElementInitialValue:
-        initialValue::ANY
+        initialValue::String
 PLISourceText:
-        source::ANY fileName::ANY
+        source::String fileName::String
 PLIArray:
-        arrayOf::ANY
+        PLIFixedBoundArray
+PLIArray:
+        PLIFixedLboundArray
+PLIArray:
+        PLIHBoundArray
+PLIArray:
+        PLIVariableBoundArray
+PLIArray:
+        arrayOf::PLIElement
 PLIFixedBoundArray:
-        IBound::ANY uBound::ANY referredTo::ANY
+        IBound::Integer uBound::Integer referredTo::PLIElement
 PLIFixedLboundArray:
-        IBound::ANY uBoundToAllocate::ANY referredTo::ANY
+        IBound::Integer uBoundToAllocate::String referredTo::PLIElement
 PLIHBoundArray:
-        uBound::ANY IBoundToAllocate::ANY referredTo::ANY
+        uBound::Integer IBoundToAllocate::String referredTo::PLIElement
 PLIVariableBoundArray:
-        IBoundToAllocate::ANY hBoundToAllocate::ANY referredTo::ANY
+        IBoundToAllocate::String hBoundToAllocate::String referredTo::PLIElement

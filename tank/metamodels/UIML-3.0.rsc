@@ -3,55 +3,55 @@ module UIML_3_0
 
 syntax UIML
         = 
-        ANY head ANY templates+ ANY interfaces+ ANY peers+
+        Header head Template templates+ Interface interfaces+ Peer peers+
  ;
 syntax Header
         = 
-        ANY metas+
+        MetaData metas+
  ;
 syntax MetaData
         = 
-        ANY name ANY content
+        String name String content
  ;
 syntax Peer
         = 
-        ANY id ANY how ANY export ANY source ANY presentations+ ANY logics+
+        String id HowKind how ExportKind export Source source Presentation presentations+ Logic logics+
  ;
 syntax Presentation
         = 
-        ANY id ANY how ANY export ANY base ANY source ANY dClasses+
+        String id HowKind how ExportKind export String base Source source DClass dClasses+
  ;
 syntax Logic
         = 
-        ANY id ANY how ANY export ANY source ANY dComponents+
+        String id HowKind how ExportKind export Source source DComponent dComponents+
  ;
 syntax DComponent
         = 
-        ANY id ANY how ANY export ANY mapsTo ANY location ANY source ANY dMethods+
+        String id HowKind how ExportKind export String mapsTo String location Source source DMethod dMethods+
  ;
 syntax DClass
         = 
-        ANY id ANY how ANY export ANY mapsTo ANY mapsType ANY source ANY dMethods+ ANY dProperties+ ANY events+ ANY listeners+
+        String id HowKind how ExportKind export String mapsTo String mapsType Source source DMethod dMethods+ DProperty dProperties+ Event events+ Listener listeners+
  ;
 syntax DProperty
         = 
-        ANY id ANY mapsType ANY mapsTo ANY returnType ANY dMethods+ ANY dParams+
+        String id MapsTypeKind mapsType String mapsTo String returnType DMethod dMethods+ DParam dParams+
  ;
 syntax DMethod
         = 
-        ANY id ANY how ANY export ANY mapsTo ANY returnType ANY source ANY dParams+ ANY script
+        String id HowKind how ExportKind export String mapsTo String returnType Source source DParam dParams+ Script script
  ;
 syntax DParam
         = 
-        ANY id ANY type ANY value
+        String id String type String value
  ;
 syntax Script
         = 
-        ANY id ANY type ANY how ANY export ANY value ANY source
+        String id String type HowKind how ExportKind export String value String source
  ;
 syntax Listener
         = 
-        ANY class ANY attacher
+        String class String attacher
  ;
 syntax UsedInTagKind
         = event: ()
@@ -65,184 +65,211 @@ syntax MapsTypeKind
         | method: ()
  ;
 syntax ExtensibleElement
-        = 
-        ()
+        = Peer
+        | Presentation
+        | Logic
+        | DComponent
+        | DClass
+        | DMethod
+        | Script
+        | Interface
+        | Structure
+        | Part
+        | Style
+        | Property
+        | Content
+        | Behavior
+        | Constant
+        | Rule
+        | Restructure
  ;
 syntax Source
-        = 
-        ()
+        = LocalSource
+        | RemoteSource
  ;
 syntax LocalSource
         = 
-        source: ANY
+        source: ExtensibleElement
  ;
 syntax RemoteSource
         = 
-        location: ANY
+        location: String
  ;
 syntax Interface
         = 
-        ANY id ANY how ANY export ANY source ANY structure+ ANY style+ ANY content+ ANY behavior+
+        String id HowKind how ExportKind export Source source Structure structure+ Style style+ Content content+ Behavior behavior+
  ;
 syntax Structure
         = 
-        ANY id ANY how ANY export ANY source ANY parts+
+        String id HowKind how ExportKind export Source source Part parts+
  ;
 syntax Part
         = 
-        ANY id ANY how ANY export ANY class ANY wherePart ANY source ANY style ANY content ANY behavior ANY parts+ ANY repeats+
+        String id HowKind how ExportKind export String class String wherePart Source source Style style Content content Behavior behavior Part parts+ Repeat repeats+
  ;
 syntax Style
         = 
-        ANY id ANY how ANY export ANY source ANY properties+
+        String id HowKind how ExportKind export Source source Property properties+
  ;
 syntax Property
         = 
-        ANY name ANY how ANY export ANY values+ ANY parts+ ANY events+ ANY source ANY constants+ ANY properties+ ANY references+ ANY calls+ ANY iterators+
+        String name HowKind how ExportKind export String values+ Part parts+ Event events+ Source source Constant constants+ Property properties+ Reference references+ Call calls+ Iterator iterators+
  ;
 syntax Content
         = 
-        ANY id ANY how ANY export ANY source ANY constants+
+        String id HowKind how ExportKind export Source source Constant constants+
  ;
 syntax Behavior
         = 
-        ANY id ANY how ANY export ANY source ANY rules+
+        String id HowKind how ExportKind export Source source Rule rules+
  ;
 syntax Repeat
         = 
-        ANY iterator ANY parts+
+        Iterator iterator Part parts+
  ;
 syntax Constant
         = 
-        ANY id ANY how ANY export ANY model ANY value ANY source ANY constants+
+        String id HowKind how ExportKind export String model String value Source source Constant constants+
  ;
 syntax Reference
         = 
-        constant: ANY
+        constant: Constant
  ;
 syntax Rule
         = 
-        ANY id ANY how ANY export ANY source ANY condition ANY action
+        String id HowKind how ExportKind export Source source Condition condition Action action
  ;
 syntax Condition
-        = 
-        ()
+        = EventCondition
+        | EqualCondition
+        | OpCondition
  ;
 syntax EventCondition
         = 
-        event: ANY
+        event: Event
  ;
 syntax EqualCondition
         = 
-        equal: ANY
+        equal: Equal
  ;
 syntax OpCondition
         = 
-        op: ANY
+        op: Operation
  ;
 syntax Action
-        = 
-        ()
+        = Action_1
+        | Action_2
  ;
 syntax Action_1
         = 
-        ANY event ANY properties+ ANY calls+ ANY restructures+
+        Event event Property properties+ Call calls+ Restructure restructures+
  ;
 syntax Action_2
         = 
-        ANY whenTrue ANY whenFalse ANY byDefault
+        WhenTrue whenTrue WhenFalse whenFalse ByDefault byDefault
  ;
 syntax Call
         = 
-        ANY name ANY params+
+        String name Parameter params+
  ;
 syntax Parameter
-        = 
-        ()
+        = PropertyParameter
+        | ReferenceParameter
+        | CallParameter
+        | OperationParameter
+        | EventParameter
+        | ConstantParameter
+        | IteratorParameter
  ;
 syntax PropertyParameter
         = 
-        property: ANY
+        property: Property
  ;
 syntax ReferenceParameter
         = 
-        reference: ANY
+        reference: Reference
  ;
 syntax CallParameter
         = 
-        call: ANY
+        call: Call
  ;
 syntax OperationParameter
         = 
-        op: ANY
+        op: Operation
  ;
 syntax EventParameter
         = 
-        event: ANY
+        event: Event
  ;
 syntax ConstantParameter
         = 
-        constant: ANY
+        constant: Constant
  ;
 syntax IteratorParameter
         = 
-        iterator: ANY
+        iterator: Iterator
  ;
 syntax Iterator
-        = 
-        ()
+        = ConstantIterator
+        | PropertyIterator
+        | CallIterator
+        | TextIterator
  ;
 syntax ConstantIterator
         = 
-        constant: ANY
+        constant: Constant
  ;
 syntax PropertyIterator
         = 
-        property: ANY
+        property: Property
  ;
 syntax CallIterator
         = 
-        call: ANY
+        call: Call
  ;
 syntax TextIterator
         = 
-        value: ANY
+        value: Integer
  ;
 syntax Event
         = 
-        ANY class ANY parts+
+        String class Part parts+
  ;
 syntax Equal
-        = 
-        ()
+        = EqualToConstant
+        | EqualToProperty
+        | EqualToReference
+        | EqualToOperation
  ;
 syntax EqualToConstant
         = 
-        constant: ANY
+        constant: Constant
  ;
 syntax EqualToProperty
         = 
-        property: ANY
+        property: Property
  ;
 syntax EqualToReference
         = 
-        reference: ANY
+        reference: Reference
  ;
 syntax EqualToOperation
         = 
-        op: ANY
+        op: Operation
  ;
 syntax Operation
         = 
-        ANY name ANY constants+ ANY properties+ ANY references+ ANY calls+ ANY ops+ ANY events+
+        String name Constant constants+ Property properties+ Reference references+ Call calls+ Operation ops+ Event events+
  ;
 syntax Restructure
         = 
-        ANY how ANY atPart ANY wherePart ANY source ANY template
+        HowKind how Part atPart Part wherePart Source source Template template
  ;
 syntax Branch
-        = 
-        ANY properties+ ANY calls+ ANY restructure ANY op ANY equal ANY event
+        = WhenTrue
+        | WhenFalse
+        | ByDefault
+        | Property properties+ Call calls+ Restructure restructure Operation op Equal equal Event event
  ;
 syntax WhenTrue
         = 
@@ -275,70 +302,84 @@ syntax WhereKind
         | after: ()
  ;
 syntax Template
-        = 
-        ()
+        = BehaviorTemplate
+        | DClassTemplate
+        | DComponentTemplate
+        | ConstantTemplate
+        | ContentTemplate
+        | InterfaceTemplate
+        | LogicTemplate
+        | PartTemplate
+        | PeerTemplate
+        | PresentationTemplate
+        | PropertyTemplate
+        | RestructureTemplate
+        | RuleTemplate
+        | ScriptTemplate
+        | StructureTemplate
+        | StyleTemplate
  ;
 syntax BehaviorTemplate
         = 
-        behavior: ANY
+        behavior: Behavior
  ;
 syntax DClassTemplate
         = 
-        dClass: ANY
+        dClass: DClass
  ;
 syntax DComponentTemplate
         = 
-        dComponent: ANY
+        dComponent: DComponent
  ;
 syntax ConstantTemplate
         = 
-        constant: ANY
+        constant: Constant
  ;
 syntax ContentTemplate
         = 
-        content: ANY
+        content: Content
  ;
 syntax InterfaceTemplate
         = 
-        interface: ANY
+        interface: Interface
  ;
 syntax LogicTemplate
         = 
-        logic: ANY
+        logic: Logic
  ;
 syntax PartTemplate
         = 
-        part: ANY
+        part: Part
  ;
 syntax PeerTemplate
         = 
-        peer: ANY
+        peer: Peer
  ;
 syntax PresentationTemplate
         = 
-        presentation: ANY
+        presentation: Presentation
  ;
 syntax PropertyTemplate
         = 
-        property: ANY
+        property: Property
  ;
 syntax RestructureTemplate
         = 
-        restructure: ANY
+        restructure: Restructure
  ;
 syntax RuleTemplate
         = 
-        rule: ANY
+        rule: Rule
  ;
 syntax ScriptTemplate
         = 
-        script: ANY
+        script: Script
  ;
 syntax StructureTemplate
         = 
-        structure: ANY
+        structure: Structure
  ;
 syntax StyleTemplate
         = 
-        style: ANY
+        style: Style
  ;

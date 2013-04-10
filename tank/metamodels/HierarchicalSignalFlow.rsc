@@ -2,32 +2,35 @@
 module HierarchicalSignalFlow
 
 syntax Port
-        = 
-        ANY asso_Port_Signalsrc ANY asso_Port_Signaldst
+        = InputPort
+        | OutputPort
+        | LocalPort
+        | Asso_Port_Signal asso_Port_Signalsrc Asso_Port_Signal asso_Port_Signaldst
  ;
 syntax Signal
         = 
-        ANY base ANY asso_Port_Signal
+        Base base Asso_Port_Signal asso_Port_Signal
  ;
 syntax Base
-        = 
-        ANY compound ANY inputPort+ ANY outputPort+ ANY signal+
+        = Compound
+        | Primitive
+        | Compound compound InputPort inputPort+ OutputPort outputPort+ Signal signal+
  ;
 syntax Compound
         = 
-        ANY localPort+ ANY base+
+        LocalPort localPort+ Base base+
  ;
 syntax InputPort
         = 
-        base: ANY
+        base: Base
  ;
 syntax OutputPort
         = 
-        base: ANY
+        base: Base
  ;
 syntax LocalPort
         = 
-        compound: ANY
+        compound: Compound
  ;
 syntax Primitive
         = 
@@ -35,5 +38,5 @@ syntax Primitive
  ;
 syntax Asso_Port_Signal
         = 
-        ANY src+ ANY dst+ ANY signal
+        Port src+ Port dst+ Signal signal
  ;

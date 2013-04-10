@@ -3,51 +3,52 @@ module LQN
 
 syntax LQN
         = 
-        ANY name ANY comment ANY author ANY created_On ANY modified_On ANY task+ ANY processor+
+        String name String comment String author Date created_On Date modified_On Task task+ Processor processor+
  ;
 syntax Task
         = 
-        ANY name ANY type ANY priority ANY mutliplicity ANY replicas ANY entry+ ANY processor ANY lqn ANY activity+
+        String name TaskType type Integer priority Integer mutliplicity Integer replicas Entry entry+ Processor processor LQN lqn Activity activity+
  ;
 syntax Processor
         = 
-        ANY name ANY scheduling ANY mutliplicity ANY replicas ANY spped ANY task ANY lqn
+        String name SchedulingType scheduling Integer mutliplicity Integer replicas Integer spped Task task LQN lqn
  ;
 syntax Entry
         = 
-        ANY name ANY num_Phase ANY arrival_Rate ANY contained_In ANY replay_To ANY callreceives ANY callsends ANY phase+ ANY activity ANY task
+        String name Integer num_Phase Integer arrival_Rate Task contained_In Entry replay_To Call callreceives Call callsends Phase phase+ Activity activity Task task
  ;
 syntax Phase
         = 
-        ANY number ANY type ANY think_Time ANY execution_Demand ANY COV ANY entry ANY activity
+        Integer number PhaseType type Integer think_Time Integer execution_Demand Integer COV Entry entry Activity activity
  ;
 syntax Activity
         = 
-        ANY name ANY arrival_Rate ANY contained_In ANY replay_To ANY linkPrecedes+ ANY linkfollows+ ANY call+ ANY phase ANY entry ANY task
+        String name Integer arrival_Rate Task contained_In Entry replay_To Link linkPrecedes+ Link linkfollows+ Call call+ Phase phase Entry entry Task task
  ;
 syntax Link
         = 
-        ANY type ANY mean_Links ANY fromActivity ANY toActivity ANY activityPrecedes ANY activityfollows
+        LinkType type Integer mean_Links Activity fromActivity Activity toActivity Activity activityPrecedes Activity activityfollows
  ;
 syntax CallPhase
         = 
-        ANY mean_Calls ANY refers_To ANY call+
+        Integer mean_Calls Phase refers_To Call call+
  ;
 syntax Call
-        = 
-        ANY toEntry ANY num_Phases ANY type ANY callPhase+ ANY activity ANY entryreceives ANY entrysends
+        = EntryCall
+        | ActivityCall
+        | Entry toEntry Integer num_Phases CallType type CallPhase callPhase+ Activity activity Entry entryreceives Entry entrysends
  ;
 syntax EntryCall
         = 
-        from_Entry: ANY
+        from_Entry: Entry
  ;
 syntax ActivityCall
         = 
-        fromActivity: ANY
+        fromActivity: Activity
  ;
 syntax Date
         = 
-        ANY day ANY month ANY year
+        String day String month String year
  ;
 syntax SchedulingType
         = FCFS: ()

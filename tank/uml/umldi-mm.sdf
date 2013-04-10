@@ -2,31 +2,31 @@ module Main
 
 exports
   sorts
-        Element ModelElement GeneralizableElement Namespace Classifier Feature Relationship Generalization Package Model Subsystem ElementImport ScopeKind VisibilityKind 
+        Element ModelElement Relationship Generalization Package Model Subsystem ElementImport ScopeKind VisibilityKind 
   context-free syntax
-         -> Element
+        ModelElement -> Element
 
-         -> ModelElement
+        GeneralizableElement -> ModelElement
 
-         -> GeneralizableElement
+        Namespace -> ModelElement
 
-         -> Namespace
+        Feature -> ModelElement
 
-         -> Classifier
+        Relationship -> ModelElement
 
-         -> Feature
+        Generalization -> Relationship
 
-         -> Relationship
+        parent::GeneralizableElement powertype::Classifier child::GeneralizableElement discriminator::String -> Generalization
 
-        parent::ANY powertype::ANY child::ANY discriminator::ANY -> Generalization
+        Model -> Package
 
-        elementImport::ANY+ -> Package
+        elementImport::ElementImport+ -> Package
 
          -> Model
 
-        isInstantiable::ANY -> Subsystem
+        isInstantiable::Boolean -> Subsystem
 
-        package::ANY importedElement::ANY visibility::ANY alias::ANY isSpecification::ANY -> ElementImport
+        package::Package importedElement::ModelElement visibility::VisibilityKind alias::String isSpecification::Boolean -> ElementImport
 
         sk_instance:: -> ScopeKind
         sk_classifier:: -> ScopeKind

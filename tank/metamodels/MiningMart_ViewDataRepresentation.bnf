@@ -1,23 +1,59 @@
 ModelElement:
-        EPSILON
+        Classifier
+ModelElement:
+        StructuralFeature
+ModelElement:
+        ColumnSetStatistics
+ModelElement:
+        Key
+ModelElement:
+        Classifier
+        StructuralFeature
+        ColumnSetStatistics
+        Key
 Classifier:
-        EPSILON
+        Class
+Classifier:
+        DataType
+Classifier:
+        Class
+        DataType
 StructuralFeature:
-        EPSILON
+        Attribute
+StructuralFeature:
+        Attribute
 Class:
-        name::ANY attributes::ANY+
+        ColumnSet
+Class:
+        UserInput
+Class:
+        name::String attributes::Attribute+
 DataType:
-        attribute::ANY
+        DomainDataType
+DataType:
+        attribute::Attribute
 Attribute:
-        class::ANY has::ANY
+        Column
+Attribute:
+        FeatureAttribute
+Attribute:
+        RoleRestriction
+Attribute:
+        class::Class has::DataType
 Column:
-        name::ANY dataType::ANY keys::ANY+ belongsToColumnSet::ANY corespondsToBaseAttribute::ANY
+        name::String dataType::DataType keys::Key+ belongsToColumnSet::ColumnSet corespondsToBaseAttribute::BaseAttribute
 ColumnSet:
-        number::ANY file::ANY dbConnectString::ANY user::ANY hasColumn::ANY+ hasKey::ANY+ correspondsToConcept::ANY correspondsToRelationShip::ANY
+        Snapshot
+ColumnSet:
+        Table
+ColumnSet:
+        View
+ColumnSet:
+        number::Integer file::String dbConnectString::String user::String hasColumn::Column+ hasKey::Key+ correspondsToConcept::Concept correspondsToRelationShip::RelationShip
 ColumnStatistics:
-        unique::ANY missing::ANY min::ANY max::ANY average::ANY standarDeviation::ANY distributionValue::ANY distributionCount::ANY distributionMin::ANY distributionMax::ANY forColumn::ANY
+        unique::Integer missing::Integer min::Integer max::Integer average::Integer standarDeviation::Integer distributionValue::String distributionCount::Integer distributionMin::Integer distributionMax::Integer forColumn::Column
 ColumnSetStatistics:
-        allNumber::ANY ordinalNumber::ANY nominalNumber::ANY timeNumber::ANY forColumnSet::ANY
+        allNumber::Integer ordinalNumber::Integer nominalNumber::Integer timeNumber::Integer forColumnSet::ColumnSet
 Snapshot:
         EPSILON
 Table:
@@ -25,29 +61,41 @@ Table:
 View:
         EPSILON
 Key:
-        isUsedForIndex::ANY hasColumn::ANY+ isAssociatedToColumnSet::ANY
+        ForeignKey
+Key:
+        PrimaryKey
+Key:
+        isUsedForIndex::Boolean hasColumn::Column+ isAssociatedToColumnSet::ColumnSet
 ForeignKey:
-        isConnectionTo::ANY correspondsToRelationShip::ANY
+        isConnectionTo::Table correspondsToRelationShip::RelationShip
 PrimaryKey:
         EPSILON
 Concept:
-        subConceptRestriction::ANY isA::ANY FromConcept::ANY ToConcept::ANY correspondsToColumnSet::ANY
+        subConceptRestriction::String isA::Concept FromConcept::RelationShip ToConcept::RelationShip correspondsToColumnSet::ColumnSet
 RelationShip:
-        name::ANY subRelationShipRestriction::ANY defined::ANY isA::ANY correspondsToForeignKey::ANY+ correspondsToColumnSet::ANY FromConcept::ANY ToConcept::ANY
+        name::String subRelationShipRestriction::String defined::String isA::RelationShip correspondsToForeignKey::ForeignKey+ correspondsToColumnSet::ColumnSet FromConcept::Concept ToConcept::Concept
 FeatureAttribute:
-        name::ANY relevanceForMining::ANY attributeType::ANY belongsToConcept::ANY correspondsToColumns::ANY+
+        BaseAttribute
+FeatureAttribute:
+        MultiColumnFeature
+FeatureAttribute:
+        name::String relevanceForMining::Boolean attributeType::DataType belongsToConcept::Concept correspondsToColumns::Column+
 BaseAttribute:
-        isPartMultiColumnFeature::ANY domainDataType::ANY
+        isPartMultiColumnFeature::MultiColumnFeature domainDataType::DomainDataType
 MultiColumnFeature:
-        consitsOfBaseAttributes::ANY+
+        consitsOfBaseAttributes::BaseAttribute+
 Value:
-        name::ANY domainDataType::ANY belongsToUserInput::ANY+
+        name::String domainDataType::DomainDataType belongsToUserInput::UserInput+
 UserInput:
-        containsValues::ANY+
+        containsValues::Value+
 Ordinal:
-        EPSILON
+        Scalar
+Ordinal:
+        Scalar
 Scalar:
-        EPSILON
+        Time
+Scalar:
+        Time
 Time:
         EPSILON
 Binary:
@@ -55,7 +103,12 @@ Binary:
 Categorial:
         EPSILON
 KeyAttribute:
-        EPSILON
+        TimeGroup
+KeyAttribute:
+        Spatial
+KeyAttribute:
+        TimeGroup
+        Spatial
 TimeGroup:
         EPSILON
 Spatial:
@@ -63,10 +116,22 @@ Spatial:
 Constant:
         EPSILON
 RoleRestriction:
-        name::ANY restrictionForRelationShip::ANY restrictionForConcept::ANY restrictionToConcept::ANY min::ANY max::ANY belongsToConcept::ANY
+        name::String restrictionForRelationShip::RelationShip restrictionForConcept::Concept restrictionToConcept::Concept min::Integer max::Integer belongsToConcept::Concept
 DomainDataType:
-        baseAttributeD::ANY
+        Ordinal
+DomainDataType:
+        Nominal
+DomainDataType:
+        baseAttributeD::BaseAttribute
 Nominal:
-        EPSILON
+        Categorial
+Nominal:
+        KeyAttribute
+Nominal:
+        Constant
+Nominal:
+        Categorial
+        KeyAttribute
+        Constant
 Parameter:
         EPSILON

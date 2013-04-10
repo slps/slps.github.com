@@ -1,71 +1,93 @@
 Man:
-        language::ANY title::ANY type::ANY date::ANY name::ANY keyword::ANY exemple::ANY meta::ANY+
+        language::String title::String type::String date::String name::String keyword::String exemple::String meta::Meta+
 Meta:
-        meta::ANY path::ANY category::ANY version_CSI::ANY version_DOC::ANY author::ANY man::ANY
+        meta::String path::String category::String version_CSI::String version_DOC::String author::String man::Man
 Short_Description:
-        name::ANY verb::ANY+
+        name::String verb::String+
 Calling_Sequence:
-        calling_Sequence_Item::ANY+
+        calling_Sequence_Item::Calling_Sequence_Item+
 Calling_Sequence_Item:
-        calling_Sequence_Item::ANY+ calling_Sequence::ANY
+        calling_Sequence_Item::String+ calling_Sequence::Calling_Sequence
 Param:
-        target::ANY param_Indent::ANY+
+        target::InOut param_Indent::Param_Indent+
 Param_Indent:
-        param::ANY param_Description::ANY param_Item::ANY+
+        param::Param param_Description::Param_Description param_Item::Param_Item+
 Param_Item:
-        label::ANY param_Indent::ANY param_Name::ANY param_Description::ANY
+        label::String param_Indent::Param_Indent param_Name::Param_Name param_Description::Param_Description
 Param_Name:
-        verb::ANY+ param_Item::ANY
+        verb::String+ param_Item::Param_Item
 Param_Description:
-        param_Indent::ANY+ param_Item::ANY
+        param_Indent::Param_Indent+ param_Item::Param_Item
 Description:
-        itemize::ANY+ description_Indent::ANY+
+        itemize::Itemize+ description_Indent::Description_Indent+
 Description_Indent:
-        description::ANY description_Item::ANY+
+        description::Description description_Item::Description_Item+
 Description_Item:
-        label::ANY description_Indent::ANY
+        label::String description_Indent::Description_Indent
 AIMG:
-        verb::ANY+
+        A
+AIMG:
+        Img
+AIMG:
+        verb::String+
 See_Also:
-        see_Also_Item::ANY+
+        see_Also_Item::See_Also_Item+
 Exemple:
-        exemple::ANY xml_space::ANY
+        exemple::String xml_space::PreDef
 See_Also_Item:
-        see_Also::ANY link::ANY+
+        see_Also::See_Also link::Link+
 A:
-        href::ANY psppp::ANY authors_Item::ANY
+        href::String psppp::PSPPP authors_Item::Authors_Item
 Img:
-        src::ANY psppp::ANY
+        src::String psppp::PSPPP
 Biblio:
-        p::ANY+ sp::ANY+ pp::ANY+
+        Short_Description
+Biblio:
+        Used_Functions
+Biblio:
+        Authors_Item
+Biblio:
+        p::P+ sp::SP+ pp::PP+
 Used_Functions:
-        verbatim::ANY+ table::ANY+
+        Param_Description
+Used_Functions:
+        Description
+Used_Functions:
+        Itemize
+Used_Functions:
+        verbatim::String+ table::Table+
 PSPPP:
-        verb::ANY+ em::ANY+ bd::ANY+ tt::ANY+ a::ANY+ link::ANY+ img::ANY+
+        P
+PSPPP:
+        SP
+PSPPP:
+        PP
+PSPPP:
+        verb::String+ em::String+ bd::String+ tt::String+ a::A+ link::Link+ img::Img+
 P:
-        biblio::ANY
+        biblio::Biblio
 SP:
-        biblio::ANY
+        biblio::Biblio
 PP:
-        biblio::ANY
+        biblio::Biblio
 Itemize:
-        label::ANY item::ANY section::ANY authors_Item::ANY description::ANY
+        label::String item::Item section::Section authors_Item::Authors_Item description::Description
 Item:
-        itemize::ANY+
+        itemize::Itemize+
 Table:
-        table_New_Row::ANY+ used_Functions::ANY
+        table_New_Row::Table_New_Row+ used_Functions::Used_Functions
 Table_New_Row:
-        table_New_Column::ANY+ table::ANY
+        table_New_Column::Table_New_Column+ table::Table
 Table_New_Column:
-        Verb::ANY+ em::ANY+ bd::ANY+ tt::ANY+ table_New_Row::ANY
+        Verb::String+ em::String+ bd::String+ tt::String+ table_New_Row::Table_New_Row
 Link:
-        link::ANY psppp::ANY see_Also_Item::ANY authors_Item::ANY
+        link::String psppp::PSPPP see_Also_Item::See_Also_Item authors_Item::Authors_Item
 Authors:
-        authors_Item::ANY+
+        authors_Item::Authors_Item+
 Authors_Item:
-        Verb::ANY+ em::ANY+ bd::ANY+ tt::ANY+ verbatim::ANY+ label::ANY a::ANY+ link::ANY+ authors::ANY itemize::ANY+
+        Verb::String+ em::String+ bd::String+ tt::String+ verbatim::String+ label::String a::A+ link::Link+ authors::Authors itemize::Itemize+
 Section:
-        itemize::ANY+
+        itemize::Itemize+
 InOut:
         in::EPSILON
         out::EPSILON

@@ -3,39 +3,40 @@ module AWKPrograms
 
 syntax AWKProgram
         = 
-        ANY name ANY input ANY output ANY script
+        String name File input File output Script script
  ;
 syntax File
         = 
-        ANY name ANY records+
+        String name Record records+
  ;
 syntax Record
         = 
-        ANY r_file ANY fields+
+        File r_file Field fields+
  ;
 syntax Field
         = 
-        ANY value ANY f_record
+        String value Record f_record
  ;
 syntax Script
         = 
-        ANY name ANY rules+
+        String name Rule rules+
  ;
 syntax Rule
-        = 
-        ANY r_script ANY pattern ANY action
+        = InitialRule
+        | FinalRule
+        | Script r_script Pattern pattern Action action
  ;
 syntax Pattern
         = 
-        regularExpression: ANY
+        regularExpression: String
  ;
 syntax Action
         = 
-        ANY instructions+
+        Instruction instructions+
  ;
 syntax Instruction
         = 
-        ANY value ANY i_action
+        String value Action i_action
  ;
 syntax InitialRule
         = 

@@ -4,18 +4,22 @@ exports
   sorts
         Actor UseCase Extend Include UseCaseContainer BehavioredClassifier NamedElement Association 
   context-free syntax
-        name::ANY -> Actor
+        name::String -> Actor
 
-        include::ANY+ extend::ANY+ -> UseCase
+        include::Include+ extend::Extend+ -> UseCase
 
-        extension::ANY+ -> Extend
+        extension::UseCase+ -> Extend
 
-        includingCase::ANY+ -> Include
+        includingCase::UseCase+ -> Include
 
-        ownedElement::ANY+ -> UseCaseContainer
+        ownedElement::NamedElement+ -> UseCaseContainer
 
          -> BehavioredClassifier
 
-         -> NamedElement
+        Actor -> NamedElement
 
-        actor::ANY useCase::ANY -> Association
+        UseCase -> NamedElement
+
+        Association -> NamedElement
+
+        actor::Actor useCase::UseCase -> Association

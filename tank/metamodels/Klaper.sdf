@@ -4,34 +4,60 @@ exports
   sorts
         Resource Service Behavior WorkLoad Step Start End Control InternalActivity ServiceCall ActualParam Branch Fork Join Acquire Release 
   context-free syntax
-        name::ANY type::ANY capacity::ANY schedulingPolicy::ANY description::ANY acquire::ANY release::ANY -> Resource
+        name::String type::String capacity::Integer schedulingPolicy::String description::String acquire::Acquire release::Release -> Resource
 
-        name::ANY formalParams::ANY speedAttr::ANY failAttr::ANY description::ANY behavior::ANY+ behaviorUsed::ANY+ serviceCall::ANY+ -> Service
+        name::String formalParams::String speedAttr::String failAttr::String description::String behavior::Behavior+ behaviorUsed::Behavior+ serviceCall::ServiceCall+ -> Service
 
-        stepn::ANY stepb::ANY+ service::ANY usedService::ANY+ workLoad::ANY -> Behavior
+        Step -> Behavior
 
-        workLoadType::ANY arrivalProcess::ANY population::ANY initialResource::ANY behavior::ANY -> WorkLoad
+        stepn::Step stepb::Step+ service::Service usedService::Service+ workLoad::WorkLoad -> Behavior
 
-        name::ANY repetition::ANY internalExecTime::ANY internalFailProb::ANY completionModel::ANY serviceCall::ANY+ predecessor::ANY+ successor::ANY+ behavior::ANY nestedBehavior::ANY -> Step
+        workLoadType::String arrivalProcess::String population::String initialResource::String behavior::Behavior -> WorkLoad
+
+        Start -> Step
+
+        End -> Step
+
+        Control -> Step
+
+        InternalActivity -> Step
+
+        ServiceCall -> Step
+
+        name::String repetition::String internalExecTime::String internalFailProb::String completionModel::String serviceCall::ServiceCall+ predecessor::Step+ successor::Step+ behavior::Behavior nestedBehavior::Behavior -> Step
 
          -> Start
 
          -> End
 
-         -> Control
+        Branch -> Control
+
+        Fork -> Control
+
+        Join -> Control
+
+        Acquire -> Control
+
+        Release -> Control
+
+        Branch -> Control
+        Fork -> Control
+        Join -> Control
+        Acquire -> Control
+        Release -> Control
 
          -> InternalActivity
 
-        resourceType::ANY serviceName::ANY isSynch::ANY actualParam::ANY+ step::ANY calledService::ANY -> ServiceCall
+        resourceType::String serviceName::String isSynch::Boolean actualParam::ActualParam+ step::Step calledService::Service -> ServiceCall
 
-        value::ANY serviceCall::ANY -> ActualParam
+        value::String serviceCall::ServiceCall -> ActualParam
 
-        branchProbs::ANY -> Branch
+        branchProbs::String -> Branch
 
          -> Fork
 
          -> Join
 
-        resourceUnits::ANY resource::ANY -> Acquire
+        resourceUnits::String resource::Resource -> Acquire
 
-        resourceUnits::ANY resource::ANY -> Release
+        resourceUnits::String resource::Resource -> Release

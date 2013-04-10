@@ -3,41 +3,44 @@ module SignalFlow
 
 syntax RootFolder
         = 
-        ANY compoundComponent+
+        CompoundComponent compoundComponent+
  ;
 syntax CompoundComponent
         = 
-        ANY rootFolder ANY baseComponent+ ANY localPort+
+        RootFolder rootFolder BaseComponent baseComponent+ LocalPort localPort+
  ;
 syntax PrimitiveComponent
         = 
         ()
  ;
 syntax BaseComponent
-        = 
-        ANY name ANY position ANY signal+ ANY outputPort+ ANY inputPort+ ANY compoundComponent
+        = CompoundComponent
+        | PrimitiveComponent
+        | String name String position Signal signal+ OutputPort outputPort+ InputPort inputPort+ CompoundComponent compoundComponent
  ;
 syntax InputPort
         = 
-        baseComponent: ANY
+        baseComponent: BaseComponent
  ;
 syntax LocalPort
         = 
-        compoundComponent: ANY
+        compoundComponent: CompoundComponent
  ;
 syntax OutputPort
         = 
-        baseComponent: ANY
+        baseComponent: BaseComponent
  ;
 syntax PortBase
-        = 
-        ANY name ANY position ANY associationPortBase_PortBasesrc ANY associationPortBase_PortBasedst
+        = InputPort
+        | LocalPort
+        | OutputPort
+        | String name String position AssociationPortBase_PortBase associationPortBase_PortBasesrc AssociationPortBase_PortBase associationPortBase_PortBasedst
  ;
 syntax Signal
         = 
-        ANY name ANY position ANY baseComponent ANY associationPortBase_PortBase
+        String name String position BaseComponent baseComponent AssociationPortBase_PortBase associationPortBase_PortBase
  ;
 syntax AssociationPortBase_PortBase
         = 
-        ANY srcPortBase+ ANY dstPortBase+ ANY signal
+        PortBase srcPortBase+ PortBase dstPortBase+ Signal signal
  ;

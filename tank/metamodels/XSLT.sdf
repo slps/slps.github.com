@@ -4,34 +4,58 @@ exports
   sorts
         Node ElementNode AttributeNode RootNode TextNode XSLTNode XSLTRootNode Document ApplyTemplates If Template ValueOf When Choose Otherwise Sort 
   context-free syntax
-         -> Node
+        ElementNode -> Node
 
-        nodes::ANY+ -> ElementNode
+        AttributeNode -> Node
 
-        name::ANY parentNode::ANY -> AttributeNode
+        RootNode -> ElementNode
 
-        document::ANY -> RootNode
+        TextNode -> ElementNode
 
-        value::ANY -> TextNode
+        XSLTNode -> ElementNode
 
-         -> XSLTNode
+        nodes::Node+ -> ElementNode
+
+        name::String parentNode::ElementNode -> AttributeNode
+
+        XSLTRootNode -> RootNode
+
+        document::Document -> RootNode
+
+        value::String -> TextNode
+
+        ApplyTemplates -> XSLTNode
+
+        If -> XSLTNode
+
+        Template -> XSLTNode
+
+        ValueOf -> XSLTNode
+
+        When -> XSLTNode
+
+        Choose -> XSLTNode
+
+        Otherwise -> XSLTNode
+
+        Sort -> XSLTNode
 
          -> XSLTRootNode
 
-        documentName::ANY document::ANY -> Document
+        documentName::String document::RootNode -> Document
 
-        select::ANY -> ApplyTemplates
+        select::String -> ApplyTemplates
 
-        test::ANY -> If
+        test::String -> If
 
-        match::ANY -> Template
+        match::String -> Template
 
-        select::ANY -> ValueOf
+        select::String -> ValueOf
 
-        test::ANY -> When
+        test::String -> When
 
-        when::ANY otherwise::ANY -> Choose
+        when::When otherwise::Otherwise -> Choose
 
          -> Otherwise
 
-        select::ANY -> Sort
+        select::String -> Sort

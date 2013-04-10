@@ -4,16 +4,22 @@ exports
   sorts
         Element PetriNet Place Transition Arc PlaceToTransArc TransToPlaceArc 
   context-free syntax
-         -> Element
+        PetriNet -> Element
 
-        places::ANY+ transitions::ANY+ arcs::ANY+ -> PetriNet
+        Place -> Element
 
-        incoming::ANY+ outgoing::ANY+ -> Place
+        Transition -> Element
 
-        incoming::ANY+ outgoing::ANY+ -> Transition
+        places::Place+ transitions::Transition+ arcs::Arc+ -> PetriNet
 
-         -> Arc
+        incoming::TransToPlaceArc+ outgoing::PlaceToTransArc+ -> Place
 
-        source::ANY target::ANY -> PlaceToTransArc
+        incoming::PlaceToTransArc+ outgoing::TransToPlaceArc+ -> Transition
 
-        source::ANY target::ANY -> TransToPlaceArc
+        PlaceToTransArc -> Arc
+
+        TransToPlaceArc -> Arc
+
+        source::Place target::Transition -> PlaceToTransArc
+
+        source::Transition target::Place -> TransToPlaceArc

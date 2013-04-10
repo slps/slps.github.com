@@ -2,34 +2,35 @@
 module Simple
 
 syntax UMLModelElement
-        = 
-        ()
+        = Attribute
+        | Package
+        | PackageElement
  ;
 syntax Attribute
         = 
-        ANY owner ANY type
+        Class owner Classifier type
  ;
 syntax Package
         = 
-        ANY elements+
+        PackageElement elements+
  ;
 syntax PackageElement
-        = 
-        ()
+        = Classifier
+        | Association
  ;
 syntax Classifier
-        = 
-        ()
+        = Class
+        | PrimitiveDataType
  ;
 syntax Class
         = 
-        ANY attribute+ ANY general+ ANY generalOpposite+ ANY reverse+ ANY forward+
+        Attribute attribute+ Class general+ Class generalOpposite+ Association reverse+ Association forward+
  ;
 syntax PrimitiveDataType
         = 
-        ANY typeOpposite+
+        Attribute typeOpposite+
  ;
 syntax Association
         = 
-        ANY source ANY destination
+        Class source Class destination
  ;

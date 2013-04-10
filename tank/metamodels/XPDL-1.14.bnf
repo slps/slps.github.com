@@ -53,73 +53,162 @@ ImplementationKind:
         Other::EPSILON
         Unspecified::EPSILON
 Element:
-        EPSILON
+        Package
+Element:
+        MessageFlow
+Element:
+        Association
+Element:
+        Pool
+Element:
+        Lane
+Element:
+        Participant
+Element:
+        Artifact
+Element:
+        TypeDeclaration
+Element:
+        Application
+Element:
+        Activity
+Element:
+        Process
+Element:
+        Transition
+Element:
+        ActivitySet
+Element:
+        Object
+Element:
+        ExternalPackage
+Element:
+        Category
+Element:
+        DataField
 Package:
-        script::ANY externalPackages::ANY+ typeDeclarations::ANY+ participants::ANY+ applications::ANY+ dataFields::ANY+ pools::ANY+ messageFlows::ANY+ associations::ANY+ artifacts::ANY+ workflowProcesses::ANY+
+        script::Script externalPackages::ExternalPackage+ typeDeclarations::TypeDeclaration+ participants::Participant+ applications::Application+ dataFields::DataField+ pools::Pool+ messageFlows::MessageFlow+ associations::Association+ artifacts::Artifact+ workflowProcesses::Process+
 MessageFlow:
-        targetActivity::ANY sourceActivity::ANY targetPool::ANY sourcePool::ANY object::ANY
+        targetActivity::Activity sourceActivity::Activity targetPool::Pool sourcePool::Pool object::Object
 Association:
-        associationDirection::ANY targetArtifact::ANY sourceArtifact::ANY targetPool::ANY sourcePool::ANY targetActivity::ANY sourceActivity::ANY object::ANY
+        associationDirection::AssociationDirectionKind targetArtifact::Artifact sourceArtifact::Artifact targetPool::Pool sourcePool::Pool targetActivity::Activity sourceActivity::Activity object::Object
 Pool:
-        orientation::ANY boundaryVisible::ANY lanes::ANY+ object::ANY participant::ANY process::ANY
+        orientation::OrientationKind boundaryVisible::Boolean lanes::Lane+ object::Object participant::Participant process::Process
 Lane:
-        object::ANY parentLane::ANY parentPool::ANY
+        object::Object parentLane::Lane parentPool::Pool
 Participant:
-        id::ANY name::ANY
+        id::String name::String
 Artifact:
-        textAnnotation::ANY group::ANY object::ANY dataObject::ANY
+        DataObject
+Artifact:
+        Group
+Artifact:
+        Annotation
+Artifact:
+        textAnnotation::String group::String object::Object dataObject::DataObject
 DataObject:
-        state::ANY requiredForStart::ANY producedAtCompletion::ANY dataFields::ANY+
+        state::String requiredForStart::Boolean producedAtCompletion::Boolean dataFields::DataField+
 Group:
         EPSILON
 Annotation:
         EPSILON
 TypeDeclaration:
-        id::ANY name::ANY
+        id::String name::String
 Application:
-        id::ANY name::ANY
+        ParametrizedApplication
+Application:
+        ReferencedApplication
+Application:
+        ParametrizedApplication
+        ReferencedApplication
 ParametrizedApplication:
         EPSILON
 ReferencedApplication:
-        externalReference::ANY
+        externalReference::ExternalReference
 Activity:
-        isStartActivity::ANY status::ANY startMode::ANY finishMode::ANY startQuantity::ANY isATransaction::ANY dataFields::ANY+ object::ANY
+        Task
+Activity:
+        Route
+Activity:
+        SubFlow
+Activity:
+        BlockActivity
+Activity:
+        Event
+Activity:
+        isStartActivity::Boolean status::StatusKind startMode::ModeKind finishMode::ModeKind startQuantity::Integer isATransaction::Boolean dataFields::DataField+ object::Object
 Task:
-        EPSILON
+        TaskService
+Task:
+        TaskReceive
+Task:
+        TaskManual
+Task:
+        TaskReference
+Task:
+        TaskScript
+Task:
+        TaskSend
+Task:
+        TaskUser
+Task:
+        TaskApplication
 TaskService:
-        implementation::ANY
+        implementation::ImplementationKind
 TaskReceive:
-        instantiate::ANY implementation::ANY
+        instantiate::Boolean implementation::ImplementationKind
 TaskManual:
         
 TaskReference:
-        taskRef::ANY
+        taskRef::Task
 TaskScript:
-        script::ANY
+        script::Script
 TaskSend:
-        implementation::ANY
+        implementation::ImplementationKind
 TaskUser:
-        implementation::ANY
+        implementation::ImplementationKind
 TaskApplication:
-        packageRef::ANY
+        packageRef::Package
 Route:
-        gatewayType::ANY instantiate::ANY markerVisiable::ANY
+        Gateway
+Route:
+        gatewayType::GatewayTypeKind instantiate::Boolean markerVisiable::Boolean
 SubFlow:
-        execution::ANY instanceDataField::ANY packageRef::ANY startActivitySet::ANY startActivity::ANY
+        execution::ExecutionKind instanceDataField::String packageRef::Package startActivitySet::ActivitySet startActivity::Activity
 BlockActivity:
-        activitySet::ANY startActivity::ANY
+        activitySet::ActivitySet startActivity::Activity
 Event:
-        EPSILON
+        StartEvent
+Event:
+        IntermediateEvent
+Event:
+        EndEvent
 Trigger:
-        EPSILON
+        ResultCompensation
+Trigger:
+        ResultError
+Trigger:
+        ResultMultiple
+Trigger:
+        TriggerResultLink
+Trigger:
+        TriggerResultMessage
+Trigger:
+        TriggerIntermediateMultiple
+Trigger:
+        TriggerMultiple
+Trigger:
+        TriggerRule
+Trigger:
+        TriggerTimer
 ResultCompensation:
-        activity::ANY
+        activity::Activity
 ResultError:
-        errorCode::ANY
+        errorCode::String
 ResultMultiple:
         
 TriggerResultLink:
-        processRef::ANY
+        processRef::Process
 TriggerResultMessage:
         
 TriggerIntermediateMultiple:
@@ -127,32 +216,32 @@ TriggerIntermediateMultiple:
 TriggerMultiple:
         
 TriggerRule:
-        ruleName::ANY
+        ruleName::String
 TriggerTimer:
-        timeDate::ANY timeCycle::ANY
+        timeDate::String timeCycle::String
 StartEvent:
-        triggerKind::ANY implementation::ANY trigger::ANY
+        triggerKind::TriggerKind implementation::ImplementationKind trigger::Trigger
 IntermediateEvent:
-        target::ANY
+        target::Activity
 EndEvent:
-        triggerKind::ANY implementation::ANY trigger::ANY
+        triggerKind::TriggerKind implementation::ImplementationKind trigger::Trigger
 Gateway:
         EPSILON
 Process:
-        accessLevel::ANY processType::ANY status::ANY suppressJoinFailure::ANY enableInstanceCompensation::ANY adHoc::ANY adHocOrdering::ANY adHocCompletionCondition::ANY participant::ANY+ applications::ANY+ dataField::ANY activitySets::ANY+ activities::ANY+ transitions::ANY+ object::ANY defaultStartActivitySet::ANY defaultStartActivity::ANY
+        accessLevel::AccessLevelKind processType::ProcessTypeKind status::StatusKind suppressJoinFailure::Boolean enableInstanceCompensation::Boolean adHoc::Boolean adHocOrdering::AdHocOrderingKind adHocCompletionCondition::String participant::Participant+ applications::Application+ dataField::DataField activitySets::ActivitySet+ activities::Activity+ transitions::Transition+ object::Object defaultStartActivitySet::ActivitySet defaultStartActivity::Activity
 Transition:
-        quantity::ANY object::ANY to::ANY from::ANY
+        quantity::Integer object::Object to::Activity from::Activity
 ActivitySet:
-        adHoc::ANY adHocOrdering::ANY adHocCompletionCondition::ANY defaultStartActivity::ANY activities::ANY+ transitions::ANY+ object::ANY
+        adHoc::Boolean adHocOrdering::AdHocOrderingKind adHocCompletionCondition::String defaultStartActivity::Activity activities::Activity+ transitions::Transition+ object::Object
 ExternalReference:
-        xref::ANY location::ANY namespace::ANY
+        xref::String location::String namespace::String
 Object:
-        categories::ANY+
+        categories::Category+
 ExternalPackage:
-        href::ANY
+        href::String
 Category:
-        id::ANY name::ANY
+        id::String name::String
 DataField:
-        isArray::ANY correlation::ANY dataType::ANY
+        isArray::Boolean correlation::Boolean dataType::TypeDeclaration
 Script:
-        type::ANY version::ANY grammar::ANY
+        type::String version::String grammar::String

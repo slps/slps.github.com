@@ -2,22 +2,22 @@
 module WSLink
 
 syntax LocatedElement
-        = 
-        ()
+        = Network
+        | Services
  ;
 syntax Network
         = 
-        ANY services+ ANY name
+        Services services+ String name
  ;
 syntax Services
-        = 
-        ()
+        = WebService
+        | RSS
  ;
 syntax WebService
         = 
-        ANY linkedServices+
+        Services linkedServices+
  ;
 syntax RSS
         = 
-        ANY name ANY URL ANY descriptions
+        String name String URL String descriptions
  ;

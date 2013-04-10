@@ -243,3 +243,7 @@ syntax Pp_compareopr
         | "\<="
         | "\<\>"
  ;
+syntax Anynumber
+        = Number
+        | Hexnumber
+ ;

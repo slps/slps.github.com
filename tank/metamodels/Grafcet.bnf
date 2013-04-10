@@ -1,18 +1,26 @@
 LocatedElement:
-        EPSILON
+        NamedElement
 NamedElement:
-        EPSILON
+        Grafcet
+NamedElement:
+        Element
+NamedElement:
+        Connection
 Grafcet:
-        elements::ANY+ connections::ANY+
+        elements::Element+ connections::Connection+
 Element:
-        EPSILON
+        Step
+Element:
+        Transition
 Step:
-        isInitial::ANY isActive::ANY action::ANY incomingConnections::ANY+ outgoingConnections::ANY+
+        isInitial::Boolean isActive::Boolean action::String incomingConnections::TransitionToStep+ outgoingConnections::StepToTransition+
 Transition:
-        condition::ANY incomingConnections::ANY+ outgoingConnections::ANY+
+        condition::String incomingConnections::StepToTransition+ outgoingConnections::TransitionToStep+
 Connection:
-        EPSILON
+        StepToTransition
+Connection:
+        TransitionToStep
 StepToTransition:
-        from::ANY to::ANY
+        from::Step to::Transition
 TransitionToStep:
-        from::ANY to::ANY
+        from::Transition to::Step

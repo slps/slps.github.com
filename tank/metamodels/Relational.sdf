@@ -4,10 +4,14 @@ exports
   sorts
         Named Table Column Type 
   context-free syntax
-         -> Named
+        Table -> Named
 
-        col::ANY+ key::ANY+ -> Table
+        Column -> Named
 
-        owner::ANY keyOf::ANY type::ANY -> Column
+        Type -> Named
 
-        name::ANY -> Type
+        col::Column+ key::Column+ -> Table
+
+        owner::Table keyOf::Table type::Type -> Column
+
+        name::String -> Type

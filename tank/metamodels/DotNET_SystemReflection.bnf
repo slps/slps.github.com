@@ -1,29 +1,45 @@
 NamedElement:
-        EPSILON
+        Assembly
+NamedElement:
+        Module
+NamedElement:
+        MemberInfo
+NamedElement:
+        ParameterInfo
 Assembly:
-        location::ANY imageRuntimeVersion::ANY evidence::ANY codeBase::ANY entryPoint::ANY modules::ANY+ manifestModule::ANY referencedAssembly::ANY+ manifest::ANY
+        location::String imageRuntimeVersion::String evidence::String codeBase::String entryPoint::MethodInfo modules::Module+ manifestModule::Module referencedAssembly::Assembly+ manifest::ManifestResource
 ManifestResource:
-        content::ANY assembly::ANY
+        content::String assembly::Assembly
 Module:
-        qualifiedName::ANY scopeName::ANY assembly::ANY types::ANY+
+        qualifiedName::String scopeName::String assembly::Assembly types::Type+
 MemberInfo:
-        EPSILON
+        PropertyInfo
+MemberInfo:
+        FieldInfo
+MemberInfo:
+        EventInfo
+MemberInfo:
+        MethodBase
+MemberInfo:
+        Type
 PropertyInfo:
-        propertyType::ANY attributes::ANY+
+        propertyType::Type attributes::PropertyAttributes+
 FieldInfo:
-        fieldType::ANY attributes::ANY+
+        fieldType::Type attributes::FieldAttributes+
 EventInfo:
-        isMulticast::ANY attributes::ANY eventHandlerType::ANY
+        isMulticast::Boolean attributes::EventAttributes eventHandlerType::Type
 ParameterInfo:
-        defaultValue::ANY position::ANY attributes::ANY+ parameterType::ANY member::ANY
+        defaultValue::String position::Integer attributes::ParameterAttributes+ parameterType::Type member::MethodBase
 MethodBase:
-        EPSILON
+        MethodInfo
+MethodBase:
+        ConstructorInfo
 MethodInfo:
-        returnType::ANY
+        returnType::Type
 ConstructorInfo:
-        attributes::ANY+ parameters::ANY+
+        attributes::MethodAttributes+ parameters::ParameterInfo+
 Type:
-        namespace::ANY genericParameterAttributes::ANY+ typeAttributes::ANY+ baseType::ANY module::ANY interfaces::ANY+ members::ANY+
+        namespace::String genericParameterAttributes::GenericParameterAttributes+ typeAttributes::TypeAttributes+ baseType::Type module::Module interfaces::Type+ members::MemberInfo+
 EventAttributes:
         None::EPSILON
         ReservedMask::EPSILON

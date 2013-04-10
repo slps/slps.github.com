@@ -2,12 +2,12 @@
 module CORBAComponent
 
 syntax InterfaceDef
-        = 
-        ()
+        = ComponentDef
+        | HomeDef
  ;
 syntax OperationDef
-        = 
-        ()
+        = FactoryDef
+        | FinderDef
  ;
 syntax ValueDef
         = 
@@ -15,45 +15,47 @@ syntax ValueDef
  ;
 syntax ComponentDef
         = 
-        ANY isBasic ANY facets+ ANY receptacles+ ANY supports+ ANY emits+ ANY publishes+ ANY consumes+
+        Boolean isBasic ProvidesDef facets+ UsesDef receptacles+ InterfaceDef supports+ EmitsDef emits+ PublishesDef publishes+ ConsumesDef consumes+
  ;
 syntax ProvidesDef
         = 
-        ANY provides ANY prd_home
+        InterfaceDef provides ComponentDef prd_home
  ;
 syntax UsesDef
         = 
-        ANY multiple ANY uses ANY ud_home
+        Boolean multiple InterfaceDef uses ComponentDef ud_home
  ;
 syntax EventDef
-        = 
-        type: ANY
+        = EmitsDef
+        | PublishesDef
+        | ConsumesDef
+        | type: ValueDef
  ;
 syntax EmitsDef
         = 
-        ed_home: ANY
+        ed_home: ComponentDef
  ;
 syntax PublishesDef
         = 
-        pud_home: ANY
+        pud_home: ComponentDef
  ;
 syntax ConsumesDef
         = 
-        cd_home: ANY
+        cd_home: ComponentDef
  ;
 syntax HomeDef
         = 
-        ANY manages ANY factories+ ANY finders+ ANY key
+        ComponentDef manages FactoryDef factories+ FinderDef finders+ PrimaryKeyDef key
  ;
 syntax FactoryDef
         = 
-        fa_home: ANY
+        fa_home: HomeDef
  ;
 syntax FinderDef
         = 
-        fi_home: ANY
+        fi_home: HomeDef
  ;
 syntax PrimaryKeyDef
         = 
-        ANY pkd_home ANY type
+        HomeDef pkd_home ValueDef type
  ;

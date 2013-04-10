@@ -13,37 +13,57 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable GUI 0.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Anas Abouzahra, Pierre-Yves Baudouin, Thomas Broussaud, Grégory Pouliquen, <code>GUI.ecore</code>, 2006/04/11.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>15</strong></li><li>Number of top alternatives: <strong>17</strong></li><li>Number of defined nonterminal symbols: <strong>15</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>15</strong>: <code><a href="#LocatedElement" class="nt">LocatedElement</a>, <a href="#Named" class="nt">Named</a>, <a href="#GUI" class="nt">GUI</a>, <a href="#Tab" class="nt">Tab</a>, <a href="#Composant" class="nt">Composant</a>, <a href="#Layout" class="nt">Layout</a>, <a href="#Group" class="nt">Group</a>, <a href="#Label" class="nt">Label</a>, <a href="#TextArea" class="nt">TextArea</a>, <a href="#Table" class="nt">Table</a>, <a href="#Column" class="nt">Column</a>, <a href="#ComboBox" class="nt">ComboBox</a>, <a href="#Row" class="nt">Row</a>, <a href="#Item" class="nt">Item</a>, <a href="#Button" class="nt">Button</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
-        ε
+				</script></head><body><h1 class="l">Browsable GUI 0.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Anas Abouzahra, Pierre-Yves Baudouin, Thomas Broussaud, Grégory Pouliquen, <code>GUI.ecore</code>, 2006/04/11.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>25</strong></li><li>Number of top alternatives: <strong>27</strong></li><li>Number of defined nonterminal symbols: <strong>15</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#LocatedElement" class="nt">LocatedElement</a></code></li><li>Bottom nonterminal symbols: <strong>2</strong>: <code><a href="#String" class="nt">String</a>, <a href="#Integer" class="nt">Integer</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
+        <a class="nt" href="#Named">Named</a>
+</pre><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
+        <a class="nt" href="#Column">Column</a>
 </pre><pre><a class="nt" name="Named">Named</a>:
-        ε
+        <a class="nt" href="#GUI">GUI</a>
+</pre><pre><a class="nt" name="Named">Named</a>:
+        <a class="nt" href="#Tab">Tab</a>
+</pre><pre><a class="nt" name="Named">Named</a>:
+        <a class="nt" href="#Composant">Composant</a>
 </pre><pre><a class="nt" name="GUI">GUI</a>:
-        <span class="sel">guiTabs</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">guiTabs</span>::<a class="nt" href="#Tab">Tab</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Tab">Tab</a>:
-        <span class="sel">title</span>::<span class="meta">any</span> <span class="sel">gui</span>::<span class="meta">any</span> <span class="sel">group</span>::<span class="meta">any</span>
+        <span class="sel">title</span>::<a class="nt" href="#String">String</a> <span class="sel">gui</span>::<a class="nt" href="#GUI">GUI</a> <span class="sel">group</span>::<a class="nt" href="#Group">Group</a>
 </pre><pre><a class="nt" name="Composant">Composant</a>:
-        ε
+        <a class="nt" href="#Group">Group</a>
+</pre><pre><a class="nt" name="Composant">Composant</a>:
+        <a class="nt" href="#Label">Label</a>
+</pre><pre><a class="nt" name="Composant">Composant</a>:
+        <a class="nt" href="#TextArea">TextArea</a>
+</pre><pre><a class="nt" name="Composant">Composant</a>:
+        <a class="nt" href="#Table">Table</a>
+</pre><pre><a class="nt" name="Composant">Composant</a>:
+        <a class="nt" href="#ComboBox">ComboBox</a>
+</pre><pre><a class="nt" name="Composant">Composant</a>:
+        <a class="nt" href="#Row">Row</a>
+</pre><pre><a class="nt" name="Composant">Composant</a>:
+        <a class="nt" href="#Item">Item</a>
+</pre><pre><a class="nt" name="Composant">Composant</a>:
+        <a class="nt" href="#Button">Button</a>
 </pre><pre><a class="nt" name="Layout">Layout</a>:
         <span class="sel">default</span>::ε
         <span class="sel">horizontal</span>::ε
         <span class="sel">vertical</span>::ε
 </pre><pre><a class="nt" name="Group">Group</a>:
-        <span class="sel">title</span>::<span class="meta">any</span> <span class="sel">layout</span>::<span class="meta">any</span> <span class="sel">description</span>::<span class="meta">any</span> <span class="sel">tabGroup</span>::<span class="meta">any</span> <span class="sel">composants</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">title</span>::<a class="nt" href="#String">String</a> <span class="sel">layout</span>::<a class="nt" href="#Layout">Layout</a> <span class="sel">description</span>::<a class="nt" href="#String">String</a> <span class="sel">tabGroup</span>::<a class="nt" href="#Tab">Tab</a> <span class="sel">composants</span>::<a class="nt" href="#Composant">Composant</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Label">Label</a>:
-        <span class="sel">text</span>::<span class="meta">any</span>
+        <span class="sel">text</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="TextArea">TextArea</a>:
-        <span class="sel">text</span>::<span class="meta">any</span> <span class="sel">nbRows</span>::<span class="meta">any</span>
+        <span class="sel">text</span>::<a class="nt" href="#String">String</a> <span class="sel">nbRows</span>::<a class="nt" href="#Integer">Integer</a>
 </pre><pre><a class="nt" name="Table">Table</a>:
-        <span class="sel">tabColumns</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">tabColumns</span>::<a class="nt" href="#Column">Column</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Column">Column</a>:
-        <span class="sel">title</span>::<span class="meta">any</span> <span class="sel">columnTab</span>::<span class="meta">any</span>
+        <span class="sel">title</span>::<a class="nt" href="#String">String</a> <span class="sel">columnTab</span>::<a class="nt" href="#Table">Table</a>
 </pre><pre><a class="nt" name="ComboBox">ComboBox</a>:
-        <span class="sel">listRows</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">listRows</span>::<a class="nt" href="#Row">Row</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Row">Row</a>:
-        <span class="sel">rowList</span>::<span class="meta">any</span> <span class="sel">text</span>::<span class="meta">any</span> <span class="sel">listItems</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">rowList</span>::<a class="nt" href="#ComboBox">ComboBox</a> <span class="sel">text</span>::<a class="nt" href="#String">String</a> <span class="sel">listItems</span>::<a class="nt" href="#Item">Item</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Item">Item</a>:
-        <span class="sel">itemList</span>::<span class="meta">any</span> <span class="sel">text</span>::<span class="meta">any</span>
+        <span class="sel">itemList</span>::<a class="nt" href="#Row">Row</a> <span class="sel">text</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Button">Button</a>:
-        <span class="sel">title</span>::<span class="meta">any</span>
+        <span class="sel">title</span>::<a class="nt" href="#String">String</a>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

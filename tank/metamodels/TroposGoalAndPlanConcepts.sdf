@@ -4,23 +4,29 @@ exports
   sorts
         Actor Decomposition Contribution Goal MeansEnd Resource Plan BooleanDecomposition BooleanDecLink AndDecLink OrDecLink 
   context-free syntax
-        decomposition::ANY+ contribution::ANY+ meansEnd::ANY+ -> Actor
+        decomposition::Decomposition+ contribution::Contribution+ meansEnd::MeansEnd+ -> Actor
 
-        PointOfView::ANY -> Decomposition
+        BooleanDecomposition -> Decomposition
 
-        metric::ANY contributer::ANY contributed::ANY PointOfView::ANY -> Contribution
+        PointOfView::Actor -> Decomposition
 
-        contributionR::ANY+ contributionD::ANY+ meansEndS::ANY+ meansEndD::ANY+ booleanDecomposition::ANY booleanDecLink::ANY+ -> Goal
+        metric::String contributer::Goal contributed::Goal PointOfView::Actor -> Contribution
 
-        meansR::ANY means::ANY end::ANY PointOfView::ANY meansP::ANY -> MeansEnd
+        contributionR::Contribution+ contributionD::Contribution+ meansEndS::MeansEnd+ meansEndD::MeansEnd+ booleanDecomposition::BooleanDecomposition booleanDecLink::BooleanDecLink+ -> Goal
 
-        meansEndR::ANY+ -> Resource
+        meansR::Resource means::Goal end::Goal PointOfView::Actor meansP::Plan -> MeansEnd
 
-        meansEndP::ANY+ booleanDecompositionP::ANY booleanDecLinkP::ANY+ -> Plan
+        meansEndR::MeansEnd+ -> Resource
 
-        type::ANY root::ANY rootP::ANY booleanDecLinkD::ANY+ -> BooleanDecomposition
+        meansEndP::MeansEnd+ booleanDecompositionP::BooleanDecomposition booleanDecLinkP::BooleanDecLink+ -> Plan
 
-        booleanDecompositionB::ANY target::ANY targetP::ANY -> BooleanDecLink
+        type::String root::Goal rootP::Plan booleanDecLinkD::BooleanDecLink+ -> BooleanDecomposition
+
+        AndDecLink -> BooleanDecLink
+
+        OrDecLink -> BooleanDecLink
+
+        booleanDecompositionB::BooleanDecomposition target::Goal targetP::Plan -> BooleanDecLink
 
          -> AndDecLink
 

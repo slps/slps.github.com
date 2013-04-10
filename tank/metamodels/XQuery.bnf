@@ -1,36 +1,58 @@
 XQueryProgram:
-        expressions::ANY+
+        expressions::ExecutableExpression+
 Expression:
-        parentNode::ANY returnEx::ANY
+        ExecutableExpression
+Expression:
+        Node
+Expression:
+        ReturnXPath
+Expression:
+        parentNode::ElementNode returnEx::Return
 ExecutableExpression:
-        xQueryProgram::ANY functionDeclaration::ANY
+        FLWOR
+ExecutableExpression:
+        FunctionCall
+ExecutableExpression:
+        FunctionDeclaration
+ExecutableExpression:
+        xQueryProgram::XQueryProgram functionDeclaration::FunctionDeclaration
 Node:
-        name::ANY
+        ElementNode
+Node:
+        AttributeNode
+Node:
+        name::String
 FLWOR:
-        for::ANY let::ANY where::ANY orderBy::ANY return::ANY
+        for::For let::Let where::Where orderBy::OrderBy return::Return
 FunctionCall:
-        name::ANY parameters::ANY+
+        name::String parameters::XPath+
 FunctionDeclaration:
-        name::ANY expression::ANY+
+        name::String expression::ExecutableExpression+
 ElementNode:
-        nodes::ANY+
+        TextNode
+ElementNode:
+        nodes::Expression+
 AttributeNode:
-        value::ANY
+        value::String
 TextNode:
         EPSILON
 ReturnXPath:
-        value::ANY
+        XPath
+ReturnXPath:
+        value::String
 XPath:
-        functionCall::ANY for::ANY let::ANY
+        BooleanExp
+XPath:
+        functionCall::FunctionCall for::For let::Let
 BooleanExp:
-        where::ANY
+        where::Where
 For:
-        var::ANY flwor::ANY expression::ANY
+        var::String flwor::FLWOR expression::XPath
 Let:
-        var::ANY flwor::ANY expression::ANY
+        var::String flwor::FLWOR expression::XPath
 Where:
-        flwor::ANY expression::ANY
+        flwor::FLWOR expression::BooleanExp
 OrderBy:
-        flwor::ANY
+        flwor::FLWOR
 Return:
-        flwor::ANY expressions::ANY+
+        flwor::FLWOR expressions::Expression+

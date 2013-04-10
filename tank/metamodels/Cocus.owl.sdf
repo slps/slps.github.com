@@ -4,81 +4,162 @@ exports
   sorts
         Thing Meta-Reviewer Reviewer Decision Preference ProgramCommittee Bid Conference ConferenceChair ConferenceMember AssociatedChair ProgramCommitteeMember AuthorNotReviewer SubjectArea ExternalReviewer Chairman ProgramCommitteeChair Acceptance Rejection Review Paper Author Co-author PaperAbstract PaperFullVersion Administrator Meta-Review Workshop Event Account Inforamtion User Role Help-Request Person Symposium Abstract Document Invited-Paper Admin-Role Paper-Typologies Event-Setup Event-URL URL Notification-Email Email Short-Paper Author-Role Preview Review-Form Committe-Role Group-Email Submission-Template Review-Form-Setup Misc Event-Creation Approval-Email Rejection-Email Submission Template Feature-Request Committee Event-Tracks Request Activity Head-Role Detail Corresponding-Author Reviewer-Role Event-Approval Registration Full-Paper Research-Topic Description Assistance Email-Template 
   context-free syntax
-         -> Thing
+        Event -> Thing
+
+        Role -> Thing
+
+        Person -> Thing
+
+        Document -> Thing
+
+        Detail -> Thing
+
+        Event -> Thing
+        Role -> Thing
+        Person -> Thing
+        Document -> Thing
+        Detail -> Thing
 
          -> Meta-Reviewer
 
-        assignedByAdministrator::ANY adjustBid::ANY readPaper::ANY hasBeenAssigned::ANY writeReview::ANY assignExternalReviewer::ANY -> Reviewer
+        Meta-Reviewer -> Reviewer
 
-         -> Decision
+        assignedByAdministrator::Administrator adjustBid::Bid readPaper::Paper hasBeenAssigned::Paper writeReview::Review assignExternalReviewer::ExternalReviewer -> Reviewer
+
+        Acceptance -> Decision
+
+        Rejection -> Decision
+
+        Acceptance -> Decision
+        Rejection -> Decision
 
          -> Preference
 
-        hasProgramCommitteeMember::ANY -> ProgramCommittee
+        hasProgramCommitteeMember::ProgramCommitteeMember -> ProgramCommittee
 
-        adjustedBy::ANY -> Bid
+        adjustedBy::Reviewer -> Bid
 
-        hasConferenceMember::ANY paperAssignmentFinalizedBy::ANY reviewCriteriaEnteredBy::ANY paperAssignmentToolsRunBy::ANY virtualMeetingEnabledBy::ANY hardcopyMailingManifestsPrintedBy::ANY detailsEnteredBy::ANY reviewerBiddingStartedBy::ANY date::ANY reviewsPerPaper::ANY logoURL::ANY acceptsHardcopySubmissions::ANY siteURL::ANY -> Conference
+        hasConferenceMember::ConferenceMember paperAssignmentFinalizedBy::Administrator reviewCriteriaEnteredBy::Administrator paperAssignmentToolsRunBy::Administrator virtualMeetingEnabledBy::Administrator hardcopyMailingManifestsPrintedBy::Administrator detailsEnteredBy::Administrator reviewerBiddingStartedBy::Administrator date::Date reviewsPerPaper::Integer logoURL::AnyURI acceptsHardcopySubmissions::Boolean siteURL::AnyURI -> Conference
 
          -> ConferenceChair
 
-        memberOfConference::ANY -> ConferenceMember
+        memberOfConference::Conference -> ConferenceMember
 
          -> AssociatedChair
 
-        memberOfProgramCommittee::ANY maxPapers::ANY addedBy::ANY -> ProgramCommitteeMember
+        memberOfProgramCommittee::ProgramCommittee maxPapers::Integer addedBy::Administrator -> ProgramCommitteeMember
 
          -> AuthorNotReviewer
 
          -> SubjectArea
 
-        assignedByReviewer::ANY -> ExternalReviewer
+        assignedByReviewer::Reviewer -> ExternalReviewer
 
          -> Chairman
 
-        endReview::ANY -> ProgramCommitteeChair
+        endReview::Review -> ProgramCommitteeChair
 
          -> Acceptance
 
          -> Rejection
 
-        writtenBy::ANY -> Review
+        Meta-Review -> Review
 
-        hasCo-author::ANY hasBid::ANY hasDecision::ANY assignedTo::ANY hasSubjectArea::ANY readByReviewer::ANY paperID::ANY title::ANY hasAuthor::ANY acceptedBy::ANY rejectedBy::ANY readByMeta-Reviewer::ANY -> Paper
+        writtenBy::Reviewer -> Review
 
-        submitPaper::ANY writePaper::ANY -> Author
+        PaperAbstract -> Paper
 
-        co-writePaper::ANY -> Co-author
+        PaperFullVersion -> Paper
+
+        Abstract -> Paper
+
+        Invited-Paper -> Paper
+
+        Short-Paper -> Paper
+
+        Full-Paper -> Paper
+
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::UnsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer -> Paper
+
+        AuthorNotReviewer -> Author
+
+        Co-author -> Author
+
+        Corresponding-Author -> Author
+
+        submitPaper::Paper writePaper::Paper -> Author
+
+        co-writePaper::Paper -> Co-author
 
          -> PaperAbstract
 
          -> PaperFullVersion
 
-        approve::ANY assign::ANY finalizePaperAssignment::ANY runPaperAssignmentTools::ANY enableVirtualMeeting::ANY startReviewerBidding::ANY assignReviewer::ANY rejectPaper::ANY enterConferenceDetails::ANY printHardcopyMailingManifests::ANY setMaxPapers::ANY enterReviewCriteria::ANY acceptPaper::ANY addProgramCommitteeMember::ANY -> Administrator
+        approve::Event assign::Role finalizePaperAssignment::Conference runPaperAssignmentTools::Conference enableVirtualMeeting::Conference startReviewerBidding::Conference assignReviewer::Reviewer rejectPaper::Paper enterConferenceDetails::Conference printHardcopyMailingManifests::Conference setMaxPapers::ProgramCommitteeMember enterReviewCriteria::Conference acceptPaper::Paper addProgramCommitteeMember::ProgramCommitteeMember -> Administrator
 
          -> Meta-Review
 
          -> Workshop
 
-        conists_of::ANY confirmed_by::ANY defined_by::ANY approved_by::ANY -> Event
+        Workshop -> Event
 
-        registred_by::ANY -> Account
+        Symposium -> Event
+
+        conists_of::Event-Tracks confirmed_by::Approval-Email defined_by::Event-Setup approved_by::Administrator -> Event
+
+        registred_by::Person -> Account
 
          -> Inforamtion
 
-        recieve::ANY create::ANY+ submit::ANY -> User
+        Committee -> User
 
-        assigned_by::ANY -> Role
+        recieve::Document create::Thing+ submit::Document -> User
 
-         -> Help-Request
+        Admin-Role -> Role
 
-        inverse_of_add::ANY+ execute::ANY+ get::ANY use::ANY register::ANY modify::ANY+ take_part_in::ANY remove::ANY+ add::ANY send::ANY added_by::ANY hasConflictOfInterest::ANY email::ANY -> Person
+        Author-Role -> Role
+
+        Committe-Role -> Role
+
+        Head-Role -> Role
+
+        Reviewer-Role -> Role
+
+        assigned_by::Administrator -> Role
+
+        Misc -> Help-Request
+
+        Feature-Request -> Help-Request
+
+        Assistance -> Help-Request
+
+        Misc -> Help-Request
+        Feature-Request -> Help-Request
+        Assistance -> Help-Request
+
+        ConferenceMember -> Person
+
+        ExternalReviewer -> Person
+
+        User -> Person
+
+        inverse_of_add::Thing+ execute::Thing+ get::Inforamtion use::Document register::Account modify::Thing+ take_part_in::Event remove::Thing+ add::Person send::Activity added_by::Person hasConflictOfInterest::Document email::String -> Person
 
          -> Symposium
 
          -> Abstract
 
-        recieved_by::ANY used_by::ANY submited__by::ANY -> Document
+        Review -> Document
+
+        Paper -> Document
+
+        Email -> Document
+
+        Submission -> Document
+
+        Template -> Document
+
+        recieved_by::User used_by::Person submited__by::User -> Document
 
          -> Invited-Paper
 
@@ -86,15 +167,40 @@ exports
 
          -> Paper-Typologies
 
-        define::ANY -> Event-Setup
+        Paper-Typologies -> Event-Setup
 
-        concerned::ANY -> Event-URL
+        Review-Form -> Event-Setup
 
-         -> URL
+        Submission-Template -> Event-Setup
+
+        Event-Tracks -> Event-Setup
+
+        Research-Topic -> Event-Setup
+
+        Email-Template -> Event-Setup
+
+        define::Event -> Event-Setup
+
+        concerned::Event -> Event-URL
+
+        Event-URL -> URL
+
+        Event-URL -> URL
 
          -> Notification-Email
 
-         -> Email
+        Notification-Email -> Email
+
+        Group-Email -> Email
+
+        Approval-Email -> Email
+
+        Rejection-Email -> Email
+
+        Notification-Email -> Email
+        Group-Email -> Email
+        Approval-Email -> Email
+        Rejection-Email -> Email
 
          -> Short-Paper
 
@@ -102,7 +208,12 @@ exports
 
          -> Preview
 
-         -> Review-Form
+        Preview -> Review-Form
+
+        Review-Form-Setup -> Review-Form
+
+        Preview -> Review-Form
+        Review-Form-Setup -> Review-Form
 
          -> Committe-Role
 
@@ -116,7 +227,7 @@ exports
 
          -> Event-Creation
 
-        confirm::ANY -> Approval-Email
+        confirm::Event -> Approval-Email
 
          -> Rejection-Email
 
@@ -130,9 +241,19 @@ exports
 
          -> Event-Tracks
 
-         -> Request
+        Help-Request -> Request
 
-        has_result::ANY+ sent_by::ANY -> Activity
+        Help-Request -> Request
+
+        Event-Creation -> Activity
+
+        Request -> Activity
+
+        Event-Approval -> Activity
+
+        Registration -> Activity
+
+        has_result::Thing+ sent_by::Person -> Activity
 
          -> Head-Role
 

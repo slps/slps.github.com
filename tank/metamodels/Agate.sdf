@@ -2,142 +2,234 @@ module Main
 
 exports
   sorts
-        Entity Object AGATEObject Objective OperationalContext Project Standard GenericStandard Threat GenericThreat Vulnerability TrafficClass InterfaceCharacteristic ConfidentialityLevel Protocol Flow Other ProjectContextElement DataClass Event Risk Stake Requirement CountermeasureRequirement TechnicalRequirement PerformanceRequirement InteroperabilityRequirement OperationalRequirement SecurityRequirement Means DomainRelation HierarchicalRelation FunctionalRelation Dependence ArchitectureObject ReusableObject Site GenericSite Package Service TechnicalComponent LogicalComponent OperationalFunction OrganizationObject Center GenericCenter InformationSystem Role GenericRole Actor GenericActor TelecomOperator CommunicationObject Interface Interconnection InformationFlow Traffic Information ReferenceObject ReferenceTechnicalComponent TechnicalComponentReferenceFrame ReferenceLogicalComponent ReferenceService ServiceReferenceFrame MADIOSObject Process Procedure Operation Activity 
+        Entity Object AGATEObject Objective OperationalContext Project Standard GenericStandard Threat GenericThreat TrafficClass InterfaceCharacteristic ConfidentialityLevel Protocol Flow Other ProjectContextElement DataClass Event Risk Stake Requirement CountermeasureRequirement TechnicalRequirement PerformanceRequirement InteroperabilityRequirement OperationalRequirement SecurityRequirement DomainRelation HierarchicalRelation FunctionalRelation Dependence ArchitectureObject ReusableObject Site GenericSite Package Service TechnicalComponent LogicalComponent OperationalFunction OrganizationObject Center GenericCenter InformationSystem Role GenericRole Actor GenericActor TelecomOperator CommunicationObject Interface Interconnection InformationFlow Traffic Information ReferenceObject ReferenceTechnicalComponent TechnicalComponentReferenceFrame ReferenceLogicalComponent ReferenceService ServiceReferenceFrame MADIOSObject Process Procedure Operation Activity 
   context-free syntax
-         -> Entity
+        Object -> Entity
 
-         -> Object
+        AGATEObject -> Object
 
-         -> AGATEObject
+        ReferenceObject -> Object
 
-        type::ANY priority::ANY indicator::ANY traceability::ANY -> Objective
+        MADIOSObject -> Object
 
-        notice::ANY description::ANY sensitivity::ANY name::ANY comment::ANY isValidIn::ANY isAssociatedWith::ANY -> OperationalContext
+        Objective -> AGATEObject
 
-        moi::ANY moa::ANY director::ANY defines::ANY+ associatedISs::ANY+ -> Project
+        OperationalContext -> AGATEObject
 
-        caracterizeIC::ANY+ caracterizeTC::ANY+ caracterizeLC::ANY+ caracterizeP::ANY+ caracterizeR::ANY+ -> Standard
+        Project -> AGATEObject
 
-         -> GenericStandard
+        GenericStandard -> AGATEObject
 
-        nature::ANY DCSSI::ANY clarifies::ANY+ -> Threat
+        GenericThreat -> AGATEObject
 
-         -> GenericThreat
+        TrafficClass -> AGATEObject
 
-         -> Vulnerability
+        InterfaceCharacteristic -> AGATEObject
 
-        traffic::ANY+ -> TrafficClass
+        ProjectContextElement -> AGATEObject
 
-         -> InterfaceCharacteristic
+        DataClass -> AGATEObject
 
-        type::ANY -> ConfidentialityLevel
+        Event -> AGATEObject
 
-        isoLevel::ANY -> Protocol
+        Risk -> AGATEObject
 
-        unit::ANY -> Flow
+        Stake -> AGATEObject
 
-        type::ANY -> Other
+        Requirement -> AGATEObject
 
-        type::ANY -> ProjectContextElement
+        Means -> AGATEObject
 
-        notice::ANY description::ANY sensitivity::ANY name::ANY comment::ANY isValidIn::ANY isAssociatedWith::ANY -> DataClass
+        DomainRelation -> AGATEObject
 
-        notice::ANY description::ANY sensitivity::ANY name::ANY comment::ANY isValidIn::ANY isAssociatedWith::ANY -> Event
+        ArchitectureObject -> AGATEObject
 
-        disponibilityLevel::ANY integrityLevel::ANY confidencialityLevel::ANY isCoveredByCR::ANY isCoveredByAO::ANY isCoveredByMO::ANY isCoveredByDR::ANY relatesToRO::ANY relatesToCO::ANY isGeneratedBy::ANY -> Risk
+        type::String priority::Integer indicator::String traceability::String -> Objective
 
-        type::ANY relativeDate::ANY unit::ANY date::ANY events::ANY+ -> Stake
+        notice::String description::String sensitivity::Integer name::String comment::String isValidIn::OperationalContext isAssociatedWith::Stake -> OperationalContext
 
-         -> Requirement
+        moi::Role moa::Role director::Role defines::ProjectContextElement+ associatedISs::InformationSystem+ -> Project
 
-        type::ANY residualVulnerability::ANY -> CountermeasureRequirement
+        caracterizeIC::InterfaceCharacteristic+ caracterizeTC::TechnicalComponent+ caracterizeLC::LogicalComponent+ caracterizeP::Package+ caracterizeR::Requirement+ -> Standard
 
-        criticality::ANY priority::ANY state::ANY isCoveredBy::ANY+ characterizes::ANY+ -> TechnicalRequirement
+        Standard -> GenericStandard
 
-        criticality::ANY priority::ANY state::ANY isCoveredBy::ANY+ characterizes::ANY+ -> PerformanceRequirement
+        nature::String DCSSI::String clarifies::Vulnerability+ -> Threat
 
-        criticality::ANY priority::ANY state::ANY isCoveredBy::ANY+ characterizes::ANY+ -> InteroperabilityRequirement
+        Threat -> GenericThreat
 
-        criticality::ANY priority::ANY state::ANY isCoveredBy::ANY+ characterizes::ANY+ -> OperationalRequirement
+        traffic::Traffic+ -> TrafficClass
 
-        criticality::ANY priority::ANY state::ANY isCoveredBy::ANY+ characterizes::ANY+ -> SecurityRequirement
+        ConfidentialityLevel -> InterfaceCharacteristic
 
-         -> Means
+        Protocol -> InterfaceCharacteristic
 
-         -> DomainRelation
+        Flow -> InterfaceCharacteristic
+
+        Other -> InterfaceCharacteristic
+
+        type::String -> ConfidentialityLevel
+
+        isoLevel::Integer -> Protocol
+
+        unit::String -> Flow
+
+        type::String -> Other
+
+        type::String -> ProjectContextElement
+
+        notice::String description::String sensitivity::Integer name::String comment::String isValidIn::OperationalContext isAssociatedWith::Stake -> DataClass
+
+        notice::String description::String sensitivity::Integer name::String comment::String isValidIn::OperationalContext isAssociatedWith::Stake -> Event
+
+        disponibilityLevel::Integer integrityLevel::Integer confidencialityLevel::Integer isCoveredByCR::CountermeasureRequirement isCoveredByAO::ArchitectureObject isCoveredByMO::MADIOSObject isCoveredByDR::DomainRelation relatesToRO::ReusableObject relatesToCO::CommunicationObject isGeneratedBy::Threat -> Risk
+
+        type::String relativeDate::String unit::String date::String events::Event+ -> Stake
+
+        CountermeasureRequirement -> Requirement
+
+        TechnicalRequirement -> Requirement
+
+        PerformanceRequirement -> Requirement
+
+        InteroperabilityRequirement -> Requirement
+
+        OperationalRequirement -> Requirement
+
+        SecurityRequirement -> Requirement
+
+        type::String residualVulnerability::String -> CountermeasureRequirement
+
+        criticality::Integer priority::String state::String isCoveredBy::ArchitectureObject+ characterizes::ArchitectureObject+ -> TechnicalRequirement
+
+        criticality::Integer priority::String state::String isCoveredBy::ArchitectureObject+ characterizes::ArchitectureObject+ -> PerformanceRequirement
+
+        criticality::Integer priority::String state::String isCoveredBy::ArchitectureObject+ characterizes::ArchitectureObject+ -> InteroperabilityRequirement
+
+        criticality::Integer priority::String state::String isCoveredBy::ArchitectureObject+ characterizes::ArchitectureObject+ -> OperationalRequirement
+
+        criticality::Integer priority::String state::String isCoveredBy::ArchitectureObject+ characterizes::ArchitectureObject+ -> SecurityRequirement
+
+        HierarchicalRelation -> DomainRelation
+
+        FunctionalRelation -> DomainRelation
+
+        Dependence -> DomainRelation
 
          -> HierarchicalRelation
 
-        necessaryObjectOF::ANY dependentObjectOF::ANY necessaryObjectOO::ANY dependentObjectOO::ANY necessaryObjectP::ANY dependentObjectP::ANY -> FunctionalRelation
+        necessaryObjectOF::OperationalFunction dependentObjectOF::OperationalFunction necessaryObjectOO::OrganizationObject dependentObjectOO::OrganizationObject necessaryObjectP::Package dependentObjectP::Package -> FunctionalRelation
 
-        type::ANY necessaryObjectS::ANY dependentObjectS::ANY necessaryObjectLC::ANY dependentObjectLC::ANY necessaryObjectP::ANY dependentObjectP::ANY necessaryObjectC::ANY dependentObjectC::ANY necessaryObjectIS::ANY dependentObjectIS::ANY -> Dependence
+        type::String necessaryObjectS::Service dependentObjectS::Service necessaryObjectLC::LogicalComponent dependentObjectLC::LogicalComponent necessaryObjectP::Package dependentObjectP::Package necessaryObjectC::Center dependentObjectC::Center necessaryObjectIS::InformationSystem dependentObjectIS::InformationSystem -> Dependence
 
-         -> ArchitectureObject
+        ReusableObject -> ArchitectureObject
 
-         -> ReusableObject
+        CommunicationObject -> ArchitectureObject
 
-        type::ANY localization::ANY deployedObjects::ANY+ -> Site
+        GenericSite -> ReusableObject
 
-         -> GenericSite
+        Package -> ReusableObject
 
-        subPackage::ANY+ time::ANY+ groupedObjects::ANY+ isCoveredByLC::ANY isCoveredByTC::ANY composedOf::ANY+ -> Package
+        Service -> ReusableObject
 
-        Statut::ANY isASpecializationOf::ANY isCoveredBy::ANY -> Service
+        TechnicalComponent -> ReusableObject
 
-        type::ANY cots::ANY editor::ANY constructor::ANY version::ANY technology::ANY definedExtension::ANY statut::ANY composedOf::ANY+ isASpecializationOf::ANY interfaces::ANY+ -> TechnicalComponent
+        LogicalComponent -> ReusableObject
 
-        type::ANY statut::ANY composedOf::ANY+ isASpecializationOf::ANY interfaces::ANY+ isCoveredBy::ANY -> LogicalComponent
+        OperationalFunction -> ReusableObject
 
-        composedOf::ANY+ isCoveredByP::ANY+ isCoveredByS::ANY+ -> OperationalFunction
+        OrganizationObject -> ReusableObject
 
-         -> OrganizationObject
+        type::String localization::String deployedObjects::ReusableObject+ -> Site
 
-        deployedObjects::ANY+ -> Center
+        Site -> GenericSite
 
-         -> GenericCenter
+        subPackage::Package+ time::Role+ groupedObjects::ReusableObject+ isCoveredByLC::LogicalComponent isCoveredByTC::TechnicalComponent composedOf::Interface+ -> Package
 
-        nature::ANY version::ANY membershipCountry::ANY currentLocation::ANY startServiceDate::ANY stopServiceDate::ANY isGeneric::ANY functionalDomain::ANY type::ANY composedOf::ANY+ associatedProjects::ANY+ defines::ANY+ fulfills::ANY+ fixes::ANY+ usedBy::ANY+ interfaces::ANY+ -> InformationSystem
+        Statut::String isASpecializationOf::ReferenceService isCoveredBy::LogicalComponent -> Service
 
-        type::ANY -> Role
+        type::String cots::Boolean editor::Boolean constructor::Boolean version::String technology::String definedExtension::String statut::String composedOf::TechnicalComponent+ isASpecializationOf::ReferenceTechnicalComponent interfaces::Interface+ -> TechnicalComponent
 
-         -> GenericRole
+        type::String statut::String composedOf::LogicalComponent+ isASpecializationOf::ReferenceLogicalComponent interfaces::Interface+ isCoveredBy::TechnicalComponent -> LogicalComponent
 
-        actors::ANY+ -> Actor
+        composedOf::OperationalFunction+ isCoveredByP::Package+ isCoveredByS::Service+ -> OperationalFunction
 
-         -> GenericActor
+        GenericCenter -> OrganizationObject
 
-        contractType::ANY interfaces::ANY+ -> TelecomOperator
+        InformationSystem -> OrganizationObject
 
-         -> CommunicationObject
+        GenericRole -> OrganizationObject
 
-        characteristics::ANY+ composedOf::ANY+ -> Interface
+        GenericActor -> OrganizationObject
 
-        linkType::ANY between::ANY -> Interconnection
+        deployedObjects::ReusableObject+ -> Center
 
-        priority::ANY frequency::ANY media::ANY continuity::ANY myContainer::ANY time::ANY availabilityRatio::ANY integrity::ANY interoperabilityLevel::ANY mediumFlow::ANY maximumFlow::ANY duration::ANY unitMediumFlow::ANY averageEvent::ANY maximumFlowOverOneDuration::ANY transports::ANY receiverP::ANY transmitterP::ANY receiverOO::ANY transmitterOO::ANY receiverOF::ANY transmitterOF::ANY -> InformationFlow
+        Center -> GenericCenter
 
-        sequence::ANY type::ANY interoperabilityLevel::ANY trafficClass::ANY dataClass::ANY receiverP::ANY transmitterP::ANY receiverIS::ANY transmitterIS::ANY receiverC::ANY transmitterC::ANY receiverTO::ANY transmitterTO::ANY receiverLC::ANY transmitterLC::ANY receiverTC::ANY transmitterTC::ANY -> Traffic
+        nature::String version::String membershipCountry::String currentLocation::String startServiceDate::String stopServiceDate::String isGeneric::Boolean functionalDomain::String type::String composedOf::InformationSystem+ associatedProjects::Project+ defines::Objective+ fulfills::Role+ fixes::OperationalContext+ usedBy::Actor+ interfaces::Interface+ -> InformationSystem
 
-        format::ANY storageSupport::ANY persistence::ANY DataType::ANY -> Information
+        type::String -> Role
 
-         -> ReferenceObject
+        Role -> GenericRole
 
-        composedOf::ANY+ -> ReferenceTechnicalComponent
+        TelecomOperator -> Actor
 
-        composedOf::ANY+ -> TechnicalComponentReferenceFrame
+        TelecomOperator -> Actor
 
-        composedOf::ANY+ -> ReferenceLogicalComponent
+        Actor -> GenericActor
 
-        composedOf::ANY+ -> ReferenceService
+        contractType::String interfaces::Interface+ -> TelecomOperator
 
-        composedOfRS::ANY+ composedOfRLC::ANY+ -> ServiceReferenceFrame
+        Interface -> CommunicationObject
 
-         -> MADIOSObject
+        Interconnection -> CommunicationObject
 
-        isCoveredByP::ANY+ isCoveredByS::ANY+ -> Process
+        InformationFlow -> CommunicationObject
 
-        isCoveredByP::ANY+ isCoveredByS::ANY+ -> Procedure
+        Traffic -> CommunicationObject
 
-        isCoveredByP::ANY+ isCoveredByS::ANY+ -> Operation
+        Information -> CommunicationObject
 
-        isCoveredByP::ANY+ isisCoveredByS::ANY+ -> Activity
+        characteristics::InterfaceCharacteristic+ composedOf::Interface+ -> Interface
+
+        linkType::String between::Interface -> Interconnection
+
+        priority::Integer frequency::String media::String continuity::String myContainer::String time::String availabilityRatio::String integrity::Integer interoperabilityLevel::Integer mediumFlow::String maximumFlow::String duration::String unitMediumFlow::String averageEvent::String maximumFlowOverOneDuration::String transports::Information receiverP::Package transmitterP::Package receiverOO::OrganizationObject transmitterOO::OrganizationObject receiverOF::OperationalFunction transmitterOF::OperationalFunction -> InformationFlow
+
+        sequence::String type::String interoperabilityLevel::Integer trafficClass::TrafficClass dataClass::DataClass receiverP::Package transmitterP::Package receiverIS::InformationSystem transmitterIS::InformationSystem receiverC::Center transmitterC::Center receiverTO::TelecomOperator transmitterTO::TelecomOperator receiverLC::LogicalComponent transmitterLC::LogicalComponent receiverTC::TechnicalComponent transmitterTC::TechnicalComponent -> Traffic
+
+        format::String storageSupport::String persistence::String DataType::DataClass -> Information
+
+        ReferenceTechnicalComponent -> ReferenceObject
+
+        TechnicalComponentReferenceFrame -> ReferenceObject
+
+        ReferenceLogicalComponent -> ReferenceObject
+
+        ReferenceService -> ReferenceObject
+
+        composedOf::ReferenceTechnicalComponent+ -> ReferenceTechnicalComponent
+
+        composedOf::ReferenceTechnicalComponent+ -> TechnicalComponentReferenceFrame
+
+        composedOf::ReferenceLogicalComponent+ -> ReferenceLogicalComponent
+
+        composedOf::ReferenceObject+ -> ReferenceService
+
+        composedOfRS::ReferenceService+ composedOfRLC::ReferenceLogicalComponent+ -> ServiceReferenceFrame
+
+        Process -> MADIOSObject
+
+        Procedure -> MADIOSObject
+
+        Operation -> MADIOSObject
+
+        Activity -> MADIOSObject
+
+        isCoveredByP::Package+ isCoveredByS::Service+ -> Process
+
+        isCoveredByP::Package+ isCoveredByS::Service+ -> Procedure
+
+        isCoveredByP::Package+ isCoveredByS::Service+ -> Operation
+
+        isCoveredByP::Package+ isisCoveredByS::Service+ -> Activity

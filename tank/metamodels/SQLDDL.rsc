@@ -2,66 +2,71 @@
 module SQLDDL
 
 syntax LocatedElement
-        = 
-        ()
+        = NamedElement
+        | TableElement
+        | Value
  ;
 syntax NamedElement
-        = 
-        ()
+        = Database
+        | Table
+        | Type
+        | Parameter
  ;
 syntax Database
         = 
-        ANY tables+
+        Table tables+
  ;
 syntax Table
         = 
-        ANY database ANY referencedBy+ ANY elements+ ANY parameters+
+        Database database ForeignKey referencedBy+ TableElement elements+ Parameter parameters+
  ;
 syntax TableElement
-        = 
-        ()
+        = Column
+        | Key
  ;
 syntax Column
         = 
-        ANY referencedBy+ ANY name ANY type ANY canBeNull ANY default ANY keys+
+        ForeignKey referencedBy+ String name Type type Boolean canBeNull Value default Key keys+
  ;
 syntax Key
-        = 
-        ()
+        = SimpleKey
+        | PrimaryKey
+        | ForeignKey
  ;
 syntax SimpleKey
         = 
-        ANY isUnique ANY name ANY columns+
+        Boolean isUnique String name Column columns+
  ;
 syntax PrimaryKey
         = 
-        ANY isUnique ANY name ANY columns+
+        Boolean isUnique String name Column columns+
  ;
 syntax ForeignKey
         = 
-        ANY referencedTable ANY referencedColumns+
+        Table referencedTable Column referencedColumns+
  ;
 syntax Type
         = 
-        ANY length ANY isUnsigned
+        Integer length Boolean isUnsigned
  ;
 syntax Parameter
         = 
-        ANY table ANY value
+        Table table Value value
  ;
 syntax Value
-        = 
-        ()
+        = IntegerVal
+        | NullVal
+        | StringVal
  ;
 syntax IntegerVal
         = 
-        value: ANY
+        value: Integer
  ;
 syntax NullVal
         = 
-        
+        ()
  ;
 syntax StringVal
         = 
-        value: ANY
+        value: String
  ;

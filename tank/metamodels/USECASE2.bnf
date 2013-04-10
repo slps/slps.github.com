@@ -1,15 +1,28 @@
 Requirement:
-        EPSILON
+        NonFunctionnelRequirement
+Requirement:
+        FunctionnelRequirement
+Requirement:
+        NonFunctionnelRequirement
+        FunctionnelRequirement
 NonFunctionnelRequirement:
-        scopes::ANY+
+        scopes::UseCase+
 FunctionnelRequirement:
-        specifies::ANY+
+        specifies::UseCase+
 UseCase:
-        scenario::ANY+ condition::ANY+ interacter::ANY+ specified_by::ANY+ scoped_by::ANY+ meet_by::ANY+
+        Manage
+UseCase:
+        scenario::ScenarioDescription+ condition::Condition+ interacter::Role+ specified_by::FunctionnelRequirement+ scoped_by::NonFunctionnelRequirement+ meet_by::Goal+
 Goal:
-        to_meet::ANY+
+        to_meet::UseCase+
 Role:
-        interacted_with::ANY+
+        HumanRole
+Role:
+        SystemRole
+Role:
+        EventRole
+Role:
+        interacted_with::UseCase+
 HumanRole:
         EPSILON
 SystemRole:
@@ -17,13 +30,17 @@ SystemRole:
 EventRole:
         EPSILON
 Manage:
-        managed_Resource::ANY+
+        managed_Resource::Resource+
 Resource:
         EPSILON
 ScenarioDescription:
-        useCase::ANY
+        useCase::UseCase
 Condition:
-        constrained_with::ANY+
+        Pre
+Condition:
+        Post
+Condition:
+        constrained_with::UseCase+
 Pre:
         EPSILON
 Post:

@@ -3,51 +3,57 @@ module Umldi_sm
 
 syntax Signal
         = 
-        ANY powertypeRange+ ANY feature+
+        Exception
  ;
 syntax Action
-        = 
-        ()
+        = CreateAction
+        | DestroyAction
+        | UninterpretedAction
+        | CallAction
+        | SendAction
+        | ActionSequence
+        | ReturnAction
+        | TerminateAction
  ;
 syntax CreateAction
         = 
-        instantiation: ANY
+        instantiation: Classifier
  ;
 syntax DestroyAction
         = 
-        ANY actualArgument+ ANY actionSequence ANY recurrence ANY target ANY isAsynchronous ANY script
+        Argument actualArgument+ ActionSequence actionSequence IterationExpression recurrence ObjectSetExpression target Boolean isAsynchronous ActionExpression script
  ;
 syntax UninterpretedAction
         = 
-        ANY actualArgument+ ANY actionSequence ANY recurrence ANY target ANY isAsynchronous ANY script
+        Argument actualArgument+ ActionSequence actionSequence IterationExpression recurrence ObjectSetExpression target Boolean isAsynchronous ActionExpression script
  ;
 syntax CallAction
         = 
-        operation: ANY
+        operation: Operation
  ;
 syntax SendAction
         = 
-        signal: ANY
+        signal: Signal
  ;
 syntax ActionSequence
         = 
-        ANY action+
+        Action action+
  ;
 syntax Argument
         = 
-        ANY action ANY value
+        Action action Expression value
  ;
 syntax Reception
         = 
-        ANY signal ANY specification ANY isRoot ANY isLeaf ANY isAbstract
+        Signal signal String specification Boolean isRoot Boolean isLeaf Boolean isAbstract
  ;
 syntax ReturnAction
         = 
-        ANY actualArgument+ ANY actionSequence ANY recurrence ANY target ANY isAsynchronous ANY script
+        Argument actualArgument+ ActionSequence actionSequence IterationExpression recurrence ObjectSetExpression target Boolean isAsynchronous ActionExpression script
  ;
 syntax TerminateAction
         = 
-        ANY actualArgument+ ANY actionSequence ANY recurrence ANY target ANY isAsynchronous ANY script
+        Argument actualArgument+ ActionSequence actionSequence IterationExpression recurrence ObjectSetExpression target Boolean isAsynchronous ActionExpression script
  ;
 syntax Exception
         = 
@@ -75,8 +81,12 @@ syntax VisibilityKind
         | vk_package: ()
  ;
 syntax Expression
-        = 
-        ANY language ANY body
+        = BooleanExpression
+        | ObjectSetExpression
+        | ActionExpression
+        | IterationExpression
+        | TimeExpression
+        | String language String body
  ;
 syntax BooleanExpression
         = 
@@ -109,113 +119,120 @@ syntax PseudostateKind
  ;
 syntax StateMachine
         = 
-        ANY context ANY submachineState+ ANY top ANY transitions+
+        ModelElement context SubmachineState submachineState+ State top Transition transitions+
  ;
 syntax Event
-        = 
-        ()
+        = TimeEvent
+        | CallEvent
+        | SignalEvent
+        | ChangeEvent
  ;
 syntax StateVertex
-        = 
-        ()
+        = State
+        | Pseudostate
+        | SynchState
+        | StubState
  ;
 syntax State
-        = 
-        ()
+        = CompositeState
+        | SimpleState
+        | FinalState
  ;
 syntax TimeEvent
         = 
-        when: ANY
+        when: TimeExpression
  ;
 syntax CallEvent
         = 
-        operation: ANY
+        operation: Operation
  ;
 syntax SignalEvent
         = 
-        signal: ANY
+        signal: Signal
  ;
 syntax Transition
         = 
-        ANY target ANY trigger ANY stateMachine ANY source ANY effect ANY guard
+        StateVertex target Event trigger StateMachine stateMachine StateVertex source Action effect Guard guard
  ;
 syntax CompositeState
-        = 
-        ANY subvertex+ ANY isConcurrent
+        = SubmachineState
+        | StateVertex subvertex+ Boolean isConcurrent
  ;
 syntax ChangeEvent
         = 
-        changeExpression: ANY
+        changeExpression: BooleanExpression
  ;
 syntax Guard
         = 
-        ANY transition ANY expression
+        Transition transition BooleanExpression expression
  ;
 syntax Pseudostate
         = 
-        kind: ANY
+        kind: PseudostateKind
  ;
 syntax SimpleState
         = 
-        ANY deferrableEvent+ ANY internalTransition+ ANY exit ANY doActivity ANY entry ANY stateMachine
+        Event deferrableEvent+ Transition internalTransition+ Action exit Action doActivity Action entry StateMachine stateMachine
  ;
 syntax SubmachineState
         = 
-        submachine: ANY
+        submachine: StateMachine
  ;
 syntax SynchState
         = 
-        bound: ANY
+        bound: Integer
  ;
 syntax StubState
         = 
-        referenceState: ANY
+        referenceState: String
  ;
 syntax FinalState
         = 
-        ANY deferrableEvent+ ANY internalTransition+ ANY exit ANY doActivity ANY entry ANY stateMachine
+        Event deferrableEvent+ Transition internalTransition+ Action exit Action doActivity Action entry StateMachine stateMachine
  ;
 syntax Element
         = 
-        ()
+        ModelElement
  ;
 syntax ModelElement
-        = 
-        ()
- ;
-syntax GeneralizableElement
-        = 
-        ()
- ;
-syntax Namespace
-        = 
-        ()
+        = Action
+        | Argument
+        | StateMachine
+        | Event
+        | StateVertex
+        | Transition
+        | Guard
+        | GeneralizableElement
+        | Namespace
+        | Feature
+        | Relationship
+        | Parameter
  ;
 syntax Classifier
         = 
-        ()
+        Signal
  ;
 syntax Feature
         = 
-        ()
+        BehavioralFeature
  ;
 syntax Relationship
         = 
-        ()
+        Generalization
  ;
 syntax BehavioralFeature
-        = 
-        ()
+        = Reception
+        | Operation
  ;
 syntax Operation
         = 
-        ANY concurrency ANY isRoot ANY isLeaf ANY isAbstract ANY specification
+        CallConcurrencyKind concurrency Boolean isRoot Boolean isLeaf Boolean isAbstract String specification
  ;
 syntax Parameter
         = 
-        ANY type ANY behavioralFeature ANY defaultValue ANY kind
+        Classifier type BehavioralFeature behavioralFeature Expression defaultValue ParameterDirectionKind kind
  ;
 syntax Generalization
         = 
-        ANY parent ANY powertype ANY child ANY discriminator
+        GeneralizableElement parent Classifier powertype GeneralizableElement child String discriminator
  ;

@@ -4,30 +4,40 @@ exports
   sorts
         ATOM Entry Source Content InLineXHTMLContent InLineOtherContent OutOfLineContent Generator Category Link Person Author Contributor Date 
   context-free syntax
-        title::ANY id::ANY subtitle::ANY rights::ANY icon::ANY logo::ANY links::ANY+ lastUpdate::ANY generator::ANY categories::ANY+ authors::ANY+ contibutors::ANY+ entries::ANY+ -> ATOM
+        title::String id::String subtitle::String rights::String icon::String logo::String links::Link+ lastUpdate::Date generator::Generator categories::Category+ authors::Author+ contibutors::Contributor+ entries::Entry+ -> ATOM
 
-        title::ANY id::ANY rights::ANY summary::ANY links::ANY+ source::ANY published::ANY lastUpdate::ANY content::ANY categories::ANY+ authors::ANY+ contibutors::ANY+ atom::ANY -> Entry
+        title::String id::String rights::String summary::String links::Link+ source::Source published::Date lastUpdate::Date content::Content categories::Category+ authors::Author+ contibutors::Contributor+ atom::ATOM -> Entry
 
-        id::ANY icon::ANY logo::ANY rights::ANY title::ANY subtitle::ANY links::ANY+ lastUpdate::ANY generator::ANY contributors::ANY+ categories::ANY+ author::ANY -> Source
+        id::String icon::String logo::String rights::String title::String subtitle::String links::Link+ lastUpdate::Date generator::Generator contributors::Contributor+ categories::Category+ author::Author -> Source
 
-        type::ANY -> Content
+        InLineXHTMLContent -> Content
+
+        InLineOtherContent -> Content
+
+        OutOfLineContent -> Content
+
+        type::String -> Content
 
          -> InLineXHTMLContent
 
          -> InLineOtherContent
 
-        src::ANY -> OutOfLineContent
+        src::String -> OutOfLineContent
 
-        uri::ANY version::ANY -> Generator
+        uri::String version::String -> Generator
 
-        term::ANY scheme::ANY label::ANY -> Category
+        term::String scheme::String label::String -> Category
 
-        href::ANY rel::ANY type::ANY hreflang::ANY title::ANY lenght::ANY -> Link
+        href::String rel::String type::String hreflang::String title::String lenght::Integer -> Link
 
-        name::ANY uri::ANY email::ANY -> Person
+        Author -> Person
+
+        Contributor -> Person
+
+        name::String uri::String email::String -> Person
 
          -> Author
 
          -> Contributor
 
-        day::ANY month::ANY year::ANY hours::ANY minutes::ANY seconds::ANY -> Date
+        day::Integer month::Integer year::Integer hours::Integer minutes::Integer seconds::Integer -> Date

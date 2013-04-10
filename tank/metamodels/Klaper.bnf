@@ -1,32 +1,58 @@
 Resource:
-        name::ANY type::ANY capacity::ANY schedulingPolicy::ANY description::ANY acquire::ANY release::ANY
+        name::String type::String capacity::Integer schedulingPolicy::String description::String acquire::Acquire release::Release
 Service:
-        name::ANY formalParams::ANY speedAttr::ANY failAttr::ANY description::ANY behavior::ANY+ behaviorUsed::ANY+ serviceCall::ANY+
+        name::String formalParams::String speedAttr::String failAttr::String description::String behavior::Behavior+ behaviorUsed::Behavior+ serviceCall::ServiceCall+
 Behavior:
-        stepn::ANY stepb::ANY+ service::ANY usedService::ANY+ workLoad::ANY
+        Step
+Behavior:
+        stepn::Step stepb::Step+ service::Service usedService::Service+ workLoad::WorkLoad
 WorkLoad:
-        workLoadType::ANY arrivalProcess::ANY population::ANY initialResource::ANY behavior::ANY
+        workLoadType::String arrivalProcess::String population::String initialResource::String behavior::Behavior
 Step:
-        name::ANY repetition::ANY internalExecTime::ANY internalFailProb::ANY completionModel::ANY serviceCall::ANY+ predecessor::ANY+ successor::ANY+ behavior::ANY nestedBehavior::ANY
+        Start
+Step:
+        End
+Step:
+        Control
+Step:
+        InternalActivity
+Step:
+        ServiceCall
+Step:
+        name::String repetition::String internalExecTime::String internalFailProb::String completionModel::String serviceCall::ServiceCall+ predecessor::Step+ successor::Step+ behavior::Behavior nestedBehavior::Behavior
 Start:
         EPSILON
 End:
         EPSILON
 Control:
-        EPSILON
+        Branch
+Control:
+        Fork
+Control:
+        Join
+Control:
+        Acquire
+Control:
+        Release
+Control:
+        Branch
+        Fork
+        Join
+        Acquire
+        Release
 InternalActivity:
         EPSILON
 ServiceCall:
-        resourceType::ANY serviceName::ANY isSynch::ANY actualParam::ANY+ step::ANY calledService::ANY
+        resourceType::String serviceName::String isSynch::Boolean actualParam::ActualParam+ step::Step calledService::Service
 ActualParam:
-        value::ANY serviceCall::ANY
+        value::String serviceCall::ServiceCall
 Branch:
-        branchProbs::ANY
+        branchProbs::String
 Fork:
         EPSILON
 Join:
         EPSILON
 Acquire:
-        resourceUnits::ANY resource::ANY
+        resourceUnits::String resource::Resource
 Release:
-        resourceUnits::ANY resource::ANY
+        resourceUnits::String resource::Resource

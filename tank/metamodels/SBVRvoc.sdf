@@ -4,73 +4,155 @@ exports
   sorts
         LocatedElement Root VocabularyEntry Caption DefCaption DescCaption SrcCaption DBCaption GenCCaption CTypCaption Necessity Possibility RefSCaption NoteCaption ExCaption SynCaption SynFCaption SeeCaption SFCaption NSURICaption PrimaryRepresentation NotFactTypeRepresentation TermRepresentation NameRepresentation FactTypeFormRepresentation ConceptDefinition ConceptSource Note Sentence NameSpaceURI Word StringWord QuotedStringWord NameWord Verb ConjonctionnalKeyWord ModalVerb Join Link Qualif EndOperator SBVRExpression SBVRPropWithKW ModalForm SimpleSBVRProp SubSBVRProp LinkSBVRConcept ConjConcept Concept NameConcept ObjectConcept StringConcept NounConcept Qualification GeneralConcept NameGConcept NounGConcept Qualifier ModalBegin ModalBeginC 
   context-free syntax
-         -> LocatedElement
+        Root -> LocatedElement
 
-        entries::ANY+ -> Root
+        VocabularyEntry -> LocatedElement
 
-        primaryRep::ANY caption::ANY+ -> VocabularyEntry
+        Caption -> LocatedElement
 
-         -> Caption
+        PrimaryRepresentation -> LocatedElement
 
-        definition::ANY -> DefCaption
+        ConceptDefinition -> LocatedElement
 
-        description::ANY -> DescCaption
+        ConceptSource -> LocatedElement
 
-        source::ANY -> SrcCaption
+        Note -> LocatedElement
 
-        dictionaryBasis::ANY -> DBCaption
+        Sentence -> LocatedElement
 
-        generalConcept::ANY -> GenCCaption
+        NameSpaceURI -> LocatedElement
 
-        conceptType::ANY+ -> CTypCaption
+        Word -> LocatedElement
 
-        exp::ANY -> Necessity
+        SBVRExpression -> LocatedElement
 
-        exp::ANY -> Possibility
+        SBVRPropWithKW -> LocatedElement
 
-        referenceScheme::ANY -> RefSCaption
+        ModalForm -> LocatedElement
 
-        note::ANY -> NoteCaption
+        SimpleSBVRProp -> LocatedElement
 
-        example::ANY+ -> ExCaption
+        SubSBVRProp -> LocatedElement
 
-        synonym::ANY+ -> SynCaption
+        LinkSBVRConcept -> LocatedElement
 
-        synonymousForm::ANY+ -> SynFCaption
+        ConjConcept -> LocatedElement
 
-        see::ANY -> SeeCaption
+        Concept -> LocatedElement
 
-        subjectField::ANY -> SFCaption
+        NounConcept -> LocatedElement
 
-        namespaceURI::ANY -> NSURICaption
+        Qualification -> LocatedElement
 
-         -> PrimaryRepresentation
+        GeneralConcept -> LocatedElement
 
-         -> NotFactTypeRepresentation
+        Qualifier -> LocatedElement
 
-        term::ANY+ -> TermRepresentation
+        ModalBegin -> LocatedElement
 
-        hasThe::ANY name::ANY+ -> NameRepresentation
+        entries::VocabularyEntry+ -> Root
 
-        primaryRep1::ANY verbExp::ANY+ primaryRep2::ANY -> FactTypeFormRepresentation
+        primaryRep::PrimaryRepresentation caption::Caption+ -> VocabularyEntry
 
-        exp::ANY conjexp::ANY+ -> ConceptDefinition
+        DefCaption -> Caption
 
-        source::ANY+ -> ConceptSource
+        DescCaption -> Caption
 
-        sentences::ANY+ -> Note
+        SrcCaption -> Caption
 
-        words::ANY+ -> Sentence
+        DBCaption -> Caption
 
-        URI::ANY+ -> NameSpaceURI
+        GenCCaption -> Caption
 
-         -> Word
+        CTypCaption -> Caption
 
-        val::ANY -> StringWord
+        Necessity -> Caption
 
-        val::ANY -> QuotedStringWord
+        Possibility -> Caption
 
-        val::ANY -> NameWord
+        RefSCaption -> Caption
+
+        NoteCaption -> Caption
+
+        ExCaption -> Caption
+
+        SynCaption -> Caption
+
+        SynFCaption -> Caption
+
+        SeeCaption -> Caption
+
+        SFCaption -> Caption
+
+        NSURICaption -> Caption
+
+        definition::ConceptDefinition -> DefCaption
+
+        description::Note -> DescCaption
+
+        source::ConceptSource -> SrcCaption
+
+        dictionaryBasis::ConceptSource -> DBCaption
+
+        generalConcept::PrimaryRepresentation -> GenCCaption
+
+        conceptType::PrimaryRepresentation+ -> CTypCaption
+
+        exp::SBVRExpression -> Necessity
+
+        exp::SBVRExpression -> Possibility
+
+        referenceScheme::PrimaryRepresentation -> RefSCaption
+
+        note::Note -> NoteCaption
+
+        example::SBVRExpression+ -> ExCaption
+
+        synonym::PrimaryRepresentation+ -> SynCaption
+
+        synonymousForm::SBVRExpression+ -> SynFCaption
+
+        see::PrimaryRepresentation -> SeeCaption
+
+        subjectField::PrimaryRepresentation -> SFCaption
+
+        namespaceURI::NameSpaceURI -> NSURICaption
+
+        NotFactTypeRepresentation -> PrimaryRepresentation
+
+        FactTypeFormRepresentation -> PrimaryRepresentation
+
+        TermRepresentation -> NotFactTypeRepresentation
+
+        NameRepresentation -> NotFactTypeRepresentation
+
+        term::StringWord+ -> TermRepresentation
+
+        hasThe::Boolean name::NameWord+ -> NameRepresentation
+
+        primaryRep1::NotFactTypeRepresentation verbExp::Verb+ primaryRep2::NotFactTypeRepresentation -> FactTypeFormRepresentation
+
+        exp::Concept conjexp::ConjConcept+ -> ConceptDefinition
+
+        source::Word+ -> ConceptSource
+
+        sentences::Sentence+ -> Note
+
+        words::Word+ -> Sentence
+
+        URI::Word+ -> NameSpaceURI
+
+        StringWord -> Word
+
+        QuotedStringWord -> Word
+
+        NameWord -> Word
+
+        val::String -> StringWord
+
+        val::String -> QuotedStringWord
+
+        val::String -> NameWord
 
         is:: -> Verb
         relevant:: -> Verb
@@ -146,40 +228,48 @@ exports
         not:: -> EndOperator
         of:: -> EndOperator
 
-        hasPoint::ANY firstProposition::ANY nextProposition::ANY+ -> SBVRExpression
+        hasPoint::Boolean firstProposition::SimpleSBVRProp nextProposition::SBVRPropWithKW+ -> SBVRExpression
 
-        conjonction::ANY endConj::ANY proposition::ANY -> SBVRPropWithKW
+        conjonction::ConjonctionnalKeyWord endConj::EndOperator proposition::SimpleSBVRProp -> SBVRPropWithKW
 
-        modal::ANY isNeg::ANY -> ModalForm
+        modal::ModalVerb isNeg::Boolean -> ModalForm
 
-        modal::ANY concept1::ANY modalVerb::ANY verbs::ANY+ concept2::ANY -> SimpleSBVRProp
+        modal::ModalBegin concept1::Concept modalVerb::ModalForm verbs::Verb+ concept2::Concept -> SimpleSBVRProp
 
-        join::ANY modalVerb::ANY verbs::ANY+ concept2::ANY -> SubSBVRProp
+        join::Join modalVerb::ModalVerb verbs::Verb+ concept2::Concept -> SubSBVRProp
 
-        link::ANY concept::ANY -> LinkSBVRConcept
+        link::Link concept::Concept -> LinkSBVRConcept
 
-        conjonction::ANY concept::ANY -> ConjConcept
+        conjonction::ConjonctionnalKeyWord concept::Concept -> ConjConcept
 
-         -> Concept
+        NameConcept -> Concept
 
-        the::ANY name::ANY+ -> NameConcept
+        ObjectConcept -> Concept
 
-        operatoredConcept::ANY qualify::ANY -> ObjectConcept
+        StringConcept -> Concept
 
-        stringWord::ANY+ -> StringConcept
+        the::Qualif name::NameWord+ -> NameConcept
 
-        qualif::ANY noun::ANY+ -> NounConcept
+        operatoredConcept::NounConcept qualify::Qualification -> ObjectConcept
 
-        generalConcept::ANY+ -> Qualification
+        stringWord::QuotedStringWord+ -> StringConcept
 
-         -> GeneralConcept
+        qualif::Qualifier noun::StringWord+ -> NounConcept
 
-        name::ANY -> NameGConcept
+        generalConcept::GeneralConcept+ -> Qualification
 
-        noun::ANY+ -> NounGConcept
+        NameGConcept -> GeneralConcept
 
-        op::ANY endOperator::ANY min::ANY max::ANY -> Qualifier
+        NounGConcept -> GeneralConcept
 
-        endOperator::ANY -> ModalBegin
+        name::NameConcept -> NameGConcept
+
+        noun::StringWord+ -> NounGConcept
+
+        op::Qualif endOperator::EndOperator min::StringWord max::StringWord -> Qualifier
+
+        ModalBeginC -> ModalBegin
+
+        endOperator::EndOperator -> ModalBegin
 
          -> ModalBeginC

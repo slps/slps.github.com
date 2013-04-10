@@ -11,24 +11,40 @@ exports
         sk_instance_level:: -> ScopeKind
         sk_classifier_level:: -> ScopeKind
 
-        lower::ANY upper::ANY isOrdered::ANY isUnique::ANY -> MultiplicityType
+        lower::Integer upper::Integer isOrdered::Boolean isUnique::Boolean -> MultiplicityType
 
-        name::ANY -> ModelElement
+        Feature -> ModelElement
 
-        ownerScope::ANY visibility::ANY owner::ANY -> Feature
+        NameSpace -> ModelElement
+
+        GeneralizableElement -> ModelElement
+
+        name::String -> ModelElement
+
+        StructuralFeature -> Feature
+
+        BehavioralFeature -> Feature
+
+        ownerScope::ScopeKind visibility::VisibilityKind owner::Classifier -> Feature
 
          -> NameSpace
 
-        isRoot::ANY isLeaf::ANY isAbstract::ANY -> GeneralizableElement
+        isRoot::Boolean isLeaf::Boolean isAbstract::Boolean -> GeneralizableElement
 
-        feature::ANY+ -> Classifier
+        Class -> Classifier
 
-        isActive::ANY -> Class
+        feature::Feature+ -> Classifier
 
-        multiplicity::ANY isChangeable::ANY targetScope::ANY -> StructuralFeature
+        isActive::Boolean -> Class
 
-        initialValue::ANY -> Attribute
+        Attribute -> StructuralFeature
 
-        isQuery::ANY -> BehavioralFeature
+        multiplicity::MultiplicityType isChangeable::Boolean targetScope::ScopeKind -> StructuralFeature
 
-        isRoot::ANY isLeaf::ANY isAbstract::ANY specification::ANY -> Operation
+        initialValue::String -> Attribute
+
+        Operation -> BehavioralFeature
+
+        isQuery::Boolean -> BehavioralFeature
+
+        isRoot::Boolean isLeaf::Boolean isAbstract::Boolean specification::String -> Operation

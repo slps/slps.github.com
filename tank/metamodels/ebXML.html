@@ -13,53 +13,71 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable ebXML 0.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Hugo Bruneliere, <code>ebXML.ecore</code>, 2005/08/03.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>24</strong></li><li>Number of top alternatives: <strong>24</strong></li><li>Number of defined nonterminal symbols: <strong>24</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>24</strong>: <code><a href="#MultyPartyCollaboration" class="nt">MultyPartyCollaboration</a>, <a href="#BusinessPartnerRole" class="nt">BusinessPartnerRole</a>, <a href="#Performs" class="nt">Performs</a>, <a href="#AuthorizedRole" class="nt">AuthorizedRole</a>, <a href="#Transaction" class="nt">Transaction</a>, <a href="#BinaryCollaboration" class="nt">BinaryCollaboration</a>, <a href="#BusinessState" class="nt">BusinessState</a>, <a href="#Start" class="nt">Start</a>, <a href="#Fork" class="nt">Fork</a>, <a href="#Join" class="nt">Join</a>, <a href="#CompletionState" class="nt">CompletionState</a>, <a href="#Failure" class="nt">Failure</a>, <a href="#Success" class="nt">Success</a>, <a href="#BusinessActivity" class="nt">BusinessActivity</a>, <a href="#BusinessTransactionActivity" class="nt">BusinessTransactionActivity</a>, <a href="#CollaborationActivity" class="nt">CollaborationActivity</a>, <a href="#BusinessTransaction" class="nt">BusinessTransaction</a>, <a href="#BusinessAction" class="nt">BusinessAction</a>, <a href="#RequestingBusinessActivity" class="nt">RequestingBusinessActivity</a>, <a href="#RespondingBusinessActivity" class="nt">RespondingBusinessActivity</a>, <a href="#DocumentSecurity" class="nt">DocumentSecurity</a>, <a href="#DocumentEnvelope" class="nt">DocumentEnvelope</a>, <a href="#Attachment" class="nt">Attachment</a>, <a href="#BusinessDocument" class="nt">BusinessDocument</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="MultyPartyCollaboration">MultyPartyCollaboration</a>:
-        <span class="sel">partners</span>::<span class="meta">any</span><span class="meta">+</span>
+				</script></head><body><h1 class="l">Browsable ebXML 0.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Hugo Bruneliere, <code>ebXML.ecore</code>, 2005/08/03.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>33</strong></li><li>Number of top alternatives: <strong>33</strong></li><li>Number of defined nonterminal symbols: <strong>24</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>2</strong>: <code><a href="#BusinessAction" class="nt">BusinessAction</a>, <a href="#DocumentSecurity" class="nt">DocumentSecurity</a></code></li><li>Bottom nonterminal symbols: <strong>2</strong>: <code><a href="#Boolean" class="nt">Boolean</a>, <a href="#String" class="nt">String</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="MultyPartyCollaboration">MultyPartyCollaboration</a>:
+        <span class="sel">partners</span>::<a class="nt" href="#BusinessPartnerRole">BusinessPartnerRole</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="BusinessPartnerRole">BusinessPartnerRole</a>:
-        <span class="sel">collaboration</span>::<span class="meta">any</span> <span class="sel">transition</span>::<span class="meta">any</span> <span class="sel">performers</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">collaboration</span>::<a class="nt" href="#MultyPartyCollaboration">MultyPartyCollaboration</a> <span class="sel">transition</span>::<a class="nt" href="#Transaction">Transaction</a> <span class="sel">performers</span>::<a class="nt" href="#Performs">Performs</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Performs">Performs</a>:
-        <span class="sel">performedBy</span>::<span class="meta">any</span> <span class="sel">collaboration</span>::<span class="meta">any</span> <span class="sel">role</span>::<span class="meta">any</span>
+        <span class="sel">performedBy</span>::<a class="nt" href="#BusinessPartnerRole">BusinessPartnerRole</a> <span class="sel">collaboration</span>::<a class="nt" href="#BinaryCollaboration">BinaryCollaboration</a> <span class="sel">role</span>::<a class="nt" href="#AuthorizedRole">AuthorizedRole</a>
 </pre><pre><a class="nt" name="AuthorizedRole">AuthorizedRole</a>:
-        <span class="sel">isInitiator</span>::<span class="meta">any</span> <span class="sel">performers</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">isInitiator</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">performers</span>::<a class="nt" href="#Performs">Performs</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Transaction">Transaction</a>:
-        <span class="sel">onInitiation</span>::<span class="meta">any</span> <span class="sel">conditionGuard</span>::<span class="meta">any</span> <span class="sel">conditionExpression</span>::<span class="meta">any</span> <span class="sel">from</span>::<span class="meta">any</span> <span class="sel">to</span>::<span class="meta">any</span>
+        <span class="sel">onInitiation</span>::<a class="nt" href="#String">String</a> <span class="sel">conditionGuard</span>::<a class="nt" href="#String">String</a> <span class="sel">conditionExpression</span>::<a class="nt" href="#String">String</a> <span class="sel">from</span>::<a class="nt" href="#BusinessState">BusinessState</a> <span class="sel">to</span>::<a class="nt" href="#BusinessState">BusinessState</a>
 </pre><pre><a class="nt" name="BinaryCollaboration">BinaryCollaboration</a>:
-        <span class="sel">pattern</span>::<span class="meta">any</span> <span class="sel">timeToPerform</span>::<span class="meta">any</span> <span class="sel">preCondition</span>::<span class="meta">any</span> <span class="sel">postCondition</span>::<span class="meta">any</span> <span class="sel">beginsWhen</span>::<span class="meta">any</span> <span class="sel">endsWhen</span>::<span class="meta">any</span> <span class="sel">roles</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">transitions</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">states</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">pattern</span>::<a class="nt" href="#String">String</a> <span class="sel">timeToPerform</span>::<a class="nt" href="#String">String</a> <span class="sel">preCondition</span>::<a class="nt" href="#String">String</a> <span class="sel">postCondition</span>::<a class="nt" href="#String">String</a> <span class="sel">beginsWhen</span>::<a class="nt" href="#String">String</a> <span class="sel">endsWhen</span>::<a class="nt" href="#String">String</a> <span class="sel">roles</span>::<a class="nt" href="#Performs">Performs</a><span class="meta">+</span> <span class="sel">transitions</span>::<a class="nt" href="#Transaction">Transaction</a><span class="meta">+</span> <span class="sel">states</span>::<a class="nt" href="#BusinessState">BusinessState</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="BusinessState">BusinessState</a>:
-        ε
+        <a class="nt" href="#Start">Start</a>
+</pre><pre><a class="nt" name="BusinessState">BusinessState</a>:
+        <a class="nt" href="#Fork">Fork</a>
+</pre><pre><a class="nt" name="BusinessState">BusinessState</a>:
+        <a class="nt" href="#Join">Join</a>
+</pre><pre><a class="nt" name="BusinessState">BusinessState</a>:
+        <a class="nt" href="#CompletionState">CompletionState</a>
+</pre><pre><a class="nt" name="BusinessState">BusinessState</a>:
+        <a class="nt" href="#BusinessActivity">BusinessActivity</a>
 </pre><pre><a class="nt" name="Start">Start</a>:
-        <span class="sel">collaboration</span>::<span class="meta">any</span> <span class="sel">from</span>::<span class="meta">any</span> <span class="sel">to</span>::<span class="meta">any</span>
+        <span class="sel">collaboration</span>::<a class="nt" href="#BinaryCollaboration">BinaryCollaboration</a> <span class="sel">from</span>::<a class="nt" href="#AuthorizedRole">AuthorizedRole</a> <span class="sel">to</span>::<a class="nt" href="#AuthorizedRole">AuthorizedRole</a>
 </pre><pre><a class="nt" name="Fork">Fork</a>:
-        <span class="sel">waitForAll</span>::<span class="meta">any</span>
+        <span class="sel">waitForAll</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Join">Join</a>:
-        <span class="sel">collaboration</span>::<span class="meta">any</span> <span class="sel">from</span>::<span class="meta">any</span> <span class="sel">to</span>::<span class="meta">any</span>
+        <span class="sel">collaboration</span>::<a class="nt" href="#BinaryCollaboration">BinaryCollaboration</a> <span class="sel">from</span>::<a class="nt" href="#AuthorizedRole">AuthorizedRole</a> <span class="sel">to</span>::<a class="nt" href="#AuthorizedRole">AuthorizedRole</a>
 </pre><pre><a class="nt" name="CompletionState">CompletionState</a>:
-        <span class="sel">guardCondition</span>::<span class="meta">any</span>
+        <a class="nt" href="#Failure">Failure</a>
+</pre><pre><a class="nt" name="CompletionState">CompletionState</a>:
+        <a class="nt" href="#Success">Success</a>
+</pre><pre><a class="nt" name="CompletionState">CompletionState</a>:
+        <span class="sel">guardCondition</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Failure">Failure</a>:
         ε
 </pre><pre><a class="nt" name="Success">Success</a>:
         ε
 </pre><pre><a class="nt" name="BusinessActivity">BusinessActivity</a>:
-        ε
+        <a class="nt" href="#BusinessTransactionActivity">BusinessTransactionActivity</a>
+</pre><pre><a class="nt" name="BusinessActivity">BusinessActivity</a>:
+        <a class="nt" href="#CollaborationActivity">CollaborationActivity</a>
 </pre><pre><a class="nt" name="BusinessTransactionActivity">BusinessTransactionActivity</a>:
-        <span class="sel">timeToPerform</span>::<span class="meta">any</span> <span class="sel">isConcurrent</span>::<span class="meta">any</span> <span class="sel">isLegallyBinding</span>::<span class="meta">any</span> <span class="sel">use</span>::<span class="meta">any</span>
+        <span class="sel">timeToPerform</span>::<a class="nt" href="#String">String</a> <span class="sel">isConcurrent</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">isLegallyBinding</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">use</span>::<a class="nt" href="#BusinessTransaction">BusinessTransaction</a>
 </pre><pre><a class="nt" name="CollaborationActivity">CollaborationActivity</a>:
-        <span class="sel">use</span>::<span class="meta">any</span>
+        <span class="sel">use</span>::<a class="nt" href="#BinaryCollaboration">BinaryCollaboration</a>
 </pre><pre><a class="nt" name="BusinessTransaction">BusinessTransaction</a>:
-        <span class="sel">pattern</span>::<span class="meta">any</span> <span class="sel">isGuaranteedDeliveryRequired</span>::<span class="meta">any</span> <span class="sel">preCondition</span>::<span class="meta">any</span> <span class="sel">postCondition</span>::<span class="meta">any</span> <span class="sel">beginsWhen</span>::<span class="meta">any</span> <span class="sel">endsWhen</span>::<span class="meta">any</span> <span class="sel">requester</span>::<span class="meta">any</span> <span class="sel">responder</span>::<span class="meta">any</span>
+        <span class="sel">pattern</span>::<a class="nt" href="#String">String</a> <span class="sel">isGuaranteedDeliveryRequired</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">preCondition</span>::<a class="nt" href="#String">String</a> <span class="sel">postCondition</span>::<a class="nt" href="#String">String</a> <span class="sel">beginsWhen</span>::<a class="nt" href="#String">String</a> <span class="sel">endsWhen</span>::<a class="nt" href="#String">String</a> <span class="sel">requester</span>::<a class="nt" href="#RequestingBusinessActivity">RequestingBusinessActivity</a> <span class="sel">responder</span>::<a class="nt" href="#RespondingBusinessActivity">RespondingBusinessActivity</a>
 </pre><pre><a class="nt" name="BusinessAction">BusinessAction</a>:
-        ε
+        <a class="nt" href="#RequestingBusinessActivity">RequestingBusinessActivity</a>
+</pre><pre><a class="nt" name="BusinessAction">BusinessAction</a>:
+        <a class="nt" href="#RespondingBusinessActivity">RespondingBusinessActivity</a>
 </pre><pre><a class="nt" name="RequestingBusinessActivity">RequestingBusinessActivity</a>:
-        <span class="sel">timeToAcknowledgeAcceptance</span>::<span class="meta">any</span> <span class="sel">transaction</span>::<span class="meta">any</span> <span class="sel">documentEnvelope</span>::<span class="meta">any</span>
+        <span class="sel">timeToAcknowledgeAcceptance</span>::<a class="nt" href="#String">String</a> <span class="sel">transaction</span>::<a class="nt" href="#BusinessTransaction">BusinessTransaction</a> <span class="sel">documentEnvelope</span>::<a class="nt" href="#DocumentEnvelope">DocumentEnvelope</a>
 </pre><pre><a class="nt" name="RespondingBusinessActivity">RespondingBusinessActivity</a>:
-        <span class="sel">transaction</span>::<span class="meta">any</span> <span class="sel">documentEnvelope</span>::<span class="meta">any</span>
+        <span class="sel">transaction</span>::<a class="nt" href="#BusinessTransaction">BusinessTransaction</a> <span class="sel">documentEnvelope</span>::<a class="nt" href="#DocumentEnvelope">DocumentEnvelope</a>
 </pre><pre><a class="nt" name="DocumentSecurity">DocumentSecurity</a>:
-        ε
+        <a class="nt" href="#DocumentEnvelope">DocumentEnvelope</a>
+</pre><pre><a class="nt" name="DocumentSecurity">DocumentSecurity</a>:
+        <a class="nt" href="#Attachment">Attachment</a>
 </pre><pre><a class="nt" name="DocumentEnvelope">DocumentEnvelope</a>:
-        <span class="sel">isPositiveResponse</span>::<span class="meta">any</span> <span class="sel">requesting</span>::<span class="meta">any</span> <span class="sel">responding</span>::<span class="meta">any</span> <span class="sel">attachements</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">document</span>::<span class="meta">any</span>
+        <span class="sel">isPositiveResponse</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">requesting</span>::<a class="nt" href="#RequestingBusinessActivity">RequestingBusinessActivity</a> <span class="sel">responding</span>::<a class="nt" href="#RespondingBusinessActivity">RespondingBusinessActivity</a> <span class="sel">attachements</span>::<a class="nt" href="#Attachment">Attachment</a><span class="meta">+</span> <span class="sel">document</span>::<a class="nt" href="#BusinessDocument">BusinessDocument</a>
 </pre><pre><a class="nt" name="Attachment">Attachment</a>:
-        <span class="sel">mimeType</span>::<span class="meta">any</span> <span class="sel">specification</span>::<span class="meta">any</span> <span class="sel">version</span>::<span class="meta">any</span> <span class="sel">envelope</span>::<span class="meta">any</span> <span class="sel">document</span>::<span class="meta">any</span>
+        <span class="sel">mimeType</span>::<a class="nt" href="#String">String</a> <span class="sel">specification</span>::<a class="nt" href="#String">String</a> <span class="sel">version</span>::<a class="nt" href="#String">String</a> <span class="sel">envelope</span>::<a class="nt" href="#DocumentEnvelope">DocumentEnvelope</a> <span class="sel">document</span>::<a class="nt" href="#BusinessDocument">BusinessDocument</a>
 </pre><pre><a class="nt" name="BusinessDocument">BusinessDocument</a>:
-        <span class="sel">specificationLocation</span>::<span class="meta">any</span> <span class="sel">specificationElement</span>::<span class="meta">any</span> <span class="sel">conditionExpression</span>::<span class="meta">any</span> <span class="sel">envelopes</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">attachments</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">specificationLocation</span>::<a class="nt" href="#String">String</a> <span class="sel">specificationElement</span>::<a class="nt" href="#String">String</a> <span class="sel">conditionExpression</span>::<a class="nt" href="#String">String</a> <span class="sel">envelopes</span>::<a class="nt" href="#DocumentEnvelope">DocumentEnvelope</a><span class="meta">+</span> <span class="sel">attachments</span>::<a class="nt" href="#Attachment">Attachment</a><span class="meta">+</span>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

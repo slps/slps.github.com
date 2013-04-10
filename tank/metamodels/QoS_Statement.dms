@@ -1,7 +1,10 @@
-QoSStatement = relation::ANY parameter::ANY+ ;
-SingleQoSStatement = contraint::ANY ;
-CoumpoundQoSStatement = statement::ANY ;
+QoSStatement = SingleQoSStatement ;
+QoSStatement = CoumpoundQoSStatement ;
+QoSStatement = relation::CoumpoundQoSStatement parameter::Parameter+ ;
+SingleQoSStatement = contraint::QoSContraint ;
+CoumpoundQoSStatement = statement::QoSStatement ;
 Parameter = ;
-QoSContraint = qualification::ANY ;
-QualificationKind = value::ANY ;
-QoSCharacteristic = ;
+QoSContraint = qualification::QualificationKind ;
+QualificationKind = value::String ;
+QoSCharacteristic = QualificationKind ;
+QoSCharacteristic = QualificationKind ;

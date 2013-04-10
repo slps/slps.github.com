@@ -4,25 +4,43 @@ exports
   sorts
         LogFile Logger Expression Literal VariableExpression NumberExpression UnaryOperator UnaryPlusOp UnaryMinusOp BinaryOperator PlusOperator MinusOperator 
   context-free syntax
-        file::ANY instance::ANY logger::ANY -> LogFile
+        file::String instance::LogFile logger::Logger -> LogFile
 
-        instance::ANY expression::ANY logFile::ANY -> Logger
+        instance::Logger expression::Expression logFile::LogFile -> Logger
 
-        loggingOn::ANY logger::ANY -> Expression
+        Literal -> Expression
 
-        value::ANY -> Literal
+        UnaryOperator -> Expression
 
-        name::ANY -> VariableExpression
+        BinaryOperator -> Expression
+
+        loggingOn::Boolean logger::Logger -> Expression
+
+        VariableExpression -> Literal
+
+        NumberExpression -> Literal
+
+        value::Integer -> Literal
+
+        name::String -> VariableExpression
 
          -> NumberExpression
 
-        operand::ANY -> UnaryOperator
+        UnaryPlusOp -> UnaryOperator
+
+        UnaryMinusOp -> UnaryOperator
+
+        operand::Expression -> UnaryOperator
 
          -> UnaryPlusOp
 
          -> UnaryMinusOp
 
-        operand1::ANY operand2::ANY -> BinaryOperator
+        PlusOperator -> BinaryOperator
+
+        MinusOperator -> BinaryOperator
+
+        operand1::Expression operand2::Expression -> BinaryOperator
 
          -> PlusOperator
 

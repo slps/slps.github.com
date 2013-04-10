@@ -2,121 +2,165 @@ module Main
 
 exports
   sorts
-        XSDAnnotation XSDAttributeDeclaration XSDAttributeGroupContent XSDAttributeGroupDefinition XSDAttributeUse XSDBoundedFacet XSDCardinalityFacet XSDComplexTypeContent XSDComplexTypeDefinition XSDComponent XSDConcreteComponent XSDConstrainingFacet XSDDiagnostic XSDElementDeclaration XSDEnumerationFacet XSDFacet XSDFeature XSDFixedFacet XSDFractionDigitsFacet XSDFundamentalFacet XSDIdentityConstraintDefinition XSDImport XSDInclude XSDLengthFacet XSDMaxExclusiveFacet XSDMaxFacet XSDMaxInclusiveFacet XSDMaxLengthFacet XSDMinExclusiveFacet XSDMinFacet XSDMinInclusiveFacet XSDMinLengthFacet XSDModelGroup XSDModelGroupDefinition XSDNamedComponent XSDNotationDeclaration XSDNumericFacet XSDOrderedFacet XSDParticle XSDParticleContent XSDPatternFacet XSDRedefinableComponent XSDRedefineContent XSDRedefine XSDRepeatableFacet XSDSchema XSDSchemaCompositor XSDSchemaContent XSDSchemaDirective XSDScope XSDSimpleTypeDefinition XSDTerm XSDTotalDigitsFacet XSDTypeDefinition XSDWhiteSpaceFacet XSDWildcard XSDXPathDefinition XSDAttributeUseCategory XSDCardinality XSDComplexFinal XSDCompositor XSDConstraint XSDContentTypeCategory XSDDerivationMethod XSDDiagnosticSeverity XSDDisallowedSubstitutions XSDForm XSDIdentityConstraintCategory XSDNamespaceConstraintCategory XSDOrdered XSDProcessContents XSDProhibitedSubstitutions XSDSimpleFinal XSDSubstitutionGroupExclusions XSDVariety XSDWhiteSpace XSDXPathVariety Property PropertyAlias MessagepropertiesQuery EObject PartnerLinkType Role Process PartnerLink FaultHandler Activity CorrelationSet Invoke Link Catch Reply PartnerActivity Receive Exit Throw Wait Empty Sequence Switch Case While Pick Flow OnAlarm Assign Copy Extension Scope Compensate CompensationHandler To From OnMessage Expression BooleanExpression Correlation CorrelationPattern EndpointReferenceRole EventHandler Source Target PartnerLinks Variables CorrelationSets Links CatchAll Correlations Variable Otherwise UnknownExtensibilityAttribute OnEvent BPELImport Rethrow Condition Targets Sources BPELQuery ServiceRef Extensions ExtensionActivity FromPart ToPart OpaqueActivity ForEach RepeatUntil TerminationHandler Validate If Then ElseIf Else CompletionCondition Branches BPELExtensibleElement Documentation Iterator WSDLElement PortType Operation Message Part Binding BindingOperation Service Port ExtensibilityElement Definition WSDLImport WSDLExtensibleElement Input Output Fault BindingInput BindingOutput BindingFault Namespace IPortType IOperation IInput IOutput IFault IMessage IPart IService IPort IBinding IBindingOperation IBindingInput IBindingOutput IBindingFault IExtensibilityElement IDefinition IImport IList IMap IURL IExtensionRegistry Types IIterator ITypes UnknownExtensibilityElement XSDSchemaExtensibilityElement MessageReference 
+        XSDAnnotation XSDAttributeDeclaration XSDAttributeGroupDefinition XSDAttributeUse XSDBoundedFacet XSDCardinalityFacet XSDComplexTypeContent XSDComplexTypeDefinition XSDComponent XSDConcreteComponent XSDConstrainingFacet XSDDiagnostic XSDElementDeclaration XSDEnumerationFacet XSDFacet XSDFixedFacet XSDFractionDigitsFacet XSDFundamentalFacet XSDIdentityConstraintDefinition XSDImport XSDInclude XSDLengthFacet XSDMaxExclusiveFacet XSDMaxFacet XSDMaxInclusiveFacet XSDMaxLengthFacet XSDMinExclusiveFacet XSDMinFacet XSDMinInclusiveFacet XSDMinLengthFacet XSDModelGroup XSDModelGroupDefinition XSDNamedComponent XSDNotationDeclaration XSDNumericFacet XSDOrderedFacet XSDParticle XSDPatternFacet XSDRedefine XSDRepeatableFacet XSDSchema XSDSchemaCompositor XSDSchemaContent XSDSchemaDirective XSDScope XSDSimpleTypeDefinition XSDTerm XSDTotalDigitsFacet XSDWhiteSpaceFacet XSDWildcard XSDXPathDefinition XSDAttributeUseCategory XSDCardinality XSDComplexFinal XSDCompositor XSDConstraint XSDContentTypeCategory XSDDerivationMethod XSDDiagnosticSeverity XSDDisallowedSubstitutions XSDForm XSDIdentityConstraintCategory XSDNamespaceConstraintCategory XSDOrdered XSDProcessContents XSDProhibitedSubstitutions XSDSimpleFinal XSDSubstitutionGroupExclusions XSDVariety XSDWhiteSpace XSDXPathVariety Property PropertyAlias MessagepropertiesQuery EObject PartnerLinkType Role Process PartnerLink FaultHandler Activity CorrelationSet Invoke Link Catch Reply PartnerActivity Receive Exit Throw Wait Empty Sequence Switch Case While Pick Flow OnAlarm Assign Copy Extension Scope Compensate CompensationHandler To From OnMessage Expression BooleanExpression Correlation CorrelationPattern EndpointReferenceRole EventHandler Source Target PartnerLinks Variables CorrelationSets Links CatchAll Correlations Variable Otherwise UnknownExtensibilityAttribute OnEvent BPELImport Rethrow Condition Targets Sources BPELQuery ServiceRef Extensions ExtensionActivity FromPart ToPart OpaqueActivity ForEach RepeatUntil TerminationHandler Validate If Then ElseIf Else CompletionCondition Branches BPELExtensibleElement Documentation Iterator WSDLElement PortType Operation Message Part Binding BindingOperation Service Port ExtensibilityElement Definition WSDLImport WSDLExtensibleElement Input Output Fault BindingInput BindingOutput BindingFault Namespace Types UnknownExtensibilityElement XSDSchemaExtensibilityElement 
   context-free syntax
-        applicationInformation::ANY+ userInformation::ANY+ attributes::ANY+ -> XSDAnnotation
+        applicationInformation::XSDDOMElement+ userInformation::XSDDOMElement+ attributes::DOMAttr+ -> XSDAnnotation
 
-        attributeDeclarationReference::ANY annotation::ANY anonymousTypeDefinition::ANY typeDefinition::ANY resolvedAttributeDeclaration::ANY -> XSDAttributeDeclaration
+        attributeDeclarationReference::EBoolean annotation::XSDAnnotation anonymousTypeDefinition::XSDSimpleTypeDefinition typeDefinition::XSDSimpleTypeDefinition resolvedAttributeDeclaration::XSDAttributeDeclaration -> XSDAttributeDeclaration
 
-         -> XSDAttributeGroupContent
+        attributeGroupDefinitionReference::EBoolean annotation::XSDAnnotation contents::XSDAttributeGroupContent+ attributeUses::XSDAttributeUse+ attributeWildcardContent::XSDWildcard attributeWildcard::XSDWildcard resolvedAttributeGroupDefinition::XSDAttributeGroupDefinition syntheticWildcard::XSDWildcard -> XSDAttributeGroupDefinition
 
-        attributeGroupDefinitionReference::ANY annotation::ANY contents::ANY+ attributeUses::ANY+ attributeWildcardContent::ANY attributeWildcard::ANY resolvedAttributeGroupDefinition::ANY syntheticWildcard::ANY -> XSDAttributeGroupDefinition
+        required::EBoolean value::Value constraint::XSDConstraint use::XSDAttributeUseCategory lexicalValue::EString attributeDeclaration::XSDAttributeDeclaration content::XSDAttributeDeclaration -> XSDAttributeUse
 
-        required::ANY value::ANY constraint::ANY use::ANY lexicalValue::ANY attributeDeclaration::ANY content::ANY -> XSDAttributeUse
+        value::EBoolean -> XSDBoundedFacet
 
-        value::ANY -> XSDBoundedFacet
+        value::XSDCardinality -> XSDCardinalityFacet
 
-        value::ANY -> XSDCardinalityFacet
+        XSDParticle -> XSDComplexTypeContent
 
-         -> XSDComplexTypeContent
+        derivationMethod::XSDDerivationMethod final::XSDComplexFinal+ abstract::EBoolean contentTypeCategory::XSDContentTypeCategory prohibitedSubstitutions::XSDProhibitedSubstitutions+ lexicalFinal::XSDComplexFinal+ block::XSDProhibitedSubstitutions+ mixed::EBoolean contentAnnotation::XSDAnnotation baseTypeDefinition::XSDTypeDefinition content::XSDComplexTypeContent contentType::XSDComplexTypeContent attributeUses::XSDAttributeUse+ attributeContents::XSDAttributeGroupContent+ attributeWildcard::XSDWildcard attributeWildcardContent::XSDWildcard rootTypeDefinition::XSDTypeDefinition syntheticParticle::XSDParticle syntheticWildcard::XSDWildcard -> XSDComplexTypeDefinition
 
-        derivationMethod::ANY final::ANY+ abstract::ANY contentTypeCategory::ANY prohibitedSubstitutions::ANY+ lexicalFinal::ANY+ block::ANY+ mixed::ANY contentAnnotation::ANY baseTypeDefinition::ANY content::ANY contentType::ANY attributeUses::ANY+ attributeContents::ANY+ attributeWildcard::ANY attributeWildcardContent::ANY rootTypeDefinition::ANY syntheticParticle::ANY syntheticWildcard::ANY -> XSDComplexTypeDefinition
+        XSDComplexTypeContent -> XSDComponent
 
-         -> XSDComponent
+        XSDFacet -> XSDComponent
 
-         -> XSDConcreteComponent
+        XSDNamedComponent -> XSDComponent
 
-         -> XSDConstrainingFacet
+        XSDScope -> XSDComponent
 
-        severity::ANY message::ANY locationURI::ANY line::ANY column::ANY node::ANY annotationURI::ANY key::ANY substitutions::ANY+ components::ANY+ primaryComponent::ANY -> XSDDiagnostic
+        XSDXPathDefinition -> XSDComponent
 
-        nillable::ANY disallowedSubstitutions::ANY+ substitutionGroupExclusions::ANY+ abstract::ANY lexicalFinal::ANY+ block::ANY+ elementDeclarationReference::ANY circular::ANY annotation::ANY anonymousTypeDefinition::ANY typeDefinition::ANY identityConstraintDefinitions::ANY+ resolvedElementDeclaration::ANY substitutionGroupAffiliation::ANY substitutionGroup::ANY+ -> XSDElementDeclaration
+        XSDAttributeGroupContent -> XSDConcreteComponent
 
-        value::ANY+ -> XSDEnumerationFacet
+        XSDComponent -> XSDConcreteComponent
 
-         -> XSDFacet
+        XSDDiagnostic -> XSDConcreteComponent
 
-         -> XSDFeature
+        XSDParticleContent -> XSDConcreteComponent
 
-         -> XSDFixedFacet
+        XSDSchemaContent -> XSDConcreteComponent
 
-        value::ANY -> XSDFractionDigitsFacet
+        XSDFixedFacet -> XSDConstrainingFacet
 
-         -> XSDFundamentalFacet
+        XSDRepeatableFacet -> XSDConstrainingFacet
 
-        identityConstraintCategory::ANY annotation::ANY referencedKey::ANY selector::ANY fields::ANY+ -> XSDIdentityConstraintDefinition
+        severity::XSDDiagnosticSeverity message::EString locationURI::EString line::EInt column::EInt node::DOMNode annotationURI::EString key::EString substitutions::EString+ components::XSDConcreteComponent+ primaryComponent::XSDConcreteComponent -> XSDDiagnostic
 
-        namespace::ANY annotation::ANY -> XSDImport
+        nillable::EBoolean disallowedSubstitutions::XSDDisallowedSubstitutions+ substitutionGroupExclusions::XSDSubstitutionGroupExclusions+ abstract::EBoolean lexicalFinal::XSDProhibitedSubstitutions+ block::XSDDisallowedSubstitutions+ elementDeclarationReference::EBoolean circular::EBoolean annotation::XSDAnnotation anonymousTypeDefinition::XSDTypeDefinition typeDefinition::XSDTypeDefinition identityConstraintDefinitions::XSDIdentityConstraintDefinition+ resolvedElementDeclaration::XSDElementDeclaration substitutionGroupAffiliation::XSDElementDeclaration substitutionGroup::XSDElementDeclaration+ -> XSDElementDeclaration
 
-        annotation::ANY -> XSDInclude
+        value::Value+ -> XSDEnumerationFacet
 
-        value::ANY -> XSDLengthFacet
+        XSDConstrainingFacet -> XSDFacet
 
-        value::ANY inclusive::ANY exclusive::ANY -> XSDMaxExclusiveFacet
+        XSDFundamentalFacet -> XSDFacet
 
-         -> XSDMaxFacet
+        XSDFractionDigitsFacet -> XSDFixedFacet
 
-        value::ANY inclusive::ANY exclusive::ANY -> XSDMaxInclusiveFacet
+        XSDLengthFacet -> XSDFixedFacet
 
-        value::ANY -> XSDMaxLengthFacet
+        XSDMaxFacet -> XSDFixedFacet
 
-        value::ANY inclusive::ANY exclusive::ANY -> XSDMinExclusiveFacet
+        XSDMaxLengthFacet -> XSDFixedFacet
 
-         -> XSDMinFacet
+        XSDMinFacet -> XSDFixedFacet
 
-        value::ANY inclusive::ANY exclusive::ANY -> XSDMinInclusiveFacet
+        XSDMinLengthFacet -> XSDFixedFacet
 
-        value::ANY -> XSDMinLengthFacet
+        XSDTotalDigitsFacet -> XSDFixedFacet
 
-        compositor::ANY annotation::ANY contents::ANY+ particles::ANY+ -> XSDModelGroup
+        XSDWhiteSpaceFacet -> XSDFixedFacet
 
-        modelGroupDefinitionReference::ANY annotation::ANY modelGroup::ANY resolvedModelGroupDefinition::ANY -> XSDModelGroupDefinition
+        value::EInt -> XSDFractionDigitsFacet
 
-         -> XSDNamedComponent
+        XSDBoundedFacet -> XSDFundamentalFacet
 
-        systemIdentifier::ANY publicIdentifier::ANY annotation::ANY -> XSDNotationDeclaration
+        XSDCardinalityFacet -> XSDFundamentalFacet
 
-        value::ANY -> XSDNumericFacet
+        XSDNumericFacet -> XSDFundamentalFacet
 
-        value::ANY -> XSDOrderedFacet
+        XSDOrderedFacet -> XSDFundamentalFacet
 
-        minOccurs::ANY maxOccurs::ANY content::ANY term::ANY -> XSDParticle
+        identityConstraintCategory::XSDIdentityConstraintCategory annotation::XSDAnnotation referencedKey::XSDIdentityConstraintDefinition selector::XSDXPathDefinition fields::XSDXPathDefinition+ -> XSDIdentityConstraintDefinition
 
-         -> XSDParticleContent
+        namespace::EString annotation::XSDAnnotation -> XSDImport
 
-        value::ANY+ -> XSDPatternFacet
+        annotation::XSDAnnotation -> XSDInclude
 
-         -> XSDRedefinableComponent
+        value::EInt -> XSDLengthFacet
 
-         -> XSDRedefineContent
+        value::Value inclusive::EBoolean exclusive::EBoolean -> XSDMaxExclusiveFacet
 
-        annotations::ANY+ contents::ANY+ -> XSDRedefine
+        XSDMaxExclusiveFacet -> XSDMaxFacet
 
-         -> XSDRepeatableFacet
+        XSDMaxInclusiveFacet -> XSDMaxFacet
 
-        document::ANY schemaLocation::ANY targetNamespace::ANY attributeFormDefault::ANY elementFormDefault::ANY finalDefault::ANY+ blockDefault::ANY+ version::ANY contents::ANY+ elementDeclarations::ANY+ attributeDeclarations::ANY+ attributeGroupDefinitions::ANY+ typeDefinitions::ANY+ modelGroupDefinitions::ANY+ identityConstraintDefinitions::ANY+ notationDeclarations::ANY+ annotations::ANY+ allDiagnostics::ANY+ referencingDirectives::ANY+ rootVersion::ANY originalVersion::ANY incorporatedVersions::ANY+ schemaForSchema::ANY -> XSDSchema
+        value::Value inclusive::EBoolean exclusive::EBoolean -> XSDMaxInclusiveFacet
 
-         -> XSDSchemaCompositor
+        value::EInt -> XSDMaxLengthFacet
 
-         -> XSDSchemaContent
+        value::Value inclusive::EBoolean exclusive::EBoolean -> XSDMinExclusiveFacet
 
-         -> XSDSchemaDirective
+        XSDMinExclusiveFacet -> XSDMinFacet
 
-         -> XSDScope
+        XSDMinInclusiveFacet -> XSDMinFacet
 
-        variety::ANY final::ANY+ lexicalFinal::ANY+ validFacets::ANY+ contents::ANY+ facetContents::ANY+ facets::ANY+ memberTypeDefinitions::ANY+ fundamentalFacets::ANY+ baseTypeDefinition::ANY primitiveTypeDefinition::ANY itemTypeDefinition::ANY rootTypeDefinition::ANY minFacet::ANY maxFacet::ANY maxInclusiveFacet::ANY minInclusiveFacet::ANY minExclusiveFacet::ANY maxExclusiveFacet::ANY lengthFacet::ANY whiteSpaceFacet::ANY enumerationFacets::ANY+ patternFacets::ANY+ cardinalityFacet::ANY numericFacet::ANY maxLengthFacet::ANY minLengthFacet::ANY totalDigitsFacet::ANY fractionDigitsFacet::ANY orderedFacet::ANY boundedFacet::ANY effectiveMaxFacet::ANY effectiveWhiteSpaceFacet::ANY effectiveMaxLengthFacet::ANY effectiveFractionDigitsFacet::ANY effectivePatternFacet::ANY effectiveEnumerationFacet::ANY effectiveTotalDigitsFacet::ANY effectiveMinLengthFacet::ANY effectiveLengthFacet::ANY effectiveMinFacet::ANY syntheticFacets::ANY+ -> XSDSimpleTypeDefinition
+        value::Value inclusive::EBoolean exclusive::EBoolean -> XSDMinInclusiveFacet
 
-         -> XSDTerm
+        value::EInt -> XSDMinLengthFacet
 
-        value::ANY -> XSDTotalDigitsFacet
+        compositor::XSDCompositor annotation::XSDAnnotation contents::XSDParticle+ particles::XSDParticle+ -> XSDModelGroup
 
-         -> XSDTypeDefinition
+        modelGroupDefinitionReference::EBoolean annotation::XSDAnnotation modelGroup::XSDModelGroup resolvedModelGroupDefinition::XSDModelGroupDefinition -> XSDModelGroupDefinition
 
-        value::ANY -> XSDWhiteSpaceFacet
+        XSDFeature -> XSDNamedComponent
 
-        namespaceConstraintCategory::ANY namespaceConstraint::ANY+ processContents::ANY lexicalNamespaceConstraint::ANY+ annotation::ANY annotations::ANY+ -> XSDWildcard
+        XSDIdentityConstraintDefinition -> XSDNamedComponent
 
-        variety::ANY value::ANY annotation::ANY -> XSDXPathDefinition
+        systemIdentifier::EString publicIdentifier::EString annotation::XSDAnnotation -> XSDNotationDeclaration
+
+        value::EBoolean -> XSDNumericFacet
+
+        value::XSDOrdered -> XSDOrderedFacet
+
+        minOccurs::EInt maxOccurs::EInt content::XSDParticleContent term::XSDTerm -> XSDParticle
+
+        value::EString+ -> XSDPatternFacet
+
+        annotations::XSDAnnotation+ contents::XSDRedefineContent+ -> XSDRedefine
+
+        XSDEnumerationFacet -> XSDRepeatableFacet
+
+        XSDPatternFacet -> XSDRepeatableFacet
+
+        document::XSDDOMDocument schemaLocation::EString targetNamespace::EString attributeFormDefault::XSDForm elementFormDefault::XSDForm finalDefault::XSDProhibitedSubstitutions+ blockDefault::XSDDisallowedSubstitutions+ version::EString contents::XSDSchemaContent+ elementDeclarations::XSDElementDeclaration+ attributeDeclarations::XSDAttributeDeclaration+ attributeGroupDefinitions::XSDAttributeGroupDefinition+ typeDefinitions::XSDTypeDefinition+ modelGroupDefinitions::XSDModelGroupDefinition+ identityConstraintDefinitions::XSDIdentityConstraintDefinition+ notationDeclarations::XSDNotationDeclaration+ annotations::XSDAnnotation+ allDiagnostics::XSDDiagnostic+ referencingDirectives::XSDSchemaDirective+ rootVersion::XSDSchema originalVersion::XSDSchema incorporatedVersions::XSDSchema+ schemaForSchema::XSDSchema -> XSDSchema
+
+        XSDInclude -> XSDSchemaCompositor
+
+        XSDRedefine -> XSDSchemaCompositor
+
+        XSDRedefineContent -> XSDSchemaContent
+
+        XSDSchemaDirective -> XSDSchemaContent
+
+        XSDImport -> XSDSchemaDirective
+
+        XSDSchemaCompositor -> XSDSchemaDirective
+
+        XSDSchema -> XSDScope
+
+        variety::XSDVariety final::XSDSimpleFinal+ lexicalFinal::XSDSimpleFinal+ validFacets::EString+ contents::XSDSimpleTypeDefinition+ facetContents::XSDConstrainingFacet+ facets::XSDConstrainingFacet+ memberTypeDefinitions::XSDSimpleTypeDefinition+ fundamentalFacets::XSDFundamentalFacet+ baseTypeDefinition::XSDSimpleTypeDefinition primitiveTypeDefinition::XSDSimpleTypeDefinition itemTypeDefinition::XSDSimpleTypeDefinition rootTypeDefinition::XSDSimpleTypeDefinition minFacet::XSDMinFacet maxFacet::XSDMaxFacet maxInclusiveFacet::XSDMaxInclusiveFacet minInclusiveFacet::XSDMinInclusiveFacet minExclusiveFacet::XSDMinExclusiveFacet maxExclusiveFacet::XSDMaxExclusiveFacet lengthFacet::XSDLengthFacet whiteSpaceFacet::XSDWhiteSpaceFacet enumerationFacets::XSDEnumerationFacet+ patternFacets::XSDPatternFacet+ cardinalityFacet::XSDCardinalityFacet numericFacet::XSDNumericFacet maxLengthFacet::XSDMaxLengthFacet minLengthFacet::XSDMinLengthFacet totalDigitsFacet::XSDTotalDigitsFacet fractionDigitsFacet::XSDFractionDigitsFacet orderedFacet::XSDOrderedFacet boundedFacet::XSDBoundedFacet effectiveMaxFacet::XSDMaxFacet effectiveWhiteSpaceFacet::XSDWhiteSpaceFacet effectiveMaxLengthFacet::XSDMaxLengthFacet effectiveFractionDigitsFacet::XSDFractionDigitsFacet effectivePatternFacet::XSDPatternFacet effectiveEnumerationFacet::XSDEnumerationFacet effectiveTotalDigitsFacet::XSDTotalDigitsFacet effectiveMinLengthFacet::XSDMinLengthFacet effectiveLengthFacet::XSDLengthFacet effectiveMinFacet::XSDMinFacet syntheticFacets::XSDFacet+ -> XSDSimpleTypeDefinition
+
+        XSDModelGroup -> XSDTerm
+
+        XSDWildcard -> XSDTerm
+
+        value::EInt -> XSDTotalDigitsFacet
+
+        value::XSDWhiteSpace -> XSDWhiteSpaceFacet
+
+        namespaceConstraintCategory::XSDNamespaceConstraintCategory namespaceConstraint::EString+ processContents::XSDProcessContents lexicalNamespaceConstraint::EString+ annotation::XSDAnnotation annotations::XSDAnnotation+ -> XSDWildcard
+
+        variety::XSDXPathVariety value::EString annotation::XSDAnnotation -> XSDXPathDefinition
 
         prohibited:: -> XSDAttributeUseCategory
         optional:: -> XSDAttributeUseCategory
@@ -196,85 +240,135 @@ exports
         field:: -> XSDXPathVariety
         selector:: -> XSDXPathVariety
 
-        qName::ANY name::ANY type::ANY ID::ANY -> Property
+        qName::QName name::EString type::EJavaObject ID::EString -> Property
 
-        messageType::ANY part::ANY propertyName::ANY ID::ANY wsdlPart::ANY query::ANY type::ANY XSDElement::ANY -> PropertyAlias
+        messageType::EJavaObject part::EString propertyName::EJavaObject ID::EString wsdlPart::Part query::MessagepropertiesQuery type::EJavaObject XSDElement::EJavaObject -> PropertyAlias
 
-        queryLanguage::ANY value::ANY -> MessagepropertiesQuery
+        queryLanguage::EString value::EString -> MessagepropertiesQuery
 
          -> EObject
 
-        name::ANY ID::ANY role::ANY+ -> PartnerLinkType
+        name::EString ID::EString role::Role+ -> PartnerLinkType
 
-        ID::ANY name::ANY portType::ANY -> Role
+        ID::EString name::EString portType::EJavaObject -> Role
 
-        name::ANY targetNamespace::ANY queryLanguage::ANY expressionLanguage::ANY suppressJoinFailure::ANY variableAccessSerializable::ANY partnerLinks::ANY variables::ANY activity::ANY faultHandlers::ANY eventHandlers::ANY correlationSets::ANY imports::ANY+ extensions::ANY exitOnStandardFault::ANY -> Process
+        name::EString targetNamespace::EString queryLanguage::EString expressionLanguage::EString suppressJoinFailure::EBooleanObject variableAccessSerializable::EBooleanObject partnerLinks::PartnerLinks variables::Variables activity::Activity faultHandlers::FaultHandler eventHandlers::EventHandler correlationSets::CorrelationSets imports::BPELImport+ extensions::Extensions exitOnStandardFault::EBooleanObject -> Process
 
-        name::ANY myRole::ANY partnerRole::ANY PartnerLinkType::ANY initializePartnerRole::ANY -> PartnerLink
+        name::EString myRole::Role partnerRole::Role PartnerLinkType::PartnerLinkType initializePartnerRole::EBooleanObject -> PartnerLink
 
-        catch::ANY+ catchAll::ANY -> FaultHandler
+        catch::Catch+ catchAll::CatchAll -> FaultHandler
 
-        name::ANY suppressJoinFailure::ANY targets::ANY sources::ANY -> Activity
+        PartnerActivity -> Activity
 
-        name::ANY properties::ANY+ -> CorrelationSet
+        Exit -> Activity
 
-        outputVariable::ANY inputVariable::ANY compensationHandler::ANY faultHandler::ANY toPart::ANY+ fromPart::ANY+ -> Invoke
+        Throw -> Activity
 
-        name::ANY sources::ANY+ targets::ANY+ -> Link
+        Wait -> Activity
 
-        faultName::ANY faultVariable::ANY activity::ANY faultMessageType::ANY faultElement::ANY -> Catch
+        Empty -> Activity
 
-        faultName::ANY variable::ANY toPart::ANY+ -> Reply
+        Sequence -> Activity
 
-        partnerLink::ANY correlations::ANY portType::ANY operation::ANY -> PartnerActivity
+        Switch -> Activity
 
-        createInstance::ANY variable::ANY fromPart::ANY+ -> Receive
+        While -> Activity
+
+        Pick -> Activity
+
+        Flow -> Activity
+
+        Assign -> Activity
+
+        Scope -> Activity
+
+        Compensate -> Activity
+
+        Rethrow -> Activity
+
+        ExtensionActivity -> Activity
+
+        OpaqueActivity -> Activity
+
+        ForEach -> Activity
+
+        RepeatUntil -> Activity
+
+        Validate -> Activity
+
+        If -> Activity
+
+        name::EString suppressJoinFailure::EBooleanObject targets::Targets sources::Sources -> Activity
+
+        name::EString properties::Property+ -> CorrelationSet
+
+        outputVariable::Variable inputVariable::Variable compensationHandler::CompensationHandler faultHandler::FaultHandler toPart::ToPart+ fromPart::FromPart+ -> Invoke
+
+        name::EString sources::Source+ targets::Target+ -> Link
+
+        faultName::QName faultVariable::Variable activity::Activity faultMessageType::Message faultElement::XSDElementDeclaration -> Catch
+
+        faultName::QName variable::Variable toPart::ToPart+ -> Reply
+
+        Invoke -> PartnerActivity
+
+        Receive -> PartnerActivity
+
+        partnerLink::PartnerLink correlations::Correlations portType::PortType operation::Operation -> PartnerActivity
+
+        createInstance::EBooleanObject variable::Variable fromPart::FromPart+ -> Receive
 
          -> Exit
 
-        faultName::ANY faultVariable::ANY -> Throw
+        faultName::QName faultVariable::Variable -> Throw
 
-        for::ANY until::ANY -> Wait
+        for::Expression until::Expression -> Wait
 
          -> Empty
 
-        activities::ANY+ -> Sequence
+        activities::Activity+ -> Sequence
 
-        cases::ANY+ otherwise::ANY -> Switch
+        cases::Case+ otherwise::Otherwise -> Switch
 
-        activity::ANY condition::ANY -> Case
+        activity::Activity condition::Condition -> Case
 
-        activity::ANY condition::ANY -> While
+        activity::Activity condition::Condition -> While
 
-        createInstance::ANY messages::ANY+ alarm::ANY+ -> Pick
+        createInstance::EBooleanObject messages::OnMessage+ alarm::OnAlarm+ -> Pick
 
-        activities::ANY+ links::ANY completionCondition::ANY -> Flow
+        activities::Activity+ links::Links completionCondition::CompletionCondition -> Flow
 
-        activity::ANY for::ANY until::ANY repeatEvery::ANY -> OnAlarm
+        activity::Activity for::Expression until::Expression repeatEvery::Expression -> OnAlarm
 
-        copy::ANY+ validate::ANY -> Assign
+        copy::Copy+ validate::EBooleanObject -> Assign
 
-        to::ANY from::ANY keepSrcElementName::ANY -> Copy
+        to::To from::From keepSrcElementName::EBooleanObject -> Copy
 
-        namespace::ANY mustUnderstand::ANY -> Extension
+        namespace::EString mustUnderstand::EBooleanObject -> Extension
 
-        isolated::ANY faultHandlers::ANY compensationHandler::ANY activity::ANY variables::ANY correlationSets::ANY eventHandlers::ANY partnerLinks::ANY terminationHandler::ANY -> Scope
+        isolated::EBooleanObject faultHandlers::FaultHandler compensationHandler::CompensationHandler activity::Activity variables::Variables correlationSets::CorrelationSets eventHandlers::EventHandler partnerLinks::PartnerLinks terminationHandler::TerminationHandler -> Scope
 
-        scope::ANY -> Compensate
+        scope::EObject -> Compensate
 
-        activity::ANY -> CompensationHandler
+        activity::Activity -> CompensationHandler
 
-        variable::ANY part::ANY partnerLink::ANY property::ANY query::ANY -> To
+        variable::Variable part::Part partnerLink::PartnerLink property::Property query::BPELQuery -> To
 
-        opaque::ANY endpointReference::ANY literal::ANY unsafeLiteral::ANY expression::ANY serviceRef::ANY type::ANY -> From
+        opaque::EBooleanObject endpointReference::EndpointReferenceRole literal::EString unsafeLiteral::EBooleanObject expression::Expression serviceRef::ServiceRef type::XSDTypeDefinition -> From
 
-        variable::ANY activity::ANY portType::ANY partnerLink::ANY correlations::ANY operation::ANY fromPart::ANY+ -> OnMessage
+        variable::Variable activity::Activity portType::PortType partnerLink::PartnerLink correlations::Correlations operation::Operation fromPart::FromPart+ -> OnMessage
 
-        body::ANY expressionLanguage::ANY opaque::ANY -> Expression
+        BooleanExpression -> Expression
+
+        Condition -> Expression
+
+        Branches -> Expression
+
+        body::EJavaObject expressionLanguage::EString opaque::EBooleanObject -> Expression
 
          -> BooleanExpression
 
-        initiate::ANY pattern::ANY set::ANY -> Correlation
+        initiate::EString pattern::CorrelationPattern set::CorrelationSet -> Correlation
 
         outin:: -> CorrelationPattern
         in:: -> CorrelationPattern
@@ -283,107 +377,193 @@ exports
         partnerRole:: -> EndpointReferenceRole
         myRole:: -> EndpointReferenceRole
 
-        alarm::ANY+ events::ANY+ -> EventHandler
+        alarm::OnAlarm+ events::OnEvent+ -> EventHandler
 
-        Link::ANY activity::ANY transitionCondition::ANY -> Source
+        Link::Link activity::Activity transitionCondition::Condition -> Source
 
-        Link::ANY activity::ANY -> Target
+        Link::Link activity::Activity -> Target
 
-        children::ANY+ -> PartnerLinks
+        children::PartnerLink+ -> PartnerLinks
 
-        children::ANY+ -> Variables
+        children::Variable+ -> Variables
 
-        children::ANY+ -> CorrelationSets
+        children::CorrelationSet+ -> CorrelationSets
 
-        children::ANY+ -> Links
+        children::Link+ -> Links
 
-        activity::ANY -> CatchAll
+        activity::Activity -> CatchAll
 
-        children::ANY+ -> Correlations
+        children::Correlation+ -> Correlations
 
-        name::ANY messageType::ANY XSDElement::ANY type::ANY from::ANY -> Variable
+        name::EString messageType::Message XSDElement::XSDElementDeclaration type::XSDTypeDefinition from::From -> Variable
 
-        activity::ANY -> Otherwise
+        activity::Activity -> Otherwise
 
          -> UnknownExtensibilityAttribute
 
-        activity::ANY variable::ANY partnerLink::ANY correlations::ANY operation::ANY portType::ANY messageType::ANY fromPart::ANY+ correlationSets::ANY -> OnEvent
+        activity::Activity variable::Variable partnerLink::PartnerLink correlations::Correlations operation::Operation portType::PortType messageType::Message fromPart::FromPart+ correlationSets::CorrelationSets -> OnEvent
 
-        namespace::ANY location::ANY importType::ANY -> BPELImport
+        namespace::EString location::EString importType::EString -> BPELImport
 
          -> Rethrow
 
          -> Condition
 
-        children::ANY+ joinCondition::ANY -> Targets
+        children::Target+ joinCondition::Condition -> Targets
 
-        children::ANY+ -> Sources
+        children::Source+ -> Sources
 
-        value::ANY queryLanguage::ANY -> BPELQuery
+        value::EString queryLanguage::EString -> BPELQuery
 
-        referenceScheme::ANY value::ANY -> ServiceRef
+        referenceScheme::EString value::EJavaObject -> ServiceRef
 
-        children::ANY+ -> Extensions
+        children::Extension+ -> Extensions
 
          -> ExtensionActivity
 
-        part::ANY to::ANY -> FromPart
+        part::EString to::To -> FromPart
 
-        part::ANY from::ANY -> ToPart
+        part::EString from::From -> ToPart
 
          -> OpaqueActivity
 
-        parallel::ANY counterName::ANY completionCondition::ANY iterator::ANY activity::ANY -> ForEach
+        parallel::EBooleanObject counterName::Variable completionCondition::CompletionCondition iterator::Iterator activity::Activity -> ForEach
 
-        activity::ANY condition::ANY -> RepeatUntil
+        activity::Activity condition::Condition -> RepeatUntil
 
-        activity::ANY -> TerminationHandler
+        activity::Activity -> TerminationHandler
 
-        variables::ANY+ -> Validate
+        variables::Variable+ -> Validate
 
-        condition::ANY then::ANY elseIf::ANY+ else::ANY -> If
+        condition::Condition then::Then elseIf::ElseIf+ else::Else -> If
 
-        activity::ANY -> Then
+        activity::Activity -> Then
 
-        condition::ANY activity::ANY -> ElseIf
+        condition::Condition activity::Activity -> ElseIf
 
-        activity::ANY -> Else
+        activity::Activity -> Else
 
-        branches::ANY -> CompletionCondition
+        branches::Branches -> CompletionCondition
 
-        countCompletedBranchesOnly::ANY -> Branches
+        countCompletedBranchesOnly::EBooleanObject -> Branches
 
-        documentation::ANY -> BPELExtensibleElement
+        Process -> BPELExtensibleElement
 
-        lang::ANY source::ANY value::ANY -> Documentation
+        PartnerLink -> BPELExtensibleElement
 
-        finalCounterValue::ANY startCounterValue::ANY -> Iterator
+        FaultHandler -> BPELExtensibleElement
 
-         -> WSDLElement
+        Activity -> BPELExtensibleElement
 
-        qName::ANY undefined::ANY proxy::ANY resourceURI::ANY eOperations::ANY+ -> PortType
+        CorrelationSet -> BPELExtensibleElement
 
-        style::ANY name::ANY undefined::ANY proxy::ANY resourceURI::ANY eInput::ANY eOutput::ANY eFaults::ANY+ eParameterOrdering::ANY+ -> Operation
+        Link -> BPELExtensibleElement
 
-        qName::ANY undefined::ANY proxy::ANY resourceURI::ANY eParts::ANY+ -> Message
+        Catch -> BPELExtensibleElement
 
-        name::ANY elementName::ANY typeName::ANY typeDefinition::ANY elementDeclaration::ANY eMessage::ANY -> Part
+        Case -> BPELExtensibleElement
 
-        qName::ANY undefined::ANY proxy::ANY resourceURI::ANY ePortType::ANY eBindingOperations::ANY+ -> Binding
+        OnAlarm -> BPELExtensibleElement
 
-        name::ANY eOperation::ANY eBindingInput::ANY eBindingOutput::ANY eBindingFaults::ANY+ -> BindingOperation
+        Copy -> BPELExtensibleElement
 
-        qName::ANY undefined::ANY proxy::ANY resourceURI::ANY ePorts::ANY+ -> Service
+        Extension -> BPELExtensibleElement
 
-        name::ANY eBinding::ANY -> Port
+        CompensationHandler -> BPELExtensibleElement
 
-        required::ANY elementType::ANY -> ExtensibilityElement
+        To -> BPELExtensibleElement
 
-        targetNamespace::ANY location::ANY qName::ANY encoding::ANY eImports::ANY+ eTypes::ANY eMessages::ANY+ ePortTypes::ANY+ eBindings::ANY+ eServices::ANY+ eNamespaces::ANY+ -> Definition
+        OnMessage -> BPELExtensibleElement
 
-        namespaceURI::ANY locationURI::ANY eDefinition::ANY eSchema::ANY -> WSDLImport
+        Correlation -> BPELExtensibleElement
 
-         -> WSDLExtensibleElement
+        EventHandler -> BPELExtensibleElement
+
+        Source -> BPELExtensibleElement
+
+        Target -> BPELExtensibleElement
+
+        PartnerLinks -> BPELExtensibleElement
+
+        Variables -> BPELExtensibleElement
+
+        CorrelationSets -> BPELExtensibleElement
+
+        Links -> BPELExtensibleElement
+
+        CatchAll -> BPELExtensibleElement
+
+        Correlations -> BPELExtensibleElement
+
+        Variable -> BPELExtensibleElement
+
+        Otherwise -> BPELExtensibleElement
+
+        OnEvent -> BPELExtensibleElement
+
+        Targets -> BPELExtensibleElement
+
+        Sources -> BPELExtensibleElement
+
+        Extensions -> BPELExtensibleElement
+
+        TerminationHandler -> BPELExtensibleElement
+
+        Then -> BPELExtensibleElement
+
+        ElseIf -> BPELExtensibleElement
+
+        Else -> BPELExtensibleElement
+
+        documentation::Documentation -> BPELExtensibleElement
+
+        lang::EString source::EString value::EString -> Documentation
+
+        finalCounterValue::Expression startCounterValue::Expression -> Iterator
+
+        WSDLExtensibleElement -> WSDLElement
+
+        MessageReference -> WSDLElement
+
+        qName::QName undefined::EBoolean proxy::EBoolean resourceURI::EString eOperations::Operation+ -> PortType
+
+        style::OperationType name::EString undefined::EBoolean proxy::EBoolean resourceURI::EString eInput::Input eOutput::Output eFaults::Fault+ eParameterOrdering::Part+ -> Operation
+
+        qName::QName undefined::EBoolean proxy::EBoolean resourceURI::EString eParts::Part+ -> Message
+
+        name::EString elementName::QName typeName::QName typeDefinition::XSDTypeDefinition elementDeclaration::XSDElementDeclaration eMessage::Message -> Part
+
+        qName::QName undefined::EBoolean proxy::EBoolean resourceURI::EString ePortType::PortType eBindingOperations::BindingOperation+ -> Binding
+
+        name::EString eOperation::Operation eBindingInput::BindingInput eBindingOutput::BindingOutput eBindingFaults::BindingFault+ -> BindingOperation
+
+        qName::QName undefined::EBoolean proxy::EBoolean resourceURI::EString ePorts::Port+ -> Service
+
+        name::EString eBinding::Binding -> Port
+
+        Property -> ExtensibilityElement
+
+        PropertyAlias -> ExtensibilityElement
+
+        MessagepropertiesQuery -> ExtensibilityElement
+
+        PartnerLinkType -> ExtensibilityElement
+
+        Role -> ExtensibilityElement
+
+        Expression -> ExtensibilityElement
+
+        UnknownExtensibilityElement -> ExtensibilityElement
+
+        XSDSchemaExtensibilityElement -> ExtensibilityElement
+
+        required::EBoolean elementType::QName -> ExtensibilityElement
+
+        targetNamespace::EString location::EString qName::QName encoding::EString eImports::WSDLImport+ eTypes::Types eMessages::Message+ ePortTypes::PortType+ eBindings::Binding+ eServices::Service+ eNamespaces::Namespace+ -> Definition
+
+        namespaceURI::EString locationURI::EString eDefinition::Definition eSchema::XSDSchema -> WSDLImport
+
+        BPELExtensibleElement -> WSDLExtensibleElement
 
          -> Input
 
@@ -391,64 +571,18 @@ exports
 
          -> Fault
 
-        name::ANY eInput::ANY -> BindingInput
+        name::EString eInput::Input -> BindingInput
 
-        name::ANY eOutput::ANY -> BindingOutput
+        name::EString eOutput::Output -> BindingOutput
 
-        name::ANY eFault::ANY -> BindingFault
+        name::EString eFault::Fault -> BindingFault
 
-        URI::ANY prefix::ANY -> Namespace
-
-         -> IPortType
-
-         -> IOperation
-
-         -> IInput
-
-         -> IOutput
-
-         -> IFault
-
-         -> IMessage
-
-         -> IPart
-
-         -> IService
-
-         -> IPort
-
-         -> IBinding
-
-         -> IBindingOperation
-
-         -> IBindingInput
-
-         -> IBindingOutput
-
-         -> IBindingFault
-
-         -> IExtensibilityElement
-
-         -> IDefinition
-
-         -> IImport
-
-         -> IList
-
-         -> IMap
-
-         -> IURL
-
-         -> IExtensionRegistry
+        URI::EString prefix::EString -> Namespace
 
          -> Types
 
-         -> IIterator
+        UnknownExtensibilityAttribute -> UnknownExtensibilityElement
 
-         -> ITypes
+        children::UnknownExtensibilityElement+ -> UnknownExtensibilityElement
 
-        children::ANY+ -> UnknownExtensibilityElement
-
-        schema::ANY -> XSDSchemaExtensibilityElement
-
-         -> MessageReference
+        schema::XSDSchema -> XSDSchemaExtensibilityElement

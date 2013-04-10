@@ -3,97 +3,100 @@ module MSOfficeExcel_SpreadsheetMLBasicDef
 
 syntax DateTimeType
         = 
-        ANY year ANY month ANY day ANY hour ANY minute ANY second
+        Integer year Integer month Integer day Integer hour Integer minute Integer second
  ;
 syntax VersionType
         = 
-        ANY n ANY nn
+        Integer n Integer nn
  ;
 syntax ValueType
-        = 
-        ()
+        = StringValue
+        | NumberValue
+        | DateTimeTypeValue
+        | BooleanValue
+        | ErrorValue
  ;
 syntax StringValue
         = 
-        value: ANY
+        value: String
  ;
 syntax NumberValue
         = 
-        value: ANY
+        value: Double
  ;
 syntax DateTimeTypeValue
         = 
-        value: ANY
+        value: DateTimeType
  ;
 syntax BooleanValue
         = 
-        value: ANY
+        value: Boolean
  ;
 syntax ErrorValue
         = 
-        ANY vt_data
+        vt_data: Data
  ;
 syntax DocumentPropertiesCollection
         = 
-        ANY dp_workbook ANY title ANY subject ANY keywords ANY description ANY category ANY author ANY lastAuthor ANY manager ANY company ANY hyperlinkBase ANY revision ANY presentationFormat ANY guid ANY appName ANY version ANY totalTime ANY lastPrinted ANY created ANY lastSaved ANY pages ANY words ANY characters ANY charactersWithSpaces ANY bytes ANY lines ANY paragraphs
+        Workbook dp_workbook String title String subject String keywords String description String category String author String lastAuthor String manager String company String hyperlinkBase Integer revision String presentationFormat String guid String appName VersionType version Integer totalTime DateTimeType lastPrinted DateTimeType created DateTimeType lastSaved Integer pages Integer words Integer characters Integer charactersWithSpaces Integer bytes Integer lines Integer paragraphs
  ;
 syntax CustomDocumentPropertiesCollection
         = 
-        ANY cdp_workbook ANY customDocumentProperties+
+        Workbook cdp_workbook CustomDocumentProperty customDocumentProperties+
  ;
 syntax CustomDocumentProperty
         = 
-        ANY customDocumentProperty_cdpe ANY name ANY value
+        CustomDocumentPropertiesCollection customDocumentProperty_cdpe String name ValueType value
  ;
 syntax SmartTagType
         = 
-        ANY smartTagType_ste ANY namespaceuri ANY name ANY url
+        SmartTagsCollection smartTagType_ste String namespaceuri String name String url
  ;
 syntax SmartTagsCollection
         = 
-        ANY st_workbook ANY st_cell ANY smartTagTypes+
+        Workbook st_workbook Cell st_cell SmartTagType smartTagTypes+
  ;
 syntax Workbook
         = 
-        ANY wb_smartTags ANY wb_docProperties ANY wb_customDocProperties ANY wb_worksheets+
+        SmartTagsCollection wb_smartTags DocumentPropertiesCollection wb_docProperties CustomDocumentPropertiesCollection wb_customDocProperties Worksheet wb_worksheets+
  ;
 syntax Worksheet
         = 
-        ANY ws_workbook ANY ws_table ANY name
+        Workbook ws_workbook Table ws_table String name
  ;
 syntax StyledElement
-        = 
-        ()
+        = Table
+        | TableElement
  ;
 syntax Table
         = 
-        ANY t_worksheet ANY t_cols+ ANY t_rows+ ANY defaultColumnWidth ANY defaultRowHeight ANY expandedColumnCount ANY expandedRowCount ANY leftCell ANY topCell ANY fullColumns ANY fullRows
+        Worksheet t_worksheet Column t_cols+ Row t_rows+ Double defaultColumnWidth Double defaultRowHeight Integer expandedColumnCount Integer expandedRowCount Integer leftCell Integer topCell Boolean fullColumns Boolean fullRows
  ;
 syntax TableElement
-        = 
-        ()
+        = ColOrRowElement
+        | Cell
  ;
 syntax ColOrRowElement
-        = 
-        ()
+        = Column
+        | Row
  ;
 syntax Column
         = 
-        ANY c_table ANY autoFitWidth ANY width
+        Table c_table Boolean autoFitWidth Double width
  ;
 syntax Row
         = 
-        ANY r_table ANY r_cells+ ANY autoFitHeight ANY height
+        Table r_table Cell r_cells+ Boolean autoFitHeight Double height
  ;
 syntax Cell
         = 
-        ANY c_row ANY c_smartTags+ ANY arrayRange ANY formula ANY hRef ANY mergeAcross ANY mergeDown ANY c_data ANY c_comment
+        Row c_row SmartTagsCollection c_smartTags+ String arrayRange String formula String hRef Double mergeAcross Double mergeDown Data c_data Comment c_comment
  ;
 syntax Comment
         = 
-        ANY c_cell ANY com_data ANY author ANY showAlways
+        Cell c_cell Data com_data String author Boolean showAlways
  ;
 syntax Data
         = 
-        ANY d_cell ANY d_comment ANY value
+        Cell d_cell Comment d_comment ValueType value
  ;

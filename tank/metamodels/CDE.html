@@ -13,23 +13,36 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable CDE 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Hugo Bruneliere, <code>CDE.ecore</code>, 2005/08/10.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>9</strong></li><li>Number of top alternatives: <strong>9</strong></li><li>Number of defined nonterminal symbols: <strong>9</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>9</strong>: <code><a href="#IUmlType" class="nt">IUmlType</a>, <a href="#ICdeComponentSpec" class="nt">ICdeComponentSpec</a>, <a href="#IUmlClass" class="nt">IUmlClass</a>, <a href="#IUmlComponent" class="nt">IUmlComponent</a>, <a href="#ICdeServer" class="nt">ICdeServer</a>, <a href="#ICdeComponent" class="nt">ICdeComponent</a>, <a href="#IUmlMember" class="nt">IUmlMember</a>, <a href="#ICdeMember" class="nt">ICdeMember</a>, <a href="#ICdeMemberExe" class="nt">ICdeMemberExe</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="IUmlType">IUmlType</a>:
-        <span class="sel">members</span>::<span class="meta">any</span><span class="meta">+</span>
+				</script></head><body><h1 class="l">Browsable CDE 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Hugo Bruneliere, <code>CDE.ecore</code>, 2005/08/10.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>15</strong></li><li>Number of top alternatives: <strong>16</strong></li><li>Number of defined nonterminal symbols: <strong>9</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>2</strong>: <code><a href="#IUmlType" class="nt">IUmlType</a>, <a href="#ICdeMemberExe" class="nt">ICdeMemberExe</a></code></li><li>Bottom nonterminal symbols: <strong>1</strong>: <code><a href="#String" class="nt">String</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="IUmlType">IUmlType</a>:
+        <a class="nt" href="#ICdeComponentSpec">ICdeComponentSpec</a>
+</pre><pre><a class="nt" name="IUmlType">IUmlType</a>:
+        <a class="nt" href="#IUmlClass">IUmlClass</a>
+</pre><pre><a class="nt" name="IUmlType">IUmlType</a>:
+        <span class="sel">members</span>::<a class="nt" href="#IUmlMember">IUmlMember</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="ICdeComponentSpec">ICdeComponentSpec</a>:
         ε
 </pre><pre><a class="nt" name="IUmlClass">IUmlClass</a>:
-        ε
+        <a class="nt" href="#IUmlComponent">IUmlComponent</a>
+</pre><pre><a class="nt" name="IUmlClass">IUmlClass</a>:
+        <a class="nt" href="#IUmlComponent">IUmlComponent</a>
 </pre><pre><a class="nt" name="IUmlComponent">IUmlComponent</a>:
-        ε
+        <a class="nt" href="#ICdeServer">ICdeServer</a>
+</pre><pre><a class="nt" name="IUmlComponent">IUmlComponent</a>:
+        <a class="nt" href="#ICdeComponent">ICdeComponent</a>
+</pre><pre><a class="nt" name="IUmlComponent">IUmlComponent</a>:
+        <a class="nt" href="#ICdeServer">ICdeServer</a>
+        <a class="nt" href="#ICdeComponent">ICdeComponent</a>
 </pre><pre><a class="nt" name="ICdeServer">ICdeServer</a>:
-        <span class="sel">implements</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">implements</span>::<a class="nt" href="#ICdeComponent">ICdeComponent</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="ICdeComponent">ICdeComponent</a>:
         ε
 </pre><pre><a class="nt" name="IUmlMember">IUmlMember</a>:
-        ε
+        <a class="nt" href="#ICdeMember">ICdeMember</a>
+</pre><pre><a class="nt" name="IUmlMember">IUmlMember</a>:
+        <a class="nt" href="#ICdeMember">ICdeMember</a>
 </pre><pre><a class="nt" name="ICdeMember">ICdeMember</a>:
         ε
 </pre><pre><a class="nt" name="ICdeMemberExe">ICdeMemberExe</a>:
-        <span class="sel">executionPerformance</span>::<span class="meta">any</span> <span class="sel">resourceNeeded</span>::<span class="meta">any</span> <span class="sel">executionDetails</span>::<span class="meta">any</span>
+        <span class="sel">executionPerformance</span>::<a class="nt" href="#String">String</a> <span class="sel">resourceNeeded</span>::<a class="nt" href="#String">String</a> <span class="sel">executionDetails</span>::<a class="nt" href="#String">String</a>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

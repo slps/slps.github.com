@@ -2,40 +2,49 @@
 module UEMLExtended
 
 syntax UEMLObject
-        = 
-        ANY has ANY model
+        = UEMLModel
+        | Port
+        | Flow
+        | Object
+        | Geometry has UEMLModel model
  ;
 syntax UEMLModel
         = 
-        ANY contains+
+        UEMLObject contains+
  ;
 syntax Geometry
         = 
-        object: ANY
+        object: UEMLObject
  ;
 syntax Port
-        = 
-        ()
+        = ResourceRole
+        | Anchor
  ;
 syntax Flow
-        = 
-        associationConnector: ANY
+        = ResourceFlow
+        | IOFlow
+        | ControlFlow
+        | associationConnector: AssociationConnector
  ;
 syntax Activity
-        = 
-        ANY resourceRole+ ANY parent ANY hasOutput+ ANY hasInput+ ANY activityType
+        = Process
+        | Task
+        | ResourceRole resourceRole+ Process parent OutputPort hasOutput+ InputPort hasInput+ ActivityType activityType
  ;
 syntax Object
-        = 
-        ioFlow: ANY
+        = InformationObject
+        | Resource
+        | ioFlow: IOFlow
  ;
 syntax InformationObject
         = 
-        controlFlow: ANY
+        controlFlow: ControlFlow
  ;
 syntax Resource
-        = 
-        ANY carries ANY plays+ ANY resourceType ANY commitment+
+        = PassiveObject
+        | Service
+        | Agent
+        | ResourceFlow carries ResourceRole plays+ ResourceType resourceType Commitment commitment+
  ;
 syntax MaterialResource
         = 
@@ -47,15 +56,16 @@ syntax HumanResource
  ;
 syntax ResourceFlow
         = 
-        ANY resourceCarries+
+        Resource resourceCarries+
  ;
 syntax IOFlow
         = 
-        ANY carries+
+        Object carries+
  ;
 syntax ControlFlow
-        = 
-        ANY carries+
+        = TriggerFlow
+        | ConstraintFlow
+        | InformationObject carries+
  ;
 syntax TriggerFlow
         = 
@@ -67,23 +77,23 @@ syntax ConstraintFlow
  ;
 syntax ResourceRole
         = 
-        ANY resourcePlays+ ANY roleQualifier ANY in
+        Resource resourcePlays+ RoleType roleQualifier Activity in
  ;
 syntax RoleType
         = 
         ()
  ;
 syntax Anchor
-        = 
-        ()
+        = OutputPort
+        | InputPort
  ;
 syntax OutputPort
         = 
-        activity: ANY
+        activity: Activity
  ;
 syntax InputPort
         = 
-        activity: ANY
+        activity: Activity
  ;
 syntax ConnectionOperator
         = 
@@ -91,11 +101,11 @@ syntax ConnectionOperator
  ;
 syntax AssociationConnector
         = 
-        ANY origin+ ANY target+ ANY classAssociation
+        FlowObject origin+ FlowObject target+ Flow classAssociation
  ;
 syntax FlowObject
-        = 
-        ANY target ANY origin
+        = Event
+        | AssociationConnector target AssociationConnector origin
  ;
 syntax Event
         = 
@@ -103,19 +113,20 @@ syntax Event
  ;
 syntax ResourceType
         = 
-        ANY resource+
+        Resource resource+
  ;
 syntax ActivityType
         = 
-        ANY activityT+
+        Activity activityT+
  ;
 syntax PassiveObject
-        = 
-        ()
+        = MaterialResource
+        | Commitment
+        | Contract
  ;
 syntax Commitment
         = 
-        ANY resource+ ANY task ANY agentO ANY agentC ANY contract
+        Resource resource+ Task task Agent agentO Agent agentC Contract contract
  ;
 syntax Software
         = 
@@ -127,21 +138,23 @@ syntax Organisation
  ;
 syntax Process
         = 
-        ANY child ANY fulfills+ ANY realises
+        Activity child Contract fulfills+ Service realises
  ;
 syntax Service
         = 
-        process: ANY
+        process: Process
  ;
 syntax Agent
-        = 
-        ANY obliger ANY claimer ANY has_parties
+        = HumanResource
+        | Software
+        | Organisation
+        | Commitment obliger Commitment claimer Contract has_parties
  ;
 syntax Contract
         = 
-        ANY process+ ANY agent ANY collection_of+
+        Process process+ Agent agent Commitment collection_of+
  ;
 syntax Task
         = 
-        ANY fulfills+
+        Commitment fulfills+
  ;

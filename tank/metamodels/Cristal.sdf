@@ -4,20 +4,28 @@ exports
   sorts
         Condition CompositeParDef ElementaryPartDef ElementaryActDef CompositeActDef ActCompositeMember ActivityDefinition PartDefinition PartCompositeMember 
   context-free syntax
-        partCompositeMembers::ANY+ actCompositeMembers::ANY+ -> Condition
+        partCompositeMembers::PartCompositeMember+ actCompositeMembers::ActCompositeMember+ -> Condition
 
-        partCompositeMember::ANY+ -> CompositeParDef
+        partCompositeMember::PartCompositeMember+ -> CompositeParDef
 
          -> ElementaryPartDef
 
          -> ElementaryActDef
 
-        actCompositeMembers::ANY+ -> CompositeActDef
+        actCompositeMembers::ActCompositeMember+ -> CompositeActDef
 
-        activityDefinitions::ANY+ -> ActCompositeMember
+        activityDefinitions::ActivityDefinition+ -> ActCompositeMember
 
-        actCompositeMember::ANY -> ActivityDefinition
+        ElementaryActDef -> ActivityDefinition
 
-        partCompositeMembers::ANY+ -> PartDefinition
+        CompositeActDef -> ActivityDefinition
 
-        partDefinitions::ANY -> PartCompositeMember
+        actCompositeMember::ActCompositeMember -> ActivityDefinition
+
+        CompositeParDef -> PartDefinition
+
+        ElementaryPartDef -> PartDefinition
+
+        partCompositeMembers::PartCompositeMember+ -> PartDefinition
+
+        partDefinitions::PartDefinition -> PartCompositeMember

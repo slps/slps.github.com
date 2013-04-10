@@ -4,17 +4,30 @@ exports
   sorts
         Requirement NonFunctionnelRequirement FunctionnelRequirement UseCase Goal Role HumanRole SystemRole EventRole Manage Resource ScenarioDescription Condition Pre Post 
   context-free syntax
-         -> Requirement
+        NonFunctionnelRequirement -> Requirement
 
-        scopes::ANY+ -> NonFunctionnelRequirement
+        FunctionnelRequirement -> Requirement
 
-        specifies::ANY+ -> FunctionnelRequirement
+        NonFunctionnelRequirement -> Requirement
+        FunctionnelRequirement -> Requirement
 
-        scenario::ANY+ condition::ANY+ interacter::ANY+ specified_by::ANY+ scoped_by::ANY+ meet_by::ANY+ -> UseCase
+        scopes::UseCase+ -> NonFunctionnelRequirement
 
-        to_meet::ANY+ -> Goal
+        specifies::UseCase+ -> FunctionnelRequirement
 
-        interacted_with::ANY+ -> Role
+        Manage -> UseCase
+
+        scenario::ScenarioDescription+ condition::Condition+ interacter::Role+ specified_by::FunctionnelRequirement+ scoped_by::NonFunctionnelRequirement+ meet_by::Goal+ -> UseCase
+
+        to_meet::UseCase+ -> Goal
+
+        HumanRole -> Role
+
+        SystemRole -> Role
+
+        EventRole -> Role
+
+        interacted_with::UseCase+ -> Role
 
          -> HumanRole
 
@@ -22,13 +35,17 @@ exports
 
          -> EventRole
 
-        managed_Resource::ANY+ -> Manage
+        managed_Resource::Resource+ -> Manage
 
          -> Resource
 
-        useCase::ANY -> ScenarioDescription
+        useCase::UseCase -> ScenarioDescription
 
-        constrained_with::ANY+ -> Condition
+        Pre -> Condition
+
+        Post -> Condition
+
+        constrained_with::UseCase+ -> Condition
 
          -> Pre
 

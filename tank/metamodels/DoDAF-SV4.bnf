@@ -1,86 +1,168 @@
 Element:
-        EPSILON
+        DoDAFModel
+Element:
+        Document
+Element:
+        SystemDocument
+Element:
+        ArchitectureDocument
+Element:
+        System
+Element:
+        SystemPA
+Element:
+        IE
+Element:
+        AMIERole
+Element:
+        AMIERoleGraphic
+Element:
+        InformationAssetDocument
+Element:
+        AMPA
+Element:
+        AMPAGraphic
+Element:
+        PA
+Element:
+        PACapability
+Element:
+        InformationAsset
+Element:
+        SystemPAStandard
+Element:
+        InformationTechnologyStandard
+Element:
+        LineOfBusiness
+Element:
+        Task
+Element:
+        BusinessSubfunction
+Element:
+        ArchitectureBusinessSubFunction
+Element:
+        OperationalRolePA
+Element:
+        OperationalRole
+Element:
+        OrganizationTypeOperationalRole
+Element:
+        OrganizationOperationalRole
+Element:
+        Occupation
+Element:
+        PersonType
+Element:
+        PersonTypeCapabilityNorm
+Element:
+        Skill
+Element:
+        Position
 DoDAFModel:
-        document::ANY+ sfd::ANY+ amSpecification::ANY+ sd::ANY+ task::ANY+ iaDocument::ANY+ position::ANY+ occupation::ANY+ ad::ANY+ system::ANY+ am::ANY+ spas::ANY+ its::ANY+ orpa::ANY+ ptcn::ANY+
+        document::Document+ sfd::SystemFunctionalityDescription+ amSpecification::AMSpecification+ sd::SystemDocument+ task::Task+ iaDocument::InformationAssetDocument+ position::Position+ occupation::Occupation+ ad::ArchitectureDocument+ system::System+ am::AM+ spas::SystemPAStandard+ its::InformationTechnologyStandard+ orpa::OperationalRolePA+ ptcn::PersonTypeCapabilityNorm+
 Document:
-        type::ANY cites::ANY+ describes::ANY+ records::ANY+ isTheReferenceFor::ANY+ isThePrimaryReferenceFor::ANY+
+        SystemFunctionalityDescription
+Document:
+        FunctionalSpecification
+Document:
+        AMSpecification
+Document:
+        type::String cites::InformationAssetDocument+ describes::SystemDocument+ records::ArchitectureDocument+ isTheReferenceFor::IE+ isThePrimaryReferenceFor::PA+
 SystemFunctionalityDescription:
         EPSILON
 FunctionalSpecification:
-        mayBeA::ANY
+        mayBeA::SystemDocument
 AMSpecification:
-        isUsedIn::ANY+
+        isUsedIn::FunctionalSpecification+
 SystemDocument:
-        name::ANY description::ANY view::ANY
+        name::String description::String view::String
 ArchitectureDocument:
-        name::ANY description::ANY view::ANY
+        name::String description::String view::String
 System:
-        isDesignedToProvide::ANY+ isDescribedBy::ANY+
+        isDesignedToProvide::SystemPA+ isDescribedBy::SystemDocument+
 SystemPA:
-        isDefinedUsing::ANY+
+        isDefinedUsing::SystemPAStandard+
 IE:
-        isAssociatedWith::ANY+ isOrdinateOf::ANY+ isSubordinateOf::ANY+
+        isAssociatedWith::AMIERole+ isOrdinateOf::IE+ isSubordinateOf::IE+
 AMIERole:
-        defines::ANY+ isRepresentedBy::ANY+
+        Input
+AMIERole:
+        Output
+AMIERole:
+        defines::AMPA+ isRepresentedBy::AMIERoleGraphic+
 AMIERoleGraphic:
-        name::ANY description::ANY view::ANY
+        name::String description::String view::String
 Input:
-        isTheInputThatIsDefinedBy::ANY+ source::ANY destination::ANY information::ANY
+        isTheInputThatIsDefinedBy::Output+ source::String destination::String information::String
 Output:
-        source::ANY destination::ANY information::ANY
+        source::String destination::String information::String
 InformationAssetDocument:
-        name::ANY description::ANY view::ANY
+        name::String description::String view::String
 AMPA:
-        isOrdinateOf::ANY+ isSubordinateOf::ANY+ defines::ANY+ isRepresentedBy::ANY+
+        isOrdinateOf::AMPA+ isSubordinateOf::AMPA+ defines::AMIERole+ isRepresentedBy::AMPAGraphic+
 AMPAGraphic:
-        name::ANY description::ANY view::ANY
+        name::String description::String view::String
 PA:
-        isParentFor::ANY+ isChildFor::ANY+ isIncludedIn::ANY+ isAssignedTo::ANY+ represents::ANY+ correspondsTo::ANY+ has::ANY+ isPerformedBy::ANY+
+        DataStore
+PA:
+        SystemFunction
+PA:
+        isParentFor::PA+ isChildFor::PA+ isIncludedIn::AMPA+ isAssignedTo::SystemPA+ represents::ArchitectureBusinessSubFunction+ correspondsTo::PATask+ has::PACapability+ isPerformedBy::OperationalRolePA+
 PACapability:
-        name::ANY description::ANY view::ANY
+        name::String description::String view::String
 AM:
-        type::ANY isCitedBy::ANY+ specifies::ANY+ includes::ANY+ isUsedToDescribe::ANY+ defines::ANY+
+        type::String isCitedBy::PATask+ specifies::AMSpecification+ includes::AMPA+ isUsedToDescribe::SystemFunctionalityDescription+ defines::LineOfBusiness+
 InformationAsset:
-        isCitedIn::ANY+ describes::ANY+
+        AM
+InformationAsset:
+        isCitedIn::InformationAssetDocument+ describes::DataStore+
 DataStore:
         EPSILON
 SystemFunction:
         EPSILON
 SystemPAStandard:
-        isUsedToDefine::ANY+
+        isUsedToDefine::InformationTechnologyStandard+
 InformationTechnologyStandard:
-        isUsedToDefine::ANY+
+        isUsedToDefine::SystemPAStandard+
 LineOfBusiness:
-        appliesToTask::ANY+ appliesToBS::ANY+
+        appliesToTask::Task+ appliesToBS::BusinessSubfunction+
 Task:
-        levelIdentifier::ANY references::ANY cost::ANY correspondsTo::ANY+ supports::ANY+
+        HumanBehaviourTask
+Task:
+        OperationalCapabilityTask
+Task:
+        TaskMissionArea
+Task:
+        PATask
+Task:
+        levelIdentifier::String references::String cost::String correspondsTo::PATask+ supports::TaskMissionArea+
 HumanBehaviourTask:
         EPSILON
 OperationalCapabilityTask:
         EPSILON
 TaskMissionArea:
-        hasContributionFrom::ANY+
+        hasContributionFrom::OperationalCapabilityTask+
 PATask:
         EPSILON
 BusinessSubfunction:
-        appliesTo::ANY+
+        appliesTo::ArchitectureBusinessSubFunction+
 ArchitectureBusinessSubFunction:
-        name::ANY description::ANY view::ANY
+        name::String description::String view::String
 OperationalRolePA:
-        name::ANY description::ANY view::ANY
+        name::String description::String view::String
 OperationalRole:
-        performs::ANY+ isPerformedByOTOR::ANY+ isPerformedByOOR::ANY+
+        performs::OperationalRolePA+ isPerformedByOTOR::OrganizationTypeOperationalRole+ isPerformedByOOR::OrganizationOperationalRole+
 OrganizationTypeOperationalRole:
-        name::ANY description::ANY view::ANY
+        name::String description::String view::String
 OrganizationOperationalRole:
-        name::ANY description::ANY view::ANY
+        name::String description::String view::String
 Occupation:
-        mayBeCitedForOR::ANY+ mayBeCitedForPT::ANY+
+        mayBeCitedForOR::OperationalRole+ mayBeCitedForPT::PersonType+
 PersonType:
-        mayBeCitedFor::ANY+ performsTo::ANY+ can::ANY+
+        mayBeCitedFor::OperationalRole+ performsTo::PersonTypeCapabilityNorm+ can::Skill+
 PersonTypeCapabilityNorm:
-        name::ANY description::ANY view::ANY
+        name::String description::String view::String
 Skill:
-        mayBeCitedFor::ANY+
+        mayBeCitedFor::OperationalRole+
 Position:
-        mayBeCitedFor::ANY+
+        mayBeCitedFor::OperationalRole+

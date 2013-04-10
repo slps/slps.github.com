@@ -1,10 +1,12 @@
 JavaSource:
-        classes::ANY+
+        classes::ClassDeclaration+
 NamedElement:
-        EPSILON
+        ClassDeclaration
+NamedElement:
+        MethodDefinition
 ClassDeclaration:
-        superclass::ANY methods::ANY+
+        superclass::ClassDeclaration methods::MethodDefinition+
 MethodDefinition:
-        class::ANY invocations::ANY+
+        class::ClassDeclaration invocations::MethodInvocation+
 MethodInvocation:
-        method::ANY
+        method::MethodDefinition

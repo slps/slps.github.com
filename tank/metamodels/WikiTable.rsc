@@ -2,22 +2,24 @@
 module WikiTable
 
 syntax LocatedElement
-        = 
-        ()
+        = Table
+        | Caption
+        | Row
+        | Cell
  ;
 syntax Table
         = 
-        ANY border ANY style ANY class ANY caption ANY rows+
+        Integer border String style String class Caption caption Row rows+
  ;
 syntax Caption
         = 
-        content: ANY
+        content: String
  ;
 syntax Row
         = 
-        ANY cells+
+        Cell cells+
  ;
 syntax Cell
         = 
-        ANY isHeading ANY align ANY style ANY content
+        Boolean isHeading String align String style String content
  ;

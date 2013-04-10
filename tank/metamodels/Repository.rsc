@@ -3,23 +3,24 @@ module Repository
 
 syntax Subsystem
         = 
-        ANY classes+ ANY relations+
+        Class classes+ Relation relations+
  ;
 syntax Relation
         = 
-        ANY subsystem ANY classes
+        Subsystem subsystem Class classes
  ;
 syntax Class
         = 
-        ANY name ANY is_deferred ANY features+ ANY parentSubsystem ANY subsystem ANY relations+
+        String name Boolean is_deferred Feature features+ Subsystem parentSubsystem Subsystem subsystem Relation relations+
  ;
 syntax Feature
-        = 
-        ANY theClass ANY type
+        = Entity
+        | Routine
+        | Class theClass Type type
  ;
 syntax Type
         = 
-        name: ANY
+        name: String
  ;
 syntax Entity
         = 

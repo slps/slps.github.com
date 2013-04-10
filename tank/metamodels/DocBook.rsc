@@ -3,25 +3,25 @@ module DocBook
 
 syntax DocBook
         = 
-        ANY books+
+        Book books+
  ;
 syntax Book
         = 
-        ANY articles+
+        Article articles+
  ;
 syntax TitledElement
-        = 
-        ()
+        = Article
+        | Sect1
  ;
 syntax Article
         = 
-        ANY sections_1+
+        Sect1 sections_1+
  ;
 syntax Sect1
         = 
-        ANY paras+
+        Para paras+
  ;
 syntax Para
         = 
-        content: ANY
+        content: String
  ;

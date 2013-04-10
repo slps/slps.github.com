@@ -4,28 +4,46 @@ exports
   sorts
         IdentifiedElement MElement MElementReference Module ModuleMember ImportDirective ExportDirective Value NumericalValue StringValue IntegerValue DecimalValue BooleanValue 
   context-free syntax
-         -> IdentifiedElement
+        MElement -> IdentifiedElement
 
-         -> MElement
+        Field -> IdentifiedElement
 
-        alias::ANY referencedElement::ANY -> MElementReference
+        Collection -> IdentifiedElement
 
-        imports::ANY+ exports::ANY+ moduleMembers::ANY+ -> Module
+        ComputedValue -> IdentifiedElement
 
-         -> ModuleMember
+        Module -> MElement
 
-        module::ANY importedElements::ANY+ -> ImportDirective
+        ModuleMember -> MElement
 
-        module::ANY exportedElements::ANY+ -> ExportDirective
+        alias::String referencedElement::MElement -> MElementReference
 
-         -> Value
+        imports::ImportDirective+ exports::ExportDirective+ moduleMembers::ModuleMember+ -> Module
 
-         -> NumericalValue
+        DerivedType -> ModuleMember
 
-        value::ANY -> StringValue
+        Language -> ModuleMember
 
-        value::ANY -> IntegerValue
+        Entity -> ModuleMember
 
-        value::ANY -> DecimalValue
+        module::Module importedElements::MElementReference+ -> ImportDirective
 
-        value::ANY -> BooleanValue
+        module::Module exportedElements::ModuleMember+ -> ExportDirective
+
+        NumericalValue -> Value
+
+        StringValue -> Value
+
+        BooleanValue -> Value
+
+        IntegerValue -> NumericalValue
+
+        DecimalValue -> NumericalValue
+
+        value::String -> StringValue
+
+        value::Integer -> IntegerValue
+
+        value::Double -> DecimalValue
+
+        value::Boolean -> BooleanValue

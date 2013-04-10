@@ -2,62 +2,68 @@
 module HierarchicalStateMachine
 
 syntax MgaObject
-        = 
-        ANY name ANY position
+        = StateBase
+        | DataVar
+        | Transition
+        | StateDateRelation
+        | String name String position
  ;
 syntax StateBase
-        = 
-        ANY defaultTransition ANY marked ANY associationStateStatedst+ ANY associationStateStatesrc+ ANY data+ ANY associationDataStateBase
+        = CompoundState
+        | PrimitiveState
+        | String defaultTransition Boolean marked AssociationStateState associationStateStatedst+ AssociationStateState associationStateStatesrc+ DataVar data+ AssociationDataStateBase associationDataStateBase
  ;
 syntax DataVar
         = 
-        ANY stateBase+ ANY orState ANY associationDataStateBase
+        StateBase stateBase+ OrState orState AssociationDataStateBase associationDataStateBase
  ;
 syntax Transition
         = 
-        ANY guard ANY trigger ANY action ANY isSync ANY orState ANY associationStateState
+        String guard String trigger String action Boolean isSync OrState orState AssociationStateState associationStateState
  ;
 syntax StateDateRelation
         = 
-        ANY value ANY color
+        String value String color
  ;
 syntax RootFolder
         = 
-        ANY name ANY rootFolders+ ANY orState+
+        String name RootFolder rootFolders+ OrState orState+
  ;
 syntax OrState
         = 
-        ANY rootFolder ANY state+ ANY init ANY dataVar+ ANY stateDataRelation+ ANY transition+ ANY compoundState+
+        RootFolder rootFolder State state+ Init init DataVar dataVar+ StateDataRelation stateDataRelation+ Transition transition+ CompoundState compoundState+
  ;
 syntax AndState
         = 
-        ANY compoundState+
+        CompoundState compoundState+
  ;
 syntax CompoundState
-        = 
-        ANY andState ANY orState
+        = OrState
+        | AndState
+        | AndState andState OrState orState
  ;
 syntax PrimitiveState
-        = 
-        ()
+        = Init
+        | State
+        | StateDataRelation
  ;
 syntax Init
         = 
-        orState: ANY
+        orState: OrState
  ;
 syntax State
         = 
-        orState: ANY
+        orState: OrState
  ;
 syntax StateDataRelation
         = 
-        ANY value ANY color ANY orState ANY associationDataStateBase1
+        String value String color OrState orState AssociationDataStateBase associationDataStateBase1
  ;
 syntax AssociationStateState
         = 
-        ANY transition ANY dstTransition+ ANY srcTransition+
+        Transition transition StateBase dstTransition+ StateBase srcTransition+
  ;
 syntax AssociationDataStateBase
         = 
-        ANY stateDataRelation ANY dataVar+ ANY stateBase+
+        StateDataRelation stateDataRelation DataVar dataVar+ StateBase stateBase+
  ;

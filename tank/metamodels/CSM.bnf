@@ -1,21 +1,35 @@
 CSM:
-        step::ANY+ generalResource::ANY+ scenarion::ANY+
+        step::Step+ generalResource::GeneralResource+ scenarion::Scenarion+
 GeneralResource:
-        resourceAcquire::ANY+ resourceRelease::ANY+
+        ActiveResource
+GeneralResource:
+        PassiveResource
+GeneralResource:
+        resourceAcquire::ResourceAcquire+ resourceRelease::ResourceRelease+
 Step:
-        postPath::ANY prePath::ANY activeResource::ANY
+        Start
+Step:
+        End
+Step:
+        ResourceAcquire
+Step:
+        ResourceRelease
+Step:
+        postPath::PathConnection prePath::PathConnection activeResource::ActiveResource
 Scenarion:
-        step::ANY+ root::ANY+
+        Step
+Scenarion:
+        step::Step+ root::Start+
 Start:
-        workload::ANY
+        workload::Workload
 End:
         EPSILON
 ResourceAcquire:
-        generalResource::ANY
+        generalResource::GeneralResource
 ResourceRelease:
-        generalResource::ANY
+        generalResource::GeneralResource
 Workload:
-        start::ANY
+        start::Start
 Component:
         EPSILON
 ProcessingResource:
@@ -23,13 +37,29 @@ ProcessingResource:
 ExternalService:
         EPSILON
 ActiveResource:
-        step::ANY+
+        ProcessingResource
+ActiveResource:
+        ExternalService
+ActiveResource:
+        step::Step+
 PassiveResource:
-        EPSILON
+        Component
+PassiveResource:
+        Component
 Message:
         EPSILON
 PathConnection:
-        message::ANY post::ANY+ pre::ANY+
+        Join
+PathConnection:
+        Fork
+PathConnection:
+        Merge
+PathConnection:
+        Branch
+PathConnection:
+        Seqence
+PathConnection:
+        message::Message post::Step+ pre::Step+
 Join:
         EPSILON
 Fork:

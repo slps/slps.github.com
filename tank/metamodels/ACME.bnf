@@ -1,32 +1,40 @@
 ACMEFile:
-        entries::ANY+
-ACMEEntry:
-        EPSILON
+        entries::ACMEEntry+
 Element:
-        EPSILON
+        Type
+Element:
+        Component
+Element:
+        Port
+Element:
+        Connector
+Element:
+        Role
 Type:
-        name::ANY representations::ANY+ property::ANY+
+        name::String representations::Representation+ property::Property+
 System:
-        componentDeclaration::ANY+ connectorDeclaration::ANY+ attachments::ANY+ bindings::ANY+
+        componentDeclaration::ComponentInstance+ connectorDeclaration::Connector+ attachments::Link+ bindings::Link+
 Representation:
-        systems::ANY+
+        systems::System+
 Component:
-        EPSILON
+        ComponentInstance
 ComponentInstance:
-        instanceOf::ANY
+        instanceOf::String
 ComponentType:
-        extend::ANY
+        extend::String
 Port:
-        name::ANY representations::ANY+ property::ANY+
+        name::String representations::Representation+ property::Property+
 Connector:
-        roles::ANY+ system::ANY
+        roles::Role+ system::System
 Role:
-        name::ANY representations::ANY+ property::ANY+
+        name::String representations::Representation+ property::Property+
 Property:
-        name::ANY val::ANY
+        name::String val::String
 Link:
-        EPSILON
+        Attachment
+Link:
+        Binding
 Attachment:
-        comp::ANY port::ANY con::ANY role::ANY
+        comp::String port::String con::String role::String
 Binding:
-        compSrc::ANY portSrc::ANY compDest::ANY portDest::ANY
+        compSrc::String portSrc::String compDest::String portDest::String

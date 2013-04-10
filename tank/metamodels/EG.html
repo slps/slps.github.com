@@ -13,16 +13,44 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable EG 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Youssef Srour, <code>EG.ecore</code>, 2006/07/24.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>13</strong></li><li>Number of top alternatives: <strong>13</strong></li><li>Number of defined nonterminal symbols: <strong>13</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>13</strong>: <code><a href="#ExecutionGraph" class="nt">ExecutionGraph</a>, <a href="#Node" class="nt">Node</a>, <a href="#Start" class="nt">Start</a>, <a href="#End" class="nt">End</a>, <a href="#Control" class="nt">Control</a>, <a href="#Basic" class="nt">Basic</a>, <a href="#Branch" class="nt">Branch</a>, <a href="#Loop" class="nt">Loop</a>, <a href="#Fork" class="nt">Fork</a>, <a href="#Join" class="nt">Join</a>, <a href="#Acquire" class="nt">Acquire</a>, <a href="#Release" class="nt">Release</a>, <a href="#Split" class="nt">Split</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="ExecutionGraph">ExecutionGraph</a>:
-        <span class="sel">node</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">nodeNested</span>::<span class="meta">any</span>
+				</script></head><body><h1 class="l">Browsable EG 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Youssef Srour, <code>EG.ecore</code>, 2006/07/24.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>24</strong></li><li>Number of top alternatives: <strong>30</strong></li><li>Number of defined nonterminal symbols: <strong>13</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: —</li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="ExecutionGraph">ExecutionGraph</a>:
+        <span class="sel">node</span>::<a class="nt" href="#Node">Node</a><span class="meta">+</span> <span class="sel">nodeNested</span>::<a class="nt" href="#Node">Node</a>
 </pre><pre><a class="nt" name="Node">Node</a>:
-        <span class="sel">predecessor</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">successor</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">executionGraph</span>::<span class="meta">any</span> <span class="sel">nested</span>::<span class="meta">any</span><span class="meta">+</span>
+        <a class="nt" href="#Start">Start</a>
+</pre><pre><a class="nt" name="Node">Node</a>:
+        <a class="nt" href="#End">End</a>
+</pre><pre><a class="nt" name="Node">Node</a>:
+        <a class="nt" href="#Control">Control</a>
+</pre><pre><a class="nt" name="Node">Node</a>:
+        <a class="nt" href="#Basic">Basic</a>
+</pre><pre><a class="nt" name="Node">Node</a>:
+        <span class="sel">predecessor</span>::<a class="nt" href="#Node">Node</a><span class="meta">+</span> <span class="sel">successor</span>::<a class="nt" href="#Node">Node</a><span class="meta">+</span> <span class="sel">executionGraph</span>::<a class="nt" href="#ExecutionGraph">ExecutionGraph</a> <span class="sel">nested</span>::<a class="nt" href="#ExecutionGraph">ExecutionGraph</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Start">Start</a>:
         ε
 </pre><pre><a class="nt" name="End">End</a>:
         ε
 </pre><pre><a class="nt" name="Control">Control</a>:
-        ε
+        <a class="nt" href="#Branch">Branch</a>
+</pre><pre><a class="nt" name="Control">Control</a>:
+        <a class="nt" href="#Loop">Loop</a>
+</pre><pre><a class="nt" name="Control">Control</a>:
+        <a class="nt" href="#Fork">Fork</a>
+</pre><pre><a class="nt" name="Control">Control</a>:
+        <a class="nt" href="#Join">Join</a>
+</pre><pre><a class="nt" name="Control">Control</a>:
+        <a class="nt" href="#Acquire">Acquire</a>
+</pre><pre><a class="nt" name="Control">Control</a>:
+        <a class="nt" href="#Release">Release</a>
+</pre><pre><a class="nt" name="Control">Control</a>:
+        <a class="nt" href="#Split">Split</a>
+</pre><pre><a class="nt" name="Control">Control</a>:
+        <a class="nt" href="#Branch">Branch</a>
+        <a class="nt" href="#Loop">Loop</a>
+        <a class="nt" href="#Fork">Fork</a>
+        <a class="nt" href="#Join">Join</a>
+        <a class="nt" href="#Acquire">Acquire</a>
+        <a class="nt" href="#Release">Release</a>
+        <a class="nt" href="#Split">Split</a>
 </pre><pre><a class="nt" name="Basic">Basic</a>:
         ε
 </pre><pre><a class="nt" name="Branch">Branch</a>:
@@ -40,4 +68,4 @@
 </pre><pre><a class="nt" name="Split">Split</a>:
         ε
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

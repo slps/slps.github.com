@@ -4,138 +4,242 @@ exports
   sorts
         LocatedElement Body InWhereHolds AsmLFile AsmLElement VarDeclaration Namespace Structure VarOrCase Case Class VarOrMethod Enumeration Enumerator Function Method Parameter Main Initially Rule SkipRule Step StepUntilFixPoint StepExpression StepWhile StepUntil StepForEach MethodInvocation UpdateRule UpdateVarRule UpdateFieldRule UpdateMapRule ChooseRule ForallRule ConditionalRule ElseIf ReturnRule AddRule RemoveRule Type NamedType MapType TupletType SetType SequenceType Term VarTerm Operator MapTerm TulpletTerm MethodCallTerm NewInstance PredicateTerm ForAllTerm ExistsTerm AnyIn SetTerm EnumerateSet RangeSet AlgorithmSet SequenceTerm EnumerateSequence RangeSequence Constant BooleanConstant IntegerConstant StringConstant NullConstant 
   context-free syntax
-         -> LocatedElement
+        Body -> LocatedElement
 
-        rules::ANY+ -> Body
+        InWhereHolds -> LocatedElement
 
-        var::ANY in::ANY where::ANY holds::ANY -> InWhereHolds
+        AsmLFile -> LocatedElement
 
-        elements::ANY+ main::ANY -> AsmLFile
+        AsmLElement -> LocatedElement
 
-         -> AsmLElement
+        VarOrCase -> LocatedElement
 
-        isConstant::ANY isDeclaration::ANY isLocal::ANY name::ANY type::ANY -> VarDeclaration
+        VarOrMethod -> LocatedElement
 
-        name::ANY -> Namespace
+        Enumerator -> LocatedElement
 
-        name::ANY varOrCase::ANY+ superStructureName::ANY -> Structure
+        Parameter -> LocatedElement
 
-         -> VarOrCase
+        Initially -> LocatedElement
 
-        name::ANY variables::ANY+ -> Case
+        Rule -> LocatedElement
 
-        name::ANY isAbstract::ANY superClassName::ANY varOrMethod::ANY+ -> Class
+        Term -> LocatedElement
 
-        ownerClass::ANY -> VarOrMethod
+        rules::Rule+ -> Body
 
-        name::ANY enumerators::ANY+ -> Enumeration
+        var::Term in::Term where::Term holds::Term -> InWhereHolds
 
-        name::ANY value::ANY -> Enumerator
+        elements::AsmLElement+ main::Main -> AsmLFile
 
-         -> Function
+        Namespace -> AsmLElement
 
-        isAbstract::ANY isShared::ANY isEntryPoint::ANY isOverride::ANY returnType::ANY parameters::ANY+ -> Method
+        Structure -> AsmLElement
 
-        name::ANY type::ANY ownerMethod::ANY -> Parameter
+        Class -> AsmLElement
 
-        mainFile::ANY initialisations::ANY+ -> Main
+        Enumeration -> AsmLElement
 
-        id::ANY val::ANY -> Initially
+        Function -> AsmLElement
 
-         -> Rule
+        Type -> AsmLElement
 
-        ownerBody::ANY -> SkipRule
+        isConstant::Boolean isDeclaration::Boolean isLocal::Boolean name::String type::Type -> VarDeclaration
 
-         -> Step
+        name::String -> Namespace
 
-        name::ANY -> StepUntilFixPoint
+        name::String varOrCase::VarOrCase+ superStructureName::String -> Structure
 
-         -> StepExpression
+        Case -> VarOrCase
 
-        expression::ANY -> StepWhile
+        name::String variables::VarDeclaration+ -> Case
 
-        expression::ANY -> StepUntil
+        name::String isAbstract::Boolean superClassName::String varOrMethod::VarOrMethod+ -> Class
 
-        expressions::ANY+ -> StepForEach
+        ownerClass::Class -> VarOrMethod
 
-        called::ANY -> MethodInvocation
+        name::String enumerators::Enumerator+ -> Enumeration
 
-         -> UpdateRule
+        name::String value::Term -> Enumerator
 
-        updateVar::ANY -> UpdateVarRule
+        Main -> Function
 
-        path::ANY -> UpdateFieldRule
+        isAbstract::Boolean isShared::Boolean isEntryPoint::Boolean isOverride::Boolean returnType::Type parameters::Parameter+ -> Method
 
-        updateMap::ANY parameters::ANY+ -> UpdateMapRule
+        name::String type::Type ownerMethod::Method -> Parameter
 
-        expressions::ANY+ ifChoosenRules::ANY ifNotChoosenRule::ANY -> ChooseRule
+        mainFile::AsmLFile initialisations::Initially+ -> Main
 
-        expressions::ANY+ doRule::ANY -> ForallRule
+        id::VarTerm val::Term -> Initially
 
-        condition::ANY thenRule::ANY elseRule::ANY elseIfRule::ANY -> ConditionalRule
+        SkipRule -> Rule
+
+        Step -> Rule
+
+        MethodInvocation -> Rule
+
+        UpdateRule -> Rule
+
+        ChooseRule -> Rule
+
+        ForallRule -> Rule
+
+        ConditionalRule -> Rule
+
+        ReturnRule -> Rule
+
+        AddRule -> Rule
+
+        RemoveRule -> Rule
+
+        ownerBody::Body -> SkipRule
+
+        StepUntilFixPoint -> Step
+
+        StepExpression -> Step
+
+        StepForEach -> Step
+
+        name::String -> StepUntilFixPoint
+
+        StepWhile -> StepExpression
+
+        StepUntil -> StepExpression
+
+        expression::Term -> StepWhile
+
+        expression::Term -> StepUntil
+
+        expressions::InWhereHolds+ -> StepForEach
+
+        called::MethodCallTerm -> MethodInvocation
+
+        UpdateVarRule -> UpdateRule
+
+        UpdateFieldRule -> UpdateRule
+
+        UpdateMapRule -> UpdateRule
+
+        updateVar::Term -> UpdateVarRule
+
+        path::VarTerm -> UpdateFieldRule
+
+        updateMap::VarTerm parameters::Term+ -> UpdateMapRule
+
+        expressions::InWhereHolds+ ifChoosenRules::Body ifNotChoosenRule::Body -> ChooseRule
+
+        expressions::InWhereHolds+ doRule::Body -> ForallRule
+
+        ElseIf -> ConditionalRule
+
+        condition::Term thenRule::Body elseRule::Body elseIfRule::ElseIf -> ConditionalRule
 
          -> ElseIf
 
-        term::ANY -> ReturnRule
+        term::Term -> ReturnRule
 
-        val::ANY set::ANY -> AddRule
+        val::Term set::VarTerm -> AddRule
 
-        val::ANY set::ANY -> RemoveRule
+        val::Term set::VarTerm -> RemoveRule
 
-         -> Type
+        NamedType -> Type
 
-        name::ANY -> NamedType
+        MapType -> Type
 
-        ofType::ANY toType::ANY -> MapType
+        TupletType -> Type
 
-        types::ANY -> TupletType
+        SetType -> Type
 
-        of::ANY -> SetType
+        SequenceType -> Type
 
-        of::ANY -> SequenceType
+        name::String -> NamedType
 
-         -> Term
+        ofType::Type toType::Type -> MapType
 
-        name::ANY -> VarTerm
+        types::Type -> TupletType
 
-        opName::ANY leftExp::ANY rightExp::ANY -> Operator
+        of::Type -> SetType
 
-        ofTerm::ANY toTerm::ANY separator::ANY -> MapTerm
+        of::Type -> SequenceType
 
-        terms::ANY -> TulpletTerm
+        VarTerm -> Term
 
-        name::ANY parameters::ANY+ -> MethodCallTerm
+        Operator -> Term
+
+        MapTerm -> Term
+
+        TulpletTerm -> Term
+
+        MethodCallTerm -> Term
+
+        PredicateTerm -> Term
+
+        SetTerm -> Term
+
+        SequenceTerm -> Term
+
+        Constant -> Term
+
+        name::String -> VarTerm
+
+        opName::String leftExp::Term rightExp::Term -> Operator
+
+        ofTerm::Term toTerm::Term separator::String -> MapTerm
+
+        terms::Term -> TulpletTerm
+
+        NewInstance -> MethodCallTerm
+
+        name::String parameters::Term+ -> MethodCallTerm
 
          -> NewInstance
 
-        expressions::ANY+ -> PredicateTerm
+        ForAllTerm -> PredicateTerm
+
+        ExistsTerm -> PredicateTerm
+
+        AnyIn -> PredicateTerm
+
+        expressions::InWhereHolds+ -> PredicateTerm
 
          -> ForAllTerm
 
-        isUnique::ANY -> ExistsTerm
+        isUnique::Boolean -> ExistsTerm
 
          -> AnyIn
 
-         -> SetTerm
+        EnumerateSet -> SetTerm
 
-        vals::ANY+ -> EnumerateSet
+        RangeSet -> SetTerm
 
-        minval::ANY maxval::ANY -> RangeSet
+        AlgorithmSet -> SetTerm
 
-        expressions::ANY+ -> AlgorithmSet
+        vals::Term+ -> EnumerateSet
 
-         -> SequenceTerm
+        minval::Term maxval::Term -> RangeSet
 
-        vals::ANY+ -> EnumerateSequence
+        expressions::InWhereHolds+ -> AlgorithmSet
 
-        minval::ANY maxval::ANY -> RangeSequence
+        EnumerateSequence -> SequenceTerm
 
-         -> Constant
+        RangeSequence -> SequenceTerm
 
-        val::ANY -> BooleanConstant
+        vals::Term+ -> EnumerateSequence
 
-        val::ANY -> IntegerConstant
+        minval::Term maxval::Term -> RangeSequence
 
-        val::ANY -> StringConstant
+        BooleanConstant -> Constant
+
+        IntegerConstant -> Constant
+
+        StringConstant -> Constant
+
+        NullConstant -> Constant
+
+        val::Boolean -> BooleanConstant
+
+        val::Integer -> IntegerConstant
+
+        val::String -> StringConstant
 
          -> NullConstant

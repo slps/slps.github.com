@@ -2,28 +2,32 @@
 module Yuml
 
 syntax LocatedElement
-        = 
-        ()
+        = Model
+        | Class
+        | ModelElement
+        | ClassDefinition
+        | Cardinality
+        | ClassMember
  ;
 syntax Model
         = 
-        ANY classes+ ANY elements+
+        Class classes+ ModelElement elements+
  ;
 syntax Class
         = 
-        name: ANY
+        name: String
  ;
 syntax ModelElement
-        = 
-        ()
+        = ColorableElement
+        | Relationship
  ;
 syntax ColorableElement
-        = 
-        ()
+        = ClassReference
+        | Note
  ;
 syntax ClassReference
         = 
-        ANY class ANY stereotype ANY definition
+        Class class String stereotype ClassDefinition definition
  ;
 syntax AssociationType
         = simpleAssociation: ()
@@ -31,24 +35,25 @@ syntax AssociationType
         | composition: ()
  ;
 syntax Relationship
-        = 
-        ()
+        = Association
+        | Inheritance
+        | NoteAssociation
  ;
 syntax ClassDefinition
         = 
-        ANY attributes+ ANY methods+
+        Attribute attributes+ Method methods+
  ;
 syntax Association
         = 
-        ANY type ANY sourceCardinality ANY sourceLabel ANY navigableSource ANY sourceVisibility ANY targetCardinality ANY targetLabel ANY navigableTarget ANY targetVisibility
+        AssociationType type Cardinality sourceCardinality String sourceLabel Boolean navigableSource Visibility sourceVisibility Cardinality targetCardinality String targetLabel Boolean navigableTarget Visibility targetVisibility
  ;
 syntax Inheritance
         = 
-        ANY source ANY target
+        ClassReference source ClassReference target
  ;
 syntax Cardinality
         = 
-        ANY lowerBound ANY upperBound
+        Integer lowerBound Integer upperBound
  ;
 syntax Visibility
         = unspecified: ()
@@ -58,22 +63,22 @@ syntax Visibility
         | package: ()
  ;
 syntax ClassMember
-        = 
-        ()
+        = Attribute
+        | Method
  ;
 syntax Attribute
         = 
-        type: ANY
+        type: String
  ;
 syntax Method
         = 
-        ANY arguments+
+        String arguments+
  ;
 syntax Note
         = 
-        ANY text+
+        String text+
  ;
 syntax NoteAssociation
         = 
-        note: ANY
+        note: Note
  ;

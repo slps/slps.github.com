@@ -4,54 +4,82 @@ exports
   sorts
         Label SimpleLabel ComplexLabel Compartment VerticalCompartment HorizontalCompartment SimpleCompartment Anchor GraphElement Graph Layer Nodelike SubGraph Node Arc DirectedArc UndirectedArc Shape NodeShape SimpleNodeShape PointNodeShape ComplexNodeShape PolygonNodeShape MNodeShape RecordNodeShape ArrowShape 
   context-free syntax
-         -> Label
+        SimpleLabel -> Label
 
-        content::ANY -> SimpleLabel
+        ComplexLabel -> Label
 
-        compartments::ANY+ -> ComplexLabel
+        content::String -> SimpleLabel
 
-         -> Compartment
+        compartments::Compartment+ -> ComplexLabel
 
-        complexLabel::ANY compartments::ANY anchor::ANY -> VerticalCompartment
+        VerticalCompartment -> Compartment
 
-        complexLabel::ANY compartments::ANY anchor::ANY -> HorizontalCompartment
+        HorizontalCompartment -> Compartment
 
-        content::ANY -> SimpleCompartment
+        SimpleCompartment -> Compartment
 
-        name::ANY source::ANY -> Anchor
+        complexLabel::ComplexLabel compartments::Compartment anchor::Anchor -> VerticalCompartment
 
-         -> GraphElement
+        complexLabel::ComplexLabel compartments::Compartment anchor::Anchor -> HorizontalCompartment
 
-        type::ANY rankDir::ANY labeljust::ANY labelloc::ANY concentrate::ANY nodes::ANY+ boundingBox::ANY compound::ANY layers::ANY+ nodeSeparation::ANY ordering::ANY size::ANY ratio::ANY center::ANY -> Graph
+        content::String -> SimpleCompartment
 
-        nodes::ANY+ arcs::ANY+ graph::ANY layerSeparator::ANY -> Layer
+        name::String source::Compartment -> Anchor
 
-         -> Nodelike
+        Graph -> GraphElement
 
-        nodes::ANY+ labelloc::ANY -> SubGraph
+        Layer -> GraphElement
 
-        fixedSize::ANY fontname::ANY fontsize::ANY height::ANY width::ANY shape::ANY -> Node
+        Nodelike -> GraphElement
 
-         -> Arc
+        Arc -> GraphElement
 
-        arrowHead::ANY headlabel::ANY taillabel::ANY arrowTail::ANY tail_lp::ANY head_lp::ANY -> DirectedArc
+        Shape -> GraphElement
 
-        fromNode::ANY toNode::ANY layers::ANY+ constraint::ANY group::ANY minlen::ANY sameHead::ANY sameTail::ANY lhead::ANY ltail::ANY decorate::ANY -> UndirectedArc
+        type::String rankDir::String labeljust::String labelloc::String concentrate::Boolean nodes::Nodelike+ boundingBox::String compound::Boolean layers::Layer+ nodeSeparation::Double ordering::String size::String ratio::String center::Boolean -> Graph
 
-         -> Shape
+        nodes::Nodelike+ arcs::Arc+ graph::Graph layerSeparator::String -> Layer
 
-         -> NodeShape
+        SubGraph -> Nodelike
+
+        Node -> Nodelike
+
+        nodes::Nodelike+ labelloc::String -> SubGraph
+
+        fixedSize::Boolean fontname::String fontsize::Integer height::Integer width::Integer shape::NodeShape -> Node
+
+        DirectedArc -> Arc
+
+        UndirectedArc -> Arc
+
+        arrowHead::ArrowShape headlabel::Label taillabel::Label arrowTail::ArrowShape tail_lp::Double head_lp::Double -> DirectedArc
+
+        fromNode::Nodelike toNode::Nodelike layers::Layer+ constraint::Boolean group::String minlen::Integer sameHead::String sameTail::String lhead::Nodelike ltail::Nodelike decorate::Boolean -> UndirectedArc
+
+        NodeShape -> Shape
+
+        ArrowShape -> Shape
+
+        SimpleNodeShape -> NodeShape
+
+        PointNodeShape -> NodeShape
+
+        ComplexNodeShape -> NodeShape
 
          -> SimpleNodeShape
 
          -> PointNodeShape
 
-         -> ComplexNodeShape
+        PolygonNodeShape -> ComplexNodeShape
 
-        sides::ANY skew::ANY distortion::ANY isRegular::ANY orientation::ANY -> PolygonNodeShape
+        MNodeShape -> ComplexNodeShape
 
-        toplabel::ANY bottomlabel::ANY -> MNodeShape
+        RecordNodeShape -> ComplexNodeShape
+
+        sides::Integer skew::Integer distortion::Integer isRegular::Boolean orientation::Integer -> PolygonNodeShape
+
+        toplabel::Label bottomlabel::Label -> MNodeShape
 
          -> RecordNodeShape
 
-        clipping::ANY isPlain::ANY size::ANY -> ArrowShape
+        clipping::String isPlain::Boolean size::Integer -> ArrowShape

@@ -18,7 +18,8 @@ syntax ASKR
         ()
  ;
 syntax ASKU
-        = NAV
+        = 
+        NAV
  ;
 syntax Attestation
         = 
@@ -256,8 +257,9 @@ syntax DvShort
         dv: ANY
  ;
 syntax DvString
-        = 
-        ANY uuid ANY language String dv
+        = DvCodedString
+        | DvIdentifier
+        | ANY uuid ANY language String dv
  ;
 syntax DvTemporal
         = DvDate
@@ -318,7 +320,8 @@ syntax EventContext
         Organization healthcareFacility DvTemporal startTime DvTemporal endTime Participation participation Location location DvCodedString setting
  ;
 syntax ExceptionalValue
-        = NI
+        = 
+        NI
  ;
 syntax FeederAudit
         = 
@@ -442,8 +445,8 @@ syntax NonHuman
         details: ItemStructure
  ;
 syntax ObjectRef
-        = 
-        ANY uuid ANY namespace ANY objType
+        = EntityRef
+        | ANY uuid ANY namespace ANY objType
  ;
 syntax Observation
         = 
@@ -477,8 +480,8 @@ syntax Party
         | Person
  ;
 syntax PartyIdentified
-        = 
-        DvString name DvIdentifier identifiers+
+        = PartyRelated
+        | DvString name DvIdentifier identifiers+
  ;
 syntax PartyProxy
         = PartyIdentified
@@ -490,7 +493,7 @@ syntax PartyRelated
  ;
 syntax PartySelf
         = 
-        EntityRef externalRef
+        externalRef: EntityRef
  ;
 syntax Person
         = 

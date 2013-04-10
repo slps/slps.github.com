@@ -1,91 +1,125 @@
 TimeBase:
-        EPSILON
+        SingleTimeBase
+TimeBase:
+        DiscreteTimeBase
+TimeBase:
+        MultipleTimeBase
 Instant:
-        EPSILON
+        SingleInstant
+Instant:
+        DiscreteInstant
+Instant:
+        CoincidencePoint
 TimeValue:
-        EPSILON
+        SingleTimeValue
+TimeValue:
+        MultipleTimeValue
+TimeValue:
+        DiscreteTimeValue
 TimeInterval:
-        EPSILON
+        SingleTimeInterval
+TimeInterval:
+        DiscreteTimeInterval
 Interval:
-        EPSILON
+        SingleInterval
+Interval:
+        MultipleInterval
 SingleTimeBase:
-        currentValue::ANY maximumValue::ANY currentInstant::ANY
+        currentValue::SingleTimeValue maximumValue::SingleTimeValue currentInstant::SingleInstant
 SingleInstant:
-        coPoint::ANY
+        coPoint::CoincidencePoint
 SingleInterval:
-        first::ANY last::ANY members::ANY+
+        first::SingleInstant last::SingleInstant members::SingleInstant+
 SingleTimeValue:
-        denotedInstant::ANY+ ref::ANY
+        denotedInstant::Instant+ ref::TimeBase
 SingleTimeInterval:
-        start::ANY end::ANY
+        start::SingleTimeValue end::SingleTimeValue
 DiscreteTimeBase:
-        refEvent::ANY
+        refEvent::Event
 DiscreteInstant:
-        next::ANY previous::ANY refOcc::ANY
-Event:
-        EPSILON
+        next::DiscreteInstant previous::DiscreteInstant refOcc::EventOccurence
 EventOccurence:
-        EPSILON
-PhysicalTime:
-        EPSILON
-PhysicalInstant:
-        EPSILON
-Duration:
-        EPSILON
+        TimedEventOccurence
 MultipleTimeBase:
-        bases::ANY+
+        bases::SingleTimeBase+
 CoincidencePoint:
-        coincidenceInstants::ANY+
+        coincidenceInstants::SingleInstant+
 MultipleInterval:
-        first::ANY+ last::ANY+
+        first::CoincidencePoint+ last::CoincidencePoint+
 MultipleTimeValue:
-        values::ANY+
+        values::SingleTimeValue+
 MetricTimeValue:
         EPSILON
 DiscreteTimeValue:
-        denotedInstant::ANY+ ref::ANY
+        MetricTimeValue
+DiscreteTimeValue:
+        MetricTimeValue
 MetricTimeInterval:
         EPSILON
 DiscreteTimeInterval:
-        endValues::ANY denotedInterval::ANY+
+        MetricTimeInterval
+DiscreteTimeInterval:
+        MetricTimeInterval
 SimultaneousEventOccurrence:
-        at::ANY occurence::ANY
+        at::Instant occurence::TimedEventOccurence
 TimedEvent:
-        timestamp::ANY+
+        timestamp::MetricTimeValue+
 TimedEventOccurence:
-        at::ANY timestamp::ANY
+        at::Instant timestamp::TimeValue
 TimedAction:
-        duration::ANY+ start::ANY+ end::ANY+
+        Delay
+TimedAction:
+        duration::TimeInterval+ start::TimeValue+ end::TimeValue+
 Delay:
         EPSILON
 TimingMechanism:
-        stability::ANY drift::ANY skew::ANY origin::ANY resolution::ANY refClock::ANY state::ANY
+        Timer
+TimingMechanism:
+        stability::String drift::String skew::String origin::TimedEvent resolution::MetricTimeInterval refClock::Clock state::String
 Clock:
-        accuracy::ANY offset::ANY generatedInterrupt::ANY+
+        accuracy::MetricTimeInterval offset::MetricTimeInterval generatedInterrupt::ClockInterrupt+
 Timer:
-        isPeriodic::ANY duration::ANY genratedTimeOuts::ANY+
+        isPeriodic::Boolean duration::MetricTimeValue genratedTimeOuts::TimeOut+
 TimeOut:
         EPSILON
 ClockInterrupt:
         EPSILON
 System:
-        dimension::ANY+
+        dimension::Quantity+
 Model:
-        ownes::ANY+
+        AnnotatedModel
+Model:
+        ownes::ModelElement+
 AnnotatedModel:
-        conformsTo::ANY+ import::ANY+
+        conformsTo::ModelingConcern+ import::NFPLibrary+
 ModelElement:
-        owner::ANY
+        AnnotatedModelElement
+ModelElement:
+        owner::Model
 AnnotatedModelElement:
-        annotation::ANY+
+        Classifier
+AnnotatedModelElement:
+        InstanceSpecification
+AnnotatedModelElement:
+        annotation::NFP+
 NFP:
-        measurementQuantity::ANY storedBy::ANY+ groupedBy::ANY
+        QualitativeNFP
+NFP:
+        QuantitativeNFP
+NFP:
+        ComplexNFP
+NFP:
+        measurementQuantity::Quantity storedBy::NFPLibrary+ groupedBy::NFPCategory
 NFPLibrary:
-        refersTo::ANY+ usedNFP::ANY+
+        refersTo::NFPLibrary+ usedNFP::NFP+
 NFPCategory:
-        setOf::ANY+ ownes::ANY+ owner::ANY
+        setOf::NFP+ ownes::NFPCategory+ owner::NFPCategory
 ModelingConcern:
-        relevantQuantity::ANY+ annotedModel::ANY
+        AnalysisConcern
+ModelingConcern:
+        DesignConcern
+ModelingConcern:
+        relevantQuantity::Quantity+ annotedModel::AnnotatedModel
 AnalysisConcern:
         EPSILON
 DesignConcern:
@@ -97,47 +131,73 @@ BasicQuantity:
 DerivedQuantity:
         EPSILON
 QualitativeNFP:
-        parameter::ANY+
+        parameter::NFP+
 QuantitativeNFP:
-        sampleSet::ANY+ measure::ANY+
+        sampleSet::Realization+ measure::Measure+
 Realization:
-        function::ANY+ owner::ANY
+        function::Measure+ owner::QuantitativeNFP
 Measure:
-        appliesTo::ANY+ owner::ANY
+        appliesTo::Realization+ owner::QuantitativeNFP
 ComplexNFP:
-        parent::ANY+ child::ANY+ ownes::ANY+
+        parent::ComplexNFP+ child::ComplexNFP+ ownes::BasicNFP+
 BasicNFP:
-        statisticalQualifier::ANY directon::ANY typedBy::ANY valuedBy::ANY+ dimensionOf::ANY+
+        statisticalQualifier::StatisticalQualifierKinds directon::DirectionKinds typedBy::NFPType valuedBy::NFPValueSpecification+ dimensionOf::ComplexNFP+
 NFPType:
-        valueSpecificationLanguage::ANY source::ANY constrainedSpec::ANY+
+        NFPInstantType
+NFPType:
+        NFPurationType
+NFPType:
+        NFPRateType
+NFPType:
+        NFPProbabilityType
+NFPType:
+        NFPSizeType
+NFPType:
+        valueSpecificationLanguage::String source::SourceKinds constrainedSpec::NFPValueSpecification+
 NFPInstantType:
-        value::ANY unit::ANY
+        value::String unit::InstantUnitKinds
 NFPurationType:
-        value::ANY unit::ANY
+        value::String unit::DurationUnitKinds
 NFPRateType:
-        value::ANY unit::ANY
+        value::String unit::RateUnitKinds
 NFPProbabilityType:
-        value::ANY unit::ANY
+        value::String unit::ProbabilityUnitKinds
 NFPSizeType:
-        value::ANY unit::ANY
+        value::String unit::SizeUnitKinds
 NFPValueSpecification:
-        constrainedBy::ANY+ expression::ANY
+        NFPConstant
+NFPValueSpecification:
+        NFPVariable
+NFPValueSpecification:
+        NFPExpression
+NFPValueSpecification:
+        constrainedBy::NFPType+ expression::NFPExpression
 NFPConstant:
-        ownerList::ANY
+        NFPListConstant
+NFPConstant:
+        NFPStringConstant
+NFPConstant:
+        NFPIntegerConstant
+NFPConstant:
+        NFPRealConstant
+NFPConstant:
+        NFPBooleanConstant
+NFPConstant:
+        ownerList::NFPListConstant
 NFPListConstant:
-        listElements::ANY+
+        listElements::NFPConstant+
 NFPStringConstant:
-        body::ANY
+        body::String
 NFPIntegerConstant:
-        body::ANY
+        body::Integer
 NFPRealConstant:
-        bodyBeforeComa::ANY bodyAfterComa::ANY
+        bodyBeforeComa::Integer bodyAfterComa::Integer
 NFPBooleanConstant:
-        body::ANY
+        body::Boolean
 NFPVariable:
-        varName::ANY
+        varName::String
 NFPExpression:
-        body::ANY+ operand::ANY+
+        body::String+ operand::NFPValueSpecification+
 SourceKinds:
         est::EPSILON
         meas::EPSILON
@@ -194,69 +254,92 @@ SizeUnitKinds:
         Mb::EPSILON
         MB::EPSILON
 Classifier:
-        EPSILON
-ResourceClassifier:
-        EPSILON
-ResourceServiceClassifier:
-        EPSILON
+        ResourceClassifier
+Classifier:
+        ResourceServiceClassifier
 InstanceSpecification:
-        EPSILON
-ResourceInstanceSpecification:
-        EPSILON
-ResourceServiceInstanceSpecification:
-        EPSILON
+        ResourceInstanceSpecification
+InstanceSpecification:
+        ResourceServiceInstanceSpecification
 Hardware:
-        owner::ANY containH::ANY+ containHL::ANY+ containHE::ANY+ deploymentConfiguration::ANY+
+        owner::Hardware containH::Hardware+ containHL::HardwareLibrary+ containHE::HardwareEntity+ deploymentConfiguration::HardwareDeployment+
 HardwareLibrary:
-        owner::ANY
+        owner::Hardware
 HardwareEntity:
-        owner::ANY
+        ECU
+HardwareEntity:
+        owner::Hardware
 HardwareDeployment:
-        owner::ANY contain::ANY+
+        owner::Hardware contain::HardwareEntityInstance+
 HardwareEntityInstance:
-        owner::ANY
+        ECUInstance
+HardwareEntityInstance:
+        ChannelInstance
+HardwareEntityInstance:
+        owner::HardwareDeployment
 ECUInstance:
-        composedOf::ANY+
+        composedOf::ECUGateInstance+
 ChannelInstance:
-        gateInstances::ANY
+        gateInstances::ECUGateInstance
 ECUGateInstance:
-        channel::ANY
+        channel::ChannelInstance
 ECU:
-        contain::ANY+
+        contain::ECUGate+
 ECUGate:
-        owner::ANY kindOf::ANY
+        owner::ECU kindOf::Channel
 Channel:
-        specify::ANY
+        specify::ECUGate
 AnalysisContext:
-        global::ANY+ workload::ANY behavior::ANY usedResources::ANY+
+        global::ComplexNFP+ workload::Workload behavior::Behavior usedResources::Resource+
 Workload:
-        transaction::ANY+
+        transaction::Transaction+
 Transaction:
-        workload::ANY+ trigger::ANY+ response::ANY
+        workload::Workload+ trigger::Trigger+ response::Response
 Trigger:
-        arrivalPattern::ANY effect::ANY+
+        arrivalPattern::ComplexNFP effect::Response+
 Response:
-        efficiency::ANY endToEndLatency::ANY cause::ANY+ behavior::ANY+
+        efficiency::ComplexNFP endToEndLatency::ComplexNFP cause::Trigger+ behavior::Scenario+
 Behavior:
-        scenario::ANY+
+        scenario::Scenario+
 Scenario:
-        behavior::ANY+ scenarionLatency::ANY+ steps::ANY+ root::ANY endToEndResponse::ANY
+        TimedAction
+Scenario:
+        Step
+Scenario:
+        behavior::Behavior+ scenarionLatency::ComplexNFP+ steps::Step+ root::Step endToEndResponse::Response
 Step:
-        predecessor::ANY+ successor::ANY+ stepLatency::ANY+ usedResourceService::ANY+
+        predecessor::Step+ successor::Step+ stepLatency::ComplexNFP+ usedResourceService::Service+
 Resource:
-        EPSILON
+        BasicResource
+Resource:
+        StructuredResource
+Resource:
+        BasicResource
+        StructuredResource
 BasicResource:
         EPSILON
 StructuredResource:
-        basicResource::ANY
+        ProcessingResource
+StructuredResource:
+        ProcessResource
+StructuredResource:
+        LogicalResource
+StructuredResource:
+        ServerResource
+StructuredResource:
+        basicResource::BasicResource
 ProcessingResource:
-        links::ANY+ components::ANY+
+        links::Link+ components::Component+
 Link:
         EPSILON
 ProcessResource:
-        components::ANY+
+        components::Component+
 Component:
-        process::ANY+ interfaces::ANY+
+        StructuredComponent
+Component:
+        BasicComponent
+Component:
+        process::ProcessResource+ interfaces::Interface+
 StructuredComponent:
         EPSILON
 BasicComponent:
@@ -264,8 +347,8 @@ BasicComponent:
 LogicalResource:
         EPSILON
 ServerResource:
-        services::ANY+
+        services::Service+
 Service:
-        resource::ANY interface::ANY
+        resource::ServerResource interface::Interface
 Interface:
-        service::ANY
+        service::Service

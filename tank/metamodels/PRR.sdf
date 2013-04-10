@@ -4,18 +4,40 @@ exports
   sorts
         Element NamedElement RuleSet Rule RuleAction RuleCondition Binding RuleVariable 
   context-free syntax
-        location::ANY commentsBefore::ANY+ commentsAfter::ANY+ -> Element
+        NamedElement -> Element
 
-         -> NamedElement
+        RuleSet -> Element
 
-        rules::ANY+ -> RuleSet
+        RuleAction -> Element
 
-        binding::ANY condition::ANY actions::ANY+ ruleOwner::ANY -> Rule
+        RuleCondition -> Element
 
-        actionOwner::ANY -> RuleAction
+        Binding -> Element
 
-        ruleConditionOwner::ANY conditionExp::ANY -> RuleCondition
+        OclExpression -> Element
 
-        bindingOwner::ANY ruleVariable::ANY+ -> Binding
+        VariableDeclaration -> Element
 
-        ruleVariableOwner::ANY filter::ANY -> RuleVariable
+        location::String commentsBefore::String+ commentsAfter::String+ -> Element
+
+        Rule -> NamedElement
+
+        OclType -> NamedElement
+
+        rules::Rule+ -> RuleSet
+
+        binding::Binding condition::RuleCondition actions::RuleAction+ ruleOwner::RuleSet -> Rule
+
+        DeleteAction -> RuleAction
+
+        AssignAction -> RuleAction
+
+        InvokeAction -> RuleAction
+
+        actionOwner::Rule -> RuleAction
+
+        ruleConditionOwner::Rule conditionExp::PRRExpressions/OclExpression -> RuleCondition
+
+        bindingOwner::Rule ruleVariable::RuleVariable+ -> Binding
+
+        ruleVariableOwner::Binding filter::PRRExpressions/OclExpression -> RuleVariable

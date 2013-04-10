@@ -1,73 +1,125 @@
 LocatedElement:
-        EPSILON
+        XAsmFile
+LocatedElement:
+        Asm
+LocatedElement:
+        Signature
+LocatedElement:
+        MetaInformation
+LocatedElement:
+        AccessUpdateFunction
+LocatedElement:
+        Declaration
+LocatedElement:
+        Parameter
+LocatedElement:
+        Initialization
+LocatedElement:
+        Term
+LocatedElement:
+        Rule
+LocatedElement:
+        ElseIf
+LocatedElement:
+        ElementDecl
+LocatedElement:
+        Extension
 XAsmFile:
-        EPSILON
+        XAsmSpec
+XAsmFile:
+        Body
 XAsmSpec:
-        Asm::ANY+
+        Asm::Asm+
 Asm:
-        signature::ANY returnType::ANY metaInformation::ANY body::ANY
+        signature::Signature returnType::String metaInformation::MetaInformation body::Body
 Signature:
-        isMain::ANY name::ANY arguments::ANY+
+        isMain::Boolean name::String arguments::Argument+
 Argument:
-        type::ANY
+        type::String
 Body:
-        declarations::ANY+ initialization::ANY rules::ANY+
+        declarations::Declaration+ initialization::Initialization rules::Rule+
 MetaInformation:
-        usedAsIn::ANY+ usedAs::ANY accessUpdateFunctions::ANY+
+        usedAsIn::Signature+ usedAs::AsmType accessUpdateFunctions::AccessUpdateFunction+
 AccessUpdateFunction:
-        type::ANY functions::ANY+
+        type::AccessUpdateType functions::Function+
 Declaration:
-        EPSILON
+        Universe
 Function:
-        parameters::ANY+ returnType::ANY initTerm::ANY isExternal::ANY
+        parameters::Parameter+ returnType::String initTerm::Term isExternal::Boolean
 Parameter:
-        name::ANY type::ANY
+        name::String type::String
 Universe:
-        name::ANY contents::ANY+ superUniverses::ANY+
+        name::String contents::String+ superUniverses::Universe+
 Initialization:
-        rules::ANY+
+        rules::Rule+
 Term:
-        EPSILON
+        Constant
+Term:
+        FunctionOrVariableTerm
+Term:
+        OperatorTerm
 Constant:
-        EPSILON
+        BooleanConstant
+Constant:
+        IntegerConstant
+Constant:
+        StringConstant
+Constant:
+        UndefConstant
 FunctionOrVariableTerm:
-        declaration::ANY terms::ANY+
+        declaration::ElementDecl terms::Term+
 OperatorTerm:
-        opName::ANY leftExp::ANY rightExp::ANY
+        opName::String leftExp::Term rightExp::Term
 BooleanConstant:
-        value::ANY
+        value::Boolean
 IntegerConstant:
-        value::ANY
+        value::Integer
 StringConstant:
-        value::ANY
+        value::String
 UndefConstant:
         
 Rule:
-        EPSILON
+        SkipRule
+Rule:
+        AsmInvocation
+Rule:
+        UpdateRule
+Rule:
+        ChooseRule
+Rule:
+        DoForallRule
+Rule:
+        ConditionalRule
+Rule:
+        ExtendRule
+Rule:
+        ReturnRule
 SkipRule:
-        inSequence::ANY
+        inSequence::Boolean
 AsmInvocation:
-        asmName::ANY arguments::ANY+
+        asmName::String arguments::Term+
 UpdateRule:
-        function::ANY updateTerm::ANY
+        function::FunctionOrVariableTerm updateTerm::Term
 ChooseRule:
-        chooseId::ANY inSet::ANY guard::ANY ifChoosenRules::ANY+ ifNotChoosenRule::ANY
+        chooseId::VariableDecl inSet::Universe guard::Term ifChoosenRules::Rule+ ifNotChoosenRule::Rule
 DoForallRule:
-        id::ANY inSet::ANY condition::ANY doRule::ANY+
+        id::VariableDecl inSet::Universe condition::Term doRule::Rule+
 ConditionalRule:
-        condition::ANY thenRule::ANY+ elseRule::ANY elseIfRule::ANY
+        condition::Term thenRule::Rule+ elseRule::Rule elseIfRule::ElseIf
 ElseIf:
-        condition::ANY thenRule::ANY+ elseRule::ANY elseIfRule::ANY
+        condition::Term thenRule::Rule+ elseRule::Rule elseIfRule::ElseIf
 ExtendRule:
-        extensions::ANY+ rules::ANY+
+        extensions::Extension+ rules::Rule+
 ElementDecl:
-        EPSILON
+        VariableDecl
 VariableDecl:
-        name::ANY
+        Argument
+VariableDecl:
+        Argument
 Extension:
-        elements::ANY+ universe::ANY
+        elements::VariableDecl+ universe::Universe
 ReturnRule:
-        term::ANY
+        term::Term
 AccessUpdateType:
         access::EPSILON
         update::EPSILON

@@ -4,15 +4,17 @@ exports
   sorts
         Element Newspaper News Category Date DayKind 
   context-free syntax
-         -> Element
+        Newspaper -> Element
 
-        language::ANY copyright::ANY pubDate::ANY category::ANY news::ANY+ -> Newspaper
+        News -> Element
 
-        author::ANY comments::ANY pubDate::ANY category::ANY newspaper::ANY -> News
+        language::String copyright::String pubDate::Date category::Category news::News+ -> Newspaper
 
-        value::ANY -> Category
+        author::String comments::String pubDate::Date category::Category newspaper::Newspaper -> News
 
-        eDay::ANY day::ANY month::ANY year::ANY hours::ANY minutes::ANY seconds::ANY -> Date
+        value::String -> Category
+
+        eDay::DayKind day::Integer month::Integer year::Integer hours::Integer minutes::Integer seconds::Integer -> Date
 
         Monday:: -> DayKind
         Tuesday:: -> DayKind

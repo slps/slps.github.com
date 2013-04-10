@@ -3,67 +3,69 @@ module Bossa
 
 syntax BossaProgramm
         = 
-        scheduler: ANY
+        scheduler: Scheduler
  ;
 syntax Scheduler
-        = 
-        ()
+        = NormalScheduler
+        | VirtualScheduler
  ;
 syntax NormalScheduler
         = 
-        schedulerDecl: ANY
+        schedulerDecl: SchedulerDecl
  ;
 syntax VirtualScheduler
         = 
-        vschedulerDecl: ANY
+        vschedulerDecl: VSchdulerDecl
  ;
 syntax AbstractSchedulerDecl
-        = 
-        ()
+        = SchedulerDecl
+        | VSchdulerDecl
  ;
 syntax SchedulerDecl
         = 
-        processDef: ANY
+        processDef: ProcessDef
  ;
 syntax VSchdulerDecl
         = 
-        schedulerDef: ANY
+        schedulerDef: SchedulerDef
  ;
 syntax ConstDef
         = 
-        ANY id ANY expr ANY bossaTypeExpr
+        String id Expression expr BossaTypeExpr bossaTypeExpr
  ;
 syntax TypeDef
         = 
-        enumRang: ANY
+        enumRang: EnumRange
  ;
 syntax EnumRange
         = 
-        ANY enumDef ANY rangeDef
+        EnumDef enumDef RangeDef rangeDef
  ;
 syntax EnumDef
         = 
-        ANY theIds+
+        String theIds+
  ;
 syntax BagId
         = 
-        theValue: ANY
+        theValue: String
  ;
 syntax RangeDef
         = 
-        expr: ANY
+        expr: Expression
  ;
 syntax ProcessDef
         = 
-        ANY processVarDecl+
+        ProcessVarDecl processVarDecl+
  ;
 syntax SchedulerDef
         = 
-        ANY processVarDecl+
+        ProcessVarDecl processVarDecl+
  ;
 syntax ProcessVarDecl
-        = 
-        ANY id ANY processDef ANY schedulerDef
+        = Timer_ProcessVarDecl
+        | System_ProcessVarDecl
+        | Normal_ProcessVarDecl
+        | String id ProcessDef processDef SchedulerDef schedulerDef
  ;
 syntax Timer_ProcessVarDecl
         = 
@@ -71,107 +73,123 @@ syntax Timer_ProcessVarDecl
  ;
 syntax System_ProcessVarDecl
         = 
-        ANY system ANY typeExpr
+        Boolean system TypeExpr typeExpr
  ;
 syntax Normal_ProcessVarDecl
         = 
-        typeExpr: ANY
+        typeExpr: TypeExpr
  ;
 syntax HandlerDef
         = 
-        ANY id ANY scheduler ANY onHandlerDef+
+        String id Scheduler scheduler OnHandlerDef onHandlerDef+
  ;
 syntax InterfaceDef
         = 
-        ANY composantOfInterFunc+ ANY scheduler
+        ComposantOfInterFunc composantOfInterFunc+ Scheduler scheduler
  ;
 syntax FunctionDef
         = 
-        ANY composantOfInterFunc+ ANY scheduler
+        ComposantOfInterFunc composantOfInterFunc+ Scheduler scheduler
  ;
 syntax Expression
-        = 
-        ()
+        = Integer_Expression
+        | Id_Expression
+        | State_Expression
+        | True_Expression
+        | False_Expression
+        | Unop_Expression
+        | Etoile_Expression
+        | ExpId_Expression
+        | Select_Expression
+        | FnName_Expression
+        | Empty_Expression
+        | SRCOnSched_Expression
+        | SchedulerOf_Expression
+        | In_Expression
+        | Parenthese_Expression
+        | Binop_Expression
  ;
 syntax Integer_Expression
         = 
-        theValue: ANY
+        theValue: Integer
  ;
 syntax Id_Expression
         = 
-        id: ANY
+        id: String
  ;
 syntax State_Expression
         = 
-        theValue: ANY
+        theValue: String
  ;
 syntax True_Expression
         = 
-        
+        ()
  ;
 syntax False_Expression
         = 
-        
+        ()
  ;
 syntax Unop_Expression
         = 
-        ANY unop ANY expr
+        Unop unop Expression expr
  ;
 syntax Etoile_Expression
         = 
-        expr: ANY
+        expr: Expression
  ;
 syntax ExpId_Expression
         = 
-        ANY id ANY expr
+        String id Expression expr
  ;
 syntax Select_Expression
         = 
-        
+        ()
  ;
 syntax FnName_Expression
         = 
-        ANY expr+
+        Expression expr+
  ;
 syntax Empty_Expression
         = 
-        classState: ANY
+        classState: ClassState
  ;
 syntax SRCOnSched_Expression
         = 
-        
+        ()
  ;
 syntax SchedulerOf_Expression
         = 
-        expr: ANY
+        expr: Expression
  ;
 syntax In_Expression
         = 
-        ANY in ANY expr ANY classState
+        Boolean in Expression expr ClassState classState
  ;
 syntax Parenthese_Expression
         = 
-        expr: ANY
+        expr: Expression
  ;
 syntax Binop_Expression
         = 
-        ANY id_Expression ANY compo_Binop_Expression
+        Id_Expression id_Expression Compo_Binop_Expression compo_Binop_Expression
  ;
 syntax Compo_Binop_Expression
         = 
-        ANY binop ANY id_Expression
+        Binop binop Id_Expression id_Expression
  ;
 syntax ValDecl
-        = 
-        ANY id ANY abstractSchedulerDecl
+        = Normal_ValDecl
+        | System_ValDecl
+        | Timer_ValDecl
+        | String id AbstractSchedulerDecl abstractSchedulerDecl
  ;
 syntax Normal_ValDecl
         = 
-        nonProcType: ANY
+        nonProcType: NonProcType
  ;
 syntax System_ValDecl
         = 
-        nonProcType: ANY
+        nonProcType: NonProcType
  ;
 syntax Timer_ValDecl
         = 
@@ -179,281 +197,295 @@ syntax Timer_ValDecl
  ;
 syntax FunDecl
         = 
-        ANY parameterTypes ANY nonProcType ANY abstractSchedulerDecl
+        ParameterType parameterTypes NonProcType nonProcType AbstractSchedulerDecl abstractSchedulerDecl
  ;
 syntax StateDef
         = 
-        ANY classNameStorage+ ANY abstractSchedulerDecl
+        ClassNameStorage classNameStorage+ AbstractSchedulerDecl abstractSchedulerDecl
  ;
 syntax ClassNameStorage
         = 
-        ANY id ANY className ANY storage
+        String id ClassName className Storage storage
  ;
 syntax OrderDef
         = 
-        ANY keyCritDecl ANY critDecls ANY abstractSchedulerDecl
+        KeyCritDecls keyCritDecl CritDecls critDecls AbstractSchedulerDecl abstractSchedulerDecl
  ;
 syntax AdmissionDef
         = 
-        ANY valDef+ ANY admCrit ANY attachDetach ANY abstractSchedulerDecl
+        ValDef valDef+ AdmCrit admCrit AttachDetach attachDetach AbstractSchedulerDecl abstractSchedulerDecl
  ;
 syntax TraceDef
         = 
-        ANY traceEvent ANY traceExpr ANY traceTest ANY abstractSchedulerDecl
+        TraceEvent traceEvent TraceExpr traceExpr TraceTest traceTest AbstractSchedulerDecl abstractSchedulerDecl
  ;
 syntax TypeExpr
         = 
-        ANY id ANY bossaTypeExpr
+        String id BossaTypeExpr bossaTypeExpr
  ;
 syntax TypeOrVoid
         = 
-        ANY isVoid ANY typeExpr
+        Boolean isVoid TypeExpr typeExpr
  ;
 syntax ParameterType
         = 
-        ANY typeExpr+
+        TypeExpr typeExpr+
  ;
 syntax Storage
-        = 
-        ()
+        = Process_Storage
+        | Scheduler_Storage
+        | Queue_Storage
  ;
 syntax Process_Storage
         = 
-        
+        ()
  ;
 syntax Scheduler_Storage
         = 
-        stateVisibility: ANY
+        stateVisibility: StateVisibility
  ;
 syntax Queue_Storage
         = 
-        ANY stateVisibility ANY queueType
+        StateVisibility stateVisibility QueueType queueType
  ;
 syntax KeyCritDecls
         = 
-        ANY compoKeyCritDecls+
+        CompoKeyCritDecls compoKeyCritDecls+
  ;
 syntax CompoKeyCritDecls
         = 
-        critDecl: ANY
+        critDecl: CritDecl
  ;
 syntax CritDecls
         = 
-        ANY critDecl+
+        CritDecl critDecl+
  ;
 syntax CritDecl
-        = 
-        ()
+        = CritDeclWhithId
+        | CritDeclWhithoutId
  ;
 syntax CritDeclWhithId
         = 
-        id: ANY
+        id: String
  ;
 syntax CritDeclWhithoutId
         = 
-        expr: ANY
+        expr: Expression
  ;
 syntax ValDef
         = 
-        ANY id ANY typeExpr ANY expr
+        String id TypeExpr typeExpr Expression expr
  ;
 syntax AdmCrit
         = 
-        ANY paramVarDecl+ ANY expr
+        ParamVarDecl paramVarDecl+ Expression expr
  ;
 syntax AttachDetach
         = 
-        ANY procParam1 ANY procParam2 ANY seqStmt1 ANY seqStmt2
+        ProcParam procParam1 ProcParam procParam2 SeqStmt seqStmt1 SeqStmt seqStmt2
  ;
 syntax ParamVarDecl
         = 
-        ANY id ANY typeExpr
+        String id TypeExpr typeExpr
  ;
 syntax SeqStmt
         = 
-        ANY valDef+ ANY stmt+
+        ValDef valDef+ Statment stmt+
  ;
 syntax TraceEvent
         = 
-        ANY eventName+
+        EventName eventName+
  ;
 syntax TraceExpr
         = 
-        ANY id+
+        String id+
  ;
 syntax TraceTest
         = 
-        expr: ANY
+        expr: Expression
  ;
 syntax ProcParam
         = 
-        ANY id ANY process ANY scheduler
+        String id Boolean process Boolean scheduler
  ;
 syntax Statment
-        = 
-        ()
+        = IfStmt
+        | ForStmt
+        | ReturnStmt
+        | SwitchStmt
+        | AssignStmt
+        | MoveStmt
+        | DeferStmt
+        | PrimStmt
+        | ErrorStmt
+        | BreakStmt
  ;
 syntax IfStmt
         = 
-        ANY expr ANY seqStmt
+        Expression expr SeqStmt seqStmt
  ;
 syntax ForStmt
-        = 
-        ()
+        = ForeachForStmt
+        | ForEachIncreasingForStmt
+        | ForEachDecreasingForStmt
  ;
 syntax ForeachForStmt
         = 
-        ANY id ANY isIn ANY classState+ ANY seqStmt
+        String id Boolean isIn ClassState classState+ SeqStmt seqStmt
  ;
 syntax ForEachIncreasingForStmt
         = 
-        ANY id ANY seqStmt
+        String id SeqStmt seqStmt
  ;
 syntax ForEachDecreasingForStmt
         = 
-        ANY id ANY seqStmt
+        String id SeqStmt seqStmt
  ;
 syntax ReturnStmt
         = 
-        expr: ANY
+        expr: Expression
  ;
 syntax SwitchStmt
         = 
-        ANY locExpr ANY composantOfSwitchStmt+
+        LocExpr locExpr ComposantOfSwitchStmt composantOfSwitchStmt+
  ;
 syntax AssignStmt
         = 
-        ANY locExpr ANY assignUnop ANY assignBinop ANY expr
+        LocExpr locExpr AssignUnop assignUnop AssignBinop assignBinop Expression expr
  ;
 syntax MoveStmt
-        = 
-        ()
+        = NormalMoveStmt
+        | ForwardMoveStmt
  ;
 syntax NormalMoveStmt
         = 
-        stateRef: ANY
+        stateRef: StateRef
  ;
 syntax ForwardMoveStmt
         = 
-        ANY isHead ANY isTail ANY moveExpr
+        Boolean isHead Boolean isTail MoveExpr moveExpr
  ;
 syntax StateRef
         = 
-        stateRef: ANY
+        stateRef: String
  ;
 syntax DeferStmt
         = 
-        deferStmt: ANY
+        deferStmt: String
  ;
 syntax PrimStmt
         = 
-        ANY expr+
+        Expression expr+
  ;
 syntax ErrorStmt
         = 
-        errorType: ANY
+        errorType: String
  ;
 syntax BreakStmt
         = 
-        
+        ()
  ;
 syntax LocExpr
         = 
-        ANY stateName ANY id+
+        String stateName String id+
  ;
 syntax MoveExpr
-        = 
-        ()
+        = Select_MoveExpr
+        | SatateName_MoveExpr
+        | ID_MoveExpr
+        | IDSource_MoveExpr
+        | IDTarget_MoveExpr
  ;
 syntax Select_MoveExpr
         = 
-        
+        ()
  ;
 syntax SatateName_MoveExpr
         = 
-        
+        ()
  ;
 syntax ID_MoveExpr
         = 
-        id: ANY
+        id: String
  ;
 syntax IDSource_MoveExpr
         = 
-        id: ANY
+        id: String
  ;
 syntax IDTarget_MoveExpr
         = 
-        id: ANY
+        id: String
  ;
 syntax ClassState
         = 
-        ANY state ANY className
+        Boolean state ClassName className
  ;
 syntax OnHandlerDef
         = 
-        ANY eventName+ ANY seqStmt
+        EventName eventName+ SeqStmt seqStmt
  ;
 syntax EventName
         = 
-        ANY eventNameLeft ANY eventNameRight
+        String eventNameLeft String eventNameRight
  ;
 syntax ComposantOfSwitchStmt
         = 
-        ANY classState+ ANY seqStmt
+        ClassState classState+ SeqStmt seqStmt
  ;
 syntax ComposantOfInterFunc
         = 
-        ANY id ANY typeOrVoid ANY paramVarDecl+ ANY seqStmt
+        String id TypeOrVoid typeOrVoid ParamVarDecl paramVarDecl+ SeqStmt seqStmt
  ;
 syntax BossaTypeExpr
         = 
-        bossaTypeExpr: ANY
+        bossaTypeExpr: String
  ;
 syntax QueueType
-        = 
-        ()
+        = Normal_QueueType
+        | Fifo_QueueType
+        | Lifo_QueueType
  ;
 syntax Normal_QueueType
         = 
-        
+        ()
  ;
 syntax Fifo_QueueType
         = 
-        
+        ()
  ;
 syntax Lifo_QueueType
         = 
-        
+        ()
  ;
 syntax Critop
         = 
-        ANY lowest ANY highest
+        Boolean lowest Boolean highest
  ;
 syntax StateVisibility
         = 
-        ANY public ANY private
+        Boolean public Boolean private
  ;
 syntax ClassName
         = 
-        className: ANY
+        className: String
  ;
 syntax NonProcType
         = 
-        ANY system ANY struct ANY id ANY nonProcType
+        Boolean system Boolean struct Boolean id String nonProcType
  ;
 syntax Unop
         = 
-        ANY plus ANY minus ANY excl ANY tild
+        Boolean plus Boolean minus Boolean excl Boolean tild
  ;
 syntax Binop
         = 
-        ANY plus ANY minus ANY star ANY slash ANY percentage ANY doubleAnd ANY doubleVerticalBar ANY and ANY eq ANY ne ANY lt ANY gt ANY le ANY ge ANY doubleLt ANY doubleGt
+        Boolean plus Boolean minus Boolean star Boolean slash Boolean percentage Boolean doubleAnd Boolean doubleVerticalBar Boolean and Boolean eq Boolean ne Boolean lt Boolean gt Boolean le Boolean ge Boolean doubleLt Boolean doubleGt
  ;
 syntax AssignUnop
         = 
-        ANY doublePlus ANY doubleMoins
+        Boolean doublePlus Boolean doubleMoins
  ;
 syntax AssignBinop
         = 
-        ANY affect ANY plusEqual ANY moinsEqual ANY starEqual ANY slashEqual ANY percentageEqual ANY andEqual ANY orEqual ANY doubleLtEqual ANY doubleGtEqual
+        Boolean affect Boolean plusEqual Boolean moinsEqual Boolean starEqual Boolean slashEqual Boolean percentageEqual Boolean andEqual Boolean orEqual Boolean doubleLtEqual Boolean doubleGtEqual
  ;

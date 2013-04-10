@@ -3,33 +3,34 @@ module UseCase
 
 syntax Actor
         = 
-        ANY name
+        name: String
  ;
 syntax UseCase
         = 
-        ANY include+ ANY extend+
+        Include include+ Extend extend+
  ;
 syntax Extend
         = 
-        ANY extension+
+        UseCase extension+
  ;
 syntax Include
         = 
-        ANY includingCase+
+        UseCase includingCase+
  ;
 syntax UseCaseContainer
         = 
-        ANY ownedElement+
+        NamedElement ownedElement+
  ;
 syntax BehavioredClassifier
         = 
         ()
  ;
 syntax NamedElement
-        = 
-        ()
+        = Actor
+        | UseCase
+        | Association
  ;
 syntax Association
         = 
-        ANY actor ANY useCase
+        Actor actor UseCase useCase
  ;

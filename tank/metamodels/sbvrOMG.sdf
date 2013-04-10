@@ -4,159 +4,493 @@ exports
   sorts
         Actuality StateOfAffairs Thing Name Designation Representation Meaning Expression BindableTarget AdoptedDefinition Definition Advice ElementOfGuidance Proposition Statement AdviceOfContingency AdviceOfPossibility AdviceOfOptionality AdviceOfPermission AdviceStatement GuidanceStatement AggregationFormulation ProjectingFormulation LogicalFormulation SemanticFormulation Projection Variable PositiveInteger NonnegativeInteger Integer Number Quantity NounConcept Concept AttributiveNamespace Namespace Uri Text Characteristic FactType FactTypeForm Placeholder FactTypeRole Role RoleBinding ReferenceScheme Set AuxiliaryVariable AnswerNominalization AssociativeFactType AssortmentFactType AtleastnQuantification Quantification AtmostnQuantification AtmostoneQuantification AtomicFormulation BagProjection BinaryFactType BinaryLogicalOperation LogicalOperation BodyOfSharedConcepts BodyOfSharedGuidance BodyOfSharedMeanings BusinessPolicy ElementOfGovernance BusinessPolicyStatement BusinessRule Rule BusinessVocabulary Vocabulary CategorizationFactType SpecializationFactType CategorizationScheme CategorizationType CharacteristicType ConceptType ObjectType ClosedLogicalFormulation ClosedSemanticFormulation ClosedProjection CommunicationContent Community ConceptOfThingAsComposite ConceptOfThingAsContinuant ConceptOfThingAsDeveloped ConceptOfThingAsOccurrent ConceptOfThingAsPrimitive ConceptOfThingAsUnitary ConceptOfThingExistingDependently ConceptOfThingExistingIndependently ConceptualSchema Conjunction ContextOfThing Segmentation ContextualizationFactType ContextualizedConcept ContingencyStatement StatementOfAdviceOfPossibility DefiniteDescription IntensionalDefinition DerivableConcept Description DescriptiveExample Disjunction Equivalence ExactlynQuantification ExactlyoneQuantification ExclusiveDisjunction ExistentialQuantification ExplicitnessOfRepresentation ExtensionalDefinition Facet Fact FactModel FactSymbol FactTypeHasFactInFactModel FactTypeNominalization FactTypeRoleDesignation FactTypeTemplating FormalRepresentation FundamentalConcept Icon NonverbalDesignation Implication ImpossibilityStatement StructuralRuleStatement RuleStatement IndividualConcept InformalRepresentation InstantiationFormulation IsfacetofFactType IspropertyofFactType IsroleofFactType KindOfGuidanceStatement Language LevelOfEnforcement LogicalFormulationKind LogicalNegation ModalFormulation NandFormulation NecessityFormulation NecessityStatement NonnecessityStatement NonobligationStatement StatementOfAdviceOfPermission NorFormulation Note NounConceptNominalization NounForm NumericRangeQuantification Objectification ObligationFormulation ObligationStatement OperativeBusinessRuleStatement OperativeBusinessRule OptionalityStatement OwnedDefinition PartitiveFactType PermissibilityFormulation PermissionStatement PossibilityFormulation PossibilityStatement PreferredDesignation ProhibitedDesignation ProhibitionStatement PropositionNominalization Question QuestionNominalization RealworldNumericalCorrespondence Reference RepresentationFormality Res RestrictedPermissionStatement RestrictedPossibilityStatement Rulebook SemanticCommunity SpeechCommunity SententialForm SetProjection Situation SituationalRole SpeechCommunityAdoptsAdoptedDefinitionCitingReference StateOfAffairsInvolvesThingInRole StructuralBusinessRule StructuralRule SubjectField Term TerminologicalDictionary ThingInContext UniversalQuantification Viewpoint VocabularyNamespace WhetherornotFormulation 
   context-free syntax
-         -> Actuality
+        Representation -> Actuality
 
-         -> StateOfAffairs
+        Representation -> Actuality
 
-        name::ANY+ -> Thing
+        Actuality -> StateOfAffairs
+
+        Actuality -> StateOfAffairs
+
+        StateOfAffairs -> Thing
+
+        Meaning -> Thing
+
+        BindableTarget -> Thing
+
+        SemanticFormulation -> Thing
+
+        Namespace -> Thing
+
+        RoleBinding -> Thing
+
+        ReferenceScheme -> Thing
+
+        Set -> Thing
+
+        BodyOfSharedConcepts -> Thing
+
+        BodyOfSharedGuidance -> Thing
+
+        CategorizationScheme -> Thing
+
+        Community -> Thing
+
+        ConceptualSchema -> Thing
+
+        FactModel -> Thing
+
+        Language -> Thing
+
+        LevelOfEnforcement -> Thing
+
+        Res -> Thing
+
+        Situation -> Thing
+
+        SubjectField -> Thing
+
+        TerminologicalDictionary -> Thing
+
+        Viewpoint -> Thing
+
+        name::Name+ -> Thing
 
          -> Name
 
-        implicitlyIsUnderstood::ANY signifier::ANY -> Designation
+        Name -> Designation
 
-        meaning::ANY expression::ANY -> Representation
+        Placeholder -> Designation
 
-        representation::ANY+ -> Meaning
+        FactSymbol -> Designation
 
-         -> Expression
+        FactTypeRoleDesignation -> Designation
 
-         -> BindableTarget
+        NonverbalDesignation -> Designation
+
+        PreferredDesignation -> Designation
+
+        ProhibitedDesignation -> Designation
+
+        Term -> Designation
+
+        implicitlyIsUnderstood::Boolean signifier::Expression -> Designation
+
+        Designation -> Representation
+
+        Definition -> Representation
+
+        Statement -> Representation
+
+        FactTypeForm -> Representation
+
+        CommunicationContent -> Representation
+
+        Description -> Representation
+
+        DescriptiveExample -> Representation
+
+        FormalRepresentation -> Representation
+
+        InformalRepresentation -> Representation
+
+        Note -> Representation
+
+        Reference -> Representation
+
+        meaning::Meaning expression::Expression -> Representation
+
+        Proposition -> Meaning
+
+        Concept -> Meaning
+
+        Question -> Meaning
+
+        representation::Representation+ -> Meaning
+
+        Text -> Expression
+
+        Text -> Expression
+
+        Expression -> BindableTarget
+
+        Variable -> BindableTarget
+
+        Expression -> BindableTarget
+        Variable -> BindableTarget
 
          -> AdoptedDefinition
 
-         -> Definition
+        AdoptedDefinition -> Definition
 
-         -> Advice
+        IntensionalDefinition -> Definition
 
-        isPracticable::ANY -> ElementOfGuidance
+        ExtensionalDefinition -> Definition
 
-        isFalse::ANY isTrue::ANY statement::ANY+ isPossiblyTrue::ANY isObligatedToBeTrue::ANY isPermittedToBeTrue::ANY isNecessarilyTrue::ANY -> Proposition
+        OwnedDefinition -> Definition
 
-         -> Statement
+        AdoptedDefinition -> Definition
+        IntensionalDefinition -> Definition
+        ExtensionalDefinition -> Definition
+        OwnedDefinition -> Definition
+
+        AdviceOfPossibility -> Advice
+
+        AdviceOfPermission -> Advice
+
+        AdviceOfPossibility -> Advice
+        AdviceOfPermission -> Advice
+
+        Advice -> ElementOfGuidance
+
+        ElementOfGovernance -> ElementOfGuidance
+
+        isPracticable::Boolean -> ElementOfGuidance
+
+        ElementOfGuidance -> Proposition
+
+        Rule -> Proposition
+
+        Fact -> Proposition
+
+        isFalse::Boolean isTrue::Boolean statement::Statement+ isPossiblyTrue::Boolean isObligatedToBeTrue::Boolean isPermittedToBeTrue::Boolean isNecessarilyTrue::Boolean -> Proposition
+
+        GuidanceStatement -> Statement
+
+        GuidanceStatement -> Statement
 
          -> AdviceOfContingency
 
-         -> AdviceOfPossibility
+        AdviceOfContingency -> AdviceOfPossibility
+
+        AdviceOfContingency -> AdviceOfPossibility
 
          -> AdviceOfOptionality
 
-         -> AdviceOfPermission
+        AdviceOfOptionality -> AdviceOfPermission
 
-         -> AdviceStatement
+        AdviceOfOptionality -> AdviceOfPermission
 
-         -> GuidanceStatement
+        StatementOfAdviceOfPossibility -> AdviceStatement
+
+        StatementOfAdviceOfPermission -> AdviceStatement
+
+        StatementOfAdviceOfPossibility -> AdviceStatement
+        StatementOfAdviceOfPermission -> AdviceStatement
+
+        AdviceStatement -> GuidanceStatement
+
+        BusinessPolicyStatement -> GuidanceStatement
+
+        RuleStatement -> GuidanceStatement
+
+        AdviceStatement -> GuidanceStatement
+        BusinessPolicyStatement -> GuidanceStatement
+        RuleStatement -> GuidanceStatement
 
          -> AggregationFormulation
 
-        projection::ANY -> ProjectingFormulation
+        AggregationFormulation -> ProjectingFormulation
 
-         -> LogicalFormulation
+        AnswerNominalization -> ProjectingFormulation
 
-         -> SemanticFormulation
+        FactTypeNominalization -> ProjectingFormulation
 
-        constrainingFormulation::ANY projectionVariable::ANY+ auxiliaryVariable::ANY+ -> Projection
+        NounConceptNominalization -> ProjectingFormulation
 
-        restrictingFormulation::ANY projectionPosition::ANY rangedoverConcept::ANY isUnitary::ANY -> Variable
+        QuestionNominalization -> ProjectingFormulation
+
+        projection::Projection -> ProjectingFormulation
+
+        ProjectingFormulation -> LogicalFormulation
+
+        Quantification -> LogicalFormulation
+
+        AtomicFormulation -> LogicalFormulation
+
+        LogicalOperation -> LogicalFormulation
+
+        InstantiationFormulation -> LogicalFormulation
+
+        ModalFormulation -> LogicalFormulation
+
+        Objectification -> LogicalFormulation
+
+        PropositionNominalization -> LogicalFormulation
+
+        ProjectingFormulation -> LogicalFormulation
+        Quantification -> LogicalFormulation
+        AtomicFormulation -> LogicalFormulation
+        LogicalOperation -> LogicalFormulation
+        InstantiationFormulation -> LogicalFormulation
+        ModalFormulation -> LogicalFormulation
+        Objectification -> LogicalFormulation
+        PropositionNominalization -> LogicalFormulation
+
+        LogicalFormulation -> SemanticFormulation
+
+        Projection -> SemanticFormulation
+
+        ClosedSemanticFormulation -> SemanticFormulation
+
+        LogicalFormulation -> SemanticFormulation
+        Projection -> SemanticFormulation
+        ClosedSemanticFormulation -> SemanticFormulation
+
+        BagProjection -> Projection
+
+        ClosedProjection -> Projection
+
+        SetProjection -> Projection
+
+        constrainingFormulation::LogicalFormulation projectionVariable::Variable+ auxiliaryVariable::AuxiliaryVariable+ -> Projection
+
+        AuxiliaryVariable -> Variable
+
+        restrictingFormulation::LogicalFormulation projectionPosition::PositiveInteger rangedoverConcept::Concept isUnitary::Boolean -> Variable
 
          -> PositiveInteger
 
-         -> NonnegativeInteger
+        PositiveInteger -> NonnegativeInteger
 
-        value::ANY -> Integer
+        PositiveInteger -> NonnegativeInteger
 
-         -> Number
+        NonnegativeInteger -> Integer
 
-         -> Quantity
+        value::Integer -> Integer
 
-         -> NounConcept
+        Integer -> Number
 
-        attributiveNamespace::ANY+ definition::ANY+ moreGeneralConcept::ANY+ category::ANY+ essentialCharacteristic::ANY+ instance::ANY+ referenceScheme::ANY+ impliedCharacteristic::ANY+ necessaryCharacteristic::ANY+ designation::ANY+ extension::ANY -> Concept
+        Integer -> Number
+
+        Number -> Quantity
+
+        Number -> Quantity
+
+        Quantity -> NounConcept
+
+        Role -> NounConcept
+
+        ContextualizedConcept -> NounConcept
+
+        Quantity -> NounConcept
+        Role -> NounConcept
+        ContextualizedConcept -> NounConcept
+
+        NounConcept -> Concept
+
+        FactType -> Concept
+
+        CategorizationType -> Concept
+
+        ObjectType -> Concept
+
+        ConceptOfThingAsComposite -> Concept
+
+        ConceptOfThingAsContinuant -> Concept
+
+        ConceptOfThingAsDeveloped -> Concept
+
+        ConceptOfThingAsOccurrent -> Concept
+
+        ConceptOfThingAsPrimitive -> Concept
+
+        ConceptOfThingAsUnitary -> Concept
+
+        ConceptOfThingExistingDependently -> Concept
+
+        ConceptOfThingExistingIndependently -> Concept
+
+        DerivableConcept -> Concept
+
+        attributiveNamespace::AttributiveNamespace+ definition::Definition+ moreGeneralConcept::Concept+ category::Concept+ essentialCharacteristic::Characteristic+ instance::Thing+ referenceScheme::ReferenceScheme+ impliedCharacteristic::Characteristic+ necessaryCharacteristic::Characteristic+ designation::Designation+ extension::Set -> Concept
 
          -> AttributiveNamespace
 
-        uri::ANY+ -> Namespace
+        AttributiveNamespace -> Namespace
+
+        VocabularyNamespace -> Namespace
+
+        uri::Uri+ -> Namespace
 
          -> Uri
 
-        value::ANY -> Text
+        Uri -> Text
+
+        value::String -> Text
 
          -> Characteristic
 
-        factTypeForm::ANY+ role::ANY+ -> FactType
+        Characteristic -> FactType
 
-        placeholder::ANY+ -> FactTypeForm
+        AssociativeFactType -> FactType
 
-        startingCharacterPosition::ANY -> Placeholder
+        AssortmentFactType -> FactType
 
-        roleBinding::ANY+ -> FactTypeRole
+        BinaryFactType -> FactType
 
-         -> Role
+        SpecializationFactType -> FactType
+
+        IsroleofFactType -> FactType
+
+        factTypeForm::FactTypeForm+ role::FactTypeRole+ -> FactType
+
+        NounForm -> FactTypeForm
+
+        SententialForm -> FactTypeForm
+
+        placeholder::Placeholder+ -> FactTypeForm
+
+        startingCharacterPosition::PositiveInteger -> Placeholder
+
+        roleBinding::RoleBinding+ -> FactTypeRole
+
+        FactTypeRole -> Role
+
+        FactTypeRole -> Role
 
          -> RoleBinding
 
-        simplyUsedRole::ANY+ identifyingCharacteristic::ANY+ extensionallyUsedRole::ANY+ -> ReferenceScheme
+        simplyUsedRole::FactTypeRole+ identifyingCharacteristic::Characteristic+ extensionallyUsedRole::FactTypeRole+ -> ReferenceScheme
 
-        cardinality::ANY element::ANY+ -> Set
+        BodyOfSharedMeanings -> Set
+
+        Vocabulary -> Set
+
+        Rulebook -> Set
+
+        cardinality::NonnegativeInteger element::Thing+ -> Set
 
          -> AuxiliaryVariable
 
          -> AnswerNominalization
 
-         -> AssociativeFactType
+        IspropertyofFactType -> AssociativeFactType
+
+        IspropertyofFactType -> AssociativeFactType
 
          -> AssortmentFactType
 
-        minimumCardinality::ANY -> AtleastnQuantification
+        ExistentialQuantification -> AtleastnQuantification
 
-        scopeFormulation::ANY -> Quantification
+        minimumCardinality::NonnegativeInteger -> AtleastnQuantification
 
-        maximumCardinality::ANY -> AtmostnQuantification
+        AtleastnQuantification -> Quantification
+
+        AtmostnQuantification -> Quantification
+
+        ExactlynQuantification -> Quantification
+
+        NumericRangeQuantification -> Quantification
+
+        UniversalQuantification -> Quantification
+
+        scopeFormulation::LogicalFormulation -> Quantification
+
+        AtmostoneQuantification -> AtmostnQuantification
+
+        maximumCardinality::NonnegativeInteger -> AtmostnQuantification
 
          -> AtmostoneQuantification
 
-        roleBinding::ANY+ -> AtomicFormulation
+        roleBinding::RoleBinding+ -> AtomicFormulation
 
          -> BagProjection
 
-         -> BinaryFactType
+        PartitiveFactType -> BinaryFactType
 
-        logicalOperand2::ANY+ logicalOperand1::ANY+ -> BinaryLogicalOperation
+        PartitiveFactType -> BinaryFactType
 
-        logicalOperand::ANY -> LogicalOperation
+        Conjunction -> BinaryLogicalOperation
+
+        Disjunction -> BinaryLogicalOperation
+
+        Equivalence -> BinaryLogicalOperation
+
+        ExclusiveDisjunction -> BinaryLogicalOperation
+
+        Implication -> BinaryLogicalOperation
+
+        NandFormulation -> BinaryLogicalOperation
+
+        NorFormulation -> BinaryLogicalOperation
+
+        WhetherornotFormulation -> BinaryLogicalOperation
+
+        logicalOperand2::LogicalFormulation+ logicalOperand1::LogicalFormulation+ -> BinaryLogicalOperation
+
+        BinaryLogicalOperation -> LogicalOperation
+
+        LogicalNegation -> LogicalOperation
+
+        logicalOperand::LogicalFormulation -> LogicalOperation
 
          -> BodyOfSharedConcepts
 
          -> BodyOfSharedGuidance
 
-        elementaryFactType::ANY+ -> BodyOfSharedMeanings
+        elementaryFactType::FactType+ -> BodyOfSharedMeanings
 
          -> BusinessPolicy
 
-        isDirectlyEnforceable::ANY -> ElementOfGovernance
+        BusinessPolicy -> ElementOfGovernance
+
+        isDirectlyEnforceable::Boolean -> ElementOfGovernance
 
          -> BusinessPolicyStatement
 
          -> BusinessRule
 
-         -> Rule
+        StructuralRule -> Rule
+
+        StructuralRule -> Rule
 
          -> BusinessVocabulary
 
-         -> Vocabulary
+        BusinessVocabulary -> Vocabulary
+
+        BusinessVocabulary -> Vocabulary
 
          -> CategorizationFactType
 
-         -> SpecializationFactType
+        CategorizationFactType -> SpecializationFactType
 
-         -> CategorizationScheme
+        ContextualizationFactType -> SpecializationFactType
+
+        CategorizationFactType -> SpecializationFactType
+        ContextualizationFactType -> SpecializationFactType
+
+        Segmentation -> CategorizationScheme
+
+        ExplicitnessOfRepresentation -> CategorizationScheme
+
+        FactTypeTemplating -> CategorizationScheme
+
+        KindOfGuidanceStatement -> CategorizationScheme
+
+        RealworldNumericalCorrespondence -> CategorizationScheme
+
+        Segmentation -> CategorizationScheme
+        ExplicitnessOfRepresentation -> CategorizationScheme
+        FactTypeTemplating -> CategorizationScheme
+        KindOfGuidanceStatement -> CategorizationScheme
+        RealworldNumericalCorrespondence -> CategorizationScheme
 
          -> CategorizationType
 
          -> CharacteristicType
 
-         -> ConceptType
+        CharacteristicType -> ConceptType
 
-        categorizationScheme::ANY+ categorizationType::ANY+ -> ObjectType
+        CharacteristicType -> ConceptType
+
+        ConceptType -> ObjectType
+
+        FundamentalConcept -> ObjectType
+
+        LogicalFormulationKind -> ObjectType
+
+        categorizationScheme::CategorizationScheme+ categorizationType::CategorizationType+ -> ObjectType
 
          -> ClosedLogicalFormulation
 
@@ -166,7 +500,11 @@ exports
 
          -> CommunicationContent
 
-        uri::ANY+ subcommunity::ANY+ -> Community
+        SemanticCommunity -> Community
+
+        SpeechCommunity -> Community
+
+        uri::Uri+ subcommunity::Community+ -> Community
 
          -> ConceptOfThingAsComposite
 
@@ -190,19 +528,41 @@ exports
 
          -> ContextOfThing
 
-         -> Segmentation
+        ContextOfThing -> Segmentation
 
-         -> ContextualizationFactType
+        RepresentationFormality -> Segmentation
 
-         -> ContextualizedConcept
+        ThingInContext -> Segmentation
+
+        ContextOfThing -> Segmentation
+        RepresentationFormality -> Segmentation
+        ThingInContext -> Segmentation
+
+        IsfacetofFactType -> ContextualizationFactType
+
+        IsfacetofFactType -> ContextualizationFactType
+
+        Facet -> ContextualizedConcept
+
+        Facet -> ContextualizedConcept
 
          -> ContingencyStatement
 
-         -> StatementOfAdviceOfPossibility
+        ContingencyStatement -> StatementOfAdviceOfPossibility
+
+        NonnecessityStatement -> StatementOfAdviceOfPossibility
+
+        PossibilityStatement -> StatementOfAdviceOfPossibility
+
+        ContingencyStatement -> StatementOfAdviceOfPossibility
+        NonnecessityStatement -> StatementOfAdviceOfPossibility
+        PossibilityStatement -> StatementOfAdviceOfPossibility
 
          -> DefiniteDescription
 
-         -> IntensionalDefinition
+        DefiniteDescription -> IntensionalDefinition
+
+        DefiniteDescription -> IntensionalDefinition
 
          -> DerivableConcept
 
@@ -214,7 +574,9 @@ exports
 
          -> Equivalence
 
-        cardinality::ANY -> ExactlynQuantification
+        ExactlyoneQuantification -> ExactlynQuantification
+
+        cardinality::NonnegativeInteger -> ExactlynQuantification
 
          -> ExactlyoneQuantification
 
@@ -234,7 +596,7 @@ exports
 
          -> FactSymbol
 
-        factType::ANY fact::ANY factModel::ANY -> FactTypeHasFactInFactModel
+        factType::FactType fact::Fact factModel::FactModel -> FactTypeHasFactInFactModel
 
          -> FactTypeNominalization
 
@@ -248,15 +610,30 @@ exports
 
          -> Icon
 
-         -> NonverbalDesignation
+        Icon -> NonverbalDesignation
 
-        consequent::ANY+ antecedent::ANY+ -> Implication
+        Icon -> NonverbalDesignation
+
+        consequent::LogicalFormulation+ antecedent::LogicalFormulation+ -> Implication
 
          -> ImpossibilityStatement
 
-         -> StructuralRuleStatement
+        ImpossibilityStatement -> StructuralRuleStatement
 
-         -> RuleStatement
+        NecessityStatement -> StructuralRuleStatement
+
+        RestrictedPossibilityStatement -> StructuralRuleStatement
+
+        ImpossibilityStatement -> StructuralRuleStatement
+        NecessityStatement -> StructuralRuleStatement
+        RestrictedPossibilityStatement -> StructuralRuleStatement
+
+        StructuralRuleStatement -> RuleStatement
+
+        OperativeBusinessRuleStatement -> RuleStatement
+
+        StructuralRuleStatement -> RuleStatement
+        OperativeBusinessRuleStatement -> RuleStatement
 
          -> IndividualConcept
 
@@ -280,7 +657,18 @@ exports
 
          -> LogicalNegation
 
-         -> ModalFormulation
+        NecessityFormulation -> ModalFormulation
+
+        ObligationFormulation -> ModalFormulation
+
+        PermissibilityFormulation -> ModalFormulation
+
+        PossibilityFormulation -> ModalFormulation
+
+        NecessityFormulation -> ModalFormulation
+        ObligationFormulation -> ModalFormulation
+        PermissibilityFormulation -> ModalFormulation
+        PossibilityFormulation -> ModalFormulation
 
          -> NandFormulation
 
@@ -292,7 +680,15 @@ exports
 
          -> NonobligationStatement
 
-         -> StatementOfAdviceOfPermission
+        NonobligationStatement -> StatementOfAdviceOfPermission
+
+        OptionalityStatement -> StatementOfAdviceOfPermission
+
+        PermissionStatement -> StatementOfAdviceOfPermission
+
+        NonobligationStatement -> StatementOfAdviceOfPermission
+        OptionalityStatement -> StatementOfAdviceOfPermission
+        PermissionStatement -> StatementOfAdviceOfPermission
 
          -> NorFormulation
 
@@ -302,7 +698,7 @@ exports
 
          -> NounForm
 
-        maximumCardinality::ANY minimumCardinality::ANY -> NumericRangeQuantification
+        maximumCardinality::NonnegativeInteger minimumCardinality::NonnegativeInteger -> NumericRangeQuantification
 
          -> Objectification
 
@@ -310,9 +706,17 @@ exports
 
          -> ObligationStatement
 
-         -> OperativeBusinessRuleStatement
+        ObligationStatement -> OperativeBusinessRuleStatement
 
-        levelOfEnforcement::ANY+ -> OperativeBusinessRule
+        ProhibitionStatement -> OperativeBusinessRuleStatement
+
+        RestrictedPermissionStatement -> OperativeBusinessRuleStatement
+
+        ObligationStatement -> OperativeBusinessRuleStatement
+        ProhibitionStatement -> OperativeBusinessRuleStatement
+        RestrictedPermissionStatement -> OperativeBusinessRuleStatement
+
+        levelOfEnforcement::LevelOfEnforcement+ -> OperativeBusinessRule
 
          -> OptionalityStatement
 
@@ -354,7 +758,7 @@ exports
 
          -> Rulebook
 
-        speechCommunity::ANY+ -> SemanticCommunity
+        speechCommunity::SpeechCommunity+ -> SemanticCommunity
 
          -> SpeechCommunity
 
@@ -366,9 +770,9 @@ exports
 
          -> SituationalRole
 
-        speechCommunity::ANY adoptedDefinition::ANY reference::ANY -> SpeechCommunityAdoptsAdoptedDefinitionCitingReference
+        speechCommunity::SpeechCommunity adoptedDefinition::AdoptedDefinition reference::Reference -> SpeechCommunityAdoptsAdoptedDefinitionCitingReference
 
-        stateOfAffairs::ANY thing::ANY role::ANY -> StateOfAffairsInvolvesThingInRole
+        stateOfAffairs::StateOfAffairs thing::Thing role::Role -> StateOfAffairsInvolvesThingInRole
 
          -> StructuralBusinessRule
 
@@ -378,7 +782,7 @@ exports
 
          -> Term
 
-        uri::ANY+ -> TerminologicalDictionary
+        uri::Uri+ -> TerminologicalDictionary
 
          -> ThingInContext
 
@@ -388,4 +792,4 @@ exports
 
          -> VocabularyNamespace
 
-        inconsequent::ANY+ consequent::ANY+ -> WhetherornotFormulation
+        inconsequent::LogicalFormulation+ consequent::LogicalFormulation+ -> WhetherornotFormulation

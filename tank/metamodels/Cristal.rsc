@@ -3,11 +3,11 @@ module Cristal
 
 syntax Condition
         = 
-        ANY partCompositeMembers+ ANY actCompositeMembers+
+        PartCompositeMember partCompositeMembers+ ActCompositeMember actCompositeMembers+
  ;
 syntax CompositeParDef
         = 
-        ANY partCompositeMember+
+        PartCompositeMember partCompositeMember+
  ;
 syntax ElementaryPartDef
         = 
@@ -19,21 +19,23 @@ syntax ElementaryActDef
  ;
 syntax CompositeActDef
         = 
-        ANY actCompositeMembers+
+        ActCompositeMember actCompositeMembers+
  ;
 syntax ActCompositeMember
         = 
-        ANY activityDefinitions+
+        ActivityDefinition activityDefinitions+
  ;
 syntax ActivityDefinition
-        = 
-        actCompositeMember: ANY
+        = ElementaryActDef
+        | CompositeActDef
+        | actCompositeMember: ActCompositeMember
  ;
 syntax PartDefinition
-        = 
-        ANY partCompositeMembers+
+        = CompositeParDef
+        | ElementaryPartDef
+        | PartCompositeMember partCompositeMembers+
  ;
 syntax PartCompositeMember
         = 
-        partDefinitions: ANY
+        partDefinitions: PartDefinition
  ;

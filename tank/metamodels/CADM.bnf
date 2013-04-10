@@ -1,52 +1,100 @@
 Element:
-        name::ANY content::ANY
+        Architecture
+Element:
+        Organization
+Element:
+        Guidance
+Element:
+        Document
+Element:
+        Action
+Element:
+        Agreement
+Element:
+        Task
+Element:
+        InformationAsset
+Element:
+        Network
+Element:
+        MissionArea
+Element:
+        System
+Element:
+        Mission
+Element:
+        FunctionalArea
+Element:
+        Capability
+Element:
+        MaterielItem
+Element:
+        Facility
+Element:
+        name::String content::String
 Architecture:
-        isAssociatedWith::ANY+ missions::ANY+ isFocusOf::ANY+ uses::ANY+
+        isAssociatedWith::Architecture+ missions::Mission+ isFocusOf::FunctionalArea+ uses::Organization+
 Organization:
-        isAssociatedWith::ANY+ softwareItems::ANY+ owns::ANY+ includes::ANY+ performsTo::ANY+ hasRequirement::ANY+ hasMissionArea::ANY+ associatedSystems::ANY+ isProponentOf::ANY+
+        isAssociatedWith::Organization+ softwareItems::SoftwareItem+ owns::InformationAsset+ includes::Node+ performsTo::Capability+ hasRequirement::Requirement+ hasMissionArea::MissionArea+ associatedSystems::System+ isProponentOf::FunctionalArea+
 Guidance:
-        isAssocitatedWith::ANY+ isImplementedBy::ANY+ isSpecifiedIn::ANY+ providesAuthorityFor::ANY+ defines::ANY+
+        Requirement
+Guidance:
+        isAssocitatedWith::Guidance+ isImplementedBy::Architecture+ isSpecifiedIn::Document+ providesAuthorityFor::InformationAsset+ defines::MissionArea+
 Document:
-        isAssociatedWith::ANY+ describesArchitecture::ANY describesSystem::ANY+ isSpecifiedUsing::ANY+ cites::ANY+
+        isAssociatedWith::Document+ describesArchitecture::Architecture describesSystem::System+ isSpecifiedUsing::Agreement+ cites::InformationAsset+
 Action:
-        mayBeA::ANY isAssociatedWith::ANY+ involvedIn::ANY+
+        mayBeA::Task isAssociatedWith::Action+ involvedIn::ActivityModel+
 Agreement:
-        isAssociatedWith::ANY+ isCitedBy::ANY+ appliesTo::ANY+ implements::ANY+
+        Standard
+Agreement:
+        isAssociatedWith::Agreement+ isCitedBy::Agreement+ appliesTo::InformationAsset+ implements::Guidance+
 Standard:
         EPSILON
 Task:
-        isAssociatedWith::ANY+ isPerformedBy::ANY+ isPerformedUsing::ANY+ specifies::ANY+
+        isAssociatedWith::Task+ isPerformedBy::Node+ isPerformedUsing::System+ specifies::Requirement+
 InformationAsset:
-        isAssociatedWith::ANY+
+        ConceptualDataModel
+InformationAsset:
+        ActivityModel
+InformationAsset:
+        isAssociatedWith::InformationAsset+
 ConceptualDataModel:
         EPSILON
 ActivityModel:
         EPSILON
 Node:
-        isAssociatedWith::ANY+ describes::ANY+ hasServicesProvidedBy::ANY+ involvedIn::ANY+ uses::ANY+ involves::ANY+ isParticipedInBy::ANY+ supports::ANY+
+        isAssociatedWith::Node+ describes::Architecture+ hasServicesProvidedBy::Facility+ involvedIn::ActivityModel+ uses::InformationAsset+ involves::InfoExchRequirement+ isParticipedInBy::Network+ supports::System+
 Network:
-        isAssociatedWith::ANY+ isDescribedIn::ANY+ compliesWith::ANY+ has::ANY+ performsTo::ANY+
+        isAssociatedWith::Network+ isDescribedIn::Document+ compliesWith::Standard+ has::Organization+ performsTo::Capability+
 Requirement:
-        mayBeSatifiedBy::ANY+ isSpecifiedUsing::ANY+ specifiesNeedFor::ANY+ cites::ANY+
+        InfoExchRequirement
+Requirement:
+        ExchangeNeedLineReq
+Requirement:
+        mayBeSatifiedBy::Architecture+ isSpecifiedUsing::InformationAsset+ specifiesNeedFor::MaterielItem+ cites::MissionArea+
 InfoExchRequirement:
-        isCitedIn::ANY+ isSpecifiedInInfos::ANY+
+        isCitedIn::Document+ isSpecifiedInInfos::InformationAsset+
 ExchangeNeedLineReq:
         EPSILON
 MissionArea:
-        supports::ANY+
+        supports::Task+
 System:
-        isAssociatedWith::ANY+ citedIn::ANY+ compliesWith::ANY+ isDescribedBy::ANY+ uses::ANY+ operatesUsing::ANY+ performsTo::ANY+ associatedOrganization::ANY+ appliesTo::ANY+
+        isAssociatedWith::System+ citedIn::Architecture+ compliesWith::Standard+ isDescribedBy::InformationAsset+ uses::MaterielItem+ operatesUsing::Network+ performsTo::Capability+ associatedOrganization::Organization+ appliesTo::Requirement+
 Mission:
-        isCitedBy::ANY requires::ANY+ isAssigned::ANY+ mayCite::ANY+
+        isCitedBy::Architecture requires::Task+ isAssigned::Organization+ mayCite::FunctionalArea+
 FunctionalArea:
-        isPartOf::ANY+ supports::ANY+ cites::ANY+
+        isPartOf::FunctionalArea+ supports::System+ cites::MissionArea+
 Capability:
-        specifiesRequired::ANY+
+        specifiesRequired::Requirement+
 MaterielItem:
-        establishedAs::ANY+ conformsTo::ANY+ performsTo::ANY+
+        EquipmentType
+MaterielItem:
+        SoftwareItem
+MaterielItem:
+        establishedAs::MaterielItem+ conformsTo::Standard+ performsTo::Capability+
 EquipmentType:
         EPSILON
 SoftwareItem:
-        uses::ANY+ isSourceFor::ANY
+        uses::EquipmentType+ isSourceFor::Organization
 Facility:
         EPSILON

@@ -4,32 +4,58 @@ exports
   sorts
         EDataType NamedObject Attribute Entity Port Relation Director Parameter ComponentPort ComponentRelation ComponentEntity AtomicActor CompositeEntity WorkSpace CompositeActor 
   context-free syntax
-        value::ANY -> EDataType
+        value::String -> EDataType
 
-        name::ANY -> NamedObject
+        Attribute -> NamedObject
 
-        att_container::ANY value::ANY -> Attribute
+        Entity -> NamedObject
 
-        attributes::ANY+ parameters::ANY+ ports::ANY+ -> Entity
+        Port -> NamedObject
 
-        po_container::ANY links::ANY+ -> Port
+        Relation -> NamedObject
 
-        ports::ANY+ -> Relation
+        Director -> NamedObject
 
-        ca_container::ANY -> Director
+        name::String -> NamedObject
 
-        pa_container::ANY dataType::ANY -> Parameter
+        Parameter -> Attribute
+
+        ComponentEntity -> Attribute
+
+        att_container::Entity value::String -> Attribute
+
+        attributes::Attribute+ parameters::Parameter+ ports::Port+ -> Entity
+
+        ComponentPort -> Port
+
+        po_container::Entity links::Relation+ -> Port
+
+        ComponentRelation -> Relation
+
+        ports::Port+ -> Relation
+
+        ca_container::CompositeActor -> Director
+
+        pa_container::Entity dataType::EDataType -> Parameter
 
          -> ComponentPort
 
-        re_container::ANY -> ComponentRelation
+        re_container::CompositeEntity -> ComponentRelation
 
-        ce_container::ANY -> ComponentEntity
+        AtomicActor -> ComponentEntity
+
+        CompositeEntity -> ComponentEntity
+
+        ce_container::CompositeEntity -> ComponentEntity
 
          -> AtomicActor
 
-        containees::ANY+ relations::ANY+ -> CompositeEntity
+        WorkSpace -> CompositeEntity
+
+        CompositeActor -> CompositeEntity
+
+        containees::ComponentEntity+ relations::ComponentRelation+ -> CompositeEntity
 
          -> WorkSpace
 
-        directors::ANY -> CompositeActor
+        directors::Director -> CompositeActor

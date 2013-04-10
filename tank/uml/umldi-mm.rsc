@@ -3,39 +3,25 @@ module Umldi_mm
 
 syntax Element
         = 
-        ()
+        ModelElement
  ;
 syntax ModelElement
-        = 
-        ()
- ;
-syntax GeneralizableElement
-        = 
-        ()
- ;
-syntax Namespace
-        = 
-        ()
- ;
-syntax Classifier
-        = 
-        ()
- ;
-syntax Feature
-        = 
-        ()
+        = GeneralizableElement
+        | Namespace
+        | Feature
+        | Relationship
  ;
 syntax Relationship
         = 
-        ()
+        Generalization
  ;
 syntax Generalization
         = 
-        ANY parent ANY powertype ANY child ANY discriminator
+        GeneralizableElement parent Classifier powertype GeneralizableElement child String discriminator
  ;
 syntax Package
-        = 
-        ANY elementImport+
+        = Model
+        | ElementImport elementImport+
  ;
 syntax Model
         = 
@@ -43,11 +29,11 @@ syntax Model
  ;
 syntax Subsystem
         = 
-        isInstantiable: ANY
+        isInstantiable: Boolean
  ;
 syntax ElementImport
         = 
-        ANY package ANY importedElement ANY visibility ANY alias ANY isSpecification
+        Package package ModelElement importedElement VisibilityKind visibility String alias Boolean isSpecification
  ;
 syntax ScopeKind
         = sk_instance: ()

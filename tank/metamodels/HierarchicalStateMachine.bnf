@@ -1,30 +1,54 @@
 MgaObject:
-        name::ANY position::ANY
+        StateBase
+MgaObject:
+        DataVar
+MgaObject:
+        Transition
+MgaObject:
+        StateDateRelation
+MgaObject:
+        name::String position::String
 StateBase:
-        defaultTransition::ANY marked::ANY associationStateStatedst::ANY+ associationStateStatesrc::ANY+ data::ANY+ associationDataStateBase::ANY
+        CompoundState
+StateBase:
+        PrimitiveState
+StateBase:
+        defaultTransition::String marked::Boolean associationStateStatedst::AssociationStateState+ associationStateStatesrc::AssociationStateState+ data::DataVar+ associationDataStateBase::AssociationDataStateBase
 DataVar:
-        stateBase::ANY+ orState::ANY associationDataStateBase::ANY
+        stateBase::StateBase+ orState::OrState associationDataStateBase::AssociationDataStateBase
 Transition:
-        guard::ANY trigger::ANY action::ANY isSync::ANY orState::ANY associationStateState::ANY
+        guard::String trigger::String action::String isSync::Boolean orState::OrState associationStateState::AssociationStateState
 StateDateRelation:
-        value::ANY color::ANY
+        value::String color::String
 RootFolder:
-        name::ANY rootFolders::ANY+ orState::ANY+
+        name::String rootFolders::RootFolder+ orState::OrState+
 OrState:
-        rootFolder::ANY state::ANY+ init::ANY dataVar::ANY+ stateDataRelation::ANY+ transition::ANY+ compoundState::ANY+
+        rootFolder::RootFolder state::State+ init::Init dataVar::DataVar+ stateDataRelation::StateDataRelation+ transition::Transition+ compoundState::CompoundState+
 AndState:
-        compoundState::ANY+
+        compoundState::CompoundState+
 CompoundState:
-        andState::ANY orState::ANY
+        OrState
+CompoundState:
+        AndState
+CompoundState:
+        andState::AndState orState::OrState
 PrimitiveState:
-        EPSILON
+        Init
+PrimitiveState:
+        State
+PrimitiveState:
+        StateDataRelation
+PrimitiveState:
+        Init
+        State
+        StateDataRelation
 Init:
-        orState::ANY
+        orState::OrState
 State:
-        orState::ANY
+        orState::OrState
 StateDataRelation:
-        value::ANY color::ANY orState::ANY associationDataStateBase1::ANY
+        value::String color::String orState::OrState associationDataStateBase1::AssociationDataStateBase
 AssociationStateState:
-        transition::ANY dstTransition::ANY+ srcTransition::ANY+
+        transition::Transition dstTransition::StateBase+ srcTransition::StateBase+
 AssociationDataStateBase:
-        stateDataRelation::ANY dataVar::ANY+ stateBase::ANY+
+        stateDataRelation::StateDataRelation dataVar::DataVar+ stateBase::StateBase+

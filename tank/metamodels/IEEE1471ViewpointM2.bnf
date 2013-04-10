@@ -1,23 +1,36 @@
 Viewpoint:
-        source::ANY+ covers::ANY+ supplierDependency::ANY+ clientDependency::ANY+ isImportTo::ANY architecturalConstruct::ANY+ process::ANY
+        source::ViewpointImport+ covers::Concern+ supplierDependency::ViewpointDependency+ clientDependency::ViewpointDependency+ isImportTo::Stakeholder architecturalConstruct::ArchitecturalConstruct+ process::Process
 Concern:
         EPSILON
 Stakeholder:
-        concerns::ANY
+        concerns::Concern
 ViewpointImport:
         EPSILON
 ViewpointDependency:
-        supplier::ANY client::ANY
+        supplier::Viewpoint client::Viewpoint
 Process:
-        methodology::ANY+
+        methodology::Technique+
 Technique:
-        methods::ANY+ applies::ANY+
+        methods::AnalysisMethod+ applies::Rule+
 AnalysisMethod:
-        analysis::ANY
+        analysis::Language
 ArchitecturalConstruct:
-        EPSILON
+        Rule
+ArchitecturalConstruct:
+        Language
+ArchitecturalConstruct:
+        Mapping
+ArchitecturalConstruct:
+        Pattern
+ArchitecturalConstruct:
+        Rule
+        Language
+        Mapping
+        Pattern
 Rule:
-        techniques::ANY+ guidance::ANY
+        ModelOrganization
+Rule:
+        techniques::Technique+ guidance::Language
 ModelOrganization:
         EPSILON
 ModellingRule:
@@ -25,6 +38,6 @@ ModellingRule:
 Language:
         EPSILON
 Mapping:
-        input::ANY ouput::ANY
+        input::Language ouput::Language
 Pattern:
         EPSILON

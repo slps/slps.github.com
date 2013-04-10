@@ -3,23 +3,23 @@ module QoS_Profile
 
 syntax QoSComponent
         = 
-        ANY operations ANY profile+
+        Operation operations QoSProfile profile+
  ;
 syntax Operation
         = 
         ()
  ;
 syntax QoSProfile
-        = 
-        ()
+        = CompoundProfile
+        | SimpleProfile
  ;
 syntax CompoundProfile
         = 
-        ANY profileTransition+ ANY simpleProfile+
+        ProfileTransition profileTransition+ SimpleProfile simpleProfile+
  ;
 syntax SimpleProfile
         = 
-        ANY compoundProfile ANY uses ANY provides
+        CompoundProfile compoundProfile QoSStatement uses QoSStatement provides
  ;
 syntax QoSStatement
         = 
@@ -27,5 +27,5 @@ syntax QoSStatement
  ;
 syntax ProfileTransition
         = 
-        ANY operations+ ANY from ANY to ANY compoundProfile
+        Operation operations+ SimpleProfile from SimpleProfile to CompoundProfile compoundProfile
  ;

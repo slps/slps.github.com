@@ -4,40 +4,50 @@ exports
   sorts
         OrganizationalStructure Organization OrganizationalRule SafetyRule LivenessRule AgentType Service Role Activity Responsibility LivenessProperty SafetyProperty AssociationConnector Permission Resource Environnement Action Communication Protocol 
   context-free syntax
-        organization::ANY+ -> OrganizationalStructure
+        organization::Organization+ -> OrganizationalStructure
 
-        collaborates::ANY interacts::ANY member::ANY+ observes::ANY+ -> Organization
+        collaborates::Organization interacts::Organization member::AgentType+ observes::OrganizationalRule+ -> Organization
 
-         -> OrganizationalRule
+        SafetyRule -> OrganizationalRule
+
+        LivenessRule -> OrganizationalRule
+
+        SafetyRule -> OrganizationalRule
+        LivenessRule -> OrganizationalRule
 
          -> SafetyRule
 
          -> LivenessRule
 
-        provides::ANY+ collaborates::ANY agentType::ANY plays::ANY+ -> AgentType
+        provides::Service+ collaborates::AgentType agentType::AgentType plays::Role+ -> AgentType
 
-        inputs::ANY outputs::ANY pre-conditions::ANY post-conditions::ANY -> Service
+        inputs::String outputs::String pre-conditions::String post-conditions::String -> Service
 
-        activity::ANY+ communication::ANY+ responsibility::ANY+ actsOn::ANY -> Role
+        activity::Activity+ communication::Communication+ responsibility::Responsibility+ actsOn::AssociationConnector -> Role
 
          -> Activity
 
-         -> Responsibility
+        LivenessProperty -> Responsibility
+
+        SafetyProperty -> Responsibility
+
+        LivenessProperty -> Responsibility
+        SafetyProperty -> Responsibility
 
          -> LivenessProperty
 
          -> SafetyProperty
 
-        actsOn::ANY+ role::ANY permission::ANY+ -> AssociationConnector
+        actsOn::Resource+ role::Role permission::Permission+ -> AssociationConnector
 
-        association::ANY -> Permission
+        association::AssociationConnector -> Permission
 
-        name::ANY description::ANY permitted_action::ANY+ environnement::ANY -> Resource
+        name::String description::String permitted_action::Action+ environnement::Environnement -> Resource
 
-        resource::ANY+ -> Environnement
+        resource::Resource+ -> Environnement
 
-        type::ANY -> Action
+        type::String -> Action
 
-        observes::ANY+ protocol::ANY -> Communication
+        observes::OrganizationalRule+ protocol::Protocol -> Communication
 
-        name::ANY initiator::ANY partner::ANY inputs::ANY outputs::ANY description::ANY -> Protocol
+        name::String initiator::String partner::String inputs::String outputs::String description::String -> Protocol

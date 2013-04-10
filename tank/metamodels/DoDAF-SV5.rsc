@@ -2,76 +2,93 @@
 module DoDAF_SV5
 
 syntax Element
-        = 
-        ()
+        = DoDAFModel
+        | Document
+        | SystemFunctionTraceabilityElement
+        | SystemDocument
+        | ArchitectureDocument
+        | PA
+        | SystemPA
+        | SoftwareApplicationProcedurePA
+        | InformationAsset
+        | AMPA
+        | System
+        | Task
+        | ArchitectureTask
+        | Capability
+        | CapabilityDocument
+        | SystemCapability
+        | InformationTechnologyRequirement
  ;
 syntax DoDAFModel
         = 
-        ANY document+ ANY sftm+ ANY sd+ ANY am+ ANY system+ ANY task+ ANY capability+ ANY capabilityDocument+ ANY systemCapability+
+        Document document+ SystemFunctionTraceabilityMatrix sftm+ SystemDocument sd+ AM am+ System system+ Task task+ Capability capability+ CapabilityDocument capabilityDocument+ SystemCapability systemCapability+
  ;
 syntax Document
-        = 
-        ANY type ANY cites+ ANY describes+ ANY records+ ANY isThePrimaryReferenceFor+
+        = SystemFunctionTraceabilityMatrix
+        | String type CapabilityDocument cites+ SystemDocument describes+ ArchitectureDocument records+ PA isThePrimaryReferenceFor+
  ;
 syntax SystemFunctionTraceabilityMatrix
         = 
-        ANY isDefinedBy+
+        SystemFunctionTraceabilityElement isDefinedBy+
  ;
 syntax SystemFunctionTraceabilityElement
         = 
-        ANY systemFunction ANY operationalActivity ANY systemProcessActivity ANY system ANY capability ANY supportStatusCode
+        SystemFunction systemFunction Task operationalActivity SystemPA systemProcessActivity System system Capability capability SupportStatusCode supportStatusCode
  ;
 syntax SystemDocument
         = 
-        ANY name ANY description ANY view
+        String name String description String view
  ;
 syntax ArchitectureDocument
         = 
-        ANY name ANY description ANY view
+        String name String description String view
  ;
 syntax PA
-        = 
-        ANY isParentFor+ ANY isChildFor+ ANY correspondsTo+ ANY isIncludedIn+ ANY isAssignedTo+ ANY isSupportedBy+ ANY isTheConsumerFor+ ANY isTheProducerFor+
+        = SystemFunction
+        | PA isParentFor+ PA isChildFor+ PATask correspondsTo+ AMPA isIncludedIn+ SystemPA isAssignedTo+ SoftwareApplicationProcedurePA isSupportedBy+ PAExchangeRequirement isTheConsumerFor+ PAExchangeRequirement isTheProducerFor+
  ;
 syntax SystemFunction
         = 
-        ANY isCitedFor+
+        SystemFunctionTraceabilityElement isCitedFor+
  ;
 syntax SystemPA
         = 
-        ANY mayBeCitedFor+ ANY provides+ ANY enables+
+        SystemFunctionTraceabilityElement mayBeCitedFor+ SystemCapability provides+ SystemOperationalCapabilityTask enables+
  ;
 syntax SoftwareApplicationProcedurePA
         = 
-        ANY name ANY description ANY view
+        String name String description String view
  ;
 syntax AM
         = 
-        ANY type ANY isCitedBy+ ANY includes+
+        String type PATask isCitedBy+ AMPA includes+
  ;
 syntax InformationAsset
         = 
-        ()
+        AM
  ;
 syntax AMPA
         = 
-        ANY isOrdinateOf+ ANY isSubordinateOf+
+        AMPA isOrdinateOf+ AMPA isSubordinateOf+
  ;
 syntax System
         = 
-        ANY isDesignedToProvide+ ANY isDescribedBy+ ANY performs+ ANY isUsedToAccomplish+
+        SystemPA isDesignedToProvide+ SystemDocument isDescribedBy+ SystemCapability performs+ SystemOperationalCapabilityTask isUsedToAccomplish+
  ;
 syntax Task
-        = 
-        ANY levelIdentifier ANY references ANY cost ANY correspondsTo+ ANY isSupportedBy+ ANY isTheSourceOfNeedFor+ ANY isTheDestinationOfNeedFor+ ANY isCitedFor+
+        = OperationalCapabilityTask
+        | SystemOperationalCapabilityTask
+        | PATask
+        | String levelIdentifier String references String cost PATask correspondsTo+ ArchitectureTask isSupportedBy+ InformationExchangeRequirement isTheSourceOfNeedFor+ InformationExchangeRequirement isTheDestinationOfNeedFor+ SystemFunctionTraceabilityElement isCitedFor+
  ;
 syntax ArchitectureTask
         = 
-        ANY name ANY description ANY view
+        String name String description String view
  ;
 syntax OperationalCapabilityTask
         = 
-        isAccomplishedA: ANY
+        isAccomplishedA: SystemOperationalCapabilityTask
  ;
 syntax SystemOperationalCapabilityTask
         = 
@@ -82,16 +99,20 @@ syntax PATask
         ()
  ;
 syntax Capability
-        = 
-        ANY isPerformedBy+ ANY isOrdinateFor+ ANY isSubordinateOf+ ANY isPerformedByNC+ ANY isPerformedByNLC+ ANY isPerformedBySC+ ANY isCitedInCD+ ANY isUsedInMICN+ ANY isUsedInOTCN+ ANY isAttainedFor+
+        = NetworkCapability
+        | NodeLinkCapability
+        | MaterielItemCapabilityNorm
+        | OrganizationTypeCapabilityNorm
+        | RequiredInformationTechnologyCapability
+        | SystemCapability isPerformedBy+ Capability isOrdinateFor+ Capability isSubordinateOf+ NetworkCapability isPerformedByNC+ NodeLinkCapability isPerformedByNLC+ SystemCapability isPerformedBySC+ CapabilityDocument isCitedInCD+ MaterielItemCapabilityNorm isUsedInMICN+ OrganizationTypeCapabilityNorm isUsedInOTCN+ RequiredInformationTechnologyCapability isAttainedFor+
  ;
 syntax CapabilityDocument
         = 
-        ANY isCitedIn+
+        Capability isCitedIn+
  ;
 syntax SystemCapability
         = 
-        ANY isCitedIn+
+        Capability isCitedIn+
  ;
 syntax NetworkCapability
         = 
@@ -114,8 +135,9 @@ syntax RequiredInformationTechnologyCapability
         ()
  ;
 syntax InformationTechnologyRequirement
-        = 
-        ANY specifies+
+        = InformationExchangeRequirement
+        | PAExchangeRequirement
+        | RequiredInformationTechnologyCapability specifies+
  ;
 syntax InformationExchangeRequirement
         = 
@@ -123,7 +145,7 @@ syntax InformationExchangeRequirement
  ;
 syntax PAExchangeRequirement
         = 
-        ANY isCitedIn+
+        InformationExchangeRequirement isCitedIn+
  ;
 syntax SupportStatusCode
         = red: ()

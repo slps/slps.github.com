@@ -3,23 +3,23 @@ module Architectural_Description
 
 syntax Architecture
         = 
-        describedBy: ANY
+        describedBy: ArchitectureDescription
  ;
 syntax ArchitectureDescription
         = 
-        ANY selects+ ANY organizedBy+
+        ArchitectureView selects+ ArchitectureView organizedBy+
  ;
 syntax ArchitectureView
         = 
-        ANY selectedBy+ ANY constituents+ ANY conformsTo+
+        ArchitectureDescription selectedBy+ ModelElement constituents+ ArchitectureViewPoint conformsTo+
  ;
 syntax ArchitectureViewPoint
         = 
-        ANY defines ANY views+
+        MainView defines ArchitectureView views+
  ;
 syntax MainView
         = 
-        ANY isProjectedOnto+ ANY consistsOf+
+        ArchitectureView isProjectedOnto+ ModelElement consistsOf+
  ;
 syntax ModelElement
         = 

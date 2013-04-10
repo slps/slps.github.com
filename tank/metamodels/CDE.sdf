@@ -4,20 +4,33 @@ exports
   sorts
         IUmlType ICdeComponentSpec IUmlClass IUmlComponent ICdeServer ICdeComponent IUmlMember ICdeMember ICdeMemberExe 
   context-free syntax
-        members::ANY+ -> IUmlType
+        ICdeComponentSpec -> IUmlType
+
+        IUmlClass -> IUmlType
+
+        members::IUmlMember+ -> IUmlType
 
          -> ICdeComponentSpec
 
-         -> IUmlClass
+        IUmlComponent -> IUmlClass
 
-         -> IUmlComponent
+        IUmlComponent -> IUmlClass
 
-        implements::ANY+ -> ICdeServer
+        ICdeServer -> IUmlComponent
+
+        ICdeComponent -> IUmlComponent
+
+        ICdeServer -> IUmlComponent
+        ICdeComponent -> IUmlComponent
+
+        implements::ICdeComponent+ -> ICdeServer
 
          -> ICdeComponent
 
-         -> IUmlMember
+        ICdeMember -> IUmlMember
+
+        ICdeMember -> IUmlMember
 
          -> ICdeMember
 
-        executionPerformance::ANY resourceNeeded::ANY executionDetails::ANY -> ICdeMemberExe
+        executionPerformance::String resourceNeeded::String executionDetails::String -> ICdeMemberExe

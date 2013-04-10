@@ -99,37 +99,39 @@ syntax ResolutionType
  ;
 syntax BugzillaRoot
         = 
-        ANY version ANY urlbase ANY maintainer ANY exporter ANY bugs+
+        String version String urlbase String maintainer String exporter Bug bugs+
  ;
 syntax Bug
         = 
-        ANY bug_bugzillaRoot ANY error ANY bug_id ANY exporter ANY urlbase ANY bug_status ANY resolution ANY product ANY priority ANY version ANY rep_platform ANY assigned_to ANY delta_ts ANY component ANY reporter ANY target_milestone ANY bug_severity ANY creation_ts ANY qa_contact ANY status_whiteboard ANY op_sys ANY bug_file_loc ANY short_desc ANY keywords+ ANY dependson+ ANY blocks+ ANY cc+ ANY long_desc+ ANY attachment+
+        BugzillaRoot bug_bugzillaRoot ErrorType error String bug_id String exporter String urlbase StatusType bug_status ResolutionType resolution String product PriorityType priority String version ReportedPlatformType rep_platform String assigned_to String delta_ts String component String reporter String target_milestone SeverityType bug_severity String creation_ts String qa_contact String status_whiteboard OperatingSystemType op_sys String bug_file_loc String short_desc Keywords keywords+ Dependson dependson+ Blocks blocks+ Cc cc+ LongDesc long_desc+ Attachment attachment+
  ;
 syntax StringElt
-        = 
-        ()
+        = Keywords
+        | Dependson
+        | Blocks
+        | Cc
  ;
 syntax Keywords
         = 
-        ANY value
+        value: String
  ;
 syntax Dependson
         = 
-        ANY value
+        value: String
  ;
 syntax Blocks
         = 
-        ANY value
+        value: String
  ;
 syntax Cc
         = 
-        ANY value
+        value: String
  ;
 syntax LongDesc
         = 
-        ANY isPrivate ANY who ANY bug_when ANY thetext
+        Boolean isPrivate String who String bug_when String thetext
  ;
 syntax Attachment
         = 
-        ANY isObsolete ANY isPatch ANY isPrivate ANY id ANY date ANY desc ANY type ANY data
+        Boolean isObsolete Boolean isPatch Boolean isPrivate String id String date String desc String type String data
  ;

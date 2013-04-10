@@ -4,79 +4,190 @@ exports
   sorts
         Thing Reviewer Meta-Reviewer Decision Preference ProgramCommittee Bid Conference ConferenceChair ConferenceMember AssociatedChair ProgramCommitteeMember AuthorNotReviewer SubjectArea ExternalReviewer Chairman ProgramCommitteeChair Acceptance Rejection Review Paper Author Co-author PaperAbstract PaperFullVersion Administrator Meta-Review Event Account Inforamtion User Role Help-Request Person Symposium Abstract Document Invited-Paper Admin-Role Paper-Typologies Event-Setup Event-URL Notification-Email Email Short-Paper Author-Role Preview Review-Form Committe-Role Group-Email Submission-Template Review-Form-Setup Misc Event-Creation Approval-Email Rejection-Email Submission Template Feature-Request Committee Event-Tracks Request Activity Head-Role Detail Corresponding-Author Reviewer-Role Event-Approval Registration Full-Paper Research-Topic Description Assistance Email-Template Conference-participant Active-conference-participant Passive-conference-participant Review-expertise Submitted-contribution Regular-author Conference-contributor Contribution-1th-author Contribution-co-author Conference-contribution Co-chair Committee-member Extended-abstract Important-dates Invited-speaker Conference-proceedings Information-for-participants Conference-document Organization Regular-contribution Poster Written-contribution Conference-applicant Camera-ready-contribution Accepted-contribution Program-committee Organizing-committee Steering-committee Conference-volume Call-for-paper Conference-announcement Invited-talk Conference-part Presentation Chair Track Workshop Tutorial Rejected-contribution Reviewed-contribution Topic Late-paid-applicant Paid-applicant Early-paid-applicant Organizer Call-for-participation Publisher Registeered-applicant Track-workshop-chair Conference-www Conference-fees Review-preference EEnum Accepted-Paper Rejected-Paper Undecided-Paper Manual-Paper-Assignment Program-Committee-member Paper-assignment Intensity Start-date-of-camera-ready-submission Camera-ready-submission-date Date-of-notification Date Article Contact-Person Bidding-of-reviewer Activity URL Conference-setup Human Managing-of-conference-process Program-Committee-Chair Reviewing-proces End-date-of-camera-ready-submission Abstract-submission-date Group-email Senior-Reviewer-URL Notification Notification-email Chair-URL Abstract-of-paper Submission-process Topic Lower-tier-reviewing-process Start-date-of-conference Date-of-conference Senior-Program-Committee-member End-date-of-abstract-submission Phase-of-conference Regular-Program-Committee-member Start-date-of-full-paper-submission Full-paper-submission-date Start-date-of-abstract-submission End-date-of-conference Review-form Automatic-Paper-Assignment Institute Classification Summary-of-reviews Upper-tier-reviewing-process End-date-of-full-paper-submission Acceptance-notification-email Rejection-notification-email Contact-Person-URL Regular-Reviewer-URL 
   context-free syntax
-         -> Thing
+        Event -> Thing
 
-        invites_co-reviewers::ANY invited_by::ANY has_a_review_reference_or_expertise::ANY+ assignedByAdministrator::ANY adjustBid::ANY readPaper::ANY hasBeenAssigned::ANY writeReview::ANY assignExternalReviewer::ANY -> Reviewer
+        Role -> Thing
+
+        Person -> Thing
+
+        Document -> Thing
+
+        Detail -> Thing
+
+        Review-expertise -> Thing
+
+        Organizer -> Thing
+
+        Review-preference -> Thing
+
+        Date -> Thing
+
+        URL -> Thing
+
+        Conference-setup -> Thing
+
+        Event -> Thing
+        Role -> Thing
+        Person -> Thing
+        Document -> Thing
+        Detail -> Thing
+        Review-expertise -> Thing
+        Organizer -> Thing
+        Review-preference -> Thing
+        Date -> Thing
+        URL -> Thing
+        Conference-setup -> Thing
+
+        Meta-Reviewer -> Reviewer
+
+        invites_co-reviewers::Reviewer invited_by::Reviewer has_a_review_reference_or_expertise::Thing+ assignedByAdministrator::Administrator adjustBid::Bid readPaper::Paper hasBeenAssigned::Paper writeReview::Review assignExternalReviewer::ExternalReviewer -> Reviewer
 
          -> Meta-Reviewer
 
-         -> Decision
+        Acceptance -> Decision
+
+        Rejection -> Decision
+
+        Acceptance -> Decision
+        Rejection -> Decision
 
          -> Preference
 
-        hasProgramCommitteeMember::ANY -> ProgramCommittee
+        hasProgramCommitteeMember::ProgramCommitteeMember -> ProgramCommittee
 
-        adjustedBy::ANY -> Bid
+        adjustedBy::Reviewer -> Bid
 
-        is_in_phase::ANY hasConferenceMember::ANY paperAssignmentFinalizedBy::ANY reviewCriteriaEnteredBy::ANY paperAssignmentToolsRunBy::ANY virtualMeetingEnabledBy::ANY hardcopyMailingManifestsPrintedBy::ANY detailsEnteredBy::ANY reviewerBiddingStartedBy::ANY date::ANY reviewsPerPaper::ANY logoURL::ANY acceptsHardcopySubmissions::ANY siteURL::ANY -> Conference
+        Conference-volume -> Conference
+
+        is_in_phase::Phase-of-conference hasConferenceMember::ConferenceMember paperAssignmentFinalizedBy::Administrator reviewCriteriaEnteredBy::Administrator paperAssignmentToolsRunBy::Administrator virtualMeetingEnabledBy::Administrator hardcopyMailingManifestsPrintedBy::Administrator detailsEnteredBy::Administrator reviewerBiddingStartedBy::Administrator date::Date reviewsPerPaper::Integer logoURL::AnyURI acceptsHardcopySubmissions::Boolean siteURL::AnyURI -> Conference
 
          -> ConferenceChair
 
-        memberOfConference::ANY -> ConferenceMember
+        memberOfConference::Conference -> ConferenceMember
 
          -> AssociatedChair
 
-        memberOfProgramCommittee::ANY maxPapers::ANY addedBy::ANY -> ProgramCommitteeMember
+        memberOfProgramCommittee::ProgramCommittee maxPapers::Integer addedBy::Administrator -> ProgramCommitteeMember
 
          -> AuthorNotReviewer
 
          -> SubjectArea
 
-        assignedByReviewer::ANY -> ExternalReviewer
+        assignedByReviewer::Reviewer -> ExternalReviewer
 
          -> Chairman
 
-        endReview::ANY -> ProgramCommitteeChair
+        endReview::Review -> ProgramCommitteeChair
 
          -> Acceptance
 
          -> Rejection
 
-        reviews::ANY gives_classification::ANY is_created_in::ANY writtenBy::ANY -> Review
+        Meta-Review -> Review
 
-        full_paper_size::ANY has_author::ANY hasCo-author::ANY hasBid::ANY hasDecision::ANY assignedTo::ANY hasSubjectArea::ANY readByReviewer::ANY paperID::ANY title::ANY hasAuthor::ANY acceptedBy::ANY rejectedBy::ANY readByMeta-Reviewer::ANY -> Paper
+        reviews::Reviewed-contribution gives_classification::Classification is_created_in::Activity writtenBy::Reviewer -> Review
 
-        submitPaper::ANY writePaper::ANY -> Author
+        PaperAbstract -> Paper
 
-        co-writePaper::ANY -> Co-author
+        PaperFullVersion -> Paper
+
+        Abstract -> Paper
+
+        Invited-Paper -> Paper
+
+        Short-Paper -> Paper
+
+        Full-Paper -> Paper
+
+        Accepted-Paper -> Paper
+
+        Rejected-Paper -> Paper
+
+        Undecided-Paper -> Paper
+
+        full_paper_size::Integer has_author::Human hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::UnsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer -> Paper
+
+        AuthorNotReviewer -> Author
+
+        Co-author -> Author
+
+        Corresponding-Author -> Author
+
+        submitPaper::Paper writePaper::Paper -> Author
+
+        co-writePaper::Paper -> Co-author
 
          -> PaperAbstract
 
          -> PaperFullVersion
 
-        approve::ANY assign::ANY finalizePaperAssignment::ANY runPaperAssignmentTools::ANY enableVirtualMeeting::ANY startReviewerBidding::ANY assignReviewer::ANY rejectPaper::ANY enterConferenceDetails::ANY printHardcopyMailingManifests::ANY setMaxPapers::ANY enterReviewCriteria::ANY acceptPaper::ANY addProgramCommitteeMember::ANY -> Administrator
+        approve::Event assign::Role finalizePaperAssignment::Conference runPaperAssignmentTools::Conference enableVirtualMeeting::Conference startReviewerBidding::Conference assignReviewer::Reviewer rejectPaper::Paper enterConferenceDetails::Conference printHardcopyMailingManifests::Conference setMaxPapers::ProgramCommitteeMember enterReviewCriteria::Conference acceptPaper::Paper addProgramCommitteeMember::ProgramCommitteeMember -> Administrator
 
          -> Meta-Review
 
-        conists_of::ANY confirmed_by::ANY defined_by::ANY approved_by::ANY -> Event
+        Symposium -> Event
 
-        registred_by::ANY -> Account
+        conists_of::Event-Tracks confirmed_by::Approval-Email defined_by::Event-Setup approved_by::Administrator -> Event
+
+        registred_by::Person -> Account
 
          -> Inforamtion
 
-        recieve::ANY create::ANY+ submit::ANY -> User
+        Committee -> User
 
-        assigned_by::ANY -> Role
+        recieve::Document create::Thing+ submit::Document -> User
 
-         -> Help-Request
+        Admin-Role -> Role
 
-        hasConflictOfInterest::ANY email::ANY inverse_of_add::ANY+ execute::ANY+ get::ANY use::ANY register::ANY modify::ANY+ take_part_in::ANY remove::ANY+ add::ANY send::ANY added_by::ANY contributes::ANY has_an_email::ANY has_the_first_name::ANY has_gender::ANY has_the_last_name::ANY -> Person
+        Author-Role -> Role
+
+        Committe-Role -> Role
+
+        Head-Role -> Role
+
+        Reviewer-Role -> Role
+
+        assigned_by::Administrator -> Role
+
+        Misc -> Help-Request
+
+        Feature-Request -> Help-Request
+
+        Assistance -> Help-Request
+
+        Misc -> Help-Request
+        Feature-Request -> Help-Request
+        Assistance -> Help-Request
+
+        ConferenceMember -> Person
+
+        ExternalReviewer -> Person
+
+        User -> Person
+
+        Conference-participant -> Person
+
+        Conference-contributor -> Person
+
+        Committee-member -> Person
+
+        Conference-applicant -> Person
+
+        Track-workshop-chair -> Person
+
+        hasConflictOfInterest::Document email::String inverse_of_add::Thing+ execute::Thing+ get::Inforamtion use::Document register::Account modify::Thing+ take_part_in::Event remove::Thing+ add::Person send::Activity added_by::Person contributes::Conference-document has_an_email::String has_the_first_name::String has_gender::EEnum has_the_last_name::String -> Person
 
          -> Symposium
 
          -> Abstract
 
-        recieved_by::ANY used_by::ANY submited__by::ANY -> Document
+        Email -> Document
+
+        Submission -> Document
+
+        Template -> Document
+
+        recieved_by::User used_by::Person submited__by::User -> Document
 
          -> Invited-Paper
 
@@ -84,13 +195,36 @@ exports
 
          -> Paper-Typologies
 
-        define::ANY -> Event-Setup
+        Paper-Typologies -> Event-Setup
 
-        concerned::ANY -> Event-URL
+        Review-Form -> Event-Setup
+
+        Submission-Template -> Event-Setup
+
+        Event-Tracks -> Event-Setup
+
+        Research-Topic -> Event-Setup
+
+        Email-Template -> Event-Setup
+
+        define::Event -> Event-Setup
+
+        concerned::Event -> Event-URL
 
          -> Notification-Email
 
-         -> Email
+        Notification-Email -> Email
+
+        Group-Email -> Email
+
+        Approval-Email -> Email
+
+        Rejection-Email -> Email
+
+        Notification-Email -> Email
+        Group-Email -> Email
+        Approval-Email -> Email
+        Rejection-Email -> Email
 
          -> Short-Paper
 
@@ -98,7 +232,12 @@ exports
 
          -> Preview
 
-         -> Review-Form
+        Preview -> Review-Form
+
+        Review-Form-Setup -> Review-Form
+
+        Preview -> Review-Form
+        Review-Form-Setup -> Review-Form
 
          -> Committe-Role
 
@@ -112,7 +251,7 @@ exports
 
          -> Event-Creation
 
-        confirm::ANY -> Approval-Email
+        confirm::Event -> Approval-Email
 
          -> Rejection-Email
 
@@ -122,13 +261,29 @@ exports
 
          -> Feature-Request
 
-        has_members::ANY was_a_committee_of::ANY has_a_committee_co-chair::ANY has_a_committee_chair::ANY -> Committee
+        Program-committee -> Committee
+
+        Organizing-committee -> Committee
+
+        Steering-committee -> Committee
+
+        has_members::Committee-member was_a_committee_of::Conference-volume has_a_committee_co-chair::Co-chair has_a_committee_chair::Chair -> Committee
 
          -> Event-Tracks
 
-         -> Request
+        Help-Request -> Request
 
-        has_result::ANY+ sent_by::ANY -> Activity
+        Help-Request -> Request
+
+        Event-Creation -> Activity
+
+        Request -> Activity
+
+        Event-Approval -> Activity
+
+        Registration -> Activity
+
+        has_result::Thing+ sent_by::Person -> Activity
 
          -> Head-Role
 
@@ -152,65 +307,114 @@ exports
 
          -> Email-Template
 
-         -> Conference-participant
+        Passive-conference-participant -> Conference-participant
 
-        gives_presentations::ANY -> Active-conference-participant
+        Passive-conference-participant -> Conference-participant
+
+        gives_presentations::Presentation -> Active-conference-participant
 
          -> Passive-conference-participant
 
-        has_a_submitted_contribution::ANY has_an_expertise::ANY -> Review-expertise
+        has_a_submitted_contribution::Submitted-contribution has_an_expertise::EEnum -> Review-expertise
 
-        has_a_review_expertise::ANY -> Submitted-contribution
+        Reviewed-contribution -> Submitted-contribution
 
-         -> Regular-author
+        has_a_review_expertise::Review-expertise -> Submitted-contribution
 
-         -> Conference-contributor
+        Contribution-1th-author -> Regular-author
+
+        Contribution-co-author -> Regular-author
+
+        Contribution-1th-author -> Regular-author
+        Contribution-co-author -> Regular-author
+
+        Regular-author -> Conference-contributor
+
+        Invited-speaker -> Conference-contributor
+
+        Regular-author -> Conference-contributor
+        Invited-speaker -> Conference-contributor
 
          -> Contribution-1th-author
 
          -> Contribution-co-author
 
-        is_submitted_at::ANY -> Conference-contribution
+        Poster -> Conference-contribution
 
-        was_a_committe_co-chair_of::ANY -> Co-chair
+        Written-contribution -> Conference-contribution
 
-        was_a_member_of::ANY -> Committee-member
+        Presentation -> Conference-contribution
 
-        is_the_1th_part_of::ANY+ -> Abstract
+        is_submitted_at::Conference-volume -> Conference-contribution
 
-         -> Extended-abstract
+        was_a_committe_co-chair_of::Committee -> Co-chair
 
-        is_an_abstract_submission_date::ANY is_a_full_paper_submission_date::ANY is_an_ending_date::ANY is_a_date_of_acceptance_announcement::ANY is_a_date_of_camera_ready_paper_submission::ANY is_a_starting_date::ANY belong_to_a_conference_volume::ANY -> Important-dates
+        Co-chair -> Committee-member
+
+        Chair -> Committee-member
+
+        was_a_member_of::Committee -> Committee-member
+
+        is_the_1th_part_of::Thing+ -> Abstract
+
+        Abstract -> Extended-abstract
+
+        Abstract -> Extended-abstract
+
+        is_an_abstract_submission_date::Date is_a_full_paper_submission_date::Date is_an_ending_date::Date is_a_date_of_acceptance_announcement::Date is_a_date_of_camera_ready_paper_submission::Date is_a_starting_date::Date belong_to_a_conference_volume::Conference-volume -> Important-dates
 
          -> Invited-speaker
 
-        has_an_ISBN::ANY has_a_publisher::ANY has_a_volume::ANY -> Conference-proceedings
+        has_an_ISBN::String has_a_publisher::Publisher has_a_volume::Integer -> Conference-proceedings
 
          -> Information-for-participants
 
-        has_authors::ANY has_a_date_of_issue::ANY -> Conference-document
+        Conference-contribution -> Conference-document
+
+        Information-for-participants -> Conference-document
+
+        Call-for-paper -> Conference-document
+
+        Conference-announcement -> Conference-document
+
+        Call-for-participation -> Conference-document
+
+        Conference-www -> Conference-document
+
+        has_authors::Person has_a_date_of_issue::Date -> Conference-document
 
          -> Organization
 
-         -> Regular-contribution
+        Extended-abstract -> Regular-contribution
+
+        Extended-abstract -> Regular-contribution
 
          -> Poster
 
-         -> Written-contribution
+        Submitted-contribution -> Written-contribution
 
-         -> Conference-applicant
+        Regular-contribution -> Written-contribution
+
+        Submitted-contribution -> Written-contribution
+        Regular-contribution -> Written-contribution
+
+        Registeered-applicant -> Conference-applicant
+
+        Registeered-applicant -> Conference-applicant
 
          -> Camera-ready-contribution
 
-         -> Accepted-contribution
+        Camera-ready-contribution -> Accepted-contribution
 
-        was_a_program_committee_of::ANY -> Program-committee
+        Camera-ready-contribution -> Accepted-contribution
 
-        was_an_organizing_committee_of::ANY -> Organizing-committee
+        was_a_program_committee_of::Conference-volume -> Program-committee
 
-        was_a_steering_committee_of::ANY -> Steering-committee
+        was_an_organizing_committee_of::Conference-volume -> Organizing-committee
 
-        has_parts::ANY has_workshops::ANY has_tracks::ANY has_tutorials::ANY has_a_commtitee::ANY has_a_steering_committee::ANY has_an_organizing_committee::ANY has_important_dates::ANY has_contributions::ANY has_a_location::ANY has_a_program_committee::ANY -> Conference-volume
+        was_a_steering_committee_of::Conference-volume -> Steering-committee
+
+        has_parts::Conference-part has_workshops::Workshop has_tracks::Track has_tutorials::Tutorial has_a_commtitee::Committee has_a_steering_committee::Steering-committee has_an_organizing_committee::Organizing-committee has_important_dates::Important-dates has_contributions::Conference-contribution has_a_location::String has_a_program_committee::Program-committee -> Conference-volume
 
          -> Call-for-paper
 
@@ -218,11 +422,17 @@ exports
 
          -> Invited-talk
 
-        has_a_track-workshop-tutorial_topic::ANY is_part_of_conference_volumes::ANY has_a_track-workshop-tutorial_chair::ANY -> Conference-part
+        Track -> Conference-part
 
-        is_given_by::ANY -> Presentation
+        Tutorial -> Conference-part
 
-        was_a_committee_chair_of::ANY -> Chair
+        has_a_track-workshop-tutorial_topic::Topic is_part_of_conference_volumes::Conference-volume has_a_track-workshop-tutorial_chair::Track-workshop-chair -> Conference-part
+
+        Invited-talk -> Presentation
+
+        is_given_by::Active-conference-participant -> Presentation
+
+        was_a_committee_chair_of::Committee -> Chair
 
          -> Track
 
@@ -232,13 +442,22 @@ exports
 
          -> Rejected-contribution
 
-        has_a_review::ANY -> Reviewed-contribution
+        Accepted-contribution -> Reviewed-contribution
 
-        belongs_to_a_review_reference::ANY is_a_topis_of_conference_parts::ANY -> Topic
+        Rejected-contribution -> Reviewed-contribution
+
+        has_a_review::Review -> Reviewed-contribution
+
+        belongs_to_a_review_reference::Review-preference is_a_topis_of_conference_parts::Conference-part -> Topic
 
          -> Late-paid-applicant
 
-         -> Paid-applicant
+        Late-paid-applicant -> Paid-applicant
+
+        Early-paid-applicant -> Paid-applicant
+
+        Late-paid-applicant -> Paid-applicant
+        Early-paid-applicant -> Paid-applicant
 
          -> Early-paid-applicant
 
@@ -246,17 +465,19 @@ exports
 
          -> Call-for-participation
 
-        issues::ANY -> Publisher
+        issues::Conference-proceedings -> Publisher
 
-         -> Registeered-applicant
+        Paid-applicant -> Registeered-applicant
 
-        was_a_track-workshop_chair_of::ANY -> Track-workshop-chair
+        Paid-applicant -> Registeered-applicant
 
-        has_a_URL::ANY -> Conference-www
+        was_a_track-workshop_chair_of::Conference-part -> Track-workshop-chair
+
+        has_a_URL::String -> Conference-www
 
          -> Conference-fees
 
-        has_a_topic_or_a_submission_contribution::ANY+ has_a_degree::ANY -> Review-preference
+        has_a_topic_or_a_submission_contribution::Thing+ has_a_degree::Integer -> Review-preference
 
         high:: -> EEnum
         medium:: -> EEnum
@@ -271,59 +492,144 @@ exports
 
          -> Undecided-Paper
 
-        manually_assign_paper::ANY+ -> Manual-Paper-Assignment
+        manually_assign_paper::Program-Committee-member+ -> Manual-Paper-Assignment
 
-         -> Program-Committee-member
+        Senior-Program-Committee-member -> Program-Committee-member
 
-        assign_paper::ANY is_performed_by::ANY -> Paper-assignment
+        Regular-Program-Committee-member -> Program-Committee-member
+
+        Senior-Program-Committee-member -> Program-Committee-member
+        Regular-Program-Committee-member -> Program-Committee-member
+
+        Manual-Paper-Assignment -> Paper-assignment
+
+        Automatic-Paper-Assignment -> Paper-assignment
+
+        assign_paper::Program-Committee-member is_performed_by::Human -> Paper-assignment
 
          -> Intensity
 
          -> Start-date-of-camera-ready-submission
 
-         -> Camera-ready-submission-date
+        Start-date-of-camera-ready-submission -> Camera-ready-submission-date
+
+        End-date-of-camera-ready-submission -> Camera-ready-submission-date
+
+        Start-date-of-camera-ready-submission -> Camera-ready-submission-date
+        End-date-of-camera-ready-submission -> Camera-ready-submission-date
 
          -> Date-of-notification
 
-         -> Date
+        Camera-ready-submission-date -> Date
 
-        goes_through::ANY is_sent_to::ANY is_created_in::ANY structure_created_by::ANY has_author::ANY gives_classification::ANY -> Article
+        Date-of-notification -> Date
+
+        Abstract-submission-date -> Date
+
+        Date-of-conference -> Date
+
+        Full-paper-submission-date -> Date
+
+        Camera-ready-submission-date -> Date
+        Date-of-notification -> Date
+        Abstract-submission-date -> Date
+        Date-of-conference -> Date
+        Full-paper-submission-date -> Date
+
+        Group-email -> Article
+
+        Notification-email -> Article
+
+        Abstract-of-paper -> Article
+
+        Review-form -> Article
+
+        Summary-of-reviews -> Article
+
+        goes_through::Activity is_sent_to::Human is_created_in::Activity structure_created_by::Human has_author::Human gives_classification::Classification -> Article
 
          -> Contact-Person
 
-        is_performed_by::ANY -> Bidding-of-reviewer
+        is_performed_by::Human -> Bidding-of-reviewer
 
-        is_followed_by::ANY is_monitored_by::ANY has_intensity::ANY has_result::ANY is_performed_by::ANY is_supervised_by::ANY -> Activity
+        Paper-assignment -> Activity
 
-         -> URL
+        Bidding-of-reviewer -> Activity
 
-        sets_member::ANY is_made_by::ANY includes_topic::ANY sets_date::ANY sets_URL::ANY -> Conference-setup
+        Managing-of-conference-process -> Activity
 
-        is_author_of::ANY performs_activity::ANY is_employed_in::ANY has_topic_of_interest::ANY supervises::ANY e-mail::ANY last_name::ANY first_name::ANY -> Human
+        Reviewing-proces -> Activity
+
+        Notification -> Activity
+
+        Submission-process -> Activity
+
+        is_followed_by::Activity is_monitored_by::Human has_intensity::Intensity has_result::Article is_performed_by::Human is_supervised_by::Human -> Activity
+
+        Event-URL -> URL
+
+        Senior-Reviewer-URL -> URL
+
+        Chair-URL -> URL
+
+        Contact-Person-URL -> URL
+
+        Regular-Reviewer-URL -> URL
+
+        Event-URL -> URL
+        Senior-Reviewer-URL -> URL
+        Chair-URL -> URL
+        Contact-Person-URL -> URL
+        Regular-Reviewer-URL -> URL
+
+        sets_member::Human is_made_by::Human includes_topic::Topic sets_date::Date sets_URL::URL -> Conference-setup
+
+        Program-Committee-member -> Human
+
+        Contact-Person -> Human
+
+        Program-Committee-Chair -> Human
+
+        is_author_of::Article performs_activity::Activity is_employed_in::Institute has_topic_of_interest::Topic supervises::Activity e-mail::String last_name::String first_name::String -> Human
 
          -> Managing-of-conference-process
 
          -> Program-Committee-Chair
 
-         -> Reviewing-proces
+        Lower-tier-reviewing-process -> Reviewing-proces
+
+        Upper-tier-reviewing-process -> Reviewing-proces
+
+        Lower-tier-reviewing-process -> Reviewing-proces
+        Upper-tier-reviewing-process -> Reviewing-proces
 
          -> End-date-of-camera-ready-submission
 
-         -> Abstract-submission-date
+        End-date-of-abstract-submission -> Abstract-submission-date
+
+        Start-date-of-abstract-submission -> Abstract-submission-date
+
+        End-date-of-abstract-submission -> Abstract-submission-date
+        Start-date-of-abstract-submission -> Abstract-submission-date
 
          -> Group-email
 
          -> Senior-Reviewer-URL
 
-        has_result::ANY is_performed_by::ANY -> Notification
+        has_result::Article is_performed_by::Human -> Notification
 
-         -> Notification-email
+        Acceptance-notification-email -> Notification-email
+
+        Rejection-notification-email -> Notification-email
+
+        Acceptance-notification-email -> Notification-email
+        Rejection-notification-email -> Notification-email
 
          -> Chair-URL
 
          -> Abstract-of-paper
 
-        is_performed_by::ANY -> Submission-process
+        is_performed_by::Human -> Submission-process
 
          -> Topic
 
@@ -331,9 +637,14 @@ exports
 
          -> Start-date-of-conference
 
-         -> Date-of-conference
+        Start-date-of-conference -> Date-of-conference
 
-        supervises::ANY -> Senior-Program-Committee-member
+        End-date-of-conference -> Date-of-conference
+
+        Start-date-of-conference -> Date-of-conference
+        End-date-of-conference -> Date-of-conference
+
+        supervises::Activity -> Senior-Program-Committee-member
 
          -> End-date-of-abstract-submission
 
@@ -343,23 +654,28 @@ exports
 
          -> Start-date-of-full-paper-submission
 
-         -> Full-paper-submission-date
+        Start-date-of-full-paper-submission -> Full-paper-submission-date
+
+        End-date-of-full-paper-submission -> Full-paper-submission-date
+
+        Start-date-of-full-paper-submission -> Full-paper-submission-date
+        End-date-of-full-paper-submission -> Full-paper-submission-date
 
          -> Start-date-of-abstract-submission
 
          -> End-date-of-conference
 
-        is_created_in::ANY -> Review-form
+        is_created_in::Activity -> Review-form
 
-        automatically_assign_paper::ANY+ -> Automatic-Paper-Assignment
+        automatically_assign_paper::Program-Committee-member+ -> Automatic-Paper-Assignment
 
          -> Institute
 
          -> Classification
 
-        is_created_in::ANY -> Summary-of-reviews
+        is_created_in::Activity -> Summary-of-reviews
 
-        is_performed_by::ANY -> Upper-tier-reviewing-process
+        is_performed_by::Human -> Upper-tier-reviewing-process
 
          -> End-date-of-full-paper-submission
 

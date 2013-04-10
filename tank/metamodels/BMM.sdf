@@ -4,63 +4,127 @@ exports
   sorts
         MotivationElement Assessment End Influencer InfluencingOrganization Means PotentialImpact AssessmentCategory InfluencerCategory OrganizationCategory OrganizationUnit BusinessProcess Asset Liability Resource Mission CourseOfAction FixedAsset Offering Directive Strategy Tactic BusinessRule BusinessPolicy Regulation Vision DesiredResult Goal Objective PotentialReward Risk 
   context-free syntax
-        name::ANY description::ANY -> MotivationElement
+        Assessment -> MotivationElement
 
-        usingAssessmentUsesUsedAssessment::ANY+ assessmentProvidesImpetusForDirective::ANY+ assessmentIdentifiesPotentialImpact::ANY+ assessmentJudgmentOfInfluencer::ANY+ -> Assessment
+        End -> MotivationElement
 
-         -> End
+        Influencer -> MotivationElement
 
-         -> Influencer
+        InfluencingOrganization -> MotivationElement
 
-        influencingOrganizationIsSourceOfInfluencer::ANY+ -> InfluencingOrganization
+        Means -> MotivationElement
 
-         -> Means
+        PotentialImpact -> MotivationElement
 
-        potentialImpactProvidesImpetusForDirective::ANY+ -> PotentialImpact
+        AssessmentCategory -> MotivationElement
 
-        assessmentCategoryCategoriesAssessment::ANY+ -> AssessmentCategory
+        InfluencerCategory -> MotivationElement
 
-        influencerCategoryCategorizesInfluencer::ANY+ -> InfluencerCategory
+        OrganizationCategory -> MotivationElement
 
-        organizationCategoryCategorizesInfluencingOrganization::ANY+ -> OrganizationCategory
+        OrganizationUnit -> MotivationElement
 
-        organizationUnitDefinesEnd::ANY+ organizationUnitEstablishesMeans::ANY+ organizationUnitIsResponsibleForAsset::ANY+ organizationUnitIsResponsibleForLiability::ANY+ organizationUnitRecognizesInfluencer::ANY+ organizationUnitActAsInfluencingOrganization::ANY+ organizationUnitMakesAssessment::ANY+ organizationUnitIsResponsibleForBusinessProcess::ANY+ -> OrganizationUnit
+        BusinessProcess -> MotivationElement
 
-        businessProcessRealizesCourseOfAction::ANY+ businessProcessManagerAsset::ANY+ businessProcessDeliversOfeering::ANY+ -> BusinessProcess
+        Asset -> MotivationElement
 
-         -> Asset
+        Liability -> MotivationElement
 
-        liabilityClaimsResource::ANY+ -> Liability
+        name::String description::String -> MotivationElement
+
+        usingAssessmentUsesUsedAssessment::Assessment+ assessmentProvidesImpetusForDirective::Directive+ assessmentIdentifiesPotentialImpact::PotentialImpact+ assessmentJudgmentOfInfluencer::Influencer+ -> Assessment
+
+        Vision -> End
+
+        DesiredResult -> End
+
+        Vision -> End
+        DesiredResult -> End
+
+        Regulation -> Influencer
+
+        Regulation -> Influencer
+
+        influencingOrganizationIsSourceOfInfluencer::Influencer+ -> InfluencingOrganization
+
+        Mission -> Means
+
+        CourseOfAction -> Means
+
+        Directive -> Means
+
+        Mission -> Means
+        CourseOfAction -> Means
+        Directive -> Means
+
+        PotentialReward -> PotentialImpact
+
+        Risk -> PotentialImpact
+
+        potentialImpactProvidesImpetusForDirective::Directive+ -> PotentialImpact
+
+        assessmentCategoryCategoriesAssessment::Assessment+ -> AssessmentCategory
+
+        influencerCategoryCategorizesInfluencer::Influencer+ -> InfluencerCategory
+
+        organizationCategoryCategorizesInfluencingOrganization::InfluencingOrganization+ -> OrganizationCategory
+
+        organizationUnitDefinesEnd::End+ organizationUnitEstablishesMeans::Means+ organizationUnitIsResponsibleForAsset::Asset+ organizationUnitIsResponsibleForLiability::Liability+ organizationUnitRecognizesInfluencer::Influencer+ organizationUnitActAsInfluencingOrganization::InfluencingOrganization+ organizationUnitMakesAssessment::Assessment+ organizationUnitIsResponsibleForBusinessProcess::BusinessProcess+ -> OrganizationUnit
+
+        businessProcessRealizesCourseOfAction::CourseOfAction+ businessProcessManagerAsset::Asset+ businessProcessDeliversOfeering::Offering+ -> BusinessProcess
+
+        Resource -> Asset
+
+        FixedAsset -> Asset
+
+        Resource -> Asset
+        FixedAsset -> Asset
+
+        liabilityClaimsResource::Resource+ -> Liability
 
          -> Resource
 
-        missionMakesOperativeVision::ANY -> Mission
+        Strategy -> Mission
 
-        enablingCourseofActionEnablesEnabledCourseOfAction::ANY+ broaderCourseofActionIncludesMoreSpecificCourseOfAction::ANY+ courseOfActionChanneIsEffortsTowardsDesiredResult::ANY courseOfActionDeployAsset::ANY+ courseOfActionDefiensOffering::ANY+ -> CourseOfAction
+        missionMakesOperativeVision::Vision -> Mission
 
-        fixedAssetProvidesResource::ANY+ -> FixedAsset
+        Tactic -> CourseOfAction
 
-        offeringRequiresResource::ANY+ offeringUsesFixedAsset::ANY+ -> Offering
+        enablingCourseofActionEnablesEnabledCourseOfAction::CourseOfAction+ broaderCourseofActionIncludesMoreSpecificCourseOfAction::CourseOfAction+ courseOfActionChanneIsEffortsTowardsDesiredResult::DesiredResult courseOfActionDeployAsset::Asset+ courseOfActionDefiensOffering::Offering+ -> CourseOfAction
 
-        directiveGovernsCourseOfAction::ANY+ directiveIsSourceOfCourseOfAction::ANY+ directiveActAsRegulation::ANY+ directiveSupportsAchievementOfDesiredResult::ANY+ directiveGovernsUseOfAsset::ANY+ -> Directive
+        Offering -> FixedAsset
 
-        strategyIsAComponentOfThePlanForMission::ANY+ strategyDeterminesOrganizationUnit::ANY+ -> Strategy
+        fixedAssetProvidesResource::Resource+ -> FixedAsset
 
-        tacticImplementsStrategy::ANY+ tacticEffectsEnforcementLevelOfBusinessRule::ANY+ -> Tactic
+        offeringRequiresResource::Resource+ offeringUsesFixedAsset::FixedAsset+ -> Offering
 
-        businessRuleGuidesBusinessProcess::ANY+ -> BusinessRule
+        BusinessRule -> Directive
 
-        businessPolicyIsBasisForBusinessRule::ANY+ broaderBusinessPolicyIncludesMoreSpecificBusinessPolicy::ANY+ businessPolicyGovernsBusinessProcess::ANY+ -> BusinessPolicy
+        BusinessPolicy -> Directive
+
+        directiveGovernsCourseOfAction::CourseOfAction+ directiveIsSourceOfCourseOfAction::CourseOfAction+ directiveActAsRegulation::Regulation+ directiveSupportsAchievementOfDesiredResult::DesiredResult+ directiveGovernsUseOfAsset::Asset+ -> Directive
+
+        strategyIsAComponentOfThePlanForMission::Mission+ strategyDeterminesOrganizationUnit::OrganizationUnit+ -> Strategy
+
+        tacticImplementsStrategy::Strategy+ tacticEffectsEnforcementLevelOfBusinessRule::BusinessRule+ -> Tactic
+
+        businessRuleGuidesBusinessProcess::BusinessProcess+ -> BusinessRule
+
+        businessPolicyIsBasisForBusinessRule::BusinessRule+ broaderBusinessPolicyIncludesMoreSpecificBusinessPolicy::BusinessPolicy+ businessPolicyGovernsBusinessProcess::BusinessProcess+ -> BusinessPolicy
 
          -> Regulation
 
          -> Vision
 
-        broaderDesiredResultIncludesMoreSpecificDesiredResult::ANY+ -> DesiredResult
+        Goal -> DesiredResult
 
-        goalAmplidfiesVision::ANY -> Goal
+        Objective -> DesiredResult
 
-        objectiveQuantifiesGoal::ANY+ -> Objective
+        broaderDesiredResultIncludesMoreSpecificDesiredResult::DesiredResult+ -> DesiredResult
+
+        goalAmplidfiesVision::Vision -> Goal
+
+        objectiveQuantifiesGoal::Goal+ -> Objective
 
          -> PotentialReward
 

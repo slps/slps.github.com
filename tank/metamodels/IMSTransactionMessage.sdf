@@ -11,9 +11,9 @@ exports
 
          -> VariableLengthField
 
-        OIMAPrefixFormat::ANY standardFieldsFlag::ANY OIMAPrefixComponent::ANY standardFieldComponent::ANY messageComponent::ANY -> IMSTransactionMessage
+        OIMAPrefixFormat::OIMAPrefixFormats standardFieldsFlag::Boolean OIMAPrefixComponent::OIMAPrefix standardFieldComponent::StandardFields messageComponent::ApplicationData -> IMSTransactionMessage
 
-        controlDataComponent::ANY stateDataComponent::ANY securityDataComponent::ANY userDataComponent::ANY -> OIMAPrefix
+        controlDataComponent::ControlData stateDataComponent::StateData securityDataComponent::SecurityData userDataComponent::UserData -> OIMAPrefix
 
          -> ControlData
 
@@ -23,10 +23,10 @@ exports
 
          -> UserData
 
-        length::ANY reservedField::ANY transactionCode::ANY -> StandardFields
+        length::TwoByteField reservedField::TwoByteField transactionCode::VariableLengthField -> StandardFields
 
-        languageElements::ANY+ fieldComponents::ANY+ -> ApplicationData
+        languageElements::TDLangElement+ fieldComponents::Field+ -> ApplicationData
 
-        fieldContainer::ANY -> Field
+        fieldContainer::ApplicationData -> Field
 
          -> TDLangElement

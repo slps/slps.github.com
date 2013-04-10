@@ -15,11 +15,11 @@ syntax VariableLengthField
  ;
 syntax IMSTransactionMessage
         = 
-        ANY OIMAPrefixFormat ANY standardFieldsFlag ANY OIMAPrefixComponent ANY standardFieldComponent ANY messageComponent
+        OIMAPrefixFormats OIMAPrefixFormat Boolean standardFieldsFlag OIMAPrefix OIMAPrefixComponent StandardFields standardFieldComponent ApplicationData messageComponent
  ;
 syntax OIMAPrefix
         = 
-        ANY controlDataComponent ANY stateDataComponent ANY securityDataComponent ANY userDataComponent
+        ControlData controlDataComponent StateData stateDataComponent SecurityData securityDataComponent UserData userDataComponent
  ;
 syntax ControlData
         = 
@@ -39,15 +39,15 @@ syntax UserData
  ;
 syntax StandardFields
         = 
-        ANY length ANY reservedField ANY transactionCode
+        TwoByteField length TwoByteField reservedField VariableLengthField transactionCode
  ;
 syntax ApplicationData
         = 
-        ANY languageElements+ ANY fieldComponents+
+        TDLangElement languageElements+ Field fieldComponents+
  ;
 syntax Field
         = 
-        fieldContainer: ANY
+        fieldContainer: ApplicationData
  ;
 syntax TDLangElement
         = 

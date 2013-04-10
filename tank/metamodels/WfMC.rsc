@@ -3,25 +3,25 @@ module WfMC
 
 syntax WorkflowProcessDefinition
         = 
-        ANY participantSpecificatons+ ANY revelantDatas+ ANY applicationDeclarations+ ANY processActivities+ ANY transitionInformations+
+        WorkflowParticipantSpecification participantSpecificatons+ WorkflowRelevantData revelantDatas+ WorkflowApplicationDeclaration applicationDeclarations+ WorkflowProcessActivity processActivities+ TransitionInformation transitionInformations+
  ;
 syntax WorkflowApplicationDeclaration
         = 
-        ANY processDefinition ANY processActivities+ ANY revelantDatas+
+        WorkflowProcessDefinition processDefinition WorkflowProcessActivity processActivities+ WorkflowRelevantData revelantDatas+
  ;
 syntax WorkflowRelevantData
         = 
-        ANY processDefinition ANY applicationDeclarations+ ANY processActivities+ ANY participantSpecifications+ ANY transitionInformations+
+        WorkflowProcessDefinition processDefinition WorkflowApplicationDeclaration applicationDeclarations+ WorkflowProcessActivity processActivities+ WorkflowParticipantSpecification participantSpecifications+ TransitionInformation transitionInformations+
  ;
 syntax WorkflowParticipantSpecification
         = 
-        ANY processDefinition ANY revelantDatas+ ANY processActivities+
+        WorkflowProcessDefinition processDefinition WorkflowRelevantData revelantDatas+ WorkflowProcessActivity processActivities+
  ;
 syntax WorkflowProcessActivity
         = 
-        ANY processDefinition ANY applicationDeclarations+ ANY revelantDatas+ ANY participantSpecifications+ ANY to_transitionInformation ANY from_transitionInformation
+        WorkflowProcessDefinition processDefinition WorkflowApplicationDeclaration applicationDeclarations+ WorkflowRelevantData revelantDatas+ WorkflowParticipantSpecification participantSpecifications+ TransitionInformation to_transitionInformation TransitionInformation from_transitionInformation
  ;
 syntax TransitionInformation
         = 
-        ANY processDefinition ANY revelantDatas+ ANY to_processActivity ANY from_processActivity
+        WorkflowProcessDefinition processDefinition WorkflowRelevantData revelantDatas+ WorkflowProcessActivity to_processActivity WorkflowProcessActivity from_processActivity
  ;

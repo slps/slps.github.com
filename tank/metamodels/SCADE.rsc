@@ -3,215 +3,237 @@ module SCADE
 
 syntax ListString
         = 
-        value: ANY
+        value: String
  ;
 syntax ListInteger
         = 
-        value: ANY
+        value: Integer
  ;
 syntax Model
         = 
-        ANY library ANY pathname ANY descriptor ANY project ANY fileRef ANY storageUnitM+ ANY enumsBlock ANY importedOperator+ ANY client+ ANY libraries+ ANY allLibry+ ANY typeM+ ANY model ANY coverageFileM ANY criterionFileM ANY root ANY all+ ANY application ANY reference+ ANY tmpNode+ ANY constBlockK ANY node ANY varBlockK ANY typeBlock ANY refinement ANY implementation ANY constant ANY allConstant ANY allvariable ANY variable ANY allConstVar ANY constVar ANY constBlock ANY varBlock ANY allNamedType ANY namedType
+        Boolean library String pathname Descriptor descriptor Project project FileRef fileRef StorageUnit storageUnitM+ ConstBlock enumsBlock Operator importedOperator+ Model client+ Model libraries+ Model allLibry+ Type typeM+ Model model CoverageFile coverageFileM CriterionFile criterionFileM Instance root Operator all+ MtcApplication application Reference reference+ Node tmpNode+ ConstBlock constBlockK Node node VarBlock varBlockK TypeBlock typeBlock NamedType refinement Implementation implementation Constant constant Constant allConstant GlobalVariable allvariable GlobalVariable variable ConstVar allConstVar ConstVar constVar ConstBlock constBlock VarBlock varBlock NamedType allNamedType NamedType namedType
  ;
 syntax Implementation
         = 
-        ANY key ANY namedTypeI+
+        Model key NamedType namedTypeI+
  ;
 syntax ConstBlock
         = 
-        ANY modelC ANY keyC ANY key ANY constant
+        Model modelC Model keyC Model key Constant constant
  ;
 syntax VarBlock
         = 
-        ANY variable ANY keyVB ANY key
+        GlobalVariable variable Model keyVB Model key
  ;
 syntax GlobalVariable
         = 
-        key: ANY
+        key: VarBlock
  ;
 syntax TypeBlock
         = 
-        ANY type ANY key
+        NamedType type Model key
  ;
 syntax Session
         = 
-        ANY descriptor ANY model ANY loadsModel+ ANY DefinedIn ANY loader
+        Descriptor descriptor Model model Model loadsModel+ String DefinedIn Loader loader
  ;
 syntax Descriptor
         = 
-        ANY modelFileName ANY sernFileName ANY sernPersistAs ANY rnetFileName ANY rnetPersistAs ANY occBase ANY size ANY nameVerify ANY checked ANY libraryModels+ ANY annTypeFiles+ ANY modelD
+        String modelFileName String sernFileName String sernPersistAs String rnetFileName String rnetPersistAs Integer occBase Integer size Boolean nameVerify Boolean checked ListString libraryModels+ ListString annTypeFiles+ Model modelD
  ;
 syntax StorageUnit
         = 
-        ANY saoFileName ANY annFileName ANY persistAs ANY loaded ANY saoModified ANY annModified ANY fileRef ANY modelS ANY element+
+        String saoFileName String annFileName String persistAs Boolean loaded Boolean saoModified Boolean annModified FileRef fileRef Model modelS StorageElement element+
  ;
 syntax StorageElement
         = 
-        ()
+        Block
  ;
 syntax Object
-        = 
-        ()
+        = Implementation
+        | Descriptor
+        | StorageUnit
+        | Expression
+        | Label
+        | CompositeElement
+        | Annotable
+        | Edge
+        | StateMachine
  ;
 syntax Block
-        = 
-        ()
+        = NodeBlock
+        | ModelBlock
  ;
 syntax NodeBlock
-        = 
-        node: ANY
+        = ParamBlock
+        | EqBlock
+        | node: Node
  ;
 syntax ModelBlock
-        = 
-        ()
+        = ConstBlock
+        | VarBlock
+        | TypeBlock
  ;
 syntax Expression
-        = 
-        ()
+        = ExprNull
+        | ConstValue
+        | ExprContact
+        | ExprCall
+        | ExprId
  ;
 syntax Label
         = 
-        expression: ANY
+        expression: Expression
  ;
 syntax ExprNull
         = 
-        ANY label ANY exprContactE ANY exprCallE ANY dependance ANY subExprId+ ANY paramArray ANY constant ANY equationE ANY assertionE
+        Label label ExprContact exprContactE ExprCall exprCallE ConstVar dependance ExprId subExprId+ ParamArray paramArray Constant constant Equation equationE Assertion assertionE
  ;
 syntax ConstValue
         = 
-        ANY value ANY kind
+        String value Object kind
  ;
 syntax ExprContact
         = 
-        ANY boolAct ANY initValue+ ANY calledOpr
+        ExprId boolAct Expression initValue+ ExprCall calledOpr
  ;
 syntax ExprCall
         = 
-        ANY numOcc ANY predefOpr ANY parameter+ ANY exprContactEC ANY operator
+        Integer numOcc Integer predefOpr Expression parameter+ ExprContact exprContactEC Operator operator
  ;
 syntax Operator
-        = 
-        ANY category ANY conversion ANY state ANY index ANY variable ANY input+ ANY output+ ANY hidden+ ANY client+ ANY modelO ANY modelOp ANY criterionO ANY intanceO+ ANY operator
+        = Node
+        | String category Boolean conversion Boolean state Integer index LocalVariable variable LocalVariable input+ LocalVariable output+ LocalVariable hidden+ EqBlock client+ Model modelO Model modelOp Criterion criterionO Instance intanceO+ Operator operator
  ;
 syntax ExprId
         = 
-        ANY exprContactEI ANY reference
+        ExprContact exprContactEI ConstVar reference
  ;
 syntax LocalVariable
         = 
-        ANY optional ANY const ANY probe ANY pure ANY initValue ANY operatorI ANY operatorO ANY operatorH ANY nodeL ANY nodeI
+        Boolean optional Boolean const Boolean probe Boolean pure String initValue Operator operatorI Operator operatorO Operator operatorH Node nodeL Node nodeI
  ;
 syntax Node
         = 
-        ANY nodeKind ANY eqBlock ANY paramBlock ANY local+ ANY internal+ ANY key ANY stateMachine ANY modelN
+        Object nodeKind EqBlock eqBlock ParamBlock paramBlock LocalVariable local+ LocalVariable internal+ Model key StateMachine stateMachine Model modelN
  ;
 syntax ParamBlock
         = 
-        ANY key ANY columnsSize+ ANY array+
+        Node key ListInteger columnsSize+ ParamArray array+
  ;
 syntax ParamArray
         = 
-        ANY notes+ ANY paramBlock ANY operator ANY value+
+        ListString notes+ ParamBlock paramBlock Operator operator Expression value+
  ;
 syntax ConstVar
-        = 
-        ANY kind ANY type ANY client+
+        = Constant
+        | Variable
+        | Object kind Type type EqBlock client+
  ;
 syntax Constant
         = 
-        ANY imported ANY value ANY enumeration ANY key
+        Boolean imported Expression value Enumeration enumeration ConstBlock key
  ;
 syntax Variable
-        = 
-        ANY clock ANY definition+
+        = GlobalVariable
+        | LocalVariable
+        | Variable clock Equation definition+
  ;
 syntax Type
-        = 
-        ()
+        = Table
+        | NamedType
+        | Enumeration
+        | Composite
  ;
 syntax Table
         = 
-        ANY size ANY typeT
+        Integer size Type typeT
  ;
 syntax NamedType
         = 
-        ANY kind ANY refinement+ ANY refined+ ANY to ANY from ANY implementation ANY definition ANY keyM ANY key
+        Object kind NamedType refinement+ NamedType refined+ Operator to Operator from Implementation implementation Type definition Model keyM TypeBlock key
  ;
 syntax Enumeration
         = 
-        ANY value+
+        Constant value+
  ;
 syntax Composite
-        = 
-        ()
+        = Structure
+        | Tuple
  ;
 syntax CompositeElement
         = 
-        ANY typeC ANY key
+        Type typeC Composite key
  ;
 syntax Structure
         = 
-        ANY element
+        element: CompositeElement
  ;
 syntax Tuple
         = 
-        ANY element
+        element: CompositeElement
  ;
 syntax EqBlock
         = 
-        ANY equation+ ANY assertion ANY key ANY calledOperator+ ANY referencedId+
+        Equation equation+ Assertion assertion Node key Operator calledOperator+ ConstVar referencedId+
  ;
 syntax Equation
         = 
-        ANY rotation ANY symetrical ANY terminator ANY eqBlock ANY left+ ANY right ANY outEdge+ ANY position ANY size
+        Integer rotation Boolean symetrical Boolean terminator EqBlock eqBlock Variable left+ Expression right Edge outEdge+ RPoint position RSize size
  ;
 syntax Assertion
         = 
-        ANY key ANY expression ANY edge ANY position
+        EqBlock key Expression expression Edge edge RPoint position
  ;
 syntax Annotable
-        = 
-        ()
+        = StorageElement
+        | ParamArray
+        | ConstVar
+        | Type
+        | Equation
+        | Assertion
+        | Project
  ;
 syntax Prop
         = 
-        ANY name ANY values+ ANY entity ANY configurationP
+        String name ListString values+ Annotable entity Configuration configurationP
  ;
 syntax Configuration
         = 
-        ANY name ANY propC+ ANY projectC
+        String name Prop propC+ Project projectC
  ;
 syntax Project
         = 
-        ANY pathname ANY configuration+ ANY fileRef+ ANY owner+
+        String pathname Configuration configuration+ FileRef fileRef+ Element owner+
  ;
 syntax Element
-        = 
-        ()
+        = FileRef
+        | Folder
  ;
 syntax FileRef
         = 
-        ANY pathname ANY persistAs ANY DefinedIn
+        String pathname String persistAs String DefinedIn
  ;
 syntax Folder
         = 
-        ANY extensions ANY element+
+        String extensions Element element+
  ;
 syntax Reference
-        = 
-        ()
+        = TypeReference
+        | OperatorReference
+        | VariableReference
  ;
 syntax TypeReference
         = 
-        
+        ()
  ;
 syntax OperatorReference
         = 
-        
+        ()
  ;
 syntax VariableReference
         = 
-        
+        ()
  ;
 syntax Error
         = 
@@ -219,7 +241,7 @@ syntax Error
  ;
 syntax Edge
         = 
-        ANY leftVarIndex ANY labelOrientation ANY leftVar ANY rightExpression ANY srcEquation ANY assertion ANY position+ ANY dstEquation
+        Integer leftVarIndex Integer labelOrientation Variable leftVar ExprId rightExpression Equation srcEquation Assertion assertion RPoint position+ Equation dstEquation
  ;
 syntax RPoint
         = 
@@ -231,91 +253,100 @@ syntax RSize
  ;
 syntax Entity
         = 
-        ()
+        StateObj
  ;
 syntax StateObj
         = 
-        ()
+        GraphicalObject
  ;
 syntax GraphicalObject
-        = 
-        ()
+        = StInputOutput
+        | Transition
+        | State
+        | InitialStPtr
  ;
 syntax StInputOutput
-        = 
-        ()
+        = StInitInput
+        | StInput
+        | StOutput
  ;
 syntax StInitInput
         = 
-        ANY name ANY type ANY clock ANY const ANY optional
+        String name String type Boolean clock Boolean const Boolean optional
  ;
 syntax StInput
         = 
-        ANY name ANY type ANY clock ANY const ANY optional
+        String name String type Boolean clock Boolean const Boolean optional
  ;
 syntax StOutput
         = 
-        ANY name ANY type ANY clock ANY const ANY optional
+        String name String type Boolean clock Boolean const Boolean optional
  ;
 syntax Transition
         = 
-        ANY conditions ANY transKind ANY state1 ANY state2
+        String conditions Integer transKind State state1 State state2
  ;
 syntax State
         = 
-        ANY name ANY cx ANY cy ANY transition1+ ANY transition2+ ANY stOutput
+        String name Double cx Double cy Transition transition1+ Transition transition2+ StOutput stOutput
  ;
 syntax InitialStPtr
         = 
-        ANY cx ANY cy ANY state
+        Double cx Double cy State state
  ;
 syntax StateMachine
         = 
-        ANY initialStPtr ANY state+ ANY transition+
+        InitialStPtr initialStPtr State state+ Transition transition+
  ;
 syntax Base
         = 
-        ()
+        StateBase
  ;
 syntax StateBase
         = 
-        ANY DefineIn
+        DefineIn: String
  ;
 syntax AnnNote
         = 
-        ANY name ANY modified ANY annNoteType ANY annotable ANY annAttValue+
+        String name Boolean modified AnnNoteType annNoteType Annotable annotable AnnAttValue annAttValue+
  ;
 syntax AnnAttValue
-        = 
-        ()
+        = AnnAttIntValue
+        | AnnAttBoolValue
+        | AnnAttCharValue
+        | AnnAttRealValue
+        | AnnAttStringValue
  ;
 syntax AnnNoteType
         = 
-        ANY name ANY annAttDefinition ANY annAttGroup ANY key
+        String name AnnAttDefinition annAttDefinition AnnAttGroup annAttGroup AnnotSchema key
  ;
 syntax AnnAttDefinition
         = 
-        ANY name ANY type ANY annAttGroup ANY key ANY annProperty
+        String name Integer type AnnAttGroup annAttGroup AnnNoteType key AnnProperty annProperty
  ;
 syntax AnnAttIntValue
         = 
-        value: ANY
+        value: Integer
  ;
 syntax AnnAttBoolValue
         = 
-        value: ANY
+        value: Boolean
  ;
 syntax AnnAttCharValue
         = 
-        value: ANY
+        value: Char
  ;
 syntax AnnAttRealValue
         = 
-        value: ANY
+        value: Double
  ;
 syntax AnnAttStringValue
-        = 
-        value: ANY
+        = AnnAttFileValue
+        | AnnAttDateValue
+        | AnnAttOidValue
+        | AnnAttEnumValue
+        | value: String
  ;
 syntax AnnAttFileValue
         = 
@@ -334,94 +365,104 @@ syntax AnnAttEnumValue
         ()
  ;
 syntax AnnProperty
-        = 
-        ANY name ANY type ANY key
+        = AnnPropertyInt
+        | AnnPropertyBool
+        | AnnPropertyChar
+        | AnnPropertyReal
+        | AnnPropertyString
+        | AnnPropertyEnum
+        | String name Integer type AnnAttDefinition key
  ;
 syntax AnnPropertyInt
         = 
-        value: ANY
+        value: Integer
  ;
 syntax AnnPropertyBool
         = 
-        value: ANY
+        value: Boolean
  ;
 syntax AnnPropertyChar
         = 
-        value: ANY
+        value: Char
  ;
 syntax AnnPropertyReal
         = 
-        value: ANY
+        value: Double
  ;
 syntax AnnPropertyString
         = 
-        value: ANY
+        value: String
  ;
 syntax AnnPropertyEnum
         = 
-        value: ANY
+        value: Object
  ;
 syntax AnnotSchema
         = 
-        ANY pathname ANY annNoteType ANY annCategory
+        String pathname AnnNoteType annNoteType AnnCategory annCategory
  ;
 syntax AnnCategory
         = 
-        ANY name ANY key ANY anootability+
+        String name AnnotSchema key Annotability anootability+
  ;
 syntax Annotability
         = 
-        ANY minCardinality ANY maxCardinality ANY defaultNote ANY annNoteType
+        Integer minCardinality Integer maxCardinality Boolean defaultNote AnnNoteType annNoteType
  ;
 syntax AnnAttGroup
         = 
-        ANY name ANY key
+        String name AnnNoteType key
  ;
 syntax File
-        = 
-        ()
+        = CoverageFile
+        | CriterionFile
  ;
 syntax MtcApplication
         = 
-        ANY coverageFileCov+ ANY criterionFileCri+ ANY modelM
+        CoverageFile coverageFileCov+ CriterionFile criterionFileCri+ Model modelM
  ;
 syntax CoverageFile
         = 
-        ANY record ANY modelCov ANY application ANY recordCov
+        Record record Model modelCov MtcApplication application Record recordCov
  ;
 syntax CriterionFile
         = 
-        ANY application ANY modelCri ANY criterionC+
+        MtcApplication application Model modelCri Criterion criterionC+
  ;
 syntax MtcEntity
-        = 
-        ()
+        = Element
+        | File
+        | HistoryEntry
+        | Criterion
+        | Instance
+        | Result
+        | Record
  ;
 syntax HistoryEntry
         = 
-        ANY file
+        file: File
  ;
 syntax Criterion
         = 
-        ANY ident ANY name ANY description ANY criterionFileC ANY operatorC ANY element+
+        String ident String name String description CriterionFile criterionFileC Operator operatorC Element element+
  ;
 syntax Instance
         = 
-        ANY index ANY occ ANY modelI ANY operatorI ANY associationClassI ANY caller ANY called+ ANY origin ANY related+
+        Integer index String occ Model modelI Operator operatorI AssociationClass associationClassI Instance caller Instance called+ Instance origin Instance related+
  ;
 syntax AssociationClass
         = 
-        ANY resultA ANY recordA+ ANY instanceA+
+        Result resultA Record recordA+ Instance instanceA+
  ;
 syntax Result
         = 
-        ANY elementCount ANY associationClassRs ANY record
+        Integer elementCount AssociationClass associationClassRs Record record
  ;
 syntax Record
         = 
-        ANY creator ANY name ANY date ANY author ANY description ANY key ANY associationClassRc ANY coverageFileR ANY result+
+        String creator String name String date String author String description CoverageFile key AssociationClass associationClassRc CoverageFile coverageFileR Result result+
  ;
 syntax Loader
         = 
-        ANY descriptor ANY session
+        Descriptor descriptor Session session
  ;

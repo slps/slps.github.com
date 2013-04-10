@@ -317,9 +317,9 @@ exports
 
         ","? LoopControl -> CommaLoopControl
 
-         -> DoLblRef
+        Icon -> DoLblRef
 
-        TAB-2 TAB-9 -> DoLblDef
+        TAB-2 Icon TAB-9 -> DoLblDef
 
         "do" LblRef CommaLoopControl EOS -> DoubleDoStmt
 
@@ -1080,3 +1080,172 @@ exports
         Ident -> TypeName
 
         Ident -> EndName
+
+        LblDef DoubleDoStmt -> ExecutionPartConstruct
+
+        Scon -> Primary
+
+        LogicalConstant -> Primary
+
+        Module -> ProgramUnit
+
+        UseStmt -> SpecificationPartConstruct
+
+        DerivedTypeDef -> DeclarationConstruct
+        InterfaceBlock -> DeclarationConstruct
+
+        AccessStmt -> SpecificationStmt
+        AllocatableStmt -> SpecificationStmt
+        IntentStmt -> SpecificationStmt
+        NamelistStmt -> SpecificationStmt
+        OptionalStmt -> SpecificationStmt
+        PointerStmt -> SpecificationStmt
+        TargetStmt -> SpecificationStmt
+
+        CaseConstruct -> ExecutableConstruct
+        WhereConstruct -> ExecutableConstruct
+
+        AllocateStmt -> ActionStmt
+        CycleStmt -> ActionStmt
+        DeallocateStmt -> ActionStmt
+        ExitStmt -> ActionStmt
+        NullifyStmt -> ActionStmt
+        PointerAssignmentStmt -> ActionStmt
+        WhereStmt -> ActionStmt
+
+        Icon "_" KindParam -> UnsignedArithmeticConstant
+
+        RDcon "_" KindParam -> UnsignedArithmeticConstant
+
+        Icon "_" Scon -> Constant
+        NamedConstantUse "_" Scon -> Constant
+
+        SP ".true." SP "_" KindParam -> LogicalConstant
+        SP ".false." SP "_" KindParam "." -> LogicalConstant
+
+        LblDef TypeSpec AttrSpecSeq? "::" EntityDeclList EOS -> TypeDeclarationStmt
+
+        "integer" KindSelector -> TypeSpec
+        "real" KindSelector -> TypeSpec
+        "double" "precision" -> TypeSpec
+        "complex" KindSelector -> TypeSpec
+        "character" CharSelector -> TypeSpec
+        "logical" KindSelector -> TypeSpec
+        "type" "(" TypeName ")" -> TypeSpec
+
+        ObjectName "=" Expr -> EntityDecl
+        ObjectName "(" ArraySpec ")" "=" Expr -> EntityDecl
+        ObjectName "*" CharLength "=" Expr -> EntityDecl
+        ObjectName "*" CharLength "(" ArraySpec ")" "=" Expr -> EntityDecl
+
+        "(" TypeParamValue ")" -> LengthSelector
+
+        AssumedShapeSpecList -> ArraySpec
+        DeferredShapeSpecList -> ArraySpec
+
+        LblDef "save" "::" SavedEntityList EOS -> SaveStmt
+
+        LblDef "dimension" "::" ArrayDeclaratorList EOS -> DimensionStmt
+
+        StructureConstructor -> Constant
+        BozLiteralConstant -> Constant
+
+        StructureComponent -> DataIDoObject
+
+        LblDef "implicit" "none" EOS -> ImplicitStmt
+
+        "%" Name -> ComplexDataRefTail
+
+        StructureComponent "(" SectionSubscriptList ")" -> ArrayElement
+
+        ":" Expr ":" Expr -> SubscriptTripletTail
+        "::" Expr -> SubscriptTripletTail
+
+        ArrayConstructor -> Primary
+
+        DefinedUnaryOp Primary -> Level1Expr
+
+        "==" -> RelOp
+        "/=" -> RelOp
+        "<" -> RelOp
+        "<=" -> RelOp
+        ">" -> RelOp
+        ">=" -> RelOp
+
+        Expr DefinedBinaryOp Level5Expr -> Expr
+
+        LblDef Name SFExprListRef? "%" NameDataRef "=" Expr EOS -> AssignmentStmt
+        LblDef Name "(" SFDummyArgNameList ")" "%" NameDataRef "=" Expr EOS -> AssignmentStmt
+
+        Expr? ":" Expr ":" Expr -> SFExprList
+        Expr? "::" Expr -> SFExprList
+
+        LblDef EX-2 "else" "if" "(" Expr ")" "then" EOS IN-2 -> ElseIfStmt
+
+        LblDef EX-2 "end" "if" EOS -> EndIfStmt
+
+        BlockDoConstruct -> DoConstruct
+
+        "while" "(" Expr ")" -> LoopControl
+
+        "go" "to" -> GoToKw
+
+        "position=" CExpr -> ConnectSpec
+        "action=" CExpr -> ConnectSpec
+        "delim=" CExpr -> ConnectSpec
+        "pad=" CExpr -> ConnectSpec
+
+        "nml=" NamelistGroupName -> IoControlSpec
+        "advance=" CExpr -> IoControlSpec
+        "size=" Variable -> IoControlSpec
+        "eor=" LblRef -> IoControlSpec
+
+        LblDef "end" "file" UnitIdentifier EOS -> EndfileStmt
+        LblDef "end" "file" "(" PositionSpecList ")" EOS -> EndfileStmt
+
+        LblDef "inquire" "(" "iolength=" ScalarVariable ")" OutputItemList EOS -> InquireStmt
+
+        "position=" ScalarVariable -> InquireSpec
+        "action=" ScalarVariable -> InquireSpec
+        "read=" ScalarVariable -> InquireSpec
+        "write=" ScalarVariable -> InquireSpec
+        "readwrite=" ScalarVariable -> InquireSpec
+        "delim=" ScalarVariable -> InquireSpec
+        "pad=" ScalarVariable -> InquireSpec
+
+        BodyPlusInternals EndProgramStmt -> MainRange
+
+        LblDef "endprogram" EndName? EOS -> EndProgramStmt
+        LblDef "end" "program" EndName? EOS -> EndProgramStmt
+
+        LblDef "block" "data" BlockDataName? EOS -> BlockDataStmt
+
+        LblDef "endblockdata" EndName? EOS -> EndBlockDataStmt
+        LblDef "end" "blockdata" EndName? EOS -> EndBlockDataStmt
+        LblDef "endblock" "data" EndName? EOS -> EndBlockDataStmt
+        LblDef "end" "block" "data" EndName? EOS -> EndBlockDataStmt
+
+        Name "(" FunctionArgList ")" -> FunctionReference
+
+        Name "=" Expr -> SubroutineArg
+        Name "=" Hcon -> SubroutineArg
+        Name "=" "*" LblRef -> SubroutineArg
+
+        FunctionParList "result" "(" Name ")" EOS BodyPlusInternals EndFunctionStmt -> FunctionRange
+        FunctionParList "result" "(" Name ")" EOS Body EndFunctionStmt -> FunctionRange
+        FunctionParList "result" "(" Name ")" EOS EndFunctionStmt -> FunctionRange
+        FunctionParList EOS BodyPlusInternals EndFunctionStmt -> FunctionRange
+
+        "recursive" "function" -> FunctionPrefix
+        "recursive" TypeSpec "function" -> FunctionPrefix
+        TypeSpec "recursive" "function" -> FunctionPrefix
+
+        LblDef "endfunction" EndName? EOS -> EndFunctionStmt
+        LblDef "end" "function" EndName? EOS -> EndFunctionStmt
+
+        LblDef "recursive" "subroutine" SubroutineName SubroutineRange -> SubroutineSubprogram
+
+        SubroutineParList EOS BodyPlusInternals EndSubroutineStmt -> SubroutineRange
+
+        LblDef "endsubroutine" EndName? EOS -> EndSubroutineStmt
+        LblDef "end" "subroutine" EndName? EOS -> EndSubroutineStmt

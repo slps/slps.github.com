@@ -1,24 +1,36 @@
 QueryExpression:
-        expresssion::ANY
+        expresssion::String
 CheckConstraint:
-        constraintElements::ANY+ constrainedElements::ANY+
+        constraintElements::Column+ constrainedElements::Table+
 Column:
-        precision::ANY scale::ANY isNullable::ANY length::ANY collectionName::ANY characterSetName::ANY column_constraints::ANY+ type::ANY owner::ANY optionScopeColumnSet::ANY
+        precision::Integer scale::Integer isNullable::Boolean length::Integer collectionName::String characterSetName::String column_constraints::CheckConstraint+ type::SQLDataType owner::ColumnSet optionScopeColumnSet::NamedColumnSet
 ColumnSet:
-        features::ANY+
+        NamedColumnSet
+ColumnSet:
+        QueryColumnSet
+ColumnSet:
+        features::Column+
 NamedColumnSet:
-        optionScopeColumn::ANY triggers::ANY+
+        Table
+NamedColumnSet:
+        View
+NamedColumnSet:
+        optionScopeColumn::Column triggers::Trigger+
 QueryColumnSet:
-        query::ANY
+        query::QueryExpression
 Table:
-        isTemporary::ANY temporaryScope::ANY isSystem::ANY table_constraints::ANY+
+        isTemporary::Boolean temporaryScope::String isSystem::Boolean table_constraints::CheckConstraint+
 View:
-        isReadOnly::ANY checkOption::ANY queryExpression::ANY
+        isReadOnly::Boolean checkOption::Boolean queryExpression::QueryExpression
 Trigger:
-        namedColumnSet::ANY
+        namedColumnSet::NamedColumnSet
 SQLDataType:
-        typeNumber::ANY structuralFeatures::ANY+
+        SQLDistinctType
+SQLDataType:
+        SQLSimpleType
+SQLDataType:
+        typeNumber::Integer structuralFeatures::Column+
 SQLDistinctType:
-        length::ANY precision::ANY scale::ANY sqlSimpleType::ANY
+        length::Integer precision::Integer scale::Integer sqlSimpleType::SQLSimpleType
 SQLSimpleType:
-        characterMaximumLength::ANY characterOctetLength::ANY numericPrecision::ANY numericPrecisionRadix::ANY numericScale::ANY dateTimePrecision::ANY sqlDistinctTypes::ANY+
+        characterMaximumLength::Integer characterOctetLength::Integer numericPrecision::Integer numericPrecisionRadix::Integer numericScale::Integer dateTimePrecision::Integer sqlDistinctTypes::SQLDistinctType+

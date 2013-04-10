@@ -4,56 +4,96 @@ exports
   sorts
         UEMLObject UEMLModel Geometry Port Flow Activity Object InformationObject Resource MaterialResource HumanResource ResourceFlow IOFlow ControlFlow TriggerFlow ConstraintFlow ResourceRole RoleType Anchor OutputPort InputPort ConnectionOperator AssociationConnector Task FlowObject Event Process 
   context-free syntax
-        has::ANY model::ANY -> UEMLObject
+        UEMLModel -> UEMLObject
 
-        contains::ANY+ -> UEMLModel
+        Port -> UEMLObject
 
-        object::ANY -> Geometry
+        Flow -> UEMLObject
 
-         -> Port
+        Object -> UEMLObject
 
-        associationConnector::ANY -> Flow
+        has::Geometry model::UEMLModel -> UEMLObject
 
-        resourceRole::ANY+ parent::ANY hasOutput::ANY+ hasInput::ANY+ -> Activity
+        contains::UEMLObject+ -> UEMLModel
 
-        ioFlow::ANY -> Object
+        object::UEMLObject -> Geometry
 
-        controlFlow::ANY -> InformationObject
+        ResourceRole -> Port
 
-        carries::ANY plays::ANY+ -> Resource
+        Anchor -> Port
+
+        ResourceRole -> Port
+        Anchor -> Port
+
+        ResourceFlow -> Flow
+
+        IOFlow -> Flow
+
+        ControlFlow -> Flow
+
+        associationConnector::AssociationConnector -> Flow
+
+        Task -> Activity
+
+        resourceRole::ResourceRole+ parent::Process hasOutput::OutputPort+ hasInput::InputPort+ -> Activity
+
+        InformationObject -> Object
+
+        Resource -> Object
+
+        ioFlow::IOFlow -> Object
+
+        controlFlow::ControlFlow -> InformationObject
+
+        MaterialResource -> Resource
+
+        HumanResource -> Resource
+
+        carries::ResourceFlow plays::ResourceRole+ -> Resource
 
          -> MaterialResource
 
          -> HumanResource
 
-        resourceCarries::ANY+ -> ResourceFlow
+        resourceCarries::Resource+ -> ResourceFlow
 
-        carries::ANY+ -> IOFlow
+        carries::Object+ -> IOFlow
 
-        carries::ANY+ -> ControlFlow
+        TriggerFlow -> ControlFlow
+
+        ConstraintFlow -> ControlFlow
+
+        carries::InformationObject+ -> ControlFlow
 
          -> TriggerFlow
 
          -> ConstraintFlow
 
-        resourcePlays::ANY+ roleQualifier::ANY in::ANY -> ResourceRole
+        resourcePlays::Resource+ roleQualifier::RoleType in::Activity -> ResourceRole
 
          -> RoleType
 
-         -> Anchor
+        OutputPort -> Anchor
 
-        activity::ANY -> OutputPort
+        InputPort -> Anchor
 
-        activity::ANY -> InputPort
+        OutputPort -> Anchor
+        InputPort -> Anchor
+
+        activity::Activity -> OutputPort
+
+        activity::Activity -> InputPort
 
          -> ConnectionOperator
 
-        origin::ANY+ target::ANY+ classAssociation::ANY -> AssociationConnector
+        origin::FlowObject+ target::FlowObject+ classAssociation::Flow -> AssociationConnector
 
          -> Task
 
-        target::ANY origin::ANY -> FlowObject
+        Event -> FlowObject
+
+        target::AssociationConnector origin::AssociationConnector -> FlowObject
 
          -> Event
 
-        child::ANY+ -> Process
+        child::Activity+ -> Process

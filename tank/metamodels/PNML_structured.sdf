@@ -2,15 +2,17 @@ module Main
 
 exports
   sorts
-        IdedElement URI Color AnyElement RotationType ShapeType StyleType DecorationType AlignType PNMLDocument NetElement NetContent ToolSpecific LabeledElement Label Name Inscription InitialMarking NetContentElement Arc Page Reference ReferencePlace ReferenceTransition Node Place Transition Graphics NetGraphics NodeGraphics EdgeGraphics AnnotationGraphics PageGraphics Coordinate Position Offset Dimension Fill Line Font 
+        IdedElement URI Color AnyElement RotationType ShapeType StyleType DecorationType AlignType PNMLDocument NetElement NetContent ToolSpecific LabeledElement Label Name Inscription InitialMarking NetContentElement Arc Page ReferencePlace ReferenceTransition Node Place Transition Graphics NetGraphics NodeGraphics EdgeGraphics AnnotationGraphics PageGraphics Coordinate Position Offset Dimension Fill Line Font 
   context-free syntax
-         -> IdedElement
+        NetElement -> IdedElement
 
-        value::ANY -> URI
+        Node -> IdedElement
+
+        value::String -> URI
 
          -> Color
 
-        name::ANY text::ANY -> AnyElement
+        name::String text::String -> AnyElement
 
         rtvertical:: -> RotationType
         rthorizontal:: -> RotationType
@@ -31,64 +33,80 @@ exports
         atcenter:: -> AlignType
         atright:: -> AlignType
 
-        xmlns::ANY nets::ANY+ -> PNMLDocument
+        xmlns::URI nets::NetElement+ -> PNMLDocument
 
-        type::ANY document::ANY contents::ANY+ tools::ANY+ netgraphics::ANY name::ANY -> NetElement
+        type::URI document::PNMLDocument contents::NetContent+ tools::ToolSpecific+ netgraphics::NetGraphics name::Name -> NetElement
 
-         -> NetContent
+        NetContentElement -> NetContent
 
-        tool::ANY version::ANY anyelement::ANY+ net::ANY arc::ANY node::ANY page::ANY -> ToolSpecific
+        tool::String version::String anyelement::AnyElement+ net::NetElement arc::Arc node::Node page::Page -> ToolSpecific
 
-         -> LabeledElement
+        Name -> LabeledElement
 
-        text::ANY namedelement::ANY -> Label
+        Inscription -> LabeledElement
 
-        net::ANY netcontent::ANY -> Name
+        InitialMarking -> LabeledElement
 
-        arc::ANY -> Inscription
+        text::String namedelement::LabeledElement -> Label
 
-        place::ANY -> InitialMarking
+        net::NetElement netcontent::NetContent -> Name
 
-         -> NetContentElement
+        arc::Arc -> Inscription
 
-        source::ANY target::ANY tools::ANY+ edgegraphics::ANY inscription::ANY -> Arc
+        place::Place -> InitialMarking
 
-        contents::ANY+ tools::ANY+ pagegraphics::ANY -> Page
+        Place -> NetContentElement
 
-         -> Reference
+        Transition -> NetContentElement
+
+        source::NetContentElement target::NetContentElement tools::ToolSpecific+ edgegraphics::EdgeGraphics inscription::Inscription -> Arc
+
+        contents::NetContent+ tools::ToolSpecific+ pagegraphics::PageGraphics -> Page
 
          -> ReferencePlace
 
          -> ReferenceTransition
 
-        netcontentelement::ANY tools::ANY+ nodegraphics::ANY -> Node
+        Reference -> Node
 
-        initialmarking::ANY -> Place
+        netcontentelement::NetContentElement tools::ToolSpecific+ nodegraphics::NodeGraphics -> Node
 
-        node::ANY -> Transition
+        initialmarking::InitialMarking -> Place
 
-         -> Graphics
+        node::Node -> Transition
 
-        net::ANY -> NetGraphics
+        NetGraphics -> Graphics
 
-        node::ANY position::ANY dimension::ANY fill::ANY line::ANY -> NodeGraphics
+        NodeGraphics -> Graphics
 
-        arc::ANY position::ANY+ fill::ANY line::ANY -> EdgeGraphics
+        EdgeGraphics -> Graphics
 
-        namedelement::ANY offset::ANY font::ANY fill::ANY line::ANY -> AnnotationGraphics
+        AnnotationGraphics -> Graphics
 
-        page::ANY -> PageGraphics
+        PageGraphics -> Graphics
 
-         -> Coordinate
+        net::NetElement -> NetGraphics
 
-        nodegraphics::ANY edgegraphics::ANY -> Position
+        node::Node position::Position dimension::Dimension fill::Fill line::Line -> NodeGraphics
 
-        annotationgraphics::ANY -> Offset
+        arc::Arc position::Position+ fill::Fill line::Line -> EdgeGraphics
 
-        width::ANY height::ANY nodegraphics::ANY -> Dimension
+        namedelement::LabeledElement offset::Offset font::Font fill::Fill line::Line -> AnnotationGraphics
 
-        gradientrotation::ANY interiorcolor::ANY gradientcolor::ANY image::ANY nodegraphics::ANY edgegraphics::ANY annotationgraphics::ANY -> Fill
+        page::Page -> PageGraphics
 
-        color::ANY width::ANY shape::ANY style::ANY nodegraphics::ANY edgegraphics::ANY annotationgraphics::ANY -> Line
+        Position -> Coordinate
 
-        family::ANY style::ANY weight::ANY size::ANY decoration::ANY align::ANY rotation::ANY annotationgraphics::ANY -> Font
+        Offset -> Coordinate
+
+        nodegraphics::NodeGraphics edgegraphics::EdgeGraphics -> Position
+
+        annotationgraphics::AnnotationGraphics -> Offset
+
+        width::Integer height::Integer nodegraphics::NodeGraphics -> Dimension
+
+        gradientrotation::RotationType interiorcolor::Color gradientcolor::Color image::URI nodegraphics::NodeGraphics edgegraphics::EdgeGraphics annotationgraphics::AnnotationGraphics -> Fill
+
+        color::Color width::Integer shape::ShapeType style::StyleType nodegraphics::NodeGraphics edgegraphics::EdgeGraphics annotationgraphics::AnnotationGraphics -> Line
+
+        family::String style::String weight::String size::String decoration::DecorationType align::AlignType rotation::Integer annotationgraphics::AnnotationGraphics -> Font

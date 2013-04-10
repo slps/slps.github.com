@@ -3,23 +3,28 @@ module OCCAM
 
 syntax OCCAM_Program
         = 
-        ANY occam_Elements+ ANY files+
+        OCCAM_Element occam_Elements+ File files+
  ;
 syntax OCCAM_Element
-        = 
-        name: ANY
+        = Process
+        | Action
+        | Constructor
+        | DataType
+        | name: String
  ;
 syntax Process
         = 
-        ANY declaration ANY constructors+ ANY parameters+ ANY libraries+ ANY toChannel
+        Declaration declaration Constructor constructors+ DataType parameters+ Library libraries+ Channel toChannel
  ;
 syntax Channel
         = 
-        ANY name ANY type ANY toServer ANY toProcess
+        String name String type Server toServer Process toProcess
  ;
 syntax Action
-        = 
-        ANY constructor ANY while ANY if
+        = Assignment
+        | Input
+        | Output
+        | Constructor constructor While while If if
  ;
 syntax Assignment
         = 
@@ -34,24 +39,27 @@ syntax Output
         ()
  ;
 syntax Constructor
-        = 
-        ANY process ANY actions+ ANY buckels+ ANY childrens+
+        = Sequential
+        | Parallel
+        | Alternative
+        | Process process Action actions+ Buckel buckels+ Constructor childrens+
  ;
 syntax Buckel
-        = 
-        constructor: ANY
+        = If
+        | While
+        | constructor: Constructor
  ;
 syntax If
         = 
-        ANY conditions+ ANY actions+
+        Condition conditions+ Action actions+
  ;
 syntax While
         = 
-        ANY conditions+ ANY actions+
+        Condition conditions+ Action actions+
  ;
 syntax Condition
         = 
-        ANY elementRight ANY elementLeft ANY typeCondition ANY if ANY while
+        String elementRight String elementLeft String typeCondition If if While while
  ;
 syntax Sequential
         = 
@@ -67,21 +75,21 @@ syntax Alternative
  ;
 syntax DataType
         = 
-        dataType: ANY
+        dataType: String
  ;
 syntax Library
         = 
-        name: ANY
+        name: String
  ;
 syntax File
         = 
-        name: ANY
+        name: String
  ;
 syntax Server
         = 
-        ANY name ANY toChannel
+        String name Channel toChannel
  ;
 syntax Declaration
         = 
-        ANY name ANY process ANY elements+
+        String name Process process DataType elements+
  ;

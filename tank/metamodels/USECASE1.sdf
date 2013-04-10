@@ -4,34 +4,40 @@ exports
   sorts
         Task User Actor Goal UseCase Service Scenario Context PreCondition PostCondition Episode Event Action Responce Stimilus Parameter 
   context-free syntax
-        service::ANY+ -> Task
+        service::Service+ -> Task
 
-        useCase::ANY+ actor::ANY+ -> User
+        useCase::UseCase+ actor::Actor+ -> User
 
-        useCase::ANY+ goal::ANY+ user::ANY+ -> Actor
+        useCase::UseCase+ goal::Goal+ user::User+ -> Actor
 
-        service::ANY+ actor::ANY+ -> Goal
+        service::Service+ actor::Actor+ -> Goal
 
-        context::ANY service::ANY+ user::ANY+ actor::ANY+ -> UseCase
+        context::Context service::Service+ user::User+ actor::Actor+ -> UseCase
 
-        useCase::ANY+ goal::ANY+ task::ANY+ -> Service
+        useCase::UseCase+ goal::Goal+ task::Task+ -> Service
 
          -> Scenario
 
-        preCondition::ANY+ postCondition::ANY+ useCase::ANY+ -> Context
+        preCondition::PreCondition+ postCondition::PostCondition+ useCase::UseCase+ -> Context
 
-        context::ANY+ -> PreCondition
+        context::Context+ -> PreCondition
 
-        context::ANY+ -> PostCondition
+        context::Context+ -> PostCondition
 
-        event::ANY+ -> Episode
+        event::Event+ -> Episode
 
-        episode::ANY+ -> Event
+        Action -> Event
+
+        Responce -> Event
+
+        Stimilus -> Event
+
+        episode::Episode+ -> Event
 
          -> Action
 
-        parameter::ANY+ -> Responce
+        parameter::Parameter+ -> Responce
 
-        parameter::ANY+ -> Stimilus
+        parameter::Parameter+ -> Stimilus
 
-        stimilus::ANY+ responce::ANY+ -> Parameter
+        stimilus::Stimilus+ responce::Responce+ -> Parameter

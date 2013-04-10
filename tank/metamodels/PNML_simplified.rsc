@@ -2,54 +2,54 @@
 module PNML_simplified
 
 syntax LocatedElement
-        = 
-        ()
+        = IdedElement
+        | URI
+        | PNMLDocument
+        | NetContent
+        | LabeledElement
+        | Label
  ;
 syntax IdedElement
         = 
-        ()
+        NetElement
  ;
 syntax URI
         = 
-        value: ANY
+        value: String
  ;
 syntax PNMLDocument
         = 
-        ANY xmlns ANY nets+
+        URI xmlns NetElement nets+
  ;
 syntax NetElement
         = 
-        ANY type ANY document ANY contents+ ANY name
- ;
-syntax NetContent
-        = 
-        ()
+        URI type PNMLDocument document NetContent contents+ Name name
  ;
 syntax LabeledElement
         = 
-        ()
+        Name
  ;
 syntax Label
         = 
-        ANY text ANY labeledElement
+        String text LabeledElement labeledElement
  ;
 syntax Name
         = 
-        ANY net ANY netContent
+        NetElement net NetContent netContent
  ;
 syntax NetContentElement
-        = 
-        ()
+        = Place
+        | Transition
  ;
 syntax Arc
         = 
-        ANY source ANY target
+        NetContentElement source NetContentElement target
  ;
 syntax Place
         = 
-        
+        ()
  ;
 syntax Transition
         = 
-        
+        ()
  ;

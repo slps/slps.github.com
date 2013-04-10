@@ -4,7 +4,13 @@ exports
   sorts
         RelationSchip ConstrainedRelationSchip Aggregation Composition Association Generalisation Dependency AssociationEnd Package Steriotype Class Constraint Operation Characteristic BusnissRule MetaData Source Domain DescriptiveAttribute Geometry Temporality VisualInfo Value RangeDomain EnumeratedDomain PerceptorySteriotype 
   context-free syntax
-        affectCharacteristic::ANY+ constraint::ANY steriotype::ANY+ packages::ANY+ associatePackages::ANY -> RelationSchip
+        Association -> RelationSchip
+
+        Generalisation -> RelationSchip
+
+        Dependency -> RelationSchip
+
+        affectCharacteristic::Characteristic+ constraint::Constraint steriotype::Steriotype+ packages::Package+ associatePackages::Package -> RelationSchip
 
          -> ConstrainedRelationSchip
 
@@ -12,7 +18,12 @@ exports
 
          -> Composition
 
-         -> Association
+        Aggregation -> Association
+
+        Composition -> Association
+
+        Aggregation -> Association
+        Composition -> Association
 
          -> Generalisation
 
@@ -20,38 +31,46 @@ exports
 
          -> AssociationEnd
 
-        steriotype::ANY children::ANY+ parent::ANY classes::ANY+ relationSchip::ANY+ connectedRelationSchip::ANY+ -> Package
+        steriotype::Steriotype children::Package+ parent::Package classes::Class+ relationSchip::RelationSchip+ connectedRelationSchip::RelationSchip+ -> Package
 
-        descriptiveAttribute::ANY+ operations::ANY+ relationSchip::ANY+ theClass::ANY+ thePackage::ANY+ -> Steriotype
+        PerceptorySteriotype -> Steriotype
 
-        characteristic::ANY+ details::ANY operations::ANY myOperations::ANY+ constraint::ANY+ steriotype::ANY packages::ANY+ -> Class
+        descriptiveAttribute::DescriptiveAttribute+ operations::Operation+ relationSchip::RelationSchip+ theClass::Class+ thePackage::Package+ -> Steriotype
 
-        caracteristic::ANY theClass::ANY relationSchip::ANY+ -> Constraint
+        characteristic::Characteristic+ details::MetaData operations::Operation myOperations::Operation+ constraint::Constraint+ steriotype::Steriotype packages::Package+ -> Class
 
-        detail::ANY inCharacteristic::ANY+ affectFeature::ANY+ steriotype::ANY behaviour::ANY -> Operation
+        caracteristic::Characteristic theClass::Class relationSchip::RelationSchip+ -> Constraint
 
-        details::ANY rule::ANY operations::ANY theClass::ANY relationSchip::ANY constraint::ANY -> Characteristic
+        detail::MetaData inCharacteristic::Characteristic+ affectFeature::Class+ steriotype::Steriotype behaviour::Class -> Operation
 
-        characteristic::ANY -> BusnissRule
+        DescriptiveAttribute -> Characteristic
 
-        source::ANY characteristic::ANY operations::ANY theClass::ANY -> MetaData
+        details::MetaData rule::BusnissRule operations::Operation theClass::Class relationSchip::RelationSchip constraint::Constraint -> Characteristic
 
-        metaData::ANY -> Source
+        characteristic::Characteristic -> BusnissRule
 
-        descriptiveAttribute::ANY+ -> Domain
+        source::Source characteristic::Characteristic operations::Operation theClass::Class -> MetaData
 
-        tempsDef::ANY specialDef::ANY steriotype::ANY domain::ANY -> DescriptiveAttribute
+        metaData::MetaData -> Source
 
-        tempsDef::ANY descriptiveAttributeg::ANY -> Geometry
+        RangeDomain -> Domain
 
-        geometry::ANY descriptiveAttributet::ANY -> Temporality
+        EnumeratedDomain -> Domain
+
+        descriptiveAttribute::DescriptiveAttribute+ -> Domain
+
+        tempsDef::Temporality specialDef::Geometry steriotype::Steriotype domain::Domain -> DescriptiveAttribute
+
+        tempsDef::Temporality descriptiveAttributeg::DescriptiveAttribute -> Geometry
+
+        geometry::Geometry descriptiveAttributet::DescriptiveAttribute -> Temporality
 
          -> VisualInfo
 
-        enumeratedDomain::ANY -> Value
+        enumeratedDomain::EnumeratedDomain -> Value
 
          -> RangeDomain
 
-        value::ANY+ -> EnumeratedDomain
+        value::Value+ -> EnumeratedDomain
 
          -> PerceptorySteriotype

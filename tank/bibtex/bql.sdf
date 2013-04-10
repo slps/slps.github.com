@@ -4,14 +4,14 @@ exports
   sorts
         LocatedElement Query Entry Field Predicate Expression 
   context-free syntax
-         -> LocatedElement
+        Entry -> LocatedElement
 
-        entries::ANY+ predicates::ANY+ -> Query
+        entries::Entry+ predicates::Predicate+ -> Query
 
-        name::ANY type::ANY allFields::ANY fields::ANY+ predicate::ANY -> Entry
+        name::String type::String allFields::Boolean fields::Field+ predicate::Predicate -> Entry
 
-        name::ANY entry::ANY -> Field
+        name::String entry::Entry -> Field
 
-        entry::ANY expression::ANY+ -> Predicate
+        entry::Entry expression::Expression+ -> Predicate
 
-        field::ANY value::ANY -> Expression
+        field::String value::String -> Expression

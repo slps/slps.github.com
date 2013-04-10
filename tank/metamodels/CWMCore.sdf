@@ -8,25 +8,47 @@ exports
         vk_private_vis:: -> VisibilityKind
         vk_protected_vis:: -> VisibilityKind
 
-        expresssion::ANY -> BooleanExpression
+        expresssion::String -> BooleanExpression
 
-        name::ANY visibility::ANY contraints::ANY+ clientDependencies::ANY+ supplierDependencies::ANY+ namespace::ANY importers::ANY+ -> ModelElement
+        Dependency -> ModelElement
 
-        kind::ANY clients::ANY+ suppliers::ANY+ -> Dependency
+        Constraint -> ModelElement
 
-        body::ANY constrainedElements::ANY+ -> Constraint
+        Feature -> ModelElement
 
-        owner::ANY -> Feature
+        NameSpace -> ModelElement
 
-        type::ANY -> StructuralFeature
+        name::String visibility::VisibilityKind contraints::Constraint+ clientDependencies::Dependency+ supplierDependencies::Dependency+ namespace::NameSpace importers::Package+ -> ModelElement
+
+        kind::String clients::ModelElement+ suppliers::ModelElement+ -> Dependency
+
+        body::BooleanExpression constrainedElements::ModelElement+ -> Constraint
+
+        StructuralFeature -> Feature
+
+        owner::Classifier -> Feature
+
+        Attribute -> StructuralFeature
+
+        type::Classifier -> StructuralFeature
 
          -> Attribute
 
-        ownedElements::ANY+ -> NameSpace
+        Classifier -> NameSpace
 
-        features::ANY+ -> Classifier
+        Package -> NameSpace
 
-        importedElements::ANY+ -> Package
+        ownedElements::ModelElement+ -> NameSpace
+
+        Class -> Classifier
+
+        Datatype -> Classifier
+
+        features::Feature+ -> Classifier
+
+        Model -> Package
+
+        importedElements::ModelElement+ -> Package
 
          -> Class
 

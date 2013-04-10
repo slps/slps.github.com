@@ -2,232 +2,260 @@
 module J2SE5
 
 syntax AbstractTypeDeclaration
-        = 
-        ()
+        = AnnotationTypeDeclaration
+        | EnumDeclaration
+        | TypeDeclaration
  ;
 syntax Annotation
         = 
-        ANY type ANY values+
+        NamedElementRef type AnnotationMemberValuePair values+
  ;
 syntax AnnotationMemberValuePair
         = 
-        ANY member ANY value
+        NamedElementRef member Expression value
  ;
 syntax AnnotationTypeDeclaration
         = 
-        ANY originalFileContent ANY package ANY bodyDeclarations+ ANY superInterfaces+ ANY commentsAfterBody+ ANY imports+ ANY commentsBeforeBody+
+        String originalFileContent PackageDeclaration package BodyDeclaration bodyDeclarations+ NamedElementRef superInterfaces+ Comment commentsAfterBody+ ImportDeclaration imports+ Comment commentsBeforeBody+
  ;
 syntax AnnotationTypeMemberDeclaration
         = 
-        ANY type ANY default
+        NamedElementRef type Expression default
  ;
 syntax AnonymousClassDeclaration
         = 
-        ANY bodyDeclarations+
+        BodyDeclaration bodyDeclarations+
  ;
 syntax ArrayAccess
         = 
-        ANY index ANY array
+        Expression index Expression array
  ;
 syntax ArrayCreation
         = 
-        ANY dimensions+ ANY initializer ANY type
+        Expression dimensions+ ArrayInitializer initializer NamedElementRef type
  ;
 syntax ArrayInitializer
         = 
-        ANY expressions+
+        Expression expressions+
  ;
 syntax ArrayLengthAccess
         = 
-        array: ANY
+        array: Expression
  ;
 syntax AssertStatement
         = 
-        ANY message ANY expression
+        Expression message Expression expression
  ;
 syntax Assignment
         = 
-        ANY operator ANY rightHandSide ANY leftHandSide
+        String operator Expression rightHandSide Expression leftHandSide
  ;
 syntax ASTNode
-        = 
-        ()
+        = AnnotationMemberValuePair
+        | AnonymousClassDeclaration
+        | BodyDeclaration
+        | CatchClause
+        | Comment
+        | Expression
+        | ImportDeclaration
+        | MemberRef
+        | MethodRef
+        | MethodRefParameter
+        | Statement
+        | TagElement
+        | TextElement
  ;
 syntax BodyDeclaration
         = 
-        ()
+        Initializer
  ;
 syntax Block
         = 
-        ANY statements+
+        Statement statements+
  ;
 syntax BlockComment
         = 
-        ANY content ANY isEnclosedByParent ANY isPrefixOfParent
+        String content Boolean isEnclosedByParent Boolean isPrefixOfParent
  ;
 syntax BreakStatement
         = 
-        label: ANY
+        label: NamedElementRef
  ;
 syntax CastExpression
         = 
-        ANY type ANY expression
+        NamedElementRef type Expression expression
  ;
 syntax CatchClause
         = 
-        ANY exception ANY body
+        SingleVariableDeclaration exception Block body
  ;
 syntax ClassInstanceCreation
         = 
-        ANY arguments+ ANY type ANY expression ANY anonymousClassDeclaration
+        Expression arguments+ NamedElementRef type Expression expression AnonymousClassDeclaration anonymousClassDeclaration
  ;
 syntax Comment
-        = 
-        ()
+        = BlockComment
+        | Javadoc
+        | LineComment
  ;
 syntax ConditionalExpression
         = 
-        ANY elseExpression ANY thenExpression ANY expression
+        Expression elseExpression Expression thenExpression Expression expression
  ;
 syntax ContinueStatement
         = 
-        label: ANY
+        label: NamedElementRef
  ;
 syntax ConstructorInvocation
         = 
-        ANY arguments+
+        Expression arguments+
  ;
 syntax DoStatement
         = 
-        ANY expression ANY body
+        Expression expression Statement body
  ;
 syntax EmptyStatement
         = 
-        
+        ()
  ;
 syntax EnhancedForStatement
         = 
-        ANY parameter ANY expression ANY body
+        SingleVariableDeclaration parameter Expression expression Statement body
  ;
 syntax EnumConstantDeclaration
         = 
-        ANY arguments+ ANY anonymousClassDeclaration
+        Expression arguments+ AnonymousClassDeclaration anonymousClassDeclaration
  ;
 syntax EnumDeclaration
         = 
-        ANY enumConstants+
+        EnumConstantDeclaration enumConstants+
  ;
 syntax Expression
-        = 
-        ()
+        = Annotation
+        | ArrayAccess
+        | ArrayCreation
+        | ArrayInitializer
+        | ArrayLengthAccess
+        | Assignment
+        | CastExpression
+        | ClassInstanceCreation
+        | ConditionalExpression
+        | FieldAccess
+        | InfixExpression
+        | InstanceofExpression
+        | MethodInvocation
+        | NamedElementRef
+        | ParenthesizedExpression
+        | PostfixExpression
+        | PrefixExpression
+        | SuperFieldAccess
+        | SuperMethodInvocation
+        | ThisExpression
+        | TypeLiteral
  ;
 syntax ExpressionStatement
         = 
-        expression: ANY
+        expression: Expression
  ;
 syntax FieldAccess
         = 
-        ANY field ANY expression
+        NamedElementRef field Expression expression
  ;
 syntax FieldDeclaration
         = 
-        type: ANY
+        type: NamedElementRef
  ;
 syntax ForStatement
         = 
-        ANY body ANY expression ANY initializers+ ANY updaters+
+        Statement body Expression expression Expression initializers+ Expression updaters+
  ;
 syntax InfixExpression
         = 
-        ANY operator ANY extendedOperands+ ANY rightOperand ANY leftOperand
+        String operator Expression extendedOperands+ Expression rightOperand Expression leftOperand
  ;
 syntax IfStatement
         = 
-        ANY expression ANY elseStatement ANY thenStatement
+        Expression expression Statement elseStatement Statement thenStatement
  ;
 syntax ImportDeclaration
         = 
-        ANY static ANY importedElement
+        Boolean static NamedElementRef importedElement
  ;
 syntax Initializer
         = 
-        body: ANY
+        body: Block
  ;
 syntax InstanceofExpression
         = 
-        ANY leftOperand ANY rightOperand
+        Expression leftOperand NamedElementRef rightOperand
  ;
 syntax Javadoc
         = 
-        ANY tags+
+        TagElement tags+
  ;
 syntax LabeledStatement
         = 
-        body: ANY
+        body: Statement
  ;
 syntax LineComment
         = 
-        ANY content ANY isEnclosedByParent ANY isPrefixOfParent
+        String content Boolean isEnclosedByParent Boolean isPrefixOfParent
  ;
 syntax MemberRef
         = 
-        ANY qualifier ANY member
+        NamedElementRef qualifier NamedElementRef member
  ;
 syntax MethodDeclaration
         = 
-        ANY extraArrayDimensions ANY constructor ANY varargs ANY body ANY parameters+ ANY typeParameters+ ANY thrownExceptions+ ANY returnType
+        Integer extraArrayDimensions Boolean constructor Boolean varargs Block body SingleVariableDeclaration parameters+ TypeParameter typeParameters+ NamedElementRef thrownExceptions+ NamedElementRef returnType
  ;
 syntax MethodInvocation
         = 
-        ANY method ANY arguments+ ANY expression
+        NamedElementRef method Expression arguments+ Expression expression
  ;
 syntax MethodRef
         = 
-        ANY qualifier ANY parameters+ ANY method
+        NamedElementRef qualifier MethodRefParameter parameters+ NamedElementRef method
  ;
 syntax MethodRefParameter
         = 
-        ANY name ANY isVarargs ANY type
+        String name Boolean isVarargs NamedElementRef type
  ;
 syntax Model
         = 
-        ANY name ANY ownedElements+ ANY orphanTypes+
- ;
-syntax MultipleValuedNamedElement
-        = 
-        ()
+        String name PackageDeclaration ownedElements+ OrphanType orphanTypes+
  ;
 syntax NamedElement
-        = 
-        ()
+        = OrphanType
+        | ValuedNamedElement
  ;
 syntax NamedElementRef
         = 
-        ANY extraArrayDimensions ANY element ANY qualifier
+        Integer extraArrayDimensions NamedElement element NamedElementRef qualifier
  ;
 syntax OrphanType
         = 
-        ANY name ANY proxy
+        String name Boolean proxy
  ;
 syntax PackageDeclaration
         = 
-        ANY model ANY ownedElements+
+        Model model AbstractTypeDeclaration ownedElements+
  ;
 syntax ParameterizedType
         = 
-        ANY typeArguments+ ANY type
+        NamedElementRef typeArguments+ NamedElementRef type
  ;
 syntax ParenthesizedExpression
         = 
-        expression: ANY
+        expression: Expression
  ;
 syntax PostfixExpression
         = 
-        ANY operator ANY operand
+        String operator Expression operand
  ;
 syntax PrefixExpression
         = 
-        ANY operator ANY operand
+        String operator Expression operand
  ;
 syntax PrimitiveType
         = 
@@ -235,75 +263,93 @@ syntax PrimitiveType
  ;
 syntax ReturnStatement
         = 
-        expression: ANY
+        expression: Expression
  ;
 syntax ThrowStatement
         = 
-        expression: ANY
+        expression: Expression
  ;
 syntax SingleVariableDeclaration
         = 
-        ANY modifiers ANY isVarargs ANY type
+        String modifiers Boolean isVarargs NamedElementRef type
  ;
 syntax Statement
-        = 
-        ()
+        = AssertStatement
+        | Block
+        | BreakStatement
+        | ContinueStatement
+        | ConstructorInvocation
+        | DoStatement
+        | EmptyStatement
+        | EnhancedForStatement
+        | ExpressionStatement
+        | ForStatement
+        | IfStatement
+        | ReturnStatement
+        | ThrowStatement
+        | SuperConstructorInvocation
+        | SwitchCase
+        | SwitchStatement
+        | SynchronizedStatement
+        | TryStatement
+        | TypeDeclarationStatement
+        | WhileStatement
  ;
 syntax SuperConstructorInvocation
         = 
-        ANY arguments+ ANY expression
+        Expression arguments+ Expression expression
  ;
 syntax SuperFieldAccess
         = 
-        ANY qualifier ANY field
+        NamedElementRef qualifier NamedElementRef field
  ;
 syntax SuperMethodInvocation
         = 
-        ANY arguments+ ANY qualifier ANY method
+        Expression arguments+ NamedElementRef qualifier NamedElementRef method
  ;
 syntax SwitchCase
         = 
-        ANY expressionInitialized ANY expression
+        Boolean expressionInitialized Expression expression
  ;
 syntax SwitchStatement
         = 
-        ANY statements+ ANY expression
+        Statement statements+ Expression expression
  ;
 syntax SynchronizedStatement
         = 
-        ANY body ANY expression
+        Block body Expression expression
  ;
 syntax TagElement
         = 
-        ANY tagName ANY fragments+
+        String tagName ASTNode fragments+
  ;
 syntax TextElement
         = 
-        text: ANY
+        text: String
  ;
 syntax ThisExpression
         = 
-        qualifier: ANY
+        qualifier: NamedElementRef
  ;
 syntax TryStatement
         = 
-        ANY finally ANY body ANY catchClauses+
+        Block finally Block body CatchClause catchClauses+
  ;
 syntax TypeDeclaration
         = 
-        ANY isInterface ANY typeParameters+ ANY superclass
+        Boolean isInterface TypeParameter typeParameters+ NamedElementRef superclass
  ;
 syntax TypeDeclarationStatement
         = 
-        declaration: ANY
+        declaration: AbstractTypeDeclaration
  ;
 syntax TypeLiteral
         = 
-        type: ANY
+        type: NamedElementRef
  ;
 syntax TypeParameter
         = 
-        ANY bounds+
+        NamedElementRef bounds+
  ;
 syntax UnresolvedItem
         = 
@@ -311,21 +357,21 @@ syntax UnresolvedItem
  ;
 syntax ValuedNamedElement
         = 
-        ()
+        MultipleValuedNamedElement
  ;
 syntax VariableDeclarationExpression
         = 
-        ANY modifiers ANY type
+        String modifiers NamedElementRef type
  ;
 syntax VariableDeclarationStatement
         = 
-        ANY modifiers ANY type
+        String modifiers NamedElementRef type
  ;
 syntax WildCardType
         = 
-        ANY isUpperBound ANY bound
+        Boolean isUpperBound NamedElementRef bound
  ;
 syntax WhileStatement
         = 
-        ANY expression ANY body
+        Expression expression Statement body
  ;

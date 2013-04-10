@@ -13,32 +13,48 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable DotNET System Reflection 1.2 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Jean-Marc Prieur, <code>DotNET_SystemReflection.ecore</code>, 2006/04/05.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>21</strong></li><li>Number of top alternatives: <strong>145</strong></li><li>Number of defined nonterminal symbols: <strong>21</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>21</strong>: <code><a href="#NamedElement" class="nt">NamedElement</a>, <a href="#Assembly" class="nt">Assembly</a>, <a href="#ManifestResource" class="nt">ManifestResource</a>, <a href="#Module" class="nt">Module</a>, <a href="#MemberInfo" class="nt">MemberInfo</a>, <a href="#PropertyInfo" class="nt">PropertyInfo</a>, <a href="#FieldInfo" class="nt">FieldInfo</a>, <a href="#EventInfo" class="nt">EventInfo</a>, <a href="#ParameterInfo" class="nt">ParameterInfo</a>, <a href="#MethodBase" class="nt">MethodBase</a>, <a href="#MethodInfo" class="nt">MethodInfo</a>, <a href="#ConstructorInfo" class="nt">ConstructorInfo</a>, <a href="#Type" class="nt">Type</a>, <a href="#EventAttributes" class="nt">EventAttributes</a>, <a href="#FieldAttributes" class="nt">FieldAttributes</a>, <a href="#GenericParameterAttributes" class="nt">GenericParameterAttributes</a>, <a href="#MemberTypes" class="nt">MemberTypes</a>, <a href="#MethodAttributes" class="nt">MethodAttributes</a>, <a href="#ParameterAttributes" class="nt">ParameterAttributes</a>, <a href="#PropertyAttributes" class="nt">PropertyAttributes</a>, <a href="#TypeAttributes" class="nt">TypeAttributes</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="NamedElement">NamedElement</a>:
-        ε
+				</script></head><body><h1 class="l">Browsable DotNET System Reflection 1.2 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Jean-Marc Prieur, <code>DotNET_SystemReflection.ecore</code>, 2006/04/05.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>29</strong></li><li>Number of top alternatives: <strong>153</strong></li><li>Number of defined nonterminal symbols: <strong>21</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>2</strong>: <code><a href="#NamedElement" class="nt">NamedElement</a>, <a href="#MemberTypes" class="nt">MemberTypes</a></code></li><li>Bottom nonterminal symbols: <strong>3</strong>: <code><a href="#String" class="nt">String</a>, <a href="#Boolean" class="nt">Boolean</a>, <a href="#Integer" class="nt">Integer</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="NamedElement">NamedElement</a>:
+        <a class="nt" href="#Assembly">Assembly</a>
+</pre><pre><a class="nt" name="NamedElement">NamedElement</a>:
+        <a class="nt" href="#Module">Module</a>
+</pre><pre><a class="nt" name="NamedElement">NamedElement</a>:
+        <a class="nt" href="#MemberInfo">MemberInfo</a>
+</pre><pre><a class="nt" name="NamedElement">NamedElement</a>:
+        <a class="nt" href="#ParameterInfo">ParameterInfo</a>
 </pre><pre><a class="nt" name="Assembly">Assembly</a>:
-        <span class="sel">location</span>::<span class="meta">any</span> <span class="sel">imageRuntimeVersion</span>::<span class="meta">any</span> <span class="sel">evidence</span>::<span class="meta">any</span> <span class="sel">codeBase</span>::<span class="meta">any</span> <span class="sel">entryPoint</span>::<span class="meta">any</span> <span class="sel">modules</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">manifestModule</span>::<span class="meta">any</span> <span class="sel">referencedAssembly</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">manifest</span>::<span class="meta">any</span>
+        <span class="sel">location</span>::<a class="nt" href="#String">String</a> <span class="sel">imageRuntimeVersion</span>::<a class="nt" href="#String">String</a> <span class="sel">evidence</span>::<a class="nt" href="#String">String</a> <span class="sel">codeBase</span>::<a class="nt" href="#String">String</a> <span class="sel">entryPoint</span>::<a class="nt" href="#MethodInfo">MethodInfo</a> <span class="sel">modules</span>::<a class="nt" href="#Module">Module</a><span class="meta">+</span> <span class="sel">manifestModule</span>::<a class="nt" href="#Module">Module</a> <span class="sel">referencedAssembly</span>::<a class="nt" href="#Assembly">Assembly</a><span class="meta">+</span> <span class="sel">manifest</span>::<a class="nt" href="#ManifestResource">ManifestResource</a>
 </pre><pre><a class="nt" name="ManifestResource">ManifestResource</a>:
-        <span class="sel">content</span>::<span class="meta">any</span> <span class="sel">assembly</span>::<span class="meta">any</span>
+        <span class="sel">content</span>::<a class="nt" href="#String">String</a> <span class="sel">assembly</span>::<a class="nt" href="#Assembly">Assembly</a>
 </pre><pre><a class="nt" name="Module">Module</a>:
-        <span class="sel">qualifiedName</span>::<span class="meta">any</span> <span class="sel">scopeName</span>::<span class="meta">any</span> <span class="sel">assembly</span>::<span class="meta">any</span> <span class="sel">types</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">qualifiedName</span>::<a class="nt" href="#String">String</a> <span class="sel">scopeName</span>::<a class="nt" href="#String">String</a> <span class="sel">assembly</span>::<a class="nt" href="#Assembly">Assembly</a> <span class="sel">types</span>::<a class="nt" href="#Type">Type</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="MemberInfo">MemberInfo</a>:
-        ε
+        <a class="nt" href="#PropertyInfo">PropertyInfo</a>
+</pre><pre><a class="nt" name="MemberInfo">MemberInfo</a>:
+        <a class="nt" href="#FieldInfo">FieldInfo</a>
+</pre><pre><a class="nt" name="MemberInfo">MemberInfo</a>:
+        <a class="nt" href="#EventInfo">EventInfo</a>
+</pre><pre><a class="nt" name="MemberInfo">MemberInfo</a>:
+        <a class="nt" href="#MethodBase">MethodBase</a>
+</pre><pre><a class="nt" name="MemberInfo">MemberInfo</a>:
+        <a class="nt" href="#Type">Type</a>
 </pre><pre><a class="nt" name="PropertyInfo">PropertyInfo</a>:
-        <span class="sel">propertyType</span>::<span class="meta">any</span> <span class="sel">attributes</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">propertyType</span>::<a class="nt" href="#Type">Type</a> <span class="sel">attributes</span>::<a class="nt" href="#PropertyAttributes">PropertyAttributes</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="FieldInfo">FieldInfo</a>:
-        <span class="sel">fieldType</span>::<span class="meta">any</span> <span class="sel">attributes</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">fieldType</span>::<a class="nt" href="#Type">Type</a> <span class="sel">attributes</span>::<a class="nt" href="#FieldAttributes">FieldAttributes</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="EventInfo">EventInfo</a>:
-        <span class="sel">isMulticast</span>::<span class="meta">any</span> <span class="sel">attributes</span>::<span class="meta">any</span> <span class="sel">eventHandlerType</span>::<span class="meta">any</span>
+        <span class="sel">isMulticast</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">attributes</span>::<a class="nt" href="#EventAttributes">EventAttributes</a> <span class="sel">eventHandlerType</span>::<a class="nt" href="#Type">Type</a>
 </pre><pre><a class="nt" name="ParameterInfo">ParameterInfo</a>:
-        <span class="sel">defaultValue</span>::<span class="meta">any</span> <span class="sel">position</span>::<span class="meta">any</span> <span class="sel">attributes</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">parameterType</span>::<span class="meta">any</span> <span class="sel">member</span>::<span class="meta">any</span>
+        <span class="sel">defaultValue</span>::<a class="nt" href="#String">String</a> <span class="sel">position</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">attributes</span>::<a class="nt" href="#ParameterAttributes">ParameterAttributes</a><span class="meta">+</span> <span class="sel">parameterType</span>::<a class="nt" href="#Type">Type</a> <span class="sel">member</span>::<a class="nt" href="#MethodBase">MethodBase</a>
 </pre><pre><a class="nt" name="MethodBase">MethodBase</a>:
-        ε
+        <a class="nt" href="#MethodInfo">MethodInfo</a>
+</pre><pre><a class="nt" name="MethodBase">MethodBase</a>:
+        <a class="nt" href="#ConstructorInfo">ConstructorInfo</a>
 </pre><pre><a class="nt" name="MethodInfo">MethodInfo</a>:
-        <span class="sel">returnType</span>::<span class="meta">any</span>
+        <span class="sel">returnType</span>::<a class="nt" href="#Type">Type</a>
 </pre><pre><a class="nt" name="ConstructorInfo">ConstructorInfo</a>:
-        <span class="sel">attributes</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">parameters</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">attributes</span>::<a class="nt" href="#MethodAttributes">MethodAttributes</a><span class="meta">+</span> <span class="sel">parameters</span>::<a class="nt" href="#ParameterInfo">ParameterInfo</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Type">Type</a>:
-        <span class="sel">namespace</span>::<span class="meta">any</span> <span class="sel">genericParameterAttributes</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">typeAttributes</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">baseType</span>::<span class="meta">any</span> <span class="sel">module</span>::<span class="meta">any</span> <span class="sel">interfaces</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">members</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">namespace</span>::<a class="nt" href="#String">String</a> <span class="sel">genericParameterAttributes</span>::<a class="nt" href="#GenericParameterAttributes">GenericParameterAttributes</a><span class="meta">+</span> <span class="sel">typeAttributes</span>::<a class="nt" href="#TypeAttributes">TypeAttributes</a><span class="meta">+</span> <span class="sel">baseType</span>::<a class="nt" href="#Type">Type</a> <span class="sel">module</span>::<a class="nt" href="#Module">Module</a> <span class="sel">interfaces</span>::<a class="nt" href="#Type">Type</a><span class="meta">+</span> <span class="sel">members</span>::<a class="nt" href="#MemberInfo">MemberInfo</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="EventAttributes">EventAttributes</a>:
         <span class="sel">None</span>::ε
         <span class="sel">ReservedMask</span>::ε
@@ -180,4 +196,4 @@
         <span class="sel">UnicodeClass</span>::ε
         <span class="sel">VisibilityMask</span>::ε
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

@@ -3,29 +3,29 @@ module EclipsePlugIn
 
 syntax Application
         = 
-        ANY name ANY version ANY author ANY extensionPoints+
+        String name String version String author ExtensionPoint extensionPoints+
  ;
 syntax ExtensionPoint
         = 
-        ANY name ANY id ANY application ANY descriptions+ ANY plugIn
+        String name String id Application application Description descriptions+ PlugIn plugIn
  ;
 syntax Description
         = 
-        ANY xmlSchema ANY extensionPoints+
+        String xmlSchema ExtensionPoint extensionPoints+
  ;
 syntax Extension
         = 
-        ANY name ANY id ANY isConfiguredInto
+        String name String id ExtensionPoint isConfiguredInto
  ;
 syntax PlugIn
         = 
-        ANY id ANY displayableName ANY version ANY supplier ANY configures+ ANY extensionPoints+ ANY requires+ ANY uses+
+        String id String displayableName String version String supplier Extension configures+ ExtensionPoint extensionPoints+ PlugIn requires+ Librairy uses+
  ;
 syntax Librairy
         = 
-        ANY name ANY plugIn ANY classes+
+        String name PlugIn plugIn Class classes+
  ;
 syntax Class
         = 
-        ANY name ANY librairy
+        String name Librairy librairy
  ;

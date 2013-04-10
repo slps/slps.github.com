@@ -4,15 +4,29 @@ exports
   sorts
         OCCAM-Program OCCAM-Element Process Channel Action Assignment Input Output Constructor Buckel If While Condition Sequential Parallel Alternative DataType Library File Server Declaration 
   context-free syntax
-        occam_Elements::ANY+ files::ANY+ -> OCCAM-Program
+        occam_Elements::OCCAM-Element+ files::File+ -> OCCAM-Program
 
-        name::ANY -> OCCAM-Element
+        Process -> OCCAM-Element
 
-        declaration::ANY constructors::ANY+ parameters::ANY+ libraries::ANY+ toChannel::ANY -> Process
+        Action -> OCCAM-Element
 
-        name::ANY type::ANY toServer::ANY toProcess::ANY -> Channel
+        Constructor -> OCCAM-Element
 
-        constructor::ANY while::ANY if::ANY -> Action
+        DataType -> OCCAM-Element
+
+        name::String -> OCCAM-Element
+
+        declaration::Declaration constructors::Constructor+ parameters::DataType+ libraries::Library+ toChannel::Channel -> Process
+
+        name::String type::String toServer::Server toProcess::Process -> Channel
+
+        Assignment -> Action
+
+        Input -> Action
+
+        Output -> Action
+
+        constructor::Constructor while::While if::If -> Action
 
          -> Assignment
 
@@ -20,15 +34,25 @@ exports
 
          -> Output
 
-        process::ANY actions::ANY+ buckels::ANY+ childrens::ANY+ -> Constructor
+        Sequential -> Constructor
 
-        constructor::ANY -> Buckel
+        Parallel -> Constructor
 
-        conditions::ANY+ actions::ANY+ -> If
+        Alternative -> Constructor
 
-        conditions::ANY+ actions::ANY+ -> While
+        process::Process actions::Action+ buckels::Buckel+ childrens::Constructor+ -> Constructor
 
-        elementRight::ANY elementLeft::ANY typeCondition::ANY if::ANY while::ANY -> Condition
+        If -> Buckel
+
+        While -> Buckel
+
+        constructor::Constructor -> Buckel
+
+        conditions::Condition+ actions::Action+ -> If
+
+        conditions::Condition+ actions::Action+ -> While
+
+        elementRight::String elementLeft::String typeCondition::String if::If while::While -> Condition
 
          -> Sequential
 
@@ -36,12 +60,12 @@ exports
 
          -> Alternative
 
-        dataType::ANY -> DataType
+        dataType::String -> DataType
 
-        name::ANY -> Library
+        name::String -> Library
 
-        name::ANY -> File
+        name::String -> File
 
-        name::ANY toChannel::ANY -> Server
+        name::String toChannel::Channel -> Server
 
-        name::ANY process::ANY elements::ANY+ -> Declaration
+        name::String process::Process elements::DataType+ -> Declaration

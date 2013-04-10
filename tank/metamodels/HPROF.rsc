@@ -2,48 +2,54 @@
 module HPROF
 
 syntax LocatedElement
-        = 
-        ()
+        = Profile
+        | Method
+        | ThreadAction
+        | Trace
+        | StackTraceElement
+        | Times
+        | Time
+        | Date
  ;
 syntax Profile
         = 
-        ANY header ANY threadActions+ ANY traces+ ANY times ANY methods+
+        String header ThreadAction threadActions+ Trace traces+ Times times Method methods+
  ;
 syntax Method
         = 
-        ANY fullyQualifiedName ANY stackTraceElements+
+        String fullyQualifiedName StackTraceElement stackTraceElements+
  ;
 syntax ThreadAction
-        = 
-        ()
+        = ThreadStart
+        | ThreadEnd
  ;
 syntax ThreadStart
         = 
-        ANY obj ANY name ANY group
+        Integer obj String name String group
  ;
 syntax ThreadEnd
         = 
-        ANY id
+        id: Integer
  ;
 syntax Trace
         = 
-        ANY id ANY threadId ANY elements+ ANY times+
+        Integer id Integer threadId StackTraceElement elements+ Time times+
  ;
 syntax StackTraceElement
         = 
-        ANY method ANY fileName ANY line ANY trace
+        Method method String fileName Integer line Trace trace
  ;
 syntax Times
         = 
-        ANY unit ANY total ANY date ANY elements+
+        String unit Integer total Date date Time elements+
  ;
 syntax Time
         = 
-        ANY rank ANY self ANY accum ANY count ANY trace ANY method
+        Integer rank Double self Double accum Integer count Trace trace Method method
  ;
 syntax Date
         = 
-        ANY day ANY month ANY dayOfMonth ANY hour ANY minutes ANY seconds ANY year
+        Day day Month month Integer dayOfMonth Integer hour Integer minutes Integer seconds Integer year
  ;
 syntax Day
         = Monday: ()

@@ -1,18 +1,28 @@
 JavaElement:
-        EPSILON
+        ClassFeature
+JavaElement:
+        Package
 ClassFeature:
-        EPSILON
+        ClassMember
+ClassFeature:
+        JavaClass
+ClassFeature:
+        FeatureParameter
 ClassMember:
-        EPSILON
+        Field
+ClassMember:
+        Method
 Field:
-        owner::ANY type::ANY isStatic::ANY isPublic::ANY
+        owner::JavaClass type::JavaClass isStatic::Boolean isPublic::Boolean
 JavaClass:
-        members::ANY+ package::ANY typedElements::ANY+ parameters::ANY+ isAbstract::ANY isStatic::ANY isPublic::ANY
+        PrimitiveType
+JavaClass:
+        members::ClassMember+ package::Package typedElements::ClassMember+ parameters::FeatureParameter+ isAbstract::Boolean isStatic::Boolean isPublic::Boolean
 Method:
-        parameters::ANY+
+        parameters::FeatureParameter+
 Package:
-        classes::ANY+
+        classes::JavaClass+
 PrimitiveType:
         EPSILON
 FeatureParameter:
-        type::ANY method::ANY
+        type::JavaClass method::Method

@@ -1,51 +1,81 @@
 LocatedElement:
-        EPSILON
+        NamedElement
+LocatedElement:
+        Expression
+LocatedElement:
+        Statement
 NamedElement:
-        EPSILON
+        Structure
+NamedElement:
+        VariableDeclaration
+NamedElement:
+        Type
 Structure:
-        EPSILON
+        ProcContainerElement
+Structure:
+        Procedure
 ProcContainerElement:
-        EPSILON
+        Program
+ProcContainerElement:
+        Monitor
 Program:
-        monitors::ANY+
+        monitors::Monitor+
 Monitor:
-        program::ANY
+        program::Program
 Procedure:
-        container::ANY parameters::ANY+ statements::ANY+
+        container::ProcContainerElement parameters::Parameter+ statements::Statement+
 VariableDeclaration:
-        type::ANY initialValue::ANY structure::ANY
+        Parameter
+VariableDeclaration:
+        type::Type initialValue::Expression structure::Structure
 Parameter:
-        direction::ANY procedure::ANY
+        direction::Direction procedure::Procedure
 Direction:
         in::EPSILON
         out::EPSILON
 Type:
-        name::ANY
+        name::String
 Expression:
-        EPSILON
+        VariableExp
+Expression:
+        PropertyCallExp
+Expression:
+        LiteralExp
 VariableExp:
-        declaration::ANY
+        declaration::VariableDeclaration
 PropertyCallExp:
-        EPSILON
+        OperatorCallExp
+PropertyCallExp:
+        AttributeCallExp
+PropertyCallExp:
+        ProcedureCallExp
 OperatorCallExp:
-        right::ANY
+        right::Expression
 AttributeCallExp:
-        source::ANY name::ANY
+        source::Expression name::String
 ProcedureCallExp:
-        arguments::ANY+
+        arguments::Expression+
 LiteralExp:
-        EPSILON
+        BooleanExp
+LiteralExp:
+        IntegerExp
 BooleanExp:
-        symbol::ANY
+        symbol::Boolean
 IntegerExp:
-        symbol::ANY
+        symbol::Integer
 Statement:
-        EPSILON
+        AssignmentStat
+Statement:
+        ConditionalStat
+Statement:
+        WhileStat
+Statement:
+        ExpressionStat
 AssignmentStat:
-        target::ANY value::ANY
+        target::VariableExp value::Expression
 ConditionalStat:
-        condition::ANY thenStats::ANY+ elseStats::ANY+
+        condition::Expression thenStats::Statement+ elseStats::Statement+
 WhileStat:
-        condition::ANY doStats::ANY+
+        condition::Expression doStats::Statement+
 ExpressionStat:
-        expression::ANY
+        expression::Expression

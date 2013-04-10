@@ -4,7 +4,23 @@ exports
   sorts
         LocatedElement Resolution Visibility Eclipse Bundle RequireBundleAttribute AttResolution AttVisibility Range Version RequiredBundle ImportedPackage ExportedPackage Package Xfriends Xinternal 
   context-free syntax
-         -> LocatedElement
+        Eclipse -> LocatedElement
+
+        Bundle -> LocatedElement
+
+        RequireBundleAttribute -> LocatedElement
+
+        Version -> LocatedElement
+
+        RequiredBundle -> LocatedElement
+
+        ImportedPackage -> LocatedElement
+
+        ExportedPackage -> LocatedElement
+
+        Package -> LocatedElement
+
+        Xfriends -> LocatedElement
 
         Mandatory:: -> Resolution
         Optional:: -> Resolution
@@ -12,28 +28,34 @@ exports
         Private:: -> Visibility
         Reexport:: -> Visibility
 
-        bundles::ANY+ packages::ANY+ -> Eclipse
+        bundles::Bundle+ packages::Package+ -> Eclipse
 
-        symbolicName::ANY singleton::ANY manifestVersion::ANY require::ANY+ version::ANY export::ANY+ import::ANY+ packages::ANY+ -> Bundle
+        symbolicName::String singleton::Boolean manifestVersion::Integer require::RequiredBundle+ version::Version export::ExportedPackage+ import::ImportedPackage+ packages::Package+ -> Bundle
 
-         -> RequireBundleAttribute
+        AttResolution -> RequireBundleAttribute
 
-        value::ANY -> AttResolution
+        AttVisibility -> RequireBundleAttribute
 
-        value::ANY -> AttVisibility
+        Range -> RequireBundleAttribute
 
-        isLeftInclusive::ANY isRightInclusive::ANY lowerBound::ANY upperBound::ANY -> Range
+        value::Resolution -> AttResolution
 
-        major::ANY minor::ANY micro::ANY qualification::ANY -> Version
+        value::Visibility -> AttVisibility
 
-        requireBundleAttribute::ANY+ bundle::ANY -> RequiredBundle
+        isLeftInclusive::Boolean isRightInclusive::Boolean lowerBound::Version upperBound::Version -> Range
 
-        resolution::ANY package::ANY range::ANY -> ImportedPackage
+        major::Integer minor::Integer micro::Integer qualification::String -> Version
 
-        package::ANY version::ANY xFriends::ANY -> ExportedPackage
+        requireBundleAttribute::RequireBundleAttribute+ bundle::Bundle -> RequiredBundle
 
-        fqn::ANY importedBy::ANY+ exportedBy::ANY -> Package
+        resolution::Resolution package::Package range::Range -> ImportedPackage
 
-        bundles::ANY+ -> Xfriends
+        Xinternal -> ExportedPackage
 
-        value::ANY -> Xinternal
+        package::Package version::Version xFriends::Xfriends -> ExportedPackage
+
+        fqn::String importedBy::ImportedPackage+ exportedBy::ExportedPackage -> Package
+
+        bundles::Bundle+ -> Xfriends
+
+        value::Boolean -> Xinternal

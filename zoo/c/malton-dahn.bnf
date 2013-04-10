@@ -1,3 +1,441 @@
+C_compilation_unit:
+        declaration_or_function_definition*
+constant:
+        number
+        float
+        hex
+        long
+        SP dotfloat
+        charlit
+        string
+constant:
+        gnu_long_int
+        gnu_long_int_string+
+        hexfloat
+string:
+        stringlit+
+expression:
+        assignment_expression+
+expression:
+        comment_NL* "..."
+constant_expression:
+        conditional_expression
+constant_expression:
+        restrict_qualifier
+assignment_expression:
+        conditional_expression assignment_operation?
+assignment_expression:
+        conditional_expression
+        conditional_expression assignment_operation
+assignment_operation:
+        assignment_operator assignment_expression
+assignment_operator:
+        "="
+        "*="
+        "/="
+        "%="
+        "+="
+        "-="
+        ">>="
+        "<<="
+        "&="
+        "^="
+        "|="
+conditional_expression:
+        binary_expression conditional_operation?
+conditional_expression:
+        binary_expression conditional_operation*
+conditional_operation:
+        "?" expression ":" conditional_expression
+conditional_operation:
+        "?" expression? ":" binary_expression
+binary_expression:
+        unary_expression
+        binary_expression binary_operator unary_expression
+binary_operator:
+        "+"
+        "-"
+        "*"
+        "/"
+        "%"
+        "=="
+        "!="
+        "<"
+        ">"
+        "<="
+        ">="
+        "||"
+        "&&"
+        "|"
+        "^"
+        "&"
+        "<<"
+        ">>"
+unary_expression:
+        postfix_expression
+        unary_operator SPOFF unary_expression SPON
+        "(" type_name ")" unary_expression
+        sizeof_expression
+unary_expression:
+        alignof_expression
+sizeof_expression:
+        "sizeof" "(" type_name ")"
+        "sizeof" unary_expression
+sizeof_expression:
+        "sizeof" unary_expression
+        "sizeof" "(" type_name ")"
+unary_operator:
+        "*"
+        "&"
+        "+"
+        "-"
+        "!"
+        "~"
+        "++"
+        "--"
+unary_operator:
+        "&&"
+postfix_expression:
+        reference
+        nonreference
+reference:
+        reference_id
+        reference_expression
+reference_id:
+        id
+reference_expression:
+        unannotated_reference_base postfix_extension*
+unannotated_reference_base:
+        reference_id
+        nonreferential_primary
+nonreference:
+        nonreferential_primary postfix_extension*
+nonreferential_primary:
+        constant
+        string
+        "(" expression ")"
+nonreferential_primary:
+        constant
+        string
+        "(" expression ")"
+        compound_statement_expression
+        compound_literal
+        extension_specifier compound_statement_expression
+        extension_specifier "(" expression ")"
+postfix_extension:
+        "[" expression "]"
+        "(" expression? ")"
+        "." id
+        "->" id
+        "++"
+        "--"
+postfix_extension:
+        "[" expression "]"
+        "(" {argument_expression ","}* ")"
+        "." id
+        "->" id
+        "++"
+        "--"
+declaration:
+        declaration_body semi
+        preprocessor
+declaration:
+        comment_NL
+declaration:
+        null_declaration
+        declaration_body semi
+        preprocessor
+declaration_body:
+        decl_specifiers init_declarator+
+        enum_specifier
+        struct_or_union_specifier
+declaration_body:
+        decl_specifiers init_declarator+
+        decl_qualifier* struct_or_union_specifier
+        decl_qualifier* enum_specifier attribute_spec*
+        local_label declarator+
+        asm_spec
+decl_specifiers:
+        decl_qualifier* type_specifier? decl_qualifier*
+decl_specifiers:
+        decl_qualifier* type_specifier decl_qualifier*
+        decl_qualifier*
+struct_or_union_specifier:
+        struct_or_union tagged_reference_id? "{" IN NL member_declaration* EX "}"
+        struct_or_union tagged_reference_id
+struct_or_union_specifier:
+        struct_or_union attribute_spec* tagged_reference_id? "{" IN NL member_declaration* EX "}" attribute_spec*
+        struct_or_union attribute_spec* tagged_reference_id
+tagged_reference_id:
+        reference_id
+member_declaration:
+        decl_specifiers member_declarator+ semi
+        preprocessor
+member_declaration:
+        comment_NL
+member_declaration:
+        decl_specifiers member_declarator+ semi
+        decl_qualifier* struct_or_union_specifier semi
+        semi
+        preprocessor
+member_declarator:
+        declarator bitfieldsize?
+        bitfieldsize
+member_declarator:
+        declarator bitfieldsize? attributes_or_asm*
+        bitfieldsize
+bitfieldsize:
+        ":" constant_expression
+decl_qualifier:
+        sc_specifier
+        cv_qualifier
+        type_qualifier
+decl_qualifier:
+        sc_specifier
+        type_qualifier
+        attribute_spec
+        extension_specifier
+sc_specifier:
+        "auto"
+        "register"
+        "static"
+        "extern"
+        "typedef"
+type_specifier:
+        simple_type_name
+        enum_specifier
+        struct_or_union_specifier
+type_specifier:
+        typeof_expression
+        complex_specifier
+type_qualifier:
+        "long"
+        "short"
+        "signed"
+        "unsigned"
+type_qualifier:
+        bit_qualifier
+        inline_qualifier
+        cv_qualifier
+        restrict_qualifier
+simple_type_name:
+        "char"
+        "int"
+        "void"
+        "float"
+        "double"
+        type_id
+type_id:
+        reference_id
+struct_or_union:
+        "struct"
+        "union"
+enum_specifier:
+        "enum" tagged_reference_id? "{" {enumerator ","}* "}"
+        "enum" tagged_reference_id
+enum_specifier:
+        "enum" tagged_reference_id
+        "enum" tagged_reference_id? "{" {enumerator ","}* ","? "}"
+enumerator:
+        reference_id enumerator_value?
+enumerator_value:
+        "=" constant_expression
+init_declarator:
+        declarator initialization?
+init_declarator:
+        declarator initialization? attributes_or_asm*
+declarator:
+        ptr_operator* base_declarator SPON declarator_extension*
+declarator:
+        attribute_spec* ptr_operator* base_declarator declarator_extension* attribute_spec*
+base_declarator:
+        reference_id
+        "(" declarator ")"
+base_declarator:
+        attribute_spec* reference_id
+        attribute_spec* "(" declarator ")"
+declarator_extension:
+        function_declarator_extension
+        array_declarator_extension
+function_declarator_extension:
+        "(" argument_declaration_list ")" cv_qualifier*
+array_declarator_extension:
+        "[" constant_expression? "]"
+ptr_operator:
+        "*" cv_qualifier* SPOFF
+ptr_operator:
+        "*" ptr_qualifier*
+cv_qualifier:
+        "const"
+        "volatile"
+cv_qualifier:
+        "const"
+        "volatile"
+        "__const"
+        "__const__"
+        "const__"
+        "__volatile__"
+        "__volatile"
+        "volatile__"
+type_name:
+        type_specifiers abstract_declarator?
+type_specifiers:
+        type_qualifier+ type_specifier? type_qualifier*
+        type_specifier type_qualifier*
+type_specifiers:
+        type_qualifier* type_specifier type_qualifier*
+        type_qualifier*
+abstract_declarator:
+        ptr_operator+ declarator_extension*
+        "(" abstract_declarator ")" declarator_extension*
+abstract_declarator:
+        ptr_operator+ declarator_extension*
+        array_declarator_extension*
+        "(" abstract_declarator ")" declarator_extension*
+argument_declaration_list:
+        {argument_declaration ","}*
+argument_declaration_list:
+        "..." comment_NL*
+argument_declaration:
+        decl_specifiers argument_declarator?
+        "..."
+argument_declaration:
+        comment_NL* "..."
+argument_declaration:
+        "..." comment_NL*
+argument_declarator:
+        declarator
+        abstract_declarator
+initialization:
+        "=" initializer
+        "(" constant_expression ")"
+initialization:
+        comment_NL* "..."
+initializer:
+        expression
+        NL "{" IN {initializer ","}* ","? EX "}"
+initializer:
+        comment_NL* "..."
+initializer:
+        assignment_expression
+        NL "{" IN {designated_initializer ","}* ","? EX "}"
+statement:
+        label* unlabeled_statement
+        preprocessor
+statement:
+        comment_NL
+statement:
+        label
+label:
+        label_id ":"
+        EX SP SP "case" constant_expression ":" IN NL
+        EX SP SP "default" ":" IN NL
+label:
+        label_id ":" attribute_spec*
+        EX SP SP "case" constant_expression ":" IN NL
+        EX SP SP "case" constant_expression SP "..." SP constant_expression ":" IN NL
+        EX SP SP "default" ":" IN NL
+label_id:
+        id
+unlabeled_statement:
+        expression_statement
+        if_statement
+        for_statement
+        while_statement
+        switch_statement
+        do_statement
+        null_statement
+        jump_statement
+        compound_statement
+unlabeled_statement:
+        asm_statement
+null_statement:
+        semi
+compound_statement:
+        "{" IN NL compound_statement_body "}" ";"? NL
+compound_statement:
+        comment_NL* "..."
+compound_statement:
+        "{" NL compound_statement_body* "}" ";"? NL
+compound_statement_body:
+        statement* EX
+        declaration compound_statement_body
+compound_statement_body:
+        IN declaration EX
+        IN function_definition EX
+        IN statement EX
+expression_statement:
+        expression semi
+if_statement:
+        "if" "(" expression ")" statement else_statement?
+if_statement:
+        "if" "(" expression ")" comment_NL* statement else_statement?
+switch_statement:
+        "switch" "(" expression ")" statement
+switch_statement:
+        "switch" "(" expression ")" comment_NL* statement
+else_statement:
+        "else" statement
+while_statement:
+        "while" "(" expression ")" statement
+do_statement:
+        "do" statement "while" "(" expression ")" semi
+for_statement:
+        "for" "(" expression? ";" expression? ";" expression? ")" statement
+for_statement:
+        "for" "(" declaration_body ";" expression? ";" expression? ")" statement
+jump_statement:
+        "goto" label_id semi
+        "continue" semi
+        "break" semi
+        "return" expression? semi
+jump_statement:
+        "goto" ptr_operator expression semi
+declaration_or_function_definition:
+        declaration
+        function_definition
+function_definition:
+        NL decl_specifiers declarator KR_parameter_decls? compound_statement NL
+KR_parameter_decls:
+        NL IN declaration+ EX
+semi:
+        ";" NL
+program:
+        C_compilation_unit
+preprocessor:
+        "#define" id "(" id+ ")" expression NL
+        "#define" id expression NL
+        EX "#else" IN NL
+        EX "#endif" NL NL
+        NL "#if" expression IN NL
+        NL "#ifdef" id IN NL
+        NL "#ifndef" id IN NL
+        "#ident" stringlit NL
+        "#include" stringlit NL
+        "#include" "<" SPOFF filepath ">" SPON NL
+        "#line" integernumber stringlit? NL
+        "#undef" id NL
+        "#LINK" stringlit NL
+preprocessor:
+        EX "#endif" comment_NL? NL
+        "..."
+preprocessor:
+        "..." comment_NL?
+preprocessor:
+        "#" integernumber string integernumber* NL
+        "#pragma" SPON id* "(" {id ","}* ")" NL
+filepath:
+        file_id slash_fileid*
+file_id:
+        id
+        key
+slash_fileid:
+        slash file_id
+slash:
+        "/"
+        "\"
+        "."
+        ":"
 comment_NL:
         comment NL
 null_declaration:
@@ -471,3 +909,7 @@ alignof_expression:
         "__alignof" "(" unary_expression ")"
         "__alignof__" "(" type_name ")"
         "__alignof" "(" type_name ")"
+designated_initializer:
+        assignment_expression
+        designator* designator_assignment? assignment_expression
+        designator* designator_assignment? NL "{" IN {designated_initializer ","}* ","? EX "}"

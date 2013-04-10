@@ -2,18 +2,19 @@
 module Relational
 
 syntax Named
-        = 
-        ()
+        = Table
+        | Column
+        | Type
  ;
 syntax Table
         = 
-        ANY col+ ANY key+
+        Column col+ Column key+
  ;
 syntax Column
         = 
-        ANY owner ANY keyOf ANY type
+        Table owner Table keyOf Type type
  ;
 syntax Type
         = 
-        ANY name
+        name: String
  ;

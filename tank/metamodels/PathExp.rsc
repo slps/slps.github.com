@@ -2,18 +2,18 @@
 module PathExp
 
 syntax Element
-        = 
-        ()
+        = PathExp
+        | Transition
  ;
 syntax PathExp
         = 
-        ANY states+ ANY transitions+
+        State states+ Transition transitions+
  ;
 syntax State
         = 
-        ANY incoming+ ANY outgoing+
+        Transition incoming+ Transition outgoing+
  ;
 syntax Transition
         = 
-        ANY source ANY target
+        State source State target
  ;

@@ -4,18 +4,22 @@ exports
   sorts
         LocatedElement NamedElement Graph GraphElement Node DirectedArc Constraint SubGraph 
   context-free syntax
-         -> LocatedElement
+        NamedElement -> LocatedElement
 
-         -> NamedElement
+        Graph -> NamedElement
 
-        type::ANY rankDir::ANY dim::ANY contents::ANY+ -> Graph
+        GraphElement -> NamedElement
 
-         -> GraphElement
+        type::String rankDir::String dim::Integer contents::GraphElement+ -> Graph
 
-        shape::ANY style::ANY -> Node
+        DirectedArc -> GraphElement
 
-        sourceNode::ANY sourcePart::ANY targetNode::ANY targetPart::ANY shape::ANY -> DirectedArc
+        Constraint -> GraphElement
 
-        val::ANY refers::ANY+ -> Constraint
+        shape::String style::String -> Node
+
+        sourceNode::String sourcePart::String targetNode::String targetPart::String shape::String -> DirectedArc
+
+        val::String refers::String+ -> Constraint
 
          -> SubGraph

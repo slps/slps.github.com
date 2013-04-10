@@ -4,88 +4,170 @@ exports
   sorts
         Element DoDAFModel Document SystemFunctionalityDescription FunctionalSpecification AMSpecification SystemDocument ArchitectureDocument System SystemPA IE AMIERole AMIERoleGraphic Input Output InformationAssetDocument AMPA AMPAGraphic PA PACapability AM InformationAsset DataStore SystemFunction SystemPAStandard InformationTechnologyStandard LineOfBusiness Task HumanBehaviourTask OperationalCapabilityTask TaskMissionArea PATask BusinessSubfunction ArchitectureBusinessSubFunction OperationalRolePA OperationalRole OrganizationTypeOperationalRole OrganizationOperationalRole Occupation PersonType PersonTypeCapabilityNorm Skill Position 
   context-free syntax
-         -> Element
+        DoDAFModel -> Element
 
-        document::ANY+ sfd::ANY+ amSpecification::ANY+ sd::ANY+ task::ANY+ iaDocument::ANY+ position::ANY+ occupation::ANY+ ad::ANY+ system::ANY+ am::ANY+ spas::ANY+ its::ANY+ orpa::ANY+ ptcn::ANY+ -> DoDAFModel
+        Document -> Element
 
-        type::ANY cites::ANY+ describes::ANY+ records::ANY+ isTheReferenceFor::ANY+ isThePrimaryReferenceFor::ANY+ -> Document
+        SystemDocument -> Element
+
+        ArchitectureDocument -> Element
+
+        System -> Element
+
+        SystemPA -> Element
+
+        IE -> Element
+
+        AMIERole -> Element
+
+        AMIERoleGraphic -> Element
+
+        InformationAssetDocument -> Element
+
+        AMPA -> Element
+
+        AMPAGraphic -> Element
+
+        PA -> Element
+
+        PACapability -> Element
+
+        InformationAsset -> Element
+
+        SystemPAStandard -> Element
+
+        InformationTechnologyStandard -> Element
+
+        LineOfBusiness -> Element
+
+        Task -> Element
+
+        BusinessSubfunction -> Element
+
+        ArchitectureBusinessSubFunction -> Element
+
+        OperationalRolePA -> Element
+
+        OperationalRole -> Element
+
+        OrganizationTypeOperationalRole -> Element
+
+        OrganizationOperationalRole -> Element
+
+        Occupation -> Element
+
+        PersonType -> Element
+
+        PersonTypeCapabilityNorm -> Element
+
+        Skill -> Element
+
+        Position -> Element
+
+        document::Document+ sfd::SystemFunctionalityDescription+ amSpecification::AMSpecification+ sd::SystemDocument+ task::Task+ iaDocument::InformationAssetDocument+ position::Position+ occupation::Occupation+ ad::ArchitectureDocument+ system::System+ am::AM+ spas::SystemPAStandard+ its::InformationTechnologyStandard+ orpa::OperationalRolePA+ ptcn::PersonTypeCapabilityNorm+ -> DoDAFModel
+
+        SystemFunctionalityDescription -> Document
+
+        FunctionalSpecification -> Document
+
+        AMSpecification -> Document
+
+        type::String cites::InformationAssetDocument+ describes::SystemDocument+ records::ArchitectureDocument+ isTheReferenceFor::IE+ isThePrimaryReferenceFor::PA+ -> Document
 
          -> SystemFunctionalityDescription
 
-        mayBeA::ANY -> FunctionalSpecification
+        mayBeA::SystemDocument -> FunctionalSpecification
 
-        isUsedIn::ANY+ -> AMSpecification
+        isUsedIn::FunctionalSpecification+ -> AMSpecification
 
-        name::ANY description::ANY view::ANY -> SystemDocument
+        name::String description::String view::String -> SystemDocument
 
-        name::ANY description::ANY view::ANY -> ArchitectureDocument
+        name::String description::String view::String -> ArchitectureDocument
 
-        isDesignedToProvide::ANY+ isDescribedBy::ANY+ -> System
+        isDesignedToProvide::SystemPA+ isDescribedBy::SystemDocument+ -> System
 
-        isDefinedUsing::ANY+ -> SystemPA
+        isDefinedUsing::SystemPAStandard+ -> SystemPA
 
-        isAssociatedWith::ANY+ isOrdinateOf::ANY+ isSubordinateOf::ANY+ -> IE
+        isAssociatedWith::AMIERole+ isOrdinateOf::IE+ isSubordinateOf::IE+ -> IE
 
-        defines::ANY+ isRepresentedBy::ANY+ -> AMIERole
+        Input -> AMIERole
 
-        name::ANY description::ANY view::ANY -> AMIERoleGraphic
+        Output -> AMIERole
 
-        isTheInputThatIsDefinedBy::ANY+ source::ANY destination::ANY information::ANY -> Input
+        defines::AMPA+ isRepresentedBy::AMIERoleGraphic+ -> AMIERole
 
-        source::ANY destination::ANY information::ANY -> Output
+        name::String description::String view::String -> AMIERoleGraphic
 
-        name::ANY description::ANY view::ANY -> InformationAssetDocument
+        isTheInputThatIsDefinedBy::Output+ source::String destination::String information::String -> Input
 
-        isOrdinateOf::ANY+ isSubordinateOf::ANY+ defines::ANY+ isRepresentedBy::ANY+ -> AMPA
+        source::String destination::String information::String -> Output
 
-        name::ANY description::ANY view::ANY -> AMPAGraphic
+        name::String description::String view::String -> InformationAssetDocument
 
-        isParentFor::ANY+ isChildFor::ANY+ isIncludedIn::ANY+ isAssignedTo::ANY+ represents::ANY+ correspondsTo::ANY+ has::ANY+ isPerformedBy::ANY+ -> PA
+        isOrdinateOf::AMPA+ isSubordinateOf::AMPA+ defines::AMIERole+ isRepresentedBy::AMPAGraphic+ -> AMPA
 
-        name::ANY description::ANY view::ANY -> PACapability
+        name::String description::String view::String -> AMPAGraphic
 
-        type::ANY isCitedBy::ANY+ specifies::ANY+ includes::ANY+ isUsedToDescribe::ANY+ defines::ANY+ -> AM
+        DataStore -> PA
 
-        isCitedIn::ANY+ describes::ANY+ -> InformationAsset
+        SystemFunction -> PA
+
+        isParentFor::PA+ isChildFor::PA+ isIncludedIn::AMPA+ isAssignedTo::SystemPA+ represents::ArchitectureBusinessSubFunction+ correspondsTo::PATask+ has::PACapability+ isPerformedBy::OperationalRolePA+ -> PA
+
+        name::String description::String view::String -> PACapability
+
+        type::String isCitedBy::PATask+ specifies::AMSpecification+ includes::AMPA+ isUsedToDescribe::SystemFunctionalityDescription+ defines::LineOfBusiness+ -> AM
+
+        AM -> InformationAsset
+
+        isCitedIn::InformationAssetDocument+ describes::DataStore+ -> InformationAsset
 
          -> DataStore
 
          -> SystemFunction
 
-        isUsedToDefine::ANY+ -> SystemPAStandard
+        isUsedToDefine::InformationTechnologyStandard+ -> SystemPAStandard
 
-        isUsedToDefine::ANY+ -> InformationTechnologyStandard
+        isUsedToDefine::SystemPAStandard+ -> InformationTechnologyStandard
 
-        appliesToTask::ANY+ appliesToBS::ANY+ -> LineOfBusiness
+        appliesToTask::Task+ appliesToBS::BusinessSubfunction+ -> LineOfBusiness
 
-        levelIdentifier::ANY references::ANY cost::ANY correspondsTo::ANY+ supports::ANY+ -> Task
+        HumanBehaviourTask -> Task
+
+        OperationalCapabilityTask -> Task
+
+        TaskMissionArea -> Task
+
+        PATask -> Task
+
+        levelIdentifier::String references::String cost::String correspondsTo::PATask+ supports::TaskMissionArea+ -> Task
 
          -> HumanBehaviourTask
 
          -> OperationalCapabilityTask
 
-        hasContributionFrom::ANY+ -> TaskMissionArea
+        hasContributionFrom::OperationalCapabilityTask+ -> TaskMissionArea
 
          -> PATask
 
-        appliesTo::ANY+ -> BusinessSubfunction
+        appliesTo::ArchitectureBusinessSubFunction+ -> BusinessSubfunction
 
-        name::ANY description::ANY view::ANY -> ArchitectureBusinessSubFunction
+        name::String description::String view::String -> ArchitectureBusinessSubFunction
 
-        name::ANY description::ANY view::ANY -> OperationalRolePA
+        name::String description::String view::String -> OperationalRolePA
 
-        performs::ANY+ isPerformedByOTOR::ANY+ isPerformedByOOR::ANY+ -> OperationalRole
+        performs::OperationalRolePA+ isPerformedByOTOR::OrganizationTypeOperationalRole+ isPerformedByOOR::OrganizationOperationalRole+ -> OperationalRole
 
-        name::ANY description::ANY view::ANY -> OrganizationTypeOperationalRole
+        name::String description::String view::String -> OrganizationTypeOperationalRole
 
-        name::ANY description::ANY view::ANY -> OrganizationOperationalRole
+        name::String description::String view::String -> OrganizationOperationalRole
 
-        mayBeCitedForOR::ANY+ mayBeCitedForPT::ANY+ -> Occupation
+        mayBeCitedForOR::OperationalRole+ mayBeCitedForPT::PersonType+ -> Occupation
 
-        mayBeCitedFor::ANY+ performsTo::ANY+ can::ANY+ -> PersonType
+        mayBeCitedFor::OperationalRole+ performsTo::PersonTypeCapabilityNorm+ can::Skill+ -> PersonType
 
-        name::ANY description::ANY view::ANY -> PersonTypeCapabilityNorm
+        name::String description::String view::String -> PersonTypeCapabilityNorm
 
-        mayBeCitedFor::ANY+ -> Skill
+        mayBeCitedFor::OperationalRole+ -> Skill
 
-        mayBeCitedFor::ANY+ -> Position
+        mayBeCitedFor::OperationalRole+ -> Position

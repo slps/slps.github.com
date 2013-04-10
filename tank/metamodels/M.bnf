@@ -1,26 +1,44 @@
 IdentifiedElement:
-        EPSILON
+        MElement
+IdentifiedElement:
+        Field
+IdentifiedElement:
+        Collection
+IdentifiedElement:
+        ComputedValue
 MElement:
-        EPSILON
+        Module
+MElement:
+        ModuleMember
 MElementReference:
-        alias::ANY referencedElement::ANY
+        alias::String referencedElement::MElement
 Module:
-        imports::ANY+ exports::ANY+ moduleMembers::ANY+
+        imports::ImportDirective+ exports::ExportDirective+ moduleMembers::ModuleMember+
 ModuleMember:
-        EPSILON
+        DerivedType
+ModuleMember:
+        Language
+ModuleMember:
+        Entity
 ImportDirective:
-        module::ANY importedElements::ANY+
+        module::Module importedElements::MElementReference+
 ExportDirective:
-        module::ANY exportedElements::ANY+
+        module::Module exportedElements::ModuleMember+
 Value:
-        EPSILON
+        NumericalValue
+Value:
+        StringValue
+Value:
+        BooleanValue
 NumericalValue:
-        EPSILON
+        IntegerValue
+NumericalValue:
+        DecimalValue
 StringValue:
-        value::ANY
+        value::String
 IntegerValue:
-        value::ANY
+        value::Integer
 DecimalValue:
-        value::ANY
+        value::Double
 BooleanValue:
-        value::ANY
+        value::Boolean

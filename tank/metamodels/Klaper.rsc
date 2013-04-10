@@ -3,23 +3,27 @@ module Klaper
 
 syntax Resource
         = 
-        ANY name ANY type ANY capacity ANY schedulingPolicy ANY description ANY acquire ANY release
+        String name String type Integer capacity String schedulingPolicy String description Acquire acquire Release release
  ;
 syntax Service
         = 
-        ANY name ANY formalParams ANY speedAttr ANY failAttr ANY description ANY behavior+ ANY behaviorUsed+ ANY serviceCall+
+        String name String formalParams String speedAttr String failAttr String description Behavior behavior+ Behavior behaviorUsed+ ServiceCall serviceCall+
  ;
 syntax Behavior
-        = 
-        ANY stepn ANY stepb+ ANY service ANY usedService+ ANY workLoad
+        = Step
+        | Step stepn Step stepb+ Service service Service usedService+ WorkLoad workLoad
  ;
 syntax WorkLoad
         = 
-        ANY workLoadType ANY arrivalProcess ANY population ANY initialResource ANY behavior
+        String workLoadType String arrivalProcess String population String initialResource Behavior behavior
  ;
 syntax Step
-        = 
-        ANY name ANY repetition ANY internalExecTime ANY internalFailProb ANY completionModel ANY serviceCall+ ANY predecessor+ ANY successor+ ANY behavior ANY nestedBehavior
+        = Start
+        | End
+        | Control
+        | InternalActivity
+        | ServiceCall
+        | String name String repetition String internalExecTime String internalFailProb String completionModel ServiceCall serviceCall+ Step predecessor+ Step successor+ Behavior behavior Behavior nestedBehavior
  ;
 syntax Start
         = 
@@ -30,8 +34,11 @@ syntax End
         ()
  ;
 syntax Control
-        = 
-        ()
+        = Branch
+        | Fork
+        | Join
+        | Acquire
+        | Release
  ;
 syntax InternalActivity
         = 
@@ -39,15 +46,15 @@ syntax InternalActivity
  ;
 syntax ServiceCall
         = 
-        ANY resourceType ANY serviceName ANY isSynch ANY actualParam+ ANY step ANY calledService
+        String resourceType String serviceName Boolean isSynch ActualParam actualParam+ Step step Service calledService
  ;
 syntax ActualParam
         = 
-        ANY value ANY serviceCall
+        String value ServiceCall serviceCall
  ;
 syntax Branch
         = 
-        branchProbs: ANY
+        branchProbs: String
  ;
 syntax Fork
         = 
@@ -59,9 +66,9 @@ syntax Join
  ;
 syntax Acquire
         = 
-        ANY resourceUnits ANY resource
+        String resourceUnits Resource resource
  ;
 syntax Release
         = 
-        ANY resourceUnits ANY resource
+        String resourceUnits Resource resource
  ;

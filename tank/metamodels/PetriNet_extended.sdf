@@ -4,28 +4,36 @@ exports
   sorts
         LocatedElement NamedElement PetriNet Element Place Transition Arc PlaceToTransition TransitionToPlace Execution Token Marking Movement 
   context-free syntax
-         -> LocatedElement
+        NamedElement -> LocatedElement
 
-         -> NamedElement
+        PetriNet -> NamedElement
 
-        elements::ANY+ arcs::ANY+ execs::ANY+ -> PetriNet
+        Element -> NamedElement
 
-         -> Element
+        Arc -> NamedElement
 
-        incomingArc::ANY+ outgoingArc::ANY+ -> Place
+        elements::Element+ arcs::Arc+ execs::Execution+ -> PetriNet
 
-        incomingArc::ANY+ outgoingArc::ANY+ -> Transition
+        Place -> Element
 
-         -> Arc
+        Transition -> Element
 
-        from::ANY to::ANY -> PlaceToTransition
+        incomingArc::TransitionToPlace+ outgoingArc::PlaceToTransition+ -> Place
 
-        from::ANY to::ANY -> TransitionToPlace
+        incomingArc::PlaceToTransition+ outgoingArc::TransitionToPlace+ -> Transition
 
-        net::ANY markings::ANY+ movements::ANY+ -> Execution
+        PlaceToTransition -> Arc
 
-        placedAt::ANY marking::ANY -> Token
+        TransitionToPlace -> Arc
 
-        exec::ANY tokens::ANY+ -> Marking
+        from::Place to::Transition -> PlaceToTransition
 
-        exec::ANY fire::ANY source::ANY target::ANY -> Movement
+        from::Transition to::Place -> TransitionToPlace
+
+        net::PetriNet markings::Marking+ movements::Movement+ -> Execution
+
+        placedAt::Place marking::Marking -> Token
+
+        exec::Execution tokens::Token+ -> Marking
+
+        exec::Execution fire::Transition source::Marking target::Marking -> Movement

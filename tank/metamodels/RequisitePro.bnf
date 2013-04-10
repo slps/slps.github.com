@@ -1,20 +1,16 @@
-DescribedElt:
-        EPSILON
-NamedElt:
-        EPSILON
 ContainerElt:
-        EPSILON
+        Project
+ContainerElt:
+        Package
 Project:
-        content::ANY+ packages::ANY+
+        content::ContainedElt+ packages::Package+
 Package:
-        parentPackage::ANY
-ContainedElt:
-        EPSILON
+        parentPackage::ContainerElt
 TypedElt:
-        EPSILON
+        Attribute
 Document:
         EPSILON
 Attribute:
-        value::ANY
+        value::String
 Requirement:
-        text::ANY attributes::ANY+ location::ANY parent::ANY children::ANY+ coverLink::ANY+
+        text::String attributes::Attribute+ location::Document parent::Requirement children::Requirement+ coverLink::Requirement+

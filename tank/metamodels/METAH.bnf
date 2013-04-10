@@ -1,28 +1,40 @@
 METAHFile:
-        entries::ANY+
+        entries::METAHEntry+
 METAHEntry:
-        EPSILON
+        Package
+METAHEntry:
+        PackageImplementation
+METAHEntry:
+        ProcessDeclaration
+METAHEntry:
+        ProcessImplementation
+METAHEntry:
+        Connection
+METAHEntry:
+        MacroDeclaration
+METAHEntry:
+        MacroImplementation
 Package:
-        packName::ANY data::ANY+
+        packName::String data::Data+
 PackageImplementation:
-        implementationName::ANY implements::ANY attributes::ANY+
+        implementationName::String implements::String attributes::Attribute+
 Data:
-        dataName::ANY
+        dataName::String
 Attribute:
-        attName::ANY attValue::ANY attValueType::ANY attType::ANY
+        attName::String attValue::Integer attValueType::String attType::String
 ProcessDeclaration:
-        procDecName::ANY ports::ANY+
+        procDecName::String ports::Port+
 ProcessImplementation:
-        procImpName::ANY declaration::ANY processAttributes::ANY+
+        procImpName::String declaration::String processAttributes::ProcessAttribute+
 ProcessAttribute:
-        attName::ANY attValue::ANY attValueType::ANY
+        attName::String attValue::Integer attValueType::String
 Process:
-        procName::ANY periodic::ANY declaration::ANY implementation::ANY
+        procName::String periodic::String declaration::String implementation::String
 Port:
-        portName::ANY portCom::ANY portPackage::ANY portType::ANY
+        portName::String portCom::String portPackage::String portType::String
 Connection:
-        compSrc::ANY portSrc::ANY compDest::ANY portDest::ANY
+        compSrc::String portSrc::String compDest::String portDest::String
 MacroDeclaration:
-        name::ANY ports::ANY+
+        name::String ports::Port+
 MacroImplementation:
-        macroImpName::ANY declaration::ANY process::ANY+ connections::ANY+
+        macroImpName::String declaration::String process::Process+ connections::Connection+

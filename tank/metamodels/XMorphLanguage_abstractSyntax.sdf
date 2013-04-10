@@ -4,80 +4,124 @@ exports
   sorts
         VarScope AbstractVar VarUse MOF::Property Key PatternScope PatternDefn TRule Transformation Query Term TRuleVar PatternVar ExtentVar CompoundTerm AndTerm OrTerm NotTerm IfTerm SimpleTerm TrackingUse MOF::Class PatternUse MofTerm Condition MofInstance MofOrder Expression CoumpoundExpr CollectionExpr FunctionExpr FeatureExpr InstanceRef MOF::Object SimpleExpr StringConstant IntConstant BooleanConstant EnumConstant 
   context-free syntax
-         -> VarScope
+        PatternScope -> VarScope
 
-         -> AbstractVar
+        PatternDefn -> VarScope
 
-        var::ANY -> VarUse
+        TRule -> VarScope
 
-        part::ANY -> MOF::Property
+        TRuleVar -> AbstractVar
 
-        property::ANY+ transformation::ANY -> Key
+        PatternVar -> AbstractVar
 
-         -> PatternScope
+        ExtentVar -> AbstractVar
 
-        scope::ANY parameter::ANY+ body::ANY -> PatternDefn
+        var::AbstractVar -> VarUse
 
-        superseded::ANY+ superseder::ANY+ transformation::ANY extended::ANY+ extender::ANY+ term::ANY tgt::ANY+ -> TRule
+        part::Key -> MOF::Property
 
-        keys::ANY+ tRule::ANY+ -> Transformation
+        property::MOF::Property+ transformation::Transformation -> Key
 
-        term::ANY parameter::ANY+ -> Query
+        Transformation -> PatternScope
 
-         -> Term
+        Query -> PatternScope
 
-        superseder::ANY+ superseded::ANY+ extended::ANY+ extender::ANY+ -> TRuleVar
+        scope::PatternScope parameter::PatternVar+ body::Term -> PatternDefn
 
-        query::ANY patternDefn::ANY -> PatternVar
+        superseded::TRule+ superseder::TRule+ transformation::Transformation extended::TRule+ extender::TRule+ term::Term tgt::SimpleTerm+ -> TRule
 
-        src::ANY -> ExtentVar
+        keys::Key+ tRule::TRule+ -> Transformation
 
-         -> CompoundTerm
+        term::Term parameter::PatternVar+ -> Query
 
-        term::ANY+ -> AndTerm
+        CompoundTerm -> Term
 
-        term::ANY+ -> OrTerm
+        SimpleTerm -> Term
 
-        term::ANY+ -> NotTerm
+        superseder::TRuleVar+ superseded::TRuleVar+ extended::TRuleVar+ extender::TRuleVar+ -> TRuleVar
 
-        term::ANY+ -> IfTerm
+        query::Query patternDefn::PatternDefn -> PatternVar
 
-         -> SimpleTerm
+        src::Term -> ExtentVar
 
-        featureNames::ANY tracking::ANY -> TrackingUse
+        AndTerm -> CompoundTerm
 
-        tracking::ANY+ -> MOF::Class
+        OrTerm -> CompoundTerm
 
-        tRuleST::ANY arg::ANY+ -> PatternUse
+        NotTerm -> CompoundTerm
 
-         -> MofTerm
+        IfTerm -> CompoundTerm
 
-        reason::ANY -> Condition
+        term::Term+ -> AndTerm
 
-        isExactly::ANY typeName::ANY instance::ANY -> MofInstance
+        term::Term+ -> OrTerm
 
-        lesser::ANY instance::ANY greater::ANY -> MofOrder
+        term::Term+ -> NotTerm
 
-         -> Expression
+        term::Term+ -> IfTerm
 
-         -> CoumpoundExpr
+        TrackingUse -> SimpleTerm
 
-        unique::ANY ordered::ANY -> CollectionExpr
+        PatternUse -> SimpleTerm
 
-        function::ANY -> FunctionExpr
+        MofTerm -> SimpleTerm
 
-        collect::ANY featureName::ANY -> FeatureExpr
+        Condition -> SimpleTerm
 
-        obj::ANY -> InstanceRef
+        featureNames::String tracking::MOF::Class -> TrackingUse
 
-        obj::ANY -> MOF::Object
+        tracking::TrackingUse+ -> MOF::Class
 
-         -> SimpleExpr
+        tRuleST::TRule arg::Expression+ -> PatternUse
 
-        representation::ANY -> StringConstant
+        MofInstance -> MofTerm
 
-        representation::ANY -> IntConstant
+        MofOrder -> MofTerm
 
-        representation::ANY -> BooleanConstant
+        reason::String -> Condition
 
-        representation::ANY -> EnumConstant
+        isExactly::Boolean typeName::Expression instance::Expression -> MofInstance
+
+        lesser::Expression instance::Expression greater::Expression -> MofOrder
+
+        VarUse -> Expression
+
+        CoumpoundExpr -> Expression
+
+        InstanceRef -> Expression
+
+        MOF::Object -> Expression
+
+        SimpleExpr -> Expression
+
+        CollectionExpr -> CoumpoundExpr
+
+        FunctionExpr -> CoumpoundExpr
+
+        FeatureExpr -> CoumpoundExpr
+
+        unique::Boolean ordered::Boolean -> CollectionExpr
+
+        function::String -> FunctionExpr
+
+        collect::String featureName::String -> FeatureExpr
+
+        obj::MOF::Object -> InstanceRef
+
+        obj::InstanceRef -> MOF::Object
+
+        StringConstant -> SimpleExpr
+
+        IntConstant -> SimpleExpr
+
+        BooleanConstant -> SimpleExpr
+
+        EnumConstant -> SimpleExpr
+
+        representation::String -> StringConstant
+
+        representation::String -> IntConstant
+
+        representation::String -> BooleanConstant
+
+        representation::String -> EnumConstant

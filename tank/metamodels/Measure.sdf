@@ -7,11 +7,11 @@ exports
         KM3:: -> ModelKind
         UML2:: -> ModelKind
 
-        modelType::ANY categories::ANY+ measureSets::ANY+ -> RootMeasureSet
+        modelType::ModelKind categories::Category+ measureSets::MeasureSet+ -> RootMeasureSet
 
-        name::ANY desc::ANY metrics::ANY+ root::ANY -> Category
+        name::String desc::String metrics::Metric+ root::RootMeasureSet -> Category
 
-        name::ANY desc::ANY preferredValue::ANY category::ANY -> Metric
+        name::String desc::String preferredValue::String category::Category -> Metric
 
         metamodel:: -> ElementKind
         model:: -> ElementKind
@@ -19,12 +19,16 @@ exports
         interface:: -> ElementKind
         class:: -> ElementKind
 
-        elementName::ANY elementType::ANY measures::ANY+ root::ANY subsets::ANY+ parent::ANY -> MeasureSet
+        elementName::String elementType::ElementKind measures::Measure+ root::RootMeasureSet subsets::MeasureSet+ parent::MeasureSet -> MeasureSet
 
-         -> Measure
+        IntegerMeasure -> Measure
 
-        value::ANY -> IntegerMeasure
+        DoubleMeasure -> Measure
 
-        value::ANY -> DoubleMeasure
+        PercentageMeasure -> Measure
 
-        value::ANY -> PercentageMeasure
+        value::Integer -> IntegerMeasure
+
+        value::Double -> DoubleMeasure
+
+        value::Double -> PercentageMeasure

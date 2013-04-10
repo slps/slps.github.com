@@ -1,12 +1,20 @@
 RModelElement:
-        EPSILON
+        Schema
+RModelElement:
+        Table
+RModelElement:
+        Column
+RModelElement:
+        Key
+RModelElement:
+        ForeignKey
 Schema:
-        tables::ANY+
+        tables::Table+
 Table:
-        schema::ANY column::ANY+ key::ANY+ foreignKey::ANY+
+        schema::Schema column::Column+ key::Key+ foreignKey::ForeignKey+
 Column:
-        type::ANY owner::ANY key::ANY+ foreignKey::ANY+
+        type::String owner::Table key::Key+ foreignKey::ForeignKey+
 Key:
-        owner::ANY column::ANY+ refersToOpposite::ANY+
+        owner::Table column::Column+ refersToOpposite::ForeignKey+
 ForeignKey:
-        column::ANY+ owner::ANY refersTo::ANY
+        column::Column+ owner::Table refersTo::Key

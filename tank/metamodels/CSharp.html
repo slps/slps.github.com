@@ -13,25 +13,39 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable C# 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Hugo Bruneliere, <code>CSharp.ecore</code>, 2005/08/08.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>10</strong></li><li>Number of top alternatives: <strong>10</strong></li><li>Number of defined nonterminal symbols: <strong>10</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>10</strong>: <code><a href="#Member" class="nt">Member</a>, <a href="#TypedAttribute" class="nt">TypedAttribute</a>, <a href="#Field" class="nt">Field</a>, <a href="#Property" class="nt">Property</a>, <a href="#MethodBase" class="nt">MethodBase</a>, <a href="#Constructor" class="nt">Constructor</a>, <a href="#Method" class="nt">Method</a>, <a href="#Type" class="nt">Type</a>, <a href="#Parameter" class="nt">Parameter</a>, <a href="#Assembly" class="nt">Assembly</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Member">Member</a>:
-        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">owner</span>::<span class="meta">any</span>
+				</script></head><body><h1 class="l">Browsable C# 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Hugo Bruneliere, <code>CSharp.ecore</code>, 2005/08/08.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>17</strong></li><li>Number of top alternatives: <strong>17</strong></li><li>Number of defined nonterminal symbols: <strong>10</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: —</li><li>Bottom nonterminal symbols: <strong>3</strong>: <code><a href="#String" class="nt">String</a>, <a href="#Boolean" class="nt">Boolean</a>, <a href="#Integer" class="nt">Integer</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Member">Member</a>:
+        <a class="nt" href="#TypedAttribute">TypedAttribute</a>
+</pre><pre><a class="nt" name="Member">Member</a>:
+        <a class="nt" href="#MethodBase">MethodBase</a>
+</pre><pre><a class="nt" name="Member">Member</a>:
+        <a class="nt" href="#Type">Type</a>
+</pre><pre><a class="nt" name="Member">Member</a>:
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">owner</span>::<a class="nt" href="#Type">Type</a>
 </pre><pre><a class="nt" name="TypedAttribute">TypedAttribute</a>:
-        <span class="sel">type</span>::<span class="meta">any</span>
+        <a class="nt" href="#Field">Field</a>
+</pre><pre><a class="nt" name="TypedAttribute">TypedAttribute</a>:
+        <a class="nt" href="#Property">Property</a>
+</pre><pre><a class="nt" name="TypedAttribute">TypedAttribute</a>:
+        <span class="sel">type</span>::<a class="nt" href="#Type">Type</a>
 </pre><pre><a class="nt" name="Field">Field</a>:
         ε
 </pre><pre><a class="nt" name="Property">Property</a>:
-        <span class="sel">isReadable</span>::<span class="meta">any</span> <span class="sel">isWritable</span>::<span class="meta">any</span>
+        <span class="sel">isReadable</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">isWritable</span>::<a class="nt" href="#Boolean">Boolean</a>
 </pre><pre><a class="nt" name="MethodBase">MethodBase</a>:
-        <span class="sel">visibility</span>::<span class="meta">any</span> <span class="sel">isAbstract</span>::<span class="meta">any</span> <span class="sel">isFinal</span>::<span class="meta">any</span> <span class="sel">isStatic</span>::<span class="meta">any</span> <span class="sel">parameters</span>::<span class="meta">any</span><span class="meta">+</span>
+        <a class="nt" href="#Constructor">Constructor</a>
+</pre><pre><a class="nt" name="MethodBase">MethodBase</a>:
+        <a class="nt" href="#Method">Method</a>
+</pre><pre><a class="nt" name="MethodBase">MethodBase</a>:
+        <span class="sel">visibility</span>::<a class="nt" href="#String">String</a> <span class="sel">isAbstract</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">isFinal</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">isStatic</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">parameters</span>::<a class="nt" href="#Parameter">Parameter</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Constructor">Constructor</a>:
         ε
 </pre><pre><a class="nt" name="Method">Method</a>:
-        <span class="sel">returnType</span>::<span class="meta">any</span>
+        <span class="sel">returnType</span>::<a class="nt" href="#Type">Type</a>
 </pre><pre><a class="nt" name="Type">Type</a>:
-        <span class="sel">qualifiedName</span>::<span class="meta">any</span> <span class="sel">isAbstract</span>::<span class="meta">any</span> <span class="sel">visibility</span>::<span class="meta">any</span> <span class="sel">isSealed</span>::<span class="meta">any</span> <span class="sel">nameSpace</span>::<span class="meta">any</span> <span class="sel">members</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">t_container</span>::<span class="meta">any</span> <span class="sel">super</span>::<span class="meta">any</span>
+        <span class="sel">qualifiedName</span>::<a class="nt" href="#String">String</a> <span class="sel">isAbstract</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">visibility</span>::<a class="nt" href="#String">String</a> <span class="sel">isSealed</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">nameSpace</span>::<a class="nt" href="#String">String</a> <span class="sel">members</span>::<a class="nt" href="#Member">Member</a><span class="meta">+</span> <span class="sel">t_container</span>::<a class="nt" href="#Assembly">Assembly</a> <span class="sel">super</span>::<a class="nt" href="#Type">Type</a>
 </pre><pre><a class="nt" name="Parameter">Parameter</a>:
-        <span class="sel">isIn</span>::<span class="meta">any</span> <span class="sel">isOut</span>::<span class="meta">any</span> <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">position</span>::<span class="meta">any</span> <span class="sel">method</span>::<span class="meta">any</span> <span class="sel">type</span>::<span class="meta">any</span>
+        <span class="sel">isIn</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">isOut</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">name</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">position</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">method</span>::<a class="nt" href="#MethodBase">MethodBase</a> <span class="sel">type</span>::<a class="nt" href="#Type">Type</a>
 </pre><pre><a class="nt" name="Assembly">Assembly</a>:
-        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">content</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">content</span>::<a class="nt" href="#Type">Type</a><span class="meta">+</span>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

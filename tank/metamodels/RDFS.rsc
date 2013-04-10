@@ -2,20 +2,29 @@
 module RDFS
 
 syntax Resource
-        = 
-        ANY graph ANY uriRef+ ANY subjectStatement+ ANY objectStatement+ ANY label+ ANY type+ ANY seeAlso+ ANY referringResource+ ANY member+ ANY container+ ANY list+
+        = Graph
+        | List
+        | Container
+        | Property
+        | Statement
+        | URIReferenceNode
+        | BlankNode
+        | Class
+        | Literal
+        | Graph graph URIReference uriRef+ Statement subjectStatement+ Statement objectStatement+ PlainLiteral label+ Class type+ Resource seeAlso+ Resource referringResource+ Resource member+ Resource container+ List list+
  ;
 syntax Graph
         = 
-        ANY graphName ANY resources+
+        URIReference graphName Resource resources+
  ;
 syntax List
         = 
-        ANY first ANY rest ANY originalList+
+        Resource first List rest List originalList+
  ;
 syntax Container
-        = 
-        ()
+        = Alt
+        | Bag
+        | Seq
  ;
 syntax Alt
         = 
@@ -31,7 +40,7 @@ syntax Seq
  ;
 syntax Property
         = 
-        ANY predicateStatement+ ANY subPropertyOf+ ANY superProperty+ ANY domain+ ANY range+
+        Statement predicateStatement+ Property subPropertyOf+ Property superProperty+ Class domain+ Class range+
  ;
 syntax ContainerMembershipProperty
         = 
@@ -39,7 +48,7 @@ syntax ContainerMembershipProperty
  ;
 syntax Statement
         = 
-        ANY predicate ANY object ANY subject ANY isReifiedOnly ANY isReified ANY nameForReification+
+        Property predicate Resource object Resource subject Boolean isReifiedOnly Boolean isReified URIReference nameForReification+
  ;
 syntax URIReferenceNode
         = 
@@ -47,37 +56,38 @@ syntax URIReferenceNode
  ;
 syntax BlankNode
         = 
-        nodeId: ANY
+        nodeId: String
  ;
 syntax Class
-        = 
-        ANY subClassOf+ ANY superClass+ ANY typedResource+ ANY propertyForDomain+ ANY propertyForRange+
+        = Datatype
+        | Class subClassOf+ Class superClass+ Resource typedResource+ Property propertyForDomain+ Property propertyForRange+
  ;
 syntax Datatype
         = 
         ()
  ;
 syntax Literal
-        = 
-        lexicalForm: ANY
+        = PlainLiteral
+        | TypedLiteral
+        | lexicalForm: String
  ;
 syntax PlainLiteral
         = 
-        ANY language ANY labeledResource
+        String language Resource labeledResource
  ;
 syntax TypedLiteral
-        = 
-        datatypeURI: ANY
+        = RDFXMLLiteral
+        | datatypeURI: URIReference
  ;
 syntax RDFXMLLiteral
         = 
         ()
  ;
 syntax URIReference
-        = 
-        ANY uri ANY resource ANY literal ANY namedGraph ANY reifiedStatement+
+        = UniformResourceIdentifier
+        | UniformResourceIdentifier uri Resource resource TypedLiteral literal Graph namedGraph Statement reifiedStatement+
  ;
 syntax UniformResourceIdentifier
         = 
-        ANY name ANY uriRef+
+        String name URIReference uriRef+
  ;

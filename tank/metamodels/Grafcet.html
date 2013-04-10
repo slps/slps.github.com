@@ -13,23 +13,31 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable GRAFCET 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Pierrick Guyard, <code>Grafcet.ecore</code>, 2005/06/29.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>9</strong></li><li>Number of top alternatives: <strong>9</strong></li><li>Number of defined nonterminal symbols: <strong>9</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>9</strong>: <code><a href="#LocatedElement" class="nt">LocatedElement</a>, <a href="#NamedElement" class="nt">NamedElement</a>, <a href="#Grafcet" class="nt">Grafcet</a>, <a href="#Element" class="nt">Element</a>, <a href="#Step" class="nt">Step</a>, <a href="#Transition" class="nt">Transition</a>, <a href="#Connection" class="nt">Connection</a>, <a href="#StepToTransition" class="nt">StepToTransition</a>, <a href="#TransitionToStep" class="nt">TransitionToStep</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
-        ε
+				</script></head><body><h1 class="l">Browsable GRAFCET 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Pierrick Guyard, <code>Grafcet.ecore</code>, 2005/06/29.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>13</strong></li><li>Number of top alternatives: <strong>13</strong></li><li>Number of defined nonterminal symbols: <strong>9</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#LocatedElement" class="nt">LocatedElement</a></code></li><li>Bottom nonterminal symbols: <strong>2</strong>: <code><a href="#Boolean" class="nt">Boolean</a>, <a href="#String" class="nt">String</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
+        <a class="nt" href="#NamedElement">NamedElement</a>
 </pre><pre><a class="nt" name="NamedElement">NamedElement</a>:
-        ε
+        <a class="nt" href="#Grafcet">Grafcet</a>
+</pre><pre><a class="nt" name="NamedElement">NamedElement</a>:
+        <a class="nt" href="#Element">Element</a>
+</pre><pre><a class="nt" name="NamedElement">NamedElement</a>:
+        <a class="nt" href="#Connection">Connection</a>
 </pre><pre><a class="nt" name="Grafcet">Grafcet</a>:
-        <span class="sel">elements</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">connections</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">elements</span>::<a class="nt" href="#Element">Element</a><span class="meta">+</span> <span class="sel">connections</span>::<a class="nt" href="#Connection">Connection</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Element">Element</a>:
-        ε
+        <a class="nt" href="#Step">Step</a>
+</pre><pre><a class="nt" name="Element">Element</a>:
+        <a class="nt" href="#Transition">Transition</a>
 </pre><pre><a class="nt" name="Step">Step</a>:
-        <span class="sel">isInitial</span>::<span class="meta">any</span> <span class="sel">isActive</span>::<span class="meta">any</span> <span class="sel">action</span>::<span class="meta">any</span> <span class="sel">incomingConnections</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">outgoingConnections</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">isInitial</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">isActive</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">action</span>::<a class="nt" href="#String">String</a> <span class="sel">incomingConnections</span>::<a class="nt" href="#TransitionToStep">TransitionToStep</a><span class="meta">+</span> <span class="sel">outgoingConnections</span>::<a class="nt" href="#StepToTransition">StepToTransition</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Transition">Transition</a>:
-        <span class="sel">condition</span>::<span class="meta">any</span> <span class="sel">incomingConnections</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">outgoingConnections</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">condition</span>::<a class="nt" href="#String">String</a> <span class="sel">incomingConnections</span>::<a class="nt" href="#StepToTransition">StepToTransition</a><span class="meta">+</span> <span class="sel">outgoingConnections</span>::<a class="nt" href="#TransitionToStep">TransitionToStep</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Connection">Connection</a>:
-        ε
+        <a class="nt" href="#StepToTransition">StepToTransition</a>
+</pre><pre><a class="nt" name="Connection">Connection</a>:
+        <a class="nt" href="#TransitionToStep">TransitionToStep</a>
 </pre><pre><a class="nt" name="StepToTransition">StepToTransition</a>:
-        <span class="sel">from</span>::<span class="meta">any</span> <span class="sel">to</span>::<span class="meta">any</span>
+        <span class="sel">from</span>::<a class="nt" href="#Step">Step</a> <span class="sel">to</span>::<a class="nt" href="#Transition">Transition</a>
 </pre><pre><a class="nt" name="TransitionToStep">TransitionToStep</a>:
-        <span class="sel">from</span>::<span class="meta">any</span> <span class="sel">to</span>::<span class="meta">any</span>
+        <span class="sel">from</span>::<a class="nt" href="#Transition">Transition</a> <span class="sel">to</span>::<a class="nt" href="#Step">Step</a>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

@@ -2,42 +2,47 @@
 module GenericEditor
 
 syntax LocatedElement
-        = 
-        ()
+        = Editor
+        | AbstractElement
+        | Element
+        | Format
+        | Color
+        | Font
+        | Indent
  ;
 syntax Editor
         = 
-        ANY extension ANY abstractElements+
+        String extension AbstractElement abstractElements+
  ;
 syntax AbstractElement
-        = 
-        ()
+        = Block
+        | GroupElement
  ;
 syntax Block
         = 
-        ANY blockbegin ANY blockend
+        String blockbegin String blockend
  ;
 syntax GroupElement
         = 
-        ANY indent ANY element+
+        Indent indent Element element+
  ;
 syntax Element
         = 
-        ANY element ANY groupElement
+        String element GroupElement groupElement
  ;
 syntax Format
         = 
-        ANY color ANY font
+        Color color Font font
  ;
 syntax Color
         = 
-        ANY red ANY green ANY blue
+        Integer red Integer green Integer blue
  ;
 syntax Font
         = 
-        ANY font ANY bold ANY italic
+        String font Boolean bold Boolean italic
  ;
 syntax Indent
         = 
-        ANY retrait ANY groupElementIndent
+        String retrait GroupElement groupElementIndent
  ;

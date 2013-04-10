@@ -4,30 +4,42 @@ exports
   sorts
         Port Service Param Input Output PortType Operation StartWithExtensions Binding BindingFault BindingOperation Fault Message Part 
   context-free syntax
-        name::ANY service::ANY binding::ANY -> Port
+        name::String service::Service binding::Binding -> Port
 
-        name::ANY ports::ANY+ -> Service
+        name::String ports::Port+ -> Service
 
-        name::ANY message::ANY -> Param
+        Input -> Param
 
-        operation::ANY -> Input
+        Output -> Param
 
-        operation::ANY -> Output
+        name::String message::Message -> Param
 
-        name::ANY operations::ANY+ bindings::ANY+ -> PortType
+        operation::Operation -> Input
 
-        name::ANY input::ANY output::ANY type::ANY faults::ANY+ -> Operation
+        operation::Operation -> Output
 
-         -> StartWithExtensions
+        name::String operations::Operation+ bindings::Binding+ -> PortType
 
-        name::ANY ports::ANY+ type::ANY operations::ANY+ -> Binding
+        name::String input::Input output::Output type::PortType faults::Fault+ -> Operation
 
-        operation::ANY binding::ANY -> BindingFault
+        Binding -> StartWithExtensions
 
-        name::ANY bind::ANY binding::ANY input::ANY output::ANY faults::ANY+ -> BindingOperation
+        BindingFault -> StartWithExtensions
 
-        name::ANY operation::ANY message::ANY -> Fault
+        BindingOperation -> StartWithExtensions
 
-        name::ANY params::ANY+ faults::ANY+ parts::ANY+ -> Message
+        Binding -> StartWithExtensions
+        BindingFault -> StartWithExtensions
+        BindingOperation -> StartWithExtensions
 
-        name::ANY message::ANY -> Part
+        name::String ports::Port+ type::PortType operations::BindingOperation+ -> Binding
+
+        operation::BindingOperation binding::Fault -> BindingFault
+
+        name::String bind::Binding binding::Operation input::StartWithExtensions output::StartWithExtensions faults::BindingFault+ -> BindingOperation
+
+        name::String operation::Operation message::Message -> Fault
+
+        name::String params::Param+ faults::Fault+ parts::Part+ -> Message
+
+        name::String message::Message -> Part

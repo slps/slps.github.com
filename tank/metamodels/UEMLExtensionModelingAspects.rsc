@@ -2,40 +2,48 @@
 module UEMLExtensionModelingAspects
 
 syntax UEMLObject
-        = 
-        ANY has ANY model
+        = UEMLModel
+        | Port
+        | Flow
+        | Activity
+        | Object
+        | Geometry has UEMLModel model
  ;
 syntax UEMLModel
         = 
-        ANY contains+
+        UEMLObject contains+
  ;
 syntax Geometry
         = 
-        object: ANY
+        object: UEMLObject
  ;
 syntax Port
-        = 
-        ()
+        = ResourceRole
+        | Anchor
  ;
 syntax Flow
-        = 
-        associationConnector: ANY
+        = ResourceFlow
+        | IOFlow
+        | ControlFlow
+        | associationConnector: AssociationConnector
  ;
 syntax Activity
         = 
-        ANY resourceRole+ ANY child+ ANY parent ANY hasOutput+ ANY hasInput+ ANY activityType
+        ResourceRole resourceRole+ Activity child+ Activity parent OutputPort hasOutput+ InputPort hasInput+ ActivityType activityType
  ;
 syntax Object
-        = 
-        ioFlow: ANY
+        = InformationObject
+        | Resource
+        | ioFlow: IOFlow
  ;
 syntax InformationObject
         = 
-        controlFlow: ANY
+        controlFlow: ControlFlow
  ;
 syntax Resource
-        = 
-        ANY carries ANY plays+ ANY resourceType
+        = MaterialResource
+        | HumanResource
+        | ResourceFlow carries ResourceRole plays+ ResourceType resourceType
  ;
 syntax MaterialResource
         = 
@@ -47,15 +55,16 @@ syntax HumanResource
  ;
 syntax ResourceFlow
         = 
-        ANY resourceCarries+
+        Resource resourceCarries+
  ;
 syntax IOFlow
         = 
-        ANY carries+
+        Object carries+
  ;
 syntax ControlFlow
-        = 
-        ANY carries+
+        = TriggerFlow
+        | ConstraintFlow
+        | InformationObject carries+
  ;
 syntax TriggerFlow
         = 
@@ -67,23 +76,25 @@ syntax ConstraintFlow
  ;
 syntax ResourceRole
         = 
-        ANY resourcePlays+ ANY roleQualifier ANY in
+        Resource resourcePlays+ RoleType roleQualifier Activity in
  ;
 syntax RoleType
         = 
         ()
  ;
 syntax Anchor
-        = 
-        ANY target ANY origin
+        = OutputPort
+        | InputPort
+        | ConnectionOperator
+        | AssociationConnector target AssociationConnector origin
  ;
 syntax OutputPort
         = 
-        activity: ANY
+        activity: Activity
  ;
 syntax InputPort
         = 
-        activity: ANY
+        activity: Activity
  ;
 syntax ConnectionOperator
         = 
@@ -91,13 +102,13 @@ syntax ConnectionOperator
  ;
 syntax AssociationConnector
         = 
-        ANY origin+ ANY target+ ANY classAssociation
+        Anchor origin+ Anchor target+ Flow classAssociation
  ;
 syntax ResourceType
         = 
-        ANY resource+
+        Resource resource+
  ;
 syntax ActivityType
         = 
-        ANY activityT+
+        Activity activityT+
  ;

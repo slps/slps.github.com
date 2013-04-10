@@ -4,14 +4,14 @@ exports
   sorts
         Architecture ArchitectureDescription ArchitectureView ArchitectureViewPoint MainView ModelElement 
   context-free syntax
-        describedBy::ANY -> Architecture
+        describedBy::ArchitectureDescription -> Architecture
 
-        selects::ANY+ organizedBy::ANY+ -> ArchitectureDescription
+        selects::ArchitectureView+ organizedBy::ArchitectureView+ -> ArchitectureDescription
 
-        selectedBy::ANY+ constituents::ANY+ conformsTo::ANY+ -> ArchitectureView
+        selectedBy::ArchitectureDescription+ constituents::ModelElement+ conformsTo::ArchitectureViewPoint+ -> ArchitectureView
 
-        defines::ANY views::ANY+ -> ArchitectureViewPoint
+        defines::MainView views::ArchitectureView+ -> ArchitectureViewPoint
 
-        isProjectedOnto::ANY+ consistsOf::ANY+ -> MainView
+        isProjectedOnto::ArchitectureView+ consistsOf::ModelElement+ -> MainView
 
          -> ModelElement

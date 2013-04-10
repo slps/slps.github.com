@@ -13,29 +13,37 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable UML Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Julien Baudry, <em>Use Cases 1.0</em>, <code>UML_UseCases.ecore</code>, 2006/07/10.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>12</strong></li><li>Number of top alternatives: <strong>12</strong></li><li>Number of defined nonterminal symbols: <strong>12</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>12</strong>: <code><a href="#Classifier" class="nt">Classifier</a>, <a href="#Instance" class="nt">Instance</a>, <a href="#Actor" class="nt">Actor</a>, <a href="#UseCase" class="nt">UseCase</a>, <a href="#UseCaseInstance" class="nt">UseCaseInstance</a>, <a href="#RelationShip" class="nt">RelationShip</a>, <a href="#Include" class="nt">Include</a>, <a href="#Extend" class="nt">Extend</a>, <a href="#BooleanExpression" class="nt">BooleanExpression</a>, <a href="#ModelElement" class="nt">ModelElement</a>, <a href="#ExtensionPoint" class="nt">ExtensionPoint</a>, <a href="#LocationReference" class="nt">LocationReference</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Classifier">Classifier</a>:
-        <span class="sel">instance</span>::<span class="meta">any</span><span class="meta">+</span>
+				</script></head><body><h1 class="l">Browsable UML Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Julien Baudry, <em>Use Cases 1.0</em>, <code>UML_UseCases.ecore</code>, 2006/07/10.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>16</strong></li><li>Number of top alternatives: <strong>16</strong></li><li>Number of defined nonterminal symbols: <strong>12</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>2</strong>: <code><a href="#RelationShip" class="nt">RelationShip</a>, <a href="#ModelElement" class="nt">ModelElement</a></code></li><li>Bottom nonterminal symbols: <strong>1</strong>: <code><a href="#String" class="nt">String</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Classifier">Classifier</a>:
+        <a class="nt" href="#Actor">Actor</a>
+</pre><pre><a class="nt" name="Classifier">Classifier</a>:
+        <a class="nt" href="#UseCase">UseCase</a>
+</pre><pre><a class="nt" name="Classifier">Classifier</a>:
+        <span class="sel">instance</span>::<a class="nt" href="#Instance">Instance</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Instance">Instance</a>:
-        <span class="sel">classifier</span>::<span class="meta">any</span><span class="meta">+</span>
+        <a class="nt" href="#UseCaseInstance">UseCaseInstance</a>
+</pre><pre><a class="nt" name="Instance">Instance</a>:
+        <span class="sel">classifier</span>::<a class="nt" href="#Classifier">Classifier</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Actor">Actor</a>:
         ε
 </pre><pre><a class="nt" name="UseCase">UseCase</a>:
-        <span class="sel">extensionPoint</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">includeAddition</span>::<span class="meta">any</span> <span class="sel">includeBase</span>::<span class="meta">any</span> <span class="sel">extendExtension</span>::<span class="meta">any</span> <span class="sel">extendBase</span>::<span class="meta">any</span> <span class="sel">extensionPoints</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">extensionPoint</span>::<a class="nt" href="#String">String</a><span class="meta">+</span> <span class="sel">includeAddition</span>::<a class="nt" href="#Include">Include</a> <span class="sel">includeBase</span>::<a class="nt" href="#Include">Include</a> <span class="sel">extendExtension</span>::<a class="nt" href="#Extend">Extend</a> <span class="sel">extendBase</span>::<a class="nt" href="#Extend">Extend</a> <span class="sel">extensionPoints</span>::<a class="nt" href="#ExtensionPoint">ExtensionPoint</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="UseCaseInstance">UseCaseInstance</a>:
         ε
 </pre><pre><a class="nt" name="RelationShip">RelationShip</a>:
-        ε
+        <a class="nt" href="#Include">Include</a>
+</pre><pre><a class="nt" name="RelationShip">RelationShip</a>:
+        <a class="nt" href="#Extend">Extend</a>
 </pre><pre><a class="nt" name="Include">Include</a>:
-        <span class="sel">addition</span>::<span class="meta">any</span> <span class="sel">base</span>::<span class="meta">any</span>
+        <span class="sel">addition</span>::<a class="nt" href="#UseCase">UseCase</a> <span class="sel">base</span>::<a class="nt" href="#UseCase">UseCase</a>
 </pre><pre><a class="nt" name="Extend">Extend</a>:
-        <span class="sel">condition</span>::<span class="meta">any</span> <span class="sel">extension</span>::<span class="meta">any</span> <span class="sel">base</span>::<span class="meta">any</span> <span class="sel">extensionPoint</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">condition</span>::<a class="nt" href="#BooleanExpression">BooleanExpression</a> <span class="sel">extension</span>::<a class="nt" href="#UseCase">UseCase</a> <span class="sel">base</span>::<a class="nt" href="#UseCase">UseCase</a> <span class="sel">extensionPoint</span>::<a class="nt" href="#ExtensionPoint">ExtensionPoint</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="BooleanExpression">BooleanExpression</a>:
-        <span class="sel">value</span>::<span class="meta">any</span>
+        <span class="sel">value</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="ModelElement">ModelElement</a>:
-        ε
+        <a class="nt" href="#ExtensionPoint">ExtensionPoint</a>
 </pre><pre><a class="nt" name="ExtensionPoint">ExtensionPoint</a>:
-        <span class="sel">location</span>::<span class="meta">any</span> <span class="sel">extend</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">useCase</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">location</span>::<a class="nt" href="#LocationReference">LocationReference</a> <span class="sel">extend</span>::<a class="nt" href="#Extend">Extend</a><span class="meta">+</span> <span class="sel">useCase</span>::<a class="nt" href="#UseCase">UseCase</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="LocationReference">LocationReference</a>:
-        <span class="sel">value</span>::<span class="meta">any</span>
+        <span class="sel">value</span>::<a class="nt" href="#String">String</a>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

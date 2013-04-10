@@ -2,36 +2,36 @@
 module SyncCharts
 
 syntax ModelElement
-        = 
-        ()
+        = Arc
+        | Vertex
  ;
 syntax SyncChart
         = 
-        ANY context ANY referenceState+
+        ModelElement context ReferenceState referenceState+
  ;
 syntax ReferenceState
         = 
-        ANY subSyncChart ANY containers
+        SyncChart subSyncChart Stg containers
  ;
 syntax Arc
-        = 
-        ()
+        = Transition
+        | PseudoTransition
  ;
 syntax Vertex
-        = 
-        ()
+        = PseudoState
+        | State
  ;
 syntax PseudoState
         = 
-        kind: ANY
+        kind: PseudoStateKind
  ;
 syntax PseudoStateKind
         = 
         ()
  ;
 syntax State
-        = 
-        isFinal: ANY
+        = SimpleState
+        | isFinal: Boolean
  ;
 syntax SimpleState
         = 
@@ -39,15 +39,15 @@ syntax SimpleState
  ;
 syntax CompositeState
         = 
-        ANY canTerminate ANY isSuspendable ANY stg+
+        Boolean canTerminate Boolean isSuspendable Stg stg+
  ;
 syntax Stg
         = 
-        ANY withFinal ANY compositeState ANY arc+ ANY referenceState+
+        Boolean withFinal CompositeState compositeState Arc arc+ ReferenceState referenceState+
  ;
 syntax Transition
         = 
-        kind: ANY
+        kind: TransitionKind
  ;
 syntax TransitionKind
         = 
@@ -55,7 +55,7 @@ syntax TransitionKind
  ;
 syntax PseudoTransition
         = 
-        kind: ANY
+        kind: PseudoTransitionKind
  ;
 syntax PseudoTransitionKind
         = 

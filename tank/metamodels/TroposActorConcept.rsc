@@ -3,11 +3,12 @@ module TroposActorConcept
 
 syntax Actor
         = 
-        ANY dependencyE+ ANY dependencyR+ ANY goal+ ANY plan+ ANY resource+
+        Dependency dependencyE+ Dependency dependencyR+ Goal goal+ Plan plan+ Resource resource+
  ;
 syntax Goal
-        = 
-        ANY wanter ANY plan+ ANY dependencyWG+ ANY dependencyG+
+        = SoftGoal
+        | HardGoal
+        | Actor wanter Plan plan+ Dependency dependencyWG+ Dependency dependencyG+
  ;
 syntax SoftGoal
         = 
@@ -19,13 +20,13 @@ syntax HardGoal
  ;
 syntax Dependency
         = 
-        ANY dependee ANY depender ANY goal ANY WhyG ANY WhyR ANY resourceD ANY WhyP ANY plan
+        Actor dependee Actor depender Goal goal Goal WhyG Resource WhyR Resource resourceD Plan WhyP Plan plan
  ;
 syntax Plan
         = 
-        ANY isFulfilled ANY capableOf ANY dependencyWP+ ANY dependencyP+
+        Goal isFulfilled Actor capableOf Dependency dependencyWP+ Dependency dependencyP+
  ;
 syntax Resource
         = 
-        ANY use ANY dependencyWR ANY dependencyR
+        Actor use Dependency dependencyWR Dependency dependencyR
  ;

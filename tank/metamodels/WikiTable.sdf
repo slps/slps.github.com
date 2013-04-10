@@ -4,12 +4,18 @@ exports
   sorts
         LocatedElement Table Caption Row Cell 
   context-free syntax
-         -> LocatedElement
+        Table -> LocatedElement
 
-        border::ANY style::ANY class::ANY caption::ANY rows::ANY+ -> Table
+        Caption -> LocatedElement
 
-        content::ANY -> Caption
+        Row -> LocatedElement
 
-        cells::ANY+ -> Row
+        Cell -> LocatedElement
 
-        isHeading::ANY align::ANY style::ANY content::ANY -> Cell
+        border::Integer style::String class::String caption::Caption rows::Row+ -> Table
+
+        content::String -> Caption
+
+        cells::Cell+ -> Row
+
+        isHeading::Boolean align::String style::String content::String -> Cell

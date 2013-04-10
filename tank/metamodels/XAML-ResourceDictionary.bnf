@@ -1,30 +1,38 @@
 Transformation:
-        EPSILON
+        TranslateTransform3D
+Transformation:
+        ScaleTransform3D
+Transformation:
+        RotateTransform3D
 WinFXElement:
-        EPSILON
+        Key
 NameSpace:
-        namespace::ANY identifier::ANY
+        namespace::String identifier::String
 ResourceGroup:
-        key::ANY
+        Transform3DGroup
+ResourceGroup:
+        MaterialGroup
+ResourceGroup:
+        key::Key
 Material:
-        EPSILON
+        DiffuseMaterial
 Key:
-        name::ANY
+        name::String
 ResourceDictionary:
-        resourcegroups::ANY+ xmlns::ANY+
+        resourcegroups::ResourceGroup+ xmlns::NameSpace+
 Transform3DGroup:
-        transformations::ANY+
+        transformations::Transformation+
 MaterialGroup:
-        materials::ANY+
+        materials::Material+
 DiffuseMaterial:
-        Brush::ANY
+        Brush::String
 TranslateTransform3D:
-        OffsetX::ANY OffsetY::ANY OffsetZ::ANY
+        OffsetX::Double OffsetY::Double OffsetZ::Double
 ScaleTransform3D:
-        ScaleX::ANY ScaleY::ANY ScaleZ::ANY
+        ScaleX::Double ScaleY::Double ScaleZ::Double
 RotateTransform3D:
-        CenterX::ANY CenterY::ANY rotation::ANY
+        CenterX::Double CenterY::Double rotation::RotateTransformat3DRotation
 RotateTransformat3DRotation:
-        axisAngleRotation3D::ANY
+        axisAngleRotation3D::AxisAngleRotation3D
 AxisAngleRotation3D:
-        angle::ANY axis::ANY
+        angle::Integer axis::String

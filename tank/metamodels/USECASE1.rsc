@@ -3,27 +3,27 @@ module USECASE1
 
 syntax Task
         = 
-        ANY service+
+        Service service+
  ;
 syntax User
         = 
-        ANY useCase+ ANY actor+
+        UseCase useCase+ Actor actor+
  ;
 syntax Actor
         = 
-        ANY useCase+ ANY goal+ ANY user+
+        UseCase useCase+ Goal goal+ User user+
  ;
 syntax Goal
         = 
-        ANY service+ ANY actor+
+        Service service+ Actor actor+
  ;
 syntax UseCase
         = 
-        ANY context ANY service+ ANY user+ ANY actor+
+        Context context Service service+ User user+ Actor actor+
  ;
 syntax Service
         = 
-        ANY useCase+ ANY goal+ ANY task+
+        UseCase useCase+ Goal goal+ Task task+
  ;
 syntax Scenario
         = 
@@ -31,23 +31,25 @@ syntax Scenario
  ;
 syntax Context
         = 
-        ANY preCondition+ ANY postCondition+ ANY useCase+
+        PreCondition preCondition+ PostCondition postCondition+ UseCase useCase+
  ;
 syntax PreCondition
         = 
-        ANY context+
+        Context context+
  ;
 syntax PostCondition
         = 
-        ANY context+
+        Context context+
  ;
 syntax Episode
         = 
-        ANY event+
+        Event event+
  ;
 syntax Event
-        = 
-        ANY episode+
+        = Action
+        | Responce
+        | Stimilus
+        | Episode episode+
  ;
 syntax Action
         = 
@@ -55,13 +57,13 @@ syntax Action
  ;
 syntax Responce
         = 
-        ANY parameter+
+        Parameter parameter+
  ;
 syntax Stimilus
         = 
-        ANY parameter+
+        Parameter parameter+
  ;
 syntax Parameter
         = 
-        ANY stimilus+ ANY responce+
+        Stimilus stimilus+ Responce responce+
  ;

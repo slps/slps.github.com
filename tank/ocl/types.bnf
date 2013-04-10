@@ -1,17 +1,37 @@
 Type:
-        EPSILON
+        BasicType
+Type:
+        InstanceType
+Type:
+        EnumType
+Type:
+        OclAnyType
+Type:
+        OclTypeType
+Type:
+        CollectionType
 BasicType:
-        EPSILON
+        IntegerType
+BasicType:
+        RealType
+BasicType:
+        StringType
+BasicType:
+        BooleanType
 InstanceType:
-        classifier::ANY
+        classifier::Classifier
 EnumType:
-        enumLiteral::ANY+
+        enumLiteral::EnumLiteral+
 OclAnyType:
-        supertype::ANY+ subtype::ANY+ collectionType::ANY+
+        supertype::Type+ subtype::Type+ collectionType::CollectionType+
 OclTypeType:
-        supertype::ANY+ subtype::ANY+ collectionType::ANY+
+        supertype::Type+ subtype::Type+ collectionType::CollectionType+
 CollectionType:
-        EPSILON
+        SetType
+CollectionType:
+        SequenceType
+CollectionType:
+        BagType
 IntegerType:
         
 RealType:
@@ -21,12 +41,12 @@ StringType:
 BooleanType:
         
 Classifier:
-        instanceType::ANY
+        instanceType::InstanceType
 EnumLiteral:
-        enumType::ANY
+        enumType::EnumType
 SetType:
-        elementType::ANY
+        elementType::Type
 SequenceType:
-        elementType::ANY
+        elementType::Type
 BagType:
-        elementType::ANY
+        elementType::Type

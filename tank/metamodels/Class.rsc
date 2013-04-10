@@ -2,22 +2,22 @@
 module Class
 
 syntax NamedElt
-        = 
-        ()
+        = Classifier
+        | Attribute
  ;
 syntax Classifier
-        = 
-        ()
+        = DataType
+        | Class
  ;
 syntax DataType
         = 
-        
+        ()
  ;
 syntax Class
         = 
-        ANY super+ ANY attr+ ANY isAbstract
+        Class super+ Attribute attr+ Boolean isAbstract
  ;
 syntax Attribute
         = 
-        ANY multiValued ANY type ANY owner
+        Boolean multiValued Classifier type Class owner
  ;

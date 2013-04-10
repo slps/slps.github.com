@@ -1,13 +1,27 @@
 OCCAM_Program:
-        occam_Elements::ANY+ files::ANY+
+        occam_Elements::OCCAM_Element+ files::File+
 OCCAM_Element:
-        name::ANY
+        Process
+OCCAM_Element:
+        Action
+OCCAM_Element:
+        Constructor
+OCCAM_Element:
+        DataType
+OCCAM_Element:
+        name::String
 Process:
-        declaration::ANY constructors::ANY+ parameters::ANY+ libraries::ANY+ toChannel::ANY
+        declaration::Declaration constructors::Constructor+ parameters::DataType+ libraries::Library+ toChannel::Channel
 Channel:
-        name::ANY type::ANY toServer::ANY toProcess::ANY
+        name::String type::String toServer::Server toProcess::Process
 Action:
-        constructor::ANY while::ANY if::ANY
+        Assignment
+Action:
+        Input
+Action:
+        Output
+Action:
+        constructor::Constructor while::While if::If
 Assignment:
         EPSILON
 Input:
@@ -15,15 +29,25 @@ Input:
 Output:
         EPSILON
 Constructor:
-        process::ANY actions::ANY+ buckels::ANY+ childrens::ANY+
+        Sequential
+Constructor:
+        Parallel
+Constructor:
+        Alternative
+Constructor:
+        process::Process actions::Action+ buckels::Buckel+ childrens::Constructor+
 Buckel:
-        constructor::ANY
+        If
+Buckel:
+        While
+Buckel:
+        constructor::Constructor
 If:
-        conditions::ANY+ actions::ANY+
+        conditions::Condition+ actions::Action+
 While:
-        conditions::ANY+ actions::ANY+
+        conditions::Condition+ actions::Action+
 Condition:
-        elementRight::ANY elementLeft::ANY typeCondition::ANY if::ANY while::ANY
+        elementRight::String elementLeft::String typeCondition::String if::If while::While
 Sequential:
         EPSILON
 Parallel:
@@ -31,12 +55,12 @@ Parallel:
 Alternative:
         EPSILON
 DataType:
-        dataType::ANY
+        dataType::String
 Library:
-        name::ANY
+        name::String
 File:
-        name::ANY
+        name::String
 Server:
-        name::ANY toChannel::ANY
+        name::String toChannel::Channel
 Declaration:
-        name::ANY process::ANY elements::ANY+
+        name::String process::Process elements::DataType+

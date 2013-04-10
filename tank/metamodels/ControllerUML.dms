@@ -1,9 +1,11 @@
-ControllerAttribute = controller::ANY ;
-Controller = controllerAttribute::ANY+ behavior::ANY ;
-StateMachine = states::ANY+ ;
-State = substates::ANY+ theContainer::ANY outGoing::ANY+ incoming::ANY+ ;
-SubControllerState = controller::ANY ;
+ControllerAttribute = controller::Controller ;
+Controller = controllerAttribute::ControllerAttribute+ behavior::StateMachine ;
+StateMachine = states::State+ ;
+State = SubControllerState ;
+State = ViewState ;
+State = substates::State+ theContainer::State outGoing::StateTransition+ incoming::StateTransition+ ;
+SubControllerState = controller::Controller ;
 ViewState = ;
-StateTransition = source::ANY target::ANY trigger::ANY effect::ANY ;
+StateTransition = source::State target::State trigger::Event effect::StateMachineAction ;
 StateMachineAction = ;
 Event = ;

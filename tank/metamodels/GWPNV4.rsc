@@ -14,8 +14,8 @@ syntax Net
         ANY place+ ANY transition+
  ;
 syntax Arc
-        = 
-        ()
+        = PTArc
+        | TPArc
  ;
 syntax PTArc
         = 

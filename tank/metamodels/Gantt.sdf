@@ -4,19 +4,19 @@ exports
   sorts
         Project Tasks Task Depend Ressource Date Allocation Vacation Description Previous 
   context-free syntax
-        name::ANY company::ANY viewDate::ANY viewIndex::ANY ganttDividerLocation::ANY ressourceDividerLocation::ANY webLink::ANY tasks::ANY ressources::ANY+ allocations::ANY+ -> Project
+        name::String company::String viewDate::Date viewIndex::Date ganttDividerLocation::Integer ressourceDividerLocation::Integer webLink::String tasks::Tasks ressources::Ressource+ allocations::Allocation+ -> Project
 
-        color::ANY tasks::ANY+ -> Tasks
+        color::String tasks::Task+ -> Tasks
 
-        id::ANY name::ANY meeting::ANY color::ANY expand::ANY complete::ANY duration::ANY priority::ANY start::ANY depends::ANY+ -> Task
+        id::String name::String meeting::Boolean color::String expand::Boolean complete::Integer duration::Integer priority::Integer start::Date depends::Depend+ -> Task
 
-        id::ANY type::ANY difference::ANY hardness::ANY task::ANY -> Depend
+        id::String type::Integer difference::Integer hardness::String task::Task -> Depend
 
-        Id::ANY name::ANY fonction::ANY contact::ANY phone::ANY -> Ressource
+        Id::String name::String fonction::String contact::String phone::String -> Ressource
 
-        year::ANY month::ANY day::ANY -> Date
+        year::Integer month::Integer day::Integer -> Date
 
-        taskId::ANY ressourceId::ANY name::ANY function::ANY responsible::ANY load::ANY -> Allocation
+        taskId::String ressourceId::String name::String function::String responsible::Boolean load::Integer -> Allocation
 
          -> Vacation
 

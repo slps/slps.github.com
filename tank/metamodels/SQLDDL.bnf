@@ -1,32 +1,52 @@
 LocatedElement:
-        EPSILON
+        NamedElement
+LocatedElement:
+        TableElement
+LocatedElement:
+        Value
 NamedElement:
-        EPSILON
+        Database
+NamedElement:
+        Table
+NamedElement:
+        Type
+NamedElement:
+        Parameter
 Database:
-        tables::ANY+
+        tables::Table+
 Table:
-        database::ANY referencedBy::ANY+ elements::ANY+ parameters::ANY+
+        database::Database referencedBy::ForeignKey+ elements::TableElement+ parameters::Parameter+
 TableElement:
-        EPSILON
+        Column
+TableElement:
+        Key
 Column:
-        referencedBy::ANY+ name::ANY type::ANY canBeNull::ANY default::ANY keys::ANY+
+        referencedBy::ForeignKey+ name::String type::Type canBeNull::Boolean default::Value keys::Key+
 Key:
-        EPSILON
+        SimpleKey
+Key:
+        PrimaryKey
+Key:
+        ForeignKey
 SimpleKey:
-        isUnique::ANY name::ANY columns::ANY+
+        isUnique::Boolean name::String columns::Column+
 PrimaryKey:
-        isUnique::ANY name::ANY columns::ANY+
+        isUnique::Boolean name::String columns::Column+
 ForeignKey:
-        referencedTable::ANY referencedColumns::ANY+
+        referencedTable::Table referencedColumns::Column+
 Type:
-        length::ANY isUnsigned::ANY
+        length::Integer isUnsigned::Boolean
 Parameter:
-        table::ANY value::ANY
+        table::Table value::Value
 Value:
-        EPSILON
+        IntegerVal
+Value:
+        NullVal
+Value:
+        StringVal
 IntegerVal:
-        value::ANY
+        value::Integer
 NullVal:
         
 StringVal:
-        value::ANY
+        value::String

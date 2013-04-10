@@ -2,40 +2,42 @@
 module Program
 
 syntax LocatedElement
-        = 
-        ()
+        = NamedElement
+        | Expression
+        | Statement
  ;
 syntax NamedElement
-        = 
-        ()
+        = Structure
+        | VariableDeclaration
+        | Type
  ;
 syntax Structure
-        = 
-        ()
+        = ProcContainerElement
+        | Procedure
  ;
 syntax ProcContainerElement
-        = 
-        ()
+        = Program
+        | Monitor
  ;
 syntax Program
         = 
-        ANY monitors+
+        Monitor monitors+
  ;
 syntax Monitor
         = 
-        program: ANY
+        program: Program
  ;
 syntax Procedure
         = 
-        ANY container ANY parameters+ ANY statements+
+        ProcContainerElement container Parameter parameters+ Statement statements+
  ;
 syntax VariableDeclaration
-        = 
-        ANY type ANY initialValue ANY structure
+        = Parameter
+        | Type type Expression initialValue Structure structure
  ;
 syntax Parameter
         = 
-        ANY direction ANY procedure
+        Direction direction Procedure procedure
  ;
 syntax Direction
         = in: ()
@@ -43,61 +45,65 @@ syntax Direction
  ;
 syntax Type
         = 
-        ANY name
+        name: String
  ;
 syntax Expression
-        = 
-        ()
+        = VariableExp
+        | PropertyCallExp
+        | LiteralExp
  ;
 syntax VariableExp
         = 
-        declaration: ANY
+        declaration: VariableDeclaration
  ;
 syntax PropertyCallExp
-        = 
-        ()
+        = OperatorCallExp
+        | AttributeCallExp
+        | ProcedureCallExp
  ;
 syntax OperatorCallExp
         = 
-        right: ANY
+        right: Expression
  ;
 syntax AttributeCallExp
         = 
-        ANY source ANY name
+        Expression source String name
  ;
 syntax ProcedureCallExp
         = 
-        ANY arguments+
+        Expression arguments+
  ;
 syntax LiteralExp
-        = 
-        ()
+        = BooleanExp
+        | IntegerExp
  ;
 syntax BooleanExp
         = 
-        symbol: ANY
+        symbol: Boolean
  ;
 syntax IntegerExp
         = 
-        symbol: ANY
+        symbol: Integer
  ;
 syntax Statement
-        = 
-        ()
+        = AssignmentStat
+        | ConditionalStat
+        | WhileStat
+        | ExpressionStat
  ;
 syntax AssignmentStat
         = 
-        ANY target ANY value
+        VariableExp target Expression value
  ;
 syntax ConditionalStat
         = 
-        ANY condition ANY thenStats+ ANY elseStats+
+        Expression condition Statement thenStats+ Statement elseStats+
  ;
 syntax WhileStat
         = 
-        ANY condition ANY doStats+
+        Expression condition Statement doStats+
  ;
 syntax ExpressionStat
         = 
-        expression: ANY
+        expression: Expression
  ;

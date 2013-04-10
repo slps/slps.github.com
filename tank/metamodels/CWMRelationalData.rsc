@@ -3,49 +3,52 @@ module CWMRelationalData
 
 syntax QueryExpression
         = 
-        expresssion: ANY
+        expresssion: String
  ;
 syntax CheckConstraint
         = 
-        ANY constraintElements+ ANY constrainedElements+
+        Column constraintElements+ Table constrainedElements+
  ;
 syntax Column
         = 
-        ANY precision ANY scale ANY isNullable ANY length ANY collectionName ANY characterSetName ANY column_constraints+ ANY type ANY owner ANY optionScopeColumnSet
+        Integer precision Integer scale Boolean isNullable Integer length String collectionName String characterSetName CheckConstraint column_constraints+ SQLDataType type ColumnSet owner NamedColumnSet optionScopeColumnSet
  ;
 syntax ColumnSet
-        = 
-        ANY features+
+        = NamedColumnSet
+        | QueryColumnSet
+        | Column features+
  ;
 syntax NamedColumnSet
-        = 
-        ANY optionScopeColumn ANY triggers+
+        = Table
+        | View
+        | Column optionScopeColumn Trigger triggers+
  ;
 syntax QueryColumnSet
         = 
-        query: ANY
+        query: QueryExpression
  ;
 syntax Table
         = 
-        ANY isTemporary ANY temporaryScope ANY isSystem ANY table_constraints+
+        Boolean isTemporary String temporaryScope Boolean isSystem CheckConstraint table_constraints+
  ;
 syntax View
         = 
-        ANY isReadOnly ANY checkOption ANY queryExpression
+        Boolean isReadOnly Boolean checkOption QueryExpression queryExpression
  ;
 syntax Trigger
         = 
-        namedColumnSet: ANY
+        namedColumnSet: NamedColumnSet
  ;
 syntax SQLDataType
-        = 
-        ANY typeNumber ANY structuralFeatures+
+        = SQLDistinctType
+        | SQLSimpleType
+        | Integer typeNumber Column structuralFeatures+
  ;
 syntax SQLDistinctType
         = 
-        ANY length ANY precision ANY scale ANY sqlSimpleType
+        Integer length Integer precision Integer scale SQLSimpleType sqlSimpleType
  ;
 syntax SQLSimpleType
         = 
-        ANY characterMaximumLength ANY characterOctetLength ANY numericPrecision ANY numericPrecisionRadix ANY numericScale ANY dateTimePrecision ANY sqlDistinctTypes+
+        Integer characterMaximumLength Integer characterOctetLength Integer numericPrecision Integer numericPrecisionRadix Integer numericScale Integer dateTimePrecision SQLDistinctType sqlDistinctTypes+
  ;

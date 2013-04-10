@@ -1,0 +1,65 @@
+module Main
+
+exports
+ context-free start-symbols program
+  sorts
+        Program Element Tag Tag-elements Singleton-tag Singleton-tag-end Singleton-id Comment-tag Comment-text Tag-beg Tag-end Attributes Attribute Attribute-id Equals-attribute-value Attribute-value Text Text-unit 
+  context-free syntax
+        Element* -> Program
+
+        Singleton-tag -> Element
+        Tag -> Element
+        Text -> Element
+        Comment-tag -> Element
+        Tag-beg -> Element
+        Tag-end -> Element
+
+        "<" Id Attributes ">" (NL IN) Tag-elements EX "</" Id ">" NL -> Tag
+
+        Element* -> Tag-elements
+
+        "<" Singleton-id Attributes ">" Singleton-tag-end? NL -> Singleton-tag
+        "<" Id Attributes "/>" NL -> Singleton-tag
+
+        "</" Singleton-id ">" -> Singleton-tag-end
+
+        "br" -> Singleton-id
+        "hr" -> Singleton-id
+        "|" "img" -> Singleton-id
+        "meta" -> Singleton-id
+        "base" -> Singleton-id
+        "basefont" -> Singleton-id
+        X-id -> Singleton-id
+        "dt" -> Singleton-id
+
+        "<!" Comment-text* ">" NL -> Comment-tag
+
+        Punctuation SP -> Comment-text
+        Token -> Comment-text
+
+        "<" Id Attributes ">" NL -> Tag-beg
+
+        "</" Id ">" NL -> Tag-end
+
+        SPOFF Attribute* SPON -> Attributes
+
+        SP Attribute-id Equals-attribute-value? -> Attribute
+
+        Id -> Attribute-id
+        X-id -> Attribute-id
+
+        "=" Attribute-value -> Equals-attribute-value
+
+        Stringlit -> Attribute-value
+        Number -> Attribute-value
+        Id -> Attribute-value
+        Url -> Attribute-value
+        Fileref -> Attribute-value
+
+        Text-unit+ NL -> Text
+
+        Punctuation SP -> Text-unit
+        ")" SP -> Text-unit
+        SP "(" -> Text-unit
+        Token -> Text-unit
+        "<" Number -> Text-unit

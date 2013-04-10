@@ -2,66 +2,73 @@
 module Types
 
 syntax Type
-        = 
-        ()
+        = BasicType
+        | InstanceType
+        | EnumType
+        | OclAnyType
+        | OclTypeType
+        | CollectionType
  ;
 syntax BasicType
-        = 
-        ()
+        = IntegerType
+        | RealType
+        | StringType
+        | BooleanType
  ;
 syntax InstanceType
         = 
-        classifier: ANY
+        classifier: Classifier
  ;
 syntax EnumType
         = 
-        ANY enumLiteral+
+        EnumLiteral enumLiteral+
  ;
 syntax OclAnyType
         = 
-        ANY supertype+ ANY subtype+ ANY collectionType+
+        Type supertype+ Type subtype+ CollectionType collectionType+
  ;
 syntax OclTypeType
         = 
-        ANY supertype+ ANY subtype+ ANY collectionType+
+        Type supertype+ Type subtype+ CollectionType collectionType+
  ;
 syntax CollectionType
-        = 
-        ()
+        = SetType
+        | SequenceType
+        | BagType
  ;
 syntax IntegerType
         = 
-        
+        ()
  ;
 syntax RealType
         = 
-        
+        ()
  ;
 syntax StringType
         = 
-        
+        ()
  ;
 syntax BooleanType
         = 
-        
+        ()
  ;
 syntax Classifier
         = 
-        instanceType: ANY
+        instanceType: InstanceType
  ;
 syntax EnumLiteral
         = 
-        enumType: ANY
+        enumType: EnumType
  ;
 syntax SetType
         = 
-        ANY elementType
+        elementType: Type
  ;
 syntax SequenceType
         = 
-        ANY elementType
+        elementType: Type
  ;
 syntax BagType
         = 
-        ANY elementType
+        elementType: Type
  ;

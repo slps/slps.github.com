@@ -3,39 +3,40 @@ module TroposGoalAndPlanConcepts
 
 syntax Actor
         = 
-        ANY decomposition+ ANY contribution+ ANY meansEnd+
+        Decomposition decomposition+ Contribution contribution+ MeansEnd meansEnd+
  ;
 syntax Decomposition
-        = 
-        PointOfView: ANY
+        = BooleanDecomposition
+        | PointOfView: Actor
  ;
 syntax Contribution
         = 
-        ANY metric ANY contributer ANY contributed ANY PointOfView
+        String metric Goal contributer Goal contributed Actor PointOfView
  ;
 syntax Goal
         = 
-        ANY contributionR+ ANY contributionD+ ANY meansEndS+ ANY meansEndD+ ANY booleanDecomposition ANY booleanDecLink+
+        Contribution contributionR+ Contribution contributionD+ MeansEnd meansEndS+ MeansEnd meansEndD+ BooleanDecomposition booleanDecomposition BooleanDecLink booleanDecLink+
  ;
 syntax MeansEnd
         = 
-        ANY meansR ANY means ANY end ANY PointOfView ANY meansP
+        Resource meansR Goal means Goal end Actor PointOfView Plan meansP
  ;
 syntax Resource
         = 
-        ANY meansEndR+
+        MeansEnd meansEndR+
  ;
 syntax Plan
         = 
-        ANY meansEndP+ ANY booleanDecompositionP ANY booleanDecLinkP+
+        MeansEnd meansEndP+ BooleanDecomposition booleanDecompositionP BooleanDecLink booleanDecLinkP+
  ;
 syntax BooleanDecomposition
         = 
-        ANY type ANY root ANY rootP ANY booleanDecLinkD+
+        String type Goal root Plan rootP BooleanDecLink booleanDecLinkD+
  ;
 syntax BooleanDecLink
-        = 
-        ANY booleanDecompositionB ANY target ANY targetP
+        = AndDecLink
+        | OrDecLink
+        | BooleanDecomposition booleanDecompositionB Goal target Plan targetP
  ;
 syntax AndDecLink
         = 

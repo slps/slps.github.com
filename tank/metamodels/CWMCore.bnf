@@ -3,25 +3,47 @@ VisibilityKind:
         vk_private_vis::EPSILON
         vk_protected_vis::EPSILON
 BooleanExpression:
-        expresssion::ANY
+        expresssion::String
 ModelElement:
-        name::ANY visibility::ANY contraints::ANY+ clientDependencies::ANY+ supplierDependencies::ANY+ namespace::ANY importers::ANY+
+        Dependency
+ModelElement:
+        Constraint
+ModelElement:
+        Feature
+ModelElement:
+        NameSpace
+ModelElement:
+        name::String visibility::VisibilityKind contraints::Constraint+ clientDependencies::Dependency+ supplierDependencies::Dependency+ namespace::NameSpace importers::Package+
 Dependency:
-        kind::ANY clients::ANY+ suppliers::ANY+
+        kind::String clients::ModelElement+ suppliers::ModelElement+
 Constraint:
-        body::ANY constrainedElements::ANY+
+        body::BooleanExpression constrainedElements::ModelElement+
 Feature:
-        owner::ANY
+        StructuralFeature
+Feature:
+        owner::Classifier
 StructuralFeature:
-        type::ANY
+        Attribute
+StructuralFeature:
+        type::Classifier
 Attribute:
         EPSILON
 NameSpace:
-        ownedElements::ANY+
+        Classifier
+NameSpace:
+        Package
+NameSpace:
+        ownedElements::ModelElement+
 Classifier:
-        features::ANY+
+        Class
+Classifier:
+        Datatype
+Classifier:
+        features::Feature+
 Package:
-        importedElements::ANY+
+        Model
+Package:
+        importedElements::ModelElement+
 Class:
         EPSILON
 Datatype:

@@ -3,19 +3,21 @@ module ATOM
 
 syntax ATOM
         = 
-        ANY title ANY id ANY subtitle ANY rights ANY icon ANY logo ANY links+ ANY lastUpdate ANY generator ANY categories+ ANY authors+ ANY contibutors+ ANY entries+
+        String title String id String subtitle String rights String icon String logo Link links+ Date lastUpdate Generator generator Category categories+ Author authors+ Contributor contibutors+ Entry entries+
  ;
 syntax Entry
         = 
-        ANY title ANY id ANY rights ANY summary ANY links+ ANY source ANY published ANY lastUpdate ANY content ANY categories+ ANY authors+ ANY contibutors+ ANY atom
+        String title String id String rights String summary Link links+ Source source Date published Date lastUpdate Content content Category categories+ Author authors+ Contributor contibutors+ ATOM atom
  ;
 syntax Source
         = 
-        ANY id ANY icon ANY logo ANY rights ANY title ANY subtitle ANY links+ ANY lastUpdate ANY generator ANY contributors+ ANY categories+ ANY author
+        String id String icon String logo String rights String title String subtitle Link links+ Date lastUpdate Generator generator Contributor contributors+ Category categories+ Author author
  ;
 syntax Content
-        = 
-        type: ANY
+        = InLineXHTMLContent
+        | InLineOtherContent
+        | OutOfLineContent
+        | type: String
  ;
 syntax InLineXHTMLContent
         = 
@@ -27,23 +29,24 @@ syntax InLineOtherContent
  ;
 syntax OutOfLineContent
         = 
-        src: ANY
+        src: String
  ;
 syntax Generator
         = 
-        ANY uri ANY version
+        String uri String version
  ;
 syntax Category
         = 
-        ANY term ANY scheme ANY label
+        String term String scheme String label
  ;
 syntax Link
         = 
-        ANY href ANY rel ANY type ANY hreflang ANY title ANY lenght
+        String href String rel String type String hreflang String title Integer lenght
  ;
 syntax Person
-        = 
-        ANY name ANY uri ANY email
+        = Author
+        | Contributor
+        | String name String uri String email
  ;
 syntax Author
         = 
@@ -55,5 +58,5 @@ syntax Contributor
  ;
 syntax Date
         = 
-        ANY day ANY month ANY year ANY hours ANY minutes ANY seconds
+        Integer day Integer month Integer year Integer hours Integer minutes Integer seconds
  ;

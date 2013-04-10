@@ -1,0 +1,356 @@
+module Main
+
+exports
+  sorts
+        ValuedElement CDATA PCDATA NMTOKEN IDREF IDREFS ID EMPTY ContentType ContentTypes Charset Charsets LanguageCode Character Number LinkTypes MediaDesc URI UriList Datetime ScriptExpression StyleSheet Text Length MultiLength Pixels Shape Coords Direction Attrs Inline Html Head HeadElement TitleHeadElement BaseTitleHeadElement BaseHeadElement TitleBaseHeadElement Title Base Meta Link Style Script Noscript Body Div P H1 H2 H3 H4 H5 H6 Ul Ol Li Dl DlElement Dt Dd Address Hr Pre Blockquote Ins Del A Span Bdo Br Em Strong Dfn Code Samp Kbd Var Cite Abbr Acronym Q Sub Sup Tt I B Big Small Object ValueType Param Img MapContent Map Area FomeMethod Form Label InputType Input Select Optgroup Option Textarea Fieldset Legend ButtonType Button TFrame TRules CellHAlign CellVAlign Table ColElement TableElement Caption Thead Tfoot Tbody Colgroup Col Tr Scope Th Td 
+  context-free syntax
+        CDATA -> ValuedElement
+
+        PCDATA -> ValuedElement
+
+        NMTOKEN -> ValuedElement
+
+        IDREF -> ValuedElement
+
+        ID -> ValuedElement
+
+        ContentType -> CDATA
+
+        Charset -> CDATA
+
+        Character -> CDATA
+
+        Number -> CDATA
+
+        LinkTypes -> CDATA
+
+        MediaDesc -> CDATA
+
+        URI -> CDATA
+
+        Datetime -> CDATA
+
+        ScriptExpression -> CDATA
+
+        StyleSheet -> CDATA
+
+        Text -> CDATA
+
+        Length -> CDATA
+
+        MultiLength -> CDATA
+
+        Pixels -> CDATA
+
+        ContentType -> CDATA
+        Charset -> CDATA
+        Character -> CDATA
+        Number -> CDATA
+        LinkTypes -> CDATA
+        MediaDesc -> CDATA
+        URI -> CDATA
+        Datetime -> CDATA
+        ScriptExpression -> CDATA
+        StyleSheet -> CDATA
+        Text -> CDATA
+        Length -> CDATA
+        MultiLength -> CDATA
+        Pixels -> CDATA
+
+        Title -> PCDATA
+
+        LanguageCode -> NMTOKEN
+
+        value::String -> IDREF
+
+        idrefs::IDREF+ -> IDREFS
+
+        value::String -> ID
+
+        Base -> EMPTY
+
+         -> ContentType
+
+        contentTypes::ContentType -> ContentTypes
+
+         -> Charset
+
+        charsets::Charset -> Charsets
+
+         -> LanguageCode
+
+         -> Character
+
+         -> Number
+
+         -> LinkTypes
+
+         -> MediaDesc
+
+         -> URI
+
+        uris::URI -> UriList
+
+         -> Datetime
+
+         -> ScriptExpression
+
+         -> StyleSheet
+
+         -> Text
+
+         -> Length
+
+         -> MultiLength
+
+         -> Pixels
+
+        rect:: -> Shape
+        circle:: -> Shape
+        poly:: -> Shape
+        default:: -> Shape
+
+        lengths::Length -> Coords
+
+        ltr:: -> Direction
+        rtl:: -> Direction
+
+        Body -> Attrs
+
+        Li -> Attrs
+
+        DlElement -> Attrs
+
+        Caption -> Attrs
+
+        Inline -> Inline
+
+        i18n::I18n id::ID xmlns::URI head::Head body::Body -> Html
+
+        i18n::I18n id::ID profile::URI headmisc::HeadMisc+ headelement::HeadElement html::Html -> Head
+
+        TitleHeadElement -> HeadElement
+
+        BaseHeadElement -> HeadElement
+
+        title::Title headmisc::HeadMisc+ baseTitleHeadElement::BaseTitleHeadElement+ -> TitleHeadElement
+
+        base::Base headmisc::HeadMisc+ -> BaseTitleHeadElement
+
+        base::Base headmisc::HeadMisc+ titleBaseHeadElement::TitleBaseHeadElement+ -> BaseHeadElement
+
+        title::Title headmisc::HeadMisc+ -> TitleBaseHeadElement
+
+        i18n::I18n id::ID -> Title
+
+        href::URI id::ID -> Base
+
+        i18n::I18n id::ID httpequiv::CDATA name::CDATA content::CDATA scheme::CDATA -> Meta
+
+        charset::Charset href::URI hreflang::LanguageCode type::ContentType rel::LinkTypes rev::LinkTypes media::MediaDesc -> Link
+
+        i18n::I18n id::ID type::ContentType media::MediaDesc title::Text xml:space::String -> Style
+
+        id::ID charset::Charset type::ContentType src::URI defer::String xml:space::String -> Script
+
+        block::Block -> Noscript
+
+        bodyElements::Block+ onload::ScriptExpression onunload::ScriptExpression html::Html -> Body
+
+        divElements::Flow+ -> Div
+
+        pElements::Inline+ -> P
+
+        h1Elements::Inline+ -> H1
+
+        h2Elements::Inline+ -> H2
+
+        h3Elements::Inline+ -> H3
+
+        h4Elements::Inline+ -> H4
+
+        h5Elements::Inline+ -> H5
+
+        h6Elements::Inline+ -> H6
+
+        li::Li+ -> Ul
+
+        li::Li+ -> Ol
+
+        liElements::Flow+ -> Li
+
+        dlElements::DlElement+ -> Dl
+
+        Dt -> DlElement
+
+        Dd -> DlElement
+
+        dtElements::Inline+ -> Dt
+
+        ddElements::Flow+ -> Dd
+
+        addressElements::Inline+ -> Address
+
+         -> Hr
+
+        preElements::PreContent+ xml:space::String -> Pre
+
+        blockquoteElements::Block+ cite::URI -> Blockquote
+
+        flowelement::Flow+ cite::URI datetime::Datetime -> Ins
+
+        flowelement::Flow+ cite::URI datetime::Datetime -> Del
+
+        acontent::AContent+ charset::Charset type::ContentType name::NMTOKEN href::URI hreflang::LanguageCode rel::LinkTypes rev::LinkTypes shape::Shape coords::Coords -> A
+
+        spanElements::Inline+ -> Span
+
+        bdoElements::Inline+ lang::LanguageCode xml:lang::LanguageCode dir::Direction -> Bdo
+
+         -> Br
+
+        emElements::Inline+ -> Em
+
+        strongElements::Inline+ -> Strong
+
+        dfnElements::Inline+ -> Dfn
+
+        codeElements::Inline+ -> Code
+
+        sampElements::Inline+ -> Samp
+
+        kbdElements::Inline+ -> Kbd
+
+        varElements::Inline+ -> Var
+
+        citeElements::Inline+ -> Cite
+
+        abbrElements::Inline+ -> Abbr
+
+        acronymElements::Inline+ -> Acronym
+
+        qElements::Inline+ cite::URI -> Q
+
+        subElements::Inline+ -> Sub
+
+        supElements::Inline+ -> Sup
+
+        ttElements::Inline+ -> Tt
+
+        iElements::Inline+ -> I
+
+        bElements::Inline+ -> B
+
+        bigElements::Inline+ -> Big
+
+        smallElements::Inline+ -> Small
+
+        objectelement::ObjectElement+ declare::Boolean classid::URI codebase::URI data::URI type::ContentType codetype::ContentType archive::UriList standby::Text height::Length width::Length usemap::URI name::NMTOKEN tabindex::Number -> Object
+
+        data:: -> ValueType
+        ref:: -> ValueType
+        object:: -> ValueType
+
+        id::ID name::CDATA value::CDATA valuetype::ValueType type::ContentType -> Param
+
+        src::URI alt::Text longdesc::URI height::Length width::Length usemap::URI ismap::Boolean -> Img
+
+        mapElements::MapElement+ -> MapContent
+
+        mapelement::MapContent id::ID class::CDATA style::StyleSheet title::Text name::NMTOKEN -> Map
+
+        shape::Shape coords::Coords href::URI nohref::Boolean alt::Text -> Area
+
+        get:: -> FomeMethod
+        post:: -> FomeMethod
+
+        formelement::FormContent+ action::URI method::FomeMethod enctype::ContentType onsubmit::ScriptExpression onreset::ScriptExpression accept::ContentTypes accept-charset::Charsets -> Form
+
+        labelelements::Inline+ for::IDREF accesskey::Character onfocus::ScriptExpression onblur::ScriptExpression -> Label
+
+        text:: -> InputType
+        password:: -> InputType
+        checkbox:: -> InputType
+        radio:: -> InputType
+        submit:: -> InputType
+        reset:: -> InputType
+        file:: -> InputType
+        hidden:: -> InputType
+        image:: -> InputType
+        button:: -> InputType
+
+        type::InputType name::CDATA value::CDATA checked::Boolean disabled::Boolean readonly::Boolean size::CDATA maxlength::Number src::URI alt::CDATA usemap::URI onselect::ScriptExpression onchange::ScriptExpression accept::ContentTypes -> Input
+
+        selectelement::SelectElement+ name::CDATA size::Number multiple::Boolean disabled::Boolean tabindex::Number onfocus::ScriptExpression onblur::ScriptExpression onchange::ScriptExpression -> Select
+
+        options::Option+ disabled::Boolean label::Text -> Optgroup
+
+        selected::Boolean disabled::Boolean label::Text optionvalue::CDATA -> Option
+
+        name::CDATA rows::Number cols::Number disabled::Boolean readonly::Boolean onselect::ScriptExpression onchange::ScriptExpression -> Textarea
+
+        fieldsetelements::FieldsetElement+ -> Fieldset
+
+        legendelement::Inline+ accesskey::Character -> Legend
+
+        button:: -> ButtonType
+        submit:: -> ButtonType
+        reset:: -> ButtonType
+
+        buttoncontent::ButtonContent+ name::CDATA value::CDATA type::ButtonType disabled::Boolean -> Button
+
+        void:: -> TFrame
+        above:: -> TFrame
+        below:: -> TFrame
+        hsides:: -> TFrame
+        lhs:: -> TFrame
+        rhs:: -> TFrame
+        vsides:: -> TFrame
+        box:: -> TFrame
+        border:: -> TFrame
+
+        none:: -> TRules
+        groups:: -> TRules
+        rows:: -> TRules
+        cols:: -> TRules
+        all:: -> TRules
+
+        left:: -> CellHAlign
+        center:: -> CellHAlign
+        right:: -> CellHAlign
+        justify:: -> CellHAlign
+        char:: -> CellHAlign
+
+        top:: -> CellVAlign
+        middle:: -> CellVAlign
+        bottom:: -> CellVAlign
+        baseline:: -> CellVAlign
+
+        caption::Caption+ colelement::ColElement thead::Thead tfoot::Tfoot tableelement::TableElement summary::Text width::Length border::Pixels frame::TFrame rules::TRules cellspacing::Length cellpadding::Length -> Table
+
+        cols::Col+ colgroup::Colgroup+ -> ColElement
+
+        tbody::Tbody+ tr::Tr+ -> TableElement
+
+        captionelement::Inline+ -> Caption
+
+        tr::Tr+ -> Thead
+
+        tr::Tr+ -> Tfoot
+
+        tr::Tr+ -> Tbody
+
+        cols::Col+ span::Number width::MultiLength -> Colgroup
+
+        span::Number width::MultiLength -> Col
+
+        trelements::TrElement+ -> Tr
+
+        row:: -> Scope
+        col:: -> Scope
+        rowgroup:: -> Scope
+        colgroup:: -> Scope
+
+        thelement::Flow+ abbr::Text axis::CDATA headers::IDREFS scope::Scope rowspan::Number colspan::Number -> Th
+
+        tdelement::Flow+ abbr::Text axis::CDATA headers::IDREFS scope::Scope rowspan::Number colspan::Number -> Td

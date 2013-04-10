@@ -1,73 +1,172 @@
 Entity:
-        EPSILON
+        NamedElement
+Entity:
+        Comment
+Entity:
+        Property
+Entity:
+        DataType
+Entity:
+        ConnectorEnd
+Entity:
+        Interface
+Entity:
+        Classifier
+Entity:
+        InformationFlow
+Entity:
+        Parameter
+Entity:
+        ActivityEdge
+Entity:
+        ParameterSet
+Entity:
+        InstanceSpecification
+Entity:
+        ValueSpecification
+Entity:
+        Behavior
+Entity:
+        Operation
+Entity:
+        ObjectNode
+Entity:
+        Abstraction
+Entity:
+        ActivityPartition
+Entity:
+        Trace
+Entity:
+        Realization
 NamedElement:
-        EPSILON
+        Dependency
+NamedElement:
+        Package
+NamedElement:
+        Allocated
+NamedElement:
+        RequirementRelated
 Dependency:
-        name::ANY
+        Conform
+Dependency:
+        Conform
 Conform:
-        target::ANY source::ANY
+        target::Viewpoint source::View
 Package:
-        name::ANY
+        View
+Package:
+        View
 View:
-        conformsTo::ANY
+        conformsTo::Viewpoint
 Class:
-        name::ANY
+        Viewpoint
+Class:
+        Block
+Class:
+        Requirement
+Class:
+        name::String
 Viewpoint:
-        stakeholders::ANY+ purpose::ANY concerns::ANY+ languages::ANY+ methods::ANY+
+        stakeholders::String+ purpose::String concerns::String+ languages::String+ methods::String+
 Comment:
-        content::ANY
+        Rationale
+Comment:
+        Problem
+Comment:
+        content::String
 Rationale:
         EPSILON
 Problem:
         EPSILON
 Block:
-        isEncapsulated::ANY
+        ConstraintBlock
+Block:
+        isEncapsulated::Boolean
 ConstraintBlock:
         EPSILON
 Property:
-        
+        BlockProperty
+Property:
+        Port
+Property:
+        FlowProperty
+Property:
+        BlockProperty
+        Port
+        FlowProperty
 BlockProperty:
-        EPSILON
+        ConstraintProperty
+BlockProperty:
+        DistributedProperty
+BlockProperty:
+        ConstraintProperty
+        DistributedProperty
 ConstraintProperty:
         EPSILON
 DistributedProperty:
-        EPSILON
+        BasicInterval
+DistributedProperty:
+        Normal
+DistributedProperty:
+        BasicInterval
+        Normal
 DataType:
-        
+        ValueType
+DataType:
+        ValueType
 ValueType:
-        unit::ANY dimension::ANY
+        Unit
+ValueType:
+        Dimension
+ValueType:
+        unit::Unit dimension::Dimension
 Unit:
         EPSILON
 Dimension:
         EPSILON
 ConnectorEnd:
-        
+        NestedConnectorEnd
+ConnectorEnd:
+        NestedConnectorEnd
 NestedConnectorEnd:
-        propertyPath::ANY
+        propertyPath::Property
 Port:
-        isBehavior::ANY
+        FlowPort
+Port:
+        isBehavior::Boolean
 FlowPort:
-        isAtomic::ANY direction::ANY isConjugated::ANY
+        isAtomic::Boolean direction::FlowDirection isConjugated::Boolean
 FlowProperty:
-        direction::ANY
+        direction::FlowDirection
 Interface:
-        
+        FlowSpecification
+Interface:
+        FlowSpecification
 FlowSpecification:
-        ownedFlowProperty::ANY+
+        ownedFlowProperty::FlowProperty+
 FlowDirection:
         in::EPSILON
         out::EPSILON
         inout::EPSILON
 Classifier:
-        
+        Class
+Classifier:
+        InformationItem
+Classifier:
+        Class
+        InformationItem
 InformationItem:
-        represented::ANY+
+        represented::Classifier+
 InformationFlow:
-        conveyed::ANY+ source::ANY+ target::ANY+
+        ItemFlow
+InformationFlow:
+        conveyed::Classifier+ source::NamedElement+ target::NamedElement+
 ItemFlow:
-        itemProperty::ANY
+        itemProperty::BlockProperty
 Parameter:
-        
+        Optional
+Parameter:
+        Optional
 ActivityEdge:
         
 ParameterSet:
@@ -75,7 +174,11 @@ ParameterSet:
 Optional:
         EPSILON
 Rate:
-        instance::ANY
+        Continous
+Rate:
+        Discrete
+Rate:
+        instance::InstanceSpecification
 InstanceSpecification:
         
 Continous:
@@ -83,7 +186,7 @@ Continous:
 Discrete:
         EPSILON
 Probability:
-        probability::ANY
+        probability::ValueSpecification
 ValueSpecification:
         
 Behavior:
@@ -93,23 +196,40 @@ Operation:
 ControlOperation:
         EPSILON
 ObjectNode:
-        
+        NoBuffer
+ObjectNode:
+        Overwrite
+ObjectNode:
+        NoBuffer
+        Overwrite
 NoBuffer:
         EPSILON
 Overwrite:
         EPSILON
 Abstraction:
-        
+        Allocate
+Abstraction:
+        Allocate
 Allocate:
         EPSILON
 Allocated:
-        allocatedFrom::ANY+ allocatedTo::ANY+
+        allocatedFrom::NamedElement+ allocatedTo::NamedElement+
 ActivityPartition:
-        
+        AllocateActivityPartition
+ActivityPartition:
+        AllocateActivityPartition
 AllocateActivityPartition:
         EPSILON
 Trace:
-        
+        DeriveReqt
+Trace:
+        Verify
+Trace:
+        Copy
+Trace:
+        DeriveReqt
+        Verify
+        Copy
 DeriveReqt:
         EPSILON
 Verify:
@@ -117,20 +237,26 @@ Verify:
 Copy:
         EPSILON
 Realization:
-        
+        Satisfy
+Realization:
+        Satisfy
 Satisfy:
         EPSILON
 Requirement:
-        text::ANY id::ANY derived::ANY+ derivedFrom::ANY+ satisfiedBy::ANY+ refinedBy::ANY+ tracedTo::ANY+ verifiedBy::ANY+ master::ANY
+        text::String id::String derived::Requirement+ derivedFrom::Requirement+ satisfiedBy::NamedElement+ refinedBy::NamedElement+ tracedTo::NamedElement+ verifiedBy::TestCase+ master::Requirement
 TestCase:
         EPSILON
 RequirementRelated:
-        verifies::ANY+ tracedFrom::ANY+ satisfies::ANY+ refines::ANY+
+        verifies::Requirement+ tracedFrom::Requirement+ satisfies::Requirement+ refines::Requirement+
 BasicInterval:
-        min::ANY max::ANY
+        Interval
+BasicInterval:
+        Uniform
+BasicInterval:
+        min::Integer max::Integer
 Interval:
         EPSILON
 Uniform:
         EPSILON
 Normal:
-        mean::ANY standardDeviation::ANY
+        mean::Integer standardDeviation::Integer

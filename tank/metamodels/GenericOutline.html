@@ -13,17 +13,25 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable Generic Outline 0.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Julien Bernier, Manuel Boillod, Joanny Christ, Sylvain Leduby, <code>GenericOutline.ecore</code>, 2005/02/01.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>6</strong></li><li>Number of top alternatives: <strong>6</strong></li><li>Number of defined nonterminal symbols: <strong>6</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>6</strong>: <code><a href="#LocatedElement" class="nt">LocatedElement</a>, <a href="#Outline" class="nt">Outline</a>, <a href="#Node" class="nt">Node</a>, <a href="#Label" class="nt">Label</a>, <a href="#LabelSuite" class="nt">LabelSuite</a>, <a href="#Map" class="nt">Map</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
-        ε
+				</script></head><body><h1 class="l">Browsable Generic Outline 0.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Julien Bernier, Manuel Boillod, Joanny Christ, Sylvain Leduby, <code>GenericOutline.ecore</code>, 2005/02/01.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>10</strong></li><li>Number of top alternatives: <strong>10</strong></li><li>Number of defined nonterminal symbols: <strong>6</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#LocatedElement" class="nt">LocatedElement</a></code></li><li>Bottom nonterminal symbols: <strong>1</strong>: <code><a href="#String" class="nt">String</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
+        <a class="nt" href="#Outline">Outline</a>
+</pre><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
+        <a class="nt" href="#Node">Node</a>
+</pre><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
+        <a class="nt" href="#Label">Label</a>
+</pre><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
+        <a class="nt" href="#LabelSuite">LabelSuite</a>
+</pre><pre><a class="nt" name="LocatedElement">LocatedElement</a>:
+        <a class="nt" href="#Map">Map</a>
 </pre><pre><a class="nt" name="Outline">Outline</a>:
-        <span class="sel">extension</span>::<span class="meta">any</span> <span class="sel">nodes</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">extension</span>::<a class="nt" href="#String">String</a> <span class="sel">nodes</span>::<a class="nt" href="#Node">Node</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Node">Node</a>:
-        <span class="sel">name</span>::<span class="meta">any</span> <span class="sel">label</span>::<span class="meta">any</span> <span class="sel">icon</span>::<span class="meta">any</span> <span class="sel">outline</span>::<span class="meta">any</span> <span class="sel">mapping</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">label</span>::<a class="nt" href="#Label">Label</a> <span class="sel">icon</span>::<a class="nt" href="#String">String</a> <span class="sel">outline</span>::<a class="nt" href="#Outline">Outline</a> <span class="sel">mapping</span>::<a class="nt" href="#Map">Map</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Label">Label</a>:
-        <span class="sel">label</span>::<span class="meta">any</span> <span class="sel">methodCall</span>::<span class="meta">any</span> <span class="sel">labelSuite</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">label</span>::<a class="nt" href="#String">String</a> <span class="sel">methodCall</span>::<a class="nt" href="#String">String</a> <span class="sel">labelSuite</span>::<a class="nt" href="#LabelSuite">LabelSuite</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="LabelSuite">LabelSuite</a>:
-        <span class="sel">label</span>::<span class="meta">any</span> <span class="sel">methodCall</span>::<span class="meta">any</span>
+        <span class="sel">label</span>::<a class="nt" href="#String">String</a> <span class="sel">methodCall</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Map">Map</a>:
-        <span class="sel">mapString</span>::<span class="meta">any</span>
+        <span class="sel">mapString</span>::<a class="nt" href="#String">String</a>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

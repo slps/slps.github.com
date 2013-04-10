@@ -6,50 +6,50 @@ syntax Package
         ()
  ;
 syntax ProviderClause
-        = 
-        ANY ownedEltColl ANY ownedEltInt+
+        = Package
+        | CollaborationPackage ownedEltColl InteractionPackage ownedEltInt+
  ;
 syntax CollaborationPackage
         = 
-        ownedElt: ANY
+        ownedElt: Collaboration
  ;
 syntax Collaboration
         = 
-        ANY interaction+ ANY ownedEltAss ANY ownedEltClass
+        Interaction interaction+ AssociationRole ownedEltAss ClassifierRole ownedEltClass
  ;
 syntax InteractionPackage
         = 
-        ANY providerClause ANY ownedElt
+        ProviderClause providerClause Interaction ownedElt
  ;
 syntax Interaction
         = 
-        ANY context ANY message+
+        Collaboration context Message message+
  ;
 syntax AssociationRole
         = 
-        connection: ANY
+        connection: AssociationEndRole
  ;
 syntax ClassifierRole
         = 
-        ANY associationEndRole+ ANY receiverMess ANY senderMess ANY availableFeature+ ANY base
+        AssociationEndRole associationEndRole+ Message receiverMess Message senderMess Operation availableFeature+ Interface base
  ;
 syntax AssociationEndRole
         = 
-        ANY associationRole ANY type
+        AssociationRole associationRole ClassifierRole type
  ;
 syntax Message
         = 
-        ANY message+ ANY activator ANY interaction+ ANY receiver ANY sender ANY specification
+        Message message+ Message activator Interaction interaction+ ClassifierRole receiver ClassifierRole sender Request specification
  ;
 syntax Request
-        = 
-        ANY message+
+        = Operation
+        | Message message+
  ;
 syntax Operation
         = 
-        ANY classifierRole+ ANY owner
+        ClassifierRole classifierRole+ Interface owner
  ;
 syntax Interface
         = 
-        ANY classifierRole+ ANY feature+
+        ClassifierRole classifierRole+ Operation feature+
  ;

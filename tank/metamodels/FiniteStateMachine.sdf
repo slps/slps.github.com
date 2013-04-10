@@ -4,14 +4,20 @@ exports
   sorts
         MgaObject Transition State StateMachine RootFolder AssociationStateState 
   context-free syntax
-        name::ANY position::ANY -> MgaObject
+        Transition -> MgaObject
 
-        stateMachine::ANY associationStateState::ANY -> Transition
+        State -> MgaObject
 
-        stateMachine::ANY associationStateStatedst::ANY+ associationStateStatesrc::ANY+ -> State
+        StateMachine -> MgaObject
 
-        rootFolder::ANY state::ANY+ transition::ANY+ -> StateMachine
+        name::String position::String -> MgaObject
 
-        name::ANY rootFolders::ANY+ stateMachine::ANY+ -> RootFolder
+        stateMachine::StateMachine associationStateState::AssociationStateState -> Transition
 
-        transition::ANY dstTransition::ANY+ srcTransition::ANY+ -> AssociationStateState
+        stateMachine::StateMachine associationStateStatedst::AssociationStateState+ associationStateStatesrc::AssociationStateState+ -> State
+
+        rootFolder::RootFolder state::State+ transition::Transition+ -> StateMachine
+
+        name::String rootFolders::RootFolder+ stateMachine::StateMachine+ -> RootFolder
+
+        transition::Transition dstTransition::State+ srcTransition::State+ -> AssociationStateState

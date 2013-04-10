@@ -1,29 +1,83 @@
 Element:
-        EPSILON
+        DoDAFModel
+Element:
+        Document
+Element:
+        AMSpecificationElement
+Element:
+        PAExchangeRequirement
+Element:
+        ArchitectureDocument
+Element:
+        IE
+Element:
+        AMIERole
+Element:
+        InformationAssetDocument
+Element:
+        AMPA
+Element:
+        PACapability
+Element:
+        PA
+Element:
+        InformationAsset
+Element:
+        Task
+Element:
+        Organization
+Element:
+        OrganizationType
+Element:
+        OperationalRole
+Element:
+        Occupation
+Element:
+        PersonType
+Element:
+        Skill
+Element:
+        DOSCR
 DoDAFModel:
-        document::ANY+ am::ANY+ task::ANY+ iaDocument::ANY+ amSpecification::ANY+ doscr::ANY+ organizationType::ANY+
+        document::Document+ am::AM+ task::Task+ iaDocument::InformationAssetDocument+ amSpecification::AMSpecification+ doscr::DOSCR+ organizationType::OrganizationType+
 Document:
-        type::ANY cites::ANY+ records::ANY+ isTheReferenceFor::ANY+ isThePrimaryReferenceFor::ANY+
+        AMSpecification
+Document:
+        type::String cites::InformationAssetDocument+ records::ArchitectureDocument+ isTheReferenceFor::IE+ isThePrimaryReferenceFor::PA+
 AMSpecification:
-        isSpecifiedUsing::ANY+
+        isSpecifiedUsing::AMSpecificationElement+
 AMSpecificationElement:
-        subject::ANY
+        subject::PAExchangeRequirement
 PAExchangeRequirement:
-        isTheSubjectOf::ANY+
+        isTheSubjectOf::AMSpecificationElement+
 ArchitectureDocument:
-        name::ANY description::ANY view::ANY
+        name::String description::String view::String
 IE:
-        isAssociatedWith::ANY+ isOrdinateOf::ANY+ isSubordinateOf::ANY+
+        isAssociatedWith::AMIERole+ isOrdinateOf::IE+ isSubordinateOf::IE+
 AMIERole:
-        defines::ANY+
+        Control
+AMIERole:
+        Input
+AMIERole:
+        Output
+AMIERole:
+        Mechanism
+AMIERole:
+        defines::AMPA+
 Control:
-        source::ANY destination::ANY
+        source::String destination::String
 Input:
-        isTheInputThatIsDefinedBy::ANY+ source::ANY destination::ANY information::ANY
+        isTheInputThatIsDefinedBy::Output+ source::String destination::String information::String
 Output:
-        source::ANY destination::ANY information::ANY
+        source::String destination::String information::String
 Mechanism:
-        source::ANY destination::ANY resourceType::ANY
+        MechanismSystem
+Mechanism:
+        MechanismReference
+Mechanism:
+        MechanismFacility
+Mechanism:
+        source::String destination::String resourceType::String
 MechanismSystem:
         EPSILON
 MechanismReference:
@@ -31,32 +85,34 @@ MechanismReference:
 MechanismFacility:
         EPSILON
 InformationAssetDocument:
-        name::ANY description::ANY view::ANY
+        name::String description::String view::String
 AMPA:
-        isOrdinateOf::ANY+ isSubordinateOf::ANY+ defines::ANY+
+        isOrdinateOf::AMPA+ isSubordinateOf::AMPA+ defines::AMIERole+
 PACapability:
-        name::ANY description::ANY view::ANY
+        name::String description::String view::String
 PA:
-        isTheProducerFor::ANY+ isTheConsumerFor::ANY+ isParentFor::ANY+ isChildFor::ANY+ has::ANY+ isIncludedIn::ANY+ correspondsTo::ANY+
+        isTheProducerFor::PAExchangeRequirement+ isTheConsumerFor::PAExchangeRequirement+ isParentFor::PA+ isChildFor::PA+ has::PACapability+ isIncludedIn::AMPA+ correspondsTo::PATask+
 AM:
-        type::ANY specifies::ANY+ includes::ANY+ paTask::ANY+
+        type::String specifies::AMSpecification+ includes::AMPA+ paTask::PATask+
 InformationAsset:
-        EPSILON
+        AM
 Task:
-        levelIdentifier::ANY references::ANY cost::ANY
+        PATask
+Task:
+        levelIdentifier::String references::String cost::String
 PATask:
-        isCitedBy::ANY
+        isCitedBy::InformationAsset
 Organization:
-        type::ANY supplies::ANY+ providesStewardshipFor::ANY+ owns::ANY+ develops::ANY+ isCitedAs::ANY+
+        type::OrganizationType supplies::InformationAsset+ providesStewardshipFor::InformationAsset+ owns::InformationAsset+ develops::IE+ isCitedAs::MechanismReference+
 OrganizationType:
-        isTheTypeOf::ANY+ isCitedAs::ANY+
+        isTheTypeOf::Organization+ isCitedAs::MechanismReference+
 OperationalRole:
-        isCitedAs::ANY+
+        isCitedAs::MechanismReference+
 Occupation:
-        mayBeCitedForOR::ANY+ mayBeCitedForPT::ANY+
+        mayBeCitedForOR::OperationalRole+ mayBeCitedForPT::PersonType+
 PersonType:
-        mayBeCitedFor::ANY+ can::ANY+
+        mayBeCitedFor::OperationalRole+ can::Skill+
 Skill:
-        mayBeCitedFor::ANY+
+        mayBeCitedFor::OperationalRole+
 DOSCR:
-        mayBeAn::ANY appliesTo::ANY+ mayBeCitedFor::ANY+
+        mayBeAn::Occupation appliesTo::PersonType+ mayBeCitedFor::OperationalRole+

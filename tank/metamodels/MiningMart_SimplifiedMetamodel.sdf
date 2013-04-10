@@ -4,17 +4,47 @@ exports
   sorts
         ModelElement Classifier StructuralFeature Class DataType Attribute Concept ColumnSet Column FeatureAttribute Value RoleRestriction Integer String DomainDataType 
   context-free syntax
-         -> ModelElement
+        Classifier -> ModelElement
 
-         -> Classifier
+        StructuralFeature -> ModelElement
 
-         -> StructuralFeature
+        Classifier -> ModelElement
+        StructuralFeature -> ModelElement
 
-        name::ANY attributes::ANY+ -> Class
+        Class -> Classifier
 
-        attribute::ANY -> DataType
+        DataType -> Classifier
 
-        class::ANY has::ANY -> Attribute
+        Class -> Classifier
+        DataType -> Classifier
+
+        Attribute -> StructuralFeature
+
+        Attribute -> StructuralFeature
+
+        Concept -> Class
+
+        ColumnSet -> Class
+
+        name::String attributes::Attribute+ -> Class
+
+        Integer -> DataType
+
+        String -> DataType
+
+        DomainDataType -> DataType
+
+        attribute::Attribute -> DataType
+
+        Column -> Attribute
+
+        FeatureAttribute -> Attribute
+
+        Value -> Attribute
+
+        RoleRestriction -> Attribute
+
+        class::Class has::DataType -> Attribute
 
          -> Concept
 

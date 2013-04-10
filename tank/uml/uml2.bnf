@@ -1,100 +1,232 @@
 Element:
-        EPSILON
+        MultiplicityElement
+Element:
+        Relationship
+Element:
+        Slot
+Element:
+        ActivityGroup
+Element:
+        Clause
+Element:
+        TemplateSignature
+Element:
+        TemplateParameter
+Element:
+        TemplateableElement
+Element:
+        ParameterableElement
+Element:
+        TemplateParameterSubstitution
+Element:
+        ExceptionHandler
+Element:
+        LinkEndData
+Element:
+        QualifierValue
 MultiplicityElement:
-        EPSILON
+        ConnectorEnd
 NamedElement:
-        EPSILON
-Namespace:
-        EPSILON
+        Namespace
+NamedElement:
+        TypedElement
+NamedElement:
+        RedefinableElement
+NamedElement:
+        CollaborationOccurrence
+NamedElement:
+        Trigger
+NamedElement:
+        InteractionFragment
+NamedElement:
+        Lifeline
+NamedElement:
+        Message
+NamedElement:
+        GeneralOrdering
+NamedElement:
+        MessageEnd
+NamedElement:
+        Vertex
+NamedElement:
+        ParameterSet
+NamedElement:
+        DeployedArtifact
+NamedElement:
+        DeploymentTarget
 OpaqueExpression:
-        body::ANY language::ANY result::ANY behavior::ANY
+        Expression
+OpaqueExpression:
+        body::String language::String result::Parameter behavior::Behavior
 ValueSpecification:
-        EPSILON
+        OpaqueExpression
+ValueSpecification:
+        LiteralSpecification
+ValueSpecification:
+        InstanceValue
+ValueSpecification:
+        TimeExpression
+ValueSpecification:
+        Duration
+ValueSpecification:
+        Interval
 Expression:
-        symbol::ANY operand::ANY+
+        symbol::String operand::ValueSpecification+
 Comment:
-        body::ANY annotatedElement::ANY+ bodyExpression::ANY
+        body::String annotatedElement::Element+ bodyExpression::StringExpression
 DirectedRelationship:
-        EPSILON
+        Generalization
+DirectedRelationship:
+        ElementImport
+DirectedRelationship:
+        PackageImport
+DirectedRelationship:
+        PackageMerge
+DirectedRelationship:
+        TemplateBinding
+DirectedRelationship:
+        ProtocolConformance
 Relationship:
-        EPSILON
+        DirectedRelationship
 Class:
-        ownedOperation::ANY+ superClass::ANY+ extension::ANY+ nestedClassifier::ANY+ isActive::ANY ownedReception::ANY+
-Type:
-        EPSILON
+        Stereotype
+Class:
+        Behavior
+Class:
+        Component
+Class:
+        ownedOperation::Operation+ superClass::Class+ extension::Extension+ nestedClassifier::Classifier+ isActive::Boolean ownedReception::Reception+
 Property:
-        default::ANY isComposite::ANY isDerived::ANY class_::ANY opposite::ANY isDerivedUnion::ANY owningAssociation::ANY redefinedProperty::ANY+ subsettedProperty::ANY+ datatype::ANY association::ANY aggregation::ANY defaultValue::ANY qualifier::ANY+ associationEnd::ANY
+        ExtensionEnd
+Property:
+        Port
+Property:
+        default::String isComposite::Boolean isDerived::Boolean class_::Class opposite::Property isDerivedUnion::Boolean owningAssociation::Association redefinedProperty::Property+ subsettedProperty::Property+ datatype::DataType association::Association aggregation::AggregationKind defaultValue::ValueSpecification qualifier::Property+ associationEnd::Property
 Operation:
-        ownedParameter::ANY+ class_::ANY isQuery::ANY datatype::ANY precondition::ANY+ postcondition::ANY+ redefinedOperation::ANY+ bodyCondition::ANY
-TypedElement:
-        EPSILON
+        ownedParameter::Parameter+ class_::Class isQuery::Boolean datatype::DataType precondition::Constraint+ postcondition::Constraint+ redefinedOperation::Operation+ bodyCondition::Constraint
 Parameter:
-        operation::ANY default::ANY direction::ANY defaultValue::ANY isException::ANY isStream::ANY effect::ANY parameterSet::ANY+
+        operation::Operation default::String direction::ParameterDirectionKind defaultValue::ValueSpecification isException::Boolean isStream::Boolean effect::ParameterEffectKind parameterSet::ParameterSet+
 Package:
-        nestedPackage::ANY+ nestingPackage::ANY ownedType::ANY+ ownedMember::ANY+ packageMerge::ANY+ appliedProfile::ANY+ packageExtension::ANY+
+        Profile
+Package:
+        Model
+Package:
+        nestedPackage::Package+ nestingPackage::Package ownedType::Type+ ownedMember::PackageableElement+ packageMerge::PackageMerge+ appliedProfile::ProfileApplication+ packageExtension::PackageMerge+
 Enumeration:
-        ownedLiteral::ANY+
+        ownedLiteral::EnumerationLiteral+
 DataType:
-        ownedAttribute::ANY+ ownedOperation::ANY+
+        Enumeration
+DataType:
+        PrimitiveType
+DataType:
+        ownedAttribute::Property+ ownedOperation::Operation+
 EnumerationLiteral:
-        enumeration::ANY
+        enumeration::Enumeration
 PrimitiveType:
         EPSILON
 Classifier:
-        EPSILON
+        DataType
+Classifier:
+        BehavioredClassifier
+Classifier:
+        InformationItem
+Classifier:
+        StructuredClassifier
+Classifier:
+        Interface
+Classifier:
+        Actor
+Classifier:
+        Signal
+Classifier:
+        ParameterableClassifier
+Classifier:
+        TemplateableClassifier
 Feature:
-        EPSILON
+        Connector
 Constraint:
-        context::ANY namespace::ANY specification::ANY constrainedElement::ANY+
+        InteractionConstraint
+Constraint:
+        IntervalConstraint
+Constraint:
+        context::Namespace namespace::Namespace specification::ValueSpecification constrainedElement::Element+
 VisibilityKind:
         package::EPSILON
         private::EPSILON
         protected::EPSILON
         public::EPSILON
 LiteralBoolean:
-        value::ANY
+        value::Boolean
 LiteralSpecification:
-        EPSILON
+        LiteralBoolean
+LiteralSpecification:
+        LiteralString
+LiteralSpecification:
+        LiteralNull
+LiteralSpecification:
+        LiteralInteger
+LiteralSpecification:
+        LiteralUnlimitedNatural
 LiteralString:
-        value::ANY
+        value::String
 LiteralNull:
         
 LiteralInteger:
-        value::ANY
+        value::Integer
 LiteralUnlimitedNatural:
-        value::ANY
+        value::UnlimitedNatural
 BehavioralFeature:
-        EPSILON
-StructuralFeature:
-        EPSILON
+        Reception
 InstanceSpecification:
-        slot::ANY+ classifier::ANY+ specification::ANY
+        EnumerationLiteral
+InstanceSpecification:
+        slot::Slot+ classifier::Classifier+ specification::ValueSpecification
 Slot:
-        owningInstance::ANY value::ANY+ definingFeature::ANY
+        owningInstance::InstanceSpecification value::ValueSpecification+ definingFeature::StructuralFeature
 InstanceValue:
-        instance::ANY
+        instance::InstanceSpecification
 RedefinableElement:
-        EPSILON
+        Feature
+RedefinableElement:
+        ActivityEdge
+RedefinableElement:
+        ActivityNode
+RedefinableElement:
+        ExtensionPoint
+RedefinableElement:
+        Transition
 Generalization:
-        specific::ANY general::ANY isSubstitutable::ANY generalizationSet::ANY+
+        specific::Classifier general::Classifier isSubstitutable::Boolean generalizationSet::GeneralizationSet+
 PackageableElement:
-        EPSILON
+        Type
+PackageableElement:
+        Constraint
+PackageableElement:
+        GeneralizationSet
+PackageableElement:
+        PrimitiveFunction
 ElementImport:
-        visibility::ANY alias::ANY importedElement::ANY importingNamespace::ANY
+        visibility::VisibilityKind alias::String importedElement::PackageableElement importingNamespace::Namespace
 PackageImport:
-        visibility::ANY importedPackage::ANY importingNamespace::ANY
+        ProfileApplication
+PackageImport:
+        visibility::VisibilityKind importedPackage::Package importingNamespace::Namespace
 Association:
-        isDerived::ANY ownedEnd::ANY+ endType::ANY+ memberEnd::ANY
+        Extension
+Association:
+        CommunicationPath
+Association:
+        isDerived::Boolean ownedEnd::Property+ endType::Type+ memberEnd::Property
 PackageMerge:
-        mergingPackage::ANY mergedPackage::ANY
+        mergingPackage::Package mergedPackage::Package
 Stereotype:
         EPSILON
 Profile:
-        ownedStereotype::ANY+ metaclassReference::ANY+ metamodelReference::ANY+
+        ownedStereotype::Stereotype+ metaclassReference::ElementImport+ metamodelReference::PackageImport+
 ProfileApplication:
-        importedProfile::ANY
+        importedProfile::Profile
 Extension:
-        isRequired::ANY metaclass::ANY
+        isRequired::Boolean metaclass::Class
 ExtensionEnd:
         EPSILON
 ParameterDirectionKind:
@@ -107,147 +239,247 @@ AggregationKind:
         none::EPSILON
         shared::EPSILON
 Behavior:
-        EPSILON
+        Activity
+Behavior:
+        StateMachine
 BehavioredClassifier:
-        EPSILON
+        UseCase
 Activity:
-        body::ANY language::ANY edge::ANY+ group::ANY+ node::ANY+ action::ANY+ structuredNode::ANY+ isSingleExecution::ANY isReadOnly::ANY
+        body::String language::String edge::ActivityEdge+ group::ActivityGroup+ node::ActivityNode+ action::Action+ structuredNode::StructuredActivityNode+ isSingleExecution::Boolean isReadOnly::Boolean
 Permission:
         EPSILON
 Dependency:
-        client::ANY+ supplier::ANY+
+        Permission
+Dependency:
+        Usage
+Dependency:
+        Abstraction
+Dependency:
+        Deployment
+Dependency:
+        client::NamedElement+ supplier::NamedElement+
 Usage:
         EPSILON
 Abstraction:
-        mapping::ANY
+        Realization
+Abstraction:
+        Manifestation
+Abstraction:
+        mapping::OpaqueExpression
 Realization:
-        abstraction::ANY realizingClassifier::ANY
+        Substitution
+Realization:
+        Implementation
+Realization:
+        abstraction::Component realizingClassifier::Classifier
 Substitution:
-        contract::ANY substitutingClassifier::ANY
+        contract::Classifier substitutingClassifier::Classifier
 GeneralizationSet:
-        isCovering::ANY isDisjoint::ANY powertype::ANY generalization::ANY+
+        isCovering::Boolean isDisjoint::Boolean powertype::Classifier generalization::Generalization+
 AssociationClass:
         EPSILON
 InformationItem:
-        represented::ANY+
+        represented::Classifier+
 InformationFlow:
-        realization::ANY+ conveyed::ANY+
+        realization::Relationship+ conveyed::Classifier+
 Model:
-        viewpoint::ANY
+        viewpoint::String
 ConnectorEnd:
-        definingEnd::ANY role::ANY partWithPort::ANY
-ConnectableElement:
-        EPSILON
+        definingEnd::Property role::ConnectableElement partWithPort::Property
 Connector:
-        type::ANY redefinedConnector::ANY+ end::ANY kind::ANY contract::ANY+
+        type::Association redefinedConnector::Connector+ end::ConnectorEnd kind::ConnectorKind contract::Behavior+
 StructuredClassifier:
-        EPSILON
+        EncapsulatedClassifier
 ActivityEdge:
-        EPSILON
+        ControlFlow
+ActivityEdge:
+        ObjectFlow
 ActivityGroup:
-        EPSILON
+        InterruptibleActivityRegion
 ActivityNode:
-        EPSILON
+        ControlNode
+ActivityNode:
+        ExecutableNode
 Action:
-        effect::ANY output::ANY+ input::ANY+ context::ANY localPrecondition::ANY+ localPostcondition::ANY+
+        CreateObjectAction
+Action:
+        DestroyObjectAction
+Action:
+        TestIdentityAction
+Action:
+        ReadSelfAction
+Action:
+        StructuralFeatureAction
+Action:
+        LinkAction
+Action:
+        ClearAssociationAction
+Action:
+        VariableAction
+Action:
+        ApplyFunctionAction
+Action:
+        InvocationAction
+Action:
+        ReadExtentAction
+Action:
+        ReclassifyObjectAction
+Action:
+        ReadIsClassifiedObjectAction
+Action:
+        StartOwnedBehaviorAction
+Action:
+        ReadLinkObjectEndAction
+Action:
+        ReadLinkObjectEndQualifierAction
+Action:
+        AcceptEventAction
+Action:
+        ReplyAction
+Action:
+        RaiseExceptionAction
+Action:
+        effect::String output::OutputPin+ input::InputPin+ context::Classifier localPrecondition::Constraint+ localPostcondition::Constraint+
 ObjectNode:
-        EPSILON
+        ActivityParameterNode
+ObjectNode:
+        CentralBufferNode
+ObjectNode:
+        ExpansionNode
 ControlNode:
-        EPSILON
+        InitialNode
+ControlNode:
+        FinalNode
+ControlNode:
+        DecisionNode
+ControlNode:
+        MergeNode
+ControlNode:
+        ForkNode
+ControlNode:
+        JoinNode
 ControlFlow:
-        activity::ANY source::ANY target::ANY inGroup::ANY+ guard::ANY redefinedElement::ANY+ inStructuredNode::ANY inPartition::ANY+ weight::ANY interrupts::ANY
+        activity::Activity source::ActivityNode target::ActivityNode inGroup::ActivityGroup+ guard::ValueSpecification redefinedElement::ActivityEdge+ inStructuredNode::StructuredActivityNode inPartition::ActivityPartition+ weight::ValueSpecification interrupts::InterruptibleActivityRegion
 ObjectFlow:
-        isMulticast::ANY isMultireceive::ANY transformation::ANY selection::ANY
+        isMulticast::Boolean isMultireceive::Boolean transformation::Behavior selection::Behavior
 InitialNode:
         
 FinalNode:
-        EPSILON
+        ActivityFinalNode
+FinalNode:
+        FlowFinalNode
 ActivityFinalNode:
         
 DecisionNode:
-        decisionInput::ANY
+        decisionInput::Behavior
 MergeNode:
         
 ExecutableNode:
-        EPSILON
+        Action
 OutputPin:
         
 InputPin:
-        
+        ValuePin
+InputPin:
+        ValuePin
 Pin:
-        EPSILON
+        OutputPin
+Pin:
+        InputPin
 ActivityParameterNode:
-        parameter::ANY
+        parameter::Parameter
 ValuePin:
-        value::ANY
+        value::ValueSpecification
 Interface:
-        ownedAttribute::ANY+ ownedOperation::ANY+ redefinedInterface::ANY+ nestedClassifier::ANY+ ownedReception::ANY+ protocol::ANY
+        ownedAttribute::Property+ ownedOperation::Operation+ redefinedInterface::Interface+ nestedClassifier::Classifier+ ownedReception::Reception+ protocol::ProtocolStateMachine
 Implementation:
-        contract::ANY implementingClassifier::ANY
+        contract::Interface implementingClassifier::BehavioredClassifier
 Artifact:
-        fileName::ANY nestedArtifact::ANY+ manifestation::ANY+ ownedOperation::ANY+ ownedAttribute::ANY+
+        DeploymentSpecification
+Artifact:
+        fileName::String nestedArtifact::Artifact+ manifestation::Manifestation+ ownedOperation::Operation+ ownedAttribute::Property+
 Manifestation:
-        utilizedElement::ANY
+        utilizedElement::PackageableElement
 Actor:
-        feature::ANY+ isAbstract::ANY inheritedMember::ANY+ general::ANY+ generalization::ANY+ attribute::ANY+ redefinedClassifier::ANY+ substitution::ANY+ powertypeExtent::ANY+ ownedUseCase::ANY+ useCase::ANY+ representation::ANY occurrence::ANY+
+        feature::Feature+ isAbstract::Boolean inheritedMember::NamedElement+ general::Classifier+ generalization::Generalization+ attribute::Property+ redefinedClassifier::Classifier+ substitution::Substitution+ powertypeExtent::GeneralizationSet+ ownedUseCase::UseCase+ useCase::UseCase+ representation::CollaborationOccurrence occurrence::CollaborationOccurrence+
 Extend:
-        extendedCase::ANY extension::ANY condition::ANY extensionLocation::ANY+
+        extendedCase::UseCase extension::UseCase condition::Constraint extensionLocation::ExtensionPoint+
 UseCase:
-        include::ANY+ extend::ANY+ extensionPoint::ANY+ subject::ANY+
+        include::Include+ extend::Extend+ extensionPoint::ExtensionPoint+ subject::Classifier+
 ExtensionPoint:
-        useCase::ANY
+        useCase::UseCase
 Include:
-        includingCase::ANY addition::ANY
+        includingCase::UseCase addition::UseCase
 CollaborationOccurrence:
-        type::ANY roleBinding::ANY+
+        type::Collaboration roleBinding::Dependency+
 Collaboration:
-        collaborationRole::ANY+
+        collaborationRole::ConnectableElement+
 Port:
-        isBehavior::ANY isService::ANY required::ANY+ redefinedPort::ANY+ provided::ANY+ protocol::ANY
-EncapsulatedClassifier:
-        EPSILON
+        isBehavior::Boolean isService::Boolean required::Interface+ redefinedPort::Port+ provided::Interface+ protocol::ProtocolStateMachine
 CallConcurrencyKind:
         guarded::EPSILON
         concurrent::EPSILON
         sequential::EPSILON
 CallTrigger:
-        operation::ANY
+        operation::Operation
 MessageTrigger:
-        EPSILON
+        CallTrigger
+MessageTrigger:
+        SignalTrigger
+MessageTrigger:
+        AnyTrigger
 ChangeTrigger:
-        changeExpression::ANY
+        changeExpression::ValueSpecification
 Trigger:
-        EPSILON
+        MessageTrigger
+Trigger:
+        ChangeTrigger
+Trigger:
+        TimeTrigger
 Reception:
-        signal::ANY
+        signal::Signal
 Signal:
-        ownedAttribute::ANY+
+        ownedAttribute::Property+
 SignalTrigger:
-        signal::ANY+
+        signal::Signal+
 TimeTrigger:
-        isRelative::ANY when::ANY
+        isRelative::Boolean when::ValueSpecification
 AnyTrigger:
         
 Variable:
-        scope::ANY
+        scope::StructuredActivityNode
 StructuredActivityNode:
-        variable::ANY+ containedNode::ANY+ containedEdge::ANY+ mustIsolate::ANY
+        ConditionalNode
+StructuredActivityNode:
+        LoopNode
+StructuredActivityNode:
+        ExpansionRegion
+StructuredActivityNode:
+        variable::Variable+ containedNode::ActivityNode+ containedEdge::ActivityEdge+ mustIsolate::Boolean
 ConditionalNode:
-        isDeterminate::ANY isAssured::ANY clause::ANY+ result::ANY+
+        isDeterminate::Boolean isAssured::Boolean clause::Clause+ result::OutputPin+
 Clause:
-        test::ANY+ body::ANY+ predecessorClause::ANY+ successorClause::ANY+ decider::ANY bodyOutput::ANY+
+        test::ActivityNode+ body::ActivityNode+ predecessorClause::Clause+ successorClause::Clause+ decider::OutputPin bodyOutput::OutputPin+
 LoopNode:
-        isTestedFirst::ANY bodyPart::ANY+ setupPart::ANY+ decider::ANY test::ANY+ result::ANY+ loopVariable::ANY+ bodyOutput::ANY+ loopVariableInput::ANY+
+        isTestedFirst::Boolean bodyPart::ActivityNode+ setupPart::ActivityNode+ decider::OutputPin test::ActivityNode+ result::OutputPin+ loopVariable::OutputPin+ bodyOutput::OutputPin+ loopVariableInput::InputPin+
 Interaction:
-        lifeline::ANY+ message::ANY+ fragment::ANY+ formalGate::ANY+
+        lifeline::Lifeline+ message::Message+ fragment::InteractionFragment+ formalGate::Gate+
 InteractionFragment:
-        EPSILON
+        ExecutionOccurrence
+InteractionFragment:
+        StateInvariant
+InteractionFragment:
+        InteractionOccurrence
+InteractionFragment:
+        CombinedFragment
+InteractionFragment:
+        Continuation
 Lifeline:
-        coveredBy::ANY+ represents::ANY interaction::ANY selector::ANY decomposedAs::ANY
+        coveredBy::InteractionFragment+ represents::ConnectableElement interaction::Interaction selector::OpaqueExpression decomposedAs::PartDecomposition
 Message:
-        messageKind::ANY messageSort::ANY receiveEvent::ANY sendEvent::ANY connector::ANY interaction::ANY signature::ANY argument::ANY+
+        messageKind::MessageKind messageSort::MessageSort receiveEvent::MessageEnd sendEvent::MessageEnd connector::Connector interaction::Interaction signature::NamedElement argument::ValueSpecification+
 GeneralOrdering:
-        before::ANY after::ANY
+        before::EventOccurrence after::EventOccurrence
 MessageKind:
         found::EPSILON
         lost::EPSILON
@@ -259,71 +491,81 @@ MessageSort:
         asynchCall::EPSILON
         asynchSignal::EPSILON
 MessageEnd:
-        EPSILON
+        Gate
 EventOccurrence:
-        startExec::ANY+ finishExec::ANY+ toAfter::ANY+ toBefore::ANY+
+        Stop
+EventOccurrence:
+        startExec::ExecutionOccurrence+ finishExec::ExecutionOccurrence+ toAfter::GeneralOrdering+ toBefore::GeneralOrdering+
 ExecutionOccurrence:
-        start::ANY finish::ANY behavior::ANY+
+        start::EventOccurrence finish::EventOccurrence behavior::Behavior+
 StateInvariant:
-        invariant::ANY
+        invariant::Constraint
 Stop:
         EPSILON
 TemplateSignature:
-        parameter::ANY+ ownedParameter::ANY+ nestedSignature::ANY+ nestingSignature::ANY template::ANY
+        parameter::TemplateParameter+ ownedParameter::TemplateParameter+ nestedSignature::TemplateSignature+ nestingSignature::TemplateSignature template::TemplateableElement
 TemplateParameter:
-        signature::ANY parameteredElement::ANY ownedParameteredElement::ANY default::ANY ownedDefault::ANY
+        OperationTemplateParameter
+TemplateParameter:
+        ClassifierTemplateParameter
+TemplateParameter:
+        ConnectableElementTemplateParameter
+TemplateParameter:
+        signature::TemplateSignature parameteredElement::ParameterableElement ownedParameteredElement::ParameterableElement default::ParameterableElement ownedDefault::ParameterableElement
 TemplateableElement:
-        EPSILON
+        NamedElement
+TemplateableElement:
+        Comment
+TemplateableElement:
+        StringExpression
 StringExpression:
-        subExpression::ANY+ owningExpression::ANY
-ParameterableElement:
-        EPSILON
+        subExpression::StringExpression+ owningExpression::StringExpression
 TemplateBinding:
-        boundElement::ANY signature::ANY parameterSubstitution::ANY+
+        boundElement::TemplateableElement signature::TemplateSignature parameterSubstitution::TemplateParameterSubstitution+
 TemplateParameterSubstitution:
-        formal::ANY templateBinding::ANY actual::ANY+ ownedActual::ANY+
+        formal::TemplateParameter templateBinding::TemplateBinding actual::ParameterableElement+ ownedActual::ParameterableElement+
 OperationTemplateParameter:
         EPSILON
 ClassifierTemplateParameter:
-        allowSubstitutable::ANY
-ParameterableClassifier:
-        EPSILON
+        allowSubstitutable::Boolean
 RedefinableTemplateSignature:
-        EPSILON
-TemplateableClassifier:
         EPSILON
 ConnectableElementTemplateParameter:
         EPSILON
 ForkNode:
         
 JoinNode:
-        isCombineDuplicate::ANY joinSpec::ANY
+        isCombineDuplicate::Boolean joinSpec::ValueSpecification
 FlowFinalNode:
         
 CentralBufferNode:
-        ordering::ANY upperBound::ANY inState::ANY+ selection::ANY
+        DataStoreNode
+CentralBufferNode:
+        DataStoreNode
 ActivityPartition:
-        isDimension::ANY isExternal::ANY containedEdge::ANY+ containedNode::ANY+ subgroup::ANY+ superPartition::ANY represents::ANY
+        isDimension::Boolean isExternal::Boolean containedEdge::ActivityEdge+ containedNode::ActivityNode+ subgroup::ActivityPartition+ superPartition::ActivityPartition represents::Element
 ExpansionNode:
-        regionAsOutput::ANY regionAsInput::ANY
+        regionAsOutput::ExpansionRegion regionAsInput::ExpansionRegion
 ExpansionRegion:
-        mode::ANY outputElement::ANY+ inputElement::ANY+
+        mode::ExpansionKind outputElement::ExpansionNode+ inputElement::ExpansionNode+
 ExpansionKind:
         parallel::EPSILON
         iterative::EPSILON
         stream::EPSILON
 ExceptionHandler:
-        protectedNode::ANY handlerBody::ANY exceptionInput::ANY exceptionType::ANY+
+        protectedNode::ExecutableNode handlerBody::ExecutableNode exceptionInput::ObjectNode exceptionType::Classifier+
 InteractionOccurrence:
-        refersTo::ANY actualGate::ANY+ argument::ANY+
+        PartDecomposition
+InteractionOccurrence:
+        refersTo::Interaction actualGate::Gate+ argument::InputPin+
 Gate:
-        receiveMessage::ANY sendMessage::ANY
+        receiveMessage::Message sendMessage::Message
 PartDecomposition:
         EPSILON
 InteractionOperand:
-        guard::ANY fragment::ANY+
+        guard::InteractionConstraint fragment::InteractionFragment+
 InteractionConstraint:
-        minint::ANY maxint::ANY
+        minint::ValueSpecification maxint::ValueSpecification
 InteractionOperator:
         consider::EPSILON
         par::EPSILON
@@ -338,23 +580,31 @@ InteractionOperator:
         neg::EPSILON
         critical::EPSILON
 CombinedFragment:
-        interactionOperator::ANY operand::ANY+ cfragmentGate::ANY+
+        interactionOperator::InteractionOperator operand::InteractionOperand+ cfragmentGate::Gate+
 Continuation:
-        setting::ANY
+        setting::Boolean
 StateMachine:
-        region::ANY+ connectionPoint::ANY+ extendedStateMachine::ANY stateMachine_redefinitionContext::ANY
+        ProtocolStateMachine
+StateMachine:
+        region::Region+ connectionPoint::Pseudostate+ extendedStateMachine::StateMachine stateMachine_redefinitionContext::BehavioredClassifier
 Region:
-        subvertex::ANY+ transition::ANY+ stateMachine::ANY state::ANY extendedRegion::ANY
+        subvertex::Vertex+ transition::Transition+ stateMachine::StateMachine state::State extendedRegion::Region
 Pseudostate:
-        kind::ANY
+        kind::PseudostateKind
 State:
-        isComposite::ANY isOrthogonal::ANY isSimple::ANY isSubmachineState::ANY submachine::ANY connection::ANY+ redefinedState::ANY deferrableTrigger::ANY+ region::ANY+ entry::ANY exit::ANY doActivity::ANY stateInvariant::ANY
+        FinalState
+State:
+        isComposite::Boolean isOrthogonal::Boolean isSimple::Boolean isSubmachineState::Boolean submachine::StateMachine connection::ConnectionPointReference+ redefinedState::State deferrableTrigger::Trigger+ region::Region+ entry::Activity exit::Activity doActivity::Activity stateInvariant::Constraint
 Vertex:
-        EPSILON
+        Pseudostate
+Vertex:
+        ConnectionPointReference
 ConnectionPointReference:
-        entry::ANY+ exit::ANY+
+        entry::Pseudostate+ exit::Pseudostate+
 Transition:
-        kind::ANY container::ANY source::ANY target::ANY redefinedTransition::ANY trigger::ANY+ guard::ANY effect::ANY
+        ProtocolTransition
+Transition:
+        kind::TransitionKind container::Region source::Vertex target::Vertex redefinedTransition::Transition trigger::Trigger+ guard::Constraint effect::Activity
 TransitionKind:
         internal::EPSILON
         local::EPSILON
@@ -373,89 +623,130 @@ PseudostateKind:
 FinalState:
         EPSILON
 CreateObjectAction:
-        classifier::ANY result::ANY
+        classifier::Classifier result::OutputPin
 DestroyObjectAction:
-        isDestroyLinks::ANY isDestroyOwnedObjects::ANY target::ANY
+        isDestroyLinks::Boolean isDestroyOwnedObjects::Boolean target::InputPin
 TestIdentityAction:
-        first::ANY second::ANY result::ANY
+        first::InputPin second::InputPin result::OutputPin
 ReadSelfAction:
-        result::ANY
+        result::OutputPin
 StructuralFeatureAction:
-        EPSILON
+        ReadStructuralFeatureAction
+StructuralFeatureAction:
+        WriteStructuralFeatureAction
+StructuralFeatureAction:
+        ClearStructuralFeatureAction
 ReadStructuralFeatureAction:
-        result::ANY
+        result::OutputPin
 WriteStructuralFeatureAction:
-        EPSILON
+        RemoveStructuralFeatureValueAction
+WriteStructuralFeatureAction:
+        AddStructuralFeatureValueAction
+WriteStructuralFeatureAction:
+        TimeObservationAction
+WriteStructuralFeatureAction:
+        DurationObservationAction
 ClearStructuralFeatureAction:
-        structuralFeature::ANY object::ANY
+        structuralFeature::StructuralFeature object::InputPin
 RemoveStructuralFeatureValueAction:
-        value::ANY
+        value::InputPin
 AddStructuralFeatureValueAction:
-        isReplaceAll::ANY insertAt::ANY
+        isReplaceAll::Boolean insertAt::InputPin
 LinkAction:
-        EPSILON
+        ReadLinkAction
+LinkAction:
+        WriteLinkAction
 LinkEndData:
-        value::ANY end::ANY qualifier::ANY+
+        LinkEndCreationData
+LinkEndData:
+        value::InputPin end::Property qualifier::QualifierValue+
 ReadLinkAction:
-        result::ANY
+        result::OutputPin
 LinkEndCreationData:
-        isReplaceAll::ANY insertAt::ANY
+        isReplaceAll::Boolean insertAt::InputPin
 CreateLinkAction:
-        
+        CreateLinkObjectAction
+CreateLinkAction:
+        CreateLinkObjectAction
 WriteLinkAction:
-        EPSILON
+        CreateLinkAction
+WriteLinkAction:
+        DestroyLinkAction
 DestroyLinkAction:
         
 ClearAssociationAction:
-        object::ANY association::ANY
+        object::InputPin association::Association
 VariableAction:
-        EPSILON
+        ReadVariableAction
+VariableAction:
+        WriteVariableAction
+VariableAction:
+        ClearVariableAction
 ReadVariableAction:
-        result::ANY
+        result::OutputPin
 WriteVariableAction:
-        EPSILON
+        AddVariableValueAction
+WriteVariableAction:
+        RemoveVariableValueAction
 ClearVariableAction:
-        variable::ANY
+        variable::Variable
 AddVariableValueAction:
-        isReplaceAll::ANY insertAt::ANY
+        isReplaceAll::Boolean insertAt::InputPin
 RemoveVariableValueAction:
-        value::ANY
+        value::InputPin
 ApplyFunctionAction:
-        function::ANY argument::ANY+ result::ANY+
+        function::PrimitiveFunction argument::InputPin+ result::OutputPin+
 PrimitiveFunction:
-        body::ANY language::ANY
+        body::String language::String
 CallAction:
-        EPSILON
+        CallOperationAction
+CallAction:
+        CallBehaviorAction
 InvocationAction:
-        EPSILON
+        CallAction
+InvocationAction:
+        SendSignalAction
+InvocationAction:
+        BroadcastSignalAction
+InvocationAction:
+        SendObjectAction
 SendSignalAction:
-        target::ANY signal::ANY
+        target::InputPin signal::Signal
 BroadcastSignalAction:
-        signal::ANY
+        signal::Signal
 SendObjectAction:
-        target::ANY request::ANY
+        target::InputPin request::InputPin
 CallOperationAction:
-        operation::ANY target::ANY
+        operation::Operation target::InputPin
 CallBehaviorAction:
-        behavior::ANY
+        behavior::Behavior
 TimeExpression:
-        firstTime::ANY event::ANY
+        firstTime::Boolean event::NamedElement
 Duration:
-        firstTime::ANY event::ANY
+        firstTime::Boolean event::NamedElement
 TimeObservationAction:
-        now::ANY+
+        now::TimeExpression+
 DurationInterval:
         EPSILON
 Interval:
-        min::ANY+ max::ANY+
+        DurationInterval
+Interval:
+        TimeInterval
+Interval:
+        min::ValueSpecification+ max::ValueSpecification+
 TimeConstraint:
         EPSILON
 IntervalConstraint:
-        EPSILON
+        TimeConstraint
+IntervalConstraint:
+        DurationConstraint
+IntervalConstraint:
+        TimeConstraint
+        DurationConstraint
 TimeInterval:
         EPSILON
 DurationObservationAction:
-        duration::ANY+
+        duration::Duration+
 DurationConstraint:
         EPSILON
 DataStoreNode:
@@ -466,27 +757,27 @@ ParameterEffectKind:
         delete::EPSILON
         create::EPSILON
 InterruptibleActivityRegion:
-        interruptingEdge::ANY+ containedNode::ANY+
+        interruptingEdge::ActivityEdge+ containedNode::ActivityNode+
 ObjectNodeOrderingKind:
         FIFO::EPSILON
         unordered::EPSILON
         ordered::EPSILON
         LIFO::EPSILON
 ParameterSet:
-        parameter::ANY+ condition::ANY+
+        parameter::Parameter+ condition::Constraint+
 Component:
-        isIndirectlyInstantiated::ANY required::ANY+ provided::ANY+ realization::ANY+ ownedMember::ANY+
+        isIndirectlyInstantiated::Boolean required::Interface+ provided::Interface+ realization::Realization+ ownedMember::PackageableElement+
 ConnectorKind:
         delegation::EPSILON
         assembly::EPSILON
 Deployment:
-        deployedArtifact::ANY+ location::ANY configuration::ANY+
-DeployedArtifact:
-        EPSILON
-DeploymentTarget:
-        EPSILON
+        deployedArtifact::DeployedArtifact+ location::DeploymentTarget configuration::DeploymentSpecification+
 Node:
-        nestedNode::ANY+
+        Device
+Node:
+        ExecutionEnvironment
+Node:
+        nestedNode::Node+
 Device:
         EPSILON
 ExecutionEnvironment:
@@ -494,34 +785,36 @@ ExecutionEnvironment:
 CommunicationPath:
         EPSILON
 ProtocolConformance:
-        specificMachine::ANY generalMachine::ANY
+        specificMachine::ProtocolStateMachine generalMachine::ProtocolStateMachine
 ProtocolStateMachine:
-        conformance::ANY+
+        conformance::ProtocolConformance+
 ProtocolTransition:
-        postCondition::ANY referred::ANY+ preCondition::ANY
+        postCondition::Constraint referred::Operation+ preCondition::Constraint
 ReadExtentAction:
-        result::ANY classifier::ANY
+        result::OutputPin classifier::Classifier
 ReclassifyObjectAction:
-        isReplaceAll::ANY oldClassifier::ANY+ newClassifier::ANY+ object::ANY
+        isReplaceAll::Boolean oldClassifier::Classifier+ newClassifier::Classifier+ object::InputPin
 ReadIsClassifiedObjectAction:
-        isDirect::ANY classifier::ANY result::ANY object::ANY
+        isDirect::Boolean classifier::Classifier result::OutputPin object::InputPin
 StartOwnedBehaviorAction:
-        object::ANY
+        object::InputPin
 QualifierValue:
-        qualifier::ANY value::ANY
+        qualifier::Property value::InputPin
 ReadLinkObjectEndAction:
-        object::ANY end::ANY result::ANY
+        object::InputPin end::Property result::OutputPin
 ReadLinkObjectEndQualifierAction:
-        object::ANY result::ANY qualifier::ANY
+        object::InputPin result::OutputPin qualifier::Property
 CreateLinkObjectAction:
-        result::ANY
+        result::OutputPin
 AcceptEventAction:
-        trigger::ANY+ result::ANY+
+        AcceptCallAction
+AcceptEventAction:
+        trigger::Trigger+ result::OutputPin+
 AcceptCallAction:
-        returnInformation::ANY
+        returnInformation::OutputPin
 ReplyAction:
-        replyToCall::ANY replyValue::ANY+ returnInformation::ANY
+        replyToCall::CallTrigger replyValue::InputPin+ returnInformation::InputPin
 RaiseExceptionAction:
-        exception::ANY
+        exception::InputPin
 DeploymentSpecification:
-        deploymentLocation::ANY executionLocation::ANY
+        deploymentLocation::String executionLocation::String

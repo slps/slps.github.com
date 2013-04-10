@@ -4,31 +4,49 @@ exports
   sorts
         LocatedElement Model Class ModelElement ColorableElement ClassReference AssociationType Relationship ClassDefinition Association Inheritance Cardinality Visibility ClassMember Attribute Method Note NoteAssociation 
   context-free syntax
-         -> LocatedElement
+        Model -> LocatedElement
 
-        classes::ANY+ elements::ANY+ -> Model
+        Class -> LocatedElement
 
-        name::ANY -> Class
+        ModelElement -> LocatedElement
 
-         -> ModelElement
+        ClassDefinition -> LocatedElement
 
-         -> ColorableElement
+        Cardinality -> LocatedElement
 
-        class::ANY stereotype::ANY definition::ANY -> ClassReference
+        ClassMember -> LocatedElement
+
+        classes::Class+ elements::ModelElement+ -> Model
+
+        name::String -> Class
+
+        ColorableElement -> ModelElement
+
+        Relationship -> ModelElement
+
+        ClassReference -> ColorableElement
+
+        Note -> ColorableElement
+
+        class::Class stereotype::String definition::ClassDefinition -> ClassReference
 
         simpleAssociation:: -> AssociationType
         aggregation:: -> AssociationType
         composition:: -> AssociationType
 
-         -> Relationship
+        Association -> Relationship
 
-        attributes::ANY+ methods::ANY+ -> ClassDefinition
+        Inheritance -> Relationship
 
-        type::ANY sourceCardinality::ANY sourceLabel::ANY navigableSource::ANY sourceVisibility::ANY targetCardinality::ANY targetLabel::ANY navigableTarget::ANY targetVisibility::ANY -> Association
+        NoteAssociation -> Relationship
 
-        source::ANY target::ANY -> Inheritance
+        attributes::Attribute+ methods::Method+ -> ClassDefinition
 
-        lowerBound::ANY upperBound::ANY -> Cardinality
+        type::AssociationType sourceCardinality::Cardinality sourceLabel::String navigableSource::Boolean sourceVisibility::Visibility targetCardinality::Cardinality targetLabel::String navigableTarget::Boolean targetVisibility::Visibility -> Association
+
+        source::ClassReference target::ClassReference -> Inheritance
+
+        lowerBound::Integer upperBound::Integer -> Cardinality
 
         unspecified:: -> Visibility
         public:: -> Visibility
@@ -36,12 +54,14 @@ exports
         protected:: -> Visibility
         package:: -> Visibility
 
-         -> ClassMember
+        Attribute -> ClassMember
 
-        type::ANY -> Attribute
+        Method -> ClassMember
 
-        arguments::ANY+ -> Method
+        type::String -> Attribute
 
-        text::ANY+ -> Note
+        arguments::String+ -> Method
 
-        note::ANY -> NoteAssociation
+        text::String+ -> Note
+
+        note::Note -> NoteAssociation

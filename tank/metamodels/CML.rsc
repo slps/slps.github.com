@@ -1,77 +1,13 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module CML
 
-syntax PCDATA
-        = 
-        ()
- ;
-syntax Any
-        = 
-        ()
- ;
-syntax TitledElement
-        = 
-        ()
- ;
-syntax IdedElement
-        = 
-        ()
- ;
-syntax ConventionnedElement
-        = 
-        ()
- ;
-syntax DictRefElement
-        = 
-        ()
- ;
-syntax SimpleLink_Element
-        = 
-        ()
- ;
-syntax Counted_Element
-        = 
-        ()
- ;
-syntax Sized_Element
-        = 
-        ()
- ;
-syntax Rows_Element
-        = 
-        ()
- ;
-syntax Columns_Element
-        = 
-        ()
- ;
-syntax Min_Element
-        = 
-        ()
- ;
-syntax Max_Element
-        = 
-        ()
- ;
-syntax Units_Element
-        = 
-        ()
- ;
 syntax AngleUnits
         = degrees: ()
         | radians: ()
  ;
-syntax AngleUnits_Element
-        = 
-        ()
- ;
-syntax UnitsRef_Element
-        = 
-        ()
- ;
 syntax AtomRefs_Element
         = 
-        ()
+        _StringBuiltin
  ;
 syntax StringBuiltin
         = id: ()
@@ -83,10 +19,6 @@ syntax StringBuiltin
         | order: ()
         | stereo: ()
         | spaceground: ()
- ;
-syntax _StringBuiltin
-        = 
-        ()
  ;
 syntax _String
         = 
@@ -120,10 +52,6 @@ syntax FloatBuiltin
         | gamma: ()
         | z: ()
  ;
-syntax _FloatBuiltin
-        = 
-        ()
- ;
 syntax _Float
         = 
         ()
@@ -136,17 +64,13 @@ syntax IntegerBuiltin
         | atomParity: ()
         | z: ()
  ;
-syntax _IntegerBuiltin
-        = 
-        ()
- ;
 syntax _Integer
         = 
         ()
  ;
 syntax _StringArray
         = 
-        delimiter: ANY
+        delimiter: String
  ;
 syntax _FloatArray
         = 
@@ -164,10 +88,6 @@ syntax Coordinate2Builtin
         = 
         xy2: ()
  ;
-syntax _Coordinate2Builtin
-        = 
-        ()
- ;
 syntax _Coordinate2
         = 
         ()
@@ -175,10 +95,6 @@ syntax _Coordinate2
 syntax Coordinate3Builtin
         = xyz3: ()
         | xyzFract: ()
- ;
-syntax _Coordinate3Builtin
-        = 
-        ()
  ;
 syntax _Coordinate3
         = 
@@ -194,49 +110,49 @@ syntax _Torsion
  ;
 syntax _List
         = 
-        ANY any+
+        Any any+
  ;
 syntax Molecule
         = 
-        ANY any+
+        Any any+
  ;
 syntax Formula
         = 
-        ANY any+
+        Any any+
  ;
 syntax Atom
         = 
-        ANY any+
+        Any any+
  ;
 syntax Atom_Array
         = 
-        ANY any+
+        Any any+
  ;
 syntax Bond
         = 
-        ANY any+
+        Any any+
  ;
 syntax Bond_Array
         = 
-        ANY any+
+        Any any+
  ;
 syntax Electron
         = 
-        ANY any+
+        Any any+
  ;
 syntax Reaction
         = 
-        ANY any+
+        Any any+
  ;
 syntax Crystal
         = 
-        ANY any+
+        Any any+
  ;
 syntax Sequence
         = 
-        ANY any+
+        Any any+
  ;
 syntax Feature
         = 
-        ANY any+
+        Any any+
  ;

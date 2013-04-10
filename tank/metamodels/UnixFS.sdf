@@ -4,12 +4,16 @@ exports
   sorts
         NamedElement File Directory FileSystemRoot TextFile 
   context-free syntax
-         -> NamedElement
+        File -> NamedElement
 
-         -> File
+        Directory -> File
 
-        contents::ANY+ -> Directory
+        TextFile -> File
+
+        FileSystemRoot -> Directory
+
+        contents::File+ -> Directory
 
          -> FileSystemRoot
 
-        owner::ANY group::ANY -> TextFile
+        owner::String group::String -> TextFile

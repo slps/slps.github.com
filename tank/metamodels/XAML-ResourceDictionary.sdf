@@ -4,32 +4,40 @@ exports
   sorts
         Transformation WinFXElement NameSpace ResourceGroup Material Key ResourceDictionary Transform3DGroup MaterialGroup DiffuseMaterial TranslateTransform3D ScaleTransform3D RotateTransform3D RotateTransformat3DRotation AxisAngleRotation3D 
   context-free syntax
-         -> Transformation
+        TranslateTransform3D -> Transformation
 
-         -> WinFXElement
+        ScaleTransform3D -> Transformation
 
-        namespace::ANY identifier::ANY -> NameSpace
+        RotateTransform3D -> Transformation
 
-        key::ANY -> ResourceGroup
+        Key -> WinFXElement
 
-         -> Material
+        namespace::String identifier::String -> NameSpace
 
-        name::ANY -> Key
+        Transform3DGroup -> ResourceGroup
 
-        resourcegroups::ANY+ xmlns::ANY+ -> ResourceDictionary
+        MaterialGroup -> ResourceGroup
 
-        transformations::ANY+ -> Transform3DGroup
+        key::Key -> ResourceGroup
 
-        materials::ANY+ -> MaterialGroup
+        DiffuseMaterial -> Material
 
-        Brush::ANY -> DiffuseMaterial
+        name::String -> Key
 
-        OffsetX::ANY OffsetY::ANY OffsetZ::ANY -> TranslateTransform3D
+        resourcegroups::ResourceGroup+ xmlns::NameSpace+ -> ResourceDictionary
 
-        ScaleX::ANY ScaleY::ANY ScaleZ::ANY -> ScaleTransform3D
+        transformations::Transformation+ -> Transform3DGroup
 
-        CenterX::ANY CenterY::ANY rotation::ANY -> RotateTransform3D
+        materials::Material+ -> MaterialGroup
 
-        axisAngleRotation3D::ANY -> RotateTransformat3DRotation
+        Brush::String -> DiffuseMaterial
 
-        angle::ANY axis::ANY -> AxisAngleRotation3D
+        OffsetX::Double OffsetY::Double OffsetZ::Double -> TranslateTransform3D
+
+        ScaleX::Double ScaleY::Double ScaleZ::Double -> ScaleTransform3D
+
+        CenterX::Double CenterY::Double rotation::RotateTransformat3DRotation -> RotateTransform3D
+
+        axisAngleRotation3D::AxisAngleRotation3D -> RotateTransformat3DRotation
+
+        angle::Integer axis::String -> AxisAngleRotation3D

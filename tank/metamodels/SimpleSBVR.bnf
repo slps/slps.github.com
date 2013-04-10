@@ -1,33 +1,79 @@
 Root:
-        elements::ANY+
+        elements::Element+
 Element:
-        objectName::ANY
+        Representation
+Element:
+        Text
+Element:
+        Meaning
+Element:
+        Role
+Element:
+        BindableTarget
+Element:
+        RoleBinding
+Element:
+        objectName::String
 Representation:
-        meaning::ANY
+        Designation
+Representation:
+        meaning::Meaning
 Designation:
-        text::ANY
+        text::Text
 Text:
-        value::ANY
+        value::String
 Meaning:
-        representations::ANY+
+        Concept
+Meaning:
+        LogicalFormulation
+Meaning:
+        representations::Representation+
 Concept:
-        EPSILON
+        NounConcept
+Concept:
+        FactType
+Concept:
+        NounConcept
+        FactType
 NounConcept:
-        EPSILON
+        ObjectType
+NounConcept:
+        IndividualConcept
+NounConcept:
+        DataType
+NounConcept:
+        ObjectType
+        IndividualConcept
+        DataType
 ObjectType:
-        specializes::ANY generalizes::ANY+
+        specializes::ObjectType generalizes::ObjectType+
 IndividualConcept:
-        instanceOf::ANY
+        instanceOf::ObjectType
 DataType:
-        EPSILON
+        NonEmptyString
+DataType:
+        NonNegativeInteger
+DataType:
+        NonEmptyString
+        NonNegativeInteger
 NonEmptyString:
-        value::ANY
+        value::String
 NonNegativeInteger:
-        value::ANY
+        value::Integer
 FactType:
-        EPSILON
+        BinaryFactType
+FactType:
+        BinaryFactType
 BinaryFactType:
-        role1::ANY role2::ANY
+        IsPropertyOfFactType
+BinaryFactType:
+        AssociativeFactType
+BinaryFactType:
+        CategorizationFactType
+BinaryFactType:
+        ObjectificationFactType
+BinaryFactType:
+        role1::FactTypeRole role2::FactTypeRole
 IsPropertyOfFactType:
         EPSILON
 AssociativeFactType:
@@ -37,30 +83,52 @@ CategorizationFactType:
 ObjectificationFactType:
         EPSILON
 Role:
-        nounConcept::ANY
+        FactTypeRole
+Role:
+        nounConcept::NounConcept
 FactTypeRole:
         EPSILON
 LogicalFormulation:
-        EPSILON
+        AtomicFormulation
+LogicalFormulation:
+        NecessityFormulation
+LogicalFormulation:
+        Quantification
+LogicalFormulation:
+        AtomicFormulation
+        NecessityFormulation
+        Quantification
 AtomicFormulation:
-        isBasedOn::ANY
+        BinaryAtomicFormulation
+AtomicFormulation:
+        isBasedOn::FactType
 BinaryAtomicFormulation:
-        roleBinding1::ANY roleBinding2::ANY
+        roleBinding1::RoleBinding roleBinding2::RoleBinding
 NecessityFormulation:
         EPSILON
 Quantification:
-        introducedVariable::ANY scopesOver::ANY
+        UniversalQuantification
+Quantification:
+        AtLeastNQuantification
+Quantification:
+        ExactlyNQuantification
+Quantification:
+        AtMostNQuantification
+Quantification:
+        introducedVariable::Variable scopesOver::LogicalFormulation
 UniversalQuantification:
         EPSILON
 AtLeastNQuantification:
-        minCardinality::ANY
+        minCardinality::NonNegativeInteger
 ExactlyNQuantification:
-        cardinality::ANY
+        cardinality::NonNegativeInteger
 AtMostNQuantification:
-        maxCardinality::ANY
+        maxCardinality::NonNegativeInteger
 BindableTarget:
-        EPSILON
+        Variable
+BindableTarget:
+        Variable
 Variable:
-        rangesOver::ANY
+        rangesOver::ObjectType
 RoleBinding:
-        occursIn::ANY isOf::ANY bindsTo::ANY
+        occursIn::AtomicFormulation isOf::FactType bindsTo::BindableTarget

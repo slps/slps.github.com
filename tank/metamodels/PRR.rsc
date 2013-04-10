@@ -2,34 +2,42 @@
 module PRR
 
 syntax Element
-        = 
-        ANY location ANY commentsBefore+ ANY commentsAfter+
+        = NamedElement
+        | RuleSet
+        | RuleAction
+        | RuleCondition
+        | Binding
+        | OclExpression
+        | VariableDeclaration
+        | String location String commentsBefore+ String commentsAfter+
  ;
 syntax NamedElement
-        = 
-        ()
+        = Rule
+        | OclType
  ;
 syntax RuleSet
         = 
-        ANY rules+
+        Rule rules+
  ;
 syntax Rule
         = 
-        ANY binding ANY condition ANY actions+ ANY ruleOwner
+        Binding binding RuleCondition condition RuleAction actions+ RuleSet ruleOwner
  ;
 syntax RuleAction
-        = 
-        actionOwner: ANY
+        = DeleteAction
+        | AssignAction
+        | InvokeAction
+        | actionOwner: Rule
  ;
 syntax RuleCondition
         = 
-        ANY ruleConditionOwner ANY conditionExp
+        Rule ruleConditionOwner PRRExpressions/OclExpression conditionExp
  ;
 syntax Binding
         = 
-        ANY bindingOwner ANY ruleVariable+
+        Rule bindingOwner RuleVariable ruleVariable+
  ;
 syntax RuleVariable
         = 
-        ANY ruleVariableOwner ANY filter
+        Binding ruleVariableOwner PRRExpressions/OclExpression filter
  ;

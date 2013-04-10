@@ -2,24 +2,31 @@
 module GUI
 
 syntax LocatedElement
-        = 
-        ()
+        = Named
+        | Column
  ;
 syntax Named
-        = 
-        ()
+        = GUI
+        | Tab
+        | Composant
  ;
 syntax GUI
         = 
-        ANY guiTabs+
+        Tab guiTabs+
  ;
 syntax Tab
         = 
-        ANY title ANY gui ANY group
+        String title GUI gui Group group
  ;
 syntax Composant
-        = 
-        ()
+        = Group
+        | Label
+        | TextArea
+        | Table
+        | ComboBox
+        | Row
+        | Item
+        | Button
  ;
 syntax Layout
         = default: ()
@@ -28,37 +35,37 @@ syntax Layout
  ;
 syntax Group
         = 
-        ANY title ANY layout ANY description ANY tabGroup ANY composants+
+        String title Layout layout String description Tab tabGroup Composant composants+
  ;
 syntax Label
         = 
-        text: ANY
+        text: String
  ;
 syntax TextArea
         = 
-        ANY text ANY nbRows
+        String text Integer nbRows
  ;
 syntax Table
         = 
-        ANY tabColumns+
+        Column tabColumns+
  ;
 syntax Column
         = 
-        ANY title ANY columnTab
+        String title Table columnTab
  ;
 syntax ComboBox
         = 
-        ANY listRows+
+        Row listRows+
  ;
 syntax Row
         = 
-        ANY rowList ANY text ANY listItems+
+        ComboBox rowList String text Item listItems+
  ;
 syntax Item
         = 
-        ANY itemList ANY text
+        Row itemList String text
  ;
 syntax Button
         = 
-        title: ANY
+        title: String
  ;

@@ -3,31 +3,35 @@ module Pascal
 
 syntax Program
         = 
-        ANY name ANY variables+ ANY types+ ANY procedures+
+        String name Variable variables+ Type types+ Procedure procedures+
  ;
 syntax Variable
-        = 
-        ANY name ANY program ANY procedure ANY type
+        = Parameter
+        | String name Program program Procedure procedure Type type
  ;
 syntax Type
         = 
-        ANY name ANY program ANY variables+
+        String name Program program Variable variables+
  ;
 syntax Parameter
         = 
-        procedure_parameter: ANY
+        procedure_parameter: Procedure
  ;
 syntax Instruction
-        = 
-        block: ANY
+        = Calculation
+        | Control
+        | Assignment
+        | Block
+        | block: Block
  ;
 syntax Calculation
         = 
         ()
  ;
 syntax Control
-        = 
-        ()
+        = Conditional
+        | Loop
+        | Procedure
  ;
 syntax Assignment
         = 
@@ -35,23 +39,25 @@ syntax Assignment
  ;
 syntax Block
         = 
-        ANY instructions+ ANY procedure ANY loop ANY conditional
+        Instruction instructions+ Procedure procedure Loop loop Conditional conditional
  ;
 syntax Conditional
         = 
-        blocks: ANY
+        blocks: Block
  ;
 syntax Loop
-        = 
-        block_loop: ANY
+        = For
+        | While
+        | Repeat
+        | block_loop: Block
  ;
 syntax Procedure
-        = 
-        ANY name ANY program ANY variables+ ANY parameters+ ANY block_procedure
+        = Function
+        | String name Program program Variable variables+ Parameter parameters+ Block block_procedure
  ;
 syntax Function
         = 
-        returnType: ANY
+        returnType: Type
  ;
 syntax For
         = 

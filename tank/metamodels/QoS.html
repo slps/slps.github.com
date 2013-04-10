@@ -13,53 +13,71 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable Quality of Service Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Julien Baudry, <code>QoS.ecore</code>, 2006/07/10.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>24</strong></li><li>Number of top alternatives: <strong>24</strong></li><li>Number of defined nonterminal symbols: <strong>24</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>24</strong>: <code><a href="#QoSComponent" class="nt">QoSComponent</a>, <a href="#QoSProfile" class="nt">QoSProfile</a>, <a href="#QoSContraints" class="nt">QoSContraints</a>, <a href="#Operation" class="nt">Operation</a>, <a href="#CompoundProfile" class="nt">CompoundProfile</a>, <a href="#SimpleProfile" class="nt">SimpleProfile</a>, <a href="#ProfileTransition" class="nt">ProfileTransition</a>, <a href="#QoSStatement" class="nt">QoSStatement</a>, <a href="#SingleQoSStatement" class="nt">SingleQoSStatement</a>, <a href="#CoumpoundQoSStatement" class="nt">CoumpoundQoSStatement</a>, <a href="#QoSContraint" class="nt">QoSContraint</a>, <a href="#QualificationKind" class="nt">QualificationKind</a>, <a href="#QoSCharacteristic" class="nt">QoSCharacteristic</a>, <a href="#BooleanExpression" class="nt">BooleanExpression</a>, <a href="#MappingExpression" class="nt">MappingExpression</a>, <a href="#StatisticalAttributekindKind" class="nt">StatisticalAttributekindKind</a>, <a href="#Parameter" class="nt">Parameter</a>, <a href="#DataType" class="nt">DataType</a>, <a href="#Domain" class="nt">Domain</a>, <a href="#DirectionKind" class="nt">DirectionKind</a>, <a href="#Numeric" class="nt">Numeric</a>, <a href="#Set" class="nt">Set</a>, <a href="#Enumeration" class="nt">Enumeration</a>, <a href="#StringSet" class="nt">StringSet</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="QoSComponent">QoSComponent</a>:
-        <span class="sel">profile</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">operations</span>::<span class="meta">any</span>
+				</script></head><body><h1 class="l">Browsable Quality of Service Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Julien Baudry, <code>QoS.ecore</code>, 2006/07/10.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>33</strong></li><li>Number of top alternatives: <strong>33</strong></li><li>Number of defined nonterminal symbols: <strong>24</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>3</strong>: <code><a href="#QoSComponent" class="nt">QoSComponent</a>, <a href="#QoSCharacteristic" class="nt">QoSCharacteristic</a>, <a href="#DataType" class="nt">DataType</a></code></li><li>Bottom nonterminal symbols: <strong>1</strong>: <code><a href="#String" class="nt">String</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="QoSComponent">QoSComponent</a>:
+        <span class="sel">profile</span>::<a class="nt" href="#QoSProfile">QoSProfile</a><span class="meta">+</span> <span class="sel">operations</span>::<a class="nt" href="#Operation">Operation</a>
 </pre><pre><a class="nt" name="QoSProfile">QoSProfile</a>:
-        ε
+        <a class="nt" href="#CompoundProfile">CompoundProfile</a>
+</pre><pre><a class="nt" name="QoSProfile">QoSProfile</a>:
+        <a class="nt" href="#SimpleProfile">SimpleProfile</a>
 </pre><pre><a class="nt" name="QoSContraints">QoSContraints</a>:
         ε
 </pre><pre><a class="nt" name="Operation">Operation</a>:
         ε
 </pre><pre><a class="nt" name="CompoundProfile">CompoundProfile</a>:
-        <span class="sel">profileTransition</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">simpleProfile</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">profileTransition</span>::<a class="nt" href="#ProfileTransition">ProfileTransition</a><span class="meta">+</span> <span class="sel">simpleProfile</span>::<a class="nt" href="#SimpleProfile">SimpleProfile</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="SimpleProfile">SimpleProfile</a>:
-        <span class="sel">compoundProfile</span>::<span class="meta">any</span> <span class="sel">use</span>::<span class="meta">any</span> <span class="sel">provides</span>::<span class="meta">any</span>
+        <span class="sel">compoundProfile</span>::<a class="nt" href="#CompoundProfile">CompoundProfile</a> <span class="sel">use</span>::<a class="nt" href="#QoSStatement">QoSStatement</a> <span class="sel">provides</span>::<a class="nt" href="#QoSStatement">QoSStatement</a>
 </pre><pre><a class="nt" name="ProfileTransition">ProfileTransition</a>:
-        <span class="sel">operations</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">from</span>::<span class="meta">any</span> <span class="sel">to</span>::<span class="meta">any</span> <span class="sel">compoundProfile</span>::<span class="meta">any</span>
+        <span class="sel">operations</span>::<a class="nt" href="#Operation">Operation</a><span class="meta">+</span> <span class="sel">from</span>::<a class="nt" href="#SimpleProfile">SimpleProfile</a> <span class="sel">to</span>::<a class="nt" href="#SimpleProfile">SimpleProfile</a> <span class="sel">compoundProfile</span>::<a class="nt" href="#CompoundProfile">CompoundProfile</a>
 </pre><pre><a class="nt" name="QoSStatement">QoSStatement</a>:
-        <span class="sel">contraints</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">relation</span>::<span class="meta">any</span> <span class="sel">parameter</span>::<span class="meta">any</span><span class="meta">+</span>
+        <a class="nt" href="#SingleQoSStatement">SingleQoSStatement</a>
+</pre><pre><a class="nt" name="QoSStatement">QoSStatement</a>:
+        <a class="nt" href="#CoumpoundQoSStatement">CoumpoundQoSStatement</a>
+</pre><pre><a class="nt" name="QoSStatement">QoSStatement</a>:
+        <span class="sel">contraints</span>::<a class="nt" href="#QoSContraints">QoSContraints</a><span class="meta">+</span> <span class="sel">relation</span>::<a class="nt" href="#CoumpoundQoSStatement">CoumpoundQoSStatement</a> <span class="sel">parameter</span>::<a class="nt" href="#Parameter">Parameter</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="SingleQoSStatement">SingleQoSStatement</a>:
-        <span class="sel">contraint</span>::<span class="meta">any</span>
+        <span class="sel">contraint</span>::<a class="nt" href="#QoSContraint">QoSContraint</a>
 </pre><pre><a class="nt" name="CoumpoundQoSStatement">CoumpoundQoSStatement</a>:
-        <span class="sel">statement</span>::<span class="meta">any</span>
+        <span class="sel">statement</span>::<a class="nt" href="#QoSStatement">QoSStatement</a>
 </pre><pre><a class="nt" name="QoSContraint">QoSContraint</a>:
-        <span class="sel">qualification</span>::<span class="meta">any</span>
+        <span class="sel">qualification</span>::<a class="nt" href="#QualificationKind">QualificationKind</a>
 </pre><pre><a class="nt" name="QualificationKind">QualificationKind</a>:
-        <span class="sel">value</span>::<span class="meta">any</span>
+        <span class="sel">value</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="QoSCharacteristic">QoSCharacteristic</a>:
-        <span class="sel">invariant</span>::<span class="meta">any</span> <span class="sel">parallel_and_composition</span>::<span class="meta">any</span> <span class="sel">parallel_or_composition</span>::<span class="meta">any</span> <span class="sel">sequential_composition</span>::<span class="meta">any</span> <span class="sel">values</span>::<span class="meta">any</span> <span class="sel">statisticalAttribute</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">parameter</span>::<span class="meta">any</span> <span class="sel">domain</span>::<span class="meta">any</span>
+        <a class="nt" href="#QoSContraints">QoSContraints</a>
+</pre><pre><a class="nt" name="QoSCharacteristic">QoSCharacteristic</a>:
+        <a class="nt" href="#QualificationKind">QualificationKind</a>
+</pre><pre><a class="nt" name="QoSCharacteristic">QoSCharacteristic</a>:
+        <span class="sel">invariant</span>::<a class="nt" href="#BooleanExpression">BooleanExpression</a> <span class="sel">parallel_and_composition</span>::<a class="nt" href="#MappingExpression">MappingExpression</a> <span class="sel">parallel_or_composition</span>::<a class="nt" href="#MappingExpression">MappingExpression</a> <span class="sel">sequential_composition</span>::<a class="nt" href="#MappingExpression">MappingExpression</a> <span class="sel">values</span>::<a class="nt" href="#MappingExpression">MappingExpression</a> <span class="sel">statisticalAttribute</span>::<a class="nt" href="#StatisticalAttributekindKind">StatisticalAttributekindKind</a><span class="meta">+</span> <span class="sel">parameter</span>::<a class="nt" href="#Parameter">Parameter</a> <span class="sel">domain</span>::<a class="nt" href="#Domain">Domain</a>
 </pre><pre><a class="nt" name="BooleanExpression">BooleanExpression</a>:
-        <span class="sel">value</span>::<span class="meta">any</span>
+        <span class="sel">value</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="MappingExpression">MappingExpression</a>:
-        <span class="sel">value</span>::<span class="meta">any</span>
+        <span class="sel">value</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="StatisticalAttributekindKind">StatisticalAttributekindKind</a>:
         ε
 </pre><pre><a class="nt" name="Parameter">Parameter</a>:
         ε
 </pre><pre><a class="nt" name="DataType">DataType</a>:
-        ε
+        <a class="nt" href="#Domain">Domain</a>
+</pre><pre><a class="nt" name="DataType">DataType</a>:
+        <a class="nt" href="#Domain">Domain</a>
 </pre><pre><a class="nt" name="Domain">Domain</a>:
-        <span class="sel">direction</span>::<span class="meta">any</span>
+        <a class="nt" href="#Numeric">Numeric</a>
+</pre><pre><a class="nt" name="Domain">Domain</a>:
+        <a class="nt" href="#Set">Set</a>
+</pre><pre><a class="nt" name="Domain">Domain</a>:
+        <a class="nt" href="#Enumeration">Enumeration</a>
+</pre><pre><a class="nt" name="Domain">Domain</a>:
+        <span class="sel">direction</span>::<a class="nt" href="#DirectionKind">DirectionKind</a>
 </pre><pre><a class="nt" name="DirectionKind">DirectionKind</a>:
-        <span class="sel">value</span>::<span class="meta">any</span>
+        <span class="sel">value</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Numeric">Numeric</a>:
         ε
 </pre><pre><a class="nt" name="Set">Set</a>:
-        <span class="sel">stringSet</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">stringSet</span>::<a class="nt" href="#StringSet">StringSet</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Enumeration">Enumeration</a>:
         ε
 </pre><pre><a class="nt" name="StringSet">StringSet</a>:
-        <span class="sel">string</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">string</span>::<a class="nt" href="#String">String</a><span class="meta">+</span>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

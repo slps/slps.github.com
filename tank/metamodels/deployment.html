@@ -13,15 +13,17 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable Deployment 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Brahim Loukil, <code>deployment.ecore</code>, 2008.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>5</strong></li><li>Number of top alternatives: <strong>5</strong></li><li>Number of defined nonterminal symbols: <strong>5</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>5</strong>: <code><a href="#Node" class="nt">Node</a>, <a href="#Device" class="nt">Device</a>, <a href="#ExecutionEnvironment" class="nt">ExecutionEnvironment</a>, <a href="#Specification" class="nt">Specification</a>, <a href="#CommunicationLink" class="nt">CommunicationLink</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Node">Node</a>:
-        ε
+				</script></head><body><h1 class="l">Browsable Deployment 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Brahim Loukil, <code>deployment.ecore</code>, 2008.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>6</strong></li><li>Number of top alternatives: <strong>6</strong></li><li>Number of defined nonterminal symbols: <strong>5</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#Specification" class="nt">Specification</a></code></li><li>Bottom nonterminal symbols: <strong>1</strong>: <code><a href="#String" class="nt">String</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Node">Node</a>:
+        <a class="nt" href="#Device">Device</a>
+</pre><pre><a class="nt" name="Node">Node</a>:
+        <a class="nt" href="#ExecutionEnvironment">ExecutionEnvironment</a>
 </pre><pre><a class="nt" name="Device">Device</a>:
-        <span class="sel">nestedNode</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">name</span>::<span class="meta">any</span>
+        <span class="sel">nestedNode</span>::<a class="nt" href="#Node">Node</a><span class="meta">+</span> <span class="sel">name</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="ExecutionEnvironment">ExecutionEnvironment</a>:
-        <span class="sel">nestedNode</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">name</span>::<span class="meta">any</span>
+        <span class="sel">nestedNode</span>::<a class="nt" href="#Node">Node</a><span class="meta">+</span> <span class="sel">name</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Specification">Specification</a>:
-        <span class="sel">ownedNode</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">ownedCommunicationLink</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">ownedNode</span>::<a class="nt" href="#Node">Node</a><span class="meta">+</span> <span class="sel">ownedCommunicationLink</span>::<a class="nt" href="#CommunicationLink">CommunicationLink</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="CommunicationLink">CommunicationLink</a>:
-        <span class="sel">source</span>::<span class="meta">any</span> <span class="sel">target</span>::<span class="meta">any</span> <span class="sel">name</span>::<span class="meta">any</span>
+        <span class="sel">source</span>::<a class="nt" href="#Node">Node</a> <span class="sel">target</span>::<a class="nt" href="#Node">Node</a> <span class="sel">name</span>::<a class="nt" href="#String">String</a>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

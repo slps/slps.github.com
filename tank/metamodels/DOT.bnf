@@ -1,52 +1,80 @@
 Label:
-        EPSILON
+        SimpleLabel
+Label:
+        ComplexLabel
 SimpleLabel:
-        content::ANY
+        content::String
 ComplexLabel:
-        compartments::ANY+
+        compartments::Compartment+
 Compartment:
-        EPSILON
+        VerticalCompartment
+Compartment:
+        HorizontalCompartment
+Compartment:
+        SimpleCompartment
 VerticalCompartment:
-        complexLabel::ANY compartments::ANY anchor::ANY
+        complexLabel::ComplexLabel compartments::Compartment anchor::Anchor
 HorizontalCompartment:
-        complexLabel::ANY compartments::ANY anchor::ANY
+        complexLabel::ComplexLabel compartments::Compartment anchor::Anchor
 SimpleCompartment:
-        content::ANY
+        content::String
 Anchor:
-        name::ANY source::ANY
+        name::String source::Compartment
 GraphElement:
-        EPSILON
+        Graph
+GraphElement:
+        Layer
+GraphElement:
+        Nodelike
+GraphElement:
+        Arc
+GraphElement:
+        Shape
 Graph:
-        type::ANY rankDir::ANY labeljust::ANY labelloc::ANY concentrate::ANY nodes::ANY+ boundingBox::ANY compound::ANY layers::ANY+ nodeSeparation::ANY ordering::ANY size::ANY ratio::ANY center::ANY
+        type::String rankDir::String labeljust::String labelloc::String concentrate::Boolean nodes::Nodelike+ boundingBox::String compound::Boolean layers::Layer+ nodeSeparation::Double ordering::String size::String ratio::String center::Boolean
 Layer:
-        nodes::ANY+ arcs::ANY+ graph::ANY layerSeparator::ANY
+        nodes::Nodelike+ arcs::Arc+ graph::Graph layerSeparator::String
 Nodelike:
-        EPSILON
+        SubGraph
+Nodelike:
+        Node
 SubGraph:
-        nodes::ANY+ labelloc::ANY
+        nodes::Nodelike+ labelloc::String
 Node:
-        fixedSize::ANY fontname::ANY fontsize::ANY height::ANY width::ANY shape::ANY
+        fixedSize::Boolean fontname::String fontsize::Integer height::Integer width::Integer shape::NodeShape
 Arc:
-        EPSILON
+        DirectedArc
+Arc:
+        UndirectedArc
 DirectedArc:
-        arrowHead::ANY headlabel::ANY taillabel::ANY arrowTail::ANY tail_lp::ANY head_lp::ANY
+        arrowHead::ArrowShape headlabel::Label taillabel::Label arrowTail::ArrowShape tail_lp::Double head_lp::Double
 UndirectedArc:
-        fromNode::ANY toNode::ANY layers::ANY+ constraint::ANY group::ANY minlen::ANY sameHead::ANY sameTail::ANY lhead::ANY ltail::ANY decorate::ANY
+        fromNode::Nodelike toNode::Nodelike layers::Layer+ constraint::Boolean group::String minlen::Integer sameHead::String sameTail::String lhead::Nodelike ltail::Nodelike decorate::Boolean
 Shape:
-        EPSILON
+        NodeShape
+Shape:
+        ArrowShape
 NodeShape:
-        EPSILON
+        SimpleNodeShape
+NodeShape:
+        PointNodeShape
+NodeShape:
+        ComplexNodeShape
 SimpleNodeShape:
         
 PointNodeShape:
         
 ComplexNodeShape:
-        EPSILON
+        PolygonNodeShape
+ComplexNodeShape:
+        MNodeShape
+ComplexNodeShape:
+        RecordNodeShape
 PolygonNodeShape:
-        sides::ANY skew::ANY distortion::ANY isRegular::ANY orientation::ANY
+        sides::Integer skew::Integer distortion::Integer isRegular::Boolean orientation::Integer
 MNodeShape:
-        toplabel::ANY bottomlabel::ANY
+        toplabel::Label bottomlabel::Label
 RecordNodeShape:
         
 ArrowShape:
-        clipping::ANY isPlain::ANY size::ANY
+        clipping::String isPlain::Boolean size::Integer

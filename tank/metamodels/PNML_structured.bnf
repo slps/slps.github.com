@@ -1,11 +1,13 @@
 IdedElement:
-        EPSILON
+        NetElement
+IdedElement:
+        Node
 URI:
-        value::ANY
+        value::String
 Color:
         EPSILON
 AnyElement:
-        name::ANY text::ANY
+        name::String text::String
 RotationType:
         rtvertical::EPSILON
         rthorizontal::EPSILON
@@ -26,64 +28,80 @@ AlignType:
         atcenter::EPSILON
         atright::EPSILON
 PNMLDocument:
-        xmlns::ANY nets::ANY+
+        xmlns::URI nets::NetElement+
 NetElement:
-        type::ANY document::ANY contents::ANY+ tools::ANY+ netgraphics::ANY name::ANY
+        type::URI document::PNMLDocument contents::NetContent+ tools::ToolSpecific+ netgraphics::NetGraphics name::Name
 NetContent:
-        EPSILON
+        NetContentElement
 ToolSpecific:
-        tool::ANY version::ANY anyelement::ANY+ net::ANY arc::ANY node::ANY page::ANY
+        tool::String version::String anyelement::AnyElement+ net::NetElement arc::Arc node::Node page::Page
 LabeledElement:
-        EPSILON
+        Name
+LabeledElement:
+        Inscription
+LabeledElement:
+        InitialMarking
 Label:
-        text::ANY namedelement::ANY
+        text::String namedelement::LabeledElement
 Name:
-        net::ANY netcontent::ANY
+        net::NetElement netcontent::NetContent
 Inscription:
-        arc::ANY
+        arc::Arc
 InitialMarking:
-        place::ANY
+        place::Place
 NetContentElement:
-        EPSILON
+        Place
+NetContentElement:
+        Transition
 Arc:
-        source::ANY target::ANY tools::ANY+ edgegraphics::ANY inscription::ANY
+        source::NetContentElement target::NetContentElement tools::ToolSpecific+ edgegraphics::EdgeGraphics inscription::Inscription
 Page:
-        contents::ANY+ tools::ANY+ pagegraphics::ANY
-Reference:
-        EPSILON
+        contents::NetContent+ tools::ToolSpecific+ pagegraphics::PageGraphics
 ReferencePlace:
         EPSILON
 ReferenceTransition:
         EPSILON
 Node:
-        netcontentelement::ANY tools::ANY+ nodegraphics::ANY
+        Reference
+Node:
+        netcontentelement::NetContentElement tools::ToolSpecific+ nodegraphics::NodeGraphics
 Place:
-        initialmarking::ANY
+        initialmarking::InitialMarking
 Transition:
-        node::ANY
+        node::Node
 Graphics:
-        EPSILON
+        NetGraphics
+Graphics:
+        NodeGraphics
+Graphics:
+        EdgeGraphics
+Graphics:
+        AnnotationGraphics
+Graphics:
+        PageGraphics
 NetGraphics:
-        net::ANY
+        net::NetElement
 NodeGraphics:
-        node::ANY position::ANY dimension::ANY fill::ANY line::ANY
+        node::Node position::Position dimension::Dimension fill::Fill line::Line
 EdgeGraphics:
-        arc::ANY position::ANY+ fill::ANY line::ANY
+        arc::Arc position::Position+ fill::Fill line::Line
 AnnotationGraphics:
-        namedelement::ANY offset::ANY font::ANY fill::ANY line::ANY
+        namedelement::LabeledElement offset::Offset font::Font fill::Fill line::Line
 PageGraphics:
-        page::ANY
+        page::Page
 Coordinate:
-        EPSILON
+        Position
+Coordinate:
+        Offset
 Position:
-        nodegraphics::ANY edgegraphics::ANY
+        nodegraphics::NodeGraphics edgegraphics::EdgeGraphics
 Offset:
-        annotationgraphics::ANY
+        annotationgraphics::AnnotationGraphics
 Dimension:
-        width::ANY height::ANY nodegraphics::ANY
+        width::Integer height::Integer nodegraphics::NodeGraphics
 Fill:
-        gradientrotation::ANY interiorcolor::ANY gradientcolor::ANY image::ANY nodegraphics::ANY edgegraphics::ANY annotationgraphics::ANY
+        gradientrotation::RotationType interiorcolor::Color gradientcolor::Color image::URI nodegraphics::NodeGraphics edgegraphics::EdgeGraphics annotationgraphics::AnnotationGraphics
 Line:
-        color::ANY width::ANY shape::ANY style::ANY nodegraphics::ANY edgegraphics::ANY annotationgraphics::ANY
+        color::Color width::Integer shape::ShapeType style::StyleType nodegraphics::NodeGraphics edgegraphics::EdgeGraphics annotationgraphics::AnnotationGraphics
 Font:
-        family::ANY style::ANY weight::ANY size::ANY decoration::ANY align::ANY rotation::ANY annotationgraphics::ANY
+        family::String style::String weight::String size::String decoration::DecorationType align::AlignType rotation::Integer annotationgraphics::AnnotationGraphics

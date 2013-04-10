@@ -3,31 +3,34 @@ module SimulinkStateFlow
 
 syntax Simulink
         = 
-        ANY subSystem+
+        System subSystem+
  ;
 syntax System
         = 
-        ANY name ANY simulink ANY blocks ANY lines ANY subSystem+
+        String name Simulink simulink Block blocks Line lines System subSystem+
  ;
 syntax Connector
-        = 
-        ()
+        = BranchPoint
+        | Port
  ;
 syntax Line
         = 
-        ANY name ANY block ANY system
+        String name Block block System system
  ;
 syntax BranchPoint
         = 
         ()
  ;
 syntax Port
-        = 
-        units: ANY
+        = OutPut
+        | TriggerPort
+        | EnablePort
+        | units: Units
  ;
 syntax Block
-        = 
-        ANY description ANY name ANY priority ANY natagme ANY blockType ANY lines+ ANY parameters+ ANY annotations+ ANY blockRefs+ ANY system
+        = Primitive
+        | Reference
+        | String description String name String priority String natagme String blockType Line lines+ Parameter parameters+ Annotation annotations+ BlockRef blockRefs+ System system
  ;
 syntax BlockRef
         = 
@@ -35,31 +38,31 @@ syntax BlockRef
  ;
 syntax Primitive
         = 
-        ANY deadLine ANY period ANY executionTime
+        String deadLine String period String executionTime
  ;
 syntax OutPut
         = 
-        number: ANY
+        number: Integer
  ;
 syntax TriggerPort
         = 
-        triggerType: ANY
+        triggerType: TriggerEnum
  ;
 syntax EnablePort
         = 
-        statesWhenEnabling: ANY
+        statesWhenEnabling: EnableEnum
  ;
 syntax Reference
         = 
-        ANY sourceBlock ANY sourceType
+        String sourceBlock String sourceType
  ;
 syntax Annotation
         = 
-        ANY text ANY block
+        String text Block block
  ;
 syntax Parameter
         = 
-        ANY value ANY block
+        String value Block block
  ;
 syntax Units
         = alpha: ()

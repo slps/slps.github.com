@@ -3,143 +3,149 @@ module HAL
 
 syntax HAL
         = 
-        ANY connexion ANY contents+
+        Connexion connexion Entry contents+
  ;
 syntax Connexion
         = 
-        ANY login ANY password
+        String login String password
  ;
 syntax Entry
-        = 
-        ()
+        = Article
+        | Notice
  ;
 syntax Article
-        = 
-        ()
+        = ArticleRecent
+        | ArticleRetro
  ;
 syntax ArticleRecent
         = 
-        fichiers: ANY
+        fichiers: DepotsType
  ;
 syntax ArticleRetro
         = 
-        ANY dateRedaction ANY fichiers
+        String dateRedaction AbstractDepot fichiers
  ;
 syntax Notice
         = 
-        metaArtNotice: ANY
+        metaArtNotice: MetaArtNoticeType
  ;
 syntax ReferenceBiblioType
-        = 
-        ()
+        = ArtRevueType
+        | WorkshopType
+        | ArtOuvrageType
+        | OuvrageType
+        | TheseType
+        | BrevetType
+        | AutreType
  ;
 syntax ArtRevueType
-        = 
-        ()
+        = ArtRevue
+        | ArtJournal
  ;
 syntax WorkshopType
-        = 
-        ()
+        = Workshop
+        | Communication
+        | Conference
  ;
 syntax ArtOuvrageType
         = 
-        ()
+        ArtOuvrage
  ;
 syntax OuvrageType
         = 
-        ()
+        Ouvrage
  ;
 syntax TheseType
         = 
-        ()
+        These
  ;
 syntax BrevetType
         = 
-        ()
+        Brevet
  ;
 syntax AutreType
         = 
-        ()
+        Autre
  ;
 syntax ArtRevue
         = 
-        ANY urldoi ANY journal ANY volume ANY page ANY annee
+        String urldoi String journal String volume String page String annee
  ;
 syntax ArtJournal
         = 
-        ANY urldoi ANY journal ANY volume ANY page ANY annee
+        String urldoi String journal String volume String page String annee
  ;
 syntax Workshop
         = 
-        ANY urldoi ANY titconf ANY ville ANY pays ANY edcom ANY annee ANY page ANY edsci ANY serie
+        String urldoi String titconf String ville String pays String edcom String annee String page String edsci String serie
  ;
 syntax Communication
         = 
-        ANY urldoi ANY titconf ANY ville ANY pays ANY edcom ANY annee ANY page ANY edsci ANY serie
+        String urldoi String titconf String ville String pays String edcom String annee String page String edsci String serie
  ;
 syntax Conference
         = 
-        ANY urldoi ANY titconf ANY ville ANY pays ANY edcom ANY annee ANY page ANY edsci ANY serie
+        String urldoi String titconf String ville String pays String edcom String annee String page String edsci String serie
  ;
 syntax ArtOuvrage
         = 
-        ANY urldoi ANY titouv ANY edcom ANY annee ANY edsci ANY serie
+        String urldoi String titouv String edcom String annee String edsci String serie
  ;
 syntax Ouvrage
         = 
-        ANY urldoi ANY edcom ANY annee ANY page
+        String urldoi String edcom String annee String page
  ;
 syntax Brevet
         = 
-        ANY datebrevet ANY numbrevet ANY page ANY pays
+        String datebrevet String numbrevet String page String pays
  ;
 syntax Autre
         = 
-        ANY urldoi ANY annee ANY description
+        String urldoi String annee String description
  ;
 syntax These
         = 
-        ANY orgthe ANY niveau ANY defencedate ANY directeur ANY codirecteur
+        String orgthe String niveau String defencedate String directeur String codirecteur
  ;
 syntax MetaType
-        = 
-        ()
+        = MetaArtType
+        | MetaArtNoticeType
  ;
 syntax MetaArtType
         = 
-        ANY domain ANY abstract ANY referenceBiblio
+        String domain String abstract ReferenceBiblioType referenceBiblio
  ;
 syntax MetaArtNoticeType
         = 
-        ANY domain ANY abstract ANY referenceBiblio
+        String domain String abstract ReferenceBiblioType referenceBiblio
  ;
 syntax AutLabType
         = 
-        ANY auteurs+ ANY laboratoires+
+        Auteur auteurs+ Laboratoire laboratoires+
  ;
 syntax Auteur
         = 
-        ANY nom ANY prenom ANY autrePrenom ANY email ANY urlPerso ANY lab
+        String nom String prenom String autrePrenom String email String urlPerso Laboratoire lab
  ;
 syntax Laboratoire
         = 
-        ANY id ANY metas
+        Integer id AbstractMetaLab metas
  ;
 syntax AbstractMetaLab
         = 
-        ()
+        MetaLab
  ;
 syntax MetaLab
         = 
-        id: ANY
+        id: String
  ;
 syntax AffiliationType
         = 
-        ANY institution+ ANY prive+ ANY ecole+ ANY universite+
+        String institution+ String prive+ String ecole+ String universite+
  ;
 syntax TamponType
         = 
-        id: ANY
+        id: String
  ;
 syntax DateVisibleEnum
         = 15J: ()
@@ -150,12 +156,12 @@ syntax DateVisibleEnum
         | JAMAIS: ()
  ;
 syntax AbstractDepot
-        = 
-        ()
+        = Depot
+        | DepotWeb
  ;
 syntax Depot
         = 
-        format: ANY
+        format: FormatEnum
  ;
 syntax FormatEnum
         = PDF: ()
@@ -168,7 +174,7 @@ syntax FormatEnum
  ;
 syntax DepotWeb
         = 
-        format: ANY
+        format: FormatWebEnum
  ;
 syntax FormatWebEnum
         = XML: ()
@@ -176,16 +182,16 @@ syntax FormatWebEnum
         | HTM: ()
  ;
 syntax AbstractDepotType
-        = 
-        ()
+        = DepotsType
+        | WebLink
  ;
 syntax DepotsType
         = 
-        ANY depots+
+        AbstractDepot depots+
  ;
 syntax WebLink
         = 
-        ANY identifiant ANY server
+        String identifiant Server server
  ;
 syntax Server
         = 

@@ -4,16 +4,16 @@ exports
   sorts
         Application ExtensionPoint Description Extension PlugIn Librairy Class 
   context-free syntax
-        name::ANY version::ANY author::ANY extensionPoints::ANY+ -> Application
+        name::String version::String author::String extensionPoints::ExtensionPoint+ -> Application
 
-        name::ANY id::ANY application::ANY descriptions::ANY+ plugIn::ANY -> ExtensionPoint
+        name::String id::String application::Application descriptions::Description+ plugIn::PlugIn -> ExtensionPoint
 
-        xmlSchema::ANY extensionPoints::ANY+ -> Description
+        xmlSchema::String extensionPoints::ExtensionPoint+ -> Description
 
-        name::ANY id::ANY isConfiguredInto::ANY -> Extension
+        name::String id::String isConfiguredInto::ExtensionPoint -> Extension
 
-        id::ANY displayableName::ANY version::ANY supplier::ANY configures::ANY+ extensionPoints::ANY+ requires::ANY+ uses::ANY+ -> PlugIn
+        id::String displayableName::String version::String supplier::String configures::Extension+ extensionPoints::ExtensionPoint+ requires::PlugIn+ uses::Librairy+ -> PlugIn
 
-        name::ANY plugIn::ANY classes::ANY+ -> Librairy
+        name::String plugIn::PlugIn classes::Class+ -> Librairy
 
-        name::ANY librairy::ANY -> Class
+        name::String librairy::Librairy -> Class

@@ -3,13 +3,13 @@ module MSProject
 
 syntax MSProject
         = 
-        ANY tasks+
+        Task tasks+
  ;
 syntax NamedElement
         = 
-        ()
+        Task
  ;
 syntax Task
         = 
-        ANY UID ANY predecessors+
+        String UID Task predecessors+
  ;

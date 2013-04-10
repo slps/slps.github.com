@@ -4,29 +4,56 @@ exports
   sorts
         ArtifactUsageName ProcessDefinitionElement Guidance ArtifactKind WorkItem RoleKind Condition ProcessComponent Goal Precondition WorkDefinition ActivityKind Iteration Phase Lifecycle 
   context-free syntax
-        isInput::ANY isOutput::ANY hasWorkPerArtifact::ANY artifactKind::ANY workDefinition::ANY -> ArtifactUsageName
+        isInput::Boolean isOutput::Boolean hasWorkPerArtifact::Boolean artifactKind::ArtifactKind workDefinition::WorkDefinition -> ArtifactUsageName
 
-        guidances::ANY+ processComponents::ANY+ -> ProcessDefinitionElement
+        Guidance -> ProcessDefinitionElement
 
-        processDefinitionElements::ANY+ -> Guidance
+        ArtifactKind -> ProcessDefinitionElement
 
-        artifactUsageNames::ANY+ responsible::ANY -> ArtifactKind
+        WorkItem -> ProcessDefinitionElement
 
-         -> WorkItem
+        RoleKind -> ProcessDefinitionElement
 
-        artifactKinds::ANY+ -> RoleKind
+        Condition -> ProcessDefinitionElement
 
-         -> Condition
+        ProcessComponent -> ProcessDefinitionElement
 
-        processDefinitionElements::ANY+ -> ProcessComponent
+        guidances::Guidance+ processComponents::ProcessComponent+ -> ProcessDefinitionElement
 
-        workDefinition::ANY -> Goal
+        processDefinitionElements::ProcessDefinitionElement+ -> Guidance
 
-        workDefinition::ANY -> Precondition
+        artifactUsageNames::ArtifactUsageName+ responsible::RoleKind -> ArtifactKind
 
-        artifactUsageNames::ANY+ goal::ANY precondition::ANY -> WorkDefinition
+        WorkDefinition -> WorkItem
 
-        performer::ANY+ assistant::ANY+ -> ActivityKind
+        WorkDefinition -> WorkItem
+
+        artifactKinds::ArtifactKind+ -> RoleKind
+
+        Goal -> Condition
+
+        Precondition -> Condition
+
+        Goal -> Condition
+        Precondition -> Condition
+
+        processDefinitionElements::ProcessDefinitionElement+ -> ProcessComponent
+
+        workDefinition::WorkDefinition -> Goal
+
+        workDefinition::WorkDefinition -> Precondition
+
+        ActivityKind -> WorkDefinition
+
+        Iteration -> WorkDefinition
+
+        Phase -> WorkDefinition
+
+        Lifecycle -> WorkDefinition
+
+        artifactUsageNames::ArtifactUsageName+ goal::Goal precondition::Precondition -> WorkDefinition
+
+        performer::RoleKind+ assistant::RoleKind+ -> ActivityKind
 
          -> Iteration
 

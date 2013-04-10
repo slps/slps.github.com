@@ -3,57 +3,60 @@ module DSLModel
 
 syntax Model
         = 
-        ANY domainModel ANY contents+
+        PrimitiveTypes/String domainModel ModelElement contents+
  ;
 syntax Element
-        = 
-        ()
+        = ModelElement
+        | ReferenceLink
  ;
 syntax ModelElement
-        = 
-        ANY parentLink ANY properties+ ANY embeddinglinks+ ANY referencelinks+
+        = ModelElementLink
+        | EmbeddingLink parentLink Property properties+ EmbeddingLink embeddinglinks+ ReferenceLink referencelinks+
  ;
 syntax ModelElementLink
         = 
-        ANY links+
+        ReferenceLink links+
  ;
 syntax EmbeddingLink
         = 
-        ANY owner ANY elements+
+        ModelElement owner ModelElement elements+
  ;
 syntax ReferenceLink
         = 
-        ANY owner ANY modelElement ANY roles
+        ModelElement owner ModelElementLink modelElement Role roles
  ;
 syntax NamedElement
-        = 
-        ()
+        = EmbeddingLink
+        | Property
+        | Role
  ;
 syntax Property
         = 
-        ANY owner ANY value
+        ModelElement owner Value value
  ;
 syntax Role
         = 
-        ANY element ANY owner
+        ModelElement element ReferenceLink owner
  ;
 syntax Value
-        = 
-        ()
+        = IntegerValue
+        | DoubleValue
+        | BooleanValue
+        | StringValue
  ;
 syntax IntegerValue
         = 
-        value: ANY
+        value: PrimitiveTypes/Integer
  ;
 syntax DoubleValue
         = 
-        value: ANY
+        value: PrimitiveTypes/Double
  ;
 syntax BooleanValue
         = 
-        value: ANY
+        value: PrimitiveTypes/Boolean
  ;
 syntax StringValue
         = 
-        value: ANY
+        value: PrimitiveTypes/String
  ;

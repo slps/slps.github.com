@@ -3,9 +3,9 @@ module Book
 
 syntax Book
         = 
-        ANY title ANY chapters+
+        String title Chapter chapters+
  ;
 syntax Chapter
         = 
-        ANY title ANY nbPages ANY author ANY book
+        String title Integer nbPages String author Book book
  ;

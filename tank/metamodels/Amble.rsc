@@ -2,58 +2,66 @@
 module Amble
 
 syntax Element
-        = 
-        ()
+        = Program
+        | Process
+        | State
+        | Guard
+        | Action
+        | Network
+        | Channel
+        | Message
+        | Variable
  ;
 syntax Program
         = 
-        ANY processes+ ANY networks+
+        Process processes+ Network networks+
  ;
 syntax Process
         = 
-        ANY minId ANY maxId ANY instancesNb ANY states+ ANY transitions+ ANY initial ANY variables+ ANY connectedTo+
+        Integer minId Integer maxId Integer instancesNb State states+ Transition transitions+ Action initial Variable variables+ Network connectedTo+
  ;
 syntax State
         = 
-        ANY isInitial ANY incoming+ ANY outgoing+
+        Boolean isInitial Transition incoming+ Transition outgoing+
  ;
 syntax Transition
-        = 
-        ()
+        = Trans
+        | Strans
+        | Transall
  ;
 syntax Trans
         = 
-        waitFor: ANY
+        waitFor: Message
  ;
 syntax Strans
         = 
-        ANY guard ANY action ANY source ANY target
+        Guard guard Action action State source State target
  ;
 syntax Transall
         = 
-        waitFor: ANY
+        waitFor: Message
  ;
 syntax Guard
         = 
-        ANY name
+        name: String
  ;
 syntax Action
         = 
-        ANY name
+        name: String
  ;
 syntax Network
         = 
-        ANY channels+
+        Channel channels+
  ;
 syntax Channel
         = 
-        ANY messages+ ANY source ANY target
+        Message messages+ Process source Process target
  ;
 syntax Message
         = 
-        ANY name
+        name: String
  ;
 syntax Variable
         = 
-        ANY type ANY initValue
+        String type String initValue
  ;

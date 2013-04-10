@@ -2,46 +2,46 @@
 module ClassicModels
 
 syntax AddressInfo
-        = 
-        ()
+        = Office
+        | Customer
  ;
 syntax Date
         = 
-        ANY year ANY month ANY day
+        Integer year Integer month Integer day
  ;
 syntax ClassicModels
         = 
-        ANY offices+ ANY productLines+ ANY customers+
+        Office offices+ ProductLine productLines+ Customer customers+
  ;
 syntax ProductLine
         = 
-        ANY productLineOwner ANY products+ ANY name ANY textDescription ANY htmlDescription
+        ClassicModels productLineOwner Product products+ String name String textDescription String htmlDescription
  ;
 syntax Product
         = 
-        ANY productLine ANY code ANY name ANY scale ANY vendor ANY description ANY quantityInStock ANY buyPrice ANY MSRP
+        ProductLine productLine String code String name String scale String vendor String description Integer quantityInStock Double buyPrice Double MSRP
  ;
 syntax Office
         = 
-        ANY officeOwner ANY code ANY employees+ ANY territory
+        ClassicModels officeOwner String code Employee employees+ String territory
  ;
 syntax Employee
         = 
-        ANY office ANY number ANY employeeCustomers+ ANY lastName ANY firstName ANY extension ANY email ANY reportsTo ANY jobTitle
+        Office office Integer number Customer employeeCustomers+ String lastName String firstName String extension String email Employee reportsTo String jobTitle
  ;
 syntax Customer
         = 
-        ANY customerOwner ANY number ANY orders+ ANY payments+ ANY salesRepEmployee ANY name ANY contactLastName ANY contactFirstName ANY creditLimit
+        ClassicModels customerOwner Integer number Order orders+ Payment payments+ Employee salesRepEmployee String name String contactLastName String contactFirstName Double creditLimit
  ;
 syntax Payment
         = 
-        ANY customer ANY checkNumber ANY date ANY amount
+        Customer customer String checkNumber Date date Double amount
  ;
 syntax Order
         = 
-        ANY customer ANY orderDetails+ ANY number ANY date ANY requiredDate ANY shippedDate ANY status ANY comments
+        Customer customer OrderDetail orderDetails+ Integer number Date date Date requiredDate Date shippedDate String status String comments
  ;
 syntax OrderDetail
         = 
-        ANY order ANY product ANY quantityOrdered ANY priceEach
+        Order order Product product Integer quantityOrdered Double priceEach
  ;

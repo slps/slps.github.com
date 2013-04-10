@@ -3,51 +3,55 @@ module DeploymentReport
 
 syntax DeploymentReport
         = 
-        ANY import+ ANY applications ANY binding ANY logicalServers ANY errors
+        DeploymentImport import+ Applications applications Binding binding LogicalServers logicalServers ErrorCollection errors
  ;
 syntax DeploymentImport
         = 
-        ANY alias ANY identity
+        SimpleName alias ImportNamespaceIdentity identity
  ;
 syntax ImportNamespaceIdentity
         = 
-        import: ANY
+        import: DeploymentImport
  ;
 syntax NamespaceIdentity
-        = 
-        ANY name ANY version ANY publicKey ANY publicKeyToken ANY culture ANY platform
+        = ImportNamespaceIdentity
+        | Path name FourPartVersionType version PublicKeyType publicKey PublicKeyTokenType publicKeyToken CultureNeutral culture Platform platform
  ;
 syntax Applications
         = 
-        ANY system+ ANY application+
+        OuterSystem system+ Application application+
  ;
 syntax LogicalServers
         = 
-        ANY zone+ ANY logicalServer+
+        Zone zone+ LogicalServer logicalServer+
  ;
 syntax OuterSystem
         = 
-        ANY system+ ANY application+ ANY name
+        OuterSystem system+ Application application+ String name
  ;
 syntax Binding
         = 
-        ANY zone+ ANY boundLogicalServer+
+        Zone zone+ BoundLogicalServer boundLogicalServer+
  ;
 syntax Zone
         = 
-        ANY zone+ ANY boundLogicalServer+ ANY logicalServer+ ANY name
+        Zone zone+ BoundLogicalServer boundLogicalServer+ LogicalServer logicalServer+ String name
  ;
 syntax ReportObject
-        = 
-        ANY sequence+ ANY name ANY definition ANY extends ANY instanceId ANY hostedOn
+        = LogicalServer
+        | Application
+        | ReportSystem
+        | ReportResource
+        | ReportEndpoint
+        | SequenceReport sequence+ String name String definition String extends Guid instanceId String hostedOn
  ;
 syntax SequenceReport
         = 
-        ANY report ANY setting ANY system+ ANY resource+ ANY endpoint+
+        ReportObject report Setting setting ReportSystem system+ ReportResource resource+ ReportEndpoint endpoint+
  ;
 syntax BoundLogicalServer
         = 
-        ANY setting+ ANY application+ ANY name ANY definition ANY extends
+        Setting setting+ Application application+ String name String definition String extends
  ;
 syntax LogicalServer
         = 
@@ -71,47 +75,48 @@ syntax ReportEndpoint
  ;
 syntax Setting
         = 
-        ANY value+ ANY facet+ ANY settingAttributes
+        SettingInstanceValue value+ SettingFacet facet+ SettingAttributes settingAttributes
  ;
 syntax SettingFacet
         = 
-        ANY value ANY settingAttributes
+        SettingInstanceValue value SettingAttributes settingAttributes
  ;
 syntax SettingInstanceValue
         = 
-        ANY contents+ ANY null
+        String contents+ Boolean null
  ;
 syntax SettingAttributes
         = 
-        ANY name ANY definition ANY state ANY fixed ANY list ANY null ANY secure ANY failedToSerialize
+        String name String definition SettingState state Boolean fixed Boolean list Boolean null Boolean secure Boolean failedToSerialize
  ;
 syntax SettingValue
         = 
-        ANY contents+ ANY Null ANY Secure
+        String contents+ Boolean Null Boolean Secure
  ;
 syntax ErrorCollection
         = 
-        ANY documentError+ ANY documentResolutionError+ ANY documentConstraintError+
+        DocumentError documentError+ DocumentResolutionError documentResolutionError+ DocumentConstraintError documentConstraintError+
  ;
 syntax DocumentError
-        = 
-        ANY description+ ANY Code ANY Level ANY File
+        = DocumentResolutionError
+        | DocumentConstraintError
+        | Description description+ Integer Code Integer Level String File
  ;
 syntax DocumentResolutionError
         = 
-        Statement: ANY
+        Statement: String
  ;
 syntax DocumentConstraintError
         = 
-        ANY failedInput+ ANY constraintMember ANY constraintDefinition ANY targetInstancePath ANY ownerInstancePath ANY constraintErrorCode ANY constraintErrorMessage
+        FailedInput failedInput+ String constraintMember String constraintDefinition String targetInstancePath String ownerInstancePath String constraintErrorCode String constraintErrorMessage
  ;
 syntax FailedInput
         = 
-        ANY contents+
+        String contents+
  ;
 syntax Description
         = 
-        ANY contents+
+        String contents+
  ;
 syntax Guid
         = 
@@ -173,6 +178,13 @@ syntax SettingState
         | Error: ()
  ;
 syntax Element
-        = 
-        value: ANY
+        = Guid
+        | SimpleName
+        | Path
+        | FourPartVersionType
+        | PublicKeyType
+        | PublicKeyTokenType
+        | Culture
+        | CultureNeutral
+        | value: String
  ;

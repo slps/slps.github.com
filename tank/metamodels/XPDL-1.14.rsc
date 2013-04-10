@@ -67,40 +67,57 @@ syntax ImplementationKind
         | Unspecified: ()
  ;
 syntax Element
-        = 
-        ()
+        = Package
+        | MessageFlow
+        | Association
+        | Pool
+        | Lane
+        | Participant
+        | Artifact
+        | TypeDeclaration
+        | Application
+        | Activity
+        | Process
+        | Transition
+        | ActivitySet
+        | Object
+        | ExternalPackage
+        | Category
+        | DataField
  ;
 syntax Package
         = 
-        ANY script ANY externalPackages+ ANY typeDeclarations+ ANY participants+ ANY applications+ ANY dataFields+ ANY pools+ ANY messageFlows+ ANY associations+ ANY artifacts+ ANY workflowProcesses+
+        Script script ExternalPackage externalPackages+ TypeDeclaration typeDeclarations+ Participant participants+ Application applications+ DataField dataFields+ Pool pools+ MessageFlow messageFlows+ Association associations+ Artifact artifacts+ Process workflowProcesses+
  ;
 syntax MessageFlow
         = 
-        ANY targetActivity ANY sourceActivity ANY targetPool ANY sourcePool ANY object
+        Activity targetActivity Activity sourceActivity Pool targetPool Pool sourcePool Object object
  ;
 syntax Association
         = 
-        ANY associationDirection ANY targetArtifact ANY sourceArtifact ANY targetPool ANY sourcePool ANY targetActivity ANY sourceActivity ANY object
+        AssociationDirectionKind associationDirection Artifact targetArtifact Artifact sourceArtifact Pool targetPool Pool sourcePool Activity targetActivity Activity sourceActivity Object object
  ;
 syntax Pool
         = 
-        ANY orientation ANY boundaryVisible ANY lanes+ ANY object ANY participant ANY process
+        OrientationKind orientation Boolean boundaryVisible Lane lanes+ Object object Participant participant Process process
  ;
 syntax Lane
         = 
-        ANY object ANY parentLane ANY parentPool
+        Object object Lane parentLane Pool parentPool
  ;
 syntax Participant
         = 
-        ANY id ANY name
+        String id String name
  ;
 syntax Artifact
-        = 
-        ANY textAnnotation ANY group ANY object ANY dataObject
+        = DataObject
+        | Group
+        | Annotation
+        | String textAnnotation String group Object object DataObject dataObject
  ;
 syntax DataObject
         = 
-        ANY state ANY requiredForStart ANY producedAtCompletion ANY dataFields+
+        String state Boolean requiredForStart Boolean producedAtCompletion DataField dataFields+
  ;
 syntax Group
         = 
@@ -112,11 +129,11 @@ syntax Annotation
  ;
 syntax TypeDeclaration
         = 
-        ANY id ANY name
+        String id String name
  ;
 syntax Application
-        = 
-        ANY id ANY name
+        = ParametrizedApplication
+        | ReferencedApplication
  ;
 syntax ParametrizedApplication
         = 
@@ -124,115 +141,133 @@ syntax ParametrizedApplication
  ;
 syntax ReferencedApplication
         = 
-        externalReference: ANY
+        externalReference: ExternalReference
  ;
 syntax Activity
-        = 
-        ANY isStartActivity ANY status ANY startMode ANY finishMode ANY startQuantity ANY isATransaction ANY dataFields+ ANY object
+        = Task
+        | Route
+        | SubFlow
+        | BlockActivity
+        | Event
+        | Boolean isStartActivity StatusKind status ModeKind startMode ModeKind finishMode Integer startQuantity Boolean isATransaction DataField dataFields+ Object object
  ;
 syntax Task
-        = 
-        ()
+        = TaskService
+        | TaskReceive
+        | TaskManual
+        | TaskReference
+        | TaskScript
+        | TaskSend
+        | TaskUser
+        | TaskApplication
  ;
 syntax TaskService
         = 
-        implementation: ANY
+        implementation: ImplementationKind
  ;
 syntax TaskReceive
         = 
-        ANY instantiate ANY implementation
+        Boolean instantiate ImplementationKind implementation
  ;
 syntax TaskManual
         = 
-        
+        ()
  ;
 syntax TaskReference
         = 
-        taskRef: ANY
+        taskRef: Task
  ;
 syntax TaskScript
         = 
-        script: ANY
+        script: Script
  ;
 syntax TaskSend
         = 
-        implementation: ANY
+        implementation: ImplementationKind
  ;
 syntax TaskUser
         = 
-        implementation: ANY
+        implementation: ImplementationKind
  ;
 syntax TaskApplication
         = 
-        packageRef: ANY
+        packageRef: Package
  ;
 syntax Route
-        = 
-        ANY gatewayType ANY instantiate ANY markerVisiable
+        = Gateway
+        | GatewayTypeKind gatewayType Boolean instantiate Boolean markerVisiable
  ;
 syntax SubFlow
         = 
-        ANY execution ANY instanceDataField ANY packageRef ANY startActivitySet ANY startActivity
+        ExecutionKind execution String instanceDataField Package packageRef ActivitySet startActivitySet Activity startActivity
  ;
 syntax BlockActivity
         = 
-        ANY activitySet ANY startActivity
+        ActivitySet activitySet Activity startActivity
  ;
 syntax Event
-        = 
-        ()
+        = StartEvent
+        | IntermediateEvent
+        | EndEvent
  ;
 syntax Trigger
-        = 
-        ()
+        = ResultCompensation
+        | ResultError
+        | ResultMultiple
+        | TriggerResultLink
+        | TriggerResultMessage
+        | TriggerIntermediateMultiple
+        | TriggerMultiple
+        | TriggerRule
+        | TriggerTimer
  ;
 syntax ResultCompensation
         = 
-        activity: ANY
+        activity: Activity
  ;
 syntax ResultError
         = 
-        errorCode: ANY
+        errorCode: String
  ;
 syntax ResultMultiple
         = 
-        
+        ()
  ;
 syntax TriggerResultLink
         = 
-        processRef: ANY
+        processRef: Process
  ;
 syntax TriggerResultMessage
         = 
-        
+        ()
  ;
 syntax TriggerIntermediateMultiple
         = 
-        
+        ()
  ;
 syntax TriggerMultiple
         = 
-        
+        ()
  ;
 syntax TriggerRule
         = 
-        ruleName: ANY
+        ruleName: String
  ;
 syntax TriggerTimer
         = 
-        ANY timeDate ANY timeCycle
+        String timeDate String timeCycle
  ;
 syntax StartEvent
         = 
-        ANY triggerKind ANY implementation ANY trigger
+        TriggerKind triggerKind ImplementationKind implementation Trigger trigger
  ;
 syntax IntermediateEvent
         = 
-        target: ANY
+        target: Activity
  ;
 syntax EndEvent
         = 
-        ANY triggerKind ANY implementation ANY trigger
+        TriggerKind triggerKind ImplementationKind implementation Trigger trigger
  ;
 syntax Gateway
         = 
@@ -240,37 +275,37 @@ syntax Gateway
  ;
 syntax Process
         = 
-        ANY accessLevel ANY processType ANY status ANY suppressJoinFailure ANY enableInstanceCompensation ANY adHoc ANY adHocOrdering ANY adHocCompletionCondition ANY participant+ ANY applications+ ANY dataField ANY activitySets+ ANY activities+ ANY transitions+ ANY object ANY defaultStartActivitySet ANY defaultStartActivity
+        AccessLevelKind accessLevel ProcessTypeKind processType StatusKind status Boolean suppressJoinFailure Boolean enableInstanceCompensation Boolean adHoc AdHocOrderingKind adHocOrdering String adHocCompletionCondition Participant participant+ Application applications+ DataField dataField ActivitySet activitySets+ Activity activities+ Transition transitions+ Object object ActivitySet defaultStartActivitySet Activity defaultStartActivity
  ;
 syntax Transition
         = 
-        ANY quantity ANY object ANY to ANY from
+        Integer quantity Object object Activity to Activity from
  ;
 syntax ActivitySet
         = 
-        ANY adHoc ANY adHocOrdering ANY adHocCompletionCondition ANY defaultStartActivity ANY activities+ ANY transitions+ ANY object
+        Boolean adHoc AdHocOrderingKind adHocOrdering String adHocCompletionCondition Activity defaultStartActivity Activity activities+ Transition transitions+ Object object
  ;
 syntax ExternalReference
         = 
-        ANY xref ANY location ANY namespace
+        String xref String location String namespace
  ;
 syntax Object
         = 
-        ANY categories+
+        Category categories+
  ;
 syntax ExternalPackage
         = 
-        href: ANY
+        href: String
  ;
 syntax Category
         = 
-        ANY id ANY name
+        String id String name
  ;
 syntax DataField
         = 
-        ANY isArray ANY correlation ANY dataType
+        Boolean isArray Boolean correlation TypeDeclaration dataType
  ;
 syntax Script
         = 
-        ANY type ANY version ANY grammar
+        String type String version String grammar
  ;

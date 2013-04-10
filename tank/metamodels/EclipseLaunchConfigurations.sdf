@@ -4,18 +4,26 @@ exports
   sorts
         LaunchConfiguration Attribute StringAttribute BooleanAttribute MapAttribute MapEntry ListAttribute ListEntry 
   context-free syntax
-        type::ANY attributes::ANY+ -> LaunchConfiguration
+        type::String attributes::Attribute+ -> LaunchConfiguration
 
-         -> Attribute
+        StringAttribute -> Attribute
 
-        value::ANY -> StringAttribute
+        BooleanAttribute -> Attribute
 
-        value::ANY -> BooleanAttribute
+        MapAttribute -> Attribute
 
-        entries::ANY+ -> MapAttribute
+        ListAttribute -> Attribute
 
-        mapAttribute::ANY -> MapEntry
+        MapEntry -> StringAttribute
 
-        entries::ANY+ -> ListAttribute
+        value::String -> StringAttribute
 
-        listAttribute::ANY value::ANY -> ListEntry
+        value::Boolean -> BooleanAttribute
+
+        entries::MapEntry+ -> MapAttribute
+
+        mapAttribute::MapAttribute -> MapEntry
+
+        entries::ListEntry+ -> ListAttribute
+
+        listAttribute::ListAttribute value::String -> ListEntry

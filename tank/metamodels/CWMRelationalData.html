@@ -13,29 +13,41 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable CWMRelationalData 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Hugo Bruneliere, <code>CWMRelationalData.ecore</code>, 2005/08/10.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>12</strong></li><li>Number of top alternatives: <strong>12</strong></li><li>Number of defined nonterminal symbols: <strong>12</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>12</strong>: <code><a href="#QueryExpression" class="nt">QueryExpression</a>, <a href="#CheckConstraint" class="nt">CheckConstraint</a>, <a href="#Column" class="nt">Column</a>, <a href="#ColumnSet" class="nt">ColumnSet</a>, <a href="#NamedColumnSet" class="nt">NamedColumnSet</a>, <a href="#QueryColumnSet" class="nt">QueryColumnSet</a>, <a href="#Table" class="nt">Table</a>, <a href="#View" class="nt">View</a>, <a href="#Trigger" class="nt">Trigger</a>, <a href="#SQLDataType" class="nt">SQLDataType</a>, <a href="#SQLDistinctType" class="nt">SQLDistinctType</a>, <a href="#SQLSimpleType" class="nt">SQLSimpleType</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="QueryExpression">QueryExpression</a>:
-        <span class="sel">expresssion</span>::<span class="meta">any</span>
+				</script></head><body><h1 class="l">Browsable CWMRelationalData 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Hugo Bruneliere, <code>CWMRelationalData.ecore</code>, 2005/08/10.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>18</strong></li><li>Number of top alternatives: <strong>18</strong></li><li>Number of defined nonterminal symbols: <strong>12</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: —</li><li>Bottom nonterminal symbols: <strong>3</strong>: <code><a href="#String" class="nt">String</a>, <a href="#Integer" class="nt">Integer</a>, <a href="#Boolean" class="nt">Boolean</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="QueryExpression">QueryExpression</a>:
+        <span class="sel">expresssion</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="CheckConstraint">CheckConstraint</a>:
-        <span class="sel">constraintElements</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">constrainedElements</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">constraintElements</span>::<a class="nt" href="#Column">Column</a><span class="meta">+</span> <span class="sel">constrainedElements</span>::<a class="nt" href="#Table">Table</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Column">Column</a>:
-        <span class="sel">precision</span>::<span class="meta">any</span> <span class="sel">scale</span>::<span class="meta">any</span> <span class="sel">isNullable</span>::<span class="meta">any</span> <span class="sel">length</span>::<span class="meta">any</span> <span class="sel">collectionName</span>::<span class="meta">any</span> <span class="sel">characterSetName</span>::<span class="meta">any</span> <span class="sel">column_constraints</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">type</span>::<span class="meta">any</span> <span class="sel">owner</span>::<span class="meta">any</span> <span class="sel">optionScopeColumnSet</span>::<span class="meta">any</span>
+        <span class="sel">precision</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">scale</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">isNullable</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">length</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">collectionName</span>::<a class="nt" href="#String">String</a> <span class="sel">characterSetName</span>::<a class="nt" href="#String">String</a> <span class="sel">column_constraints</span>::<a class="nt" href="#CheckConstraint">CheckConstraint</a><span class="meta">+</span> <span class="sel">type</span>::<a class="nt" href="#SQLDataType">SQLDataType</a> <span class="sel">owner</span>::<a class="nt" href="#ColumnSet">ColumnSet</a> <span class="sel">optionScopeColumnSet</span>::<a class="nt" href="#NamedColumnSet">NamedColumnSet</a>
 </pre><pre><a class="nt" name="ColumnSet">ColumnSet</a>:
-        <span class="sel">features</span>::<span class="meta">any</span><span class="meta">+</span>
+        <a class="nt" href="#NamedColumnSet">NamedColumnSet</a>
+</pre><pre><a class="nt" name="ColumnSet">ColumnSet</a>:
+        <a class="nt" href="#QueryColumnSet">QueryColumnSet</a>
+</pre><pre><a class="nt" name="ColumnSet">ColumnSet</a>:
+        <span class="sel">features</span>::<a class="nt" href="#Column">Column</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="NamedColumnSet">NamedColumnSet</a>:
-        <span class="sel">optionScopeColumn</span>::<span class="meta">any</span> <span class="sel">triggers</span>::<span class="meta">any</span><span class="meta">+</span>
+        <a class="nt" href="#Table">Table</a>
+</pre><pre><a class="nt" name="NamedColumnSet">NamedColumnSet</a>:
+        <a class="nt" href="#View">View</a>
+</pre><pre><a class="nt" name="NamedColumnSet">NamedColumnSet</a>:
+        <span class="sel">optionScopeColumn</span>::<a class="nt" href="#Column">Column</a> <span class="sel">triggers</span>::<a class="nt" href="#Trigger">Trigger</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="QueryColumnSet">QueryColumnSet</a>:
-        <span class="sel">query</span>::<span class="meta">any</span>
+        <span class="sel">query</span>::<a class="nt" href="#QueryExpression">QueryExpression</a>
 </pre><pre><a class="nt" name="Table">Table</a>:
-        <span class="sel">isTemporary</span>::<span class="meta">any</span> <span class="sel">temporaryScope</span>::<span class="meta">any</span> <span class="sel">isSystem</span>::<span class="meta">any</span> <span class="sel">table_constraints</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">isTemporary</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">temporaryScope</span>::<a class="nt" href="#String">String</a> <span class="sel">isSystem</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">table_constraints</span>::<a class="nt" href="#CheckConstraint">CheckConstraint</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="View">View</a>:
-        <span class="sel">isReadOnly</span>::<span class="meta">any</span> <span class="sel">checkOption</span>::<span class="meta">any</span> <span class="sel">queryExpression</span>::<span class="meta">any</span>
+        <span class="sel">isReadOnly</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">checkOption</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">queryExpression</span>::<a class="nt" href="#QueryExpression">QueryExpression</a>
 </pre><pre><a class="nt" name="Trigger">Trigger</a>:
-        <span class="sel">namedColumnSet</span>::<span class="meta">any</span>
+        <span class="sel">namedColumnSet</span>::<a class="nt" href="#NamedColumnSet">NamedColumnSet</a>
 </pre><pre><a class="nt" name="SQLDataType">SQLDataType</a>:
-        <span class="sel">typeNumber</span>::<span class="meta">any</span> <span class="sel">structuralFeatures</span>::<span class="meta">any</span><span class="meta">+</span>
+        <a class="nt" href="#SQLDistinctType">SQLDistinctType</a>
+</pre><pre><a class="nt" name="SQLDataType">SQLDataType</a>:
+        <a class="nt" href="#SQLSimpleType">SQLSimpleType</a>
+</pre><pre><a class="nt" name="SQLDataType">SQLDataType</a>:
+        <span class="sel">typeNumber</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">structuralFeatures</span>::<a class="nt" href="#Column">Column</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="SQLDistinctType">SQLDistinctType</a>:
-        <span class="sel">length</span>::<span class="meta">any</span> <span class="sel">precision</span>::<span class="meta">any</span> <span class="sel">scale</span>::<span class="meta">any</span> <span class="sel">sqlSimpleType</span>::<span class="meta">any</span>
+        <span class="sel">length</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">precision</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">scale</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">sqlSimpleType</span>::<a class="nt" href="#SQLSimpleType">SQLSimpleType</a>
 </pre><pre><a class="nt" name="SQLSimpleType">SQLSimpleType</a>:
-        <span class="sel">characterMaximumLength</span>::<span class="meta">any</span> <span class="sel">characterOctetLength</span>::<span class="meta">any</span> <span class="sel">numericPrecision</span>::<span class="meta">any</span> <span class="sel">numericPrecisionRadix</span>::<span class="meta">any</span> <span class="sel">numericScale</span>::<span class="meta">any</span> <span class="sel">dateTimePrecision</span>::<span class="meta">any</span> <span class="sel">sqlDistinctTypes</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">characterMaximumLength</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">characterOctetLength</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">numericPrecision</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">numericPrecisionRadix</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">numericScale</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">dateTimePrecision</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">sqlDistinctTypes</span>::<a class="nt" href="#SQLDistinctType">SQLDistinctType</a><span class="meta">+</span>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

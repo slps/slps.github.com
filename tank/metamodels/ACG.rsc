@@ -2,88 +2,96 @@
 module ACG
 
 syntax LocatedElement
-        = 
-        ()
+        = ACG
+        | ACGElement
+        | StatementBlock
+        | Statement
+        | VariableDecl
+        | Expression
  ;
 syntax ACG
         = 
-        ANY metamodel ANY startsWith ANY elements+
+        String metamodel String startsWith ACGElement elements+
  ;
 syntax ACGElement
-        = 
-        ()
+        = Function
+        | Attribute
  ;
 syntax Function
         = 
-        ANY context ANY name ANY parameters+ ANY body
+        String context String name Parameter parameters+ Expression body
  ;
 syntax Attribute
         = 
-        ANY context ANY name ANY body
+        String context String name Expression body
  ;
 syntax Parameter
         = 
         ()
  ;
 syntax Node
-        = 
-        ()
+        = ASMNode
+        | CodeNode
+        | SimpleNode
  ;
 syntax ASMNode
         = 
-        name: ANY
+        name: Expression
  ;
 syntax CodeNode
         = 
-        ANY element ANY mode ANY guard
+        String element String mode Expression guard
  ;
 syntax SimpleNode
         = 
-        ANY element ANY mode ANY guard
- ;
-syntax StatementBlock
-        = 
-        ()
+        String element String mode Expression guard
  ;
 syntax Statement
-        = 
-        ()
+        = ReportStat
+        | FieldStat
+        | ParamStat
+        | EmitStat
  ;
 syntax CompoundStat
-        = 
-        ()
+        = ForEachStat
+        | OnceStat
+        | VariableStat
+        | OperationStat
+        | ConditionalStat
+        | LetStat
+        | AnalyzeStat
  ;
 syntax ForEachStat
         = 
-        ANY iterator ANY collection
+        VariableDecl iterator Expression collection
  ;
 syntax OnceStat
         = 
-        
+        ()
  ;
 syntax VariableStat
         = 
-        ANY definition ANY name
+        Expression definition Expression name
  ;
 syntax OperationStat
         = 
-        ANY context ANY name
+        Expression context Expression name
  ;
 syntax ConditionalStat
         = 
-        ANY condition ANY elseStatements+
+        Expression condition Statement elseStatements+
  ;
 syntax LetStat
         = 
-        ANY variable ANY value
+        VariableDecl variable Expression value
  ;
 syntax AnalyzeStat
         = 
-        ANY target ANY mode
+        Expression target String mode
  ;
 syntax ReportStat
         = 
-        ANY severity ANY message
+        Severity severity Expression message
  ;
 syntax Severity
         = critic: ()
@@ -92,197 +100,227 @@ syntax Severity
  ;
 syntax FieldStat
         = 
-        ANY name ANY type
+        Expression name Expression type
  ;
 syntax ParamStat
         = 
-        ANY name ANY type
+        Expression name Expression type
  ;
 syntax EmitStat
-        = 
-        ()
+        = LabelStat
+        | NewStat
+        | DupStat
+        | DupX1Stat
+        | PopStat
+        | SwapStat
+        | IterateStat
+        | EndIterateStat
+        | GetAsmStat
+        | FindMEStat
+        | PushTStat
+        | PushFStat
+        | EmitWithOperandStat
+        | EmitWithLabelRefStat
  ;
 syntax LabelStat
         = 
-        ANY name ANY id
+        String name Expression id
  ;
 syntax NewStat
         = 
-        
+        ()
  ;
 syntax DupStat
         = 
-        
+        ()
  ;
 syntax DupX1Stat
         = 
-        
+        ()
  ;
 syntax PopStat
         = 
-        
+        ()
  ;
 syntax SwapStat
         = 
-        
+        ()
  ;
 syntax IterateStat
         = 
-        
+        ()
  ;
 syntax EndIterateStat
         = 
-        
+        ()
  ;
 syntax GetAsmStat
         = 
-        
+        ()
  ;
 syntax FindMEStat
         = 
-        
+        ()
  ;
 syntax PushTStat
         = 
-        
+        ()
  ;
 syntax PushFStat
         = 
-        
+        ()
  ;
 syntax EmitWithOperandStat
-        = 
-        ()
+        = PushStat
+        | PushIStat
+        | PushDStat
+        | LoadStat
+        | StoreStat
+        | CallStat
+        | PCallStat
+        | SuperCallStat
+        | GetStat
+        | SetStat
  ;
 syntax PushStat
         = 
-        ANY operand
+        operand: Expression
  ;
 syntax PushIStat
         = 
-        ANY operand
+        operand: Expression
  ;
 syntax PushDStat
         = 
-        ANY operand
+        operand: Expression
  ;
 syntax LoadStat
         = 
-        ANY operand
+        operand: Expression
  ;
 syntax StoreStat
         = 
-        ANY operand
+        operand: Expression
  ;
 syntax CallStat
         = 
-        ANY operand
+        operand: Expression
  ;
 syntax PCallStat
         = 
-        ANY operand
+        operand: Expression
  ;
 syntax SuperCallStat
         = 
-        ANY operand
+        operand: Expression
  ;
 syntax GetStat
         = 
-        ANY operand
+        operand: Expression
  ;
 syntax SetStat
         = 
-        ANY operand
+        operand: Expression
  ;
 syntax EmitWithLabelRefStat
-        = 
-        ()
+        = IfStat
+        | GotoStat
  ;
 syntax IfStat
         = 
-        ANY label
+        label: LabelStat
  ;
 syntax GotoStat
         = 
-        ANY label
+        label: LabelStat
  ;
 syntax VariableDecl
-        = 
-        name: ANY
+        = Parameter
+        | name: String
  ;
 syntax Expression
-        = 
-        ()
+        = VariableExp
+        | SelfExp
+        | LastExp
+        | IfExp
+        | IsAExp
+        | LetExp
+        | PropertyCallExp
+        | LiteralExp
  ;
 syntax VariableExp
         = 
-        variable: ANY
+        variable: VariableDecl
  ;
 syntax SelfExp
         = 
-        
+        ()
  ;
 syntax LastExp
         = 
-        
+        ()
  ;
 syntax IfExp
         = 
-        ANY condition ANY thenExp ANY elseExp
+        Expression condition Expression thenExp Expression elseExp
  ;
 syntax IsAExp
         = 
-        ANY source ANY type
+        Expression source String type
  ;
 syntax LetExp
         = 
-        ANY variable ANY value ANY in
+        VariableDecl variable Expression value Expression in
  ;
 syntax PropertyCallExp
-        = 
-        ()
+        = NavigationExp
+        | IteratorExp
+        | OperationCallExp
  ;
 syntax NavigationExp
         = 
-        ANY source ANY name
+        Expression source String name
  ;
 syntax IteratorExp
         = 
-        ANY iterator ANY body
+        VariableDecl iterator Expression body
  ;
 syntax OperationCallExp
-        = 
-        ANY arguments+
+        = OperatorCallExp
+        | Expression arguments+
  ;
 syntax OperatorCallExp
         = 
         ()
  ;
 syntax LiteralExp
-        = 
-        ()
+        = OclUndefinedExp
+        | CollectionExp
+        | BooleanExp
+        | IntegerExp
+        | StringExp
  ;
 syntax OclUndefinedExp
         = 
-        
+        ()
  ;
 syntax CollectionExp
         = 
-        ()
+        SequenceExp
  ;
 syntax SequenceExp
         = 
-        ANY elements+
+        Expression elements+
  ;
 syntax BooleanExp
         = 
-        value: ANY
+        value: Boolean
  ;
 syntax IntegerExp
         = 
-        value: ANY
+        value: Integer
  ;
 syntax StringExp
         = 
-        value: ANY
+        value: String
  ;

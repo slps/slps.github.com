@@ -2,158 +2,170 @@
 module XMorphLanguage_abstractSyntax
 
 syntax VarScope
-        = 
-        ()
+        = PatternScope
+        | PatternDefn
+        | TRule
  ;
 syntax AbstractVar
-        = 
-        ()
+        = TRuleVar
+        | PatternVar
+        | ExtentVar
  ;
 syntax VarUse
         = 
-        var: ANY
+        var: AbstractVar
  ;
 syntax MOF::Property
         = 
-        part: ANY
+        part: Key
  ;
 syntax Key
         = 
-        ANY property+ ANY transformation
+        MOF::Property property+ Transformation transformation
  ;
 syntax PatternScope
-        = 
-        ()
+        = Transformation
+        | Query
  ;
 syntax PatternDefn
         = 
-        ANY scope ANY parameter+ ANY body
+        PatternScope scope PatternVar parameter+ Term body
  ;
 syntax TRule
         = 
-        ANY superseded+ ANY superseder+ ANY transformation ANY extended+ ANY extender+ ANY term ANY tgt+
+        TRule superseded+ TRule superseder+ Transformation transformation TRule extended+ TRule extender+ Term term SimpleTerm tgt+
  ;
 syntax Transformation
         = 
-        ANY keys+ ANY tRule+
+        Key keys+ TRule tRule+
  ;
 syntax Query
         = 
-        ANY term ANY parameter+
+        Term term PatternVar parameter+
  ;
 syntax Term
-        = 
-        ()
+        = CompoundTerm
+        | SimpleTerm
  ;
 syntax TRuleVar
         = 
-        ANY superseder+ ANY superseded+ ANY extended+ ANY extender+
+        TRuleVar superseder+ TRuleVar superseded+ TRuleVar extended+ TRuleVar extender+
  ;
 syntax PatternVar
         = 
-        ANY query ANY patternDefn
+        Query query PatternDefn patternDefn
  ;
 syntax ExtentVar
         = 
-        src: ANY
+        src: Term
  ;
 syntax CompoundTerm
-        = 
-        ()
+        = AndTerm
+        | OrTerm
+        | NotTerm
+        | IfTerm
  ;
 syntax AndTerm
         = 
-        ANY term+
+        Term term+
  ;
 syntax OrTerm
         = 
-        ANY term+
+        Term term+
  ;
 syntax NotTerm
         = 
-        ANY term+
+        Term term+
  ;
 syntax IfTerm
         = 
-        ANY term+
+        Term term+
  ;
 syntax SimpleTerm
-        = 
-        ()
+        = TrackingUse
+        | PatternUse
+        | MofTerm
+        | Condition
  ;
 syntax TrackingUse
         = 
-        ANY featureNames ANY tracking
+        String featureNames MOF::Class tracking
  ;
 syntax MOF::Class
         = 
-        ANY tracking+
+        TrackingUse tracking+
  ;
 syntax PatternUse
         = 
-        ANY tRuleST ANY arg+
+        TRule tRuleST Expression arg+
  ;
 syntax MofTerm
-        = 
-        ()
+        = MofInstance
+        | MofOrder
  ;
 syntax Condition
         = 
-        reason: ANY
+        reason: String
  ;
 syntax MofInstance
         = 
-        ANY isExactly ANY typeName ANY instance
+        Boolean isExactly Expression typeName Expression instance
  ;
 syntax MofOrder
         = 
-        ANY lesser ANY instance ANY greater
+        Expression lesser Expression instance Expression greater
  ;
 syntax Expression
-        = 
-        ()
+        = VarUse
+        | CoumpoundExpr
+        | InstanceRef
+        | MOF::Object
+        | SimpleExpr
  ;
 syntax CoumpoundExpr
-        = 
-        ()
+        = CollectionExpr
+        | FunctionExpr
+        | FeatureExpr
  ;
 syntax CollectionExpr
         = 
-        ANY unique ANY ordered
+        Boolean unique Boolean ordered
  ;
 syntax FunctionExpr
         = 
-        function: ANY
+        function: String
  ;
 syntax FeatureExpr
         = 
-        ANY collect ANY featureName
+        String collect String featureName
  ;
 syntax InstanceRef
         = 
-        obj: ANY
+        obj: MOF::Object
  ;
 syntax MOF::Object
         = 
-        obj: ANY
+        obj: InstanceRef
  ;
 syntax SimpleExpr
-        = 
-        ()
+        = StringConstant
+        | IntConstant
+        | BooleanConstant
+        | EnumConstant
  ;
 syntax StringConstant
         = 
-        ANY representation
+        representation: String
  ;
 syntax IntConstant
         = 
-        ANY representation
+        representation: String
  ;
 syntax BooleanConstant
         = 
-        ANY representation
+        representation: String
  ;
 syntax EnumConstant
         = 
-        ANY representation
+        representation: String
  ;

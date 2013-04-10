@@ -4,20 +4,24 @@ exports
   sorts
         Makefile Element Rule Macro ShellLine Comment Dependency RuleDep FileDep 
   context-free syntax
-        name::ANY comment::ANY elements::ANY+ -> Makefile
+        name::String comment::Comment elements::Element+ -> Makefile
 
-         -> Element
+        Rule -> Element
 
-        dependencies::ANY+ shellLines::ANY+ -> Rule
+        Macro -> Element
 
-        value::ANY -> Macro
+        dependencies::Dependency+ shellLines::ShellLine+ -> Rule
 
-        command::ANY display::ANY ruleShellLine::ANY -> ShellLine
+        value::String -> Macro
 
-        text::ANY -> Comment
+        command::String display::Boolean ruleShellLine::Rule -> ShellLine
 
-         -> Dependency
+        text::String -> Comment
 
-        ruledep::ANY -> RuleDep
+        RuleDep -> Dependency
 
-        name::ANY -> FileDep
+        FileDep -> Dependency
+
+        ruledep::Rule -> RuleDep
+
+        name::String -> FileDep

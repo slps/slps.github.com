@@ -13,33 +13,53 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable Amble 1.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: David Touzet, <code>Amble.ecore</code>, 2005/05/30.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>14</strong></li><li>Number of top alternatives: <strong>14</strong></li><li>Number of defined nonterminal symbols: <strong>14</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>14</strong>: <code><a href="#Element" class="nt">Element</a>, <a href="#Program" class="nt">Program</a>, <a href="#Process" class="nt">Process</a>, <a href="#State" class="nt">State</a>, <a href="#Transition" class="nt">Transition</a>, <a href="#Trans" class="nt">Trans</a>, <a href="#Strans" class="nt">Strans</a>, <a href="#Transall" class="nt">Transall</a>, <a href="#Guard" class="nt">Guard</a>, <a href="#Action" class="nt">Action</a>, <a href="#Network" class="nt">Network</a>, <a href="#Channel" class="nt">Channel</a>, <a href="#Message" class="nt">Message</a>, <a href="#Variable" class="nt">Variable</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Element">Element</a>:
-        ε
+				</script></head><body><h1 class="l">Browsable Amble 1.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: David Touzet, <code>Amble.ecore</code>, 2005/05/30.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>24</strong></li><li>Number of top alternatives: <strong>24</strong></li><li>Number of defined nonterminal symbols: <strong>14</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#Element" class="nt">Element</a></code></li><li>Bottom nonterminal symbols: <strong>3</strong>: <code><a href="#Integer" class="nt">Integer</a>, <a href="#Boolean" class="nt">Boolean</a>, <a href="#String" class="nt">String</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Element">Element</a>:
+        <a class="nt" href="#Program">Program</a>
+</pre><pre><a class="nt" name="Element">Element</a>:
+        <a class="nt" href="#Process">Process</a>
+</pre><pre><a class="nt" name="Element">Element</a>:
+        <a class="nt" href="#State">State</a>
+</pre><pre><a class="nt" name="Element">Element</a>:
+        <a class="nt" href="#Guard">Guard</a>
+</pre><pre><a class="nt" name="Element">Element</a>:
+        <a class="nt" href="#Action">Action</a>
+</pre><pre><a class="nt" name="Element">Element</a>:
+        <a class="nt" href="#Network">Network</a>
+</pre><pre><a class="nt" name="Element">Element</a>:
+        <a class="nt" href="#Channel">Channel</a>
+</pre><pre><a class="nt" name="Element">Element</a>:
+        <a class="nt" href="#Message">Message</a>
+</pre><pre><a class="nt" name="Element">Element</a>:
+        <a class="nt" href="#Variable">Variable</a>
 </pre><pre><a class="nt" name="Program">Program</a>:
-        <span class="sel">processes</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">networks</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">processes</span>::<a class="nt" href="#Process">Process</a><span class="meta">+</span> <span class="sel">networks</span>::<a class="nt" href="#Network">Network</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Process">Process</a>:
-        <span class="sel">minId</span>::<span class="meta">any</span> <span class="sel">maxId</span>::<span class="meta">any</span> <span class="sel">instancesNb</span>::<span class="meta">any</span> <span class="sel">states</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">transitions</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">initial</span>::<span class="meta">any</span> <span class="sel">variables</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">connectedTo</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">minId</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">maxId</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">instancesNb</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">states</span>::<a class="nt" href="#State">State</a><span class="meta">+</span> <span class="sel">transitions</span>::<a class="nt" href="#Transition">Transition</a><span class="meta">+</span> <span class="sel">initial</span>::<a class="nt" href="#Action">Action</a> <span class="sel">variables</span>::<a class="nt" href="#Variable">Variable</a><span class="meta">+</span> <span class="sel">connectedTo</span>::<a class="nt" href="#Network">Network</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="State">State</a>:
-        <span class="sel">isInitial</span>::<span class="meta">any</span> <span class="sel">incoming</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">outgoing</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">isInitial</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">incoming</span>::<a class="nt" href="#Transition">Transition</a><span class="meta">+</span> <span class="sel">outgoing</span>::<a class="nt" href="#Transition">Transition</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Transition">Transition</a>:
-        ε
+        <a class="nt" href="#Trans">Trans</a>
+</pre><pre><a class="nt" name="Transition">Transition</a>:
+        <a class="nt" href="#Strans">Strans</a>
+</pre><pre><a class="nt" name="Transition">Transition</a>:
+        <a class="nt" href="#Transall">Transall</a>
 </pre><pre><a class="nt" name="Trans">Trans</a>:
-        <span class="sel">waitFor</span>::<span class="meta">any</span>
+        <span class="sel">waitFor</span>::<a class="nt" href="#Message">Message</a>
 </pre><pre><a class="nt" name="Strans">Strans</a>:
-        <span class="sel">guard</span>::<span class="meta">any</span> <span class="sel">action</span>::<span class="meta">any</span> <span class="sel">source</span>::<span class="meta">any</span> <span class="sel">target</span>::<span class="meta">any</span>
+        <span class="sel">guard</span>::<a class="nt" href="#Guard">Guard</a> <span class="sel">action</span>::<a class="nt" href="#Action">Action</a> <span class="sel">source</span>::<a class="nt" href="#State">State</a> <span class="sel">target</span>::<a class="nt" href="#State">State</a>
 </pre><pre><a class="nt" name="Transall">Transall</a>:
-        <span class="sel">waitFor</span>::<span class="meta">any</span>
+        <span class="sel">waitFor</span>::<a class="nt" href="#Message">Message</a>
 </pre><pre><a class="nt" name="Guard">Guard</a>:
-        <span class="sel">name</span>::<span class="meta">any</span>
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Action">Action</a>:
-        <span class="sel">name</span>::<span class="meta">any</span>
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Network">Network</a>:
-        <span class="sel">channels</span>::<span class="meta">any</span><span class="meta">+</span>
+        <span class="sel">channels</span>::<a class="nt" href="#Channel">Channel</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Channel">Channel</a>:
-        <span class="sel">messages</span>::<span class="meta">any</span><span class="meta">+</span> <span class="sel">source</span>::<span class="meta">any</span> <span class="sel">target</span>::<span class="meta">any</span>
+        <span class="sel">messages</span>::<a class="nt" href="#Message">Message</a><span class="meta">+</span> <span class="sel">source</span>::<a class="nt" href="#Process">Process</a> <span class="sel">target</span>::<a class="nt" href="#Process">Process</a>
 </pre><pre><a class="nt" name="Message">Message</a>:
-        <span class="sel">name</span>::<span class="meta">any</span>
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Variable">Variable</a>:
-        <span class="sel">type</span>::<span class="meta">any</span> <span class="sel">initValue</span>::<span class="meta">any</span>
+        <span class="sel">type</span>::<a class="nt" href="#String">String</a> <span class="sel">initValue</span>::<a class="nt" href="#String">String</a>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: 09/04/2013.</div></body></html>
+Last updated: Apr2013.</div></body></html>

@@ -4,26 +4,34 @@ exports
   sorts
         Classifier Instance Actor UseCase UseCaseInstance RelationShip Include Extend BooleanExpression ModelElement ExtensionPoint LocationReference 
   context-free syntax
-        instance::ANY+ -> Classifier
+        Actor -> Classifier
 
-        classifier::ANY+ -> Instance
+        UseCase -> Classifier
+
+        instance::Instance+ -> Classifier
+
+        UseCaseInstance -> Instance
+
+        classifier::Classifier+ -> Instance
 
          -> Actor
 
-        extensionPoint::ANY+ includeAddition::ANY includeBase::ANY extendExtension::ANY extendBase::ANY extensionPoints::ANY+ -> UseCase
+        extensionPoint::String+ includeAddition::Include includeBase::Include extendExtension::Extend extendBase::Extend extensionPoints::ExtensionPoint+ -> UseCase
 
          -> UseCaseInstance
 
-         -> RelationShip
+        Include -> RelationShip
 
-        addition::ANY base::ANY -> Include
+        Extend -> RelationShip
 
-        condition::ANY extension::ANY base::ANY extensionPoint::ANY+ -> Extend
+        addition::UseCase base::UseCase -> Include
 
-        value::ANY -> BooleanExpression
+        condition::BooleanExpression extension::UseCase base::UseCase extensionPoint::ExtensionPoint+ -> Extend
 
-         -> ModelElement
+        value::String -> BooleanExpression
 
-        location::ANY extend::ANY+ useCase::ANY+ -> ExtensionPoint
+        ExtensionPoint -> ModelElement
 
-        value::ANY -> LocationReference
+        location::LocationReference extend::Extend+ useCase::UseCase+ -> ExtensionPoint
+
+        value::String -> LocationReference

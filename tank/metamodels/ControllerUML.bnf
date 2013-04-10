@@ -1,17 +1,21 @@
 ControllerAttribute:
-        controller::ANY
+        controller::Controller
 Controller:
-        controllerAttribute::ANY+ behavior::ANY
+        controllerAttribute::ControllerAttribute+ behavior::StateMachine
 StateMachine:
-        states::ANY+
+        states::State+
 State:
-        substates::ANY+ theContainer::ANY outGoing::ANY+ incoming::ANY+
+        SubControllerState
+State:
+        ViewState
+State:
+        substates::State+ theContainer::State outGoing::StateTransition+ incoming::StateTransition+
 SubControllerState:
-        controller::ANY
+        controller::Controller
 ViewState:
         EPSILON
 StateTransition:
-        source::ANY target::ANY trigger::ANY effect::ANY
+        source::State target::State trigger::Event effect::StateMachineAction
 StateMachineAction:
         EPSILON
 Event:

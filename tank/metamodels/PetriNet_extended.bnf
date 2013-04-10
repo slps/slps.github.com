@@ -1,26 +1,34 @@
 LocatedElement:
-        EPSILON
+        NamedElement
 NamedElement:
-        EPSILON
+        PetriNet
+NamedElement:
+        Element
+NamedElement:
+        Arc
 PetriNet:
-        elements::ANY+ arcs::ANY+ execs::ANY+
+        elements::Element+ arcs::Arc+ execs::Execution+
 Element:
-        EPSILON
+        Place
+Element:
+        Transition
 Place:
-        incomingArc::ANY+ outgoingArc::ANY+
+        incomingArc::TransitionToPlace+ outgoingArc::PlaceToTransition+
 Transition:
-        incomingArc::ANY+ outgoingArc::ANY+
+        incomingArc::PlaceToTransition+ outgoingArc::TransitionToPlace+
 Arc:
-        EPSILON
+        PlaceToTransition
+Arc:
+        TransitionToPlace
 PlaceToTransition:
-        from::ANY to::ANY
+        from::Place to::Transition
 TransitionToPlace:
-        from::ANY to::ANY
+        from::Transition to::Place
 Execution:
-        net::ANY markings::ANY+ movements::ANY+
+        net::PetriNet markings::Marking+ movements::Movement+
 Token:
-        placedAt::ANY marking::ANY
+        placedAt::Place marking::Marking
 Marking:
-        exec::ANY tokens::ANY+
+        exec::Execution tokens::Token+
 Movement:
-        exec::ANY fire::ANY source::ANY target::ANY
+        exec::Execution fire::Transition source::Marking target::Marking

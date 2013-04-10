@@ -1,12 +1,12 @@
 SeminarSchedulingSystem:
-        presenter::ANY+ seminar::ANY+
+        presenter::Presenter+ seminar::Seminar+
 Presenter:
-        name::ANY seminarSchedulingSystem::ANY qualifiedFor::ANY+ offering::ANY+
+        name::String seminarSchedulingSystem::SeminarSchedulingSystem qualifiedFor::Seminar+ offering::Offering+
 Seminar:
-        title::ANY seminarSchedulingSystem::ANY qualified::ANY+ offering::ANY+
+        title::String seminarSchedulingSystem::SeminarSchedulingSystem qualified::Presenter+ offering::Offering+
 Offering:
-        is_cancelled::ANY date::ANY attendee::ANY+ presenter::ANY seminar::ANY
+        is_cancelled::Boolean date::Date attendee::Attendee+ presenter::Presenter seminar::Seminar
 Date:
-        year::ANY month::ANY day::ANY
+        year::Integer month::Integer day::Integer
 Attendee:
-        name::ANY offering::ANY+
+        name::String offering::Offering+

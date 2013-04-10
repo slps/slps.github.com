@@ -3,37 +3,38 @@ module Grafcet
 
 syntax LocatedElement
         = 
-        ()
+        NamedElement
  ;
 syntax NamedElement
-        = 
-        ()
+        = Grafcet
+        | Element
+        | Connection
  ;
 syntax Grafcet
         = 
-        ANY elements+ ANY connections+
+        Element elements+ Connection connections+
  ;
 syntax Element
-        = 
-        ()
+        = Step
+        | Transition
  ;
 syntax Step
         = 
-        ANY isInitial ANY isActive ANY action ANY incomingConnections+ ANY outgoingConnections+
+        Boolean isInitial Boolean isActive String action TransitionToStep incomingConnections+ StepToTransition outgoingConnections+
  ;
 syntax Transition
         = 
-        ANY condition ANY incomingConnections+ ANY outgoingConnections+
+        String condition StepToTransition incomingConnections+ TransitionToStep outgoingConnections+
  ;
 syntax Connection
-        = 
-        ()
+        = StepToTransition
+        | TransitionToStep
  ;
 syntax StepToTransition
         = 
-        ANY from ANY to
+        Step from Transition to
  ;
 syntax TransitionToStep
         = 
-        ANY from ANY to
+        Transition from Step to
  ;
