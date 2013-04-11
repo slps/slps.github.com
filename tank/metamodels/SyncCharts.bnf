@@ -5,6 +5,8 @@ ModelElement:
 SyncChart:
         context::ModelElement referenceState::ReferenceState+
 ReferenceState:
+        CompositeState
+ReferenceState:
         subSyncChart::SyncChart containers::Stg
 Arc:
         Transition
@@ -21,9 +23,11 @@ PseudoStateKind:
 State:
         SimpleState
 State:
+        CompositeState
+State:
         isFinal::Boolean
 SimpleState:
-        EPSILON
+        isFinal::Boolean
 CompositeState:
         canTerminate::Boolean isSuspendable::Boolean stg::Stg+
 Stg:
@@ -36,3 +40,10 @@ PseudoTransition:
         kind::PseudoTransitionKind
 PseudoTransitionKind:
         EPSILON
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR

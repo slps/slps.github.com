@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        Thing Meta-Reviewer Reviewer Decision Preference ProgramCommittee Bid Conference ConferenceChair ConferenceMember AssociatedChair ProgramCommitteeMember AuthorNotReviewer SubjectArea ExternalReviewer Chairman ProgramCommitteeChair Acceptance Rejection Review Paper Author Co-author PaperAbstract PaperFullVersion Administrator Meta-Review Workshop Event Account Inforamtion User Role Help-Request Person Symposium Abstract Document Invited-Paper Admin-Role Paper-Typologies Event-Setup Event-URL URL Notification-Email Email Short-Paper Author-Role Preview Review-Form Committe-Role Group-Email Submission-Template Review-Form-Setup Misc Event-Creation Approval-Email Rejection-Email Submission Template Feature-Request Committee Event-Tracks Request Activity Head-Role Detail Corresponding-Author Reviewer-Role Event-Approval Registration Full-Paper Research-Topic Description Assistance Email-Template 
+        Thing Meta-Reviewer Reviewer Decision Preference ProgramCommittee Bid Conference ConferenceChair ConferenceMember AssociatedChair ProgramCommitteeMember AuthorNotReviewer SubjectArea ExternalReviewer Chairman ProgramCommitteeChair Acceptance Rejection Review Paper Author Co-author PaperAbstract PaperFullVersion Administrator Meta-Review Workshop Event Account Inforamtion User Role Help-Request Person Symposium Abstract Document Invited-Paper Admin-Role Paper-Typologies Event-Setup Event-URL URL Notification-Email Email Short-Paper Author-Role Preview Review-Form Committe-Role Group-Email Submission-Template Review-Form-Setup Misc Event-Creation Approval-Email Rejection-Email Submission Template Feature-Request Committee Event-Tracks Request Activity Head-Role Detail Corresponding-Author Reviewer-Role Event-Approval Registration Full-Paper Research-Topic Description Assistance Email-Template Boolean Integer String 
   context-free syntax
         Event -> Thing
 
@@ -14,13 +14,15 @@ exports
 
         Detail -> Thing
 
+        Conference -> Thing
+
         Event -> Thing
         Role -> Thing
         Person -> Thing
         Document -> Thing
         Detail -> Thing
 
-         -> Meta-Reviewer
+        assignedByAdministrator::Administrator adjustBid::Bid readPaper::Paper hasBeenAssigned::Paper writeReview::Review assignExternalReviewer::ExternalReviewer -> Meta-Reviewer
 
         Meta-Reviewer -> Reviewer
 
@@ -41,21 +43,41 @@ exports
 
         hasConferenceMember::ConferenceMember paperAssignmentFinalizedBy::Administrator reviewCriteriaEnteredBy::Administrator paperAssignmentToolsRunBy::Administrator virtualMeetingEnabledBy::Administrator hardcopyMailingManifestsPrintedBy::Administrator detailsEnteredBy::Administrator reviewerBiddingStartedBy::Administrator date::Date reviewsPerPaper::Integer logoURL::AnyURI acceptsHardcopySubmissions::Boolean siteURL::AnyURI -> Conference
 
-         -> ConferenceChair
+        memberOfConference::Conference -> ConferenceChair
+
+        Reviewer -> ConferenceMember
+
+        ConferenceChair -> ConferenceMember
+
+        AssociatedChair -> ConferenceMember
+
+        Author -> ConferenceMember
+
+        ProgramCommitteeMember -> ConferenceMember
+
+        Chairman -> ConferenceMember
 
         memberOfConference::Conference -> ConferenceMember
 
-         -> AssociatedChair
+        memberOfConference::Conference -> AssociatedChair
+
+        ProgramCommitteeChair -> ProgramCommitteeMember
 
         memberOfProgramCommittee::ProgramCommittee maxPapers::Integer addedBy::Administrator -> ProgramCommitteeMember
 
-         -> AuthorNotReviewer
+        submitPaper::Paper writePaper::Paper -> AuthorNotReviewer
 
          -> SubjectArea
 
         assignedByReviewer::Reviewer -> ExternalReviewer
 
-         -> Chairman
+        ConferenceChair -> Chairman
+
+        AssociatedChair -> Chairman
+
+        ProgramCommitteeChair -> Chairman
+
+        inverse_of_add::Thing+ execute::Thing+ get::Inforamtion use::Document register::Account modify::Thing+ take_part_in::Event remove::Thing+ add::Person send::Activity added_by::Person hasConflictOfInterest::Document email::String memberOfConference::Conference -> Chairman
 
         endReview::Review -> ProgramCommitteeChair
 
@@ -91,19 +113,21 @@ exports
 
         co-writePaper::Paper -> Co-author
 
-         -> PaperAbstract
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::UnsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer -> PaperAbstract
 
-         -> PaperFullVersion
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::UnsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer -> PaperFullVersion
 
         approve::Event assign::Role finalizePaperAssignment::Conference runPaperAssignmentTools::Conference enableVirtualMeeting::Conference startReviewerBidding::Conference assignReviewer::Reviewer rejectPaper::Paper enterConferenceDetails::Conference printHardcopyMailingManifests::Conference setMaxPapers::ProgramCommitteeMember enterReviewCriteria::Conference acceptPaper::Paper addProgramCommitteeMember::ProgramCommitteeMember -> Administrator
 
-         -> Meta-Review
+        writtenBy::Reviewer -> Meta-Review
 
-         -> Workshop
+        conists_of::Event-Tracks confirmed_by::Approval-Email defined_by::Event-Setup approved_by::Administrator -> Workshop
 
         Workshop -> Event
 
         Symposium -> Event
+
+        Conference -> Event
 
         conists_of::Event-Tracks confirmed_by::Approval-Email defined_by::Event-Setup approved_by::Administrator -> Event
 
@@ -112,6 +136,12 @@ exports
          -> Inforamtion
 
         Committee -> User
+
+        Administrator -> User
+
+        Reviewer -> User
+
+        Author -> User
 
         recieve::Document create::Thing+ submit::Document -> User
 
@@ -143,11 +173,17 @@ exports
 
         User -> Person
 
+        ProgramCommitteeMember -> Person
+
+        Chairman -> Person
+
+        Administrator -> Person
+
         inverse_of_add::Thing+ execute::Thing+ get::Inforamtion use::Document register::Account modify::Thing+ take_part_in::Event remove::Thing+ add::Person send::Activity added_by::Person hasConflictOfInterest::Document email::String -> Person
 
-         -> Symposium
+        conists_of::Event-Tracks confirmed_by::Approval-Email defined_by::Event-Setup approved_by::Administrator -> Symposium
 
-         -> Abstract
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::UnsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer -> Abstract
 
         Review -> Document
 
@@ -161,11 +197,11 @@ exports
 
         recieved_by::User used_by::Person submited__by::User -> Document
 
-         -> Invited-Paper
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::UnsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer -> Invited-Paper
 
-         -> Admin-Role
+        assigned_by::Administrator -> Admin-Role
 
-         -> Paper-Typologies
+        define::Event -> Paper-Typologies
 
         Paper-Typologies -> Event-Setup
 
@@ -185,8 +221,6 @@ exports
 
         Event-URL -> URL
 
-        Event-URL -> URL
-
          -> Notification-Email
 
         Notification-Email -> Email
@@ -202,9 +236,9 @@ exports
         Approval-Email -> Email
         Rejection-Email -> Email
 
-         -> Short-Paper
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::UnsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer -> Short-Paper
 
-         -> Author-Role
+        assigned_by::Administrator -> Author-Role
 
          -> Preview
 
@@ -215,33 +249,31 @@ exports
         Preview -> Review-Form
         Review-Form-Setup -> Review-Form
 
-         -> Committe-Role
+        assigned_by::Administrator -> Committe-Role
 
          -> Group-Email
 
-         -> Submission-Template
+        define::Event -> Submission-Template
 
          -> Review-Form-Setup
 
          -> Misc
 
-         -> Event-Creation
+        has_result::Thing+ sent_by::Person -> Event-Creation
 
         confirm::Event -> Approval-Email
 
          -> Rejection-Email
 
-         -> Submission
+        recieved_by::User used_by::Person submited__by::User -> Submission
 
-         -> Template
+        recieved_by::User used_by::Person submited__by::User -> Template
 
          -> Feature-Request
 
-         -> Committee
+        recieve::Document create::Thing+ submit::Document -> Committee
 
-         -> Event-Tracks
-
-        Help-Request -> Request
+        define::Event -> Event-Tracks
 
         Help-Request -> Request
 
@@ -255,24 +287,31 @@ exports
 
         has_result::Thing+ sent_by::Person -> Activity
 
-         -> Head-Role
+        assigned_by::Administrator -> Head-Role
 
          -> Detail
 
-         -> Corresponding-Author
+        submitPaper::Paper writePaper::Paper -> Corresponding-Author
 
-         -> Reviewer-Role
+        assigned_by::Administrator -> Reviewer-Role
 
-         -> Event-Approval
+        has_result::Thing+ sent_by::Person -> Event-Approval
 
-         -> Registration
+        has_result::Thing+ sent_by::Person -> Registration
 
-         -> Full-Paper
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::UnsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer -> Full-Paper
 
-         -> Research-Topic
+        define::Event -> Research-Topic
 
          -> Description
 
          -> Assistance
 
-         -> Email-Template
+        define::Event -> Email-Template
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
+        STR -> String

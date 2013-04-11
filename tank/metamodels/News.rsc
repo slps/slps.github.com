@@ -30,3 +30,15 @@ syntax DayKind
         | Saturday: ()
         | Sunday: ()
  ;
+syntax String
+        = 
+        String
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;

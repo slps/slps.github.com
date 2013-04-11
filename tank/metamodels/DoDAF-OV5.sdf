@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        Element DoDAFModel Document AMSpecification AMSpecificationElement PAExchangeRequirement ArchitectureDocument IE AMIERole Control Input Output Mechanism MechanismSystem MechanismReference MechanismFacility InformationAssetDocument AMPA PACapability PA AM InformationAsset Task PATask Organization OrganizationType OperationalRole Occupation PersonType Skill DOSCR 
+        Element DoDAFModel Document AMSpecification AMSpecificationElement PAExchangeRequirement ArchitectureDocument IE AMIERole Control Input Output Mechanism MechanismSystem MechanismReference MechanismFacility InformationAssetDocument AMPA PACapability PA AM InformationAsset Task PATask Organization OrganizationType OperationalRole Occupation PersonType Skill DOSCR String 
   context-free syntax
         DoDAFModel -> Element
 
@@ -84,11 +84,11 @@ exports
 
         source::String destination::String resourceType::String -> Mechanism
 
-         -> MechanismSystem
+        source::String destination::String resourceType::String -> MechanismSystem
 
-         -> MechanismReference
+        source::String destination::String resourceType::String -> MechanismReference
 
-         -> MechanismFacility
+        source::String destination::String resourceType::String -> MechanismFacility
 
         name::String description::String view::String -> InformationAssetDocument
 
@@ -121,3 +121,5 @@ exports
         mayBeCitedFor::OperationalRole+ -> Skill
 
         mayBeAn::Occupation appliesTo::PersonType+ mayBeCitedFor::OperationalRole+ -> DOSCR
+
+        STR -> String

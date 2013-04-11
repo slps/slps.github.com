@@ -2,8 +2,16 @@ module Main
 
 exports
   sorts
-        ContainerElt Project Package TypedElt Document Attribute Requirement 
+        DescribedElt NamedElt ContainerElt Project Package TypedElt Document Attribute Requirement String 
   context-free syntax
+        Document -> DescribedElt
+
+        ContainerElt -> DescribedElt
+
+        ContainerElt -> NamedElt
+
+        Requirement -> NamedElt
+
         Project -> ContainerElt
 
         Package -> ContainerElt
@@ -14,8 +22,10 @@ exports
 
         Attribute -> TypedElt
 
-         -> Document
+        description::String -> Document
 
         value::String -> Attribute
 
         text::String attributes::Attribute+ location::Document parent::Requirement children::Requirement+ coverLink::Requirement+ -> Requirement
+
+        STR -> String

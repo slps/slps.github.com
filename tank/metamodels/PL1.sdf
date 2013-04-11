@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        PLIClassifier PLISimpleType PLINamedType PLIComposedType PLIAlias PLIAttribute PLIComputationalType PLINonComputationalType PLIElement PLIElementInitialValue PLISourceText PLIArray PLIFixedBoundArray PLIFixedLboundArray PLIHBoundArray PLIVariableBoundArray 
+        PLIClassifier PLISimpleType PLINamedType PLIComposedType PLIAlias PLIAttribute PLIComputationalType PLINonComputationalType PLIElement PLIElementInitialValue PLISourceText PLIArray PLIFixedBoundArray PLIFixedLboundArray PLIHBoundArray PLIVariableBoundArray String Integer 
   context-free syntax
         PLISimpleType -> PLIClassifier
 
@@ -18,7 +18,7 @@ exports
 
         alias::PLIAlias -> PLISimpleType
 
-         -> PLINamedType
+        name::String typedElements::PLIElement+ -> PLINamedType
 
         elements::PLIElement+ -> PLIComposedType
 
@@ -26,9 +26,9 @@ exports
 
          -> PLIAttribute
 
-         -> PLIComputationalType
+        alias::PLIAlias -> PLIComputationalType
 
-         -> PLINonComputationalType
+        alias::PLIAlias -> PLINonComputationalType
 
         level::String name::String sharedType::PLIClassifier group::PLIComposedType initial::PLIElementInitialValue source::PLISourceText array::PLIArray -> PLIElement
 
@@ -53,3 +53,7 @@ exports
         uBound::Integer IBoundToAllocate::String referredTo::PLIElement -> PLIHBoundArray
 
         IBoundToAllocate::String hBoundToAllocate::String referredTo::PLIElement -> PLIVariableBoundArray
+
+        STR -> String
+
+        INT -> Integer

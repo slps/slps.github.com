@@ -1,3 +1,12 @@
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR
+Activity:
+        SubProcess
 Activity:
         orderedMessages::MessagingEdge+ incomingMessages::MessagingEdge+ outgoingMessages::MessagingEdge+ groups::Group+ activityType::ActivityType eventHandlerFor::SubProcess lane::Lane looping::Boolean
 ActivityType:
@@ -40,18 +49,26 @@ Artifact:
 Artifact:
         associations::Association+ artifactsContainer::ArtifactsContainer
 ArtifactsContainer:
+        BpmnDiagram
+ArtifactsContainer:
+        Graph
+ArtifactsContainer:
         artifacts::Artifact+
 Association:
         direction::DirectionType source::Artifact target::IdentifiableNode
 BpmnDiagram:
         pools::Pool+ messages::MessagingEdge+ author::String title::String
 DataObject:
-        EPSILON
+        associations::Association+ artifactsContainer::ArtifactsContainer
 DirectionType:
         Both::EPSILON
         From::EPSILON
         To::EPSILON
         None::EPSILON
+Graph:
+        Pool
+Graph:
+        SubProcess
 Graph:
         vertices::Vertex+ sequenceEdges::SequenceEdge+
 Group:
@@ -59,9 +76,21 @@ Group:
 Identifiable:
         IdentifiableNode
 Identifiable:
+        Artifact
+Identifiable:
+        BpmnDiagram
+Identifiable:
+        Lane
+Identifiable:
+        MessagingEdge
+Identifiable:
+        SequenceEdge
+Identifiable:
         iD::ID
 IdentifiableNode:
         Vertex
+IdentifiableNode:
+        Graph
 IdentifiableNode:
         associations::Association+
 Lane:
@@ -71,6 +100,18 @@ MessagingEdge:
 NamedBpmnObject:
         ArtifactsContainer
 NamedBpmnObject:
+        Activity
+NamedBpmnObject:
+        Artifact
+NamedBpmnObject:
+        Lane
+NamedBpmnObject:
+        MessagingEdge
+NamedBpmnObject:
+        Pool
+NamedBpmnObject:
+        SequenceEdge
+NamedBpmnObject:
         documentation::String name::String ncname::String
 Pool:
         lanes::Lane+ bpmnDiagram::BpmnDiagram
@@ -79,6 +120,8 @@ SequenceEdge:
 SubProcess:
         eventHandlers::Activity+ isTransaction::Boolean
 TextAnnotation:
-        EPSILON
+        associations::Association+ artifactsContainer::ArtifactsContainer
+Vertex:
+        Activity
 Vertex:
         outgoingEdges::SequenceEdge+ incomingEdges::SequenceEdge+ graph::Graph

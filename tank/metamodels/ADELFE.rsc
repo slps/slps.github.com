@@ -57,29 +57,29 @@ syntax NCS
  ;
 syntax Incomprehension
         = 
-        ()
+        cooperationRules: CooperationRules
  ;
 syntax Ambiguity
         = 
-        ()
+        cooperationRules: CooperationRules
  ;
 syntax Incompetence
         = 
-        ()
+        cooperationRules: CooperationRules
  ;
 syntax Unproductiveness
         = 
-        ()
+        cooperationRules: CooperationRules
  ;
 syntax Concurrency
         = 
-        ()
+        cooperationRules: CooperationRules
  ;
 syntax Conflict
         = 
-        ()
+        cooperationRules: CooperationRules
  ;
 syntax Uselessness
         = 
-        ()
+        cooperationRules: CooperationRules
  ;

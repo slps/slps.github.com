@@ -4,6 +4,8 @@ module PNML_structured
 syntax IdedElement
         = NetElement
         | Node
+        | Arc
+        | Page
  ;
 syntax URI
         = 
@@ -50,8 +52,11 @@ syntax NetElement
         URI type PNMLDocument document NetContent contents+ ToolSpecific tools+ NetGraphics netgraphics Name name
  ;
 syntax NetContent
-        = 
-        NetContentElement
+        = NetContentElement
+        | Arc
+        | Page
+        | ReferencePlace
+        | ReferenceTransition
  ;
 syntax ToolSpecific
         = 
@@ -90,13 +95,17 @@ syntax Page
         = 
         NetContent contents+ ToolSpecific tools+ PageGraphics pagegraphics
  ;
+syntax Reference
+        = ReferencePlace
+        | ReferenceTransition
+ ;
 syntax ReferencePlace
         = 
-        ()
+        NetElement net Name name Page page Node ref
  ;
 syntax ReferenceTransition
         = 
-        ()
+        NetElement net Name name Page page Node ref
  ;
 syntax Node
         = Reference
@@ -164,4 +173,12 @@ syntax Line
 syntax Font
         = 
         String family String style String weight String size DecorationType decoration AlignType align Integer rotation AnnotationGraphics annotationgraphics
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
  ;

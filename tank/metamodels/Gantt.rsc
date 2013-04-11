@@ -41,3 +41,15 @@ syntax Previous
         = 
         ()
  ;
+syntax String
+        = 
+        String
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;

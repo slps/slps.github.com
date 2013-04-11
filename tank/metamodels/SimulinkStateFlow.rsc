@@ -76,3 +76,11 @@ syntax EnableEnum
         = alpha: ()
         | beta: ()
  ;
+syntax String
+        = 
+        String
+ ;
+syntax Integer
+        = 
+        Integer
+ ;

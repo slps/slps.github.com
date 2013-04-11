@@ -4,6 +4,12 @@ IdedElement:
         NetElement
 IdedElement:
         Node
+IdedElement:
+        Arc
+IdedElement:
+        Page
+IdedElement:
+        Instance
 URI:
         value::String
 Color:
@@ -41,6 +47,16 @@ NetElement:
         type::URI document::PNMLDocument contents::NetContent+ tools::ToolSpecific+ netgraphics::NetGraphics name::Name
 NetContent:
         NetContentElement
+NetContent:
+        Arc
+NetContent:
+        Page
+NetContent:
+        ReferencePlace
+NetContent:
+        ReferenceTransition
+NetContent:
+        Instance
 ToolSpecific:
         tool::String version::String anyelement::AnyElement+ net::NetElement arc::Arc node::Node page::Page
 LabeledElement:
@@ -65,10 +81,14 @@ Arc:
         source::NetContentElement target::NetContentElement tools::ToolSpecific+ edgegraphics::EdgeGraphics inscription::Inscription
 Page:
         contents::NetContent+ tools::ToolSpecific+ pagegraphics::PageGraphics
+Reference:
+        ReferencePlace
+Reference:
+        ReferenceTransition
 ReferencePlace:
-        EPSILON
+        net::NetElement name::Name page::Page module::Module instance::Node ref::NCName importnode::ImportNode
 ReferenceTransition:
-        EPSILON
+        net::NetElement name::Name page::Page module::Module instance::Node ref::NCName importnode::ImportNode
 Instance:
         ref::URI importplace::ImportNode+ importtransition::ImportNode+
 ImportNode:
@@ -117,3 +137,7 @@ Line:
         color::Color width::Integer shape::ShapeType style::StyleType nodegraphics::NodeGraphics edgegraphics::EdgeGraphics annotationgraphics::AnnotationGraphics
 Font:
         family::String style::String weight::String size::String decoration::DecorationType align::AlignType rotation::Integer annotationgraphics::AnnotationGraphics
+Integer:
+        INT
+String:
+        STR

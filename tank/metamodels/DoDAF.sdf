@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        Element System SystemRole SystemFunction Service SystemRoleInterface ServiceDependency ServiceProvider ServiceMediator ServiceRegistry ServiceLocator ServiceBroker SystemAtNode SystemAtNodeInterface SystemsNode COI Vocabulary DataReference Performer OperationalRole OperationalActivity Product Material Data SystemProductFlow ConstraintOrRequirement Constraint QualityRequirement DIA NMJIC HigherEchelon JFC F2C2 ComponentCommand DJFLCC JFACC JFMCC JFSOCC SubordinateAirCommand MAW WOC AOCCID AOCCombatPlanStrategyCells ResultData CombatReport WSV MISREP Imagery CollectionRequirement BDAReport MunitionsEffectsAssesment ATO RestrikeRecommendation TargetNomination TargetMaterialsAnalysis Target MIDB 
+        Element System SystemRole SystemFunction Service SystemRoleInterface ServiceDependency ServiceProvider ServiceMediator ServiceRegistry ServiceLocator ServiceBroker SystemAtNode SystemAtNodeInterface SystemsNode COI Vocabulary DataReference Performer OperationalRole OperationalActivity Product Material Data SystemProductFlow ConstraintOrRequirement Constraint QualityRequirement DIA NMJIC HigherEchelon JFC F2C2 ComponentCommand DJFLCC JFACC JFMCC JFSOCC SubordinateAirCommand MAW WOC AOCCID AOCCombatPlanStrategyCells ResultData CombatReport WSV MISREP Imagery CollectionRequirement BDAReport MunitionsEffectsAssesment ATO RestrikeRecommendation TargetNomination TargetMaterialsAnalysis Target MIDB String Integer 
   context-free syntax
         System -> Element
 
@@ -64,15 +64,13 @@ exports
 
         decomposes::SystemFunction+ consumes::Product+ produces::Product+ terminatesAt::SystemProductFlow mesuredBy::ConstraintOrRequirement+ -> SystemFunction
 
-         -> Service
+        decomposes::SystemFunction+ consumes::Product+ produces::Product+ terminatesAt::SystemProductFlow mesuredBy::ConstraintOrRequirement+ -> Service
 
         ServiceDependency -> SystemRoleInterface
 
         originatesFrom::SystemRole -> SystemRoleInterface
 
-         -> ServiceDependency
-
-        ServiceMediator -> ServiceProvider
+        originatesFrom::SystemRole -> ServiceDependency
 
         ServiceMediator -> ServiceProvider
 
@@ -151,13 +149,13 @@ exports
 
         jfc::JFC -> ComponentCommand
 
-         -> DJFLCC
+        jfc::JFC -> DJFLCC
 
         subordinateAirCommand::SubordinateAirCommand aoccid::AOCCID+ aoccpsc::AOCCombatPlanStrategyCells+ -> JFACC
 
-         -> JFMCC
+        jfc::JFC -> JFMCC
 
-         -> JFSOCC
+        jfc::JFC -> JFSOCC
 
         MAW -> SubordinateAirCommand
 
@@ -165,9 +163,9 @@ exports
 
         jfacc::JFACC -> SubordinateAirCommand
 
-         -> MAW
+        jfacc::JFACC -> MAW
 
-         -> WOC
+        jfacc::JFACC -> WOC
 
         name::String content::String -> AOCCID
 
@@ -208,3 +206,7 @@ exports
         cr::CollectionRequirement+ tn::TargetNomination holds::MIDB describes::TargetMaterialsAnalysis+ -> Target
 
         target::Target+ -> MIDB
+
+        STR -> String
+
+        INT -> Integer

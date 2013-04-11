@@ -2,8 +2,15 @@ module Main
 
 exports
   sorts
-        LocatedElement SQLRoot Statement ViewStatement InsertStmt QueryStmt QueryStmtCol QueryStmtAllCol NamedElement Table WhereClause Expression BinaryExp OrExp AndExp NotExp LikeExp InExp OperationExp Predicate QueryPredicate ColumnExp ValueExp StringValueExp IntegerValueExp ListExp FunctionExp DataType 
+        Boolean Integer String LocatedElement SQLRoot Statement ViewStatement InsertStmt QueryStmt QueryStmtCol QueryStmtAllCol NamedElement Table WhereClause Expression BinaryExp OrExp AndExp NotExp LikeExp InExp OperationExp Predicate QueryPredicate ColumnExp ValueExp StringValueExp IntegerValueExp ListExp FunctionExp DataType 
   context-free syntax
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
+        STR -> String
+
         SQLRoot -> LocatedElement
 
         Statement -> LocatedElement
@@ -37,6 +44,8 @@ exports
         Table -> NamedElement
 
         DataType -> NamedElement
+
+        ColumnExp -> NamedElement
 
         alias::String -> Table
 
@@ -77,6 +86,8 @@ exports
         ListExp -> Predicate
 
         FunctionExp -> Predicate
+
+        ColumnExp -> Predicate
 
         query::QueryStmt -> QueryPredicate
 

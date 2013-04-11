@@ -301,7 +301,7 @@ syntax Element
  ;
 syntax EntityRef
         = 
-        ()
+        ANY uuid ANY namespace ANY objType
  ;
 syntax Entry
         = AdminEntry

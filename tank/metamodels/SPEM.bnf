@@ -1,3 +1,6 @@
+Boolean:
+        "true"
+        "false"
 ArtifactUsageName:
         isInput::Boolean isOutput::Boolean hasWorkPerArtifact::Boolean artifactKind::ArtifactKind workDefinition::WorkDefinition
 ProcessDefinitionElement:
@@ -18,8 +21,6 @@ Guidance:
         processDefinitionElements::ProcessDefinitionElement+
 ArtifactKind:
         artifactUsageNames::ArtifactUsageName+ responsible::RoleKind
-WorkItem:
-        WorkDefinition
 WorkItem:
         WorkDefinition
 RoleKind:
@@ -50,8 +51,8 @@ WorkDefinition:
 ActivityKind:
         performer::RoleKind+ assistant::RoleKind+
 Iteration:
-        EPSILON
+        artifactUsageNames::ArtifactUsageName+ goal::Goal precondition::Precondition
 Phase:
-        EPSILON
+        artifactUsageNames::ArtifactUsageName+ goal::Goal precondition::Precondition
 Lifecycle:
-        EPSILON
+        artifactUsageNames::ArtifactUsageName+ goal::Goal precondition::Precondition

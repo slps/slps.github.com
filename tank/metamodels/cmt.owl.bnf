@@ -1,9 +1,7 @@
 Thing:
         Conference
-Thing:
-        Conference
 Meta-Reviewer:
-        EPSILON
+        assignedByAdministrator::Administrator adjustBid::Bid readPaper::Paper hasBeenAssigned::Paper writeReview::Review assignExternalReviewer::ExternalReviewer
 Reviewer:
         Meta-Reviewer
 Reviewer:
@@ -22,6 +20,10 @@ Person:
 Person:
         User
 Person:
+        ProgramCommitteeMember
+Person:
+        Chairman
+Person:
         hasConflictOfInterest::Document email::String
 Document:
         Review
@@ -39,21 +41,41 @@ Bid:
 Conference:
         hasConferenceMember::ConferenceMember paperAssignmentFinalizedBy::Administrator reviewCriteriaEnteredBy::Administrator paperAssignmentToolsRunBy::Administrator virtualMeetingEnabledBy::Administrator hardcopyMailingManifestsPrintedBy::Administrator detailsEnteredBy::Administrator reviewerBiddingStartedBy::Administrator date::date reviewsPerPaper::Integer logoURL::anyURI acceptsHardcopySubmissions::Boolean siteURL::anyURI
 ConferenceChair:
-        EPSILON
+        memberOfConference::Conference
+ConferenceMember:
+        Reviewer
+ConferenceMember:
+        ConferenceChair
+ConferenceMember:
+        AssociatedChair
+ConferenceMember:
+        Author
+ConferenceMember:
+        ProgramCommitteeMember
+ConferenceMember:
+        Chairman
 ConferenceMember:
         memberOfConference::Conference
 AssociatedChair:
-        EPSILON
+        memberOfConference::Conference
+ProgramCommitteeMember:
+        ProgramCommitteeChair
 ProgramCommitteeMember:
         memberOfProgramCommittee::ProgramCommittee maxPapers::Integer addedBy::Administrator
 AuthorNotReviewer:
-        EPSILON
+        submitPaper::Paper writePaper::Paper
 SubjectArea:
         EPSILON
 ExternalReviewer:
         assignedByReviewer::Reviewer
 Chairman:
-        EPSILON
+        ConferenceChair
+Chairman:
+        AssociatedChair
+Chairman:
+        ProgramCommitteeChair
+Chairman:
+        hasConflictOfInterest::Document email::String memberOfConference::Conference
 ProgramCommitteeChair:
         endReview::Review
 Acceptance:
@@ -79,14 +101,23 @@ Author:
 User:
         Administrator
 User:
-        Administrator
+        Reviewer
+User:
+        Author
 Co-author:
         co-writePaper::Paper
 PaperAbstract:
-        EPSILON
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::unsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer
 PaperFullVersion:
-        EPSILON
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::unsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer
 Administrator:
         finalizePaperAssignment::Conference runPaperAssignmentTools::Conference enableVirtualMeeting::Conference startReviewerBidding::Conference assignReviewer::Reviewer rejectPaper::Paper enterConferenceDetails::Conference printHardcopyMailingManifests::Conference setMaxPapers::ProgramCommitteeMember enterReviewCriteria::Conference acceptPaper::Paper addProgramCommitteeMember::ProgramCommitteeMember
 Meta-Review:
-        EPSILON
+        writtenBy::Reviewer
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR

@@ -2,11 +2,13 @@ module Main
 
 exports
   sorts
-        IdedElement URI Color AnyElement RotationType ShapeType StyleType DecorationType AlignType PNMLDocument NetElement NetContent ToolSpecific LabeledElement Label Name Inscription InitialMarking NetContentElement Arc Node Place Transition Graphics NetGraphics NodeGraphics EdgeGraphics AnnotationGraphics Coordinate Position Offset Dimension Fill Line Font 
+        IdedElement URI Color AnyElement RotationType ShapeType StyleType DecorationType AlignType PNMLDocument NetElement NetContent ToolSpecific LabeledElement Label Name Inscription InitialMarking NetContentElement Arc Node Place Transition Graphics NetGraphics NodeGraphics EdgeGraphics AnnotationGraphics Coordinate Position Offset Dimension Fill Line Font Integer String 
   context-free syntax
         NetElement -> IdedElement
 
         Node -> IdedElement
+
+        Arc -> IdedElement
 
         value::String -> URI
 
@@ -38,6 +40,8 @@ exports
         type::URI document::PNMLDocument contents::NetContent+ tools::ToolSpecific+ netgraphics::NetGraphics name::Name -> NetElement
 
         NetContentElement -> NetContent
+
+        Arc -> NetContent
 
         tool::String version::String anyelement::AnyElement+ net::NetElement arc::Arc node::Node -> ToolSpecific
 
@@ -98,3 +102,7 @@ exports
         color::Color width::Integer shape::ShapeType style::StyleType nodegraphics::NodeGraphics edgegraphics::EdgeGraphics annotationgraphics::AnnotationGraphics -> Line
 
         family::String style::String weight::String size::String decoration::DecorationType align::AlignType rotation::Integer annotationgraphics::AnnotationGraphics -> Font
+
+        INT -> Integer
+
+        STR -> String

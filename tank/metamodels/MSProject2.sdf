@@ -2,8 +2,12 @@ module Main
 
 exports
   sorts
-        MSPProject MSPTask MSPLink MSPAssignment MSPResource MSPHumanResource MSPMachine Date 
+        Integer String MSPProject MSPTask MSPLink MSPAssignment MSPResource MSPHumanResource MSPMachine Date 
   context-free syntax
+        INT -> Integer
+
+        STR -> String
+
         resource::MSPResource+ link::MSPLink+ task::MSPTask+ -> MSPProject
 
         finishDate::Date startDate::Date project::MSPProject superTask::MSPTask subTask::MSPTask+ assignment::MSPAssignment+ inLink::MSPLink+ outLink::MSPLink+ -> MSPTask
@@ -20,6 +24,6 @@ exports
 
         email::String -> MSPHumanResource
 
-         -> MSPMachine
+        cost::Double project::MSPProject assignment::MSPAssignment+ -> MSPMachine
 
         day::Integer month::Integer year::Integer -> Date

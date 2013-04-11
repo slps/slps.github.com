@@ -12,7 +12,7 @@ syntax Attribute
  ;
 syntax Root
         = 
-        ()
+        String description Boolean preliminary String object Attribute attributes+ ORGroup no_dst+ XORGroup nx_dst+ Child cn_dst+
  ;
 syntax Child
         = 
@@ -25,4 +25,16 @@ syntax XORGroup
 syntax ORGroup
         = 
         Boolean preliminary String name Node no_src+ Child co_dst+
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
  ;

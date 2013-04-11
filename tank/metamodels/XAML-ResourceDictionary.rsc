@@ -63,3 +63,15 @@ syntax AxisAngleRotation3D
         = 
         Integer angle String axis
  ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;

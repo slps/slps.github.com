@@ -4,6 +4,7 @@ module PNML_basic
 syntax IdedElement
         = NetElement
         | Node
+        | Arc
  ;
 syntax URI
         = 
@@ -50,8 +51,8 @@ syntax NetElement
         URI type PNMLDocument document NetContent contents+ ToolSpecific tools+ NetGraphics netgraphics Name name
  ;
 syntax NetContent
-        = 
-        NetContentElement
+        = NetContentElement
+        | Arc
  ;
 syntax ToolSpecific
         = 
@@ -147,4 +148,12 @@ syntax Line
 syntax Font
         = 
         String family String style String weight String size DecorationType decoration AlignType align Integer rotation AnnotationGraphics annotationgraphics
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
  ;

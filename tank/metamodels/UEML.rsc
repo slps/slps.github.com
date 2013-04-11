@@ -47,11 +47,11 @@ syntax Resource
  ;
 syntax MaterialResource
         = 
-        ()
+        ResourceFlow carries ResourceRole plays+
  ;
 syntax HumanResource
         = 
-        ()
+        ResourceFlow carries ResourceRole plays+
  ;
 syntax ResourceFlow
         = 
@@ -68,11 +68,11 @@ syntax ControlFlow
  ;
 syntax TriggerFlow
         = 
-        ()
+        InformationObject carries+
  ;
 syntax ConstraintFlow
         = 
-        ()
+        InformationObject carries+
  ;
 syntax ResourceRole
         = 
@@ -98,7 +98,7 @@ syntax InputPort
  ;
 syntax ConnectionOperator
         = 
-        ()
+        AssociationConnector target AssociationConnector origin
  ;
 syntax AssociationConnector
         = 

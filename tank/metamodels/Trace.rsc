@@ -17,3 +17,15 @@ syntax Index
         = 
         value: Integer
  ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;

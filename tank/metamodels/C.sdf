@@ -2,8 +2,15 @@ module Main
 
 exports
   sorts
-        CDataType CIntegral CFloating CBitField CVoid CEnumeration CInt CChar CDouble CFloat CLongDouble CUnsignedInt CLong CLongLong CShort CSignedChar CUnsignedChar CWChar UnsignedLong UnsignedLongLong UnsignedShort CClassifier Derived CStructureContents CStructured CStruct CUnion CSourceText CTypedElement CStructuralFeature CField CParameter BehavioralFeature CFunction 
+        Integer String Boolean CDataType CIntegral CFloating CBitField CVoid CEnumeration CInt CChar CDouble CFloat CLongDouble CUnsignedInt CLong CLongLong CShort CSignedChar CUnsignedChar CWChar UnsignedLong UnsignedLongLong UnsignedShort CClassifier Derived CStructureContents CStructured CStruct CUnion CSourceText CTypedElement CStructuralFeature CField CParameter BehavioralFeature CFunction 
   context-free syntax
+        INT -> Integer
+
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean
+
         CIntegral -> CDataType
 
         CFloating -> CDataType
@@ -104,10 +111,16 @@ exports
 
         Derived -> CClassifier
 
+        CStructured -> CClassifier
+
         CDataType -> CClassifier
         Derived -> CClassifier
 
          -> Derived
+
+        CStructuralFeature -> CStructureContents
+
+        CStructured -> CStructureContents
 
         sc_container::CStructured -> CStructureContents
 
@@ -117,17 +130,17 @@ exports
 
         contains::CStructureContents+ -> CStructured
 
-         -> CStruct
+        contains::CStructureContents+ -> CStruct
 
-         -> CUnion
+        contains::CStructureContents+ -> CUnion
 
         source::String fileName::String -> CSourceText
 
         CParameter -> CTypedElement
 
-        type::CClassifier source::CSourceText -> CTypedElement
+        CStructuralFeature -> CTypedElement
 
-        CField -> CStructuralFeature
+        type::CClassifier source::CSourceText -> CTypedElement
 
         CField -> CStructuralFeature
 

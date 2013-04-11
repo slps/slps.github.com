@@ -41,3 +41,11 @@ syntax AssociationQueueTransmitter
         = 
         Queue dstqueue+ Transmitter srctransmitter+ OutputSignal outputSignal
  ;
+syntax String
+        = 
+        String
+ ;
+syntax Integer
+        = 
+        Integer
+ ;

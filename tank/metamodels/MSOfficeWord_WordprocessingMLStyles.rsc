@@ -53,10 +53,14 @@ syntax SmartTagsCollection
  ;
 syntax StringProperty
         = 
-        ()
+        val: String
  ;
 syntax StringType
         = StringProperty
+        | Text
+        | DelText
+        | InstrText
+        | DelInstrText
         | val: String
  ;
 syntax BreakType
@@ -202,6 +206,16 @@ syntax RunContentElt
         | ContinuationSeparator
         | PgNum
         | Cr
+        | Text
+        | DelText
+        | InstrText
+        | DelInstrText
+        | Footnote
+        | Endnote
+        | Picture
+        | Symbol
+        | Tab
+        | FldChar
  ;
 syntax BreakElt
         = 
@@ -209,19 +223,19 @@ syntax BreakElt
  ;
 syntax Text
         = 
-        ()
+        RunElt rce_rElt String val
  ;
 syntax DelText
         = 
-        ()
+        RunElt rce_rElt String val
  ;
 syntax InstrText
         = 
-        ()
+        RunElt rce_rElt String val
  ;
 syntax DelInstrText
         = 
-        ()
+        RunElt rce_rElt String val
  ;
 syntax NoBreakHyphen
         = 
@@ -261,35 +275,39 @@ syntax Cr
  ;
 syntax Footnote
         = 
-        ()
+        RunElt rce_rElt BlockLevelElt n_blockLevelElts+ NoteValue type OnOffType suppressRef
  ;
 syntax Endnote
         = 
-        ()
+        RunElt rce_rElt BlockLevelElt n_blockLevelElts+ NoteValue type OnOffType suppressRef
+ ;
+syntax NoteElt
+        = Footnote
+        | Endnote
  ;
 syntax Picture
         = 
-        ()
+        rce_rElt: RunElt
  ;
 syntax Symbol
         = 
-        ()
+        RunElt rce_rElt StringType font StringType char
  ;
 syntax SymElt
-        = 
-        StringType font StringType char
+        = Symbol
+        | StringType font StringType char
  ;
 syntax Tab
         = 
-        ()
+        rce_rElt: RunElt
  ;
 syntax FldChar
         = 
-        ()
+        RunElt rce_rElt StringType fldData FldCharTypeProperty fldCharType OnOffType fldLock
  ;
 syntax FldCharElt
-        = 
-        StringType fldData FldCharTypeProperty fldCharType OnOffType fldLock
+        = FldChar
+        | StringType fldData FldCharTypeProperty fldCharType OnOffType fldLock
  ;
 syntax TableElt
         = 
@@ -380,10 +398,22 @@ syntax SubDocElt
         pce_pElt: ParaElt
  ;
 syntax PictureType
-        = 
-        ()
+        = Picture
+        | ()
  ;
 syntax TabElt
+        = Tab
+        | ()
+ ;
+syntax Integer
         = 
-        ()
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
  ;

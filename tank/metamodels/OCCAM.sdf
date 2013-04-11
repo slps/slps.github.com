@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        OCCAM-Program OCCAM-Element Process Channel Action Assignment Input Output Constructor Buckel If While Condition Sequential Parallel Alternative DataType Library File Server Declaration 
+        OCCAM-Program OCCAM-Element Process Channel Action Assignment Input Output Constructor Buckel If While Condition Sequential Parallel Alternative DataType Library File Server Declaration String Boolean Integer 
   context-free syntax
         occam_Elements::OCCAM-Element+ files::File+ -> OCCAM-Program
 
@@ -28,11 +28,11 @@ exports
 
         constructor::Constructor while::While if::If -> Action
 
-         -> Assignment
+        constructor::Constructor while::While if::If -> Assignment
 
-         -> Input
+        constructor::Constructor while::While if::If -> Input
 
-         -> Output
+        constructor::Constructor while::While if::If -> Output
 
         Sequential -> Constructor
 
@@ -54,11 +54,11 @@ exports
 
         elementRight::String elementLeft::String typeCondition::String if::If while::While -> Condition
 
-         -> Sequential
+        process::Process actions::Action+ buckels::Buckel+ childrens::Constructor+ -> Sequential
 
-         -> Parallel
+        process::Process actions::Action+ buckels::Buckel+ childrens::Constructor+ -> Parallel
 
-         -> Alternative
+        process::Process actions::Action+ buckels::Buckel+ childrens::Constructor+ -> Alternative
 
         dataType::String -> DataType
 
@@ -69,3 +69,10 @@ exports
         name::String toChannel::Channel -> Server
 
         name::String process::Process elements::DataType+ -> Declaration
+
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer

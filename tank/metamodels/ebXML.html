@@ -13,7 +13,7 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable ebXML 0.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Hugo Bruneliere, <code>ebXML.ecore</code>, 2005/08/03.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>33</strong></li><li>Number of top alternatives: <strong>33</strong></li><li>Number of defined nonterminal symbols: <strong>24</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>2</strong>: <code><a href="#BusinessAction" class="nt">BusinessAction</a>, <a href="#DocumentSecurity" class="nt">DocumentSecurity</a></code></li><li>Bottom nonterminal symbols: <strong>2</strong>: <code><a href="#Boolean" class="nt">Boolean</a>, <a href="#String" class="nt">String</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="MultyPartyCollaboration">MultyPartyCollaboration</a>:
+				</script></head><body><h1 class="l">Browsable ebXML 0.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Hugo Brunelière, <code>ebXML.ecore</code>, 2005/08/03.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>35</strong></li><li>Number of top alternatives: <strong>36</strong></li><li>Number of defined nonterminal symbols: <strong>26</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>2</strong>: <code><a href="#BusinessAction" class="nt">BusinessAction</a>, <a href="#DocumentSecurity" class="nt">DocumentSecurity</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>2</strong></li><li>Keywords: <strong>2</strong>: <code class="t">"true", "false"</code></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="MultyPartyCollaboration">MultyPartyCollaboration</a>:
         <span class="sel">partners</span>::<a class="nt" href="#BusinessPartnerRole">BusinessPartnerRole</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="BusinessPartnerRole">BusinessPartnerRole</a>:
         <span class="sel">collaboration</span>::<a class="nt" href="#MultyPartyCollaboration">MultyPartyCollaboration</a> <span class="sel">transition</span>::<a class="nt" href="#Transaction">Transaction</a> <span class="sel">performers</span>::<a class="nt" href="#Performs">Performs</a><span class="meta">+</span>
@@ -48,9 +48,9 @@
 </pre><pre><a class="nt" name="CompletionState">CompletionState</a>:
         <span class="sel">guardCondition</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Failure">Failure</a>:
-        ε
+        <span class="sel">guardCondition</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Success">Success</a>:
-        ε
+        <span class="sel">guardCondition</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="BusinessActivity">BusinessActivity</a>:
         <a class="nt" href="#BusinessTransactionActivity">BusinessTransactionActivity</a>
 </pre><pre><a class="nt" name="BusinessActivity">BusinessActivity</a>:
@@ -79,5 +79,10 @@
         <span class="sel">mimeType</span>::<a class="nt" href="#String">String</a> <span class="sel">specification</span>::<a class="nt" href="#String">String</a> <span class="sel">version</span>::<a class="nt" href="#String">String</a> <span class="sel">envelope</span>::<a class="nt" href="#DocumentEnvelope">DocumentEnvelope</a> <span class="sel">document</span>::<a class="nt" href="#BusinessDocument">BusinessDocument</a>
 </pre><pre><a class="nt" name="BusinessDocument">BusinessDocument</a>:
         <span class="sel">specificationLocation</span>::<a class="nt" href="#String">String</a> <span class="sel">specificationElement</span>::<a class="nt" href="#String">String</a> <span class="sel">conditionExpression</span>::<a class="nt" href="#String">String</a> <span class="sel">envelopes</span>::<a class="nt" href="#DocumentEnvelope">DocumentEnvelope</a><span class="meta">+</span> <span class="sel">attachments</span>::<a class="nt" href="#Attachment">Attachment</a><span class="meta">+</span>
+</pre><pre><a class="nt" name="Boolean">Boolean</a>:
+        <span class="t">"true"</span>
+        <span class="t">"false"</span>
+</pre><pre><a class="nt" name="String">String</a>:
+        <span class="meta">string</span>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
 Last updated: Apr2013.</div></body></html>

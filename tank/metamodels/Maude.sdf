@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        MaudeSpec MaudeTopEl ModExpression InstModExp RenModExp CompModExp ModuleIdModExp TheoryIdModExp Parameter Theory FTheory STheory Module FModule SModule ModElement ModImportation ImportationMode Type Sort Kind SubsortRel Operation Statement Membership Equation Rule Condition EquationalCond RewriteCond MembershipCond BooleanCond MatchingCond EqualCond Term Constant RecTerm Variable View ViewMapping RenMapping TermMapping SortMapping OpTypedMapping OpMapping LabelMapping 
+        MaudeSpec MaudeTopEl ModExpression InstModExp RenModExp CompModExp ModuleIdModExp TheoryIdModExp Parameter Theory FTheory STheory Module FModule SModule ModElement ModImportation ImportationMode Type Sort Kind SubsortRel Operation Statement Membership Equation Rule Condition EquationalCond RewriteCond MembershipCond BooleanCond MatchingCond EqualCond Term Constant RecTerm Variable View ViewMapping RenMapping TermMapping SortMapping OpTypedMapping OpMapping LabelMapping String 
   context-free syntax
         els::MaudeTopEl+ printableEls::MaudeTopEl+ -> MaudeSpec
 
@@ -60,6 +60,8 @@ exports
 
         Statement -> ModElement
 
+        Sort -> ModElement
+
         imports::ModExpression mode::ImportationMode -> ModImportation
 
         protecting:: -> ImportationMode
@@ -67,6 +69,8 @@ exports
         extending:: -> ImportationMode
 
         Kind -> Type
+
+        Sort -> Type
 
         subsortRels::SubsortRel+ supersortRels::SubsortRel+ kind::Kind -> Sort
 
@@ -145,3 +149,5 @@ exports
         from::Operation to::String -> OpMapping
 
         from::String to::String -> LabelMapping
+
+        STR -> String

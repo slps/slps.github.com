@@ -2,15 +2,22 @@ module Main
 
 exports
   sorts
-        QoSComponent QoSProfile QoSContraints Operation CompoundProfile SimpleProfile ProfileTransition QoSStatement SingleQoSStatement CoumpoundQoSStatement QoSContraint QualificationKind QoSCharacteristic BooleanExpression MappingExpression StatisticalAttributekindKind Parameter DataType Domain DirectionKind Numeric Set Enumeration StringSet 
+        Boolean Integer String QoSComponent QoSProfile QoSContraints Operation CompoundProfile SimpleProfile ProfileTransition QoSStatement SingleQoSStatement CoumpoundQoSStatement QoSContraint QualificationKind QoSCharacteristic BooleanExpression MappingExpression StatisticalAttributekindKind Parameter DataType Domain DirectionKind Numeric Set Enumeration StringSet 
   context-free syntax
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
+        STR -> String
+
         profile::QoSProfile+ operations::Operation -> QoSComponent
 
         CompoundProfile -> QoSProfile
 
         SimpleProfile -> QoSProfile
 
-         -> QoSContraints
+        invariant::BooleanExpression parallel_and_composition::MappingExpression parallel_or_composition::MappingExpression sequential_composition::MappingExpression values::MappingExpression statisticalAttribute::StatisticalAttributekindKind+ parameter::Parameter domain::Domain -> QoSContraints
 
          -> Operation
 
@@ -50,8 +57,6 @@ exports
 
         Domain -> DataType
 
-        Domain -> DataType
-
         Numeric -> Domain
 
         Set -> Domain
@@ -62,10 +67,10 @@ exports
 
         value::String -> DirectionKind
 
-         -> Numeric
+        direction::DirectionKind -> Numeric
 
         stringSet::StringSet+ -> Set
 
-         -> Enumeration
+        direction::DirectionKind -> Enumeration
 
         string::String+ -> StringSet

@@ -100,3 +100,15 @@ syntax Data
         = 
         Cell d_cell Comment d_comment ValueType value
  ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;

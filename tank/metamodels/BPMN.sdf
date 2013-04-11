@@ -2,8 +2,17 @@ module Main
 
 exports
   sorts
-        Activity ActivityType Artifact ArtifactsContainer Association BpmnDiagram DataObject DirectionType Graph Group Identifiable IdentifiableNode Lane MessagingEdge NamedBpmnObject Pool SequenceEdge SubProcess TextAnnotation Vertex 
+        Boolean Integer String Activity ActivityType Artifact ArtifactsContainer Association BpmnDiagram DataObject DirectionType Graph Group Identifiable IdentifiableNode Lane MessagingEdge NamedBpmnObject Pool SequenceEdge SubProcess TextAnnotation Vertex 
   context-free syntax
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
+        STR -> String
+
+        SubProcess -> Activity
+
         orderedMessages::MessagingEdge+ incomingMessages::MessagingEdge+ outgoingMessages::MessagingEdge+ groups::Group+ activityType::ActivityType eventHandlerFor::SubProcess lane::Lane looping::Boolean -> Activity
 
         SubProcess:: -> ActivityType
@@ -45,18 +54,26 @@ exports
 
         associations::Association+ artifactsContainer::ArtifactsContainer -> Artifact
 
+        BpmnDiagram -> ArtifactsContainer
+
+        Graph -> ArtifactsContainer
+
         artifacts::Artifact+ -> ArtifactsContainer
 
         direction::DirectionType source::Artifact target::IdentifiableNode -> Association
 
         pools::Pool+ messages::MessagingEdge+ author::String title::String -> BpmnDiagram
 
-         -> DataObject
+        associations::Association+ artifactsContainer::ArtifactsContainer -> DataObject
 
         Both:: -> DirectionType
         From:: -> DirectionType
         To:: -> DirectionType
         None:: -> DirectionType
+
+        Pool -> Graph
+
+        SubProcess -> Graph
 
         vertices::Vertex+ sequenceEdges::SequenceEdge+ -> Graph
 
@@ -64,9 +81,21 @@ exports
 
         IdentifiableNode -> Identifiable
 
+        Artifact -> Identifiable
+
+        BpmnDiagram -> Identifiable
+
+        Lane -> Identifiable
+
+        MessagingEdge -> Identifiable
+
+        SequenceEdge -> Identifiable
+
         iD::ID -> Identifiable
 
         Vertex -> IdentifiableNode
+
+        Graph -> IdentifiableNode
 
         associations::Association+ -> IdentifiableNode
 
@@ -76,6 +105,18 @@ exports
 
         ArtifactsContainer -> NamedBpmnObject
 
+        Activity -> NamedBpmnObject
+
+        Artifact -> NamedBpmnObject
+
+        Lane -> NamedBpmnObject
+
+        MessagingEdge -> NamedBpmnObject
+
+        Pool -> NamedBpmnObject
+
+        SequenceEdge -> NamedBpmnObject
+
         documentation::String name::String ncname::String -> NamedBpmnObject
 
         lanes::Lane+ bpmnDiagram::BpmnDiagram -> Pool
@@ -84,6 +125,8 @@ exports
 
         eventHandlers::Activity+ isTransaction::Boolean -> SubProcess
 
-         -> TextAnnotation
+        associations::Association+ artifactsContainer::ArtifactsContainer -> TextAnnotation
+
+        Activity -> Vertex
 
         outgoingEdges::SequenceEdge+ incomingEdges::SequenceEdge+ graph::Graph -> Vertex

@@ -2,8 +2,15 @@ module Main
 
 exports
   sorts
-        RelationSchip ConstrainedRelationSchip Aggregation Composition Association Generalisation Dependency AssociationEnd Package Steriotype Class Constraint Operation Characteristic BusnissRule MetaData Source Domain DescriptiveAttribute Geometry Temporality VisualInfo Value RangeDomain EnumeratedDomain PerceptorySteriotype 
+        String Boolean Integer RelationSchip ConstrainedRelationSchip Aggregation Composition Association Generalisation Dependency AssociationEnd Package Steriotype Class Constraint Operation Characteristic BusnissRule MetaData Source Domain DescriptiveAttribute Geometry Temporality VisualInfo Value RangeDomain EnumeratedDomain PerceptorySteriotype 
   context-free syntax
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
         Association -> RelationSchip
 
         Generalisation -> RelationSchip
@@ -25,9 +32,9 @@ exports
         Aggregation -> Association
         Composition -> Association
 
-         -> Generalisation
+        affectCharacteristic::Characteristic+ constraint::Constraint steriotype::Steriotype+ packages::Package+ associatePackages::Package -> Generalisation
 
-         -> Dependency
+        affectCharacteristic::Characteristic+ constraint::Constraint steriotype::Steriotype+ packages::Package+ associatePackages::Package -> Dependency
 
          -> AssociationEnd
 
@@ -44,6 +51,12 @@ exports
         detail::MetaData inCharacteristic::Characteristic+ affectFeature::Class+ steriotype::Steriotype behaviour::Class -> Operation
 
         DescriptiveAttribute -> Characteristic
+
+        Geometry -> Characteristic
+
+        Temporality -> Characteristic
+
+        VisualInfo -> Characteristic
 
         details::MetaData rule::BusnissRule operations::Operation theClass::Class relationSchip::RelationSchip constraint::Constraint -> Characteristic
 
@@ -65,12 +78,18 @@ exports
 
         geometry::Geometry descriptiveAttributet::DescriptiveAttribute -> Temporality
 
-         -> VisualInfo
+        details::MetaData rule::BusnissRule operations::Operation theClass::Class relationSchip::RelationSchip constraint::Constraint -> VisualInfo
 
         enumeratedDomain::EnumeratedDomain -> Value
 
-         -> RangeDomain
+        descriptiveAttribute::DescriptiveAttribute+ -> RangeDomain
 
         value::Value+ -> EnumeratedDomain
 
-         -> PerceptorySteriotype
+        Geometry -> PerceptorySteriotype
+
+        Temporality -> PerceptorySteriotype
+
+        VisualInfo -> PerceptorySteriotype
+
+        descriptiveAttribute::DescriptiveAttribute+ operations::Operation+ relationSchip::RelationSchip+ theClass::Class+ thePackage::Package+ -> PerceptorySteriotype

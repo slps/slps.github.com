@@ -2,8 +2,15 @@ module Main
 
 exports
   sorts
-        AssociationDirectionKind OrientationKind AccessLevelKind ProcessTypeKind StatusKind AdHocOrderingKind ModeKind GatewayTypeKind ExecutionKind TriggerKind ImplementationKind Element Package MessageFlow Association Pool Lane Participant Artifact DataObject Group Annotation TypeDeclaration Application ParametrizedApplication ReferencedApplication Activity Task TaskService TaskReceive TaskManual TaskReference TaskScript TaskSend TaskUser TaskApplication Route SubFlow BlockActivity Event Trigger ResultCompensation ResultError ResultMultiple TriggerResultLink TriggerResultMessage TriggerIntermediateMultiple TriggerMultiple TriggerRule TriggerTimer StartEvent IntermediateEvent EndEvent Gateway Process Transition ActivitySet ExternalReference Object ExternalPackage Category DataField Script 
+        String Integer Boolean AssociationDirectionKind OrientationKind AccessLevelKind ProcessTypeKind StatusKind AdHocOrderingKind ModeKind GatewayTypeKind ExecutionKind TriggerKind ImplementationKind Element Package MessageFlow Association Pool Lane Participant Artifact DataObject Group Annotation TypeDeclaration Application ParametrizedApplication ReferencedApplication Activity Task TaskService TaskReceive TaskManual TaskReference TaskScript TaskSend TaskUser TaskApplication Route SubFlow BlockActivity Event Trigger ResultCompensation ResultError ResultMultiple TriggerResultLink TriggerResultMessage TriggerIntermediateMultiple TriggerMultiple TriggerRule TriggerTimer StartEvent IntermediateEvent EndEvent Gateway Process Transition ActivitySet ExternalReference Object ExternalPackage Category DataField Script 
   context-free syntax
+        STR -> String
+
+        INT -> Integer
+
+        "true" -> Boolean
+        "false" -> Boolean
+
         None:: -> AssociationDirectionKind
         To:: -> AssociationDirectionKind
         From:: -> AssociationDirectionKind
@@ -114,9 +121,9 @@ exports
 
         state::String requiredForStart::Boolean producedAtCompletion::Boolean dataFields::DataField+ -> DataObject
 
-         -> Group
+        textAnnotation::String group::String object::Object dataObject::DataObject -> Group
 
-         -> Annotation
+        textAnnotation::String group::String object::Object dataObject::DataObject -> Annotation
 
         id::String name::String -> TypeDeclaration
 
@@ -231,7 +238,7 @@ exports
 
         triggerKind::TriggerKind implementation::ImplementationKind trigger::Trigger -> EndEvent
 
-         -> Gateway
+        gatewayType::GatewayTypeKind instantiate::Boolean markerVisiable::Boolean -> Gateway
 
         accessLevel::AccessLevelKind processType::ProcessTypeKind status::StatusKind suppressJoinFailure::Boolean enableInstanceCompensation::Boolean adHoc::Boolean adHocOrdering::AdHocOrderingKind adHocCompletionCondition::String participant::Participant+ applications::Application+ dataField::DataField activitySets::ActivitySet+ activities::Activity+ transitions::Transition+ object::Object defaultStartActivitySet::ActivitySet defaultStartActivity::Activity -> Process
 

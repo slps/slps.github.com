@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        Root Element Representation Designation Text Meaning Concept NounConcept ObjectType IndividualConcept DataType NonEmptyString NonNegativeInteger FactType BinaryFactType IsPropertyOfFactType AssociativeFactType CategorizationFactType ObjectificationFactType Role FactTypeRole LogicalFormulation AtomicFormulation BinaryAtomicFormulation NecessityFormulation Quantification UniversalQuantification AtLeastNQuantification ExactlyNQuantification AtMostNQuantification BindableTarget Variable RoleBinding 
+        Root Element Representation Designation Text Meaning Concept NounConcept ObjectType IndividualConcept DataType NonEmptyString NonNegativeInteger FactType BinaryFactType IsPropertyOfFactType AssociativeFactType CategorizationFactType ObjectificationFactType Role FactTypeRole LogicalFormulation AtomicFormulation BinaryAtomicFormulation NecessityFormulation Quantification UniversalQuantification AtLeastNQuantification ExactlyNQuantification AtMostNQuantification BindableTarget Variable RoleBinding String Integer 
   context-free syntax
         elements::Element+ -> Root
 
@@ -68,8 +68,6 @@ exports
 
         BinaryFactType -> FactType
 
-        BinaryFactType -> FactType
-
         IsPropertyOfFactType -> BinaryFactType
 
         AssociativeFactType -> BinaryFactType
@@ -80,19 +78,19 @@ exports
 
         role1::FactTypeRole role2::FactTypeRole -> BinaryFactType
 
-         -> IsPropertyOfFactType
+        role1::FactTypeRole role2::FactTypeRole -> IsPropertyOfFactType
 
-         -> AssociativeFactType
+        role1::FactTypeRole role2::FactTypeRole -> AssociativeFactType
 
-         -> CategorizationFactType
+        role1::FactTypeRole role2::FactTypeRole -> CategorizationFactType
 
-         -> ObjectificationFactType
+        role1::FactTypeRole role2::FactTypeRole -> ObjectificationFactType
 
         FactTypeRole -> Role
 
         nounConcept::NounConcept -> Role
 
-         -> FactTypeRole
+        nounConcept::NounConcept -> FactTypeRole
 
         AtomicFormulation -> LogicalFormulation
 
@@ -122,7 +120,7 @@ exports
 
         introducedVariable::Variable scopesOver::LogicalFormulation -> Quantification
 
-         -> UniversalQuantification
+        introducedVariable::Variable scopesOver::LogicalFormulation -> UniversalQuantification
 
         minCardinality::NonNegativeInteger -> AtLeastNQuantification
 
@@ -132,8 +130,10 @@ exports
 
         Variable -> BindableTarget
 
-        Variable -> BindableTarget
-
         rangesOver::ObjectType -> Variable
 
         occursIn::AtomicFormulation isOf::FactType bindsTo::BindableTarget -> RoleBinding
+
+        STR -> String
+
+        INT -> Integer

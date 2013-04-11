@@ -1,6 +1,18 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module µOCCAM
 
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
 syntax Process
         = StopProcess
         | SkipProcess
@@ -165,11 +177,11 @@ syntax Channel
  ;
 syntax VariableOPerand
         = 
-        ()
+        element: Element
  ;
 syntax LiteralOperand
         = 
-        ()
+        integer: Integer
  ;
 syntax ExpressionOperand
         = 

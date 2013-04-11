@@ -21,3 +21,7 @@ syntax CommunicationLink
         = 
         Node source Node target String name
  ;
+syntax String
+        = 
+        String
+ ;

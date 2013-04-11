@@ -17,3 +17,15 @@ syntax Expression
         = 
         expressionName: String
  ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Integer
+        = 
+        Integer
+ ;

@@ -1,0 +1,257 @@
+module Main
+
+exports
+  sorts
+        Asm-stmtblock Asm-stm Asmlabel-colon Asm-unlabeledstm-semi Asmid Asmlabel Asm-expr Asm-infix-expr Asm-term Asm-primary Asmhex Asm-unlabeledstm Asm-opcode-prefix Asm-opcode Asm-directive Asm-directive-arg Asm-register Segmt-overr Asm-prefixop Asm-infixop Asm-postfixop Procedure-body Unlabeled-stm 
+  context-free syntax
+        "asm" Asm-stm* End-struct -> Asm-stmtblock
+
+        Asmlabel-colon? Asm-unlabeledstm-semi? -> Asm-stm
+
+        Asmlabel Colon -> Asmlabel-colon
+
+        Asm-unlabeledstm ";"? NL -> Asm-unlabeledstm-semi
+
+        "@"* Asmlbl -> Asmid
+        "@+"* Id -> Asmid
+        "@+"* Anynumber -> Asmid
+        "@+"* Key -> Asmid
+
+        SPOFF Asmid+ SPON -> Asmlabel
+        Label-id -> Asmlabel
+
+        Asm-term Asm-infix-expr* -> Asm-expr
+
+        Asm-infixop Asm-term -> Asm-infix-expr
+
+        Asm-prefixop* Asm-primary Asm-postfixop* -> Asm-term
+
+        "[" Asm-expr "]" -> Asm-primary
+        "(" Asm-expr ")" -> Asm-primary
+        Asm-register -> Asm-primary
+        Id -> Asm-primary
+        Anynumber -> Asm-primary
+        Charlit -> Asm-primary
+        Stringlit -> Asm-primary
+        Asmhex -> Asm-primary
+        SP Asmlabel -> Asm-primary
+
+        Number SPOFF Id SPON -> Asmhex
+
+        Asm-directive Asm-directive-arg"," -> Asm-unlabeledstm
+        Asm-opcode-prefix? Asm-opcode Asm-expr"," -> Asm-unlabeledstm
+
+        "lock" Space? -> Asm-opcode-prefix
+
+        "adc" -> Asm-opcode
+        "add" -> Asm-opcode
+        "and" -> Asm-opcode
+        "bswap" -> Asm-opcode
+        "bt" -> Asm-opcode
+        "btr" -> Asm-opcode
+        "bts" -> Asm-opcode
+        "call" -> Asm-opcode
+        "cdq" -> Asm-opcode
+        "cld" -> Asm-opcode
+        "cmp" -> Asm-opcode
+        "dec" -> Asm-opcode
+        "div" -> Asm-opcode
+        "f2xm1" -> Asm-opcode
+        "fabs" -> Asm-opcode
+        "fadd" -> Asm-opcode
+        "faddp" -> Asm-opcode
+        "fbstp" -> Asm-opcode
+        "fchs" -> Asm-opcode
+        "fclex" -> Asm-opcode
+        "fcom" -> Asm-opcode
+        "fcomp" -> Asm-opcode
+        "fcos" -> Asm-opcode
+        "fdiv" -> Asm-opcode
+        "fdivp" -> Asm-opcode
+        "fdivrp" -> Asm-opcode
+        "ffree" -> Asm-opcode
+        "fiadd" -> Asm-opcode
+        "fidiv" -> Asm-opcode
+        "fild" -> Asm-opcode
+        "fimul" -> Asm-opcode
+        "fistp" -> Asm-opcode
+        "fld" -> Asm-opcode
+        "fld1" -> Asm-opcode
+        "fldcw" -> Asm-opcode
+        "fldl2e" -> Asm-opcode
+        "fldlg2" -> Asm-opcode
+        "fldln2" -> Asm-opcode
+        "fldz" -> Asm-opcode
+        "fmul" -> Asm-opcode
+        "fmulp" -> Asm-opcode
+        "fnclex" -> Asm-opcode
+        "fninit" -> Asm-opcode
+        "fnstcw" -> Asm-opcode
+        "fnstsw" -> Asm-opcode
+        "fpatan" -> Asm-opcode
+        "fprem" -> Asm-opcode
+        "fptan" -> Asm-opcode
+        "frndint" -> Asm-opcode
+        "fscale" -> Asm-opcode
+        "fsin" -> Asm-opcode
+        "fsincos" -> Asm-opcode
+        "fsqrt" -> Asm-opcode
+        "fstcw" -> Asm-opcode
+        "fstp" -> Asm-opcode
+        "fstsw" -> Asm-opcode
+        "fsub" -> Asm-opcode
+        "fsubp" -> Asm-opcode
+        "fsubr" -> Asm-opcode
+        "fwait" -> Asm-opcode
+        "fxch" -> Asm-opcode
+        "fxtract" -> Asm-opcode
+        "fyl2x" -> Asm-opcode
+        "fyl2xp1" -> Asm-opcode
+        "imul" -> Asm-opcode
+        "inc" -> Asm-opcode
+        "int" -> Asm-opcode
+        "ja" -> Asm-opcode
+        "jae" -> Asm-opcode
+        "jb" -> Asm-opcode
+        "jbe" -> Asm-opcode
+        "jc" -> Asm-opcode
+        "je" -> Asm-opcode
+        "jecxz" -> Asm-opcode
+        "jg" -> Asm-opcode
+        "jge" -> Asm-opcode
+        "jl" -> Asm-opcode
+        "jle" -> Asm-opcode
+        "jmp" -> Asm-opcode
+        "jnc" -> Asm-opcode
+        "jne" -> Asm-opcode
+        "jnl" -> Asm-opcode
+        "jns" -> Asm-opcode
+        "jnz" -> Asm-opcode
+        "jo" -> Asm-opcode
+        "jp" -> Asm-opcode
+        "js" -> Asm-opcode
+        "jz" -> Asm-opcode
+        "lea" -> Asm-opcode
+        "leave" -> Asm-opcode
+        "lodsb" -> Asm-opcode
+        "lodsw" -> Asm-opcode
+        "loop" -> Asm-opcode
+        "mov" -> Asm-opcode
+        "movsb" -> Asm-opcode
+        "movsx" -> Asm-opcode
+        "movzx" -> Asm-opcode
+        "mul" -> Asm-opcode
+        "neg" -> Asm-opcode
+        "not" -> Asm-opcode
+        "or" -> Asm-opcode
+        "pop" -> Asm-opcode
+        "popfd" -> Asm-opcode
+        "push" -> Asm-opcode
+        "pushfd" -> Asm-opcode
+        "rcl" -> Asm-opcode
+        "rcr" -> Asm-opcode
+        "rep" -> Asm-opcode
+        "repe" -> Asm-opcode
+        "repne" -> Asm-opcode
+        "ret" -> Asm-opcode
+        "rol" -> Asm-opcode
+        "ror" -> Asm-opcode
+        "sahf" -> Asm-opcode
+        "sar" -> Asm-opcode
+        "sbb" -> Asm-opcode
+        "seto" -> Asm-opcode
+        "shl" -> Asm-opcode
+        "shld" -> Asm-opcode
+        "shr" -> Asm-opcode
+        "shrd" -> Asm-opcode
+        "std" -> Asm-opcode
+        "stosb" -> Asm-opcode
+        "stosd" -> Asm-opcode
+        "stosw" -> Asm-opcode
+        "sub" -> Asm-opcode
+        "test" -> Asm-opcode
+        "wait" -> Asm-opcode
+        "xadd" -> Asm-opcode
+        "xchg" -> Asm-opcode
+        "xor" -> Asm-opcode
+
+        "DB" -> Asm-directive
+        "DW" -> Asm-directive
+        "DD" -> Asm-directive
+        "DQ" -> Asm-directive
+
+        Charlit -> Asm-directive-arg
+        Sign? Anynumber -> Asm-directive-arg
+        Asm-expr -> Asm-directive-arg
+
+        "ST" "(" Integernumber ")" -> Asm-register
+        "ST" -> Asm-register
+        "FS" -> Asm-register
+        "GS" -> Asm-register
+        "EAX" -> Asm-register
+        "EBX" -> Asm-register
+        "ECX" -> Asm-register
+        "EDX" -> Asm-register
+        "ESP" -> Asm-register
+        "EBP" -> Asm-register
+        "ESI" -> Asm-register
+        "EDI" -> Asm-register
+        "AX" -> Asm-register
+        "BX" -> Asm-register
+        "CX" -> Asm-register
+        "DX" -> Asm-register
+        "SP" -> Asm-register
+        "BP" -> Asm-register
+        "SI" -> Asm-register
+        "DI" -> Asm-register
+        "AL" -> Asm-register
+        "BL" -> Asm-register
+        "CL" -> Asm-register
+        "DL" -> Asm-register
+        "CS" -> Asm-register
+        "DS" -> Asm-register
+        "SS" -> Asm-register
+        "ES" -> Asm-register
+        "AH" -> Asm-register
+        "BH" -> Asm-register
+        "CH" -> Asm-register
+        "DH" -> Asm-register
+        "CS" Segmt-overr? -> Asm-register
+        "DS" Segmt-overr? -> Asm-register
+        "SS" Segmt-overr? -> Asm-register
+        "FS" Segmt-overr? -> Asm-register
+        "GS" Segmt-overr? -> Asm-register
+        "ES" Segmt-overr? -> Asm-register
+
+        SPOFF ":" Asm-expr SPON -> Segmt-overr
+
+        "high" -> Asm-prefixop
+        "low" -> Asm-prefixop
+        "offset" -> Asm-prefixop
+        "dmtindex" -> Asm-prefixop
+        "vmtoffset" -> Asm-prefixop
+        "type" -> Asm-prefixop
+        "not" -> Asm-prefixop
+        "&" -> Asm-prefixop
+        Sign -> Asm-prefixop
+        "@" -> Asm-prefixop
+
+        "." -> Asm-infixop
+        "+" -> Asm-infixop
+        "-" -> Asm-infixop
+        "*" -> Asm-infixop
+        "/" -> Asm-infixop
+        "ptr" -> Asm-infixop
+        "mod" -> Asm-infixop
+        "xor" -> Asm-infixop
+        "and" -> Asm-infixop
+        "or" -> Asm-infixop
+        "shr" -> Asm-infixop
+        "shl" -> Asm-infixop
+
+        "[" Asm-expr "]" -> Asm-postfixop
+        "." Asm-expr -> Asm-postfixop
+
+        Asm-stmtblock -> Procedure-body
+
+        Asm-stmtblock -> Unlabeled-stm

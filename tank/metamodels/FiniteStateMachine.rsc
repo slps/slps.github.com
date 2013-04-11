@@ -27,3 +27,11 @@ syntax AssociationStateState
         = 
         Transition transition State dstTransition+ State srcTransition+
  ;
+syntax String
+        = 
+        String
+ ;
+syntax Integer
+        = 
+        Integer
+ ;

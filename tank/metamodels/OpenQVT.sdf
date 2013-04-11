@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        Variable Context Rule RootRule RuleSetCall QARule RuleSet Service OCLService RTransService JavaService RulePart Action RTransAction JavaAction Query OCLFilter RTransQuery JavaQuery JavaFilter 
+        Variable Context Rule RootRule RuleSetCall QARule RuleSet Service OCLService RTransService JavaService RulePart Action RTransAction JavaAction Query OCLFilter RTransQuery JavaQuery JavaFilter String 
   context-free syntax
         name::String type::String value::String visibility::String context::Context -> Variable
 
@@ -32,11 +32,11 @@ exports
 
         visibility::String signature::String rule::Rule -> Service
 
-         -> OCLService
+        visibility::String signature::String rule::Rule -> OCLService
 
-         -> RTransService
+        visibility::String signature::String rule::Rule -> RTransService
 
-         -> JavaService
+        visibility::String signature::String rule::Rule -> JavaService
 
         Action -> RulePart
 
@@ -48,9 +48,9 @@ exports
 
         qARule::QARule -> Action
 
-         -> RTransAction
+        qARule::QARule -> RTransAction
 
-         -> JavaAction
+        qARule::QARule -> JavaAction
 
         OCLFilter -> Query
 
@@ -62,10 +62,12 @@ exports
 
         qARule::QARule -> Query
 
-         -> OCLFilter
+        qARule::QARule -> OCLFilter
 
-         -> RTransQuery
+        qARule::QARule -> RTransQuery
 
-         -> JavaQuery
+        qARule::QARule -> JavaQuery
 
-         -> JavaFilter
+        qARule::QARule -> JavaFilter
+
+        STR -> String

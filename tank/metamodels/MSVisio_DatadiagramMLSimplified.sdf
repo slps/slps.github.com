@@ -2,17 +2,35 @@ module Main
 
 exports
   sorts
-        CellType VisioDocument PageSheet Shape ShapeElt Geom XYElt LineTo MoveTo XYAElt ArcTo SplineKnot PolylineTo XYABElt InfiniteLine XYABCDElt Ellipse EllipticalArcTo SplineStart XYABCDEElt NURBSTo Text TextElt StringElt MastersCollection MasterShortCut Icon Master ShapesCollection ConnectsCollection Connect MasterElt PagesCollection Page 
+        CellType VisioDocument PageSheet NamedElt IdentifiedElt Shape ShapeElt IXElt DelElt Geom XYElt LineTo MoveTo XYAElt ArcTo SplineKnot PolylineTo XYABElt InfiniteLine XYABCDElt Ellipse EllipticalArcTo SplineStart XYABCDEElt NURBSTo Text TextElt StringElt MastersCollection MasterShortCut Icon Master ShapesCollection ConnectsCollection Connect MasterElt PagesCollection Page PageElt Integer String Boolean 
   context-free syntax
         unit::String formula::String err::String value::String -> CellType
 
         docMasters::MastersCollection docPages::PagesCollection -> VisioDocument
 
-         -> PageSheet
+        ss_shapes::ShapesCollection lineStyle::Integer fillStyle::Integer textStyle::Integer shapeElts::ShapeElt+ -> PageSheet
+
+        MasterShortCut -> NamedElt
+
+        Page -> NamedElt
+
+        MasterShortCut -> IdentifiedElt
+
+        Master -> IdentifiedElt
+
+        Page -> IdentifiedElt
+
+        PageSheet -> Shape
 
         ss_shapes::ShapesCollection lineStyle::Integer fillStyle::Integer textStyle::Integer shapeElts::ShapeElt+ -> Shape
 
         Text -> ShapeElt
+
+        Geom -> ShapeElt
+
+        XYElt -> IXElt
+
+        XYElt -> DelElt
 
         noFill::CellType noLine::CellType noShow::CellType noSnap::CellType linesTo::LineTo+ movesTo::MoveTo+ arcsTo::ArcTo+ splineKnots::SplineKnot+ polylinesTo::PolylineTo+ infiniteLines::InfiniteLine+ ellipses::Ellipse+ ellipticalArcsTo::EllipticalArcTo+ splineStarts::SplineStart+ nurbsTo::NURBSTo+ -> Geom
 
@@ -86,6 +104,21 @@ exports
 
         Icon -> MasterElt
 
+        ShapesCollection -> MasterElt
+
+        ConnectsCollection -> MasterElt
+
         ps_visioDocument::VisioDocument pages::Page+ -> PagesCollection
 
         p_pages::PagesCollection background::Boolean backPage::Integer viewScale::Double viewCenterX::Double ViewCenterY::Double reviewerID::Integer associatedPage::Integer pageElts::PageElt+ -> Page
+
+        ShapesCollection -> PageElt
+
+        ConnectsCollection -> PageElt
+
+        INT -> Integer
+
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean

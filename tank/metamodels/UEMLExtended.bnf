@@ -7,6 +7,8 @@ UEMLObject:
 UEMLObject:
         Object
 UEMLObject:
+        Activity
+UEMLObject:
         has::Geometry model::UEMLModel
 UEMLModel:
         contains::UEMLObject+
@@ -50,9 +52,9 @@ Resource:
 Resource:
         carries::ResourceFlow plays::ResourceRole+ resourceType::ResourceType commitment::Commitment+
 MaterialResource:
-        EPSILON
+        
 HumanResource:
-        EPSILON
+        obliger::Commitment claimer::Commitment has_parties::Contract
 ResourceFlow:
         resourceCarries::Resource+
 IOFlow:
@@ -64,9 +66,9 @@ ControlFlow:
 ControlFlow:
         carries::InformationObject+
 TriggerFlow:
-        EPSILON
+        carries::InformationObject+
 ConstraintFlow:
-        EPSILON
+        carries::InformationObject+
 ResourceRole:
         resourcePlays::Resource+ roleQualifier::RoleType in::Activity
 RoleType:
@@ -76,6 +78,8 @@ Anchor:
 Anchor:
         InputPort
 Anchor:
+        ConnectionOperator
+Anchor:
         OutputPort
         InputPort
 OutputPort:
@@ -83,15 +87,19 @@ OutputPort:
 InputPort:
         activity::Activity
 ConnectionOperator:
-        EPSILON
+        target::AssociationConnector origin::AssociationConnector
 AssociationConnector:
         origin::FlowObject+ target::FlowObject+ classAssociation::Flow
 FlowObject:
         Event
 FlowObject:
+        Activity
+FlowObject:
+        ConnectionOperator
+FlowObject:
         target::AssociationConnector origin::AssociationConnector
 Event:
-        EPSILON
+        target::AssociationConnector origin::AssociationConnector
 ResourceType:
         resource::Resource+
 ActivityType:
@@ -109,9 +117,9 @@ PassiveObject:
 Commitment:
         resource::Resource+ task::Task agentO::Agent agentC::Agent contract::Contract
 Software:
-        EPSILON
+        obliger::Commitment claimer::Commitment has_parties::Contract
 Organisation:
-        EPSILON
+        obliger::Commitment claimer::Commitment has_parties::Contract
 Process:
         child::Activity fulfills::Contract+ realises::Service
 Service:

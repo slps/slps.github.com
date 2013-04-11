@@ -1,14 +1,6 @@
 all:
 	cp ../slps/topics/grammars/hats/abs/grammar.bgf tank/hats/abs.bgf
 	_dev/format tank hats/abs hats/abs
-	cp ../slps/topics/grammars/bibtex/bibtex-1/grammar.bgf tank/bibtex/bibtex-1.bgf
-	_dev/format tank bibtex/bibtex-1 bibtex/bibtex-1
-	cp ../slps/topics/grammars/bibtex/bibtex-1.1/grammar.bgf tank/bibtex/bibtex-1.1.bgf
-	_dev/format tank bibtex/bibtex-1.1 bibtex/bibtex-1.1
-	cp ../slps/topics/grammars/bibtex/bibtex-1.2/grammar.bgf tank/bibtex/bibtex-1.2.bgf
-	_dev/format tank bibtex/bibtex-1.2 bibtex/bibtex-1.2
-	cp ../slps/topics/grammars/bibtex/bql/grammar.bgf tank/bibtex/bql.bgf
-	_dev/format tank bibtex/bql bibtex/bql
 	_dev/format tank fl/antlr fl/antlr
 	_dev/format tank fl/dcg fl/dcg
 	_dev/format tank fl/sdf fl/sdf
@@ -221,8 +213,6 @@ all:
 	_dev/format tank metamodels/Cristal metamodels/Cristal
 	cp ../slps/topics/grammars/metamodels/crs_dr.owl/grammar.bgf tank/metamodels/crs_dr.owl.bgf
 	_dev/format tank metamodels/crs_dr.owl metamodels/crs_dr.owl
-	cp ../slps/topics/grammars/metamodels/DOT/grammar.bgf tank/metamodels/DOT.bgf
-	_dev/format tank metamodels/DOT metamodels/DOT
 	cp ../slps/topics/grammars/metamodels/DSL/grammar.bgf tank/metamodels/DSL.bgf
 	_dev/format tank metamodels/DSL metamodels/DSL
 	cp ../slps/topics/grammars/metamodels/DSLtools/grammar.bgf tank/metamodels/DSLtools.bgf
@@ -305,8 +295,6 @@ all:
 	_dev/format tank metamodels/TroposGoalAndPlanConcepts metamodels/TroposGoalAndPlanConcepts
 	cp ../slps/topics/grammars/metamodels/GraphML/grammar.bgf tank/metamodels/GraphML.bgf
 	_dev/format tank metamodels/GraphML metamodels/GraphML
-	cp ../slps/topics/grammars/metamodels/GraphVizDot/grammar.bgf tank/metamodels/GraphVizDot.bgf
-	_dev/format tank metamodels/GraphVizDot metamodels/GraphVizDot
 	cp ../slps/topics/grammars/metamodels/HAL/grammar.bgf tank/metamodels/HAL.bgf
 	_dev/format tank metamodels/HAL metamodels/HAL
 	cp ../slps/topics/grammars/metamodels/HPROF/grammar.bgf tank/metamodels/HPROF.bgf
@@ -325,18 +313,6 @@ all:
 	_dev/format tank metamodels/iasted.owl metamodels/iasted.owl
 	cp ../slps/topics/grammars/metamodels/TroposIntegratingActorConcept/grammar.bgf tank/metamodels/TroposIntegratingActorConcept.bgf
 	_dev/format tank metamodels/TroposIntegratingActorConcept metamodels/TroposIntegratingActorConcept
-	cp ../slps/topics/grammars/metamodels/J2SE5/grammar.bgf tank/metamodels/J2SE5.bgf
-	_dev/format tank metamodels/J2SE5 metamodels/J2SE5
-	cp ../slps/topics/grammars/metamodels/Java-20040316/grammar.bgf tank/metamodels/Java-20040316.bgf
-	_dev/format tank metamodels/Java-20040316 metamodels/Java-20040316
-	cp ../slps/topics/grammars/metamodels/JAVA3/grammar.bgf tank/metamodels/JAVA3.bgf
-	_dev/format tank metamodels/JAVA3 metamodels/JAVA3
-	cp ../slps/topics/grammars/metamodels/JavaProject/grammar.bgf tank/metamodels/JavaProject.bgf
-	_dev/format tank metamodels/JavaProject metamodels/JavaProject
-	cp ../slps/topics/grammars/metamodels/JavaAbstractSyntax/grammar.bgf tank/metamodels/JavaAbstractSyntax.bgf
-	_dev/format tank metamodels/JavaAbstractSyntax metamodels/JavaAbstractSyntax
-	cp ../slps/topics/grammars/metamodels/JavaSource/grammar.bgf tank/metamodels/JavaSource.bgf
-	_dev/format tank metamodels/JavaSource metamodels/JavaSource
 	cp ../slps/topics/grammars/metamodels/Jess/grammar.bgf tank/metamodels/Jess.bgf
 	_dev/format tank metamodels/Jess metamodels/Jess
 	cp ../slps/topics/grammars/metamodels/KDM/grammar.bgf tank/metamodels/KDM.bgf
@@ -639,8 +615,6 @@ all:
 	_dev/format tank metamodels/XAML-ResourceDictionary metamodels/XAML-ResourceDictionary
 	cp ../slps/topics/grammars/metamodels/ASM/grammar.bgf tank/metamodels/ASM.bgf
 	_dev/format tank metamodels/ASM metamodels/ASM
-	cp ../slps/topics/grammars/metamodels/XML/grammar.bgf tank/metamodels/XML.bgf
-	_dev/format tank metamodels/XML metamodels/XML
 	cp ../slps/topics/grammars/metamodels/XPDL-1.14/grammar.bgf tank/metamodels/XPDL-1.14.bgf
 	_dev/format tank metamodels/XPDL-1.14 metamodels/XPDL-1.14
 	cp ../slps/topics/grammars/metamodels/XQuery/grammar.bgf tank/metamodels/XQuery.bgf

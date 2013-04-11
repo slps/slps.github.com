@@ -1,6 +1,18 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module MSOfficeExcel_SpreadsheetMLWorkbookProp
 
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
 syntax DateTimeType
         = 
         Integer year Integer month Integer day Integer hour Integer minute Integer second

@@ -1,6 +1,10 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module IEEE1471ConceptualModel
 
+syntax String
+        = 
+        String
+ ;
 syntax Element
         = IEEE1471Model
         | System

@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        Element Architecture Organization Guidance Document Action Agreement Standard Task InformationAsset ConceptualDataModel ActivityModel Node Network Requirement InfoExchRequirement ExchangeNeedLineReq MissionArea System Mission FunctionalArea Capability MaterielItem EquipmentType SoftwareItem Facility 
+        Element Architecture Organization Guidance Document Action Agreement Standard Task InformationAsset ConceptualDataModel ActivityModel Node Network Requirement InfoExchRequirement ExchangeNeedLineReq MissionArea System Mission FunctionalArea Capability MaterielItem EquipmentType SoftwareItem Facility String 
   context-free syntax
         Architecture -> Element
 
@@ -54,7 +54,7 @@ exports
 
         isAssociatedWith::Agreement+ isCitedBy::Agreement+ appliesTo::InformationAsset+ implements::Guidance+ -> Agreement
 
-         -> Standard
+        isAssociatedWith::Agreement+ isCitedBy::Agreement+ appliesTo::InformationAsset+ implements::Guidance+ -> Standard
 
         isAssociatedWith::Task+ isPerformedBy::Node+ isPerformedUsing::System+ specifies::Requirement+ -> Task
 
@@ -64,9 +64,9 @@ exports
 
         isAssociatedWith::InformationAsset+ -> InformationAsset
 
-         -> ConceptualDataModel
+        isAssociatedWith::InformationAsset+ -> ConceptualDataModel
 
-         -> ActivityModel
+        isAssociatedWith::InformationAsset+ -> ActivityModel
 
         isAssociatedWith::Node+ describes::Architecture+ hasServicesProvidedBy::Facility+ involvedIn::ActivityModel+ uses::InformationAsset+ involves::InfoExchRequirement+ isParticipedInBy::Network+ supports::System+ -> Node
 
@@ -80,7 +80,7 @@ exports
 
         isCitedIn::Document+ isSpecifiedInInfos::InformationAsset+ -> InfoExchRequirement
 
-         -> ExchangeNeedLineReq
+        mayBeSatifiedBy::Architecture+ isSpecifiedUsing::InformationAsset+ specifiesNeedFor::MaterielItem+ cites::MissionArea+ -> ExchangeNeedLineReq
 
         supports::Task+ -> MissionArea
 
@@ -98,8 +98,10 @@ exports
 
         establishedAs::MaterielItem+ conformsTo::Standard+ performsTo::Capability+ -> MaterielItem
 
-         -> EquipmentType
+        establishedAs::MaterielItem+ conformsTo::Standard+ performsTo::Capability+ -> EquipmentType
 
         uses::EquipmentType+ isSourceFor::Organization -> SoftwareItem
 
-         -> Facility
+        name::String content::String -> Facility
+
+        STR -> String

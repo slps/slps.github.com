@@ -2,11 +2,13 @@ module Main
 
 exports
   sorts
-        XSDAnnotation XSDAttributeDeclaration XSDAttributeGroupDefinition XSDAttributeUse XSDBoundedFacet XSDCardinalityFacet XSDComplexTypeContent XSDComplexTypeDefinition XSDComponent XSDConcreteComponent XSDConstrainingFacet XSDDiagnostic XSDElementDeclaration XSDEnumerationFacet XSDFacet XSDFixedFacet XSDFractionDigitsFacet XSDFundamentalFacet XSDIdentityConstraintDefinition XSDImport XSDInclude XSDLengthFacet XSDMaxExclusiveFacet XSDMaxFacet XSDMaxInclusiveFacet XSDMaxLengthFacet XSDMinExclusiveFacet XSDMinFacet XSDMinInclusiveFacet XSDMinLengthFacet XSDModelGroup XSDModelGroupDefinition XSDNamedComponent XSDNotationDeclaration XSDNumericFacet XSDOrderedFacet XSDParticle XSDPatternFacet XSDRedefine XSDRepeatableFacet XSDSchema XSDSchemaCompositor XSDSchemaContent XSDSchemaDirective XSDScope XSDSimpleTypeDefinition XSDTerm XSDTotalDigitsFacet XSDWhiteSpaceFacet XSDWildcard XSDXPathDefinition XSDAttributeUseCategory XSDCardinality XSDComplexFinal XSDCompositor XSDConstraint XSDContentTypeCategory XSDDerivationMethod XSDDiagnosticSeverity XSDDisallowedSubstitutions XSDForm XSDIdentityConstraintCategory XSDNamespaceConstraintCategory XSDOrdered XSDProcessContents XSDProhibitedSubstitutions XSDSimpleFinal XSDSubstitutionGroupExclusions XSDVariety XSDWhiteSpace XSDXPathVariety Property PropertyAlias MessagepropertiesQuery EObject PartnerLinkType Role Process PartnerLink FaultHandler Activity CorrelationSet Invoke Link Catch Reply PartnerActivity Receive Exit Throw Wait Empty Sequence Switch Case While Pick Flow OnAlarm Assign Copy Extension Scope Compensate CompensationHandler To From OnMessage Expression BooleanExpression Correlation CorrelationPattern EndpointReferenceRole EventHandler Source Target PartnerLinks Variables CorrelationSets Links CatchAll Correlations Variable Otherwise UnknownExtensibilityAttribute OnEvent BPELImport Rethrow Condition Targets Sources BPELQuery ServiceRef Extensions ExtensionActivity FromPart ToPart OpaqueActivity ForEach RepeatUntil TerminationHandler Validate If Then ElseIf Else CompletionCondition Branches BPELExtensibleElement Documentation Iterator WSDLElement PortType Operation Message Part Binding BindingOperation Service Port ExtensibilityElement Definition WSDLImport WSDLExtensibleElement Input Output Fault BindingInput BindingOutput BindingFault Namespace Types UnknownExtensibilityElement XSDSchemaExtensibilityElement 
+        XSDAnnotation XSDAttributeDeclaration XSDAttributeGroupContent XSDAttributeGroupDefinition XSDAttributeUse XSDBoundedFacet XSDCardinalityFacet XSDComplexTypeContent XSDComplexTypeDefinition XSDComponent XSDConcreteComponent XSDConstrainingFacet XSDDiagnostic XSDElementDeclaration XSDEnumerationFacet XSDFacet XSDFeature XSDFixedFacet XSDFractionDigitsFacet XSDFundamentalFacet XSDIdentityConstraintDefinition XSDImport XSDInclude XSDLengthFacet XSDMaxExclusiveFacet XSDMaxFacet XSDMaxInclusiveFacet XSDMaxLengthFacet XSDMinExclusiveFacet XSDMinFacet XSDMinInclusiveFacet XSDMinLengthFacet XSDModelGroup XSDModelGroupDefinition XSDNamedComponent XSDNotationDeclaration XSDNumericFacet XSDOrderedFacet XSDParticle XSDParticleContent XSDPatternFacet XSDRedefinableComponent XSDRedefineContent XSDRedefine XSDRepeatableFacet XSDSchema XSDSchemaCompositor XSDSchemaContent XSDSchemaDirective XSDScope XSDSimpleTypeDefinition XSDTerm XSDTotalDigitsFacet XSDTypeDefinition XSDWhiteSpaceFacet XSDWildcard XSDXPathDefinition XSDAttributeUseCategory XSDCardinality XSDComplexFinal XSDCompositor XSDConstraint XSDContentTypeCategory XSDDerivationMethod XSDDiagnosticSeverity XSDDisallowedSubstitutions XSDForm XSDIdentityConstraintCategory XSDNamespaceConstraintCategory XSDOrdered XSDProcessContents XSDProhibitedSubstitutions XSDSimpleFinal XSDSubstitutionGroupExclusions XSDVariety XSDWhiteSpace XSDXPathVariety Property PropertyAlias MessagepropertiesQuery EObject PartnerLinkType Role Process PartnerLink FaultHandler Activity CorrelationSet Invoke Link Catch Reply PartnerActivity Receive Exit Throw Wait Empty Sequence Switch Case While Pick Flow OnAlarm Assign Copy Extension Scope Compensate CompensationHandler To From OnMessage Expression BooleanExpression Correlation CorrelationPattern EndpointReferenceRole EventHandler Source Target PartnerLinks Variables CorrelationSets Links CatchAll Correlations Variable Otherwise UnknownExtensibilityAttribute OnEvent BPELImport Rethrow Condition Targets Sources BPELQuery ServiceRef Extensions ExtensionActivity FromPart ToPart OpaqueActivity ForEach RepeatUntil TerminationHandler Validate If Then ElseIf Else CompletionCondition Branches BPELExtensibleElement Documentation Iterator WSDLElement PortType Operation Message Part Binding BindingOperation Service Port ExtensibilityElement Definition WSDLImport WSDLExtensibleElement Input Output Fault BindingInput BindingOutput BindingFault Namespace IPortType IOperation IMessage IPart IService IPort IBinding IBindingOperation IBindingInput IBindingOutput IBindingFault IExtensibilityElement IDefinition IImport Types ITypes UnknownExtensibilityElement XSDSchemaExtensibilityElement MessageReference 
   context-free syntax
         applicationInformation::XSDDOMElement+ userInformation::XSDDOMElement+ attributes::DOMAttr+ -> XSDAnnotation
 
         attributeDeclarationReference::EBoolean annotation::XSDAnnotation anonymousTypeDefinition::XSDSimpleTypeDefinition typeDefinition::XSDSimpleTypeDefinition resolvedAttributeDeclaration::XSDAttributeDeclaration -> XSDAttributeDeclaration
+
+        XSDAttributeUse -> XSDAttributeGroupContent
 
         attributeGroupDefinitionReference::EBoolean annotation::XSDAnnotation contents::XSDAttributeGroupContent+ attributeUses::XSDAttributeUse+ attributeWildcardContent::XSDWildcard attributeWildcard::XSDWildcard resolvedAttributeGroupDefinition::XSDAttributeGroupDefinition syntheticWildcard::XSDWildcard -> XSDAttributeGroupDefinition
 
@@ -17,6 +19,8 @@ exports
         value::XSDCardinality -> XSDCardinalityFacet
 
         XSDParticle -> XSDComplexTypeContent
+
+        XSDSimpleTypeDefinition -> XSDComplexTypeContent
 
         derivationMethod::XSDDerivationMethod final::XSDComplexFinal+ abstract::EBoolean contentTypeCategory::XSDContentTypeCategory prohibitedSubstitutions::XSDProhibitedSubstitutions+ lexicalFinal::XSDComplexFinal+ block::XSDProhibitedSubstitutions+ mixed::EBoolean contentAnnotation::XSDAnnotation baseTypeDefinition::XSDTypeDefinition content::XSDComplexTypeContent contentType::XSDComplexTypeContent attributeUses::XSDAttributeUse+ attributeContents::XSDAttributeGroupContent+ attributeWildcard::XSDWildcard attributeWildcardContent::XSDWildcard rootTypeDefinition::XSDTypeDefinition syntheticParticle::XSDParticle syntheticWildcard::XSDWildcard -> XSDComplexTypeDefinition
 
@@ -29,6 +33,12 @@ exports
         XSDScope -> XSDComponent
 
         XSDXPathDefinition -> XSDComponent
+
+        XSDAnnotation -> XSDComponent
+
+        XSDAttributeUse -> XSDComponent
+
+        XSDTerm -> XSDComponent
 
         XSDAttributeGroupContent -> XSDConcreteComponent
 
@@ -53,6 +63,10 @@ exports
         XSDConstrainingFacet -> XSDFacet
 
         XSDFundamentalFacet -> XSDFacet
+
+        XSDAttributeDeclaration -> XSDFeature
+
+        XSDElementDeclaration -> XSDFeature
 
         XSDFractionDigitsFacet -> XSDFixedFacet
 
@@ -116,6 +130,10 @@ exports
 
         XSDIdentityConstraintDefinition -> XSDNamedComponent
 
+        XSDNotationDeclaration -> XSDNamedComponent
+
+        XSDRedefinableComponent -> XSDNamedComponent
+
         systemIdentifier::EString publicIdentifier::EString annotation::XSDAnnotation -> XSDNotationDeclaration
 
         value::EBoolean -> XSDNumericFacet
@@ -124,7 +142,21 @@ exports
 
         minOccurs::EInt maxOccurs::EInt content::XSDParticleContent term::XSDTerm -> XSDParticle
 
+        XSDTerm -> XSDParticleContent
+
         value::EString+ -> XSDPatternFacet
+
+        XSDAttributeGroupDefinition -> XSDRedefinableComponent
+
+        XSDModelGroupDefinition -> XSDRedefinableComponent
+
+        XSDTypeDefinition -> XSDRedefinableComponent
+
+        XSDAnnotation -> XSDRedefineContent
+
+        XSDRedefinableComponent -> XSDRedefineContent
+
+        XSDTypeDefinition -> XSDRedefineContent
 
         annotations::XSDAnnotation+ contents::XSDRedefineContent+ -> XSDRedefine
 
@@ -142,11 +174,17 @@ exports
 
         XSDSchemaDirective -> XSDSchemaContent
 
+        XSDAttributeDeclaration -> XSDSchemaContent
+
+        XSDNotationDeclaration -> XSDSchemaContent
+
         XSDImport -> XSDSchemaDirective
 
         XSDSchemaCompositor -> XSDSchemaDirective
 
         XSDSchema -> XSDScope
+
+        XSDComplexTypeDefinition -> XSDScope
 
         variety::XSDVariety final::XSDSimpleFinal+ lexicalFinal::XSDSimpleFinal+ validFacets::EString+ contents::XSDSimpleTypeDefinition+ facetContents::XSDConstrainingFacet+ facets::XSDConstrainingFacet+ memberTypeDefinitions::XSDSimpleTypeDefinition+ fundamentalFacets::XSDFundamentalFacet+ baseTypeDefinition::XSDSimpleTypeDefinition primitiveTypeDefinition::XSDSimpleTypeDefinition itemTypeDefinition::XSDSimpleTypeDefinition rootTypeDefinition::XSDSimpleTypeDefinition minFacet::XSDMinFacet maxFacet::XSDMaxFacet maxInclusiveFacet::XSDMaxInclusiveFacet minInclusiveFacet::XSDMinInclusiveFacet minExclusiveFacet::XSDMinExclusiveFacet maxExclusiveFacet::XSDMaxExclusiveFacet lengthFacet::XSDLengthFacet whiteSpaceFacet::XSDWhiteSpaceFacet enumerationFacets::XSDEnumerationFacet+ patternFacets::XSDPatternFacet+ cardinalityFacet::XSDCardinalityFacet numericFacet::XSDNumericFacet maxLengthFacet::XSDMaxLengthFacet minLengthFacet::XSDMinLengthFacet totalDigitsFacet::XSDTotalDigitsFacet fractionDigitsFacet::XSDFractionDigitsFacet orderedFacet::XSDOrderedFacet boundedFacet::XSDBoundedFacet effectiveMaxFacet::XSDMaxFacet effectiveWhiteSpaceFacet::XSDWhiteSpaceFacet effectiveMaxLengthFacet::XSDMaxLengthFacet effectiveFractionDigitsFacet::XSDFractionDigitsFacet effectivePatternFacet::XSDPatternFacet effectiveEnumerationFacet::XSDEnumerationFacet effectiveTotalDigitsFacet::XSDTotalDigitsFacet effectiveMinLengthFacet::XSDMinLengthFacet effectiveLengthFacet::XSDLengthFacet effectiveMinFacet::XSDMinFacet syntheticFacets::XSDFacet+ -> XSDSimpleTypeDefinition
 
@@ -155,6 +193,10 @@ exports
         XSDWildcard -> XSDTerm
 
         value::EInt -> XSDTotalDigitsFacet
+
+        XSDComplexTypeDefinition -> XSDTypeDefinition
+
+        XSDSimpleTypeDefinition -> XSDTypeDefinition
 
         value::XSDWhiteSpace -> XSDWhiteSpaceFacet
 
@@ -298,6 +340,8 @@ exports
 
         If -> Activity
 
+        Reply -> Activity
+
         name::EString suppressJoinFailure::EBooleanObject targets::Targets sources::Sources -> Activity
 
         name::EString properties::Property+ -> CorrelationSet
@@ -314,17 +358,19 @@ exports
 
         Receive -> PartnerActivity
 
+        Reply -> PartnerActivity
+
         partnerLink::PartnerLink correlations::Correlations portType::PortType operation::Operation -> PartnerActivity
 
         createInstance::EBooleanObject variable::Variable fromPart::FromPart+ -> Receive
 
-         -> Exit
+        name::EString suppressJoinFailure::EBooleanObject targets::Targets sources::Sources -> Exit
 
         faultName::QName faultVariable::Variable -> Throw
 
         for::Expression until::Expression -> Wait
 
-         -> Empty
+        name::EString suppressJoinFailure::EBooleanObject targets::Targets sources::Sources -> Empty
 
         activities::Activity+ -> Sequence
 
@@ -352,6 +398,8 @@ exports
 
         activity::Activity -> CompensationHandler
 
+        From -> To
+
         variable::Variable part::Part partnerLink::PartnerLink property::Property query::BPELQuery -> To
 
         opaque::EBooleanObject endpointReference::EndpointReferenceRole literal::EString unsafeLiteral::EBooleanObject expression::Expression serviceRef::ServiceRef type::XSDTypeDefinition -> From
@@ -366,7 +414,7 @@ exports
 
         body::EJavaObject expressionLanguage::EString opaque::EBooleanObject -> Expression
 
-         -> BooleanExpression
+        body::EJavaObject expressionLanguage::EString opaque::EBooleanObject -> BooleanExpression
 
         initiate::EString pattern::CorrelationPattern set::CorrelationSet -> Correlation
 
@@ -399,15 +447,15 @@ exports
 
         activity::Activity -> Otherwise
 
-         -> UnknownExtensibilityAttribute
+        children::UnknownExtensibilityElement+ -> UnknownExtensibilityAttribute
 
         activity::Activity variable::Variable partnerLink::PartnerLink correlations::Correlations operation::Operation portType::PortType messageType::Message fromPart::FromPart+ correlationSets::CorrelationSets -> OnEvent
 
         namespace::EString location::EString importType::EString -> BPELImport
 
-         -> Rethrow
+        name::EString suppressJoinFailure::EBooleanObject targets::Targets sources::Sources -> Rethrow
 
-         -> Condition
+        body::EJavaObject expressionLanguage::EString opaque::EBooleanObject -> Condition
 
         children::Target+ joinCondition::Condition -> Targets
 
@@ -419,13 +467,13 @@ exports
 
         children::Extension+ -> Extensions
 
-         -> ExtensionActivity
+        name::EString suppressJoinFailure::EBooleanObject targets::Targets sources::Sources -> ExtensionActivity
 
         part::EString to::To -> FromPart
 
         part::EString from::From -> ToPart
 
-         -> OpaqueActivity
+        name::EString suppressJoinFailure::EBooleanObject targets::Targets sources::Sources -> OpaqueActivity
 
         parallel::EBooleanObject counterName::Variable completionCondition::CompletionCondition iterator::Iterator activity::Activity -> ForEach
 
@@ -515,6 +563,8 @@ exports
 
         Else -> BPELExtensibleElement
 
+        From -> BPELExtensibleElement
+
         documentation::Documentation -> BPELExtensibleElement
 
         lang::EString source::EString value::EString -> Documentation
@@ -524,6 +574,18 @@ exports
         WSDLExtensibleElement -> WSDLElement
 
         MessageReference -> WSDLElement
+
+        PortType -> WSDLElement
+
+        Operation -> WSDLElement
+
+        Message -> WSDLElement
+
+        Part -> WSDLElement
+
+        ExtensibilityElement -> WSDLElement
+
+        WSDLImport -> WSDLElement
 
         qName::QName undefined::EBoolean proxy::EBoolean resourceURI::EString eOperations::Operation+ -> PortType
 
@@ -565,11 +627,29 @@ exports
 
         BPELExtensibleElement -> WSDLExtensibleElement
 
-         -> Input
+        Binding -> WSDLExtensibleElement
 
-         -> Output
+        BindingOperation -> WSDLExtensibleElement
 
-         -> Fault
+        Service -> WSDLExtensibleElement
+
+        Port -> WSDLExtensibleElement
+
+        Definition -> WSDLExtensibleElement
+
+        BindingInput -> WSDLExtensibleElement
+
+        BindingOutput -> WSDLExtensibleElement
+
+        BindingFault -> WSDLExtensibleElement
+
+        Types -> WSDLExtensibleElement
+
+        name::EString eMessage::Message -> Input
+
+        name::EString eMessage::Message -> Output
+
+        name::EString eMessage::Message -> Fault
 
         name::EString eInput::Input -> BindingInput
 
@@ -579,10 +659,46 @@ exports
 
         URI::EString prefix::EString -> Namespace
 
-         -> Types
+        PortType -> IPortType
+
+        Operation -> IOperation
+
+        Message -> IMessage
+
+        Part -> IPart
+
+        Service -> IService
+
+        Port -> IPort
+
+        Binding -> IBinding
+
+        BindingOperation -> IBindingOperation
+
+        BindingInput -> IBindingInput
+
+        BindingOutput -> IBindingOutput
+
+        BindingFault -> IBindingFault
+
+        ExtensibilityElement -> IExtensibilityElement
+
+        Definition -> IDefinition
+
+        WSDLImport -> IImport
+
+        eExtensibilityElements::ExtensibilityElement+ -> Types
+
+        Types -> ITypes
 
         UnknownExtensibilityAttribute -> UnknownExtensibilityElement
 
         children::UnknownExtensibilityElement+ -> UnknownExtensibilityElement
 
         schema::XSDSchema -> XSDSchemaExtensibilityElement
+
+        Input -> MessageReference
+
+        Output -> MessageReference
+
+        Fault -> MessageReference

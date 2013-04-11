@@ -47,11 +47,11 @@ syntax MenuItem
  ;
 syntax Vbox
         = 
-        ()
+        Interactor xulInteractors+
  ;
 syntax Hbox
         = 
-        ()
+        Interactor xulInteractors+
  ;
 syntax Containement
         = Button
@@ -71,7 +71,7 @@ syntax Containement
  ;
 syntax GroupBox
         = 
-        ()
+        Interactor xulInteractors+
  ;
 syntax Container
         = Windows
@@ -101,7 +101,7 @@ syntax TextBox
  ;
 syntax Spacer
         = 
-        ()
+        String style String accesskey String class Integer maxlength String label Orients orient String minlength String onclick String disabled
  ;
 syntax Label
         = 
@@ -113,11 +113,11 @@ syntax Grid
  ;
 syntax Row
         = 
-        ()
+        Interactor xulInteractors+
  ;
 syntax Column
         = 
-        ()
+        Interactor xulInteractors+
  ;
 syntax CheckBox
         = 
@@ -153,9 +153,21 @@ syntax Parameter
  ;
 syntax OnClick
         = 
-        ()
+        Parameter functionCallParameters+ String functionCalledName String name
  ;
 syntax Function
         = 
         String name UIModel functionUIModel String body
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax Boolean
+        = "true"
+        | "false"
  ;

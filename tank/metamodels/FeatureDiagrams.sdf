@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        Node Attribute Root Child XORGroup ORGroup 
+        Node Attribute Root Child XORGroup ORGroup Integer String Boolean 
   context-free syntax
         Root -> Node
 
@@ -12,10 +12,17 @@ exports
 
         description::String editable::Boolean key::Boolean value::String name::String node::Node -> Attribute
 
-         -> Root
+        description::String preliminary::Boolean object::String attributes::Attribute+ no_dst::ORGroup+ nx_dst::XORGroup+ cn_dst::Child+ -> Root
 
         cn_src::Node+ cx_src::XORGroup+ co_src::ORGroup+ -> Child
 
         preliminary::Boolean name::String nx_src::Node+ cx_dst::Child+ -> XORGroup
 
         preliminary::Boolean name::String no_src::Node+ co_dst::Child+ -> ORGroup
+
+        INT -> Integer
+
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean

@@ -12,6 +12,8 @@ exports
 
         Object -> UEMLObject
 
+        Activity -> UEMLObject
+
         has::Geometry model::UEMLModel -> UEMLObject
 
         contains::UEMLObject+ -> UEMLModel
@@ -57,7 +59,7 @@ exports
 
          -> MaterialResource
 
-         -> HumanResource
+        obliger::Commitment claimer::Commitment has_parties::Contract -> HumanResource
 
         resourceCarries::Resource+ -> ResourceFlow
 
@@ -69,9 +71,9 @@ exports
 
         carries::InformationObject+ -> ControlFlow
 
-         -> TriggerFlow
+        carries::InformationObject+ -> TriggerFlow
 
-         -> ConstraintFlow
+        carries::InformationObject+ -> ConstraintFlow
 
         resourcePlays::Resource+ roleQualifier::RoleType in::Activity -> ResourceRole
 
@@ -81,6 +83,8 @@ exports
 
         InputPort -> Anchor
 
+        ConnectionOperator -> Anchor
+
         OutputPort -> Anchor
         InputPort -> Anchor
 
@@ -88,15 +92,19 @@ exports
 
         activity::Activity -> InputPort
 
-         -> ConnectionOperator
+        target::AssociationConnector origin::AssociationConnector -> ConnectionOperator
 
         origin::FlowObject+ target::FlowObject+ classAssociation::Flow -> AssociationConnector
 
         Event -> FlowObject
 
+        Activity -> FlowObject
+
+        ConnectionOperator -> FlowObject
+
         target::AssociationConnector origin::AssociationConnector -> FlowObject
 
-         -> Event
+        target::AssociationConnector origin::AssociationConnector -> Event
 
         resource::Resource+ -> ResourceType
 
@@ -114,9 +122,9 @@ exports
 
         resource::Resource+ task::Task agentO::Agent agentC::Agent contract::Contract -> Commitment
 
-         -> Software
+        obliger::Commitment claimer::Commitment has_parties::Contract -> Software
 
-         -> Organisation
+        obliger::Commitment claimer::Commitment has_parties::Contract -> Organisation
 
         child::Activity fulfills::Contract+ realises::Service -> Process
 

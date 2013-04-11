@@ -2,8 +2,15 @@ module Main
 
 exports
   sorts
-        LocatedElement Program Service Session Registration Dialog Event Method Argument MethodName SIPMethodName ControlMethodName Branch DefaultBranch NamedBranch TypeExpression SimpleType SequenceType DefinedType Declaration VariableDeclaration FunctionDeclaration RemoteFunctionDeclaration LocalFunctionDeclaration StructureDeclaration StructureProperty FunctionCall Statement CompoundStat SetStat DeclarationStat ReturnStat IfStat WhenStat ForeachStat SelectStat FunctionCallStat ContinueStat BreakStat PushStat WhenHeader SelectMember SelectDefault SelectCase Expression ConstantExp OperatorExp ForwardExp WithExp BlockExp ReasonExp BODYExp RequestURIExp PopExp FunctionCallExp Place SIPHeaderPlace VariablePlace PropertyCallPlace Variable MessageField ReasonMessageField HeadedMessageField Constant BooleanConstant IntegerConstant StringConstant URIConstant SequenceConstant ResponseConstant Response SuccessResponse ErrorResponse ClientErrorResponse GlobalErrorResponse RedirectionErrorResponse ServerErrorResponse Direction SIPMethod ControlMethod PrimitiveType Modifier FunctionLocation SIPHeader SuccessKind ClientErrorKind GlobalErrorKind RedirectionErrorKind ServerErrorKind 
+        String Integer Boolean LocatedElement Program Service Session Registration Dialog Event Method Argument MethodName SIPMethodName ControlMethodName Branch DefaultBranch NamedBranch TypeExpression SimpleType SequenceType DefinedType Declaration VariableDeclaration FunctionDeclaration RemoteFunctionDeclaration LocalFunctionDeclaration StructureDeclaration StructureProperty FunctionCall Statement CompoundStat SetStat DeclarationStat ReturnStat IfStat WhenStat ForeachStat SelectStat FunctionCallStat ContinueStat BreakStat PushStat WhenHeader SelectMember SelectDefault SelectCase Expression ConstantExp OperatorExp ForwardExp WithExp BlockExp ReasonExp BODYExp RequestURIExp PopExp FunctionCallExp Place SIPHeaderPlace VariablePlace PropertyCallPlace Variable MessageField ReasonMessageField HeadedMessageField Constant BooleanConstant IntegerConstant StringConstant URIConstant SequenceConstant ResponseConstant Response SuccessResponse ErrorResponse ClientErrorResponse GlobalErrorResponse RedirectionErrorResponse ServerErrorResponse Direction SIPMethod ControlMethod PrimitiveType Modifier FunctionLocation SIPHeader SuccessKind ClientErrorKind GlobalErrorKind RedirectionErrorKind ServerErrorKind 
   context-free syntax
+        STR -> String
+
+        INT -> Integer
+
+        "true" -> Boolean
+        "false" -> Boolean
+
         Program -> LocatedElement
 
         Service -> LocatedElement
@@ -54,7 +61,7 @@ exports
 
         type::TypeExpression direction::Direction methodName::MethodName arguments::Argument+ statements::Statement+ branches::Branch+ -> Method
 
-         -> Argument
+        type::TypeExpression initExp::Expression -> Argument
 
         SIPMethodName -> MethodName
 
@@ -70,7 +77,7 @@ exports
 
         statements::Statement+ -> Branch
 
-         -> DefaultBranch
+        statements::Statement+ -> DefaultBranch
 
         name::String+ -> NamedBranch
 

@@ -16,6 +16,7 @@ syntax ACG
 syntax ACGElement
         = Function
         | Attribute
+        | Node
  ;
 syntax Function
         = 
@@ -27,7 +28,7 @@ syntax Attribute
  ;
 syntax Parameter
         = 
-        ()
+        name: String
  ;
 syntax Node
         = ASMNode
@@ -46,11 +47,16 @@ syntax SimpleNode
         = 
         String element String mode Expression guard
  ;
+syntax StatementBlock
+        = Node
+        | CompoundStat
+ ;
 syntax Statement
         = ReportStat
         | FieldStat
         | ParamStat
         | EmitStat
+        | CompoundStat
  ;
 syntax CompoundStat
         = ForEachStat
@@ -291,7 +297,7 @@ syntax OperationCallExp
  ;
 syntax OperatorCallExp
         = 
-        ()
+        Expression arguments+
  ;
 syntax LiteralExp
         = OclUndefinedExp
@@ -323,4 +329,16 @@ syntax IntegerExp
 syntax StringExp
         = 
         value: String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
  ;

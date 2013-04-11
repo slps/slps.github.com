@@ -1,6 +1,18 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module AWKPrograms
 
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
 syntax AWKProgram
         = 
         String name File input File output Script script
@@ -40,9 +52,9 @@ syntax Instruction
  ;
 syntax InitialRule
         = 
-        ()
+        Script r_script Pattern pattern Action action
  ;
 syntax FinalRule
         = 
-        ()
+        Script r_script Pattern pattern Action action
  ;

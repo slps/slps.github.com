@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        Bibliography Publication Article Book InBook Booklet InCollection InProceedings Proceedings Manual Misc Unpublished Thesis MasterThesis PhDThesis Report ProjectReport TechnicalReport Event Conference Workshop Exhibition Lecture Meeting ProjectMeeting Person Employee Manager AdministrativeStaff TechnicalStaff AcademicStaff Lecturer FacultyMember FullProfessor AssistantProfessor AssociateProfessor Student Undergraduate Graduate PhDStudent Organization ResearchGroup Association Department Institute Enterprise University Project ResearchProject DevelopmentProject SoftwareProject Product SoftwareComponent Topic ResearchTopic 
+        Bibliography Publication Article Book InBook Booklet InCollection InProceedings Proceedings Manual Misc Unpublished Thesis MasterThesis PhDThesis Report ProjectReport TechnicalReport Event Conference Workshop Exhibition Lecture Meeting ProjectMeeting Person Employee Manager AdministrativeStaff TechnicalStaff AcademicStaff Lecturer FacultyMember FullProfessor AssistantProfessor AssociateProfessor Student Undergraduate Graduate PhDStudent Organization ResearchGroup Association Department Institute Enterprise University Project ResearchProject DevelopmentProject SoftwareProject Product SoftwareComponent Topic ResearchTopic String Integer 
   context-free syntax
         publications::Publication+ -> Bibliography
 
@@ -82,7 +82,7 @@ exports
 
         series::String -> Workshop
 
-         -> Exhibition
+        name::String date::String eventTitle::String location::String atEvent::Event hasPartEvent::Event -> Exhibition
 
         givenBy::Person -> Lecture
 
@@ -90,7 +90,7 @@ exports
 
         title::String participant::Person+ -> Meeting
 
-         -> ProjectMeeting
+        title::String participant::Person+ -> ProjectMeeting
 
         Employee -> Person
 
@@ -108,11 +108,11 @@ exports
 
         affiliation::Organization -> Employee
 
-         -> Manager
+        affiliation::Organization -> Manager
 
-         -> AdministrativeStaff
+        affiliation::Organization -> AdministrativeStaff
 
-         -> TechnicalStaff
+        affiliation::Organization -> TechnicalStaff
 
         Lecturer -> AcademicStaff
 
@@ -120,7 +120,7 @@ exports
 
         cooperateWith::AcademicStaff+ editor::Publication headOf::Project headOfGroup::ResearchGroup memberOfPC::Event organizerOrChairOf::Event publication::Publication+ supervises::PhDStudent+ worksAtProject::ResearchTopic -> AcademicStaff
 
-         -> Lecturer
+        cooperateWith::AcademicStaff+ editor::Publication headOf::Project headOfGroup::ResearchGroup memberOfPC::Event organizerOrChairOf::Event publication::Publication+ supervises::PhDStudent+ worksAtProject::ResearchTopic -> Lecturer
 
         FullProfessor -> FacultyMember
 
@@ -144,9 +144,7 @@ exports
 
         studiesAt::University -> Student
 
-         -> Undergraduate
-
-        PhDStudent -> Graduate
+        studiesAt::University -> Undergraduate
 
         PhDStudent -> Graduate
 
@@ -168,13 +166,13 @@ exports
 
         head::AcademicStaff member::Employee+ -> ResearchGroup
 
-         -> Association
+        location::String name::String carriesOut::Project+ develops::Product+ employs::Employee+ finances::Project+ publishes::Publication+ technicalReport::TechnicalReport+ -> Association
 
         hasParts::Institute -> Department
 
         cooperateWith::Institute hasParts::ResearchGroup+ -> Institute
 
-         -> Enterprise
+        location::String name::String carriesOut::Project+ develops::Product+ employs::Employee+ finances::Project+ publishes::Publication+ technicalReport::TechnicalReport+ -> Enterprise
 
         hasParts::Department+ student::Student+ -> University
 
@@ -201,3 +199,7 @@ exports
         name::String -> Topic
 
         dealWithIn::Project isWorkedOnBy::AcademicStaff+ -> ResearchTopic
+
+        STR -> String
+
+        INT -> Integer

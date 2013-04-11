@@ -2,8 +2,15 @@ module Main
 
 exports
   sorts
-        EDataType NamedObject Attribute Entity Port Relation Director Parameter ComponentPort ComponentRelation ComponentEntity AtomicActor CompositeEntity WorkSpace CompositeActor 
+        Integer String Boolean EDataType NamedObject Attribute Entity Port Relation Director Parameter ComponentPort ComponentRelation ComponentEntity AtomicActor CompositeEntity WorkSpace CompositeActor 
   context-free syntax
+        INT -> Integer
+
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean
+
         value::String -> EDataType
 
         Attribute -> NamedObject
@@ -38,7 +45,7 @@ exports
 
         pa_container::Entity dataType::EDataType -> Parameter
 
-         -> ComponentPort
+        po_container::Entity links::Relation+ -> ComponentPort
 
         re_container::CompositeEntity -> ComponentRelation
 
@@ -48,7 +55,7 @@ exports
 
         ce_container::CompositeEntity -> ComponentEntity
 
-         -> AtomicActor
+        ce_container::CompositeEntity -> AtomicActor
 
         WorkSpace -> CompositeEntity
 
@@ -56,6 +63,6 @@ exports
 
         containees::ComponentEntity+ relations::ComponentRelation+ -> CompositeEntity
 
-         -> WorkSpace
+        containees::ComponentEntity+ relations::ComponentRelation+ -> WorkSpace
 
         directors::Director -> CompositeActor

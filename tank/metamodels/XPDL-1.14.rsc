@@ -1,6 +1,18 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module XPDL_1_14
 
+syntax String
+        = 
+        String
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
 syntax AssociationDirectionKind
         = None: ()
         | To: ()
@@ -121,11 +133,11 @@ syntax DataObject
  ;
 syntax Group
         = 
-        ()
+        String textAnnotation String group Object object DataObject dataObject
  ;
 syntax Annotation
         = 
-        ()
+        String textAnnotation String group Object object DataObject dataObject
  ;
 syntax TypeDeclaration
         = 
@@ -271,7 +283,7 @@ syntax EndEvent
  ;
 syntax Gateway
         = 
-        ()
+        GatewayTypeKind gatewayType Boolean instantiate Boolean markerVisiable
  ;
 syntax Process
         = 

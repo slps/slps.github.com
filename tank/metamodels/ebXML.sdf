@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        MultyPartyCollaboration BusinessPartnerRole Performs AuthorizedRole Transaction BinaryCollaboration BusinessState Start Fork Join CompletionState Failure Success BusinessActivity BusinessTransactionActivity CollaborationActivity BusinessTransaction BusinessAction RequestingBusinessActivity RespondingBusinessActivity DocumentSecurity DocumentEnvelope Attachment BusinessDocument 
+        MultyPartyCollaboration BusinessPartnerRole Performs AuthorizedRole Transaction BinaryCollaboration BusinessState Start Fork Join CompletionState Failure Success BusinessActivity BusinessTransactionActivity CollaborationActivity BusinessTransaction BusinessAction RequestingBusinessActivity RespondingBusinessActivity DocumentSecurity DocumentEnvelope Attachment BusinessDocument Boolean String 
   context-free syntax
         partners::BusinessPartnerRole+ -> MultyPartyCollaboration
 
@@ -38,9 +38,9 @@ exports
 
         guardCondition::String -> CompletionState
 
-         -> Failure
+        guardCondition::String -> Failure
 
-         -> Success
+        guardCondition::String -> Success
 
         BusinessTransactionActivity -> BusinessActivity
 
@@ -69,3 +69,8 @@ exports
         mimeType::String specification::String version::String envelope::DocumentEnvelope document::BusinessDocument -> Attachment
 
         specificationLocation::String specificationElement::String conditionExpression::String envelopes::DocumentEnvelope+ attachments::Attachment+ -> BusinessDocument
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        STR -> String

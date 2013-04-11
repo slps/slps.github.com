@@ -45,3 +45,11 @@ syntax OrderDetail
         = 
         Order order Product product Integer quantityOrdered Double priceEach
  ;
+syntax String
+        = 
+        String
+ ;
+syntax Integer
+        = 
+        Integer
+ ;

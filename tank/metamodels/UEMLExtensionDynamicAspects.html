@@ -13,7 +13,7 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable UEML extension Dynamic Aspects 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: SIMON Eric, <code>UEMLExtensionDynamicAspects.ecore</code>, 2006/07/18.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>46</strong></li><li>Number of top alternatives: <strong>48</strong></li><li>Number of defined nonterminal symbols: <strong>27</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#ConnectionOperator" class="nt">ConnectionOperator</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="UEMLObject">UEMLObject</a>:
+				</script></head><body><h1 class="l">Browsable UEML extension Dynamic Aspects 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: SIMON Eric, <code>UEMLExtensionDynamicAspects.ecore</code>, 2006/07/18.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>50</strong></li><li>Number of top alternatives: <strong>52</strong></li><li>Number of defined nonterminal symbols: <strong>27</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: —</li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="UEMLObject">UEMLObject</a>:
         <a class="nt" href="#UEMLModel">UEMLModel</a>
 </pre><pre><a class="nt" name="UEMLObject">UEMLObject</a>:
         <a class="nt" href="#Port">Port</a>
@@ -21,6 +21,8 @@
         <a class="nt" href="#Flow">Flow</a>
 </pre><pre><a class="nt" name="UEMLObject">UEMLObject</a>:
         <a class="nt" href="#Object">Object</a>
+</pre><pre><a class="nt" name="UEMLObject">UEMLObject</a>:
+        <a class="nt" href="#Activity">Activity</a>
 </pre><pre><a class="nt" name="UEMLObject">UEMLObject</a>:
         <span class="sel">has</span>::<a class="nt" href="#Geometry">Geometry</a> <span class="sel">model</span>::<a class="nt" href="#UEMLModel">UEMLModel</a>
 </pre><pre><a class="nt" name="UEMLModel">UEMLModel</a>:
@@ -61,9 +63,9 @@
 </pre><pre><a class="nt" name="Resource">Resource</a>:
         <span class="sel">carries</span>::<a class="nt" href="#ResourceFlow">ResourceFlow</a> <span class="sel">plays</span>::<a class="nt" href="#ResourceRole">ResourceRole</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="MaterialResource">MaterialResource</a>:
-        ε
+        <span class="sel">carries</span>::<a class="nt" href="#ResourceFlow">ResourceFlow</a> <span class="sel">plays</span>::<a class="nt" href="#ResourceRole">ResourceRole</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="HumanResource">HumanResource</a>:
-        ε
+        <span class="sel">carries</span>::<a class="nt" href="#ResourceFlow">ResourceFlow</a> <span class="sel">plays</span>::<a class="nt" href="#ResourceRole">ResourceRole</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="ResourceFlow">ResourceFlow</a>:
         <span class="sel">resourceCarries</span>::<a class="nt" href="#Resource">Resource</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="IOFlow">IOFlow</a>:
@@ -75,9 +77,9 @@
 </pre><pre><a class="nt" name="ControlFlow">ControlFlow</a>:
         <span class="sel">carries</span>::<a class="nt" href="#InformationObject">InformationObject</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="TriggerFlow">TriggerFlow</a>:
-        ε
+        <span class="sel">carries</span>::<a class="nt" href="#InformationObject">InformationObject</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="ConstraintFlow">ConstraintFlow</a>:
-        ε
+        <span class="sel">carries</span>::<a class="nt" href="#InformationObject">InformationObject</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="ResourceRole">ResourceRole</a>:
         <span class="sel">resourcePlays</span>::<a class="nt" href="#Resource">Resource</a><span class="meta">+</span> <span class="sel">roleQualifier</span>::<a class="nt" href="#RoleType">RoleType</a> <span class="sel">in</span>::<a class="nt" href="#Activity">Activity</a>
 </pre><pre><a class="nt" name="RoleType">RoleType</a>:
@@ -87,6 +89,8 @@
 </pre><pre><a class="nt" name="Anchor">Anchor</a>:
         <a class="nt" href="#InputPort">InputPort</a>
 </pre><pre><a class="nt" name="Anchor">Anchor</a>:
+        <a class="nt" href="#ConnectionOperator">ConnectionOperator</a>
+</pre><pre><a class="nt" name="Anchor">Anchor</a>:
         <a class="nt" href="#OutputPort">OutputPort</a>
         <a class="nt" href="#InputPort">InputPort</a>
 </pre><pre><a class="nt" name="OutputPort">OutputPort</a>:
@@ -94,17 +98,21 @@
 </pre><pre><a class="nt" name="InputPort">InputPort</a>:
         <span class="sel">activity</span>::<a class="nt" href="#Activity">Activity</a>
 </pre><pre><a class="nt" name="ConnectionOperator">ConnectionOperator</a>:
-        ε
+        <span class="sel">target</span>::<a class="nt" href="#AssociationConnector">AssociationConnector</a> <span class="sel">origin</span>::<a class="nt" href="#AssociationConnector">AssociationConnector</a>
 </pre><pre><a class="nt" name="AssociationConnector">AssociationConnector</a>:
         <span class="sel">origin</span>::<a class="nt" href="#FlowObject">FlowObject</a><span class="meta">+</span> <span class="sel">target</span>::<a class="nt" href="#FlowObject">FlowObject</a><span class="meta">+</span> <span class="sel">classAssociation</span>::<a class="nt" href="#Flow">Flow</a>
 </pre><pre><a class="nt" name="Task">Task</a>:
-        ε
+        <span class="sel">resourceRole</span>::<a class="nt" href="#ResourceRole">ResourceRole</a><span class="meta">+</span> <span class="sel">parent</span>::<a class="nt" href="#Process">Process</a> <span class="sel">hasOutput</span>::<a class="nt" href="#OutputPort">OutputPort</a><span class="meta">+</span> <span class="sel">hasInput</span>::<a class="nt" href="#InputPort">InputPort</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="FlowObject">FlowObject</a>:
         <a class="nt" href="#Event">Event</a>
 </pre><pre><a class="nt" name="FlowObject">FlowObject</a>:
+        <a class="nt" href="#Activity">Activity</a>
+</pre><pre><a class="nt" name="FlowObject">FlowObject</a>:
+        <a class="nt" href="#ConnectionOperator">ConnectionOperator</a>
+</pre><pre><a class="nt" name="FlowObject">FlowObject</a>:
         <span class="sel">target</span>::<a class="nt" href="#AssociationConnector">AssociationConnector</a> <span class="sel">origin</span>::<a class="nt" href="#AssociationConnector">AssociationConnector</a>
 </pre><pre><a class="nt" name="Event">Event</a>:
-        ε
+        <span class="sel">target</span>::<a class="nt" href="#AssociationConnector">AssociationConnector</a> <span class="sel">origin</span>::<a class="nt" href="#AssociationConnector">AssociationConnector</a>
 </pre><pre><a class="nt" name="Process">Process</a>:
         <span class="sel">child</span>::<a class="nt" href="#Activity">Activity</a><span class="meta">+</span>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.

@@ -2,9 +2,13 @@ module Main
 
 exports
   sorts
-        ACMEFile Element Type System Representation Component ComponentInstance ComponentType Port Connector Role Property Link Attachment Binding 
+        ACMEFile ACMEEntry Element Type System Representation Component ComponentInstance ComponentType Port Connector Role Property Link Attachment Binding Boolean Integer String 
   context-free syntax
         entries::ACMEEntry+ -> ACMEFile
+
+        System -> ACMEEntry
+
+        ComponentType -> ACMEEntry
 
         Type -> Element
 
@@ -16,6 +20,8 @@ exports
 
         Role -> Element
 
+        System -> Element
+
         name::String representations::Representation+ property::Property+ -> Type
 
         componentDeclaration::ComponentInstance+ connectorDeclaration::Connector+ attachments::Link+ bindings::Link+ -> System
@@ -23,6 +29,8 @@ exports
         systems::System+ -> Representation
 
         ComponentInstance -> Component
+
+        ComponentType -> Component
 
         instanceOf::String -> ComponentInstance
 
@@ -43,3 +51,10 @@ exports
         comp::String port::String con::String role::String -> Attachment
 
         compSrc::String portSrc::String compDest::String portDest::String -> Binding
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
+        STR -> String

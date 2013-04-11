@@ -2,8 +2,15 @@ module Main
 
 exports
   sorts
-        CDerived CStructured CBehavorialFeature CFunction CStructureContents CField CDerivableType VisibilityKind CPPReference CPPExtern CPPConst CPPTemplate CPPClass CPPGeneralization CPPOperation CPPOperator CPPMember 
+        Integer String Boolean CDerived CStructured CBehavorialFeature CFunction CStructureContents CField CDerivableType VisibilityKind CPPReference CPPExtern CPPConst CPPTemplate CPPClass CPPGeneralization CPPOperation CPPOperator CPPMember 
   context-free syntax
+        INT -> Integer
+
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean
+
         CPPReference -> CDerived
 
         CPPExtern -> CDerived
@@ -19,17 +26,15 @@ exports
 
         CPPClass -> CStructured
 
-        CPPClass -> CStructured
-
         CFunction -> CBehavorialFeature
 
-        CFunction -> CBehavorialFeature
+        CPPOperation -> CFunction
 
         isVsrArg::Boolean -> CFunction
 
         CPPOperator -> CStructureContents
 
-        CPPOperator -> CStructureContents
+        CPPOperation -> CStructureContents
 
          -> CField
 

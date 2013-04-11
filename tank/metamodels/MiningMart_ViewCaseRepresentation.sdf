@@ -2,8 +2,15 @@ module Main
 
 exports
   sorts
-        Case Step LoopStep MultiStep Operator Parameter ParameterType FeatureConstruction DataMinStep TimeOperator FeatureSelection MultiRelFeatureConstr RowSelection Agregation Scaling Discretization Segmentation Sampling ExecutionElement DataObject MSL-Tool TransformationGroup Transformation Function StoredProcedure SQLQuery ModelElement Classifier StructuralFeature Class DataType Attribute 
+        String Boolean Integer Case Step LoopStep MultiStep Operator Parameter ParameterType FeatureConstruction DataMinStep TimeOperator FeatureSelection MultiRelFeatureConstr RowSelection Agregation Scaling Discretization Segmentation Sampling ExecutionElement DataObject MSL-Tool TransformationGroup Transformation Function StoredProcedure SQLQuery ModelElement Classifier StructuralFeature Class DataType Attribute 
   context-free syntax
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
         name::String caseMode::Boolean caseInput::Parameter documentation::String listOfStep::Step+ -> Case
 
         LoopStep -> Step
@@ -12,7 +19,7 @@ exports
 
         name::String description::String belongsToCase::Case embedsOperator::Operator predecessors::Step+ successors::Step+ -> Step
 
-         -> LoopStep
+        name::String description::String belongsToCase::Case embedsOperator::Operator predecessors::Step+ successors::Step+ -> LoopStep
 
         iterationCondition::String -> MultiStep
 
@@ -49,8 +56,6 @@ exports
 
         Agregation -> MultiRelFeatureConstr
 
-        Agregation -> MultiRelFeatureConstr
-
         Segmentation -> RowSelection
 
         Sampling -> RowSelection
@@ -60,9 +65,9 @@ exports
 
          -> Agregation
 
-         -> Scaling
+        scalingFactor::Integer -> Scaling
 
-         -> Discretization
+        scalingFactor::Integer -> Discretization
 
          -> Segmentation
 
@@ -78,7 +83,7 @@ exports
 
         source::ExecutionElement target::ExecutionElement -> DataObject
 
-         -> MSL-Tool
+        source::DataObject target::DataObject -> MSL-Tool
 
         transformation::Transformation+ -> TransformationGroup
 
@@ -94,7 +99,7 @@ exports
 
         nameOf::String signature::String -> StoredProcedure
 
-         -> SQLQuery
+        transformationGroup::TransformationGroup -> SQLQuery
 
         Case -> ModelElement
 
@@ -118,8 +123,6 @@ exports
 
         Class -> Classifier
         DataType -> Classifier
-
-        Attribute -> StructuralFeature
 
         Attribute -> StructuralFeature
 

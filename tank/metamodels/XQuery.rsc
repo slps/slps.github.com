@@ -44,7 +44,7 @@ syntax AttributeNode
  ;
 syntax TextNode
         = 
-        ()
+        Expression nodes+
  ;
 syntax ReturnXPath
         = XPath
@@ -77,4 +77,16 @@ syntax OrderBy
 syntax Return
         = 
         FLWOR flwor Expression expressions+
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
  ;

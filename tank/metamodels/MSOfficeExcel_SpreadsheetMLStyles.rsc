@@ -310,3 +310,15 @@ syntax NamedRange
         = 
         NamesType nr_namesType String name String refersTo Boolean hidden
  ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;

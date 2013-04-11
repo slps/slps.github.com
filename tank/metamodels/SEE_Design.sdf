@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        LogFile Logger Expression Literal VariableExpression NumberExpression UnaryOperator UnaryPlusOp UnaryMinusOp BinaryOperator PlusOperator MinusOperator 
+        LogFile Logger Expression Literal VariableExpression NumberExpression UnaryOperator UnaryPlusOp UnaryMinusOp BinaryOperator PlusOperator MinusOperator Boolean Integer String 
   context-free syntax
         file::String instance::LogFile logger::Logger -> LogFile
 
@@ -24,7 +24,7 @@ exports
 
         name::String -> VariableExpression
 
-         -> NumberExpression
+        value::Integer -> NumberExpression
 
         UnaryPlusOp -> UnaryOperator
 
@@ -32,9 +32,9 @@ exports
 
         operand::Expression -> UnaryOperator
 
-         -> UnaryPlusOp
+        operand::Expression -> UnaryPlusOp
 
-         -> UnaryMinusOp
+        operand::Expression -> UnaryMinusOp
 
         PlusOperator -> BinaryOperator
 
@@ -42,6 +42,13 @@ exports
 
         operand1::Expression operand2::Expression -> BinaryOperator
 
-         -> PlusOperator
+        operand1::Expression operand2::Expression -> PlusOperator
 
-         -> MinusOperator
+        operand1::Expression operand2::Expression -> MinusOperator
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
+        STR -> String

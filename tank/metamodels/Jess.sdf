@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        LocatedElement Root Expression Integ Floa Str Ident ValidIdentifier SlotName JessVariable TemplateExpression SlotOp DefinitionExp GlobalDefinition VarDefinition FunctionDefinition AdviceDefinition UnDefAdvice FactDefinition RuleDefinition DeclareRule ModuleDefinition QueryDefinition DeclareVar TemplateDefinition DeclareBloc ASlotDef SlotDef MultiSlotDef SlotOptions UseFuncExp WhileExp ForExp ForeachExp FuncCall EngineExp ExitExp IfExpression ConditionAction ElifConditionAction Advice 
+        LocatedElement Root Expression Integ Floa Str Ident ValidIdentifier SlotName JessVariable TemplateExpression SlotOp DefinitionExp GlobalDefinition VarDefinition FunctionDefinition AdviceDefinition UnDefAdvice FactDefinition RuleDefinition DeclareRule ModuleDefinition QueryDefinition DeclareVar TemplateDefinition DeclareBloc ASlotDef SlotDef MultiSlotDef SlotOptions UseFuncExp WhileExp ForExp ForeachExp FuncCall EngineExp ExitExp IfExpression ConditionAction ElifConditionAction Advice Boolean Integer String 
   context-free syntax
         Root -> LocatedElement
 
@@ -114,9 +114,9 @@ exports
 
         slotName::SlotName optionals::SlotOptions+ -> ASlotDef
 
-         -> SlotDef
+        slotName::SlotName optionals::SlotOptions+ -> SlotDef
 
-         -> MultiSlotDef
+        slotName::SlotName optionals::SlotOptions+ -> MultiSlotDef
 
         type::ValidIdentifier def::Expression defaultDyn::Expression allowedValues::Expression+ -> SlotOptions
 
@@ -154,3 +154,10 @@ exports
 
         before:: -> Advice
         after:: -> Advice
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
+        STR -> String

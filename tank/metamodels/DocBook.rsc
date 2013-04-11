@@ -25,3 +25,7 @@ syntax Para
         = 
         content: String
  ;
+syntax String
+        = 
+        String
+ ;

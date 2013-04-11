@@ -21,3 +21,11 @@ syntax PrimitiveTrans
         = 
         name: String
  ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;

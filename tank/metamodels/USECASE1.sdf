@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        Task User Actor Goal UseCase Service Scenario Context PreCondition PostCondition Episode Event Action Responce Stimilus Parameter 
+        Task User Actor Goal UseCase Service Scenario Context PreCondition PostCondition Episode Event Action Responce Stimilus Parameter String Boolean Integer 
   context-free syntax
         service::Service+ -> Task
 
@@ -34,10 +34,17 @@ exports
 
         episode::Episode+ -> Event
 
-         -> Action
+        episode::Episode+ -> Action
 
         parameter::Parameter+ -> Responce
 
         parameter::Parameter+ -> Stimilus
 
         stimilus::Stimilus+ responce::Responce+ -> Parameter
+
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer

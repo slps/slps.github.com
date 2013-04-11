@@ -39,6 +39,22 @@ syntax NamedElement
         | MessageEnd
         | InteractionFragment
         | GeneralOrdering
+        | PackageableElement
+        | ActivityPartition
+        | Include
+        | Extend
+ ;
+syntax StructuralFeature
+        = 
+        Property
+ ;
+syntax ConnectableElement
+        = Parameter
+        | Variable
+ ;
+syntax TemplateableElement
+        = 
+        StringExpression
  ;
 syntax Property
         = Port
@@ -63,10 +79,22 @@ syntax DirectedRelationship
         | PackageMerge
         | ProfileApplication
         | ProtocolConformance
+        | Dependency
+        | Include
+        | Extend
  ;
 syntax Relationship
-        = 
-        DirectedRelationship
+        = DirectedRelationship
+        | Association
+ ;
+syntax Namespace
+        = Package
+        | Classifier
+        | BehavioralFeature
+        | Region
+        | Transition
+        | State
+        | InteractionOperand
  ;
 syntax ElementImport
         = 
@@ -81,6 +109,11 @@ syntax Constraint
         | InteractionConstraint
         | Element constrainedElement+ ValueSpecification specification Namespace context
  ;
+syntax TypedElement
+        = ConnectableElement
+        | ValueSpecification
+        | ObjectNode
+ ;
 syntax Association
         = Extension
         | MARTE_PrimitivesTypes/Boolean isDerived Property ownedEnd+ Type endType+ Property memberEnd Property navigableOwnedEnd+
@@ -91,12 +124,16 @@ syntax Classifier
         | Signal
         | Interface
         | StructuredClassifier
+        | Association
+        | Artifact
  ;
 syntax RedefinableElement
         = Feature
         | ExtensionPoint
         | ActivityNode
         | ActivityEdge
+        | Region
+        | Transition
  ;
 syntax TemplateBinding
         = 
@@ -109,6 +146,10 @@ syntax TemplateSignature
 syntax TemplateParameter
         = 
         TemplateSignature signature ParameterableElement parameteredElement ParameterableElement ownedParameteredElement ParameterableElement default ParameterableElement ownedDefault
+ ;
+syntax ParameterableElement
+        = ConnectableElement
+        | PackageableElement
  ;
 syntax TemplateParameterSubstitution
         = 
@@ -123,8 +164,9 @@ syntax GeneralizationSet
         MARTE_PrimitivesTypes/Boolean isCovering MARTE_PrimitivesTypes/Boolean isDisjoint Classifier powertype Generalization generalization+
  ;
 syntax Feature
-        = 
-        Connector
+        = Connector
+        | StructuralFeature
+        | BehavioralFeature
  ;
 syntax Substitution
         = 
@@ -136,6 +178,8 @@ syntax PackageableElement
         | GeneralizationSet
         | Observation
         | Event
+        | Dependency
+        | ValueSpecification
  ;
 syntax PackageMerge
         = 
@@ -163,8 +207,8 @@ syntax StringExpression
         StringExpression subExpression+ StringExpression owningExpression
  ;
 syntax Expression
-        = 
-        MARTE_PrimitivesTypes/String symbol ValueSpecification operand+
+        = StringExpression
+        | MARTE_PrimitivesTypes/String symbol ValueSpecification operand+
  ;
 syntax ValueSpecification
         = Expression
@@ -174,16 +218,24 @@ syntax ValueSpecification
         | Interval
  ;
 syntax BehavioredClassifier
-        = 
-        UseCase
+        = UseCase
+        | Collaboration
+        | Class
  ;
 syntax Behavior
         = StateMachine
         | Activity
+        | Interaction
  ;
 syntax MultiplicityElement
+        = ConnectorEnd
+        | Parameter
+        | Pin
+        | Variable
+ ;
+syntax DeploymentTarget
         = 
-        ConnectorEnd
+        InstanceSpecification
  ;
 syntax DataType
         = Enumeration
@@ -223,6 +275,10 @@ syntax Parameter
         = 
         ParameterDirectionKind direction MARTE_PrimitivesTypes/String default ValueSpecification defaultValue Operation operation ParameterSet parameterSet+ MARTE_PrimitivesTypes/Boolean isException MARTE_PrimitivesTypes/Boolean isStream ParameterEffectKind effect
  ;
+syntax EncapsulatedClassifier
+        = 
+        Class
+ ;
 syntax Operation
         = 
         Interface interface Class class MARTE_PrimitivesTypes/Boolean isQuery MARTE_PrimitivesTypes/Boolean isOrdered MARTE_PrimitivesTypes/Boolean isUnique MARTE_PrimitivesTypes/Integer lower MARTE_PrimitivesTypes/UnlimitedNatural upper Constraint precondition+ Constraint postcondition+ Operation redefinedOperation+ DataType datatype Constraint bodyCondition Type type
@@ -252,8 +308,8 @@ syntax InstanceSpecification
         | Classifier classifier+ Slot slot+ ValueSpecification specification
  ;
 syntax BehavioralFeature
-        = 
-        Reception
+        = Reception
+        | Operation
  ;
 syntax Signal
         = 
@@ -273,7 +329,7 @@ syntax Duration
  ;
 syntax DurationInterval
         = 
-        ()
+        ValueSpecification min ValueSpecification max
  ;
 syntax Interval
         = DurationInterval
@@ -290,7 +346,7 @@ syntax IntervalConstraint
  ;
 syntax TimeInterval
         = 
-        ()
+        ValueSpecification min ValueSpecification max
  ;
 syntax DurationConstraint
         = 
@@ -321,8 +377,8 @@ syntax Port
         MARTE_PrimitivesTypes/Boolean isBehavior MARTE_PrimitivesTypes/Boolean isService Interface required+ Port redefinedPort+ Interface provided+ ProtocolStateMachine protocol
  ;
 syntax Action
-        = 
-        InvocationAction
+        = InvocationAction
+        | StructuredActivityNode
  ;
 syntax Message
         = 
@@ -385,8 +441,8 @@ syntax Region
         Vertex subvertex+ Transition transition+ State state Region extendedRegion StateMachine stateMachine
  ;
 syntax StructuredClassifier
-        = 
-        EncapsulatedClassifier
+        = EncapsulatedClassifier
+        | Collaboration
  ;
 syntax Vertex
         = Pseudostate
@@ -410,12 +466,12 @@ syntax ParameterSet
         Parameter parameter+ Constraint condition+
  ;
 syntax ActivityNode
-        = 
-        ExecutableNode
+        = ExecutableNode
+        | ObjectNode
  ;
 syntax ActivityGroup
-        = 
-        InterruptibleActivityRegion
+        = InterruptibleActivityRegion
+        | ActivityPartition
  ;
 syntax ParameterDirectionKind
         = in: ()
@@ -433,6 +489,10 @@ syntax InterruptibleActivityRegion
         = 
         ActivityNode node+ ActivityEdge interruptingEdge+
  ;
+syntax DeployedArtifact
+        = 
+        Artifact
+ ;
 syntax Slot
         = 
         StructuralFeature definingFeature ValueSpecification value+ InstanceSpecification owningInstance
@@ -443,7 +503,7 @@ syntax ExecutableNode
  ;
 syntax OutputPin
         = 
-        ()
+        isControl: MARTE_PrimitivesTypes/Boolean
  ;
 syntax Pin
         = OutputPin
@@ -452,7 +512,7 @@ syntax Pin
  ;
 syntax InputPin
         = 
-        ()
+        isControl: MARTE_PrimitivesTypes/Boolean
  ;
 syntax MessageKind
         = complete: ()
@@ -463,6 +523,10 @@ syntax MessageKind
 syntax ExceptionHandler
         = 
         ExecutableNode handlerBody ObjectNode exceptionInput Classifier exceptionType+ ExecutableNode protectedNode
+ ;
+syntax ObjectNode
+        = 
+        Pin
  ;
 syntax ObjectNodeOrderingKind
         = unordered: ()
@@ -488,7 +552,7 @@ syntax Interaction
  ;
 syntax PartDecomposition
         = 
-        ()
+        Interaction refersTo Gate actualGate+ Action argument+
  ;
 syntax InteractionUse
         = PartDecomposition
@@ -498,6 +562,8 @@ syntax InteractionFragment
         = ExecutionSpecification
         | InteractionUse
         | OccurrenceSpecification
+        | Interaction
+        | InteractionOperand
  ;
 syntax ConnectorKind
         = assembly: ()

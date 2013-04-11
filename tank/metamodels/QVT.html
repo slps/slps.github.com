@@ -13,7 +13,7 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable QVT 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Frédéric Jouault, <code>QVT.ecore</code>, 2007/06/03.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>246</strong></li><li>Number of top alternatives: <strong>257</strong></li><li>Number of defined nonterminal symbols: <strong>144</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>10</strong>: <code><a href="#SwitchExp" class="nt">SwitchExp</a>, <a href="#ImperativeLoopExp" class="nt">ImperativeLoopExp</a>, <a href="#Object" class="nt">Object</a>, <a href="#Mapping" class="nt">Mapping</a>, <a href="#CoreDomain" class="nt">CoreDomain</a>, <a href="#FunctionParameter" class="nt">FunctionParameter</a>, <a href="#LoopExp" class="nt">LoopExp</a>, <a href="#OpaqueExpression" class="nt">OpaqueExpression</a>, <a href="#TupleType" class="nt">TupleType</a>, <a href="#AnyType" class="nt">AnyType</a></code></li><li>Bottom nonterminal symbols: <strong>6</strong>: <code><a href="#Boolean" class="nt">Boolean</a>, <a href="#String" class="nt">String</a>, <a href="#Integer" class="nt">Integer</a>, <a href="#Area" class="nt">Area</a>, <a href="#UnlimitedNatural" class="nt">UnlimitedNatural</a>, <a href="#Real" class="nt">Real</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="TemplateExp">TemplateExp</a>:
+				</script></head><body><h1 class="l">Browsable QVT 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Frédéric Jouault, <code>QVT.ecore</code>, 2007/06/03.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>278</strong></li><li>Number of top alternatives: <strong>290</strong></li><li>Number of defined nonterminal symbols: <strong>149</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>3</strong>: <code><a href="#Object" class="nt">Object</a>, <a href="#MultiplicityElement" class="nt">MultiplicityElement</a>, <a href="#OpaqueExpression" class="nt">OpaqueExpression</a></code></li><li>Bottom nonterminal symbols: <strong>2</strong>: <code><a href="#UnlimitedNatural" class="nt">UnlimitedNatural</a>, <a href="#Real" class="nt">Real</a></code></li><li>Number of used terminal symbols: <strong>2</strong></li><li>Keywords: <strong>2</strong>: <code class="t">"true", "false"</code></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="TemplateExp">TemplateExp</a>:
         <a class="nt" href="#ObjectTemplateExp">ObjectTemplateExp</a>
 </pre><pre><a class="nt" name="TemplateExp">TemplateExp</a>:
         <a class="nt" href="#CollectionTemplateExp">CollectionTemplateExp</a>
@@ -44,13 +44,13 @@
 </pre><pre><a class="nt" name="ReturnExp">ReturnExp</a>:
         <span class="sel">value</span>::<a class="nt" href="#OclExpression">OclExpression</a>
 </pre><pre><a class="nt" name="BreakExp">BreakExp</a>:
-        
+        ε
 </pre><pre><a class="nt" name="TryExp">TryExp</a>:
         <span class="sel">tryBody</span>::<a class="nt" href="#OclExpression">OclExpression</a> <span class="sel">exception</span>::<a class="nt" href="#Type">Type</a><span class="meta">+</span> <span class="sel">exceptBody</span>::<a class="nt" href="#OclExpression">OclExpression</a>
 </pre><pre><a class="nt" name="RaiseExp">RaiseExp</a>:
         <span class="sel">exception</span>::<a class="nt" href="#Type">Type</a>
 </pre><pre><a class="nt" name="ContinueExp">ContinueExp</a>:
-        
+        ε
 </pre><pre><a class="nt" name="ForExp">ForExp</a>:
         <span class="sel">condition</span>::<a class="nt" href="#OclExpression">OclExpression</a>
 </pre><pre><a class="nt" name="TupleExp">TupleExp</a>:
@@ -119,6 +119,10 @@
         <a class="nt" href="#AssertExp">AssertExp</a>
 </pre><pre><a class="nt" name="ImperativeExpression">ImperativeExpression</a>:
         <a class="nt" href="#UnpackExp">UnpackExp</a>
+</pre><pre><a class="nt" name="ImperativeExpression">ImperativeExpression</a>:
+        <a class="nt" href="#SwitchExp">SwitchExp</a>
+</pre><pre><a class="nt" name="ImperativeExpression">ImperativeExpression</a>:
+        <a class="nt" href="#ImperativeLoopExp">ImperativeLoopExp</a>
 </pre><pre><a class="nt" name="UnpackExp">UnpackExp</a>:
         <span class="sel">variable</span>::<a class="nt" href="#Variable">Variable</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="AnonymousTupleType">AnonymousTupleType</a>:
@@ -134,6 +138,16 @@
 </pre><pre><a class="nt" name="Class">Class</a>:
         <a class="nt" href="#AnonymousTupleType">AnonymousTupleType</a>
 </pre><pre><a class="nt" name="Class">Class</a>:
+        <a class="nt" href="#ModelType">ModelType</a>
+</pre><pre><a class="nt" name="Class">Class</a>:
+        <a class="nt" href="#Module">Module</a>
+</pre><pre><a class="nt" name="Class">Class</a>:
+        <a class="nt" href="#Transformation">Transformation</a>
+</pre><pre><a class="nt" name="Class">Class</a>:
+        <a class="nt" href="#TupleType">TupleType</a>
+</pre><pre><a class="nt" name="Class">Class</a>:
+        <a class="nt" href="#AnyType">AnyType</a>
+</pre><pre><a class="nt" name="Class">Class</a>:
         <span class="sel">ownedAttribute</span>::<a class="nt" href="#Property">Property</a><span class="meta">+</span> <span class="sel">ownedOperation</span>::<a class="nt" href="#Operation">Operation</a><span class="meta">+</span> <span class="sel">superClass</span>::<a class="nt" href="#Class">Class</a><span class="meta">+</span> <span class="sel">isAbstract</span>::<a class="nt" href="#Boolean">Boolean</a>
 </pre><pre><a class="nt" name="DataType">DataType</a>:
         <a class="nt" href="#Enumeration">Enumeration</a>
@@ -141,6 +155,8 @@
         <a class="nt" href="#PrimitiveType">PrimitiveType</a>
 </pre><pre><a class="nt" name="DataType">DataType</a>:
         <a class="nt" href="#CollectionType">CollectionType</a>
+</pre><pre><a class="nt" name="DataType">DataType</a>:
+        <a class="nt" href="#TupleType">TupleType</a>
 </pre><pre><a class="nt" name="Element">Element</a>:
         <a class="nt" href="#PropertyTemplateItem">PropertyTemplateItem</a>
 </pre><pre><a class="nt" name="Element">Element</a>:
@@ -185,8 +201,6 @@
         <a class="nt" href="#Rule">Rule</a>
 </pre><pre><a class="nt" name="Extent">Extent</a>:
         <a class="nt" href="#URIExtent">URIExtent</a>
-</pre><pre><a class="nt" name="Extent">Extent</a>:
-        <a class="nt" href="#URIExtent">URIExtent</a>
 </pre><pre><a class="nt" name="Object">Object</a>:
         <a class="nt" href="#Element">Element</a>
 </pre><pre><a class="nt" name="Object">Object</a>:
@@ -200,6 +214,16 @@
         <a class="nt" href="#Function">Function</a>
 </pre><pre><a class="nt" name="Operation">Operation</a>:
         <span class="sel">class</span>::<a class="nt" href="#Class">Class</a> <span class="sel">ownedParameter</span>::<a class="nt" href="#Parameter">Parameter</a><span class="meta">+</span> <span class="sel">raisedException</span>::<a class="nt" href="#Type">Type</a><span class="meta">+</span>
+</pre><pre><a class="nt" name="MultiplicityElement">MultiplicityElement</a>:
+        <a class="nt" href="#Operation">Operation</a>
+</pre><pre><a class="nt" name="MultiplicityElement">MultiplicityElement</a>:
+        <a class="nt" href="#Parameter">Parameter</a>
+</pre><pre><a class="nt" name="MultiplicityElement">MultiplicityElement</a>:
+        <a class="nt" href="#Property">Property</a>
+</pre><pre><a class="nt" name="Package">Package</a>:
+        <a class="nt" href="#Module">Module</a>
+</pre><pre><a class="nt" name="Package">Package</a>:
+        <a class="nt" href="#Transformation">Transformation</a>
 </pre><pre><a class="nt" name="Package">Package</a>:
         <span class="sel">ownedType</span>::<a class="nt" href="#Type">Type</a><span class="meta">+</span> <span class="sel">nestedPackage</span>::<a class="nt" href="#Package">Package</a><span class="meta">+</span> <span class="sel">uri</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Type">Type</a>:
@@ -212,6 +236,12 @@
         <a class="nt" href="#InvalidType">InvalidType</a>
 </pre><pre><a class="nt" name="Type">Type</a>:
         <a class="nt" href="#VoidType">VoidType</a>
+</pre><pre><a class="nt" name="Type">Type</a>:
+        <a class="nt" href="#AnyType">AnyType</a>
+</pre><pre><a class="nt" name="Parameter">Parameter</a>:
+        <a class="nt" href="#VarParameter">VarParameter</a>
+</pre><pre><a class="nt" name="Parameter">Parameter</a>:
+        <a class="nt" href="#FunctionParameter">FunctionParameter</a>
 </pre><pre><a class="nt" name="Parameter">Parameter</a>:
         <span class="sel">operation</span>::<a class="nt" href="#Operation">Operation</a>
 </pre><pre><a class="nt" name="EnumerationLiteral">EnumerationLiteral</a>:
@@ -228,10 +258,25 @@
         <a class="nt" href="#CollectionLiteralPart">CollectionLiteralPart</a>
 </pre><pre><a class="nt" name="TypedElement">TypedElement</a>:
         <a class="nt" href="#TupleLiteralPart">TupleLiteralPart</a>
+</pre><pre><a class="nt" name="TypedElement">TypedElement</a>:
+        <a class="nt" href="#Operation">Operation</a>
+</pre><pre><a class="nt" name="TypedElement">TypedElement</a>:
+        <a class="nt" href="#Parameter">Parameter</a>
+</pre><pre><a class="nt" name="TypedElement">TypedElement</a>:
+        <a class="nt" href="#Property">Property</a>
 </pre><pre><a class="nt" name="PrimitiveType">PrimitiveType</a>:
-        
+        ε
+</pre><pre><a class="nt" name="URIExtent">URIExtent</a>:
+        <a class="nt" href="#ModelType">ModelType</a>
 </pre><pre><a class="nt" name="URIExtent">URIExtent</a>:
         ε
+</pre><pre><a class="nt" name="Boolean">Boolean</a>:
+        <span class="t">"true"</span>
+        <span class="t">"false"</span>
+</pre><pre><a class="nt" name="String">String</a>:
+        <span class="meta">string</span>
+</pre><pre><a class="nt" name="Integer">Integer</a>:
+        <span class="meta">int</span>
 </pre><pre><a class="nt" name="Comment">Comment</a>:
         <span class="sel">annotatedElement</span>::<a class="nt" href="#NamedElement">NamedElement</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="MappingBody">MappingBody</a>:
@@ -253,11 +298,11 @@
 </pre><pre><a class="nt" name="MappingCallExp">MappingCallExp</a>:
         <span class="sel">isStrict</span>::<a class="nt" href="#Boolean">Boolean</a>
 </pre><pre><a class="nt" name="Constructor">Constructor</a>:
-        ε
+        <span class="sel">context</span>::<a class="nt" href="#VarParameter">VarParameter</a> <span class="sel">result</span>::<a class="nt" href="#VarParameter">VarParameter</a><span class="meta">+</span> <span class="sel">overridden</span>::<a class="nt" href="#ImperativeOperation">ImperativeOperation</a> <span class="sel">body</span>::<a class="nt" href="#OperationBody">OperationBody</a> <span class="sel">isBlackbox</span>::<a class="nt" href="#Boolean">Boolean</a>
 </pre><pre><a class="nt" name="ContextualProperty">ContextualProperty</a>:
         <span class="sel">context</span>::<a class="nt" href="#Class">Class</a> <span class="sel">overridden</span>::<a class="nt" href="#Property">Property</a>
 </pre><pre><a class="nt" name="EntryOperation">EntryOperation</a>:
-        ε
+        <span class="sel">context</span>::<a class="nt" href="#VarParameter">VarParameter</a> <span class="sel">result</span>::<a class="nt" href="#VarParameter">VarParameter</a><span class="meta">+</span> <span class="sel">overridden</span>::<a class="nt" href="#ImperativeOperation">ImperativeOperation</a> <span class="sel">body</span>::<a class="nt" href="#OperationBody">OperationBody</a> <span class="sel">isBlackbox</span>::<a class="nt" href="#Boolean">Boolean</a>
 </pre><pre><a class="nt" name="ImperativeCallExp">ImperativeCallExp</a>:
         <a class="nt" href="#MappingCallExp">MappingCallExp</a>
 </pre><pre><a class="nt" name="ImperativeCallExp">ImperativeCallExp</a>:
@@ -269,15 +314,17 @@
 </pre><pre><a class="nt" name="ImperativeOperation">ImperativeOperation</a>:
         <a class="nt" href="#EntryOperation">EntryOperation</a>
 </pre><pre><a class="nt" name="ImperativeOperation">ImperativeOperation</a>:
+        <a class="nt" href="#MappingOperation">MappingOperation</a>
+</pre><pre><a class="nt" name="ImperativeOperation">ImperativeOperation</a>:
         <span class="sel">context</span>::<a class="nt" href="#VarParameter">VarParameter</a> <span class="sel">result</span>::<a class="nt" href="#VarParameter">VarParameter</a><span class="meta">+</span> <span class="sel">overridden</span>::<a class="nt" href="#ImperativeOperation">ImperativeOperation</a> <span class="sel">body</span>::<a class="nt" href="#OperationBody">OperationBody</a> <span class="sel">isBlackbox</span>::<a class="nt" href="#Boolean">Boolean</a>
 </pre><pre><a class="nt" name="DirectionKind">DirectionKind</a>:
         <span class="sel">in</span>::ε
         <span class="sel">inout</span>::ε
         <span class="sel">out</span>::ε
 </pre><pre><a class="nt" name="Library">Library</a>:
-        ε
+        <span class="sel">ownedTag</span>::<a class="nt" href="#Tag">Tag</a><span class="meta">+</span> <span class="sel">configProperty</span>::<a class="nt" href="#Property">Property</a><span class="meta">+</span> <span class="sel">moduleImport</span>::<a class="nt" href="#ModuleImport">ModuleImport</a><span class="meta">+</span> <span class="sel">usedModelType</span>::<a class="nt" href="#ModelType">ModelType</a><span class="meta">+</span> <span class="sel">isBlackbox</span>::<a class="nt" href="#Boolean">Boolean</a>
 </pre><pre><a class="nt" name="ModelParameter">ModelParameter</a>:
-        ε
+        <span class="sel">ctxOwner</span>::<a class="nt" href="#ImperativeOperation">ImperativeOperation</a> <span class="sel">resOwner</span>::<a class="nt" href="#ImperativeOperation">ImperativeOperation</a> <span class="sel">kind</span>::<a class="nt" href="#DirectionKind">DirectionKind</a>
 </pre><pre><a class="nt" name="ModelType">ModelType</a>:
         <span class="sel">metamodel</span>::<a class="nt" href="#Package">Package</a><span class="meta">+</span> <span class="sel">additionalCondition</span>::<a class="nt" href="#OclExpression">OclExpression</a><span class="meta">+</span> <span class="sel">conformanceKind</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Module">Module</a>:
@@ -304,9 +351,13 @@
 </pre><pre><a class="nt" name="OperationBody">OperationBody</a>:
         <span class="sel">operation</span>::<a class="nt" href="#ImperativeOperation">ImperativeOperation</a> <span class="sel">content</span>::<a class="nt" href="#OclExpression">OclExpression</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="ConstructorBody">ConstructorBody</a>:
-        ε
+        <span class="sel">operation</span>::<a class="nt" href="#ImperativeOperation">ImperativeOperation</a> <span class="sel">content</span>::<a class="nt" href="#OclExpression">OclExpression</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="ObjectExp">ObjectExp</a>:
         <span class="sel">referredObject</span>::<a class="nt" href="#Variable">Variable</a> <span class="sel">body</span>::<a class="nt" href="#ConstructorBody">ConstructorBody</a>
+</pre><pre><a class="nt" name="Area">Area</a>:
+        <a class="nt" href="#Mapping">Mapping</a>
+</pre><pre><a class="nt" name="Area">Area</a>:
+        <a class="nt" href="#CoreDomain">CoreDomain</a>
 </pre><pre><a class="nt" name="Assignment">Assignment</a>:
         <span class="sel">bottomPattern</span>::<a class="nt" href="#BottomPattern">BottomPattern</a> <span class="sel">slotExpression</span>::<a class="nt" href="#OclExpression">OclExpression</a> <span class="sel">value</span>::<a class="nt" href="#OclExpression">OclExpression</a> <span class="sel">targetProperty</span>::<a class="nt" href="#Property">Property</a> <span class="sel">isDefault</span>::<a class="nt" href="#Boolean">Boolean</a>
 </pre><pre><a class="nt" name="BottomPattern">BottomPattern</a>:
@@ -316,9 +367,9 @@
 </pre><pre><a class="nt" name="Mapping">Mapping</a>:
         <span class="sel">specification</span>::<a class="nt" href="#Mapping">Mapping</a><span class="meta">+</span> <span class="sel">local</span>::<a class="nt" href="#Mapping">Mapping</a><span class="meta">+</span> <span class="sel">context</span>::<a class="nt" href="#Mapping">Mapping</a>
 </pre><pre><a class="nt" name="RealizedVariable">RealizedVariable</a>:
-        ε
+        <span class="sel">initExpression</span>::<a class="nt" href="#OclExpression">OclExpression</a> <span class="sel">LetExp</span>::<a class="nt" href="#LetExp">LetExp</a> <span class="sel">computeOwner</span>::<a class="nt" href="#ComputeExp">ComputeExp</a> <span class="sel">bindParameter</span>::<a class="nt" href="#Parameter">Parameter</a>
 </pre><pre><a class="nt" name="CoreDomain">CoreDomain</a>:
-        ε
+        <span class="sel">isCheckable</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">isEnforceable</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">rule</span>::<a class="nt" href="#Rule">Rule</a> <span class="sel">typedModel</span>::<a class="nt" href="#TypedModel">TypedModel</a> <span class="sel">guardPattern</span>::<a class="nt" href="#GuardPattern">GuardPattern</a> <span class="sel">bottomPattern</span>::<a class="nt" href="#BottomPattern">BottomPattern</a>
 </pre><pre><a class="nt" name="CorePattern">CorePattern</a>:
         <a class="nt" href="#BottomPattern">BottomPattern</a>
 </pre><pre><a class="nt" name="CorePattern">CorePattern</a>:
@@ -334,6 +385,8 @@
 </pre><pre><a class="nt" name="Domain">Domain</a>:
         <a class="nt" href="#RelationDomain">RelationDomain</a>
 </pre><pre><a class="nt" name="Domain">Domain</a>:
+        <a class="nt" href="#CoreDomain">CoreDomain</a>
+</pre><pre><a class="nt" name="Domain">Domain</a>:
         <span class="sel">isCheckable</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">isEnforceable</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">rule</span>::<a class="nt" href="#Rule">Rule</a> <span class="sel">typedModel</span>::<a class="nt" href="#TypedModel">TypedModel</a>
 </pre><pre><a class="nt" name="Transformation">Transformation</a>:
         <a class="nt" href="#RelationalTransformation">RelationalTransformation</a>
@@ -343,6 +396,8 @@
         <span class="sel">transformation</span>::<a class="nt" href="#Transformation">Transformation</a> <span class="sel">usedPackage</span>::<a class="nt" href="#Package">Package</a><span class="meta">+</span> <span class="sel">dependsOn</span>::<a class="nt" href="#TypedModel">TypedModel</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Rule">Rule</a>:
         <a class="nt" href="#Relation">Relation</a>
+</pre><pre><a class="nt" name="Rule">Rule</a>:
+        <a class="nt" href="#Mapping">Mapping</a>
 </pre><pre><a class="nt" name="Rule">Rule</a>:
         <span class="sel">domain</span>::<a class="nt" href="#Domain">Domain</a><span class="meta">+</span> <span class="sel">transformation</span>::<a class="nt" href="#Transformation">Transformation</a> <span class="sel">overrides</span>::<a class="nt" href="#Rule">Rule</a>
 </pre><pre><a class="nt" name="Pattern">Pattern</a>:
@@ -356,7 +411,7 @@
 </pre><pre><a class="nt" name="Function">Function</a>:
         <span class="sel">queryExpression</span>::<a class="nt" href="#OclExpression">OclExpression</a>
 </pre><pre><a class="nt" name="FunctionParameter">FunctionParameter</a>:
-        ε
+        <span class="sel">operation</span>::<a class="nt" href="#Operation">Operation</a> <span class="sel">initExpression</span>::<a class="nt" href="#OclExpression">OclExpression</a> <span class="sel">LetExp</span>::<a class="nt" href="#LetExp">LetExp</a> <span class="sel">computeOwner</span>::<a class="nt" href="#ComputeExp">ComputeExp</a> <span class="sel">bindParameter</span>::<a class="nt" href="#Parameter">Parameter</a>
 </pre><pre><a class="nt" name="RelationalTransformation">RelationalTransformation</a>:
         <span class="sel">ownedKey</span>::<a class="nt" href="#Key">Key</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Relation">Relation</a>:
@@ -375,6 +430,10 @@
         <a class="nt" href="#ResolveExp">ResolveExp</a>
 </pre><pre><a class="nt" name="CallExp">CallExp</a>:
         <a class="nt" href="#FeaturePropertyCall">FeaturePropertyCall</a>
+</pre><pre><a class="nt" name="CallExp">CallExp</a>:
+        <a class="nt" href="#SwitchExp">SwitchExp</a>
+</pre><pre><a class="nt" name="CallExp">CallExp</a>:
+        <a class="nt" href="#LoopExp">LoopExp</a>
 </pre><pre><a class="nt" name="CollectionKind">CollectionKind</a>:
         <span class="sel">OrderedSet</span>::ε
         <span class="sel">Set</span>::ε
@@ -394,6 +453,8 @@
         <a class="nt" href="#TypeExp">TypeExp</a>
 </pre><pre><a class="nt" name="OclExpression">OclExpression</a>:
         <a class="nt" href="#LiteralExp">LiteralExp</a>
+</pre><pre><a class="nt" name="OclExpression">OclExpression</a>:
+        <a class="nt" href="#LoopExp">LoopExp</a>
 </pre><pre><a class="nt" name="UnlimitedNaturalExp">UnlimitedNaturalExp</a>:
         <span class="sel">symbol</span>::<a class="nt" href="#UnlimitedNatural">UnlimitedNatural</a>
 </pre><pre><a class="nt" name="IfExp">IfExp</a>:
@@ -402,6 +463,10 @@
         <span class="sel">in</span>::<a class="nt" href="#OclExpression">OclExpression</a><span class="meta">+</span> <span class="sel">variable</span>::<a class="nt" href="#Variable">Variable</a>
 </pre><pre><a class="nt" name="Variable">Variable</a>:
         <a class="nt" href="#RealizedVariable">RealizedVariable</a>
+</pre><pre><a class="nt" name="Variable">Variable</a>:
+        <a class="nt" href="#VarParameter">VarParameter</a>
+</pre><pre><a class="nt" name="Variable">Variable</a>:
+        <a class="nt" href="#FunctionParameter">FunctionParameter</a>
 </pre><pre><a class="nt" name="Variable">Variable</a>:
         <span class="sel">initExpression</span>::<a class="nt" href="#OclExpression">OclExpression</a> <span class="sel">LetExp</span>::<a class="nt" href="#LetExp">LetExp</a> <span class="sel">computeOwner</span>::<a class="nt" href="#ComputeExp">ComputeExp</a> <span class="sel">bindParameter</span>::<a class="nt" href="#Parameter">Parameter</a>
 </pre><pre><a class="nt" name="PropertyCallExp">PropertyCallExp</a>:
@@ -414,6 +479,8 @@
         <a class="nt" href="#IteratorExp">IteratorExp</a>
 </pre><pre><a class="nt" name="LoopExp">LoopExp</a>:
         <a class="nt" href="#IterateExp">IterateExp</a>
+</pre><pre><a class="nt" name="LoopExp">LoopExp</a>:
+        <a class="nt" href="#ImperativeLoopExp">ImperativeLoopExp</a>
 </pre><pre><a class="nt" name="IteratorExp">IteratorExp</a>:
         <span class="sel">body</span>::<a class="nt" href="#OclExpression">OclExpression</a> <span class="sel">iterator</span>::<a class="nt" href="#Variable">Variable</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="StringLiteralExp">StringLiteralExp</a>:
@@ -471,15 +538,13 @@
 </pre><pre><a class="nt" name="TupleLiteralExp">TupleLiteralExp</a>:
         <span class="sel">part</span>::<a class="nt" href="#TupleLiteralPart">TupleLiteralPart</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="NullLiteralExp">NullLiteralExp</a>:
-        
+        ε
 </pre><pre><a class="nt" name="ExpressionInOcl">ExpressionInOcl</a>:
         <span class="sel">bodyExpression</span>::<a class="nt" href="#OclExpression">OclExpression</a> <span class="sel">context</span>::<a class="nt" href="#Variable">Variable</a> <span class="sel">resultVariable</span>::<a class="nt" href="#Variable">Variable</a> <span class="sel">parameterVariable</span>::<a class="nt" href="#Variable">Variable</a>
 </pre><pre><a class="nt" name="OpaqueExpression">OpaqueExpression</a>:
         <a class="nt" href="#ExpressionInOcl">ExpressionInOcl</a>
-</pre><pre><a class="nt" name="OpaqueExpression">OpaqueExpression</a>:
-        <a class="nt" href="#ExpressionInOcl">ExpressionInOcl</a>
 </pre><pre><a class="nt" name="InvalidLiteralExp">InvalidLiteralExp</a>:
-        
+        ε
 </pre><pre><a class="nt" name="FeaturePropertyCall">FeaturePropertyCall</a>:
         <a class="nt" href="#PropertyCallExp">PropertyCallExp</a>
 </pre><pre><a class="nt" name="FeaturePropertyCall">FeaturePropertyCall</a>:
@@ -511,10 +576,10 @@
 </pre><pre><a class="nt" name="SetType">SetType</a>:
         <span class="sel">elementType</span>::<a class="nt" href="#Type">Type</a>
 </pre><pre><a class="nt" name="TupleType">TupleType</a>:
-        ε
+        <span class="sel">ownedAttribute</span>::<a class="nt" href="#Property">Property</a><span class="meta">+</span> <span class="sel">ownedOperation</span>::<a class="nt" href="#Operation">Operation</a><span class="meta">+</span> <span class="sel">superClass</span>::<a class="nt" href="#Class">Class</a><span class="meta">+</span> <span class="sel">isAbstract</span>::<a class="nt" href="#Boolean">Boolean</a>
 </pre><pre><a class="nt" name="VoidType">VoidType</a>:
         <span class="sel">package</span>::<a class="nt" href="#Package">Package</a>
 </pre><pre><a class="nt" name="AnyType">AnyType</a>:
-        ε
+        <span class="sel">ownedAttribute</span>::<a class="nt" href="#Property">Property</a><span class="meta">+</span> <span class="sel">ownedOperation</span>::<a class="nt" href="#Operation">Operation</a><span class="meta">+</span> <span class="sel">superClass</span>::<a class="nt" href="#Class">Class</a><span class="meta">+</span> <span class="sel">isAbstract</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">package</span>::<a class="nt" href="#Package">Package</a>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
 Last updated: Apr2013.</div></body></html>

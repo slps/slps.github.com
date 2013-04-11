@@ -62,8 +62,6 @@ NonNegativeInteger:
         value::Integer
 FactType:
         BinaryFactType
-FactType:
-        BinaryFactType
 BinaryFactType:
         IsPropertyOfFactType
 BinaryFactType:
@@ -75,19 +73,19 @@ BinaryFactType:
 BinaryFactType:
         role1::FactTypeRole role2::FactTypeRole
 IsPropertyOfFactType:
-        EPSILON
+        role1::FactTypeRole role2::FactTypeRole
 AssociativeFactType:
-        EPSILON
+        role1::FactTypeRole role2::FactTypeRole
 CategorizationFactType:
-        EPSILON
+        role1::FactTypeRole role2::FactTypeRole
 ObjectificationFactType:
-        EPSILON
+        role1::FactTypeRole role2::FactTypeRole
 Role:
         FactTypeRole
 Role:
         nounConcept::NounConcept
 FactTypeRole:
-        EPSILON
+        nounConcept::NounConcept
 LogicalFormulation:
         AtomicFormulation
 LogicalFormulation:
@@ -117,7 +115,7 @@ Quantification:
 Quantification:
         introducedVariable::Variable scopesOver::LogicalFormulation
 UniversalQuantification:
-        EPSILON
+        introducedVariable::Variable scopesOver::LogicalFormulation
 AtLeastNQuantification:
         minCardinality::NonNegativeInteger
 ExactlyNQuantification:
@@ -126,9 +124,11 @@ AtMostNQuantification:
         maxCardinality::NonNegativeInteger
 BindableTarget:
         Variable
-BindableTarget:
-        Variable
 Variable:
         rangesOver::ObjectType
 RoleBinding:
         occursIn::AtomicFormulation isOf::FactType bindsTo::BindableTarget
+String:
+        STR
+Integer:
+        INT

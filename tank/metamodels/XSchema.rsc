@@ -1,6 +1,18 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module XSchema
 
+syntax String
+        = 
+        String
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
 syntax AttributeUseType
         = null: ()
         | optional: ()
@@ -34,6 +46,12 @@ syntax XSchema
 syntax XSchemaContentElement
         = Parameters
         | AbstractType
+        | Group
+        | AttributeGroup
+ ;
+syntax Parameters
+        = Element
+        | Attribute
  ;
 syntax Element
         = 
@@ -51,10 +69,12 @@ syntax Container
         = All
         | Choice
         | Sequence
+        | Group
  ;
 syntax AtomicContent
         = ElementRef
         | GroupRef
+        | Element
  ;
 syntax ElementRef
         = 
@@ -81,8 +101,8 @@ syntax Sequence
         AbstractContent contents+
  ;
 syntax AbstractAttributeGroupContent
-        = 
-        AtomicAttributeGroupContent
+        = AtomicAttributeGroupContent
+        | AttributeGroup
  ;
 syntax AttributeGroup
         = 
@@ -95,6 +115,7 @@ syntax AttributeGroupRef
 syntax AtomicAttributeGroupContent
         = AttributeGroupRef
         | AttributeRef
+        | Attribute
  ;
 syntax Attribute
         = 

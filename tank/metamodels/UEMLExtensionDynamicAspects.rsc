@@ -6,6 +6,7 @@ syntax UEMLObject
         | Port
         | Flow
         | Object
+        | Activity
         | Geometry has UEMLModel model
  ;
 syntax UEMLModel
@@ -46,11 +47,11 @@ syntax Resource
  ;
 syntax MaterialResource
         = 
-        ()
+        ResourceFlow carries ResourceRole plays+
  ;
 syntax HumanResource
         = 
-        ()
+        ResourceFlow carries ResourceRole plays+
  ;
 syntax ResourceFlow
         = 
@@ -67,11 +68,11 @@ syntax ControlFlow
  ;
 syntax TriggerFlow
         = 
-        ()
+        InformationObject carries+
  ;
 syntax ConstraintFlow
         = 
-        ()
+        InformationObject carries+
  ;
 syntax ResourceRole
         = 
@@ -82,7 +83,8 @@ syntax RoleType
         ()
  ;
 syntax Anchor
-        = OutputPort
+        = ConnectionOperator
+        | OutputPort
         | InputPort
  ;
 syntax OutputPort
@@ -95,7 +97,7 @@ syntax InputPort
  ;
 syntax ConnectionOperator
         = 
-        ()
+        AssociationConnector target AssociationConnector origin
  ;
 syntax AssociationConnector
         = 
@@ -103,15 +105,17 @@ syntax AssociationConnector
  ;
 syntax Task
         = 
-        ()
+        ResourceRole resourceRole+ Process parent OutputPort hasOutput+ InputPort hasInput+
  ;
 syntax FlowObject
         = Event
+        | Activity
+        | ConnectionOperator
         | AssociationConnector target AssociationConnector origin
  ;
 syntax Event
         = 
-        ()
+        AssociationConnector target AssociationConnector origin
  ;
 syntax Process
         = 

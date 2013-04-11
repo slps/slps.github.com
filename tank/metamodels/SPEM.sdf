@@ -2,8 +2,11 @@ module Main
 
 exports
   sorts
-        ArtifactUsageName ProcessDefinitionElement Guidance ArtifactKind WorkItem RoleKind Condition ProcessComponent Goal Precondition WorkDefinition ActivityKind Iteration Phase Lifecycle 
+        Boolean ArtifactUsageName ProcessDefinitionElement Guidance ArtifactKind WorkItem RoleKind Condition ProcessComponent Goal Precondition WorkDefinition ActivityKind Iteration Phase Lifecycle 
   context-free syntax
+        "true" -> Boolean
+        "false" -> Boolean
+
         isInput::Boolean isOutput::Boolean hasWorkPerArtifact::Boolean artifactKind::ArtifactKind workDefinition::WorkDefinition -> ArtifactUsageName
 
         Guidance -> ProcessDefinitionElement
@@ -23,8 +26,6 @@ exports
         processDefinitionElements::ProcessDefinitionElement+ -> Guidance
 
         artifactUsageNames::ArtifactUsageName+ responsible::RoleKind -> ArtifactKind
-
-        WorkDefinition -> WorkItem
 
         WorkDefinition -> WorkItem
 
@@ -55,8 +56,8 @@ exports
 
         performer::RoleKind+ assistant::RoleKind+ -> ActivityKind
 
-         -> Iteration
+        artifactUsageNames::ArtifactUsageName+ goal::Goal precondition::Precondition -> Iteration
 
-         -> Phase
+        artifactUsageNames::ArtifactUsageName+ goal::Goal precondition::Precondition -> Phase
 
-         -> Lifecycle
+        artifactUsageNames::ArtifactUsageName+ goal::Goal precondition::Precondition -> Lifecycle

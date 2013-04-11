@@ -59,3 +59,15 @@ syntax PrimaryKeyDef
         = 
         HomeDef pkd_home ValueDef type
  ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;

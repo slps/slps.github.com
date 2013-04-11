@@ -23,7 +23,7 @@ Scenarion:
 Start:
         workload::Workload
 End:
-        EPSILON
+        postPath::PathConnection prePath::PathConnection activeResource::ActiveResource
 ResourceAcquire:
         generalResource::GeneralResource
 ResourceRelease:
@@ -33,17 +33,15 @@ Workload:
 Component:
         EPSILON
 ProcessingResource:
-        EPSILON
+        step::Step+
 ExternalService:
-        EPSILON
+        step::Step+
 ActiveResource:
         ProcessingResource
 ActiveResource:
         ExternalService
 ActiveResource:
         step::Step+
-PassiveResource:
-        Component
 PassiveResource:
         Component
 Message:
@@ -61,12 +59,19 @@ PathConnection:
 PathConnection:
         message::Message post::Step+ pre::Step+
 Join:
-        EPSILON
+        message::Message post::Step+ pre::Step+
 Fork:
-        EPSILON
+        message::Message post::Step+ pre::Step+
 Merge:
-        EPSILON
+        message::Message post::Step+ pre::Step+
 Branch:
-        EPSILON
+        message::Message post::Step+ pre::Step+
 Seqence:
-        EPSILON
+        message::Message post::Step+ pre::Step+
+String:
+        STR
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT

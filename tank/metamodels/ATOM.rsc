@@ -1,6 +1,14 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module ATOM
 
+syntax String
+        = 
+        String
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
 syntax ATOM
         = 
         String title String id String subtitle String rights String icon String logo Link links+ Date lastUpdate Generator generator Category categories+ Author authors+ Contributor contibutors+ Entry entries+
@@ -21,11 +29,11 @@ syntax Content
  ;
 syntax InLineXHTMLContent
         = 
-        ()
+        type: String
  ;
 syntax InLineOtherContent
         = 
-        ()
+        type: String
  ;
 syntax OutOfLineContent
         = 
@@ -50,11 +58,11 @@ syntax Person
  ;
 syntax Author
         = 
-        ()
+        String name String uri String email
  ;
 syntax Contributor
         = 
-        ()
+        String name String uri String email
  ;
 syntax Date
         = 

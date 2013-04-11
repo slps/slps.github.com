@@ -2,15 +2,15 @@ module Main
 
 exports
   sorts
-        Condition CompositeParDef ElementaryPartDef ElementaryActDef CompositeActDef ActCompositeMember ActivityDefinition PartDefinition PartCompositeMember 
+        Condition CompositeParDef ElementaryPartDef ElementaryActDef CompositeActDef ActCompositeMember ActivityDefinition PartDefinition PartCompositeMember String Boolean Integer 
   context-free syntax
         partCompositeMembers::PartCompositeMember+ actCompositeMembers::ActCompositeMember+ -> Condition
 
         partCompositeMember::PartCompositeMember+ -> CompositeParDef
 
-         -> ElementaryPartDef
+        partCompositeMembers::PartCompositeMember+ -> ElementaryPartDef
 
-         -> ElementaryActDef
+        actCompositeMember::ActCompositeMember -> ElementaryActDef
 
         actCompositeMembers::ActCompositeMember+ -> CompositeActDef
 
@@ -29,3 +29,10 @@ exports
         partCompositeMembers::PartCompositeMember+ -> PartDefinition
 
         partDefinitions::PartDefinition -> PartCompositeMember
+
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer

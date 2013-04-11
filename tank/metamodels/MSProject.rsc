@@ -13,3 +13,7 @@ syntax Task
         = 
         String UID Task predecessors+
  ;
+syntax String
+        = 
+        String
+ ;

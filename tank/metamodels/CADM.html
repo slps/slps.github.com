@@ -13,7 +13,7 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable CADM (C4ISR Architecture Data Model) 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Albin Jossic, <code>CADM.ecore</code>, 2006/06/06.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>50</strong></li><li>Number of top alternatives: <strong>50</strong></li><li>Number of defined nonterminal symbols: <strong>26</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#Element" class="nt">Element</a></code></li><li>Bottom nonterminal symbols: <strong>1</strong>: <code><a href="#String" class="nt">String</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Element">Element</a>:
+				</script></head><body><h1 class="l">Browsable CADM (C4ISR Architecture Data Model) 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Albin Jossic, <code>CADM.ecore</code>, 2006/06/06.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>51</strong></li><li>Number of top alternatives: <strong>51</strong></li><li>Number of defined nonterminal symbols: <strong>27</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#Element" class="nt">Element</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Element">Element</a>:
         <a class="nt" href="#Architecture">Architecture</a>
 </pre><pre><a class="nt" name="Element">Element</a>:
         <a class="nt" href="#Organization">Organization</a>
@@ -64,7 +64,7 @@
 </pre><pre><a class="nt" name="Agreement">Agreement</a>:
         <span class="sel">isAssociatedWith</span>::<a class="nt" href="#Agreement">Agreement</a><span class="meta">+</span> <span class="sel">isCitedBy</span>::<a class="nt" href="#Agreement">Agreement</a><span class="meta">+</span> <span class="sel">appliesTo</span>::<a class="nt" href="#InformationAsset">InformationAsset</a><span class="meta">+</span> <span class="sel">implements</span>::<a class="nt" href="#Guidance">Guidance</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Standard">Standard</a>:
-        ε
+        <span class="sel">isAssociatedWith</span>::<a class="nt" href="#Agreement">Agreement</a><span class="meta">+</span> <span class="sel">isCitedBy</span>::<a class="nt" href="#Agreement">Agreement</a><span class="meta">+</span> <span class="sel">appliesTo</span>::<a class="nt" href="#InformationAsset">InformationAsset</a><span class="meta">+</span> <span class="sel">implements</span>::<a class="nt" href="#Guidance">Guidance</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Task">Task</a>:
         <span class="sel">isAssociatedWith</span>::<a class="nt" href="#Task">Task</a><span class="meta">+</span> <span class="sel">isPerformedBy</span>::<a class="nt" href="#Node">Node</a><span class="meta">+</span> <span class="sel">isPerformedUsing</span>::<a class="nt" href="#System">System</a><span class="meta">+</span> <span class="sel">specifies</span>::<a class="nt" href="#Requirement">Requirement</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="InformationAsset">InformationAsset</a>:
@@ -74,9 +74,9 @@
 </pre><pre><a class="nt" name="InformationAsset">InformationAsset</a>:
         <span class="sel">isAssociatedWith</span>::<a class="nt" href="#InformationAsset">InformationAsset</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="ConceptualDataModel">ConceptualDataModel</a>:
-        ε
+        <span class="sel">isAssociatedWith</span>::<a class="nt" href="#InformationAsset">InformationAsset</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="ActivityModel">ActivityModel</a>:
-        ε
+        <span class="sel">isAssociatedWith</span>::<a class="nt" href="#InformationAsset">InformationAsset</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Node">Node</a>:
         <span class="sel">isAssociatedWith</span>::<a class="nt" href="#Node">Node</a><span class="meta">+</span> <span class="sel">describes</span>::<a class="nt" href="#Architecture">Architecture</a><span class="meta">+</span> <span class="sel">hasServicesProvidedBy</span>::<a class="nt" href="#Facility">Facility</a><span class="meta">+</span> <span class="sel">involvedIn</span>::<a class="nt" href="#ActivityModel">ActivityModel</a><span class="meta">+</span> <span class="sel">uses</span>::<a class="nt" href="#InformationAsset">InformationAsset</a><span class="meta">+</span> <span class="sel">involves</span>::<a class="nt" href="#InfoExchRequirement">InfoExchRequirement</a><span class="meta">+</span> <span class="sel">isParticipedInBy</span>::<a class="nt" href="#Network">Network</a><span class="meta">+</span> <span class="sel">supports</span>::<a class="nt" href="#System">System</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Network">Network</a>:
@@ -90,7 +90,7 @@
 </pre><pre><a class="nt" name="InfoExchRequirement">InfoExchRequirement</a>:
         <span class="sel">isCitedIn</span>::<a class="nt" href="#Document">Document</a><span class="meta">+</span> <span class="sel">isSpecifiedInInfos</span>::<a class="nt" href="#InformationAsset">InformationAsset</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="ExchangeNeedLineReq">ExchangeNeedLineReq</a>:
-        ε
+        <span class="sel">mayBeSatifiedBy</span>::<a class="nt" href="#Architecture">Architecture</a><span class="meta">+</span> <span class="sel">isSpecifiedUsing</span>::<a class="nt" href="#InformationAsset">InformationAsset</a><span class="meta">+</span> <span class="sel">specifiesNeedFor</span>::<a class="nt" href="#MaterielItem">MaterielItem</a><span class="meta">+</span> <span class="sel">cites</span>::<a class="nt" href="#MissionArea">MissionArea</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="MissionArea">MissionArea</a>:
         <span class="sel">supports</span>::<a class="nt" href="#Task">Task</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="System">System</a>:
@@ -108,10 +108,12 @@
 </pre><pre><a class="nt" name="MaterielItem">MaterielItem</a>:
         <span class="sel">establishedAs</span>::<a class="nt" href="#MaterielItem">MaterielItem</a><span class="meta">+</span> <span class="sel">conformsTo</span>::<a class="nt" href="#Standard">Standard</a><span class="meta">+</span> <span class="sel">performsTo</span>::<a class="nt" href="#Capability">Capability</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="EquipmentType">EquipmentType</a>:
-        ε
+        <span class="sel">establishedAs</span>::<a class="nt" href="#MaterielItem">MaterielItem</a><span class="meta">+</span> <span class="sel">conformsTo</span>::<a class="nt" href="#Standard">Standard</a><span class="meta">+</span> <span class="sel">performsTo</span>::<a class="nt" href="#Capability">Capability</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="SoftwareItem">SoftwareItem</a>:
         <span class="sel">uses</span>::<a class="nt" href="#EquipmentType">EquipmentType</a><span class="meta">+</span> <span class="sel">isSourceFor</span>::<a class="nt" href="#Organization">Organization</a>
 </pre><pre><a class="nt" name="Facility">Facility</a>:
-        ε
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">content</span>::<a class="nt" href="#String">String</a>
+</pre><pre><a class="nt" name="String">String</a>:
+        <span class="meta">string</span>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
 Last updated: Apr2013.</div></body></html>

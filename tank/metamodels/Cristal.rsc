@@ -11,11 +11,11 @@ syntax CompositeParDef
  ;
 syntax ElementaryPartDef
         = 
-        ()
+        PartCompositeMember partCompositeMembers+
  ;
 syntax ElementaryActDef
         = 
-        ()
+        actCompositeMember: ActCompositeMember
  ;
 syntax CompositeActDef
         = 
@@ -38,4 +38,16 @@ syntax PartDefinition
 syntax PartCompositeMember
         = 
         partDefinitions: PartDefinition
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
  ;

@@ -39,15 +39,15 @@ syntax Service
  ;
 syntax OCLService
         = 
-        ()
+        String visibility String signature Rule rule
  ;
 syntax RTransService
         = 
-        ()
+        String visibility String signature Rule rule
  ;
 syntax JavaService
         = 
-        ()
+        String visibility String signature Rule rule
  ;
 syntax RulePart
         = Action
@@ -60,11 +60,11 @@ syntax Action
  ;
 syntax RTransAction
         = 
-        ()
+        qARule: QARule
  ;
 syntax JavaAction
         = 
-        ()
+        qARule: QARule
  ;
 syntax Query
         = OCLFilter
@@ -75,17 +75,21 @@ syntax Query
  ;
 syntax OCLFilter
         = 
-        ()
+        qARule: QARule
  ;
 syntax RTransQuery
         = 
-        ()
+        qARule: QARule
  ;
 syntax JavaQuery
         = 
-        ()
+        qARule: QARule
  ;
 syntax JavaFilter
         = 
-        ()
+        qARule: QARule
+ ;
+syntax String
+        = 
+        String
  ;

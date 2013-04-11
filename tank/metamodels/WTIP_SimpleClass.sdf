@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        Classifier Class PrimitiveDataType Association Attribute 
+        Classifier Class PrimitiveDataType Association Attribute String Boolean 
   context-free syntax
         Class -> Classifier
 
@@ -12,8 +12,13 @@ exports
 
         is_persistent::Boolean parent::Class attrs::Attribute+ -> Class
 
-         -> PrimitiveDataType
+        name::String -> PrimitiveDataType
 
         name::String src::Class dest::Class -> Association
 
         name::String is_primary::Boolean type::Classifier -> Attribute
+
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean

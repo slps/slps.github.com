@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        LocatedElement Body InWhereHolds AsmLFile AsmLElement VarDeclaration Namespace Structure VarOrCase Case Class VarOrMethod Enumeration Enumerator Function Method Parameter Main Initially Rule SkipRule Step StepUntilFixPoint StepExpression StepWhile StepUntil StepForEach MethodInvocation UpdateRule UpdateVarRule UpdateFieldRule UpdateMapRule ChooseRule ForallRule ConditionalRule ElseIf ReturnRule AddRule RemoveRule Type NamedType MapType TupletType SetType SequenceType Term VarTerm Operator MapTerm TulpletTerm MethodCallTerm NewInstance PredicateTerm ForAllTerm ExistsTerm AnyIn SetTerm EnumerateSet RangeSet AlgorithmSet SequenceTerm EnumerateSequence RangeSequence Constant BooleanConstant IntegerConstant StringConstant NullConstant 
+        LocatedElement Body InWhereHolds AsmLFile AsmLElement VarDeclaration Namespace Structure VarOrCase Case Class VarOrMethod Enumeration Enumerator Function Method Parameter Main Initially Rule SkipRule Step StepUntilFixPoint StepExpression StepWhile StepUntil StepForEach MethodInvocation UpdateRule UpdateVarRule UpdateFieldRule UpdateMapRule ChooseRule ForallRule ConditionalRule ElseIf ReturnRule AddRule RemoveRule Type NamedType MapType TupletType SetType SequenceType Term VarTerm Operator MapTerm TulpletTerm MethodCallTerm NewInstance PredicateTerm ForAllTerm ExistsTerm AnyIn SetTerm EnumerateSet RangeSet AlgorithmSet SequenceTerm EnumerateSequence RangeSequence Constant BooleanConstant IntegerConstant StringConstant NullConstant String Integer Boolean 
   context-free syntax
         Body -> LocatedElement
 
@@ -44,6 +44,8 @@ exports
 
         Type -> AsmLElement
 
+        VarDeclaration -> AsmLElement
+
         isConstant::Boolean isDeclaration::Boolean isLocal::Boolean name::String type::Type -> VarDeclaration
 
         name::String -> Namespace
@@ -56,6 +58,8 @@ exports
 
         name::String isAbstract::Boolean superClassName::String varOrMethod::VarOrMethod+ -> Class
 
+        Method -> VarOrMethod
+
         ownerClass::Class -> VarOrMethod
 
         name::String enumerators::Enumerator+ -> Enumeration
@@ -63,6 +67,8 @@ exports
         name::String value::Term -> Enumerator
 
         Main -> Function
+
+        Method -> Function
 
         isAbstract::Boolean isShared::Boolean isEntryPoint::Boolean isOverride::Boolean returnType::Type parameters::Parameter+ -> Method
 
@@ -134,7 +140,7 @@ exports
 
         condition::Term thenRule::Body elseRule::Body elseIfRule::ElseIf -> ConditionalRule
 
-         -> ElseIf
+        condition::Term thenRule::Body elseRule::Body elseIfRule::ElseIf -> ElseIf
 
         term::Term -> ReturnRule
 
@@ -192,7 +198,7 @@ exports
 
         name::String parameters::Term+ -> MethodCallTerm
 
-         -> NewInstance
+        name::String parameters::Term+ -> NewInstance
 
         ForAllTerm -> PredicateTerm
 
@@ -202,11 +208,11 @@ exports
 
         expressions::InWhereHolds+ -> PredicateTerm
 
-         -> ForAllTerm
+        expressions::InWhereHolds+ -> ForAllTerm
 
         isUnique::Boolean -> ExistsTerm
 
-         -> AnyIn
+        expressions::InWhereHolds+ -> AnyIn
 
         EnumerateSet -> SetTerm
 
@@ -243,3 +249,10 @@ exports
         val::String -> StringConstant
 
          -> NullConstant
+
+        STR -> String
+
+        INT -> Integer
+
+        "true" -> Boolean
+        "false" -> Boolean

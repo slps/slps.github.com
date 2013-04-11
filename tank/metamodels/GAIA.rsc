@@ -77,3 +77,7 @@ syntax Protocol
         = 
         String name String initiator String partner String inputs String outputs String description
  ;
+syntax String
+        = 
+        String
+ ;

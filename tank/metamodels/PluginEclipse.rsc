@@ -73,3 +73,15 @@ syntax Xinternal
         = 
         value: Boolean
  ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;

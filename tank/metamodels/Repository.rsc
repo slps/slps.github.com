@@ -1,6 +1,18 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module Repository
 
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
 syntax Subsystem
         = 
         Class classes+ Relation relations+
@@ -24,9 +36,9 @@ syntax Type
  ;
 syntax Entity
         = 
-        ()
+        Class theClass Type type
  ;
 syntax Routine
         = 
-        ()
+        Class theClass Type type
  ;

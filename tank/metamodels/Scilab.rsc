@@ -1,6 +1,14 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module Scilab
 
+syntax String
+        = 
+        String
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
 syntax Man
         = 
         String language String title String type String date String name String keyword String exemple Meta meta+
@@ -88,6 +96,8 @@ syntax Used_Functions
         = Param_Description
         | Description
         | Itemize
+        | Item
+        | Section
         | String verbatim+ Table table+
  ;
 syntax PSPPP
@@ -109,8 +119,9 @@ syntax PP
         biblio: Biblio
  ;
 syntax Itemize
-        = 
-        String label Item item Section section Authors_Item authors_Item Description description
+        = Item
+        | Section
+        | String label Item item Section section Authors_Item authors_Item Description description
  ;
 syntax Item
         = 

@@ -13,3 +13,11 @@ syntax Point
         = 
         String name Mesh mesh Double x Double y Double z
  ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;

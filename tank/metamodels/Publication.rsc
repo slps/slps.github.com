@@ -5,3 +5,15 @@ syntax Publication
         = 
         String title String authors Integer nbPages
  ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;

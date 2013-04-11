@@ -21,3 +21,15 @@ syntax TupleElement
         = 
         Tuple tuple String value
  ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;

@@ -37,3 +37,11 @@ syntax FileDep
         = 
         name: String
  ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;

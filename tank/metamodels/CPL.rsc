@@ -26,6 +26,7 @@ syntax NodeContainer
         | Redirection
         | Failure
         | Default
+        | Location
  ;
 syntax SubAction
         = 
@@ -91,6 +92,7 @@ syntax Node
         = Switch
         | SubCall
         | Action
+        | Location
  ;
 syntax Switch
         = AddressSwitch
@@ -147,4 +149,16 @@ syntax Redirect
 syntax Reject
         = 
         String status String reason
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
  ;

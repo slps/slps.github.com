@@ -13,7 +13,14 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable XPDL 0.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: David Touzet, Freddy Allilaire, <code>XPDL-1.14.ecore</code>, 2006/02/21.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>107</strong></li><li>Number of top alternatives: <strong>140</strong></li><li>Number of defined nonterminal symbols: <strong>63</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#Element" class="nt">Element</a></code></li><li>Bottom nonterminal symbols: <strong>3</strong>: <code><a href="#Boolean" class="nt">Boolean</a>, <a href="#String" class="nt">String</a>, <a href="#Integer" class="nt">Integer</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="AssociationDirectionKind">AssociationDirectionKind</a>:
+				</script></head><body><h1 class="l">Browsable XPDL 0.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: David Touzet, Freddy Allilaire, <code>XPDL-1.14.ecore</code>, 2006/02/21.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>110</strong></li><li>Number of top alternatives: <strong>144</strong></li><li>Number of defined nonterminal symbols: <strong>66</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#Element" class="nt">Element</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>2</strong></li><li>Keywords: <strong>2</strong>: <code class="t">"true", "false"</code></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="String">String</a>:
+        <span class="meta">string</span>
+</pre><pre><a class="nt" name="Integer">Integer</a>:
+        <span class="meta">int</span>
+</pre><pre><a class="nt" name="Boolean">Boolean</a>:
+        <span class="t">"true"</span>
+        <span class="t">"false"</span>
+</pre><pre><a class="nt" name="AssociationDirectionKind">AssociationDirectionKind</a>:
         <span class="sel">None</span>::ε
         <span class="sel">To</span>::ε
         <span class="sel">From</span>::ε
@@ -124,9 +131,9 @@
 </pre><pre><a class="nt" name="DataObject">DataObject</a>:
         <span class="sel">state</span>::<a class="nt" href="#String">String</a> <span class="sel">requiredForStart</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">producedAtCompletion</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">dataFields</span>::<a class="nt" href="#DataField">DataField</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Group">Group</a>:
-        ε
+        <span class="sel">textAnnotation</span>::<a class="nt" href="#String">String</a> <span class="sel">group</span>::<a class="nt" href="#String">String</a> <span class="sel">object</span>::<a class="nt" href="#Object">Object</a> <span class="sel">dataObject</span>::<a class="nt" href="#DataObject">DataObject</a>
 </pre><pre><a class="nt" name="Annotation">Annotation</a>:
-        ε
+        <span class="sel">textAnnotation</span>::<a class="nt" href="#String">String</a> <span class="sel">group</span>::<a class="nt" href="#String">String</a> <span class="sel">object</span>::<a class="nt" href="#Object">Object</a> <span class="sel">dataObject</span>::<a class="nt" href="#DataObject">DataObject</a>
 </pre><pre><a class="nt" name="TypeDeclaration">TypeDeclaration</a>:
         <span class="sel">id</span>::<a class="nt" href="#String">String</a> <span class="sel">name</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Application">Application</a>:
@@ -137,7 +144,7 @@
         <a class="nt" href="#ParametrizedApplication">ParametrizedApplication</a>
         <a class="nt" href="#ReferencedApplication">ReferencedApplication</a>
 </pre><pre><a class="nt" name="ParametrizedApplication">ParametrizedApplication</a>:
-        ε
+        
 </pre><pre><a class="nt" name="ReferencedApplication">ReferencedApplication</a>:
         <span class="sel">externalReference</span>::<a class="nt" href="#ExternalReference">ExternalReference</a>
 </pre><pre><a class="nt" name="Activity">Activity</a>:
@@ -241,7 +248,7 @@
 </pre><pre><a class="nt" name="EndEvent">EndEvent</a>:
         <span class="sel">triggerKind</span>::<a class="nt" href="#TriggerKind">TriggerKind</a> <span class="sel">implementation</span>::<a class="nt" href="#ImplementationKind">ImplementationKind</a> <span class="sel">trigger</span>::<a class="nt" href="#Trigger">Trigger</a>
 </pre><pre><a class="nt" name="Gateway">Gateway</a>:
-        ε
+        <span class="sel">gatewayType</span>::<a class="nt" href="#GatewayTypeKind">GatewayTypeKind</a> <span class="sel">instantiate</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">markerVisiable</span>::<a class="nt" href="#Boolean">Boolean</a>
 </pre><pre><a class="nt" name="Process">Process</a>:
         <span class="sel">accessLevel</span>::<a class="nt" href="#AccessLevelKind">AccessLevelKind</a> <span class="sel">processType</span>::<a class="nt" href="#ProcessTypeKind">ProcessTypeKind</a> <span class="sel">status</span>::<a class="nt" href="#StatusKind">StatusKind</a> <span class="sel">suppressJoinFailure</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">enableInstanceCompensation</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">adHoc</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">adHocOrdering</span>::<a class="nt" href="#AdHocOrderingKind">AdHocOrderingKind</a> <span class="sel">adHocCompletionCondition</span>::<a class="nt" href="#String">String</a> <span class="sel">participant</span>::<a class="nt" href="#Participant">Participant</a><span class="meta">+</span> <span class="sel">applications</span>::<a class="nt" href="#Application">Application</a><span class="meta">+</span> <span class="sel">dataField</span>::<a class="nt" href="#DataField">DataField</a> <span class="sel">activitySets</span>::<a class="nt" href="#ActivitySet">ActivitySet</a><span class="meta">+</span> <span class="sel">activities</span>::<a class="nt" href="#Activity">Activity</a><span class="meta">+</span> <span class="sel">transitions</span>::<a class="nt" href="#Transition">Transition</a><span class="meta">+</span> <span class="sel">object</span>::<a class="nt" href="#Object">Object</a> <span class="sel">defaultStartActivitySet</span>::<a class="nt" href="#ActivitySet">ActivitySet</a> <span class="sel">defaultStartActivity</span>::<a class="nt" href="#Activity">Activity</a>
 </pre><pre><a class="nt" name="Transition">Transition</a>:

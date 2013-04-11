@@ -68,11 +68,11 @@ syntax ControlFlow
  ;
 syntax TriggerFlow
         = 
-        ()
+        InformationObject carries+
  ;
 syntax ConstraintFlow
         = 
-        ()
+        InformationObject carries+
  ;
 syntax ResourceRole
         = 
@@ -98,7 +98,7 @@ syntax InputPort
  ;
 syntax ConnectionOperator
         = 
-        ()
+        AssociationConnector target AssociationConnector origin
  ;
 syntax AssociationConnector
         = 

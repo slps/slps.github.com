@@ -195,9 +195,9 @@ OperationCallExp:
 OperationCallExp:
         arguments::OclExpression+ operationName::String
 OperatorCallExp:
-        EPSILON
+        arguments::OclExpression+ operationName::String
 CollectionOperationCallExp:
-        EPSILON
+        arguments::OclExpression+ operationName::String
 LoopExp:
         IterateExp
 LoopExp:
@@ -269,15 +269,15 @@ IntegerType:
 RealType:
         
 BagType:
-        EPSILON
+        elementType::OclType
 OrderedSetType:
-        EPSILON
+        elementType::OclType
 SequenceType:
-        EPSILON
+        elementType::OclType
 SetType:
-        EPSILON
+        elementType::OclType
 OclAnyType:
-        EPSILON
+        name::String definitions::OclContextDefinition oclExpression::OclExpression operation::Operation mapType2::MapType attribute::Attribute mapType::MapType collectionTypes::CollectionType tupleTypeAttribute::TupleTypeAttribute variableDeclaration::VariableDeclaration
 TupleType:
         attributes::TupleTypeAttribute+
 TupleTypeAttribute:
@@ -300,3 +300,10 @@ Operation:
         name::String parameters::Parameter+ returnType::OclType body::OclExpression
 OclModel:
         name::String metamodel::OclModel elements::OclModelElement+ model::OclModel+
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR

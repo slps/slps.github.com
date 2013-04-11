@@ -1,6 +1,14 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module MSProject2
 
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
 syntax MSPProject
         = 
         MSPResource resource+ MSPLink link+ MSPTask task+
@@ -28,7 +36,7 @@ syntax MSPHumanResource
  ;
 syntax MSPMachine
         = 
-        ()
+        Double cost MSPProject project MSPAssignment assignment+
  ;
 syntax Date
         = 

@@ -1,6 +1,18 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module SPL
 
+syntax String
+        = 
+        String
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
 syntax LocatedElement
         = Program
         | Service
@@ -50,7 +62,7 @@ syntax Method
  ;
 syntax Argument
         = 
-        ()
+        TypeExpression type Expression initExp
  ;
 syntax MethodName
         = SIPMethodName
@@ -71,7 +83,7 @@ syntax Branch
  ;
 syntax DefaultBranch
         = 
-        ()
+        Statement statements+
  ;
 syntax NamedBranch
         = 

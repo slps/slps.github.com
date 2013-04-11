@@ -36,3 +36,15 @@ syntax UnaryType
         | Iteration: ()
         | finitIteration: ()
  ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;

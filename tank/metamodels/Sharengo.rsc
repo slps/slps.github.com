@@ -43,3 +43,7 @@ syntax Service2BusinessObjectFlow
         = 
         String source String target
  ;
+syntax String
+        = 
+        String
+ ;

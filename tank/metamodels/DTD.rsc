@@ -96,3 +96,11 @@ syntax OtherAttributeType
         = 
         type: OtherAttributeTypeEnum
  ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;

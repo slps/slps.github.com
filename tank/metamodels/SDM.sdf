@@ -2,8 +2,15 @@ module Main
 
 exports
   sorts
-        SystemDefinitionModel Information Import ImportNamespaceIdentity SDMCommunicationDefinition SDMContainmentDefinition SDMDelegationDefinition SDMReferenceDefinition SDMEndpointDefinition SDMResourceDefinition SDMSystemDefinition SDMConstraintDefinition SDMManager ManagerDeclaration ObjectDefinition OBFlow OBRelationshipConstraint OBConstraint OBConstraintGroup OBEndpointDefinition OBSystemDefinition OBResourceDefinition OBCommunicationDefinition OBContainmentDefinition OBDelegationDefinition OBReferenceDefinition OBHostingDefinition OBEndpoint OBSubsystem OBResource OBHosting OBContainment OBConnection OBDelegation OBReference SystemDefinition EndpointDefinition ResourceDefinition RelationshipDefinition RDObjectConstraint RDConstraint RDConstraintGroup RDFlow RDConnection RDHosting RDDelegation RDReference RDContainment CommunicationDefinition HostingDefinition ContainmentDefinition DelegationDefinition ReferenceDefinition Member MembSettingValue MembSettingValueList ObjectMember RelationshipMember SystemMember EndpointMember ResourceMember HostingMember CommunicationMember ContainmentMember DelegationMember ReferenceMember DesignData NameSpace ObjectConstraint OCConstraint OCRelationshipConstraint OCConstraintGroup RelationshipConstraint RCConstraint RCRelationshipConstraint RCObjectConstraint RCConstraintGroup ConstraintGroup CGConstraint CGRelationshipConstraint CGObjectConstraint StructuralConstraint ConstraintDefinition CDRelationshipConstraint CDConstraintGroup CDObjectConstraint CDConstraint ConstraintMember Definition DefSettingDeclaration DefSettingValue DefSettingValueList SimpleName QualifiedName Path SettingPath NamespaceIdentity FlowDefinition FlowMember ValueTransfer Output Input SettingDefinitions SettingMember SettingsAttributes SettingMemberAccess SettingMemberSecure Facet SettingValue SettingValueList Value SettingValueAttributes Description Entry DescriptionEntry Substitute PathList MaxOccurs MinOccurs FourPartVersionType PublicKeyType PublicKeyTokenType CompilationHashType RolesList Culture CultureNeutral ProcessorArchitectures Platform ConstraintEvaluation Element 
+        String Integer Boolean SystemDefinitionModel Information Import ImportNamespaceIdentity SDMCommunicationDefinition SDMContainmentDefinition SDMDelegationDefinition SDMReferenceDefinition SDMEndpointDefinition SDMResourceDefinition SDMSystemDefinition SDMConstraintDefinition SDMManager ManagerDeclaration ObjectDefinition OBFlow OBRelationshipConstraint OBConstraint OBConstraintGroup OBEndpointDefinition OBSystemDefinition OBResourceDefinition OBCommunicationDefinition OBContainmentDefinition OBDelegationDefinition OBReferenceDefinition OBHostingDefinition OBEndpoint OBSubsystem OBResource OBHosting OBContainment OBConnection OBDelegation OBReference SystemDefinition EndpointDefinition ResourceDefinition RelationshipDefinition RDObjectConstraint RDConstraint RDConstraintGroup RDFlow RDConnection RDHosting RDDelegation RDReference RDContainment CommunicationDefinition HostingDefinition ContainmentDefinition DelegationDefinition ReferenceDefinition Member MembSettingValue MembSettingValueList ObjectMember RelationshipMember SystemMember EndpointMember ResourceMember HostingMember CommunicationMember ContainmentMember DelegationMember ReferenceMember DesignData NameSpace ObjectConstraint OCConstraint OCRelationshipConstraint OCConstraintGroup RelationshipConstraint RCConstraint RCRelationshipConstraint RCObjectConstraint RCConstraintGroup ConstraintGroup CGConstraint CGRelationshipConstraint CGObjectConstraint StructuralConstraint ConstraintDefinition CDRelationshipConstraint CDConstraintGroup CDObjectConstraint CDConstraint ConstraintMember Definition DefSettingDeclaration DefSettingValue DefSettingValueList SimpleName QualifiedName Path SettingPath NamespaceIdentity FlowDefinition FlowMember ValueTransfer Output Input SettingDefinitions SettingMember SettingsAttributes SettingMemberAccess SettingMemberSecure Facet SettingValue SettingValueList Value SettingValueAttributes Description Entry DescriptionEntry Substitute PathList MaxOccurs MinOccurs FourPartVersionType PublicKeyType PublicKeyTokenType CompilationHashType RolesList Culture CultureNeutral ProcessorArchitectures Platform ConstraintEvaluation Element 
   context-free syntax
+        STR -> String
+
+        INT -> Integer
+
+        "true" -> Boolean
+        "false" -> Boolean
+
         information::Information import::Import+ designData::DesignData settingDefinitions::SettingDefinitions communicationDefinition::SDMCommunicationDefinition+ containmentDefinition::SDMContainmentDefinition+ delegationDefinition::SDMDelegationDefinition+ referenceDefinition::SDMReferenceDefinition+ endpointDefinition::SDMEndpointDefinition+ resourceDefinition::SDMResourceDefinition+ systemDefinition::SDMSystemDefinition+ constraintDefinition::SDMConstraintDefinition+ manager::SDMManager+ nameSpace::NameSpace namespaceIdentity::NamespaceIdentity documentLanguage::Culture+ compilationHash::CompilationHashType+ -> SystemDefinitionModel
 
         sdm::SystemDefinitionModel friendlyname::String companyname::String copyright::String trademark::String description::Description comments::String compilerversion::FourPartVersionType -> Information
@@ -202,13 +209,7 @@ exports
 
         OBSubsystem -> SystemMember
 
-        OBSubsystem -> SystemMember
-
         OBEndpoint -> EndpointMember
-
-        OBEndpoint -> EndpointMember
-
-        OBResource -> ResourceMember
 
         OBResource -> ResourceMember
 
@@ -350,19 +351,19 @@ exports
 
         definition::Definition -> DefSettingValueList
 
-         -> SimpleName
+        value::String -> SimpleName
 
-         -> QualifiedName
+        value::String -> QualifiedName
 
-         -> Path
+        value::String -> Path
 
-         -> SettingPath
+        value::String -> SettingPath
 
         ImportNamespaceIdentity -> NamespaceIdentity
 
         name::Path version::FourPartVersionType publicKey::PublicKeyType publicKeyToken::PublicKeyTokenType culture::CultureNeutral platform::Platform -> NamespaceIdentity
 
-         -> FlowDefinition
+        description::Description designData::DesignData settingDeclaration::DefSettingDeclaration+ settingValue::DefSettingValue+ settingValueList::DefSettingValueList+ name::SimpleName manager::QualifiedName className::String -> FlowDefinition
 
         OBFlow -> FlowMember
 
@@ -378,7 +379,7 @@ exports
 
         fixed::Boolean replace::Boolean -> Output
 
-         -> Input
+        name::SimpleName path::SettingPath cast::Boolean convert::Boolean -> Input
 
         nameSpace::NameSpace manager::QualifiedName clrNameSpace::String -> SettingDefinitions
 
@@ -428,17 +429,17 @@ exports
 
         settingPath::SettingPath+ -> PathList
 
-         -> MaxOccurs
+        value::String -> MaxOccurs
 
-         -> MinOccurs
+        value::String -> MinOccurs
 
-         -> FourPartVersionType
+        value::String -> FourPartVersionType
 
-         -> PublicKeyType
+        value::String -> PublicKeyType
 
-         -> PublicKeyTokenType
+        value::String -> PublicKeyTokenType
 
-         -> CompilationHashType
+        value::String -> CompilationHashType
 
         Host:: -> RolesList
         Guest:: -> RolesList
@@ -451,9 +452,9 @@ exports
         Client:: -> RolesList
         Server:: -> RolesList
 
-         -> Culture
+        value::String -> Culture
 
-         -> CultureNeutral
+        value::String -> CultureNeutral
 
         x86:: -> ProcessorArchitectures
         ia64:: -> ProcessorArchitectures

@@ -29,3 +29,7 @@ syntax Contributor
         = 
         String name String email String url String organization String organizationUrl String roles String timezone String properties
  ;
+syntax String
+        = 
+        String
+ ;

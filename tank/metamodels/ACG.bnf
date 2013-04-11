@@ -16,12 +16,14 @@ ACGElement:
         Function
 ACGElement:
         Attribute
+ACGElement:
+        Node
 Function:
         context::String name::String parameters::Parameter+ body::Expression
 Attribute:
         context::String name::String body::Expression
 Parameter:
-        EPSILON
+        name::String
 Node:
         ASMNode
 Node:
@@ -34,6 +36,10 @@ CodeNode:
         element::String mode::String guard::Expression
 SimpleNode:
         element::String mode::String guard::Expression
+StatementBlock:
+        Node
+StatementBlock:
+        CompoundStat
 Statement:
         ReportStat
 Statement:
@@ -42,6 +48,8 @@ Statement:
         ParamStat
 Statement:
         EmitStat
+Statement:
+        CompoundStat
 CompoundStat:
         ForEachStat
 CompoundStat:
@@ -227,7 +235,7 @@ OperationCallExp:
 OperationCallExp:
         arguments::Expression+
 OperatorCallExp:
-        EPSILON
+        arguments::Expression+
 LiteralExp:
         OclUndefinedExp
 LiteralExp:
@@ -250,3 +258,10 @@ IntegerExp:
         value::Integer
 StringExp:
         value::String
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR

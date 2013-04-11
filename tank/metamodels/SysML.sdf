@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        Entity NamedElement Dependency Conform Package View Class Viewpoint Comment Rationale Problem Block ConstraintBlock Property BlockProperty ConstraintProperty DistributedProperty DataType ValueType Unit Dimension ConnectorEnd NestedConnectorEnd Port FlowPort FlowProperty Interface FlowSpecification FlowDirection Classifier InformationItem InformationFlow ItemFlow Parameter ActivityEdge ParameterSet Optional Rate InstanceSpecification Continous Discrete Probability ValueSpecification Behavior Operation ControlOperation ObjectNode NoBuffer Overwrite Abstraction Allocate Allocated ActivityPartition AllocateActivityPartition Trace DeriveReqt Verify Copy Realization Satisfy Requirement TestCase RequirementRelated BasicInterval Interval Uniform Normal 
+        Entity NamedElement Dependency Conform Package View Class Viewpoint Comment Rationale Problem Block ConstraintBlock Property BlockProperty ConstraintProperty DistributedProperty DataType ValueType Unit Dimension ConnectorEnd NestedConnectorEnd Port FlowPort FlowProperty Interface FlowSpecification FlowDirection Classifier InformationItem InformationFlow ItemFlow Parameter ActivityEdge ParameterSet Optional Rate InstanceSpecification Continous Discrete Probability ValueSpecification Behavior Operation ControlOperation ObjectNode NoBuffer Overwrite Abstraction Allocate Allocated ActivityPartition AllocateActivityPartition Trace DeriveReqt Verify Copy Realization Satisfy Requirement TestCase RequirementRelated BasicInterval Interval Uniform Normal String Integer Boolean 
   context-free syntax
         NamedElement -> Entity
 
@@ -54,11 +54,7 @@ exports
 
         Conform -> Dependency
 
-        Conform -> Dependency
-
         target::Viewpoint source::View -> Conform
-
-        View -> Package
 
         View -> Package
 
@@ -80,15 +76,15 @@ exports
 
         content::String -> Comment
 
-         -> Rationale
+        content::String -> Rationale
 
-         -> Problem
+        content::String -> Problem
 
         ConstraintBlock -> Block
 
         isEncapsulated::Boolean -> Block
 
-         -> ConstraintBlock
+        isEncapsulated::Boolean -> ConstraintBlock
 
         BlockProperty -> Property
 
@@ -118,19 +114,15 @@ exports
 
         ValueType -> DataType
 
-        ValueType -> DataType
-
         Unit -> ValueType
 
         Dimension -> ValueType
 
         unit::Unit dimension::Dimension -> ValueType
 
-         -> Unit
+        unit::Unit dimension::Dimension -> Unit
 
-         -> Dimension
-
-        NestedConnectorEnd -> ConnectorEnd
+        unit::Unit dimension::Dimension -> Dimension
 
         NestedConnectorEnd -> ConnectorEnd
 
@@ -143,8 +135,6 @@ exports
         isAtomic::Boolean direction::FlowDirection isConjugated::Boolean -> FlowPort
 
         direction::FlowDirection -> FlowProperty
-
-        FlowSpecification -> Interface
 
         FlowSpecification -> Interface
 
@@ -171,9 +161,15 @@ exports
 
         Optional -> Parameter
 
-        Optional -> Parameter
+        Rate -> Parameter
+
+        Probability -> ActivityEdge
+
+        Rate -> ActivityEdge
 
          -> ActivityEdge
+
+        Probability -> ParameterSet
 
          -> ParameterSet
 
@@ -187,15 +183,23 @@ exports
 
          -> InstanceSpecification
 
-         -> Continous
+        instance::InstanceSpecification -> Continous
 
-         -> Discrete
+        instance::InstanceSpecification -> Discrete
 
         probability::ValueSpecification -> Probability
 
          -> ValueSpecification
 
+        ControlOperation -> Behavior
+
+        TestCase -> Behavior
+
          -> Behavior
+
+        ControlOperation -> Operation
+
+        TestCase -> Operation
 
          -> Operation
 
@@ -214,13 +218,9 @@ exports
 
         Allocate -> Abstraction
 
-        Allocate -> Abstraction
-
          -> Allocate
 
         allocatedFrom::NamedElement+ allocatedTo::NamedElement+ -> Allocated
-
-        AllocateActivityPartition -> ActivityPartition
 
         AllocateActivityPartition -> ActivityPartition
 
@@ -244,8 +244,6 @@ exports
 
         Satisfy -> Realization
 
-        Satisfy -> Realization
-
          -> Satisfy
 
         text::String id::String derived::Requirement+ derivedFrom::Requirement+ satisfiedBy::NamedElement+ refinedBy::NamedElement+ tracedTo::NamedElement+ verifiedBy::TestCase+ master::Requirement -> Requirement
@@ -260,8 +258,15 @@ exports
 
         min::Integer max::Integer -> BasicInterval
 
-         -> Interval
+        min::Integer max::Integer -> Interval
 
-         -> Uniform
+        min::Integer max::Integer -> Uniform
 
         mean::Integer standardDeviation::Integer -> Normal
+
+        STR -> String
+
+        INT -> Integer
+
+        "true" -> Boolean
+        "false" -> Boolean

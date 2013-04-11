@@ -1,7 +1,14 @@
+String:
+        STR
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
 Group:
         subjectGroup::Subject+
 User:
-        EPSILON
+        group::Group role::Role+
 Subject:
         Group
 Subject:
@@ -15,7 +22,7 @@ Permission:
 AuthorizationConstraint:
         permission::Permission+
 AtomicAction:
-        EPSILON
+        permission::Permission+ resource::Resource actionHyerarchy::CompositeAction+
 CompositeAction:
         subordinatedAction::Action+
 Action:

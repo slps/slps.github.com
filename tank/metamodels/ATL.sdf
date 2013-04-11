@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        LocatedElement Unit Library Query Module ModuleElement Helper Rule MatchedRule LazyMatchedRule CalledRule InPattern OutPattern PatternElement InPatternElement SimpleInPatternElement OutPatternElement SimpleOutPatternElement ForEachOutPatternElement Binding RuleVariableDeclaration LibraryRef ActionBlock Statement ExpressionStat BindingStat IfStat ForStat OclExpression VariableExp SuperExp PrimitiveExp StringExp BooleanExp NumericExp RealExp IntegerExp CollectionExp BagExp OrderedSetExp SequenceExp SetExp TupleExp TuplePart MapExp MapElement EnumLiteralExp OclUndefinedExp PropertyCallExp NavigationOrAttributeCallExp OperationCallExp OperatorCallExp CollectionOperationCallExp LoopExp IterateExp IteratorExp LetExp IfExp VariableDeclaration Iterator Parameter CollectionType OclType Primitive StringType BooleanType NumericType IntegerType RealType BagType OrderedSetType SequenceType SetType OclAnyType TupleType TupleTypeAttribute OclModelElement MapType OclFeatureDefinition OclContextDefinition OclFeature Attribute Operation OclModel 
+        LocatedElement Unit Library Query Module ModuleElement Helper Rule MatchedRule LazyMatchedRule CalledRule InPattern OutPattern PatternElement InPatternElement SimpleInPatternElement OutPatternElement SimpleOutPatternElement ForEachOutPatternElement Binding RuleVariableDeclaration LibraryRef ActionBlock Statement ExpressionStat BindingStat IfStat ForStat OclExpression VariableExp SuperExp PrimitiveExp StringExp BooleanExp NumericExp RealExp IntegerExp CollectionExp BagExp OrderedSetExp SequenceExp SetExp TupleExp TuplePart MapExp MapElement EnumLiteralExp OclUndefinedExp PropertyCallExp NavigationOrAttributeCallExp OperationCallExp OperatorCallExp CollectionOperationCallExp LoopExp IterateExp IteratorExp LetExp IfExp VariableDeclaration Iterator Parameter CollectionType OclType Primitive StringType BooleanType NumericType IntegerType RealType BagType OrderedSetType SequenceType SetType OclAnyType TupleType TupleTypeAttribute OclModelElement MapType OclFeatureDefinition OclContextDefinition OclFeature Attribute Operation OclModel Boolean Integer String 
   context-free syntax
         Unit -> LocatedElement
 
@@ -200,9 +200,9 @@ exports
 
         arguments::OclExpression+ operationName::String -> OperationCallExp
 
-         -> OperatorCallExp
+        arguments::OclExpression+ operationName::String -> OperatorCallExp
 
-         -> CollectionOperationCallExp
+        arguments::OclExpression+ operationName::String -> CollectionOperationCallExp
 
         IterateExp -> LoopExp
 
@@ -274,15 +274,15 @@ exports
 
          -> RealType
 
-         -> BagType
+        elementType::OclType -> BagType
 
-         -> OrderedSetType
+        elementType::OclType -> OrderedSetType
 
-         -> SequenceType
+        elementType::OclType -> SequenceType
 
-         -> SetType
+        elementType::OclType -> SetType
 
-         -> OclAnyType
+        name::String definitions::OclContextDefinition oclExpression::OclExpression operation::Operation mapType2::MapType attribute::Attribute mapType::MapType collectionTypes::CollectionType tupleTypeAttribute::TupleTypeAttribute variableDeclaration::VariableDeclaration -> OclAnyType
 
         attributes::TupleTypeAttribute+ -> TupleType
 
@@ -305,3 +305,10 @@ exports
         name::String parameters::Parameter+ returnType::OclType body::OclExpression -> Operation
 
         name::String metamodel::OclModel elements::OclModelElement+ model::OclModel+ -> OclModel
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
+        STR -> String

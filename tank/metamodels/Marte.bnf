@@ -58,6 +58,22 @@ NamedElement:
         InteractionFragment
 NamedElement:
         GeneralOrdering
+NamedElement:
+        PackageableElement
+NamedElement:
+        ActivityPartition
+NamedElement:
+        Include
+NamedElement:
+        Extend
+StructuralFeature:
+        Property
+ConnectableElement:
+        Parameter
+ConnectableElement:
+        Variable
+TemplateableElement:
+        StringExpression
 Property:
         Port
 Property:
@@ -87,8 +103,30 @@ DirectedRelationship:
         ProfileApplication
 DirectedRelationship:
         ProtocolConformance
+DirectedRelationship:
+        Dependency
+DirectedRelationship:
+        Include
+DirectedRelationship:
+        Extend
 Relationship:
         DirectedRelationship
+Relationship:
+        Association
+Namespace:
+        Package
+Namespace:
+        Classifier
+Namespace:
+        BehavioralFeature
+Namespace:
+        Region
+Namespace:
+        Transition
+Namespace:
+        State
+Namespace:
+        InteractionOperand
 ElementImport:
         visibility::VisibilityKind alias::MARTE_PrimitivesTypes/String importedElement::PackageableElement importingNamespace::Namespace
 PackageImport:
@@ -99,6 +137,12 @@ Constraint:
         InteractionConstraint
 Constraint:
         constrainedElement::Element+ specification::ValueSpecification context::Namespace
+TypedElement:
+        ConnectableElement
+TypedElement:
+        ValueSpecification
+TypedElement:
+        ObjectNode
 Association:
         Extension
 Association:
@@ -113,6 +157,10 @@ Classifier:
         Interface
 Classifier:
         StructuredClassifier
+Classifier:
+        Association
+Classifier:
+        Artifact
 RedefinableElement:
         Feature
 RedefinableElement:
@@ -121,12 +169,20 @@ RedefinableElement:
         ActivityNode
 RedefinableElement:
         ActivityEdge
+RedefinableElement:
+        Region
+RedefinableElement:
+        Transition
 TemplateBinding:
         signature::TemplateSignature parameterSubstitution::TemplateParameterSubstitution+ boundElement::TemplateableElement
 TemplateSignature:
         parameter::TemplateParameter+ ownedParameter::TemplateParameter+ template::TemplateableElement
 TemplateParameter:
         signature::TemplateSignature parameteredElement::ParameterableElement ownedParameteredElement::ParameterableElement default::ParameterableElement ownedDefault::ParameterableElement
+ParameterableElement:
+        ConnectableElement
+ParameterableElement:
+        PackageableElement
 TemplateParameterSubstitution:
         formal::TemplateParameter actual::ParameterableElement+ ownedActual::ParameterableElement+ templateBinding::TemplateBinding
 Generalization:
@@ -135,6 +191,10 @@ GeneralizationSet:
         isCovering::MARTE_PrimitivesTypes/Boolean isDisjoint::MARTE_PrimitivesTypes/Boolean powertype::Classifier generalization::Generalization+
 Feature:
         Connector
+Feature:
+        StructuralFeature
+Feature:
+        BehavioralFeature
 Substitution:
         contract::Classifier substitutingClassifier::Classifier
 PackageableElement:
@@ -147,6 +207,10 @@ PackageableElement:
         Observation
 PackageableElement:
         Event
+PackageableElement:
+        Dependency
+PackageableElement:
+        ValueSpecification
 PackageMerge:
         mergedPackage::Package receivingPackage::Package
 ProfileApplication:
@@ -164,6 +228,8 @@ Class:
 StringExpression:
         subExpression::StringExpression+ owningExpression::StringExpression
 Expression:
+        StringExpression
+Expression:
         symbol::MARTE_PrimitivesTypes/String operand::ValueSpecification+
 ValueSpecification:
         Expression
@@ -177,12 +243,26 @@ ValueSpecification:
         Interval
 BehavioredClassifier:
         UseCase
+BehavioredClassifier:
+        Collaboration
+BehavioredClassifier:
+        Class
 Behavior:
         StateMachine
 Behavior:
         Activity
+Behavior:
+        Interaction
 MultiplicityElement:
         ConnectorEnd
+MultiplicityElement:
+        Parameter
+MultiplicityElement:
+        Pin
+MultiplicityElement:
+        Variable
+DeploymentTarget:
+        InstanceSpecification
 DataType:
         Enumeration
 DataType:
@@ -214,6 +294,8 @@ OpaqueExpression:
         body::MARTE_PrimitivesTypes/String+ language::MARTE_PrimitivesTypes/String+ result::Parameter behavior::Behavior
 Parameter:
         direction::ParameterDirectionKind default::MARTE_PrimitivesTypes/String defaultValue::ValueSpecification operation::Operation parameterSet::ParameterSet+ isException::MARTE_PrimitivesTypes/Boolean isStream::MARTE_PrimitivesTypes/Boolean effect::ParameterEffectKind
+EncapsulatedClassifier:
+        Class
 Operation:
         interface::Interface class::Class isQuery::MARTE_PrimitivesTypes/Boolean isOrdered::MARTE_PrimitivesTypes/Boolean isUnique::MARTE_PrimitivesTypes/Boolean lower::MARTE_PrimitivesTypes/Integer upper::MARTE_PrimitivesTypes/UnlimitedNatural precondition::Constraint+ postcondition::Constraint+ redefinedOperation::Operation+ datatype::DataType bodyCondition::Constraint type::Type
 Reception:
@@ -232,6 +314,8 @@ InstanceSpecification:
         classifier::Classifier+ slot::Slot+ specification::ValueSpecification
 BehavioralFeature:
         Reception
+BehavioralFeature:
+        Operation
 Signal:
         ownedAttribute::Property+
 TimeExpression:
@@ -243,7 +327,7 @@ Observation:
 Duration:
         expr::ValueSpecification observation::Observation+
 DurationInterval:
-        EPSILON
+        min::ValueSpecification max::ValueSpecification
 Interval:
         DurationInterval
 Interval:
@@ -260,7 +344,7 @@ IntervalConstraint:
         TimeConstraint
         DurationConstraint
 TimeInterval:
-        EPSILON
+        min::ValueSpecification max::ValueSpecification
 DurationConstraint:
         firstEvent::MARTE_PrimitivesTypes/Boolean
 TimeObservation:
@@ -277,6 +361,8 @@ Port:
         isBehavior::MARTE_PrimitivesTypes/Boolean isService::MARTE_PrimitivesTypes/Boolean required::Interface+ redefinedPort::Port+ provided::Interface+ protocol::ProtocolStateMachine
 Action:
         InvocationAction
+Action:
+        StructuredActivityNode
 Message:
         messageKind::MessageKind messageSort::MessageSort receiveEvent::MessageEnd sendEvent::MessageEnd connector::Connector interaction::Interaction argument::ValueSpecification+ signature::NamedElement
 Lifeline:
@@ -311,6 +397,8 @@ Region:
         subvertex::Vertex+ transition::Transition+ state::State extendedRegion::Region stateMachine::StateMachine
 StructuredClassifier:
         EncapsulatedClassifier
+StructuredClassifier:
+        Collaboration
 Vertex:
         Pseudostate
 Vertex:
@@ -327,8 +415,12 @@ ParameterSet:
         parameter::Parameter+ condition::Constraint+
 ActivityNode:
         ExecutableNode
+ActivityNode:
+        ObjectNode
 ActivityGroup:
         InterruptibleActivityRegion
+ActivityGroup:
+        ActivityPartition
 ParameterDirectionKind:
         in::EPSILON
         inout::EPSILON
@@ -341,12 +433,14 @@ ParameterEffectKind:
         delete::EPSILON
 InterruptibleActivityRegion:
         node::ActivityNode+ interruptingEdge::ActivityEdge+
+DeployedArtifact:
+        Artifact
 Slot:
         definingFeature::StructuralFeature value::ValueSpecification+ owningInstance::InstanceSpecification
 ExecutableNode:
         Action
 OutputPin:
-        EPSILON
+        isControl::MARTE_PrimitivesTypes/Boolean
 Pin:
         OutputPin
 Pin:
@@ -354,7 +448,7 @@ Pin:
 Pin:
         isControl::MARTE_PrimitivesTypes/Boolean
 InputPin:
-        EPSILON
+        isControl::MARTE_PrimitivesTypes/Boolean
 MessageKind:
         complete::EPSILON
         lost::EPSILON
@@ -362,6 +456,8 @@ MessageKind:
         unknown::EPSILON
 ExceptionHandler:
         handlerBody::ExecutableNode exceptionInput::ObjectNode exceptionType::Classifier+ protectedNode::ExecutableNode
+ObjectNode:
+        Pin
 ObjectNodeOrderingKind:
         unordered::EPSILON
         ordered::EPSILON
@@ -379,7 +475,7 @@ MessageSort:
 Interaction:
         lifeline::Lifeline+ fragment::InteractionFragment+ action::Action+ formalGate::Gate+ message::Message+
 PartDecomposition:
-        EPSILON
+        refersTo::Interaction actualGate::Gate+ argument::Action+
 InteractionUse:
         PartDecomposition
 InteractionUse:
@@ -390,6 +486,10 @@ InteractionFragment:
         InteractionUse
 InteractionFragment:
         OccurrenceSpecification
+InteractionFragment:
+        Interaction
+InteractionFragment:
+        InteractionOperand
 ConnectorKind:
         assembly::EPSILON
         delegation::EPSILON

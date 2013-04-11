@@ -2,13 +2,15 @@ module Main
 
 exports
   sorts
-        ModelElement SyncChart ReferenceState Arc Vertex PseudoState PseudoStateKind State SimpleState CompositeState Stg Transition TransitionKind PseudoTransition PseudoTransitionKind 
+        ModelElement SyncChart ReferenceState Arc Vertex PseudoState PseudoStateKind State SimpleState CompositeState Stg Transition TransitionKind PseudoTransition PseudoTransitionKind Boolean Integer String 
   context-free syntax
         Arc -> ModelElement
 
         Vertex -> ModelElement
 
         context::ModelElement referenceState::ReferenceState+ -> SyncChart
+
+        CompositeState -> ReferenceState
 
         subSyncChart::SyncChart containers::Stg -> ReferenceState
 
@@ -26,9 +28,11 @@ exports
 
         SimpleState -> State
 
+        CompositeState -> State
+
         isFinal::Boolean -> State
 
-         -> SimpleState
+        isFinal::Boolean -> SimpleState
 
         canTerminate::Boolean isSuspendable::Boolean stg::Stg+ -> CompositeState
 
@@ -41,3 +45,10 @@ exports
         kind::PseudoTransitionKind -> PseudoTransition
 
          -> PseudoTransitionKind
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
+        STR -> String

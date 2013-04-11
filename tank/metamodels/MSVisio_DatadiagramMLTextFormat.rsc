@@ -70,24 +70,41 @@ syntax DocumentSheet
         ds_visioDocument: VisioDocument
  ;
 syntax PageSheet
-        = 
-        ()
+        = DocumentSheet
+        | ShapesCollection ss_shapes Integer lineStyle Integer fillStyle Integer textStyle ShapeElt shapeElts+
+ ;
+syntax NamedElt
+        = DocumentSheet
+        | MasterShortCut
+        | Page
  ;
 syntax IdentifiedElt
         = FontEntry
         | FaceName
+        | MasterShortCut
+        | Master
+        | Page
  ;
 syntax Shape
-        = 
-        ShapesCollection ss_shapes Integer lineStyle Integer fillStyle Integer textStyle ShapeElt shapeElts+
+        = StyleSheet
+        | PageSheet
+        | ShapesCollection ss_shapes Integer lineStyle Integer fillStyle Integer textStyle ShapeElt shapeElts+
  ;
 syntax ShapeElt
-        = 
-        Text
+        = Text
+        | Geom
+        | Char
+        | Para
+        | TabsCollection
+        | Field
  ;
 syntax IXElt
+        = Tab
+        | XYElt
+ ;
+syntax DelElt
         = 
-        Tab
+        XYElt
  ;
 syntax Geom
         = 
@@ -163,28 +180,34 @@ syntax Text
         TextElt textElts+
  ;
 syntax TextElt
-        = 
-        StringElt
+        = StringElt
+        | Cp
+        | Pp
+        | Tp
+        | Fld
  ;
 syntax IXrequiredElt
-        = 
-        ColorEntry
+        = ColorEntry
+        | Cp
+        | Pp
+        | Tp
+        | Fld
  ;
 syntax Cp
         = 
-        ()
+        Integer iX Text te_text
  ;
 syntax Pp
         = 
-        ()
+        Integer iX Text te_text
  ;
 syntax Tp
         = 
-        ()
+        Integer iX Text te_text
  ;
 syntax Fld
         = 
-        ()
+        Integer iX Text te_text
  ;
 syntax StringElt
         = 
@@ -239,8 +262,9 @@ syntax Connect
         ConnectsCollection c_connects Integer fromSheet Integer toSheet String fromCell String toCell Integer fromPart Integer toPart
  ;
 syntax MasterElt
-        = 
-        Icon
+        = Icon
+        | ShapesCollection
+        | ConnectsCollection
  ;
 syntax PagesCollection
         = 
@@ -249,6 +273,10 @@ syntax PagesCollection
 syntax Page
         = 
         PagesCollection p_pages Boolean background Integer backPage Double viewScale Double viewCenterX Double ViewCenterY Integer reviewerID Integer associatedPage PageElt pageElts+
+ ;
+syntax PageElt
+        = ShapesCollection
+        | ConnectsCollection
  ;
 syntax DocumentSettingsElt
         = 
@@ -273,4 +301,16 @@ syntax HeaderFooter
 syntax SolutionXML
         = 
         sx_visioDocument: VisioDocument
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
  ;

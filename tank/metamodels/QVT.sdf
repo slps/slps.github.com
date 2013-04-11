@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        TemplateExp ObjectTemplateExp CollectionTemplateExp PropertyTemplateItem ImperativeIterateExp AssignExp BlockExp SwitchExp VariableInitExp WhileExp ComputeExp AltExp UnlinkExp ReturnExp BreakExp TryExp RaiseExp ContinueExp ForExp TupleExp Typedef InstantiationExp DictionaryType DictLiteralExp DictLiteralPart TemplateParameterType LogExp AssertExp SeverityKind ImperativeLoopExp CollectorExp ImperativeExpression UnpackExp AnonymousTupleType AnonymousTupleLiteralExp AnonymousTupleLiteralPart ListType Class DataType Element Tag Enumeration NamedElement Extent Object Operation Package Type Parameter EnumerationLiteral Property TypedElement PrimitiveType URIExtent Comment MappingBody Helper ResolveExp ResolveInExp OperationalTransformation MappingParameter MappingOperation MappingCallExp Constructor ContextualProperty EntryOperation ImperativeCallExp ImperativeOperation DirectionKind Library ModelParameter ModelType Module ModuleImport ImportKind VarParameter OperationBody ConstructorBody ObjectExp Assignment BottomPattern GuardPattern Mapping RealizedVariable CoreDomain CorePattern EnforcementOperation EnforcementMode Domain Transformation TypedModel Rule Pattern Predicate Function FunctionParameter RelationalTransformation Relation RelationDomain DomainPattern RelationImplementation Key BooleanLiteralExp CallExp CollectionKind OclExpression UnlimitedNaturalExp IfExp LetExp Variable PropertyCallExp VariableExp TypeExp LoopExp IteratorExp StringLiteralExp IntegerLiteralExp OperationCallExp RealLiteralExp LiteralExp IterateExp PrimitiveLiteralExp NumericLiteralExp CollectionLiteralExp CollectionLiteralPart CollectionItem CollectionRange TupleLiteralExp NullLiteralExp ExpressionInOcl OpaqueExpression InvalidLiteralExp FeaturePropertyCall TupleLiteralPart BagType CollectionType EnumLiteralExp InvalidType OrderedSetType SequenceType SetType TupleType VoidType AnyType 
+        TemplateExp ObjectTemplateExp CollectionTemplateExp PropertyTemplateItem ImperativeIterateExp AssignExp BlockExp SwitchExp VariableInitExp WhileExp ComputeExp AltExp UnlinkExp ReturnExp BreakExp TryExp RaiseExp ContinueExp ForExp TupleExp Typedef InstantiationExp DictionaryType DictLiteralExp DictLiteralPart TemplateParameterType LogExp AssertExp SeverityKind ImperativeLoopExp CollectorExp ImperativeExpression UnpackExp AnonymousTupleType AnonymousTupleLiteralExp AnonymousTupleLiteralPart ListType Class DataType Element Tag Enumeration NamedElement Extent Object Operation MultiplicityElement Package Type Parameter EnumerationLiteral Property TypedElement PrimitiveType URIExtent Boolean String Integer Comment MappingBody Helper ResolveExp ResolveInExp OperationalTransformation MappingParameter MappingOperation MappingCallExp Constructor ContextualProperty EntryOperation ImperativeCallExp ImperativeOperation DirectionKind Library ModelParameter ModelType Module ModuleImport ImportKind VarParameter OperationBody ConstructorBody ObjectExp Area Assignment BottomPattern GuardPattern Mapping RealizedVariable CoreDomain CorePattern EnforcementOperation EnforcementMode Domain Transformation TypedModel Rule Pattern Predicate Function FunctionParameter RelationalTransformation Relation RelationDomain DomainPattern RelationImplementation Key BooleanLiteralExp CallExp CollectionKind OclExpression UnlimitedNaturalExp IfExp LetExp Variable PropertyCallExp VariableExp TypeExp LoopExp IteratorExp StringLiteralExp IntegerLiteralExp OperationCallExp RealLiteralExp LiteralExp IterateExp PrimitiveLiteralExp NumericLiteralExp CollectionLiteralExp CollectionLiteralPart CollectionItem CollectionRange TupleLiteralExp NullLiteralExp ExpressionInOcl OpaqueExpression InvalidLiteralExp FeaturePropertyCall TupleLiteralPart BagType CollectionType EnumLiteralExp InvalidType OrderedSetType SequenceType SetType TupleType VoidType AnyType 
   context-free syntax
         ObjectTemplateExp -> TemplateExp
 
@@ -110,6 +110,10 @@ exports
 
         UnpackExp -> ImperativeExpression
 
+        SwitchExp -> ImperativeExpression
+
+        ImperativeLoopExp -> ImperativeExpression
+
         variable::Variable+ -> UnpackExp
 
         elementType::Type+ -> AnonymousTupleType
@@ -124,6 +128,16 @@ exports
 
         AnonymousTupleType -> Class
 
+        ModelType -> Class
+
+        Module -> Class
+
+        Transformation -> Class
+
+        TupleType -> Class
+
+        AnyType -> Class
+
         ownedAttribute::Property+ ownedOperation::Operation+ superClass::Class+ isAbstract::Boolean -> Class
 
         Enumeration -> DataType
@@ -131,6 +145,8 @@ exports
         PrimitiveType -> DataType
 
         CollectionType -> DataType
+
+        TupleType -> DataType
 
         PropertyTemplateItem -> Element
 
@@ -176,8 +192,6 @@ exports
 
         URIExtent -> Extent
 
-        URIExtent -> Extent
-
         Element -> Object
 
         Extent -> Object
@@ -191,6 +205,16 @@ exports
 
         class::Class ownedParameter::Parameter+ raisedException::Type+ -> Operation
 
+        Operation -> MultiplicityElement
+
+        Parameter -> MultiplicityElement
+
+        Property -> MultiplicityElement
+
+        Module -> Package
+
+        Transformation -> Package
+
         ownedType::Type+ nestedPackage::Package+ uri::String -> Package
 
         TemplateParameterType -> Type
@@ -202,6 +226,12 @@ exports
         InvalidType -> Type
 
         VoidType -> Type
+
+        AnyType -> Type
+
+        VarParameter -> Parameter
+
+        FunctionParameter -> Parameter
 
         operation::Operation -> Parameter
 
@@ -219,9 +249,24 @@ exports
 
         TupleLiteralPart -> TypedElement
 
+        Operation -> TypedElement
+
+        Parameter -> TypedElement
+
+        Property -> TypedElement
+
          -> PrimitiveType
 
+        ModelType -> URIExtent
+
          -> URIExtent
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        STR -> String
+
+        INT -> Integer
 
         annotatedElement::NamedElement+ -> Comment
 
@@ -243,11 +288,11 @@ exports
 
         isStrict::Boolean -> MappingCallExp
 
-         -> Constructor
+        context::VarParameter result::VarParameter+ overridden::ImperativeOperation body::OperationBody isBlackbox::Boolean -> Constructor
 
         context::Class overridden::Property -> ContextualProperty
 
-         -> EntryOperation
+        context::VarParameter result::VarParameter+ overridden::ImperativeOperation body::OperationBody isBlackbox::Boolean -> EntryOperation
 
         MappingCallExp -> ImperativeCallExp
 
@@ -259,15 +304,17 @@ exports
 
         EntryOperation -> ImperativeOperation
 
+        MappingOperation -> ImperativeOperation
+
         context::VarParameter result::VarParameter+ overridden::ImperativeOperation body::OperationBody isBlackbox::Boolean -> ImperativeOperation
 
         in:: -> DirectionKind
         inout:: -> DirectionKind
         out:: -> DirectionKind
 
-         -> Library
+        ownedTag::Tag+ configProperty::Property+ moduleImport::ModuleImport+ usedModelType::ModelType+ isBlackbox::Boolean -> Library
 
-         -> ModelParameter
+        ctxOwner::ImperativeOperation resOwner::ImperativeOperation kind::DirectionKind -> ModelParameter
 
         metamodel::Package+ additionalCondition::OclExpression+ conformanceKind::String -> ModelType
 
@@ -294,9 +341,13 @@ exports
 
         operation::ImperativeOperation content::OclExpression+ -> OperationBody
 
-         -> ConstructorBody
+        operation::ImperativeOperation content::OclExpression+ -> ConstructorBody
 
         referredObject::Variable body::ConstructorBody -> ObjectExp
+
+        Mapping -> Area
+
+        CoreDomain -> Area
 
         bottomPattern::BottomPattern slotExpression::OclExpression value::OclExpression targetProperty::Property isDefault::Boolean -> Assignment
 
@@ -306,9 +357,9 @@ exports
 
         specification::Mapping+ local::Mapping+ context::Mapping -> Mapping
 
-         -> RealizedVariable
+        initExpression::OclExpression LetExp::LetExp computeOwner::ComputeExp bindParameter::Parameter -> RealizedVariable
 
-         -> CoreDomain
+        isCheckable::Boolean isEnforceable::Boolean rule::Rule typedModel::TypedModel guardPattern::GuardPattern bottomPattern::BottomPattern -> CoreDomain
 
         BottomPattern -> CorePattern
 
@@ -324,6 +375,8 @@ exports
 
         RelationDomain -> Domain
 
+        CoreDomain -> Domain
+
         isCheckable::Boolean isEnforceable::Boolean rule::Rule typedModel::TypedModel -> Domain
 
         RelationalTransformation -> Transformation
@@ -333,6 +386,8 @@ exports
         transformation::Transformation usedPackage::Package+ dependsOn::TypedModel+ -> TypedModel
 
         Relation -> Rule
+
+        Mapping -> Rule
 
         domain::Domain+ transformation::Transformation overrides::Rule -> Rule
 
@@ -346,7 +401,7 @@ exports
 
         queryExpression::OclExpression -> Function
 
-         -> FunctionParameter
+        operation::Operation initExpression::OclExpression LetExp::LetExp computeOwner::ComputeExp bindParameter::Parameter -> FunctionParameter
 
         ownedKey::Key+ -> RelationalTransformation
 
@@ -365,6 +420,10 @@ exports
         ResolveExp -> CallExp
 
         FeaturePropertyCall -> CallExp
+
+        SwitchExp -> CallExp
+
+        LoopExp -> CallExp
 
         OrderedSet:: -> CollectionKind
         Set:: -> CollectionKind
@@ -385,6 +444,8 @@ exports
 
         LiteralExp -> OclExpression
 
+        LoopExp -> OclExpression
+
         symbol::UnlimitedNatural -> UnlimitedNaturalExp
 
         condition::OclExpression thenExpression::OclExpression elseExpression::OclExpression -> IfExp
@@ -392,6 +453,10 @@ exports
         in::OclExpression+ variable::Variable -> LetExp
 
         RealizedVariable -> Variable
+
+        VarParameter -> Variable
+
+        FunctionParameter -> Variable
 
         initExpression::OclExpression LetExp::LetExp computeOwner::ComputeExp bindParameter::Parameter -> Variable
 
@@ -404,6 +469,8 @@ exports
         IteratorExp -> LoopExp
 
         IterateExp -> LoopExp
+
+        ImperativeLoopExp -> LoopExp
 
         body::OclExpression iterator::Variable+ -> IteratorExp
 
@@ -467,8 +534,6 @@ exports
 
         ExpressionInOcl -> OpaqueExpression
 
-        ExpressionInOcl -> OpaqueExpression
-
          -> InvalidLiteralExp
 
         PropertyCallExp -> FeaturePropertyCall
@@ -501,8 +566,8 @@ exports
 
         elementType::Type -> SetType
 
-         -> TupleType
+        ownedAttribute::Property+ ownedOperation::Operation+ superClass::Class+ isAbstract::Boolean -> TupleType
 
         package::Package -> VoidType
 
-         -> AnyType
+        ownedAttribute::Property+ ownedOperation::Operation+ superClass::Class+ isAbstract::Boolean package::Package -> AnyType

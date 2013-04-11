@@ -1,6 +1,14 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module XMorphLanguage_abstractSyntax
 
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
 syntax VarScope
         = PatternScope
         | PatternDefn

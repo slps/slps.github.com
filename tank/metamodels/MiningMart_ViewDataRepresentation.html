@@ -13,7 +13,7 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable data representation 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Anca Vaduva, Jörg-Uwe Kietz, Regina Zücker, Klaus R. Dittrich, SIMON Eric, <code>MiningMart_ViewDataRepresentation.ecore</code>, 2006/07/20.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>65</strong></li><li>Number of top alternatives: <strong>72</strong></li><li>Number of defined nonterminal symbols: <strong>36</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>4</strong>: <code><a href="#ModelElement" class="nt">ModelElement</a>, <a href="#ColumnStatistics" class="nt">ColumnStatistics</a>, <a href="#Binary" class="nt">Binary</a>, <a href="#Parameter" class="nt">Parameter</a></code></li><li>Bottom nonterminal symbols: <strong>3</strong>: <code><a href="#String" class="nt">String</a>, <a href="#Integer" class="nt">Integer</a>, <a href="#Boolean" class="nt">Boolean</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="ModelElement">ModelElement</a>:
+				</script></head><body><h1 class="l">Browsable data representation 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Anca Vaduva, Jörg-Uwe Kietz, Regina Zücker, Klaus R. Dittrich, SIMON Eric, <code>MiningMart_ViewDataRepresentation.ecore</code>, 2006/07/20.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>73</strong></li><li>Number of top alternatives: <strong>81</strong></li><li>Number of defined nonterminal symbols: <strong>39</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>3</strong>: <code><a href="#ModelElement" class="nt">ModelElement</a>, <a href="#ColumnStatistics" class="nt">ColumnStatistics</a>, <a href="#Parameter" class="nt">Parameter</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>2</strong></li><li>Keywords: <strong>2</strong>: <code class="t">"true", "false"</code></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="ModelElement">ModelElement</a>:
         <a class="nt" href="#Classifier">Classifier</a>
 </pre><pre><a class="nt" name="ModelElement">ModelElement</a>:
         <a class="nt" href="#StructuralFeature">StructuralFeature</a>
@@ -21,6 +21,8 @@
         <a class="nt" href="#ColumnSetStatistics">ColumnSetStatistics</a>
 </pre><pre><a class="nt" name="ModelElement">ModelElement</a>:
         <a class="nt" href="#Key">Key</a>
+</pre><pre><a class="nt" name="ModelElement">ModelElement</a>:
+        <a class="nt" href="#RelationShip">RelationShip</a>
 </pre><pre><a class="nt" name="ModelElement">ModelElement</a>:
         <a class="nt" href="#Classifier">Classifier</a>
         <a class="nt" href="#StructuralFeature">StructuralFeature</a>
@@ -33,14 +35,14 @@
 </pre><pre><a class="nt" name="Classifier">Classifier</a>:
         <a class="nt" href="#Class">Class</a>
         <a class="nt" href="#DataType">DataType</a>
-</pre><pre><a class="nt" name="StructuralFeature">StructuralFeature</a>:
-        <a class="nt" href="#Attribute">Attribute</a>
 </pre><pre><a class="nt" name="StructuralFeature">StructuralFeature</a>:
         <a class="nt" href="#Attribute">Attribute</a>
 </pre><pre><a class="nt" name="Class">Class</a>:
         <a class="nt" href="#ColumnSet">ColumnSet</a>
 </pre><pre><a class="nt" name="Class">Class</a>:
         <a class="nt" href="#UserInput">UserInput</a>
+</pre><pre><a class="nt" name="Class">Class</a>:
+        <a class="nt" href="#Concept">Concept</a>
 </pre><pre><a class="nt" name="Class">Class</a>:
         <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">attributes</span>::<a class="nt" href="#Attribute">Attribute</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="DataType">DataType</a>:
@@ -54,7 +56,16 @@
 </pre><pre><a class="nt" name="Attribute">Attribute</a>:
         <a class="nt" href="#RoleRestriction">RoleRestriction</a>
 </pre><pre><a class="nt" name="Attribute">Attribute</a>:
+        <a class="nt" href="#Value">Value</a>
+</pre><pre><a class="nt" name="Attribute">Attribute</a>:
         <span class="sel">class</span>::<a class="nt" href="#Class">Class</a> <span class="sel">has</span>::<a class="nt" href="#DataType">DataType</a>
+</pre><pre><a class="nt" name="String">String</a>:
+        <span class="meta">string</span>
+</pre><pre><a class="nt" name="Integer">Integer</a>:
+        <span class="meta">int</span>
+</pre><pre><a class="nt" name="Boolean">Boolean</a>:
+        <span class="t">"true"</span>
+        <span class="t">"false"</span>
 </pre><pre><a class="nt" name="Column">Column</a>:
         <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">dataType</span>::<a class="nt" href="#DataType">DataType</a> <span class="sel">keys</span>::<a class="nt" href="#Key">Key</a><span class="meta">+</span> <span class="sel">belongsToColumnSet</span>::<a class="nt" href="#ColumnSet">ColumnSet</a> <span class="sel">corespondsToBaseAttribute</span>::<a class="nt" href="#BaseAttribute">BaseAttribute</a>
 </pre><pre><a class="nt" name="ColumnSet">ColumnSet</a>:
@@ -70,11 +81,11 @@
 </pre><pre><a class="nt" name="ColumnSetStatistics">ColumnSetStatistics</a>:
         <span class="sel">allNumber</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">ordinalNumber</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">nominalNumber</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">timeNumber</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">forColumnSet</span>::<a class="nt" href="#ColumnSet">ColumnSet</a>
 </pre><pre><a class="nt" name="Snapshot">Snapshot</a>:
-        ε
+        <span class="sel">number</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">file</span>::<a class="nt" href="#String">String</a> <span class="sel">dbConnectString</span>::<a class="nt" href="#String">String</a> <span class="sel">user</span>::<a class="nt" href="#String">String</a> <span class="sel">hasColumn</span>::<a class="nt" href="#Column">Column</a><span class="meta">+</span> <span class="sel">hasKey</span>::<a class="nt" href="#Key">Key</a><span class="meta">+</span> <span class="sel">correspondsToConcept</span>::<a class="nt" href="#Concept">Concept</a> <span class="sel">correspondsToRelationShip</span>::<a class="nt" href="#RelationShip">RelationShip</a>
 </pre><pre><a class="nt" name="Table">Table</a>:
-        ε
+        <span class="sel">number</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">file</span>::<a class="nt" href="#String">String</a> <span class="sel">dbConnectString</span>::<a class="nt" href="#String">String</a> <span class="sel">user</span>::<a class="nt" href="#String">String</a> <span class="sel">hasColumn</span>::<a class="nt" href="#Column">Column</a><span class="meta">+</span> <span class="sel">hasKey</span>::<a class="nt" href="#Key">Key</a><span class="meta">+</span> <span class="sel">correspondsToConcept</span>::<a class="nt" href="#Concept">Concept</a> <span class="sel">correspondsToRelationShip</span>::<a class="nt" href="#RelationShip">RelationShip</a>
 </pre><pre><a class="nt" name="View">View</a>:
-        ε
+        <span class="sel">number</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">file</span>::<a class="nt" href="#String">String</a> <span class="sel">dbConnectString</span>::<a class="nt" href="#String">String</a> <span class="sel">user</span>::<a class="nt" href="#String">String</a> <span class="sel">hasColumn</span>::<a class="nt" href="#Column">Column</a><span class="meta">+</span> <span class="sel">hasKey</span>::<a class="nt" href="#Key">Key</a><span class="meta">+</span> <span class="sel">correspondsToConcept</span>::<a class="nt" href="#Concept">Concept</a> <span class="sel">correspondsToRelationShip</span>::<a class="nt" href="#RelationShip">RelationShip</a>
 </pre><pre><a class="nt" name="Key">Key</a>:
         <a class="nt" href="#ForeignKey">ForeignKey</a>
 </pre><pre><a class="nt" name="Key">Key</a>:
@@ -84,7 +95,7 @@
 </pre><pre><a class="nt" name="ForeignKey">ForeignKey</a>:
         <span class="sel">isConnectionTo</span>::<a class="nt" href="#Table">Table</a> <span class="sel">correspondsToRelationShip</span>::<a class="nt" href="#RelationShip">RelationShip</a>
 </pre><pre><a class="nt" name="PrimaryKey">PrimaryKey</a>:
-        ε
+        <span class="sel">isUsedForIndex</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">hasColumn</span>::<a class="nt" href="#Column">Column</a><span class="meta">+</span> <span class="sel">isAssociatedToColumnSet</span>::<a class="nt" href="#ColumnSet">ColumnSet</a>
 </pre><pre><a class="nt" name="Concept">Concept</a>:
         <span class="sel">subConceptRestriction</span>::<a class="nt" href="#String">String</a> <span class="sel">isA</span>::<a class="nt" href="#Concept">Concept</a> <span class="sel">FromConcept</span>::<a class="nt" href="#RelationShip">RelationShip</a> <span class="sel">ToConcept</span>::<a class="nt" href="#RelationShip">RelationShip</a> <span class="sel">correspondsToColumnSet</span>::<a class="nt" href="#ColumnSet">ColumnSet</a>
 </pre><pre><a class="nt" name="RelationShip">RelationShip</a>:
@@ -105,12 +116,10 @@
         <span class="sel">containsValues</span>::<a class="nt" href="#Value">Value</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Ordinal">Ordinal</a>:
         <a class="nt" href="#Scalar">Scalar</a>
-</pre><pre><a class="nt" name="Ordinal">Ordinal</a>:
-        <a class="nt" href="#Scalar">Scalar</a>
 </pre><pre><a class="nt" name="Scalar">Scalar</a>:
         <a class="nt" href="#Time">Time</a>
 </pre><pre><a class="nt" name="Scalar">Scalar</a>:
-        <a class="nt" href="#Time">Time</a>
+        <a class="nt" href="#Binary">Binary</a>
 </pre><pre><a class="nt" name="Time">Time</a>:
         ε
 </pre><pre><a class="nt" name="Binary">Binary</a>:
@@ -145,9 +154,17 @@
 </pre><pre><a class="nt" name="Nominal">Nominal</a>:
         <a class="nt" href="#Constant">Constant</a>
 </pre><pre><a class="nt" name="Nominal">Nominal</a>:
+        <a class="nt" href="#Binary">Binary</a>
+</pre><pre><a class="nt" name="Nominal">Nominal</a>:
         <a class="nt" href="#Categorial">Categorial</a>
         <a class="nt" href="#KeyAttribute">KeyAttribute</a>
         <a class="nt" href="#Constant">Constant</a>
+</pre><pre><a class="nt" name="Parameter">Parameter</a>:
+        <a class="nt" href="#Concept">Concept</a>
+</pre><pre><a class="nt" name="Parameter">Parameter</a>:
+        <a class="nt" href="#RelationShip">RelationShip</a>
+</pre><pre><a class="nt" name="Parameter">Parameter</a>:
+        <a class="nt" href="#Value">Value</a>
 </pre><pre><a class="nt" name="Parameter">Parameter</a>:
         ε
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.

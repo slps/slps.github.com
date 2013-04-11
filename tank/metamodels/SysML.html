@@ -13,7 +13,7 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable SysML (OMG System Modeling Language) 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Albin Jossic, <code>SysML.ecore</code>, 2006/06/06.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>126</strong></li><li>Number of top alternatives: <strong>136</strong></li><li>Number of defined nonterminal symbols: <strong>67</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>4</strong>: <code><a href="#Entity" class="nt">Entity</a>, <a href="#Rate" class="nt">Rate</a>, <a href="#Probability" class="nt">Probability</a>, <a href="#ControlOperation" class="nt">ControlOperation</a></code></li><li>Bottom nonterminal symbols: <strong>3</strong>: <code><a href="#String" class="nt">String</a>, <a href="#Boolean" class="nt">Boolean</a>, <a href="#Integer" class="nt">Integer</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Entity">Entity</a>:
+				</script></head><body><h1 class="l">Browsable SysML (OMG System Modeling Language) 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Albin Jossic, <code>SysML.ecore</code>, 2006/06/06.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>128</strong></li><li>Number of top alternatives: <strong>139</strong></li><li>Number of defined nonterminal symbols: <strong>70</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#Entity" class="nt">Entity</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>2</strong></li><li>Keywords: <strong>2</strong>: <code class="t">"true", "false"</code></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Entity">Entity</a>:
         <a class="nt" href="#NamedElement">NamedElement</a>
 </pre><pre><a class="nt" name="Entity">Entity</a>:
         <a class="nt" href="#Comment">Comment</a>
@@ -63,12 +63,8 @@
         <a class="nt" href="#RequirementRelated">RequirementRelated</a>
 </pre><pre><a class="nt" name="Dependency">Dependency</a>:
         <a class="nt" href="#Conform">Conform</a>
-</pre><pre><a class="nt" name="Dependency">Dependency</a>:
-        <a class="nt" href="#Conform">Conform</a>
 </pre><pre><a class="nt" name="Conform">Conform</a>:
         <span class="sel">target</span>::<a class="nt" href="#Viewpoint">Viewpoint</a> <span class="sel">source</span>::<a class="nt" href="#View">View</a>
-</pre><pre><a class="nt" name="Package">Package</a>:
-        <a class="nt" href="#View">View</a>
 </pre><pre><a class="nt" name="Package">Package</a>:
         <a class="nt" href="#View">View</a>
 </pre><pre><a class="nt" name="View">View</a>:
@@ -90,15 +86,15 @@
 </pre><pre><a class="nt" name="Comment">Comment</a>:
         <span class="sel">content</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Rationale">Rationale</a>:
-        ε
+        <span class="sel">content</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Problem">Problem</a>:
-        ε
+        <span class="sel">content</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Block">Block</a>:
         <a class="nt" href="#ConstraintBlock">ConstraintBlock</a>
 </pre><pre><a class="nt" name="Block">Block</a>:
         <span class="sel">isEncapsulated</span>::<a class="nt" href="#Boolean">Boolean</a>
 </pre><pre><a class="nt" name="ConstraintBlock">ConstraintBlock</a>:
-        ε
+        <span class="sel">isEncapsulated</span>::<a class="nt" href="#Boolean">Boolean</a>
 </pre><pre><a class="nt" name="Property">Property</a>:
         <a class="nt" href="#BlockProperty">BlockProperty</a>
 </pre><pre><a class="nt" name="Property">Property</a>:
@@ -127,8 +123,6 @@
         <a class="nt" href="#Normal">Normal</a>
 </pre><pre><a class="nt" name="DataType">DataType</a>:
         <a class="nt" href="#ValueType">ValueType</a>
-</pre><pre><a class="nt" name="DataType">DataType</a>:
-        <a class="nt" href="#ValueType">ValueType</a>
 </pre><pre><a class="nt" name="ValueType">ValueType</a>:
         <a class="nt" href="#Unit">Unit</a>
 </pre><pre><a class="nt" name="ValueType">ValueType</a>:
@@ -136,11 +130,9 @@
 </pre><pre><a class="nt" name="ValueType">ValueType</a>:
         <span class="sel">unit</span>::<a class="nt" href="#Unit">Unit</a> <span class="sel">dimension</span>::<a class="nt" href="#Dimension">Dimension</a>
 </pre><pre><a class="nt" name="Unit">Unit</a>:
-        ε
+        <span class="sel">unit</span>::<a class="nt" href="#Unit">Unit</a> <span class="sel">dimension</span>::<a class="nt" href="#Dimension">Dimension</a>
 </pre><pre><a class="nt" name="Dimension">Dimension</a>:
-        ε
-</pre><pre><a class="nt" name="ConnectorEnd">ConnectorEnd</a>:
-        <a class="nt" href="#NestedConnectorEnd">NestedConnectorEnd</a>
+        <span class="sel">unit</span>::<a class="nt" href="#Unit">Unit</a> <span class="sel">dimension</span>::<a class="nt" href="#Dimension">Dimension</a>
 </pre><pre><a class="nt" name="ConnectorEnd">ConnectorEnd</a>:
         <a class="nt" href="#NestedConnectorEnd">NestedConnectorEnd</a>
 </pre><pre><a class="nt" name="NestedConnectorEnd">NestedConnectorEnd</a>:
@@ -153,8 +145,6 @@
         <span class="sel">isAtomic</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">direction</span>::<a class="nt" href="#FlowDirection">FlowDirection</a> <span class="sel">isConjugated</span>::<a class="nt" href="#Boolean">Boolean</a>
 </pre><pre><a class="nt" name="FlowProperty">FlowProperty</a>:
         <span class="sel">direction</span>::<a class="nt" href="#FlowDirection">FlowDirection</a>
-</pre><pre><a class="nt" name="Interface">Interface</a>:
-        <a class="nt" href="#FlowSpecification">FlowSpecification</a>
 </pre><pre><a class="nt" name="Interface">Interface</a>:
         <a class="nt" href="#FlowSpecification">FlowSpecification</a>
 </pre><pre><a class="nt" name="FlowSpecification">FlowSpecification</a>:
@@ -181,11 +171,17 @@
 </pre><pre><a class="nt" name="Parameter">Parameter</a>:
         <a class="nt" href="#Optional">Optional</a>
 </pre><pre><a class="nt" name="Parameter">Parameter</a>:
-        <a class="nt" href="#Optional">Optional</a>
+        <a class="nt" href="#Rate">Rate</a>
 </pre><pre><a class="nt" name="ActivityEdge">ActivityEdge</a>:
-        
+        <a class="nt" href="#Probability">Probability</a>
+</pre><pre><a class="nt" name="ActivityEdge">ActivityEdge</a>:
+        <a class="nt" href="#Rate">Rate</a>
+</pre><pre><a class="nt" name="ActivityEdge">ActivityEdge</a>:
+        ε
 </pre><pre><a class="nt" name="ParameterSet">ParameterSet</a>:
-        
+        <a class="nt" href="#Probability">Probability</a>
+</pre><pre><a class="nt" name="ParameterSet">ParameterSet</a>:
+        ε
 </pre><pre><a class="nt" name="Optional">Optional</a>:
         ε
 </pre><pre><a class="nt" name="Rate">Rate</a>:
@@ -195,19 +191,27 @@
 </pre><pre><a class="nt" name="Rate">Rate</a>:
         <span class="sel">instance</span>::<a class="nt" href="#InstanceSpecification">InstanceSpecification</a>
 </pre><pre><a class="nt" name="InstanceSpecification">InstanceSpecification</a>:
-        
+        ε
 </pre><pre><a class="nt" name="Continous">Continous</a>:
-        ε
+        <span class="sel">instance</span>::<a class="nt" href="#InstanceSpecification">InstanceSpecification</a>
 </pre><pre><a class="nt" name="Discrete">Discrete</a>:
-        ε
+        <span class="sel">instance</span>::<a class="nt" href="#InstanceSpecification">InstanceSpecification</a>
 </pre><pre><a class="nt" name="Probability">Probability</a>:
         <span class="sel">probability</span>::<a class="nt" href="#ValueSpecification">ValueSpecification</a>
 </pre><pre><a class="nt" name="ValueSpecification">ValueSpecification</a>:
-        
+        ε
 </pre><pre><a class="nt" name="Behavior">Behavior</a>:
-        
+        <a class="nt" href="#ControlOperation">ControlOperation</a>
+</pre><pre><a class="nt" name="Behavior">Behavior</a>:
+        <a class="nt" href="#TestCase">TestCase</a>
+</pre><pre><a class="nt" name="Behavior">Behavior</a>:
+        ε
 </pre><pre><a class="nt" name="Operation">Operation</a>:
-        
+        <a class="nt" href="#ControlOperation">ControlOperation</a>
+</pre><pre><a class="nt" name="Operation">Operation</a>:
+        <a class="nt" href="#TestCase">TestCase</a>
+</pre><pre><a class="nt" name="Operation">Operation</a>:
+        ε
 </pre><pre><a class="nt" name="ControlOperation">ControlOperation</a>:
         ε
 </pre><pre><a class="nt" name="ObjectNode">ObjectNode</a>:
@@ -223,14 +227,10 @@
         ε
 </pre><pre><a class="nt" name="Abstraction">Abstraction</a>:
         <a class="nt" href="#Allocate">Allocate</a>
-</pre><pre><a class="nt" name="Abstraction">Abstraction</a>:
-        <a class="nt" href="#Allocate">Allocate</a>
 </pre><pre><a class="nt" name="Allocate">Allocate</a>:
         ε
 </pre><pre><a class="nt" name="Allocated">Allocated</a>:
         <span class="sel">allocatedFrom</span>::<a class="nt" href="#NamedElement">NamedElement</a><span class="meta">+</span> <span class="sel">allocatedTo</span>::<a class="nt" href="#NamedElement">NamedElement</a><span class="meta">+</span>
-</pre><pre><a class="nt" name="ActivityPartition">ActivityPartition</a>:
-        <a class="nt" href="#AllocateActivityPartition">AllocateActivityPartition</a>
 </pre><pre><a class="nt" name="ActivityPartition">ActivityPartition</a>:
         <a class="nt" href="#AllocateActivityPartition">AllocateActivityPartition</a>
 </pre><pre><a class="nt" name="AllocateActivityPartition">AllocateActivityPartition</a>:
@@ -253,8 +253,6 @@
         ε
 </pre><pre><a class="nt" name="Realization">Realization</a>:
         <a class="nt" href="#Satisfy">Satisfy</a>
-</pre><pre><a class="nt" name="Realization">Realization</a>:
-        <a class="nt" href="#Satisfy">Satisfy</a>
 </pre><pre><a class="nt" name="Satisfy">Satisfy</a>:
         ε
 </pre><pre><a class="nt" name="Requirement">Requirement</a>:
@@ -270,10 +268,17 @@
 </pre><pre><a class="nt" name="BasicInterval">BasicInterval</a>:
         <span class="sel">min</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">max</span>::<a class="nt" href="#Integer">Integer</a>
 </pre><pre><a class="nt" name="Interval">Interval</a>:
-        ε
+        <span class="sel">min</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">max</span>::<a class="nt" href="#Integer">Integer</a>
 </pre><pre><a class="nt" name="Uniform">Uniform</a>:
-        ε
+        <span class="sel">min</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">max</span>::<a class="nt" href="#Integer">Integer</a>
 </pre><pre><a class="nt" name="Normal">Normal</a>:
         <span class="sel">mean</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">standardDeviation</span>::<a class="nt" href="#Integer">Integer</a>
+</pre><pre><a class="nt" name="String">String</a>:
+        <span class="meta">string</span>
+</pre><pre><a class="nt" name="Integer">Integer</a>:
+        <span class="meta">int</span>
+</pre><pre><a class="nt" name="Boolean">Boolean</a>:
+        <span class="t">"true"</span>
+        <span class="t">"false"</span>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
 Last updated: Apr2013.</div></body></html>

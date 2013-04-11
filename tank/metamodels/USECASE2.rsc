@@ -1,6 +1,18 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module USECASE2
 
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
 syntax Requirement
         = NonFunctionnelRequirement
         | FunctionnelRequirement
@@ -29,15 +41,15 @@ syntax Role
  ;
 syntax HumanRole
         = 
-        ()
+        UseCase interacted_with+
  ;
 syntax SystemRole
         = 
-        ()
+        UseCase interacted_with+
  ;
 syntax EventRole
         = 
-        ()
+        UseCase interacted_with+
  ;
 syntax Manage
         = 
@@ -58,9 +70,9 @@ syntax Condition
  ;
 syntax Pre
         = 
-        ()
+        UseCase constrained_with+
  ;
 syntax Post
         = 
-        ()
+        UseCase constrained_with+
  ;

@@ -59,3 +59,7 @@ syntax Part
         = 
         String name Message message
  ;
+syntax String
+        = 
+        String
+ ;

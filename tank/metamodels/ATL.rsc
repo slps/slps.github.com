@@ -240,11 +240,11 @@ syntax OperationCallExp
  ;
 syntax OperatorCallExp
         = 
-        ()
+        OclExpression arguments+ String operationName
  ;
 syntax CollectionOperationCallExp
         = 
-        ()
+        OclExpression arguments+ String operationName
  ;
 syntax LoopExp
         = IterateExp
@@ -325,23 +325,23 @@ syntax RealType
  ;
 syntax BagType
         = 
-        ()
+        elementType: OclType
  ;
 syntax OrderedSetType
         = 
-        ()
+        elementType: OclType
  ;
 syntax SequenceType
         = 
-        ()
+        elementType: OclType
  ;
 syntax SetType
         = 
-        ()
+        elementType: OclType
  ;
 syntax OclAnyType
         = 
-        ()
+        String name OclContextDefinition definitions OclExpression oclExpression Operation operation MapType mapType2 Attribute attribute MapType mapType CollectionType collectionTypes TupleTypeAttribute tupleTypeAttribute VariableDeclaration variableDeclaration
  ;
 syntax TupleType
         = 
@@ -382,4 +382,16 @@ syntax Operation
 syntax OclModel
         = 
         String name OclModel metamodel OclModelElement elements+ OclModel model+
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
  ;

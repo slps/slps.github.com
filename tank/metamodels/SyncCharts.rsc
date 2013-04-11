@@ -10,8 +10,8 @@ syntax SyncChart
         ModelElement context ReferenceState referenceState+
  ;
 syntax ReferenceState
-        = 
-        SyncChart subSyncChart Stg containers
+        = CompositeState
+        | SyncChart subSyncChart Stg containers
  ;
 syntax Arc
         = Transition
@@ -31,11 +31,12 @@ syntax PseudoStateKind
  ;
 syntax State
         = SimpleState
+        | CompositeState
         | isFinal: Boolean
  ;
 syntax SimpleState
         = 
-        ()
+        isFinal: Boolean
  ;
 syntax CompositeState
         = 
@@ -60,4 +61,16 @@ syntax PseudoTransition
 syntax PseudoTransitionKind
         = 
         ()
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
  ;

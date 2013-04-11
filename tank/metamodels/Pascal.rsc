@@ -26,7 +26,7 @@ syntax Instruction
  ;
 syntax Calculation
         = 
-        ()
+        block: Block
  ;
 syntax Control
         = Conditional
@@ -35,7 +35,7 @@ syntax Control
  ;
 syntax Assignment
         = 
-        ()
+        block: Block
  ;
 syntax Block
         = 
@@ -61,13 +61,17 @@ syntax Function
  ;
 syntax For
         = 
-        ()
+        block_loop: Block
  ;
 syntax While
         = 
-        ()
+        block_loop: Block
  ;
 syntax Repeat
         = 
-        ()
+        block_loop: Block
+ ;
+syntax String
+        = 
+        String
  ;

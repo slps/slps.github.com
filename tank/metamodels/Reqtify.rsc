@@ -46,3 +46,7 @@ syntax Attribute
         = 
         value: String
  ;
+syntax String
+        = 
+        String
+ ;

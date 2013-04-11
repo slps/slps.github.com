@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        ExecutionGraph Node Start End Control Basic Branch Loop Fork Join Acquire Release Split 
+        ExecutionGraph Node Start End Control Basic Branch Loop Fork Join Acquire Release Split String Boolean Integer 
   context-free syntax
         node::Node+ nodeNested::Node -> ExecutionGraph
 
@@ -16,9 +16,9 @@ exports
 
         predecessor::Node+ successor::Node+ executionGraph::ExecutionGraph nested::ExecutionGraph+ -> Node
 
-         -> Start
+        predecessor::Node+ successor::Node+ executionGraph::ExecutionGraph nested::ExecutionGraph+ -> Start
 
-         -> End
+        predecessor::Node+ successor::Node+ executionGraph::ExecutionGraph nested::ExecutionGraph+ -> End
 
         Branch -> Control
 
@@ -42,7 +42,7 @@ exports
         Release -> Control
         Split -> Control
 
-         -> Basic
+        predecessor::Node+ successor::Node+ executionGraph::ExecutionGraph nested::ExecutionGraph+ -> Basic
 
          -> Branch
 
@@ -57,3 +57,10 @@ exports
          -> Release
 
          -> Split
+
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer

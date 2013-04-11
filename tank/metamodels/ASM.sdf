@@ -2,8 +2,15 @@ module Main
 
 exports
   sorts
-        LocatedElement XAsmFile XAsmSpec Asm Signature Argument Body MetaInformation AccessUpdateFunction Declaration Function Parameter Universe Initialization Term Constant FunctionOrVariableTerm OperatorTerm BooleanConstant IntegerConstant StringConstant UndefConstant Rule SkipRule AsmInvocation UpdateRule ChooseRule DoForallRule ConditionalRule ElseIf ExtendRule ElementDecl VariableDecl Extension ReturnRule AccessUpdateType AsmType 
+        String Integer Boolean LocatedElement XAsmFile XAsmSpec Asm Signature Argument Body MetaInformation AccessUpdateFunction Declaration Function Parameter Universe Initialization Term Constant FunctionOrVariableTerm OperatorTerm BooleanConstant IntegerConstant StringConstant UndefConstant Rule SkipRule AsmInvocation UpdateRule ChooseRule DoForallRule ConditionalRule ElseIf ExtendRule ElementDecl VariableDecl Extension ReturnRule AccessUpdateType AsmType 
   context-free syntax
+        STR -> String
+
+        INT -> Integer
+
+        "true" -> Boolean
+        "false" -> Boolean
+
         XAsmFile -> LocatedElement
 
         Asm -> LocatedElement
@@ -49,6 +56,8 @@ exports
         type::AccessUpdateType functions::Function+ -> AccessUpdateFunction
 
         Universe -> Declaration
+
+        Function -> Declaration
 
         parameters::Parameter+ returnType::String initTerm::Term isExternal::Boolean -> Function
 
@@ -118,7 +127,7 @@ exports
 
         VariableDecl -> ElementDecl
 
-        Argument -> VariableDecl
+        Function -> ElementDecl
 
         Argument -> VariableDecl
 

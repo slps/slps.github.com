@@ -2,8 +2,14 @@
 module AntScripts
 
 syntax NamedElement
+        = Attribute
+        | Project
+        | Target
+        | TaskElement
+ ;
+syntax CommentableElement
         = 
-        Attribute
+        TaskElement
  ;
 syntax Project
         = 
@@ -32,4 +38,8 @@ syntax Task
 syntax TaskParameter
         = 
         Attribute attributes+ TaskElement elements+
+ ;
+syntax String
+        = 
+        String
  ;

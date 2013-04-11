@@ -1,12 +1,28 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module MSOfficeWord_WordprocessingMLSimplified
 
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
 syntax StringProperty
         = 
-        ()
+        val: String
  ;
 syntax StringType
         = StringProperty
+        | Text
+        | DelText
+        | InstrText
+        | DelInstrText
         | val: String
  ;
 syntax BreakType
@@ -70,6 +86,14 @@ syntax RunContentElt
         | Cr
         | Picture
         | Tab
+        | Text
+        | DelText
+        | InstrText
+        | DelInstrText
+        | Footnote
+        | Endnote
+        | Symbol
+        | FldChar
  ;
 syntax BreakElt
         = 
@@ -77,19 +101,19 @@ syntax BreakElt
  ;
 syntax Text
         = 
-        ()
+        RunElt rce_rElt String val
  ;
 syntax DelText
         = 
-        ()
+        RunElt rce_rElt String val
  ;
 syntax InstrText
         = 
-        ()
+        RunElt rce_rElt String val
  ;
 syntax DelInstrText
         = 
-        ()
+        RunElt rce_rElt String val
  ;
 syntax NoBreakHyphen
         = 
@@ -129,11 +153,15 @@ syntax Cr
  ;
 syntax Footnote
         = 
-        ()
+        RunElt rce_rElt BlockLevelElt n_blockLevelElts+ NoteValue type OnOffType suppressRef
  ;
 syntax Endnote
         = 
-        ()
+        RunElt rce_rElt BlockLevelElt n_blockLevelElts+ NoteValue type OnOffType suppressRef
+ ;
+syntax NoteElt
+        = Footnote
+        | Endnote
  ;
 syntax Picture
         = 
@@ -141,11 +169,11 @@ syntax Picture
  ;
 syntax Symbol
         = 
-        ()
+        RunElt rce_rElt StringType font StringType char
  ;
 syntax SymElt
-        = 
-        StringType font StringType char
+        = Symbol
+        | StringType font StringType char
  ;
 syntax Tab
         = 
@@ -153,9 +181,9 @@ syntax Tab
  ;
 syntax FldChar
         = 
-        ()
+        RunElt rce_rElt StringType fldData FldCharTypeProperty fldCharType OnOffType fldLock
  ;
 syntax FldCharElt
-        = 
-        StringType fldData FldCharTypeProperty fldCharType OnOffType fldLock
+        = FldChar
+        | StringType fldData FldCharTypeProperty fldCharType OnOffType fldLock
  ;

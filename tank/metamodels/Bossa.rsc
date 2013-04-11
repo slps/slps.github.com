@@ -69,7 +69,7 @@ syntax ProcessVarDecl
  ;
 syntax Timer_ProcessVarDecl
         = 
-        ()
+        String id ProcessDef processDef SchedulerDef schedulerDef
  ;
 syntax System_ProcessVarDecl
         = 
@@ -193,7 +193,7 @@ syntax System_ValDecl
  ;
 syntax Timer_ValDecl
         = 
-        ()
+        String id AbstractSchedulerDecl abstractSchedulerDecl
  ;
 syntax FunDecl
         = 
@@ -488,4 +488,16 @@ syntax AssignUnop
 syntax AssignBinop
         = 
         Boolean affect Boolean plusEqual Boolean moinsEqual Boolean starEqual Boolean slashEqual Boolean percentageEqual Boolean andEqual Boolean orEqual Boolean doubleLtEqual Boolean doubleGtEqual
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
  ;

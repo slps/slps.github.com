@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        TimeBase Instant TimeValue TimeInterval Interval SingleTimeBase SingleInstant SingleInterval SingleTimeValue SingleTimeInterval DiscreteTimeBase DiscreteInstant EventOccurence MultipleTimeBase CoincidencePoint MultipleInterval MultipleTimeValue MetricTimeValue DiscreteTimeValue MetricTimeInterval DiscreteTimeInterval SimultaneousEventOccurrence TimedEvent TimedEventOccurence TimedAction Delay TimingMechanism Clock Timer TimeOut ClockInterrupt System Model AnnotatedModel ModelElement AnnotatedModelElement NFP NFPLibrary NFPCategory ModelingConcern AnalysisConcern DesignConcern Quantity BasicQuantity DerivedQuantity QualitativeNFP QuantitativeNFP Realization Measure ComplexNFP BasicNFP NFPType NFPInstantType NFPurationType NFPRateType NFPProbabilityType NFPSizeType NFPValueSpecification NFPConstant NFPListConstant NFPStringConstant NFPIntegerConstant NFPRealConstant NFPBooleanConstant NFPVariable NFPExpression SourceKinds DirectionKinds StatisticalQualifierKinds InstantUnitKinds DurationUnitKinds RateUnitKinds ProbabilityUnitKinds SizeUnitKinds Classifier InstanceSpecification Hardware HardwareLibrary HardwareEntity HardwareDeployment HardwareEntityInstance ECUInstance ChannelInstance ECUGateInstance ECU ECUGate Channel AnalysisContext Workload Transaction Trigger Response Behavior Scenario Step Resource BasicResource StructuredResource ProcessingResource Link ProcessResource Component StructuredComponent BasicComponent LogicalResource ServerResource Service Interface 
+        TimeBase Instant TimeValue TimeInterval Interval SingleTimeBase SingleInstant SingleInterval SingleTimeValue SingleTimeInterval DiscreteTimeBase DiscreteInstant EventOccurence MultipleTimeBase CoincidencePoint MultipleInterval MultipleTimeValue MetricTimeValue DiscreteTimeValue MetricTimeInterval DiscreteTimeInterval SimultaneousEventOccurrence TimedEvent TimedEventOccurence TimedAction Delay TimingMechanism Clock Timer TimeOut ClockInterrupt System Model AnnotatedModel ModelElement AnnotatedModelElement NFP NFPLibrary NFPCategory ModelingConcern AnalysisConcern DesignConcern Quantity BasicQuantity DerivedQuantity QualitativeNFP QuantitativeNFP Realization Measure ComplexNFP BasicNFP NFPType NFPInstantType NFPurationType NFPRateType NFPProbabilityType NFPSizeType NFPValueSpecification NFPConstant NFPListConstant NFPStringConstant NFPIntegerConstant NFPRealConstant NFPBooleanConstant NFPVariable NFPExpression SourceKinds DirectionKinds StatisticalQualifierKinds InstantUnitKinds DurationUnitKinds RateUnitKinds ProbabilityUnitKinds SizeUnitKinds Classifier InstanceSpecification Hardware HardwareLibrary HardwareEntity HardwareDeployment HardwareEntityInstance ECUInstance ChannelInstance ECUGateInstance ECU ECUGate Channel AnalysisContext Workload Transaction Trigger Response Behavior Scenario Step Resource BasicResource StructuredResource ProcessingResource Link ProcessResource Component StructuredComponent BasicComponent LogicalResource ServerResource Service Interface String Integer Boolean 
   context-free syntax
         SingleTimeBase -> TimeBase
 
@@ -40,6 +40,8 @@ exports
 
         start::SingleTimeValue end::SingleTimeValue -> SingleTimeInterval
 
+        Clock -> DiscreteTimeBase
+
         refEvent::Event -> DiscreteTimeBase
 
         next::DiscreteInstant previous::DiscreteInstant refOcc::EventOccurence -> DiscreteInstant
@@ -58,11 +60,7 @@ exports
 
         MetricTimeValue -> DiscreteTimeValue
 
-        MetricTimeValue -> DiscreteTimeValue
-
          -> MetricTimeInterval
-
-        MetricTimeInterval -> DiscreteTimeInterval
 
         MetricTimeInterval -> DiscreteTimeInterval
 
@@ -76,9 +74,11 @@ exports
 
         duration::TimeInterval+ start::TimeValue+ end::TimeValue+ -> TimedAction
 
-         -> Delay
+        duration::TimeInterval+ start::TimeValue+ end::TimeValue+ -> Delay
 
         Timer -> TimingMechanism
+
+        Clock -> TimingMechanism
 
         stability::String drift::String skew::String origin::TimedEvent resolution::MetricTimeInterval refClock::Clock state::String -> TimingMechanism
 
@@ -126,9 +126,9 @@ exports
 
         relevantQuantity::Quantity+ annotedModel::AnnotatedModel -> ModelingConcern
 
-         -> AnalysisConcern
+        relevantQuantity::Quantity+ annotedModel::AnnotatedModel -> AnalysisConcern
 
-         -> DesignConcern
+        relevantQuantity::Quantity+ annotedModel::AnnotatedModel -> DesignConcern
 
          -> Quantity
 
@@ -346,14 +346,21 @@ exports
 
         process::ProcessResource+ interfaces::Interface+ -> Component
 
-         -> StructuredComponent
+        process::ProcessResource+ interfaces::Interface+ -> StructuredComponent
 
-         -> BasicComponent
+        process::ProcessResource+ interfaces::Interface+ -> BasicComponent
 
-         -> LogicalResource
+        basicResource::BasicResource -> LogicalResource
 
         services::Service+ -> ServerResource
 
         resource::ServerResource interface::Interface -> Service
 
         service::Service -> Interface
+
+        STR -> String
+
+        INT -> Integer
+
+        "true" -> Boolean
+        "false" -> Boolean

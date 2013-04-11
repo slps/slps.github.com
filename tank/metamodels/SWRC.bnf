@@ -77,7 +77,7 @@ Conference:
 Workshop:
         series::String
 Exhibition:
-        EPSILON
+        name::String date::String eventTitle::String location::String atEvent::Event hasPartEvent::Event
 Lecture:
         givenBy::Person
 Meeting:
@@ -85,7 +85,7 @@ Meeting:
 Meeting:
         title::String participant::Person+
 ProjectMeeting:
-        EPSILON
+        title::String participant::Person+
 Person:
         Employee
 Person:
@@ -103,11 +103,11 @@ Employee:
 Employee:
         affiliation::Organization
 Manager:
-        EPSILON
+        affiliation::Organization
 AdministrativeStaff:
-        EPSILON
+        affiliation::Organization
 TechnicalStaff:
-        EPSILON
+        affiliation::Organization
 AcademicStaff:
         Lecturer
 AcademicStaff:
@@ -115,7 +115,7 @@ AcademicStaff:
 AcademicStaff:
         cooperateWith::AcademicStaff+ editor::Publication headOf::Project headOfGroup::ResearchGroup memberOfPC::Event organizerOrChairOf::Event publication::Publication+ supervises::PhDStudent+ worksAtProject::ResearchTopic
 Lecturer:
-        EPSILON
+        cooperateWith::AcademicStaff+ editor::Publication headOf::Project headOfGroup::ResearchGroup memberOfPC::Event organizerOrChairOf::Event publication::Publication+ supervises::PhDStudent+ worksAtProject::ResearchTopic
 FacultyMember:
         FullProfessor
 FacultyMember:
@@ -139,9 +139,7 @@ Student:
 Student:
         studiesAt::University
 Undergraduate:
-        EPSILON
-Graduate:
-        PhDStudent
+        studiesAt::University
 Graduate:
         PhDStudent
 PhDStudent:
@@ -163,13 +161,13 @@ Organization:
 ResearchGroup:
         head::AcademicStaff member::Employee+
 Association:
-        EPSILON
+        location::String name::String carriesOut::Project+ develops::Product+ employs::Employee+ finances::Project+ publishes::Publication+ technicalReport::TechnicalReport+
 Department:
         hasParts::Institute
 Institute:
         cooperateWith::Institute hasParts::ResearchGroup+
 Enterprise:
-        EPSILON
+        location::String name::String carriesOut::Project+ develops::Product+ employs::Employee+ finances::Project+ publishes::Publication+ technicalReport::TechnicalReport+
 University:
         hasParts::Department+ student::Student+
 Project:
@@ -196,3 +194,7 @@ Topic:
         name::String
 ResearchTopic:
         dealWithIn::Project isWorkedOnBy::AcademicStaff+
+String:
+        STR
+Integer:
+        INT

@@ -2,13 +2,11 @@ module Main
 
 exports
   sorts
-        Thing Meta-Reviewer Reviewer Decision Person Document Preference ProgramCommittee Bid Conference ConferenceChair ConferenceMember AssociatedChair ProgramCommitteeMember AuthorNotReviewer SubjectArea ExternalReviewer Chairman ProgramCommitteeChair Acceptance Rejection Review Paper Author User Co-author PaperAbstract PaperFullVersion Administrator Meta-Review 
+        Thing Meta-Reviewer Reviewer Decision Person Document Preference ProgramCommittee Bid Conference ConferenceChair ConferenceMember AssociatedChair ProgramCommitteeMember AuthorNotReviewer SubjectArea ExternalReviewer Chairman ProgramCommitteeChair Acceptance Rejection Review Paper Author User Co-author PaperAbstract PaperFullVersion Administrator Meta-Review Boolean Integer String 
   context-free syntax
         Conference -> Thing
 
-        Conference -> Thing
-
-         -> Meta-Reviewer
+        assignedByAdministrator::Administrator adjustBid::Bid readPaper::Paper hasBeenAssigned::Paper writeReview::Review assignExternalReviewer::ExternalReviewer -> Meta-Reviewer
 
         Meta-Reviewer -> Reviewer
 
@@ -27,6 +25,10 @@ exports
 
         User -> Person
 
+        ProgramCommitteeMember -> Person
+
+        Chairman -> Person
+
         hasConflictOfInterest::Document email::String -> Person
 
         Review -> Document
@@ -44,21 +46,41 @@ exports
 
         hasConferenceMember::ConferenceMember paperAssignmentFinalizedBy::Administrator reviewCriteriaEnteredBy::Administrator paperAssignmentToolsRunBy::Administrator virtualMeetingEnabledBy::Administrator hardcopyMailingManifestsPrintedBy::Administrator detailsEnteredBy::Administrator reviewerBiddingStartedBy::Administrator date::Date reviewsPerPaper::Integer logoURL::AnyURI acceptsHardcopySubmissions::Boolean siteURL::AnyURI -> Conference
 
-         -> ConferenceChair
+        memberOfConference::Conference -> ConferenceChair
+
+        Reviewer -> ConferenceMember
+
+        ConferenceChair -> ConferenceMember
+
+        AssociatedChair -> ConferenceMember
+
+        Author -> ConferenceMember
+
+        ProgramCommitteeMember -> ConferenceMember
+
+        Chairman -> ConferenceMember
 
         memberOfConference::Conference -> ConferenceMember
 
-         -> AssociatedChair
+        memberOfConference::Conference -> AssociatedChair
+
+        ProgramCommitteeChair -> ProgramCommitteeMember
 
         memberOfProgramCommittee::ProgramCommittee maxPapers::Integer addedBy::Administrator -> ProgramCommitteeMember
 
-         -> AuthorNotReviewer
+        submitPaper::Paper writePaper::Paper -> AuthorNotReviewer
 
          -> SubjectArea
 
         assignedByReviewer::Reviewer -> ExternalReviewer
 
-         -> Chairman
+        ConferenceChair -> Chairman
+
+        AssociatedChair -> Chairman
+
+        ProgramCommitteeChair -> Chairman
+
+        hasConflictOfInterest::Document email::String memberOfConference::Conference -> Chairman
 
         endReview::Review -> ProgramCommitteeChair
 
@@ -84,14 +106,23 @@ exports
 
         Administrator -> User
 
-        Administrator -> User
+        Reviewer -> User
+
+        Author -> User
 
         co-writePaper::Paper -> Co-author
 
-         -> PaperAbstract
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::UnsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer -> PaperAbstract
 
-         -> PaperFullVersion
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::UnsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer -> PaperFullVersion
 
         finalizePaperAssignment::Conference runPaperAssignmentTools::Conference enableVirtualMeeting::Conference startReviewerBidding::Conference assignReviewer::Reviewer rejectPaper::Paper enterConferenceDetails::Conference printHardcopyMailingManifests::Conference setMaxPapers::ProgramCommitteeMember enterReviewCriteria::Conference acceptPaper::Paper addProgramCommitteeMember::ProgramCommitteeMember -> Administrator
 
-         -> Meta-Review
+        writtenBy::Reviewer -> Meta-Review
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
+        STR -> String

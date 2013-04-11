@@ -62,3 +62,15 @@ syntax MacroImplementation
         = 
         String macroImpName String declaration Process process+ Connection connections+
  ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;

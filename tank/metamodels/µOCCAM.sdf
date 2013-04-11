@@ -2,8 +2,15 @@ module Main
 
 exports
   sorts
-        Process StopProcess SkipProcess Action Construction Instance Assignment Input Output Sequence NormalSequence ReplicatorSequence Conditional NormalConditional ReplicatorConditional Loop Parallel NormalParallel ReplicatorParallel Alternation NormalAlternation ReplicatorAlternation Choice BooleanRef Alternative Guard InputGuard BooleanGuard Replicator Base Count Type PrimitiveType Literal Element Subscript Variable Channel VariableOPerand LiteralOperand ExpressionOperand Expression MonadicExpression DyadicExpression SimpleExpression Specification Declaration TypeDeclaration IntDeclaration ValDeclaration Definition Formal ProcedureBody Actual MonadicOperator DyadicOperator 
+        String Boolean Integer Process StopProcess SkipProcess Action Construction Instance Assignment Input Output Sequence NormalSequence ReplicatorSequence Conditional NormalConditional ReplicatorConditional Loop Parallel NormalParallel ReplicatorParallel Alternation NormalAlternation ReplicatorAlternation Choice BooleanRef Alternative Guard InputGuard BooleanGuard Replicator Base Count Type PrimitiveType Literal Element Subscript Variable Channel VariableOPerand LiteralOperand ExpressionOperand Expression MonadicExpression DyadicExpression SimpleExpression Specification Declaration TypeDeclaration IntDeclaration ValDeclaration Definition Formal ProcedureBody Actual MonadicOperator DyadicOperator 
   context-free syntax
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
         StopProcess -> Process
 
         SkipProcess -> Process
@@ -124,9 +131,9 @@ exports
 
         element::Element -> Channel
 
-         -> VariableOPerand
+        element::Element -> VariableOPerand
 
-         -> LiteralOperand
+        integer::Integer -> LiteralOperand
 
         operand::Operand -> ExpressionOperand
 

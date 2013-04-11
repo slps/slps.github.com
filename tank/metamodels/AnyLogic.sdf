@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        ModelElement VisualModelElement Point Model ActiveObjectClass Connector EmbeddedObject ActiveObjectClassRef Parameter Shape EmbeddedObjectPresentation Experiment SimulationExperiment Control Button Frame Text Font 
+        ModelElement VisualModelElement Point Model ActiveObjectClass Connector EmbeddedObject ActiveObjectClassRef Parameter Shape EmbeddedObjectPresentation Experiment SimulationExperiment Control Button Frame Text Font Boolean Integer String 
   context-free syntax
         VisualModelElement -> ModelElement
 
@@ -44,9 +44,7 @@ exports
 
         asObject::Boolean embeddedIcon::Boolean rotation::Double -> Shape
 
-         -> EmbeddedObjectPresentation
-
-        SimulationExperiment -> Experiment
+        asObject::Boolean embeddedIcon::Boolean rotation::Double -> EmbeddedObjectPresentation
 
         SimulationExperiment -> Experiment
 
@@ -56,10 +54,17 @@ exports
 
         width::Integer height::Integer asObject::Boolean embeddedIcon::Boolean fillColor::Integer textColor::Integer enableExpression::String actionCode::String labelText::String font::Font -> Control
 
-         -> Button
+        width::Integer height::Integer asObject::Boolean embeddedIcon::Boolean fillColor::Integer textColor::Integer enableExpression::String actionCode::String labelText::String font::Font -> Button
 
         x::Integer y::Integer width::Integer height::Integer -> Frame
 
         color::Integer text::String font::Font alignment::String -> Text
 
         name::String size::Integer style::Integer -> Font
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
+        STR -> String

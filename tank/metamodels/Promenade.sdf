@@ -2,8 +2,15 @@ module Main
 
 exports
   sorts
-        Strong Start End FeedBack Weak Grouping Precedence DynPrecedence DerPrecedence BasPrecedence MetaTaskOccurence ParBinding ParameterPrec ModelElement DependancyUML MetaTask ParameterUML MetaDocument 
+        String Boolean Integer Strong Start End FeedBack Weak Grouping Precedence DynPrecedence DerPrecedence BasPrecedence MetaTaskOccurence ParBinding ParameterPrec ModelElement DependancyUML MetaTask ParameterUML MetaDocument 
   context-free syntax
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
          -> Strong
 
          -> Start
@@ -12,9 +19,9 @@ exports
 
          -> FeedBack
 
-         -> Weak
+        precs::Precedence+ auxTasks::MetaTaskOccurence+ -> Weak
 
-         -> Grouping
+        precs::Precedence+ auxTasks::MetaTaskOccurence+ -> Grouping
 
         DynPrecedence -> Precedence
 
@@ -24,11 +31,35 @@ exports
 
         deprecs::DerPrecedence+ parbind::ParBinding+ -> Precedence
 
-         -> DynPrecedence
+        Strong -> DynPrecedence
+
+        Start -> DynPrecedence
+
+        End -> DynPrecedence
+
+        FeedBack -> DynPrecedence
+
+        Weak -> DynPrecedence
+
+        Grouping -> DynPrecedence
+
+        deprecs::DerPrecedence+ parbind::ParBinding+ -> DynPrecedence
+
+        Weak -> DerPrecedence
+
+        Grouping -> DerPrecedence
 
         precs::Precedence+ auxTasks::MetaTaskOccurence+ -> DerPrecedence
 
-         -> BasPrecedence
+        Strong -> BasPrecedence
+
+        Start -> BasPrecedence
+
+        End -> BasPrecedence
+
+        FeedBack -> BasPrecedence
+
+        deprecs::DerPrecedence+ parbind::ParBinding+ -> BasPrecedence
 
         dprecs::DerPrecedence+ taskCl::MetaTask+ -> MetaTaskOccurence
 

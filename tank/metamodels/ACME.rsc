@@ -5,12 +5,17 @@ syntax ACMEFile
         = 
         ACMEEntry entries+
  ;
+syntax ACMEEntry
+        = System
+        | ComponentType
+ ;
 syntax Element
         = Type
         | Component
         | Port
         | Connector
         | Role
+        | System
  ;
 syntax Type
         = 
@@ -25,8 +30,8 @@ syntax Representation
         System systems+
  ;
 syntax Component
-        = 
-        ComponentInstance
+        = ComponentInstance
+        | ComponentType
  ;
 syntax ComponentInstance
         = 
@@ -63,4 +68,16 @@ syntax Attachment
 syntax Binding
         = 
         String compSrc String portSrc String compDest String portDest
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
  ;

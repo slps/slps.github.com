@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        DateTimeType VersionType ValueType StringValue FloatValue DateTimeTypeValue BooleanValue DocumentPropertiesCollection CustomDocumentPropertiesCollection CustomDocumentProperty SmartTagType SmartTagsCollection StringProperty StringType BreakType NoteValue OnOffType FldCharTypeProperty WordDocument DocPrElt BodyElt BlockLevelElt BlockLevelChunkElt ParaElt ParaPrElt ParaContentElt RunElt RunPrElt RunContentElt BreakElt Text DelText InstrText DelInstrText NoBreakHyphen SoftHyphen AnnotationRef FootnoteRef EndnoteRef Separator ContinuationSeparator PgNum Cr Footnote Endnote Picture Symbol SymElt Tab FldChar FldCharElt FontsListElt ListsElt StylesElt SectPrElt RunLevelElt CfChunk SimpleFieldElt HLinkElt SubDocElt PictureType TabElt 
+        DateTimeType VersionType ValueType StringValue FloatValue DateTimeTypeValue BooleanValue DocumentPropertiesCollection CustomDocumentPropertiesCollection CustomDocumentProperty SmartTagType SmartTagsCollection StringProperty StringType BreakType NoteValue OnOffType FldCharTypeProperty WordDocument DocPrElt BodyElt BlockLevelElt BlockLevelChunkElt ParaElt ParaPrElt ParaContentElt RunElt RunPrElt RunContentElt BreakElt Text DelText InstrText DelInstrText NoBreakHyphen SoftHyphen AnnotationRef FootnoteRef EndnoteRef Separator ContinuationSeparator PgNum Cr Footnote Endnote NoteElt Picture Symbol SymElt Tab FldChar FldCharElt FontsListElt ListsElt StylesElt SectPrElt RunLevelElt CfChunk SimpleFieldElt HLinkElt SubDocElt PictureType TabElt Integer String Boolean 
   context-free syntax
         year::Integer month::Integer day::Integer hour::Integer minute::Integer second::Integer -> DateTimeType
 
@@ -34,9 +34,17 @@ exports
 
         st_wordDocument::WordDocument smartTagTypes::SmartTagType+ -> SmartTagsCollection
 
-         -> StringProperty
+        val::String -> StringProperty
 
         StringProperty -> StringType
+
+        Text -> StringType
+
+        DelText -> StringType
+
+        InstrText -> StringType
+
+        DelInstrText -> StringType
 
         val::String -> StringType
 
@@ -106,15 +114,35 @@ exports
 
         Cr -> RunContentElt
 
+        Text -> RunContentElt
+
+        DelText -> RunContentElt
+
+        InstrText -> RunContentElt
+
+        DelInstrText -> RunContentElt
+
+        Footnote -> RunContentElt
+
+        Endnote -> RunContentElt
+
+        Picture -> RunContentElt
+
+        Symbol -> RunContentElt
+
+        Tab -> RunContentElt
+
+        FldChar -> RunContentElt
+
         type::BreakType -> BreakElt
 
-         -> Text
+        rce_rElt::RunElt val::String -> Text
 
-         -> DelText
+        rce_rElt::RunElt val::String -> DelText
 
-         -> InstrText
+        rce_rElt::RunElt val::String -> InstrText
 
-         -> DelInstrText
+        rce_rElt::RunElt val::String -> DelInstrText
 
         rce_rElt::RunElt -> NoBreakHyphen
 
@@ -134,19 +162,27 @@ exports
 
         rce_rElt::RunElt -> Cr
 
-         -> Footnote
+        rce_rElt::RunElt n_blockLevelElts::BlockLevelElt+ type::NoteValue suppressRef::OnOffType -> Footnote
 
-         -> Endnote
+        rce_rElt::RunElt n_blockLevelElts::BlockLevelElt+ type::NoteValue suppressRef::OnOffType -> Endnote
 
-         -> Picture
+        Footnote -> NoteElt
 
-         -> Symbol
+        Endnote -> NoteElt
+
+        rce_rElt::RunElt -> Picture
+
+        rce_rElt::RunElt font::StringType char::StringType -> Symbol
+
+        Symbol -> SymElt
 
         font::StringType char::StringType -> SymElt
 
-         -> Tab
+        rce_rElt::RunElt -> Tab
 
-         -> FldChar
+        rce_rElt::RunElt fldData::StringType fldCharType::FldCharTypeProperty fldLock::OnOffType -> FldChar
+
+        FldChar -> FldCharElt
 
         fldData::StringType fldCharType::FldCharTypeProperty fldLock::OnOffType -> FldCharElt
 
@@ -168,6 +204,17 @@ exports
 
         pce_pElt::ParaElt -> SubDocElt
 
+        Picture -> PictureType
+
          -> PictureType
 
+        Tab -> TabElt
+
          -> TabElt
+
+        INT -> Integer
+
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean

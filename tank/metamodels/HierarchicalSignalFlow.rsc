@@ -1,6 +1,14 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module HierarchicalSignalFlow
 
+syntax String
+        = 
+        String
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
 syntax Port
         = InputPort
         | OutputPort
@@ -34,7 +42,7 @@ syntax LocalPort
  ;
 syntax Primitive
         = 
-        ()
+        Compound compound InputPort inputPort+ OutputPort outputPort+ Signal signal+
  ;
 syntax Asso_Port_Signal
         = 

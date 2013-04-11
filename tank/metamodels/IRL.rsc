@@ -22,8 +22,8 @@ syntax ExtendedIdentifier
         ExtendedIdentifier parentIdentifier Extended extendedIdentifierOwner
  ;
 syntax Extended
-        = 
-        Definition
+        = Definition
+        | ClassInstancesDeclaration
  ;
 syntax Definition
         = ImportDefinition
@@ -36,4 +36,16 @@ syntax RuleSet
 syntax ImportDefinition
         = 
         RuleSet importDefinitionOwners Boolean dotStar
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
  ;

@@ -47,7 +47,7 @@ Channel:
 Channel:
         chStub::Stub chBinder::Binder chPObject::ProtocolObject chInterceptor::Interceptor+ chEndPoint::BEO
 ClientServerChannel:
-        EPSILON
+        chStub::Stub chBinder::Binder chPObject::ProtocolObject chInterceptor::Interceptor+ chEndPoint::BEO
 ControllingObject:
         SecurityAuthority
 ControllingObject:
@@ -59,13 +59,13 @@ ControllingObject:
 ControllingObject:
         coDomain::Domain+
 SecurityAuthority:
-        EPSILON
+        coDomain::Domain+
 ManagementAuthority:
-        EPSILON
+        coDomain::Domain+
 AddressingAuthority:
-        EPSILON
+        coDomain::Domain+
 NamingAuthority:
-        EPSILON
+        coDomain::Domain+
 ControlledObject:
         cdoDomain::Domain+
 Domain:
@@ -79,13 +79,11 @@ Domain:
 Domain:
         parentDomain::Domain subDomain::Domain+ domControllingObject::ControllingObject domMember::ControlledObject+
 SecurityDomain:
-        EPSILON
+        parentDomain::Domain subDomain::Domain+ domControllingObject::ControllingObject domMember::ControlledObject+
 ManagementDomain:
-        EPSILON
+        parentDomain::Domain subDomain::Domain+ domControllingObject::ControllingObject domMember::ControlledObject+
 AddressingDomain:
-        EPSILON
-NamingDomain:
-        EngineeringInterfaceReferenceManagementDomain
+        parentDomain::Domain subDomain::Domain+ domControllingObject::ControllingObject domMember::ControlledObject+
 NamingDomain:
         EngineeringInterfaceReferenceManagementDomain
 EngineeringInterfaceReferenceManagementDomain:
@@ -94,3 +92,5 @@ EngineeringInterfaceReferenceManagementPolicy:
         eirmpManagementDomain::EngineeringInterfaceReferenceManagementDomain+
 EngineeringInterfaceReference:
         eirManagementDomain::EngineeringInterfaceReferenceManagementDomain
+String:
+        STR

@@ -35,6 +35,8 @@ SingleTimeValue:
 SingleTimeInterval:
         start::SingleTimeValue end::SingleTimeValue
 DiscreteTimeBase:
+        Clock
+DiscreteTimeBase:
         refEvent::Event
 DiscreteInstant:
         next::DiscreteInstant previous::DiscreteInstant refOcc::EventOccurence
@@ -52,12 +54,8 @@ MetricTimeValue:
         EPSILON
 DiscreteTimeValue:
         MetricTimeValue
-DiscreteTimeValue:
-        MetricTimeValue
 MetricTimeInterval:
         EPSILON
-DiscreteTimeInterval:
-        MetricTimeInterval
 DiscreteTimeInterval:
         MetricTimeInterval
 SimultaneousEventOccurrence:
@@ -71,9 +69,11 @@ TimedAction:
 TimedAction:
         duration::TimeInterval+ start::TimeValue+ end::TimeValue+
 Delay:
-        EPSILON
+        duration::TimeInterval+ start::TimeValue+ end::TimeValue+
 TimingMechanism:
         Timer
+TimingMechanism:
+        Clock
 TimingMechanism:
         stability::String drift::String skew::String origin::TimedEvent resolution::MetricTimeInterval refClock::Clock state::String
 Clock:
@@ -121,9 +121,9 @@ ModelingConcern:
 ModelingConcern:
         relevantQuantity::Quantity+ annotedModel::AnnotatedModel
 AnalysisConcern:
-        EPSILON
+        relevantQuantity::Quantity+ annotedModel::AnnotatedModel
 DesignConcern:
-        EPSILON
+        relevantQuantity::Quantity+ annotedModel::AnnotatedModel
 Quantity:
         EPSILON
 BasicQuantity:
@@ -341,14 +341,21 @@ Component:
 Component:
         process::ProcessResource+ interfaces::Interface+
 StructuredComponent:
-        EPSILON
+        process::ProcessResource+ interfaces::Interface+
 BasicComponent:
-        EPSILON
+        process::ProcessResource+ interfaces::Interface+
 LogicalResource:
-        EPSILON
+        basicResource::BasicResource
 ServerResource:
         services::Service+
 Service:
         resource::ServerResource interface::Interface
 Interface:
         service::Service
+String:
+        STR
+Integer:
+        INT
+Boolean:
+        "true"
+        "false"

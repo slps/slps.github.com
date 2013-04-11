@@ -48,12 +48,8 @@ NamedElement:
         RequirementRelated
 Dependency:
         Conform
-Dependency:
-        Conform
 Conform:
         target::Viewpoint source::View
-Package:
-        View
 Package:
         View
 View:
@@ -75,15 +71,15 @@ Comment:
 Comment:
         content::String
 Rationale:
-        EPSILON
+        content::String
 Problem:
-        EPSILON
+        content::String
 Block:
         ConstraintBlock
 Block:
         isEncapsulated::Boolean
 ConstraintBlock:
-        EPSILON
+        isEncapsulated::Boolean
 Property:
         BlockProperty
 Property:
@@ -112,8 +108,6 @@ DistributedProperty:
         Normal
 DataType:
         ValueType
-DataType:
-        ValueType
 ValueType:
         Unit
 ValueType:
@@ -121,11 +115,9 @@ ValueType:
 ValueType:
         unit::Unit dimension::Dimension
 Unit:
-        EPSILON
+        unit::Unit dimension::Dimension
 Dimension:
-        EPSILON
-ConnectorEnd:
-        NestedConnectorEnd
+        unit::Unit dimension::Dimension
 ConnectorEnd:
         NestedConnectorEnd
 NestedConnectorEnd:
@@ -138,8 +130,6 @@ FlowPort:
         isAtomic::Boolean direction::FlowDirection isConjugated::Boolean
 FlowProperty:
         direction::FlowDirection
-Interface:
-        FlowSpecification
 Interface:
         FlowSpecification
 FlowSpecification:
@@ -166,11 +156,17 @@ ItemFlow:
 Parameter:
         Optional
 Parameter:
-        Optional
+        Rate
 ActivityEdge:
-        
+        Probability
+ActivityEdge:
+        Rate
+ActivityEdge:
+        EPSILON
 ParameterSet:
-        
+        Probability
+ParameterSet:
+        EPSILON
 Optional:
         EPSILON
 Rate:
@@ -180,19 +176,27 @@ Rate:
 Rate:
         instance::InstanceSpecification
 InstanceSpecification:
-        
+        EPSILON
 Continous:
-        EPSILON
+        instance::InstanceSpecification
 Discrete:
-        EPSILON
+        instance::InstanceSpecification
 Probability:
         probability::ValueSpecification
 ValueSpecification:
-        
+        EPSILON
 Behavior:
-        
+        ControlOperation
+Behavior:
+        TestCase
+Behavior:
+        EPSILON
 Operation:
-        
+        ControlOperation
+Operation:
+        TestCase
+Operation:
+        EPSILON
 ControlOperation:
         EPSILON
 ObjectNode:
@@ -208,14 +212,10 @@ Overwrite:
         EPSILON
 Abstraction:
         Allocate
-Abstraction:
-        Allocate
 Allocate:
         EPSILON
 Allocated:
         allocatedFrom::NamedElement+ allocatedTo::NamedElement+
-ActivityPartition:
-        AllocateActivityPartition
 ActivityPartition:
         AllocateActivityPartition
 AllocateActivityPartition:
@@ -238,8 +238,6 @@ Copy:
         EPSILON
 Realization:
         Satisfy
-Realization:
-        Satisfy
 Satisfy:
         EPSILON
 Requirement:
@@ -255,8 +253,15 @@ BasicInterval:
 BasicInterval:
         min::Integer max::Integer
 Interval:
-        EPSILON
+        min::Integer max::Integer
 Uniform:
-        EPSILON
+        min::Integer max::Integer
 Normal:
         mean::Integer standardDeviation::Integer
+String:
+        STR
+Integer:
+        INT
+Boolean:
+        "true"
+        "false"

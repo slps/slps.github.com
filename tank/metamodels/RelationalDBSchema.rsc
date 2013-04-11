@@ -18,3 +18,15 @@ syntax Column
         = 
         String dataType Boolean null String defaultValue Table owner Table keyOf
  ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;

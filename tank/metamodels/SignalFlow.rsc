@@ -11,7 +11,7 @@ syntax CompoundComponent
  ;
 syntax PrimitiveComponent
         = 
-        ()
+        String name String position Signal signal+ OutputPort outputPort+ InputPort inputPort+ CompoundComponent compoundComponent
  ;
 syntax BaseComponent
         = CompoundComponent
@@ -43,4 +43,12 @@ syntax Signal
 syntax AssociationPortBase_PortBase
         = 
         PortBase srcPortBase+ PortBase dstPortBase+ Signal signal
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Integer
+        = 
+        Integer
  ;

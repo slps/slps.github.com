@@ -29,13 +29,13 @@ UnlinkExp:
 ReturnExp:
         value::OclExpression
 BreakExp:
-        
+        EPSILON
 TryExp:
         tryBody::OclExpression exception::Type+ exceptBody::OclExpression
 RaiseExp:
         exception::Type
 ContinueExp:
-        
+        EPSILON
 ForExp:
         condition::OclExpression
 TupleExp:
@@ -104,6 +104,10 @@ ImperativeExpression:
         AssertExp
 ImperativeExpression:
         UnpackExp
+ImperativeExpression:
+        SwitchExp
+ImperativeExpression:
+        ImperativeLoopExp
 UnpackExp:
         variable::Variable+
 AnonymousTupleType:
@@ -119,6 +123,16 @@ Class:
 Class:
         AnonymousTupleType
 Class:
+        ModelType
+Class:
+        Module
+Class:
+        Transformation
+Class:
+        TupleType
+Class:
+        AnyType
+Class:
         ownedAttribute::Property+ ownedOperation::Operation+ superClass::Class+ isAbstract::Boolean
 DataType:
         Enumeration
@@ -126,6 +140,8 @@ DataType:
         PrimitiveType
 DataType:
         CollectionType
+DataType:
+        TupleType
 Element:
         PropertyTemplateItem
 Element:
@@ -170,8 +186,6 @@ NamedElement:
         Rule
 Extent:
         URIExtent
-Extent:
-        URIExtent
 Object:
         Element
 Object:
@@ -185,6 +199,16 @@ Operation:
         Function
 Operation:
         class::Class ownedParameter::Parameter+ raisedException::Type+
+MultiplicityElement:
+        Operation
+MultiplicityElement:
+        Parameter
+MultiplicityElement:
+        Property
+Package:
+        Module
+Package:
+        Transformation
 Package:
         ownedType::Type+ nestedPackage::Package+ uri::String
 Type:
@@ -197,6 +221,12 @@ Type:
         InvalidType
 Type:
         VoidType
+Type:
+        AnyType
+Parameter:
+        VarParameter
+Parameter:
+        FunctionParameter
 Parameter:
         operation::Operation
 EnumerationLiteral:
@@ -213,10 +243,25 @@ TypedElement:
         CollectionLiteralPart
 TypedElement:
         TupleLiteralPart
+TypedElement:
+        Operation
+TypedElement:
+        Parameter
+TypedElement:
+        Property
 PrimitiveType:
-        
+        EPSILON
+URIExtent:
+        ModelType
 URIExtent:
         EPSILON
+Boolean:
+        "true"
+        "false"
+String:
+        STR
+Integer:
+        INT
 Comment:
         annotatedElement::NamedElement+
 MappingBody:
@@ -238,11 +283,11 @@ MappingOperation:
 MappingCallExp:
         isStrict::Boolean
 Constructor:
-        EPSILON
+        context::VarParameter result::VarParameter+ overridden::ImperativeOperation body::OperationBody isBlackbox::Boolean
 ContextualProperty:
         context::Class overridden::Property
 EntryOperation:
-        EPSILON
+        context::VarParameter result::VarParameter+ overridden::ImperativeOperation body::OperationBody isBlackbox::Boolean
 ImperativeCallExp:
         MappingCallExp
 ImperativeCallExp:
@@ -254,15 +299,17 @@ ImperativeOperation:
 ImperativeOperation:
         EntryOperation
 ImperativeOperation:
+        MappingOperation
+ImperativeOperation:
         context::VarParameter result::VarParameter+ overridden::ImperativeOperation body::OperationBody isBlackbox::Boolean
 DirectionKind:
         in::EPSILON
         inout::EPSILON
         out::EPSILON
 Library:
-        EPSILON
+        ownedTag::Tag+ configProperty::Property+ moduleImport::ModuleImport+ usedModelType::ModelType+ isBlackbox::Boolean
 ModelParameter:
-        EPSILON
+        ctxOwner::ImperativeOperation resOwner::ImperativeOperation kind::DirectionKind
 ModelType:
         metamodel::Package+ additionalCondition::OclExpression+ conformanceKind::String
 Module:
@@ -289,9 +336,13 @@ OperationBody:
 OperationBody:
         operation::ImperativeOperation content::OclExpression+
 ConstructorBody:
-        EPSILON
+        operation::ImperativeOperation content::OclExpression+
 ObjectExp:
         referredObject::Variable body::ConstructorBody
+Area:
+        Mapping
+Area:
+        CoreDomain
 Assignment:
         bottomPattern::BottomPattern slotExpression::OclExpression value::OclExpression targetProperty::Property isDefault::Boolean
 BottomPattern:
@@ -301,9 +352,9 @@ GuardPattern:
 Mapping:
         specification::Mapping+ local::Mapping+ context::Mapping
 RealizedVariable:
-        EPSILON
+        initExpression::OclExpression LetExp::LetExp computeOwner::ComputeExp bindParameter::Parameter
 CoreDomain:
-        EPSILON
+        isCheckable::Boolean isEnforceable::Boolean rule::Rule typedModel::TypedModel guardPattern::GuardPattern bottomPattern::BottomPattern
 CorePattern:
         BottomPattern
 CorePattern:
@@ -319,6 +370,8 @@ EnforcementMode:
 Domain:
         RelationDomain
 Domain:
+        CoreDomain
+Domain:
         isCheckable::Boolean isEnforceable::Boolean rule::Rule typedModel::TypedModel
 Transformation:
         RelationalTransformation
@@ -328,6 +381,8 @@ TypedModel:
         transformation::Transformation usedPackage::Package+ dependsOn::TypedModel+
 Rule:
         Relation
+Rule:
+        Mapping
 Rule:
         domain::Domain+ transformation::Transformation overrides::Rule
 Pattern:
@@ -341,7 +396,7 @@ Predicate:
 Function:
         queryExpression::OclExpression
 FunctionParameter:
-        EPSILON
+        operation::Operation initExpression::OclExpression LetExp::LetExp computeOwner::ComputeExp bindParameter::Parameter
 RelationalTransformation:
         ownedKey::Key+
 Relation:
@@ -360,6 +415,10 @@ CallExp:
         ResolveExp
 CallExp:
         FeaturePropertyCall
+CallExp:
+        SwitchExp
+CallExp:
+        LoopExp
 CollectionKind:
         OrderedSet::EPSILON
         Set::EPSILON
@@ -379,6 +438,8 @@ OclExpression:
         TypeExp
 OclExpression:
         LiteralExp
+OclExpression:
+        LoopExp
 UnlimitedNaturalExp:
         symbol::UnlimitedNatural
 IfExp:
@@ -387,6 +448,10 @@ LetExp:
         in::OclExpression+ variable::Variable
 Variable:
         RealizedVariable
+Variable:
+        VarParameter
+Variable:
+        FunctionParameter
 Variable:
         initExpression::OclExpression LetExp::LetExp computeOwner::ComputeExp bindParameter::Parameter
 PropertyCallExp:
@@ -399,6 +464,8 @@ LoopExp:
         IteratorExp
 LoopExp:
         IterateExp
+LoopExp:
+        ImperativeLoopExp
 IteratorExp:
         body::OclExpression iterator::Variable+
 StringLiteralExp:
@@ -456,15 +523,13 @@ CollectionRange:
 TupleLiteralExp:
         part::TupleLiteralPart+
 NullLiteralExp:
-        
+        EPSILON
 ExpressionInOcl:
         bodyExpression::OclExpression context::Variable resultVariable::Variable parameterVariable::Variable
 OpaqueExpression:
         ExpressionInOcl
-OpaqueExpression:
-        ExpressionInOcl
 InvalidLiteralExp:
-        
+        EPSILON
 FeaturePropertyCall:
         PropertyCallExp
 FeaturePropertyCall:
@@ -496,8 +561,8 @@ SequenceType:
 SetType:
         elementType::Type
 TupleType:
-        EPSILON
+        ownedAttribute::Property+ ownedOperation::Operation+ superClass::Class+ isAbstract::Boolean
 VoidType:
         package::Package
 AnyType:
-        EPSILON
+        ownedAttribute::Property+ ownedOperation::Operation+ superClass::Class+ isAbstract::Boolean package::Package

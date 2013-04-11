@@ -58,3 +58,15 @@ syntax DerivationRuleSet
         = 
         Rules/DerivationRule rules+
  ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax String
+        = 
+        String
+ ;

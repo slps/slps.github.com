@@ -13,7 +13,14 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable C 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Hugo Bruneliere, <code>C.ecore</code>, 2005/08/08.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>61</strong></li><li>Number of top alternatives: <strong>76</strong></li><li>Number of defined nonterminal symbols: <strong>34</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>2</strong>: <code><a href="#CTypedElement" class="nt">CTypedElement</a>, <a href="#CStructuralFeature" class="nt">CStructuralFeature</a></code></li><li>Bottom nonterminal symbols: <strong>2</strong>: <code><a href="#String" class="nt">String</a>, <a href="#Boolean" class="nt">Boolean</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="CDataType">CDataType</a>:
+				</script></head><body><h1 class="l">Browsable C 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Hugo Brunelière, <code>C.ecore</code>, 2005/08/08.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>67</strong></li><li>Number of top alternatives: <strong>83</strong></li><li>Number of defined nonterminal symbols: <strong>37</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>2</strong>: <code><a href="#Integer" class="nt">Integer</a>, <a href="#CTypedElement" class="nt">CTypedElement</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>2</strong></li><li>Keywords: <strong>2</strong>: <code class="t">"true", "false"</code></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Integer">Integer</a>:
+        <span class="meta">int</span>
+</pre><pre><a class="nt" name="String">String</a>:
+        <span class="meta">string</span>
+</pre><pre><a class="nt" name="Boolean">Boolean</a>:
+        <span class="t">"true"</span>
+        <span class="t">"false"</span>
+</pre><pre><a class="nt" name="CDataType">CDataType</a>:
         <a class="nt" href="#CIntegral">CIntegral</a>
 </pre><pre><a class="nt" name="CDataType">CDataType</a>:
         <a class="nt" href="#CFloating">CFloating</a>
@@ -114,10 +121,16 @@
 </pre><pre><a class="nt" name="CClassifier">CClassifier</a>:
         <a class="nt" href="#Derived">Derived</a>
 </pre><pre><a class="nt" name="CClassifier">CClassifier</a>:
+        <a class="nt" href="#CStructured">CStructured</a>
+</pre><pre><a class="nt" name="CClassifier">CClassifier</a>:
         <a class="nt" href="#CDataType">CDataType</a>
         <a class="nt" href="#Derived">Derived</a>
 </pre><pre><a class="nt" name="Derived">Derived</a>:
         ε
+</pre><pre><a class="nt" name="CStructureContents">CStructureContents</a>:
+        <a class="nt" href="#CStructuralFeature">CStructuralFeature</a>
+</pre><pre><a class="nt" name="CStructureContents">CStructureContents</a>:
+        <a class="nt" href="#CStructured">CStructured</a>
 </pre><pre><a class="nt" name="CStructureContents">CStructureContents</a>:
         <span class="sel">sc_container</span>::<a class="nt" href="#CStructured">CStructured</a>
 </pre><pre><a class="nt" name="CStructured">CStructured</a>:
@@ -127,17 +140,17 @@
 </pre><pre><a class="nt" name="CStructured">CStructured</a>:
         <span class="sel">contains</span>::<a class="nt" href="#CStructureContents">CStructureContents</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="CStruct">CStruct</a>:
-        ε
+        <span class="sel">contains</span>::<a class="nt" href="#CStructureContents">CStructureContents</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="CUnion">CUnion</a>:
-        ε
+        <span class="sel">contains</span>::<a class="nt" href="#CStructureContents">CStructureContents</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="CSourceText">CSourceText</a>:
         <span class="sel">source</span>::<a class="nt" href="#String">String</a> <span class="sel">fileName</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="CTypedElement">CTypedElement</a>:
         <a class="nt" href="#CParameter">CParameter</a>
 </pre><pre><a class="nt" name="CTypedElement">CTypedElement</a>:
+        <a class="nt" href="#CStructuralFeature">CStructuralFeature</a>
+</pre><pre><a class="nt" name="CTypedElement">CTypedElement</a>:
         <span class="sel">type</span>::<a class="nt" href="#CClassifier">CClassifier</a> <span class="sel">source</span>::<a class="nt" href="#CSourceText">CSourceText</a>
-</pre><pre><a class="nt" name="CStructuralFeature">CStructuralFeature</a>:
-        <a class="nt" href="#CField">CField</a>
 </pre><pre><a class="nt" name="CStructuralFeature">CStructuralFeature</a>:
         <a class="nt" href="#CField">CField</a>
 </pre><pre><a class="nt" name="CField">CField</a>:

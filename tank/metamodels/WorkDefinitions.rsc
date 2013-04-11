@@ -40,3 +40,7 @@ syntax Step
         = 
         ()
  ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;

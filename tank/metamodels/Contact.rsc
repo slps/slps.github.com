@@ -13,3 +13,15 @@ syntax Num_portable
         = 
         String numero Contact contact_portable
  ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;

@@ -2,8 +2,15 @@ module Main
 
 exports
   sorts
-        AWKProgram File Record Field Script Rule Pattern Action Instruction InitialRule FinalRule 
+        Integer String Boolean AWKProgram File Record Field Script Rule Pattern Action Instruction InitialRule FinalRule 
   context-free syntax
+        INT -> Integer
+
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean
+
         name::String input::File output::File script::Script -> AWKProgram
 
         name::String records::Record+ -> File
@@ -26,6 +33,6 @@ exports
 
         value::String i_action::Action -> Instruction
 
-         -> InitialRule
+        r_script::Script pattern::Pattern action::Action -> InitialRule
 
-         -> FinalRule
+        r_script::Script pattern::Pattern action::Action -> FinalRule

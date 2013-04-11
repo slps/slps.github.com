@@ -1,6 +1,14 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module RequisitePro
 
+syntax DescribedElt
+        = Document
+        | ContainerElt
+ ;
+syntax NamedElt
+        = ContainerElt
+        | Requirement
+ ;
 syntax ContainerElt
         = Project
         | Package
@@ -19,7 +27,7 @@ syntax TypedElt
  ;
 syntax Document
         = 
-        ()
+        description: String
  ;
 syntax Attribute
         = 
@@ -28,4 +36,8 @@ syntax Attribute
 syntax Requirement
         = 
         String text Attribute attributes+ Document location Requirement parent Requirement children+ Requirement coverLink+
+ ;
+syntax String
+        = 
+        String
  ;

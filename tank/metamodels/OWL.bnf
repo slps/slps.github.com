@@ -31,6 +31,8 @@ RDFSResource:
 RDFSResource:
         OWLUniverse
 RDFSResource:
+        Individual
+RDFSResource:
         uriRef::URIReference+ subjectStatement::RDFStatement+ objectStatement::RDFStatement+ label::PlainLiteral+ type::RDFSClass+ comment::PlainLiteral+ seeAlso::RDFSResource+ referringResource::RDFSResource+ isDefinedBy::RDFSResource+ definedResource::RDFSResource+ member::RDFSResource+ container::RDFSResource+ list::List+
 RDFGraph:
         OWLGraph
@@ -49,11 +51,17 @@ Container:
         Bag
         Seq
 Alt:
-        EPSILON
+        
 Bag:
-        EPSILON
+        
 Seq:
-        EPSILON
+        
+RDFProperty:
+        OWLAnnotationProperty
+RDFProperty:
+        OWLOntologyProperty
+RDFProperty:
+        Property
 RDFProperty:
         predicateStatement::RDFStatement+ subPropertyOf::RDFProperty+ superProperty::RDFProperty+ domain::RDFSClass+ range::RDFSClass+ propertyRestriction::OWLRestriction+
 ContainerMembershipProperty:
@@ -67,11 +75,15 @@ ReificationKind:
         reifiedOnly::EPSILON
         reified::EPSILON
 URIReferenceNode:
-        EPSILON
+        uriRef::URIReference+ subjectStatement::RDFStatement+ objectStatement::RDFStatement+ label::PlainLiteral+ type::RDFSClass+ comment::PlainLiteral+ seeAlso::RDFSResource+ referringResource::RDFSResource+ isDefinedBy::RDFSResource+ definedResource::RDFSResource+ member::RDFSResource+ container::RDFSResource+ list::List+
 BlankNode:
         nodeId::String
 RDFSClass:
         RDFSDataType
+RDFSClass:
+        OWLClass
+RDFSClass:
+        OWLDataRange
 RDFSClass:
         subClassOf::RDFSClass+ superClass::RDFSClass+ typedResource::RDFSResource+ propertyForDomain::RDFProperty+ propertyForRange::RDFProperty+
 RDFSDataType:
@@ -89,19 +101,38 @@ TypedLiteral:
 TypedLiteral:
         datatypeURI::URIReference cardinalityRestriction::CardinalityRestriction+ minCardinalityRestriction::MinCardinalityRestriction+ maxCardinalityRestriction::MaxCardinalityRestriction+
 XMLLiteral:
-        EPSILON
+        datatypeURI::URIReference cardinalityRestriction::CardinalityRestriction+ minCardinalityRestriction::MinCardinalityRestriction+ maxCardinalityRestriction::MaxCardinalityRestriction+
 URIReference:
         UniformResourceIdentifier
 URIReference:
         uri::UniformResourceIdentifier resource::RDFSResource literal::TypedLiteral+ namedGraph::RDFGraph reifiedStatement::RDFStatement+ fragmentIdentifier::LocalName namespace::Namespace
 UniformResourceIdentifier:
         name::String uriRef::URIReference+
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR
 OWLOntology:
         owlUniverse::OWLUniverse+ OWLPriorVersion::OWLOntology+ newerOntology::OWLOntology+ OWLIncompatibleWith::OWLOntology+ incompatibleOntology::OWLOntology+ OWLImports::OWLOntology+ importingOntology::OWLOntology+ owlGraph::OWLGraph+ owlStatement::OWLStatement+ versionInfo::RDFSLiteral+
 OWLGraph:
         ontology::OWLOntology+ owlStatement::OWLStatement+
 OWLStatement:
         ontology::OWLOntology+ owlGraph::OWLGraph+
+OWLUniverse:
+        OWLClass
+OWLUniverse:
+        OWLAnnotationProperty
+OWLUniverse:
+        OWLOntologyProperty
+OWLUniverse:
+        Property
+OWLUniverse:
+        Individual
+OWLUniverse:
+        OWLDataRange
 OWLUniverse:
         ontology::OWLOntology+
 OWLClass:
@@ -153,9 +184,9 @@ MaxCardinalityRestriction:
 MinCardinalityRestriction:
         OWLMinCardinality::TypedLiteral
 OWLAnnotationProperty:
-        EPSILON
+        predicateStatement::RDFStatement+ subPropertyOf::RDFProperty+ superProperty::RDFProperty+ domain::RDFSClass+ range::RDFSClass+ propertyRestriction::OWLRestriction+ ontology::OWLOntology+
 OWLOntologyProperty:
-        EPSILON
+        predicateStatement::RDFStatement+ subPropertyOf::RDFProperty+ superProperty::RDFProperty+ domain::RDFSClass+ range::RDFSClass+ propertyRestriction::OWLRestriction+ ontology::OWLOntology+
 Property:
         FunctionalProperty
 Property:
@@ -175,11 +206,11 @@ OWLObjectProperty:
 OWLObjectProperty:
         OWLInverseOf::OWLObjectProperty inverseProperty::OWLObjectProperty+
 InverseFunctionalProperty:
-        EPSILON
+        OWLInverseOf::OWLObjectProperty inverseProperty::OWLObjectProperty+
 SymmetricProperty:
-        EPSILON
+        OWLInverseOf::OWLObjectProperty inverseProperty::OWLObjectProperty+
 TransitiveProperty:
-        EPSILON
+        OWLInverseOf::OWLObjectProperty inverseProperty::OWLObjectProperty+
 Individual:
         OWLDifferentFrom::Individual+ differentIndividual::Individual+ OWLSameAs::Individual+ sameIndividual::Individual+ allDifferent::OWLAllDifferent+ enumeratedClass::EnumeratedClass+ restrictionClass::HasValueRestriction+
 OWLAllDifferent:

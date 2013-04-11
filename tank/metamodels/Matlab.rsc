@@ -1,6 +1,14 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module Matlab
 
+syntax String
+        = 
+        String
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
 syntax Matlab
         = 
         Model model+
@@ -77,11 +85,11 @@ syntax Reference
  ;
 syntax Masked
         = 
-        ()
+        system: System
  ;
 syntax Normal
         = 
-        ()
+        system: System
  ;
 syntax Parameter
         = Type

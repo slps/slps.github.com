@@ -2,8 +2,12 @@ module Main
 
 exports
   sorts
-        Matlab BlockDefaults Model AnnotationDefaults LineDefaults System Subsystem Block Annotation Line DirectLine InputPort Branch BranchedLine Primitive Port Reference Masked Normal Parameter OutputPort Type Double INteger Enumeration BOolean TrueFalse Text Vector DirectBranch NestedBranch Machine Junction Transition Event Data Instance Target Chart State Props Range Array StateFlow TransitionTerminal Simulink 
+        String Integer Matlab BlockDefaults Model AnnotationDefaults LineDefaults System Subsystem Block Annotation Line DirectLine InputPort Branch BranchedLine Primitive Port Reference Masked Normal Parameter OutputPort Type Double INteger Enumeration BOolean TrueFalse Text Vector DirectBranch NestedBranch Machine Junction Transition Event Data Instance Target Chart State Props Range Array StateFlow TransitionTerminal Simulink 
   context-free syntax
+        STR -> String
+
+        INT -> Integer
+
         model::Model+ -> Matlab
 
         Block -> BlockDefaults
@@ -66,9 +70,9 @@ exports
 
         sourceType::String sourceBlock::String parameters::Parameter+ -> Reference
 
-         -> Masked
+        system::System -> Masked
 
-         -> Normal
+        system::System -> Normal
 
         Type -> Parameter
 

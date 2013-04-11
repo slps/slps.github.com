@@ -1,0 +1,92 @@
+module Main
+
+exports
+  sorts
+        Boolean Integer String Label SimpleLabel ComplexLabel Compartment VerticalCompartment HorizontalCompartment SimpleCompartment Anchor GraphElement Graph Layer Nodelike SubGraph Node Arc DirectedArc UndirectedArc Shape NodeShape SimpleNodeShape PointNodeShape ComplexNodeShape PolygonNodeShape MNodeShape RecordNodeShape ArrowShape 
+  context-free syntax
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
+        STR -> String
+
+        SimpleLabel -> Label
+
+        ComplexLabel -> Label
+
+        content::String -> SimpleLabel
+
+        compartments::Compartment+ -> ComplexLabel
+
+        VerticalCompartment -> Compartment
+
+        HorizontalCompartment -> Compartment
+
+        SimpleCompartment -> Compartment
+
+        complexLabel::ComplexLabel compartments::Compartment anchor::Anchor -> VerticalCompartment
+
+        complexLabel::ComplexLabel compartments::Compartment anchor::Anchor -> HorizontalCompartment
+
+        content::String -> SimpleCompartment
+
+        name::String source::Compartment -> Anchor
+
+        Graph -> GraphElement
+
+        Layer -> GraphElement
+
+        Nodelike -> GraphElement
+
+        Arc -> GraphElement
+
+        Shape -> GraphElement
+
+        type::String rankDir::String labeljust::String labelloc::String concentrate::Boolean nodes::Nodelike+ boundingBox::String compound::Boolean layers::Layer+ nodeSeparation::Double ordering::String size::String ratio::String center::Boolean -> Graph
+
+        nodes::Nodelike+ arcs::Arc+ graph::Graph layerSeparator::String -> Layer
+
+        SubGraph -> Nodelike
+
+        Node -> Nodelike
+
+        nodes::Nodelike+ labelloc::String -> SubGraph
+
+        fixedSize::Boolean fontname::String fontsize::Integer height::Integer width::Integer shape::NodeShape -> Node
+
+        DirectedArc -> Arc
+
+        UndirectedArc -> Arc
+
+        arrowHead::ArrowShape headlabel::Label taillabel::Label arrowTail::ArrowShape tail_lp::Double head_lp::Double -> DirectedArc
+
+        fromNode::Nodelike toNode::Nodelike layers::Layer+ constraint::Boolean group::String minlen::Integer sameHead::String sameTail::String lhead::Nodelike ltail::Nodelike decorate::Boolean -> UndirectedArc
+
+        NodeShape -> Shape
+
+        ArrowShape -> Shape
+
+        SimpleNodeShape -> NodeShape
+
+        PointNodeShape -> NodeShape
+
+        ComplexNodeShape -> NodeShape
+
+         -> SimpleNodeShape
+
+         -> PointNodeShape
+
+        PolygonNodeShape -> ComplexNodeShape
+
+        MNodeShape -> ComplexNodeShape
+
+        RecordNodeShape -> ComplexNodeShape
+
+        sides::Integer skew::Integer distortion::Integer isRegular::Boolean orientation::Integer -> PolygonNodeShape
+
+        toplabel::Label bottomlabel::Label -> MNodeShape
+
+         -> RecordNodeShape
+
+        clipping::String isPlain::Boolean size::Integer -> ArrowShape

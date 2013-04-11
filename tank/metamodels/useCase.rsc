@@ -34,3 +34,7 @@ syntax Association
         = 
         Actor actor UseCase useCase
  ;
+syntax String
+        = 
+        String
+ ;

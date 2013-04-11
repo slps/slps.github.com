@@ -28,15 +28,15 @@ syntax Action
  ;
 syntax Assignment
         = 
-        ()
+        Constructor constructor While while If if
  ;
 syntax Input
         = 
-        ()
+        Constructor constructor While while If if
  ;
 syntax Output
         = 
-        ()
+        Constructor constructor While while If if
  ;
 syntax Constructor
         = Sequential
@@ -63,15 +63,15 @@ syntax Condition
  ;
 syntax Sequential
         = 
-        ()
+        Process process Action actions+ Buckel buckels+ Constructor childrens+
  ;
 syntax Parallel
         = 
-        ()
+        Process process Action actions+ Buckel buckels+ Constructor childrens+
  ;
 syntax Alternative
         = 
-        ()
+        Process process Action actions+ Buckel buckels+ Constructor childrens+
  ;
 syntax DataType
         = 
@@ -92,4 +92,16 @@ syntax Server
 syntax Declaration
         = 
         String name Process process DataType elements+
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
  ;

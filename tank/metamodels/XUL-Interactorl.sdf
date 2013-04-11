@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        UIModel Windows Button Orients Image RadioGroup Radio ListBox ListItem MenuList MenuItem Vbox Hbox Containement GroupBox Container Interactor TabBox TextBox Spacer Label Grid Row Column CheckBox Caption Description HeaderCss HeaderJScript TabPanel Event Parameter OnClick Function 
+        UIModel Windows Button Orients Image RadioGroup Radio ListBox ListItem MenuList MenuItem Vbox Hbox Containement GroupBox Container Interactor TabBox TextBox Spacer Label Grid Row Column CheckBox Caption Description HeaderCss HeaderJScript TabPanel Event Parameter OnClick Function String Integer Boolean 
   context-free syntax
         windows::Windows functions::Function+ -> UIModel
 
@@ -27,9 +27,9 @@ exports
 
         label::String -> MenuItem
 
-         -> Vbox
+        xulInteractors::Interactor+ -> Vbox
 
-         -> Hbox
+        xulInteractors::Interactor+ -> Hbox
 
         Button -> Containement
 
@@ -59,7 +59,7 @@ exports
 
         style::String accesskey::String class::String maxlength::Integer label::String orient::Orients minlength::String onclick::String disabled::String -> Containement
 
-         -> GroupBox
+        xulInteractors::Interactor+ -> GroupBox
 
         Windows -> Container
 
@@ -93,15 +93,15 @@ exports
 
         multiline::Boolean value::String -> TextBox
 
-         -> Spacer
+        style::String accesskey::String class::String maxlength::Integer label::String orient::Orients minlength::String onclick::String disabled::String -> Spacer
 
         value::String control::String -> Label
 
         columns::Column+ rows::Row+ -> Grid
 
-         -> Row
+        xulInteractors::Interactor+ -> Row
 
-         -> Column
+        xulInteractors::Interactor+ -> Column
 
         checked::Boolean -> CheckBox
 
@@ -121,6 +121,13 @@ exports
 
         value::String name::String -> Parameter
 
-         -> OnClick
+        functionCallParameters::Parameter+ functionCalledName::String name::String -> OnClick
 
         name::String functionUIModel::UIModel body::String -> Function
+
+        STR -> String
+
+        INT -> Integer
+
+        "true" -> Boolean
+        "false" -> Boolean

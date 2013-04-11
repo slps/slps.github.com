@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        Namespace Task DataSet Parameter DataElement ModelElement Flow DataFlow ControlFlow ControlPoint Input Output OutputSet InputSet Exception SimpleTask CoumpoundTask MutliTask InvokerTask TerminatorTask ApplicationTask Decision Clock SendCommunication ReceiveCommunication BusinessProcess 
+        Namespace Task DataSet Parameter DataElement ModelElement Flow DataFlow ControlFlow ControlPoint Input Output OutputSet InputSet Exception SimpleTask CoumpoundTask MutliTask InvokerTask TerminatorTask ApplicationTask Decision Clock SendCommunication ReceiveCommunication BusinessProcess Boolean Integer String 
   context-free syntax
         Task -> Namespace
 
@@ -15,8 +15,6 @@ exports
         OutputSet -> DataSet
 
         InputSet -> DataSet
-
-        DataElement -> Parameter
 
         DataElement -> Parameter
 
@@ -45,8 +43,6 @@ exports
 
         Exception -> Output
 
-        Exception -> Output
-
         containsOutput::Output+ -> OutputSet
 
         containsInput::Input+ -> InputSet
@@ -67,7 +63,7 @@ exports
 
         containsTask::Task+ containsFlow::Flow+ realizes::BusinessProcess -> CoumpoundTask
 
-         -> MutliTask
+        containsTask::Task+ containsFlow::Flow+ realizes::BusinessProcess -> MutliTask
 
         invokes::Task+ -> InvokerTask
 
@@ -98,3 +94,10 @@ exports
          -> ReceiveCommunication
 
          -> BusinessProcess
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
+        STR -> String

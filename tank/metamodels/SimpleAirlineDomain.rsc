@@ -25,3 +25,15 @@ syntax Time
         = 
         Integer year Integer month Integer day Integer hour Integer minute Integer second
  ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;

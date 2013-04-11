@@ -17,3 +17,15 @@ syntax Expression
         = 
         String name Boolean isIdentifier Expression innerExpressions+
  ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Integer
+        = 
+        Integer
+ ;

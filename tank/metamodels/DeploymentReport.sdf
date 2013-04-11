@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        DeploymentReport DeploymentImport ImportNamespaceIdentity NamespaceIdentity Applications LogicalServers OuterSystem Binding Zone ReportObject SequenceReport BoundLogicalServer LogicalServer Application ReportSystem ReportResource ReportEndpoint Setting SettingFacet SettingInstanceValue SettingAttributes SettingValue ErrorCollection DocumentError DocumentResolutionError DocumentConstraintError FailedInput Description Guid SimpleName Path FourPartVersionType PublicKeyType PublicKeyTokenType Culture CultureNeutral ProcessorArchitectures Platform SettingState Element 
+        DeploymentReport DeploymentImport ImportNamespaceIdentity NamespaceIdentity Applications LogicalServers OuterSystem Binding Zone ReportObject SequenceReport BoundLogicalServer LogicalServer Application ReportSystem ReportResource ReportEndpoint Setting SettingFacet SettingInstanceValue SettingAttributes SettingValue ErrorCollection DocumentError DocumentResolutionError DocumentConstraintError FailedInput Description Guid SimpleName Path FourPartVersionType PublicKeyType PublicKeyTokenType Culture CultureNeutral ProcessorArchitectures Platform SettingState Element String Integer Boolean 
   context-free syntax
         import::DeploymentImport+ applications::Applications binding::Binding logicalServers::LogicalServers errors::ErrorCollection -> DeploymentReport
 
@@ -40,15 +40,15 @@ exports
 
         setting::Setting+ application::Application+ name::String definition::String extends::String -> BoundLogicalServer
 
-         -> LogicalServer
+        sequence::SequenceReport+ name::String definition::String extends::String instanceId::Guid hostedOn::String -> LogicalServer
 
-         -> Application
+        sequence::SequenceReport+ name::String definition::String extends::String instanceId::Guid hostedOn::String -> Application
 
-         -> ReportSystem
+        sequence::SequenceReport+ name::String definition::String extends::String instanceId::Guid hostedOn::String -> ReportSystem
 
-         -> ReportResource
+        sequence::SequenceReport+ name::String definition::String extends::String instanceId::Guid hostedOn::String -> ReportResource
 
-         -> ReportEndpoint
+        sequence::SequenceReport+ name::String definition::String extends::String instanceId::Guid hostedOn::String -> ReportEndpoint
 
         value::SettingInstanceValue+ facet::SettingFacet+ settingAttributes::SettingAttributes -> Setting
 
@@ -76,21 +76,21 @@ exports
 
         contents::String+ -> Description
 
-         -> Guid
+        value::String -> Guid
 
-         -> SimpleName
+        value::String -> SimpleName
 
-         -> Path
+        value::String -> Path
 
-         -> FourPartVersionType
+        value::String -> FourPartVersionType
 
-         -> PublicKeyType
+        value::String -> PublicKeyType
 
-         -> PublicKeyTokenType
+        value::String -> PublicKeyTokenType
 
-         -> Culture
+        value::String -> Culture
 
-         -> CultureNeutral
+        value::String -> CultureNeutral
 
         x86:: -> ProcessorArchitectures
         ia64:: -> ProcessorArchitectures
@@ -133,3 +133,10 @@ exports
         CultureNeutral -> Element
 
         value::String -> Element
+
+        STR -> String
+
+        INT -> Integer
+
+        "true" -> Boolean
+        "false" -> Boolean

@@ -2,8 +2,15 @@ module Main
 
 exports
   sorts
-        Requirement NonFunctionnelRequirement FunctionnelRequirement UseCase Goal Role HumanRole SystemRole EventRole Manage Resource ScenarioDescription Condition Pre Post 
+        String Boolean Integer Requirement NonFunctionnelRequirement FunctionnelRequirement UseCase Goal Role HumanRole SystemRole EventRole Manage Resource ScenarioDescription Condition Pre Post 
   context-free syntax
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
         NonFunctionnelRequirement -> Requirement
 
         FunctionnelRequirement -> Requirement
@@ -29,11 +36,11 @@ exports
 
         interacted_with::UseCase+ -> Role
 
-         -> HumanRole
+        interacted_with::UseCase+ -> HumanRole
 
-         -> SystemRole
+        interacted_with::UseCase+ -> SystemRole
 
-         -> EventRole
+        interacted_with::UseCase+ -> EventRole
 
         managed_Resource::Resource+ -> Manage
 
@@ -47,6 +54,6 @@ exports
 
         constrained_with::UseCase+ -> Condition
 
-         -> Pre
+        constrained_with::UseCase+ -> Pre
 
-         -> Post
+        constrained_with::UseCase+ -> Post

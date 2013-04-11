@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        Resource Graph List Container Alt Bag Seq Property ContainerMembershipProperty Statement URIReferenceNode BlankNode Class Datatype Literal PlainLiteral TypedLiteral RDFXMLLiteral URIReference UniformResourceIdentifier 
+        Resource Graph List Container Alt Bag Seq Property ContainerMembershipProperty Statement URIReferenceNode BlankNode Class Datatype Literal PlainLiteral TypedLiteral RDFXMLLiteral URIReference UniformResourceIdentifier Boolean Integer String 
   context-free syntax
         Graph -> Resource
 
@@ -50,7 +50,7 @@ exports
 
         predicate::Property object::Resource subject::Resource isReifiedOnly::Boolean isReified::Boolean nameForReification::URIReference+ -> Statement
 
-         -> URIReferenceNode
+        graph::Graph uriRef::URIReference+ subjectStatement::Statement+ objectStatement::Statement+ label::PlainLiteral+ type::Class+ seeAlso::Resource+ referringResource::Resource+ member::Resource+ container::Resource+ list::List+ -> URIReferenceNode
 
         nodeId::String -> BlankNode
 
@@ -58,7 +58,7 @@ exports
 
         subClassOf::Class+ superClass::Class+ typedResource::Resource+ propertyForDomain::Property+ propertyForRange::Property+ -> Class
 
-         -> Datatype
+        subClassOf::Class+ superClass::Class+ typedResource::Resource+ propertyForDomain::Property+ propertyForRange::Property+ -> Datatype
 
         PlainLiteral -> Literal
 
@@ -72,10 +72,17 @@ exports
 
         datatypeURI::URIReference -> TypedLiteral
 
-         -> RDFXMLLiteral
+        datatypeURI::URIReference -> RDFXMLLiteral
 
         UniformResourceIdentifier -> URIReference
 
         uri::UniformResourceIdentifier resource::Resource literal::TypedLiteral namedGraph::Graph reifiedStatement::Statement+ -> URIReference
 
         name::String uriRef::URIReference+ -> UniformResourceIdentifier
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
+        STR -> String

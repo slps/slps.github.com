@@ -55,23 +55,23 @@ syntax BoundLogicalServer
  ;
 syntax LogicalServer
         = 
-        ()
+        SequenceReport sequence+ String name String definition String extends Guid instanceId String hostedOn
  ;
 syntax Application
         = 
-        ()
+        SequenceReport sequence+ String name String definition String extends Guid instanceId String hostedOn
  ;
 syntax ReportSystem
         = 
-        ()
+        SequenceReport sequence+ String name String definition String extends Guid instanceId String hostedOn
  ;
 syntax ReportResource
         = 
-        ()
+        SequenceReport sequence+ String name String definition String extends Guid instanceId String hostedOn
  ;
 syntax ReportEndpoint
         = 
-        ()
+        SequenceReport sequence+ String name String definition String extends Guid instanceId String hostedOn
  ;
 syntax Setting
         = 
@@ -120,35 +120,35 @@ syntax Description
  ;
 syntax Guid
         = 
-        ()
+        value: String
  ;
 syntax SimpleName
         = 
-        ()
+        value: String
  ;
 syntax Path
         = 
-        ()
+        value: String
  ;
 syntax FourPartVersionType
         = 
-        ()
+        value: String
  ;
 syntax PublicKeyType
         = 
-        ()
+        value: String
  ;
 syntax PublicKeyTokenType
         = 
-        ()
+        value: String
  ;
 syntax Culture
         = 
-        ()
+        value: String
  ;
 syntax CultureNeutral
         = 
-        ()
+        value: String
  ;
 syntax ProcessorArchitectures
         = x86: ()
@@ -187,4 +187,16 @@ syntax Element
         | Culture
         | CultureNeutral
         | value: String
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax Boolean
+        = "true"
+        | "false"
  ;

@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        CSM GeneralResource Step Scenarion Start End ResourceAcquire ResourceRelease Workload Component ProcessingResource ExternalService ActiveResource PassiveResource Message PathConnection Join Fork Merge Branch Seqence 
+        CSM GeneralResource Step Scenarion Start End ResourceAcquire ResourceRelease Workload Component ProcessingResource ExternalService ActiveResource PassiveResource Message PathConnection Join Fork Merge Branch Seqence String Boolean Integer 
   context-free syntax
         step::Step+ generalResource::GeneralResource+ scenarion::Scenarion+ -> CSM
 
@@ -28,7 +28,7 @@ exports
 
         workload::Workload -> Start
 
-         -> End
+        postPath::PathConnection prePath::PathConnection activeResource::ActiveResource -> End
 
         generalResource::GeneralResource -> ResourceAcquire
 
@@ -38,17 +38,15 @@ exports
 
          -> Component
 
-         -> ProcessingResource
+        step::Step+ -> ProcessingResource
 
-         -> ExternalService
+        step::Step+ -> ExternalService
 
         ProcessingResource -> ActiveResource
 
         ExternalService -> ActiveResource
 
         step::Step+ -> ActiveResource
-
-        Component -> PassiveResource
 
         Component -> PassiveResource
 
@@ -66,12 +64,19 @@ exports
 
         message::Message post::Step+ pre::Step+ -> PathConnection
 
-         -> Join
+        message::Message post::Step+ pre::Step+ -> Join
 
-         -> Fork
+        message::Message post::Step+ pre::Step+ -> Fork
 
-         -> Merge
+        message::Message post::Step+ pre::Step+ -> Merge
 
-         -> Branch
+        message::Message post::Step+ pre::Step+ -> Branch
 
-         -> Seqence
+        message::Message post::Step+ pre::Step+ -> Seqence
+
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer

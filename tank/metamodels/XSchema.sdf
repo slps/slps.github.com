@@ -2,8 +2,15 @@ module Main
 
 exports
   sorts
-        AttributeUseType AnnotedElement Annotation Documentation ApplicationInfo NamedElement XSchema XSchemaContentElement Element Occurable AbstractContent Container AtomicContent ElementRef GroupRef All Group Choice Sequence AbstractAttributeGroupContent AttributeGroup AttributeGroupRef AtomicAttributeGroupContent Attribute AttributeRef AbstractType SimpleType ComplexType ComplexTypeSimpleContent ComplexTypeComplexContent 
+        String Integer Boolean AttributeUseType AnnotedElement Annotation Documentation ApplicationInfo NamedElement XSchema XSchemaContentElement Parameters Element Occurable AbstractContent Container AtomicContent ElementRef GroupRef All Group Choice Sequence AbstractAttributeGroupContent AttributeGroup AttributeGroupRef AtomicAttributeGroupContent Attribute AttributeRef AbstractType SimpleType ComplexType ComplexTypeSimpleContent ComplexTypeComplexContent 
   context-free syntax
+        STR -> String
+
+        INT -> Integer
+
+        "true" -> Boolean
+        "false" -> Boolean
+
         null:: -> AttributeUseType
         optional:: -> AttributeUseType
         prohibited:: -> AttributeUseType
@@ -27,6 +34,14 @@ exports
 
         AbstractType -> XSchemaContentElement
 
+        Group -> XSchemaContentElement
+
+        AttributeGroup -> XSchemaContentElement
+
+        Element -> Parameters
+
+        Attribute -> Parameters
+
         references::ElementRef+ -> Element
 
         AbstractContent -> Occurable
@@ -43,9 +58,13 @@ exports
 
         Sequence -> Container
 
+        Group -> Container
+
         ElementRef -> AtomicContent
 
         GroupRef -> AtomicContent
+
+        Element -> AtomicContent
 
         referencedElement::Element -> ElementRef
 
@@ -61,6 +80,8 @@ exports
 
         AtomicAttributeGroupContent -> AbstractAttributeGroupContent
 
+        AttributeGroup -> AbstractAttributeGroupContent
+
         contents::AbstractAttributeGroupContent+ references::AttributeGroupRef+ -> AttributeGroup
 
         referencedAttributeGroup::AttributeGroup -> AttributeGroupRef
@@ -68,6 +89,8 @@ exports
         AttributeGroupRef -> AtomicAttributeGroupContent
 
         AttributeRef -> AtomicAttributeGroupContent
+
+        Attribute -> AtomicAttributeGroupContent
 
         use::AttributeUseType references::AttributeRef+ -> Attribute
 

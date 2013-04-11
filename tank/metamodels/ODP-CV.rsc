@@ -15,7 +15,7 @@ syntax ComputationalObject
  ;
 syntax BindingObject
         = 
-        ()
+        Interface co_to_i+ Behaviour co_to_bh ComputationalObjectTemplate specifier_co State co_to_st
  ;
 syntax ComputationalObjectTemplate
         = 
@@ -113,7 +113,7 @@ syntax State
  ;
 syntax InternalAction
         = 
-        ()
+        EnvironmentContract constrainer_ec+ State changedState+ ActionTemplate specifier_a Behaviour a_to_bh
  ;
 syntax Interaction
         = Flow

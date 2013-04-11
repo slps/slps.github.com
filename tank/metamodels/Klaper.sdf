@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        Resource Service Behavior WorkLoad Step Start End Control InternalActivity ServiceCall ActualParam Branch Fork Join Acquire Release 
+        Resource Service Behavior WorkLoad Step Start End Control InternalActivity ServiceCall ActualParam Branch Fork Join Acquire Release String Boolean Integer 
   context-free syntax
         name::String type::String capacity::Integer schedulingPolicy::String description::String acquire::Acquire release::Release -> Resource
 
@@ -26,9 +26,9 @@ exports
 
         name::String repetition::String internalExecTime::String internalFailProb::String completionModel::String serviceCall::ServiceCall+ predecessor::Step+ successor::Step+ behavior::Behavior nestedBehavior::Behavior -> Step
 
-         -> Start
+        name::String repetition::String internalExecTime::String internalFailProb::String completionModel::String serviceCall::ServiceCall+ predecessor::Step+ successor::Step+ behavior::Behavior nestedBehavior::Behavior -> Start
 
-         -> End
+        name::String repetition::String internalExecTime::String internalFailProb::String completionModel::String serviceCall::ServiceCall+ predecessor::Step+ successor::Step+ behavior::Behavior nestedBehavior::Behavior -> End
 
         Branch -> Control
 
@@ -46,7 +46,7 @@ exports
         Acquire -> Control
         Release -> Control
 
-         -> InternalActivity
+        name::String repetition::String internalExecTime::String internalFailProb::String completionModel::String serviceCall::ServiceCall+ predecessor::Step+ successor::Step+ behavior::Behavior nestedBehavior::Behavior -> InternalActivity
 
         resourceType::String serviceName::String isSynch::Boolean actualParam::ActualParam+ step::Step calledService::Service -> ServiceCall
 
@@ -61,3 +61,10 @@ exports
         resourceUnits::String resource::Resource -> Acquire
 
         resourceUnits::String resource::Resource -> Release
+
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer

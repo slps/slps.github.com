@@ -33,6 +33,7 @@ syntax AsmLElement
         | Enumeration
         | Function
         | Type
+        | VarDeclaration
  ;
 syntax VarDeclaration
         = 
@@ -59,8 +60,8 @@ syntax Class
         String name Boolean isAbstract String superClassName VarOrMethod varOrMethod+
  ;
 syntax VarOrMethod
-        = 
-        ownerClass: Class
+        = Method
+        | ownerClass: Class
  ;
 syntax Enumeration
         = 
@@ -71,8 +72,8 @@ syntax Enumerator
         String name Term value
  ;
 syntax Function
-        = 
-        Main
+        = Main
+        | Method
  ;
 syntax Method
         = 
@@ -166,7 +167,7 @@ syntax ConditionalRule
  ;
 syntax ElseIf
         = 
-        ()
+        Term condition Body thenRule Body elseRule ElseIf elseIfRule
  ;
 syntax ReturnRule
         = 
@@ -240,7 +241,7 @@ syntax MethodCallTerm
  ;
 syntax NewInstance
         = 
-        ()
+        String name Term parameters+
  ;
 syntax PredicateTerm
         = ForAllTerm
@@ -250,7 +251,7 @@ syntax PredicateTerm
  ;
 syntax ForAllTerm
         = 
-        ()
+        InWhereHolds expressions+
  ;
 syntax ExistsTerm
         = 
@@ -258,7 +259,7 @@ syntax ExistsTerm
  ;
 syntax AnyIn
         = 
-        ()
+        InWhereHolds expressions+
  ;
 syntax SetTerm
         = EnumerateSet
@@ -310,4 +311,16 @@ syntax StringConstant
 syntax NullConstant
         = 
         ()
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax Boolean
+        = "true"
+        | "false"
  ;

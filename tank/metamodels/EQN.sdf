@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        RoutingChain QueuingNetwork ExecutionGraph Center Node Special ActiveCenter PassiveCenter Source Sink Fork Join Split Allocate Release 
+        RoutingChain QueuingNetwork ExecutionGraph Center Node Special ActiveCenter PassiveCenter Source Sink Fork Join Split Allocate Release String Boolean Integer 
   context-free syntax
         queuingNetwork::QueuingNetwork+ -> RoutingChain
 
@@ -42,9 +42,9 @@ exports
         Allocate -> Special
         Release -> Special
 
-         -> ActiveCenter
+        node::Node queuingNetwork::QueuingNetwork -> ActiveCenter
 
-         -> PassiveCenter
+        node::Node queuingNetwork::QueuingNetwork -> PassiveCenter
 
          -> Source
 
@@ -59,3 +59,10 @@ exports
          -> Allocate
 
          -> Release
+
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer

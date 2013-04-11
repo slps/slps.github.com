@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        Member TypedAttribute Field Property MethodBase Constructor Method Type Parameter Assembly 
+        Member TypedAttribute Field Property MethodBase Constructor Method Type Parameter Assembly Integer String Boolean 
   context-free syntax
         TypedAttribute -> Member
 
@@ -18,7 +18,7 @@ exports
 
         type::Type -> TypedAttribute
 
-         -> Field
+        type::Type -> Field
 
         isReadable::Boolean isWritable::Boolean -> Property
 
@@ -28,7 +28,7 @@ exports
 
         visibility::String isAbstract::Boolean isFinal::Boolean isStatic::Boolean parameters::Parameter+ -> MethodBase
 
-         -> Constructor
+        visibility::String isAbstract::Boolean isFinal::Boolean isStatic::Boolean parameters::Parameter+ -> Constructor
 
         returnType::Type -> Method
 
@@ -37,3 +37,10 @@ exports
         isIn::Boolean isOut::Boolean name::Boolean position::Integer method::MethodBase type::Type -> Parameter
 
         name::String content::Type+ -> Assembly
+
+        INT -> Integer
+
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean

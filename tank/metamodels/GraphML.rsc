@@ -67,3 +67,15 @@ syntax EdgeType
         = directed: ()
         | undirected: ()
  ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;

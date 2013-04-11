@@ -13,3 +13,11 @@ syntax State
         = 
         String name State combination
  ;
+syntax String
+        = 
+        String
+ ;
+syntax Integer
+        = 
+        Integer
+ ;

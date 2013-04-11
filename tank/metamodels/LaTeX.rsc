@@ -16,6 +16,8 @@ syntax ValuedElement
         | Label
         | Item
         | Description
+        | Value
+        | Cite
  ;
 syntax Type
         = 
@@ -78,14 +80,16 @@ syntax Corps
         | Items
         | Enumerate
         | Section
+        | Value
+        | Cite
  ;
 syntax Value
         = 
-        ()
+        SectionBody sectionbody String value
  ;
 syntax Cite
         = 
-        ()
+        SectionBody sectionbody String value
  ;
 syntax Path
         = 
@@ -134,4 +138,12 @@ syntax DocumentBody
 syntax Document
         = 
         Type type Title title Author author Date date Heading heading Abstract abstract Keywords keywords DocumentBody documentbody
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
  ;

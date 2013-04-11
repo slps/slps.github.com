@@ -1,6 +1,44 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module CML
 
+syntax String
+        = 
+        String
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Any
+        = _String
+        | _Link
+        | _Float
+        | _Integer
+        | _StringArray
+        | _FloatArray
+        | _IntegerArray
+        | _FloatMatrix
+        | _Coordinate2
+        | _Coordinate3
+        | _Angle
+        | _Torsion
+        | _List
+        | Molecule
+        | Formula
+        | Atom
+        | Atom_Array
+        | Bond
+        | Bond_Array
+        | Electron
+        | Reaction
+        | Crystal
+        | Sequence
+        | Feature
+ ;
 syntax AngleUnits
         = degrees: ()
         | radians: ()

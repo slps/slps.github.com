@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        Element DoDAFModel Document SystemFunctionTraceabilityMatrix SystemFunctionTraceabilityElement SystemDocument ArchitectureDocument PA SystemFunction SystemPA SoftwareApplicationProcedurePA AM InformationAsset AMPA System Task ArchitectureTask OperationalCapabilityTask SystemOperationalCapabilityTask PATask Capability CapabilityDocument SystemCapability NetworkCapability NodeLinkCapability MaterielItemCapabilityNorm OrganizationTypeCapabilityNorm RequiredInformationTechnologyCapability InformationTechnologyRequirement InformationExchangeRequirement PAExchangeRequirement SupportStatusCode 
+        Element DoDAFModel Document SystemFunctionTraceabilityMatrix SystemFunctionTraceabilityElement SystemDocument ArchitectureDocument PA SystemFunction SystemPA SoftwareApplicationProcedurePA AM InformationAsset AMPA System Task ArchitectureTask OperationalCapabilityTask SystemOperationalCapabilityTask PATask Capability CapabilityDocument SystemCapability NetworkCapability NodeLinkCapability MaterielItemCapabilityNorm OrganizationTypeCapabilityNorm RequiredInformationTechnologyCapability InformationTechnologyRequirement InformationExchangeRequirement PAExchangeRequirement SupportStatusCode String 
   context-free syntax
         DoDAFModel -> Element
 
@@ -82,9 +82,9 @@ exports
 
         isAccomplishedA::SystemOperationalCapabilityTask -> OperationalCapabilityTask
 
-         -> SystemOperationalCapabilityTask
+        levelIdentifier::String references::String cost::String correspondsTo::PATask+ isSupportedBy::ArchitectureTask+ isTheSourceOfNeedFor::InformationExchangeRequirement+ isTheDestinationOfNeedFor::InformationExchangeRequirement+ isCitedFor::SystemFunctionTraceabilityElement+ -> SystemOperationalCapabilityTask
 
-         -> PATask
+        levelIdentifier::String references::String cost::String correspondsTo::PATask+ isSupportedBy::ArchitectureTask+ isTheSourceOfNeedFor::InformationExchangeRequirement+ isTheDestinationOfNeedFor::InformationExchangeRequirement+ isCitedFor::SystemFunctionTraceabilityElement+ -> PATask
 
         NetworkCapability -> Capability
 
@@ -102,15 +102,15 @@ exports
 
         isCitedIn::Capability+ -> SystemCapability
 
-         -> NetworkCapability
+        isPerformedBy::SystemCapability+ isOrdinateFor::Capability+ isSubordinateOf::Capability+ isPerformedByNC::NetworkCapability+ isPerformedByNLC::NodeLinkCapability+ isPerformedBySC::SystemCapability+ isCitedInCD::CapabilityDocument+ isUsedInMICN::MaterielItemCapabilityNorm+ isUsedInOTCN::OrganizationTypeCapabilityNorm+ isAttainedFor::RequiredInformationTechnologyCapability+ -> NetworkCapability
 
-         -> NodeLinkCapability
+        isPerformedBy::SystemCapability+ isOrdinateFor::Capability+ isSubordinateOf::Capability+ isPerformedByNC::NetworkCapability+ isPerformedByNLC::NodeLinkCapability+ isPerformedBySC::SystemCapability+ isCitedInCD::CapabilityDocument+ isUsedInMICN::MaterielItemCapabilityNorm+ isUsedInOTCN::OrganizationTypeCapabilityNorm+ isAttainedFor::RequiredInformationTechnologyCapability+ -> NodeLinkCapability
 
-         -> MaterielItemCapabilityNorm
+        isPerformedBy::SystemCapability+ isOrdinateFor::Capability+ isSubordinateOf::Capability+ isPerformedByNC::NetworkCapability+ isPerformedByNLC::NodeLinkCapability+ isPerformedBySC::SystemCapability+ isCitedInCD::CapabilityDocument+ isUsedInMICN::MaterielItemCapabilityNorm+ isUsedInOTCN::OrganizationTypeCapabilityNorm+ isAttainedFor::RequiredInformationTechnologyCapability+ -> MaterielItemCapabilityNorm
 
-         -> OrganizationTypeCapabilityNorm
+        isPerformedBy::SystemCapability+ isOrdinateFor::Capability+ isSubordinateOf::Capability+ isPerformedByNC::NetworkCapability+ isPerformedByNLC::NodeLinkCapability+ isPerformedBySC::SystemCapability+ isCitedInCD::CapabilityDocument+ isUsedInMICN::MaterielItemCapabilityNorm+ isUsedInOTCN::OrganizationTypeCapabilityNorm+ isAttainedFor::RequiredInformationTechnologyCapability+ -> OrganizationTypeCapabilityNorm
 
-         -> RequiredInformationTechnologyCapability
+        isPerformedBy::SystemCapability+ isOrdinateFor::Capability+ isSubordinateOf::Capability+ isPerformedByNC::NetworkCapability+ isPerformedByNLC::NodeLinkCapability+ isPerformedBySC::SystemCapability+ isCitedInCD::CapabilityDocument+ isUsedInMICN::MaterielItemCapabilityNorm+ isUsedInOTCN::OrganizationTypeCapabilityNorm+ isAttainedFor::RequiredInformationTechnologyCapability+ -> RequiredInformationTechnologyCapability
 
         InformationExchangeRequirement -> InformationTechnologyRequirement
 
@@ -118,10 +118,12 @@ exports
 
         specifies::RequiredInformationTechnologyCapability+ -> InformationTechnologyRequirement
 
-         -> InformationExchangeRequirement
+        specifies::RequiredInformationTechnologyCapability+ -> InformationExchangeRequirement
 
         isCitedIn::InformationExchangeRequirement+ -> PAExchangeRequirement
 
         red:: -> SupportStatusCode
         yellow:: -> SupportStatusCode
         green:: -> SupportStatusCode
+
+        STR -> String

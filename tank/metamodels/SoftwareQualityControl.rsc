@@ -30,3 +30,15 @@ syntax BugStatusType
         | bst_closed: ()
         | bst_skipped: ()
  ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;

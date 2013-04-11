@@ -1,6 +1,18 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module ControllerUML
 
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
 syntax ControllerAttribute
         = 
         controller: Controller
@@ -24,7 +36,7 @@ syntax SubControllerState
  ;
 syntax ViewState
         = 
-        ()
+        State substates+ State theContainer StateTransition outGoing+ StateTransition incoming+
  ;
 syntax StateTransition
         = 

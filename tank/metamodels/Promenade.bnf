@@ -1,15 +1,22 @@
+String:
+        STR
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
 Strong:
-        EPSILON
+        
 Start:
-        EPSILON
+        
 End:
-        EPSILON
+        
 FeedBack:
-        EPSILON
+        
 Weak:
-        EPSILON
+        precs::Precedence+ auxTasks::MetaTaskOccurence+
 Grouping:
-        EPSILON
+        precs::Precedence+ auxTasks::MetaTaskOccurence+
 Precedence:
         DynPrecedence
 Precedence:
@@ -19,11 +26,35 @@ Precedence:
 Precedence:
         deprecs::DerPrecedence+ parbind::ParBinding+
 DynPrecedence:
-        EPSILON
+        Strong
+DynPrecedence:
+        Start
+DynPrecedence:
+        End
+DynPrecedence:
+        FeedBack
+DynPrecedence:
+        Weak
+DynPrecedence:
+        Grouping
+DynPrecedence:
+        deprecs::DerPrecedence+ parbind::ParBinding+
+DerPrecedence:
+        Weak
+DerPrecedence:
+        Grouping
 DerPrecedence:
         precs::Precedence+ auxTasks::MetaTaskOccurence+
 BasPrecedence:
-        EPSILON
+        Strong
+BasPrecedence:
+        Start
+BasPrecedence:
+        End
+BasPrecedence:
+        FeedBack
+BasPrecedence:
+        deprecs::DerPrecedence+ parbind::ParBinding+
 MetaTaskOccurence:
         dprecs::DerPrecedence+ taskCl::MetaTask+
 ParBinding:

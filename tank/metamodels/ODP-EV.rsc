@@ -110,7 +110,7 @@ syntax Role
  ;
 syntax InterfaceRole
         = 
-        ()
+        Behaviour roleBehaviour Community roleSpecifier EnterpriseObject rolefillers+ Policy roleConstrainer+ EO_A_R roleEOAR+
  ;
 syntax Violation
         = 

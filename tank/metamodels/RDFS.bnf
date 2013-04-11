@@ -33,11 +33,11 @@ Container:
         Bag
         Seq
 Alt:
-        EPSILON
+        
 Bag:
-        EPSILON
+        
 Seq:
-        EPSILON
+        
 Property:
         predicateStatement::Statement+ subPropertyOf::Property+ superProperty::Property+ domain::Class+ range::Class+
 ContainerMembershipProperty:
@@ -45,7 +45,7 @@ ContainerMembershipProperty:
 Statement:
         predicate::Property object::Resource subject::Resource isReifiedOnly::Boolean isReified::Boolean nameForReification::URIReference+
 URIReferenceNode:
-        EPSILON
+        graph::Graph uriRef::URIReference+ subjectStatement::Statement+ objectStatement::Statement+ label::PlainLiteral+ type::Class+ seeAlso::Resource+ referringResource::Resource+ member::Resource+ container::Resource+ list::List+
 BlankNode:
         nodeId::String
 Class:
@@ -53,7 +53,7 @@ Class:
 Class:
         subClassOf::Class+ superClass::Class+ typedResource::Resource+ propertyForDomain::Property+ propertyForRange::Property+
 Datatype:
-        EPSILON
+        subClassOf::Class+ superClass::Class+ typedResource::Resource+ propertyForDomain::Property+ propertyForRange::Property+
 Literal:
         PlainLiteral
 Literal:
@@ -67,10 +67,17 @@ TypedLiteral:
 TypedLiteral:
         datatypeURI::URIReference
 RDFXMLLiteral:
-        EPSILON
+        datatypeURI::URIReference
 URIReference:
         UniformResourceIdentifier
 URIReference:
         uri::UniformResourceIdentifier resource::Resource literal::TypedLiteral namedGraph::Graph reifiedStatement::Statement+
 UniformResourceIdentifier:
         name::String uriRef::URIReference+
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR

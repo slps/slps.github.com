@@ -1,6 +1,10 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module TroposGoalAndPlanConcepts
 
+syntax String
+        = 
+        String
+ ;
 syntax Actor
         = 
         Decomposition decomposition+ Contribution contribution+ MeansEnd meansEnd+
@@ -40,9 +44,9 @@ syntax BooleanDecLink
  ;
 syntax AndDecLink
         = 
-        ()
+        BooleanDecomposition booleanDecompositionB Goal target Plan targetP
  ;
 syntax OrDecLink
         = 
-        ()
+        BooleanDecomposition booleanDecompositionB Goal target Plan targetP
  ;

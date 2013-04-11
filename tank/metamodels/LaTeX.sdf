@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        ValuedElement Type Title Name Date Author Adress Organisation Phone Fax EMail Heading Abstract Keywords SectionBody Corps Value Cite Path Label Figure Item Items Enumerate Section Description Citation Bibliography DocumentBody Document 
+        ValuedElement Type Title Name Date Author Adress Organisation Phone Fax EMail Heading Abstract Keywords SectionBody Corps Value Cite Path Label Figure Item Items Enumerate Section Description Citation Bibliography DocumentBody Document Integer String 
   context-free syntax
         Type -> ValuedElement
 
@@ -31,6 +31,10 @@ exports
         Item -> ValuedElement
 
         Description -> ValuedElement
+
+        Value -> ValuedElement
+
+        Cite -> ValuedElement
 
         value::String -> Type
 
@@ -68,9 +72,13 @@ exports
 
         Section -> Corps
 
-         -> Value
+        Value -> Corps
 
-         -> Cite
+        Cite -> Corps
+
+        sectionbody::SectionBody value::String -> Value
+
+        sectionbody::SectionBody value::String -> Cite
 
         value::String -> Path
 
@@ -95,3 +103,7 @@ exports
         sections::Section+ bibliography::Bibliography+ document::Document -> DocumentBody
 
         type::Type title::Title author::Author date::Date heading::Heading abstract::Abstract keywords::Keywords documentbody::DocumentBody -> Document
+
+        INT -> Integer
+
+        STR -> String

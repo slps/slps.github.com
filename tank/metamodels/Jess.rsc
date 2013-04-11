@@ -134,11 +134,11 @@ syntax ASlotDef
  ;
 syntax SlotDef
         = 
-        ()
+        SlotName slotName SlotOptions optionals+
  ;
 syntax MultiSlotDef
         = 
-        ()
+        SlotName slotName SlotOptions optionals+
  ;
 syntax SlotOptions
         = 
@@ -192,4 +192,16 @@ syntax ElifConditionAction
 syntax Advice
         = before: ()
         | after: ()
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
  ;

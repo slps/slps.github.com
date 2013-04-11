@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        Program Variable Type Parameter Instruction Calculation Control Assignment Block Conditional Loop Procedure Function For While Repeat 
+        Program Variable Type Parameter Instruction Calculation Control Assignment Block Conditional Loop Procedure Function For While Repeat String 
   context-free syntax
         name::String variables::Variable+ types::Type+ procedures::Procedure+ -> Program
 
@@ -24,7 +24,7 @@ exports
 
         block::Block -> Instruction
 
-         -> Calculation
+        block::Block -> Calculation
 
         Conditional -> Control
 
@@ -36,7 +36,7 @@ exports
         Loop -> Control
         Procedure -> Control
 
-         -> Assignment
+        block::Block -> Assignment
 
         instructions::Instruction+ procedure::Procedure loop::Loop conditional::Conditional -> Block
 
@@ -56,8 +56,10 @@ exports
 
         returnType::Type -> Function
 
-         -> For
+        block_loop::Block -> For
 
-         -> While
+        block_loop::Block -> While
 
-         -> Repeat
+        block_loop::Block -> Repeat
+
+        STR -> String

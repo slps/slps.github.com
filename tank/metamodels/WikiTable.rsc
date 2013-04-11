@@ -23,3 +23,15 @@ syntax Cell
         = 
         Boolean isHeading String align String style String content
  ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;

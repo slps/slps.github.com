@@ -27,11 +27,11 @@ syntax Step
  ;
 syntax Start
         = 
-        ()
+        String name String repetition String internalExecTime String internalFailProb String completionModel ServiceCall serviceCall+ Step predecessor+ Step successor+ Behavior behavior Behavior nestedBehavior
  ;
 syntax End
         = 
-        ()
+        String name String repetition String internalExecTime String internalFailProb String completionModel ServiceCall serviceCall+ Step predecessor+ Step successor+ Behavior behavior Behavior nestedBehavior
  ;
 syntax Control
         = Branch
@@ -42,7 +42,7 @@ syntax Control
  ;
 syntax InternalActivity
         = 
-        ()
+        String name String repetition String internalExecTime String internalFailProb String completionModel ServiceCall serviceCall+ Step predecessor+ Step successor+ Behavior behavior Behavior nestedBehavior
  ;
 syntax ServiceCall
         = 
@@ -71,4 +71,16 @@ syntax Acquire
 syntax Release
         = 
         String resourceUnits Resource resource
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
  ;

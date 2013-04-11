@@ -51,6 +51,7 @@ syntax Offering
 syntax Asset
         = Resource
         | FixedAsset
+        | Offering
         | CourseOfAction deployingCourseOfAction+ Directive governingDirective+ OrganizationUnit responsibleOrganizationUnit+ BusinessProcess managingBusinessProcess+
  ;
 syntax CourseOfAction
@@ -72,8 +73,8 @@ syntax Resource
         FixedAsset providingFixedAsset+ Offering requiringOffering+ Liability claimingLiability+
  ;
 syntax FixedAsset
-        = 
-        Offering usingOffering+ Resource providedResource+
+        = Offering
+        | Offering usingOffering+ Resource providedResource+
  ;
 syntax BusinessPolicy
         = 
@@ -138,9 +139,13 @@ syntax AssessmentCategory
  ;
 syntax PotentialReward
         = 
-        ()
+        Assessment identifyingAssessment+ Directive motivatedDirective+
  ;
 syntax Risk
         = 
-        ()
+        Assessment identifyingAssessment+ Directive motivatedDirective+
+ ;
+syntax String
+        = 
+        String
  ;

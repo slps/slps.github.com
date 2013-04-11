@@ -79,3 +79,15 @@ syntax PostConstraint
         = 
         OpConstraint op ConstraintDef constraint
  ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;

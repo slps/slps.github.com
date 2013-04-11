@@ -1,9 +1,21 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module BPMN
 
-syntax Activity
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
         = 
-        MessagingEdge orderedMessages+ MessagingEdge incomingMessages+ MessagingEdge outgoingMessages+ Group groups+ ActivityType activityType SubProcess eventHandlerFor Lane lane Boolean looping
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Activity
+        = SubProcess
+        | MessagingEdge orderedMessages+ MessagingEdge incomingMessages+ MessagingEdge outgoingMessages+ Group groups+ ActivityType activityType SubProcess eventHandlerFor Lane lane Boolean looping
  ;
 syntax ActivityType
         = SubProcess: ()
@@ -44,8 +56,9 @@ syntax Artifact
         | Association associations+ ArtifactsContainer artifactsContainer
  ;
 syntax ArtifactsContainer
-        = 
-        Artifact artifacts+
+        = BpmnDiagram
+        | Graph
+        | Artifact artifacts+
  ;
 syntax Association
         = 
@@ -57,7 +70,7 @@ syntax BpmnDiagram
  ;
 syntax DataObject
         = 
-        ()
+        Association associations+ ArtifactsContainer artifactsContainer
  ;
 syntax DirectionType
         = Both: ()
@@ -66,8 +79,9 @@ syntax DirectionType
         | None: ()
  ;
 syntax Graph
-        = 
-        Vertex vertices+ SequenceEdge sequenceEdges+
+        = Pool
+        | SubProcess
+        | Vertex vertices+ SequenceEdge sequenceEdges+
  ;
 syntax Group
         = 
@@ -75,10 +89,16 @@ syntax Group
  ;
 syntax Identifiable
         = IdentifiableNode
+        | Artifact
+        | BpmnDiagram
+        | Lane
+        | MessagingEdge
+        | SequenceEdge
         | iD: ID
  ;
 syntax IdentifiableNode
         = Vertex
+        | Graph
         | Association associations+
  ;
 syntax Lane
@@ -91,6 +111,12 @@ syntax MessagingEdge
  ;
 syntax NamedBpmnObject
         = ArtifactsContainer
+        | Activity
+        | Artifact
+        | Lane
+        | MessagingEdge
+        | Pool
+        | SequenceEdge
         | String documentation String name String ncname
  ;
 syntax Pool
@@ -107,9 +133,9 @@ syntax SubProcess
  ;
 syntax TextAnnotation
         = 
-        ()
+        Association associations+ ArtifactsContainer artifactsContainer
  ;
 syntax Vertex
-        = 
-        SequenceEdge outgoingEdges+ SequenceEdge incomingEdges+ Graph graph
+        = Activity
+        | SequenceEdge outgoingEdges+ SequenceEdge incomingEdges+ Graph graph
  ;

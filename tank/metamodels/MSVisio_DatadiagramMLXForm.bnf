@@ -41,17 +41,53 @@ StyleSheet:
 DocumentSheet:
         ds_visioDocument::VisioDocument
 PageSheet:
-        EPSILON
+        DocumentSheet
+PageSheet:
+        ss_shapes::ShapesCollection lineStyle::Integer fillStyle::Integer textStyle::Integer shapeElts::ShapeElt+
+NamedElt:
+        DocumentSheet
+NamedElt:
+        MasterShortCut
+NamedElt:
+        Page
 IdentifiedElt:
         FontEntry
 IdentifiedElt:
         FaceName
+IdentifiedElt:
+        MasterShortCut
+IdentifiedElt:
+        Master
+IdentifiedElt:
+        Page
+Shape:
+        StyleSheet
+Shape:
+        PageSheet
 Shape:
         ss_shapes::ShapesCollection lineStyle::Integer fillStyle::Integer textStyle::Integer shapeElts::ShapeElt+
 ShapeElt:
         Text
+ShapeElt:
+        Geom
+ShapeElt:
+        Char
+ShapeElt:
+        Para
+ShapeElt:
+        TabsCollection
+ShapeElt:
+        Field
+ShapeElt:
+        XForm
 IXElt:
         Tab
+IXElt:
+        XYElt
+DelElt:
+        XYElt
+DelElt:
+        XForm
 Geom:
         noFill::CellType noLine::CellType noShow::CellType noSnap::CellType linesTo::LineTo+ movesTo::MoveTo+ arcsTo::ArcTo+ splineKnots::SplineKnot+ polylinesTo::PolylineTo+ infiniteLines::InfiniteLine+ ellipses::Ellipse+ ellipticalArcsTo::EllipticalArcTo+ splineStarts::SplineStart+ nurbsTo::NURBSTo+
 XYElt:
@@ -106,16 +142,32 @@ Text:
         textElts::TextElt+
 TextElt:
         StringElt
+TextElt:
+        Cp
+TextElt:
+        Pp
+TextElt:
+        Tp
+TextElt:
+        Fld
 IXrequiredElt:
         ColorEntry
+IXrequiredElt:
+        Cp
+IXrequiredElt:
+        Pp
+IXrequiredElt:
+        Tp
+IXrequiredElt:
+        Fld
 Cp:
-        EPSILON
+        iX::Integer te_text::Text
 Pp:
-        EPSILON
+        iX::Integer te_text::Text
 Tp:
-        EPSILON
+        iX::Integer te_text::Text
 Fld:
-        EPSILON
+        iX::Integer te_text::Text
 StringElt:
         value::String
 Char:
@@ -146,10 +198,18 @@ Connect:
         c_connects::ConnectsCollection fromSheet::Integer toSheet::Integer fromCell::String toCell::String fromPart::Integer toPart::Integer
 MasterElt:
         Icon
+MasterElt:
+        ShapesCollection
+MasterElt:
+        ConnectsCollection
 PagesCollection:
         ps_visioDocument::VisioDocument pages::Page+
 Page:
         p_pages::PagesCollection background::Boolean backPage::Integer viewScale::Double viewCenterX::Double ViewCenterY::Double reviewerID::Integer associatedPage::Integer pageElts::PageElt+
+PageElt:
+        ShapesCollection
+PageElt:
+        ConnectsCollection
 WindowsInfo:
         ws_visioDocument::VisioDocument
 EventList:
@@ -158,3 +218,10 @@ HeaderFooter:
         ef_visioDocument::VisioDocument
 SolutionXML:
         sx_visioDocument::VisioDocument
+Integer:
+        INT
+String:
+        STR
+Boolean:
+        "true"
+        "false"

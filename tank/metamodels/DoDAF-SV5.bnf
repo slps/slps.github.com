@@ -77,9 +77,9 @@ ArchitectureTask:
 OperationalCapabilityTask:
         isAccomplishedA::SystemOperationalCapabilityTask
 SystemOperationalCapabilityTask:
-        EPSILON
+        levelIdentifier::String references::String cost::String correspondsTo::PATask+ isSupportedBy::ArchitectureTask+ isTheSourceOfNeedFor::InformationExchangeRequirement+ isTheDestinationOfNeedFor::InformationExchangeRequirement+ isCitedFor::SystemFunctionTraceabilityElement+
 PATask:
-        EPSILON
+        levelIdentifier::String references::String cost::String correspondsTo::PATask+ isSupportedBy::ArchitectureTask+ isTheSourceOfNeedFor::InformationExchangeRequirement+ isTheDestinationOfNeedFor::InformationExchangeRequirement+ isCitedFor::SystemFunctionTraceabilityElement+
 Capability:
         NetworkCapability
 Capability:
@@ -97,15 +97,15 @@ CapabilityDocument:
 SystemCapability:
         isCitedIn::Capability+
 NetworkCapability:
-        EPSILON
+        isPerformedBy::SystemCapability+ isOrdinateFor::Capability+ isSubordinateOf::Capability+ isPerformedByNC::NetworkCapability+ isPerformedByNLC::NodeLinkCapability+ isPerformedBySC::SystemCapability+ isCitedInCD::CapabilityDocument+ isUsedInMICN::MaterielItemCapabilityNorm+ isUsedInOTCN::OrganizationTypeCapabilityNorm+ isAttainedFor::RequiredInformationTechnologyCapability+
 NodeLinkCapability:
-        EPSILON
+        isPerformedBy::SystemCapability+ isOrdinateFor::Capability+ isSubordinateOf::Capability+ isPerformedByNC::NetworkCapability+ isPerformedByNLC::NodeLinkCapability+ isPerformedBySC::SystemCapability+ isCitedInCD::CapabilityDocument+ isUsedInMICN::MaterielItemCapabilityNorm+ isUsedInOTCN::OrganizationTypeCapabilityNorm+ isAttainedFor::RequiredInformationTechnologyCapability+
 MaterielItemCapabilityNorm:
-        EPSILON
+        isPerformedBy::SystemCapability+ isOrdinateFor::Capability+ isSubordinateOf::Capability+ isPerformedByNC::NetworkCapability+ isPerformedByNLC::NodeLinkCapability+ isPerformedBySC::SystemCapability+ isCitedInCD::CapabilityDocument+ isUsedInMICN::MaterielItemCapabilityNorm+ isUsedInOTCN::OrganizationTypeCapabilityNorm+ isAttainedFor::RequiredInformationTechnologyCapability+
 OrganizationTypeCapabilityNorm:
-        EPSILON
+        isPerformedBy::SystemCapability+ isOrdinateFor::Capability+ isSubordinateOf::Capability+ isPerformedByNC::NetworkCapability+ isPerformedByNLC::NodeLinkCapability+ isPerformedBySC::SystemCapability+ isCitedInCD::CapabilityDocument+ isUsedInMICN::MaterielItemCapabilityNorm+ isUsedInOTCN::OrganizationTypeCapabilityNorm+ isAttainedFor::RequiredInformationTechnologyCapability+
 RequiredInformationTechnologyCapability:
-        EPSILON
+        isPerformedBy::SystemCapability+ isOrdinateFor::Capability+ isSubordinateOf::Capability+ isPerformedByNC::NetworkCapability+ isPerformedByNLC::NodeLinkCapability+ isPerformedBySC::SystemCapability+ isCitedInCD::CapabilityDocument+ isUsedInMICN::MaterielItemCapabilityNorm+ isUsedInOTCN::OrganizationTypeCapabilityNorm+ isAttainedFor::RequiredInformationTechnologyCapability+
 InformationTechnologyRequirement:
         InformationExchangeRequirement
 InformationTechnologyRequirement:
@@ -113,10 +113,12 @@ InformationTechnologyRequirement:
 InformationTechnologyRequirement:
         specifies::RequiredInformationTechnologyCapability+
 InformationExchangeRequirement:
-        EPSILON
+        specifies::RequiredInformationTechnologyCapability+
 PAExchangeRequirement:
         isCitedIn::InformationExchangeRequirement+
 SupportStatusCode:
         red::EPSILON
         yellow::EPSILON
         green::EPSILON
+String:
+        STR

@@ -92,11 +92,11 @@ syntax OperationalCapabilityTask
  ;
 syntax SystemOperationalCapabilityTask
         = 
-        ()
+        String levelIdentifier String references String cost PATask correspondsTo+ ArchitectureTask isSupportedBy+ InformationExchangeRequirement isTheSourceOfNeedFor+ InformationExchangeRequirement isTheDestinationOfNeedFor+ SystemFunctionTraceabilityElement isCitedFor+
  ;
 syntax PATask
         = 
-        ()
+        String levelIdentifier String references String cost PATask correspondsTo+ ArchitectureTask isSupportedBy+ InformationExchangeRequirement isTheSourceOfNeedFor+ InformationExchangeRequirement isTheDestinationOfNeedFor+ SystemFunctionTraceabilityElement isCitedFor+
  ;
 syntax Capability
         = NetworkCapability
@@ -116,23 +116,23 @@ syntax SystemCapability
  ;
 syntax NetworkCapability
         = 
-        ()
+        SystemCapability isPerformedBy+ Capability isOrdinateFor+ Capability isSubordinateOf+ NetworkCapability isPerformedByNC+ NodeLinkCapability isPerformedByNLC+ SystemCapability isPerformedBySC+ CapabilityDocument isCitedInCD+ MaterielItemCapabilityNorm isUsedInMICN+ OrganizationTypeCapabilityNorm isUsedInOTCN+ RequiredInformationTechnologyCapability isAttainedFor+
  ;
 syntax NodeLinkCapability
         = 
-        ()
+        SystemCapability isPerformedBy+ Capability isOrdinateFor+ Capability isSubordinateOf+ NetworkCapability isPerformedByNC+ NodeLinkCapability isPerformedByNLC+ SystemCapability isPerformedBySC+ CapabilityDocument isCitedInCD+ MaterielItemCapabilityNorm isUsedInMICN+ OrganizationTypeCapabilityNorm isUsedInOTCN+ RequiredInformationTechnologyCapability isAttainedFor+
  ;
 syntax MaterielItemCapabilityNorm
         = 
-        ()
+        SystemCapability isPerformedBy+ Capability isOrdinateFor+ Capability isSubordinateOf+ NetworkCapability isPerformedByNC+ NodeLinkCapability isPerformedByNLC+ SystemCapability isPerformedBySC+ CapabilityDocument isCitedInCD+ MaterielItemCapabilityNorm isUsedInMICN+ OrganizationTypeCapabilityNorm isUsedInOTCN+ RequiredInformationTechnologyCapability isAttainedFor+
  ;
 syntax OrganizationTypeCapabilityNorm
         = 
-        ()
+        SystemCapability isPerformedBy+ Capability isOrdinateFor+ Capability isSubordinateOf+ NetworkCapability isPerformedByNC+ NodeLinkCapability isPerformedByNLC+ SystemCapability isPerformedBySC+ CapabilityDocument isCitedInCD+ MaterielItemCapabilityNorm isUsedInMICN+ OrganizationTypeCapabilityNorm isUsedInOTCN+ RequiredInformationTechnologyCapability isAttainedFor+
  ;
 syntax RequiredInformationTechnologyCapability
         = 
-        ()
+        SystemCapability isPerformedBy+ Capability isOrdinateFor+ Capability isSubordinateOf+ NetworkCapability isPerformedByNC+ NodeLinkCapability isPerformedByNLC+ SystemCapability isPerformedBySC+ CapabilityDocument isCitedInCD+ MaterielItemCapabilityNorm isUsedInMICN+ OrganizationTypeCapabilityNorm isUsedInOTCN+ RequiredInformationTechnologyCapability isAttainedFor+
  ;
 syntax InformationTechnologyRequirement
         = InformationExchangeRequirement
@@ -141,7 +141,7 @@ syntax InformationTechnologyRequirement
  ;
 syntax InformationExchangeRequirement
         = 
-        ()
+        RequiredInformationTechnologyCapability specifies+
  ;
 syntax PAExchangeRequirement
         = 
@@ -151,4 +151,8 @@ syntax SupportStatusCode
         = red: ()
         | yellow: ()
         | green: ()
+ ;
+syntax String
+        = 
+        String
  ;

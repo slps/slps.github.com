@@ -1,6 +1,18 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module XSLT
 
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
 syntax Node
         = ElementNode
         | AttributeNode
@@ -35,7 +47,7 @@ syntax XSLTNode
  ;
 syntax XSLTRootNode
         = 
-        ()
+        document: Document
  ;
 syntax Document
         = 

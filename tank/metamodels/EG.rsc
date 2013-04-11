@@ -14,11 +14,11 @@ syntax Node
  ;
 syntax Start
         = 
-        ()
+        Node predecessor+ Node successor+ ExecutionGraph executionGraph ExecutionGraph nested+
  ;
 syntax End
         = 
-        ()
+        Node predecessor+ Node successor+ ExecutionGraph executionGraph ExecutionGraph nested+
  ;
 syntax Control
         = Branch
@@ -31,7 +31,7 @@ syntax Control
  ;
 syntax Basic
         = 
-        ()
+        Node predecessor+ Node successor+ ExecutionGraph executionGraph ExecutionGraph nested+
  ;
 syntax Branch
         = 
@@ -60,4 +60,16 @@ syntax Release
 syntax Split
         = 
         ()
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
  ;

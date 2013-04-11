@@ -1,0 +1,206 @@
+module Main
+
+exports
+ context-free start-symbols program
+  sorts
+        Program Prolog Dtd-body Misc Doctypedecl Declbody Literal Pi Pitarget Sub1-pi Sub2-pi Sp-external-id External-id Exid-sys Exid-pub Decl Markupdecl Elementdecl Contentspec Children Repetition Children-body Choice Choice-item Cp Cp-body Seq More-cps Mixed Pcdata-or-name More-names Pcdata Attlistdecl Attdef Atttype Stringtype Tokenizedtype Enumeratedtype Notationtype Enumeration Nmtoken More-nmtokens Defaultdecl Fixed Attvalue Longstringlit Not-dquote Longcharlit Not-quote Entitydecl Gedecl Pedecl Entitydef Pedef Ndatadecl Entityvalue Notationdecl Exid-or-pubid Spaces Space-or-newline Element Tag-content Empty-elem-tag Attribute Stag Content Sub1-content Sub2-content Chardata Etag Cdata Cdend Reference Cdsect 
+  context-free syntax
+        Prolog Element -> Program
+
+        Dtd-body -> Prolog
+
+        Misc* Doctypedecl? -> Dtd-body
+
+        Comment -> Misc
+        Pi -> Misc
+        Space -> Misc
+        Newline -> Misc
+
+        "<!DOCTYPE" Spaces Name Spaces Sp-external-id? Spaces Declbody? Spaces ">" Spaces -> Doctypedecl
+
+        "[" Decl* "]" -> Declbody
+
+        Charlit -> Literal
+        Stringlit -> Literal
+
+        "<?" Pitarget Sub1-pi? "?>" -> Pi
+
+        Name -> Pitarget
+
+        Spaces Token -> Sub1-pi
+
+        Token "?>" Token -> Sub2-pi
+
+        Spaces External-id -> Sp-external-id
+
+        Exid-sys -> External-id
+        Exid-pub -> External-id
+
+        "SYSTEM" Spaces Literal -> Exid-sys
+
+        "PUBLIC" Spaces Literal Spaces Literal -> Exid-pub
+
+        Markupdecl -> Decl
+        "%" Name ";" -> Decl
+        Spaces -> Decl
+
+        Elementdecl -> Markupdecl
+        Attlistdecl -> Markupdecl
+        Entitydecl -> Markupdecl
+        Notationdecl -> Markupdecl
+        Pi -> Markupdecl
+        Comment -> Markupdecl
+
+        "<!ELEMENT" Spaces Name Spaces Contentspec Spaces ">" Spaces -> Elementdecl
+
+        "EMPTY" -> Contentspec
+        "ANY" -> Contentspec
+        Mixed -> Contentspec
+        Children -> Contentspec
+
+        Children-body Repetition? -> Children
+
+        "?" -> Repetition
+        "*" -> Repetition
+        "+" -> Repetition
+
+        Choice -> Children-body
+        Seq -> Children-body
+
+        "(" Spaces Cp Choice-item Choice-item* Spaces ")" -> Choice
+
+        Spaces "|" Spaces Cp -> Choice-item
+
+        Cp-body Repetition? -> Cp
+
+        Name -> Cp-body
+        Choice -> Cp-body
+        Seq -> Cp-body
+
+        "(" Spaces Cp More-cps* Spaces ")" -> Seq
+
+        Spaces "," Spaces Cp -> More-cps
+
+        Pcdata-or-name -> Mixed
+        Pcdata -> Mixed
+
+        "(" Spaces "#PCDATA" More-names* Spaces ")*" -> Pcdata-or-name
+
+        Spaces "|" Spaces Name -> More-names
+
+        "(" Spaces "#PCDATA" Spaces ")" -> Pcdata
+
+        "<!ATTLIST" Spaces Name Attdef* Spaces ">" Spaces -> Attlistdecl
+
+        Spaces Name Spaces Atttype Spaces Defaultdecl -> Attdef
+
+        Stringtype -> Atttype
+        Tokenizedtype -> Atttype
+        Enumeratedtype -> Atttype
+
+        "CDATA" -> Stringtype
+
+        "ID" -> Tokenizedtype
+        "IDREF" -> Tokenizedtype
+        "IDREFS" -> Tokenizedtype
+        "ENTITY" -> Tokenizedtype
+        "ENTITIES" -> Tokenizedtype
+        "NMTOKEN" -> Tokenizedtype
+        "NMTOKENS" -> Tokenizedtype
+
+        Notationtype -> Enumeratedtype
+        Enumeration -> Enumeratedtype
+
+        "NOTATION" Spaces "(" Spaces Name More-names* Spaces ")" -> Notationtype
+
+        "(" Spaces Nmtoken More-nmtokens* Spaces ")" -> Enumeration
+
+        Name -> Nmtoken
+        Dname -> Nmtoken
+
+        Spaces "|" Spaces Nmtoken -> More-nmtokens
+
+        "#REQUIRED" -> Defaultdecl
+        "#IMPLIED" -> Defaultdecl
+        Fixed? Attvalue -> Defaultdecl
+
+        "#FIXED" Spaces -> Fixed
+
+        Stringlit -> Attvalue
+        Charlit -> Attvalue
+        Longstringlit -> Attvalue
+        Longcharlit -> Attvalue
+
+        """ Not-dquote* """ -> Longstringlit
+
+        Token -> Not-dquote
+
+        "'" Not-quote* "'" -> Longcharlit
+
+        Token -> Not-quote
+
+        Gedecl -> Entitydecl
+        Pedecl -> Entitydecl
+
+        "<!ENTITY" Spaces Name Spaces Entitydef Spaces ">" Spaces -> Gedecl
+
+        "<!ENTITY" Spaces "%" Spaces Name Spaces Pedef Spaces ">" Spaces -> Pedecl
+
+        Entityvalue -> Entitydef
+        External-id Ndatadecl? -> Entitydef
+
+        Entityvalue -> Pedef
+        External-id -> Pedef
+
+        Spaces "NDATA" Spaces Name -> Ndatadecl
+
+        Charlit -> Entityvalue
+        Stringlit -> Entityvalue
+        Longstringlit -> Entityvalue
+        Longcharlit -> Entityvalue
+
+        "<!NOTATION" Spaces Name Spaces Exid-or-pubid Spaces ">" Spaces -> Notationdecl
+
+        External-id -> Exid-or-pubid
+        "PUBLIC" Spaces Literal -> Exid-or-pubid
+
+        Space-or-newline* -> Spaces
+
+        Space -> Space-or-newline
+        Newline -> Space-or-newline
+
+        Empty-elem-tag Spaces -> Element
+        Tag-content Spaces -> Element
+
+        Stag IN Content EX Etag -> Tag-content
+
+        "<" Name Spaces Attribute* "/>" -> Empty-elem-tag
+
+        Spaces Name "=" Attvalue Spaces -> Attribute
+
+        "<" Name Spaces Attribute* ">" -> Stag
+
+        Spaces Chardata* Spaces Sub1-content* Spaces -> Content
+
+        Spaces Sub2-content Spaces Chardata* Spaces -> Sub1-content
+
+        Element -> Sub2-content
+        Reference -> Sub2-content
+        Cdsect -> Sub2-content
+        Pi -> Sub2-content
+        Comment -> Sub2-content
+        Regexp -> Sub2-content
+
+        Token -> Chardata
+
+        "</" Name Spaces ">" -> Etag
+
+        Token -> Cdata
+        Comment -> Cdata
+
+        "]" "]" ">" -> Cdend
+
+        "&" Name ";" -> Reference
+        Charref -> Reference
+
+        "<!" "[" "CDATA" "[" Cdata* Cdend -> Cdsect

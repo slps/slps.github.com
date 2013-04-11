@@ -28,3 +28,7 @@ syntax ForeignKey
         = 
         Column column+ Table owner Key refersTo
  ;
+syntax String
+        = 
+        String
+ ;

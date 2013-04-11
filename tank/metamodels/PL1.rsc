@@ -14,7 +14,7 @@ syntax PLISimpleType
  ;
 syntax PLINamedType
         = 
-        ()
+        String name PLIElement typedElements+
  ;
 syntax PLIComposedType
         = 
@@ -30,11 +30,11 @@ syntax PLIAttribute
  ;
 syntax PLIComputationalType
         = 
-        ()
+        alias: PLIAlias
  ;
 syntax PLINonComputationalType
         = 
-        ()
+        alias: PLIAlias
  ;
 syntax PLIElement
         = 
@@ -70,4 +70,12 @@ syntax PLIHBoundArray
 syntax PLIVariableBoundArray
         = 
         String IBoundToAllocate String hBoundToAllocate PLIElement referredTo
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Integer
+        = 
+        Integer
  ;

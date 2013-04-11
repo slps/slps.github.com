@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        ListString ListInteger Model Implementation ConstBlock VarBlock GlobalVariable TypeBlock Session Descriptor StorageUnit StorageElement Object Block NodeBlock ModelBlock Expression Label ExprNull ConstValue ExprContact ExprCall Operator ExprId LocalVariable Node ParamBlock ParamArray ConstVar Constant Variable Type Table NamedType Enumeration Composite CompositeElement Structure Tuple EqBlock Equation Assertion Annotable Prop Configuration Project Element FileRef Folder Reference TypeReference OperatorReference VariableReference Error Edge RPoint RSize Entity StateObj GraphicalObject StInputOutput StInitInput StInput StOutput Transition State InitialStPtr StateMachine Base StateBase AnnNote AnnAttValue AnnNoteType AnnAttDefinition AnnAttIntValue AnnAttBoolValue AnnAttCharValue AnnAttRealValue AnnAttStringValue AnnAttFileValue AnnAttDateValue AnnAttOidValue AnnAttEnumValue AnnProperty AnnPropertyInt AnnPropertyBool AnnPropertyChar AnnPropertyReal AnnPropertyString AnnPropertyEnum AnnotSchema AnnCategory Annotability AnnAttGroup File MtcApplication CoverageFile CriterionFile MtcEntity HistoryEntry Criterion Instance AssociationClass Result Record Loader 
+        ListString ListInteger Model Implementation ConstBlock VarBlock GlobalVariable TypeBlock Session Descriptor StorageUnit StorageElement Object Block NodeBlock ModelBlock Expression Label ExprNull ConstValue ExprContact ExprCall Operator ExprId LocalVariable Node ParamBlock ParamArray ConstVar Constant Variable Type Table NamedType Enumeration Composite CompositeElement Structure Tuple EqBlock Equation Assertion Annotable Prop Configuration Project Element FileRef Folder Reference TypeReference OperatorReference VariableReference Error Edge RPoint RSize Entity StateObj GraphicalObject StInputOutput StInitInput StInput StOutput Transition State InitialStPtr StateMachine Base StateBase AnnNote AnnAttValue AnnNoteType AnnAttDefinition AnnAttIntValue AnnAttBoolValue AnnAttCharValue AnnAttRealValue AnnAttStringValue AnnAttFileValue AnnAttDateValue AnnAttOidValue AnnAttEnumValue AnnProperty AnnPropertyInt AnnPropertyBool AnnPropertyChar AnnPropertyReal AnnPropertyString AnnPropertyEnum AnnotSchema AnnCategory Annotability AnnAttGroup File MtcApplication CoverageFile CriterionFile MtcEntity HistoryEntry Criterion Instance AssociationClass Result Record Loader String Integer Boolean 
   context-free syntax
         value::String -> ListString
 
@@ -28,6 +28,8 @@ exports
 
         Block -> StorageElement
 
+        Operator -> StorageElement
+
         Implementation -> Object
 
         Descriptor -> Object
@@ -45,6 +47,8 @@ exports
         Edge -> Object
 
         StateMachine -> Object
+
+        Model -> Object
 
         NodeBlock -> Block
 
@@ -258,13 +262,13 @@ exports
 
         value::String -> AnnAttStringValue
 
-         -> AnnAttFileValue
+        value::String -> AnnAttFileValue
 
-         -> AnnAttDateValue
+        value::String -> AnnAttDateValue
 
-         -> AnnAttOidValue
+        value::String -> AnnAttOidValue
 
-         -> AnnAttEnumValue
+        value::String -> AnnAttEnumValue
 
         AnnPropertyInt -> AnnProperty
 
@@ -324,6 +328,10 @@ exports
 
         Record -> MtcEntity
 
+        Model -> MtcEntity
+
+        Operator -> MtcEntity
+
         file::File -> HistoryEntry
 
         ident::String name::String description::String criterionFileC::CriterionFile operatorC::Operator element::Element+ -> Criterion
@@ -337,3 +345,10 @@ exports
         creator::String name::String date::String author::String description::String key::CoverageFile associationClassRc::AssociationClass coverageFileR::CoverageFile result::Result+ -> Record
 
         descriptor::Descriptor session::Session -> Loader
+
+        STR -> String
+
+        INT -> Integer
+
+        "true" -> Boolean
+        "false" -> Boolean

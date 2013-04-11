@@ -13,10 +13,14 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable PNML_structured 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Pierrick Guyard, <code>PNML_structured.ecore</code>, 2005/06/16.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>49</strong></li><li>Number of top alternatives: <strong>58</strong></li><li>Number of defined nonterminal symbols: <strong>39</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>6</strong>: <code><a href="#IdedElement" class="nt">IdedElement</a>, <a href="#Label" class="nt">Label</a>, <a href="#ReferencePlace" class="nt">ReferencePlace</a>, <a href="#ReferenceTransition" class="nt">ReferenceTransition</a>, <a href="#Graphics" class="nt">Graphics</a>, <a href="#Coordinate" class="nt">Coordinate</a></code></li><li>Bottom nonterminal symbols: <strong>3</strong>: <code><a href="#String" class="nt">String</a>, <a href="#Reference" class="nt">Reference</a>, <a href="#Integer" class="nt">Integer</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="IdedElement">IdedElement</a>:
+				</script></head><body><h1 class="l">Browsable PNML_structured 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Pierrick Guyard, <code>PNML_structured.ecore</code>, 2005/06/16.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>59</strong></li><li>Number of top alternatives: <strong>68</strong></li><li>Number of defined nonterminal symbols: <strong>42</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>4</strong>: <code><a href="#IdedElement" class="nt">IdedElement</a>, <a href="#Label" class="nt">Label</a>, <a href="#Graphics" class="nt">Graphics</a>, <a href="#Coordinate" class="nt">Coordinate</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="IdedElement">IdedElement</a>:
         <a class="nt" href="#NetElement">NetElement</a>
 </pre><pre><a class="nt" name="IdedElement">IdedElement</a>:
         <a class="nt" href="#Node">Node</a>
+</pre><pre><a class="nt" name="IdedElement">IdedElement</a>:
+        <a class="nt" href="#Arc">Arc</a>
+</pre><pre><a class="nt" name="IdedElement">IdedElement</a>:
+        <a class="nt" href="#Page">Page</a>
 </pre><pre><a class="nt" name="URI">URI</a>:
         <span class="sel">value</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Color">Color</a>:
@@ -48,6 +52,14 @@
         <span class="sel">type</span>::<a class="nt" href="#URI">URI</a> <span class="sel">document</span>::<a class="nt" href="#PNMLDocument">PNMLDocument</a> <span class="sel">contents</span>::<a class="nt" href="#NetContent">NetContent</a><span class="meta">+</span> <span class="sel">tools</span>::<a class="nt" href="#ToolSpecific">ToolSpecific</a><span class="meta">+</span> <span class="sel">netgraphics</span>::<a class="nt" href="#NetGraphics">NetGraphics</a> <span class="sel">name</span>::<a class="nt" href="#Name">Name</a>
 </pre><pre><a class="nt" name="NetContent">NetContent</a>:
         <a class="nt" href="#NetContentElement">NetContentElement</a>
+</pre><pre><a class="nt" name="NetContent">NetContent</a>:
+        <a class="nt" href="#Arc">Arc</a>
+</pre><pre><a class="nt" name="NetContent">NetContent</a>:
+        <a class="nt" href="#Page">Page</a>
+</pre><pre><a class="nt" name="NetContent">NetContent</a>:
+        <a class="nt" href="#ReferencePlace">ReferencePlace</a>
+</pre><pre><a class="nt" name="NetContent">NetContent</a>:
+        <a class="nt" href="#ReferenceTransition">ReferenceTransition</a>
 </pre><pre><a class="nt" name="ToolSpecific">ToolSpecific</a>:
         <span class="sel">tool</span>::<a class="nt" href="#String">String</a> <span class="sel">version</span>::<a class="nt" href="#String">String</a> <span class="sel">anyelement</span>::<a class="nt" href="#AnyElement">AnyElement</a><span class="meta">+</span> <span class="sel">net</span>::<a class="nt" href="#NetElement">NetElement</a> <span class="sel">arc</span>::<a class="nt" href="#Arc">Arc</a> <span class="sel">node</span>::<a class="nt" href="#Node">Node</a> <span class="sel">page</span>::<a class="nt" href="#Page">Page</a>
 </pre><pre><a class="nt" name="LabeledElement">LabeledElement</a>:
@@ -72,10 +84,14 @@
         <span class="sel">source</span>::<a class="nt" href="#NetContentElement">NetContentElement</a> <span class="sel">target</span>::<a class="nt" href="#NetContentElement">NetContentElement</a> <span class="sel">tools</span>::<a class="nt" href="#ToolSpecific">ToolSpecific</a><span class="meta">+</span> <span class="sel">edgegraphics</span>::<a class="nt" href="#EdgeGraphics">EdgeGraphics</a> <span class="sel">inscription</span>::<a class="nt" href="#Inscription">Inscription</a>
 </pre><pre><a class="nt" name="Page">Page</a>:
         <span class="sel">contents</span>::<a class="nt" href="#NetContent">NetContent</a><span class="meta">+</span> <span class="sel">tools</span>::<a class="nt" href="#ToolSpecific">ToolSpecific</a><span class="meta">+</span> <span class="sel">pagegraphics</span>::<a class="nt" href="#PageGraphics">PageGraphics</a>
+</pre><pre><a class="nt" name="Reference">Reference</a>:
+        <a class="nt" href="#ReferencePlace">ReferencePlace</a>
+</pre><pre><a class="nt" name="Reference">Reference</a>:
+        <a class="nt" href="#ReferenceTransition">ReferenceTransition</a>
 </pre><pre><a class="nt" name="ReferencePlace">ReferencePlace</a>:
-        ε
+        <span class="sel">net</span>::<a class="nt" href="#NetElement">NetElement</a> <span class="sel">name</span>::<a class="nt" href="#Name">Name</a> <span class="sel">page</span>::<a class="nt" href="#Page">Page</a> <span class="sel">ref</span>::<a class="nt" href="#Node">Node</a>
 </pre><pre><a class="nt" name="ReferenceTransition">ReferenceTransition</a>:
-        ε
+        <span class="sel">net</span>::<a class="nt" href="#NetElement">NetElement</a> <span class="sel">name</span>::<a class="nt" href="#Name">Name</a> <span class="sel">page</span>::<a class="nt" href="#Page">Page</a> <span class="sel">ref</span>::<a class="nt" href="#Node">Node</a>
 </pre><pre><a class="nt" name="Node">Node</a>:
         <a class="nt" href="#Reference">Reference</a>
 </pre><pre><a class="nt" name="Node">Node</a>:
@@ -120,5 +136,9 @@
         <span class="sel">color</span>::<a class="nt" href="#Color">Color</a> <span class="sel">width</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">shape</span>::<a class="nt" href="#ShapeType">ShapeType</a> <span class="sel">style</span>::<a class="nt" href="#StyleType">StyleType</a> <span class="sel">nodegraphics</span>::<a class="nt" href="#NodeGraphics">NodeGraphics</a> <span class="sel">edgegraphics</span>::<a class="nt" href="#EdgeGraphics">EdgeGraphics</a> <span class="sel">annotationgraphics</span>::<a class="nt" href="#AnnotationGraphics">AnnotationGraphics</a>
 </pre><pre><a class="nt" name="Font">Font</a>:
         <span class="sel">family</span>::<a class="nt" href="#String">String</a> <span class="sel">style</span>::<a class="nt" href="#String">String</a> <span class="sel">weight</span>::<a class="nt" href="#String">String</a> <span class="sel">size</span>::<a class="nt" href="#String">String</a> <span class="sel">decoration</span>::<a class="nt" href="#DecorationType">DecorationType</a> <span class="sel">align</span>::<a class="nt" href="#AlignType">AlignType</a> <span class="sel">rotation</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">annotationgraphics</span>::<a class="nt" href="#AnnotationGraphics">AnnotationGraphics</a>
+</pre><pre><a class="nt" name="Integer">Integer</a>:
+        <span class="meta">int</span>
+</pre><pre><a class="nt" name="String">String</a>:
+        <span class="meta">string</span>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
 Last updated: Apr2013.</div></body></html>

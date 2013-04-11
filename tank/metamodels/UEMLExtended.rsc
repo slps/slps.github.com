@@ -6,6 +6,7 @@ syntax UEMLObject
         | Port
         | Flow
         | Object
+        | Activity
         | Geometry has UEMLModel model
  ;
 syntax UEMLModel
@@ -52,7 +53,7 @@ syntax MaterialResource
  ;
 syntax HumanResource
         = 
-        ()
+        Commitment obliger Commitment claimer Contract has_parties
  ;
 syntax ResourceFlow
         = 
@@ -69,11 +70,11 @@ syntax ControlFlow
  ;
 syntax TriggerFlow
         = 
-        ()
+        InformationObject carries+
  ;
 syntax ConstraintFlow
         = 
-        ()
+        InformationObject carries+
  ;
 syntax ResourceRole
         = 
@@ -84,7 +85,8 @@ syntax RoleType
         ()
  ;
 syntax Anchor
-        = OutputPort
+        = ConnectionOperator
+        | OutputPort
         | InputPort
  ;
 syntax OutputPort
@@ -97,7 +99,7 @@ syntax InputPort
  ;
 syntax ConnectionOperator
         = 
-        ()
+        AssociationConnector target AssociationConnector origin
  ;
 syntax AssociationConnector
         = 
@@ -105,11 +107,13 @@ syntax AssociationConnector
  ;
 syntax FlowObject
         = Event
+        | Activity
+        | ConnectionOperator
         | AssociationConnector target AssociationConnector origin
  ;
 syntax Event
         = 
-        ()
+        AssociationConnector target AssociationConnector origin
  ;
 syntax ResourceType
         = 
@@ -130,11 +134,11 @@ syntax Commitment
  ;
 syntax Software
         = 
-        ()
+        Commitment obliger Commitment claimer Contract has_parties
  ;
 syntax Organisation
         = 
-        ()
+        Commitment obliger Commitment claimer Contract has_parties
  ;
 syntax Process
         = 

@@ -78,15 +78,15 @@ syntax Mechanism
  ;
 syntax MechanismSystem
         = 
-        ()
+        String source String destination String resourceType
  ;
 syntax MechanismReference
         = 
-        ()
+        String source String destination String resourceType
  ;
 syntax MechanismFacility
         = 
-        ()
+        String source String destination String resourceType
  ;
 syntax InformationAssetDocument
         = 
@@ -147,4 +147,8 @@ syntax Skill
 syntax DOSCR
         = 
         Occupation mayBeAn PersonType appliesTo+ OperationalRole mayBeCitedFor+
+ ;
+syntax String
+        = 
+        String
  ;

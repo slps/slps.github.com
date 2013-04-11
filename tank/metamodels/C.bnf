@@ -1,3 +1,10 @@
+Integer:
+        INT
+String:
+        STR
+Boolean:
+        "true"
+        "false"
 CDataType:
         CIntegral
 CDataType:
@@ -99,10 +106,16 @@ CClassifier:
 CClassifier:
         Derived
 CClassifier:
+        CStructured
+CClassifier:
         CDataType
         Derived
 Derived:
         EPSILON
+CStructureContents:
+        CStructuralFeature
+CStructureContents:
+        CStructured
 CStructureContents:
         sc_container::CStructured
 CStructured:
@@ -112,17 +125,17 @@ CStructured:
 CStructured:
         contains::CStructureContents+
 CStruct:
-        EPSILON
+        contains::CStructureContents+
 CUnion:
-        EPSILON
+        contains::CStructureContents+
 CSourceText:
         source::String fileName::String
 CTypedElement:
         CParameter
 CTypedElement:
+        CStructuralFeature
+CTypedElement:
         type::CClassifier source::CSourceText
-CStructuralFeature:
-        CField
 CStructuralFeature:
         CField
 CField:

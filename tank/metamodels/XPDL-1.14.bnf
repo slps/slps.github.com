@@ -1,3 +1,10 @@
+String:
+        STR
+Integer:
+        INT
+Boolean:
+        "true"
+        "false"
 AssociationDirectionKind:
         None::EPSILON
         To::EPSILON
@@ -109,9 +116,9 @@ Artifact:
 DataObject:
         state::String requiredForStart::Boolean producedAtCompletion::Boolean dataFields::DataField+
 Group:
-        EPSILON
+        textAnnotation::String group::String object::Object dataObject::DataObject
 Annotation:
-        EPSILON
+        textAnnotation::String group::String object::Object dataObject::DataObject
 TypeDeclaration:
         id::String name::String
 Application:
@@ -122,7 +129,7 @@ Application:
         ParametrizedApplication
         ReferencedApplication
 ParametrizedApplication:
-        EPSILON
+        
 ReferencedApplication:
         externalReference::ExternalReference
 Activity:
@@ -226,7 +233,7 @@ IntermediateEvent:
 EndEvent:
         triggerKind::TriggerKind implementation::ImplementationKind trigger::Trigger
 Gateway:
-        EPSILON
+        gatewayType::GatewayTypeKind instantiate::Boolean markerVisiable::Boolean
 Process:
         accessLevel::AccessLevelKind processType::ProcessTypeKind status::StatusKind suppressJoinFailure::Boolean enableInstanceCompensation::Boolean adHoc::Boolean adHocOrdering::AdHocOrderingKind adHocCompletionCondition::String participant::Participant+ applications::Application+ dataField::DataField activitySets::ActivitySet+ activities::Activity+ transitions::Transition+ object::Object defaultStartActivitySet::ActivitySet defaultStartActivity::Activity
 Transition:

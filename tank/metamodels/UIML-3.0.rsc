@@ -273,15 +273,15 @@ syntax Branch
  ;
 syntax WhenTrue
         = 
-        ()
+        Property properties+ Call calls+ Restructure restructure Operation op Equal equal Event event
  ;
 syntax WhenFalse
         = 
-        ()
+        Property properties+ Call calls+ Restructure restructure Operation op Equal equal Event event
  ;
 syntax ByDefault
         = 
-        ()
+        Property properties+ Call calls+ Restructure restructure Operation op Equal equal Event event
  ;
 syntax HowKind
         = append: ()
@@ -300,6 +300,14 @@ syntax WhereKind
         | last: ()
         | before: ()
         | after: ()
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Integer
+        = 
+        Integer
  ;
 syntax Template
         = BehaviorTemplate

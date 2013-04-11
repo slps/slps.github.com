@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        VisibilityKind BooleanExpression ModelElement Dependency Constraint Feature StructuralFeature Attribute NameSpace Classifier Package Class Datatype Subsystem Model 
+        VisibilityKind BooleanExpression ModelElement Dependency Constraint Feature StructuralFeature Attribute NameSpace Classifier Package Class Datatype Subsystem Model Integer String Boolean 
   context-free syntax
         vk_public_vis:: -> VisibilityKind
         vk_private_vis:: -> VisibilityKind
@@ -32,7 +32,7 @@ exports
 
         type::Classifier -> StructuralFeature
 
-         -> Attribute
+        type::Classifier -> Attribute
 
         Classifier -> NameSpace
 
@@ -44,16 +44,27 @@ exports
 
         Datatype -> Classifier
 
+        Subsystem -> Classifier
+
         features::Feature+ -> Classifier
 
         Model -> Package
 
+        Subsystem -> Package
+
         importedElements::ModelElement+ -> Package
 
-         -> Class
+        features::Feature+ -> Class
 
-         -> Datatype
+        features::Feature+ -> Datatype
 
-         -> Subsystem
+        features::Feature+ importedElements::ModelElement+ -> Subsystem
 
-         -> Model
+        importedElements::ModelElement+ -> Model
+
+        INT -> Integer
+
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean

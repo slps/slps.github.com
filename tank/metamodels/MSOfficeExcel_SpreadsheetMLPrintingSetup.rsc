@@ -170,3 +170,15 @@ syntax CommentsLayoutType
         | clt_PrintNone: ()
         | clt_SheetEnd: ()
  ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;

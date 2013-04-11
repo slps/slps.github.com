@@ -11,6 +11,16 @@ all:
 	_dev/format zoo ada/lncs-4348 ada/lncs-4348
 	cp ../slps/topics/grammars/ada/cordy-hyaric/grammar.bgf zoo/ada/cordy-hyaric.bgf
 	_dev/format zoo ada/cordy-hyaric ada/cordy-hyaric
+	cp ../slps/topics/grammars/assembly/delphi/grammar.bgf zoo/assembly/delphi.bgf
+	_dev/format zoo assembly/delphi assembly/delphi
+	cp ../slps/topics/grammars/bibtex/bibtex-1/grammar.bgf zoo/bibtex/bibtex-1.bgf
+	_dev/format zoo bibtex/bibtex-1 bibtex/bibtex-1
+	cp ../slps/topics/grammars/bibtex/bibtex-1.1/grammar.bgf zoo/bibtex/bibtex-1.1.bgf
+	_dev/format zoo bibtex/bibtex-1.1 bibtex/bibtex-1.1
+	cp ../slps/topics/grammars/bibtex/bibtex-1.2/grammar.bgf zoo/bibtex/bibtex-1.2.bgf
+	_dev/format zoo bibtex/bibtex-1.2 bibtex/bibtex-1.2
+	cp ../slps/topics/grammars/bibtex/bql/grammar.bgf zoo/bibtex/bql.bgf
+	_dev/format zoo bibtex/bql bibtex/bql
 	cp ../slps/topics/grammars/c/iso-9899-1999/grammar.bgf zoo/c/iso-9899-1999.bgf
 	_dev/format zoo c/iso-9899-1999 c/iso-9899-1999
 	cp ../slps/topics/grammars/c/iso-9899-tc2/grammar.bgf zoo/c/iso-9899-tc2.bgf
@@ -63,6 +73,10 @@ all:
 	_dev/format zoo dart/spec-0.01 dart/spec-0.01
 	cp ../slps/topics/grammars/dart/spec-0.05/grammar.bgf zoo/dart/spec-0.05.bgf
 	_dev/format zoo dart/spec-0.05 dart/spec-0.05
+	cp ../slps/topics/grammars/dot/palies/grammar.bgf zoo/dot/palies.bgf
+	_dev/format zoo dot/palies dot/palies
+	cp ../slps/topics/grammars/dot/doux/grammar.bgf zoo/dot/doux.bgf
+	_dev/format zoo dot/doux dot/doux
 	cp ../slps/topics/grammars/eiffel/bezault/grammar.bgf zoo/eiffel/bezault.bgf
 	_dev/format zoo eiffel/bezault eiffel/bezault
 	cp ../slps/topics/grammars/eiffel/iso-25436-2006/grammar.bgf zoo/eiffel/iso-25436-2006.bgf
@@ -85,10 +99,16 @@ all:
 	_dev/format zoo java/java-1-jls-impl java-1/jls-impl
 	cp ../slps/topics/grammars/java-1/cordy-guo/grammar.bgf zoo/java/java-1-cordy-guo.bgf
 	_dev/format zoo java/java-1-cordy-guo java-1/cordy-guo
+	cp ../slps/topics/grammars/java-1/jouault/grammar.bgf zoo/java/java-1-jouault.bgf
+	_dev/format zoo java/java-1-jouault java-1/jouault
+	cp ../slps/topics/grammars/java-1/touzet/grammar.bgf zoo/java/java-1-touzet.bgf
+	_dev/format zoo java/java-1-touzet java-1/touzet
 	cp ../slps/topics/grammars/java-2/jls-read/grammar.bgf zoo/java/java-2-jls-read.bgf
 	_dev/format zoo java/java-2-jls-read java-2/jls-read
 	cp ../slps/topics/grammars/java-2/jls-impl/grammar.bgf zoo/java/java-2-jls-impl.bgf
 	_dev/format zoo java/java-2-jls-impl java-2/jls-impl
+	cp ../slps/topics/grammars/java-3/bruneliere/grammar.bgf zoo/java/java-3-bruneliere.bgf
+	_dev/format zoo java/java-3-bruneliere java-3/bruneliere
 	cp ../slps/topics/grammars/java-5/jls-read/grammar.bgf zoo/java/java-5-jls-read.bgf
 	_dev/format zoo java/java-5-jls-read java-5/jls-read
 	cp ../slps/topics/grammars/java-5/jls-impl/grammar.bgf zoo/java/java-5-jls-impl.bgf
@@ -103,6 +123,12 @@ all:
 	_dev/format zoo java/java-5-habelitz java-5/habelitz
 	cp ../slps/topics/grammars/java-5/cordy-guo-dean/grammar.bgf zoo/java/java-5-cordy-guo-dean.bgf
 	_dev/format zoo java/java-5-cordy-guo-dean java-5/cordy-guo-dean
+	cp ../slps/topics/grammars/java-5/giquel/grammar.bgf zoo/java/java-5-giquel.bgf
+	_dev/format zoo java/java-5-giquel java-5/giquel
+	cp ../slps/topics/grammars/java/jdt/grammar.bgf zoo/java/jdt.bgf
+	_dev/format zoo java/jdt java/jdt
+	cp ../slps/topics/grammars/java/project/grammar.bgf zoo/java/project.bgf
+	_dev/format zoo java/project java/project
 	cp ../slps/topics/grammars/js/synytskyy-cordy/grammar.bgf zoo/javascript/js-synytskyy-cordy.bgf
 	_dev/format zoo javascript/js-synytskyy-cordy js/synytskyy-cordy
 	cp ../slps/topics/grammars/modula/src-052/grammar.bgf zoo/modula/src-052.bgf
@@ -117,9 +143,13 @@ all:
 	_dev/format zoo pascal/delphipp pascal/delphipp
 	cp ../slps/topics/grammars/pascal/object/grammar.bgf zoo/pascal/object.bgf
 	_dev/format zoo pascal/object pascal/object
-	cp ../slps/topics/grammars/w3c/xpath1/grammar.bgf zoo/xpath/w3c-xpath1.bgf
-	_dev/format zoo xpath/w3c-xpath1 w3c/xpath1
 	cp ../slps/topics/grammars/wiki/mediawiki-bnf/grammar.bgf zoo/wiki/mediawiki-bnf.bgf
 	_dev/format zoo wiki/mediawiki-bnf wiki/mediawiki-bnf
 	cp ../slps/topics/grammars/wiki/mediawiki-ebnf/grammar.bgf zoo/wiki/mediawiki-ebnf.bgf
 	_dev/format zoo wiki/mediawiki-ebnf wiki/mediawiki-ebnf
+	cp ../slps/topics/grammars/xml/zhang-cordy/grammar.bgf zoo/xml/zhang-cordy.bgf
+	_dev/format zoo xml/zhang-cordy xml/zhang-cordy
+	cp ../slps/topics/grammars/xml/rosendal/grammar.bgf zoo/xml/rosendal.bgf
+	_dev/format zoo xml/rosendal xml/rosendal
+	cp ../slps/topics/grammars/w3c/xpath1/grammar.bgf zoo/xpath/w3c-xpath1.bgf
+	_dev/format zoo xpath/w3c-xpath1 w3c/xpath1

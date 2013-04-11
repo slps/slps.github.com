@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        ModelElement Classifier StructuralFeature Class DataType Attribute Column ColumnSet ColumnStatistics ColumnSetStatistics Snapshot Table View Key ForeignKey PrimaryKey Concept RelationShip FeatureAttribute BaseAttribute MultiColumnFeature Value UserInput Ordinal Scalar Time Binary Categorial KeyAttribute TimeGroup Spatial Constant RoleRestriction DomainDataType Nominal Parameter 
+        ModelElement Classifier StructuralFeature Class DataType Attribute String Integer Boolean Column ColumnSet ColumnStatistics ColumnSetStatistics Snapshot Table View Key ForeignKey PrimaryKey Concept RelationShip FeatureAttribute BaseAttribute MultiColumnFeature Value UserInput Ordinal Scalar Time Binary Categorial KeyAttribute TimeGroup Spatial Constant RoleRestriction DomainDataType Nominal Parameter 
   context-free syntax
         Classifier -> ModelElement
 
@@ -12,6 +12,8 @@ exports
 
         Key -> ModelElement
 
+        RelationShip -> ModelElement
+
         Classifier -> ModelElement
         StructuralFeature -> ModelElement
         ColumnSetStatistics -> ModelElement
@@ -26,11 +28,11 @@ exports
 
         Attribute -> StructuralFeature
 
-        Attribute -> StructuralFeature
-
         ColumnSet -> Class
 
         UserInput -> Class
+
+        Concept -> Class
 
         name::String attributes::Attribute+ -> Class
 
@@ -44,7 +46,16 @@ exports
 
         RoleRestriction -> Attribute
 
+        Value -> Attribute
+
         class::Class has::DataType -> Attribute
+
+        STR -> String
+
+        INT -> Integer
+
+        "true" -> Boolean
+        "false" -> Boolean
 
         name::String dataType::DataType keys::Key+ belongsToColumnSet::ColumnSet corespondsToBaseAttribute::BaseAttribute -> Column
 
@@ -60,11 +71,11 @@ exports
 
         allNumber::Integer ordinalNumber::Integer nominalNumber::Integer timeNumber::Integer forColumnSet::ColumnSet -> ColumnSetStatistics
 
-         -> Snapshot
+        number::Integer file::String dbConnectString::String user::String hasColumn::Column+ hasKey::Key+ correspondsToConcept::Concept correspondsToRelationShip::RelationShip -> Snapshot
 
-         -> Table
+        number::Integer file::String dbConnectString::String user::String hasColumn::Column+ hasKey::Key+ correspondsToConcept::Concept correspondsToRelationShip::RelationShip -> Table
 
-         -> View
+        number::Integer file::String dbConnectString::String user::String hasColumn::Column+ hasKey::Key+ correspondsToConcept::Concept correspondsToRelationShip::RelationShip -> View
 
         ForeignKey -> Key
 
@@ -74,7 +85,7 @@ exports
 
         isConnectionTo::Table correspondsToRelationShip::RelationShip -> ForeignKey
 
-         -> PrimaryKey
+        isUsedForIndex::Boolean hasColumn::Column+ isAssociatedToColumnSet::ColumnSet -> PrimaryKey
 
         subConceptRestriction::String isA::Concept FromConcept::RelationShip ToConcept::RelationShip correspondsToColumnSet::ColumnSet -> Concept
 
@@ -96,11 +107,9 @@ exports
 
         Scalar -> Ordinal
 
-        Scalar -> Ordinal
-
         Time -> Scalar
 
-        Time -> Scalar
+        Binary -> Scalar
 
          -> Time
 
@@ -135,8 +144,16 @@ exports
 
         Constant -> Nominal
 
+        Binary -> Nominal
+
         Categorial -> Nominal
         KeyAttribute -> Nominal
         Constant -> Nominal
+
+        Concept -> Parameter
+
+        RelationShip -> Parameter
+
+        Value -> Parameter
 
          -> Parameter

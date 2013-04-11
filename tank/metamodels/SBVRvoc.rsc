@@ -329,5 +329,17 @@ syntax ModalBegin
  ;
 syntax ModalBeginC
         = 
-        ()
+        endOperator: EndOperator
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
  ;

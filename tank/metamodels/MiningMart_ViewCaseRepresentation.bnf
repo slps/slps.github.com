@@ -1,3 +1,10 @@
+String:
+        STR
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
 Case:
         name::String caseMode::Boolean caseInput::Parameter documentation::String listOfStep::Step+
 Step:
@@ -7,7 +14,7 @@ Step:
 Step:
         name::String description::String belongsToCase::Case embedsOperator::Operator predecessors::Step+ successors::Step+
 LoopStep:
-        EPSILON
+        name::String description::String belongsToCase::Case embedsOperator::Operator predecessors::Step+ successors::Step+
 MultiStep:
         iterationCondition::String
 Operator:
@@ -43,8 +50,6 @@ FeatureSelection:
         loopable::Boolean numberOfInputParameters::Integer numberOfOutputParameters::Integer manual::Boolean tool::String input::Parameter+ output::Parameter+ realizes::ExecutionElement
 MultiRelFeatureConstr:
         Agregation
-MultiRelFeatureConstr:
-        Agregation
 RowSelection:
         Segmentation
 RowSelection:
@@ -55,9 +60,9 @@ RowSelection:
 Agregation:
         EPSILON
 Scaling:
-        EPSILON
+        scalingFactor::Integer
 Discretization:
-        EPSILON
+        scalingFactor::Integer
 Segmentation:
         EPSILON
 Sampling:
@@ -73,7 +78,7 @@ ExecutionElement:
 DataObject:
         source::ExecutionElement target::ExecutionElement
 MSL-Tool:
-        EPSILON
+        source::DataObject target::DataObject
 TransformationGroup:
         transformation::Transformation+
 Transformation:
@@ -89,7 +94,7 @@ Function:
 StoredProcedure:
         nameOf::String signature::String
 SQLQuery:
-        EPSILON
+        transformationGroup::TransformationGroup
 ModelElement:
         Case
 ModelElement:
@@ -113,8 +118,6 @@ Classifier:
 Classifier:
         Class
         DataType
-StructuralFeature:
-        Attribute
 StructuralFeature:
         Attribute
 Class:

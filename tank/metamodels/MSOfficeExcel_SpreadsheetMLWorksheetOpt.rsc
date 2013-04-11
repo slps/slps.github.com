@@ -133,3 +133,15 @@ syntax EnableSelectionType
         = est_UnlockedCells: ()
         | est_NoSelection: ()
  ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;

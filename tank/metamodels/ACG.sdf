@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        LocatedElement ACG ACGElement Function Attribute Parameter Node ASMNode CodeNode SimpleNode Statement CompoundStat ForEachStat OnceStat VariableStat OperationStat ConditionalStat LetStat AnalyzeStat ReportStat Severity FieldStat ParamStat EmitStat LabelStat NewStat DupStat DupX1Stat PopStat SwapStat IterateStat EndIterateStat GetAsmStat FindMEStat PushTStat PushFStat EmitWithOperandStat PushStat PushIStat PushDStat LoadStat StoreStat CallStat PCallStat SuperCallStat GetStat SetStat EmitWithLabelRefStat IfStat GotoStat VariableDecl Expression VariableExp SelfExp LastExp IfExp IsAExp LetExp PropertyCallExp NavigationExp IteratorExp OperationCallExp OperatorCallExp LiteralExp OclUndefinedExp CollectionExp SequenceExp BooleanExp IntegerExp StringExp 
+        LocatedElement ACG ACGElement Function Attribute Parameter Node ASMNode CodeNode SimpleNode StatementBlock Statement CompoundStat ForEachStat OnceStat VariableStat OperationStat ConditionalStat LetStat AnalyzeStat ReportStat Severity FieldStat ParamStat EmitStat LabelStat NewStat DupStat DupX1Stat PopStat SwapStat IterateStat EndIterateStat GetAsmStat FindMEStat PushTStat PushFStat EmitWithOperandStat PushStat PushIStat PushDStat LoadStat StoreStat CallStat PCallStat SuperCallStat GetStat SetStat EmitWithLabelRefStat IfStat GotoStat VariableDecl Expression VariableExp SelfExp LastExp IfExp IsAExp LetExp PropertyCallExp NavigationExp IteratorExp OperationCallExp OperatorCallExp LiteralExp OclUndefinedExp CollectionExp SequenceExp BooleanExp IntegerExp StringExp Boolean Integer String 
   context-free syntax
         ACG -> LocatedElement
 
@@ -22,11 +22,13 @@ exports
 
         Attribute -> ACGElement
 
+        Node -> ACGElement
+
         context::String name::String parameters::Parameter+ body::Expression -> Function
 
         context::String name::String body::Expression -> Attribute
 
-         -> Parameter
+        name::String -> Parameter
 
         ASMNode -> Node
 
@@ -40,6 +42,10 @@ exports
 
         element::String mode::String guard::Expression -> SimpleNode
 
+        Node -> StatementBlock
+
+        CompoundStat -> StatementBlock
+
         ReportStat -> Statement
 
         FieldStat -> Statement
@@ -47,6 +53,8 @@ exports
         ParamStat -> Statement
 
         EmitStat -> Statement
+
+        CompoundStat -> Statement
 
         ForEachStat -> CompoundStat
 
@@ -232,7 +240,7 @@ exports
 
         arguments::Expression+ -> OperationCallExp
 
-         -> OperatorCallExp
+        arguments::Expression+ -> OperatorCallExp
 
         OclUndefinedExp -> LiteralExp
 
@@ -255,3 +263,10 @@ exports
         value::Integer -> IntegerExp
 
         value::String -> StringExp
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
+        STR -> String

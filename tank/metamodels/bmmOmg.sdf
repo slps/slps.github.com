@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        Assessment MotivationElement Directive Means OrganizationUnit End BusinessProcess Offering Asset CourseOfAction DesiredResult Liability Resource FixedAsset BusinessPolicy BusinessRule Tactic Strategy Mission Vision Goal Objective Influencer InfluencerCategory InfluencingOrganization OrganizationCategory PotentialImpact Regulation AssessmentCategory PotentialReward Risk 
+        Assessment MotivationElement Directive Means OrganizationUnit End BusinessProcess Offering Asset CourseOfAction DesiredResult Liability Resource FixedAsset BusinessPolicy BusinessRule Tactic Strategy Mission Vision Goal Objective Influencer InfluencerCategory InfluencingOrganization OrganizationCategory PotentialImpact Regulation AssessmentCategory PotentialReward Risk String 
   context-free syntax
         motivatedDirective::Directive+ affectedEnd::End+ judgedInfluencer::Influencer+ assessingOrganizationUnit::OrganizationUnit affectedMeans::Means+ identifiedPotentialImpact::PotentialImpact+ usedAssessment::Assessment+ usingAssessment::Assessment+ categorizingAssessmentCategory::AssessmentCategory+ -> Assessment
 
@@ -62,6 +62,8 @@ exports
 
         FixedAsset -> Asset
 
+        Offering -> Asset
+
         deployingCourseOfAction::CourseOfAction+ governingDirective::Directive+ responsibleOrganizationUnit::OrganizationUnit+ managingBusinessProcess::BusinessProcess+ -> Asset
 
         Tactic -> CourseOfAction
@@ -79,6 +81,8 @@ exports
         claimedResource::Resource+ responsibleOrganizationUnit::OrganizationUnit+ dischargingCourseOfAction::CourseOfAction+ -> Liability
 
         providingFixedAsset::FixedAsset+ requiringOffering::Offering+ claimingLiability::Liability+ -> Resource
+
+        Offering -> FixedAsset
 
         usingOffering::Offering+ providedResource::Resource+ -> FixedAsset
 
@@ -118,6 +122,8 @@ exports
 
         categorizedAssessment::Assessment+ -> AssessmentCategory
 
-         -> PotentialReward
+        identifyingAssessment::Assessment+ motivatedDirective::Directive+ -> PotentialReward
 
-         -> Risk
+        identifyingAssessment::Assessment+ motivatedDirective::Directive+ -> Risk
+
+        STR -> String

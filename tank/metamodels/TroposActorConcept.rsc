@@ -12,11 +12,11 @@ syntax Goal
  ;
 syntax SoftGoal
         = 
-        ()
+        Actor wanter Plan plan+ Dependency dependencyWG+ Dependency dependencyG+
  ;
 syntax HardGoal
         = 
-        ()
+        Actor wanter Plan plan+ Dependency dependencyWG+ Dependency dependencyG+
  ;
 syntax Dependency
         = 

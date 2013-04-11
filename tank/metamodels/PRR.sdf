@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        Element NamedElement RuleSet Rule RuleAction RuleCondition Binding RuleVariable 
+        Element NamedElement RuleSet Rule RuleAction RuleCondition Binding RuleVariable Integer String Boolean 
   context-free syntax
         NamedElement -> Element
 
@@ -34,6 +34,8 @@ exports
 
         InvokeAction -> RuleAction
 
+        CreateAction -> RuleAction
+
         actionOwner::Rule -> RuleAction
 
         ruleConditionOwner::Rule conditionExp::PRRExpressions/OclExpression -> RuleCondition
@@ -41,3 +43,10 @@ exports
         bindingOwner::Rule ruleVariable::RuleVariable+ -> Binding
 
         ruleVariableOwner::Binding filter::PRRExpressions/OclExpression -> RuleVariable
+
+        INT -> Integer
+
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean

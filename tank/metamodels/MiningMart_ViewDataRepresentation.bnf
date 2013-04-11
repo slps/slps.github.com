@@ -7,6 +7,8 @@ ModelElement:
 ModelElement:
         Key
 ModelElement:
+        RelationShip
+ModelElement:
         Classifier
         StructuralFeature
         ColumnSetStatistics
@@ -20,12 +22,12 @@ Classifier:
         DataType
 StructuralFeature:
         Attribute
-StructuralFeature:
-        Attribute
 Class:
         ColumnSet
 Class:
         UserInput
+Class:
+        Concept
 Class:
         name::String attributes::Attribute+
 DataType:
@@ -39,7 +41,16 @@ Attribute:
 Attribute:
         RoleRestriction
 Attribute:
+        Value
+Attribute:
         class::Class has::DataType
+String:
+        STR
+Integer:
+        INT
+Boolean:
+        "true"
+        "false"
 Column:
         name::String dataType::DataType keys::Key+ belongsToColumnSet::ColumnSet corespondsToBaseAttribute::BaseAttribute
 ColumnSet:
@@ -55,11 +66,11 @@ ColumnStatistics:
 ColumnSetStatistics:
         allNumber::Integer ordinalNumber::Integer nominalNumber::Integer timeNumber::Integer forColumnSet::ColumnSet
 Snapshot:
-        EPSILON
+        number::Integer file::String dbConnectString::String user::String hasColumn::Column+ hasKey::Key+ correspondsToConcept::Concept correspondsToRelationShip::RelationShip
 Table:
-        EPSILON
+        number::Integer file::String dbConnectString::String user::String hasColumn::Column+ hasKey::Key+ correspondsToConcept::Concept correspondsToRelationShip::RelationShip
 View:
-        EPSILON
+        number::Integer file::String dbConnectString::String user::String hasColumn::Column+ hasKey::Key+ correspondsToConcept::Concept correspondsToRelationShip::RelationShip
 Key:
         ForeignKey
 Key:
@@ -69,7 +80,7 @@ Key:
 ForeignKey:
         isConnectionTo::Table correspondsToRelationShip::RelationShip
 PrimaryKey:
-        EPSILON
+        isUsedForIndex::Boolean hasColumn::Column+ isAssociatedToColumnSet::ColumnSet
 Concept:
         subConceptRestriction::String isA::Concept FromConcept::RelationShip ToConcept::RelationShip correspondsToColumnSet::ColumnSet
 RelationShip:
@@ -90,12 +101,10 @@ UserInput:
         containsValues::Value+
 Ordinal:
         Scalar
-Ordinal:
-        Scalar
 Scalar:
         Time
 Scalar:
-        Time
+        Binary
 Time:
         EPSILON
 Binary:
@@ -130,8 +139,16 @@ Nominal:
 Nominal:
         Constant
 Nominal:
+        Binary
+Nominal:
         Categorial
         KeyAttribute
         Constant
+Parameter:
+        Concept
+Parameter:
+        RelationShip
+Parameter:
+        Value
 Parameter:
         EPSILON

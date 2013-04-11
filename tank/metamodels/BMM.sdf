@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        MotivationElement Assessment End Influencer InfluencingOrganization Means PotentialImpact AssessmentCategory InfluencerCategory OrganizationCategory OrganizationUnit BusinessProcess Asset Liability Resource Mission CourseOfAction FixedAsset Offering Directive Strategy Tactic BusinessRule BusinessPolicy Regulation Vision DesiredResult Goal Objective PotentialReward Risk 
+        MotivationElement Assessment End Influencer InfluencingOrganization Means PotentialImpact AssessmentCategory InfluencerCategory OrganizationCategory OrganizationUnit BusinessProcess Asset Liability Resource Mission CourseOfAction FixedAsset Offering Directive Strategy Tactic BusinessRule BusinessPolicy Regulation Vision DesiredResult Goal Objective PotentialReward Risk Boolean Integer String 
   context-free syntax
         Assessment -> MotivationElement
 
@@ -40,8 +40,6 @@ exports
 
         Vision -> End
         DesiredResult -> End
-
-        Regulation -> Influencer
 
         Regulation -> Influencer
 
@@ -126,6 +124,13 @@ exports
 
         objectiveQuantifiesGoal::Goal+ -> Objective
 
-         -> PotentialReward
+        potentialImpactProvidesImpetusForDirective::Directive+ -> PotentialReward
 
-         -> Risk
+        potentialImpactProvidesImpetusForDirective::Directive+ -> Risk
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
+        STR -> String

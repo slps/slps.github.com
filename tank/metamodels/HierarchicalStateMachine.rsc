@@ -67,3 +67,15 @@ syntax AssociationDataStateBase
         = 
         StateDataRelation stateDataRelation DataVar dataVar+ StateBase stateBase+
  ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;

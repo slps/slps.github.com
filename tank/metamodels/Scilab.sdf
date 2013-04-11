@@ -2,8 +2,12 @@ module Main
 
 exports
   sorts
-        Man Meta Short-Description Calling-Sequence Calling-Sequence-Item Param Param-Indent Param-Item Param-Name Param-Description Description Description-Indent Description-Item AIMG See-Also Exemple See-Also-Item A Img Biblio Used-Functions PSPPP P SP PP Itemize Item Table Table-New-Row Table-New-Column Link Authors Authors-Item Section InOut PreDef 
+        String Integer Man Meta Short-Description Calling-Sequence Calling-Sequence-Item Param Param-Indent Param-Item Param-Name Param-Description Description Description-Indent Description-Item AIMG See-Also Exemple See-Also-Item A Img Biblio Used-Functions PSPPP P SP PP Itemize Item Table Table-New-Row Table-New-Column Link Authors Authors-Item Section InOut PreDef 
   context-free syntax
+        STR -> String
+
+        INT -> Integer
+
         language::String title::String type::String date::String name::String keyword::String exemple::String meta::Meta+ -> Man
 
         meta::String path::String category::String version_CSI::String version_DOC::String author::String man::Man -> Meta
@@ -60,6 +64,10 @@ exports
 
         Itemize -> Used-Functions
 
+        Item -> Used-Functions
+
+        Section -> Used-Functions
+
         verbatim::String+ table::Table+ -> Used-Functions
 
         P -> PSPPP
@@ -75,6 +83,10 @@ exports
         biblio::Biblio -> SP
 
         biblio::Biblio -> PP
+
+        Item -> Itemize
+
+        Section -> Itemize
 
         label::String item::Item section::Section authors_Item::Authors-Item description::Description -> Itemize
 

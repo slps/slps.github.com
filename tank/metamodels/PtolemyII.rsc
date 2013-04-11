@@ -1,6 +1,18 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module PtolemyII
 
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
 syntax EDataType
         = 
         value: String
@@ -40,7 +52,7 @@ syntax Parameter
  ;
 syntax ComponentPort
         = 
-        ()
+        Entity po_container Relation links+
  ;
 syntax ComponentRelation
         = 
@@ -53,7 +65,7 @@ syntax ComponentEntity
  ;
 syntax AtomicActor
         = 
-        ()
+        ce_container: CompositeEntity
  ;
 syntax CompositeEntity
         = WorkSpace
@@ -62,7 +74,7 @@ syntax CompositeEntity
  ;
 syntax WorkSpace
         = 
-        ()
+        ComponentEntity containees+ ComponentRelation relations+
  ;
 syntax CompositeActor
         = 

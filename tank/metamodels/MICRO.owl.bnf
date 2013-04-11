@@ -31,6 +31,10 @@ Thing:
 Thing:
         DoubleBlindReview
 Thing:
+        Organizer
+Thing:
+        Document
+Thing:
         Role
         Activity
         Detail
@@ -48,7 +52,7 @@ Thing:
         ActivitySubmissionForm
         DoubleBlindReview
 Meta-Reviewer:
-        EPSILON
+        assignedByAdministrator::Administrator adjustBid::Bid readPaper::Paper hasBeenAssigned::Paper writeReview::Review assignExternalReviewer::ExternalReviewer invites_co-reviewers::Reviewer invited_by::Reviewer has_a_review_reference_or_expertise::Thing+ writes_review::Review hasReviewHistory::PersonalReviewHistory executes::DoubleBlindReview
 Decision:
         Acceptance
 Decision:
@@ -63,21 +67,39 @@ ProgramCommittee:
 Bid:
         adjustedBy::Reviewer
 ConferenceChair:
-        EPSILON
+        memberOfConference::Conference
+ConferenceChair:
+        hasMail::String worksForCompany::String hasConflictOfInterest::Document email::String inverse_of_add::Thing+ execute::Thing+ get::Inforamtion use::Document register::Account modify::Thing+ take_part_in::Event remove::Thing+ add::Person added_by::Person contributes::Conference_document has_an_email::String has_the_first_name::String has_gender::EEnum has_the_last_name::String employedBy::Organization hasHomePage::String hasSurname::String hasFax::String hasFirstName::String hasPhone::String hasEmail::String attendeeAt::ConferenceEvent isMemberOf::Conference hasFirstName::String hasBiography::String hasLastName::String authorOf::Document prepare::Item occupy::Presenter_city+ is_present_in::Thing+ write::Item obtain::Item send::Item speak_in::Thing+ pay::Money sign::Item is_present::Time give::Thing+ need::Item
+ConferenceMember:
+        ConferenceChair
+ConferenceMember:
+        AssociatedChair
+ConferenceMember:
+        ProgramCommitteeMember
+ConferenceMember:
+        Chairman
 ConferenceMember:
         memberOfConference::Conference
 AssociatedChair:
-        EPSILON
+        memberOfConference::Conference
+ProgramCommitteeMember:
+        ProgramCommitteeChair
 ProgramCommitteeMember:
         memberOfProgramCommittee::ProgramCommittee maxPapers::Integer addedBy::Administrator
 AuthorNotReviewer:
-        EPSILON
+        submitPaper::Paper writePaper::Paper writes::Contribution writes_article::article assigns_article_to_conference::article hasRelatedPaper::Paper conflictsWith::Thing+ isAuthorOf::ActivitySubmissionForm conducts::Thing
 SubjectArea:
         EPSILON
 ExternalReviewer:
         assignedByReviewer::Reviewer
 Chairman:
-        EPSILON
+        ConferenceChair
+Chairman:
+        AssociatedChair
+Chairman:
+        ProgramCommitteeChair
+Chairman:
+        hasMail::String worksForCompany::String hasConflictOfInterest::Document email::String inverse_of_add::Thing+ execute::Thing+ get::Inforamtion use::Document register::Account modify::Thing+ take_part_in::Event remove::Thing+ add::Person added_by::Person contributes::Conference_document has_an_email::String has_the_first_name::String has_gender::EEnum has_the_last_name::String employedBy::Organization hasHomePage::String hasSurname::String hasFax::String hasFirstName::String hasPhone::String hasEmail::String attendeeAt::ConferenceEvent isMemberOf::Conference hasFirstName::String hasBiography::String hasLastName::String authorOf::Document prepare::Item occupy::Presenter_city+ is_present_in::Thing+ write::Item obtain::Item send::Item speak_in::Thing+ pay::Money sign::Item is_present::Time give::Thing+ need::Item memberOfConference::Conference
 ProgramCommitteeChair:
         endReview::Review
 Acceptance:
@@ -87,17 +109,19 @@ Rejection:
 Co-author:
         co-writePaper::Paper
 PaperAbstract:
-        EPSILON
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::unsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer full_paper_size::Integer has_author::human isWrittenBy::Author isReviewedBy::Person+ hasReview::Review hasReviewer::Possible_Reviewer
 PaperFullVersion:
-        EPSILON
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::unsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer full_paper_size::Integer has_author::human isWrittenBy::Author isReviewedBy::Person+ hasReview::Review hasReviewer::Possible_Reviewer
 Meta-Review:
-        EPSILON
+        writtenBy::Reviewer reviews::Reviewed_contribution gives_classification::classification is_created_in::activity review_written_by::Reviewer reviewOfPaper::Paper reviewWrittenBy::Possible_Reviewer
 Account:
         registred_by::Person
 Inforamtion:
         EPSILON
 User:
         Committee
+User:
+        Administrator
 User:
         recieve::Document create::Thing+ submit::Document
 Role:
@@ -123,13 +147,13 @@ Help_Request:
         Feature_Request
         Assistance
 Symposium:
-        EPSILON
+        conists_of::Event_Tracks confirmed_by::Approval_Email defined_by::Event_Setup approved_by::Administrator starts_on::String ends_on::String has_startdate::dateTime has_enddate::dateTime eventOnList::Thing+ partOfEvent::Event hasEvent::Event organisedBy::Thing+ heldIn::Location
 Invited_Paper:
-        EPSILON
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::unsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer full_paper_size::Integer has_author::human isWrittenBy::Author isReviewedBy::Person+ hasReview::Review hasReviewer::Possible_Reviewer
 Admin_Role:
-        EPSILON
+        assigned_by::Administrator
 Paper_Typologies:
-        EPSILON
+        define::Event
 Event_Setup:
         Paper_Typologies
 Event_Setup:
@@ -162,9 +186,9 @@ Email:
         Approval_Email
         Rejection_Email
 Short_Paper:
-        EPSILON
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::unsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer full_paper_size::Integer has_author::human isWrittenBy::Author isReviewedBy::Person+ hasReview::Review hasReviewer::Possible_Reviewer
 Author_Role:
-        EPSILON
+        assigned_by::Administrator
 Preview:
         EPSILON
 Review_Form:
@@ -175,17 +199,17 @@ Review_Form:
         Preview
         Review_Form_Setup
 Committe_Role:
-        EPSILON
+        assigned_by::Administrator
 Group_Email:
         EPSILON
 Submission_Template:
-        EPSILON
+        define::Event
 Review_Form_Setup:
         EPSILON
 Misc:
         EPSILON
 Event_Creation:
-        EPSILON
+        is_held_before::Time is_held_in::Thing is_held_after::Time is_dated_on::dateTime hasTopic::Topic expectedAttendance::Integer isPartOf::Conference has_result::Thing+ sent_by::Person
 Approval_Email:
         confirm::Event
 Rejection_Email:
@@ -198,13 +222,11 @@ Submission:
         Final_manuscript
         Initial_manuscipt
 Template:
-        EPSILON
+        recieved_by::User used_by::Person submited__by::User relatesTo::Thing+ writtenBy::Person hasUpdatedVersion::Document updatedVersionOf::Document
 Feature_Request:
         EPSILON
 Event_Tracks:
-        EPSILON
-Request:
-        Help_Request
+        define::Event
 Request:
         Help_Request
 Activity:
@@ -224,33 +246,39 @@ Activity:
 Activity:
         WorkShop
 Activity:
+        Lecture
+Activity:
         is_held_before::Time is_held_in::Thing is_held_after::Time is_dated_on::dateTime hasTopic::Topic expectedAttendance::Integer isPartOf::Conference has_result::Thing+ sent_by::Person
 Head_Role:
-        EPSILON
+        assigned_by::Administrator
 Detail:
         EPSILON
 Corresponding_Author:
-        EPSILON
+        submitPaper::Paper writePaper::Paper writes::Contribution writes_article::article assigns_article_to_conference::article hasRelatedPaper::Paper conflictsWith::Thing+ isAuthorOf::ActivitySubmissionForm conducts::Thing
 Reviewer_Role:
-        EPSILON
+        assigned_by::Administrator
 Event_Approval:
-        EPSILON
+        is_held_before::Time is_held_in::Thing is_held_after::Time is_dated_on::dateTime hasTopic::Topic expectedAttendance::Integer isPartOf::Conference has_result::Thing+ sent_by::Person
+Registration:
+        is_held_before::Time is_held_in::Thing is_held_after::Time is_dated_on::dateTime hasTopic::Topic expectedAttendance::Integer isPartOf::Conference has_result::Thing+ sent_by::Person
 Registration:
         EPSILON
 Full_Paper:
-        EPSILON
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::unsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer full_paper_size::Integer has_author::human isWrittenBy::Author isReviewedBy::Person+ hasReview::Review hasReviewer::Possible_Reviewer
 Research_Topic:
-        EPSILON
+        define::Event
+Research_Topic:
+        topicCoveredBy::Thing
 Description:
         EPSILON
 Assistance:
         EPSILON
 Email_Template:
-        EPSILON
+        define::Event
 Conference_participant:
         Passive_conference_participant
 Conference_participant:
-        Passive_conference_participant
+        Active_conference_participant
 Active_conference_participant:
         gives_presentations::Presentation
 Passive_conference_participant:
@@ -273,6 +301,8 @@ Conference_contributor:
 Conference_contributor:
         Invited_speaker
 Conference_contributor:
+        Active_conference_participant
+Conference_contributor:
         Regular_author
         Invited_speaker
 Contribution_1th-author:
@@ -283,6 +313,8 @@ Conference_contribution:
         Poster
 Conference_contribution:
         Written_contribution
+Conference_contribution:
+        Presentation
 Conference_contribution:
         is_submitted_at::Conference_volume
 Co-chair:
@@ -308,6 +340,8 @@ Abstract:
 Abstract:
         part_of_article::article is_the_1th_part_of::Thing+
 Extended_abstract:
+        Abstract
+Extended_abstract:
         EPSILON
 Important_dates:
         is_an_abstract_submission_date::date is_a_full_paper_submission_date::date is_an_ending_date::date is_a_date_of_acceptance_announcement::date is_a_date_of_camera_ready_paper_submission::date is_a_starting_date::date belong_to_a_conference_volume::Conference_volume
@@ -316,7 +350,7 @@ Invited_speaker:
 Conference_proceedings:
         has_an_ISBN::String has_a_publisher::Publisher has_a_volume::String
 Information_for_participants:
-        EPSILON
+        has_authors::Person has_a_date_of_issue::date
 Conference_document:
         Conference_contribution
 Conference_document:
@@ -333,10 +367,10 @@ Conference_document:
         has_authors::Person has_a_date_of_issue::date
 Regular_contribution:
         Extended_abstract
-Regular_contribution:
-        Extended_abstract
 Poster:
-        EPSILON
+        is_submitted_at::Conference_volume
+Poster:
+        writtenBy::Author dealsWith::Topic remark::String abstract::String contactEmail::String hasKeyword::String hasTitle::String
 Written_contribution:
         Submitted_contribution
 Written_contribution:
@@ -344,14 +378,10 @@ Written_contribution:
 Written_contribution:
         Submitted_contribution
         Regular_contribution
-Conference_applicant:
-        Registeered_applicant
 Conference_applicant:
         Registeered_applicant
 Camera_ready_contribution:
         EPSILON
-Accepted_contribution:
-        Camera_ready_contribution
 Accepted_contribution:
         Camera_ready_contribution
 Program_committee:
@@ -363,21 +393,25 @@ Steering_committee:
 Conference_volume:
         has_parts::Conference_part has_workshops::Workshop has_tracks::Track has_tutorials::Tutorial has_a_commtitee::Committee has_a_steering_committee::Steering_committee has_an_organizing_committee::Organizing_committee has_important_dates::Important_dates has_contributions::Conference_contribution has_a_location::String has_a_program_committee::Program_committee
 Call_for_paper:
-        EPSILON
+        has_authors::Person has_a_date_of_issue::date
 Conference_announcement:
-        EPSILON
+        has_authors::Person has_a_date_of_issue::date
 Invited_talk:
-        EPSILON
+        is_given_by::Active_conference_participant
+Conference_part:
+        Track
+Conference_part:
+        Tutorial
 Conference_part:
         has_a_track-workshop-tutorial_topic::Topic is_part_of_conference_volumes::Conference_volume has_a_track-workshop-tutorial_chair::Track-workshop_chair
 Chair:
         was_a_committee_chair_of::Committee
 Track:
-        EPSILON
+        has_a_track-workshop-tutorial_topic::Topic is_part_of_conference_volumes::Conference_volume has_a_track-workshop-tutorial_chair::Track-workshop_chair
 Tutorial:
-        EPSILON
+        has_a_track-workshop-tutorial_topic::Topic is_part_of_conference_volumes::Conference_volume has_a_track-workshop-tutorial_chair::Track-workshop_chair
 Rejected_contribution:
-        EPSILON
+        has_a_review::Review
 Reviewed_contribution:
         Accepted_contribution
 Reviewed_contribution:
@@ -398,13 +432,11 @@ Early_paid_applicant:
 Organizer:
         CommitteeMember
 Organizer:
-        CommitteeMember
+        Reviewer
 Call_for_participation:
-        EPSILON
+        has_authors::Person has_a_date_of_issue::date
 Publisher:
         issues::Conference_proceedings
-Registeered_applicant:
-        Paid_applicant
 Registeered_applicant:
         Paid_applicant
 Track-workshop_chair:
@@ -416,11 +448,15 @@ Conference_fees:
 Review_preference:
         has_a_topic_or_a_submission_contribution::Thing+ has_a_degree::Integer
 Accepted_Paper:
-        EPSILON
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::unsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer full_paper_size::Integer has_author::human isWrittenBy::Author isReviewedBy::Person+ hasReview::Review hasReviewer::Possible_Reviewer
+Accepted_Paper:
+        hasReview::Review
 Rejected_Paper:
-        EPSILON
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::unsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer full_paper_size::Integer has_author::human isWrittenBy::Author isReviewedBy::Person+ hasReview::Review hasReviewer::Possible_Reviewer
+Rejected_Paper:
+        hasReview::Review
 Undecided_Paper:
-        EPSILON
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::unsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer full_paper_size::Integer has_author::human isWrittenBy::Author isReviewedBy::Person+ hasReview::Review hasReviewer::Possible_Reviewer
 Manual_Paper_Assignment:
         manually_assign_paper::Program_Committee_member+
 Program_Committee_member:
@@ -466,7 +502,7 @@ date:
         date_of_conference
         full_paper_submission_date
 Contact_Person:
-        EPSILON
+        is_author_of::article performs_activity::activity is_employed_in::institute has_topic_of_interest::Topic supervises::activity e-mail::String last_name::String first_name::String
 bidding_of_reviewer:
         is_performed_by::human
 activity:
@@ -510,9 +546,9 @@ human:
 human:
         is_author_of::article performs_activity::activity is_employed_in::institute has_topic_of_interest::Topic supervises::activity e-mail::String last_name::String first_name::String
 managing_of_conference_process:
-        EPSILON
+        is_followed_by::activity is_monitored_by::human has_intensity::intensity has_result::article is_performed_by::human is_supervised_by::human
 Program_Committee_Chair:
-        EPSILON
+        is_author_of::article performs_activity::activity is_employed_in::institute has_topic_of_interest::Topic supervises::activity e-mail::String last_name::String first_name::String
 reviewing_proces:
         lower_tier_reviewing_process
 reviewing_proces:
@@ -530,7 +566,7 @@ abstract_submission_date:
         end_date_of_abstract_submission
         start_date_of_abstract_submission
 group_email:
-        EPSILON
+        goes_through::activity is_sent_to::human is_created_in::activity structure_created_by::human has_author::human gives_classification::classification article_written_by::Author has_reviewer::Reviewer has_abstract::Abstract
 Senior_Reviewer_URL:
         EPSILON
 notification:
@@ -545,7 +581,7 @@ notification_email:
 Chair_URL:
         EPSILON
 abstract_of_paper:
-        EPSILON
+        goes_through::activity is_sent_to::human is_created_in::activity structure_created_by::human has_author::human gives_classification::classification article_written_by::Author has_reviewer::Reviewer has_abstract::Abstract
 submission_process:
         is_performed_by::human
 lower_tier_reviewing_process:
@@ -625,17 +661,15 @@ Contribution:
 Contribution:
         writtenBy::Author dealsWith::Topic remark::String abstract::String contactEmail::String hasKeyword::String hasTitle::String
 Company:
-        EPSILON
+        isProviderOf::Sponsorship
 Scholar:
         studyAt::University
 Administrator:
         finalizePaperAssignment::Conference runPaperAssignmentTools::Conference enableVirtualMeeting::Conference startReviewerBidding::Conference assignReviewer::Reviewer rejectPaper::Paper enterConferenceDetails::Conference printHardcopyMailingManifests::Conference setMaxPapers::ProgramCommitteeMember enterReviewCriteria::Conference acceptPaper::Paper addProgramCommitteeMember::ProgramCommitteeMember approve::Event assign::Role
-Poster:
-        EPSILON
 Short_paper:
-        EPSILON
+        writtenBy::Author dealsWith::Topic remark::String abstract::String contactEmail::String hasKeyword::String hasTitle::String
 Reviewing_results_event:
-        EPSILON
+        follows::Administrative_event parallel_with::Administrative_event
 Administrative_event:
         Reviewing_results_event
 Administrative_event:
@@ -649,17 +683,17 @@ Administrative_event:
 Administrative_event:
         follows::Administrative_event parallel_with::Administrative_event
 Reviewing_event:
-        EPSILON
+        follows::Administrative_event parallel_with::Administrative_event
 Registration_of_participants_event:
-        EPSILON
+        follows::Administrative_event parallel_with::Administrative_event
 Submission_event:
-        EPSILON
+        follows::Administrative_event parallel_with::Administrative_event
 Camera_Ready_event:
-        EPSILON
+        follows::Administrative_event parallel_with::Administrative_event
 Working_event:
         hasTopic::Topic hasAdministrativeEvent::Administrative_event
 Member:
-        EPSILON
+        earlyRegistration::Boolean
 Participant:
         Member
 Participant:
@@ -671,21 +705,23 @@ Participant:
 Member_PC:
         expertOn::Topic reviewes::Contribution
 Chair_PC:
-        EPSILON
+        hasMail::String worksForCompany::String hasConflictOfInterest::Document email::String inverse_of_add::Thing+ execute::Thing+ get::Inforamtion use::Document register::Account modify::Thing+ take_part_in::Event remove::Thing+ add::Person added_by::Person contributes::Conference_document has_an_email::String has_the_first_name::String has_gender::EEnum has_the_last_name::String employedBy::Organization hasHomePage::String hasSurname::String hasFax::String hasFirstName::String hasPhone::String hasEmail::String attendeeAt::ConferenceEvent isMemberOf::Conference hasFirstName::String hasBiography::String hasLastName::String authorOf::Document prepare::Item occupy::Presenter_city+ is_present_in::Thing+ write::Item obtain::Item send::Item speak_in::Thing+ pay::Money sign::Item is_present::Time give::Thing+ need::Item
 Student:
-        EPSILON
+        earlyRegistration::Boolean
+Student:
+        hasMail::String worksForCompany::String hasConflictOfInterest::Document email::String inverse_of_add::Thing+ execute::Thing+ get::Inforamtion use::Document register::Account modify::Thing+ take_part_in::Event remove::Thing+ add::Person added_by::Person contributes::Conference_document has_an_email::String has_the_first_name::String has_gender::EEnum has_the_last_name::String employedBy::Organization hasHomePage::String hasSurname::String hasFax::String hasFirstName::String hasPhone::String hasEmail::String attendeeAt::ConferenceEvent isMemberOf::Conference hasFirstName::String hasBiography::String hasLastName::String authorOf::Document prepare::Item occupy::Presenter_city+ is_present_in::Thing+ write::Item obtain::Item send::Item speak_in::Thing+ pay::Money sign::Item is_present::Time give::Thing+ need::Item
 Science_Worker:
-        EPSILON
+        hasMail::String worksForCompany::String hasConflictOfInterest::Document email::String inverse_of_add::Thing+ execute::Thing+ get::Inforamtion use::Document register::Account modify::Thing+ take_part_in::Event remove::Thing+ add::Person added_by::Person contributes::Conference_document has_an_email::String has_the_first_name::String has_gender::EEnum has_the_last_name::String employedBy::Organization hasHomePage::String hasSurname::String hasFax::String hasFirstName::String hasPhone::String hasEmail::String attendeeAt::ConferenceEvent isMemberOf::Conference hasFirstName::String hasBiography::String hasLastName::String authorOf::Document prepare::Item occupy::Presenter_city+ is_present_in::Thing+ write::Item obtain::Item send::Item speak_in::Thing+ pay::Money sign::Item is_present::Time give::Thing+ need::Item
 Assistant:
-        EPSILON
+        hasMail::String worksForCompany::String hasConflictOfInterest::Document email::String inverse_of_add::Thing+ execute::Thing+ get::Inforamtion use::Document register::Account modify::Thing+ take_part_in::Event remove::Thing+ add::Person added_by::Person contributes::Conference_document has_an_email::String has_the_first_name::String has_gender::EEnum has_the_last_name::String employedBy::Organization hasHomePage::String hasSurname::String hasFax::String hasFirstName::String hasPhone::String hasEmail::String attendeeAt::ConferenceEvent isMemberOf::Conference hasFirstName::String hasBiography::String hasLastName::String authorOf::Document prepare::Item occupy::Presenter_city+ is_present_in::Thing+ write::Item obtain::Item send::Item speak_in::Thing+ pay::Money sign::Item is_present::Time give::Thing+ need::Item
 Volunteer:
-        EPSILON
+        hasMail::String worksForCompany::String hasConflictOfInterest::Document email::String inverse_of_add::Thing+ execute::Thing+ get::Inforamtion use::Document register::Account modify::Thing+ take_part_in::Event remove::Thing+ add::Person added_by::Person contributes::Conference_document has_an_email::String has_the_first_name::String has_gender::EEnum has_the_last_name::String employedBy::Organization hasHomePage::String hasSurname::String hasFax::String hasFirstName::String hasPhone::String hasEmail::String attendeeAt::ConferenceEvent isMemberOf::Conference hasFirstName::String hasBiography::String hasLastName::String authorOf::Document prepare::Item occupy::Presenter_city+ is_present_in::Thing+ write::Item obtain::Item send::Item speak_in::Thing+ pay::Money sign::Item is_present::Time give::Thing+ need::Item
 Regular:
-        EPSILON
+        earlyRegistration::Boolean
 pc_meeting:
-        EPSILON
+        conists_of::Event_Tracks confirmed_by::Approval_Email defined_by::Event_Setup approved_by::Administrator starts_on::String ends_on::String has_startdate::dateTime has_enddate::dateTime eventOnList::Thing+ partOfEvent::Event hasEvent::Event organisedBy::Thing+ heldIn::Location
 session:
-        EPSILON
+        conists_of::Event_Tracks confirmed_by::Approval_Email defined_by::Event_Setup approved_by::Administrator starts_on::String ends_on::String has_startdate::dateTime has_enddate::dateTime eventOnList::Thing+ partOfEvent::Event hasEvent::Event organisedBy::Thing+ heldIn::Location
 chair:
         assigns_reviewers_to_article::Reviewer creates_program::program
 article:
@@ -699,13 +735,15 @@ article:
 article:
         summary_of_reviews
 article:
+        Review
+article:
         goes_through::activity is_sent_to::human is_created_in::activity structure_created_by::human has_author::human gives_classification::classification article_written_by::Author has_reviewer::Reviewer has_abstract::Abstract
 participant:
         submits_to_conference::Conference
 program:
         program_created_by::chair has_session::session
 SlideSet:
-        EPSILON
+        recieved_by::User used_by::Person submited__by::User relatesTo::Thing+ writtenBy::Person hasUpdatedVersion::Document updatedVersionOf::Document
 Programme:
         belongsToEvent::ConferenceEvent
 MealMenu:
@@ -792,6 +830,8 @@ Organization:
 Organization:
         GovernmentOrganization
 Organization:
+        University
+Organization:
         isProviderOf::Sponsorship
 ReviewForm:
         EPSILON
@@ -852,11 +892,11 @@ BreakEvent:
         FreeTimeBreak
         MealBreak
 ParallelAndDistributedComputingTopic:
-        EPSILON
+        isIncluded::Activity belongs_to_a_review_reference::Review_preference is_a_topis_of_conference_parts::Conference_part isTopicOf::Working_event
 WirelessCommunicationsTopic:
-        EPSILON
+        isIncluded::Activity belongs_to_a_review_reference::Review_preference is_a_topis_of_conference_parts::Conference_part isTopicOf::Working_event
 OperatingTopicsystems:
-        EPSILON
+        isIncluded::Activity belongs_to_a_review_reference::Review_preference is_a_topis_of_conference_parts::Conference_part isTopicOf::Working_event
 ComputerNetworksTopic:
         ComputerNetworksEnterpriseTopic
 ComputerNetworksTopic:
@@ -883,51 +923,49 @@ ComputerNetworksTopic:
         ComputerNetworksManagementTopic
         ComputerNetworksAapplicationsTopic
 SatelliteAndSpaceCommunicationsTopic:
-        EPSILON
+        isIncluded::Activity belongs_to_a_review_reference::Review_preference is_a_topis_of_conference_parts::Conference_part isTopicOf::Working_event
 CADTopic:
-        EPSILON
+        isIncluded::Activity belongs_to_a_review_reference::Review_preference is_a_topis_of_conference_parts::Conference_part isTopicOf::Working_event
 MultimediaTopic:
-        EPSILON
+        isIncluded::Activity belongs_to_a_review_reference::Review_preference is_a_topis_of_conference_parts::Conference_part isTopicOf::Working_event
 CommunicationsTopic:
-        EPSILON
+        isIncluded::Activity belongs_to_a_review_reference::Review_preference is_a_topis_of_conference_parts::Conference_part isTopicOf::Working_event
 PowerlineTransmissionTopic:
-        EPSILON
+        isIncluded::Activity belongs_to_a_review_reference::Review_preference is_a_topis_of_conference_parts::Conference_part isTopicOf::Working_event
 AntennasTopic:
-        EPSILON
+        isIncluded::Activity belongs_to_a_review_reference::Review_preference is_a_topis_of_conference_parts::Conference_part isTopicOf::Working_event
 PerformanceTopic:
-        EPSILON
+        isIncluded::Activity belongs_to_a_review_reference::Review_preference is_a_topis_of_conference_parts::Conference_part isTopicOf::Working_event
 SignalProcessingTopic:
-        EPSILON
+        isIncluded::Activity belongs_to_a_review_reference::Review_preference is_a_topis_of_conference_parts::Conference_part isTopicOf::Working_event
 MicroelectronicsTopic:
-        EPSILON
+        isIncluded::Activity belongs_to_a_review_reference::Review_preference is_a_topis_of_conference_parts::Conference_part isTopicOf::Working_event
 TestOnlyTopic:
-        EPSILON
+        isIncluded::Activity belongs_to_a_review_reference::Review_preference is_a_topis_of_conference_parts::Conference_part isTopicOf::Working_event
 RadioCommunicationsTopic:
-        EPSILON
+        isIncluded::Activity belongs_to_a_review_reference::Review_preference is_a_topis_of_conference_parts::Conference_part isTopicOf::Working_event
 ComputerArchitectureTopic:
-        EPSILON
+        isIncluded::Activity belongs_to_a_review_reference::Review_preference is_a_topis_of_conference_parts::Conference_part isTopicOf::Working_event
 MedicineTopic:
-        EPSILON
+        isIncluded::Activity belongs_to_a_review_reference::Review_preference is_a_topis_of_conference_parts::Conference_part isTopicOf::Working_event
 SecurityTopic:
-        EPSILON
+        isIncluded::Activity belongs_to_a_review_reference::Review_preference is_a_topis_of_conference_parts::Conference_part isTopicOf::Working_event
 MobileComputingTopic:
-        EPSILON
+        isIncluded::Activity belongs_to_a_review_reference::Review_preference is_a_topis_of_conference_parts::Conference_part isTopicOf::Working_event
 CryptographyTopic:
-        EPSILON
+        isIncluded::Activity belongs_to_a_review_reference::Review_preference is_a_topis_of_conference_parts::Conference_part isTopicOf::Working_event
 CommunicationTheoryTopic:
-        EPSILON
-ConferenceChair:
-        EPSILON
+        isIncluded::Activity belongs_to_a_review_reference::Review_preference is_a_topis_of_conference_parts::Conference_part isTopicOf::Working_event
 DiningPlace:
-        EPSILON
+        isLocationOf::ConferenceEvent is_equipped_by::Item
 AcademiaOrganization:
-        EPSILON
+        isProviderOf::Sponsorship
 IndustryOrganization:
-        EPSILON
+        isProviderOf::Sponsorship
 NGO:
-        EPSILON
+        isProviderOf::Sponsorship
 GovernmentOrganization:
-        EPSILON
+        isProviderOf::Sponsorship
 ComputerNetworksEnterpriseTopic:
         EPSILON
 ComputerNetworksSwitchingTopic:
@@ -949,17 +987,17 @@ ActivePaper:
 ActivePaper:
         hasRating::ReviewRating
 PendingPaper:
-        EPSILON
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::unsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer full_paper_size::Integer has_author::human isWrittenBy::Author isReviewedBy::Person+ hasReview::Review hasReviewer::Possible_Reviewer
 WithdrawnPaper:
-        EPSILON
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::unsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer full_paper_size::Integer has_author::human isWrittenBy::Author isReviewedBy::Person+ hasReview::Review hasReviewer::Possible_Reviewer
 RejectedPaper:
-        EPSILON
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::unsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer full_paper_size::Integer has_author::human isWrittenBy::Author isReviewedBy::Person+ hasReview::Review hasReviewer::Possible_Reviewer
 AcceptedPaper:
         relatedToEvent::PaperPresentation
 PublishedPaper:
-        EPSILON
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::unsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer full_paper_size::Integer has_author::human isWrittenBy::Author isReviewedBy::Person+ hasReview::Review hasReviewer::Possible_Reviewer
 Attendee:
-        EPSILON
+        hasMail::String worksForCompany::String hasConflictOfInterest::Document email::String inverse_of_add::Thing+ execute::Thing+ get::Inforamtion use::Document register::Account modify::Thing+ take_part_in::Event remove::Thing+ add::Person added_by::Person contributes::Conference_document has_an_email::String has_the_first_name::String has_gender::EEnum has_the_last_name::String employedBy::Organization hasHomePage::String hasSurname::String hasFax::String hasFirstName::String hasPhone::String hasEmail::String attendeeAt::ConferenceEvent isMemberOf::Conference hasFirstName::String hasBiography::String hasLastName::String authorOf::Document prepare::Item occupy::Presenter_city+ is_present_in::Thing+ write::Item obtain::Item send::Item speak_in::Thing+ pay::Money sign::Item is_present::Time give::Thing+ need::Item
 CoffeeBreak:
         EPSILON
 FreeTimeBreak:
@@ -978,19 +1016,19 @@ TalkEvent:
         ClosingTalk
         WelcomeTalk
 SessionChair:
-        EPSILON
+        hasMail::String worksForCompany::String hasConflictOfInterest::Document email::String inverse_of_add::Thing+ execute::Thing+ get::Inforamtion use::Document register::Account modify::Thing+ take_part_in::Event remove::Thing+ add::Person added_by::Person contributes::Conference_document has_an_email::String has_the_first_name::String has_gender::EEnum has_the_last_name::String employedBy::Organization hasHomePage::String hasSurname::String hasFax::String hasFirstName::String hasPhone::String hasEmail::String attendeeAt::ConferenceEvent isMemberOf::Conference hasFirstName::String hasBiography::String hasLastName::String authorOf::Document prepare::Item occupy::Presenter_city+ is_present_in::Thing+ write::Item obtain::Item send::Item speak_in::Thing+ pay::Money sign::Item is_present::Time give::Thing+ need::Item
 TPCMember:
-        EPSILON
+        hasMail::String worksForCompany::String hasConflictOfInterest::Document email::String inverse_of_add::Thing+ execute::Thing+ get::Inforamtion use::Document register::Account modify::Thing+ take_part_in::Event remove::Thing+ add::Person added_by::Person contributes::Conference_document has_an_email::String has_the_first_name::String has_gender::EEnum has_the_last_name::String employedBy::Organization hasHomePage::String hasSurname::String hasFax::String hasFirstName::String hasPhone::String hasEmail::String attendeeAt::ConferenceEvent isMemberOf::Conference hasFirstName::String hasBiography::String hasLastName::String authorOf::Document prepare::Item occupy::Presenter_city+ is_present_in::Thing+ write::Item obtain::Item send::Item speak_in::Thing+ pay::Money sign::Item is_present::Time give::Thing+ need::Item
 TwoLevelConference:
-        EPSILON
+        isOrganizedBy::OrganizingCommittee annualOrder::Integer takesPlace::Location hasConferenceMember::ConferenceMember paperAssignmentFinalizedBy::Administrator reviewCriteriaEnteredBy::Administrator paperAssignmentToolsRunBy::Administrator virtualMeetingEnabledBy::Administrator hardcopyMailingManifestsPrintedBy::Administrator detailsEnteredBy::Administrator reviewerBiddingStartedBy::Administrator date::date reviewsPerPaper::Integer logoURL::anyURI acceptsHardcopySubmissions::Boolean siteURL::anyURI is_in_phase::phase_of_conference has_program::program hasMember::Person hasName::String endDate::dateTime paperDueOn::dateTime registrationDueOn::dateTime manuscriptDueOn::dateTime startDate::dateTime hasCountry::Country
 CallForPapers:
-        EPSILON
+        forEvent::AcademicEvent isInitiatedBy::Person+ hasSubmissionInstructions::String hasSubmissionDeadline::dateTime
 TextualReviewQuestion:
         EPSILON
 NumericalReviewQuestion:
         EPSILON
 OrganizationalMeeting:
-        EPSILON
+        hasCall::Call
 PaperPresentation:
         relatedToPaper::AcceptedPaper
 AcademicEvent:
@@ -1013,27 +1051,25 @@ SocialEvent:
         Excursion
         Reception
 CallForReviews:
-        EPSILON
+        forEvent::AcademicEvent isInitiatedBy::Person+ hasSubmissionInstructions::String hasSubmissionDeadline::dateTime
 PersonalReviewHistory:
         isReviewHistoryOf::Reviewer
 ConferenceVenuePlace:
-        EPSILON
+        isLocationOf::ConferenceEvent is_equipped_by::Item
 CallForManuscripts:
-        EPSILON
-Reception:
-        EPSILON
+        forEvent::AcademicEvent isInitiatedBy::Person+ hasSubmissionInstructions::String hasSubmissionDeadline::dateTime
 SingleLevelConference:
-        EPSILON
+        isOrganizedBy::OrganizingCommittee annualOrder::Integer takesPlace::Location hasConferenceMember::ConferenceMember paperAssignmentFinalizedBy::Administrator reviewCriteriaEnteredBy::Administrator paperAssignmentToolsRunBy::Administrator virtualMeetingEnabledBy::Administrator hardcopyMailingManifestsPrintedBy::Administrator detailsEnteredBy::Administrator reviewerBiddingStartedBy::Administrator date::date reviewsPerPaper::Integer logoURL::anyURI acceptsHardcopySubmissions::Boolean siteURL::anyURI is_in_phase::phase_of_conference has_program::program hasMember::Person hasName::String endDate::dateTime paperDueOn::dateTime registrationDueOn::dateTime manuscriptDueOn::dateTime startDate::dateTime hasCountry::Country
 MeetingRoomPlace:
-        EPSILON
+        isLocationOf::ConferenceEvent is_equipped_by::Item
 AccommodationPlace:
-        EPSILON
+        isLocationOf::ConferenceEvent is_equipped_by::Item
 RatedPapers:
-        EPSILON
+        hasRating::ReviewRating
 TravelGrant:
-        EPSILON
+        providedBy::Organization hasCostCurrency::String hasCostAmount::Integer
 ConferenceDinner:
-        EPSILON
+        hasMenu::MealMenu
 Event:
         Symposium
 Event:
@@ -1052,10 +1088,6 @@ Event:
         Scientific_Event
 Event:
         conists_of::Event_Tracks confirmed_by::Approval_Email defined_by::Event_Setup approved_by::Administrator starts_on::String ends_on::String has_startdate::dateTime has_enddate::dateTime eventOnList::Thing+ partOfEvent::Event hasEvent::Event organisedBy::Thing+ heldIn::Location
-Accepted_Paper:
-        EPSILON
-Rejected_Paper:
-        EPSILON
 Evaluated_Paper:
         Accepted_Paper
 Evaluated_Paper:
@@ -1063,19 +1095,17 @@ Evaluated_Paper:
 Evaluated_Paper:
         hasReview::Review
 Camera_Ready_Paper:
-        EPSILON
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::unsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer full_paper_size::Integer has_author::human isWrittenBy::Author isReviewedBy::Person+ hasReview::Review hasReviewer::Possible_Reviewer
 Positive_Review:
-        EPSILON
+        writtenBy::Reviewer reviews::Reviewed_contribution gives_classification::classification is_created_in::activity review_written_by::Reviewer reviewOfPaper::Paper reviewWrittenBy::Possible_Reviewer
 Workshop_Paper:
-        EPSILON
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::unsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer full_paper_size::Integer has_author::human isWrittenBy::Author isReviewedBy::Person+ hasReview::Review hasReviewer::Possible_Reviewer
 Industrial_Paper:
-        EPSILON
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::unsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer full_paper_size::Integer has_author::human isWrittenBy::Author isReviewedBy::Person+ hasReview::Review hasReviewer::Possible_Reviewer
 Conference_Paper:
-        EPSILON
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::unsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer full_paper_size::Integer has_author::human isWrittenBy::Author isReviewedBy::Person+ hasReview::Review hasReviewer::Possible_Reviewer
 Industrial_Session:
         EPSILON
-Conference_Session:
-        Industrial_Session
 Conference_Session:
         Industrial_Session
 Regular_Session:
@@ -1085,7 +1115,7 @@ Poster_Session:
 Demo_Session:
         EPSILON
 Paper_Author:
-        EPSILON
+        hasMail::String worksForCompany::String hasConflictOfInterest::Document email::String inverse_of_add::Thing+ execute::Thing+ get::Inforamtion use::Document register::Account modify::Thing+ take_part_in::Event remove::Thing+ add::Person added_by::Person contributes::Conference_document has_an_email::String has_the_first_name::String has_gender::EEnum has_the_last_name::String employedBy::Organization hasHomePage::String hasSurname::String hasFax::String hasFirstName::String hasPhone::String hasEmail::String attendeeAt::ConferenceEvent isMemberOf::Conference hasFirstName::String hasBiography::String hasLastName::String authorOf::Document prepare::Item occupy::Presenter_city+ is_present_in::Thing+ write::Item obtain::Item send::Item speak_in::Thing+ pay::Money sign::Item is_present::Time give::Thing+ need::Item
 Conference_Trip:
         EPSILON
 Social_Event:
@@ -1096,7 +1126,7 @@ Social_Event:
         Conference_Trip
         Conference_Banquet
 Tutorial_Abstract:
-        EPSILON
+        part_of_article::article is_the_1th_part_of::Thing+
 Conference_Participant:
         Demo_Chair
 Conference_Participant:
@@ -1106,12 +1136,20 @@ Conference_Participant:
 Conference_Participant:
         Late-Registered_Participant
 Conference_Participant:
+        Tutorial_Chair
+Conference_Participant:
+        PC_Chair
+Conference_Participant:
+        Workshop_Chair
+Conference_Participant:
+        Presenter
+Conference_Participant:
+        Session_Chair
+Conference_Participant:
         Demo_Chair
         OC_Member
         Early-Registered_Participant
         Late-Registered_Participant
-Submitted_Paper:
-        Assigned_Paper
 Submitted_Paper:
         Assigned_Paper
 Assigned_Paper:
@@ -1119,7 +1157,7 @@ Assigned_Paper:
 Assigned_Paper:
         hasReviewer::Possible_Reviewer
 Negative_Review:
-        EPSILON
+        writtenBy::Reviewer reviews::Reviewed_contribution gives_classification::classification is_created_in::activity review_written_by::Reviewer reviewOfPaper::Paper reviewWrittenBy::Possible_Reviewer
 Review:
         Meta-Review
 Review:
@@ -1131,13 +1169,13 @@ Review:
 Review:
         writtenBy::Reviewer reviews::Reviewed_contribution gives_classification::classification is_created_in::activity review_written_by::Reviewer reviewOfPaper::Paper reviewWrittenBy::Possible_Reviewer
 Neutral_Review:
-        EPSILON
-Research_Topic:
-        topicCoveredBy::Thing
+        writtenBy::Reviewer reviews::Reviewed_contribution gives_classification::classification is_created_in::activity review_written_by::Reviewer reviewOfPaper::Paper reviewWrittenBy::Possible_Reviewer
 Organising_Agency:
-        EPSILON
+        publisherOf::Thing+ technicallyOrganises::Thing
 Academic_Institution:
         Research_Institute
+Academic_Institution:
+        University
 Academic_Institution:
         scientificallyOrganises::Academic_Institution
 Organisation:
@@ -1149,27 +1187,33 @@ Organisation:
 Organisation:
         publisherOf::Thing+ technicallyOrganises::Thing
 Proceedings_Publisher:
-        EPSILON
+        publisherOf::Thing+ technicallyOrganises::Thing
 Poster_Paper:
-        EPSILON
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::unsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer full_paper_size::Integer has_author::human isWrittenBy::Author isReviewedBy::Person+ hasReview::Review hasReviewer::Possible_Reviewer
 Regular_Paper:
-        EPSILON
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::unsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer full_paper_size::Integer has_author::human isWrittenBy::Author isReviewedBy::Person+ hasReview::Review hasReviewer::Possible_Reviewer
 Demo_Paper:
-        EPSILON
+        hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::unsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer full_paper_size::Integer has_author::human isWrittenBy::Author isReviewedBy::Person+ hasReview::Review hasReviewer::Possible_Reviewer
 Research_Institute:
-        EPSILON
+        scientificallyOrganises::Academic_Institution
 Scientific_Event:
         Individual_Presentation
 Scientific_Event:
-        Individual_Presentation
+        Workshop
+Scientific_Event:
+        Conference
+Scientific_Event:
+        Track
+Scientific_Event:
+        Session
 Invited_Talk_Abstract:
-        EPSILON
+        part_of_article::article is_the_1th_part_of::Thing+
 Agency_Staff_Member:
-        EPSILON
+        hasMail::String worksForCompany::String hasConflictOfInterest::Document email::String inverse_of_add::Thing+ execute::Thing+ get::Inforamtion use::Document register::Account modify::Thing+ take_part_in::Event remove::Thing+ add::Person added_by::Person contributes::Conference_document has_an_email::String has_the_first_name::String has_gender::EEnum has_the_last_name::String employedBy::Organization hasHomePage::String hasSurname::String hasFax::String hasFirstName::String hasPhone::String hasEmail::String attendeeAt::ConferenceEvent isMemberOf::Conference hasFirstName::String hasBiography::String hasLastName::String authorOf::Document prepare::Item occupy::Presenter_city+ is_present_in::Thing+ write::Item obtain::Item send::Item speak_in::Thing+ pay::Money sign::Item is_present::Time give::Thing+ need::Item
 Workshop_Session:
         EPSILON
 Invited_Talk:
-        EPSILON
+        presentationOfPaper::Document+
 Workshop:
         EPSILON
 Contributed_Talk:
@@ -1191,23 +1235,23 @@ PC_Chair:
 PC_Member:
         SC_Member
 PC_Member:
-        SC_Member
+        Session_Chair
+PC_Member:
+        Tutorial_Chair
+PC_Member:
+        PC_Chair
+PC_Member:
+        Workshop_Chair
 OC_Member:
         OC_Chair
-OC_Member:
-        OC_Chair
-Proceedings:
-        Conference_Proceedings
 Proceedings:
         Conference_Proceedings
 Programme_Brochure:
-        EPSILON
+        recieved_by::User used_by::Person submited__by::User relatesTo::Thing+ writtenBy::Person hasUpdatedVersion::Document updatedVersionOf::Document
 Flyer:
-        EPSILON
+        recieved_by::User used_by::Person submited__by::User relatesTo::Thing+ writtenBy::Person hasUpdatedVersion::Document updatedVersionOf::Document
 Web_Site:
-        EPSILON
-Multi-author_Volume:
-        Proceedings
+        recieved_by::User used_by::Person submited__by::User relatesTo::Thing+ writtenBy::Person hasUpdatedVersion::Document updatedVersionOf::Document
 Multi-author_Volume:
         Proceedings
 Individual_Presentation:
@@ -1231,17 +1275,13 @@ Early-Registered_Participant:
 Late-Registered_Participant:
         EPSILON
 University:
-        EPSILON
+        scientificallyOrganises::Academic_Institution isProviderOf::Sponsorship
 Possible_Reviewer:
         PC_Member
 Possible_Reviewer:
         reviewerOfPaper::Paper
-Student:
-        EPSILON
 Invited_Speaker:
         EPSILON
-Presenter:
-        Invited_Speaker
 Presenter:
         Invited_Speaker
 SC_Member:
@@ -1308,7 +1348,7 @@ Presenter_city:
 Hotel_registration_form:
         EPSILON
 Deadline_hotel_reservation:
-        EPSILON
+        done_till::date
 Form:
         Hotel_registration_form
 Form:
@@ -1335,7 +1375,7 @@ Transport_vehicle:
         Shuttle_bus
         Van
 Mailing_list:
-        EPSILON
+        recieved_by::User used_by::Person submited__by::User relatesTo::Thing+ writtenBy::Person hasUpdatedVersion::Document updatedVersionOf::Document
 Document:
         Email
 Document:
@@ -1400,8 +1440,6 @@ One_day_presenter:
         EPSILON
 Social_program:
         Dinner_banquet
-Social_program:
-        Dinner_banquet
 Person:
         ConferenceMember
 Person:
@@ -1461,9 +1499,17 @@ Person:
 Person:
         OutsideReferee
 Person:
+        ProgramCommitteeMember
+Person:
+        Chairman
+Person:
+        Administrator
+Person:
+        Organizer
+Person:
         hasMail::String worksForCompany::String hasConflictOfInterest::Document email::String inverse_of_add::Thing+ execute::Thing+ get::Inforamtion use::Document register::Account modify::Thing+ take_part_in::Event remove::Thing+ add::Person added_by::Person contributes::Conference_document has_an_email::String has_the_first_name::String has_gender::EEnum has_the_last_name::String employedBy::Organization hasHomePage::String hasSurname::String hasFax::String hasFirstName::String hasPhone::String hasEmail::String attendeeAt::ConferenceEvent isMemberOf::Conference hasFirstName::String hasBiography::String hasLastName::String authorOf::Document prepare::Item occupy::Presenter_city+ is_present_in::Thing+ write::Item obtain::Item send::Item speak_in::Thing+ pay::Money sign::Item is_present::Time give::Thing+ need::Item
 PowerPoint_presentation:
-        EPSILON
+        is_given_by::Active_conference_participant
 Presentation:
         Invited_talk
 Presentation:
@@ -1479,7 +1525,7 @@ Conference_city:
 Conference_state:
         EPSILON
 Submissions_deadline:
-        EPSILON
+        done_till::date
 Deadline:
         Deadline_hotel_reservation
 Deadline:
@@ -1518,6 +1564,10 @@ Conference_activity:
 Conference_activity:
         Coctail_reception
 Conference_activity:
+        Presentation
+Conference_activity:
+        Lecture
+Conference_activity:
         Social_program
         Technic_activity
         Registration
@@ -1548,7 +1598,7 @@ Place:
 Place:
         isLocationOf::ConferenceEvent is_equipped_by::Item
 Author_cd_proceedings_included:
-        EPSILON
+        submitPaper::Paper writePaper::Paper writes::Contribution writes_article::article assigns_article_to_conference::article hasRelatedPaper::Paper conflictsWith::Thing+ isAuthorOf::ActivitySubmissionForm conducts::Thing
 Cd_proceening:
         EPSILON
 Trip_day:
@@ -1564,25 +1614,21 @@ Time:
         Trip_day
         Conference_days
 Record_of_attendance:
-        EPSILON
+        recieved_by::User used_by::Person submited__by::User relatesTo::Thing+ writtenBy::Person hasUpdatedVersion::Document updatedVersionOf::Document
 Listener:
         EPSILON
 Session_room:
-        EPSILON
+        isLocationOf::ConferenceEvent is_equipped_by::Item
 Brief_introduction_for_Session_chair:
-        EPSILON
+        recieved_by::User used_by::Person submited__by::User relatesTo::Thing+ writtenBy::Person hasUpdatedVersion::Document updatedVersionOf::Document
 Session_chair:
         EPSILON
 Invitation_letter:
-        EPSILON
+        recieved_by::User used_by::Person submited__by::User relatesTo::Thing+ writtenBy::Person hasUpdatedVersion::Document updatedVersionOf::Document
 Registration_form:
         EPSILON
 Viza:
-        EPSILON
-Registration:
-        EPSILON
-Conference_days:
-        One_conference_day
+        recieved_by::User used_by::Person submited__by::User relatesTo::Thing+ writtenBy::Person hasUpdatedVersion::Document updatedVersionOf::Document
 Conference_days:
         One_conference_day
 Conference_building:
@@ -1627,7 +1673,9 @@ Lecturer:
         Worker_lecturer
         Student_lecturer
 Transparency:
-        EPSILON
+        recieved_by::User used_by::Person submited__by::User relatesTo::Thing+ writtenBy::Person hasUpdatedVersion::Document updatedVersionOf::Document
+Speaker:
+        Author
 Speaker:
         EPSILON
 City:
@@ -1645,8 +1693,6 @@ City:
         Trip_city
 Card:
         Credit_card
-Card:
-        Credit_card
 Item:
         Transport_vehicle
 Item:
@@ -1655,6 +1701,8 @@ Item:
         Audiovisual_equipment
 Item:
         Publication
+Item:
+        Document
 Item:
         go_through::Activity is_used_for::Thing+ is_signed_by::Person is_made_from::Item is_sent_after::Time is_needed_for::Person is_sent_before::Time is_prepared_by::Person is_used_by::Person is_given_to::Person is_sent_by::Person is_writen_by::Person
 Author_attendee_book_registration_fee:
@@ -1677,7 +1725,7 @@ Audiovisual_equipment:
         Computer
         Overhead_projector
 Video_presentation:
-        EPSILON
+        is_given_by::Active_conference_participant
 Hotel_room:
         Single_hotel_room
 Hotel_room:
@@ -1711,8 +1759,6 @@ State:
         Sponsor_state
 Introduction:
         Introduction_of_speaker
-Introduction:
-        Introduction_of_speaker
 Welcome_address:
         EPSILON
 Value_added_tax:
@@ -1733,23 +1779,23 @@ Accepting_manuscript:
 Sponsor_city:
         EPSILON
 Sponsor:
-        EPSILON
+        hasMail::String worksForCompany::String hasConflictOfInterest::Document email::String inverse_of_add::Thing+ execute::Thing+ get::Inforamtion use::Document register::Account modify::Thing+ take_part_in::Event remove::Thing+ add::Person added_by::Person contributes::Conference_document has_an_email::String has_the_first_name::String has_gender::EEnum has_the_last_name::String employedBy::Organization hasHomePage::String hasSurname::String hasFax::String hasFirstName::String hasPhone::String hasEmail::String attendeeAt::ConferenceEvent isMemberOf::Conference hasFirstName::String hasBiography::String hasLastName::String authorOf::Document prepare::Item occupy::Presenter_city+ is_present_in::Thing+ write::Item obtain::Item send::Item speak_in::Thing+ pay::Money sign::Item is_present::Time give::Thing+ need::Item
 Time_zone:
         EPSILON
 Introduction_of_speaker:
         EPSILON
 Conference_hall:
-        EPSILON
+        isLocationOf::ConferenceEvent is_equipped_by::Item
 Plenary_lecture:
-        EPSILON
+        hasAcronym::String
 Plenary_lecture_speaker:
-        EPSILON
+        submitPaper::Paper writePaper::Paper writes::Contribution writes_article::article assigns_article_to_conference::article hasRelatedPaper::Paper conflictsWith::Thing+ isAuthorOf::ActivitySubmissionForm conducts::Thing
 LCD_projector:
         EPSILON
 Deadline_for_notification_of_acceptance:
-        EPSILON
+        done_till::date
 Tutorial_speaker:
-        EPSILON
+        submitPaper::Paper writePaper::Paper writes::Contribution writes_article::article assigns_article_to_conference::article hasRelatedPaper::Paper conflictsWith::Thing+ isAuthorOf::ActivitySubmissionForm conducts::Thing
 Session:
         Conference_Session
 Session:
@@ -1770,7 +1816,7 @@ Session:
         Workshop_Session
         Speaker_lecture
 Registation_deadline:
-        EPSILON
+        done_till::date
 Single_hotel_room:
         EPSILON
 Non_speaker:
@@ -1823,7 +1869,7 @@ Payment_document:
         Cheque
         Bank_transfer
 Camera_ready_manuscript_deadline:
-        EPSILON
+        done_till::date
 One_conference_day:
         EPSILON
 Fee_for_extra_trip:
@@ -1839,11 +1885,11 @@ IASTED_member:
 Memeber_registration_fee:
         EPSILON
 Author_book_proceedings_included:
-        EPSILON
+        submitPaper::Paper writePaper::Paper writes::Contribution writes_article::article assigns_article_to_conference::article hasRelatedPaper::Paper conflictsWith::Thing+ isAuthorOf::ActivitySubmissionForm conducts::Thing
 Sponsor_company_house:
         EPSILON
 Sponzorship:
-        EPSILON
+        is_paid_with::Item is_paid_by::Person is_paid_in::Building is_paid_for::Thing+ has_amount_of::Money
 Student_lecturer:
         EPSILON
 Trip_city:
@@ -1859,13 +1905,13 @@ Student_registration_fee:
 Author_attendee_cd_registration_fee:
         EPSILON
 Tip:
-        EPSILON
+        is_paid_with::Item is_paid_by::Person is_paid_in::Building is_paid_for::Thing+ has_amount_of::Money
 Credit_card:
         EPSILON
 Van:
         EPSILON
 Main_office:
-        EPSILON
+        isLocationOf::ConferenceEvent is_equipped_by::Item
 Presenter_university:
         EPSILON
 Departure_tax:
@@ -1889,7 +1935,7 @@ Coctail_reception:
 Currency:
         EPSILON
 WorkShop:
-        EPSILON
+        is_held_before::Time is_held_in::Thing is_held_after::Time is_dated_on::dateTime hasTopic::Topic expectedAttendance::Integer isPartOf::Conference has_result::Thing+ sent_by::Person
 OrganizingCommittee:
         ProgramCoChair
 OrganizingCommittee:
@@ -1915,11 +1961,11 @@ OrganizingCommittee:
 CommitteeMember:
         isMemberOf::Conference
 ProgramCoChair:
-        EPSILON
+        organizes::Conference
 PublicationsChair:
-        EPSILON
+        organizes::Conference
 OutsideReferee:
-        EPSILON
+        hasMail::String worksForCompany::String hasConflictOfInterest::Document email::String inverse_of_add::Thing+ execute::Thing+ get::Inforamtion use::Document register::Account modify::Thing+ take_part_in::Event remove::Thing+ add::Person added_by::Person contributes::Conference_document has_an_email::String has_the_first_name::String has_gender::EEnum has_the_last_name::String employedBy::Organization hasHomePage::String hasSurname::String hasFax::String hasFirstName::String hasPhone::String hasEmail::String attendeeAt::ConferenceEvent isMemberOf::Conference hasFirstName::String hasBiography::String hasLastName::String authorOf::Document prepare::Item occupy::Presenter_city+ is_present_in::Thing+ write::Item obtain::Item send::Item speak_in::Thing+ pay::Money sign::Item is_present::Time give::Thing+ need::Item
 Author:
         AuthorNotReviewer
 Author:
@@ -1937,6 +1983,8 @@ Author:
 Author:
         Author_book_proceedings_included
 Author:
+        Presenter
+Author:
         submitPaper::Paper writePaper::Paper writes::Contribution writes_article::article assigns_article_to_conference::article hasRelatedPaper::Paper conflictsWith::Thing+ isAuthorOf::ActivitySubmissionForm conducts::Thing
 Lecture:
         Plenary_lecture
@@ -1945,15 +1993,19 @@ Lecture:
 Lecture:
         TraditionalLecture
 Lecture:
+        Session
+Lecture:
         hasAcronym::String
 ActivitySubmissionForm:
         TutorialProposal
 ActivitySubmissionForm:
         WorksopProposal
 ActivitySubmissionForm:
+        Paper
+ActivitySubmissionForm:
         isSubmittedBy::Author hasAuthor::Author submissionDeadline::dateTime
 WorkshopTutorialChair:
-        EPSILON
+        organizes::Conference
 Reviewer:
         Meta-Reviewer
 Reviewer:
@@ -1961,23 +2013,23 @@ Reviewer:
 DoubleBlindReview:
         isExecutedBy::Reviewer
 TutorialProposal:
-        EPSILON
+        isSubmittedBy::Author hasAuthor::Author submissionDeadline::dateTime
 Location:
         locationOf::Event
 RegistrationChair:
-        EPSILON
+        organizes::Conference
 StudentAdvocate:
-        EPSILON
+        organizes::Conference
 FinanceChair:
-        EPSILON
+        organizes::Conference
 QualitatvieLecture:
-        EPSILON
+        hasAcronym::String
 TraditionalLecture:
-        EPSILON
+        hasAcronym::String
 PaperSubmissionChair:
-        EPSILON
+        organizes::Conference
 PublicityWebChair:
-        EPSILON
+        organizes::Conference
 Paper:
         PaperAbstract
 Paper:
@@ -2025,11 +2077,11 @@ Paper:
 Paper:
         hasCo-author::Co-author hasBid::Bid hasDecision::Decision assignedTo::Reviewer hasSubjectArea::SubjectArea readByReviewer::Reviewer paperID::unsignedLong title::String hasAuthor::Author acceptedBy::Administrator rejectedBy::Administrator readByMeta-Reviewer::Meta-Reviewer full_paper_size::Integer has_author::human isWrittenBy::Author isReviewedBy::Person+ hasReview::Review hasReviewer::Possible_Reviewer
 SteeringCommittee:
-        EPSILON
+        organizes::Conference
 GeneralCoChair:
-        EPSILON
+        organizes::Conference
 WorksopProposal:
-        EPSILON
+        isSubmittedBy::Author hasAuthor::Author submissionDeadline::dateTime
 EEnum:
         Compilers::EPSILON
         Microarchitecture::EPSILON
@@ -2041,3 +2093,10 @@ EEnum:
         medium::EPSILON
         low::EPSILON
         very high::EPSILON
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR

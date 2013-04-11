@@ -34,11 +34,11 @@ syntax Special
  ;
 syntax ActiveCenter
         = 
-        ()
+        Node node QueuingNetwork queuingNetwork
  ;
 syntax PassiveCenter
         = 
-        ()
+        Node node QueuingNetwork queuingNetwork
  ;
 syntax Source
         = 
@@ -67,4 +67,16 @@ syntax Allocate
 syntax Release
         = 
         ()
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
  ;

@@ -13,7 +13,7 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable ProMarte a UML profile for MARTE 0.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Albin Jossic, <code>ProMarte.ecore</code>, 2006/06/06.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>157</strong></li><li>Number of top alternatives: <strong>197</strong></li><li>Number of defined nonterminal symbols: <strong>108</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>7</strong>: <code><a href="#Interval" class="nt">Interval</a>, <a href="#SimultaneousEventOccurrence" class="nt">SimultaneousEventOccurrence</a>, <a href="#TimingMechanism" class="nt">TimingMechanism</a>, <a href="#System" class="nt">System</a>, <a href="#BasicQuantity" class="nt">BasicQuantity</a>, <a href="#DerivedQuantity" class="nt">DerivedQuantity</a>, <a href="#AnalysisContext" class="nt">AnalysisContext</a></code></li><li>Bottom nonterminal symbols: <strong>8</strong>: <code><a href="#Event" class="nt">Event</a>, <a href="#String" class="nt">String</a>, <a href="#Boolean" class="nt">Boolean</a>, <a href="#Integer" class="nt">Integer</a>, <a href="#ResourceClassifier" class="nt">ResourceClassifier</a>, <a href="#ResourceServiceClassifier" class="nt">ResourceServiceClassifier</a>, <a href="#ResourceInstanceSpecification" class="nt">ResourceInstanceSpecification</a>, <a href="#ResourceServiceInstanceSpecification" class="nt">ResourceServiceInstanceSpecification</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="TimeBase">TimeBase</a>:
+				</script></head><body><h1 class="l">Browsable ProMarte a UML profile for MARTE 0.1 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Albin Jossic, <code>ProMarte.ecore</code>, 2006/06/06.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>160</strong></li><li>Number of top alternatives: <strong>201</strong></li><li>Number of defined nonterminal symbols: <strong>111</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>7</strong>: <code><a href="#Interval" class="nt">Interval</a>, <a href="#SimultaneousEventOccurrence" class="nt">SimultaneousEventOccurrence</a>, <a href="#TimingMechanism" class="nt">TimingMechanism</a>, <a href="#System" class="nt">System</a>, <a href="#BasicQuantity" class="nt">BasicQuantity</a>, <a href="#DerivedQuantity" class="nt">DerivedQuantity</a>, <a href="#AnalysisContext" class="nt">AnalysisContext</a></code></li><li>Bottom nonterminal symbols: <strong>5</strong>: <code><a href="#Event" class="nt">Event</a>, <a href="#ResourceClassifier" class="nt">ResourceClassifier</a>, <a href="#ResourceServiceClassifier" class="nt">ResourceServiceClassifier</a>, <a href="#ResourceInstanceSpecification" class="nt">ResourceInstanceSpecification</a>, <a href="#ResourceServiceInstanceSpecification" class="nt">ResourceServiceInstanceSpecification</a></code></li><li>Number of used terminal symbols: <strong>2</strong></li><li>Keywords: <strong>2</strong>: <code class="t">"true", "false"</code></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="TimeBase">TimeBase</a>:
         <a class="nt" href="#SingleTimeBase">SingleTimeBase</a>
 </pre><pre><a class="nt" name="TimeBase">TimeBase</a>:
         <a class="nt" href="#DiscreteTimeBase">DiscreteTimeBase</a>
@@ -50,6 +50,8 @@
 </pre><pre><a class="nt" name="SingleTimeInterval">SingleTimeInterval</a>:
         <span class="sel">start</span>::<a class="nt" href="#SingleTimeValue">SingleTimeValue</a> <span class="sel">end</span>::<a class="nt" href="#SingleTimeValue">SingleTimeValue</a>
 </pre><pre><a class="nt" name="DiscreteTimeBase">DiscreteTimeBase</a>:
+        <a class="nt" href="#Clock">Clock</a>
+</pre><pre><a class="nt" name="DiscreteTimeBase">DiscreteTimeBase</a>:
         <span class="sel">refEvent</span>::<a class="nt" href="#Event">Event</a>
 </pre><pre><a class="nt" name="DiscreteInstant">DiscreteInstant</a>:
         <span class="sel">next</span>::<a class="nt" href="#DiscreteInstant">DiscreteInstant</a> <span class="sel">previous</span>::<a class="nt" href="#DiscreteInstant">DiscreteInstant</a> <span class="sel">refOcc</span>::<a class="nt" href="#EventOccurence">EventOccurence</a>
@@ -67,12 +69,8 @@
         ε
 </pre><pre><a class="nt" name="DiscreteTimeValue">DiscreteTimeValue</a>:
         <a class="nt" href="#MetricTimeValue">MetricTimeValue</a>
-</pre><pre><a class="nt" name="DiscreteTimeValue">DiscreteTimeValue</a>:
-        <a class="nt" href="#MetricTimeValue">MetricTimeValue</a>
 </pre><pre><a class="nt" name="MetricTimeInterval">MetricTimeInterval</a>:
         ε
-</pre><pre><a class="nt" name="DiscreteTimeInterval">DiscreteTimeInterval</a>:
-        <a class="nt" href="#MetricTimeInterval">MetricTimeInterval</a>
 </pre><pre><a class="nt" name="DiscreteTimeInterval">DiscreteTimeInterval</a>:
         <a class="nt" href="#MetricTimeInterval">MetricTimeInterval</a>
 </pre><pre><a class="nt" name="SimultaneousEventOccurrence">SimultaneousEventOccurrence</a>:
@@ -86,9 +84,11 @@
 </pre><pre><a class="nt" name="TimedAction">TimedAction</a>:
         <span class="sel">duration</span>::<a class="nt" href="#TimeInterval">TimeInterval</a><span class="meta">+</span> <span class="sel">start</span>::<a class="nt" href="#TimeValue">TimeValue</a><span class="meta">+</span> <span class="sel">end</span>::<a class="nt" href="#TimeValue">TimeValue</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Delay">Delay</a>:
-        ε
+        <span class="sel">duration</span>::<a class="nt" href="#TimeInterval">TimeInterval</a><span class="meta">+</span> <span class="sel">start</span>::<a class="nt" href="#TimeValue">TimeValue</a><span class="meta">+</span> <span class="sel">end</span>::<a class="nt" href="#TimeValue">TimeValue</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="TimingMechanism">TimingMechanism</a>:
         <a class="nt" href="#Timer">Timer</a>
+</pre><pre><a class="nt" name="TimingMechanism">TimingMechanism</a>:
+        <a class="nt" href="#Clock">Clock</a>
 </pre><pre><a class="nt" name="TimingMechanism">TimingMechanism</a>:
         <span class="sel">stability</span>::<a class="nt" href="#String">String</a> <span class="sel">drift</span>::<a class="nt" href="#String">String</a> <span class="sel">skew</span>::<a class="nt" href="#String">String</a> <span class="sel">origin</span>::<a class="nt" href="#TimedEvent">TimedEvent</a> <span class="sel">resolution</span>::<a class="nt" href="#MetricTimeInterval">MetricTimeInterval</a> <span class="sel">refClock</span>::<a class="nt" href="#Clock">Clock</a> <span class="sel">state</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="Clock">Clock</a>:
@@ -136,9 +136,9 @@
 </pre><pre><a class="nt" name="ModelingConcern">ModelingConcern</a>:
         <span class="sel">relevantQuantity</span>::<a class="nt" href="#Quantity">Quantity</a><span class="meta">+</span> <span class="sel">annotedModel</span>::<a class="nt" href="#AnnotatedModel">AnnotatedModel</a>
 </pre><pre><a class="nt" name="AnalysisConcern">AnalysisConcern</a>:
-        ε
+        <span class="sel">relevantQuantity</span>::<a class="nt" href="#Quantity">Quantity</a><span class="meta">+</span> <span class="sel">annotedModel</span>::<a class="nt" href="#AnnotatedModel">AnnotatedModel</a>
 </pre><pre><a class="nt" name="DesignConcern">DesignConcern</a>:
-        ε
+        <span class="sel">relevantQuantity</span>::<a class="nt" href="#Quantity">Quantity</a><span class="meta">+</span> <span class="sel">annotedModel</span>::<a class="nt" href="#AnnotatedModel">AnnotatedModel</a>
 </pre><pre><a class="nt" name="Quantity">Quantity</a>:
         ε
 </pre><pre><a class="nt" name="BasicQuantity">BasicQuantity</a>:
@@ -356,16 +356,23 @@
 </pre><pre><a class="nt" name="Component">Component</a>:
         <span class="sel">process</span>::<a class="nt" href="#ProcessResource">ProcessResource</a><span class="meta">+</span> <span class="sel">interfaces</span>::<a class="nt" href="#Interface">Interface</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="StructuredComponent">StructuredComponent</a>:
-        ε
+        <span class="sel">process</span>::<a class="nt" href="#ProcessResource">ProcessResource</a><span class="meta">+</span> <span class="sel">interfaces</span>::<a class="nt" href="#Interface">Interface</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="BasicComponent">BasicComponent</a>:
-        ε
+        <span class="sel">process</span>::<a class="nt" href="#ProcessResource">ProcessResource</a><span class="meta">+</span> <span class="sel">interfaces</span>::<a class="nt" href="#Interface">Interface</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="LogicalResource">LogicalResource</a>:
-        ε
+        <span class="sel">basicResource</span>::<a class="nt" href="#BasicResource">BasicResource</a>
 </pre><pre><a class="nt" name="ServerResource">ServerResource</a>:
         <span class="sel">services</span>::<a class="nt" href="#Service">Service</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="Service">Service</a>:
         <span class="sel">resource</span>::<a class="nt" href="#ServerResource">ServerResource</a> <span class="sel">interface</span>::<a class="nt" href="#Interface">Interface</a>
 </pre><pre><a class="nt" name="Interface">Interface</a>:
         <span class="sel">service</span>::<a class="nt" href="#Service">Service</a>
+</pre><pre><a class="nt" name="String">String</a>:
+        <span class="meta">string</span>
+</pre><pre><a class="nt" name="Integer">Integer</a>:
+        <span class="meta">int</span>
+</pre><pre><a class="nt" name="Boolean">Boolean</a>:
+        <span class="t">"true"</span>
+        <span class="t">"false"</span>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
 Last updated: Apr2013.</div></body></html>

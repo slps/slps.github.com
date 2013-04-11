@@ -46,8 +46,8 @@ syntax StorageUnit
         String saoFileName String annFileName String persistAs Boolean loaded Boolean saoModified Boolean annModified FileRef fileRef Model modelS StorageElement element+
  ;
 syntax StorageElement
-        = 
-        Block
+        = Block
+        | Operator
  ;
 syntax Object
         = Implementation
@@ -59,6 +59,7 @@ syntax Object
         | Annotable
         | Edge
         | StateMachine
+        | Model
  ;
 syntax Block
         = NodeBlock
@@ -350,19 +351,19 @@ syntax AnnAttStringValue
  ;
 syntax AnnAttFileValue
         = 
-        ()
+        value: String
  ;
 syntax AnnAttDateValue
         = 
-        ()
+        value: String
  ;
 syntax AnnAttOidValue
         = 
-        ()
+        value: String
  ;
 syntax AnnAttEnumValue
         = 
-        ()
+        value: String
  ;
 syntax AnnProperty
         = AnnPropertyInt
@@ -437,6 +438,8 @@ syntax MtcEntity
         | Instance
         | Result
         | Record
+        | Model
+        | Operator
  ;
 syntax HistoryEntry
         = 
@@ -465,4 +468,16 @@ syntax Record
 syntax Loader
         = 
         Descriptor descriptor Session session
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax Boolean
+        = "true"
+        | "false"
  ;

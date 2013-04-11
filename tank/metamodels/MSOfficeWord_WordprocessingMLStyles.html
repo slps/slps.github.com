@@ -13,7 +13,7 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable WordprocessingMLStyles 1.2 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Hugo Bruneliere, <code>MSOfficeWord_WordprocessingMLStyles.ecore</code>, 2005/07/01.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>102</strong></li><li>Number of top alternatives: <strong>153</strong></li><li>Number of defined nonterminal symbols: <strong>83</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>15</strong>: <code><a href="#NoteValue" class="nt">NoteValue</a>, <a href="#Text" class="nt">Text</a>, <a href="#DelText" class="nt">DelText</a>, <a href="#InstrText" class="nt">InstrText</a>, <a href="#DelInstrText" class="nt">DelInstrText</a>, <a href="#Footnote" class="nt">Footnote</a>, <a href="#Endnote" class="nt">Endnote</a>, <a href="#Picture" class="nt">Picture</a>, <a href="#Symbol" class="nt">Symbol</a>, <a href="#SymElt" class="nt">SymElt</a>, <a href="#Tab" class="nt">Tab</a>, <a href="#FldChar" class="nt">FldChar</a>, <a href="#FldCharElt" class="nt">FldCharElt</a>, <a href="#PictureType" class="nt">PictureType</a>, <a href="#TabElt" class="nt">TabElt</a></code></li><li>Bottom nonterminal symbols: <strong>5</strong>: <code><a href="#Integer" class="nt">Integer</a>, <a href="#String" class="nt">String</a>, <a href="#Double" class="nt">Double</a>, <a href="#Boolean" class="nt">Boolean</a>, <a href="#NoteElt" class="nt">NoteElt</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="DateTimeType">DateTimeType</a>:
+				</script></head><body><h1 class="l">Browsable WordprocessingMLStyles 1.2 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Hugo Brunelière, <code>MSOfficeWord_WordprocessingMLStyles.ecore</code>, 2005/07/01.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>125</strong></li><li>Number of top alternatives: <strong>177</strong></li><li>Number of defined nonterminal symbols: <strong>87</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>4</strong>: <code><a href="#SymElt" class="nt">SymElt</a>, <a href="#FldCharElt" class="nt">FldCharElt</a>, <a href="#PictureType" class="nt">PictureType</a>, <a href="#TabElt" class="nt">TabElt</a></code></li><li>Bottom nonterminal symbols: <strong>1</strong>: <code><a href="#Double" class="nt">Double</a></code></li><li>Number of used terminal symbols: <strong>2</strong></li><li>Keywords: <strong>2</strong>: <code class="t">"true", "false"</code></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="DateTimeType">DateTimeType</a>:
         <span class="sel">year</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">month</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">day</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">hour</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">minute</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">second</span>::<a class="nt" href="#Integer">Integer</a>
 </pre><pre><a class="nt" name="VersionType">VersionType</a>:
         <span class="sel">n</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">nn</span>::<a class="nt" href="#Integer">Integer</a>
@@ -44,9 +44,17 @@
 </pre><pre><a class="nt" name="SmartTagsCollection">SmartTagsCollection</a>:
         <span class="sel">st_wordDocument</span>::<a class="nt" href="#WordDocument">WordDocument</a> <span class="sel">smartTagTypes</span>::<a class="nt" href="#SmartTagType">SmartTagType</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="StringProperty">StringProperty</a>:
-        ε
+        <span class="sel">val</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="StringType">StringType</a>:
         <a class="nt" href="#StringProperty">StringProperty</a>
+</pre><pre><a class="nt" name="StringType">StringType</a>:
+        <a class="nt" href="#Text">Text</a>
+</pre><pre><a class="nt" name="StringType">StringType</a>:
+        <a class="nt" href="#DelText">DelText</a>
+</pre><pre><a class="nt" name="StringType">StringType</a>:
+        <a class="nt" href="#InstrText">InstrText</a>
+</pre><pre><a class="nt" name="StringType">StringType</a>:
+        <a class="nt" href="#DelInstrText">DelInstrText</a>
 </pre><pre><a class="nt" name="StringType">StringType</a>:
         <span class="sel">val</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="BreakType">BreakType</a>:
@@ -176,16 +184,36 @@
         <a class="nt" href="#PgNum">PgNum</a>
 </pre><pre><a class="nt" name="RunContentElt">RunContentElt</a>:
         <a class="nt" href="#Cr">Cr</a>
+</pre><pre><a class="nt" name="RunContentElt">RunContentElt</a>:
+        <a class="nt" href="#Text">Text</a>
+</pre><pre><a class="nt" name="RunContentElt">RunContentElt</a>:
+        <a class="nt" href="#DelText">DelText</a>
+</pre><pre><a class="nt" name="RunContentElt">RunContentElt</a>:
+        <a class="nt" href="#InstrText">InstrText</a>
+</pre><pre><a class="nt" name="RunContentElt">RunContentElt</a>:
+        <a class="nt" href="#DelInstrText">DelInstrText</a>
+</pre><pre><a class="nt" name="RunContentElt">RunContentElt</a>:
+        <a class="nt" href="#Footnote">Footnote</a>
+</pre><pre><a class="nt" name="RunContentElt">RunContentElt</a>:
+        <a class="nt" href="#Endnote">Endnote</a>
+</pre><pre><a class="nt" name="RunContentElt">RunContentElt</a>:
+        <a class="nt" href="#Picture">Picture</a>
+</pre><pre><a class="nt" name="RunContentElt">RunContentElt</a>:
+        <a class="nt" href="#Symbol">Symbol</a>
+</pre><pre><a class="nt" name="RunContentElt">RunContentElt</a>:
+        <a class="nt" href="#Tab">Tab</a>
+</pre><pre><a class="nt" name="RunContentElt">RunContentElt</a>:
+        <a class="nt" href="#FldChar">FldChar</a>
 </pre><pre><a class="nt" name="BreakElt">BreakElt</a>:
         <span class="sel">type</span>::<a class="nt" href="#BreakType">BreakType</a>
 </pre><pre><a class="nt" name="Text">Text</a>:
-        ε
+        <span class="sel">rce_rElt</span>::<a class="nt" href="#RunElt">RunElt</a> <span class="sel">val</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="DelText">DelText</a>:
-        ε
+        <span class="sel">rce_rElt</span>::<a class="nt" href="#RunElt">RunElt</a> <span class="sel">val</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="InstrText">InstrText</a>:
-        ε
+        <span class="sel">rce_rElt</span>::<a class="nt" href="#RunElt">RunElt</a> <span class="sel">val</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="DelInstrText">DelInstrText</a>:
-        ε
+        <span class="sel">rce_rElt</span>::<a class="nt" href="#RunElt">RunElt</a> <span class="sel">val</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="NoBreakHyphen">NoBreakHyphen</a>:
         <span class="sel">rce_rElt</span>::<a class="nt" href="#RunElt">RunElt</a>
 </pre><pre><a class="nt" name="SoftHyphen">SoftHyphen</a>:
@@ -205,19 +233,27 @@
 </pre><pre><a class="nt" name="Cr">Cr</a>:
         <span class="sel">rce_rElt</span>::<a class="nt" href="#RunElt">RunElt</a>
 </pre><pre><a class="nt" name="Footnote">Footnote</a>:
-        ε
+        <span class="sel">rce_rElt</span>::<a class="nt" href="#RunElt">RunElt</a> <span class="sel">n_blockLevelElts</span>::<a class="nt" href="#BlockLevelElt">BlockLevelElt</a><span class="meta">+</span> <span class="sel">type</span>::<a class="nt" href="#NoteValue">NoteValue</a> <span class="sel">suppressRef</span>::<a class="nt" href="#OnOffType">OnOffType</a>
 </pre><pre><a class="nt" name="Endnote">Endnote</a>:
-        ε
+        <span class="sel">rce_rElt</span>::<a class="nt" href="#RunElt">RunElt</a> <span class="sel">n_blockLevelElts</span>::<a class="nt" href="#BlockLevelElt">BlockLevelElt</a><span class="meta">+</span> <span class="sel">type</span>::<a class="nt" href="#NoteValue">NoteValue</a> <span class="sel">suppressRef</span>::<a class="nt" href="#OnOffType">OnOffType</a>
+</pre><pre><a class="nt" name="NoteElt">NoteElt</a>:
+        <a class="nt" href="#Footnote">Footnote</a>
+</pre><pre><a class="nt" name="NoteElt">NoteElt</a>:
+        <a class="nt" href="#Endnote">Endnote</a>
 </pre><pre><a class="nt" name="Picture">Picture</a>:
-        ε
+        <span class="sel">rce_rElt</span>::<a class="nt" href="#RunElt">RunElt</a>
 </pre><pre><a class="nt" name="Symbol">Symbol</a>:
-        ε
+        <span class="sel">rce_rElt</span>::<a class="nt" href="#RunElt">RunElt</a> <span class="sel">font</span>::<a class="nt" href="#StringType">StringType</a> <span class="sel">char</span>::<a class="nt" href="#StringType">StringType</a>
+</pre><pre><a class="nt" name="SymElt">SymElt</a>:
+        <a class="nt" href="#Symbol">Symbol</a>
 </pre><pre><a class="nt" name="SymElt">SymElt</a>:
         <span class="sel">font</span>::<a class="nt" href="#StringType">StringType</a> <span class="sel">char</span>::<a class="nt" href="#StringType">StringType</a>
 </pre><pre><a class="nt" name="Tab">Tab</a>:
-        ε
+        <span class="sel">rce_rElt</span>::<a class="nt" href="#RunElt">RunElt</a>
 </pre><pre><a class="nt" name="FldChar">FldChar</a>:
-        ε
+        <span class="sel">rce_rElt</span>::<a class="nt" href="#RunElt">RunElt</a> <span class="sel">fldData</span>::<a class="nt" href="#StringType">StringType</a> <span class="sel">fldCharType</span>::<a class="nt" href="#FldCharTypeProperty">FldCharTypeProperty</a> <span class="sel">fldLock</span>::<a class="nt" href="#OnOffType">OnOffType</a>
+</pre><pre><a class="nt" name="FldCharElt">FldCharElt</a>:
+        <a class="nt" href="#FldChar">FldChar</a>
 </pre><pre><a class="nt" name="FldCharElt">FldCharElt</a>:
         <span class="sel">fldData</span>::<a class="nt" href="#StringType">StringType</a> <span class="sel">fldCharType</span>::<a class="nt" href="#FldCharTypeProperty">FldCharTypeProperty</a> <span class="sel">fldLock</span>::<a class="nt" href="#OnOffType">OnOffType</a>
 </pre><pre><a class="nt" name="TableElt">TableElt</a>:
@@ -265,8 +301,19 @@
 </pre><pre><a class="nt" name="SubDocElt">SubDocElt</a>:
         <span class="sel">pce_pElt</span>::<a class="nt" href="#ParaElt">ParaElt</a>
 </pre><pre><a class="nt" name="PictureType">PictureType</a>:
+        <a class="nt" href="#Picture">Picture</a>
+</pre><pre><a class="nt" name="PictureType">PictureType</a>:
         ε
 </pre><pre><a class="nt" name="TabElt">TabElt</a>:
+        <a class="nt" href="#Tab">Tab</a>
+</pre><pre><a class="nt" name="TabElt">TabElt</a>:
         ε
+</pre><pre><a class="nt" name="Integer">Integer</a>:
+        <span class="meta">int</span>
+</pre><pre><a class="nt" name="String">String</a>:
+        <span class="meta">string</span>
+</pre><pre><a class="nt" name="Boolean">Boolean</a>:
+        <span class="t">"true"</span>
+        <span class="t">"false"</span>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
 Last updated: Apr2013.</div></body></html>

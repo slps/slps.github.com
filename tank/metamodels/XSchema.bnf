@@ -1,3 +1,10 @@
+String:
+        STR
+Integer:
+        INT
+Boolean:
+        "true"
+        "false"
 AttributeUseType:
         null::EPSILON
         optional::EPSILON
@@ -21,6 +28,14 @@ XSchemaContentElement:
         Parameters
 XSchemaContentElement:
         AbstractType
+XSchemaContentElement:
+        Group
+XSchemaContentElement:
+        AttributeGroup
+Parameters:
+        Element
+Parameters:
+        Attribute
 Element:
         references::ElementRef+
 Occurable:
@@ -37,10 +52,14 @@ Container:
         Choice
 Container:
         Sequence
+Container:
+        Group
 AtomicContent:
         ElementRef
 AtomicContent:
         GroupRef
+AtomicContent:
+        Element
 ElementRef:
         referencedElement::Element
 GroupRef:
@@ -55,6 +74,8 @@ Sequence:
         contents::AbstractContent+
 AbstractAttributeGroupContent:
         AtomicAttributeGroupContent
+AbstractAttributeGroupContent:
+        AttributeGroup
 AttributeGroup:
         contents::AbstractAttributeGroupContent+ references::AttributeGroupRef+
 AttributeGroupRef:
@@ -63,6 +84,8 @@ AtomicAttributeGroupContent:
         AttributeGroupRef
 AtomicAttributeGroupContent:
         AttributeRef
+AtomicAttributeGroupContent:
+        Attribute
 Attribute:
         use::AttributeUseType references::AttributeRef+
 AttributeRef:

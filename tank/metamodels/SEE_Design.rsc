@@ -26,7 +26,7 @@ syntax VariableExpression
  ;
 syntax NumberExpression
         = 
-        ()
+        value: Integer
  ;
 syntax UnaryOperator
         = UnaryPlusOp
@@ -35,11 +35,11 @@ syntax UnaryOperator
  ;
 syntax UnaryPlusOp
         = 
-        ()
+        operand: Expression
  ;
 syntax UnaryMinusOp
         = 
-        ()
+        operand: Expression
  ;
 syntax BinaryOperator
         = PlusOperator
@@ -48,9 +48,21 @@ syntax BinaryOperator
  ;
 syntax PlusOperator
         = 
-        ()
+        Expression operand1 Expression operand2
  ;
 syntax MinusOperator
         = 
-        ()
+        Expression operand1 Expression operand2
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
  ;

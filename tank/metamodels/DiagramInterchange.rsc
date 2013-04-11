@@ -100,3 +100,15 @@ syntax Ellipse
         = 
         Point center Double radiusX Double radiusY Double rotation Double startAngle Double endAngle
  ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;

@@ -1,3 +1,10 @@
+Integer:
+        INT
+String:
+        STR
+Boolean:
+        "true"
+        "false"
 EDataType:
         value::String
 NamedObject:
@@ -33,7 +40,7 @@ Director:
 Parameter:
         pa_container::Entity dataType::EDataType
 ComponentPort:
-        EPSILON
+        po_container::Entity links::Relation+
 ComponentRelation:
         re_container::CompositeEntity
 ComponentEntity:
@@ -43,7 +50,7 @@ ComponentEntity:
 ComponentEntity:
         ce_container::CompositeEntity
 AtomicActor:
-        EPSILON
+        ce_container::CompositeEntity
 CompositeEntity:
         WorkSpace
 CompositeEntity:
@@ -51,6 +58,6 @@ CompositeEntity:
 CompositeEntity:
         containees::ComponentEntity+ relations::ComponentRelation+
 WorkSpace:
-        EPSILON
+        containees::ComponentEntity+ relations::ComponentRelation+
 CompositeActor:
         directors::Director

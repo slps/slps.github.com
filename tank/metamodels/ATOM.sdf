@@ -2,8 +2,12 @@ module Main
 
 exports
   sorts
-        ATOM Entry Source Content InLineXHTMLContent InLineOtherContent OutOfLineContent Generator Category Link Person Author Contributor Date 
+        String Integer ATOM Entry Source Content InLineXHTMLContent InLineOtherContent OutOfLineContent Generator Category Link Person Author Contributor Date 
   context-free syntax
+        STR -> String
+
+        INT -> Integer
+
         title::String id::String subtitle::String rights::String icon::String logo::String links::Link+ lastUpdate::Date generator::Generator categories::Category+ authors::Author+ contibutors::Contributor+ entries::Entry+ -> ATOM
 
         title::String id::String rights::String summary::String links::Link+ source::Source published::Date lastUpdate::Date content::Content categories::Category+ authors::Author+ contibutors::Contributor+ atom::ATOM -> Entry
@@ -18,9 +22,9 @@ exports
 
         type::String -> Content
 
-         -> InLineXHTMLContent
+        type::String -> InLineXHTMLContent
 
-         -> InLineOtherContent
+        type::String -> InLineOtherContent
 
         src::String -> OutOfLineContent
 
@@ -36,8 +40,8 @@ exports
 
         name::String uri::String email::String -> Person
 
-         -> Author
+        name::String uri::String email::String -> Author
 
-         -> Contributor
+        name::String uri::String email::String -> Contributor
 
         day::Integer month::Integer year::Integer hours::Integer minutes::Integer seconds::Integer -> Date

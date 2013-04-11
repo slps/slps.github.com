@@ -13,3 +13,7 @@ syntax FKey
         = 
         Table references Column cols+
  ;
+syntax String
+        = 
+        String
+ ;

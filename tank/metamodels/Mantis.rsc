@@ -15,6 +15,11 @@ syntax MantisRoot
 syntax IdentifiedElt
         = ValueWithId
         | Relationship
+        | Issue
+ ;
+syntax PrivateElt
+        = Issue
+        | Note
  ;
 syntax Issue
         = 
@@ -33,8 +38,8 @@ syntax Relationship
         type: RelationshipType
  ;
 syntax TimeStampedElt
-        = 
-        Attachment
+        = Attachment
+        | Note
  ;
 syntax Note
         = 
@@ -43,4 +48,16 @@ syntax Note
 syntax Attachment
         = 
         String filename Integer size String contentType String downloadUrl
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
  ;

@@ -1,3 +1,10 @@
+String:
+        STR
+Integer:
+        INT
+Boolean:
+        "true"
+        "false"
 SystemDefinitionModel:
         information::Information import::Import+ designData::DesignData settingDefinitions::SettingDefinitions communicationDefinition::SDMCommunicationDefinition+ containmentDefinition::SDMContainmentDefinition+ delegationDefinition::SDMDelegationDefinition+ referenceDefinition::SDMReferenceDefinition+ endpointDefinition::SDMEndpointDefinition+ resourceDefinition::SDMResourceDefinition+ systemDefinition::SDMSystemDefinition+ constraintDefinition::SDMConstraintDefinition+ manager::SDMManager+ nameSpace::NameSpace namespaceIdentity::NamespaceIdentity documentLanguage::Culture+ compilationHash::CompilationHashType+
 Information:
@@ -196,14 +203,8 @@ RelationshipMember:
         ReferenceMember
 SystemMember:
         OBSubsystem
-SystemMember:
-        OBSubsystem
 EndpointMember:
         OBEndpoint
-EndpointMember:
-        OBEndpoint
-ResourceMember:
-        OBResource
 ResourceMember:
         OBResource
 HostingMember:
@@ -345,19 +346,19 @@ DefSettingValue:
 DefSettingValueList:
         definition::Definition
 SimpleName:
-        EPSILON
+        value::String
 QualifiedName:
-        EPSILON
+        value::String
 Path:
-        EPSILON
+        value::String
 SettingPath:
-        EPSILON
+        value::String
 NamespaceIdentity:
         ImportNamespaceIdentity
 NamespaceIdentity:
         name::Path version::FourPartVersionType publicKey::PublicKeyType publicKeyToken::PublicKeyTokenType culture::CultureNeutral platform::Platform
 FlowDefinition:
-        EPSILON
+        description::Description designData::DesignData settingDeclaration::DefSettingDeclaration+ settingValue::DefSettingValue+ settingValueList::DefSettingValueList+ name::SimpleName manager::QualifiedName className::String
 FlowMember:
         OBFlow
 FlowMember:
@@ -373,7 +374,7 @@ ValueTransfer:
 Output:
         fixed::Boolean replace::Boolean
 Input:
-        EPSILON
+        name::SimpleName path::SettingPath cast::Boolean convert::Boolean
 SettingDefinitions:
         nameSpace::NameSpace manager::QualifiedName clrNameSpace::String
 SettingMember:
@@ -423,17 +424,17 @@ PathList:
 PathList:
         settingPath::SettingPath+
 MaxOccurs:
-        EPSILON
+        value::String
 MinOccurs:
-        EPSILON
+        value::String
 FourPartVersionType:
-        EPSILON
+        value::String
 PublicKeyType:
-        EPSILON
+        value::String
 PublicKeyTokenType:
-        EPSILON
+        value::String
 CompilationHashType:
-        EPSILON
+        value::String
 RolesList:
         Host::EPSILON
         Guest::EPSILON
@@ -446,9 +447,9 @@ RolesList:
         Client::EPSILON
         Server::EPSILON
 Culture:
-        EPSILON
+        value::String
 CultureNeutral:
-        EPSILON
+        value::String
 ProcessorArchitectures:
         x86::EPSILON
         ia64::EPSILON

@@ -1,3 +1,10 @@
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR
 QoSComponent:
         profile::QoSProfile+ operations::Operation
 QoSProfile:
@@ -5,7 +12,7 @@ QoSProfile:
 QoSProfile:
         SimpleProfile
 QoSContraints:
-        EPSILON
+        invariant::BooleanExpression parallel_and_composition::MappingExpression parallel_or_composition::MappingExpression sequential_composition::MappingExpression values::MappingExpression statisticalAttribute::StatisticalAttributekindKind+ parameter::Parameter domain::Domain
 Operation:
         EPSILON
 CompoundProfile:
@@ -44,8 +51,6 @@ Parameter:
         EPSILON
 DataType:
         Domain
-DataType:
-        Domain
 Domain:
         Numeric
 Domain:
@@ -57,10 +62,10 @@ Domain:
 DirectionKind:
         value::String
 Numeric:
-        EPSILON
+        direction::DirectionKind
 Set:
         stringSet::StringSet+
 Enumeration:
-        EPSILON
+        direction::DirectionKind
 StringSet:
         string::String+

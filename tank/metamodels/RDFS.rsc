@@ -52,7 +52,7 @@ syntax Statement
  ;
 syntax URIReferenceNode
         = 
-        ()
+        Graph graph URIReference uriRef+ Statement subjectStatement+ Statement objectStatement+ PlainLiteral label+ Class type+ Resource seeAlso+ Resource referringResource+ Resource member+ Resource container+ List list+
  ;
 syntax BlankNode
         = 
@@ -64,7 +64,7 @@ syntax Class
  ;
 syntax Datatype
         = 
-        ()
+        Class subClassOf+ Class superClass+ Resource typedResource+ Property propertyForDomain+ Property propertyForRange+
  ;
 syntax Literal
         = PlainLiteral
@@ -81,7 +81,7 @@ syntax TypedLiteral
  ;
 syntax RDFXMLLiteral
         = 
-        ()
+        datatypeURI: URIReference
  ;
 syntax URIReference
         = UniformResourceIdentifier
@@ -90,4 +90,16 @@ syntax URIReference
 syntax UniformResourceIdentifier
         = 
         String name URIReference uriRef+
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
  ;

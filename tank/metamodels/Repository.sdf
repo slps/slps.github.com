@@ -2,8 +2,15 @@ module Main
 
 exports
   sorts
-        Subsystem Relation Class Feature Type Entity Routine 
+        String Boolean Integer Subsystem Relation Class Feature Type Entity Routine 
   context-free syntax
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
         classes::Class+ relations::Relation+ -> Subsystem
 
         subsystem::Subsystem classes::Class -> Relation
@@ -18,6 +25,6 @@ exports
 
         name::String -> Type
 
-         -> Entity
+        theClass::Class type::Type -> Entity
 
-         -> Routine
+        theClass::Class type::Type -> Routine

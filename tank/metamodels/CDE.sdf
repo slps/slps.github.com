@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        IUmlType ICdeComponentSpec IUmlClass IUmlComponent ICdeServer ICdeComponent IUmlMember ICdeMember ICdeMemberExe 
+        IUmlType ICdeComponentSpec IUmlClass IUmlComponent ICdeServer ICdeComponent IUmlMember ICdeMember ICdeMemberExe Integer String Boolean 
   context-free syntax
         ICdeComponentSpec -> IUmlType
 
@@ -10,9 +10,7 @@ exports
 
         members::IUmlMember+ -> IUmlType
 
-         -> ICdeComponentSpec
-
-        IUmlComponent -> IUmlClass
+        members::IUmlMember+ -> ICdeComponentSpec
 
         IUmlComponent -> IUmlClass
 
@@ -29,8 +27,13 @@ exports
 
         ICdeMember -> IUmlMember
 
-        ICdeMember -> IUmlMember
-
          -> ICdeMember
 
         executionPerformance::String resourceNeeded::String executionDetails::String -> ICdeMemberExe
+
+        INT -> Integer
+
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean

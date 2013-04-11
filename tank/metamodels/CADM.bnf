@@ -49,7 +49,7 @@ Agreement:
 Agreement:
         isAssociatedWith::Agreement+ isCitedBy::Agreement+ appliesTo::InformationAsset+ implements::Guidance+
 Standard:
-        EPSILON
+        isAssociatedWith::Agreement+ isCitedBy::Agreement+ appliesTo::InformationAsset+ implements::Guidance+
 Task:
         isAssociatedWith::Task+ isPerformedBy::Node+ isPerformedUsing::System+ specifies::Requirement+
 InformationAsset:
@@ -59,9 +59,9 @@ InformationAsset:
 InformationAsset:
         isAssociatedWith::InformationAsset+
 ConceptualDataModel:
-        EPSILON
+        isAssociatedWith::InformationAsset+
 ActivityModel:
-        EPSILON
+        isAssociatedWith::InformationAsset+
 Node:
         isAssociatedWith::Node+ describes::Architecture+ hasServicesProvidedBy::Facility+ involvedIn::ActivityModel+ uses::InformationAsset+ involves::InfoExchRequirement+ isParticipedInBy::Network+ supports::System+
 Network:
@@ -75,7 +75,7 @@ Requirement:
 InfoExchRequirement:
         isCitedIn::Document+ isSpecifiedInInfos::InformationAsset+
 ExchangeNeedLineReq:
-        EPSILON
+        mayBeSatifiedBy::Architecture+ isSpecifiedUsing::InformationAsset+ specifiesNeedFor::MaterielItem+ cites::MissionArea+
 MissionArea:
         supports::Task+
 System:
@@ -93,8 +93,10 @@ MaterielItem:
 MaterielItem:
         establishedAs::MaterielItem+ conformsTo::Standard+ performsTo::Capability+
 EquipmentType:
-        EPSILON
+        establishedAs::MaterielItem+ conformsTo::Standard+ performsTo::Capability+
 SoftwareItem:
         uses::EquipmentType+ isSourceFor::Organization
 Facility:
-        EPSILON
+        name::String content::String
+String:
+        STR

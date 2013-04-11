@@ -69,7 +69,7 @@ Document:
 Document:
         type::String cites::InformationAssetDocument+ describes::SystemDocument+ records::ArchitectureDocument+ isTheReferenceFor::IE+ isThePrimaryReferenceFor::PA+
 SystemFunctionalityDescription:
-        EPSILON
+        type::String cites::InformationAssetDocument+ describes::SystemDocument+ records::ArchitectureDocument+ isTheReferenceFor::IE+ isThePrimaryReferenceFor::PA+
 FunctionalSpecification:
         mayBeA::SystemDocument
 AMSpecification:
@@ -117,9 +117,9 @@ InformationAsset:
 InformationAsset:
         isCitedIn::InformationAssetDocument+ describes::DataStore+
 DataStore:
-        EPSILON
+        isParentFor::PA+ isChildFor::PA+ isIncludedIn::AMPA+ isAssignedTo::SystemPA+ represents::ArchitectureBusinessSubFunction+ correspondsTo::PATask+ has::PACapability+ isPerformedBy::OperationalRolePA+
 SystemFunction:
-        EPSILON
+        isParentFor::PA+ isChildFor::PA+ isIncludedIn::AMPA+ isAssignedTo::SystemPA+ represents::ArchitectureBusinessSubFunction+ correspondsTo::PATask+ has::PACapability+ isPerformedBy::OperationalRolePA+
 SystemPAStandard:
         isUsedToDefine::InformationTechnologyStandard+
 InformationTechnologyStandard:
@@ -137,13 +137,13 @@ Task:
 Task:
         levelIdentifier::String references::String cost::String correspondsTo::PATask+ supports::TaskMissionArea+
 HumanBehaviourTask:
-        EPSILON
+        levelIdentifier::String references::String cost::String correspondsTo::PATask+ supports::TaskMissionArea+
 OperationalCapabilityTask:
-        EPSILON
+        levelIdentifier::String references::String cost::String correspondsTo::PATask+ supports::TaskMissionArea+
 TaskMissionArea:
         hasContributionFrom::OperationalCapabilityTask+
 PATask:
-        EPSILON
+        levelIdentifier::String references::String cost::String correspondsTo::PATask+ supports::TaskMissionArea+
 BusinessSubfunction:
         appliesTo::ArchitectureBusinessSubFunction+
 ArchitectureBusinessSubFunction:
@@ -166,3 +166,5 @@ Skill:
         mayBeCitedFor::OperationalRole+
 Position:
         mayBeCitedFor::OperationalRole+
+String:
+        STR

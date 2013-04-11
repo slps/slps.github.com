@@ -29,3 +29,7 @@ syntax Token
         = 
         place: ANY
  ;
+syntax Integer
+        = 
+        Integer
+ ;

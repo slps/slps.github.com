@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        Page NameSpace PageResource GraphicalContainer WinFXElement ResourceDictionary Grid Workshop3D Element3D UI3Delement XyzAxis3D Box3D Square3D Name 
+        Page NameSpace PageResource GraphicalContainer WinFXElement PerspectiveElement ResourceDictionary Grid Object3D Workshop3D Element3D UI3Delement XyzAxis3D Box3D Square3D Name String Boolean Integer 
   context-free syntax
         xmlns::NameSpace+ title::String graphContainer::GraphicalContainer pageResources::PageResource -> Page
 
@@ -14,22 +14,45 @@ exports
 
         Name -> WinFXElement
 
+        Workshop3D -> PerspectiveElement
+
+        XyzAxis3D -> PerspectiveElement
+
+        Box3D -> PerspectiveElement
+
+        Square3D -> PerspectiveElement
+
         source::String -> ResourceDictionary
 
         object3D::Object3D+ -> Grid
+
+        Workshop3D -> Object3D
 
         elements3D::Element3D+ -> Workshop3D
 
         UI3Delement -> Element3D
 
+        XyzAxis3D -> Element3D
+
         UI3Delement -> Element3D
+
+        Box3D -> UI3Delement
+
+        Square3D -> UI3Delement
 
         transform::String material::String name::Name -> UI3Delement
 
         length::Double -> XyzAxis3D
 
-         -> Box3D
+        transform::String material::String name::Name namespace::NameSpace -> Box3D
 
-         -> Square3D
+        transform::String material::String name::Name namespace::NameSpace -> Square3D
 
         name::String -> Name
+
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer

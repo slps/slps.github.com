@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        Element DoDAFModel Document SystemFunctionalityDescription FunctionalSpecification AMSpecification SystemDocument ArchitectureDocument System SystemPA IE AMIERole AMIERoleGraphic Input Output InformationAssetDocument AMPA AMPAGraphic PA PACapability AM InformationAsset DataStore SystemFunction SystemPAStandard InformationTechnologyStandard LineOfBusiness Task HumanBehaviourTask OperationalCapabilityTask TaskMissionArea PATask BusinessSubfunction ArchitectureBusinessSubFunction OperationalRolePA OperationalRole OrganizationTypeOperationalRole OrganizationOperationalRole Occupation PersonType PersonTypeCapabilityNorm Skill Position 
+        Element DoDAFModel Document SystemFunctionalityDescription FunctionalSpecification AMSpecification SystemDocument ArchitectureDocument System SystemPA IE AMIERole AMIERoleGraphic Input Output InformationAssetDocument AMPA AMPAGraphic PA PACapability AM InformationAsset DataStore SystemFunction SystemPAStandard InformationTechnologyStandard LineOfBusiness Task HumanBehaviourTask OperationalCapabilityTask TaskMissionArea PATask BusinessSubfunction ArchitectureBusinessSubFunction OperationalRolePA OperationalRole OrganizationTypeOperationalRole OrganizationOperationalRole Occupation PersonType PersonTypeCapabilityNorm Skill Position String 
   context-free syntax
         DoDAFModel -> Element
 
@@ -74,7 +74,7 @@ exports
 
         type::String cites::InformationAssetDocument+ describes::SystemDocument+ records::ArchitectureDocument+ isTheReferenceFor::IE+ isThePrimaryReferenceFor::PA+ -> Document
 
-         -> SystemFunctionalityDescription
+        type::String cites::InformationAssetDocument+ describes::SystemDocument+ records::ArchitectureDocument+ isTheReferenceFor::IE+ isThePrimaryReferenceFor::PA+ -> SystemFunctionalityDescription
 
         mayBeA::SystemDocument -> FunctionalSpecification
 
@@ -122,9 +122,9 @@ exports
 
         isCitedIn::InformationAssetDocument+ describes::DataStore+ -> InformationAsset
 
-         -> DataStore
+        isParentFor::PA+ isChildFor::PA+ isIncludedIn::AMPA+ isAssignedTo::SystemPA+ represents::ArchitectureBusinessSubFunction+ correspondsTo::PATask+ has::PACapability+ isPerformedBy::OperationalRolePA+ -> DataStore
 
-         -> SystemFunction
+        isParentFor::PA+ isChildFor::PA+ isIncludedIn::AMPA+ isAssignedTo::SystemPA+ represents::ArchitectureBusinessSubFunction+ correspondsTo::PATask+ has::PACapability+ isPerformedBy::OperationalRolePA+ -> SystemFunction
 
         isUsedToDefine::InformationTechnologyStandard+ -> SystemPAStandard
 
@@ -142,13 +142,13 @@ exports
 
         levelIdentifier::String references::String cost::String correspondsTo::PATask+ supports::TaskMissionArea+ -> Task
 
-         -> HumanBehaviourTask
+        levelIdentifier::String references::String cost::String correspondsTo::PATask+ supports::TaskMissionArea+ -> HumanBehaviourTask
 
-         -> OperationalCapabilityTask
+        levelIdentifier::String references::String cost::String correspondsTo::PATask+ supports::TaskMissionArea+ -> OperationalCapabilityTask
 
         hasContributionFrom::OperationalCapabilityTask+ -> TaskMissionArea
 
-         -> PATask
+        levelIdentifier::String references::String cost::String correspondsTo::PATask+ supports::TaskMissionArea+ -> PATask
 
         appliesTo::ArchitectureBusinessSubFunction+ -> BusinessSubfunction
 
@@ -171,3 +171,5 @@ exports
         mayBeCitedFor::OperationalRole+ -> Skill
 
         mayBeCitedFor::OperationalRole+ -> Position
+
+        STR -> String

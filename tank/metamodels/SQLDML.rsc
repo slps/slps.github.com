@@ -1,6 +1,18 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module SQLDML
 
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
 syntax LocatedElement
         = SQLRoot
         | Statement
@@ -40,6 +52,7 @@ syntax QueryStmtAllCol
 syntax NamedElement
         = Table
         | DataType
+        | ColumnExp
  ;
 syntax Table
         = 
@@ -90,6 +103,7 @@ syntax Predicate
         = ValueExp
         | ListExp
         | FunctionExp
+        | ColumnExp
  ;
 syntax QueryPredicate
         = 

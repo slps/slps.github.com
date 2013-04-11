@@ -10,8 +10,9 @@ syntax LocatedElement
         | Label
  ;
 syntax IdedElement
-        = 
-        NetElement
+        = NetElement
+        | NetContentElement
+        | Arc
  ;
 syntax URI
         = 
@@ -24,6 +25,10 @@ syntax PNMLDocument
 syntax NetElement
         = 
         URI type PNMLDocument document NetContent contents+ Name name
+ ;
+syntax NetContent
+        = NetContentElement
+        | Arc
  ;
 syntax LabeledElement
         = 
@@ -52,4 +57,12 @@ syntax Place
 syntax Transition
         = 
         ()
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
  ;

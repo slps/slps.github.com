@@ -5,3 +5,15 @@ syntax Person
         = 
         String name String firstName String phone
  ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;

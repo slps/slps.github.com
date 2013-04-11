@@ -14,7 +14,7 @@ syntax TypedAttribute
  ;
 syntax Field
         = 
-        ()
+        type: Type
  ;
 syntax Property
         = 
@@ -27,7 +27,7 @@ syntax MethodBase
  ;
 syntax Constructor
         = 
-        ()
+        String visibility Boolean isAbstract Boolean isFinal Boolean isStatic Parameter parameters+
  ;
 syntax Method
         = 
@@ -44,4 +44,16 @@ syntax Parameter
 syntax Assembly
         = 
         String name Type content+
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
  ;

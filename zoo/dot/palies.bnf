@@ -1,0 +1,87 @@
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR
+Label:
+        SimpleLabel
+Label:
+        ComplexLabel
+SimpleLabel:
+        content::String
+ComplexLabel:
+        compartments::Compartment+
+Compartment:
+        VerticalCompartment
+Compartment:
+        HorizontalCompartment
+Compartment:
+        SimpleCompartment
+VerticalCompartment:
+        complexLabel::ComplexLabel compartments::Compartment anchor::Anchor
+HorizontalCompartment:
+        complexLabel::ComplexLabel compartments::Compartment anchor::Anchor
+SimpleCompartment:
+        content::String
+Anchor:
+        name::String source::Compartment
+GraphElement:
+        Graph
+GraphElement:
+        Layer
+GraphElement:
+        Nodelike
+GraphElement:
+        Arc
+GraphElement:
+        Shape
+Graph:
+        type::String rankDir::String labeljust::String labelloc::String concentrate::Boolean nodes::Nodelike+ boundingBox::String compound::Boolean layers::Layer+ nodeSeparation::Double ordering::String size::String ratio::String center::Boolean
+Layer:
+        nodes::Nodelike+ arcs::Arc+ graph::Graph layerSeparator::String
+Nodelike:
+        SubGraph
+Nodelike:
+        Node
+SubGraph:
+        nodes::Nodelike+ labelloc::String
+Node:
+        fixedSize::Boolean fontname::String fontsize::Integer height::Integer width::Integer shape::NodeShape
+Arc:
+        DirectedArc
+Arc:
+        UndirectedArc
+DirectedArc:
+        arrowHead::ArrowShape headlabel::Label taillabel::Label arrowTail::ArrowShape tail_lp::Double head_lp::Double
+UndirectedArc:
+        fromNode::Nodelike toNode::Nodelike layers::Layer+ constraint::Boolean group::String minlen::Integer sameHead::String sameTail::String lhead::Nodelike ltail::Nodelike decorate::Boolean
+Shape:
+        NodeShape
+Shape:
+        ArrowShape
+NodeShape:
+        SimpleNodeShape
+NodeShape:
+        PointNodeShape
+NodeShape:
+        ComplexNodeShape
+SimpleNodeShape:
+        
+PointNodeShape:
+        
+ComplexNodeShape:
+        PolygonNodeShape
+ComplexNodeShape:
+        MNodeShape
+ComplexNodeShape:
+        RecordNodeShape
+PolygonNodeShape:
+        sides::Integer skew::Integer distortion::Integer isRegular::Boolean orientation::Integer
+MNodeShape:
+        toplabel::Label bottomlabel::Label
+RecordNodeShape:
+        
+ArrowShape:
+        clipping::String isPlain::Boolean size::Integer

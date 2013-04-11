@@ -38,6 +38,8 @@ AsmLElement:
         Function
 AsmLElement:
         Type
+AsmLElement:
+        VarDeclaration
 VarDeclaration:
         isConstant::Boolean isDeclaration::Boolean isLocal::Boolean name::String type::Type
 Namespace:
@@ -51,6 +53,8 @@ Case:
 Class:
         name::String isAbstract::Boolean superClassName::String varOrMethod::VarOrMethod+
 VarOrMethod:
+        Method
+VarOrMethod:
         ownerClass::Class
 Enumeration:
         name::String enumerators::Enumerator+
@@ -58,6 +62,8 @@ Enumerator:
         name::String value::Term
 Function:
         Main
+Function:
+        Method
 Method:
         isAbstract::Boolean isShared::Boolean isEntryPoint::Boolean isOverride::Boolean returnType::Type parameters::Parameter+
 Parameter:
@@ -129,7 +135,7 @@ ConditionalRule:
 ConditionalRule:
         condition::Term thenRule::Body elseRule::Body elseIfRule::ElseIf
 ElseIf:
-        EPSILON
+        condition::Term thenRule::Body elseRule::Body elseIfRule::ElseIf
 ReturnRule:
         term::Term
 AddRule:
@@ -187,7 +193,7 @@ MethodCallTerm:
 MethodCallTerm:
         name::String parameters::Term+
 NewInstance:
-        EPSILON
+        name::String parameters::Term+
 PredicateTerm:
         ForAllTerm
 PredicateTerm:
@@ -197,11 +203,11 @@ PredicateTerm:
 PredicateTerm:
         expressions::InWhereHolds+
 ForAllTerm:
-        EPSILON
+        expressions::InWhereHolds+
 ExistsTerm:
         isUnique::Boolean
 AnyIn:
-        EPSILON
+        expressions::InWhereHolds+
 SetTerm:
         EnumerateSet
 SetTerm:
@@ -238,3 +244,10 @@ StringConstant:
         val::String
 NullConstant:
         
+String:
+        STR
+Integer:
+        INT
+Boolean:
+        "true"
+        "false"

@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        UIML Header MetaData Peer Presentation Logic DComponent DClass DProperty DMethod DParam Script Listener UsedInTagKind MapsTypeKind ExtensibleElement Source LocalSource RemoteSource Interface Structure Part Style Property Content Behavior Repeat Constant Reference Rule Condition EventCondition EqualCondition OpCondition Action Action-1 Action-2 Call Parameter PropertyParameter ReferenceParameter CallParameter OperationParameter EventParameter ConstantParameter IteratorParameter Iterator ConstantIterator PropertyIterator CallIterator TextIterator Event Equal EqualToConstant EqualToProperty EqualToReference EqualToOperation Operation Restructure Branch WhenTrue WhenFalse ByDefault HowKind ExportKind WhereKind Template BehaviorTemplate DClassTemplate DComponentTemplate ConstantTemplate ContentTemplate InterfaceTemplate LogicTemplate PartTemplate PeerTemplate PresentationTemplate PropertyTemplate RestructureTemplate RuleTemplate ScriptTemplate StructureTemplate StyleTemplate 
+        UIML Header MetaData Peer Presentation Logic DComponent DClass DProperty DMethod DParam Script Listener UsedInTagKind MapsTypeKind ExtensibleElement Source LocalSource RemoteSource Interface Structure Part Style Property Content Behavior Repeat Constant Reference Rule Condition EventCondition EqualCondition OpCondition Action Action-1 Action-2 Call Parameter PropertyParameter ReferenceParameter CallParameter OperationParameter EventParameter ConstantParameter IteratorParameter Iterator ConstantIterator PropertyIterator CallIterator TextIterator Event Equal EqualToConstant EqualToProperty EqualToReference EqualToOperation Operation Restructure Branch WhenTrue WhenFalse ByDefault HowKind ExportKind WhereKind String Integer Template BehaviorTemplate DClassTemplate DComponentTemplate ConstantTemplate ContentTemplate InterfaceTemplate LogicTemplate PartTemplate PeerTemplate PresentationTemplate PropertyTemplate RestructureTemplate RuleTemplate ScriptTemplate StructureTemplate StyleTemplate 
   context-free syntax
         head::Header templates::Template+ interfaces::Interface+ peers::Peer+ -> UIML
 
@@ -202,11 +202,11 @@ exports
 
         properties::Property+ calls::Call+ restructure::Restructure op::Operation equal::Equal event::Event -> Branch
 
-         -> WhenTrue
+        properties::Property+ calls::Call+ restructure::Restructure op::Operation equal::Equal event::Event -> WhenTrue
 
-         -> WhenFalse
+        properties::Property+ calls::Call+ restructure::Restructure op::Operation equal::Equal event::Event -> WhenFalse
 
-         -> ByDefault
+        properties::Property+ calls::Call+ restructure::Restructure op::Operation equal::Equal event::Event -> ByDefault
 
         append:: -> HowKind
         cascade:: -> HowKind
@@ -222,6 +222,10 @@ exports
         last:: -> WhereKind
         before:: -> WhereKind
         after:: -> WhereKind
+
+        STR -> String
+
+        INT -> Integer
 
         BehaviorTemplate -> Template
 

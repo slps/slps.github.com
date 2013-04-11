@@ -35,7 +35,7 @@ syntax StructuralFeature
  ;
 syntax Attribute
         = 
-        ()
+        type: Classifier
  ;
 syntax NameSpace
         = Classifier
@@ -45,25 +45,39 @@ syntax NameSpace
 syntax Classifier
         = Class
         | Datatype
+        | Subsystem
         | Feature features+
  ;
 syntax Package
         = Model
+        | Subsystem
         | ModelElement importedElements+
  ;
 syntax Class
         = 
-        ()
+        Feature features+
  ;
 syntax Datatype
         = 
-        ()
+        Feature features+
  ;
 syntax Subsystem
         = 
-        ()
+        Feature features+ ModelElement importedElements+
  ;
 syntax Model
         = 
-        ()
+        ModelElement importedElements+
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
  ;

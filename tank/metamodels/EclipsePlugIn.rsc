@@ -29,3 +29,11 @@ syntax Class
         = 
         String name Librairy librairy
  ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;

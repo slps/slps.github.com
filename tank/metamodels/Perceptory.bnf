@@ -1,3 +1,10 @@
+String:
+        STR
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
 RelationSchip:
         Association
 RelationSchip:
@@ -9,9 +16,9 @@ RelationSchip:
 ConstrainedRelationSchip:
         EPSILON
 Aggregation:
-        EPSILON
+        
 Composition:
-        EPSILON
+        
 Association:
         Aggregation
 Association:
@@ -20,9 +27,9 @@ Association:
         Aggregation
         Composition
 Generalisation:
-        EPSILON
+        affectCharacteristic::Characteristic+ constraint::Constraint steriotype::Steriotype+ packages::Package+ associatePackages::Package
 Dependency:
-        EPSILON
+        affectCharacteristic::Characteristic+ constraint::Constraint steriotype::Steriotype+ packages::Package+ associatePackages::Package
 AssociationEnd:
         EPSILON
 Package:
@@ -39,6 +46,12 @@ Operation:
         detail::MetaData inCharacteristic::Characteristic+ affectFeature::Class+ steriotype::Steriotype behaviour::Class
 Characteristic:
         DescriptiveAttribute
+Characteristic:
+        Geometry
+Characteristic:
+        Temporality
+Characteristic:
+        VisualInfo
 Characteristic:
         details::MetaData rule::BusnissRule operations::Operation theClass::Class relationSchip::RelationSchip constraint::Constraint
 BusnissRule:
@@ -60,12 +73,18 @@ Geometry:
 Temporality:
         geometry::Geometry descriptiveAttributet::DescriptiveAttribute
 VisualInfo:
-        EPSILON
+        details::MetaData rule::BusnissRule operations::Operation theClass::Class relationSchip::RelationSchip constraint::Constraint
 Value:
         enumeratedDomain::EnumeratedDomain
 RangeDomain:
-        EPSILON
+        descriptiveAttribute::DescriptiveAttribute+
 EnumeratedDomain:
         value::Value+
 PerceptorySteriotype:
-        EPSILON
+        Geometry
+PerceptorySteriotype:
+        Temporality
+PerceptorySteriotype:
+        VisualInfo
+PerceptorySteriotype:
+        descriptiveAttribute::DescriptiveAttribute+ operations::Operation+ relationSchip::RelationSchip+ theClass::Class+ thePackage::Package+

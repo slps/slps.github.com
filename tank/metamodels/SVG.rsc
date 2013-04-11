@@ -167,3 +167,15 @@ syntax SvgFile
         = 
         Svg tag Element elements+
  ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;

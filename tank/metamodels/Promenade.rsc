@@ -1,6 +1,18 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module Promenade
 
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
 syntax Strong
         = 
         ()
@@ -19,11 +31,11 @@ syntax FeedBack
  ;
 syntax Weak
         = 
-        ()
+        Precedence precs+ MetaTaskOccurence auxTasks+
  ;
 syntax Grouping
         = 
-        ()
+        Precedence precs+ MetaTaskOccurence auxTasks+
  ;
 syntax Precedence
         = DynPrecedence
@@ -32,16 +44,25 @@ syntax Precedence
         | DerPrecedence deprecs+ ParBinding parbind+
  ;
 syntax DynPrecedence
-        = 
-        ()
+        = Strong
+        | Start
+        | End
+        | FeedBack
+        | Weak
+        | Grouping
+        | DerPrecedence deprecs+ ParBinding parbind+
  ;
 syntax DerPrecedence
-        = 
-        Precedence precs+ MetaTaskOccurence auxTasks+
+        = Weak
+        | Grouping
+        | Precedence precs+ MetaTaskOccurence auxTasks+
  ;
 syntax BasPrecedence
-        = 
-        ()
+        = Strong
+        | Start
+        | End
+        | FeedBack
+        | DerPrecedence deprecs+ ParBinding parbind+
  ;
 syntax MetaTaskOccurence
         = 

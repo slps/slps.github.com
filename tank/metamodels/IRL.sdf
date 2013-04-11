@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        Element NamedElement ExtendedIdentifier Extended Definition RuleSet ImportDefinition 
+        Element NamedElement ExtendedIdentifier Extended Definition RuleSet ImportDefinition Integer String Boolean 
   context-free syntax
         NamedElement -> Element
 
@@ -32,6 +32,8 @@ exports
 
         Definition -> Extended
 
+        ClassInstancesDeclaration -> Extended
+
         ImportDefinition -> Definition
 
         PropertyDefinition -> Definition
@@ -39,3 +41,10 @@ exports
         importDefinitions::ImportDefinition+ propertyDefinitions::IRLDeclarations/PropertyDefinition rulesetElementDefinitions::IRLRules/RulesetElementDefinition+ -> RuleSet
 
         importDefinitionOwners::RuleSet dotStar::Boolean -> ImportDefinition
+
+        INT -> Integer
+
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean

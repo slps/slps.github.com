@@ -51,11 +51,11 @@ syntax CompletionState
  ;
 syntax Failure
         = 
-        ()
+        guardCondition: String
  ;
 syntax Success
         = 
-        ()
+        guardCondition: String
  ;
 syntax BusinessActivity
         = BusinessTransactionActivity
@@ -100,4 +100,12 @@ syntax Attachment
 syntax BusinessDocument
         = 
         String specificationLocation String specificationElement String conditionExpression DocumentEnvelope envelopes+ Attachment attachments+
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax String
+        = 
+        String
  ;

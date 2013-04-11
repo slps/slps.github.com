@@ -11,15 +11,32 @@ syntax VisioDocument
  ;
 syntax PageSheet
         = 
-        ()
- ;
-syntax Shape
-        = 
         ShapesCollection ss_shapes Integer lineStyle Integer fillStyle Integer textStyle ShapeElt shapeElts+
  ;
+syntax NamedElt
+        = MasterShortCut
+        | Page
+ ;
+syntax IdentifiedElt
+        = MasterShortCut
+        | Master
+        | Page
+ ;
+syntax Shape
+        = PageSheet
+        | ShapesCollection ss_shapes Integer lineStyle Integer fillStyle Integer textStyle ShapeElt shapeElts+
+ ;
 syntax ShapeElt
+        = Text
+        | Geom
+ ;
+syntax IXElt
         = 
-        Text
+        XYElt
+ ;
+syntax DelElt
+        = 
+        XYElt
  ;
 syntax Geom
         = 
@@ -131,8 +148,9 @@ syntax Connect
         ConnectsCollection c_connects Integer fromSheet Integer toSheet String fromCell String toCell Integer fromPart Integer toPart
  ;
 syntax MasterElt
-        = 
-        Icon
+        = Icon
+        | ShapesCollection
+        | ConnectsCollection
  ;
 syntax PagesCollection
         = 
@@ -141,4 +159,20 @@ syntax PagesCollection
 syntax Page
         = 
         PagesCollection p_pages Boolean background Integer backPage Double viewScale Double viewCenterX Double ViewCenterY Integer reviewerID Integer associatedPage PageElt pageElts+
+ ;
+syntax PageElt
+        = ShapesCollection
+        | ConnectsCollection
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
  ;

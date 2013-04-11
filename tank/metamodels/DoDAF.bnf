@@ -59,15 +59,13 @@ SystemFunction:
 SystemFunction:
         decomposes::SystemFunction+ consumes::Product+ produces::Product+ terminatesAt::SystemProductFlow mesuredBy::ConstraintOrRequirement+
 Service:
-        EPSILON
+        decomposes::SystemFunction+ consumes::Product+ produces::Product+ terminatesAt::SystemProductFlow mesuredBy::ConstraintOrRequirement+
 SystemRoleInterface:
         ServiceDependency
 SystemRoleInterface:
         originatesFrom::SystemRole
 ServiceDependency:
-        EPSILON
-ServiceProvider:
-        ServiceMediator
+        originatesFrom::SystemRole
 ServiceProvider:
         ServiceMediator
 ServiceMediator:
@@ -122,9 +120,9 @@ ConstraintOrRequirement:
 ConstraintOrRequirement:
         QualityRequirement
 Constraint:
-        
+        EPSILON
 QualityRequirement:
-        
+        EPSILON
 DIA:
         nmjic::NMJIC higherEchelon::HigherEchelon
 NMJIC:
@@ -146,13 +144,13 @@ ComponentCommand:
 ComponentCommand:
         jfc::JFC
 DJFLCC:
-        EPSILON
+        jfc::JFC
 JFACC:
         subordinateAirCommand::SubordinateAirCommand aoccid::AOCCID+ aoccpsc::AOCCombatPlanStrategyCells+
 JFMCC:
-        EPSILON
+        jfc::JFC
 JFSOCC:
-        EPSILON
+        jfc::JFC
 SubordinateAirCommand:
         MAW
 SubordinateAirCommand:
@@ -160,9 +158,9 @@ SubordinateAirCommand:
 SubordinateAirCommand:
         jfacc::JFACC
 MAW:
-        EPSILON
+        jfacc::JFACC
 WOC:
-        EPSILON
+        jfacc::JFACC
 AOCCID:
         name::String content::String
 AOCCombatPlanStrategyCells:
@@ -203,3 +201,7 @@ Target:
         cr::CollectionRequirement+ tn::TargetNomination holds::MIDB describes::TargetMaterialsAnalysis+
 MIDB:
         target::Target+
+String:
+        STR
+Integer:
+        INT

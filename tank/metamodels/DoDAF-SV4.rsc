@@ -45,7 +45,7 @@ syntax Document
  ;
 syntax SystemFunctionalityDescription
         = 
-        ()
+        String type InformationAssetDocument cites+ SystemDocument describes+ ArchitectureDocument records+ IE isTheReferenceFor+ PA isThePrimaryReferenceFor+
  ;
 syntax FunctionalSpecification
         = 
@@ -123,11 +123,11 @@ syntax InformationAsset
  ;
 syntax DataStore
         = 
-        ()
+        PA isParentFor+ PA isChildFor+ AMPA isIncludedIn+ SystemPA isAssignedTo+ ArchitectureBusinessSubFunction represents+ PATask correspondsTo+ PACapability has+ OperationalRolePA isPerformedBy+
  ;
 syntax SystemFunction
         = 
-        ()
+        PA isParentFor+ PA isChildFor+ AMPA isIncludedIn+ SystemPA isAssignedTo+ ArchitectureBusinessSubFunction represents+ PATask correspondsTo+ PACapability has+ OperationalRolePA isPerformedBy+
  ;
 syntax SystemPAStandard
         = 
@@ -150,11 +150,11 @@ syntax Task
  ;
 syntax HumanBehaviourTask
         = 
-        ()
+        String levelIdentifier String references String cost PATask correspondsTo+ TaskMissionArea supports+
  ;
 syntax OperationalCapabilityTask
         = 
-        ()
+        String levelIdentifier String references String cost PATask correspondsTo+ TaskMissionArea supports+
  ;
 syntax TaskMissionArea
         = 
@@ -162,7 +162,7 @@ syntax TaskMissionArea
  ;
 syntax PATask
         = 
-        ()
+        String levelIdentifier String references String cost PATask correspondsTo+ TaskMissionArea supports+
  ;
 syntax BusinessSubfunction
         = 
@@ -207,4 +207,8 @@ syntax Skill
 syntax Position
         = 
         OperationalRole mayBeCitedFor+
+ ;
+syntax String
+        = 
+        String
  ;

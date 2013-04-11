@@ -53,7 +53,7 @@ syntax Event
  ;
 syntax Action
         = 
-        ()
+        Episode episode+
  ;
 syntax Responce
         = 
@@ -66,4 +66,16 @@ syntax Stimilus
 syntax Parameter
         = 
         Stimilus stimilus+ Responce responce+
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
  ;

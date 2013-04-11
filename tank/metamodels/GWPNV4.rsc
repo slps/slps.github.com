@@ -25,3 +25,7 @@ syntax TPArc
         = 
         ANY src ANY dst
  ;
+syntax Integer
+        = 
+        Integer
+ ;

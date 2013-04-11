@@ -54,3 +54,11 @@ syntax Movement
         = 
         Execution exec Transition fire Marking source Marking target
  ;
+syntax String
+        = 
+        String
+ ;
+syntax Integer
+        = 
+        Integer
+ ;

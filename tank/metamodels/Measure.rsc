@@ -45,3 +45,15 @@ syntax PercentageMeasure
         = 
         value: Double
  ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;

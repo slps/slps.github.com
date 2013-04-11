@@ -1,6 +1,10 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module MAS
 
+syntax String
+        = 
+        String
+ ;
 syntax Agent
         = 
         Service service+ Non Functionnal Requirement non_Functionnal_Requirement+ Requirement requirement+ Organization belongs CooperationRules cooperationRules+ FIPA_Platform Agent fipa_Platform_Agent Role role Representation representation Characteristic characteristic Skill skill Aptitude aptitude
@@ -82,15 +86,15 @@ syntax Ontology
  ;
 syntax Concept
         = 
-        ()
+        environnement: Environnement
  ;
 syntax Predicat
         = 
-        ()
+        environnement: Environnement
  ;
 syntax Action
         = 
-        ()
+        environnement: Environnement
  ;
 syntax Environnement
         = 

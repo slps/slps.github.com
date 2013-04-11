@@ -25,3 +25,7 @@ syntax TransitionInformation
         = 
         WorkflowProcessDefinition processDefinition WorkflowRelevantData revelantDatas+ WorkflowProcessActivity to_processActivity WorkflowProcessActivity from_processActivity
  ;
+syntax String
+        = 
+        String
+ ;

@@ -46,3 +46,15 @@ syntax Indent
         = 
         String retrait GroupElement groupElementIndent
  ;
+syntax String
+        = 
+        String
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;

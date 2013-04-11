@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        LocatedElement IdedElement URI PNMLDocument NetElement LabeledElement Label Name NetContentElement Arc Place Transition 
+        LocatedElement IdedElement URI PNMLDocument NetElement NetContent LabeledElement Label Name NetContentElement Arc Place Transition Integer String 
   context-free syntax
         IdedElement -> LocatedElement
 
@@ -18,11 +18,19 @@ exports
 
         NetElement -> IdedElement
 
+        NetContentElement -> IdedElement
+
+        Arc -> IdedElement
+
         value::String -> URI
 
         xmlns::URI nets::NetElement+ -> PNMLDocument
 
         type::URI document::PNMLDocument contents::NetContent+ name::Name -> NetElement
+
+        NetContentElement -> NetContent
+
+        Arc -> NetContent
 
         Name -> LabeledElement
 
@@ -39,3 +47,7 @@ exports
          -> Place
 
          -> Transition
+
+        INT -> Integer
+
+        STR -> String

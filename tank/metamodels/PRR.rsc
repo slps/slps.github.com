@@ -27,6 +27,7 @@ syntax RuleAction
         = DeleteAction
         | AssignAction
         | InvokeAction
+        | CreateAction
         | actionOwner: Rule
  ;
 syntax RuleCondition
@@ -40,4 +41,16 @@ syntax Binding
 syntax RuleVariable
         = 
         Binding ruleVariableOwner PRRExpressions/OclExpression filter
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
  ;

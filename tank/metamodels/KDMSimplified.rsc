@@ -47,3 +47,15 @@ syntax KDMFramework
         = 
         KDMModel
  ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;

@@ -35,3 +35,11 @@ syntax ListEntry
         = 
         ListAttribute listAttribute String value
  ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;

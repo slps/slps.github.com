@@ -1,7 +1,22 @@
+Integer:
+        INT
+String:
+        STR
+Boolean:
+        "true"
+        "false"
 StringProperty:
-        EPSILON
+        val::String
 StringType:
         StringProperty
+StringType:
+        Text
+StringType:
+        DelText
+StringType:
+        InstrText
+StringType:
+        DelInstrText
 StringType:
         val::String
 BreakType:
@@ -58,16 +73,32 @@ RunContentElt:
         Picture
 RunContentElt:
         Tab
+RunContentElt:
+        Text
+RunContentElt:
+        DelText
+RunContentElt:
+        InstrText
+RunContentElt:
+        DelInstrText
+RunContentElt:
+        Footnote
+RunContentElt:
+        Endnote
+RunContentElt:
+        Symbol
+RunContentElt:
+        FldChar
 BreakElt:
         type::BreakType
 Text:
-        EPSILON
+        rce_rElt::RunElt val::String
 DelText:
-        EPSILON
+        rce_rElt::RunElt val::String
 InstrText:
-        EPSILON
+        rce_rElt::RunElt val::String
 DelInstrText:
-        EPSILON
+        rce_rElt::RunElt val::String
 NoBreakHyphen:
         rce_rElt::RunElt
 SoftHyphen:
@@ -87,18 +118,26 @@ PgNum:
 Cr:
         rce_rElt::RunElt
 Footnote:
-        EPSILON
+        rce_rElt::RunElt n_blockLevelElts::BlockLevelElt+ type::NoteValue suppressRef::OnOffType
 Endnote:
-        EPSILON
+        rce_rElt::RunElt n_blockLevelElts::BlockLevelElt+ type::NoteValue suppressRef::OnOffType
+NoteElt:
+        Footnote
+NoteElt:
+        Endnote
 Picture:
         rce_rElt::RunElt
 Symbol:
-        EPSILON
+        rce_rElt::RunElt font::StringType char::StringType
+SymElt:
+        Symbol
 SymElt:
         font::StringType char::StringType
 Tab:
         rce_rElt::RunElt
 FldChar:
-        EPSILON
+        rce_rElt::RunElt fldData::StringType fldCharType::FldCharTypeProperty fldLock::OnOffType
+FldCharElt:
+        FldChar
 FldCharElt:
         fldData::StringType fldCharType::FldCharTypeProperty fldLock::OnOffType

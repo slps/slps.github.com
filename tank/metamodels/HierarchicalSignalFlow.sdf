@@ -2,8 +2,12 @@ module Main
 
 exports
   sorts
-        Port Signal Base Compound InputPort OutputPort LocalPort Primitive Asso-Port-Signal 
+        String Integer Port Signal Base Compound InputPort OutputPort LocalPort Primitive Asso-Port-Signal 
   context-free syntax
+        STR -> String
+
+        INT -> Integer
+
         InputPort -> Port
 
         OutputPort -> Port
@@ -28,6 +32,6 @@ exports
 
         compound::Compound -> LocalPort
 
-         -> Primitive
+        compound::Compound inputPort::InputPort+ outputPort::OutputPort+ signal::Signal+ -> Primitive
 
         src::Port+ dst::Port+ signal::Signal -> Asso-Port-Signal

@@ -2,8 +2,15 @@ module Main
 
 exports
   sorts
-        ControllerAttribute Controller StateMachine State SubControllerState ViewState StateTransition StateMachineAction Event 
+        String Boolean Integer ControllerAttribute Controller StateMachine State SubControllerState ViewState StateTransition StateMachineAction Event 
   context-free syntax
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
         controller::Controller -> ControllerAttribute
 
         controllerAttribute::ControllerAttribute+ behavior::StateMachine -> Controller
@@ -18,7 +25,7 @@ exports
 
         controller::Controller -> SubControllerState
 
-         -> ViewState
+        substates::State+ theContainer::State outGoing::StateTransition+ incoming::StateTransition+ -> ViewState
 
         source::State target::State trigger::Event effect::StateMachineAction -> StateTransition
 

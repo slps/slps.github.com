@@ -2,11 +2,15 @@ module Main
 
 exports
   sorts
-        IdedElement URI Color AnyElement RotationType ShapeType StyleType DecorationType AlignType PNMLDocument NetElement NetContent ToolSpecific LabeledElement Label Name Inscription InitialMarking NetContentElement Arc Page ReferencePlace ReferenceTransition Node Place Transition Graphics NetGraphics NodeGraphics EdgeGraphics AnnotationGraphics PageGraphics Coordinate Position Offset Dimension Fill Line Font 
+        IdedElement URI Color AnyElement RotationType ShapeType StyleType DecorationType AlignType PNMLDocument NetElement NetContent ToolSpecific LabeledElement Label Name Inscription InitialMarking NetContentElement Arc Page Reference ReferencePlace ReferenceTransition Node Place Transition Graphics NetGraphics NodeGraphics EdgeGraphics AnnotationGraphics PageGraphics Coordinate Position Offset Dimension Fill Line Font Integer String 
   context-free syntax
         NetElement -> IdedElement
 
         Node -> IdedElement
+
+        Arc -> IdedElement
+
+        Page -> IdedElement
 
         value::String -> URI
 
@@ -39,6 +43,14 @@ exports
 
         NetContentElement -> NetContent
 
+        Arc -> NetContent
+
+        Page -> NetContent
+
+        ReferencePlace -> NetContent
+
+        ReferenceTransition -> NetContent
+
         tool::String version::String anyelement::AnyElement+ net::NetElement arc::Arc node::Node page::Page -> ToolSpecific
 
         Name -> LabeledElement
@@ -63,9 +75,13 @@ exports
 
         contents::NetContent+ tools::ToolSpecific+ pagegraphics::PageGraphics -> Page
 
-         -> ReferencePlace
+        ReferencePlace -> Reference
 
-         -> ReferenceTransition
+        ReferenceTransition -> Reference
+
+        net::NetElement name::Name page::Page ref::Node -> ReferencePlace
+
+        net::NetElement name::Name page::Page ref::Node -> ReferenceTransition
 
         Reference -> Node
 
@@ -110,3 +126,7 @@ exports
         color::Color width::Integer shape::ShapeType style::StyleType nodegraphics::NodeGraphics edgegraphics::EdgeGraphics annotationgraphics::AnnotationGraphics -> Line
 
         family::String style::String weight::String size::String decoration::DecorationType align::AlignType rotation::Integer annotationgraphics::AnnotationGraphics -> Font
+
+        INT -> Integer
+
+        STR -> String

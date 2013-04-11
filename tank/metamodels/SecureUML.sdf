@@ -2,11 +2,18 @@ module Main
 
 exports
   sorts
-        Group User Subject Role Permission AuthorizationConstraint AtomicAction CompositeAction Action Resource 
+        String Boolean Integer Group User Subject Role Permission AuthorizationConstraint AtomicAction CompositeAction Action Resource 
   context-free syntax
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
         subjectGroup::Subject+ -> Group
 
-         -> User
+        group::Group role::Role+ -> User
 
         Group -> Subject
 
@@ -20,7 +27,7 @@ exports
 
         permission::Permission+ -> AuthorizationConstraint
 
-         -> AtomicAction
+        permission::Permission+ resource::Resource actionHyerarchy::CompositeAction+ -> AtomicAction
 
         subordinatedAction::Action+ -> CompositeAction
 

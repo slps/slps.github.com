@@ -46,7 +46,7 @@ syntax Agreement
  ;
 syntax Standard
         = 
-        ()
+        Agreement isAssociatedWith+ Agreement isCitedBy+ InformationAsset appliesTo+ Guidance implements+
  ;
 syntax Task
         = 
@@ -59,11 +59,11 @@ syntax InformationAsset
  ;
 syntax ConceptualDataModel
         = 
-        ()
+        InformationAsset isAssociatedWith+
  ;
 syntax ActivityModel
         = 
-        ()
+        InformationAsset isAssociatedWith+
  ;
 syntax Node
         = 
@@ -84,7 +84,7 @@ syntax InfoExchRequirement
  ;
 syntax ExchangeNeedLineReq
         = 
-        ()
+        Architecture mayBeSatifiedBy+ InformationAsset isSpecifiedUsing+ MaterielItem specifiesNeedFor+ MissionArea cites+
  ;
 syntax MissionArea
         = 
@@ -113,7 +113,7 @@ syntax MaterielItem
  ;
 syntax EquipmentType
         = 
-        ()
+        MaterielItem establishedAs+ Standard conformsTo+ Capability performsTo+
  ;
 syntax SoftwareItem
         = 
@@ -121,5 +121,9 @@ syntax SoftwareItem
  ;
 syntax Facility
         = 
-        ()
+        String name String content
+ ;
+syntax String
+        = 
+        String
  ;

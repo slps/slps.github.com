@@ -208,3 +208,7 @@ syntax Delete
         = 
         String file String dir String verbose String quiet String failonerror String includeEmptyDirs String includes String includesfile String excludes String excludesfile String defaultexcludes
  ;
+syntax String
+        = 
+        String
+ ;

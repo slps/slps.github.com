@@ -45,7 +45,7 @@ syntax Rule
  ;
 syntax ModelOrganization
         = 
-        ()
+        Technique techniques+ Language guidance
  ;
 syntax ModellingRule
         = 

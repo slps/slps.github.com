@@ -1,6 +1,18 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module Perceptory
 
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
 syntax RelationSchip
         = Association
         | Generalisation
@@ -25,11 +37,11 @@ syntax Association
  ;
 syntax Generalisation
         = 
-        ()
+        Characteristic affectCharacteristic+ Constraint constraint Steriotype steriotype+ Package packages+ Package associatePackages
  ;
 syntax Dependency
         = 
-        ()
+        Characteristic affectCharacteristic+ Constraint constraint Steriotype steriotype+ Package packages+ Package associatePackages
  ;
 syntax AssociationEnd
         = 
@@ -57,6 +69,9 @@ syntax Operation
  ;
 syntax Characteristic
         = DescriptiveAttribute
+        | Geometry
+        | Temporality
+        | VisualInfo
         | MetaData details BusnissRule rule Operation operations Class theClass RelationSchip relationSchip Constraint constraint
  ;
 syntax BusnissRule
@@ -90,7 +105,7 @@ syntax Temporality
  ;
 syntax VisualInfo
         = 
-        ()
+        MetaData details BusnissRule rule Operation operations Class theClass RelationSchip relationSchip Constraint constraint
  ;
 syntax Value
         = 
@@ -98,13 +113,15 @@ syntax Value
  ;
 syntax RangeDomain
         = 
-        ()
+        DescriptiveAttribute descriptiveAttribute+
  ;
 syntax EnumeratedDomain
         = 
         Value value+
  ;
 syntax PerceptorySteriotype
-        = 
-        ()
+        = Geometry
+        | Temporality
+        | VisualInfo
+        | DescriptiveAttribute descriptiveAttribute+ Operation operations+ RelationSchip relationSchip+ Class theClass+ Package thePackage+
  ;

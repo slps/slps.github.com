@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        BossaProgramm Scheduler NormalScheduler VirtualScheduler AbstractSchedulerDecl SchedulerDecl VSchdulerDecl ConstDef TypeDef EnumRange EnumDef BagId RangeDef ProcessDef SchedulerDef ProcessVarDecl Timer-ProcessVarDecl System-ProcessVarDecl Normal-ProcessVarDecl HandlerDef InterfaceDef FunctionDef Expression Integer-Expression Id-Expression State-Expression True-Expression False-Expression Unop-Expression Etoile-Expression ExpId-Expression Select-Expression FnName-Expression Empty-Expression SRCOnSched-Expression SchedulerOf-Expression In-Expression Parenthese-Expression Binop-Expression Compo-Binop-Expression ValDecl Normal-ValDecl System-ValDecl Timer-ValDecl FunDecl StateDef ClassNameStorage OrderDef AdmissionDef TraceDef TypeExpr TypeOrVoid ParameterType Storage Process-Storage Scheduler-Storage Queue-Storage KeyCritDecls CompoKeyCritDecls CritDecls CritDecl CritDeclWhithId CritDeclWhithoutId ValDef AdmCrit AttachDetach ParamVarDecl SeqStmt TraceEvent TraceExpr TraceTest ProcParam Statment IfStmt ForStmt ForeachForStmt ForEachIncreasingForStmt ForEachDecreasingForStmt ReturnStmt SwitchStmt AssignStmt MoveStmt NormalMoveStmt ForwardMoveStmt StateRef DeferStmt PrimStmt ErrorStmt BreakStmt LocExpr MoveExpr Select-MoveExpr SatateName-MoveExpr ID-MoveExpr IDSource-MoveExpr IDTarget-MoveExpr ClassState OnHandlerDef EventName ComposantOfSwitchStmt ComposantOfInterFunc BossaTypeExpr QueueType Normal-QueueType Fifo-QueueType Lifo-QueueType Critop StateVisibility ClassName NonProcType Unop Binop AssignUnop AssignBinop 
+        BossaProgramm Scheduler NormalScheduler VirtualScheduler AbstractSchedulerDecl SchedulerDecl VSchdulerDecl ConstDef TypeDef EnumRange EnumDef BagId RangeDef ProcessDef SchedulerDef ProcessVarDecl Timer-ProcessVarDecl System-ProcessVarDecl Normal-ProcessVarDecl HandlerDef InterfaceDef FunctionDef Expression Integer-Expression Id-Expression State-Expression True-Expression False-Expression Unop-Expression Etoile-Expression ExpId-Expression Select-Expression FnName-Expression Empty-Expression SRCOnSched-Expression SchedulerOf-Expression In-Expression Parenthese-Expression Binop-Expression Compo-Binop-Expression ValDecl Normal-ValDecl System-ValDecl Timer-ValDecl FunDecl StateDef ClassNameStorage OrderDef AdmissionDef TraceDef TypeExpr TypeOrVoid ParameterType Storage Process-Storage Scheduler-Storage Queue-Storage KeyCritDecls CompoKeyCritDecls CritDecls CritDecl CritDeclWhithId CritDeclWhithoutId ValDef AdmCrit AttachDetach ParamVarDecl SeqStmt TraceEvent TraceExpr TraceTest ProcParam Statment IfStmt ForStmt ForeachForStmt ForEachIncreasingForStmt ForEachDecreasingForStmt ReturnStmt SwitchStmt AssignStmt MoveStmt NormalMoveStmt ForwardMoveStmt StateRef DeferStmt PrimStmt ErrorStmt BreakStmt LocExpr MoveExpr Select-MoveExpr SatateName-MoveExpr ID-MoveExpr IDSource-MoveExpr IDTarget-MoveExpr ClassState OnHandlerDef EventName ComposantOfSwitchStmt ComposantOfInterFunc BossaTypeExpr QueueType Normal-QueueType Fifo-QueueType Lifo-QueueType Critop StateVisibility ClassName NonProcType Unop Binop AssignUnop AssignBinop String Boolean Integer 
   context-free syntax
         scheduler::Scheduler -> BossaProgramm
 
@@ -46,7 +46,7 @@ exports
 
         id::String processDef::ProcessDef schedulerDef::SchedulerDef -> ProcessVarDecl
 
-         -> Timer-ProcessVarDecl
+        id::String processDef::ProcessDef schedulerDef::SchedulerDef -> Timer-ProcessVarDecl
 
         system::Boolean typeExpr::TypeExpr -> System-ProcessVarDecl
 
@@ -136,7 +136,7 @@ exports
 
         nonProcType::NonProcType -> System-ValDecl
 
-         -> Timer-ValDecl
+        id::String abstractSchedulerDecl::AbstractSchedulerDecl -> Timer-ValDecl
 
         parameterTypes::ParameterType nonProcType::NonProcType abstractSchedulerDecl::AbstractSchedulerDecl -> FunDecl
 
@@ -319,3 +319,10 @@ exports
         doublePlus::Boolean doubleMoins::Boolean -> AssignUnop
 
         affect::Boolean plusEqual::Boolean moinsEqual::Boolean starEqual::Boolean slashEqual::Boolean percentageEqual::Boolean andEqual::Boolean orEqual::Boolean doubleLtEqual::Boolean doubleGtEqual::Boolean -> AssignBinop
+
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer

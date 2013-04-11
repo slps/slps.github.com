@@ -71,3 +71,15 @@ syntax COBOLVariableLengthArray
         = 
         Integer minUpper COBOLElement dependingOn
  ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;

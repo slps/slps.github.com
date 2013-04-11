@@ -1,3 +1,7 @@
+String = STR ;
+Boolean = 'true' ;
+Boolean = 'false' ;
+Integer = INT ;
 ControllerAttribute = controller::Controller ;
 Controller = controllerAttribute::ControllerAttribute+ behavior::StateMachine ;
 StateMachine = states::State+ ;
@@ -5,7 +9,7 @@ State = SubControllerState ;
 State = ViewState ;
 State = substates::State+ theContainer::State outGoing::StateTransition+ incoming::StateTransition+ ;
 SubControllerState = controller::Controller ;
-ViewState = ;
+ViewState = substates::State+ theContainer::State outGoing::StateTransition+ incoming::StateTransition+ ;
 StateTransition = source::State target::State trigger::Event effect::StateMachineAction ;
 StateMachineAction = ;
 Event = ;

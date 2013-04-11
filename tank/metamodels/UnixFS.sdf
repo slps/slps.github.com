@@ -2,8 +2,10 @@ module Main
 
 exports
   sorts
-        NamedElement File Directory FileSystemRoot TextFile 
+        String NamedElement File Directory FileSystemRoot TextFile 
   context-free syntax
+        STR -> String
+
         File -> NamedElement
 
         Directory -> File
@@ -14,6 +16,6 @@ exports
 
         contents::File+ -> Directory
 
-         -> FileSystemRoot
+        contents::File+ -> FileSystemRoot
 
         owner::String group::String -> TextFile

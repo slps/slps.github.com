@@ -30,6 +30,7 @@ syntax RDFSResource
         | RDFSLiteral
         | OWLOntology
         | OWLUniverse
+        | Individual
         | URIReference uriRef+ RDFStatement subjectStatement+ RDFStatement objectStatement+ PlainLiteral label+ RDFSClass type+ PlainLiteral comment+ RDFSResource seeAlso+ RDFSResource referringResource+ RDFSResource isDefinedBy+ RDFSResource definedResource+ RDFSResource member+ RDFSResource container+ List list+
  ;
 syntax RDFGraph
@@ -58,8 +59,10 @@ syntax Seq
         ()
  ;
 syntax RDFProperty
-        = 
-        RDFStatement predicateStatement+ RDFProperty subPropertyOf+ RDFProperty superProperty+ RDFSClass domain+ RDFSClass range+ OWLRestriction propertyRestriction+
+        = OWLAnnotationProperty
+        | OWLOntologyProperty
+        | Property
+        | RDFStatement predicateStatement+ RDFProperty subPropertyOf+ RDFProperty superProperty+ RDFSClass domain+ RDFSClass range+ OWLRestriction propertyRestriction+
  ;
 syntax ContainerMembershipProperty
         = 
@@ -76,7 +79,7 @@ syntax ReificationKind
  ;
 syntax URIReferenceNode
         = 
-        ()
+        URIReference uriRef+ RDFStatement subjectStatement+ RDFStatement objectStatement+ PlainLiteral label+ RDFSClass type+ PlainLiteral comment+ RDFSResource seeAlso+ RDFSResource referringResource+ RDFSResource isDefinedBy+ RDFSResource definedResource+ RDFSResource member+ RDFSResource container+ List list+
  ;
 syntax BlankNode
         = 
@@ -84,6 +87,8 @@ syntax BlankNode
  ;
 syntax RDFSClass
         = RDFSDataType
+        | OWLClass
+        | OWLDataRange
         | RDFSClass subClassOf+ RDFSClass superClass+ RDFSResource typedResource+ RDFProperty propertyForDomain+ RDFProperty propertyForRange+
  ;
 syntax RDFSDataType
@@ -105,7 +110,7 @@ syntax TypedLiteral
  ;
 syntax XMLLiteral
         = 
-        ()
+        URIReference datatypeURI CardinalityRestriction cardinalityRestriction+ MinCardinalityRestriction minCardinalityRestriction+ MaxCardinalityRestriction maxCardinalityRestriction+
  ;
 syntax URIReference
         = UniformResourceIdentifier
@@ -114,6 +119,18 @@ syntax URIReference
 syntax UniformResourceIdentifier
         = 
         String name URIReference uriRef+
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
  ;
 syntax OWLOntology
         = 
@@ -128,8 +145,13 @@ syntax OWLStatement
         OWLOntology ontology+ OWLGraph owlGraph+
  ;
 syntax OWLUniverse
-        = 
-        OWLOntology ontology+
+        = OWLClass
+        | OWLAnnotationProperty
+        | OWLOntologyProperty
+        | Property
+        | Individual
+        | OWLDataRange
+        | OWLOntology ontology+
  ;
 syntax OWLClass
         = IntersectionClass
@@ -191,11 +213,11 @@ syntax MinCardinalityRestriction
  ;
 syntax OWLAnnotationProperty
         = 
-        ()
+        RDFStatement predicateStatement+ RDFProperty subPropertyOf+ RDFProperty superProperty+ RDFSClass domain+ RDFSClass range+ OWLRestriction propertyRestriction+ OWLOntology ontology+
  ;
 syntax OWLOntologyProperty
         = 
-        ()
+        RDFStatement predicateStatement+ RDFProperty subPropertyOf+ RDFProperty superProperty+ RDFSClass domain+ RDFSClass range+ OWLRestriction propertyRestriction+ OWLOntology ontology+
  ;
 syntax Property
         = FunctionalProperty
@@ -218,15 +240,15 @@ syntax OWLObjectProperty
  ;
 syntax InverseFunctionalProperty
         = 
-        ()
+        OWLObjectProperty OWLInverseOf OWLObjectProperty inverseProperty+
  ;
 syntax SymmetricProperty
         = 
-        ()
+        OWLObjectProperty OWLInverseOf OWLObjectProperty inverseProperty+
  ;
 syntax TransitiveProperty
         = 
-        ()
+        OWLObjectProperty OWLInverseOf OWLObjectProperty inverseProperty+
  ;
 syntax Individual
         = 

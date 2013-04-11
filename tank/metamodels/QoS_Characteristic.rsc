@@ -37,7 +37,7 @@ syntax DirectionKind
  ;
 syntax Numeric
         = 
-        ()
+        direction: DirectionKind
  ;
 syntax Set
         = 
@@ -45,9 +45,21 @@ syntax Set
  ;
 syntax Enumeration
         = 
-        ()
+        direction: DirectionKind
  ;
 syntax StringSet
         = 
         String string+
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
  ;

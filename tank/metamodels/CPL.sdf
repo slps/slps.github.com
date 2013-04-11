@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        Element CPL NodeContainer SubAction Outgoing Incoming NotPresent Otherwise SwitchedAddress SwitchedString SwitchedLanguage SwitchedTime SwitchedPriority Busy NoAnswer Redirection Failure Default Node Switch AddressSwitch StringSwitch LanguageSwitch TimeSwitch PrioritySwitch Location SubCall Action SignallingAction Proxy Redirect Reject 
+        Element CPL NodeContainer SubAction Outgoing Incoming NotPresent Otherwise SwitchedAddress SwitchedString SwitchedLanguage SwitchedTime SwitchedPriority Busy NoAnswer Redirection Failure Default Node Switch AddressSwitch StringSwitch LanguageSwitch TimeSwitch PrioritySwitch Location SubCall Action SignallingAction Proxy Redirect Reject Boolean Integer String 
   context-free syntax
         CPL -> Element
 
@@ -42,6 +42,8 @@ exports
 
         Default -> NodeContainer
 
+        Location -> NodeContainer
+
         id::String -> SubAction
 
         contents::Node -> Outgoing
@@ -77,6 +79,8 @@ exports
         SubCall -> Node
 
         Action -> Node
+
+        Location -> Node
 
         AddressSwitch -> Switch
 
@@ -115,3 +119,10 @@ exports
         permanent::String -> Redirect
 
         status::String reason::String -> Reject
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
+        STR -> String

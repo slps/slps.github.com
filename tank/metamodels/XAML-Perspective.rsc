@@ -21,6 +21,12 @@ syntax WinFXElement
         = 
         Name
  ;
+syntax PerspectiveElement
+        = Workshop3D
+        | XyzAxis3D
+        | Box3D
+        | Square3D
+ ;
 syntax ResourceDictionary
         = 
         source: String
@@ -29,17 +35,22 @@ syntax Grid
         = 
         Object3D object3D+
  ;
+syntax Object3D
+        = 
+        Workshop3D
+ ;
 syntax Workshop3D
         = 
         Element3D elements3D+
  ;
 syntax Element3D
-        = 
-        UI3Delement
+        = UI3Delement
+        | XyzAxis3D
  ;
 syntax UI3Delement
-        = 
-        String transform String material Name name
+        = Box3D
+        | Square3D
+        | String transform String material Name name
  ;
 syntax XyzAxis3D
         = 
@@ -47,13 +58,25 @@ syntax XyzAxis3D
  ;
 syntax Box3D
         = 
-        ()
+        String transform String material Name name NameSpace namespace
  ;
 syntax Square3D
         = 
-        ()
+        String transform String material Name name NameSpace namespace
  ;
 syntax Name
         = 
         name: String
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
  ;

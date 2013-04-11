@@ -37,3 +37,11 @@ syntax Variable
         = 
         String name Rule rule
  ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax String
+        = 
+        String
+ ;

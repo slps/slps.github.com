@@ -2,8 +2,10 @@ module Main
 
 exports
   sorts
-        Actor Decomposition Contribution Goal MeansEnd Resource Plan BooleanDecomposition BooleanDecLink AndDecLink OrDecLink 
+        String Actor Decomposition Contribution Goal MeansEnd Resource Plan BooleanDecomposition BooleanDecLink AndDecLink OrDecLink 
   context-free syntax
+        STR -> String
+
         decomposition::Decomposition+ contribution::Contribution+ meansEnd::MeansEnd+ -> Actor
 
         BooleanDecomposition -> Decomposition
@@ -28,6 +30,6 @@ exports
 
         booleanDecompositionB::BooleanDecomposition target::Goal targetP::Plan -> BooleanDecLink
 
-         -> AndDecLink
+        booleanDecompositionB::BooleanDecomposition target::Goal targetP::Plan -> AndDecLink
 
-         -> OrDecLink
+        booleanDecompositionB::BooleanDecomposition target::Goal targetP::Plan -> OrDecLink

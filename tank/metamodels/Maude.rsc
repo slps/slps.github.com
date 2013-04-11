@@ -71,6 +71,7 @@ syntax ModElement
         | SubsortRel
         | Operation
         | Statement
+        | Sort
  ;
 syntax ModImportation
         = 
@@ -82,8 +83,8 @@ syntax ImportationMode
         | extending: ()
  ;
 syntax Type
-        = 
-        Kind
+        = Kind
+        | Sort
  ;
 syntax Sort
         = 
@@ -198,4 +199,8 @@ syntax OpMapping
 syntax LabelMapping
         = 
         String from String to
+ ;
+syntax String
+        = 
+        String
  ;

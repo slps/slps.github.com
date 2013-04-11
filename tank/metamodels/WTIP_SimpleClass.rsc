@@ -12,7 +12,7 @@ syntax Class
  ;
 syntax PrimitiveDataType
         = 
-        ()
+        name: String
  ;
 syntax Association
         = 
@@ -21,4 +21,12 @@ syntax Association
 syntax Attribute
         = 
         String name Boolean is_primary Classifier type
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Boolean
+        = "true"
+        | "false"
  ;

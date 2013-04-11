@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        DateTimeType CellType VisioDocument DocumentPropertiesCollection CustomPropertiesCollection CustomProperty ColorsTable ColorEntry FontsTable FontEntry FaceNamesTable FaceName VBProjectData EmailRoutingData StyleSheetsCollection StyleSheet DocumentSheet PageSheet IdentifiedElt Shape ShapeElt IXElt Geom XYElt LineTo MoveTo XYAElt ArcTo SplineKnot PolylineTo XYABElt InfiniteLine XYABCDElt Ellipse EllipticalArcTo SplineStart XYABCDEElt NURBSTo Text TextElt IXrequiredElt Cp Pp Tp Fld StringElt Char Para TabsCollection Tab Field MastersCollection MasterShortCut Icon Master ShapesCollection ConnectsCollection Connect MasterElt PagesCollection Page DocumentSettingsElt PrintSetup WindowsInfo EventList HeaderFooter SolutionXML 
+        DateTimeType CellType VisioDocument DocumentPropertiesCollection CustomPropertiesCollection CustomProperty ColorsTable ColorEntry FontsTable FontEntry FaceNamesTable FaceName VBProjectData EmailRoutingData StyleSheetsCollection StyleSheet DocumentSheet PageSheet NamedElt IdentifiedElt Shape ShapeElt IXElt DelElt Geom XYElt LineTo MoveTo XYAElt ArcTo SplineKnot PolylineTo XYABElt InfiniteLine XYABCDElt Ellipse EllipticalArcTo SplineStart XYABCDEElt NURBSTo Text TextElt IXrequiredElt Cp Pp Tp Fld StringElt Char Para TabsCollection Tab Field MastersCollection MasterShortCut Icon Master ShapesCollection ConnectsCollection Connect MasterElt PagesCollection Page PageElt DocumentSettingsElt PrintSetup WindowsInfo EventList HeaderFooter SolutionXML Integer String Boolean 
   context-free syntax
         year::Integer month::Integer day::Integer hour::Integer minute::Integer second::Integer -> DateTimeType
 
@@ -38,17 +38,49 @@ exports
 
         ds_visioDocument::VisioDocument -> DocumentSheet
 
-         -> PageSheet
+        DocumentSheet -> PageSheet
+
+        ss_shapes::ShapesCollection lineStyle::Integer fillStyle::Integer textStyle::Integer shapeElts::ShapeElt+ -> PageSheet
+
+        DocumentSheet -> NamedElt
+
+        MasterShortCut -> NamedElt
+
+        Page -> NamedElt
 
         FontEntry -> IdentifiedElt
 
         FaceName -> IdentifiedElt
 
+        MasterShortCut -> IdentifiedElt
+
+        Master -> IdentifiedElt
+
+        Page -> IdentifiedElt
+
+        StyleSheet -> Shape
+
+        PageSheet -> Shape
+
         ss_shapes::ShapesCollection lineStyle::Integer fillStyle::Integer textStyle::Integer shapeElts::ShapeElt+ -> Shape
 
         Text -> ShapeElt
 
+        Geom -> ShapeElt
+
+        Char -> ShapeElt
+
+        Para -> ShapeElt
+
+        TabsCollection -> ShapeElt
+
+        Field -> ShapeElt
+
         Tab -> IXElt
+
+        XYElt -> IXElt
+
+        XYElt -> DelElt
 
         noFill::CellType noLine::CellType noShow::CellType noSnap::CellType linesTo::LineTo+ movesTo::MoveTo+ arcsTo::ArcTo+ splineKnots::SplineKnot+ polylinesTo::PolylineTo+ infiniteLines::InfiniteLine+ ellipses::Ellipse+ ellipticalArcsTo::EllipticalArcTo+ splineStarts::SplineStart+ nurbsTo::NURBSTo+ -> Geom
 
@@ -104,15 +136,31 @@ exports
 
         StringElt -> TextElt
 
+        Cp -> TextElt
+
+        Pp -> TextElt
+
+        Tp -> TextElt
+
+        Fld -> TextElt
+
         ColorEntry -> IXrequiredElt
 
-         -> Cp
+        Cp -> IXrequiredElt
 
-         -> Pp
+        Pp -> IXrequiredElt
 
-         -> Tp
+        Tp -> IXrequiredElt
 
-         -> Fld
+        Fld -> IXrequiredElt
+
+        iX::Integer te_text::Text -> Cp
+
+        iX::Integer te_text::Text -> Pp
+
+        iX::Integer te_text::Text -> Tp
+
+        iX::Integer te_text::Text -> Fld
 
         value::String -> StringElt
 
@@ -142,9 +190,17 @@ exports
 
         Icon -> MasterElt
 
+        ShapesCollection -> MasterElt
+
+        ConnectsCollection -> MasterElt
+
         ps_visioDocument::VisioDocument pages::Page+ -> PagesCollection
 
         p_pages::PagesCollection background::Boolean backPage::Integer viewScale::Double viewCenterX::Double ViewCenterY::Double reviewerID::Integer associatedPage::Integer pageElts::PageElt+ -> Page
+
+        ShapesCollection -> PageElt
+
+        ConnectsCollection -> PageElt
 
         dss_visioDocument::VisioDocument -> DocumentSettingsElt
 
@@ -157,3 +213,10 @@ exports
         ef_visioDocument::VisioDocument -> HeaderFooter
 
         sx_visioDocument::VisioDocument -> SolutionXML
+
+        INT -> Integer
+
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean
