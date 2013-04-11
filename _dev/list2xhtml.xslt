@@ -33,25 +33,25 @@
 				<xsl:if test="name='zoo'">
 					<h1>
 						<xsl:text>Grammar Zoo | </xsl:text>
-						<a href="../tank/">Grammar Tank</a>
+						<a href="../tank/index.html">Grammar Tank</a>
 					</h1>
 					<div class="c">
 						<em>
 							The objective of the Grammar Zoo is to accumulate grammars of contemporary 
-							programming languages, extracted and recovered from language documentation, parser
-							specifications and other artifacts and make them available in a range of formats.
+							software languages, extracted and recovered from language documentation, parser
+							specifications and other artefacts and make them available in a range of formats.
 						</em>
 					</div>
 				</xsl:if>
 				<xsl:if test="name='tank'">
 					<h1>
-						<a href="../zoo/">Grammar Zoo</a>
+						<a href="../zoo/index.html">Grammar Zoo</a>
 						<xsl:text> | Grammar Tank</xsl:text>
 					</h1>
 					<div class="c">
 						<em>
-							The objective of the Grammar Tank is to compose a grammar base of multiple different
-							grammars for the same intended language to be used in language engineering research.
+							The objective of the Grammar Tank is to accumulate grammars of possibly insignificant
+							software languages, such that these grammars are useful in language engineering research.
 						</em>
 					</div>
 				</xsl:if>

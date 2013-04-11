@@ -73,6 +73,12 @@ all:
 	_dev/format zoo fortran/derricks fortran/derricks
 	cp ../slps/topics/grammars/fortran/waite-cordy/grammar.bgf zoo/fortran/waite-cordy.bgf
 	_dev/format zoo fortran/waite-cordy fortran/waite-cordy
+	cp ../slps/topics/grammars/html/cordy/grammar.bgf zoo/html/cordy.bgf
+	_dev/format zoo html/cordy html/cordy
+	cp ../slps/topics/grammars/html/allilaire/grammar.bgf zoo/html/allilaire.bgf
+	_dev/format zoo html/allilaire html/allilaire
+	cp ../slps/topics/grammars/html/guyard/grammar.bgf zoo/html/guyard.bgf
+	_dev/format zoo html/guyard html/guyard
 	cp ../slps/topics/grammars/java-1/jls-read/grammar.bgf zoo/java/java-1-jls-read.bgf
 	_dev/format zoo java/java-1-jls-read java-1/jls-read
 	cp ../slps/topics/grammars/java-1/jls-impl/grammar.bgf zoo/java/java-1-jls-impl.bgf

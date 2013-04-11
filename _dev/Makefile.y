@@ -311,8 +311,6 @@ all:
 	_dev/format tank metamodels/HAL metamodels/HAL
 	cp ../slps/topics/grammars/metamodels/HPROF/grammar.bgf tank/metamodels/HPROF.bgf
 	_dev/format tank metamodels/HPROF metamodels/HPROF
-	cp ../slps/topics/grammars/metamodels/HTML/grammar.bgf tank/metamodels/HTML.bgf
-	_dev/format tank metamodels/HTML metamodels/HTML
 	cp ../slps/topics/grammars/metamodels/HierarchicalSignalFlow/grammar.bgf tank/metamodels/HierarchicalSignalFlow.bgf
 	_dev/format tank metamodels/HierarchicalSignalFlow metamodels/HierarchicalSignalFlow
 	cp ../slps/topics/grammars/metamodels/HierarchicalStateMachine/grammar.bgf tank/metamodels/HierarchicalStateMachine.bgf
@@ -641,8 +639,6 @@ all:
 	_dev/format tank metamodels/XAML-ResourceDictionary metamodels/XAML-ResourceDictionary
 	cp ../slps/topics/grammars/metamodels/ASM/grammar.bgf tank/metamodels/ASM.bgf
 	_dev/format tank metamodels/ASM metamodels/ASM
-	cp ../slps/topics/grammars/metamodels/XHTML/grammar.bgf tank/metamodels/XHTML.bgf
-	_dev/format tank metamodels/XHTML metamodels/XHTML
 	cp ../slps/topics/grammars/metamodels/XML/grammar.bgf tank/metamodels/XML.bgf
 	_dev/format tank metamodels/XML metamodels/XML
 	cp ../slps/topics/grammars/metamodels/XPDL-1.14/grammar.bgf tank/metamodels/XPDL-1.14.bgf
