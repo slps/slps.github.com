@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:bgf="http://planet-sl.org/bgf" xmlns:xbgf="http://planet-sl.org/xbgf" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Browsable CML Grammar</title><link href="/slps.css" rel="stylesheet" type="text/css"></link><script type="text/javascript">
+
+				  var _gaq = _gaq || [];
+				  _gaq.push(['_setAccount', 'UA-3743366-7']);
+				  _gaq.push(['_setDomainName', 'github.com']);
+				  _gaq.push(['_trackPageview']);
+
+				  (function() {
+				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				  })();
+
+				</script></head><body><h1 class="l">Browsable CML Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Pierrick Guyard, <em>Chemical Markup Language</em>, <code>CML.ecore</code>, 2005/06/22.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>58</strong></li><li>Number of top alternatives: <strong>95</strong></li><li>Number of defined nonterminal symbols: <strong>35</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>9</strong>: <code><a href="#Integer" class="nt">Integer</a>, <a href="#Boolean" class="nt">Boolean</a>, <a href="#AngleUnits" class="nt">AngleUnits</a>, <a href="#AtomRefs_Element" class="nt">AtomRefs_Element</a>, <a href="#StringBuiltin" class="nt">StringBuiltin</a>, <a href="#FloatBuiltin" class="nt">FloatBuiltin</a>, <a href="#IntegerBuiltin" class="nt">IntegerBuiltin</a>, <a href="#Coordinate2Builtin" class="nt">Coordinate2Builtin</a>, <a href="#Coordinate3Builtin" class="nt">Coordinate3Builtin</a></code></li><li>Bottom nonterminal symbols: <strong>1</strong>: <code><a href="#_StringBuiltin" class="nt">_StringBuiltin</a></code></li><li>Number of used terminal symbols: <strong>2</strong></li><li>Keywords: <strong>2</strong>: <code class="t">"true", "false"</code></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="String">String</a>:
+        <span class="meta">string</span>
+</pre><pre><a class="nt" name="Integer">Integer</a>:
+        <span class="meta">int</span>
+</pre><pre><a class="nt" name="Boolean">Boolean</a>:
+        <span class="t">"true"</span>
+        <span class="t">"false"</span>
+</pre><pre><a class="nt" name="Any">Any</a>:
+        <a class="nt" href="#_String">_String</a>
+</pre><pre><a class="nt" name="Any">Any</a>:
+        <a class="nt" href="#_Link">_Link</a>
+</pre><pre><a class="nt" name="Any">Any</a>:
+        <a class="nt" href="#_Float">_Float</a>
+</pre><pre><a class="nt" name="Any">Any</a>:
+        <a class="nt" href="#_Integer">_Integer</a>
+</pre><pre><a class="nt" name="Any">Any</a>:
+        <a class="nt" href="#_StringArray">_StringArray</a>
+</pre><pre><a class="nt" name="Any">Any</a>:
+        <a class="nt" href="#_FloatArray">_FloatArray</a>
+</pre><pre><a class="nt" name="Any">Any</a>:
+        <a class="nt" href="#_IntegerArray">_IntegerArray</a>
+</pre><pre><a class="nt" name="Any">Any</a>:
+        <a class="nt" href="#_FloatMatrix">_FloatMatrix</a>
+</pre><pre><a class="nt" name="Any">Any</a>:
+        <a class="nt" href="#_Coordinate2">_Coordinate2</a>
+</pre><pre><a class="nt" name="Any">Any</a>:
+        <a class="nt" href="#_Coordinate3">_Coordinate3</a>
+</pre><pre><a class="nt" name="Any">Any</a>:
+        <a class="nt" href="#_Angle">_Angle</a>
+</pre><pre><a class="nt" name="Any">Any</a>:
+        <a class="nt" href="#_Torsion">_Torsion</a>
+</pre><pre><a class="nt" name="Any">Any</a>:
+        <a class="nt" href="#_List">_List</a>
+</pre><pre><a class="nt" name="Any">Any</a>:
+        <a class="nt" href="#Molecule">Molecule</a>
+</pre><pre><a class="nt" name="Any">Any</a>:
+        <a class="nt" href="#Formula">Formula</a>
+</pre><pre><a class="nt" name="Any">Any</a>:
+        <a class="nt" href="#Atom">Atom</a>
+</pre><pre><a class="nt" name="Any">Any</a>:
+        <a class="nt" href="#Atom_Array">Atom_Array</a>
+</pre><pre><a class="nt" name="Any">Any</a>:
+        <a class="nt" href="#Bond">Bond</a>
+</pre><pre><a class="nt" name="Any">Any</a>:
+        <a class="nt" href="#Bond_Array">Bond_Array</a>
+</pre><pre><a class="nt" name="Any">Any</a>:
+        <a class="nt" href="#Electron">Electron</a>
+</pre><pre><a class="nt" name="Any">Any</a>:
+        <a class="nt" href="#Reaction">Reaction</a>
+</pre><pre><a class="nt" name="Any">Any</a>:
+        <a class="nt" href="#Crystal">Crystal</a>
+</pre><pre><a class="nt" name="Any">Any</a>:
+        <a class="nt" href="#Sequence">Sequence</a>
+</pre><pre><a class="nt" name="Any">Any</a>:
+        <a class="nt" href="#Feature">Feature</a>
+</pre><pre><a class="nt" name="AngleUnits">AngleUnits</a>:
+        <span class="sel">degrees</span>::ε
+        <span class="sel">radians</span>::ε
+</pre><pre><a class="nt" name="AtomRefs_Element">AtomRefs_Element</a>:
+        <a class="nt" href="#_StringBuiltin">_StringBuiltin</a>
+</pre><pre><a class="nt" name="StringBuiltin">StringBuiltin</a>:
+        <span class="sel">id</span>::ε
+        <span class="sel">elementType</span>::ε
+        <span class="sel">atomId</span>::ε
+        <span class="sel">residueType</span>::ε
+        <span class="sel">residueId</span>::ε
+        <span class="sel">atomRef</span>::ε
+        <span class="sel">order</span>::ε
+        <span class="sel">stereo</span>::ε
+        <span class="sel">spaceground</span>::ε
+</pre><pre><a class="nt" name="_String">_String</a>:
+        
+</pre><pre><a class="nt" name="_Link">_Link</a>:
+        
+</pre><pre><a class="nt" name="FloatBuiltin">FloatBuiltin</a>:
+        <span class="sel">x2</span>::ε
+        <span class="sel">y2</span>::ε
+        <span class="sel">x3</span>::ε
+        <span class="sel">y3</span>::ε
+        <span class="sel">z3</span>::ε
+        <span class="sel">xFract</span>::ε
+        <span class="sel">yFract</span>::ε
+        <span class="sel">zFract</span>::ε
+        <span class="sel">occupancy</span>::ε
+        <span class="sel">isotope</span>::ε
+        <span class="sel">formalCharge</span>::ε
+        <span class="sel">hydrogenCount</span>::ε
+        <span class="sel">nonHydrogenCount</span>::ε
+        <span class="sel">atomParity</span>::ε
+        <span class="sel">length</span>::ε
+        <span class="sel">acell</span>::ε
+        <span class="sel">bcell</span>::ε
+        <span class="sel">ccell</span>::ε
+        <span class="sel">alpha</span>::ε
+        <span class="sel">beta</span>::ε
+        <span class="sel">gamma</span>::ε
+        <span class="sel">z</span>::ε
+</pre><pre><a class="nt" name="_Float">_Float</a>:
+        
+</pre><pre><a class="nt" name="IntegerBuiltin">IntegerBuiltin</a>:
+        <span class="sel">isotope</span>::ε
+        <span class="sel">formalCharge</span>::ε
+        <span class="sel">hydrogenCount</span>::ε
+        <span class="sel">nonHydrogenCount</span>::ε
+        <span class="sel">atomParity</span>::ε
+        <span class="sel">z</span>::ε
+</pre><pre><a class="nt" name="_Integer">_Integer</a>:
+        
+</pre><pre><a class="nt" name="_StringArray">_StringArray</a>:
+        <span class="sel">delimiter</span>::<a class="nt" href="#String">String</a>
+</pre><pre><a class="nt" name="_FloatArray">_FloatArray</a>:
+        
+</pre><pre><a class="nt" name="_IntegerArray">_IntegerArray</a>:
+        
+</pre><pre><a class="nt" name="_FloatMatrix">_FloatMatrix</a>:
+        
+</pre><pre><a class="nt" name="Coordinate2Builtin">Coordinate2Builtin</a>:
+        <span class="sel">xy2</span>::ε
+</pre><pre><a class="nt" name="_Coordinate2">_Coordinate2</a>:
+        
+</pre><pre><a class="nt" name="Coordinate3Builtin">Coordinate3Builtin</a>:
+        <span class="sel">xyz3</span>::ε
+        <span class="sel">xyzFract</span>::ε
+</pre><pre><a class="nt" name="_Coordinate3">_Coordinate3</a>:
+        
+</pre><pre><a class="nt" name="_Angle">_Angle</a>:
+        
+</pre><pre><a class="nt" name="_Torsion">_Torsion</a>:
+        
+</pre><pre><a class="nt" name="_List">_List</a>:
+        <span class="sel">any</span>::<a class="nt" href="#Any">Any</a><span class="meta">+</span>
+</pre><pre><a class="nt" name="Molecule">Molecule</a>:
+        <span class="sel">any</span>::<a class="nt" href="#Any">Any</a><span class="meta">+</span>
+</pre><pre><a class="nt" name="Formula">Formula</a>:
+        <span class="sel">any</span>::<a class="nt" href="#Any">Any</a><span class="meta">+</span>
+</pre><pre><a class="nt" name="Atom">Atom</a>:
+        <span class="sel">any</span>::<a class="nt" href="#Any">Any</a><span class="meta">+</span>
+</pre><pre><a class="nt" name="Atom_Array">Atom_Array</a>:
+        <span class="sel">any</span>::<a class="nt" href="#Any">Any</a><span class="meta">+</span>
+</pre><pre><a class="nt" name="Bond">Bond</a>:
+        <span class="sel">any</span>::<a class="nt" href="#Any">Any</a><span class="meta">+</span>
+</pre><pre><a class="nt" name="Bond_Array">Bond_Array</a>:
+        <span class="sel">any</span>::<a class="nt" href="#Any">Any</a><span class="meta">+</span>
+</pre><pre><a class="nt" name="Electron">Electron</a>:
+        <span class="sel">any</span>::<a class="nt" href="#Any">Any</a><span class="meta">+</span>
+</pre><pre><a class="nt" name="Reaction">Reaction</a>:
+        <span class="sel">any</span>::<a class="nt" href="#Any">Any</a><span class="meta">+</span>
+</pre><pre><a class="nt" name="Crystal">Crystal</a>:
+        <span class="sel">any</span>::<a class="nt" href="#Any">Any</a><span class="meta">+</span>
+</pre><pre><a class="nt" name="Sequence">Sequence</a>:
+        <span class="sel">any</span>::<a class="nt" href="#Any">Any</a><span class="meta">+</span>
+</pre><pre><a class="nt" name="Feature">Feature</a>:
+        <span class="sel">any</span>::<a class="nt" href="#Any">Any</a><span class="meta">+</span>
+</pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
+Last updated: Apr2013.</div></body></html>

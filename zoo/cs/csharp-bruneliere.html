@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:bgf="http://planet-sl.org/bgf" xmlns:xbgf="http://planet-sl.org/xbgf" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Browsable C# subsets Grammar</title><link href="/slps.css" rel="stylesheet" type="text/css"></link><script type="text/javascript">
+
+				  var _gaq = _gaq || [];
+				  _gaq.push(['_setAccount', 'UA-3743366-7']);
+				  _gaq.push(['_setDomainName', 'github.com']);
+				  _gaq.push(['_trackPageview']);
+
+				  (function() {
+				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				  })();
+
+				</script></head><body><h1 class="l">Browsable C# subsets Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/zoo/">Grammar Zoo</a> for details. <br></br>Source used for this grammar: Hugo Brunelière, <em>C# 1.0</em>, a simplified metamodel corresponding to a small subset of the language, <code>CSharp.ecore</code>, 2005/08/08.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>20</strong></li><li>Number of top alternatives: <strong>21</strong></li><li>Number of defined nonterminal symbols: <strong>13</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: —</li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>2</strong></li><li>Keywords: <strong>2</strong>: <code class="t">"true", "false"</code></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Member">Member</a>:
+        <a class="nt" href="#TypedAttribute">TypedAttribute</a>
+</pre><pre><a class="nt" name="Member">Member</a>:
+        <a class="nt" href="#MethodBase">MethodBase</a>
+</pre><pre><a class="nt" name="Member">Member</a>:
+        <a class="nt" href="#Type">Type</a>
+</pre><pre><a class="nt" name="Member">Member</a>:
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">owner</span>::<a class="nt" href="#Type">Type</a>
+</pre><pre><a class="nt" name="TypedAttribute">TypedAttribute</a>:
+        <a class="nt" href="#Field">Field</a>
+</pre><pre><a class="nt" name="TypedAttribute">TypedAttribute</a>:
+        <a class="nt" href="#Property">Property</a>
+</pre><pre><a class="nt" name="TypedAttribute">TypedAttribute</a>:
+        <span class="sel">type</span>::<a class="nt" href="#Type">Type</a>
+</pre><pre><a class="nt" name="Field">Field</a>:
+        <span class="sel">type</span>::<a class="nt" href="#Type">Type</a>
+</pre><pre><a class="nt" name="Property">Property</a>:
+        <span class="sel">isReadable</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">isWritable</span>::<a class="nt" href="#Boolean">Boolean</a>
+</pre><pre><a class="nt" name="MethodBase">MethodBase</a>:
+        <a class="nt" href="#Constructor">Constructor</a>
+</pre><pre><a class="nt" name="MethodBase">MethodBase</a>:
+        <a class="nt" href="#Method">Method</a>
+</pre><pre><a class="nt" name="MethodBase">MethodBase</a>:
+        <span class="sel">visibility</span>::<a class="nt" href="#String">String</a> <span class="sel">isAbstract</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">isFinal</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">isStatic</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">parameters</span>::<a class="nt" href="#Parameter">Parameter</a><span class="meta">+</span>
+</pre><pre><a class="nt" name="Constructor">Constructor</a>:
+        <span class="sel">visibility</span>::<a class="nt" href="#String">String</a> <span class="sel">isAbstract</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">isFinal</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">isStatic</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">parameters</span>::<a class="nt" href="#Parameter">Parameter</a><span class="meta">+</span>
+</pre><pre><a class="nt" name="Method">Method</a>:
+        <span class="sel">returnType</span>::<a class="nt" href="#Type">Type</a>
+</pre><pre><a class="nt" name="Type">Type</a>:
+        <span class="sel">qualifiedName</span>::<a class="nt" href="#String">String</a> <span class="sel">isAbstract</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">visibility</span>::<a class="nt" href="#String">String</a> <span class="sel">isSealed</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">nameSpace</span>::<a class="nt" href="#String">String</a> <span class="sel">members</span>::<a class="nt" href="#Member">Member</a><span class="meta">+</span> <span class="sel">t_container</span>::<a class="nt" href="#Assembly">Assembly</a> <span class="sel">super</span>::<a class="nt" href="#Type">Type</a>
+</pre><pre><a class="nt" name="Parameter">Parameter</a>:
+        <span class="sel">isIn</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">isOut</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">name</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">position</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">method</span>::<a class="nt" href="#MethodBase">MethodBase</a> <span class="sel">type</span>::<a class="nt" href="#Type">Type</a>
+</pre><pre><a class="nt" name="Assembly">Assembly</a>:
+        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">content</span>::<a class="nt" href="#Type">Type</a><span class="meta">+</span>
+</pre><pre><a class="nt" name="Integer">Integer</a>:
+        <span class="meta">int</span>
+</pre><pre><a class="nt" name="String">String</a>:
+        <span class="meta">string</span>
+</pre><pre><a class="nt" name="Boolean">Boolean</a>:
+        <span class="t">"true"</span>
+        <span class="t">"false"</span>
+</pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
+Last updated: Apr2013.</div></body></html>

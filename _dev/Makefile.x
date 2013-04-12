@@ -35,12 +35,16 @@ all:
 	_dev/format zoo c/cordy-malton-dahn c/cordy-malton-dahn
 	cp ../slps/topics/grammars/c/antoniol/grammar.bgf zoo/c/antoniol.bgf
 	_dev/format zoo c/antoniol c/antoniol
+	cp ../slps/topics/grammars/c/bruneliere/grammar.bgf zoo/c/bruneliere.bgf
+	_dev/format zoo c/bruneliere c/bruneliere
 	cp ../slps/topics/grammars/cpp/iso-14882-1998/grammar.bgf zoo/cpp/iso-14882-1998.bgf
 	_dev/format zoo cpp/iso-14882-1998 cpp/iso-14882-1998
 	cp ../slps/topics/grammars/cpp/iso-n2723/grammar.bgf zoo/cpp/iso-n2723.bgf
 	_dev/format zoo cpp/iso-n2723 cpp/iso-n2723
 	cp ../slps/topics/grammars/cpp/elges-cordy/grammar.bgf zoo/cpp/elges-cordy.bgf
 	_dev/format zoo cpp/elges-cordy cpp/elges-cordy
+	cp ../slps/topics/grammars/cpp/bruneliere/grammar.bgf zoo/cpp/bruneliere.bgf
+	_dev/format zoo cpp/bruneliere cpp/bruneliere
 	cp ../slps/topics/grammars/csharp/ecma-334-1/grammar.bgf zoo/cs/csharp-ecma-334-1.bgf
 	_dev/format zoo cs/csharp-ecma-334-1 csharp/ecma-334-1
 	cp ../slps/topics/grammars/csharp/ecma-334-2/grammar.bgf zoo/cs/csharp-ecma-334-2.bgf
@@ -67,6 +71,8 @@ all:
 	_dev/format zoo cs/csharp-antoniol csharp/antoniol
 	cp ../slps/topics/grammars/csharp/msft-ls-4.0/grammar.bgf zoo/cs/csharp-msft-ls-4.0.bgf
 	_dev/format zoo cs/csharp-msft-ls-4.0 csharp/msft-ls-4.0
+	cp ../slps/topics/grammars/csharp/bruneliere/grammar.bgf zoo/cs/csharp-bruneliere.bgf
+	_dev/format zoo cs/csharp-bruneliere csharp/bruneliere
 	cp ../slps/topics/grammars/dart/google/grammar.bgf zoo/dart/google.bgf
 	_dev/format zoo dart/google dart/google
 	cp ../slps/topics/grammars/dart/spec-0.01/grammar.bgf zoo/dart/spec-0.01.bgf
@@ -137,12 +143,52 @@ all:
 	_dev/format zoo modula/sdf modula/sdf
 	cp ../slps/topics/grammars/modula/dagenais-cordy/grammar.bgf zoo/modula/dagenais-cordy.bgf
 	_dev/format zoo modula/dagenais-cordy modula/dagenais-cordy
+	cp ../slps/topics/grammars/occam/srour/grammar.bgf zoo/occam/srour.bgf
+	_dev/format zoo occam/srour occam/srour
+	cp ../slps/topics/grammars/occam/mu-srour/grammar.bgf zoo/occam/mu-srour.bgf
+	_dev/format zoo occam/mu-srour occam/mu-srour
+	cp ../slps/topics/grammars/occam/mu-mitchell/grammar.bgf zoo/occam/mu-mitchell.bgf
+	_dev/format zoo occam/mu-mitchell occam/mu-mitchell
 	cp ../slps/topics/grammars/pascal/delphi/grammar.bgf zoo/pascal/delphi.bgf
 	_dev/format zoo pascal/delphi pascal/delphi
 	cp ../slps/topics/grammars/pascal/delphipp/grammar.bgf zoo/pascal/delphipp.bgf
 	_dev/format zoo pascal/delphipp pascal/delphipp
 	cp ../slps/topics/grammars/pascal/object/grammar.bgf zoo/pascal/object.bgf
 	_dev/format zoo pascal/object pascal/object
+	cp ../slps/topics/grammars/pascal/bruneliere/grammar.bgf zoo/pascal/bruneliere.bgf
+	_dev/format zoo pascal/bruneliere pascal/bruneliere
+	cp ../slps/topics/grammars/uml/uml2/grammar.bgf zoo/uml/uml2.bgf
+	_dev/format zoo uml/uml2 uml/uml2
+	cp ../slps/topics/grammars/uml/stereo/grammar.bgf zoo/uml/stereo.bgf
+	_dev/format zoo uml/stereo uml/stereo
+	cp ../slps/topics/grammars/uml/uml-uc/grammar.bgf zoo/uml/uml-uc.bgf
+	_dev/format zoo uml/uml-uc uml/uml-uc
+	cp ../slps/topics/grammars/uml/reuse/grammar.bgf zoo/uml/reuse.bgf
+	_dev/format zoo uml/reuse uml/reuse
+	cp ../slps/topics/grammars/uml/oocm/grammar.bgf zoo/uml/oocm.bgf
+	_dev/format zoo uml/oocm uml/oocm
+	cp ../slps/topics/grammars/uml/fragment/grammar.bgf zoo/uml/fragment.bgf
+	_dev/format zoo uml/fragment uml/fragment
+	cp ../slps/topics/grammars/uml/extended/grammar.bgf zoo/uml/extended.bgf
+	_dev/format zoo uml/extended uml/extended
+	cp ../slps/topics/grammars/uml/collab/grammar.bgf zoo/uml/collab.bgf
+	_dev/format zoo uml/collab uml/collab
+	cp ../slps/topics/grammars/uml/umldi-2.0/grammar.bgf zoo/uml/umldi-2.0.bgf
+	_dev/format zoo uml/umldi-2.0 uml/umldi-2.0
+	cp ../slps/topics/grammars/uml/umldi-ag/grammar.bgf zoo/uml/umldi-ag.bgf
+	_dev/format zoo uml/umldi-ag uml/umldi-ag
+	cp ../slps/topics/grammars/uml/umldi-c/grammar.bgf zoo/uml/umldi-c.bgf
+	_dev/format zoo uml/umldi-c uml/umldi-c
+	cp ../slps/topics/grammars/uml/umldi-mm/grammar.bgf zoo/uml/umldi-mm.bgf
+	_dev/format zoo uml/umldi-mm uml/umldi-mm
+	cp ../slps/topics/grammars/uml/umldi-sm/grammar.bgf zoo/uml/umldi-sm.bgf
+	_dev/format zoo uml/umldi-sm uml/umldi-sm
+	cp ../slps/topics/grammars/uml/umldi-uc/grammar.bgf zoo/uml/umldi-uc.bgf
+	_dev/format zoo uml/umldi-uc uml/umldi-uc
+	cp ../slps/topics/grammars/uml/simple/grammar.bgf zoo/uml/simple.bgf
+	_dev/format zoo uml/simple uml/simple
+	cp ../slps/topics/grammars/uml/yuml/grammar.bgf zoo/uml/yuml.bgf
+	_dev/format zoo uml/yuml uml/yuml
 	cp ../slps/topics/grammars/wiki/mediawiki-bnf/grammar.bgf zoo/wiki/mediawiki-bnf.bgf
 	_dev/format zoo wiki/mediawiki-bnf wiki/mediawiki-bnf
 	cp ../slps/topics/grammars/wiki/mediawiki-ebnf/grammar.bgf zoo/wiki/mediawiki-ebnf.bgf
