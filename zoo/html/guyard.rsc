@@ -1,6 +1,9 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module Guyard
 
+extend lang::std::Whitespace;
+
+layout Standard = Whitespace* !>> [\u0009-\u000D \u0020 \u0085 \u00A0 \u1680 \u180E \u2000-\u200A \u2028 \u2029 \u202F \u205F \u3000];
 syntax ValuedElement
         = CDATA
         | PCDATA
@@ -25,8 +28,10 @@ syntax CDATA
         | Pixels
  ;
 syntax PCDATA
-        = 
-        Title
+        = Title
+        | Style
+        | Script
+        | Textarea
  ;
 syntax NMTOKEN
         = 
@@ -45,8 +50,16 @@ syntax ID
         value: String
  ;
 syntax EMPTY
-        = 
-        Base
+        = Base
+        | Meta
+        | Link
+        | Hr
+        | Br
+        | Param
+        | Img
+        | Area
+        | Input
+        | Col
  ;
 syntax ContentType
         = 
@@ -130,23 +143,176 @@ syntax Coords
         = 
         lengths: Length
  ;
+syntax CoreAttrs
+        = Attrs
+        | Bdo
+ ;
 syntax Direction
         = ltr: ()
         | rtl: ()
+ ;
+syntax I18n
+        = 
+        Map
  ;
 syntax Attrs
         = Body
         | Li
         | DlElement
         | Caption
+        | Noscript
+        | Div
+        | P
+        | H1
+        | H2
+        | H3
+        | H4
+        | H5
+        | H6
+        | Ul
+        | Ol
+        | Dl
+        | Address
+        | Pre
+        | Blockquote
+        | Ins
+        | Del
+        | A
+        | Span
+        | Em
+        | Strong
+        | Dfn
+        | Code
+        | Samp
+        | Kbd
+        | Var
+        | Cite
+        | Abbr
+        | Acronym
+        | Q
+        | Sub
+        | Sup
+        | Tt
+        | I
+        | B
+        | Big
+        | Small
+        | Object
+        | Form
+        | Label
+        | Select
+        | Fieldset
+        | Legend
+        | Button
+        | Table
+        | Thead
+        | Tfoot
+        | Tbody
+        | Colgroup
+        | Tr
+        | Optgroup
+ ;
+syntax Specialpre
+        = 
+        Span
+ ;
+syntax Special
+        = 
+        Specialpre
+ ;
+syntax Fontstyle
+        = Tt
+        | I
+        | B
+        | Big
+        | Small
+ ;
+syntax Phrase
+        = Em
+        | Strong
+        | Dfn
+        | Code
+        | Samp
+        | Kbd
+        | Var
+        | Cite
+        | Abbr
+        | Acronym
+        | Q
+        | Sub
+        | Sup
+ ;
+syntax Inlineforms
+        = Label
+        | Select
+ ;
+syntax Miscinline
+        = Ins
+        | Del
+ ;
+syntax Misc
+        = Miscinline
+        | Noscript
+ ;
+syntax Inline
+        = Special
+        | Fontstyle
+        | Phrase
+        | Inlineforms
  ;
 syntax Inline
         = 
         Inline
  ;
+syntax Heading
+        = H1
+        | H2
+        | H3
+        | H4
+        | H5
+        | H6
+ ;
+syntax Lists
+        = Ul
+        | Ol
+        | Dl
+ ;
+syntax Blocktext
+        = Address
+        | Pre
+        | Blockquote
+ ;
+syntax Block
+        = Heading
+        | Lists
+        | Blocktext
+        | Fieldset
+ ;
+syntax Block
+        = Misc
+        | Block
+ ;
+syntax Flow
+        = 
+        Inline
+ ;
+syntax PreContent
+        = 
+        Specialpre
+ ;
+syntax ButtonContent
+        = Special
+        | Heading
+        | Lists
+        | Blocktext
+ ;
 syntax Html
         = 
         I18n i18n ID id URI xmlns Head head Body body
+ ;
+syntax HeadMisc
+        = Meta
+        | Style
  ;
 syntax Head
         = 
@@ -376,6 +542,10 @@ syntax Small
         = 
         Inline smallElements+
  ;
+syntax ObjectElement
+        = 
+        Param
+ ;
 syntax Object
         = 
         ObjectElement objectelement+ Boolean declare URI classid URI codebase URI data ContentType type ContentType codetype UriList archive Text standby Length height Length width URI usemap NMTOKEN name Number tabindex
@@ -437,6 +607,10 @@ syntax Select
         = 
         SelectElement selectelement+ CDATA name Number size Boolean multiple Boolean disabled Number tabindex ScriptExpression onfocus ScriptExpression onblur ScriptExpression onchange
  ;
+syntax SelectElement
+        = Optgroup
+        | Option
+ ;
 syntax Optgroup
         = 
         Option options+ Boolean disabled Text label
@@ -448,6 +622,10 @@ syntax Option
 syntax Textarea
         = 
         CDATA name Number rows Number cols Boolean disabled Boolean readonly ScriptExpression onselect ScriptExpression onchange
+ ;
+syntax FieldsetElement
+        = 
+        Legend
  ;
 syntax Fieldset
         = 
@@ -537,6 +715,10 @@ syntax Tr
         = 
         TrElement trelements+
  ;
+syntax TrElement
+        = Th
+        | Td
+ ;
 syntax Scope
         = row: ()
         | col: ()
@@ -550,4 +732,16 @@ syntax Th
 syntax Td
         = 
         Flow tdelement+ Text abbr CDATA axis IDREFS headers Scope scope Number rowspan Number colspan
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax Boolean
+        = "true"
+        | "false"
  ;

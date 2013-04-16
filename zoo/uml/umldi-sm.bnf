@@ -39,7 +39,7 @@ ReturnAction:
 TerminateAction:
         actualArgument::Argument+ actionSequence::ActionSequence recurrence::IterationExpression target::ObjectSetExpression isAsynchronous::Boolean script::ActionExpression
 Exception:
-        EPSILON
+        
 CallConcurrencyKind:
         cck_sequential::EPSILON
         cck_guarded::EPSILON
@@ -70,15 +70,15 @@ Expression:
 Expression:
         language::String body::String
 BooleanExpression:
-        EPSILON
+        language::String body::String
 ObjectSetExpression:
-        EPSILON
+        language::String body::String
 ActionExpression:
-        EPSILON
+        language::String body::String
 IterationExpression:
-        EPSILON
+        language::String body::String
 TimeExpression:
-        EPSILON
+        language::String body::String
 PseudostateKind:
         pk_choice::EPSILON
         pk_deepHistory::EPSILON
@@ -139,6 +139,13 @@ StubState:
         referenceState::String
 FinalState:
         deferrableEvent::Event+ internalTransition::Transition+ exit::Action doActivity::Action entry::Action stateMachine::StateMachine
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR
 Element:
         ModelElement
 ModelElement:
@@ -165,6 +172,10 @@ ModelElement:
         Relationship
 ModelElement:
         Parameter
+GeneralizableElement:
+        Classifier
+Namespace:
+        Classifier
 Classifier:
         Signal
 Feature:

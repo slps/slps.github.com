@@ -1,3 +1,10 @@
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR
 Element:
         MultiplicityElement
 Element:
@@ -26,6 +33,8 @@ Element:
         QualifierValue
 MultiplicityElement:
         ConnectorEnd
+MultiplicityElement:
+        Pin
 NamedElement:
         Namespace
 NamedElement:
@@ -54,6 +63,28 @@ NamedElement:
         DeployedArtifact
 NamedElement:
         DeploymentTarget
+NamedElement:
+        PackageableElement
+NamedElement:
+        ConnectableElement
+NamedElement:
+        Extend
+NamedElement:
+        Include
+NamedElement:
+        ActivityPartition
+Namespace:
+        Package
+Namespace:
+        Classifier
+Namespace:
+        BehavioralFeature
+Namespace:
+        InteractionOperand
+Namespace:
+        Region
+Namespace:
+        State
 OpaqueExpression:
         Expression
 OpaqueExpression:
@@ -86,14 +117,28 @@ DirectedRelationship:
         TemplateBinding
 DirectedRelationship:
         ProtocolConformance
+DirectedRelationship:
+        Dependency
+DirectedRelationship:
+        InformationFlow
+DirectedRelationship:
+        Extend
+DirectedRelationship:
+        Include
 Relationship:
         DirectedRelationship
+Relationship:
+        Association
 Class:
         Stereotype
 Class:
         Behavior
 Class:
         Component
+Class:
+        AssociationClass
+Class:
+        Node
 Class:
         ownedOperation::Operation+ superClass::Class+ extension::Extension+ nestedClassifier::Classifier+ isActive::Boolean ownedReception::Reception+
 Property:
@@ -104,6 +149,10 @@ Property:
         default::String isComposite::Boolean isDerived::Boolean class_::Class opposite::Property isDerivedUnion::Boolean owningAssociation::Association redefinedProperty::Property+ subsettedProperty::Property+ datatype::DataType association::Association aggregation::AggregationKind defaultValue::ValueSpecification qualifier::Property+ associationEnd::Property
 Operation:
         ownedParameter::Parameter+ class_::Class isQuery::Boolean datatype::DataType precondition::Constraint+ postcondition::Constraint+ redefinedOperation::Operation+ bodyCondition::Constraint
+TypedElement:
+        ValueSpecification
+TypedElement:
+        ObjectNode
 Parameter:
         operation::Operation default::String direction::ParameterDirectionKind defaultValue::ValueSpecification isException::Boolean isStream::Boolean effect::ParameterEffectKind parameterSet::ParameterSet+
 Package:
@@ -123,7 +172,7 @@ DataType:
 EnumerationLiteral:
         enumeration::Enumeration
 PrimitiveType:
-        EPSILON
+        ownedAttribute::Property+ ownedOperation::Operation+
 Classifier:
         DataType
 Classifier:
@@ -142,8 +191,16 @@ Classifier:
         ParameterableClassifier
 Classifier:
         TemplateableClassifier
+Classifier:
+        Association
+Classifier:
+        Artifact
 Feature:
         Connector
+Feature:
+        StructuralFeature
+Feature:
+        BehavioralFeature
 Constraint:
         InteractionConstraint
 Constraint:
@@ -177,6 +234,10 @@ LiteralUnlimitedNatural:
         value::UnlimitedNatural
 BehavioralFeature:
         Reception
+BehavioralFeature:
+        Operation
+StructuralFeature:
+        Property
 InstanceSpecification:
         EnumerationLiteral
 InstanceSpecification:
@@ -195,6 +256,10 @@ RedefinableElement:
         ExtensionPoint
 RedefinableElement:
         Transition
+RedefinableElement:
+        RedefinableTemplateSignature
+RedefinableElement:
+        Region
 Generalization:
         specific::Classifier general::Classifier isSubstitutable::Boolean generalizationSet::GeneralizationSet+
 PackageableElement:
@@ -205,6 +270,14 @@ PackageableElement:
         GeneralizationSet
 PackageableElement:
         PrimitiveFunction
+PackageableElement:
+        InstanceSpecification
+PackageableElement:
+        Dependency
+PackageableElement:
+        InformationFlow
+PackageableElement:
+        Package
 ElementImport:
         visibility::VisibilityKind alias::String importedElement::PackageableElement importingNamespace::Namespace
 PackageImport:
@@ -216,11 +289,13 @@ Association:
 Association:
         CommunicationPath
 Association:
+        AssociationClass
+Association:
         isDerived::Boolean ownedEnd::Property+ endType::Type+ memberEnd::Property
 PackageMerge:
         mergingPackage::Package mergedPackage::Package
 Stereotype:
-        EPSILON
+        ownedOperation::Operation+ superClass::Class+ extension::Extension+ nestedClassifier::Classifier+ isActive::Boolean ownedReception::Reception+
 Profile:
         ownedStereotype::Stereotype+ metaclassReference::ElementImport+ metamodelReference::PackageImport+
 ProfileApplication:
@@ -228,7 +303,7 @@ ProfileApplication:
 Extension:
         isRequired::Boolean metaclass::Class
 ExtensionEnd:
-        EPSILON
+        default::String isComposite::Boolean isDerived::Boolean class_::Class opposite::Property isDerivedUnion::Boolean owningAssociation::Association redefinedProperty::Property+ subsettedProperty::Property+ datatype::DataType association::Association aggregation::AggregationKind defaultValue::ValueSpecification qualifier::Property+ associationEnd::Property
 ParameterDirectionKind:
         in::EPSILON
         inout::EPSILON
@@ -242,12 +317,18 @@ Behavior:
         Activity
 Behavior:
         StateMachine
+Behavior:
+        Interaction
 BehavioredClassifier:
         UseCase
+BehavioredClassifier:
+        Class
+BehavioredClassifier:
+        Collaboration
 Activity:
         body::String language::String edge::ActivityEdge+ group::ActivityGroup+ node::ActivityNode+ action::Action+ structuredNode::StructuredActivityNode+ isSingleExecution::Boolean isReadOnly::Boolean
 Permission:
-        EPSILON
+        client::NamedElement+ supplier::NamedElement+
 Dependency:
         Permission
 Dependency:
@@ -259,7 +340,7 @@ Dependency:
 Dependency:
         client::NamedElement+ supplier::NamedElement+
 Usage:
-        EPSILON
+        client::NamedElement+ supplier::NamedElement+
 Abstraction:
         Realization
 Abstraction:
@@ -277,7 +358,7 @@ Substitution:
 GeneralizationSet:
         isCovering::Boolean isDisjoint::Boolean powertype::Classifier generalization::Generalization+
 AssociationClass:
-        EPSILON
+        ownedOperation::Operation+ superClass::Class+ extension::Extension+ nestedClassifier::Classifier+ isActive::Boolean ownedReception::Reception+ isDerived::Boolean ownedEnd::Property+ endType::Type+ memberEnd::Property
 InformationItem:
         represented::Classifier+
 InformationFlow:
@@ -286,20 +367,30 @@ Model:
         viewpoint::String
 ConnectorEnd:
         definingEnd::Property role::ConnectableElement partWithPort::Property
+ConnectableElement:
+        Parameter
+ConnectableElement:
+        Variable
 Connector:
         type::Association redefinedConnector::Connector+ end::ConnectorEnd kind::ConnectorKind contract::Behavior+
 StructuredClassifier:
         EncapsulatedClassifier
+StructuredClassifier:
+        Collaboration
 ActivityEdge:
         ControlFlow
 ActivityEdge:
         ObjectFlow
 ActivityGroup:
         InterruptibleActivityRegion
+ActivityGroup:
+        ActivityPartition
 ActivityNode:
         ControlNode
 ActivityNode:
         ExecutableNode
+ActivityNode:
+        ObjectNode
 Action:
         CreateObjectAction
 Action:
@@ -339,6 +430,8 @@ Action:
 Action:
         RaiseExceptionAction
 Action:
+        StructuredActivityNode
+Action:
         effect::String output::OutputPin+ input::InputPin+ context::Classifier localPrecondition::Constraint+ localPostcondition::Constraint+
 ObjectNode:
         ActivityParameterNode
@@ -346,6 +439,8 @@ ObjectNode:
         CentralBufferNode
 ObjectNode:
         ExpansionNode
+ObjectNode:
+        Pin
 ControlNode:
         InitialNode
 ControlNode:
@@ -414,6 +509,8 @@ Collaboration:
         collaborationRole::ConnectableElement+
 Port:
         isBehavior::Boolean isService::Boolean required::Interface+ redefinedPort::Port+ provided::Interface+ protocol::ProtocolStateMachine
+EncapsulatedClassifier:
+        Class
 CallConcurrencyKind:
         guarded::EPSILON
         concurrent::EPSILON
@@ -472,6 +569,12 @@ InteractionFragment:
         CombinedFragment
 InteractionFragment:
         Continuation
+InteractionFragment:
+        EventOccurrence
+InteractionFragment:
+        Interaction
+InteractionFragment:
+        InteractionOperand
 Lifeline:
         coveredBy::InteractionFragment+ represents::ConnectableElement interaction::Interaction selector::OpaqueExpression decomposedAs::PartDecomposition
 Message:
@@ -490,6 +593,8 @@ MessageSort:
         asynchSignal::EPSILON
 MessageEnd:
         Gate
+MessageEnd:
+        EventOccurrence
 EventOccurrence:
         Stop
 EventOccurrence:
@@ -499,7 +604,9 @@ ExecutionOccurrence:
 StateInvariant:
         invariant::Constraint
 Stop:
-        EPSILON
+        startExec::ExecutionOccurrence+ finishExec::ExecutionOccurrence+ toAfter::GeneralOrdering+ toBefore::GeneralOrdering+
+TemplateSignature:
+        RedefinableTemplateSignature
 TemplateSignature:
         parameter::TemplateParameter+ ownedParameter::TemplateParameter+ nestedSignature::TemplateSignature+ nestingSignature::TemplateSignature template::TemplateableElement
 TemplateParameter:
@@ -518,18 +625,24 @@ TemplateableElement:
         StringExpression
 StringExpression:
         subExpression::StringExpression+ owningExpression::StringExpression
+ParameterableElement:
+        ValueSpecification
+ParameterableElement:
+        PackageableElement
+ParameterableElement:
+        ConnectableElement
 TemplateBinding:
         boundElement::TemplateableElement signature::TemplateSignature parameterSubstitution::TemplateParameterSubstitution+
 TemplateParameterSubstitution:
         formal::TemplateParameter templateBinding::TemplateBinding actual::ParameterableElement+ ownedActual::ParameterableElement+
 OperationTemplateParameter:
-        EPSILON
+        signature::TemplateSignature parameteredElement::ParameterableElement ownedParameteredElement::ParameterableElement default::ParameterableElement ownedDefault::ParameterableElement
 ClassifierTemplateParameter:
         allowSubstitutable::Boolean
 RedefinableTemplateSignature:
-        EPSILON
+        redefinitionContext::Classifier+ isLeaf::Boolean parameter::TemplateParameter+ ownedParameter::TemplateParameter+ nestedSignature::TemplateSignature+ nestingSignature::TemplateSignature template::TemplateableElement
 ConnectableElementTemplateParameter:
-        EPSILON
+        signature::TemplateSignature parameteredElement::ParameterableElement ownedParameteredElement::ParameterableElement default::ParameterableElement ownedDefault::ParameterableElement
 ForkNode:
         EPSILON
 JoinNode:
@@ -557,7 +670,7 @@ InteractionOccurrence:
 Gate:
         receiveMessage::Message sendMessage::Message
 PartDecomposition:
-        EPSILON
+        refersTo::Interaction actualGate::Gate+ argument::InputPin+
 InteractionOperand:
         guard::InteractionConstraint fragment::InteractionFragment+
 InteractionConstraint:
@@ -617,7 +730,7 @@ PseudostateKind:
         initial::EPSILON
         entryPoint::EPSILON
 FinalState:
-        EPSILON
+        isComposite::Boolean isOrthogonal::Boolean isSimple::Boolean isSubmachineState::Boolean submachine::StateMachine connection::ConnectionPointReference+ redefinedState::State deferrableTrigger::Trigger+ region::Region+ entry::Activity exit::Activity doActivity::Activity stateInvariant::Constraint
 CreateObjectAction:
         classifier::Classifier result::OutputPin
 DestroyObjectAction:
@@ -721,7 +834,7 @@ Duration:
 TimeObservationAction:
         now::TimeExpression+
 DurationInterval:
-        EPSILON
+        min::ValueSpecification+ max::ValueSpecification+
 Interval:
         DurationInterval
 Interval:
@@ -738,7 +851,7 @@ IntervalConstraint:
         TimeConstraint
         DurationConstraint
 TimeInterval:
-        EPSILON
+        min::ValueSpecification+ max::ValueSpecification+
 DurationObservationAction:
         duration::Duration+
 DurationConstraint:
@@ -766,6 +879,10 @@ ConnectorKind:
         assembly::EPSILON
 Deployment:
         deployedArtifact::DeployedArtifact+ location::DeploymentTarget configuration::DeploymentSpecification+
+DeployedArtifact:
+        Artifact
+DeploymentTarget:
+        Node
 Node:
         Device
 Node:
@@ -773,11 +890,11 @@ Node:
 Node:
         nestedNode::Node+
 Device:
-        EPSILON
+        nestedNode::Node+
 ExecutionEnvironment:
-        EPSILON
+        nestedNode::Node+
 CommunicationPath:
-        EPSILON
+        isDerived::Boolean ownedEnd::Property+ endType::Type+ memberEnd::Property
 ProtocolConformance:
         specificMachine::ProtocolStateMachine generalMachine::ProtocolStateMachine
 ProtocolStateMachine:

@@ -1,6 +1,9 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module Bibtex_1_2
 
+extend lang::std::Whitespace;
+
+layout Standard = Whitespace* !>> [\u0009-\u000D \u0020 \u0085 \u00A0 \u1680 \u180E \u2000-\u200A \u2028 \u2029 \u202F \u205F \u3000];
 syntax BibtexFile
         = 
         Entry entries+
@@ -22,12 +25,34 @@ syntax Entry
         | SchoolEntry
         | Misc
  ;
+syntax AuthoredEntry
+        = Article
+        | Book
+        | TechReport
+        | ThesisEntry
+        | InProceedings
+        | Unpublished
+ ;
+syntax BookTitledEntry
+        = 
+        InCollection
+ ;
+syntax DatedEntry
+        = Booklet
+        | Proceedings
+ ;
+syntax TitledEntry
+        = Manual
+        | Booklet
+        | Proceedings
+ ;
 syntax Article
         = 
         String volume String number String pages String note
  ;
 syntax Book
         = InBook
+        | InCollection
         | String volume String number String series String address String edition String note
  ;
 syntax Booklet
@@ -72,13 +97,17 @@ syntax InProceedings
  ;
 syntax Conference
         = 
-        ()
+        pages: String
  ;
 syntax Unpublished
         = 
-        ()
+        Author authors+
  ;
 syntax Misc
         = 
         Author authors+ String title String howpublished String month String year String note
+ ;
+syntax String
+        = 
+        String
  ;

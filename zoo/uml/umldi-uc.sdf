@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        Instance AttributeLink Link LinkEnd ComponentInstance NodeInstance UseCase Actor UseCaseInstance Extend Include ExtensionPoint Element ModelElement Classifier Feature StructuralFeature AssociationEnd Relationship Association Attribute Generalization AggregationKind ChangeableKind OrderingKind ScopeKind VisibilityKind Multiplicity MultiplicityRange Expression BooleanExpression 
+        Instance AttributeLink Link LinkEnd ComponentInstance NodeInstance UseCase Actor UseCaseInstance Extend Include ExtensionPoint Element ModelElement GeneralizableElement Namespace Classifier Feature StructuralFeature AssociationEnd Relationship Association Attribute Generalization AggregationKind ChangeableKind OrderingKind ScopeKind VisibilityKind Multiplicity MultiplicityRange Expression BooleanExpression Boolean Integer String 
   context-free syntax
         ComponentInstance -> Instance
 
@@ -54,6 +54,12 @@ exports
 
         Relationship -> ModelElement
 
+        Classifier -> GeneralizableElement
+
+        Association -> GeneralizableElement
+
+        Classifier -> Namespace
+
         UseCase -> Classifier
 
         Actor -> Classifier
@@ -69,6 +75,8 @@ exports
         Include -> Relationship
 
         Generalization -> Relationship
+
+        Association -> Relationship
 
         connection::AssociationEnd -> Association
 
@@ -103,4 +111,11 @@ exports
 
         language::String body::String -> Expression
 
-         -> BooleanExpression
+        language::String body::String -> BooleanExpression
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
+        STR -> String

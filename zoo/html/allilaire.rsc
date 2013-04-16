@@ -1,6 +1,21 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module Allilaire
 
+extend lang::std::Whitespace;
+
+layout Standard = Whitespace* !>> [\u0009-\u000D \u0020 \u0085 \u00A0 \u1680 \u180E \u2000-\u200A \u2028 \u2029 \u202F \u205F \u3000];
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax String
+        = 
+        String
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
 syntax HTML
         = 
         HEAD head BODY body
@@ -189,7 +204,7 @@ syntax TD
  ;
 syntax TH
         = 
-        ()
+        String colspan String rowspan String valign String align String width TR tr
  ;
 syntax FORM
         = 
@@ -266,5 +281,5 @@ syntax NOFRAME
  ;
 syntax IFRAME
         = 
-        ()
+        String src String name String marginwidth String marginheight String scrolling String noresize
  ;

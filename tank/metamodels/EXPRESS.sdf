@@ -2,8 +2,293 @@ module Main
 
 exports
   sorts
-        Express-metamodel::java::lang::void Express-metamodel::java::lang::int 
+        Express-metamodel::java::lang::void Express-metamodel::java::lang::int Express-metamodel::Rules::ONEOFConstraint Express-metamodel::Rules::SupertypeRule Express-metamodel::Rules::SubtypeConstraint Express-metamodel::Rules::Extent Express-metamodel::Rules::TOTAL-OVERConstraint Express-metamodel::Rules::ANDConstraint Express-metamodel::Rules::GlobalRule Express-metamodel::Rules::NamedRule Express-metamodel::Statements::ProcedureCall Express-metamodel::Statements::SkipStatement Express-metamodel::Statements::AliasStatement Express-metamodel::Statements::ControlVariable Express-metamodel::Statements::AliasVariable Express-metamodel::Statements::VARCell Express-metamodel::Statements::NullStatement Express-metamodel::Statements::AttributeCell Express-metamodel::Statements::StatementBlock Express-metamodel::Statements::CaseAction Express-metamodel::Statements::MemberCell Express-metamodel::Statements::RepeatStatement Express-metamodel::Statements::GroupCell Express-metamodel::Statements::VariableCell Express-metamodel::Statements::CaseStatement Express-metamodel::Statements::IfStatement Express-metamodel::Statements::EscapeStatement Express-metamodel::Statements::ReturnStatement Express-metamodel::Statements::Assignment String Integer Boolean Express-metamodel::Expressions::RepeatCount Express-metamodel::Expressions::EnumItemRef Express-metamodel::Expressions::Literal Express-metamodel::Expressions::BinaryIndex Express-metamodel::Expressions::IndeterminateRef Express-metamodel::Expressions::SELFRef Express-metamodel::Expressions::BinaryOperation Express-metamodel::Expressions::AggregateInitializer Express-metamodel::Expressions::StringIndex Express-metamodel::Expressions::PartialEntityConstructor Express-metamodel::Expressions::Coercion Express-metamodel::Expressions::ActualParameter Express-metamodel::Expressions::ParameterRef Express-metamodel::Expressions::AttributeRef Express-metamodel::Expressions::AggregateIndex Express-metamodel::Expressions::GroupRef Express-metamodel::Expressions::UnaryOperation Express-metamodel::Expressions::UsedInRef Express-metamodel::Expressions::ConstantRef Express-metamodel::Expressions::QueryExpression Express-metamodel::Expressions::QueryVariable Express-metamodel::Expressions::AttributeBinding Express-metamodel::Expressions::FunctionCall Express-metamodel::Expressions::MemberBinding Express-metamodel::Expressions::ExtentRef Express-metamodel::Expressions::VariableRef Express-metamodel::Core::SingleEntityType Express-metamodel::Core::AGGREGATEType Express-metamodel::Core::GeneralBAGType Express-metamodel::Core::DomainRule Express-metamodel::Core::Expression Express-metamodel::Core::InverseAttribute Express-metamodel::Core::EnumerationType Express-metamodel::Core::ArrayBound Express-metamodel::Core::GeneralSETType Express-metamodel::Core::LISTType Express-metamodel::Core::Redeclaration Express-metamodel::Core::EntityType Express-metamodel::Core::PartialEntityType Express-metamodel::Core::Schema Express-metamodel::Core::InvertibleAttribute Express-metamodel::Core::InterfacedElement Express-metamodel::Core::NumericType Express-metamodel::Core::UniqueRule Express-metamodel::Core::DomainRole Express-metamodel::Core::GeneralLISTType Express-metamodel::Core::BAGType Express-metamodel::Core::RealType Express-metamodel::Core::LogicType Express-metamodel::Core::GenericType Express-metamodel::Core::StringType Express-metamodel::Core::DerivedAttribute Express-metamodel::Core::RangeRole Express-metamodel::Core::Remark Express-metamodel::Core::SizeConstraint Express-metamodel::Core::SETType Express-metamodel::Core::SpecializedType Express-metamodel::Core::GeneralARRAYType Express-metamodel::Core::Relationship Express-metamodel::Core::LengthConstraint Express-metamodel::Core::BinaryType Express-metamodel::Core::ScopedId Express-metamodel::Core::SelectType Express-metamodel::Core::ExplicitAttribute Express-metamodel::Core::ARRAYType Express-metamodel::Algorithms::ActualTypeConstraint Express-metamodel::Algorithms::FunctionResult Express-metamodel::Algorithms::Function Express-metamodel::Algorithms::InParameter Express-metamodel::Algorithms::LocalVariable Express-metamodel::Algorithms::ActualStructure Express-metamodel::Algorithms::ActualGenericType Express-metamodel::Algorithms::Statement Express-metamodel::Algorithms::InVariable Express-metamodel::Algorithms::Procedure Express-metamodel::Algorithms::ActualARRAYType Express-metamodel::Algorithms::ActualSETType Express-metamodel::Algorithms::ActualAGGREGATEType Express-metamodel::Algorithms::ActualStructureConstraint Express-metamodel::Algorithms::ActualLISTType Express-metamodel::Algorithms::VARParameter Express-metamodel::Algorithms::ActualDataType Express-metamodel::Algorithms::ActualBAGType Express-metamodel::Instances::AttributeValue Express-metamodel::Instances::ARRAYValue Express-metamodel::Instances::RoleName Express-metamodel::Instances::EntityInstance Express-metamodel::Instances::IntegerValue Express-metamodel::Instances::Constant Express-metamodel::Instances::LogicalValue Express-metamodel::Instances::ListMember Express-metamodel::Instances::BagMember Express-metamodel::Instances::SingleEntityValue Express-metamodel::Instances::Indeterminate Express-metamodel::Instances::SingleLeafInstance Express-metamodel::Instances::GenericAggregate Express-metamodel::Instances::BinaryValue Express-metamodel::Instances::SpecializedValue Express-metamodel::Instances::BAGValue Express-metamodel::Instances::EnumerationItem Express-metamodel::Instances::EntityValue Express-metamodel::Instances::SETValue Express-metamodel::Instances::ArrayMember Express-metamodel::Instances::Population Express-metamodel::Instances::RealValue Express-metamodel::Instances::BooleanValue Express-metamodel::Instances::LISTValue Express-metamodel::Instances::StringValue Express-metamodel::Instances::TypeName Express-metamodel::Instances::PartialEntityValue Express-metamodel::Instances::NumberValue Express-metamodel::Instances::MultiLeafInstance 
   context-free syntax
          -> Express-metamodel::java::lang::void
 
          -> Express-metamodel::java::lang::int
+
+         -> Express-metamodel::Rules::ONEOFConstraint
+
+        Express_metamodel::Rules::SupertypeRule::named-supertype::Core/Express-metamodel%3A%3ACore%3A%3AEntityType Express_metamodel::Rules::SupertypeRule::constraints::Rules/Express-metamodel%3A%3ARules%3A%3ASubtypeConstraint+ assertsAbstract::MOF/Boolean -> Express-metamodel::Rules::SupertypeRule
+
+        Express_metamodel::Rules::SubtypeConstraint::constrained-subtypes::Rules/Express-metamodel%3A%3ARules%3A%3AExtent+ Express_metamodel::Rules::SubtypeConstraint::equivalent-rule::Core/Express-metamodel%3A%3ACore%3A%3AExpression Express_metamodel::Rules::SubtypeConstraint::collection::Rules/Express-metamodel%3A%3ARules%3A%3ASupertypeRule -> Express-metamodel::Rules::SubtypeConstraint
+
+        Express_metamodel::Rules::Extent::constraints::Rules/Express-metamodel%3A%3ARules%3A%3ASubtypeConstraint+ Express_metamodel::Rules::Extent::content::Instances/Express-metamodel%3A%3AInstances%3A%3AEntityInstance+ Express_metamodel::Rules::Extent::within-population::Instances/Express-metamodel%3A%3AInstances%3A%3APopulation Express_metamodel::Rules::Extent::constraint-rules::Rules/Express-metamodel%3A%3ARules%3A%3AGlobalRule+ Express_metamodel::Rules::Extent::for-type::Core/Express-metamodel%3A%3ACore%3A%3AEntityType id::Core/Express-metamodel%3A%3ACore%3A%3AScopedId -> Express-metamodel::Rules::Extent
+
+         -> Express-metamodel::Rules::TOTAL-OVERConstraint
+
+         -> Express-metamodel::Rules::ANDConstraint
+
+        Express_metamodel::Rules::GlobalRule::supporting-body::Algorithms/Express-metamodel%3A%3AAlgorithms%3A%3AStatement Express_metamodel::Rules::GlobalRule::constrained-extents::Rules/Express-metamodel%3A%3ARules%3A%3AExtent+ Express_metamodel::Rules::GlobalRule::contains-rules::Rules/Express-metamodel%3A%3ARules%3A%3ANamedRule+ -> Express-metamodel::Rules::GlobalRule
+
+        Express_metamodel::Rules::NamedRule::namespace::Rules/Express-metamodel%3A%3ARules%3A%3AGlobalRule Express_metamodel::Rules::NamedRule::asserts-expression::Core/Express-metamodel%3A%3ACore%3A%3AExpression position::MOF/Integer -> Express-metamodel::Rules::NamedRule
+
+        Express_metamodel::Statements::ProcedureCall::invokes::Algorithms/Express-metamodel%3A%3AAlgorithms%3A%3AProcedure Express_metamodel::Statements::ProcedureCall::actual-parameters::Expressions/Express-metamodel%3A%3AExpressions%3A%3AActualParameter+ -> Express-metamodel::Statements::ProcedureCall
+
+        Express_metamodel::Statements::SkipStatement::in-block::Algorithms/Express-metamodel%3A%3AAlgorithms%3A%3AStatement -> Express-metamodel::Statements::SkipStatement
+
+        Express_metamodel::Statements::AliasStatement::binds-to-reference::Statements/Express-metamodel%3A%3AStatements%3A%3AVARExpression Express_metamodel::Statements::AliasStatement::body::Algorithms/Express-metamodel%3A%3AAlgorithms%3A%3AStatement Express_metamodel::Statements::AliasStatement::alias-variable::Statements/Express-metamodel%3A%3AStatements%3A%3AAliasVariable -> Express-metamodel::Statements::AliasStatement
+
+        Express_metamodel::Statements::ControlVariable::bound-value::Core/Express-metamodel%3A%3ACore%3A%3AExpression Express_metamodel::Statements::ControlVariable::initial-value::Core/Express-metamodel%3A%3ACore%3A%3AExpression Express_metamodel::Statements::ControlVariable::namespace::Statements/Express-metamodel%3A%3AStatements%3A%3ARepeatStatement Express_metamodel::Statements::ControlVariable::increment::Core/Express-metamodel%3A%3ACore%3A%3AExpression -> Express-metamodel::Statements::ControlVariable
+
+        Express_metamodel::Statements::AliasVariable::namespace::Statements/Express-metamodel%3A%3AStatements%3A%3AAliasStatement Express_metamodel::Statements::AliasVariable::referent::Statements/Express-metamodel%3A%3AStatements%3A%3AVARExpression -> Express-metamodel::Statements::AliasVariable
+
+        Express_metamodel::Statements::VARCell::refers-to::Algorithms/Express-metamodel%3A%3AAlgorithms%3A%3AVARVariable id::Core/Identifier -> Express-metamodel::Statements::VARCell
+
+         -> Express-metamodel::Statements::NullStatement
+
+        Express_metamodel::Statements::AttributeCell::refers-to::Core/Express-metamodel%3A%3ACore%3A%3AExplicitAttribute Express_metamodel::Statements::AttributeCell::base-entity::Statements/Express-metamodel%3A%3AStatements%3A%3AVARExpression id::Core/Identifier -> Express-metamodel::Statements::AttributeCell
+
+        Express_metamodel::Statements::StatementBlock::body-statements_Statement::Algorithms/Express-metamodel%3A%3AAlgorithms%3A%3AStatement+ delimited::MOF/Boolean -> Express-metamodel::Statements::StatementBlock
+
+        Express_metamodel::Statements::CaseAction::label-value::Core/Express-metamodel%3A%3ACore%3A%3AExpression+ Express_metamodel::Statements::CaseAction::action::Algorithms/Express-metamodel%3A%3AAlgorithms%3A%3AStatement isDefault::MOF/Boolean -> Express-metamodel::Statements::CaseAction
+
+        Express_metamodel::Statements::MemberCell::index-value::Core/Express-metamodel%3A%3ACore%3A%3AExpression Express_metamodel::Statements::MemberCell::base-aggregate::Statements/Express-metamodel%3A%3AStatements%3A%3AVARExpression -> Express-metamodel::Statements::MemberCell
+
+        Express_metamodel::Statements::RepeatStatement::while-expression::Core/Express-metamodel%3A%3ACore%3A%3AExpression Express_metamodel::Statements::RepeatStatement::body::Algorithms/Express-metamodel%3A%3AAlgorithms%3A%3AStatement Express_metamodel::Statements::RepeatStatement::control-variable::Statements/Express-metamodel%3A%3AStatements%3A%3AControlVariable Express_metamodel::Statements::RepeatStatement::until-expression::Core/Express-metamodel%3A%3ACore%3A%3AExpression -> Express-metamodel::Statements::RepeatStatement
+
+        Express_metamodel::Statements::GroupCell::base-entity::Statements/Express-metamodel%3A%3AStatements%3A%3AVARExpression Express_metamodel::Statements::GroupCell::refers-to::Core/Express-metamodel%3A%3ACore%3A%3ASingleEntityType id::Core/Identifier -> Express-metamodel::Statements::GroupCell
+
+        Express_metamodel::Statements::VariableCell::refers-to::Algorithms/Express-metamodel%3A%3AAlgorithms%3A%3AVariable id::Core/Identifier -> Express-metamodel::Statements::VariableCell
+
+        Express_metamodel::Statements::CaseStatement::cases::Statements/Express-metamodel%3A%3AStatements%3A%3ACaseAction+ Express_metamodel::Statements::CaseStatement::selection-expression::Core/Express-metamodel%3A%3ACore%3A%3AExpression -> Express-metamodel::Statements::CaseStatement
+
+        Express_metamodel::Statements::IfStatement::if-condition::Core/Express-metamodel%3A%3ACore%3A%3AExpression Express_metamodel::Statements::IfStatement::else-actions::Algorithms/Express-metamodel%3A%3AAlgorithms%3A%3AStatement Express_metamodel::Statements::IfStatement::then-actions::Algorithms/Express-metamodel%3A%3AAlgorithms%3A%3AStatement -> Express-metamodel::Statements::IfStatement
+
+        Express_metamodel::Statements::EscapeStatement::in-block::Algorithms/Express-metamodel%3A%3AAlgorithms%3A%3AStatement -> Express-metamodel::Statements::EscapeStatement
+
+        Express_metamodel::Statements::ReturnStatement::return-value::Core/Express-metamodel%3A%3ACore%3A%3AExpression -> Express-metamodel::Statements::ReturnStatement
+
+        Express_metamodel::Statements::Assignment::assigned-value::Core/Express-metamodel%3A%3ACore%3A%3AExpression Express_metamodel::Statements::Assignment::variable::Statements/Express-metamodel%3A%3AStatements%3A%3AVARExpression -> Express-metamodel::Statements::Assignment
+
+        STR -> String
+
+        INT -> Integer
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        Express_metamodel::Expressions::RepeatCount::derivation::Core/Express-metamodel%3A%3ACore%3A%3AExpression -> Express-metamodel::Expressions::RepeatCount
+
+        Express_metamodel::Expressions::EnumItemRef::refers-to::Instances/Express-metamodel%3A%3AInstances%3A%3AEnumerationItem id::Core/Identifier -> Express-metamodel::Expressions::EnumItemRef
+
+        Express_metamodel::Expressions::Literal::refers-to::Instances/Express-metamodel%3A%3AInstances%3A%3ASimpleValue -> Express-metamodel::Expressions::Literal
+
+        Express_metamodel::Expressions::BinaryIndex::first-bit::Core/Express-metamodel%3A%3ACore%3A%3AExpression Express_metamodel::Expressions::BinaryIndex::last-bit::Core/Express-metamodel%3A%3ACore%3A%3AExpression -> Express-metamodel::Expressions::BinaryIndex
+
+        Express_metamodel::Expressions::IndeterminateRef::refers-to::Instances/Express-metamodel%3A%3AInstances%3A%3AIndeterminate -> Express-metamodel::Expressions::IndeterminateRef
+
+         -> Express-metamodel::Expressions::SELFRef
+
+        Express_metamodel::Expressions::BinaryOperation::left-operand::Core/Express-metamodel%3A%3ACore%3A%3AExpression Express_metamodel::Expressions::BinaryOperation::right-operand::Core/Express-metamodel%3A%3ACore%3A%3AExpression operator::Expressions/BinaryOperator -> Express-metamodel::Expressions::BinaryOperation
+
+        Express_metamodel::Expressions::AggregateInitializer::result-value::Instances/Express-metamodel%3A%3AInstances%3A%3AGenericAggregate Express_metamodel::Expressions::AggregateInitializer::bindings::Expressions/Express-metamodel%3A%3AExpressions%3A%3AMemberBinding+ -> Express-metamodel::Expressions::AggregateInitializer
+
+        Express_metamodel::Expressions::StringIndex::first-code::Core/Express-metamodel%3A%3ACore%3A%3AExpression Express_metamodel::Expressions::StringIndex::last-code::Core/Express-metamodel%3A%3ACore%3A%3AExpression -> Express-metamodel::Expressions::StringIndex
+
+        Express_metamodel::Expressions::PartialEntityConstructor::result-value::Instances/Express-metamodel%3A%3AInstances%3A%3APartialEntityValue Express_metamodel::Expressions::PartialEntityConstructor::attribute-group::Core/Express-metamodel%3A%3ACore%3A%3ASingleEntityType Express_metamodel::Expressions::PartialEntityConstructor::bindings::Expressions/Express-metamodel%3A%3AExpressions%3A%3AAttributeBinding+ id::Core/Identifier -> Express-metamodel::Expressions::PartialEntityConstructor
+
+        Express_metamodel::Expressions::Coercion::operand::Core/Express-metamodel%3A%3ACore%3A%3AExpression Express_metamodel::Expressions::Coercion::target-type::Core/Express-metamodel%3A%3ACore%3A%3AVariableType -> Express-metamodel::Expressions::Coercion
+
+        Express_metamodel::Expressions::ActualParameter::in-ProcedureCall::Statements/Express-metamodel%3A%3AStatements%3A%3AProcedureCall Express_metamodel::Expressions::ActualParameter::in-FunctionCall::Expressions/Express-metamodel%3A%3AExpressions%3A%3AFunctionCall Express_metamodel::Expressions::ActualParameter::formal-parameter::Algorithms/Express-metamodel%3A%3AAlgorithms%3A%3AParameter Express_metamodel::Expressions::ActualParameter::actual-referent::Statements/Express-metamodel%3A%3AStatements%3A%3AVARExpression Express_metamodel::Expressions::ActualParameter::actual-value::Core/Express-metamodel%3A%3ACore%3A%3AExpression position::MOF/Integer -> Express-metamodel::Expressions::ActualParameter
+
+        Express_metamodel::Expressions::ParameterRef::refers-to::Algorithms/Express-metamodel%3A%3AAlgorithms%3A%3AParameter id::Core/Identifier -> Express-metamodel::Expressions::ParameterRef
+
+        Express_metamodel::Expressions::AttributeRef::refers-to::Core/Express-metamodel%3A%3ACore%3A%3AAttribute id::Core/Identifier -> Express-metamodel::Expressions::AttributeRef
+
+        Express_metamodel::Expressions::AggregateIndex::index-value::Core/Express-metamodel%3A%3ACore%3A%3AExpression -> Express-metamodel::Expressions::AggregateIndex
+
+        Express_metamodel::Expressions::GroupRef::refers-to::Core/Express-metamodel%3A%3ACore%3A%3ASingleEntityType id::Core/Identifier -> Express-metamodel::Expressions::GroupRef
+
+        Express_metamodel::Expressions::UnaryOperation::unary-operand::Core/Express-metamodel%3A%3ACore%3A%3AExpression operator::Expressions/UnaryOperator -> Express-metamodel::Expressions::UnaryOperation
+
+        Express_metamodel::Expressions::UsedInRef::inverse-of::Core/Express-metamodel%3A%3ACore%3A%3AAttribute -> Express-metamodel::Expressions::UsedInRef
+
+        Express_metamodel::Expressions::ConstantRef::refers-to::Instances/Express-metamodel%3A%3AInstances%3A%3AConstant id::Core/Identifier -> Express-metamodel::Expressions::ConstantRef
+
+        Express_metamodel::Expressions::QueryExpression::select-condition::Core/Express-metamodel%3A%3ACore%3A%3AExpression Express_metamodel::Expressions::QueryExpression::query-variable::Expressions/Express-metamodel%3A%3AExpressions%3A%3AQueryVariable Express_metamodel::Expressions::QueryExpression::aggregate-operand::Core/Express-metamodel%3A%3ACore%3A%3AExpression -> Express-metamodel::Expressions::QueryExpression
+
+        Express_metamodel::Expressions::QueryVariable::namespace::Expressions/Express-metamodel%3A%3AExpressions%3A%3AQueryExpression -> Express-metamodel::Expressions::QueryVariable
+
+        Express_metamodel::Expressions::AttributeBinding::attribute-value::Core/Express-metamodel%3A%3ACore%3A%3AExpression Express_metamodel::Expressions::AttributeBinding::to-value::Instances/Express-metamodel%3A%3AInstances%3A%3AAttributeValue Express_metamodel::Expressions::AttributeBinding::attribute::Core/Express-metamodel%3A%3ACore%3A%3AExplicitAttribute position::MOF/Integer -> Express-metamodel::Expressions::AttributeBinding
+
+        Express_metamodel::Expressions::FunctionCall::actual-parameters::Expressions/Express-metamodel%3A%3AExpressions%3A%3AActualParameter+ Express_metamodel::Expressions::FunctionCall::invokes-function::Algorithms/Express-metamodel%3A%3AAlgorithms%3A%3AFunction Express_metamodel::Expressions::FunctionCall::/returns-result::Algorithms/Express-metamodel%3A%3AAlgorithms%3A%3AFunctionResult -> Express-metamodel::Expressions::FunctionCall
+
+        Express_metamodel::Expressions::MemberBinding::repetition::Expressions/Express-metamodel%3A%3AExpressions%3A%3ARepeatCount Express_metamodel::Expressions::MemberBinding::to-slot::Instances/Express-metamodel%3A%3AInstances%3A%3AListMember+ Express_metamodel::Expressions::MemberBinding::member-value::Core/Express-metamodel%3A%3ACore%3A%3AExpression position::MOF/Integer -> Express-metamodel::Expressions::MemberBinding
+
+        Express_metamodel::Expressions::ExtentRef::refers-to::Core/Express-metamodel%3A%3ACore%3A%3ANamedType id::Core/Identifier -> Express-metamodel::Expressions::ExtentRef
+
+        Express_metamodel::Expressions::VariableRef::refers-to::Algorithms/Express-metamodel%3A%3AAlgorithms%3A%3ANamedVariable id::Core/Identifier -> Express-metamodel::Expressions::VariableRef
+
+        Express_metamodel::Core::SingleEntityType::declares_ExplicitAttribute::Core/Express-metamodel%3A%3ACore%3A%3AExplicitAttribute+ Express_metamodel::Core::SingleEntityType::declares_Attribute::Core/Express-metamodel%3A%3ACore%3A%3AAttribute+ Express_metamodel::Core::SingleEntityType::declared-in::Core/Express-metamodel%3A%3ACore%3A%3AEntityType Express_metamodel::Core::SingleEntityType::equivalent::Core/Express-metamodel%3A%3ACore%3A%3APartialEntityType id::Core/Express-metamodel%3A%3ACore%3A%3AScopedId -> Express-metamodel::Core::SingleEntityType
+
+        Express_metamodel::Core::AGGREGATEType::upper-bound::Core/Express-metamodel%3A%3ACore%3A%3ASizeConstraint Express_metamodel::Core::AGGREGATEType::member-type::Core/Express-metamodel%3A%3ACore%3A%3AParameterType Express_metamodel::Core::AGGREGATEType::constraint::Algorithms/Express-metamodel%3A%3AAlgorithms%3A%3AActualStructureConstraint Express_metamodel::Core::AGGREGATEType::lower-bound::Core/Express-metamodel%3A%3ACore%3A%3ASizeConstraint -> Express-metamodel::Core::AGGREGATEType
+
+         -> Express-metamodel::Core::GeneralBAGType
+
+        Express_metamodel::Core::DomainRule::domain::Core/Express-metamodel%3A%3ACore%3A%3ANamedType position::MOF/Integer -> Express-metamodel::Core::DomainRule
+
+        Express_metamodel::Core::Expression::evaluation::Core/Express-metamodel%3A%3ACore%3A%3AInstance Express_metamodel::Core::Expression::interpretation-context::Core/Express-metamodel%3A%3ACore%3A%3AScope Express_metamodel::Core::Expression::data-type::Core/Express-metamodel%3A%3ACore%3A%3ADataType text::Core/ExpressText -> Express-metamodel::Core::Expression
+
+        Express_metamodel::Core::InverseAttribute::models-role::Core/Express-metamodel%3A%3ACore%3A%3ADomainRole Express_metamodel::Core::InverseAttribute::explicit::Core/Express-metamodel%3A%3ACore%3A%3AInvertibleAttribute isUnique::MOF/Boolean -> Express-metamodel::Core::InverseAttribute
+
+        Express_metamodel::Core::EnumerationType::values::Instances/Express-metamodel%3A%3AInstances%3A%3AEnumerationItem+ Express_metamodel::Core::EnumerationType::declared-items::Instances/Express-metamodel%3A%3AInstances%3A%3AEnumerationItem+ Express_metamodel::Core::EnumerationType::extension::Core/Express-metamodel%3A%3ACore%3A%3AEnumerationType+ Express_metamodel::Core::EnumerationType::base::Core/Express-metamodel%3A%3ACore%3A%3AEnumerationType isExtensible::MOF/Boolean -> Express-metamodel::Core::EnumerationType
+
+        Express_metamodel::Core::ArrayBound::bound-expression::Core/Express-metamodel%3A%3ACore%3A%3AExpression bound::MOF/Integer -> Express-metamodel::Core::ArrayBound
+
+         -> Express-metamodel::Core::GeneralSETType
+
+         -> Express-metamodel::Core::LISTType
+
+        Express_metamodel::Core::Redeclaration::derivation::Core/Express-metamodel%3A%3ACore%3A%3AExpression Express_metamodel::Core::Redeclaration::restricted-type::Core/Express-metamodel%3A%3ACore%3A%3AAttributeType Express_metamodel::Core::Redeclaration::refines::Core/Express-metamodel%3A%3ACore%3A%3ARedeclaration Express_metamodel::Core::Redeclaration::upper-bound::Core/Express-metamodel%3A%3ACore%3A%3ASizeConstraint Express_metamodel::Core::Redeclaration::lower-bound::Core/Express-metamodel%3A%3ACore%3A%3ASizeConstraint Express_metamodel::Core::Redeclaration::scope::Core/Express-metamodel%3A%3ACore%3A%3AEntityType Express_metamodel::Core::Redeclaration::original-attribute::Core/Express-metamodel%3A%3ACore%3A%3AAttribute Express_metamodel::Core::Redeclaration::refined-role::Core/Express-metamodel%3A%3ACore%3A%3ARole position::MOF/Integer isMandatory::MOF/Boolean alias::Core/Express-metamodel%3A%3ACore%3A%3AScopedId -> Express-metamodel::Core::Redeclaration
+
+        Express_metamodel::Core::EntityType::plays-role::Core/Express-metamodel%3A%3ACore%3A%3ARole+ Express_metamodel::Core::EntityType::redeclarations::Core/Express-metamodel%3A%3ACore%3A%3ARedeclaration+ Express_metamodel::Core::EntityType::attributes::Core/Express-metamodel%3A%3ACore%3A%3AAttribute+ Express_metamodel::Core::EntityType::plays-range-role::Core/Express-metamodel%3A%3ACore%3A%3ARangeRole+ Express_metamodel::Core::EntityType::declares::Core/Express-metamodel%3A%3ACore%3A%3ASingleEntityType Express_metamodel::Core::EntityType::extension::Rules/Express-metamodel%3A%3ARules%3A%3AExtent+ Express_metamodel::Core::EntityType::invertible_attributes::Core/Express-metamodel%3A%3ACore%3A%3AInvertibleAttribute+ Express_metamodel::Core::EntityType::plays-domain-role::Core/Express-metamodel%3A%3ACore%3A%3ADomainRole+ Express_metamodel::Core::EntityType::instances::Instances/Express-metamodel%3A%3AInstances%3A%3AEntityInstance+ Express_metamodel::Core::EntityType::unique-rules::Core/Express-metamodel%3A%3ACore%3A%3AUniqueRule+ Express_metamodel::Core::EntityType::used-in::Core/Express-metamodel%3A%3ACore%3A%3AInvertibleAttribute+ Express_metamodel::Core::EntityType::subtype-of::Core/Express-metamodel%3A%3ACore%3A%3AEntityType+ isAbstract::MOF/Boolean -> Express-metamodel::Core::EntityType
+
+        Express_metamodel::Core::PartialEntityType::components::Core/Express-metamodel%3A%3ACore%3A%3ASingleEntityType+ -> Express-metamodel::Core::PartialEntityType
+
+        Express_metamodel::Core::Schema::documentation::Core/Express-metamodel%3A%3ACore%3A%3ARemark+ Express_metamodel::Core::Schema::interfaces::Core/Express-metamodel%3A%3ACore%3A%3AInterfacedElement+ Express_metamodel::Core::Schema::schema-elements::Core/Express-metamodel%3A%3ACore%3A%3ASchemaElement+ Express_metamodel::Core::Schema::interfaced-elements::Core/Express-metamodel%3A%3ACore%3A%3ASchemaElement+ name::Core/Identifier version::Core/Identifier -> Express-metamodel::Core::Schema
+
+        Express_metamodel::Core::InvertibleAttribute::inverse::Core/Express-metamodel%3A%3ACore%3A%3AInverseAttribute+ Express_metamodel::Core::InvertibleAttribute::range-type::Core/Express-metamodel%3A%3ACore%3A%3AEntityType+ Express_metamodel::Core::InvertibleAttribute::creates-relationship::Core/Express-metamodel%3A%3ACore%3A%3ARelationship Express_metamodel::Core::InvertibleAttribute::referencing-type::Core/Express-metamodel%3A%3ACore%3A%3AEntityType+ Express_metamodel::Core::InvertibleAttribute::models-role::Core/Express-metamodel%3A%3ACore%3A%3ARangeRole -> Express-metamodel::Core::InvertibleAttribute
+
+        Express_metamodel::Core::InterfacedElement::interfacing-schema::Core/Express-metamodel%3A%3ACore%3A%3ASchema Express_metamodel::Core::InterfacedElement::refers-to::Core/Express-metamodel%3A%3ACore%3A%3ASchemaElement isUSE::MOF/Boolean interfacedId::Core/Express-metamodel%3A%3ACore%3A%3AScopedId -> Express-metamodel::Core::InterfacedElement
+
+         -> Express-metamodel::Core::NumericType
+
+        Express_metamodel::Core::UniqueRule::domain::Core/Express-metamodel%3A%3ACore%3A%3AEntityType Express_metamodel::Core::UniqueRule::key-component::Core/Express-metamodel%3A%3ACore%3A%3AAttribute+ position::MOF/Integer -> Express-metamodel::Core::UniqueRule
+
+        Express_metamodel::Core::DomainRole::range-view::Core/Express-metamodel%3A%3ACore%3A%3AInverseAttribute Express_metamodel::Core::DomainRole::domain::Core/Express-metamodel%3A%3ACore%3A%3AEntityType Express_metamodel::Core::DomainRole::in-relationship::Core/Express-metamodel%3A%3ACore%3A%3ARelationship id::Core/Express-metamodel%3A%3ACore%3A%3AScopedId -> Express-metamodel::Core::DomainRole
+
+         -> Express-metamodel::Core::GeneralLISTType
+
+         -> Express-metamodel::Core::BAGType
+
+        precision::MOF/Integer -> Express-metamodel::Core::RealType
+
+         -> Express-metamodel::Core::LogicType
+
+        Express_metamodel::Core::GenericType::constraint::Algorithms/Express-metamodel%3A%3AAlgorithms%3A%3AActualTypeConstraint isEntity::MOF/Boolean -> Express-metamodel::Core::GenericType
+
+        Express_metamodel::Core::StringType::string-length-constraint::Core/Express-metamodel%3A%3ACore%3A%3ALengthConstraint -> Express-metamodel::Core::StringType
+
+        Express_metamodel::Core::DerivedAttribute::derivation::Core/Express-metamodel%3A%3ACore%3A%3AExpression -> Express-metamodel::Core::DerivedAttribute
+
+        Express_metamodel::Core::RangeRole::domain-view::Core/Express-metamodel%3A%3ACore%3A%3AInvertibleAttribute Express_metamodel::Core::RangeRole::in-relationship::Core/Express-metamodel%3A%3ACore%3A%3ARelationship Express_metamodel::Core::RangeRole::range::Core/Express-metamodel%3A%3ACore%3A%3AEntityType id::Core/Express-metamodel%3A%3ACore%3A%3AScopedId -> Express-metamodel::Core::RangeRole
+
+        Express_metamodel::Core::Remark::describes-schema::Core/Express-metamodel%3A%3ACore%3A%3ASchema+ Express_metamodel::Core::Remark::appears-in::Core/Express-metamodel%3A%3ACore%3A%3AScope Express_metamodel::Core::Remark::describes-element::Core/Express-metamodel%3A%3ACore%3A%3ANamedElement+ isTagged::MOF/Boolean isTail::MOF/Boolean text::Core/ExpressText -> Express-metamodel::Core::Remark
+
+        Express_metamodel::Core::SizeConstraint::asserts::Core/Express-metamodel%3A%3ACore%3A%3AExpression bound::MOF/Integer -> Express-metamodel::Core::SizeConstraint
+
+         -> Express-metamodel::Core::SETType
+
+        Express_metamodel::Core::SpecializedType::underlying-type::Core/Express-metamodel%3A%3ACore%3A%3AConcreteType -> Express-metamodel::Core::SpecializedType
+
+        Express_metamodel::Core::GeneralARRAYType::hi-index::Core/Express-metamodel%3A%3ACore%3A%3AArrayBound Express_metamodel::Core::GeneralARRAYType::lo-index::Core/Express-metamodel%3A%3ACore%3A%3AArrayBound isOptional::MOF/Boolean -> Express-metamodel::Core::GeneralARRAYType
+
+        Express_metamodel::Core::Relationship::domain::Core/Express-metamodel%3A%3ACore%3A%3ADomainRole Express_metamodel::Core::Relationship::roles::Core/Express-metamodel%3A%3ACore%3A%3ARole Express_metamodel::Core::Relationship::based-on::Core/Express-metamodel%3A%3ACore%3A%3AInvertibleAttribute Express_metamodel::Core::Relationship::range::Core/Express-metamodel%3A%3ACore%3A%3ARangeRole -> Express-metamodel::Core::Relationship
+
+        maxLength::MOF/Integer isFixed::MOF/Boolean -> Express-metamodel::Core::LengthConstraint
+
+        Express_metamodel::Core::BinaryType::binary-length-constraint::Core/Express-metamodel%3A%3ACore%3A%3ALengthConstraint -> Express-metamodel::Core::BinaryType
+
+        localName::Core/Identifier definingScope::Core/Express-metamodel%3A%3ACore%3A%3AScope -> Express-metamodel::Core::ScopedId
+
+        Express_metamodel::Core::SelectType::allowed-types::Core/Express-metamodel%3A%3ACore%3A%3ANamedType+ Express_metamodel::Core::SelectType::extension::Core/Express-metamodel%3A%3ACore%3A%3ASelectType+ Express_metamodel::Core::SelectType::base::Core/Express-metamodel%3A%3ACore%3A%3ASelectType Express_metamodel::Core::SelectType::select-list::Core/Express-metamodel%3A%3ACore%3A%3ANamedType+ isExtensible::MOF/Boolean isEntity::MOF/Boolean -> Express-metamodel::Core::SelectType
+
+        Express_metamodel::Core::ExplicitAttribute::of-entity::Core/Express-metamodel%3A%3ACore%3A%3ASingleEntityType isOptional::MOF/Boolean -> Express-metamodel::Core::ExplicitAttribute
+
+        Express_metamodel::Core::ARRAYType::lo-index::Core/Express-metamodel%3A%3ACore%3A%3AArrayBound Express_metamodel::Core::ARRAYType::hi-index::Core/Express-metamodel%3A%3ACore%3A%3AArrayBound isOptional::MOF/Boolean -> Express-metamodel::Core::ARRAYType
+
+        Express_metamodel::Algorithms::ActualTypeConstraint::matching-type::Core/Express-metamodel%3A%3ACore%3A%3AGenericType Express_metamodel::Algorithms::ActualTypeConstraint::required-type::Algorithms/Express-metamodel%3A%3AAlgorithms%3A%3AActualDataType label::Core/Identifier -> Express-metamodel::Algorithms::ActualTypeConstraint
+
+        Express_metamodel::Algorithms::FunctionResult::namespace::Algorithms/Express-metamodel%3A%3AAlgorithms%3A%3AFunction -> Express-metamodel::Algorithms::FunctionResult
+
+        Express_metamodel::Algorithms::Function::result::Algorithms/Express-metamodel%3A%3AAlgorithms%3A%3AFunctionResult -> Express-metamodel::Algorithms::Function
+
+        Express_metamodel::Algorithms::InParameter::variable::Algorithms/Express-metamodel%3A%3AAlgorithms%3A%3AInVariable -> Express-metamodel::Algorithms::InParameter
+
+        Express_metamodel::Algorithms::LocalVariable::initial-value::Core/Express-metamodel%3A%3ACore%3A%3AExpression -> Express-metamodel::Algorithms::LocalVariable
+
+         -> Express-metamodel::Algorithms::ActualStructure
+
+        Express_metamodel::Algorithms::ActualGenericType::refers-to::Algorithms/Express-metamodel%3A%3AAlgorithms%3A%3AActualDataType isEntity::MOF/Boolean label::Core/Identifier -> Express-metamodel::Algorithms::ActualGenericType
+
+        Express_metamodel::Algorithms::Statement::in-block::Statements/Express-metamodel%3A%3AStatements%3A%3AStatementBlock Express_metamodel::Algorithms::Statement::body-statements_SkipStatement::Statements/Express-metamodel%3A%3AStatements%3A%3ASkipStatement+ Express_metamodel::Algorithms::Statement::body-statements_EscapeStatement::Statements/Express-metamodel%3A%3AStatements%3A%3AEscapeStatement+ Express_metamodel::Algorithms::Statement::controlled-by::Statements/Express-metamodel%3A%3AStatements%3A%3ARepeatStatement Express_metamodel::Algorithms::Statement::implements::Algorithms/Express-metamodel%3A%3AAlgorithms%3A%3AAlgorithm text::Core/ExpressText -> Express-metamodel::Algorithms::Statement
+
+        Express_metamodel::Algorithms::InVariable::source::Algorithms/Express-metamodel%3A%3AAlgorithms%3A%3AInParameter -> Express-metamodel::Algorithms::InVariable
+
+         -> Express-metamodel::Algorithms::Procedure
+
+        Express_metamodel::Algorithms::ActualARRAYType::hi-index::Core/Express-metamodel%3A%3ACore%3A%3AArrayBound Express_metamodel::Algorithms::ActualARRAYType::lo-index::Core/Express-metamodel%3A%3ACore%3A%3AArrayBound isOptional::MOF/Boolean -> Express-metamodel::Algorithms::ActualARRAYType
+
+         -> Express-metamodel::Algorithms::ActualSETType
+
+        Express_metamodel::Algorithms::ActualAGGREGATEType::upper-bound::Core/Express-metamodel%3A%3ACore%3A%3ASizeConstraint Express_metamodel::Algorithms::ActualAGGREGATEType::refers-to::Algorithms/Express-metamodel%3A%3AAlgorithms%3A%3AActualStructure Express_metamodel::Algorithms::ActualAGGREGATEType::member-type::Core/Express-metamodel%3A%3ACore%3A%3AVariableType Express_metamodel::Algorithms::ActualAGGREGATEType::lower-bound::Core/Express-metamodel%3A%3ACore%3A%3ASizeConstraint label::Core/Identifier -> Express-metamodel::Algorithms::ActualAGGREGATEType
+
+        Express_metamodel::Algorithms::ActualStructureConstraint::matching-structure::Core/Express-metamodel%3A%3ACore%3A%3AAGGREGATEType Express_metamodel::Algorithms::ActualStructureConstraint::required-structure::Algorithms/Express-metamodel%3A%3AAlgorithms%3A%3AActualStructure label::Core/Identifier -> Express-metamodel::Algorithms::ActualStructureConstraint
+
+         -> Express-metamodel::Algorithms::ActualLISTType
+
+         -> Express-metamodel::Algorithms::VARParameter
+
+         -> Express-metamodel::Algorithms::ActualDataType
+
+         -> Express-metamodel::Algorithms::ActualBAGType
+
+        Express_metamodel::Instances::AttributeValue::actual-value::Core/Express-metamodel%3A%3ACore%3A%3AInstance Express_metamodel::Instances::AttributeValue::attribute::Core/Express-metamodel%3A%3ACore%3A%3AExplicitAttribute -> Express-metamodel::Instances::AttributeValue
+
+        Express_metamodel::Instances::ARRAYValue::of-type::Core/Express-metamodel%3A%3ACore%3A%3AARRAYType+ Express_metamodel::Instances::ARRAYValue::member-slot::Instances/Express-metamodel%3A%3AInstances%3A%3AArrayMember+ -> Express-metamodel::Instances::ARRAYValue
+
+        Express_metamodel::Instances::RoleName::refers-to::Core/Express-metamodel%3A%3ACore%3A%3AAttribute represents::Core/Express-metamodel%3A%3ACore%3A%3AScopedId -> Express-metamodel::Instances::RoleName
+
+        Express_metamodel::Instances::EntityInstance::state::Instances/Express-metamodel%3A%3AInstances%3A%3AEntityValue Express_metamodel::Instances::EntityInstance::instance-of::Core/Express-metamodel%3A%3ACore%3A%3AEntityType+ Express_metamodel::Instances::EntityInstance::appears-in-population::Instances/Express-metamodel%3A%3AInstances%3A%3APopulation+ id::Instances/EntityName -> Express-metamodel::Instances::EntityInstance
+
+         -> Express-metamodel::Instances::IntegerValue
+
+        Express_metamodel::Instances::Constant::value-expression::Core/Express-metamodel%3A%3ACore%3A%3AExpression Express_metamodel::Instances::Constant::actual-value::Core/Express-metamodel%3A%3ACore%3A%3AInstance Express_metamodel::Instances::Constant::data-type::Core/Express-metamodel%3A%3ACore%3A%3AInstantiableType -> Express-metamodel::Instances::Constant
+
+         -> Express-metamodel::Instances::LogicalValue
+
+        Express_metamodel::Instances::ListMember::member-value::Core/Express-metamodel%3A%3ACore%3A%3AInstance position::MOF/Integer -> Express-metamodel::Instances::ListMember
+
+        Express_metamodel::Instances::BagMember::member-value::Core/Express-metamodel%3A%3ACore%3A%3AInstance count::MOF/Integer -> Express-metamodel::Instances::BagMember
+
+        Express_metamodel::Instances::SingleEntityValue::equivalent::Instances/Express-metamodel%3A%3AInstances%3A%3APartialEntityValue Express_metamodel::Instances::SingleEntityValue::of-type::Core/Express-metamodel%3A%3ACore%3A%3ASingleEntityType Express_metamodel::Instances::SingleEntityValue::properties::Instances/Express-metamodel%3A%3AInstances%3A%3AAttributeValue+ -> Express-metamodel::Instances::SingleEntityValue
+
+         -> Express-metamodel::Instances::Indeterminate
+
+        Express_metamodel::Instances::SingleLeafInstance::characterizing-type::Core/Express-metamodel%3A%3ACore%3A%3AEntityType -> Express-metamodel::Instances::SingleLeafInstance
+
+         -> Express-metamodel::Instances::GenericAggregate
+
+         -> Express-metamodel::Instances::BinaryValue
+
+        Express_metamodel::Instances::SpecializedValue::of-type::Core/Express-metamodel%3A%3ACore%3A%3ASpecializedType Express_metamodel::Instances::SpecializedValue::fundamental-value::Instances/Express-metamodel%3A%3AInstances%3A%3AConcreteValue -> Express-metamodel::Instances::SpecializedValue
+
+        Express_metamodel::Instances::BAGValue::member-slot::Instances/Express-metamodel%3A%3AInstances%3A%3ABagMember+ Express_metamodel::Instances::BAGValue::of-type::Core/Express-metamodel%3A%3ACore%3A%3ABAGType+ -> Express-metamodel::Instances::BAGValue
+
+        Express_metamodel::Instances::EnumerationItem::of-type::Core/Express-metamodel%3A%3ACore%3A%3AEnumerationType+ Express_metamodel::Instances::EnumerationItem::declared-in::Core/Express-metamodel%3A%3ACore%3A%3AEnumerationType position::MOF/Integer -> Express-metamodel::Instances::EnumerationItem
+
+        Express_metamodel::Instances::EntityValue::corresponds to::Core/Express-metamodel%3A%3ACore%3A%3AEntityType+ Express_metamodel::Instances::EntityValue::describes::Instances/Express-metamodel%3A%3AInstances%3A%3AEntityInstance+ -> Express-metamodel::Instances::EntityValue
+
+        Express_metamodel::Instances::SETValue::member-value::Core/Express-metamodel%3A%3ACore%3A%3AInstance+ Express_metamodel::Instances::SETValue::of-type::Core/Express-metamodel%3A%3ACore%3A%3ASETType+ -> Express-metamodel::Instances::SETValue
+
+        Express_metamodel::Instances::ArrayMember::member-value::Core/Express-metamodel%3A%3ACore%3A%3AInstance index::MOF/Integer -> Express-metamodel::Instances::ArrayMember
+
+        Express_metamodel::Instances::Population::composition_EntityInstance::Instances/Express-metamodel%3A%3AInstances%3A%3AEntityInstance+ Express_metamodel::Instances::Population::composition_Instance::Core/Express-metamodel%3A%3ACore%3A%3AInstance+ Express_metamodel::Instances::Population::governing-schema::Core/Express-metamodel%3A%3ACore%3A%3ASchema+ -> Express-metamodel::Instances::Population
+
+         -> Express-metamodel::Instances::RealValue
+
+         -> Express-metamodel::Instances::BooleanValue
+
+        Express_metamodel::Instances::LISTValue::of-type::Core/Express-metamodel%3A%3ACore%3A%3ALISTType+ Express_metamodel::Instances::LISTValue::member-slot::Instances/Express-metamodel%3A%3AInstances%3A%3AListMember+ -> Express-metamodel::Instances::LISTValue
+
+         -> Express-metamodel::Instances::StringValue
+
+        Express_metamodel::Instances::TypeName::refers-to::Core/Express-metamodel%3A%3ACore%3A%3ANamedType represents::Core/Express-metamodel%3A%3ACore%3A%3AScopedId -> Express-metamodel::Instances::TypeName
+
+        Express_metamodel::Instances::PartialEntityValue::of-type::Core/Express-metamodel%3A%3ACore%3A%3APartialEntityType Express_metamodel::Instances::PartialEntityValue::components::Instances/Express-metamodel%3A%3AInstances%3A%3ASingleEntityValue+ -> Express-metamodel::Instances::PartialEntityValue
+
+         -> Express-metamodel::Instances::NumberValue
+
+         -> Express-metamodel::Instances::MultiLeafInstance

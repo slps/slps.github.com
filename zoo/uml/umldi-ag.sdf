@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        Signal Action CreateAction DestroyAction UninterpretedAction CallAction SendAction ActionSequence Argument ReturnAction TerminateAction Exception Element ModelElement Classifier Feature Relationship BehavioralFeature Operation Parameter Generalization AggregationKind ChangeableKind OrderingKind CallConcurrencyKind ParameterDirectionKind PseudostateKind ScopeKind VisibilityKind Multiplicity MultiplicityRange Expression BooleanExpression ObjectSetExpression ActionExpression IterationExpression TimeExpression ArgListsExpression StateMachine Event StateVertex State TimeEvent CallEvent SignalEvent Transition CompositeState ChangeEvent Guard Pseudostate SimpleState SubmachineState SynchState StubState FinalState ActivityGraph Partition SubactivityState ActionState CallState ObjectFlowState ClassifierInState 
+        Signal Action CreateAction DestroyAction UninterpretedAction CallAction SendAction ActionSequence Argument ReturnAction TerminateAction Exception Element ModelElement GeneralizableElement Namespace Classifier Feature Relationship BehavioralFeature Operation Parameter Generalization AggregationKind ChangeableKind OrderingKind CallConcurrencyKind ParameterDirectionKind PseudostateKind ScopeKind VisibilityKind Multiplicity MultiplicityRange Expression BooleanExpression ObjectSetExpression ActionExpression IterationExpression TimeExpression ArgListsExpression StateMachine Event StateVertex State TimeEvent CallEvent SignalEvent Transition CompositeState ChangeEvent Guard Pseudostate SimpleState SubmachineState SynchState StubState FinalState ActivityGraph Partition SubactivityState ActionState CallState ObjectFlowState ClassifierInState Boolean Integer String 
   context-free syntax
         Exception -> Signal
 
@@ -71,6 +71,10 @@ exports
         Guard -> ModelElement
 
         Partition -> ModelElement
+
+        Classifier -> GeneralizableElement
+
+        Classifier -> Namespace
 
         Signal -> Classifier
 
@@ -142,17 +146,17 @@ exports
 
         language::String body::String -> Expression
 
-         -> BooleanExpression
+        language::String body::String -> BooleanExpression
 
-         -> ObjectSetExpression
+        language::String body::String -> ObjectSetExpression
 
-         -> ActionExpression
+        language::String body::String -> ActionExpression
 
-         -> IterationExpression
+        language::String body::String -> IterationExpression
 
-         -> TimeExpression
+        language::String body::String -> TimeExpression
 
-         -> ArgListsExpression
+        language::String body::String -> ArgListsExpression
 
         ActivityGraph -> StateMachine
 
@@ -225,8 +229,15 @@ exports
 
         isDynamic::Boolean dynamicArguments::ArgListsExpression dynamicMultiplicity::Multiplicity -> ActionState
 
-         -> CallState
+        isDynamic::Boolean dynamicArguments::ArgListsExpression dynamicMultiplicity::Multiplicity -> CallState
 
         type::Classifier parameter::Parameter+ isSynch::Boolean -> ObjectFlowState
 
         inState::State+ type::Classifier -> ClassifierInState
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
+        STR -> String

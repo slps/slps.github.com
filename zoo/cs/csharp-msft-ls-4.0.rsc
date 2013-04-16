@@ -1,6 +1,12 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module Csharp_msft_ls_4_0
 
+extend lang::std::Whitespace;
+import ParseTree;
+import util::IDE;
+import IO;
+
+layout Standard = Whitespace* !>> [\u0009-\u000D \u0020 \u0085 \u00A0 \u1680 \u180E \u2000-\u200A \u2028 \u2029 \u202F \u205F \u3000];
 syntax Compilation_unit
         = Extern_alias_directives? Using_directives? Global_attributes?
         | Namespace_member_declarations?
@@ -1493,3 +1499,9 @@ syntax Delegate_modifier
         | "internal"
         | "private"
  ;
+
+public void main()
+{
+	registerLanguage("Csharp_msft_ls_4_0", "ext", compilation-unit(str input, loc org) {return parse(#compilation-unit, input, org);});
+	println("Language registered.");
+}

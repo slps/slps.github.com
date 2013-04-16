@@ -37,7 +37,7 @@ ReturnAction:
 TerminateAction:
         actualArgument::Argument+ actionSequence::ActionSequence recurrence::IterationExpression target::ObjectSetExpression isAsynchronous::Boolean script::ActionExpression
 Exception:
-        EPSILON
+        
 Element:
         ModelElement
 ModelElement:
@@ -66,6 +66,10 @@ ModelElement:
         Guard
 ModelElement:
         Partition
+GeneralizableElement:
+        Classifier
+Namespace:
+        Classifier
 Classifier:
         Signal
 Classifier:
@@ -137,17 +141,17 @@ Expression:
 Expression:
         language::String body::String
 BooleanExpression:
-        EPSILON
+        language::String body::String
 ObjectSetExpression:
-        EPSILON
+        language::String body::String
 ActionExpression:
-        EPSILON
+        language::String body::String
 IterationExpression:
-        EPSILON
+        language::String body::String
 TimeExpression:
-        EPSILON
+        language::String body::String
 ArgListsExpression:
-        EPSILON
+        language::String body::String
 StateMachine:
         ActivityGraph
 StateMachine:
@@ -220,8 +224,15 @@ ActionState:
 ActionState:
         isDynamic::Boolean dynamicArguments::ArgListsExpression dynamicMultiplicity::Multiplicity
 CallState:
-        EPSILON
+        isDynamic::Boolean dynamicArguments::ArgListsExpression dynamicMultiplicity::Multiplicity
 ObjectFlowState:
         type::Classifier parameter::Parameter+ isSynch::Boolean
 ClassifierInState:
         inState::State+ type::Classifier
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR

@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        BibTeXFile Author BibTeXEntry DatedEntry TitledEntry Article TechReport Unpublished Manual Proceedings InProceedings Booklet Book InCollection InBook Misc ThesisEntry PhDThesis MasterThesis 
+        BibTeXFile Author BibTeXEntry AuthoredEntry DatedEntry TitledEntry BookTitledEntry Article TechReport Unpublished Manual Proceedings InProceedings Booklet Book InCollection InBook Misc ThesisEntry PhDThesis MasterThesis String Integer 
   context-free syntax
         entries::BibTeXEntry+ -> BibTeXFile
 
@@ -18,19 +18,39 @@ exports
 
         Misc -> BibTeXEntry
 
+        Article -> AuthoredEntry
+
+        TechReport -> AuthoredEntry
+
+        Unpublished -> AuthoredEntry
+
+        Book -> AuthoredEntry
+
+        ThesisEntry -> AuthoredEntry
+
         Booklet -> DatedEntry
+
+        Proceedings -> DatedEntry
 
         Manual -> TitledEntry
 
+        Unpublished -> TitledEntry
+
+        Proceedings -> TitledEntry
+
+        InCollection -> BookTitledEntry
+
         journal::String -> Article
 
-         -> TechReport
+        authors::Author+ -> TechReport
 
         note::String -> Unpublished
 
         title::String -> Manual
 
-         -> Proceedings
+        InProceedings -> Proceedings
+
+        year::String title::String -> Proceedings
 
          -> InProceedings
 
@@ -38,9 +58,11 @@ exports
 
         InBook -> Book
 
+        InCollection -> Book
+
         publisher::String -> Book
 
-         -> InCollection
+        publisher::String booktitle::String -> InCollection
 
         chapter::Integer -> InBook
 
@@ -53,3 +75,7 @@ exports
         school::String -> PhDThesis
 
         school::String -> MasterThesis
+
+        STR -> String
+
+        INT -> Integer

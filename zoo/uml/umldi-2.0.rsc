@@ -1,6 +1,9 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module Umldi_2_0
 
+extend lang::std::Whitespace;
+
+layout Standard = Whitespace* !>> [\u0009-\u000D \u0020 \u0085 \u00A0 \u1680 \u180E \u2000-\u200A \u2028 \u2029 \u202F \u205F \u3000];
 syntax Collaboration
         = 
         Collaboration usedCollaboration+ Operation representedOperation Classifier representedClassifier Interaction interaction+ ModelElement constrainingElement+
@@ -32,6 +35,18 @@ syntax InteractionInstanceSet
 syntax CollaborationInstanceSet
         = 
         Collaboration collaboration ModelElement constrainingElement+ Instance participatingInstance+ InteractionInstanceSet interactionInstanceSet+ Link participatingLink+
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
  ;
 syntax UseCase
         = 
@@ -114,39 +129,39 @@ syntax Expression
  ;
 syntax BooleanExpression
         = 
-        ()
+        String language String body
  ;
 syntax TypeExpression
         = 
-        ()
+        String language String body
  ;
 syntax MappingExpression
         = 
-        ()
+        String language String body
  ;
 syntax ProcedureExpression
         = 
-        ()
+        String language String body
  ;
 syntax ObjectSetExpression
         = 
-        ()
+        String language String body
  ;
 syntax ActionExpression
         = 
-        ()
+        String language String body
  ;
 syntax IterationExpression
         = 
-        ()
+        String language String body
  ;
 syntax TimeExpression
         = 
-        ()
+        String language String body
  ;
 syntax ArgListsExpression
         = 
-        ()
+        String language String body
  ;
 syntax PseudostateKind
         = pk_choice: ()
@@ -196,16 +211,16 @@ syntax AttributeLink
         Instance instance Instance value LinkEnd linkEnd Attribute attribute
  ;
 syntax Object
-        = 
-        Instance ownedInstance+ LinkEnd linkEnd+ Classifier classifier+ ComponentInstance componentInstance AttributeLink slot+ Link ownedLink+
+        = LinkObject
+        | Instance ownedInstance+ LinkEnd linkEnd+ Classifier classifier+ ComponentInstance componentInstance AttributeLink slot+ Link ownedLink+
  ;
 syntax Link
-        = 
-        Association association LinkEnd connection
+        = LinkObject
+        | Association association LinkEnd connection
  ;
 syntax LinkObject
         = 
-        ()
+        Association association LinkEnd connection
  ;
 syntax DataValue
         = 
@@ -281,7 +296,7 @@ syntax ActionState
  ;
 syntax CallState
         = 
-        ()
+        Boolean isDynamic ArgListsExpression dynamicArguments Multiplicity dynamicMultiplicity
  ;
 syntax ObjectFlowState
         = 
@@ -491,8 +506,16 @@ syntax ModelElement
         | TaggedValue
  ;
 syntax GeneralizableElement
-        = 
-        Stereotype
+        = Stereotype
+        | Collaboration
+        | Classifier
+        | Association
+        | Package
+ ;
+syntax Namespace
+        = Collaboration
+        | Classifier
+        | Package
  ;
 syntax Classifier
         = ClassifierRole
@@ -506,10 +529,11 @@ syntax Classifier
         | Component
         | Node
         | Artifact
+        | Subsystem
  ;
 syntax Class
-        = 
-        isActive: Boolean
+        = AssociationClass
+        | isActive: Boolean
  ;
 syntax DataType
         = Primitive
@@ -542,9 +566,11 @@ syntax Relationship
         | Generalization
         | Dependency
         | Flow
+        | Association
  ;
 syntax Association
         = AssociationRole
+        | AssociationClass
         | connection: AssociationEnd
  ;
 syntax Attribute
@@ -574,7 +600,7 @@ syntax Generalization
  ;
 syntax AssociationClass
         = 
-        ()
+        AssociationEnd connection Boolean isActive
  ;
 syntax Dependency
         = Abstraction
@@ -589,7 +615,7 @@ syntax Abstraction
  ;
 syntax Usage
         = 
-        ()
+        ModelElement client+ ModelElement supplier+
  ;
 syntax Binding
         = 
@@ -605,7 +631,7 @@ syntax Node
  ;
 syntax Permission
         = 
-        ()
+        ModelElement client+ ModelElement supplier+
  ;
 syntax Comment
         = 
@@ -661,11 +687,12 @@ syntax TemplateArgument
  ;
 syntax Package
         = Model
+        | Subsystem
         | ElementImport elementImport+
  ;
 syntax Model
         = 
-        ()
+        ElementImport elementImport+
  ;
 syntax Subsystem
         = 

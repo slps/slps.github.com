@@ -14,6 +14,13 @@ InteractionInstanceSet:
         interaction::Interaction context::CollaborationInstanceSet participatingStimulus::Stimulus+
 CollaborationInstanceSet:
         collaboration::Collaboration constrainingElement::ModelElement+ participatingInstance::Instance+ interactionInstanceSet::InteractionInstanceSet+ participatingLink::Link+
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR
 UseCase:
         include::Include+ extend::Extend+ extensionPoint::ExtensionPoint+
 Actor:
@@ -79,23 +86,23 @@ Expression:
 Expression:
         language::String body::String
 BooleanExpression:
-        EPSILON
+        language::String body::String
 TypeExpression:
-        EPSILON
+        language::String body::String
 MappingExpression:
-        EPSILON
+        language::String body::String
 ProcedureExpression:
-        EPSILON
+        language::String body::String
 ObjectSetExpression:
-        EPSILON
+        language::String body::String
 ActionExpression:
-        EPSILON
+        language::String body::String
 IterationExpression:
-        EPSILON
+        language::String body::String
 TimeExpression:
-        EPSILON
+        language::String body::String
 ArgListsExpression:
-        EPSILON
+        language::String body::String
 PseudostateKind:
         pk_choice::EPSILON
         pk_deepHistory::EPSILON
@@ -143,11 +150,15 @@ UninterpretedAction:
 AttributeLink:
         instance::Instance value::Instance linkEnd::LinkEnd attribute::Attribute
 Object:
+        LinkObject
+Object:
         ownedInstance::Instance+ linkEnd::LinkEnd+ classifier::Classifier+ componentInstance::ComponentInstance slot::AttributeLink+ ownedLink::Link+
+Link:
+        LinkObject
 Link:
         association::Association connection::LinkEnd
 LinkObject:
-        EPSILON
+        association::Association connection::LinkEnd
 DataValue:
         ownedInstance::Instance+ linkEnd::LinkEnd+ classifier::Classifier+ componentInstance::ComponentInstance slot::AttributeLink+ ownedLink::Link+
 CallAction:
@@ -187,7 +198,7 @@ ActionState:
 ActionState:
         isDynamic::Boolean dynamicArguments::ArgListsExpression dynamicMultiplicity::Multiplicity
 CallState:
-        EPSILON
+        isDynamic::Boolean dynamicArguments::ArgListsExpression dynamicMultiplicity::Multiplicity
 ObjectFlowState:
         type::Classifier parameter::Parameter+ isSynch::Boolean
 ClassifierInState:
@@ -379,6 +390,20 @@ ModelElement:
         TaggedValue
 GeneralizableElement:
         Stereotype
+GeneralizableElement:
+        Collaboration
+GeneralizableElement:
+        Classifier
+GeneralizableElement:
+        Association
+GeneralizableElement:
+        Package
+Namespace:
+        Collaboration
+Namespace:
+        Classifier
+Namespace:
+        Package
 Classifier:
         ClassifierRole
 Classifier:
@@ -401,6 +426,10 @@ Classifier:
         Node
 Classifier:
         Artifact
+Classifier:
+        Subsystem
+Class:
+        AssociationClass
 Class:
         isActive::Boolean
 DataType:
@@ -437,8 +466,12 @@ Relationship:
         Dependency
 Relationship:
         Flow
+Relationship:
+        Association
 Association:
         AssociationRole
+Association:
+        AssociationClass
 Association:
         connection::AssociationEnd
 Attribute:
@@ -458,7 +491,7 @@ Method:
 Generalization:
         parent::GeneralizableElement powertype::Classifier child::GeneralizableElement discriminator::String
 AssociationClass:
-        EPSILON
+        connection::AssociationEnd isActive::Boolean
 Dependency:
         Abstraction
 Dependency:
@@ -472,7 +505,7 @@ Dependency:
 Abstraction:
         mapping::MappingExpression
 Usage:
-        EPSILON
+        client::ModelElement+ supplier::ModelElement+
 Binding:
         argument::TemplateArgument+
 Component:
@@ -480,7 +513,7 @@ Component:
 Node:
         deployedComponent::Component+
 Permission:
-        EPSILON
+        client::ModelElement+ supplier::ModelElement+
 Comment:
         annotatedElement::ModelElement+ body::String
 Flow:
@@ -510,9 +543,11 @@ TemplateArgument:
 Package:
         Model
 Package:
+        Subsystem
+Package:
         elementImport::ElementImport+
 Model:
-        EPSILON
+        elementImport::ElementImport+
 Subsystem:
         isInstantiable::Boolean
 ElementImport:

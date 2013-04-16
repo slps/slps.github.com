@@ -1,6 +1,21 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module Umldi_c
 
+extend lang::std::Whitespace;
+
+layout Standard = Whitespace* !>> [\u0009-\u000D \u0020 \u0085 \u00A0 \u1680 \u180E \u2000-\u200A \u2028 \u2029 \u202F \u205F \u3000];
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
 syntax Element
         = 
         ModelElement
@@ -24,6 +39,15 @@ syntax ModelElement
         | InteractionInstanceSet
         | CollaborationInstanceSet
  ;
+syntax GeneralizableElement
+        = Classifier
+        | Association
+        | Collaboration
+ ;
+syntax Namespace
+        = Classifier
+        | Collaboration
+ ;
 syntax Classifier
         = Signal
         | ClassifierRole
@@ -41,8 +65,8 @@ syntax AssociationEnd
         | Association association Classifier specification+ Classifier participant Attribute qualifier+ Boolean isNavigable OrderingKind ordering AggregationKind aggregation ScopeKind targetScope Multiplicity multiplicity ChangeableKind changeability
  ;
 syntax Relationship
-        = 
-        Generalization
+        = Generalization
+        | Association
  ;
 syntax Association
         = AssociationRole
@@ -120,19 +144,19 @@ syntax Expression
  ;
 syntax BooleanExpression
         = 
-        ()
+        String language String body
  ;
 syntax ObjectSetExpression
         = 
-        ()
+        String language String body
  ;
 syntax ActionExpression
         = 
-        ()
+        String language String body
  ;
 syntax IterationExpression
         = 
-        ()
+        String language String body
  ;
 syntax Instance
         = Object
@@ -172,16 +196,16 @@ syntax AttributeLink
         Instance instance Instance value LinkEnd linkEnd Attribute attribute
  ;
 syntax Object
-        = 
-        Instance ownedInstance+ LinkEnd linkEnd+ Classifier classifier+ ComponentInstance componentInstance AttributeLink slot+ Link ownedLink+
+        = LinkObject
+        | Instance ownedInstance+ LinkEnd linkEnd+ Classifier classifier+ ComponentInstance componentInstance AttributeLink slot+ Link ownedLink+
  ;
 syntax Link
-        = 
-        Association association LinkEnd connection
+        = LinkObject
+        | Association association LinkEnd connection
  ;
 syntax LinkObject
         = 
-        ()
+        Association association LinkEnd connection
  ;
 syntax DataValue
         = 

@@ -2,8 +2,15 @@ module Main
 
 exports
   sorts
-        Element ModelElement Classifier Feature StructuralFeature AssociationEnd Relationship Association Attribute BehavioralFeature Operation Parameter Generalization AggregationKind ChangeableKind OrderingKind CallConcurrencyKind ParameterDirectionKind ScopeKind VisibilityKind Multiplicity MultiplicityRange Expression BooleanExpression ObjectSetExpression ActionExpression IterationExpression Instance Signal Action CreateAction DestroyAction UninterpretedAction AttributeLink Object Link LinkObject DataValue CallAction SendAction ActionSequence Argument Reception LinkEnd ReturnAction TerminateAction Stimulus Exception ComponentInstance NodeInstance SubsystemInstance Collaboration ClassifierRole AssociationRole AssociationEndRole Message Interaction InteractionInstanceSet CollaborationInstanceSet 
+        Boolean Integer String Element ModelElement GeneralizableElement Namespace Classifier Feature StructuralFeature AssociationEnd Relationship Association Attribute BehavioralFeature Operation Parameter Generalization AggregationKind ChangeableKind OrderingKind CallConcurrencyKind ParameterDirectionKind ScopeKind VisibilityKind Multiplicity MultiplicityRange Expression BooleanExpression ObjectSetExpression ActionExpression IterationExpression Instance Signal Action CreateAction DestroyAction UninterpretedAction AttributeLink Object Link LinkObject DataValue CallAction SendAction ActionSequence Argument Reception LinkEnd ReturnAction TerminateAction Stimulus Exception ComponentInstance NodeInstance SubsystemInstance Collaboration ClassifierRole AssociationRole AssociationEndRole Message Interaction InteractionInstanceSet CollaborationInstanceSet 
   context-free syntax
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
+        STR -> String
+
         ModelElement -> Element
 
         GeneralizableElement -> ModelElement
@@ -40,6 +47,16 @@ exports
 
         CollaborationInstanceSet -> ModelElement
 
+        Classifier -> GeneralizableElement
+
+        Association -> GeneralizableElement
+
+        Collaboration -> GeneralizableElement
+
+        Classifier -> Namespace
+
+        Collaboration -> Namespace
+
         Signal -> Classifier
 
         ClassifierRole -> Classifier
@@ -55,6 +72,8 @@ exports
         association::Association specification::Classifier+ participant::Classifier qualifier::Attribute+ isNavigable::Boolean ordering::OrderingKind aggregation::AggregationKind targetScope::ScopeKind multiplicity::Multiplicity changeability::ChangeableKind -> AssociationEnd
 
         Generalization -> Relationship
+
+        Association -> Relationship
 
         AssociationRole -> Association
 
@@ -114,13 +133,13 @@ exports
 
         language::String body::String -> Expression
 
-         -> BooleanExpression
+        language::String body::String -> BooleanExpression
 
-         -> ObjectSetExpression
+        language::String body::String -> ObjectSetExpression
 
-         -> ActionExpression
+        language::String body::String -> ActionExpression
 
-         -> IterationExpression
+        language::String body::String -> IterationExpression
 
         Object -> Instance
 
@@ -158,11 +177,15 @@ exports
 
         instance::Instance value::Instance linkEnd::LinkEnd attribute::Attribute -> AttributeLink
 
+        LinkObject -> Object
+
         ownedInstance::Instance+ linkEnd::LinkEnd+ classifier::Classifier+ componentInstance::ComponentInstance slot::AttributeLink+ ownedLink::Link+ -> Object
+
+        LinkObject -> Link
 
         association::Association connection::LinkEnd -> Link
 
-         -> LinkObject
+        association::Association connection::LinkEnd -> LinkObject
 
         ownedInstance::Instance+ linkEnd::LinkEnd+ classifier::Classifier+ componentInstance::ComponentInstance slot::AttributeLink+ ownedLink::Link+ -> DataValue
 

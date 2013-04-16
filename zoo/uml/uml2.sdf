@@ -2,8 +2,15 @@ module Main
 
 exports
   sorts
-        Element MultiplicityElement NamedElement OpaqueExpression ValueSpecification Expression Comment DirectedRelationship Relationship Class Property Operation Parameter Package Enumeration DataType EnumerationLiteral PrimitiveType Classifier Feature Constraint VisibilityKind LiteralBoolean LiteralSpecification LiteralString LiteralNull LiteralInteger LiteralUnlimitedNatural BehavioralFeature InstanceSpecification Slot InstanceValue RedefinableElement Generalization PackageableElement ElementImport PackageImport Association PackageMerge Stereotype Profile ProfileApplication Extension ExtensionEnd ParameterDirectionKind AggregationKind Behavior BehavioredClassifier Activity Permission Dependency Usage Abstraction Realization Substitution GeneralizationSet AssociationClass InformationItem InformationFlow Model ConnectorEnd Connector StructuredClassifier ActivityEdge ActivityGroup ActivityNode Action ObjectNode ControlNode ControlFlow ObjectFlow InitialNode FinalNode ActivityFinalNode DecisionNode MergeNode ExecutableNode OutputPin InputPin Pin ActivityParameterNode ValuePin Interface Implementation Artifact Manifestation Actor Extend UseCase ExtensionPoint Include CollaborationOccurrence Collaboration Port CallConcurrencyKind CallTrigger MessageTrigger ChangeTrigger Trigger Reception Signal SignalTrigger TimeTrigger AnyTrigger Variable StructuredActivityNode ConditionalNode Clause LoopNode Interaction InteractionFragment Lifeline Message GeneralOrdering MessageKind MessageSort MessageEnd EventOccurrence ExecutionOccurrence StateInvariant Stop TemplateSignature TemplateParameter TemplateableElement StringExpression TemplateBinding TemplateParameterSubstitution OperationTemplateParameter ClassifierTemplateParameter RedefinableTemplateSignature ConnectableElementTemplateParameter ForkNode JoinNode FlowFinalNode CentralBufferNode ActivityPartition ExpansionNode ExpansionRegion ExpansionKind ExceptionHandler InteractionOccurrence Gate PartDecomposition InteractionOperand InteractionConstraint InteractionOperator CombinedFragment Continuation StateMachine Region Pseudostate State Vertex ConnectionPointReference Transition TransitionKind PseudostateKind FinalState CreateObjectAction DestroyObjectAction TestIdentityAction ReadSelfAction StructuralFeatureAction ReadStructuralFeatureAction WriteStructuralFeatureAction ClearStructuralFeatureAction RemoveStructuralFeatureValueAction AddStructuralFeatureValueAction LinkAction LinkEndData ReadLinkAction LinkEndCreationData CreateLinkAction WriteLinkAction DestroyLinkAction ClearAssociationAction VariableAction ReadVariableAction WriteVariableAction ClearVariableAction AddVariableValueAction RemoveVariableValueAction ApplyFunctionAction PrimitiveFunction CallAction InvocationAction SendSignalAction BroadcastSignalAction SendObjectAction CallOperationAction CallBehaviorAction TimeExpression Duration TimeObservationAction DurationInterval Interval TimeConstraint IntervalConstraint TimeInterval DurationObservationAction DurationConstraint DataStoreNode ParameterEffectKind InterruptibleActivityRegion ObjectNodeOrderingKind ParameterSet Component ConnectorKind Deployment Node Device ExecutionEnvironment CommunicationPath ProtocolConformance ProtocolStateMachine ProtocolTransition ReadExtentAction ReclassifyObjectAction ReadIsClassifiedObjectAction StartOwnedBehaviorAction QualifierValue ReadLinkObjectEndAction ReadLinkObjectEndQualifierAction CreateLinkObjectAction AcceptEventAction AcceptCallAction ReplyAction RaiseExceptionAction DeploymentSpecification 
+        Boolean Integer String Element MultiplicityElement NamedElement Namespace OpaqueExpression ValueSpecification Expression Comment DirectedRelationship Relationship Class Property Operation TypedElement Parameter Package Enumeration DataType EnumerationLiteral PrimitiveType Classifier Feature Constraint VisibilityKind LiteralBoolean LiteralSpecification LiteralString LiteralNull LiteralInteger LiteralUnlimitedNatural BehavioralFeature StructuralFeature InstanceSpecification Slot InstanceValue RedefinableElement Generalization PackageableElement ElementImport PackageImport Association PackageMerge Stereotype Profile ProfileApplication Extension ExtensionEnd ParameterDirectionKind AggregationKind Behavior BehavioredClassifier Activity Permission Dependency Usage Abstraction Realization Substitution GeneralizationSet AssociationClass InformationItem InformationFlow Model ConnectorEnd ConnectableElement Connector StructuredClassifier ActivityEdge ActivityGroup ActivityNode Action ObjectNode ControlNode ControlFlow ObjectFlow InitialNode FinalNode ActivityFinalNode DecisionNode MergeNode ExecutableNode OutputPin InputPin Pin ActivityParameterNode ValuePin Interface Implementation Artifact Manifestation Actor Extend UseCase ExtensionPoint Include CollaborationOccurrence Collaboration Port EncapsulatedClassifier CallConcurrencyKind CallTrigger MessageTrigger ChangeTrigger Trigger Reception Signal SignalTrigger TimeTrigger AnyTrigger Variable StructuredActivityNode ConditionalNode Clause LoopNode Interaction InteractionFragment Lifeline Message GeneralOrdering MessageKind MessageSort MessageEnd EventOccurrence ExecutionOccurrence StateInvariant Stop TemplateSignature TemplateParameter TemplateableElement StringExpression ParameterableElement TemplateBinding TemplateParameterSubstitution OperationTemplateParameter ClassifierTemplateParameter RedefinableTemplateSignature ConnectableElementTemplateParameter ForkNode JoinNode FlowFinalNode CentralBufferNode ActivityPartition ExpansionNode ExpansionRegion ExpansionKind ExceptionHandler InteractionOccurrence Gate PartDecomposition InteractionOperand InteractionConstraint InteractionOperator CombinedFragment Continuation StateMachine Region Pseudostate State Vertex ConnectionPointReference Transition TransitionKind PseudostateKind FinalState CreateObjectAction DestroyObjectAction TestIdentityAction ReadSelfAction StructuralFeatureAction ReadStructuralFeatureAction WriteStructuralFeatureAction ClearStructuralFeatureAction RemoveStructuralFeatureValueAction AddStructuralFeatureValueAction LinkAction LinkEndData ReadLinkAction LinkEndCreationData CreateLinkAction WriteLinkAction DestroyLinkAction ClearAssociationAction VariableAction ReadVariableAction WriteVariableAction ClearVariableAction AddVariableValueAction RemoveVariableValueAction ApplyFunctionAction PrimitiveFunction CallAction InvocationAction SendSignalAction BroadcastSignalAction SendObjectAction CallOperationAction CallBehaviorAction TimeExpression Duration TimeObservationAction DurationInterval Interval TimeConstraint IntervalConstraint TimeInterval DurationObservationAction DurationConstraint DataStoreNode ParameterEffectKind InterruptibleActivityRegion ObjectNodeOrderingKind ParameterSet Component ConnectorKind Deployment DeployedArtifact DeploymentTarget Node Device ExecutionEnvironment CommunicationPath ProtocolConformance ProtocolStateMachine ProtocolTransition ReadExtentAction ReclassifyObjectAction ReadIsClassifiedObjectAction StartOwnedBehaviorAction QualifierValue ReadLinkObjectEndAction ReadLinkObjectEndQualifierAction CreateLinkObjectAction AcceptEventAction AcceptCallAction ReplyAction RaiseExceptionAction DeploymentSpecification 
   context-free syntax
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
+        STR -> String
+
         MultiplicityElement -> Element
 
         Relationship -> Element
@@ -32,6 +39,8 @@ exports
 
         ConnectorEnd -> MultiplicityElement
 
+        Pin -> MultiplicityElement
+
         Namespace -> NamedElement
 
         TypedElement -> NamedElement
@@ -59,6 +68,28 @@ exports
         DeployedArtifact -> NamedElement
 
         DeploymentTarget -> NamedElement
+
+        PackageableElement -> NamedElement
+
+        ConnectableElement -> NamedElement
+
+        Extend -> NamedElement
+
+        Include -> NamedElement
+
+        ActivityPartition -> NamedElement
+
+        Package -> Namespace
+
+        Classifier -> Namespace
+
+        BehavioralFeature -> Namespace
+
+        InteractionOperand -> Namespace
+
+        Region -> Namespace
+
+        State -> Namespace
 
         Expression -> OpaqueExpression
 
@@ -92,13 +123,27 @@ exports
 
         ProtocolConformance -> DirectedRelationship
 
+        Dependency -> DirectedRelationship
+
+        InformationFlow -> DirectedRelationship
+
+        Extend -> DirectedRelationship
+
+        Include -> DirectedRelationship
+
         DirectedRelationship -> Relationship
+
+        Association -> Relationship
 
         Stereotype -> Class
 
         Behavior -> Class
 
         Component -> Class
+
+        AssociationClass -> Class
+
+        Node -> Class
 
         ownedOperation::Operation+ superClass::Class+ extension::Extension+ nestedClassifier::Classifier+ isActive::Boolean ownedReception::Reception+ -> Class
 
@@ -109,6 +154,10 @@ exports
         default::String isComposite::Boolean isDerived::Boolean class_::Class opposite::Property isDerivedUnion::Boolean owningAssociation::Association redefinedProperty::Property+ subsettedProperty::Property+ datatype::DataType association::Association aggregation::AggregationKind defaultValue::ValueSpecification qualifier::Property+ associationEnd::Property -> Property
 
         ownedParameter::Parameter+ class_::Class isQuery::Boolean datatype::DataType precondition::Constraint+ postcondition::Constraint+ redefinedOperation::Operation+ bodyCondition::Constraint -> Operation
+
+        ValueSpecification -> TypedElement
+
+        ObjectNode -> TypedElement
 
         operation::Operation default::String direction::ParameterDirectionKind defaultValue::ValueSpecification isException::Boolean isStream::Boolean effect::ParameterEffectKind parameterSet::ParameterSet+ -> Parameter
 
@@ -128,7 +177,7 @@ exports
 
         enumeration::Enumeration -> EnumerationLiteral
 
-         -> PrimitiveType
+        ownedAttribute::Property+ ownedOperation::Operation+ -> PrimitiveType
 
         DataType -> Classifier
 
@@ -148,7 +197,15 @@ exports
 
         TemplateableClassifier -> Classifier
 
+        Association -> Classifier
+
+        Artifact -> Classifier
+
         Connector -> Feature
+
+        StructuralFeature -> Feature
+
+        BehavioralFeature -> Feature
 
         InteractionConstraint -> Constraint
 
@@ -183,6 +240,10 @@ exports
 
         Reception -> BehavioralFeature
 
+        Operation -> BehavioralFeature
+
+        Property -> StructuralFeature
+
         EnumerationLiteral -> InstanceSpecification
 
         slot::Slot+ classifier::Classifier+ specification::ValueSpecification -> InstanceSpecification
@@ -201,6 +262,10 @@ exports
 
         Transition -> RedefinableElement
 
+        RedefinableTemplateSignature -> RedefinableElement
+
+        Region -> RedefinableElement
+
         specific::Classifier general::Classifier isSubstitutable::Boolean generalizationSet::GeneralizationSet+ -> Generalization
 
         Type -> PackageableElement
@@ -210,6 +275,14 @@ exports
         GeneralizationSet -> PackageableElement
 
         PrimitiveFunction -> PackageableElement
+
+        InstanceSpecification -> PackageableElement
+
+        Dependency -> PackageableElement
+
+        InformationFlow -> PackageableElement
+
+        Package -> PackageableElement
 
         visibility::VisibilityKind alias::String importedElement::PackageableElement importingNamespace::Namespace -> ElementImport
 
@@ -221,11 +294,13 @@ exports
 
         CommunicationPath -> Association
 
+        AssociationClass -> Association
+
         isDerived::Boolean ownedEnd::Property+ endType::Type+ memberEnd::Property -> Association
 
         mergingPackage::Package mergedPackage::Package -> PackageMerge
 
-         -> Stereotype
+        ownedOperation::Operation+ superClass::Class+ extension::Extension+ nestedClassifier::Classifier+ isActive::Boolean ownedReception::Reception+ -> Stereotype
 
         ownedStereotype::Stereotype+ metaclassReference::ElementImport+ metamodelReference::PackageImport+ -> Profile
 
@@ -233,7 +308,7 @@ exports
 
         isRequired::Boolean metaclass::Class -> Extension
 
-         -> ExtensionEnd
+        default::String isComposite::Boolean isDerived::Boolean class_::Class opposite::Property isDerivedUnion::Boolean owningAssociation::Association redefinedProperty::Property+ subsettedProperty::Property+ datatype::DataType association::Association aggregation::AggregationKind defaultValue::ValueSpecification qualifier::Property+ associationEnd::Property -> ExtensionEnd
 
         in:: -> ParameterDirectionKind
         inout:: -> ParameterDirectionKind
@@ -248,11 +323,17 @@ exports
 
         StateMachine -> Behavior
 
+        Interaction -> Behavior
+
         UseCase -> BehavioredClassifier
+
+        Class -> BehavioredClassifier
+
+        Collaboration -> BehavioredClassifier
 
         body::String language::String edge::ActivityEdge+ group::ActivityGroup+ node::ActivityNode+ action::Action+ structuredNode::StructuredActivityNode+ isSingleExecution::Boolean isReadOnly::Boolean -> Activity
 
-         -> Permission
+        client::NamedElement+ supplier::NamedElement+ -> Permission
 
         Permission -> Dependency
 
@@ -264,7 +345,7 @@ exports
 
         client::NamedElement+ supplier::NamedElement+ -> Dependency
 
-         -> Usage
+        client::NamedElement+ supplier::NamedElement+ -> Usage
 
         Realization -> Abstraction
 
@@ -282,7 +363,7 @@ exports
 
         isCovering::Boolean isDisjoint::Boolean powertype::Classifier generalization::Generalization+ -> GeneralizationSet
 
-         -> AssociationClass
+        ownedOperation::Operation+ superClass::Class+ extension::Extension+ nestedClassifier::Classifier+ isActive::Boolean ownedReception::Reception+ isDerived::Boolean ownedEnd::Property+ endType::Type+ memberEnd::Property -> AssociationClass
 
         represented::Classifier+ -> InformationItem
 
@@ -292,9 +373,15 @@ exports
 
         definingEnd::Property role::ConnectableElement partWithPort::Property -> ConnectorEnd
 
+        Parameter -> ConnectableElement
+
+        Variable -> ConnectableElement
+
         type::Association redefinedConnector::Connector+ end::ConnectorEnd kind::ConnectorKind contract::Behavior+ -> Connector
 
         EncapsulatedClassifier -> StructuredClassifier
+
+        Collaboration -> StructuredClassifier
 
         ControlFlow -> ActivityEdge
 
@@ -302,9 +389,13 @@ exports
 
         InterruptibleActivityRegion -> ActivityGroup
 
+        ActivityPartition -> ActivityGroup
+
         ControlNode -> ActivityNode
 
         ExecutableNode -> ActivityNode
+
+        ObjectNode -> ActivityNode
 
         CreateObjectAction -> Action
 
@@ -344,6 +435,8 @@ exports
 
         RaiseExceptionAction -> Action
 
+        StructuredActivityNode -> Action
+
         effect::String output::OutputPin+ input::InputPin+ context::Classifier localPrecondition::Constraint+ localPostcondition::Constraint+ -> Action
 
         ActivityParameterNode -> ObjectNode
@@ -351,6 +444,8 @@ exports
         CentralBufferNode -> ObjectNode
 
         ExpansionNode -> ObjectNode
+
+        Pin -> ObjectNode
 
         InitialNode -> ControlNode
 
@@ -420,6 +515,8 @@ exports
 
         isBehavior::Boolean isService::Boolean required::Interface+ redefinedPort::Port+ provided::Interface+ protocol::ProtocolStateMachine -> Port
 
+        Class -> EncapsulatedClassifier
+
         guarded:: -> CallConcurrencyKind
         concurrent:: -> CallConcurrencyKind
         sequential:: -> CallConcurrencyKind
@@ -478,6 +575,12 @@ exports
 
         Continuation -> InteractionFragment
 
+        EventOccurrence -> InteractionFragment
+
+        Interaction -> InteractionFragment
+
+        InteractionOperand -> InteractionFragment
+
         coveredBy::InteractionFragment+ represents::ConnectableElement interaction::Interaction selector::OpaqueExpression decomposedAs::PartDecomposition -> Lifeline
 
         messageKind::MessageKind messageSort::MessageSort receiveEvent::MessageEnd sendEvent::MessageEnd connector::Connector interaction::Interaction signature::NamedElement argument::ValueSpecification+ -> Message
@@ -496,6 +599,8 @@ exports
 
         Gate -> MessageEnd
 
+        EventOccurrence -> MessageEnd
+
         Stop -> EventOccurrence
 
         startExec::ExecutionOccurrence+ finishExec::ExecutionOccurrence+ toAfter::GeneralOrdering+ toBefore::GeneralOrdering+ -> EventOccurrence
@@ -504,7 +609,9 @@ exports
 
         invariant::Constraint -> StateInvariant
 
-         -> Stop
+        startExec::ExecutionOccurrence+ finishExec::ExecutionOccurrence+ toAfter::GeneralOrdering+ toBefore::GeneralOrdering+ -> Stop
+
+        RedefinableTemplateSignature -> TemplateSignature
 
         parameter::TemplateParameter+ ownedParameter::TemplateParameter+ nestedSignature::TemplateSignature+ nestingSignature::TemplateSignature template::TemplateableElement -> TemplateSignature
 
@@ -524,17 +631,23 @@ exports
 
         subExpression::StringExpression+ owningExpression::StringExpression -> StringExpression
 
+        ValueSpecification -> ParameterableElement
+
+        PackageableElement -> ParameterableElement
+
+        ConnectableElement -> ParameterableElement
+
         boundElement::TemplateableElement signature::TemplateSignature parameterSubstitution::TemplateParameterSubstitution+ -> TemplateBinding
 
         formal::TemplateParameter templateBinding::TemplateBinding actual::ParameterableElement+ ownedActual::ParameterableElement+ -> TemplateParameterSubstitution
 
-         -> OperationTemplateParameter
+        signature::TemplateSignature parameteredElement::ParameterableElement ownedParameteredElement::ParameterableElement default::ParameterableElement ownedDefault::ParameterableElement -> OperationTemplateParameter
 
         allowSubstitutable::Boolean -> ClassifierTemplateParameter
 
-         -> RedefinableTemplateSignature
+        redefinitionContext::Classifier+ isLeaf::Boolean parameter::TemplateParameter+ ownedParameter::TemplateParameter+ nestedSignature::TemplateSignature+ nestingSignature::TemplateSignature template::TemplateableElement -> RedefinableTemplateSignature
 
-         -> ConnectableElementTemplateParameter
+        signature::TemplateSignature parameteredElement::ParameterableElement ownedParameteredElement::ParameterableElement default::ParameterableElement ownedDefault::ParameterableElement -> ConnectableElementTemplateParameter
 
          -> ForkNode
 
@@ -562,7 +675,7 @@ exports
 
         receiveMessage::Message sendMessage::Message -> Gate
 
-         -> PartDecomposition
+        refersTo::Interaction actualGate::Gate+ argument::InputPin+ -> PartDecomposition
 
         guard::InteractionConstraint fragment::InteractionFragment+ -> InteractionOperand
 
@@ -622,7 +735,7 @@ exports
         initial:: -> PseudostateKind
         entryPoint:: -> PseudostateKind
 
-         -> FinalState
+        isComposite::Boolean isOrthogonal::Boolean isSimple::Boolean isSubmachineState::Boolean submachine::StateMachine connection::ConnectionPointReference+ redefinedState::State deferrableTrigger::Trigger+ region::Region+ entry::Activity exit::Activity doActivity::Activity stateInvariant::Constraint -> FinalState
 
         classifier::Classifier result::OutputPin -> CreateObjectAction
 
@@ -726,7 +839,7 @@ exports
 
         now::TimeExpression+ -> TimeObservationAction
 
-         -> DurationInterval
+        min::ValueSpecification+ max::ValueSpecification+ -> DurationInterval
 
         DurationInterval -> Interval
 
@@ -743,7 +856,7 @@ exports
         TimeConstraint -> IntervalConstraint
         DurationConstraint -> IntervalConstraint
 
-         -> TimeInterval
+        min::ValueSpecification+ max::ValueSpecification+ -> TimeInterval
 
         duration::Duration+ -> DurationObservationAction
 
@@ -772,17 +885,21 @@ exports
 
         deployedArtifact::DeployedArtifact+ location::DeploymentTarget configuration::DeploymentSpecification+ -> Deployment
 
+        Artifact -> DeployedArtifact
+
+        Node -> DeploymentTarget
+
         Device -> Node
 
         ExecutionEnvironment -> Node
 
         nestedNode::Node+ -> Node
 
-         -> Device
+        nestedNode::Node+ -> Device
 
-         -> ExecutionEnvironment
+        nestedNode::Node+ -> ExecutionEnvironment
 
-         -> CommunicationPath
+        isDerived::Boolean ownedEnd::Property+ endType::Type+ memberEnd::Property -> CommunicationPath
 
         specificMachine::ProtocolStateMachine generalMachine::ProtocolStateMachine -> ProtocolConformance
 

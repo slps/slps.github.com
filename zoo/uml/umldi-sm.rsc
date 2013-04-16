@@ -1,6 +1,9 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module Umldi_sm
 
+extend lang::std::Whitespace;
+
+layout Standard = Whitespace* !>> [\u0009-\u000D \u0020 \u0085 \u00A0 \u1680 \u180E \u2000-\u200A \u2028 \u2029 \u202F \u205F \u3000];
 syntax Signal
         = 
         Exception
@@ -90,23 +93,23 @@ syntax Expression
  ;
 syntax BooleanExpression
         = 
-        ()
+        String language String body
  ;
 syntax ObjectSetExpression
         = 
-        ()
+        String language String body
  ;
 syntax ActionExpression
         = 
-        ()
+        String language String body
  ;
 syntax IterationExpression
         = 
-        ()
+        String language String body
  ;
 syntax TimeExpression
         = 
-        ()
+        String language String body
  ;
 syntax PseudostateKind
         = pk_choice: ()
@@ -190,6 +193,18 @@ syntax FinalState
         = 
         Event deferrableEvent+ Transition internalTransition+ Action exit Action doActivity Action entry StateMachine stateMachine
  ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
 syntax Element
         = 
         ModelElement
@@ -207,6 +222,14 @@ syntax ModelElement
         | Feature
         | Relationship
         | Parameter
+ ;
+syntax GeneralizableElement
+        = 
+        Classifier
+ ;
+syntax Namespace
+        = 
+        Classifier
  ;
 syntax Classifier
         = 

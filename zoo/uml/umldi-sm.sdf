@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        Signal Action CreateAction DestroyAction UninterpretedAction CallAction SendAction ActionSequence Argument Reception ReturnAction TerminateAction Exception CallConcurrencyKind ParameterDirectionKind ScopeKind VisibilityKind Expression BooleanExpression ObjectSetExpression ActionExpression IterationExpression TimeExpression PseudostateKind StateMachine Event StateVertex State TimeEvent CallEvent SignalEvent Transition CompositeState ChangeEvent Guard Pseudostate SimpleState SubmachineState SynchState StubState FinalState Element ModelElement Classifier Feature Relationship BehavioralFeature Operation Parameter Generalization 
+        Signal Action CreateAction DestroyAction UninterpretedAction CallAction SendAction ActionSequence Argument Reception ReturnAction TerminateAction Exception CallConcurrencyKind ParameterDirectionKind ScopeKind VisibilityKind Expression BooleanExpression ObjectSetExpression ActionExpression IterationExpression TimeExpression PseudostateKind StateMachine Event StateVertex State TimeEvent CallEvent SignalEvent Transition CompositeState ChangeEvent Guard Pseudostate SimpleState SubmachineState SynchState StubState FinalState Boolean Integer String Element ModelElement GeneralizableElement Namespace Classifier Feature Relationship BehavioralFeature Operation Parameter Generalization 
   context-free syntax
         Exception -> Signal
 
@@ -75,15 +75,15 @@ exports
 
         language::String body::String -> Expression
 
-         -> BooleanExpression
+        language::String body::String -> BooleanExpression
 
-         -> ObjectSetExpression
+        language::String body::String -> ObjectSetExpression
 
-         -> ActionExpression
+        language::String body::String -> ActionExpression
 
-         -> IterationExpression
+        language::String body::String -> IterationExpression
 
-         -> TimeExpression
+        language::String body::String -> TimeExpression
 
         pk_choice:: -> PseudostateKind
         pk_deepHistory:: -> PseudostateKind
@@ -145,6 +145,13 @@ exports
 
         deferrableEvent::Event+ internalTransition::Transition+ exit::Action doActivity::Action entry::Action stateMachine::StateMachine -> FinalState
 
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
+        STR -> String
+
         ModelElement -> Element
 
         Action -> ModelElement
@@ -170,6 +177,10 @@ exports
         Relationship -> ModelElement
 
         Parameter -> ModelElement
+
+        Classifier -> GeneralizableElement
+
+        Classifier -> Namespace
 
         Signal -> Classifier
 

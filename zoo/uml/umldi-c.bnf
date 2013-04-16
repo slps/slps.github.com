@@ -1,3 +1,10 @@
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR
 Element:
         ModelElement
 ModelElement:
@@ -34,6 +41,16 @@ ModelElement:
         InteractionInstanceSet
 ModelElement:
         CollaborationInstanceSet
+GeneralizableElement:
+        Classifier
+GeneralizableElement:
+        Association
+GeneralizableElement:
+        Collaboration
+Namespace:
+        Classifier
+Namespace:
+        Collaboration
 Classifier:
         Signal
 Classifier:
@@ -50,6 +67,8 @@ AssociationEnd:
         association::Association specification::Classifier+ participant::Classifier qualifier::Attribute+ isNavigable::Boolean ordering::OrderingKind aggregation::AggregationKind targetScope::ScopeKind multiplicity::Multiplicity changeability::ChangeableKind
 Relationship:
         Generalization
+Relationship:
+        Association
 Association:
         AssociationRole
 Association:
@@ -109,13 +128,13 @@ Expression:
 Expression:
         language::String body::String
 BooleanExpression:
-        EPSILON
+        language::String body::String
 ObjectSetExpression:
-        EPSILON
+        language::String body::String
 ActionExpression:
-        EPSILON
+        language::String body::String
 IterationExpression:
-        EPSILON
+        language::String body::String
 Instance:
         Object
 Instance:
@@ -153,11 +172,15 @@ UninterpretedAction:
 AttributeLink:
         instance::Instance value::Instance linkEnd::LinkEnd attribute::Attribute
 Object:
+        LinkObject
+Object:
         ownedInstance::Instance+ linkEnd::LinkEnd+ classifier::Classifier+ componentInstance::ComponentInstance slot::AttributeLink+ ownedLink::Link+
+Link:
+        LinkObject
 Link:
         association::Association connection::LinkEnd
 LinkObject:
-        EPSILON
+        association::Association connection::LinkEnd
 DataValue:
         ownedInstance::Instance+ linkEnd::LinkEnd+ classifier::Classifier+ componentInstance::ComponentInstance slot::AttributeLink+ ownedLink::Link+
 CallAction:

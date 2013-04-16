@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        Classifier Instance Actor UseCase UseCaseInstance RelationShip Include Extend BooleanExpression ModelElement ExtensionPoint LocationReference 
+        Classifier Instance Actor UseCase UseCaseInstance RelationShip Include Extend BooleanExpression ModelElement ExtensionPoint LocationReference Boolean Integer String 
   context-free syntax
         Actor -> Classifier
 
@@ -14,11 +14,11 @@ exports
 
         classifier::Classifier+ -> Instance
 
-         -> Actor
+        instance::Instance+ -> Actor
 
         extensionPoint::String+ includeAddition::Include includeBase::Include extendExtension::Extend extendBase::Extend extensionPoints::ExtensionPoint+ -> UseCase
 
-         -> UseCaseInstance
+        classifier::Classifier+ -> UseCaseInstance
 
         Include -> RelationShip
 
@@ -35,3 +35,10 @@ exports
         location::LocationReference extend::Extend+ useCase::UseCase+ -> ExtensionPoint
 
         value::String -> LocationReference
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
+        STR -> String

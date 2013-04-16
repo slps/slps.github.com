@@ -2,8 +2,15 @@ module Main
 
 exports
   sorts
-        HTML HTMLElement HEAD HEADElement LINK TITLE BODY BODYElement H1 H2 H3 H4 EM STRONG B I TT PRE BIG SMALL SUB SUP STRIKE FONT IMG BR MAP AREA STYLE EMBED NOEMBED SPAN A DIV P TABLEElement TABLE TR TD TH FORM INPUT TEXTAREA SELECT OPTION ListElement OL UL LI DL DT DD APPLET PARAM OBJECT FRAMESET FRAME NOFRAME IFRAME 
+        Boolean String Integer HTML HTMLElement HEAD HEADElement LINK TITLE BODY BODYElement H1 H2 H3 H4 EM STRONG B I TT PRE BIG SMALL SUB SUP STRIKE FONT IMG BR MAP AREA STYLE EMBED NOEMBED SPAN A DIV P TABLEElement TABLE TR TD TH FORM INPUT TEXTAREA SELECT OPTION ListElement OL UL LI DL DT DD APPLET PARAM OBJECT FRAMESET FRAME NOFRAME IFRAME 
   context-free syntax
+        "true" -> Boolean
+        "false" -> Boolean
+
+        STR -> String
+
+        INT -> Integer
+
         head::HEAD body::BODY -> HTML
 
         HEAD -> HTMLElement
@@ -152,7 +159,7 @@ exports
 
         colspan::String rowspan::String valign::String align::String width::String tr::TR -> TD
 
-         -> TH
+        colspan::String rowspan::String valign::String align::String width::String tr::TR -> TH
 
         action::String method::String -> FORM
 
@@ -196,4 +203,4 @@ exports
 
          -> NOFRAME
 
-         -> IFRAME
+        src::String name::String marginwidth::String marginheight::String scrolling::String noresize::String -> IFRAME

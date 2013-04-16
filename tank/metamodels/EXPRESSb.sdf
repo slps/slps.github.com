@@ -2,5 +2,289 @@ module Main
 
 exports
   sorts
-        
+        ONEOFConstraint SupertypeRule SubtypeConstraint Extent TOTAL-OVERConstraint ANDConstraint GlobalRule NamedRule ProcedureCall SkipStatement AliasStatement ControlVariable AliasVariable VARCell NullStatement AttributeCell StatementBlock CaseAction MemberCell RepeatStatement GroupCell VariableCell CaseStatement IfStatement EscapeStatement ReturnStatement Assignment String Integer Boolean RepeatCount EnumItemRef Literal BinaryIndex IndeterminateRef SELFRef BinaryOperation AggregateInitializer StringIndex PartialEntityConstructor Coercion ActualParameter ParameterRef AttributeRef AggregateIndex GroupRef UnaryOperation UsedInRef ConstantRef QueryExpression QueryVariable AttributeBinding FunctionCall MemberBinding ExtentRef VariableRef SingleEntityType AGGREGATEType GeneralBAGType DomainRule Expression InverseAttribute EnumerationType ArrayBound GeneralSETType LISTType Redeclaration EntityType PartialEntityType Schema InvertibleAttribute InterfacedElement NumericType UniqueRule DomainRole GeneralLISTType BAGType RealType LogicType GenericType StringType DerivedAttribute RangeRole Remark SizeConstraint SETType SpecializedType GeneralARRAYType Relationship LengthConstraint BinaryType ScopedId SelectType ExplicitAttribute ARRAYType ActualTypeConstraint FunctionResult Function InParameter LocalVariable ActualStructure ActualGenericType Statement InVariable Procedure ActualARRAYType ActualSETType ActualAGGREGATEType ActualStructureConstraint ActualLISTType VARParameter ActualDataType ActualBAGType AttributeValue ARRAYValue RoleName EntityInstance IntegerValue Constant LogicalValue ListMember BagMember SingleEntityValue Indeterminate SingleLeafInstance GenericAggregate BinaryValue SpecializedValue BAGValue EnumerationItem EntityValue SETValue ArrayMember Population RealValue BooleanValue LISTValue StringValue TypeName PartialEntityValue NumberValue MultiLeafInstance 
   context-free syntax
+         -> ONEOFConstraint
+
+        namedSupertype::Core/EntityType constraints::Rules/SubtypeConstraint+ assertsAbstract::Mof/Boolean -> SupertypeRule
+
+        constrainedSubtypes::Rules/Extent+ equivalentRule::Core/Expression collection::Rules/SupertypeRule -> SubtypeConstraint
+
+        constraints::Rules/SubtypeConstraint+ content::Instances/EntityInstance+ withinPopulation::Instances/Population constraintRules::Rules/GlobalRule+ forType::Core/EntityType id::Core/ScopedId -> Extent
+
+         -> TOTAL-OVERConstraint
+
+         -> ANDConstraint
+
+        supportingBody::Algorithms/Statement constrainedExtents::Rules/Extent+ containsRules::Rules/NamedRule+ -> GlobalRule
+
+        assertsExpression::Core/Expression position::Mof/Integer -> NamedRule
+
+        invokes::Algorithms/Procedure actualParameters::Expressions/ActualParameter+ -> ProcedureCall
+
+         -> SkipStatement
+
+        bindsToReference::Statements/VARExpression body::Algorithms/Statement aliasVariable::Statements/AliasVariable -> AliasStatement
+
+        boundValue::Core/Expression initialValue::Core/Expression increment::Core/Expression -> ControlVariable
+
+        referent::Statements/VARExpression -> AliasVariable
+
+        refersTo::Algorithms/VARVariable id::Core/Identifier -> VARCell
+
+         -> NullStatement
+
+        refersTo::Core/ExplicitAttribute baseEntity::Statements/VARExpression id::Core/Identifier -> AttributeCell
+
+        bodyStatements_Statement::Algorithms/Statement+ delimited::Mof/Boolean -> StatementBlock
+
+        labelValue::Core/Expression+ action::Algorithms/Statement isDefault::Mof/Boolean -> CaseAction
+
+        indexValue::Core/Expression baseAggregate::Statements/VARExpression -> MemberCell
+
+        whileExpression::Core/Expression body::Algorithms/Statement controlVariable::Statements/ControlVariable untilExpression::Core/Expression -> RepeatStatement
+
+        baseEntity::Statements/VARExpression refersTo::Core/SingleEntityType id::Core/Identifier -> GroupCell
+
+        refersTo::Algorithms/Variable id::Core/Identifier -> VariableCell
+
+        cases::Statements/CaseAction+ selectionExpression::Core/Expression -> CaseStatement
+
+        ifCondition::Core/Expression elseActions::Algorithms/Statement thenActions::Algorithms/Statement -> IfStatement
+
+         -> EscapeStatement
+
+        returnValue::Core/Expression -> ReturnStatement
+
+        assignedValue::Core/Expression variable::Statements/VARExpression -> Assignment
+
+        STR -> String
+
+        INT -> Integer
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        derivation::Core/Expression -> RepeatCount
+
+        refersTo::Instances/EnumerationItem id::Core/Identifier -> EnumItemRef
+
+        refersTo::Instances/SimpleValue -> Literal
+
+        firstBit::Core/Expression lastBit::Core/Expression -> BinaryIndex
+
+        refersTo::Instances/Indeterminate -> IndeterminateRef
+
+         -> SELFRef
+
+        leftOperand::Core/Expression rightOperand::Core/Expression operator::Expressions/BinaryOperator -> BinaryOperation
+
+        resultValue::Instances/GenericAggregate bindings::Expressions/MemberBinding+ -> AggregateInitializer
+
+        firstCode::Core/Expression lastCode::Core/Expression -> StringIndex
+
+        resultValue::Instances/PartialEntityValue attributeGroup::Core/SingleEntityType bindings::Expressions/AttributeBinding+ id::Core/Identifier -> PartialEntityConstructor
+
+        operand::Core/Expression targetType::Core/VariableType -> Coercion
+
+        inProcedureCall::Statements/ProcedureCall inFunctionCall::Expressions/FunctionCall formalParameter::Algorithms/Parameter actualReferent::Statements/VARExpression actualValue::Core/Expression position::Mof/Integer -> ActualParameter
+
+        refersTo::Algorithms/Parameter id::Core/Identifier -> ParameterRef
+
+        refersTo::Core/Attribute id::Core/Identifier -> AttributeRef
+
+        indexValue::Core/Expression -> AggregateIndex
+
+        refersTo::Core/SingleEntityType id::Core/Identifier -> GroupRef
+
+        unaryOperand::Core/Expression operator::Expressions/UnaryOperator -> UnaryOperation
+
+        inverseOf::Core/Attribute -> UsedInRef
+
+        refersTo::Instances/Constant id::Core/Identifier -> ConstantRef
+
+        selectCondition::Core/Expression queryVariable::Expressions/QueryVariable aggregateOperand::Core/Expression -> QueryExpression
+
+         -> QueryVariable
+
+        attributeValue::Core/Expression toValue::Instances/AttributeValue attribute::Core/ExplicitAttribute position::Mof/Integer -> AttributeBinding
+
+        actualParameters::Expressions/ActualParameter+ invokesFunction::Algorithms/Function returnsResult::Algorithms/FunctionResult -> FunctionCall
+
+        repetition::Expressions/RepeatCount toSlot::Instances/ListMember+ memberValue::Core/Expression position::Mof/Integer -> MemberBinding
+
+        refersTo::Core/NamedType id::Core/Identifier -> ExtentRef
+
+        refersTo::Algorithms/NamedVariable id::Core/Identifier -> VariableRef
+
+        declaresExplicitAttribute::Core/ExplicitAttribute+ declaresAttribute::Core/Attribute+ declaredIn::Core/EntityType equivalent::Core/PartialEntityType id::Core/ScopedId -> SingleEntityType
+
+        upperBound::Core/SizeConstraint memberType::Core/ParameterType constraint::Algorithms/ActualStructureConstraint lowerBound::Core/SizeConstraint -> AGGREGATEType
+
+         -> GeneralBAGType
+
+        position::Mof/Integer -> DomainRule
+
+        evaluation::Core/Instance interpretationContext::Core/Scope dataType::Core/DataType text::Core/ExpressText -> Expression
+
+        modelsRole::Core/DomainRole explicit::Core/InvertibleAttribute isUnique::Mof/Boolean -> InverseAttribute
+
+        values::Instances/EnumerationItem+ declaredItems::Instances/EnumerationItem+ extension::Core/EnumerationType+ base::Core/EnumerationType isExtensible::Mof/Boolean -> EnumerationType
+
+        boundExpression::Core/Expression bound::Mof/Integer -> ArrayBound
+
+         -> GeneralSETType
+
+         -> LISTType
+
+        derivation::Core/Expression restrictedType::Core/AttributeType refines::Core/Redeclaration upperBound::Core/SizeConstraint lowerBound::Core/SizeConstraint scope::Core/EntityType originalAttribute::Core/Attribute refinedRole::Core/Role position::Mof/Integer isMandatory::Mof/Boolean alias::Core/ScopedId -> Redeclaration
+
+        playsRole::Core/Role+ redeclarations::Core/Redeclaration+ attributes::Core/Attribute+ playsRangeRole::Core/RangeRole+ declares::Core/SingleEntityType extension::Rules/Extent+ invertibleAttributes::Core/InvertibleAttribute+ playsDomainRole::Core/DomainRole+ uniqueRules::Core/UniqueRule+ usedIn::Core/InvertibleAttribute+ subtypeOf::Core/EntityType+ isAbstract::Mof/Boolean -> EntityType
+
+        components::Core/SingleEntityType+ -> PartialEntityType
+
+        documentation::Core/Remark+ interfaces::Core/InterfacedElement+ schemaElements::Core/SchemaElement+ interfacedElements::Core/SchemaElement+ name::Core/Identifier version::Core/Identifier -> Schema
+
+        inverse::Core/InverseAttribute+ rangeType::Core/EntityType+ createsRelationship::Core/Relationship referencingType::Core/EntityType+ modelsRole::Core/RangeRole -> InvertibleAttribute
+
+        interfacingSchema::Core/Schema refersTo::Core/SchemaElement isUSE::Mof/Boolean interfacedId::Core/ScopedId -> InterfacedElement
+
+         -> NumericType
+
+        domain::Core/EntityType keyComponent::Core/Attribute+ position::Mof/Integer -> UniqueRule
+
+        rangeView::Core/InverseAttribute domain::Core/EntityType id::Core/ScopedId -> DomainRole
+
+         -> GeneralLISTType
+
+         -> BAGType
+
+        precision::Mof/Integer -> RealType
+
+         -> LogicType
+
+        constraint::Algorithms/ActualTypeConstraint isEntity::Mof/Boolean -> GenericType
+
+        stringLengthConstraint::Core/LengthConstraint -> StringType
+
+        derivation::Core/Expression -> DerivedAttribute
+
+        domainView::Core/InvertibleAttribute range::Core/EntityType id::Core/ScopedId -> RangeRole
+
+        describesSchema::Core/Schema+ appearsIn::Core/Scope describesElement::Core/NamedElement+ isTagged::Mof/Boolean isTail::Mof/Boolean text::Core/ExpressText -> Remark
+
+        bound::Mof/Integer -> SizeConstraint
+
+         -> SETType
+
+        underlyingType::Core/ConcreteType -> SpecializedType
+
+        hiIndex::Core/ArrayBound loIndex::Core/ArrayBound isOptional::Mof/Boolean -> GeneralARRAYType
+
+        domain::Core/DomainRole roles::Core/Role basedOn::Core/InvertibleAttribute range::Core/RangeRole -> Relationship
+
+        maxLength::Mof/Integer isFixed::Mof/Boolean -> LengthConstraint
+
+        binaryLengthConstraint::Core/LengthConstraint -> BinaryType
+
+        localName::Core/Identifier definingScope::Core/Scope -> ScopedId
+
+        allowedTypes::Core/NamedType+ extension::Core/SelectType+ base::Core/SelectType selectList::Core/NamedType+ isExtensible::Mof/Boolean isEntity::Mof/Boolean -> SelectType
+
+        isOptional::Mof/Boolean -> ExplicitAttribute
+
+        loIndex::Core/ArrayBound hiIndex::Core/ArrayBound isOptional::Mof/Boolean -> ARRAYType
+
+        matchingType::Core/GenericType requiredType::Algorithms/ActualDataType label::Core/Identifier -> ActualTypeConstraint
+
+         -> FunctionResult
+
+        result::Algorithms/FunctionResult -> Function
+
+        variable::Algorithms/InVariable -> InParameter
+
+        initialValue::Core/Expression -> LocalVariable
+
+         -> ActualStructure
+
+        refersTo::Algorithms/ActualDataType isEntity::Mof/Boolean label::Core/Identifier -> ActualGenericType
+
+        inBlock::Statements/StatementBlock bodyStatementsSkipStatement::Statements/SkipStatement+ bodyStatementsEscapeStatement::Statements/EscapeStatement+ controlledBy::Statements/RepeatStatement implements::Algorithms/Algorithm text::Core/ExpressText -> Statement
+
+        source::Algorithms/InParameter -> InVariable
+
+         -> Procedure
+
+        hiIndex::Core/ArrayBound loIndex::Core/ArrayBound isOptional::Mof/Boolean -> ActualARRAYType
+
+         -> ActualSETType
+
+        upperBound::Core/SizeConstraint refersTo::Algorithms/ActualStructure memberType::Core/VariableType lowerBound::Core/SizeConstraint label::Core/Identifier -> ActualAGGREGATEType
+
+        matchingStructure::Core/AGGREGATEType requiredStructure::Algorithms/ActualStructure label::Core/Identifier -> ActualStructureConstraint
+
+         -> ActualLISTType
+
+         -> VARParameter
+
+         -> ActualDataType
+
+         -> ActualBAGType
+
+        actualValue::Core/Instance attribute::Core/ExplicitAttribute -> AttributeValue
+
+        memberSlot::Instances/ArrayMember+ -> ARRAYValue
+
+        refersTo::Core/Attribute represents::Core/ScopedId -> RoleName
+
+        state::Instances/EntityValue instanceOf::Core/EntityType+ id::Instances/EntityName -> EntityInstance
+
+         -> IntegerValue
+
+        valueExpression::Core/Expression actualValue::Core/Instance dataType::Core/InstantiableType -> Constant
+
+         -> LogicalValue
+
+        memberValue::Core/Instance position::Mof/Integer -> ListMember
+
+        memberValue::Core/Instance count::Mof/Integer -> BagMember
+
+        equivalent::Instances/PartialEntityValue ofType::Core/SingleEntityType properties::Instances/AttributeValue+ -> SingleEntityValue
+
+         -> Indeterminate
+
+        characterizingType::Core/EntityType -> SingleLeafInstance
+
+         -> GenericAggregate
+
+         -> BinaryValue
+
+        fundamentalValue::Instances/ConcreteValue -> SpecializedValue
+
+        memberSlot::Instances/BagMember+ -> BAGValue
+
+        declaredIn::Core/EnumerationType position::Mof/Integer -> EnumerationItem
+
+        correspondsTo::Core/EntityType+ describes::Instances/EntityInstance+ -> EntityValue
+
+        memberValue::Core/Instance+ -> SETValue
+
+        memberValue::Core/Instance index::Mof/Integer -> ArrayMember
+
+        compositionEntityInstance::Instances/EntityInstance+ compositionInstance::Core/Instance+ governingSchema::Core/Schema+ -> Population
+
+         -> RealValue
+
+         -> BooleanValue
+
+        memberSlot::Instances/ListMember+ -> LISTValue
+
+         -> StringValue
+
+        refersTo::Core/NamedType represents::Core/ScopedId -> TypeName
+
+        components::Instances/SingleEntityValue+ -> PartialEntityValue
+
+         -> NumberValue
+
+         -> MultiLeafInstance

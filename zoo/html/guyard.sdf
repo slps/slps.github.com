@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        ValuedElement CDATA PCDATA NMTOKEN IDREF IDREFS ID EMPTY ContentType ContentTypes Charset Charsets LanguageCode Character Number LinkTypes MediaDesc URI UriList Datetime ScriptExpression StyleSheet Text Length MultiLength Pixels Shape Coords Direction Attrs Inline Html Head HeadElement TitleHeadElement BaseTitleHeadElement BaseHeadElement TitleBaseHeadElement Title Base Meta Link Style Script Noscript Body Div P H1 H2 H3 H4 H5 H6 Ul Ol Li Dl DlElement Dt Dd Address Hr Pre Blockquote Ins Del A Span Bdo Br Em Strong Dfn Code Samp Kbd Var Cite Abbr Acronym Q Sub Sup Tt I B Big Small Object ValueType Param Img MapContent Map Area FomeMethod Form Label InputType Input Select Optgroup Option Textarea Fieldset Legend ButtonType Button TFrame TRules CellHAlign CellVAlign Table ColElement TableElement Caption Thead Tfoot Tbody Colgroup Col Tr Scope Th Td 
+        ValuedElement CDATA PCDATA NMTOKEN IDREF IDREFS ID EMPTY ContentType ContentTypes Charset Charsets LanguageCode Character Number LinkTypes MediaDesc URI UriList Datetime ScriptExpression StyleSheet Text Length MultiLength Pixels Shape Coords CoreAttrs Direction I18n Attrs Specialpre Special Fontstyle Phrase Inlineforms Miscinline Misc Inline Inline Heading Lists Blocktext Block Block Flow PreContent ButtonContent Html HeadMisc Head HeadElement TitleHeadElement BaseTitleHeadElement BaseHeadElement TitleBaseHeadElement Title Base Meta Link Style Script Noscript Body Div P H1 H2 H3 H4 H5 H6 Ul Ol Li Dl DlElement Dt Dd Address Hr Pre Blockquote Ins Del A Span Bdo Br Em Strong Dfn Code Samp Kbd Var Cite Abbr Acronym Q Sub Sup Tt I B Big Small ObjectElement Object ValueType Param Img MapContent Map Area FomeMethod Form Label InputType Input Select SelectElement Optgroup Option Textarea FieldsetElement Fieldset Legend ButtonType Button TFrame TRules CellHAlign CellVAlign Table ColElement TableElement Caption Thead Tfoot Tbody Colgroup Col Tr TrElement Scope Th Td String Integer Boolean 
   context-free syntax
         CDATA -> ValuedElement
 
@@ -59,6 +59,12 @@ exports
 
         Title -> PCDATA
 
+        Style -> PCDATA
+
+        Script -> PCDATA
+
+        Textarea -> PCDATA
+
         LanguageCode -> NMTOKEN
 
         value::String -> IDREF
@@ -68,6 +74,24 @@ exports
         value::String -> ID
 
         Base -> EMPTY
+
+        Meta -> EMPTY
+
+        Link -> EMPTY
+
+        Hr -> EMPTY
+
+        Br -> EMPTY
+
+        Param -> EMPTY
+
+        Img -> EMPTY
+
+        Area -> EMPTY
+
+        Input -> EMPTY
+
+        Col -> EMPTY
 
          -> ContentType
 
@@ -112,8 +136,14 @@ exports
 
         lengths::Length -> Coords
 
+        Attrs -> CoreAttrs
+
+        Bdo -> CoreAttrs
+
         ltr:: -> Direction
         rtl:: -> Direction
+
+        Map -> I18n
 
         Body -> Attrs
 
@@ -123,9 +153,223 @@ exports
 
         Caption -> Attrs
 
+        Noscript -> Attrs
+
+        Div -> Attrs
+
+        P -> Attrs
+
+        H1 -> Attrs
+
+        H2 -> Attrs
+
+        H3 -> Attrs
+
+        H4 -> Attrs
+
+        H5 -> Attrs
+
+        H6 -> Attrs
+
+        Ul -> Attrs
+
+        Ol -> Attrs
+
+        Dl -> Attrs
+
+        Address -> Attrs
+
+        Pre -> Attrs
+
+        Blockquote -> Attrs
+
+        Ins -> Attrs
+
+        Del -> Attrs
+
+        A -> Attrs
+
+        Span -> Attrs
+
+        Em -> Attrs
+
+        Strong -> Attrs
+
+        Dfn -> Attrs
+
+        Code -> Attrs
+
+        Samp -> Attrs
+
+        Kbd -> Attrs
+
+        Var -> Attrs
+
+        Cite -> Attrs
+
+        Abbr -> Attrs
+
+        Acronym -> Attrs
+
+        Q -> Attrs
+
+        Sub -> Attrs
+
+        Sup -> Attrs
+
+        Tt -> Attrs
+
+        I -> Attrs
+
+        B -> Attrs
+
+        Big -> Attrs
+
+        Small -> Attrs
+
+        Object -> Attrs
+
+        Form -> Attrs
+
+        Label -> Attrs
+
+        Select -> Attrs
+
+        Fieldset -> Attrs
+
+        Legend -> Attrs
+
+        Button -> Attrs
+
+        Table -> Attrs
+
+        Thead -> Attrs
+
+        Tfoot -> Attrs
+
+        Tbody -> Attrs
+
+        Colgroup -> Attrs
+
+        Tr -> Attrs
+
+        Optgroup -> Attrs
+
+        Span -> Specialpre
+
+        Specialpre -> Special
+
+        Tt -> Fontstyle
+
+        I -> Fontstyle
+
+        B -> Fontstyle
+
+        Big -> Fontstyle
+
+        Small -> Fontstyle
+
+        Em -> Phrase
+
+        Strong -> Phrase
+
+        Dfn -> Phrase
+
+        Code -> Phrase
+
+        Samp -> Phrase
+
+        Kbd -> Phrase
+
+        Var -> Phrase
+
+        Cite -> Phrase
+
+        Abbr -> Phrase
+
+        Acronym -> Phrase
+
+        Q -> Phrase
+
+        Sub -> Phrase
+
+        Sup -> Phrase
+
+        Label -> Inlineforms
+
+        Select -> Inlineforms
+
+        Ins -> Miscinline
+
+        Del -> Miscinline
+
+        Miscinline -> Misc
+
+        Noscript -> Misc
+
+        Special -> Inline
+
+        Fontstyle -> Inline
+
+        Phrase -> Inline
+
+        Inlineforms -> Inline
+
         Inline -> Inline
 
+        H1 -> Heading
+
+        H2 -> Heading
+
+        H3 -> Heading
+
+        H4 -> Heading
+
+        H5 -> Heading
+
+        H6 -> Heading
+
+        Ul -> Lists
+
+        Ol -> Lists
+
+        Dl -> Lists
+
+        Address -> Blocktext
+
+        Pre -> Blocktext
+
+        Blockquote -> Blocktext
+
+        Heading -> Block
+
+        Lists -> Block
+
+        Blocktext -> Block
+
+        Fieldset -> Block
+
+        Misc -> Block
+
+        Block -> Block
+
+        Inline -> Flow
+
+        Specialpre -> PreContent
+
+        Special -> ButtonContent
+
+        Heading -> ButtonContent
+
+        Lists -> ButtonContent
+
+        Blocktext -> ButtonContent
+
         i18n::I18n id::ID xmlns::URI head::Head body::Body -> Html
+
+        Meta -> HeadMisc
+
+        Style -> HeadMisc
 
         i18n::I18n id::ID profile::URI headmisc::HeadMisc+ headelement::HeadElement html::Html -> Head
 
@@ -245,6 +489,8 @@ exports
 
         smallElements::Inline+ -> Small
 
+        Param -> ObjectElement
+
         objectelement::ObjectElement+ declare::Boolean classid::URI codebase::URI data::URI type::ContentType codetype::ContentType archive::UriList standby::Text height::Length width::Length usemap::URI name::NMTOKEN tabindex::Number -> Object
 
         data:: -> ValueType
@@ -283,11 +529,17 @@ exports
 
         selectelement::SelectElement+ name::CDATA size::Number multiple::Boolean disabled::Boolean tabindex::Number onfocus::ScriptExpression onblur::ScriptExpression onchange::ScriptExpression -> Select
 
+        Optgroup -> SelectElement
+
+        Option -> SelectElement
+
         options::Option+ disabled::Boolean label::Text -> Optgroup
 
         selected::Boolean disabled::Boolean label::Text optionvalue::CDATA -> Option
 
         name::CDATA rows::Number cols::Number disabled::Boolean readonly::Boolean onselect::ScriptExpression onchange::ScriptExpression -> Textarea
+
+        Legend -> FieldsetElement
 
         fieldsetelements::FieldsetElement+ -> Fieldset
 
@@ -346,6 +598,10 @@ exports
 
         trelements::TrElement+ -> Tr
 
+        Th -> TrElement
+
+        Td -> TrElement
+
         row:: -> Scope
         col:: -> Scope
         rowgroup:: -> Scope
@@ -354,3 +610,10 @@ exports
         thelement::Flow+ abbr::Text axis::CDATA headers::IDREFS scope::Scope rowspan::Number colspan::Number -> Th
 
         tdelement::Flow+ abbr::Text axis::CDATA headers::IDREFS scope::Scope rowspan::Number colspan::Number -> Td
+
+        STR -> String
+
+        INT -> Integer
+
+        "true" -> Boolean
+        "false" -> Boolean

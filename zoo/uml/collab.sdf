@@ -2,9 +2,9 @@ module Main
 
 exports
   sorts
-        Package ProviderClause CollaborationPackage Collaboration InteractionPackage Interaction AssociationRole ClassifierRole AssociationEndRole Message Request Operation Interface 
+        Package ProviderClause CollaborationPackage Collaboration InteractionPackage Interaction AssociationRole ClassifierRole AssociationEndRole Message Request Operation Interface Boolean Integer String 
   context-free syntax
-         -> Package
+        ownedEltColl::CollaborationPackage ownedEltInt::InteractionPackage+ -> Package
 
         Package -> ProviderClause
 
@@ -33,3 +33,10 @@ exports
         classifierRole::ClassifierRole+ owner::Interface -> Operation
 
         classifierRole::ClassifierRole+ feature::Operation+ -> Interface
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
+        STR -> String

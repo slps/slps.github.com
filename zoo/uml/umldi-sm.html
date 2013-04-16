@@ -13,7 +13,7 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable UML Diagram Interchange Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/zoo/">Grammar Zoo</a> for details. <br></br>Source used for this grammar: David Touzet, <em>UMLDI State Machine 0.1</em>, <code>UMLDI-StateMachines.ecore</code>, 2006/02/21.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>84</strong></li><li>Number of top alternatives: <strong>99</strong></li><li>Number of defined nonterminal symbols: <strong>50</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>3</strong>: <code><a href="#ScopeKind" class="nt">ScopeKind</a>, <a href="#VisibilityKind" class="nt">VisibilityKind</a>, <a href="#Element" class="nt">Element</a></code></li><li>Bottom nonterminal symbols: <strong>5</strong>: <code><a href="#Boolean" class="nt">Boolean</a>, <a href="#String" class="nt">String</a>, <a href="#Integer" class="nt">Integer</a>, <a href="#GeneralizableElement" class="nt">GeneralizableElement</a>, <a href="#Namespace" class="nt">Namespace</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Signal">Signal</a>:
+				</script></head><body><h1 class="l">Browsable UML Diagram Interchange Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/zoo/">Grammar Zoo</a> for details. <br></br>Source used for this grammar: David Touzet, <em>UMLDI State Machine 0.1</em>, <code>UMLDI-StateMachines.ecore</code>, 2006/02/21.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>89</strong></li><li>Number of top alternatives: <strong>105</strong></li><li>Number of defined nonterminal symbols: <strong>55</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>3</strong>: <code><a href="#ScopeKind" class="nt">ScopeKind</a>, <a href="#VisibilityKind" class="nt">VisibilityKind</a>, <a href="#Element" class="nt">Element</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>2</strong></li><li>Keywords: <strong>2</strong>: <code class="t">"true", "false"</code></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Signal">Signal</a>:
         <a class="nt" href="#Exception">Exception</a>
 </pre><pre><a class="nt" name="Signal">Signal</a>:
         <a class="nt" href="#Exception">Exception</a>
@@ -54,7 +54,7 @@
 </pre><pre><a class="nt" name="TerminateAction">TerminateAction</a>:
         <span class="sel">actualArgument</span>::<a class="nt" href="#Argument">Argument</a><span class="meta">+</span> <span class="sel">actionSequence</span>::<a class="nt" href="#ActionSequence">ActionSequence</a> <span class="sel">recurrence</span>::<a class="nt" href="#IterationExpression">IterationExpression</a> <span class="sel">target</span>::<a class="nt" href="#ObjectSetExpression">ObjectSetExpression</a> <span class="sel">isAsynchronous</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">script</span>::<a class="nt" href="#ActionExpression">ActionExpression</a>
 </pre><pre><a class="nt" name="Exception">Exception</a>:
-        ε
+        
 </pre><pre><a class="nt" name="CallConcurrencyKind">CallConcurrencyKind</a>:
         <span class="sel">cck_sequential</span>::ε
         <span class="sel">cck_guarded</span>::ε
@@ -85,15 +85,15 @@
 </pre><pre><a class="nt" name="Expression">Expression</a>:
         <span class="sel">language</span>::<a class="nt" href="#String">String</a> <span class="sel">body</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="BooleanExpression">BooleanExpression</a>:
-        ε
+        <span class="sel">language</span>::<a class="nt" href="#String">String</a> <span class="sel">body</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="ObjectSetExpression">ObjectSetExpression</a>:
-        ε
+        <span class="sel">language</span>::<a class="nt" href="#String">String</a> <span class="sel">body</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="ActionExpression">ActionExpression</a>:
-        ε
+        <span class="sel">language</span>::<a class="nt" href="#String">String</a> <span class="sel">body</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="IterationExpression">IterationExpression</a>:
-        ε
+        <span class="sel">language</span>::<a class="nt" href="#String">String</a> <span class="sel">body</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="TimeExpression">TimeExpression</a>:
-        ε
+        <span class="sel">language</span>::<a class="nt" href="#String">String</a> <span class="sel">body</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="PseudostateKind">PseudostateKind</a>:
         <span class="sel">pk_choice</span>::ε
         <span class="sel">pk_deepHistory</span>::ε
@@ -154,6 +154,13 @@
         <span class="sel">referenceState</span>::<a class="nt" href="#String">String</a>
 </pre><pre><a class="nt" name="FinalState">FinalState</a>:
         <span class="sel">deferrableEvent</span>::<a class="nt" href="#Event">Event</a><span class="meta">+</span> <span class="sel">internalTransition</span>::<a class="nt" href="#Transition">Transition</a><span class="meta">+</span> <span class="sel">exit</span>::<a class="nt" href="#Action">Action</a> <span class="sel">doActivity</span>::<a class="nt" href="#Action">Action</a> <span class="sel">entry</span>::<a class="nt" href="#Action">Action</a> <span class="sel">stateMachine</span>::<a class="nt" href="#StateMachine">StateMachine</a>
+</pre><pre><a class="nt" name="Boolean">Boolean</a>:
+        <span class="t">"true"</span>
+        <span class="t">"false"</span>
+</pre><pre><a class="nt" name="Integer">Integer</a>:
+        <span class="meta">int</span>
+</pre><pre><a class="nt" name="String">String</a>:
+        <span class="meta">string</span>
 </pre><pre><a class="nt" name="Element">Element</a>:
         <a class="nt" href="#ModelElement">ModelElement</a>
 </pre><pre><a class="nt" name="ModelElement">ModelElement</a>:
@@ -180,6 +187,10 @@
         <a class="nt" href="#Relationship">Relationship</a>
 </pre><pre><a class="nt" name="ModelElement">ModelElement</a>:
         <a class="nt" href="#Parameter">Parameter</a>
+</pre><pre><a class="nt" name="GeneralizableElement">GeneralizableElement</a>:
+        <a class="nt" href="#Classifier">Classifier</a>
+</pre><pre><a class="nt" name="Namespace">Namespace</a>:
+        <a class="nt" href="#Classifier">Classifier</a>
 </pre><pre><a class="nt" name="Classifier">Classifier</a>:
         <a class="nt" href="#Signal">Signal</a>
 </pre><pre><a class="nt" name="Feature">Feature</a>:

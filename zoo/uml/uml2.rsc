@@ -1,6 +1,21 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module Uml2
 
+extend lang::std::Whitespace;
+
+layout Standard = Whitespace* !>> [\u0009-\u000D \u0020 \u0085 \u00A0 \u1680 \u180E \u2000-\u200A \u2028 \u2029 \u202F \u205F \u3000];
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
+ ;
 syntax Element
         = MultiplicityElement
         | Relationship
@@ -17,8 +32,8 @@ syntax Element
         | QualifierValue
  ;
 syntax MultiplicityElement
-        = 
-        ConnectorEnd
+        = ConnectorEnd
+        | Pin
  ;
 syntax NamedElement
         = Namespace
@@ -35,6 +50,19 @@ syntax NamedElement
         | ParameterSet
         | DeployedArtifact
         | DeploymentTarget
+        | PackageableElement
+        | ConnectableElement
+        | Extend
+        | Include
+        | ActivityPartition
+ ;
+syntax Namespace
+        = Package
+        | Classifier
+        | BehavioralFeature
+        | InteractionOperand
+        | Region
+        | State
  ;
 syntax OpaqueExpression
         = Expression
@@ -63,15 +91,21 @@ syntax DirectedRelationship
         | PackageMerge
         | TemplateBinding
         | ProtocolConformance
+        | Dependency
+        | InformationFlow
+        | Extend
+        | Include
  ;
 syntax Relationship
-        = 
-        DirectedRelationship
+        = DirectedRelationship
+        | Association
  ;
 syntax Class
         = Stereotype
         | Behavior
         | Component
+        | AssociationClass
+        | Node
         | Operation ownedOperation+ Class superClass+ Extension extension+ Classifier nestedClassifier+ Boolean isActive Reception ownedReception+
  ;
 syntax Property
@@ -82,6 +116,10 @@ syntax Property
 syntax Operation
         = 
         Parameter ownedParameter+ Class class_ Boolean isQuery DataType datatype Constraint precondition+ Constraint postcondition+ Operation redefinedOperation+ Constraint bodyCondition
+ ;
+syntax TypedElement
+        = ValueSpecification
+        | ObjectNode
  ;
 syntax Parameter
         = 
@@ -107,7 +145,7 @@ syntax EnumerationLiteral
  ;
 syntax PrimitiveType
         = 
-        ()
+        Property ownedAttribute+ Operation ownedOperation+
  ;
 syntax Classifier
         = DataType
@@ -119,10 +157,13 @@ syntax Classifier
         | Signal
         | ParameterableClassifier
         | TemplateableClassifier
+        | Association
+        | Artifact
  ;
 syntax Feature
-        = 
-        Connector
+        = Connector
+        | StructuralFeature
+        | BehavioralFeature
  ;
 syntax Constraint
         = InteractionConstraint
@@ -163,8 +204,12 @@ syntax LiteralUnlimitedNatural
         value: UnlimitedNatural
  ;
 syntax BehavioralFeature
+        = Reception
+        | Operation
+ ;
+syntax StructuralFeature
         = 
-        Reception
+        Property
  ;
 syntax InstanceSpecification
         = EnumerationLiteral
@@ -184,6 +229,8 @@ syntax RedefinableElement
         | ActivityNode
         | ExtensionPoint
         | Transition
+        | RedefinableTemplateSignature
+        | Region
  ;
 syntax Generalization
         = 
@@ -194,6 +241,10 @@ syntax PackageableElement
         | Constraint
         | GeneralizationSet
         | PrimitiveFunction
+        | InstanceSpecification
+        | Dependency
+        | InformationFlow
+        | Package
  ;
 syntax ElementImport
         = 
@@ -206,6 +257,7 @@ syntax PackageImport
 syntax Association
         = Extension
         | CommunicationPath
+        | AssociationClass
         | Boolean isDerived Property ownedEnd+ Type endType+ Property memberEnd
  ;
 syntax PackageMerge
@@ -214,7 +266,7 @@ syntax PackageMerge
  ;
 syntax Stereotype
         = 
-        ()
+        Operation ownedOperation+ Class superClass+ Extension extension+ Classifier nestedClassifier+ Boolean isActive Reception ownedReception+
  ;
 syntax Profile
         = 
@@ -230,7 +282,7 @@ syntax Extension
  ;
 syntax ExtensionEnd
         = 
-        ()
+        String default Boolean isComposite Boolean isDerived Class class_ Property opposite Boolean isDerivedUnion Association owningAssociation Property redefinedProperty+ Property subsettedProperty+ DataType datatype Association association AggregationKind aggregation ValueSpecification defaultValue Property qualifier+ Property associationEnd
  ;
 syntax ParameterDirectionKind
         = in: ()
@@ -246,10 +298,12 @@ syntax AggregationKind
 syntax Behavior
         = Activity
         | StateMachine
+        | Interaction
  ;
 syntax BehavioredClassifier
-        = 
-        UseCase
+        = UseCase
+        | Class
+        | Collaboration
  ;
 syntax Activity
         = 
@@ -257,7 +311,7 @@ syntax Activity
  ;
 syntax Permission
         = 
-        ()
+        NamedElement client+ NamedElement supplier+
  ;
 syntax Dependency
         = Permission
@@ -268,7 +322,7 @@ syntax Dependency
  ;
 syntax Usage
         = 
-        ()
+        NamedElement client+ NamedElement supplier+
  ;
 syntax Abstraction
         = Realization
@@ -290,7 +344,7 @@ syntax GeneralizationSet
  ;
 syntax AssociationClass
         = 
-        ()
+        Operation ownedOperation+ Class superClass+ Extension extension+ Classifier nestedClassifier+ Boolean isActive Reception ownedReception+ Boolean isDerived Property ownedEnd+ Type endType+ Property memberEnd
  ;
 syntax InformationItem
         = 
@@ -308,25 +362,30 @@ syntax ConnectorEnd
         = 
         Property definingEnd ConnectableElement role Property partWithPort
  ;
+syntax ConnectableElement
+        = Parameter
+        | Variable
+ ;
 syntax Connector
         = 
         Association type Connector redefinedConnector+ ConnectorEnd end ConnectorKind kind Behavior contract+
  ;
 syntax StructuredClassifier
-        = 
-        EncapsulatedClassifier
+        = EncapsulatedClassifier
+        | Collaboration
  ;
 syntax ActivityEdge
         = ControlFlow
         | ObjectFlow
  ;
 syntax ActivityGroup
-        = 
-        InterruptibleActivityRegion
+        = InterruptibleActivityRegion
+        | ActivityPartition
  ;
 syntax ActivityNode
         = ControlNode
         | ExecutableNode
+        | ObjectNode
  ;
 syntax Action
         = CreateObjectAction
@@ -348,12 +407,14 @@ syntax Action
         | AcceptEventAction
         | ReplyAction
         | RaiseExceptionAction
+        | StructuredActivityNode
         | String effect OutputPin output+ InputPin input+ Classifier context Constraint localPrecondition+ Constraint localPostcondition+
  ;
 syntax ObjectNode
         = ActivityParameterNode
         | CentralBufferNode
         | ExpansionNode
+        | Pin
  ;
 syntax ControlNode
         = InitialNode
@@ -463,6 +524,10 @@ syntax Port
         = 
         Boolean isBehavior Boolean isService Interface required+ Port redefinedPort+ Interface provided+ ProtocolStateMachine protocol
  ;
+syntax EncapsulatedClassifier
+        = 
+        Class
+ ;
 syntax CallConcurrencyKind
         = guarded: ()
         | concurrent: ()
@@ -538,6 +603,9 @@ syntax InteractionFragment
         | InteractionOccurrence
         | CombinedFragment
         | Continuation
+        | EventOccurrence
+        | Interaction
+        | InteractionOperand
  ;
 syntax Lifeline
         = 
@@ -564,8 +632,8 @@ syntax MessageSort
         | asynchSignal: ()
  ;
 syntax MessageEnd
-        = 
-        Gate
+        = Gate
+        | EventOccurrence
  ;
 syntax EventOccurrence
         = Stop
@@ -581,11 +649,11 @@ syntax StateInvariant
  ;
 syntax Stop
         = 
-        ()
+        ExecutionOccurrence startExec+ ExecutionOccurrence finishExec+ GeneralOrdering toAfter+ GeneralOrdering toBefore+
  ;
 syntax TemplateSignature
-        = 
-        TemplateParameter parameter+ TemplateParameter ownedParameter+ TemplateSignature nestedSignature+ TemplateSignature nestingSignature TemplateableElement template
+        = RedefinableTemplateSignature
+        | TemplateParameter parameter+ TemplateParameter ownedParameter+ TemplateSignature nestedSignature+ TemplateSignature nestingSignature TemplateableElement template
  ;
 syntax TemplateParameter
         = OperationTemplateParameter
@@ -602,6 +670,11 @@ syntax StringExpression
         = 
         StringExpression subExpression+ StringExpression owningExpression
  ;
+syntax ParameterableElement
+        = ValueSpecification
+        | PackageableElement
+        | ConnectableElement
+ ;
 syntax TemplateBinding
         = 
         TemplateableElement boundElement TemplateSignature signature TemplateParameterSubstitution parameterSubstitution+
@@ -612,7 +685,7 @@ syntax TemplateParameterSubstitution
  ;
 syntax OperationTemplateParameter
         = 
-        ()
+        TemplateSignature signature ParameterableElement parameteredElement ParameterableElement ownedParameteredElement ParameterableElement default ParameterableElement ownedDefault
  ;
 syntax ClassifierTemplateParameter
         = 
@@ -620,11 +693,11 @@ syntax ClassifierTemplateParameter
  ;
 syntax RedefinableTemplateSignature
         = 
-        ()
+        Classifier redefinitionContext+ Boolean isLeaf TemplateParameter parameter+ TemplateParameter ownedParameter+ TemplateSignature nestedSignature+ TemplateSignature nestingSignature TemplateableElement template
  ;
 syntax ConnectableElementTemplateParameter
         = 
-        ()
+        TemplateSignature signature ParameterableElement parameteredElement ParameterableElement ownedParameteredElement ParameterableElement default ParameterableElement ownedDefault
  ;
 syntax ForkNode
         = 
@@ -673,7 +746,7 @@ syntax Gate
  ;
 syntax PartDecomposition
         = 
-        ()
+        Interaction refersTo Gate actualGate+ InputPin argument+
  ;
 syntax InteractionOperand
         = 
@@ -752,7 +825,7 @@ syntax PseudostateKind
  ;
 syntax FinalState
         = 
-        ()
+        Boolean isComposite Boolean isOrthogonal Boolean isSimple Boolean isSubmachineState StateMachine submachine ConnectionPointReference connection+ State redefinedState Trigger deferrableTrigger+ Region region+ Activity entry Activity exit Activity doActivity Constraint stateInvariant
  ;
 syntax CreateObjectAction
         = 
@@ -906,7 +979,7 @@ syntax TimeObservationAction
  ;
 syntax DurationInterval
         = 
-        ()
+        ValueSpecification min+ ValueSpecification max+
  ;
 syntax Interval
         = DurationInterval
@@ -923,7 +996,7 @@ syntax IntervalConstraint
  ;
 syntax TimeInterval
         = 
-        ()
+        ValueSpecification min+ ValueSpecification max+
  ;
 syntax DurationObservationAction
         = 
@@ -969,6 +1042,14 @@ syntax Deployment
         = 
         DeployedArtifact deployedArtifact+ DeploymentTarget location DeploymentSpecification configuration+
  ;
+syntax DeployedArtifact
+        = 
+        Artifact
+ ;
+syntax DeploymentTarget
+        = 
+        Node
+ ;
 syntax Node
         = Device
         | ExecutionEnvironment
@@ -976,15 +1057,15 @@ syntax Node
  ;
 syntax Device
         = 
-        ()
+        Node nestedNode+
  ;
 syntax ExecutionEnvironment
         = 
-        ()
+        Node nestedNode+
  ;
 syntax CommunicationPath
         = 
-        ()
+        Boolean isDerived Property ownedEnd+ Type endType+ Property memberEnd
  ;
 syntax ProtocolConformance
         = 

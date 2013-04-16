@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        VisibilityKind ScopeKind MultiplicityType ModelElement Feature NameSpace GeneralizableElement Classifier Class StructuralFeature Attribute BehavioralFeature Operation 
+        VisibilityKind ScopeKind MultiplicityType ModelElement Feature NameSpace GeneralizableElement Classifier Class StructuralFeature Attribute BehavioralFeature Operation Integer String Boolean 
   context-free syntax
         vk_public_vis:: -> VisibilityKind
         vk_private_vis:: -> VisibilityKind
@@ -27,7 +27,11 @@ exports
 
         ownerScope::ScopeKind visibility::VisibilityKind owner::Classifier -> Feature
 
-         -> NameSpace
+        Classifier -> NameSpace
+
+        name::String -> NameSpace
+
+        Classifier -> GeneralizableElement
 
         isRoot::Boolean isLeaf::Boolean isAbstract::Boolean -> GeneralizableElement
 
@@ -48,3 +52,10 @@ exports
         isQuery::Boolean -> BehavioralFeature
 
         isRoot::Boolean isLeaf::Boolean isAbstract::Boolean specification::String -> Operation
+
+        INT -> Integer
+
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean

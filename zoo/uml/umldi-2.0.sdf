@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        Collaboration ClassifierRole AssociationRole AssociationEndRole Message Interaction InteractionInstanceSet CollaborationInstanceSet UseCase Actor UseCaseInstance Extend Include ExtensionPoint AggregationKind CallConcurrencyKind ChangeableKind OrderingKind ParameterDirectionKind ScopeKind VisibilityKind Multiplicity MultiplicityRange Expression BooleanExpression TypeExpression MappingExpression ProcedureExpression ObjectSetExpression ActionExpression IterationExpression TimeExpression ArgListsExpression PseudostateKind Instance Signal Action CreateAction DestroyAction UninterpretedAction AttributeLink Object Link LinkObject DataValue CallAction SendAction ActionSequence Argument Reception LinkEnd ReturnAction TerminateAction Stimulus Exception ComponentInstance NodeInstance SubsystemInstance ActivityGraph Partition SubactivityState ActionState CallState ObjectFlowState ClassifierInState StateMachine Event StateVertex State TimeEvent CallEvent SignalEvent Transition CompositeState ChangeEvent Guard Pseudostate SimpleState SubmachineState SynchState StubState FinalState Point Dimension BezierPoint DiagramElement GraphElement SemanticModelBridge GraphEdge GraphNode GraphConnector LeafElement Reference TextElement GraphicPrimitive Polyline Ellipse Image Property SimpleSemanticModelElement Uml1SemanticModelBridge CoreSemanticModelBridge DiagramLink Diagram Element ModelElement GeneralizableElement Classifier Class DataType Feature StructuralFeature AssociationEnd Interface Constraint Relationship Association Attribute BehavioralFeature Operation Parameter Method Generalization AssociationClass Dependency Abstraction Usage Binding Component Node Permission Comment Flow ElementResidence TemplateParameter Primitive Enumeration EnumerationLiteral Stereotype TagDefinition TaggedValue ProgrammingLanguageDataType Artifact TemplateArgument Package Model Subsystem ElementImport 
+        Collaboration ClassifierRole AssociationRole AssociationEndRole Message Interaction InteractionInstanceSet CollaborationInstanceSet Boolean Integer String UseCase Actor UseCaseInstance Extend Include ExtensionPoint AggregationKind CallConcurrencyKind ChangeableKind OrderingKind ParameterDirectionKind ScopeKind VisibilityKind Multiplicity MultiplicityRange Expression BooleanExpression TypeExpression MappingExpression ProcedureExpression ObjectSetExpression ActionExpression IterationExpression TimeExpression ArgListsExpression PseudostateKind Instance Signal Action CreateAction DestroyAction UninterpretedAction AttributeLink Object Link LinkObject DataValue CallAction SendAction ActionSequence Argument Reception LinkEnd ReturnAction TerminateAction Stimulus Exception ComponentInstance NodeInstance SubsystemInstance ActivityGraph Partition SubactivityState ActionState CallState ObjectFlowState ClassifierInState StateMachine Event StateVertex State TimeEvent CallEvent SignalEvent Transition CompositeState ChangeEvent Guard Pseudostate SimpleState SubmachineState SynchState StubState FinalState Point Dimension BezierPoint DiagramElement GraphElement SemanticModelBridge GraphEdge GraphNode GraphConnector LeafElement Reference TextElement GraphicPrimitive Polyline Ellipse Image Property SimpleSemanticModelElement Uml1SemanticModelBridge CoreSemanticModelBridge DiagramLink Diagram Element ModelElement GeneralizableElement Namespace Classifier Class DataType Feature StructuralFeature AssociationEnd Interface Constraint Relationship Association Attribute BehavioralFeature Operation Parameter Method Generalization AssociationClass Dependency Abstraction Usage Binding Component Node Permission Comment Flow ElementResidence TemplateParameter Primitive Enumeration EnumerationLiteral Stereotype TagDefinition TaggedValue ProgrammingLanguageDataType Artifact TemplateArgument Package Model Subsystem ElementImport 
   context-free syntax
         usedCollaboration::Collaboration+ representedOperation::Operation representedClassifier::Classifier interaction::Interaction+ constrainingElement::ModelElement+ -> Collaboration
 
@@ -19,6 +19,13 @@ exports
         interaction::Interaction context::CollaborationInstanceSet participatingStimulus::Stimulus+ -> InteractionInstanceSet
 
         collaboration::Collaboration constrainingElement::ModelElement+ participatingInstance::Instance+ interactionInstanceSet::InteractionInstanceSet+ participatingLink::Link+ -> CollaborationInstanceSet
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        INT -> Integer
+
+        STR -> String
 
         include::Include+ extend::Extend+ extensionPoint::ExtensionPoint+ -> UseCase
 
@@ -84,23 +91,23 @@ exports
 
         language::String body::String -> Expression
 
-         -> BooleanExpression
+        language::String body::String -> BooleanExpression
 
-         -> TypeExpression
+        language::String body::String -> TypeExpression
 
-         -> MappingExpression
+        language::String body::String -> MappingExpression
 
-         -> ProcedureExpression
+        language::String body::String -> ProcedureExpression
 
-         -> ObjectSetExpression
+        language::String body::String -> ObjectSetExpression
 
-         -> ActionExpression
+        language::String body::String -> ActionExpression
 
-         -> IterationExpression
+        language::String body::String -> IterationExpression
 
-         -> TimeExpression
+        language::String body::String -> TimeExpression
 
-         -> ArgListsExpression
+        language::String body::String -> ArgListsExpression
 
         pk_choice:: -> PseudostateKind
         pk_deepHistory:: -> PseudostateKind
@@ -148,11 +155,15 @@ exports
 
         instance::Instance value::Instance linkEnd::LinkEnd attribute::Attribute -> AttributeLink
 
+        LinkObject -> Object
+
         ownedInstance::Instance+ linkEnd::LinkEnd+ classifier::Classifier+ componentInstance::ComponentInstance slot::AttributeLink+ ownedLink::Link+ -> Object
+
+        LinkObject -> Link
 
         association::Association connection::LinkEnd -> Link
 
-         -> LinkObject
+        association::Association connection::LinkEnd -> LinkObject
 
         ownedInstance::Instance+ linkEnd::LinkEnd+ classifier::Classifier+ componentInstance::ComponentInstance slot::AttributeLink+ ownedLink::Link+ -> DataValue
 
@@ -192,7 +203,7 @@ exports
 
         isDynamic::Boolean dynamicArguments::ArgListsExpression dynamicMultiplicity::Multiplicity -> ActionState
 
-         -> CallState
+        isDynamic::Boolean dynamicArguments::ArgListsExpression dynamicMultiplicity::Multiplicity -> CallState
 
         type::Classifier parameter::Parameter+ isSynch::Boolean -> ObjectFlowState
 
@@ -385,6 +396,20 @@ exports
 
         Stereotype -> GeneralizableElement
 
+        Collaboration -> GeneralizableElement
+
+        Classifier -> GeneralizableElement
+
+        Association -> GeneralizableElement
+
+        Package -> GeneralizableElement
+
+        Collaboration -> Namespace
+
+        Classifier -> Namespace
+
+        Package -> Namespace
+
         ClassifierRole -> Classifier
 
         UseCase -> Classifier
@@ -406,6 +431,10 @@ exports
         Node -> Classifier
 
         Artifact -> Classifier
+
+        Subsystem -> Classifier
+
+        AssociationClass -> Class
 
         isActive::Boolean -> Class
 
@@ -443,7 +472,11 @@ exports
 
         Flow -> Relationship
 
+        Association -> Relationship
+
         AssociationRole -> Association
+
+        AssociationClass -> Association
 
         connection::AssociationEnd -> Association
 
@@ -463,7 +496,7 @@ exports
 
         parent::GeneralizableElement powertype::Classifier child::GeneralizableElement discriminator::String -> Generalization
 
-         -> AssociationClass
+        connection::AssociationEnd isActive::Boolean -> AssociationClass
 
         Abstraction -> Dependency
 
@@ -477,7 +510,7 @@ exports
 
         mapping::MappingExpression -> Abstraction
 
-         -> Usage
+        client::ModelElement+ supplier::ModelElement+ -> Usage
 
         argument::TemplateArgument+ -> Binding
 
@@ -485,7 +518,7 @@ exports
 
         deployedComponent::Component+ -> Node
 
-         -> Permission
+        client::ModelElement+ supplier::ModelElement+ -> Permission
 
         annotatedElement::ModelElement+ body::String -> Comment
 
@@ -515,9 +548,11 @@ exports
 
         Model -> Package
 
+        Subsystem -> Package
+
         elementImport::ElementImport+ -> Package
 
-         -> Model
+        elementImport::ElementImport+ -> Model
 
         isInstantiable::Boolean -> Subsystem
 

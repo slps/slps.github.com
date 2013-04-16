@@ -1,6 +1,9 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module Umldi_ag
 
+extend lang::std::Whitespace;
+
+layout Standard = Whitespace* !>> [\u0009-\u000D \u0020 \u0085 \u00A0 \u1680 \u180E \u2000-\u200A \u2028 \u2029 \u202F \u205F \u3000];
 syntax Signal
         = 
         Exception
@@ -73,6 +76,14 @@ syntax ModelElement
         | Transition
         | Guard
         | Partition
+ ;
+syntax GeneralizableElement
+        = 
+        Classifier
+ ;
+syntax Namespace
+        = 
+        Classifier
  ;
 syntax Classifier
         = Signal
@@ -165,27 +176,27 @@ syntax Expression
  ;
 syntax BooleanExpression
         = 
-        ()
+        String language String body
  ;
 syntax ObjectSetExpression
         = 
-        ()
+        String language String body
  ;
 syntax ActionExpression
         = 
-        ()
+        String language String body
  ;
 syntax IterationExpression
         = 
-        ()
+        String language String body
  ;
 syntax TimeExpression
         = 
-        ()
+        String language String body
  ;
 syntax ArgListsExpression
         = 
-        ()
+        String language String body
  ;
 syntax StateMachine
         = ActivityGraph
@@ -278,7 +289,7 @@ syntax ActionState
  ;
 syntax CallState
         = 
-        ()
+        Boolean isDynamic ArgListsExpression dynamicArguments Multiplicity dynamicMultiplicity
  ;
 syntax ObjectFlowState
         = 
@@ -287,4 +298,16 @@ syntax ObjectFlowState
 syntax ClassifierInState
         = 
         State inState+ Classifier type
+ ;
+syntax Boolean
+        = "true"
+        | "false"
+ ;
+syntax Integer
+        = 
+        Integer
+ ;
+syntax String
+        = 
+        String
  ;

@@ -1,6 +1,12 @@
 @contributor{BGF2Rascal automated exporter - SLPS - http://github.com/grammarware/slps/wiki/BGF2Rascal}
 module Iso_9899_tc2
 
+extend lang::std::Whitespace;
+import ParseTree;
+import util::IDE;
+import IO;
+
+layout Standard = Whitespace* !>> [\u0009-\u000D \u0020 \u0085 \u00A0 \u1680 \u180E \u2000-\u200A \u2028 \u2029 \u202F \u205F \u3000];
 syntax Translation_unit
         = External_declaration
         | Translation_unit External_declaration
@@ -349,3 +355,9 @@ syntax Jump_statement
         | "break" ";"
         | "return" Expression? ";"
  ;
+
+public void main()
+{
+	registerLanguage("Iso_9899_tc2", "ext", translation-unit(str input, loc org) {return parse(#translation-unit, input, org);});
+	println("Language registered.");
+}
