@@ -1,0 +1,44 @@
+module Main
+
+exports
+  sorts
+        BuiltInSort BuiltInOperator BuiltInConstant String StringConstant.content StringConstant StringOperator.content StringOperator StringLessThan StringLessThanOrEqual StringGreaterThan StringGreaterThanOrEqual StringConcatenation StringLength StringAppend Substring 
+  context-free syntax
+        String -> BuiltInSort
+
+        StringOperator -> BuiltInOperator
+
+        StringConstant -> BuiltInConstant
+
+        string:: -> String
+
+        value::STR -> StringConstant.content
+
+        stringconstant::(StringConstant.content BuiltInConstant.content) -> StringConstant
+
+        BuiltInOperator.content -> StringOperator.content
+
+        StringLessThan -> StringOperator
+        StringLessThanOrEqual -> StringOperator
+        StringGreaterThan -> StringOperator
+        StringGreaterThanOrEqual -> StringOperator
+        StringConcatenation -> StringOperator
+        StringAppend -> StringOperator
+        StringLength -> StringOperator
+        Substring -> StringOperator
+
+        lts::StringOperator.content -> StringLessThan
+
+        leqs::StringOperator.content -> StringLessThanOrEqual
+
+        gts::StringOperator.content -> StringGreaterThan
+
+        geqs::StringOperator.content -> StringGreaterThanOrEqual
+
+        stringconcatenation::StringOperator.content -> StringConcatenation
+
+        stringlength::StringOperator.content -> StringLength
+
+        stringappend::StringOperator.content -> StringAppend
+
+        substring::(start::INT length::INT StringOperator.content) -> Substring

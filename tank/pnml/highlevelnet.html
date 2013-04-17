@@ -1,0 +1,465 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:bgf="http://planet-sl.org/bgf" xmlns:xbgf="http://planet-sl.org/xbgf" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Browsable PNML Grammar</title><link href="/slps.css" rel="stylesheet" type="text/css"></link><script type="text/javascript">
+
+				  var _gaq = _gaq || [];
+				  _gaq.push(['_setAccount', 'UA-3743366-7']);
+				  _gaq.push(['_setDomainName', 'github.com']);
+				  _gaq.push(['_trackPageview']);
+
+				  (function() {
+				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				  })();
+
+				</script></head><body><h1 class="l">Browsable PNML Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Lom Hillah, <em>Petri Net Type Definition for High-level Petri Nets Graphs (HLPNGs)</em>, <code>highlevelnet.pntd</code>, July 2008.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>197</strong></li><li>Number of top alternatives: <strong>251</strong></li><li>Number of defined nonterminal symbols: <strong>160</strong></li><li>Root nonterminal symbols: <code><a href="#pnml.element" class="nt">pnml.element</a></code></li><li>Other top nonterminal symbols: <strong>3</strong>: <code><a href="#IntegerOperator.content" class="nt">IntegerOperator.content</a>, <a href="#Term.content" class="nt">Term.content</a>, <a href="#Sort.content" class="nt">Sort.content</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>19</strong></li><li>Special terminal symbols: <strong>3</strong>: <code class="t">"http://www.pnml.org/version-2009/grammar/highlevelnet", "http://www.pnml.org/version-2009/grammar/symmetricnet", "http://www.pnml.org/version-2009/grammar/pnmlcoremodel"</code></li><li>Keywords: <strong>16</strong>: <code class="t">"true", "false", "vertical", "horizontal", "diagonal", "line", "curve", "solid", "dash", "dot", "underline", "overline", "line-through", "left", "center", "right"</code></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="nettype.uri">nettype.uri</a>:
+        <span class="sel">type</span>::<span class="t">"http://www.pnml.org/version-2009/grammar/highlevelnet"</span>
+</pre><pre><a class="nt" name="BuiltInSort">BuiltInSort</a>:
+        <a class="nt" href="#List">List</a>
+</pre><pre><a class="nt" name="BuiltInOperator">BuiltInOperator</a>:
+        <a class="nt" href="#ListOperator">ListOperator</a>
+</pre><pre><a class="nt" name="List">List</a>:
+        <span class="sel">list</span>::<a class="nt" href="#Sort">Sort</a>
+</pre><pre><a class="nt" name="BuiltInConstant">BuiltInConstant</a>:
+        <a class="nt" href="#EmptyList">EmptyList</a>
+</pre><pre><a class="nt" name="ListOperator.content">ListOperator.content</a>:
+        <a class="nt" href="#BuiltInOperator.content">BuiltInOperator.content</a>
+</pre><pre><a class="nt" name="ListOperator">ListOperator</a>:
+        <a class="nt" href="#ListAppend">ListAppend</a>
+        <a class="nt" href="#ListConcatenation">ListConcatenation</a>
+        <a class="nt" href="#MakeList">MakeList</a>
+        <a class="nt" href="#ListLength">ListLength</a>
+        <a class="nt" href="#MemberAtIndex">MemberAtIndex</a>
+        <a class="nt" href="#Sublist">Sublist</a>
+</pre><pre><a class="nt" name="EmptyList">EmptyList</a>:
+        <span class="sel">emptylist</span>::(<a class="nt" href="#Sort">Sort</a> <a class="nt" href="#BuiltInConstant.content">BuiltInConstant.content</a>)
+</pre><pre><a class="nt" name="ListLength">ListLength</a>:
+        <span class="sel">listlength</span>::<a class="nt" href="#ListOperator.content">ListOperator.content</a>
+</pre><pre><a class="nt" name="MakeList">MakeList</a>:
+        <span class="sel">makelist</span>::(<a class="nt" href="#Sort">Sort</a> <a class="nt" href="#ListOperator.content">ListOperator.content</a>)
+</pre><pre><a class="nt" name="ListConcatenation">ListConcatenation</a>:
+        <span class="sel">listconcatenation</span>::<a class="nt" href="#ListOperator.content">ListOperator.content</a>
+</pre><pre><a class="nt" name="ListAppend">ListAppend</a>:
+        <span class="sel">listappend</span>::<a class="nt" href="#ListOperator.content">ListOperator.content</a>
+</pre><pre><a class="nt" name="MemberAtIndex">MemberAtIndex</a>:
+        <span class="sel">memberatindex</span>::(<span class="sel">index</span>::<span class="meta">int</span> <a class="nt" href="#ListOperator.content">ListOperator.content</a>)
+</pre><pre><a class="nt" name="Sublist">Sublist</a>:
+        <span class="sel">sublist</span>::(<span class="sel">start</span>::<span class="meta">int</span> <span class="sel">length</span>::<span class="meta">int</span> <a class="nt" href="#ListOperator.content">ListOperator.content</a>)
+</pre><pre><a class="nt" name="BuiltInSort">BuiltInSort</a>:
+        <a class="nt" href="#String">String</a>
+</pre><pre><a class="nt" name="BuiltInOperator">BuiltInOperator</a>:
+        <a class="nt" href="#StringOperator">StringOperator</a>
+</pre><pre><a class="nt" name="BuiltInConstant">BuiltInConstant</a>:
+        <a class="nt" href="#StringConstant">StringConstant</a>
+</pre><pre><a class="nt" name="String">String</a>:
+        <span class="sel">string</span>::ε
+</pre><pre><a class="nt" name="StringConstant.content">StringConstant.content</a>:
+        <span class="sel">value</span>::<span class="meta">string</span>
+</pre><pre><a class="nt" name="StringConstant">StringConstant</a>:
+        <span class="sel">stringconstant</span>::(<a class="nt" href="#StringConstant.content">StringConstant.content</a> <a class="nt" href="#BuiltInConstant.content">BuiltInConstant.content</a>)
+</pre><pre><a class="nt" name="StringOperator.content">StringOperator.content</a>:
+        <a class="nt" href="#BuiltInOperator.content">BuiltInOperator.content</a>
+</pre><pre><a class="nt" name="StringOperator">StringOperator</a>:
+        <a class="nt" href="#StringLessThan">StringLessThan</a>
+        <a class="nt" href="#StringLessThanOrEqual">StringLessThanOrEqual</a>
+        <a class="nt" href="#StringGreaterThan">StringGreaterThan</a>
+        <a class="nt" href="#StringGreaterThanOrEqual">StringGreaterThanOrEqual</a>
+        <a class="nt" href="#StringConcatenation">StringConcatenation</a>
+        <a class="nt" href="#StringAppend">StringAppend</a>
+        <a class="nt" href="#StringLength">StringLength</a>
+        <a class="nt" href="#Substring">Substring</a>
+</pre><pre><a class="nt" name="StringLessThan">StringLessThan</a>:
+        <span class="sel">lts</span>::<a class="nt" href="#StringOperator.content">StringOperator.content</a>
+</pre><pre><a class="nt" name="StringLessThanOrEqual">StringLessThanOrEqual</a>:
+        <span class="sel">leqs</span>::<a class="nt" href="#StringOperator.content">StringOperator.content</a>
+</pre><pre><a class="nt" name="StringGreaterThan">StringGreaterThan</a>:
+        <span class="sel">gts</span>::<a class="nt" href="#StringOperator.content">StringOperator.content</a>
+</pre><pre><a class="nt" name="StringGreaterThanOrEqual">StringGreaterThanOrEqual</a>:
+        <span class="sel">geqs</span>::<a class="nt" href="#StringOperator.content">StringOperator.content</a>
+</pre><pre><a class="nt" name="StringConcatenation">StringConcatenation</a>:
+        <span class="sel">stringconcatenation</span>::<a class="nt" href="#StringOperator.content">StringOperator.content</a>
+</pre><pre><a class="nt" name="StringLength">StringLength</a>:
+        <span class="sel">stringlength</span>::<a class="nt" href="#StringOperator.content">StringOperator.content</a>
+</pre><pre><a class="nt" name="StringAppend">StringAppend</a>:
+        <span class="sel">stringappend</span>::<a class="nt" href="#StringOperator.content">StringOperator.content</a>
+</pre><pre><a class="nt" name="Substring">Substring</a>:
+        <span class="sel">substring</span>::(<span class="sel">start</span>::<span class="meta">int</span> <span class="sel">length</span>::<span class="meta">int</span> <a class="nt" href="#StringOperator.content">StringOperator.content</a>)
+</pre><pre><a class="nt" name="Declaration">Declaration</a>:
+        <a class="nt" href="#Unparsed">Unparsed</a>
+</pre><pre><a class="nt" name="SortDeclaration">SortDeclaration</a>:
+        <a class="nt" href="#ArbitrarySort">ArbitrarySort</a>
+</pre><pre><a class="nt" name="OperatorDeclaration">OperatorDeclaration</a>:
+        <a class="nt" href="#ArbitraryOperator">ArbitraryOperator</a>
+</pre><pre><a class="nt" name="ArbitrarySort">ArbitrarySort</a>:
+        <span class="sel">arbitrarysort</span>::<a class="nt" href="#SortDeclaration.content">SortDeclaration.content</a>
+</pre><pre><a class="nt" name="ArbitraryOperator">ArbitraryOperator</a>:
+        <span class="sel">arbitraryoperator</span>::(<a class="nt" href="#OperatorDeclaration.content">OperatorDeclaration.content</a> <span class="sel">input</span>::<a class="nt" href="#Sort">Sort</a><span class="meta">*</span> <span class="sel">output</span>::<a class="nt" href="#Sort">Sort</a>)
+</pre><pre><a class="nt" name="Unparsed">Unparsed</a>:
+        <span class="sel">unparsed</span>::(<a class="nt" href="#Declaration.content">Declaration.content</a> <a class="nt" href="#anyElement">anyElement</a><span class="meta">*</span>)
+</pre><pre><a class="nt" name="nettype.uri">nettype.uri</a>:
+        <span class="sel">type</span>::<span class="t">"http://www.pnml.org/version-2009/grammar/symmetricnet"</span>
+</pre><pre><a class="nt" name="SortDeclaration">SortDeclaration</a>:
+        <a class="nt" href="#Partition">Partition</a>
+</pre><pre><a class="nt" name="OperatorDeclaration">OperatorDeclaration</a>:
+        <a class="nt" href="#PartitionElement">PartitionElement</a>
+</pre><pre><a class="nt" name="BuiltInOperator">BuiltInOperator</a>:
+        <a class="nt" href="#PartitionOperator">PartitionOperator</a>
+</pre><pre><a class="nt" name="Partition">Partition</a>:
+        <span class="sel">partition</span>::(<a class="nt" href="#SortDeclaration.content">SortDeclaration.content</a> <a class="nt" href="#Sort">Sort</a> <a class="nt" href="#PartitionElement">PartitionElement</a><span class="meta">+</span>)
+</pre><pre><a class="nt" name="PartitionElement">PartitionElement</a>:
+        <span class="sel">partitionelement</span>::(<a class="nt" href="#OperatorDeclaration.content">OperatorDeclaration.content</a> <a class="nt" href="#Term">Term</a><span class="meta">+</span>)
+</pre><pre><a class="nt" name="PartitionOperator.content">PartitionOperator.content</a>:
+        <a class="nt" href="#BuiltInOperator.content">BuiltInOperator.content</a>
+</pre><pre><a class="nt" name="PartitionOperator">PartitionOperator</a>:
+        <a class="nt" href="#PartitionLessThan">PartitionLessThan</a>
+        <a class="nt" href="#PartitionGreaterThan">PartitionGreaterThan</a>
+        <a class="nt" href="#PartitionElementOf">PartitionElementOf</a>
+</pre><pre><a class="nt" name="PartitionLessThan">PartitionLessThan</a>:
+        <span class="sel">ltp</span>::<a class="nt" href="#PartitionOperator.content">PartitionOperator.content</a>
+</pre><pre><a class="nt" name="PartitionGreaterThan">PartitionGreaterThan</a>:
+        <span class="sel">gtp</span>::<a class="nt" href="#PartitionOperator.content">PartitionOperator.content</a>
+</pre><pre><a class="nt" name="PartitionElementOf">PartitionElementOf</a>:
+        <span class="sel">partitionelementof</span>::(<span class="sel">refpartition</span>::<span class="meta">string</span> <a class="nt" href="#PartitionOperator.content">PartitionOperator.content</a>)
+</pre><pre><a class="nt" name="BuiltInSort">BuiltInSort</a>:
+        <a class="nt" href="#CyclicEnumeration">CyclicEnumeration</a>
+</pre><pre><a class="nt" name="BuiltInOperator">BuiltInOperator</a>:
+        <a class="nt" href="#CyclicEnumOperator">CyclicEnumOperator</a>
+</pre><pre><a class="nt" name="CyclicEnumeration">CyclicEnumeration</a>:
+        <span class="sel">cyclicenumeration</span>::<a class="nt" href="#FiniteEnumeration.content">FiniteEnumeration.content</a>
+</pre><pre><a class="nt" name="CyclicEnumOperator.content">CyclicEnumOperator.content</a>:
+        <a class="nt" href="#BuiltInOperator.content">BuiltInOperator.content</a>
+</pre><pre><a class="nt" name="CyclicEnumOperator">CyclicEnumOperator</a>:
+        <a class="nt" href="#Successor">Successor</a>
+        <a class="nt" href="#Predecessor">Predecessor</a>
+</pre><pre><a class="nt" name="Successor">Successor</a>:
+        <span class="sel">successor</span>::<a class="nt" href="#CyclicEnumOperator.content">CyclicEnumOperator.content</a>
+</pre><pre><a class="nt" name="Predecessor">Predecessor</a>:
+        <span class="sel">predecessor</span>::<a class="nt" href="#CyclicEnumOperator.content">CyclicEnumOperator.content</a>
+</pre><pre><a class="nt" name="OperatorDeclaration">OperatorDeclaration</a>:
+        <a class="nt" href="#FEConstant">FEConstant</a>
+</pre><pre><a class="nt" name="BuiltInSort">BuiltInSort</a>:
+        <a class="nt" href="#FiniteEnumeration">FiniteEnumeration</a>
+</pre><pre><a class="nt" name="FiniteEnumeration.content">FiniteEnumeration.content</a>:
+        <a class="nt" href="#FEConstant">FEConstant</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="FiniteEnumeration">FiniteEnumeration</a>:
+        <span class="sel">finiteenumeration</span>::<a class="nt" href="#FiniteEnumeration.content">FiniteEnumeration.content</a>
+</pre><pre><a class="nt" name="FEConstant">FEConstant</a>:
+        <span class="sel">feconstant</span>::<a class="nt" href="#OperatorDeclaration.content">OperatorDeclaration.content</a>
+</pre><pre><a class="nt" name="BuiltInSort">BuiltInSort</a>:
+        <a class="nt" href="#FiniteIntRange">FiniteIntRange</a>
+</pre><pre><a class="nt" name="BuiltInOperator">BuiltInOperator</a>:
+        <a class="nt" href="#FiniteIntRangeOperator">FiniteIntRangeOperator</a>
+</pre><pre><a class="nt" name="BuiltInConstant">BuiltInConstant</a>:
+        <a class="nt" href="#FiniteIntRangeConstant">FiniteIntRangeConstant</a>
+</pre><pre><a class="nt" name="FiniteIntRange">FiniteIntRange</a>:
+        <span class="sel">finiteintrange</span>::(<span class="sel">start</span>::<span class="meta">int</span> <span class="sel">end</span>::<span class="meta">int</span>)
+</pre><pre><a class="nt" name="FiniteIntRangeOperator.content">FiniteIntRangeOperator.content</a>:
+        <a class="nt" href="#BuiltInOperator.content">BuiltInOperator.content</a>
+</pre><pre><a class="nt" name="FiniteIntRangeOperator">FiniteIntRangeOperator</a>:
+        <a class="nt" href="#FIRLessThan">FIRLessThan</a>
+        <a class="nt" href="#FIRLessThanOrEqual">FIRLessThanOrEqual</a>
+        <a class="nt" href="#FIRGreaterThan">FIRGreaterThan</a>
+        <a class="nt" href="#FIRGreaterThanOrEqual">FIRGreaterThanOrEqual</a>
+</pre><pre><a class="nt" name="FIRLessThan">FIRLessThan</a>:
+        <span class="sel">lessthan</span>::<a class="nt" href="#FiniteIntRangeOperator.content">FiniteIntRangeOperator.content</a>
+</pre><pre><a class="nt" name="FIRLessThanOrEqual">FIRLessThanOrEqual</a>:
+        <span class="sel">lessthanorequal</span>::<a class="nt" href="#FiniteIntRangeOperator.content">FiniteIntRangeOperator.content</a>
+</pre><pre><a class="nt" name="FIRGreaterThan">FIRGreaterThan</a>:
+        <span class="sel">greaterthan</span>::<a class="nt" href="#FiniteIntRangeOperator.content">FiniteIntRangeOperator.content</a>
+</pre><pre><a class="nt" name="FIRGreaterThanOrEqual">FIRGreaterThanOrEqual</a>:
+        <span class="sel">greaterthanorequal</span>::<a class="nt" href="#FiniteIntRangeOperator.content">FiniteIntRangeOperator.content</a>
+</pre><pre><a class="nt" name="FiniteIntRangeConstant">FiniteIntRangeConstant</a>:
+        <span class="sel">finiteintrangeconstant</span>::(<span class="sel">value</span>::<span class="meta">int</span> <a class="nt" href="#FiniteIntRange">FiniteIntRange</a> <a class="nt" href="#BuiltInConstant.content">BuiltInConstant.content</a>)
+</pre><pre><a class="nt" name="Operator">Operator</a>:
+        <a class="nt" href="#Equality">Equality</a>
+        <a class="nt" href="#Inequality">Inequality</a>
+</pre><pre><a class="nt" name="BuiltInSort">BuiltInSort</a>:
+        <a class="nt" href="#Bool">Bool</a>
+</pre><pre><a class="nt" name="BuiltInOperator">BuiltInOperator</a>:
+        <a class="nt" href="#BooleanOperator">BooleanOperator</a>
+</pre><pre><a class="nt" name="BuiltInConstant">BuiltInConstant</a>:
+        <a class="nt" href="#BooleanConstant">BooleanConstant</a>
+</pre><pre><a class="nt" name="Bool">Bool</a>:
+        <span class="sel">bool</span>::ε
+</pre><pre><a class="nt" name="BooleanOperator.content">BooleanOperator.content</a>:
+        <a class="nt" href="#BuiltInOperator.content">BuiltInOperator.content</a>
+</pre><pre><a class="nt" name="BooleanOperator">BooleanOperator</a>:
+        <a class="nt" href="#And">And</a>
+        <a class="nt" href="#Or">Or</a>
+        <a class="nt" href="#Imply">Imply</a>
+        <a class="nt" href="#Not">Not</a>
+</pre><pre><a class="nt" name="And">And</a>:
+        <span class="sel">and</span>::<a class="nt" href="#BooleanOperator.content">BooleanOperator.content</a>
+</pre><pre><a class="nt" name="Or">Or</a>:
+        <span class="sel">or</span>::<a class="nt" href="#BooleanOperator.content">BooleanOperator.content</a>
+</pre><pre><a class="nt" name="Not">Not</a>:
+        <span class="sel">not</span>::<a class="nt" href="#BooleanOperator.content">BooleanOperator.content</a>
+</pre><pre><a class="nt" name="Imply">Imply</a>:
+        <span class="sel">imply</span>::<a class="nt" href="#BooleanOperator.content">BooleanOperator.content</a>
+</pre><pre><a class="nt" name="Equality">Equality</a>:
+        <span class="sel">equality</span>::<a class="nt" href="#Operator.content">Operator.content</a>
+</pre><pre><a class="nt" name="Inequality">Inequality</a>:
+        <span class="sel">inequality</span>::<a class="nt" href="#Operator.content">Operator.content</a>
+</pre><pre><a class="nt" name="BooleanConstant">BooleanConstant</a>:
+        <span class="sel">booleanconstant</span>::(<span class="sel">value</span>::(<span class="t">"true"</span> | <span class="t">"false"</span>) <a class="nt" href="#BuiltInConstant.content">BuiltInConstant.content</a>)
+</pre><pre><a class="nt" name="BuiltInOperator">BuiltInOperator</a>:
+        <a class="nt" href="#Cardinality">Cardinality</a>
+        <a class="nt" href="#CardinalityOf">CardinalityOf</a>
+        <a class="nt" href="#Contains">Contains</a>
+</pre><pre><a class="nt" name="MultisetOperator">MultisetOperator</a>:
+        <a class="nt" href="#Add">Add</a>
+        <a class="nt" href="#All">All</a>
+        <a class="nt" href="#NumberOf">NumberOf</a>
+        <a class="nt" href="#Subtract">Subtract</a>
+        <a class="nt" href="#ScalarProduct">ScalarProduct</a>
+        <a class="nt" href="#Empty">Empty</a>
+</pre><pre><a class="nt" name="Add">Add</a>:
+        <span class="sel">add</span>::<a class="nt" href="#MultisetOperator.content">MultisetOperator.content</a>
+</pre><pre><a class="nt" name="Subtract">Subtract</a>:
+        <span class="sel">subtract</span>::<a class="nt" href="#MultisetOperator.content">MultisetOperator.content</a>
+</pre><pre><a class="nt" name="All">All</a>:
+        <span class="sel">all</span>::(<a class="nt" href="#MultisetOperator.content">MultisetOperator.content</a> <a class="nt" href="#Sort">Sort</a>)
+</pre><pre><a class="nt" name="Empty">Empty</a>:
+        <span class="sel">empty</span>::(<a class="nt" href="#MultisetOperator.content">MultisetOperator.content</a> <a class="nt" href="#Sort">Sort</a>)
+</pre><pre><a class="nt" name="ScalarProduct">ScalarProduct</a>:
+        <span class="sel">scalarproduct</span>::<a class="nt" href="#MultisetOperator.content">MultisetOperator.content</a>
+</pre><pre><a class="nt" name="NumberOf">NumberOf</a>:
+        <span class="sel">numberof</span>::<a class="nt" href="#MultisetOperator.content">MultisetOperator.content</a>
+</pre><pre><a class="nt" name="Cardinality">Cardinality</a>:
+        <span class="sel">cardinality</span>::<a class="nt" href="#BuiltInOperator.content">BuiltInOperator.content</a>
+</pre><pre><a class="nt" name="CardinalityOf">CardinalityOf</a>:
+        <span class="sel">cardinalityof</span>::<a class="nt" href="#BuiltInOperator.content">BuiltInOperator.content</a>
+</pre><pre><a class="nt" name="Contains">Contains</a>:
+        <span class="sel">contains</span>::<a class="nt" href="#BuiltInOperator.content">BuiltInOperator.content</a>
+</pre><pre><a class="nt" name="BuiltInSort">BuiltInSort</a>:
+        <a class="nt" href="#Dot">Dot</a>
+</pre><pre><a class="nt" name="BuiltInConstant">BuiltInConstant</a>:
+        <a class="nt" href="#DotConstant">DotConstant</a>
+</pre><pre><a class="nt" name="Dot">Dot</a>:
+        <span class="sel">dot</span>::ε
+</pre><pre><a class="nt" name="DotConstant">DotConstant</a>:
+        <span class="sel">dotconstant</span>::ε
+</pre><pre><a class="nt" name="BuiltInSort">BuiltInSort</a>:
+        <a class="nt" href="#Number">Number</a>
+</pre><pre><a class="nt" name="BuiltInOperator">BuiltInOperator</a>:
+        <a class="nt" href="#IntegerOperator">IntegerOperator</a>
+</pre><pre><a class="nt" name="BuiltInConstant">BuiltInConstant</a>:
+        <a class="nt" href="#NumberConstant">NumberConstant</a>
+</pre><pre><a class="nt" name="Number">Number</a>:
+        <a class="nt" href="#Natural">Natural</a>
+        <a class="nt" href="#Positive">Positive</a>
+        <a class="nt" href="#Integer">Integer</a>
+</pre><pre><a class="nt" name="Integer">Integer</a>:
+        <span class="sel">integer</span>::ε
+</pre><pre><a class="nt" name="Natural">Natural</a>:
+        <span class="sel">natural</span>::ε
+</pre><pre><a class="nt" name="Positive">Positive</a>:
+        <span class="sel">positive</span>::ε
+</pre><pre><a class="nt" name="IntegerOperator.content">IntegerOperator.content</a>:
+        <a class="nt" href="#BuiltInOperator.content">BuiltInOperator.content</a>
+</pre><pre><a class="nt" name="IntegerOperator">IntegerOperator</a>:
+        <a class="nt" href="#Addition">Addition</a>
+        <a class="nt" href="#Subtraction">Subtraction</a>
+        <a class="nt" href="#Multiplication">Multiplication</a>
+        <a class="nt" href="#Division">Division</a>
+        <a class="nt" href="#Modulo">Modulo</a>
+        <a class="nt" href="#GreaterThan">GreaterThan</a>
+        <a class="nt" href="#GreaterThanOrEqual">GreaterThanOrEqual</a>
+        <a class="nt" href="#LessThan">LessThan</a>
+        <a class="nt" href="#LessThanOrEqual">LessThanOrEqual</a>
+</pre><pre><a class="nt" name="NumberConstant">NumberConstant</a>:
+        <span class="sel">numberconstant</span>::(<span class="sel">value</span>::<span class="meta">int</span> (<a class="nt" href="#BuiltInConstant.content">BuiltInConstant.content</a> <a class="nt" href="#Number">Number</a>))
+</pre><pre><a class="nt" name="LessThan">LessThan</a>:
+        <span class="sel">lt</span>::<a class="nt" href="#IntegerOperator">IntegerOperator</a>
+</pre><pre><a class="nt" name="LessThanOrEqual">LessThanOrEqual</a>:
+        <span class="sel">leq</span>::<a class="nt" href="#IntegerOperator">IntegerOperator</a>
+</pre><pre><a class="nt" name="GreaterThan">GreaterThan</a>:
+        <span class="sel">gt</span>::<a class="nt" href="#IntegerOperator">IntegerOperator</a>
+</pre><pre><a class="nt" name="GreaterThanOrEqual">GreaterThanOrEqual</a>:
+        <span class="sel">geq</span>::<a class="nt" href="#IntegerOperator">IntegerOperator</a>
+</pre><pre><a class="nt" name="Addition">Addition</a>:
+        <span class="sel">addition</span>::<a class="nt" href="#IntegerOperator">IntegerOperator</a>
+</pre><pre><a class="nt" name="Subtraction">Subtraction</a>:
+        <span class="sel">subtraction</span>::<a class="nt" href="#IntegerOperator">IntegerOperator</a>
+</pre><pre><a class="nt" name="Multiplication">Multiplication</a>:
+        <span class="sel">mult</span>::<a class="nt" href="#IntegerOperator">IntegerOperator</a>
+</pre><pre><a class="nt" name="Division">Division</a>:
+        <span class="sel">div</span>::<a class="nt" href="#IntegerOperator">IntegerOperator</a>
+</pre><pre><a class="nt" name="Modulo">Modulo</a>:
+        <span class="sel">mod</span>::<a class="nt" href="#IntegerOperator">IntegerOperator</a>
+</pre><pre><a class="nt" name="net.labels">net.labels</a>:
+        <a class="nt" href="#HLDeclaration">HLDeclaration</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="page.labels">page.labels</a>:
+        <a class="nt" href="#HLDeclaration">HLDeclaration</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="place.labels">place.labels</a>:
+        <a class="nt" href="#Type">Type</a><span class="meta">?</span> <a class="nt" href="#HLMarking">HLMarking</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="transition.labels">transition.labels</a>:
+        <a class="nt" href="#Condition">Condition</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="arc.labels">arc.labels</a>:
+        <a class="nt" href="#HLAnnotation">HLAnnotation</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="HLDeclaration">HLDeclaration</a>:
+        <span class="sel">declaration</span>::(<a class="nt" href="#simpletextlabel.content">simpletextlabel.content</a> <span class="sel">structure</span>::<a class="nt" href="#Declarations">Declarations</a><span class="meta">?</span>)
+</pre><pre><a class="nt" name="Type">Type</a>:
+        <span class="sel">type</span>::(<a class="nt" href="#simpletextlabel.content">simpletextlabel.content</a> <span class="sel">structure</span>::<a class="nt" href="#Sort">Sort</a><span class="meta">?</span>)
+</pre><pre><a class="nt" name="HLMarking">HLMarking</a>:
+        <span class="sel">hlinitialMarking</span>::(<a class="nt" href="#simpletextlabel.content">simpletextlabel.content</a> <span class="sel">structure</span>::<a class="nt" href="#Term">Term</a><span class="meta">?</span>)
+</pre><pre><a class="nt" name="Condition">Condition</a>:
+        <span class="sel">condition</span>::(<a class="nt" href="#simpletextlabel.content">simpletextlabel.content</a> <span class="sel">structure</span>::<a class="nt" href="#Term">Term</a><span class="meta">?</span>)
+</pre><pre><a class="nt" name="HLAnnotation">HLAnnotation</a>:
+        <span class="sel">hlinscription</span>::(<a class="nt" href="#simpletextlabel.content">simpletextlabel.content</a> <span class="sel">structure</span>::<a class="nt" href="#Term">Term</a><span class="meta">?</span>)
+</pre><pre><a class="nt" name="Declarations">Declarations</a>:
+        <span class="sel">declarations</span>::(<a class="nt" href="#Declaration">Declaration</a><span class="meta">*</span>)
+</pre><pre><a class="nt" name="Declaration.content">Declaration.content</a>:
+        <span class="sel">id</span>::<span class="meta">string</span> <span class="sel">name</span>::<span class="meta">string</span>
+</pre><pre><a class="nt" name="Declaration">Declaration</a>:
+        <a class="nt" href="#SortDeclaration">SortDeclaration</a>
+        <a class="nt" href="#VariableDeclaration">VariableDeclaration</a>
+        <a class="nt" href="#OperatorDeclaration">OperatorDeclaration</a>
+</pre><pre><a class="nt" name="VariableDeclaration">VariableDeclaration</a>:
+        <span class="sel">variabledecl</span>::(<a class="nt" href="#Declaration.content">Declaration.content</a> <a class="nt" href="#Sort">Sort</a>)
+</pre><pre><a class="nt" name="SortDeclaration.content">SortDeclaration.content</a>:
+        <a class="nt" href="#Declaration.content">Declaration.content</a>
+</pre><pre><a class="nt" name="SortDeclaration">SortDeclaration</a>:
+        <a class="nt" href="#NamedSort">NamedSort</a>
+</pre><pre><a class="nt" name="OperatorDeclaration.content">OperatorDeclaration.content</a>:
+        <a class="nt" href="#Declaration.content">Declaration.content</a>
+</pre><pre><a class="nt" name="OperatorDeclaration">OperatorDeclaration</a>:
+        <a class="nt" href="#NamedOperator">NamedOperator</a>
+</pre><pre><a class="nt" name="Variable">Variable</a>:
+        <span class="sel">variable</span>::<span class="sel">refvariable</span>::<span class="meta">string</span>
+</pre><pre><a class="nt" name="NamedSort">NamedSort</a>:
+        <span class="sel">namedsort</span>::(<a class="nt" href="#SortDeclaration.content">SortDeclaration.content</a> <a class="nt" href="#Sort">Sort</a>)
+</pre><pre><a class="nt" name="NamedOperator">NamedOperator</a>:
+        <span class="sel">namedoperator</span>::(<a class="nt" href="#OperatorDeclaration.content">OperatorDeclaration.content</a> <span class="sel">parameter</span>::(<a class="nt" href="#VariableDeclaration">VariableDeclaration</a><span class="meta">*</span>) <span class="sel">def</span>::<a class="nt" href="#Term">Term</a>)
+</pre><pre><a class="nt" name="Term.content">Term.content</a>:
+        ε
+</pre><pre><a class="nt" name="Term">Term</a>:
+        <a class="nt" href="#Variable">Variable</a>
+        <a class="nt" href="#Operator">Operator</a>
+</pre><pre><a class="nt" name="Sort.content">Sort.content</a>:
+        ε
+</pre><pre><a class="nt" name="Sort">Sort</a>:
+        <a class="nt" href="#BuiltInSort">BuiltInSort</a>
+        <a class="nt" href="#MultisetSort">MultisetSort</a>
+        <a class="nt" href="#ProductSort">ProductSort</a>
+        <a class="nt" href="#UserSort">UserSort</a>
+</pre><pre><a class="nt" name="BuiltInSort">BuiltInSort</a>:
+        ε
+</pre><pre><a class="nt" name="MultisetSort">MultisetSort</a>:
+        <span class="sel">multisetsort</span>::<a class="nt" href="#Sort">Sort</a>
+</pre><pre><a class="nt" name="ProductSort">ProductSort</a>:
+        <span class="sel">productsort</span>::(<a class="nt" href="#Sort">Sort</a><span class="meta">*</span>)
+</pre><pre><a class="nt" name="UserSort">UserSort</a>:
+        <span class="sel">usersort</span>::<span class="sel">declaration</span>::<span class="meta">string</span>
+</pre><pre><a class="nt" name="Operator.content">Operator.content</a>:
+        <span class="sel">subterm</span>::<a class="nt" href="#Term">Term</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="Operator">Operator</a>:
+        <a class="nt" href="#BuiltInOperator">BuiltInOperator</a>
+        <a class="nt" href="#BuiltInConstant">BuiltInConstant</a>
+        <a class="nt" href="#MultisetOperator">MultisetOperator</a>
+        <a class="nt" href="#Tuple">Tuple</a>
+        <a class="nt" href="#UserOperator">UserOperator</a>
+</pre><pre><a class="nt" name="BuiltInOperator.content">BuiltInOperator.content</a>:
+        <a class="nt" href="#Operator.content">Operator.content</a>
+</pre><pre><a class="nt" name="BuiltInOperator">BuiltInOperator</a>:
+        ε
+</pre><pre><a class="nt" name="BuiltInConstant.content">BuiltInConstant.content</a>:
+        <a class="nt" href="#Operator.content">Operator.content</a>
+</pre><pre><a class="nt" name="BuiltInConstant">BuiltInConstant</a>:
+        ε
+</pre><pre><a class="nt" name="MultisetOperator.content">MultisetOperator.content</a>:
+        <a class="nt" href="#Operator.content">Operator.content</a>
+</pre><pre><a class="nt" name="MultisetOperator">MultisetOperator</a>:
+        ε
+</pre><pre><a class="nt" name="Tuple">Tuple</a>:
+        <span class="sel">tuple</span>::<a class="nt" href="#Operator.content">Operator.content</a>
+</pre><pre><a class="nt" name="UserOperator">UserOperator</a>:
+        <span class="sel">useroperator</span>::(<span class="sel">declaration</span>::<span class="meta">string</span> <a class="nt" href="#Operator.content">Operator.content</a>)
+</pre><pre><a class="nt" name="pnml.element">pnml.element</a>:
+        <span class="sel">pnml</span>::(<a class="nt" href="#pnml.content">pnml.content</a><span class="meta">+</span>)
+</pre><pre><a class="nt" name="pnml.content">pnml.content</a>:
+        <a class="nt" href="#net.element">net.element</a>
+</pre><pre><a class="nt" name="net.element">net.element</a>:
+        <span class="sel">net</span>::(<a class="nt" href="#identifier.content">identifier.content</a> <a class="nt" href="#nettype.uri">nettype.uri</a> (<a class="nt" href="#Name">Name</a><span class="meta">?</span> <a class="nt" href="#net.labels">net.labels</a> <a class="nt" href="#page.content">page.content</a><span class="meta">+</span> <a class="nt" href="#toolspecific.element">toolspecific.element</a><span class="meta">*</span>))
+</pre><pre><a class="nt" name="identifier.content">identifier.content</a>:
+        <span class="sel">id</span>::<span class="meta">string</span>
+</pre><pre><a class="nt" name="nettype.uri">nettype.uri</a>:
+        <span class="sel">type</span>::<span class="t">"http://www.pnml.org/version-2009/grammar/pnmlcoremodel"</span>
+</pre><pre><a class="nt" name="net.labels">net.labels</a>:
+        ε
+</pre><pre><a class="nt" name="basicobject.content">basicobject.content</a>:
+        <a class="nt" href="#Name">Name</a><span class="meta">?</span> <a class="nt" href="#toolspecific.element">toolspecific.element</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="page.content">page.content</a>:
+        <span class="sel">page</span>::(<a class="nt" href="#identifier.content">identifier.content</a> (<a class="nt" href="#basicobject.content">basicobject.content</a> <a class="nt" href="#page.labels">page.labels</a> <a class="nt" href="#netobject.content">netobject.content</a><span class="meta">*</span> <span class="sel">graphics</span>::<a class="nt" href="#pagegraphics.content">pagegraphics.content</a><span class="meta">?</span>))
+</pre><pre><a class="nt" name="netobject.content">netobject.content</a>:
+        <a class="nt" href="#page.content">page.content</a>
+        <a class="nt" href="#place.content">place.content</a>
+        <a class="nt" href="#transition.content">transition.content</a>
+        <a class="nt" href="#refplace.content">refplace.content</a>
+        <a class="nt" href="#reftrans.content">reftrans.content</a>
+        <a class="nt" href="#arc.content">arc.content</a>
+</pre><pre><a class="nt" name="page.labels">page.labels</a>:
+        ε
+</pre><pre><a class="nt" name="place.content">place.content</a>:
+        <span class="sel">place</span>::(<a class="nt" href="#identifier.content">identifier.content</a> (<a class="nt" href="#basicobject.content">basicobject.content</a> <a class="nt" href="#place.labels">place.labels</a> <a class="nt" href="#node.content">node.content</a>))
+</pre><pre><a class="nt" name="place.labels">place.labels</a>:
+        ε
+</pre><pre><a class="nt" name="transition.content">transition.content</a>:
+        <span class="sel">transition</span>::(<a class="nt" href="#identifier.content">identifier.content</a> (<a class="nt" href="#basicobject.content">basicobject.content</a> <a class="nt" href="#transition.labels">transition.labels</a> <a class="nt" href="#node.content">node.content</a>))
+</pre><pre><a class="nt" name="transition.labels">transition.labels</a>:
+        ε
+</pre><pre><a class="nt" name="node.content">node.content</a>:
+        <span class="sel">graphics</span>::<a class="nt" href="#nodegraphics.content">nodegraphics.content</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="reference">reference</a>:
+        <span class="sel">ref</span>::<span class="meta">string</span>
+</pre><pre><a class="nt" name="refplace.content">refplace.content</a>:
+        <span class="sel">referencePlace</span>::<a class="nt" href="#refnode.content">refnode.content</a>
+</pre><pre><a class="nt" name="reftrans.content">reftrans.content</a>:
+        <span class="sel">referenceTransition</span>::<a class="nt" href="#refnode.content">refnode.content</a>
+</pre><pre><a class="nt" name="refnode.content">refnode.content</a>:
+        <a class="nt" href="#identifier.content">identifier.content</a> <a class="nt" href="#reference">reference</a> <a class="nt" href="#basicobject.content">basicobject.content</a> <a class="nt" href="#node.content">node.content</a>
+</pre><pre><a class="nt" name="arc.content">arc.content</a>:
+        <span class="sel">arc</span>::(<a class="nt" href="#identifier.content">identifier.content</a> <span class="sel">source</span>::<span class="meta">string</span> <span class="sel">target</span>::<span class="meta">string</span> (<a class="nt" href="#Name">Name</a><span class="meta">?</span> <a class="nt" href="#arc.labels">arc.labels</a> <span class="sel">graphics</span>::<a class="nt" href="#edgegraphics.content">edgegraphics.content</a><span class="meta">?</span> <a class="nt" href="#toolspecific.element">toolspecific.element</a><span class="meta">*</span>))
+</pre><pre><a class="nt" name="arc.labels">arc.labels</a>:
+        ε
+</pre><pre><a class="nt" name="pagegraphics.content">pagegraphics.content</a>:
+        <a class="nt" href="#nodegraphics.content">nodegraphics.content</a>
+</pre><pre><a class="nt" name="nodegraphics.content">nodegraphics.content</a>:
+        <a class="nt" href="#position.element">position.element</a> <a class="nt" href="#dimension.element">dimension.element</a><span class="meta">?</span> <a class="nt" href="#fill.element">fill.element</a><span class="meta">?</span> <a class="nt" href="#line.element">line.element</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="edgegraphics.content">edgegraphics.content</a>:
+        <a class="nt" href="#position.element">position.element</a><span class="meta">*</span> <a class="nt" href="#line.element">line.element</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="simpletext.content">simpletext.content</a>:
+        <span class="sel">text</span>::<span class="meta">string</span><span class="meta">?</span>
+</pre><pre><a class="nt" name="annotationstandard.content">annotationstandard.content</a>:
+        <span class="sel">graphics</span>::<a class="nt" href="#annotationgraphics.content">annotationgraphics.content</a><span class="meta">?</span> <a class="nt" href="#toolspecific.element">toolspecific.element</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="simpletextlabel.content">simpletextlabel.content</a>:
+        <a class="nt" href="#simpletext.content">simpletext.content</a> <a class="nt" href="#annotationstandard.content">annotationstandard.content</a>
+</pre><pre><a class="nt" name="Name">Name</a>:
+        <span class="sel">name</span>::<a class="nt" href="#simpletextlabel.content">simpletextlabel.content</a>
+</pre><pre><a class="nt" name="annotationgraphics.content">annotationgraphics.content</a>:
+        <a class="nt" href="#offset.element">offset.element</a> (<a class="nt" href="#fill.element">fill.element</a><span class="meta">?</span> <a class="nt" href="#line.element">line.element</a><span class="meta">?</span> <a class="nt" href="#font.element">font.element</a><span class="meta">?</span>)
+</pre><pre><a class="nt" name="position.element">position.element</a>:
+        <span class="sel">position</span>::<a class="nt" href="#coordinate.attributes">coordinate.attributes</a>
+</pre><pre><a class="nt" name="offset.element">offset.element</a>:
+        <span class="sel">offset</span>::<a class="nt" href="#coordinate.attributes">coordinate.attributes</a>
+</pre><pre><a class="nt" name="coordinate.attributes">coordinate.attributes</a>:
+        <span class="sel">x</span>::<span class="meta">int</span> <span class="sel">y</span>::<span class="meta">int</span>
+</pre><pre><a class="nt" name="dimension.element">dimension.element</a>:
+        <span class="sel">dimension</span>::(<span class="sel">x</span>::<a class="nt" href="#positiveDecimal.content">positiveDecimal.content</a> <span class="sel">y</span>::<a class="nt" href="#positiveDecimal.content">positiveDecimal.content</a>)
+</pre><pre><a class="nt" name="positiveDecimal.content">positiveDecimal.content</a>:
+        <span class="meta">int</span>
+</pre><pre><a class="nt" name="fill.element">fill.element</a>:
+        <span class="sel">fill</span>::(<span class="sel">color</span>::<a class="nt" href="#color.type">color.type</a><span class="meta">?</span> <span class="sel">gradient-color</span>::<a class="nt" href="#color.type">color.type</a><span class="meta">?</span> <span class="sel">gradient-rotation</span>::(<span class="t">"vertical"</span> | <span class="t">"horizontal"</span> | <span class="t">"diagonal"</span>)<span class="meta">?</span> <span class="sel">image</span>::<span class="meta">string</span><span class="meta">?</span>)
+</pre><pre><a class="nt" name="line.element">line.element</a>:
+        <span class="sel">line</span>::(<span class="sel">shape</span>::(<span class="t">"line"</span> | <span class="t">"curve"</span>)<span class="meta">?</span> <span class="sel">color</span>::<a class="nt" href="#color.type">color.type</a><span class="meta">?</span> <span class="sel">width</span>::<a class="nt" href="#positiveDecimal.content">positiveDecimal.content</a><span class="meta">?</span> <span class="sel">style</span>::(<span class="t">"solid"</span> | <span class="t">"dash"</span> | <span class="t">"dot"</span>)<span class="meta">?</span>)
+</pre><pre><a class="nt" name="color.type">color.type</a>:
+        <span class="meta">string</span>
+</pre><pre><a class="nt" name="font.element">font.element</a>:
+        <span class="sel">font</span>::(<span class="sel">family</span>::<span class="meta">string</span><span class="meta">?</span> <span class="sel">style</span>::<span class="meta">string</span><span class="meta">?</span> <span class="sel">weight</span>::<span class="meta">string</span><span class="meta">?</span> <span class="sel">size</span>::<span class="meta">string</span><span class="meta">?</span> <span class="sel">decoration</span>::(<span class="t">"underline"</span> | <span class="t">"overline"</span> | <span class="t">"line-through"</span>)<span class="meta">?</span> <span class="sel">align</span>::(<span class="t">"left"</span> | <span class="t">"center"</span> | <span class="t">"right"</span>)<span class="meta">?</span> <span class="sel">rotation</span>::<span class="meta">int</span><span class="meta">?</span>)
+</pre><pre><a class="nt" name="toolspecific.element">toolspecific.element</a>:
+        <span class="sel">toolspecific</span>::(<span class="sel">tool</span>::<span class="meta">string</span> <span class="sel">version</span>::<span class="meta">string</span> <a class="nt" href="#anyElement">anyElement</a><span class="meta">*</span>)
+</pre><pre><a class="nt" name="anyElement">anyElement</a>:
+        (<span class="meta">any</span> | <span class="meta">string</span> | <a class="nt" href="#anyElement">anyElement</a>)<span class="meta">*</span>
+</pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
+Last updated: Apr2013.</div></body></html>

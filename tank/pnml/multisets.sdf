@@ -1,0 +1,34 @@
+module Main
+
+exports
+  sorts
+        BuiltInOperator MultisetOperator Add Subtract All Empty ScalarProduct NumberOf Cardinality CardinalityOf Contains 
+  context-free syntax
+        Cardinality -> BuiltInOperator
+        CardinalityOf -> BuiltInOperator
+        Contains -> BuiltInOperator
+
+        Add -> MultisetOperator
+        All -> MultisetOperator
+        NumberOf -> MultisetOperator
+        Subtract -> MultisetOperator
+        ScalarProduct -> MultisetOperator
+        Empty -> MultisetOperator
+
+        add::MultisetOperator.content -> Add
+
+        subtract::MultisetOperator.content -> Subtract
+
+        all::(MultisetOperator.content Sort) -> All
+
+        empty::(MultisetOperator.content Sort) -> Empty
+
+        scalarproduct::MultisetOperator.content -> ScalarProduct
+
+        numberof::MultisetOperator.content -> NumberOf
+
+        cardinality::BuiltInOperator.content -> Cardinality
+
+        cardinalityof::BuiltInOperator.content -> CardinalityOf
+
+        contains::BuiltInOperator.content -> Contains

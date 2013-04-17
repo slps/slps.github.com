@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:bgf="http://planet-sl.org/bgf" xmlns:xbgf="http://planet-sl.org/xbgf" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Browsable PNML Grammar</title><link href="/slps.css" rel="stylesheet" type="text/css"></link><script type="text/javascript">
+
+				  var _gaq = _gaq || [];
+				  _gaq.push(['_setAccount', 'UA-3743366-7']);
+				  _gaq.push(['_setDomainName', 'github.com']);
+				  _gaq.push(['_trackPageview']);
+
+				  (function() {
+				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				  })();
+
+				</script></head><body><h1 class="l">Browsable PNML Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Lom Hillah, <em>RELAX NG implementation of Lists grammar</em>, <code>lists.rng</code>, July 2008.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>13</strong></li><li>Number of top alternatives: <strong>18</strong></li><li>Number of defined nonterminal symbols: <strong>13</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>3</strong>: <code><a href="#BuiltInSort" class="nt">BuiltInSort</a>, <a href="#BuiltInOperator" class="nt">BuiltInOperator</a>, <a href="#BuiltInConstant" class="nt">BuiltInConstant</a></code></li><li>Bottom nonterminal symbols: <strong>3</strong>: <code><a href="#Sort" class="nt">Sort</a>, <a href="#BuiltInOperator.content" class="nt">BuiltInOperator.content</a>, <a href="#BuiltInConstant.content" class="nt">BuiltInConstant.content</a></code></li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="BuiltInSort">BuiltInSort</a>:
+        <a class="nt" href="#List">List</a>
+</pre><pre><a class="nt" name="BuiltInOperator">BuiltInOperator</a>:
+        <a class="nt" href="#ListOperator">ListOperator</a>
+</pre><pre><a class="nt" name="List">List</a>:
+        <span class="sel">list</span>::<a class="nt" href="#Sort">Sort</a>
+</pre><pre><a class="nt" name="BuiltInConstant">BuiltInConstant</a>:
+        <a class="nt" href="#EmptyList">EmptyList</a>
+</pre><pre><a class="nt" name="ListOperator.content">ListOperator.content</a>:
+        <a class="nt" href="#BuiltInOperator.content">BuiltInOperator.content</a>
+</pre><pre><a class="nt" name="ListOperator">ListOperator</a>:
+        <a class="nt" href="#ListAppend">ListAppend</a>
+        <a class="nt" href="#ListConcatenation">ListConcatenation</a>
+        <a class="nt" href="#MakeList">MakeList</a>
+        <a class="nt" href="#ListLength">ListLength</a>
+        <a class="nt" href="#MemberAtIndex">MemberAtIndex</a>
+        <a class="nt" href="#Sublist">Sublist</a>
+</pre><pre><a class="nt" name="EmptyList">EmptyList</a>:
+        <span class="sel">emptylist</span>::(<a class="nt" href="#Sort">Sort</a> <a class="nt" href="#BuiltInConstant.content">BuiltInConstant.content</a>)
+</pre><pre><a class="nt" name="ListLength">ListLength</a>:
+        <span class="sel">listlength</span>::<a class="nt" href="#ListOperator.content">ListOperator.content</a>
+</pre><pre><a class="nt" name="MakeList">MakeList</a>:
+        <span class="sel">makelist</span>::(<a class="nt" href="#Sort">Sort</a> <a class="nt" href="#ListOperator.content">ListOperator.content</a>)
+</pre><pre><a class="nt" name="ListConcatenation">ListConcatenation</a>:
+        <span class="sel">listconcatenation</span>::<a class="nt" href="#ListOperator.content">ListOperator.content</a>
+</pre><pre><a class="nt" name="ListAppend">ListAppend</a>:
+        <span class="sel">listappend</span>::<a class="nt" href="#ListOperator.content">ListOperator.content</a>
+</pre><pre><a class="nt" name="MemberAtIndex">MemberAtIndex</a>:
+        <span class="sel">memberatindex</span>::(<span class="sel">index</span>::<span class="meta">int</span> <a class="nt" href="#ListOperator.content">ListOperator.content</a>)
+</pre><pre><a class="nt" name="Sublist">Sublist</a>:
+        <span class="sel">sublist</span>::(<span class="sel">start</span>::<span class="meta">int</span> <span class="sel">length</span>::<span class="meta">int</span> <a class="nt" href="#ListOperator.content">ListOperator.content</a>)
+</pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
+Last updated: Apr2013.</div></body></html>

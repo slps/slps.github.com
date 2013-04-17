@@ -1,0 +1,17 @@
+module Main
+
+exports
+  sorts
+        Declaration SortDeclaration OperatorDeclaration ArbitrarySort ArbitraryOperator Unparsed 
+  context-free syntax
+        Unparsed -> Declaration
+
+        ArbitrarySort -> SortDeclaration
+
+        ArbitraryOperator -> OperatorDeclaration
+
+        arbitrarysort::SortDeclaration.content -> ArbitrarySort
+
+        arbitraryoperator::(OperatorDeclaration.content input::Sort* output::Sort) -> ArbitraryOperator
+
+        unparsed::(Declaration.content AnyElement*) -> Unparsed

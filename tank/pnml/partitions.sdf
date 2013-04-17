@@ -1,0 +1,27 @@
+module Main
+
+exports
+  sorts
+        SortDeclaration OperatorDeclaration BuiltInOperator Partition PartitionElement PartitionOperator.content PartitionOperator PartitionLessThan PartitionGreaterThan PartitionElementOf 
+  context-free syntax
+        Partition -> SortDeclaration
+
+        PartitionElement -> OperatorDeclaration
+
+        PartitionOperator -> BuiltInOperator
+
+        partition::(SortDeclaration.content Sort PartitionElement+) -> Partition
+
+        partitionelement::(OperatorDeclaration.content Term+) -> PartitionElement
+
+        BuiltInOperator.content -> PartitionOperator.content
+
+        PartitionLessThan -> PartitionOperator
+        PartitionGreaterThan -> PartitionOperator
+        PartitionElementOf -> PartitionOperator
+
+        ltp::PartitionOperator.content -> PartitionLessThan
+
+        gtp::PartitionOperator.content -> PartitionGreaterThan
+
+        partitionelementof::(refpartition::STR PartitionOperator.content) -> PartitionElementOf

@@ -1,0 +1,36 @@
+module Main
+
+exports
+  sorts
+        BuiltInSort BuiltInOperator List BuiltInConstant ListOperator.content ListOperator EmptyList ListLength MakeList ListConcatenation ListAppend MemberAtIndex Sublist 
+  context-free syntax
+        List -> BuiltInSort
+
+        ListOperator -> BuiltInOperator
+
+        list::Sort -> List
+
+        EmptyList -> BuiltInConstant
+
+        BuiltInOperator.content -> ListOperator.content
+
+        ListAppend -> ListOperator
+        ListConcatenation -> ListOperator
+        MakeList -> ListOperator
+        ListLength -> ListOperator
+        MemberAtIndex -> ListOperator
+        Sublist -> ListOperator
+
+        emptylist::(Sort BuiltInConstant.content) -> EmptyList
+
+        listlength::ListOperator.content -> ListLength
+
+        makelist::(Sort ListOperator.content) -> MakeList
+
+        listconcatenation::ListOperator.content -> ListConcatenation
+
+        listappend::ListOperator.content -> ListAppend
+
+        memberatindex::(index::INT ListOperator.content) -> MemberAtIndex
+
+        sublist::(start::INT length::INT ListOperator.content) -> Sublist

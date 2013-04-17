@@ -1,0 +1,51 @@
+pattern:
+        element::((name::STR | open-name-class) common-atts open-patterns)
+        attribute::(common-atts (name::STR | open-name-class) other pattern?)
+        group::(common-atts open-patterns)
+        interleave::(common-atts open-patterns)
+        choice::(common-atts open-patterns)
+        optional::(common-atts open-patterns)
+        zeroOrMore::(common-atts open-patterns)
+        oneOrMore::(common-atts open-patterns)
+        list::(common-atts open-patterns)
+        mixed::(common-atts open-patterns)
+        ref::(name::STR common-atts other)
+        parentRef::(name::STR common-atts other)
+        empty::(common-atts other)
+        text::(common-atts other)
+        value::((type::STR)? common-atts STR)
+        data::(type::STR common-atts other param::(name::STR common-atts STR)* (except::(common-atts open-patterns))?)
+        notAllowed::(common-atts other)
+        externalRef::(href::STR common-atts other)
+        grammar::(common-atts grammar-content)
+grammar-content:
+        other (start-element | define-element | div::(common-atts grammar-content) | include::(href::STR common-atts include-content))*
+include-content:
+        other (start-element | define-element | div::(common-atts include-content))*
+start-element:
+        start::(combine-att common-atts open-pattern)
+define-element:
+        define::(name::STR combine-att common-atts open-patterns)
+combine-att:
+        (combine::("choice" | "interleave"))?
+open-patterns:
+        other pattern+
+open-pattern:
+        other pattern
+name-class:
+        name::(common-atts STR)
+        anyName::(common-atts except-name-class)
+        nsName::(common-atts except-name-class)
+        choice::(common-atts open-name-classes)
+except-name-class:
+        other (except::open-name-classes)?
+open-name-classes:
+        other name-class+
+open-name-class:
+        other name-class
+common-atts:
+        (ns::STR)? (datatypeLibrary::STR)? ANY*
+other:
+        (ANY | STR | any)**
+any:
+        (ANY | STR | any)*

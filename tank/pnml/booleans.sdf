@@ -1,0 +1,37 @@
+module Main
+
+exports
+  sorts
+        Operator BuiltInSort BuiltInOperator BuiltInConstant Bool BooleanOperator.content BooleanOperator And Or Not Imply Equality Inequality BooleanConstant 
+  context-free syntax
+        Equality -> Operator
+        Inequality -> Operator
+
+        Bool -> BuiltInSort
+
+        BooleanOperator -> BuiltInOperator
+
+        BooleanConstant -> BuiltInConstant
+
+        bool:: -> Bool
+
+        BuiltInOperator.content -> BooleanOperator.content
+
+        And -> BooleanOperator
+        Or -> BooleanOperator
+        Imply -> BooleanOperator
+        Not -> BooleanOperator
+
+        and::BooleanOperator.content -> And
+
+        or::BooleanOperator.content -> Or
+
+        not::BooleanOperator.content -> Not
+
+        imply::BooleanOperator.content -> Imply
+
+        equality::Operator.content -> Equality
+
+        inequality::Operator.content -> Inequality
+
+        booleanconstant::(value::("true" | "false") BuiltInConstant.content) -> BooleanConstant

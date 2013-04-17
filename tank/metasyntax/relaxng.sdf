@@ -1,0 +1,57 @@
+module Main
+
+exports
+ context-free start-symbols pattern
+  sorts
+        Pattern Grammar-content Include-content Start-element Define-element Combine-att Open-patterns Open-pattern Name-class Except-name-class Open-name-classes Open-name-class Common-atts Other Any 
+  context-free syntax
+        element::((name::STR | Open-name-class) Common-atts Open-patterns) -> Pattern
+        attribute::(Common-atts (name::STR | Open-name-class) Other Pattern?) -> Pattern
+        group::(Common-atts Open-patterns) -> Pattern
+        interleave::(Common-atts Open-patterns) -> Pattern
+        choice::(Common-atts Open-patterns) -> Pattern
+        optional::(Common-atts Open-patterns) -> Pattern
+        zeroOrMore::(Common-atts Open-patterns) -> Pattern
+        oneOrMore::(Common-atts Open-patterns) -> Pattern
+        list::(Common-atts Open-patterns) -> Pattern
+        mixed::(Common-atts Open-patterns) -> Pattern
+        ref::(name::STR Common-atts Other) -> Pattern
+        parentRef::(name::STR Common-atts Other) -> Pattern
+        empty::(Common-atts Other) -> Pattern
+        text::(Common-atts Other) -> Pattern
+        value::(type::STR? Common-atts STR) -> Pattern
+        data::(type::STR Common-atts Other param::(name::STR Common-atts STR)* except::(Common-atts Open-patterns)?) -> Pattern
+        notAllowed::(Common-atts Other) -> Pattern
+        externalRef::(href::STR Common-atts Other) -> Pattern
+        grammar::(Common-atts Grammar-content) -> Pattern
+
+        Other (Start-element | Define-element | div::(Common-atts Grammar-content) | include::(href::STR Common-atts Include-content))* -> Grammar-content
+
+        Other (Start-element | Define-element | div::(Common-atts Include-content))* -> Include-content
+
+        start::(Combine-att Common-atts Open-pattern) -> Start-element
+
+        define::(name::STR Combine-att Common-atts Open-patterns) -> Define-element
+
+        combine::("choice" | "interleave")? -> Combine-att
+
+        Other Pattern+ -> Open-patterns
+
+        Other Pattern -> Open-pattern
+
+        name::(Common-atts STR) -> Name-class
+        anyName::(Common-atts Except-name-class) -> Name-class
+        nsName::(Common-atts Except-name-class) -> Name-class
+        choice::(Common-atts Open-name-classes) -> Name-class
+
+        Other except::Open-name-classes? -> Except-name-class
+
+        Other Name-class+ -> Open-name-classes
+
+        Other Name-class -> Open-name-class
+
+        ns::STR? datatypeLibrary::STR? ANY* -> Common-atts
+
+        (ANY | STR | Any)** -> Other
+
+        (ANY | STR | Any)* -> Any

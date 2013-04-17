@@ -28,6 +28,8 @@ all:
 	_dev/format tank metasyntax/lll-ldta metasyntax/lll-ldta
 	cp ../slps/topics/grammars/metasyntax/lll-kort/grammar.bgf tank/metasyntax/lll-kort.bgf
 	_dev/format tank metasyntax/lll-kort metasyntax/lll-kort
+	cp ../slps/topics/grammars/metasyntax/relaxng/grammar.bgf tank/metasyntax/relaxng.bgf
+	_dev/format tank metasyntax/relaxng metasyntax/relaxng
 	cp ../slps/topics/grammars/metasyntax/txl/grammar.bgf tank/metasyntax/txl.bgf
 	_dev/format tank metasyntax/txl metasyntax/txl
 	cp ../slps/topics/grammars/metasyntax/yacc-sdf/grammar.bgf tank/metasyntax/yacc-sdf.bgf
@@ -42,6 +44,82 @@ all:
 	_dev/format tank ocl/types ocl/types
 	cp ../slps/topics/grammars/ocl/values/grammar.bgf tank/ocl/values.bgf
 	_dev/format tank ocl/values ocl/values
+	cp ../slps/topics/grammars/markup/atom/grammar.bgf tank/markup/atom.bgf
+	_dev/format tank markup/atom markup/atom
+	cp ../slps/topics/grammars/markup/bugzilla/grammar.bgf tank/markup/bugzilla.bgf
+	_dev/format tank markup/bugzilla markup/bugzilla
+	cp ../slps/topics/grammars/markup/cml/grammar.bgf tank/markup/cml.bgf
+	_dev/format tank markup/cml markup/cml
+	cp ../slps/topics/grammars/markup/docbook/grammar.bgf tank/markup/docbook.bgf
+	_dev/format tank markup/docbook markup/docbook
+	cp ../slps/topics/grammars/markup/ebxml/grammar.bgf tank/markup/ebxml.bgf
+	_dev/format tank markup/ebxml markup/ebxml
+	cp ../slps/topics/grammars/markup/graphml/grammar.bgf tank/markup/graphml.bgf
+	_dev/format tank markup/graphml markup/graphml
+	cp ../slps/topics/grammars/markup/kml/grammar.bgf tank/markup/kml.bgf
+	_dev/format tank markup/kml markup/kml
+	cp ../slps/topics/grammars/pnml/pnmlcoremodel/grammar.bgf tank/pnml/pnmlcoremodel.bgf
+	_dev/format tank pnml/pnmlcoremodel pnml/pnmlcoremodel
+	cp ../slps/topics/grammars/pnml/anyElement/grammar.bgf tank/pnml/anyElement.bgf
+	_dev/format tank pnml/anyElement pnml/anyElement
+	cp ../slps/topics/grammars/pnml/conventions/grammar.bgf tank/pnml/conventions.bgf
+	_dev/format tank pnml/conventions pnml/conventions
+	cp ../slps/topics/grammars/pnml/ptnet/grammar.bgf tank/pnml/ptnet.bgf
+	_dev/format tank pnml/ptnet pnml/ptnet
+	cp ../slps/topics/grammars/pnml/booleans/grammar.bgf tank/pnml/booleans.bgf
+	_dev/format tank pnml/booleans pnml/booleans
+	cp ../slps/topics/grammars/pnml/finiteenumerations/grammar.bgf tank/pnml/finiteenumerations.bgf
+	_dev/format tank pnml/finiteenumerations pnml/finiteenumerations
+	cp ../slps/topics/grammars/pnml/cyclicenumerations/grammar.bgf tank/pnml/cyclicenumerations.bgf
+	_dev/format tank pnml/cyclicenumerations pnml/cyclicenumerations
+	cp ../slps/topics/grammars/pnml/finiteintranges/grammar.bgf tank/pnml/finiteintranges.bgf
+	_dev/format tank pnml/finiteintranges pnml/finiteintranges
+	cp ../slps/topics/grammars/pnml/dots/grammar.bgf tank/pnml/dots.bgf
+	_dev/format tank pnml/dots pnml/dots
+	cp ../slps/topics/grammars/pnml/multisets/grammar.bgf tank/pnml/multisets.bgf
+	_dev/format tank pnml/multisets pnml/multisets
+	cp ../slps/topics/grammars/pnml/partitions/grammar.bgf tank/pnml/partitions.bgf
+	_dev/format tank pnml/partitions pnml/partitions
+	cp ../slps/topics/grammars/pnml/lists/grammar.bgf tank/pnml/lists.bgf
+	_dev/format tank pnml/lists pnml/lists
+	cp ../slps/topics/grammars/pnml/integers/grammar.bgf tank/pnml/integers.bgf
+	_dev/format tank pnml/integers pnml/integers
+	cp ../slps/topics/grammars/pnml/strings/grammar.bgf tank/pnml/strings.bgf
+	_dev/format tank pnml/strings pnml/strings
+	cp ../slps/topics/grammars/pnml/terms/grammar.bgf tank/pnml/terms.bgf
+	_dev/format tank pnml/terms pnml/terms
+	cp ../slps/topics/grammars/pnml/arbitrarydeclarations/grammar.bgf tank/pnml/arbitrarydeclarations.bgf
+	_dev/format tank pnml/arbitrarydeclarations pnml/arbitrarydeclarations
+	cp ../slps/topics/grammars/pnml/hlcorestructure/grammar.bgf tank/pnml/hlcorestructure.bgf
+	_dev/format tank pnml/hlcorestructure pnml/hlcorestructure
+	cp ../slps/topics/grammars/pnml/hlpng/grammar.bgf tank/pnml/hlpng.bgf
+	_dev/format tank pnml/hlpng pnml/hlpng
+	cp ../slps/topics/grammars/pnml/symmetricnet/grammar.bgf tank/pnml/symmetricnet.bgf
+	_dev/format tank pnml/symmetricnet pnml/symmetricnet
+	cp ../slps/topics/grammars/pnml/highlevelnet/grammar.bgf tank/pnml/highlevelnet.bgf
+	_dev/format tank pnml/highlevelnet pnml/highlevelnet
+	cp ../slps/topics/grammars/pnml/ext-specialarcs/grammar.bgf tank/pnml/ext-specialarcs.bgf
+	_dev/format tank pnml/ext-specialarcs pnml/ext-specialarcs
+	cp ../slps/topics/grammars/pnml/ext-reset/grammar.bgf tank/pnml/ext-reset.bgf
+	_dev/format tank pnml/ext-reset pnml/ext-reset
+	cp ../slps/topics/grammars/pnml/ext-inhibitor/grammar.bgf tank/pnml/ext-inhibitor.bgf
+	_dev/format tank pnml/ext-inhibitor pnml/ext-inhibitor
+	cp ../slps/topics/grammars/pnml/ext-resetinhibitor/grammar.bgf tank/pnml/ext-resetinhibitor.bgf
+	_dev/format tank pnml/ext-resetinhibitor pnml/ext-resetinhibitor
+	cp ../slps/topics/grammars/pnml/guyard-modular/grammar.bgf tank/pnml/guyard-modular.bgf
+	_dev/format tank pnml/guyard-modular pnml/guyard-modular
+	cp ../slps/topics/grammars/pnml/guyard-simplified/grammar.bgf tank/pnml/guyard-simplified.bgf
+	_dev/format tank pnml/guyard-simplified pnml/guyard-simplified
+	cp ../slps/topics/grammars/pnml/guyard-basic/grammar.bgf tank/pnml/guyard-basic.bgf
+	_dev/format tank pnml/guyard-basic pnml/guyard-basic
+	cp ../slps/topics/grammars/pnml/guyard-structured/grammar.bgf tank/pnml/guyard-structured.bgf
+	_dev/format tank pnml/guyard-structured pnml/guyard-structured
+	cp ../slps/topics/grammars/pnml/touzet/grammar.bgf tank/pnml/touzet.bgf
+	_dev/format tank pnml/touzet pnml/touzet
+	cp ../slps/topics/grammars/markup/r2ml/grammar.bgf tank/markup/r2ml.bgf
+	_dev/format tank markup/r2ml markup/r2ml
+	cp ../slps/topics/grammars/markup/rss/grammar.bgf tank/markup/rss.bgf
+	_dev/format tank markup/rss markup/rss
 	_dev/format tank tescol/reference Reference
 	_dev/format tank tescol/00000 00000
 	_dev/format tank tescol/00001 00001
@@ -75,27 +153,7 @@ all:
 	_dev/format tank tescol/11101 11101
 	_dev/format tank tescol/11110 11110
 	_dev/format tank tescol/11111 11111
-				cp ../slps/topics/grammars/markup/atom/grammar.bgf tank/markup/atom.bgf
-	_dev/format tank markup/atom markup/atom
-	cp ../slps/topics/grammars/markup/bugzilla/grammar.bgf tank/markup/bugzilla.bgf
-	_dev/format tank markup/bugzilla markup/bugzilla
-	cp ../slps/topics/grammars/markup/cml/grammar.bgf tank/markup/cml.bgf
-	_dev/format tank markup/cml markup/cml
-	cp ../slps/topics/grammars/markup/docbook/grammar.bgf tank/markup/docbook.bgf
-	_dev/format tank markup/docbook markup/docbook
-	cp ../slps/topics/grammars/markup/graphml/grammar.bgf tank/markup/graphml.bgf
-	_dev/format tank markup/graphml markup/graphml
-	cp ../slps/topics/grammars/markup/kml/grammar.bgf tank/markup/kml.bgf
-	_dev/format tank markup/kml markup/kml
-	cp ../slps/topics/grammars/markup/pnml-modular/grammar.bgf tank/markup/pnml-modular.bgf
-	_dev/format tank markup/pnml-modular markup/pnml-modular
-	cp ../slps/topics/grammars/markup/pnml-simplified/grammar.bgf tank/markup/pnml-simplified.bgf
-	_dev/format tank markup/pnml-simplified markup/pnml-simplified
-	cp ../slps/topics/grammars/markup/pnml-basic/grammar.bgf tank/markup/pnml-basic.bgf
-	_dev/format tank markup/pnml-basic markup/pnml-basic
-	cp ../slps/topics/grammars/markup/pnml-structured/grammar.bgf tank/markup/pnml-structured.bgf
-	_dev/format tank markup/pnml-structured markup/pnml-structured
-	cp ../slps/topics/grammars/metamodels/ACG/grammar.bgf tank/metamodels/ACG.bgf
+				cp ../slps/topics/grammars/metamodels/ACG/grammar.bgf tank/metamodels/ACG.bgf
 	_dev/format tank metamodels/ACG metamodels/ACG
 	cp ../slps/topics/grammars/metamodels/ACME/grammar.bgf tank/metamodels/ACME.bgf
 	_dev/format tank metamodels/ACME metamodels/ACME
@@ -395,8 +453,6 @@ all:
 	_dev/format tank metamodels/GWPNV4 metamodels/GWPNV4
 	cp ../slps/topics/grammars/metamodels/GWPNV5/grammar.bgf tank/metamodels/GWPNV5.bgf
 	_dev/format tank metamodels/GWPNV5 metamodels/GWPNV5
-	cp ../slps/topics/grammars/metamodels/PetriNet/grammar.bgf tank/metamodels/PetriNet.bgf
-	_dev/format tank metamodels/PetriNet metamodels/PetriNet
 	cp ../slps/topics/grammars/metamodels/PetriNet_extended/grammar.bgf tank/metamodels/PetriNet_extended.bgf
 	_dev/format tank metamodels/PetriNet_extended metamodels/PetriNet_extended
 	cp ../slps/topics/grammars/metamodels/PluginEclipse/grammar.bgf tank/metamodels/PluginEclipse.bgf
@@ -423,12 +479,8 @@ all:
 	_dev/format tank metamodels/QoS_Statement metamodels/QoS_Statement
 	cp ../slps/topics/grammars/metamodels/QoS/grammar.bgf tank/metamodels/QoS.bgf
 	_dev/format tank metamodels/QoS metamodels/QoS
-	cp ../slps/topics/grammars/metamodels/R2ML/grammar.bgf tank/metamodels/R2ML.bgf
-	_dev/format tank metamodels/R2ML metamodels/R2ML
 	cp ../slps/topics/grammars/metamodels/RDFS/grammar.bgf tank/metamodels/RDFS.bgf
 	_dev/format tank metamodels/RDFS metamodels/RDFS
-	cp ../slps/topics/grammars/metamodels/RSS-2.0/grammar.bgf tank/metamodels/RSS-2.0.bgf
-	_dev/format tank metamodels/RSS-2.0 metamodels/RSS-2.0
 	cp ../slps/topics/grammars/metamodels/Relational/grammar.bgf tank/metamodels/Relational.bgf
 	_dev/format tank metamodels/Relational metamodels/Relational
 	cp ../slps/topics/grammars/metamodels/RelationalDBContent/grammar.bgf tank/metamodels/RelationalDBContent.bgf
@@ -503,8 +555,6 @@ all:
 	_dev/format tank metamodels/MSOfficeExcel_SpreadsheetMLWorkbookProp metamodels/MSOfficeExcel_SpreadsheetMLWorkbookProp
 	cp ../slps/topics/grammars/metamodels/MSOfficeExcel_SpreadsheetMLWorksheetOpt/grammar.bgf tank/metamodels/MSOfficeExcel_SpreadsheetMLWorksheetOpt.bgf
 	_dev/format tank metamodels/MSOfficeExcel_SpreadsheetMLWorksheetOpt metamodels/MSOfficeExcel_SpreadsheetMLWorksheetOpt
-	cp ../slps/topics/grammars/metamodels/Statecharts/grammar.bgf tank/metamodels/Statecharts.bgf
-	_dev/format tank metamodels/Statecharts metamodels/Statecharts
 	cp ../slps/topics/grammars/metamodels/SyncCharts/grammar.bgf tank/metamodels/SyncCharts.bgf
 	_dev/format tank metamodels/SyncCharts metamodels/SyncCharts
 	cp ../slps/topics/grammars/metamodels/SysML/grammar.bgf tank/metamodels/SysML.bgf
@@ -545,8 +595,6 @@ all:
 	_dev/format tank metamodels/UnixFS metamodels/UnixFS
 	cp ../slps/topics/grammars/metamodels/UsiXML-task/grammar.bgf tank/metamodels/UsiXML-task.bgf
 	_dev/format tank metamodels/UsiXML-task metamodels/UsiXML-task
-	cp ../slps/topics/grammars/metamodels/vb/grammar.bgf tank/metamodels/vb.bgf
-	_dev/format tank metamodels/vb metamodels/vb
 	cp ../slps/topics/grammars/metamodels/WSDL/grammar.bgf tank/metamodels/WSDL.bgf
 	_dev/format tank metamodels/WSDL metamodels/WSDL
 	cp ../slps/topics/grammars/metamodels/WebApplications_AbstractModel/grammar.bgf tank/metamodels/WebApplications_AbstractModel.bgf
@@ -589,8 +637,6 @@ all:
 	_dev/format tank metamodels/MiningMart_SimplifiedMetamodel metamodels/MiningMart_SimplifiedMetamodel
 	cp ../slps/topics/grammars/metamodels/MiningMart_ViewDataRepresentation/grammar.bgf tank/metamodels/MiningMart_ViewDataRepresentation.bgf
 	_dev/format tank metamodels/MiningMart_ViewDataRepresentation metamodels/MiningMart_ViewDataRepresentation
-	cp ../slps/topics/grammars/metamodels/ebXML/grammar.bgf tank/metamodels/ebXML.bgf
-	_dev/format tank metamodels/ebXML metamodels/ebXML
 	cp ../slps/topics/grammars/metamodels/ifc2x3/grammar.bgf tank/metamodels/ifc2x3.bgf
 	_dev/format tank metamodels/ifc2x3 metamodels/ifc2x3
 	cp ../slps/topics/grammars/metamodels/sbvrEclipse/grammar.bgf tank/metamodels/sbvrEclipse.bgf

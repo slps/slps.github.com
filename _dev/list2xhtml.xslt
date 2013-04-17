@@ -276,7 +276,9 @@ Last updated: </xsl:text>
 				</xsl:if>
 				<xsl:text>, </xsl:text>
 			</xsl:for-each>
-			<xsl:if test="etc"><xsl:text>…</xsl:text></xsl:if>
+			<xsl:if test="etc">
+				<xsl:text>…</xsl:text>
+			</xsl:if>
 			<xsl:for-each select="edition|version|revision">
 				<xsl:value-of select="."/>
 				<sup>
@@ -326,18 +328,28 @@ Last updated: </xsl:text>
 					<xsl:value-of select="name"/>
 					<xsl:text> grammar: </xsl:text>
 					<span class="links">
-				[<a href="{$filename}.html" class="red">Browsable</a>]
-				[<a href="{$filename}.bgf">BGF</a>]
-				[<a href="{$filename}.bnf">EBNF</a>]
-				<!--
+						<xsl:text> [</xsl:text>
+						<a href="{$filename}.html" class="red">Browsable</a>
+						<xsl:text>] [</xsl:text>
+						<a href="{$filename}.bgf">BGF</a>
+						<xsl:text>] [</xsl:text>
+						<a href="{$filename}.bnf">EBNF</a>
+						<xsl:text>] [</xsl:text>
+						<!--
 				<xsl:if test="(../../handle='c') or (../../handle='cpp') or ((../../handle='csharp') and not(handle='iso-23270-2003') and not(handle='iso-23270-2003-recovered'))">
 					[<a href="{$filename}.lll">LLL</a>]
 				</xsl:if>
 				-->
-				[<a href="{$filename}.dms">DMS BNF</a>]
-				[<a href="{$filename}.sdf">SDF</a>]
-				[<a href="{$filename}.rsc">Rascal</a>]
-			</span>
+						<a href="{$filename}.dms">DMS BNF</a>
+						<xsl:text>] [</xsl:text>
+						<a href="{$filename}.sdf">SDF</a>
+						<xsl:text>]</xsl:text>
+						<xsl:if test="../../short != 'Metamodels'">
+							<xsl:text> [</xsl:text>
+							<a href="{$filename}.rsc">Rascal</a>
+							<xsl:text>]</xsl:text>
+						</xsl:if>
+					</span>
 				</li>
 			</xsl:if>
 			<xsl:for-each select="*">
@@ -386,13 +398,20 @@ Last updated: </xsl:text>
 					<xsl:value-of select="."/>
 					<xsl:text> grammar: </xsl:text>
 					<span class="links">
-					[<a href="{$filename}.html" class="red">Browsable</a>]
-					[<a href="{$filename}.bgf">BGF</a>]
-					[<a href="{$filename}.bnf">EBNF</a>]
-					[<a href="{$filename}.dms">DMS BNF</a>]
-					[<a href="{$filename}.sdf">SDF</a>]
-					[<a href="{$filename}.rsc">Rascal</a>]
-				</span>
+						<xsl:text>[</xsl:text>
+						<a href="{$filename}.html" class="red">Browsable</a>
+						<xsl:text>] [</xsl:text>
+						<a href="{$filename}.bgf">BGF</a>
+						<xsl:text>] [</xsl:text>
+						<a href="{$filename}.bnf">EBNF</a>
+						<xsl:text>] [</xsl:text>
+						<a href="{$filename}.dms">DMS BNF</a>
+						<xsl:text>] [</xsl:text>
+						<a href="{$filename}.sdf">SDF</a>
+						<xsl:text>] [</xsl:text>
+						<a href="{$filename}.rsc">Rascal</a>
+						<xsl:text>]</xsl:text>
+					</span>
 				</li>
 			</xsl:for-each>
 			<xsl:for-each select="tool|toolset|item|itemset">

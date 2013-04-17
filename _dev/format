@@ -3,7 +3,9 @@
 ../slps/shared/tools/bgf2bnf   $1/$2.bgf $1/$2.bnf
 ../slps/shared/tools/bgf2dms   $1/$2.bgf $1/$2.dms
 ../slps/shared/tools/bgf2sdf   $1/$2.bgf $1/$2.sdf
+if [ `dirname $2` != 'metamodels' ]; then
 ../slps/shared/tools/bgf2rsc   $1/$2.bgf $1/$2.rsc
+fi
 ../slps/topics/investigation/analysis/overview_bgf.py $1/$2.bgf >tmp.xml || exit -1
 xsltproc --stringparam date `date +"%b%Y"` --stringparam zoo ../../../../webslps/_dev/$1.xml --stringparam id $3 --stringparam report ../../../../webslps/tmp.xml ../slps/topics/export/hypertext/bgf2fancy.xslt $1/$2.bgf >$1/$2.html || exit -1
 if [ -r ../slps/topics/grammars/$3 ]; then
