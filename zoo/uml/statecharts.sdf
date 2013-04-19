@@ -1,0 +1,32 @@
+module Main
+
+exports
+  sorts
+        Integer String Boolean BooleanExpression StateMachine State CompositeState Transition StateVertex Guard Event 
+  context-free syntax
+        INT -> Integer
+
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        value::String -> BooleanExpression
+
+        transitions::Transition+ top::State+ -> StateMachine
+
+        CompositeState -> State
+
+        state_container::StateMachine internalTransitions::Transition+ deferrableEvents::Event+ -> State
+
+        subVertexes::StateVertex+ isConcurrent::Boolean -> CompositeState
+
+        transSM_container::StateMachine transS_container::State trigger::Event guard::Guard source::StateVertex target::StateVertex -> Transition
+
+        State -> StateVertex
+
+        sv_container::CompositeState outgoing::Transition+ incoming::Transition+ -> StateVertex
+
+        gua_container::Transition expression::BooleanExpression -> Guard
+
+        evt_container::Transition+ targets::State+ -> Event

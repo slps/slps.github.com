@@ -1,0 +1,33 @@
+module Main
+
+exports
+ context-free start-symbols BGFGrammar
+  sorts
+        BGFGrammar BGFProduction BGFExpression BGFValue BGFProdList BGFExprList 
+  context-free syntax
+        grammar::(roots::(STR*) prods::BGFProdList) -> BGFGrammar
+
+        production::(label::STR lhs::STR rhs::BGFExpression) -> BGFProduction
+
+        epsilon:: -> BGFExpression
+        empty:: -> BGFExpression
+        val::v::BGFValue -> BGFExpression
+        anything:: -> BGFExpression
+        terminal::t::STR -> BGFExpression
+        nonterminal::t::STR -> BGFExpression
+        selectable::(selector::STR expr::BGFExpression) -> BGFExpression
+        sequence::exprs::BGFExprList -> BGFExpression
+        choice::exprs::BGFExprList -> BGFExpression
+        marked::expr::BGFExpression -> BGFExpression
+        optional::expr::BGFExpression -> BGFExpression
+        plus::expr::BGFExpression -> BGFExpression
+        star::expr::BGFExpression -> BGFExpression
+        seplistplus::(expr::BGFExpression sep::BGFExpression) -> BGFExpression
+        sepliststar::(expr::BGFExpression sep::BGFExpression) -> BGFExpression
+
+        string:: -> BGFValue
+        integer:: -> BGFValue
+
+        BGFProduction* -> BGFProdList
+
+        BGFExpression* -> BGFExprList

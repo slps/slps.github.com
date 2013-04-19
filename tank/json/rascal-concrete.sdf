@@ -1,0 +1,30 @@
+module Main
+
+exports
+ context-free start-symbols JSONText
+  sorts
+        JSONText Value Object Member Array 
+  context-free syntax
+        Object -> JSONText
+
+        Array -> JSONText
+
+        NumericLiteral -> Value
+
+        StringLiteral -> Value
+
+        "true" -> Value {cons(True)}
+
+        Object -> Value
+
+        Array -> Value
+
+        "null" -> Value {cons(Null)}
+
+        "false" -> Value {cons(False)}
+
+        "{" members:: "}" -> Object {cons(Object)}
+
+        memberName::StringLiteral ":" memberValue::Value -> Member {cons(Member)}
+
+        "[" values:: "]" -> Array {cons(Array)}

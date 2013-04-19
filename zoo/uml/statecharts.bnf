@@ -1,0 +1,27 @@
+Integer:
+        INT
+String:
+        STR
+Boolean:
+        "true"
+        "false"
+BooleanExpression:
+        value::String
+StateMachine:
+        transitions::Transition+ top::State+
+State:
+        CompositeState
+State:
+        state_container::StateMachine internalTransitions::Transition+ deferrableEvents::Event+
+CompositeState:
+        subVertexes::StateVertex+ isConcurrent::Boolean
+Transition:
+        transSM_container::StateMachine transS_container::State trigger::Event guard::Guard source::StateVertex target::StateVertex
+StateVertex:
+        State
+StateVertex:
+        sv_container::CompositeState outgoing::Transition+ incoming::Transition+
+Guard:
+        gua_container::Transition expression::BooleanExpression
+Event:
+        evt_container::Transition+ targets::State+

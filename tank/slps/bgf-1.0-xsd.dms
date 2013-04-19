@@ -1,0 +1,17 @@
+grammar = name::STR? root::nonterminal* production* ;
+production = label::label? nonterminal::nonterminal expression ;
+expression = epsilon:: ;
+expression = empty:: ;
+expression = any:: ;
+expression = terminal::terminal ;
+expression = nonterminal::nonterminal ;
+expression = selectable::(selector::selector expression) ;
+expression = sequence::(expression*) ;
+expression = choice::(expression*) ;
+expression = optional::expression ;
+expression = plus::expression ;
+expression = star::expression ;
+label = STR ;
+nonterminal = STR ;
+selector = STR ;
+terminal = STR ;

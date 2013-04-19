@@ -1,0 +1,349 @@
+id.attrib:
+        (id::ID.datatype)?
+class.attrib:
+        (class::NMTOKENS.datatype)?
+title.attrib:
+        (title::Text.datatype)?
+Core.attrib:
+        id.attrib class.attrib title.attrib
+lang.attrib:
+        (xml:lang::LanguageCode.datatype)?
+I18n.attrib:
+        lang.attrib
+Common.attrib:
+        Core.attrib I18n.attrib
+CommonIdRequired.attrib:
+        id::ID.datatype class.attrib title.attrib I18n.attrib
+base:
+        base::base.attlist
+base.attlist:
+        href::URI.datatype
+head.content:
+        base?
+head.content:
+        link*
+head.content:
+        meta*
+head.content:
+        title
+Length.datatype:
+        STR
+LinkTypes.datatype:
+        NMTOKENS.datatype
+MediaDesc.datatype:
+        STR
+MultiLength.datatype:
+        STR
+Number.datatype:
+        STR
+Pixels.datatype:
+        STR
+Script.datatype:
+        STR
+Text.datatype:
+        STR
+Character.datatype:
+        STR
+Charset.datatype:
+        STR
+Charsets.datatype:
+        STR
+ContentType.datatype:
+        STR
+ContentTypes.datatype:
+        STR
+Datetime.datatype:
+        STR
+FPI.datatype:
+        STR
+LanguageCode.datatype:
+        STR
+URI.datatype:
+        STR
+URIs.datatype:
+        STR
+NMTOKEN.datatype:
+        STR
+NMTOKENS.datatype:
+        STR
+ID.datatype:
+        STR
+IDREF.datatype:
+        STR
+IDREFS.datatype:
+        STR
+form:
+        form::(form.attlist Block.class+)
+form.attlist:
+        Common.attrib action::URI.datatype ("get" | "post")? (enctype::ContentType.datatype)?
+label:
+        label::(label.attlist Inline.model)
+label.attlist:
+        Common.attrib (for::IDREF.datatype)? (accesskey::Character.datatype)?
+input:
+        input::input.attlist
+input.attlist:
+        Common.attrib (type::InputType.class)? (name::STR)? (value::STR)? (checked::"checked")? (size::STR)? (maxlength::Number.datatype)? (src::URI.datatype)? (accesskey::Character.datatype)?
+InputType.class:
+        "text"
+        "password"
+        "checkbox"
+        "radio"
+        "submit"
+        "reset"
+        "hidden"
+select:
+        select::(select.attlist option+)
+select.attlist:
+        Common.attrib (name::STR)? (size::Number.datatype)? (multiple::"multiple")?
+option:
+        option::(Common.attrib (selected::"selected")? (value::STR)? STR)
+textarea:
+        textarea::textarea.attlist
+textarea.attlist:
+        Common.attrib (name::STR)? rows::Number.datatype cols::Number.datatype (accesskey::Character.datatype)? STR
+Form.class:
+        form
+Formctrl.class:
+        input
+        label
+        select
+        textarea
+Block.class:
+        Form.class
+Block.class:
+        List.class
+Block.class:
+        table
+Block.class:
+        address
+        blockquote
+        div
+        p
+        pre
+        Heading.class
+Inline.class:
+        Formctrl.class
+Inline.class:
+        a
+Inline.class:
+        img
+Inline.class:
+        object
+Inline.class:
+        abbr
+        acronym
+        br
+        cite
+        code
+        dfn
+        em
+        kbd
+        q
+        samp
+        span
+        strong
+        var
+a:
+        a::(a.attlist Inline.model)
+a.attlist:
+        Common.attrib (href::URI.datatype)? (charset::Charset.datatype)? (type::ContentType.datatype)? (hreflang::LanguageCode.datatype)? (rel::LinkTypes.datatype)? (rev::LinkTypes.datatype)? (accesskey::Character.datatype)? (tabindex::Number.datatype)?
+img:
+        img::img.attlist
+img.attlist:
+        Common.attrib src::URI.datatype alt::Text.datatype (longdesc::URI.datatype)? (height::Length.datatype)? (width::Length.datatype)?
+link:
+        link::link.attlist
+link.attlist:
+        Common.attrib (charset::Charset.datatype)? (href::URI.datatype)? (hreflang::LanguageCode.datatype)? (type::ContentType.datatype)? (rel::LinkTypes.datatype)? (rev::LinkTypes.datatype)? (media::MediaDesc.datatype)?
+dl:
+        dl::(dl.attlist (dt | dd)+)
+dl.attlist:
+        Common.attrib
+dt:
+        dt::(dt.attlist Inline.model)
+dt.attlist:
+        Common.attrib
+dd:
+        dd::(dd.attlist Flow.model)
+dd.attlist:
+        Common.attrib
+ol:
+        ol::(ol.attlist li+)
+ol.attlist:
+        Common.attrib
+ul:
+        ul::(ul.attlist li+)
+ul.attlist:
+        Common.attrib
+li:
+        li::(li.attlist Flow.model)
+li.attlist:
+        Common.attrib
+List.class:
+        ul
+        ol
+        dl
+meta:
+        meta::meta.attlist
+meta.attlist:
+        I18n.attrib (http-equiv::NMTOKEN.datatype)? (name::NMTOKEN.datatype)? (content::STR)? (scheme::STR)?
+object:
+        object::(object.attlist param* Flow.model)
+object.attlist:
+        Common.attrib (declare::"declare")? (classid::URI.datatype)? (codebase::URI.datatype)? (data::URI.datatype)? (type::ContentType.datatype)? (codetype::ContentType.datatype)? (archive::URIs.datatype)? (standby::Text.datatype)? (height::Length.datatype)? (width::Length.datatype)? (name::STR)? (tabindex::Number.datatype)?
+param:
+        param::param.attlist
+param.attlist:
+        id.attrib name::STR (value::STR)? ("data" | "ref" | "object")? (type::ContentType.datatype)?
+title:
+        title::(title.attlist STR)
+title.attlist:
+        I18n.attrib
+head:
+        head::(head.attlist head.content)
+head.attlist:
+        I18n.attrib profile.attlist
+profile.attlist:
+        (profile::URI.datatype)?
+body:
+        body::(body.attlist Block.model)
+body.attlist:
+        Common.attrib
+html:
+        html::(html.attlist head body)
+html.attlist:
+        XHTML.version.attrib I18n.attrib
+XHTML.version.attrib:
+        (version::FPI.datatype)?
+table:
+        table::(table.attlist caption? tr+)
+table.attlist:
+        Common.attrib (summary::Text.datatype)?
+caption:
+        caption::(caption.attlist Inline.model)
+caption.attlist:
+        Common.attrib
+tr:
+        tr::(tr.attlist (th | td)+)
+tr.attlist:
+        Common.attrib CellHAlign.attrib CellVAlign.attrib
+th:
+        th::(th.attlist Flow.model)
+th.attlist:
+        Cell.attrib
+td:
+        td::(td.attlist Flow.model)
+td.attlist:
+        Cell.attrib
+Cell.attrib:
+        Common.attrib (abbr::Text.datatype)? (axis::STR)? (headers::IDREFS.datatype)? scope.attrib (rowspan::Number.datatype)? (colspan::Number.datatype)? CellHAlign.attrib CellVAlign.attrib
+CellHAlign.attrib:
+        ("left" | "center" | "right")?
+CellVAlign.attrib:
+        ("top" | "middle" | "bottom")?
+scope.attrib:
+        ("row" | "col")?
+br:
+        br::br.attlist
+br.attlist:
+        Core.attrib
+span:
+        span::(span.attlist Inline.model)
+span.attlist:
+        Common.attrib
+abbr:
+        abbr::(abbr.attlist Inline.model)
+abbr.attlist:
+        Common.attrib
+acronym:
+        acronym::(acronym.attlist Inline.model)
+acronym.attlist:
+        Common.attrib
+cite:
+        cite::(cite.attlist Inline.model)
+cite.attlist:
+        Common.attrib
+code:
+        code::(code.attlist Inline.model)
+code.attlist:
+        Common.attrib
+dfn:
+        dfn::(dfn.attlist Inline.model)
+dfn.attlist:
+        Common.attrib
+em:
+        em::(em.attlist Inline.model)
+em.attlist:
+        Common.attrib
+kbd:
+        kbd::(kbd.attlist Inline.model)
+kbd.attlist:
+        Common.attrib
+q:
+        q::(q.attlist Inline.model)
+q.attlist:
+        Common.attrib (cite::URI.datatype)?
+samp:
+        samp::(samp.attlist Inline.model)
+samp.attlist:
+        Common.attrib
+strong:
+        strong::(strong.attlist Inline.model)
+strong.attlist:
+        Common.attrib
+var:
+        var::(var.attlist Inline.model)
+var.attlist:
+        Common.attrib
+div:
+        div::(div.attlist Flow.model)
+div.attlist:
+        Common.attrib
+p:
+        p::(p.attlist Inline.model)
+p.attlist:
+        Common.attrib
+address:
+        address::(address.attlist Inline.model)
+address.attlist:
+        Common.attrib
+blockquote:
+        blockquote::(blockquote.attlist Block.model)
+blockquote.attlist:
+        Common.attrib (cite::URI.datatype)?
+pre:
+        pre::(pre.attlist Inline.model)
+pre.attlist:
+        Common.attrib (xml:space::"preserve")?
+h1:
+        h1::(Heading.attrib Heading.content)
+h2:
+        h2::(Heading.attrib Heading.content)
+h3:
+        h3::(Heading.attrib Heading.content)
+h4:
+        h4::(Heading.attrib Heading.content)
+h5:
+        h5::(Heading.attrib Heading.content)
+h6:
+        h6::(Heading.attrib Heading.content)
+Heading.attrib:
+        Common.attrib
+Heading.content:
+        Inline.model
+Heading.class:
+        h1
+        h2
+        h3
+        h4
+        h5
+        h6
+Inline.model:
+        (STR | Inline.class)*
+Block.mix:
+        Block.class
+Block.model:
+        Block.mix+
+Flow.model:
+        (STR | Inline.class | Block.class)*

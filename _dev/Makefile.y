@@ -34,6 +34,14 @@ all:
 	_dev/format tank metasyntax/txl metasyntax/txl
 	cp ../slps/topics/grammars/metasyntax/yacc-sdf/grammar.bgf tank/metasyntax/yacc-sdf.bgf
 	_dev/format tank metasyntax/yacc-sdf metasyntax/yacc-sdf
+	cp ../slps/topics/grammars/json/rascal-concrete/grammar.bgf tank/json/rascal-concrete.bgf
+	_dev/format tank json/rascal-concrete json/rascal-concrete
+	cp ../slps/topics/grammars/json/zaytsev-concrete/grammar.bgf tank/json/zaytsev-concrete.bgf
+	_dev/format tank json/zaytsev-concrete json/zaytsev-concrete
+	cp ../slps/topics/grammars/json/rascal-abstract/grammar.bgf tank/json/rascal-abstract.bgf
+	_dev/format tank json/rascal-abstract json/rascal-abstract
+	cp ../slps/topics/grammars/json/zaytsev-abstract/grammar.bgf tank/json/zaytsev-abstract.bgf
+	_dev/format tank json/zaytsev-abstract json/zaytsev-abstract
 	cp ../slps/topics/grammars/ocl/expressions/grammar.bgf tank/ocl/expressions.bgf
 	_dev/format tank ocl/expressions ocl/expressions
 	cp ../slps/topics/grammars/ocl/uml/grammar.bgf tank/ocl/uml.bgf
@@ -50,8 +58,10 @@ all:
 	_dev/format tank markup/bugzilla markup/bugzilla
 	cp ../slps/topics/grammars/markup/cml/grammar.bgf tank/markup/cml.bgf
 	_dev/format tank markup/cml markup/cml
-	cp ../slps/topics/grammars/markup/docbook/grammar.bgf tank/markup/docbook.bgf
-	_dev/format tank markup/docbook markup/docbook
+	cp ../slps/topics/grammars/docbook/walsh/grammar.bgf tank/docbook/walsh.bgf
+	_dev/format tank docbook/walsh docbook/walsh
+	cp ../slps/topics/grammars/docbook/touzet/grammar.bgf tank/docbook/touzet.bgf
+	_dev/format tank docbook/touzet docbook/touzet
 	cp ../slps/topics/grammars/markup/ebxml/grammar.bgf tank/markup/ebxml.bgf
 	_dev/format tank markup/ebxml markup/ebxml
 	cp ../slps/topics/grammars/markup/graphml/grammar.bgf tank/markup/graphml.bgf
@@ -120,6 +130,58 @@ all:
 	_dev/format tank markup/r2ml markup/r2ml
 	cp ../slps/topics/grammars/markup/rss/grammar.bgf tank/markup/rss.bgf
 	_dev/format tank markup/rss markup/rss
+	cp ../slps/topics/grammars/markup/uiml/grammar.bgf tank/markup/uiml.bgf
+	_dev/format tank markup/uiml markup/uiml
+	cp ../slps/topics/grammars/slps/bgf-1.0-xsd/grammar.bgf tank/slps/bgf-1.0-xsd.bgf
+	_dev/format tank slps/bgf-1.0-xsd slps/bgf-1.0-xsd
+	cp ../slps/topics/grammars/slps/bgf-2.0-xsd/grammar.bgf tank/slps/bgf-2.0-xsd.bgf
+	_dev/format tank slps/bgf-2.0-xsd slps/bgf-2.0-xsd
+	cp ../slps/topics/grammars/slps/bgf-2.1-xsd/grammar.bgf tank/slps/bgf-2.1-xsd.bgf
+	_dev/format tank slps/bgf-2.1-xsd slps/bgf-2.1-xsd
+	cp ../slps/topics/grammars/slps/bgf-3.0-xsd/grammar.bgf tank/slps/bgf-3.0-xsd.bgf
+	_dev/format tank slps/bgf-3.0-xsd slps/bgf-3.0-xsd
+	cp ../slps/topics/grammars/slps/bgf-3.1-xsd/grammar.bgf tank/slps/bgf-3.1-xsd.bgf
+	_dev/format tank slps/bgf-3.1-xsd slps/bgf-3.1-xsd
+	cp ../slps/topics/grammars/slps/bgf-4.0-xsd/grammar.bgf tank/slps/bgf-4.0-xsd.bgf
+	_dev/format tank slps/bgf-4.0-xsd slps/bgf-4.0-xsd
+	cp ../slps/topics/grammars/slps/bgf-4.1-adt/grammar.bgf tank/slps/bgf-4.1-adt.bgf
+	_dev/format tank slps/bgf-4.1-adt slps/bgf-4.1-adt
+	cp ../slps/topics/grammars/slps/bgf-4.2-adt/grammar.bgf tank/slps/bgf-4.2-adt.bgf
+	_dev/format tank slps/bgf-4.2-adt slps/bgf-4.2-adt
+	cp ../slps/topics/grammars/slps/bgf-4.3-adt/grammar.bgf tank/slps/bgf-4.3-adt.bgf
+	_dev/format tank slps/bgf-4.3-adt slps/bgf-4.3-adt
+	cp ../slps/topics/grammars/slps/bgf-5.0-adt/grammar.bgf tank/slps/bgf-5.0-adt.bgf
+	_dev/format tank slps/bgf-5.0-adt slps/bgf-5.0-adt
+	cp ../slps/topics/grammars/slps/bgf-5.1-adt/grammar.bgf tank/slps/bgf-5.1-adt.bgf
+	_dev/format tank slps/bgf-5.1-adt slps/bgf-5.1-adt
+	cp ../slps/topics/grammars/slps/bgf-5.2-xsd/grammar.bgf tank/slps/bgf-5.2-xsd.bgf
+	_dev/format tank slps/bgf-5.2-xsd slps/bgf-5.2-xsd
+	cp ../slps/topics/grammars/slps/bgf-5.3-adt/grammar.bgf tank/slps/bgf-5.3-adt.bgf
+	_dev/format tank slps/bgf-5.3-adt slps/bgf-5.3-adt
+	cp ../slps/topics/grammars/slps/btf/grammar.bgf tank/slps/btf.bgf
+	_dev/format tank slps/btf slps/btf
+	cp ../slps/topics/grammars/slps/edd/grammar.bgf tank/slps/edd.bgf
+	_dev/format tank slps/edd slps/edd
+	cp ../slps/topics/grammars/slps/edd/grammar.bgf tank/slps/edd.bgf
+	_dev/format tank slps/edd slps/edd
+	cp ../slps/topics/grammars/slps/edd/grammar.bgf tank/slps/edd.bgf
+	_dev/format tank slps/edd slps/edd
+	cp ../slps/topics/grammars/slps/edd/grammar.bgf tank/slps/edd.bgf
+	_dev/format tank slps/edd slps/edd
+	cp ../slps/topics/grammars/slps/xbgf-xsd/grammar.bgf tank/slps/xbgf-xsd.bgf
+	_dev/format tank slps/xbgf-xsd slps/xbgf-xsd
+	cp ../slps/topics/grammars/slps/xbgf-adt/grammar.bgf tank/slps/xbgf-adt.bgf
+	_dev/format tank slps/xbgf-adt slps/xbgf-adt
+	cp ../slps/topics/grammars/slps/edd/grammar.bgf tank/slps/edd.bgf
+	_dev/format tank slps/edd slps/edd
+	cp ../slps/topics/grammars/slps/edd/grammar.bgf tank/slps/edd.bgf
+	_dev/format tank slps/edd slps/edd
+	cp ../slps/topics/grammars/slps/edd/grammar.bgf tank/slps/edd.bgf
+	_dev/format tank slps/edd slps/edd
+	cp ../slps/topics/grammars/slps/cbgf-xsd/grammar.bgf tank/slps/cbgf-xsd.bgf
+	_dev/format tank slps/cbgf-xsd slps/cbgf-xsd
+	cp ../slps/topics/grammars/slps/cbgf-adt/grammar.bgf tank/slps/cbgf-adt.bgf
+	_dev/format tank slps/cbgf-adt slps/cbgf-adt
 	_dev/format tank tescol/reference Reference
 	_dev/format tank tescol/00000 00000
 	_dev/format tank tescol/00001 00001
@@ -425,8 +487,6 @@ all:
 	_dev/format tank metamodels/PDG metamodels/PDG
 	cp ../slps/topics/grammars/metamodels/PIF/grammar.bgf tank/metamodels/PIF.bgf
 	_dev/format tank metamodels/PIF metamodels/PIF
-	cp ../slps/topics/grammars/metamodels/PL1/grammar.bgf tank/metamodels/PL1.bgf
-	_dev/format tank metamodels/PL1 metamodels/PL1
 	cp ../slps/topics/grammars/metamodels/PRR/grammar.bgf tank/metamodels/PRR.bgf
 	_dev/format tank metamodels/PRR metamodels/PRR
 	cp ../slps/topics/grammars/metamodels/paperdyne.owl/grammar.bgf tank/metamodels/paperdyne.owl.bgf
@@ -583,8 +643,6 @@ all:
 	_dev/format tank metamodels/UEMLExtensionDynamicAspects metamodels/UEMLExtensionDynamicAspects
 	cp ../slps/topics/grammars/metamodels/UEMLExtensionModelingAspects/grammar.bgf tank/metamodels/UEMLExtensionModelingAspects.bgf
 	_dev/format tank metamodels/UEMLExtensionModelingAspects metamodels/UEMLExtensionModelingAspects
-	cp ../slps/topics/grammars/metamodels/UIML-3.0/grammar.bgf tank/metamodels/UIML-3.0.bgf
-	_dev/format tank metamodels/UIML-3.0 metamodels/UIML-3.0
 	cp ../slps/topics/grammars/metamodels/USECASE1/grammar.bgf tank/metamodels/USECASE1.bgf
 	_dev/format tank metamodels/USECASE1 metamodels/USECASE1
 	cp ../slps/topics/grammars/metamodels/USECASE2/grammar.bgf tank/metamodels/USECASE2.bgf
@@ -603,8 +661,6 @@ all:
 	_dev/format tank metamodels/WebApplications_ConceptualModel metamodels/WebApplications_ConceptualModel
 	cp ../slps/topics/grammars/metamodels/WfMC/grammar.bgf tank/metamodels/WfMC.bgf
 	_dev/format tank metamodels/WfMC metamodels/WfMC
-	cp ../slps/topics/grammars/metamodels/WikiTable/grammar.bgf tank/metamodels/WikiTable.bgf
-	_dev/format tank metamodels/WikiTable metamodels/WikiTable
 	cp ../slps/topics/grammars/metamodels/MSOfficeWord_WordprocessingMLBasicDef/grammar.bgf tank/metamodels/MSOfficeWord_WordprocessingMLBasicDef.bgf
 	_dev/format tank metamodels/MSOfficeWord_WordprocessingMLBasicDef metamodels/MSOfficeWord_WordprocessingMLBasicDef
 	cp ../slps/topics/grammars/metamodels/MSOfficeWord_WordprocessingMLSimplified/grammar.bgf tank/metamodels/MSOfficeWord_WordprocessingMLSimplified.bgf
@@ -623,10 +679,6 @@ all:
 	_dev/format tank metamodels/ASM metamodels/ASM
 	cp ../slps/topics/grammars/metamodels/XPDL-1.14/grammar.bgf tank/metamodels/XPDL-1.14.bgf
 	_dev/format tank metamodels/XPDL-1.14 metamodels/XPDL-1.14
-	cp ../slps/topics/grammars/metamodels/XQuery/grammar.bgf tank/metamodels/XQuery.bgf
-	_dev/format tank metamodels/XQuery metamodels/XQuery
-	cp ../slps/topics/grammars/metamodels/XSLT/grammar.bgf tank/metamodels/XSLT.bgf
-	_dev/format tank metamodels/XSLT metamodels/XSLT
 	cp ../slps/topics/grammars/metamodels/XSchema/grammar.bgf tank/metamodels/XSchema.bgf
 	_dev/format tank metamodels/XSchema metamodels/XSchema
 	cp ../slps/topics/grammars/metamodels/XUL-Interactorl/grammar.bgf tank/metamodels/XUL-Interactorl.bgf

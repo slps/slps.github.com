@@ -128,6 +128,10 @@
 			<name>rscs2bgf</name>
 		</link>
 	</toolset>
+	<toolset name="rscd2bgf">
+		<name>Extraction</name>
+		<link wiki="RascalADT2BGF"/>
+	</toolset>
 	<!-- ================================================================ -->
 	<language>
 		<name>Abstract Behavioral Specification Language</name>
@@ -807,6 +811,71 @@
 		</version>
 	</language>
 	<language>
+		<name>JSON</name>
+		<version>
+			<name>JSON Concrete Syntax</name>
+			<grammar>
+				<name>Extracted</name>
+				<handle>json/rascal-concrete</handle>
+				<source>
+					<author>Mark Hills</author>
+					<file>lang::json::syntax::JSON</file>
+					<date>May 2012</date>
+					<link>
+						<uri>https://github.com/cwi-swat/rascal/blob/master/src/org/rascalmpl/library/lang/json/syntax/JSON.rsc</uri>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="rscs2bgf"/>
+			</grammar>
+			<grammar>
+				<name>Extracted</name>
+				<handle>json/zaytsev-concrete</handle>
+				<source>
+					<author>Vadim Zaytsev</author>
+					<file>language::JSON</file>
+					<date>November 2012</date>
+					<link>
+						<mu>shared/rascal/src/language/JSON.rsc</mu>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="rscs2bgf"/>
+			</grammar>
+		</version>
+		<version>
+			<name>JSON Abstract Syntax</name>
+			<grammar>
+				<name>Extracted</name>
+				<handle>json/rascal-abstract</handle>
+				<source>
+					<author>Mark Hills</author>
+					<file>lang::json::ast::JSON</file>
+					<date>May 2012</date>
+					<link>
+						<uri>https://github.com/cwi-swat/rascal/blob/master/src/org/rascalmpl/library/lang/json/ast/JSON.rsc</uri>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="rscd2bgf"/>
+			</grammar>
+			<grammar>
+				<name>Extracted</name>
+				<handle>json/zaytsev-abstract</handle>
+				<source>
+					<author>Vadim Zaytsev</author>
+					<file>language::JSON</file>
+					<date>November 2012</date>
+					<link>
+						<mu>shared/rascal/src/language/JSON.rsc</mu>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="rscd2bgf"/>
+			</grammar>
+		</version>
+	</language>
+	<language>
 		<handle>ocl</handle>
 		<name>Object Constraint Language</name>
 		<short>OCL</short>
@@ -1003,11 +1072,27 @@
 			<name>DocBook</name>
 			<grammar>
 				<name>Extracted</name>
-				<handle>markup/docbook</handle>
+				<handle>docbook/walsh</handle>
+				<source>
+					<standard>OASIS</standard>
+					<author>Norman Walsh</author>
+					<title>DocBook RELAX NG Schema V1.0b1</title>
+					<date>27 Dec 2002</date>
+					<readme/>
+					<link>
+						<mu>topics/grammars/docbook/walsh/docbook-rng-1.0b1/</mu>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="rng2bgf"/>
+			</grammar>
+			<grammar>
+				<name>Extracted</name>
+				<handle>docbook/touzet</handle>
 				<source>
 					<author>David Touzet</author>
 					<title>DocBook 1.1</title>
-					<subtitle>a metamodel describing a limited subset of DocBook, an XML-based format for document composition</subtitle>
+					<subtitle>a metamodel describing a limited subset of DocBook</subtitle>
 					<file>DocBook.ecore</file>
 					<date>2005/05/17</date>
 					<readme/>
@@ -1016,7 +1101,7 @@
 						<name>Atlantic</name>
 					</link>
 					<link>
-						<mu>topics/grammars/markup/docbook/DocBook.ecore</mu>
+						<mu>topics/grammars/docbook/touzet/DocBook.ecore</mu>
 						<name>GitHub</name>
 					</link>
 				</source>
@@ -1733,6 +1818,464 @@
 					</link>
 				</source>
 				<toolset ref="ecore2bgf"/>
+			</grammar>
+		</version>
+		<version>
+			<name>UIML</name>
+			<grammar>
+				<name>Extracted</name>
+				<handle>markup/uiml</handle>
+				<source>
+					<author>David Touzet</author>
+					<title>UIML-3.0 0.1</title>
+					<file>UIML-3.0.ecore</file>
+					<date>2006/02/21</date>
+					<readme/>
+					<link>
+						<uri>http://www.emn.fr/z-info/atlanmod/index.php/Ecore</uri>
+						<name>Atlantic</name>
+					</link>
+					<link>
+						<mu>topics/grammars/markup/uiml/UIML-3.0.ecore</mu>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="ecore2bgf"/>
+			</grammar>
+		</version>
+	</language>
+	<!-- ================================================================ -->
+	<language>
+		<name>SLPS DSLs</name>
+		<short>SLPS</short>
+		<version>
+			<name>BGF</name>
+			<grammar>
+				<name>Extracted</name>
+				<handle>slps/bgf-1.0-xsd</handle>
+				<source>
+					<author>Ralf Lämmel</author>
+					<title>BNF-like Grammar Format, v.1.0</title>
+					<file>bgf.xsd</file>
+					<subtitle>the first sketch</subtitle>
+					<date>July 2008</date>
+					<link>
+						<uri>https://github.com/grammarware/slps/blob/ccb3c35e68dbd822e221a74e04a088ada1a14b5f/shared/xsd/bgf.xsd</uri>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="xsd2bgf"/>
+			</grammar>
+			<grammar>
+				<name>Extracted</name>
+				<handle>slps/bgf-2.0-xsd</handle>
+				<source>
+					<author>Ralf Lämmel</author>
+					<title>BNF-like Grammar Format, v.2.0</title>
+					<file>bgf.xsd</file>
+					<subtitle>still experimental design</subtitle>
+					<date>August 2008</date>
+					<link>
+						<uri>https://github.com/grammarware/slps/blob/eadfc3bc8ec417737c5f36c74935bb727d0b79b6/shared/xsd/bgf.xsd</uri>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="xsd2bgf"/>
+			</grammar>
+			<grammar>
+				<name>Extracted</name>
+				<handle>slps/bgf-2.1-xsd</handle>
+				<source>
+					<author>Ralf Lämmel</author>
+					<title>BNF-like Grammar Format, v.2.1</title>
+					<file>bgf.xsd</file>
+					<subtitle>minor design adjustments</subtitle>
+					<date>September 2008</date>
+					<link>
+						<uri>https://github.com/grammarware/slps/blob/8d857bfc477110a04be6a6ae66d36e6cbd9f3ba7/shared/xsd/bgf.xsd</uri>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="xsd2bgf"/>
+			</grammar>
+			<grammar>
+				<name>Extracted</name>
+				<handle>slps/bgf-3.0-xsd</handle>
+				<source>
+					<author>Ralf Lämmel</author>
+					<author>Vadim Zaytsev</author>
+					<title>BNF-like Grammar Format, v.3.0</title>
+					<file>bgf.xsd</file>
+					<subtitle>marked expressions</subtitle>
+					<date>February 2009</date>
+					<link>
+						<uri>https://github.com/grammarware/slps/blob/16699a41710e43b6d75f5863b8763b95ab1787e4/shared/xsd/bgf.xsd</uri>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="xsd2bgf"/>
+			</grammar>
+			<grammar>
+				<name>Extracted</name>
+				<handle>slps/bgf-3.1-xsd</handle>
+				<source>
+					<author>Ralf Lämmel</author>
+					<author>Vadim Zaytsev</author>
+					<title>BNF-like Grammar Format, v.3.1</title>
+					<file>bgf.xsd</file>
+					<subtitle>minor adjustment of marked expressions</subtitle>
+					<date>February 2009</date>
+					<link>
+						<uri>https://github.com/grammarware/slps/blob/6283da30b664c59f2d16f7289dda2c63394ef715/shared/xsd/bgf.xsd</uri>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="xsd2bgf"/>
+			</grammar>
+			<grammar>
+				<name>Extracted</name>
+				<handle>slps/bgf-4.0-xsd</handle>
+				<source>
+					<author>Ralf Lämmel</author>
+					<author>Vadim Zaytsev</author>
+					<title>BNF-like Grammar Format, v.4.0</title>
+					<file>bgf.xsd</file>
+					<subtitle>separator lists</subtitle>
+					<date>December 2011</date>
+					<link>
+						<uri>https://github.com/grammarware/slps/blob/46c30080305d274e3fde30e9dd36b985534f0bda/shared/xsd/bgf.xsd</uri>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="xsd2bgf"/>
+			</grammar>
+			<grammar>
+				<name>Extracted</name>
+				<handle>slps/bgf-4.1-adt</handle>
+				<source>
+					<author>Vadim Zaytsev</author>
+					<title>BNF-like Grammar Format, v.4.1</title>
+					<file>XBGFSyntax.rsc</file>
+					<subtitle>the first Rascal port</subtitle>
+					<date>31 May 2012</date>
+					<link>
+						<uri>https://github.com/grammarware/slps/blob/921d8c44a4c998bbb9f2d258a8ddc8a200383801/shared/rascal/src/XBGFSyntax.rsc</uri>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="rscd2bgf"/>
+			</grammar>
+			<grammar>
+				<name>Extracted</name>
+				<handle>slps/bgf-4.2-adt</handle>
+				<source>
+					<author>Vadim Zaytsev</author>
+					<title>BNF-like Grammar Format, v.4.2</title>
+					<file>syntax::BGF.rsc</file>
+					<subtitle>standalone BGF abstract syntax</subtitle>
+					<date>1 June 2012</date>
+					<link>
+						<uri>https://github.com/grammarware/slps/blob/ad3139811a32018301f770c307f9e11f00c92ad3/shared/rascal/src/syntax/BGF.rsc</uri>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="rscd2bgf"/>
+			</grammar>
+			<grammar>
+				<name>Extracted</name>
+				<handle>slps/bgf-4.3-adt</handle>
+				<source>
+					<author>Vadim Zaytsev</author>
+					<title>BNF-like Grammar Format, v.4.3</title>
+					<file>syntax::BGF.rsc</file>
+					<subtitle>lists of productions and expressions</subtitle>
+					<date>3 July 2012</date>
+					<link>
+						<uri>https://github.com/grammarware/slps/blob/fc2e428f2d95abf11ec52ee5c26768fa99ff450d/shared/rascal/src/syntax/BGF.rsc</uri>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="rscd2bgf"/>
+			</grammar>
+			<grammar>
+				<name>Extracted</name>
+				<handle>slps/bgf-5.0-adt</handle>
+				<source>
+					<author>Vadim Zaytsev</author>
+					<title>BNF-like Grammar Format, v.5.0</title>
+					<file>syntax::BGF.rsc</file>
+					<subtitle>toward Boolean grammars</subtitle>
+					<date>23 December 2012</date>
+					<link>
+						<uri>https://github.com/grammarware/slps/blob/69838518ae695fd083067423e349a0673f595d04/shared/rascal/src/syntax/BGF.rsc</uri>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="rscd2bgf"/>
+			</grammar>
+			<grammar>
+				<name>Extracted</name>
+				<handle>slps/bgf-5.1-adt</handle>
+				<source>
+					<author>Vadim Zaytsev</author>
+					<title>BNF-like Grammar Format, v.5.1</title>
+					<file>syntax::BGF.rsc</file>
+					<subtitle>Rascal-friendly names</subtitle>
+					<date>23 December 2012</date>
+					<link>
+						<uri>https://github.com/grammarware/slps/blob/962c2678e0ee1583dfddb9413e0af3520943a474/shared/rascal/src/syntax/BGF.rsc</uri>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="rscd2bgf"/>
+			</grammar>
+			<grammar>
+				<name>Extracted</name>
+				<handle>slps/bgf-5.2-xsd</handle>
+				<source>
+					<author>Ralf Lämmel</author>
+					<author>Vadim Zaytsev</author>
+					<title>BNF-like Grammar Format, v.5.2</title>
+					<file>bgf.xsd</file>
+					<subtitle>coevolved schema</subtitle>
+					<date>December 2012</date>
+					<link>
+						<uri>https://github.com/grammarware/slps/blob/36e8dc04a0e2e1ed8ce7598d6cddec6cc3197897/shared/xsd/bgf.xsd</uri>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="xsd2bgf"/>
+			</grammar>
+			<grammar>
+				<name>Extracted</name>
+				<handle>slps/bgf-5.3-adt</handle>
+				<source>
+					<author>Vadim Zaytsev</author>
+					<title>BNF-like Grammar Format, v.5.3</title>
+					<file>language::BGF.rsc</file>
+					<subtitle>sets of productions</subtitle>
+					<date>18 March 2013</date>
+					<link>
+						<uri>https://github.com/grammarware/slps/blob/bb8025496d46f747a9e4394a5cea4f235e1e26a6/shared/rascal/src/language/BGF.rsc</uri>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="rscd2bgf"/>
+			</grammar>
+		</version>
+		<version>
+			<name>BTF</name>
+			<grammar>
+				<name>Extracted</name>
+				<handle>slps/btf</handle>
+				<source>
+					<author>Ralf Lämmel</author>
+					<author>Vadim Zaytsev</author>
+					<title>BGF Tree Format</title>
+					<file>btf.xsd</file>
+					<date>2008–2013</date>
+					<link>
+						<mu>shared/xsd/btf.xsd</mu>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="xsd2bgf"/>
+			</grammar>
+		</version>
+		<version>
+			<name>EDD</name>
+			<grammar>
+				<name>Extracted</name>
+				<handle>slps/edd</handle>
+				<source>
+					<author>Vadim Zaytsev</author>
+					<title>EBNF Dialect Definition</title>
+					<file>edd.xsd</file>
+					<date>2009–2013</date>
+					<link>
+						<mu>shared/xsd/edd.xsd</mu>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="xsd2bgf"/>
+			</grammar>
+		</version>
+		<version>
+			<name>EXBGF</name>
+			<grammar>
+				<name>Extracted</name>
+				<handle>slps/edd</handle>
+				<source>
+					<author>Vadim Zaytsev</author>
+					<title>Extended XBGF</title>
+					<file>exbgf.xsd</file>
+					<date>2012–2013</date>
+					<link>
+						<mu>shared/xsd/exbgf.xsd</mu>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="xsd2bgf"/>
+			</grammar>
+		</version>
+		<version>
+			<name>LCF</name>
+			<grammar>
+				<name>Extracted</name>
+				<handle>slps/edd</handle>
+				<source>
+					<author>Ralf Lämmel</author>
+					<author>Vadim Zaytsev</author>
+					<title>Language Convergence Format</title>
+					<file>lcf.xsd</file>
+					<date>2008–2013</date>
+					<link>
+						<mu>shared/xsd/lcf.xsd</mu>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="xsd2bgf"/>
+			</grammar>
+		</version>
+		<version>
+			<name>LDF</name>
+			<grammar>
+				<name>Extracted</name>
+				<handle>slps/edd</handle>
+				<source>
+					<author>Ralf Lämmel</author>
+					<author>Vadim Zaytsev</author>
+					<title>Language Documentation Format</title>
+					<file>ldf.xsd</file>
+					<date>2008–2013</date>
+					<link>
+						<mu>shared/xsd/ldf.xsd</mu>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="xsd2bgf"/>
+			</grammar>
+		</version>
+		<version>
+			<name>XBGF</name>
+			<grammar>
+				<name>Extracted</name>
+				<handle>slps/xbgf-xsd</handle>
+				<source>
+					<author>Ralf Lämmel</author>
+					<author>Vadim Zaytsev</author>
+					<title>BGF Transformations</title>
+					<file>xbgf.xsd</file>
+					<date>2008–2013</date>
+					<link>
+						<mu>shared/xsd/xbgf.xsd</mu>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="xsd2bgf"/>
+			</grammar>
+			<grammar>
+				<name>Extracted</name>
+				<handle>slps/xbgf-adt</handle>
+				<source>
+					<author>Vadim Zaytsev</author>
+					<title>BGF Transformations</title>
+					<file>language::XBGF</file>
+					<date>2012–2013</date>
+					<link>
+						<mu>shared/rascal/src/language/XBGF.rsc</mu>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="rscd2bgf"/>
+			</grammar>
+		</version>
+		<version>
+			<name>XEDD</name>
+			<grammar>
+				<name>Extracted</name>
+				<handle>slps/edd</handle>
+				<source>
+					<author>Vadim Zaytsev</author>
+					<title>EDD Transformations</title>
+					<file>xedd.xsd</file>
+					<date>2011–2013</date>
+					<link>
+						<mu>shared/xsd/xedd.xsd</mu>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="xsd2bgf"/>
+			</grammar>
+		</version>
+		<version>
+			<name>XLDF</name>
+			<grammar>
+				<name>Extracted</name>
+				<handle>slps/edd</handle>
+				<source>
+					<author>Ralf Lämmel</author>
+					<author>Vadim Zaytsev</author>
+					<title>LDF Transformations</title>
+					<file>xldf.xsd</file>
+					<date>2008–2013</date>
+					<link>
+						<mu>shared/xsd/xldf.xsd</mu>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="xsd2bgf"/>
+			</grammar>
+		</version>
+		<version>
+			<name>XOutcome</name>
+			<grammar>
+				<name>Extracted</name>
+				<handle>slps/edd</handle>
+				<source>
+					<author>Vadim Zaytsev</author>
+					<title>Negotiated Transformation Outcome</title>
+					<file>language::XOutcome</file>
+					<date>2013</date>
+					<link>
+						<mu>shared/rascal/src/language/XOutcome.rsc</mu>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="rscd2bgf"/>
+			</grammar>
+		</version>
+		<version>
+			<name>ΞBGF</name>
+			<grammar>
+				<name>Extracted</name>
+				<handle>slps/cbgf-xsd</handle>
+				<source>
+					<author>Vadim Zaytsev</author>
+					<title>Bidirectional BGF Transformations</title>
+					<file>ξbgf.xsd</file>
+					<date>2008–2013</date>
+					<link>
+						<mu>shared/xsd/cbgf.xsd</mu>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="xsd2bgf"/>
+			</grammar>
+			<grammar>
+				<name>Extracted</name>
+				<handle>slps/cbgf-adt</handle>
+				<source>
+					<author>Vadim Zaytsev</author>
+					<title>Bidirectional BGF Transformations</title>
+					<file>language::ΞBGF</file>
+					<date>2012–2013</date>
+					<link>
+						<mu>shared/rascal/src/language/CBGF.rsc</mu>
+						<name>GitHub</name>
+					</link>
+				</source>
+				<toolset ref="rscd2bgf"/>
 			</grammar>
 		</version>
 	</language>
@@ -4886,28 +5429,6 @@
 			</grammar>
 		</version>
 		<version>
-			<name>PL/1 0.1</name>
-			<grammar>
-				<name>Extracted</name>
-				<handle>metamodels/PL1</handle>
-				<source>
-					<author>Hugo Brunelière</author>
-					<file>PL1.ecore</file>
-					<date>2005/08/11</date>
-					<readme/>
-					<link>
-						<uri>http://www.emn.fr/z-info/atlanmod/index.php/Ecore</uri>
-						<name>Atlantic</name>
-					</link>
-					<link>
-						<mu>topics/grammars/metamodels/PL1/PL1.ecore</mu>
-						<name>GitHub</name>
-					</link>
-				</source>
-				<toolset ref="ecore2bgf"/>
-			</grammar>
-		</version>
-		<version>
 			<name>PRR (Production Rule Representation) 0.1</name>
 			<grammar>
 				<name>Extracted</name>
@@ -6495,12 +7016,13 @@
 			</grammar>
 		</version>
 		<version>
-			<name>UEML 1.0</name>
+			<name>UEML</name>
 			<grammar>
 				<name>Extracted</name>
 				<handle>metamodels/UEML</handle>
 				<source>
 					<author>SIMON Eric</author>
+					<title>UEML 1.0</title>
 					<file>UEML.ecore</file>
 					<date>2006/07/18</date>
 					<readme/>
@@ -6515,14 +7037,12 @@
 				</source>
 				<toolset ref="ecore2bgf"/>
 			</grammar>
-		</version>
-		<version>
-			<name>UEML (Extended) 1.0</name>
 			<grammar>
 				<name>Extracted</name>
 				<handle>metamodels/UEMLExtended</handle>
 				<source>
 					<author>SIMON Eric</author>
+					<title>UEML (Extended) 1.0</title>
 					<file>UEMLExtended.ecore</file>
 					<date>2006/07/18</date>
 					<readme/>
@@ -6537,14 +7057,12 @@
 				</source>
 				<toolset ref="ecore2bgf"/>
 			</grammar>
-		</version>
-		<version>
-			<name>UEML extension Capturing Agents 1.0</name>
 			<grammar>
 				<name>Extracted</name>
 				<handle>metamodels/UEMLExtensionCapturingAgents</handle>
 				<source>
 					<author>SIMON Eric</author>
+					<title>UEML extension Capturing Agents 1.0</title>
 					<file>UEMLExtensionCapturingAgents.ecore</file>
 					<date>2006/07/18</date>
 					<readme/>
@@ -6559,14 +7077,12 @@
 				</source>
 				<toolset ref="ecore2bgf"/>
 			</grammar>
-		</version>
-		<version>
-			<name>UEML extension Capturing social effects 1.0</name>
 			<grammar>
 				<name>Extracted</name>
 				<handle>metamodels/UEMLExtensionCapturingSocialEffects</handle>
 				<source>
 					<author>SIMON Eric</author>
+					<title>UEML extension Capturing social effects 1.0</title>
 					<file>UEMLExtensionCapturingSocialEffects.ecore</file>
 					<date>2006/07/18</date>
 					<readme/>
@@ -6581,14 +7097,12 @@
 				</source>
 				<toolset ref="ecore2bgf"/>
 			</grammar>
-		</version>
-		<version>
-			<name>UEML extension Dynamic Aspects 1.0</name>
 			<grammar>
 				<name>Extracted</name>
 				<handle>metamodels/UEMLExtensionDynamicAspects</handle>
 				<source>
 					<author>SIMON Eric</author>
+					<title>UEML extension Dynamic Aspects 1.0</title>
 					<file>UEMLExtensionDynamicAspects.ecore</file>
 					<date>2006/07/18</date>
 					<readme/>
@@ -6603,14 +7117,12 @@
 				</source>
 				<toolset ref="ecore2bgf"/>
 			</grammar>
-		</version>
-		<version>
-			<name>UEML extension: Modeling Aspects 1.0</name>
 			<grammar>
 				<name>Extracted</name>
 				<handle>metamodels/UEMLExtensionModelingAspects</handle>
 				<source>
 					<author>SIMON Eric</author>
+					<title>UEML extension: Modeling Aspects 1.0</title>
 					<file>UEMLExtensionModelingAspects.ecore</file>
 					<date>2006/07/18</date>
 					<readme/>
@@ -6620,28 +7132,6 @@
 					</link>
 					<link>
 						<mu>topics/grammars/metamodels/UEMLExtensionModelingAspects/UEMLExtensionModelingAspects.ecore</mu>
-						<name>GitHub</name>
-					</link>
-				</source>
-				<toolset ref="ecore2bgf"/>
-			</grammar>
-		</version>
-		<version>
-			<name>UIML-3.0 0.1</name>
-			<grammar>
-				<name>Extracted</name>
-				<handle>metamodels/UIML-3.0</handle>
-				<source>
-					<author>David Touzet</author>
-					<file>UIML-3.0.ecore</file>
-					<date>2006/02/21</date>
-					<readme/>
-					<link>
-						<uri>http://www.emn.fr/z-info/atlanmod/index.php/Ecore</uri>
-						<name>Atlantic</name>
-					</link>
-					<link>
-						<mu>topics/grammars/metamodels/UIML-3.0/UIML-3.0.ecore</mu>
 						<name>GitHub</name>
 					</link>
 				</source>
@@ -6847,28 +7337,6 @@
 			</grammar>
 		</version>
 		<version>
-			<name>WikiTable 1.0</name>
-			<grammar>
-				<name>Extracted</name>
-				<handle>metamodels/WikiTable</handle>
-				<source>
-					<author>Jean-Sébastien Sottet</author>
-					<file>WikiTable.ecore</file>
-					<date>2010/01/19</date>
-					<readme/>
-					<link>
-						<uri>http://www.emn.fr/z-info/atlanmod/index.php/Ecore</uri>
-						<name>Atlantic</name>
-					</link>
-					<link>
-						<mu>topics/grammars/metamodels/WikiTable/WikiTable.ecore</mu>
-						<name>GitHub</name>
-					</link>
-				</source>
-				<toolset ref="ecore2bgf"/>
-			</grammar>
-		</version>
-		<version>
 			<name>WordprocessingMLBasicDef 1.2</name>
 			<grammar>
 				<name>Extracted</name>
@@ -7061,50 +7529,6 @@
 					</link>
 					<link>
 						<mu>topics/grammars/metamodels/XPDL-1.14/XPDL-1.14.ecore</mu>
-						<name>GitHub</name>
-					</link>
-				</source>
-				<toolset ref="ecore2bgf"/>
-			</grammar>
-		</version>
-		<version>
-			<name>XQuery 1.1</name>
-			<grammar>
-				<name>Extracted</name>
-				<handle>metamodels/XQuery</handle>
-				<source>
-					<author>Peter Rosendal</author>
-					<file>XQuery.ecore</file>
-					<date>2005/06/13</date>
-					<readme/>
-					<link>
-						<uri>http://www.emn.fr/z-info/atlanmod/index.php/Ecore</uri>
-						<name>Atlantic</name>
-					</link>
-					<link>
-						<mu>topics/grammars/metamodels/XQuery/XQuery.ecore</mu>
-						<name>GitHub</name>
-					</link>
-				</source>
-				<toolset ref="ecore2bgf"/>
-			</grammar>
-		</version>
-		<version>
-			<name>XSLT 1.1</name>
-			<grammar>
-				<name>Extracted</name>
-				<handle>metamodels/XSLT</handle>
-				<source>
-					<author>Peter Rosendal</author>
-					<file>XSLT.ecore</file>
-					<date>2005/06/13</date>
-					<readme/>
-					<link>
-						<uri>http://www.emn.fr/z-info/atlanmod/index.php/Ecore</uri>
-						<name>Atlantic</name>
-					</link>
-					<link>
-						<mu>topics/grammars/metamodels/XSLT/XSLT.ecore</mu>
 						<name>GitHub</name>
 					</link>
 				</source>

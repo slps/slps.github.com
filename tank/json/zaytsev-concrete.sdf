@@ -1,0 +1,35 @@
+module Main
+
+exports
+  sorts
+        JSONObject JSONData JSONBasicType JSONBoolean JSONArray JSONNumber JSONNull JSONKeyValue JSONString 
+  context-free syntax
+        "{" "}" -> JSONObject
+
+        JSONBasicType -> JSONData
+
+        JSONString -> JSONBasicType
+
+        JSONNull -> JSONBasicType
+
+        JSONBoolean -> JSONBasicType
+
+        JSONNumber -> JSONBasicType
+
+        JSONArray -> JSONBasicType
+
+        JSONObject -> JSONBasicType
+
+        "false" -> JSONBoolean
+
+        "true" -> JSONBoolean
+
+        "[" "]" -> JSONArray
+
+        Digits -> JSONNumber
+
+        "null" -> JSONNull
+
+        key::JSONBasicType ":" val::JSONBasicType -> JSONKeyValue
+
+        DoubleQuotedString -> JSONString

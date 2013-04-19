@@ -1,0 +1,15 @@
+module Main
+
+exports
+  sorts
+        WikiText WikiSymbol WikiLink 
+  context-free syntax
+        WikiSymbol* -> WikiText
+
+        w::MWWord -> WikiSymbol
+
+        wl::WikiLink -> WikiSymbol
+
+        "[[" destination::PageName "]]" -> WikiLink {cons(simple)}
+
+        "[[" destination::PageName "|" description::(MWWord+) "]]" -> WikiLink {cons(barred)}

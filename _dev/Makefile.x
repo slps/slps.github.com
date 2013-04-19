@@ -13,6 +13,10 @@ all:
 	_dev/format zoo ada/cordy-hyaric ada/cordy-hyaric
 	cp ../slps/topics/grammars/assembly/delphi/grammar.bgf zoo/assembly/delphi.bgf
 	_dev/format zoo assembly/delphi assembly/delphi
+	cp ../slps/topics/grammars/basic/vb6-cordy/grammar.bgf zoo/basic/vb6-cordy.bgf
+	_dev/format zoo basic/vb6-cordy basic/vb6-cordy
+	cp ../slps/topics/grammars/basic/vb-glineur/grammar.bgf zoo/basic/vb-glineur.bgf
+	_dev/format zoo basic/vb-glineur basic/vb-glineur
 	cp ../slps/topics/grammars/bibtex/bibtex-1/grammar.bgf zoo/bibtex/bibtex-1.bgf
 	_dev/format zoo bibtex/bibtex-1 bibtex/bibtex-1
 	cp ../slps/topics/grammars/bibtex/bibtex-1.1/grammar.bgf zoo/bibtex/bibtex-1.1.bgf
@@ -97,8 +101,14 @@ all:
 	_dev/format zoo html/cordy html/cordy
 	cp ../slps/topics/grammars/html/allilaire/grammar.bgf zoo/html/allilaire.bgf
 	_dev/format zoo html/allilaire html/allilaire
+	cp ../slps/topics/grammars/html/clark/grammar.bgf zoo/html/clark.bgf
+	_dev/format zoo html/clark html/clark
 	cp ../slps/topics/grammars/html/guyard/grammar.bgf zoo/html/guyard.bgf
 	_dev/format zoo html/guyard html/guyard
+	cp ../slps/topics/grammars/html/clark-basic/grammar.bgf zoo/html/clark-basic.bgf
+	_dev/format zoo html/clark-basic html/clark-basic
+	cp ../slps/topics/grammars/html/clark-strict/grammar.bgf zoo/html/clark-strict.bgf
+	_dev/format zoo html/clark-strict html/clark-strict
 	cp ../slps/topics/grammars/java-1/jls-read/grammar.bgf zoo/java/java-1-jls-read.bgf
 	_dev/format zoo java/java-1-jls-read java-1/jls-read
 	cp ../slps/topics/grammars/java-1/jls-impl/grammar.bgf zoo/java/java-1-jls-impl.bgf
@@ -157,6 +167,8 @@ all:
 	_dev/format zoo pascal/object pascal/object
 	cp ../slps/topics/grammars/pascal/bruneliere/grammar.bgf zoo/pascal/bruneliere.bgf
 	_dev/format zoo pascal/bruneliere pascal/bruneliere
+	cp ../slps/topics/grammars/pl1/bruneliere/grammar.bgf zoo/pl1/bruneliere.bgf
+	_dev/format zoo pl1/bruneliere pl1/bruneliere
 	cp ../slps/topics/grammars/uml/uml2/grammar.bgf zoo/uml/uml2.bgf
 	_dev/format zoo uml/uml2 uml/uml2
 	cp ../slps/topics/grammars/uml/stereo/grammar.bgf zoo/uml/stereo.bgf
@@ -187,15 +199,25 @@ all:
 	_dev/format zoo uml/umldi-uc uml/umldi-uc
 	cp ../slps/topics/grammars/uml/simple/grammar.bgf zoo/uml/simple.bgf
 	_dev/format zoo uml/simple uml/simple
+	cp ../slps/topics/grammars/uml/statecharts/grammar.bgf zoo/uml/statecharts.bgf
+	_dev/format zoo uml/statecharts uml/statecharts
 	cp ../slps/topics/grammars/uml/yuml/grammar.bgf zoo/uml/yuml.bgf
 	_dev/format zoo uml/yuml uml/yuml
 	cp ../slps/topics/grammars/wiki/mediawiki-bnf/grammar.bgf zoo/wiki/mediawiki-bnf.bgf
 	_dev/format zoo wiki/mediawiki-bnf wiki/mediawiki-bnf
 	cp ../slps/topics/grammars/wiki/mediawiki-ebnf/grammar.bgf zoo/wiki/mediawiki-ebnf.bgf
 	_dev/format zoo wiki/mediawiki-ebnf wiki/mediawiki-ebnf
+	cp ../slps/topics/grammars/wiki/simple/grammar.bgf zoo/wiki/simple.bgf
+	_dev/format zoo wiki/simple wiki/simple
+	cp ../slps/topics/grammars/wiki/table/grammar.bgf zoo/wiki/table.bgf
+	_dev/format zoo wiki/table wiki/table
 	cp ../slps/topics/grammars/xml/zhang-cordy/grammar.bgf zoo/xml/zhang-cordy.bgf
 	_dev/format zoo xml/zhang-cordy xml/zhang-cordy
 	cp ../slps/topics/grammars/xml/rosendal/grammar.bgf zoo/xml/rosendal.bgf
 	_dev/format zoo xml/rosendal xml/rosendal
 	cp ../slps/topics/grammars/w3c/xpath1/grammar.bgf zoo/xpath/w3c-xpath1.bgf
 	_dev/format zoo xpath/w3c-xpath1 w3c/xpath1
+	cp ../slps/topics/grammars/xslt/rosendal/grammar.bgf zoo/xslt/rosendal.bgf
+	_dev/format zoo xslt/rosendal xslt/rosendal
+	cp ../slps/topics/grammars/xquery/rosendal/grammar.bgf zoo/xquery/rosendal.bgf
+	_dev/format zoo xquery/rosendal xquery/rosendal

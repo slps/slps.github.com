@@ -1,0 +1,496 @@
+module Main
+
+exports
+ context-free start-symbols program
+  sorts
+        Program Class-file-header Class-begin-block Class-begin-item Declaration-or-statement Single-declaration-or-statement Colon-declaration-or-statement Declaration Implements-declaration Enum-declaration Enum-member-definition Type-declaration Type-member-definition Defletter-declaration Letterrange Def-keyword Variable-declaration Variable-declaration-keyword Access-modifier Variable-description Single-var-description Initial-value Array-description Subscript-expn Constant-declaration Constant-description Declare-subprogram-declaration Subprogram-declaration Lib-description Alias-description Sub-scope Sub-or-function Subprogram-argument-description Subprogram-argument As-type Star-size Byref-or-byval Class-declaration Expn Operator-primary Op Primary Prefix-op Reference Filenumber Component-selector Subscript Optional-subscript Statement Assignment-statement App-activate-statement Comma-expn Beep-statement Chdir-statement Mkdir-statement Rmdir-statement Mid-statement Name-statement Filepath Slash-id Chdrive-statement Drive Open-statement Mode Access-spec Access-mode Lock Length-spec Close-statement Seek-statement Unlock-statement Get-statement Comma-recordnumber Input-statement Line-input-statement Width-statement Write-statement Print-statement Print-item Spc-tab Charpos Put-statement Kill-statement Lock-statement Comma-recordrange To-number Load-statement Lset-statement Rset-statement Date-statement Time-statement Deletesetting-statement End-statement Erase-statement Error-statement Event-statement Event-argument-list Event-argument Parens Filecopy-statement Gosub-statement Return-statement Goto-statement On-expn Option-statement Compare-mode Attribute-statement Attribute-definition If-statement Full-if-statement Elsif-clause Else-clause Short-if-statement Short-else-clause Select-case-statement Eol Tab-vbcomment Case-alternative Is-operator Case-expn To-expn Last-case-alternative For-next-statement Short-for-next-statement Full-for-next-statement To-or-downto Step-clause For-each-statement Short-for-each-statement Full-for-each-statement Do-statement While-or-until-clause While-clause Until-clause While-statement Call-statement Subroutine-bracketless-params Optional-expn Set-statement Set-object-expn Setattr-statement Exit-statement Exit-what-indicator On-error-statement On-error-action With-statement Property-statement Get-let-set Property-argument-list Property-argument Equals-expn Randomize-statement Reset-statement Resume-statement Savepicture-statement Savesetting-statement Stop-statement Unload-statement Label-statement Preprocessor-if-statement Preprocessor-elsif-clause Preprocessor-else-clause 
+  context-free syntax
+        Class-file-header? Declaration-or-statement* -> Program
+
+        "version" Number "class" Eol+ Class-begin-block -> Class-file-header
+
+        "begin" Reference? IN Class-begin-item* EX "end" -> Class-begin-block
+
+        Assignment-statement -> Class-begin-item
+        Class-begin-block -> Class-begin-item
+        Eol -> Class-begin-item
+
+        Declaration Eol -> Declaration-or-statement
+        Statement Eol -> Declaration-or-statement
+        Eol -> Declaration-or-statement
+
+        Declaration Colon-declaration-or-statement* -> Single-declaration-or-statement
+        Statement Colon-declaration-or-statement* -> Single-declaration-or-statement
+
+        ":" Declaration-or-statement? -> Colon-declaration-or-statement
+
+        Variable-declaration -> Declaration
+        Implements-declaration -> Declaration
+        Subprogram-declaration -> Declaration
+        Constant-declaration -> Declaration
+        Class-declaration -> Declaration
+        Declare-subprogram-declaration -> Declaration
+        Defletter-declaration -> Declaration
+        Enum-declaration -> Declaration
+        Type-declaration -> Declaration
+
+        "implements" Id -> Implements-declaration
+
+        Access-modifier? "enum" Id Eol IN Enum-member-definition* EX "end" "enum" -> Enum-declaration
+
+        Id "=" Expn Eol -> Enum-member-definition
+        Eol -> Enum-member-definition
+
+        Access-modifier? "type" Id Eol IN Type-member-definition* EX "end" "type" -> Type-declaration
+
+        Id Parens? As-type? Eol -> Type-member-definition
+        Eol -> Type-member-definition
+
+        Def-keyword Letterrange+ -> Defletter-declaration
+
+        Id SPOFF "-" Id SPON -> Letterrange
+
+        "defbool" -> Def-keyword
+        "defbyte" -> Def-keyword
+        "defcur" -> Def-keyword
+        "defdate" -> Def-keyword
+        "defdbl" -> Def-keyword
+        "defdec" -> Def-keyword
+        "defint" -> Def-keyword
+        "deflng" -> Def-keyword
+        "defobj" -> Def-keyword
+        "defsng" -> Def-keyword
+        "defstr" -> Def-keyword
+        "defvar" -> Def-keyword
+
+        Variable-declaration-keyword Variable-description+ -> Variable-declaration
+
+        "dim" -> Variable-declaration-keyword
+        "redim" -> Variable-declaration-keyword
+        Access-modifier -> Variable-declaration-keyword
+
+        "public" -> Access-modifier
+        "private" -> Access-modifier
+        "friend" -> Access-modifier
+        "static" -> Access-modifier
+
+        Array-description -> Variable-description
+        Single-var-description -> Variable-description
+
+        Id Initial-value? As-type? -> Single-var-description
+
+        "=" Expn -> Initial-value
+
+        "withevents"? "preserve"? Id "(" Subscript-expn"," ")" As-type? -> Array-description
+
+        Expn To-expn? -> Subscript-expn
+
+        Access-modifier? "const" Constant-description -> Constant-declaration
+
+        Id As-type? Initial-value -> Constant-description
+
+        Access-modifier? "declare" Sub-or-function Id Lib-description Alias-description? Subprogram-argument-description? As-type? -> Declare-subprogram-declaration
+
+        Access-modifier? "static"? Sub-or-function Id Lib-description? Subprogram-argument-description? As-type? Eol IN Sub-scope EX "end" Sub-or-function -> Subprogram-declaration
+
+        "lib" Stringlit -> Lib-description
+
+        "alias" Stringlit -> Alias-description
+
+        Declaration-or-statement* -> Sub-scope
+
+        "sub" -> Sub-or-function
+        "function" -> Sub-or-function
+
+        "(" Subprogram-argument"," ")" -> Subprogram-argument-description
+
+        "optional"? Byref-or-byval? Id? Parens? As-type? Equals-expn? -> Subprogram-argument
+
+        "as" "new"? Reference Star-size? -> As-type
+
+        "*" Expn -> Star-size
+
+        "byref" -> Byref-or-byval
+        "byval" -> Byref-or-byval
+
+        "class" Id Eol IN Sub-scope EX "end" "class" -> Class-declaration
+
+        Primary Operator-primary* -> Expn
+
+        Op Primary -> Operator-primary
+
+        "^" -> Op
+        "*" -> Op
+        "/" -> Op
+        "\" -> Op
+        "mod" -> Op
+        "+" -> Op
+        "-" -> Op
+        "&" -> Op
+        "=" -> Op
+        "<>" -> Op
+        "<=" -> Op
+        ">=" -> Op
+        ":=" -> Op
+        ">" -> Op
+        "<" -> Op
+        "!" -> Op
+        "is" -> Op
+        "not" -> Op
+        "and" -> Op
+        "or" -> Op
+        "xor" -> Op
+        "eqv" -> Op
+        "imp" -> Op
+        "like" -> Op
+
+        Reference -> Primary
+        Stringlit -> Primary
+        Number -> Primary
+        Hexnumber -> Primary
+        Octnumber -> Primary
+        Datelit -> Primary
+        Returncode -> Primary
+        Filenumber -> Primary
+        Prefix-op Primary -> Primary
+        "(" Expn"," ")" -> Primary
+
+        "+" -> Prefix-op
+        "-" -> Prefix-op
+        "not" -> Prefix-op
+        "typeof" -> Prefix-op
+        "addressof" -> Prefix-op
+
+        "."? "!"? Id Component-selector* -> Reference
+        "." Key Component-selector* -> Reference
+
+        "#" Primary -> Filenumber
+
+        "." Id -> Component-selector
+        "." Key -> Component-selector
+        Subscript -> Component-selector
+
+        "(" Optional-subscript"," ")" -> Subscript
+
+        Expn To-expn? -> Optional-subscript
+        SP  -> Optional-subscript
+
+        Label-statement -> Statement
+        Assignment-statement -> Statement
+        App-activate-statement -> Statement
+        Attribute-statement -> Statement
+        Beep-statement -> Statement
+        Call-statement -> Statement
+        Chdir-statement -> Statement
+        Chdrive-statement -> Statement
+        Close-statement -> Statement
+        Date-statement -> Statement
+        Deletesetting-statement -> Statement
+        Do-statement -> Statement
+        End-statement -> Statement
+        Erase-statement -> Statement
+        Error-statement -> Statement
+        Event-statement -> Statement
+        Exit-statement -> Statement
+        Filecopy-statement -> Statement
+        For-each-statement -> Statement
+        For-next-statement -> Statement
+        Get-statement -> Statement
+        Gosub-statement -> Statement
+        Return-statement -> Statement
+        Goto-statement -> Statement
+        If-statement -> Statement
+        Input-statement -> Statement
+        Kill-statement -> Statement
+        Line-input-statement -> Statement
+        Load-statement -> Statement
+        Lock-statement -> Statement
+        Lset-statement -> Statement
+        Mid-statement -> Statement
+        Mkdir-statement -> Statement
+        Name-statement -> Statement
+        On-error-statement -> Statement
+        Open-statement -> Statement
+        Option-statement -> Statement
+        Preprocessor-if-statement -> Statement
+        Print-statement -> Statement
+        Property-statement -> Statement
+        Put-statement -> Statement
+        Randomize-statement -> Statement
+        Reset-statement -> Statement
+        Resume-statement -> Statement
+        Rmdir-statement -> Statement
+        Rset-statement -> Statement
+        Savepicture-statement -> Statement
+        Savesetting-statement -> Statement
+        Select-case-statement -> Statement
+        Set-statement -> Statement
+        Stop-statement -> Statement
+        Time-statement -> Statement
+        Unload-statement -> Statement
+        Unlock-statement -> Statement
+        While-statement -> Statement
+        With-statement -> Statement
+        Width-statement -> Statement
+        Write-statement -> Statement
+
+        "let"? Reference "=" Expn -> Assignment-statement
+
+        "appactivate" Expn Comma-expn? -> App-activate-statement
+
+        "," Expn -> Comma-expn
+
+        "beep" -> Beep-statement
+
+        "chdir" Filepath -> Chdir-statement
+
+        "mkdir" Filepath -> Mkdir-statement
+
+        "rmdir" Filepath -> Rmdir-statement
+
+        "mid" Reference "=" Stringlit -> Mid-statement
+
+        "name" Filepath "as" Filepath -> Name-statement
+
+        Drive? Id Slash-id* -> Filepath
+        Stringlit -> Filepath
+
+        "\" Id -> Slash-id
+        "/" Id -> Slash-id
+
+        "chdrive" Drive -> Chdrive-statement
+
+        Id ":" -> Drive
+
+        "open" Filepath "for" Mode Access-spec? Lock? "as" Filenumber Length-spec? -> Open-statement
+
+        "append" -> Mode
+        "binary" -> Mode
+        "input" -> Mode
+        "output" -> Mode
+        "random" -> Mode
+
+        "access" Access-mode -> Access-spec
+
+        "read" -> Access-mode
+        "write" -> Access-mode
+        "read" "write" -> Access-mode
+
+        "shared" -> Lock
+        "lock" "read" -> Lock
+        "lock" "write" -> Lock
+        "lock" "read" "write" -> Lock
+
+        "len" "=" Expn -> Length-spec
+
+        "close" Filenumber"," -> Close-statement
+
+        "seek" Filenumber "," Expn -> Seek-statement
+
+        "unlock" Filenumber Comma-recordrange? -> Unlock-statement
+
+        "get" Filenumber Comma-recordnumber? "," Reference -> Get-statement
+
+        "," Expn -> Comma-recordnumber
+
+        "input" Filenumber "," Reference"," -> Input-statement
+
+        "line" "input" Filenumber "," Reference -> Line-input-statement
+
+        "width" Filenumber "," Expn -> Width-statement
+
+        "write" Filenumber "," Print-item"," -> Write-statement
+
+        "print" Filenumber "," Print-item"," -> Print-statement
+
+        Spc-tab? Expn Charpos? -> Print-item
+        Spc-tab -> Print-item
+
+        "spc" "(" Expn? ")" -> Spc-tab
+        "tab" "(" Expn? ")" -> Spc-tab
+
+        Expn -> Charpos
+        ";" -> Charpos
+
+        "put" Filenumber Comma-expn? "," Reference -> Put-statement
+
+        "kill" Filepath -> Kill-statement
+
+        "lock" Filenumber Comma-recordrange? -> Lock-statement
+
+        "," Number To-number? -> Comma-recordrange
+
+        "to" Number -> To-number
+
+        "load" Expn -> Load-statement
+
+        "lset" Reference "=" Expn -> Lset-statement
+
+        "rset" Reference "=" Expn -> Rset-statement
+
+        "date" "=" Expn -> Date-statement
+
+        "time" "=" Expn -> Time-statement
+
+        "deletesetting" Expn+ -> Deletesetting-statement
+
+        "end" -> End-statement
+
+        "erase" Id"," -> Erase-statement
+
+        "error" Expn -> Error-statement
+
+        "public"? "event" Id Event-argument-list? -> Event-statement
+
+        "(" Event-argument+ ")" -> Event-argument-list
+
+        Byref-or-byval? Id Parens? As-type? -> Event-argument
+
+        "(" ")" -> Parens
+
+        "filecopy" Filepath "," Filepath -> Filecopy-statement
+
+        On-expn? "gosub" Expn -> Gosub-statement
+
+        "return" -> Return-statement
+
+        On-expn? "goto" Expn -> Goto-statement
+
+        "on" Expn -> On-expn
+
+        "option" "base" Number -> Option-statement
+        "option" "compare" Compare-mode -> Option-statement
+        "option" "explicit" -> Option-statement
+        "option" "private" "module" -> Option-statement
+
+        "binary" -> Compare-mode
+        "text" -> Compare-mode
+        "database" -> Compare-mode
+
+        "attribute" Attribute-definition+ -> Attribute-statement
+
+        Reference "=" Expn+ -> Attribute-definition
+
+        Full-if-statement -> If-statement
+        Short-if-statement -> If-statement
+
+        "if" Expn "then" Eol IN Sub-scope EX Elsif-clause* Else-clause? "end" "if" -> Full-if-statement
+
+        "elseif" Expn "then" Eol IN Sub-scope EX -> Elsif-clause
+
+        "else" Eol IN Sub-scope EX -> Else-clause
+
+        "if" Expn "then" Single-declaration-or-statement Short-else-clause? -> Short-if-statement
+
+        "else" Single-declaration-or-statement -> Short-else-clause
+
+        "select" "case" Expn Eol IN Case-alternative* Last-case-alternative? EX "end" "select" -> Select-case-statement
+
+        Tab-vbcomment? Newline -> Eol
+        ":" -> Eol
+
+        TAB Vbcomment -> Tab-vbcomment
+
+        Eol* "case" Is-operator? Case-expn+ Eol IN Sub-scope EX -> Case-alternative
+
+        "is" Op? -> Is-operator
+
+        Expn To-expn? -> Case-expn
+
+        "to" Expn -> To-expn
+
+        Eol* "case" "else" Eol IN Sub-scope EX -> Last-case-alternative
+
+        Full-for-next-statement -> For-next-statement
+        Short-for-next-statement -> For-next-statement
+
+        "for" Id "=" Expn To-or-downto Expn Step-clause? Colon-declaration-or-statement* ":" "next" Id? -> Short-for-next-statement
+
+        "for" Id "=" Expn To-or-downto Expn Step-clause? Eol IN Sub-scope EX "next" Id? -> Full-for-next-statement
+
+        "to" -> To-or-downto
+        "downto" -> To-or-downto
+
+        "step" Expn -> Step-clause
+
+        Full-for-each-statement -> For-each-statement
+        Short-for-each-statement -> For-each-statement
+
+        "for" "each" Id "in" Expn Eol Colon-declaration-or-statement* ":" "next" Id? -> Short-for-each-statement
+
+        "for" "each" Id "in" Expn Eol IN Sub-scope EX "next" Id? -> Full-for-each-statement
+
+        "do" While-or-until-clause? Eol IN Sub-scope EX "loop" While-or-until-clause? -> Do-statement
+
+        While-clause -> While-or-until-clause
+        Until-clause -> While-or-until-clause
+
+        "while" Expn -> While-clause
+
+        "until" Expn -> Until-clause
+
+        "while" Expn Eol IN Sub-scope EX "wend" -> While-statement
+
+        "call"? Reference Subroutine-bracketless-params? -> Call-statement
+
+        Expn Optional-expn"," -> Subroutine-bracketless-params
+
+        Expn -> Optional-expn
+         SP -> Optional-expn
+
+        "set" Reference "=" Set-object-expn -> Set-statement
+
+        "new"? Expn -> Set-object-expn
+        "nothing" -> Set-object-expn
+
+        "setattr" Filepath "," Expn -> Setattr-statement
+
+        "exit" Exit-what-indicator -> Exit-statement
+
+        "do" -> Exit-what-indicator
+        "for" -> Exit-what-indicator
+        "function" -> Exit-what-indicator
+        "property" -> Exit-what-indicator
+        "sub" -> Exit-what-indicator
+
+        "on" "local"? "error" On-error-action -> On-error-statement
+
+        "resume" "next" -> On-error-action
+        "goto" Expn -> On-error-action
+
+        "with" Reference Eol IN Sub-scope EX "end" "with" -> With-statement
+
+        Access-modifier? "static"? "property" Get-let-set Id Property-argument-list? As-type? Eol IN Sub-scope EX "end" "property" -> Property-statement
+
+        "get" -> Get-let-set
+        "let" -> Get-let-set
+        "set" -> Get-let-set
+
+        "(" Property-argument"," ")" -> Property-argument-list
+
+        "optional"? Byref-or-byval? "paramarray"? Id Parens? As-type? Equals-expn? -> Property-argument
+
+        "=" Expn -> Equals-expn
+
+        "randomize" Number? -> Randomize-statement
+
+        "reset" -> Reset-statement
+
+        "resume" "next" -> Resume-statement
+        "resume" Number? -> Resume-statement
+
+        "savepicture" Expn "," Expn -> Savepicture-statement
+
+        "savesetting" Expn"," -> Savesetting-statement
+
+        "stop" -> Stop-statement
+
+        "unload" Expn -> Unload-statement
+
+        EX Id ":" IN -> Label-statement
+
+        "#if" Expn "then" Eol IN Sub-scope EX Preprocessor-elsif-clause* Preprocessor-else-clause? "#end" "if" -> Preprocessor-if-statement
+
+        "#elseif" Expn "then" Eol IN Sub-scope EX -> Preprocessor-elsif-clause
+
+        "#else" Eol IN Sub-scope EX -> Preprocessor-else-clause

@@ -1,0 +1,622 @@
+module Main
+
+exports
+  sorts
+        Applet Applet.attlist Inline.class Id.attrib Class.attrib Title.attrib Core.attrib Lang.attrib I18n.attrib Common.attrib CommonIdRequired.attrib Base Base.attlist Head.content Bdo Bdo.attlist Dir.attrib Area Area.attlist Map Map.attlist A.attlist Img.attlist Object.attlist Usemap.attlist Shape.attrib Coords.attrib Length.datatype LinkTypes.datatype MediaDesc.datatype MultiLength.datatype Number.datatype Pixels.datatype Script.datatype Text.datatype Character.datatype Charset.datatype Charsets.datatype ContentType.datatype ContentTypes.datatype Datetime.datatype FPI.datatype LanguageCode.datatype URI.datatype URIs.datatype NMTOKEN.datatype NMTOKENS.datatype ID.datatype IDREF.datatype IDREFS.datatype Del Del.attlist Ins Ins.attlist Edit.attrib Edit.class Block.class Form.attlist Body.attlist Label.attlist Input.attlist Select.attlist Textarea.attlist Button.attlist Events.attrib InputType.class Option.attlist Optgroup Optgroup.attlist Fieldset Fieldset.attlist Button Legend Legend.attlist Form.class Formctrl.class Frameset Frameset.attlist Frame Frame.attlist Noframes Noframes.attlist A Iframe Iframe.attlist Img Basefont Basefont.attlist Center Center.attlist Font Font.attlist Font.attrib S S.attlist Strike Strike.attlist U U.attlist Dir Dir.attlist Menu Menu.attlist Li.noblock Isindex Isindex.attlist Br.attlist Caption.attlist Div.attlist Dl.attlist Heading.attrib Hr.attlist Li.attlist Ol.attlist P.attlist Pre.attlist Script.attlist Table.attlist Tr.attlist Cell.attrib Ul.attlist Align.attrib Color.datatype List.class Block.mix Link Link.attlist Dl Dt Dt.attlist Dd Dd.attlist Ol Ul Li Meta Meta.attlist Frame.attrib Name.attlist Object Param Param.attlist Hr B B.attlist Big Big.attlist I I.attlist Small Small.attlist Sub Sub.attlist Sup Sup.attlist Tt Tt.attlist Script Noscript Noscript.attlist Script.class Style Style.attlist Col Col.attlist Colgroup Colgroup.attlist Tbody Tbody.attlist Thead Thead.attlist Tfoot Tfoot.attlist Rules.attrib Link.attrib Target.attrib Br Span Span.attlist Abbr Abbr.attlist Acronym Acronym.attlist Cite Cite.attlist Code Code.attlist Dfn Dfn.attlist Em Em.attlist Kbd Kbd.attlist Q Q.attlist Samp Samp.attlist Strong Strong.attlist Var Var.attlist Div P Address Address.attlist Blockquote Blockquote.attlist Pre H1 H2 H3 H4 H5 H6 Heading.content Heading.class Inline.model Block.model Flow.model 
+  context-free syntax
+        applet::(Applet.attlist Param* Flow.model) -> Applet
+
+        Core.attrib alt::Text.datatype archive::STR? code::STR? codebase::URI.datatype? object::STR? height::Length.datatype width::Length.datatype -> Applet.attlist
+
+        ("top" | "middle" | "bottom" | "left" | "right")? hspace::Pixels.datatype? vspace::Pixels.datatype? -> Applet.attlist
+
+        Name.attlist -> Applet.attlist
+
+        Applet -> Inline.class
+
+        Bdo -> Inline.class
+
+        Map -> Inline.class
+
+        Edit.class -> Inline.class
+
+        A -> Inline.class
+
+        Iframe -> Inline.class
+
+        Img -> Inline.class
+
+        Font -> Inline.class
+        Basefont -> Inline.class
+        S -> Inline.class
+        Strike -> Inline.class
+        U -> Inline.class
+
+        Object -> Inline.class
+
+        B -> Inline.class
+        Big -> Inline.class
+        I -> Inline.class
+        Small -> Inline.class
+        Sub -> Inline.class
+        Sup -> Inline.class
+        Tt -> Inline.class
+
+        Script.class -> Inline.class
+
+        Abbr -> Inline.class
+        Acronym -> Inline.class
+        Br -> Inline.class
+        Cite -> Inline.class
+        Code -> Inline.class
+        Dfn -> Inline.class
+        Em -> Inline.class
+        Kbd -> Inline.class
+        Q -> Inline.class
+        Samp -> Inline.class
+        Span -> Inline.class
+        Strong -> Inline.class
+        Var -> Inline.class
+
+        id::ID.datatype? -> Id.attrib
+
+        class::NMTOKENS.datatype? -> Class.attrib
+
+        title::Text.datatype? -> Title.attrib
+
+        Id.attrib Class.attrib Title.attrib -> Core.attrib
+
+        style::STR? -> Core.attrib
+
+        xml:lang::LanguageCode.datatype? -> Lang.attrib
+
+        lang::LanguageCode.datatype? -> Lang.attrib
+
+        Lang.attrib -> I18n.attrib
+
+        Dir.attrib? -> I18n.attrib
+
+        Core.attrib I18n.attrib -> Common.attrib
+
+        Events.attrib -> Common.attrib
+
+        id::ID.datatype Class.attrib Title.attrib I18n.attrib -> CommonIdRequired.attrib
+
+        Events.attrib -> CommonIdRequired.attrib
+
+        base::Base.attlist -> Base
+
+        href::URI.datatype -> Base.attlist
+
+        Target.attrib -> Base.attlist
+
+        Base? -> Head.content
+
+        Isindex? -> Head.content
+
+        Link* -> Head.content
+
+        Meta* -> Head.content
+
+        Script* -> Head.content
+
+        Style* -> Head.content
+
+        bdo::(Bdo.attlist Inline.model) -> Bdo
+
+        Core.attrib Lang.attrib Dir.attrib -> Bdo.attlist
+
+        "ltr" -> Dir.attrib
+        "rtl" -> Dir.attrib
+
+        area::Area.attlist -> Area
+
+        Common.attrib href::URI.datatype? Shape.attrib Coords.attrib nohref::"nohref"? alt::Text.datatype tabindex::Number.datatype? accesskey::Character.datatype? -> Area.attlist
+
+        onblur::Script.datatype? onfocus::Script.datatype? -> Area.attlist
+
+        Target.attrib -> Area.attlist
+
+        map::(Map.attlist (Block.class | Area)+) -> Map
+
+        CommonIdRequired.attrib -> Map.attlist
+
+        Name.attlist -> Map.attlist
+
+        Shape.attrib Coords.attrib -> A.attlist
+
+        onblur::Script.datatype? onfocus::Script.datatype? -> A.attlist
+
+        Common.attrib href::URI.datatype? charset::Charset.datatype? type::ContentType.datatype? hreflang::LanguageCode.datatype? rel::LinkTypes.datatype? rev::LinkTypes.datatype? accesskey::Character.datatype? tabindex::Number.datatype? -> A.attlist
+
+        Name.attlist -> A.attlist
+
+        Target.attrib -> A.attlist
+
+        Usemap.attlist -> Img.attlist
+
+        Common.attrib src::URI.datatype alt::Text.datatype longdesc::URI.datatype? height::Length.datatype? width::Length.datatype? -> Img.attlist
+
+        ("top" | "middle" | "bottom" | "left" | "right")? border::Pixels.datatype? hspace::Pixels.datatype? vspace::Pixels.datatype? -> Img.attlist
+
+        Name.attlist -> Img.attlist
+
+        ismap::"ismap"? -> Img.attlist
+
+        Usemap.attlist -> Object.attlist
+
+        ("top" | "middle" | "bottom" | "left" | "right")? border::Pixels.datatype? hspace::Pixels.datatype? vspace::Pixels.datatype? -> Object.attlist
+
+        Common.attrib declare::"declare"? classid::URI.datatype? codebase::URI.datatype? data::URI.datatype? type::ContentType.datatype? codetype::ContentType.datatype? archive::URIs.datatype? standby::Text.datatype? height::Length.datatype? width::Length.datatype? name::STR? tabindex::Number.datatype? -> Object.attlist
+
+        usemap::IDREF.datatype? -> Usemap.attlist
+
+        ("rect" | "circle" | "poly" | "default")? -> Shape.attrib
+
+        coords::STR? -> Coords.attrib
+
+        STR -> Length.datatype
+
+        NMTOKENS.datatype -> LinkTypes.datatype
+
+        STR -> MediaDesc.datatype
+
+        STR -> MultiLength.datatype
+
+        STR -> Number.datatype
+
+        STR -> Pixels.datatype
+
+        STR -> Script.datatype
+
+        STR -> Text.datatype
+
+        STR -> Character.datatype
+
+        STR -> Charset.datatype
+
+        STR -> Charsets.datatype
+
+        STR -> ContentType.datatype
+
+        STR -> ContentTypes.datatype
+
+        STR -> Datetime.datatype
+
+        STR -> FPI.datatype
+
+        STR -> LanguageCode.datatype
+
+        STR -> URI.datatype
+
+        STR -> URIs.datatype
+
+        STR -> NMTOKEN.datatype
+
+        STR -> NMTOKENS.datatype
+
+        STR -> ID.datatype
+
+        STR -> IDREF.datatype
+
+        STR -> IDREFS.datatype
+
+        del::(Del.attlist Inline.model) -> Del
+
+        Edit.attrib -> Del.attlist
+
+        ins::(Ins.attlist Inline.model) -> Ins
+
+        Edit.attrib -> Ins.attlist
+
+        cite::URI.datatype? datetime::Datetime.datatype? -> Edit.attrib
+
+        Del -> Edit.class
+        Ins -> Edit.class
+
+        Edit.class -> Block.class
+
+        Center -> Block.class
+        Isindex -> Block.class
+
+        List.class -> Block.class
+
+        Hr -> Block.class
+
+        Script.class -> Block.class
+
+        Address -> Block.class
+        Blockquote -> Block.class
+        Div -> Block.class
+        P -> Block.class
+        Pre -> Block.class
+        Heading.class -> Block.class
+
+        onreset::Script.datatype? onsubmit::Script.datatype? -> Form.attlist
+
+        accept-charset::Charsets.datatype? accept::ContentTypes.datatype? -> Form.attlist
+
+        Name.attlist -> Form.attlist
+
+        Target.attrib -> Form.attlist
+
+        onload::Script.datatype? onunload::Script.datatype? -> Body.attlist
+
+        background::URI.datatype? bgcolor::Color.datatype? text::Color.datatype? link::Color.datatype? vlink::Color.datatype? alink::Color.datatype? -> Body.attlist
+
+        onblur::Script.datatype? onfocus::Script.datatype? -> Label.attlist
+
+        onblur::Script.datatype? onchange::Script.datatype? onfocus::Script.datatype? onselect::Script.datatype? -> Input.attlist
+
+        disabled::"disabled"? readonly::"readonly"? alt::STR? tabindex::Number.datatype? accept::ContentTypes.datatype? -> Input.attlist
+
+        Align.attrib -> Input.attlist
+
+        onblur::Script.datatype? onchange::Script.datatype? onfocus::Script.datatype? -> Select.attlist
+
+        disabled::"disabled"? tabindex::Number.datatype? -> Select.attlist
+
+        onblur::Script.datatype? onchange::Script.datatype? onfocus::Script.datatype? onselect::Script.datatype? -> Textarea.attlist
+
+        disabled::"disabled"? readonly::"readonly"? tabindex::Number.datatype? -> Textarea.attlist
+
+        onblur::Script.datatype? onfocus::Script.datatype? -> Button.attlist
+
+        Common.attrib name::STR? value::STR? ("button" | "submit" | "reset")? disabled::"disabled"? tabindex::Number.datatype? accesskey::Character.datatype? -> Button.attlist
+
+        onclick::Script.datatype? ondblclick::Script.datatype? onmousedown::Script.datatype? onmouseup::Script.datatype? onmouseover::Script.datatype? onmousemove::Script.datatype? onmouseout::Script.datatype? onkeypress::Script.datatype? onkeydown::Script.datatype? onkeyup::Script.datatype? -> Events.attrib
+
+        "image" -> InputType.class
+        "button" -> InputType.class
+
+        disabled::"disabled"? label::Text.datatype? -> Option.attlist
+
+        optgroup::(Optgroup.attlist Option+) -> Optgroup
+
+        Common.attrib disabled::"disabled"? label::Text.datatype -> Optgroup.attlist
+
+        fieldset::(Fieldset.attlist Legend Flow.model) -> Fieldset
+
+        Common.attrib -> Fieldset.attlist
+
+        button::(Button.attlist Flow.model) -> Button
+
+        legend::(Legend.attlist Inline.model) -> Legend
+
+        Common.attrib accesskey::Character.datatype? -> Legend.attlist
+
+        ("top" | "bottom" | "left" | "right")? -> Legend.attlist
+
+        Fieldset -> Form.class
+
+        Button -> Formctrl.class
+
+        frameset::(Frameset.attlist (Frameset | Frame)+ Noframes?) -> Frameset
+
+        Body -> Frameset
+
+        Core.attrib cols::MultiLength.datatype? rows::MultiLength.datatype? -> Frameset.attlist
+
+        frame::Frame.attlist -> Frame
+
+        Core.attrib longdesc::URI.datatype? src::URI.datatype? ("1" | "0")? marginwidth::Pixels.datatype? marginheight::Pixels.datatype? noresize::"noresize"? ("yes" | "no" | "auto")? -> Frame.attlist
+
+        noframes::(Noframes.attlist Body) -> Noframes
+
+        Common.attrib -> Noframes.attlist
+
+        a::(A.attlist Inline.model) -> A
+
+        iframe::(Iframe.attlist Flow.model) -> Iframe
+
+        Core.attrib longdesc::URI.datatype? src::URI.datatype? ("1" | "0")? width::Length.datatype? height::Length.datatype? marginwidth::Pixels.datatype? marginheight::Pixels.datatype? ("yes" | "no" | "auto")? -> Iframe.attlist
+
+        Name.attlist -> Iframe.attlist
+
+        img::Img.attlist -> Img
+
+        basefont::Basefont.attlist -> Basefont
+
+        Id.attrib Font.attrib -> Basefont.attlist
+
+        center::(Center.attlist Flow.model) -> Center
+
+        Common.attrib -> Center.attlist
+
+        font::(Font.attlist Inline.model) -> Font
+
+        Core.attrib I18n.attrib Font.attrib -> Font.attlist
+
+        size::STR? color::Color.datatype? face::STR? -> Font.attrib
+
+        s::(S.attlist Inline.model) -> S
+
+        Common.attrib -> S.attlist
+
+        strike::(Strike.attlist Inline.model) -> Strike
+
+        Common.attrib -> Strike.attlist
+
+        u::(U.attlist Inline.model) -> U
+
+        Common.attrib -> U.attlist
+
+        dir::(Dir.attlist Li.noblock+) -> Dir
+
+        Common.attrib compact::"compact"? -> Dir.attlist
+
+        menu::(Menu.attlist Li.noblock+) -> Menu
+
+        Common.attrib compact::"compact"? -> Menu.attlist
+
+        li::(Li.attlist Inline.model) -> Li.noblock
+
+        isindex::Isindex.attlist -> Isindex
+
+        Core.attrib I18n.attrib prompt::Text.datatype? -> Isindex.attlist
+
+        ("left" | "all" | "right" | "none")? -> Br.attlist
+
+        Core.attrib -> Br.attlist
+
+        Align.attrib -> Caption.attlist
+
+        Align.attrib -> Div.attlist
+
+        Common.attrib -> Div.attlist
+
+        compact::"compact"? -> Dl.attlist
+
+        Common.attrib -> Dl.attlist
+
+        Align.attrib -> Heading.attrib
+
+        Common.attrib -> Heading.attrib
+
+        ("left" | "center" | "right")? noshade::"noshade"? size::Pixels.datatype? width::Pixels.datatype? -> Hr.attlist
+
+        Common.attrib -> Hr.attlist
+
+        type::STR? value::STR? -> Li.attlist
+
+        Common.attrib -> Li.attlist
+
+        type::STR? compact::"compact"? start::STR? -> Ol.attlist
+
+        Common.attrib -> Ol.attlist
+
+        Align.attrib -> P.attlist
+
+        Common.attrib -> P.attlist
+
+        width::Length.datatype? -> Pre.attlist
+
+        Common.attrib xml:space::"preserve"? -> Pre.attlist
+
+        language::ContentType.datatype? -> Script.attlist
+
+        charset::Charset.datatype? type::ContentType.datatype src::URI.datatype? defer::"defer"? xml:space::"preserve"? -> Script.attlist
+
+        Align.attrib bgcolor::Color.datatype? -> Table.attlist
+
+        width::Length.datatype? border::Pixels.datatype? Frame.attrib Rules.attrib cellspacing::Length.datatype? cellpadding::Length.datatype? -> Table.attlist
+
+        bgcolor::Color.datatype? -> Tr.attlist
+
+        nowrap::"nowrap"? bgcolor::Color.datatype? width::Pixels.datatype? height::Pixels.datatype? -> Cell.attrib
+
+        type::STR? compact::"compact"? -> Ul.attlist
+
+        Common.attrib -> Ul.attlist
+
+        ("left" | "all" | "right" | "none")? -> Align.attrib
+
+        STR -> Color.datatype
+
+        Dir -> List.class
+        Menu -> List.class
+
+        Ul -> List.class
+        Ol -> List.class
+        Dl -> List.class
+
+        STR -> Block.mix
+        Inline.class -> Block.mix
+
+        Block.class -> Block.mix
+
+        link::Link.attlist -> Link
+
+        Common.attrib charset::Charset.datatype? href::URI.datatype? hreflang::LanguageCode.datatype? type::ContentType.datatype? rel::LinkTypes.datatype? rev::LinkTypes.datatype? media::MediaDesc.datatype? -> Link.attlist
+
+        dl::(Dl.attlist (Dt | Dd)+) -> Dl
+
+        dt::(Dt.attlist Inline.model) -> Dt
+
+        Common.attrib -> Dt.attlist
+
+        dd::(Dd.attlist Flow.model) -> Dd
+
+        Common.attrib -> Dd.attlist
+
+        ol::(Ol.attlist Li+) -> Ol
+
+        ul::(Ul.attlist Li+) -> Ul
+
+        li::(Li.attlist Flow.model) -> Li
+
+        meta::Meta.attlist -> Meta
+
+        I18n.attrib http-equiv::NMTOKEN.datatype? name::NMTOKEN.datatype? content::STR? scheme::STR? -> Meta.attlist
+
+        Name.attlist -> Frame.attrib
+
+        ("void" | "above" | "below" | "hsides" | "lhs" | "rhs" | "vsides" | "box" | "border")? -> Frame.attrib
+
+        name::STR? -> Name.attlist
+
+        object::(Object.attlist Param* Flow.model) -> Object
+
+        param::Param.attlist -> Param
+
+        Id.attrib name::STR value::STR? ("data" | "ref" | "object")? type::ContentType.datatype? -> Param.attlist
+
+        hr::Hr.attlist -> Hr
+
+        b::(B.attlist Inline.model) -> B
+
+        Common.attrib -> B.attlist
+
+        big::(Big.attlist Inline.model) -> Big
+
+        Common.attrib -> Big.attlist
+
+        i::(I.attlist Inline.model) -> I
+
+        Common.attrib -> I.attlist
+
+        small::(Small.attlist Inline.model) -> Small
+
+        Common.attrib -> Small.attlist
+
+        sub::(Sub.attlist Inline.model) -> Sub
+
+        Common.attrib -> Sub.attlist
+
+        sup::(Sup.attlist Inline.model) -> Sup
+
+        Common.attrib -> Sup.attlist
+
+        tt::(Tt.attlist Inline.model) -> Tt
+
+        Common.attrib -> Tt.attlist
+
+        script::(Script.attlist STR) -> Script
+
+        noscript::(Noscript.attlist Block.model) -> Noscript
+
+        Common.attrib -> Noscript.attlist
+
+        Noscript -> Script.class
+        Script -> Script.class
+
+        style::(Style.attlist STR) -> Style
+
+        Title.attrib I18n.attrib type::ContentType.datatype media::MediaDesc.datatype? xml:space::"preserve"? -> Style.attlist
+
+        col::Col.attlist -> Col
+
+        Common.attrib span::Number.datatype? width::MultiLength.datatype? CellHAlign.attrib CellVAlign.attrib -> Col.attlist
+
+        colgroup::(Colgroup.attlist Col*) -> Colgroup
+
+        Common.attrib span::Number.datatype? width::MultiLength.datatype? CellHAlign.attrib CellVAlign.attrib -> Colgroup.attlist
+
+        tbody::(Tbody.attlist Tr+) -> Tbody
+
+        Common.attrib CellHAlign.attrib CellVAlign.attrib -> Tbody.attlist
+
+        thead::(Thead.attlist Tr+) -> Thead
+
+        Common.attrib CellHAlign.attrib CellVAlign.attrib -> Thead.attlist
+
+        tfoot::(Tfoot.attlist Tr+) -> Tfoot
+
+        Common.attrib CellHAlign.attrib CellVAlign.attrib -> Tfoot.attlist
+
+        ("none" | "groups" | "rows" | "cols" | "all")? -> Rules.attrib
+
+        Target.attrib -> Link.attrib
+
+        target::STR? -> Target.attrib
+
+        br::Br.attlist -> Br
+
+        span::(Span.attlist Inline.model) -> Span
+
+        Common.attrib -> Span.attlist
+
+        abbr::(Abbr.attlist Inline.model) -> Abbr
+
+        Common.attrib -> Abbr.attlist
+
+        acronym::(Acronym.attlist Inline.model) -> Acronym
+
+        Common.attrib -> Acronym.attlist
+
+        cite::(Cite.attlist Inline.model) -> Cite
+
+        Common.attrib -> Cite.attlist
+
+        code::(Code.attlist Inline.model) -> Code
+
+        Common.attrib -> Code.attlist
+
+        dfn::(Dfn.attlist Inline.model) -> Dfn
+
+        Common.attrib -> Dfn.attlist
+
+        em::(Em.attlist Inline.model) -> Em
+
+        Common.attrib -> Em.attlist
+
+        kbd::(Kbd.attlist Inline.model) -> Kbd
+
+        Common.attrib -> Kbd.attlist
+
+        q::(Q.attlist Inline.model) -> Q
+
+        Common.attrib cite::URI.datatype? -> Q.attlist
+
+        samp::(Samp.attlist Inline.model) -> Samp
+
+        Common.attrib -> Samp.attlist
+
+        strong::(Strong.attlist Inline.model) -> Strong
+
+        Common.attrib -> Strong.attlist
+
+        var::(Var.attlist Inline.model) -> Var
+
+        Common.attrib -> Var.attlist
+
+        div::(Div.attlist Flow.model) -> Div
+
+        p::(P.attlist Inline.model) -> P
+
+        address::(Address.attlist Inline.model) -> Address
+
+        Common.attrib -> Address.attlist
+
+        blockquote::(Blockquote.attlist Block.model) -> Blockquote
+
+        Common.attrib cite::URI.datatype? -> Blockquote.attlist
+
+        pre::(Pre.attlist Inline.model) -> Pre
+
+        h1::(Heading.attrib Heading.content) -> H1
+
+        h2::(Heading.attrib Heading.content) -> H2
+
+        h3::(Heading.attrib Heading.content) -> H3
+
+        h4::(Heading.attrib Heading.content) -> H4
+
+        h5::(Heading.attrib Heading.content) -> H5
+
+        h6::(Heading.attrib Heading.content) -> H6
+
+        Inline.model -> Heading.content
+
+        H1 -> Heading.class
+        H2 -> Heading.class
+        H3 -> Heading.class
+        H4 -> Heading.class
+        H5 -> Heading.class
+        H6 -> Heading.class
+
+        (STR | Inline.class)* -> Inline.model
+
+        Block.mix+ -> Block.model
+
+        (STR | Inline.class | Block.class)* -> Flow.model

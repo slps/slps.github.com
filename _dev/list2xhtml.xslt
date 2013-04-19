@@ -16,7 +16,8 @@
 
 					  var _gaq = _gaq || [];
 					  _gaq.push(['_setAccount', 'UA-3743366-7']);
-					  _gaq.push(['_setDomainName', 'github.com']);
+					  _gaq.push(['_setDomainName', 'github.io']);
+					  _gaq.push(['_setAllowLinker', true]);
 					  _gaq.push(['_trackPageview']);
 
 					  (function() {
@@ -344,7 +345,7 @@ Last updated: </xsl:text>
 						<xsl:text>] [</xsl:text>
 						<a href="{$filename}.sdf">SDF</a>
 						<xsl:text>]</xsl:text>
-						<xsl:if test="../../short != 'Metamodels'">
+						<xsl:if test="not(../../short = 'Metamodels')">
 							<xsl:text> [</xsl:text>
 							<a href="{$filename}.rsc">Rascal</a>
 							<xsl:text>]</xsl:text>
