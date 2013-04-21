@@ -8,7 +8,7 @@ exports
 
         Core.attrib alt::Text.datatype archive::STR? code::STR? codebase::URI.datatype? object::STR? height::Length.datatype width::Length.datatype -> Applet.attlist
 
-        ("top" | "middle" | "bottom" | "left" | "right")? hspace::Pixels.datatype? vspace::Pixels.datatype? -> Applet.attlist
+        align::("top" | "middle" | "bottom" | "left" | "right")? hspace::Pixels.datatype? vspace::Pixels.datatype? -> Applet.attlist
 
         Name.attlist -> Applet.attlist
 
@@ -106,8 +106,7 @@ exports
 
         Core.attrib Lang.attrib Dir.attrib -> Bdo.attlist
 
-        "ltr" -> Dir.attrib
-        "rtl" -> Dir.attrib
+        dir::("ltr" | "rtl") -> Dir.attrib
 
         area::Area.attlist -> Area
 
@@ -137,7 +136,7 @@ exports
 
         Common.attrib src::URI.datatype alt::Text.datatype longdesc::URI.datatype? height::Length.datatype? width::Length.datatype? -> Img.attlist
 
-        ("top" | "middle" | "bottom" | "left" | "right")? border::Pixels.datatype? hspace::Pixels.datatype? vspace::Pixels.datatype? -> Img.attlist
+        align::("top" | "middle" | "bottom" | "left" | "right")? border::Pixels.datatype? hspace::Pixels.datatype? vspace::Pixels.datatype? -> Img.attlist
 
         Name.attlist -> Img.attlist
 
@@ -145,13 +144,13 @@ exports
 
         Usemap.attlist -> Object.attlist
 
-        ("top" | "middle" | "bottom" | "left" | "right")? border::Pixels.datatype? hspace::Pixels.datatype? vspace::Pixels.datatype? -> Object.attlist
+        align::("top" | "middle" | "bottom" | "left" | "right")? border::Pixels.datatype? hspace::Pixels.datatype? vspace::Pixels.datatype? -> Object.attlist
 
         Common.attrib declare::"declare"? classid::URI.datatype? codebase::URI.datatype? data::URI.datatype? type::ContentType.datatype? codetype::ContentType.datatype? archive::URIs.datatype? standby::Text.datatype? height::Length.datatype? width::Length.datatype? name::STR? tabindex::Number.datatype? -> Object.attlist
 
         usemap::IDREF.datatype? -> Usemap.attlist
 
-        ("rect" | "circle" | "poly" | "default")? -> Shape.attrib
+        shape::("rect" | "circle" | "poly" | "default")? -> Shape.attrib
 
         coords::STR? -> Coords.attrib
 
@@ -262,7 +261,7 @@ exports
 
         onblur::Script.datatype? onfocus::Script.datatype? -> Button.attlist
 
-        Common.attrib name::STR? value::STR? ("button" | "submit" | "reset")? disabled::"disabled"? tabindex::Number.datatype? accesskey::Character.datatype? -> Button.attlist
+        Common.attrib name::STR? value::STR? type::("button" | "submit" | "reset")? disabled::"disabled"? tabindex::Number.datatype? accesskey::Character.datatype? -> Button.attlist
 
         onclick::Script.datatype? ondblclick::Script.datatype? onmousedown::Script.datatype? onmouseup::Script.datatype? onmouseover::Script.datatype? onmousemove::Script.datatype? onmouseout::Script.datatype? onkeypress::Script.datatype? onkeydown::Script.datatype? onkeyup::Script.datatype? -> Events.attrib
 
@@ -285,7 +284,7 @@ exports
 
         Common.attrib accesskey::Character.datatype? -> Legend.attlist
 
-        ("top" | "bottom" | "left" | "right")? -> Legend.attlist
+        align::("top" | "bottom" | "left" | "right")? -> Legend.attlist
 
         Fieldset -> Form.class
 
@@ -299,7 +298,7 @@ exports
 
         frame::Frame.attlist -> Frame
 
-        Core.attrib longdesc::URI.datatype? src::URI.datatype? ("1" | "0")? marginwidth::Pixels.datatype? marginheight::Pixels.datatype? noresize::"noresize"? ("yes" | "no" | "auto")? -> Frame.attlist
+        Core.attrib longdesc::URI.datatype? src::URI.datatype? frameborder::("1" | "0")? marginwidth::Pixels.datatype? marginheight::Pixels.datatype? noresize::"noresize"? scrolling::("yes" | "no" | "auto")? -> Frame.attlist
 
         noframes::(Noframes.attlist Body) -> Noframes
 
@@ -309,7 +308,7 @@ exports
 
         iframe::(Iframe.attlist Flow.model) -> Iframe
 
-        Core.attrib longdesc::URI.datatype? src::URI.datatype? ("1" | "0")? width::Length.datatype? height::Length.datatype? marginwidth::Pixels.datatype? marginheight::Pixels.datatype? ("yes" | "no" | "auto")? -> Iframe.attlist
+        Core.attrib longdesc::URI.datatype? src::URI.datatype? frameborder::("1" | "0")? width::Length.datatype? height::Length.datatype? marginwidth::Pixels.datatype? marginheight::Pixels.datatype? scrolling::("yes" | "no" | "auto")? -> Iframe.attlist
 
         Name.attlist -> Iframe.attlist
 
@@ -355,7 +354,7 @@ exports
 
         Core.attrib I18n.attrib prompt::Text.datatype? -> Isindex.attlist
 
-        ("left" | "all" | "right" | "none")? -> Br.attlist
+        clear::("left" | "all" | "right" | "none")? -> Br.attlist
 
         Core.attrib -> Br.attlist
 
@@ -373,7 +372,7 @@ exports
 
         Common.attrib -> Heading.attrib
 
-        ("left" | "center" | "right")? noshade::"noshade"? size::Pixels.datatype? width::Pixels.datatype? -> Hr.attlist
+        align::("left" | "center" | "right")? noshade::"noshade"? size::Pixels.datatype? width::Pixels.datatype? -> Hr.attlist
 
         Common.attrib -> Hr.attlist
 
@@ -409,7 +408,7 @@ exports
 
         Common.attrib -> Ul.attlist
 
-        ("left" | "all" | "right" | "none")? -> Align.attrib
+        align::("left" | "all" | "right" | "none")? -> Align.attrib
 
         STR -> Color.datatype
 
@@ -451,7 +450,7 @@ exports
 
         Name.attlist -> Frame.attrib
 
-        ("void" | "above" | "below" | "hsides" | "lhs" | "rhs" | "vsides" | "box" | "border")? -> Frame.attrib
+        frame::("void" | "above" | "below" | "hsides" | "lhs" | "rhs" | "vsides" | "box" | "border")? -> Frame.attrib
 
         name::STR? -> Name.attlist
 
@@ -459,7 +458,7 @@ exports
 
         param::Param.attlist -> Param
 
-        Id.attrib name::STR value::STR? ("data" | "ref" | "object")? type::ContentType.datatype? -> Param.attlist
+        Id.attrib name::STR value::STR? valuetype::("data" | "ref" | "object")? type::ContentType.datatype? -> Param.attlist
 
         hr::Hr.attlist -> Hr
 
@@ -524,7 +523,7 @@ exports
 
         Common.attrib CellHAlign.attrib CellVAlign.attrib -> Tfoot.attlist
 
-        ("none" | "groups" | "rows" | "cols" | "all")? -> Rules.attrib
+        rules::("none" | "groups" | "rows" | "cols" | "all")? -> Rules.attrib
 
         Target.attrib -> Link.attrib
 

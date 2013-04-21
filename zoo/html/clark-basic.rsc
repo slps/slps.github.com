@@ -151,7 +151,7 @@ syntax Form
  ;
 syntax Form_attlist
         = 
-        Common_attrib URI_datatype action ("get" | "post")? ContentType_datatype enctype?
+        Common_attrib URI_datatype action ("get" | "post") method? ContentType_datatype enctype?
  ;
 syntax Label
         = 
@@ -337,7 +337,7 @@ syntax Param
  ;
 syntax Param_attlist
         = 
-        Id_attrib String name String value? ("data" | "ref" | "object")? ContentType_datatype type?
+        Id_attrib String name String value? ("data" | "ref" | "object") valuetype? ContentType_datatype type?
  ;
 syntax Title
         = 
@@ -425,15 +425,15 @@ syntax Cell_attrib
  ;
 syntax CellHAlign_attrib
         = 
-        ("left" | "center" | "right")?
+        ("left" | "center" | "right") align?
  ;
 syntax CellVAlign_attrib
         = 
-        ("top" | "middle" | "bottom")?
+        ("top" | "middle" | "bottom") valign?
  ;
 syntax Scope_attrib
         = 
-        ("row" | "col")?
+        ("row" | "col") scope?
  ;
 syntax Br
         = 

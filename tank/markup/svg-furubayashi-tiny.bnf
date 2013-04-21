@@ -1,0 +1,415 @@
+SVG.Animation.extra.attrib:
+        EPSILON
+SVG.Animation.attrib:
+        SVG.XLink.attrib SVG.Animation.extra.attrib
+SVG.AnimationAttribute.extra.attrib:
+        EPSILON
+SVG.AnimationAttribute.attrib:
+        attributeName::STR (attributeType::STR)? SVG.AnimationAttribute.extra.attrib
+SVG.AnimationTiming.extra.attrib:
+        EPSILON
+SVG.AnimationTiming.attrib:
+        (begin::STR)? (dur::STR)? (end::STR)? (min::STR)? (max::STR)? (restart::("always" | "never" | "whenNotActive"))? (repeatCount::STR)? (repeatDur::STR)? (fill::("remove" | "freeze"))? SVG.AnimationTiming.extra.attrib
+SVG.AnimationValue.extra.attrib:
+        EPSILON
+SVG.AnimationValue.attrib:
+        (calcMode::("discrete" | "linear" | "paced" | "spline"))? (values::STR)? (keyTimes::STR)? (keySplines::STR)? (from::STR)? (to::STR)? (by::STR)? SVG.AnimationValue.extra.attrib
+SVG.AnimationAddition.extra.attrib:
+        EPSILON
+SVG.AnimationAddtion.attrib:
+        (additive::("replace" | "sum"))? (accumulate::("none" | "sum"))? SVG.AnimationAddition.extra.attrib
+SVG.Animation.extra.class:
+        EPSILON
+SVG.Animation.class:
+        SVG.animate
+        SVG.set
+        SVG.animateMotion
+        SVG.animateColor
+        SVG.animateTransform
+        SVG.Animation.extra.class
+SVG.animate:
+        animate::(SVG.Description.class* SVG.Core.attrib SVG.Conditional.attrib SVG.AnimationEvents.attrib SVG.External.attrib SVG.Animation.attrib SVG.AnimationAttribute.attrib SVG.AnimationTiming.attrib SVG.AnimationValue.attrib SVG.AnimationAddtion.attrib)
+SVG.set:
+        set::(SVG.Description.class* SVG.Core.attrib SVG.Conditional.attrib SVG.AnimationEvents.attrib SVG.External.attrib SVG.Animation.attrib SVG.AnimationAttribute.attrib SVG.AnimationTiming.attrib (to::STR)?)
+SVG.animateMotion:
+        animateMotion::(SVG.Description.class* SVG.mpath? SVG.Core.attrib SVG.Conditional.attrib SVG.AnimationEvents.attrib SVG.External.attrib SVG.Animation.attrib SVG.AnimationTiming.attrib SVG.AnimationAddtion.attrib (calcMode::("discrete" | "linear" | "paced" | "spline"))? (values::STR)? (keyTimes::STR)? (Splines::STR)? (from::STR)? (to::STR)? (by::STR)? (path::STR)? (keyPoints::STR)? (rotate::STR)? (origin::STR)?)
+SVG.animateColor:
+        animateColor::(SVG.Description.class* SVG.Core.attrib SVG.Conditional.attrib SVG.AnimationEvents.attrib SVG.External.attrib SVG.Animation.attrib SVG.AnimationAttribute.attrib SVG.AnimationTiming.attrib SVG.AnimationValue.attrib SVG.AnimationAddtion.attrib)
+SVG.animateTransform:
+        animateTransform::(SVG.Description.class* SVG.Core.attrib SVG.Conditional.attrib SVG.AnimationEvents.attrib SVG.External.attrib SVG.Animation.attrib SVG.AnimationAttribute.attrib SVG.AnimationTiming.attrib SVG.AnimationValue.attrib SVG.AnimationAddtion.attrib (type::("translate" | "scale" | "rotate" | "skewX" | "skewY"))?)
+SVG.mpath:
+        mpath::(SVG.Description.class* SVG.Core.attrib SVG.XLinkRequired.attrib SVG.External.attrib)
+SVG.Font.extra.class:
+        EPSILON
+SVG.Font.class:
+        SVG.font
+        SVG.font-face
+        SVG.Font.extra.class
+SVG.font:
+        font::(SVG.Description.class* SVG.font-face SVG.missing-glyph (SVG.glyph | SVG.hkern)* SVG.Core.attrib SVG.Style.attrib SVG.External.attrib (horiz-origin-x::SVG.Number.datatype)? horiz-adv-x::SVG.Number.datatype)
+SVG.font-face:
+        font-face::(SVG.Description.class* SVG.font-face-src? SVG.Core.attrib (font-family::STR)? (font-style::STR)? (font-variant::STR)? (font-weight::STR)? (font-stretch::STR)? (font-size::STR)? (unicode-range::STR)? (units-per-em::SVG.Number.datatype)? (panose-1::STR)? (stemv::SVG.Number.datatype)? (stemh::SVG.Number.datatype)? (slope::SVG.Number.datatype)? (cap-height::SVG.Number.datatype)? (x-height::SVG.Number.datatype)? (accent-height::SVG.Number.datatype)? (ascent::SVG.Number.datatype)? (descent::SVG.Number.datatype)? (widths::STR)? (bbox::STR)? (ideographic::SVG.Number.datatype)? (alphabetic::SVG.Number.datatype)? (mathematical::SVG.Number.datatype)? (hanging::SVG.Number.datatype)? (underline-position::SVG.Number.datatype)? (underline-thickness::SVG.Number.datatype)? (strikethrough-position::SVG.Number.datatype)? (strikethrough-thickness::SVG.Number.datatype)? (overline-position::SVG.Number.datatype)? (overline-thickness::SVG.Number.datatype)?)
+SVG.glyph:
+        glyph::(SVG.Description.class* SVG.Core.attrib SVG.Style.attrib (unicode::STR)? (glyph-name::STR)? (d::SVG.PathData.datatype)? (arabic-form::STR)? (lang::SVG.LanguageCodes.datatype)? (horiz-adv-x::SVG.Number.datatype)?)
+SVG.missing-glyph:
+        missing-glyph::(SVG.Description.class* SVG.Core.attrib SVG.Style.attrib (d::SVG.PathData.datatype)? (horiz-adv-x::SVG.Number.datatype)?)
+SVG.hkern:
+        hkern::(EPSILON SVG.Core.attrib (u1::STR)? (g1::STR)? (u2::STR)? (g2::STR)? k::SVG.Number.datatype)
+SVG.font-face-src:
+        font-face-src::(SVG.font-face-name+ SVG.Core.attrib)
+SVG.font-face-name:
+        font-face-name::(EPSILON SVG.Core.attrib (name::STR)?)
+SVG.display.attrib:
+        (display::("inline" | "block" | "list-item" | "run-in" | "compact" | "marker" | "table" | "inline-table" | "table-row-group" | "table-header-group" | "table-footer-group" | "table-row" | "table-column-group" | "table-column" | "table-cell" | "table-caption" | "none" | "inherit"))?
+SVG.visibility.attrib:
+        (visibility::("visible" | "hidden" | "inherit"))?
+SVG.Graphics.extra.attrib:
+        EPSILON
+SVG.Graphics.attrib:
+        SVG.display.attrib SVG.visibility.attrib SVG.Graphics.extra.attrib
+SVG.Paint.datatype:
+        STR
+SVG.StrokeDashArrayValue.datatype:
+        STR
+SVG.StrokeDashOffsetValue.datatype:
+        STR
+SVG.StrokeMiterLimitValue.datatype:
+        STR
+SVG.StrokeWidthValue.datatype:
+        STR
+SVG.fill.attrib:
+        (fill::SVG.Paint.datatype)?
+SVG.fill-rule.attrib:
+        (fill-rule::SVG.ClipFillRule.datatype)?
+SVG.stroke.attrib:
+        (stroke::SVG.Paint.datatype)?
+SVG.stroke-dasharray.attrib:
+        (stroke-dasharray::SVG.StrokeDashArrayValue.datatype)?
+SVG.stroke-dashoffset.attrib:
+        (stroke-dashoffset::SVG.StrokeDashOffsetValue.datatype)?
+SVG.stroke-linecap.attrib:
+        (stroke-linecap::("butt" | "round" | "square" | "inherit"))?
+SVG.stroke-linejoin.attrib:
+        (stroke-linejoin::("miter" | "round" | "bevel" | "inherit"))?
+SVG.stroke-miterlimit.attrib:
+        (stroke-miterlimit::SVG.StrokeMiterLimitValue.datatype)?
+SVG.stroke-width.attrib:
+        (stroke-width::SVG.StrokeWidthValue.datatype)?
+SVG.Paint.extra.attrib:
+        EPSILON
+SVG.Paint.attrib:
+        SVG.fill.attrib SVG.fill-rule.attrib SVG.stroke.attrib SVG.stroke-dasharray.attrib SVG.stroke-dashoffset.attrib SVG.stroke-linecap.attrib SVG.stroke-linejoin.attrib SVG.stroke-miterlimit.attrib SVG.stroke-width.attrib SVG.Paint.extra.attrib
+SVG.color.attrib:
+        (color::SVG.Color.datatype)?
+SVG.color-rendering.attrib:
+        (color-rendering::("auto" | "optimizeSpeed" | "optimizeQuality" | "inherit"))?
+SVG.Color.extra.attrib:
+        EPSILON
+SVG.Color.attrib:
+        SVG.color.attrib SVG.color-rendering.attrib SVG.Color.extra.attrib
+SVG.Description.extra.class:
+        EPSILON
+SVG.Description.class:
+        SVG.desc
+        SVG.title
+        SVG.metadata
+        SVG.Description.extra.class
+SVG.Use.extra.class:
+        EPSILON
+SVG.Use.class:
+        SVG.use
+        SVG.Use.extra.class
+SVG.Structure.extra.class:
+        EPSILON
+SVG.Structure.class:
+        SVG.g
+        SVG.defs
+        SVG.Use.class
+        SVG.Structure.extra.class
+SVG.svg:
+        svg::((SVG.Description.class | SVG.Animation.class | SVG.Structure.class | SVG.Conditional.class | SVG.Image.class | SVG.Style.class | SVG.Shape.class | SVG.Text.class | SVG.Marker.class | SVG.Profile.class | SVG.Gradient.class | SVG.Pattern.class | SVG.Clip.class | SVG.Mask.class | SVG.Filter.class | SVG.Cursor.class | SVG.Hyperlink.class | SVG.View.class | SVG.Script.class | SVG.Font.class)* SVG.Core.attrib SVG.Conditional.attrib SVG.Style.attrib SVG.Presentation.attrib SVG.DocumentEvents.attrib SVG.GraphicalEvents.attrib SVG.External.attrib (x::SVG.Coordinate.datatype)? (y::SVG.Coordinate.datatype)? (width::SVG.Length.datatype)? (height::SVG.Length.datatype)? (viewBox::SVG.ViewBoxSpec.datatype)? (preserveAspectRatio::SVG.PreserveAspectRatioSpec.datatype)? (zoomAndPan::("disable" | "magnify"))? version::SVG.Number.datatype (baseProfile::SVG.Text.datatype)?)
+SVG.g:
+        g::((SVG.Description.class | SVG.Animation.class | SVG.Structure.class | SVG.Conditional.class | SVG.Image.class | SVG.Style.class | SVG.Shape.class | SVG.Text.class | SVG.Marker.class | SVG.Profile.class | SVG.Gradient.class | SVG.Pattern.class | SVG.Clip.class | SVG.Mask.class | SVG.Filter.class | SVG.Cursor.class | SVG.Hyperlink.class | SVG.View.class | SVG.Script.class | SVG.Font.class)* SVG.Core.attrib SVG.Conditional.attrib SVG.Style.attrib SVG.Presentation.attrib SVG.GraphicalEvents.attrib SVG.External.attrib (transform::SVG.TransformList.datatype)?)
+SVG.defs:
+        defs::((SVG.Description.class | SVG.Animation.class | SVG.Structure.class | SVG.Conditional.class | SVG.Image.class | SVG.Style.class | SVG.Shape.class | SVG.Text.class | SVG.Marker.class | SVG.Profile.class | SVG.Gradient.class | SVG.Pattern.class | SVG.Clip.class | SVG.Mask.class | SVG.Filter.class | SVG.Cursor.class | SVG.Hyperlink.class | SVG.View.class | SVG.Script.class | SVG.Font.class)* SVG.Core.attrib SVG.Conditional.attrib SVG.Style.attrib SVG.Presentation.attrib SVG.GraphicalEvents.attrib SVG.External.attrib (transform::SVG.TransformList.datatype)?)
+SVG.desc:
+        desc::(STR SVG.Core.attrib SVG.Style.attrib)
+SVG.title:
+        title::(STR SVG.Core.attrib SVG.Style.attrib)
+SVG.metadata:
+        metadata::(STR SVG.Core.attrib)
+SVG.use:
+        use::(SVG.Description.class* SVG.Animation.class* SVG.Core.attrib SVG.Conditional.attrib SVG.Style.attrib SVG.Presentation.attrib SVG.GraphicalEvents.attrib SVG.XLinkEmbed.attrib SVG.External.attrib (x::SVG.Coordinate.datatype)? (y::SVG.Coordinate.datatype)? (width::SVG.Length.datatype)? (height::SVG.Length.datatype)? (transform::SVG.TransformList.datatype)?)
+SVG.FontFamilyValue.datatype:
+        STR
+SVG.FontSizeValue.datatype:
+        STR
+SVG.Text.extra.class:
+        EPSILON
+SVG.Text.class:
+        SVG.text
+        SVG.Text.extra.class
+SVG.TextContent.extra.attrib:
+        EPSILON
+SVG.TextContent.attrib:
+        (text-anchor::("start" | "middle" | "end" | "inherit"))? SVG.TextContent.extra.attrib
+SVG.Font.extra.attrib:
+        EPSILON
+SVG.Font.attrib:
+        (font-family::SVG.FontFamilyValue.datatype)? (font-size::SVG.FontSizeValue.datatype)? (font-style::("normal" | "italic" | "oblique" | "inherit"))? (font-weight::("normal" | "bold" | "bolder" | "lighter" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900" | "inherit"))? SVG.Font.extra.attrib
+SVG.text:
+        text::((STR | SVG.Description.class | SVG.Animation.class | SVG.Hyperlink.class)* SVG.Core.attrib SVG.Conditional.attrib SVG.Style.attrib SVG.TextContent.attrib SVG.Font.attrib SVG.Paint.attrib SVG.Color.attrib SVG.Opacity.attrib SVG.Graphics.attrib SVG.Clip.attrib SVG.Mask.attrib SVG.Filter.attrib SVG.GraphicalEvents.attrib SVG.Cursor.attrib SVG.External.attrib (x::SVG.Coordinates.datatype)? (y::SVG.Coordinates.datatype)? (rotate::SVG.Numbers.datatype)? (transform::SVG.TransformList.datatype)?)
+SVG.ExtensionList.datatype:
+        STR
+SVG.FeatureList.datatype:
+        STR
+SVG.Conditional.extra.class:
+        EPSILON
+SVG.Conditional.class:
+        SVG.switch
+        SVG.Conditional.extra.class
+SVG.Conditional.extra.attrib:
+        EPSILON
+SVG.Conditional.attrib:
+        (requiredFeatures::SVG.FeatureList.datatype)? (requiredExtensions::SVG.ExtensionList.datatype)? (systemLanguage::SVG.LanguageCodes.datatype)? SVG.Conditional.extra.attrib
+SVG.switch:
+        switch::(SVG.Description.class* (SVG.svg | SVG.g | SVG.use | SVG.text | SVG.text | SVG.Animation.class | SVG.Conditional.class | SVG.Image.class | SVG.Shape.class | SVG.Hyperlink.class | SVG.Extensibility.class)* SVG.Core.attrib SVG.Conditional.attrib SVG.Style.attrib SVG.Presentation.attrib SVG.GraphicalEvents.attrib SVG.External.attrib (transform::SVG.TransformList.datatype)?)
+SVG.id.attrib:
+        (id::SVG.ID.datatype)?
+SVG.base.attrib:
+        (xml:base::SVG.URI.datatype)?
+SVG.lang.attrib:
+        (xml:lang::SVG.LanguageCode.datatype)?
+SVG.space.attrib:
+        (xml:space::("default" | "preserve"))?
+SVG.Core.extra.attrib:
+        EPSILON
+SVG.Core.attrib:
+        SVG.id.attrib SVG.base.attrib SVG.lang.attrib SVG.space.attrib SVG.Core.extra.attrib
+SVG.ID.datatype:
+        STR
+SVG.Text.datatype:
+        STR
+SVG.Length.datatype:
+        STR
+SVG.Lengths.datatype:
+        STR
+SVG.URI.datatype:
+        STR
+SVG.PreserveAspectRatioSpec.datatype:
+        STR
+SVG.OpacityValue.datatype:
+        STR
+SVG.Integer.datatype:
+        INT
+SVG.Coordinate.datatype:
+        STR
+SVG.Coordinates.datatype:
+        STR
+SVG.LanguageCode.datatype:
+        STR
+SVG.LanguageCodes.datatype:
+        STR
+SVG.Color.datatype:
+        STR
+SVG.Script.datatype:
+        STR
+SVG.ContentType.datatype:
+        STR
+SVG.ViewBoxSpec.datatype:
+        STR
+SVG.Boolean.datatype:
+        STR
+SVG.Number.datatype:
+        INT
+SVG.Numbers.datatype:
+        STR
+SVG.ClipFillRule.datatype:
+        STR
+SVG.SVGColor.datatype:
+        STR
+SVG.TransformList.datatype:
+        STR
+SVG.PathData.datatype:
+        STR
+SVG.AnimationEvents.attrib:
+        EPSILON
+SVG.Clip.attrib:
+        EPSILON
+SVG.Color.attrib:
+        EPSILON
+SVG.Conditional.attrib:
+        EPSILON
+SVG.Container.attrib:
+        EPSILON
+SVG.Core.attrib:
+        EPSILON
+SVG.Cursor.attrib:
+        EPSILON
+SVG.External.attrib:
+        EPSILON
+SVG.Filter.attrib:
+        EPSILON
+SVG.FilterColor.attrib:
+        EPSILON
+SVG.Font.attrib:
+        EPSILON
+SVG.Gradient.attrib:
+        EPSILON
+SVG.GraphicalEvents.attrib:
+        EPSILON
+SVG.Graphics.attrib:
+        EPSILON
+SVG.Marker.attrib:
+        EPSILON
+SVG.Mask.attrib:
+        EPSILON
+SVG.Opacity.attrib:
+        EPSILON
+SVG.Paint.attrib:
+        EPSILON
+SVG.Profile.attrib:
+        EPSILON
+SVG.Style.attrib:
+        EPSILON
+SVG.Text.attrib:
+        EPSILON
+SVG.TextContent.attrib:
+        EPSILON
+SVG.Viewport.attrib:
+        EPSILON
+SVG.XLink.attrib:
+        EPSILON
+XLinkEmbed.attrib:
+        EPSILON
+XLinkRequired.attrib:
+        EPSILON
+SVG.Presentation.extra.attrib:
+        EPSILON
+SVG.Presentation.attrib:
+        SVG.Container.attrib SVG.Viewport.attrib SVG.Text.attrib SVG.TextContent.attrib SVG.Font.attrib SVG.Paint.attrib SVG.Color.attrib SVG.Opacity.attrib SVG.Graphics.attrib SVG.Marker.attrib SVG.Profile.attrib SVG.Gradient.attrib SVG.Clip.attrib SVG.Mask.attrib SVG.Filter.attrib SVG.FilterColor.attrib SVG.Cursor.attrib (flood-color::SVG.SVGColor.datatype)? (flood-opacity::SVG.OpacityValue.datatype)? (lighting-color::SVG.SVGColor.datatype)? SVG.Presentation.extra.attrib
+SVG.Extensibility.extra.class:
+        EPSILON
+SVG.Extensibility.class:
+        SVG.foreignObject
+        SVG.Extensibility.extra.class
+SVG.foreignObject:
+        foreignObject::(SVG.foreignObject.content SVG.Core.attrib SVG.Conditional.attrib SVG.Style.attrib SVG.Presentation.attrib SVG.GraphicalEvents.attrib SVG.External.attrib (x::SVG.Coordinate.datatype)? (y::SVG.Coordinate.datatype)? width::SVG.Length.datatype height::SVG.Length.datatype (transform::SVG.TransformList.datatype)?)
+SVG.foreignObject.content:
+        SVG.foreignObject.class*
+SVG.foreignObject.class:
+        STR
+SVG.externalResourcesRequired.attrib:
+        (externalResourcesRequired::SVG.Boolean.datatype)?
+SVG.External.extra.attrib:
+        EPSILON
+SVG.External.attrib:
+        SVG.externalResourcesRequired.attrib SVG.External.extra.attrib
+SVG.LinkTarget.datatype:
+        STR
+SVG.Hyperlink.extra.class:
+        EPSILON
+SVG.Hyperlink.class:
+        SVG.a
+        SVG.Hyperlink.extra.class
+SVG.a:
+        a::((STR | SVG.Description.class | SVG.Animation.class | SVG.Structure.class | SVG.Conditional.class | SVG.Image.class | SVG.Style.class | SVG.Shape.class | SVG.Text.class | SVG.Marker.class | SVG.Profile.class | SVG.Gradient.class | SVG.Pattern.class | SVG.Clip.class | SVG.Mask.class | SVG.Filter.class | SVG.Cursor.class | SVG.Hyperlink.class | SVG.View.class | SVG.Script.class | SVG.Font.class)* SVG.Core.attrib SVG.Conditional.attrib SVG.Style.attrib SVG.Presentation.attrib SVG.GraphicalEvents.attrib SVG.XLinkReplace.attrib SVG.External.attrib (transform::SVG.TransformList.datatype)? (target::SVG.LinkTarget.datatype)?)
+SVG.Image.extra.class:
+        EPSILON
+SVG.Image.class:
+        SVG.image
+        SVG.Image.extra.class
+SVG.image:
+        image::(SVG.Description.class* SVG.Animation.class* SVG.Core.attrib SVG.Conditional.attrib SVG.Style.attrib SVG.Viewport.attrib SVG.Color.attrib SVG.Opacity.attrib SVG.Graphics.attrib SVG.Profile.attrib SVG.Clip.attrib SVG.Mask.attrib SVG.Filter.attrib SVG.GraphicalEvents.attrib SVG.Cursor.attrib SVG.XLinkEmbed.attrib SVG.External.attrib (x::SVG.Coordinate.datatype)? (y::SVG.Coordinate.datatype)? width::SVG.Length.datatype height::SVG.Length.datatype (preserveAspectRatio::SVG.PreserveAspectRatioSpec.datatype)? (transform::SVG.TransformList.datatype)?)
+SVG.Script.extra.class:
+        EPSILON
+SVG.Script.class:
+        SVG.script
+        SVG.Script.extra.class
+SVG.script:
+        script::(STR SVG.Core.attrib SVG.XLink.attrib SVG.External.attrib type::SVG.ContentType.datatype)
+SVG.Points.datatype:
+        STR
+SVG.Shape.extra.class:
+        EPSILON
+SVG.Shape.class:
+        SVG.path
+        SVG.rect
+        SVG.circle
+        SVG.line
+        SVG.ellipse
+        SVG.polyline
+        SVG.polygon
+        SVG.Shape.extra.class
+SVG.path:
+        path::(SVG.Description.class* SVG.Animation.class* SVG.Core.attrib SVG.Conditional.attrib SVG.Style.attrib SVG.Paint.attrib SVG.Color.attrib SVG.Opacity.attrib SVG.Graphics.attrib SVG.Marker.attrib SVG.Clip.attrib SVG.Mask.attrib SVG.Filter.attrib SVG.GraphicalEvents.attrib SVG.Cursor.attrib SVG.External.attrib d::SVG.PathData.datatype (pathLength::SVG.Number.datatype)? (transform::SVG.TransformList.datatype)?)
+SVG.rect:
+        rect::(SVG.Description.class* SVG.Animation.class* SVG.Core.attrib SVG.Conditional.attrib SVG.Style.attrib SVG.Paint.attrib SVG.Color.attrib SVG.Opacity.attrib SVG.Graphics.attrib SVG.Clip.attrib SVG.Mask.attrib SVG.Filter.attrib SVG.GraphicalEvents.attrib SVG.Cursor.attrib SVG.External.attrib (x::SVG.Coordinate.datatype)? (y::SVG.Coordinate.datatype)? width::SVG.Length.datatype height::SVG.Length.datatype (rx::SVG.Length.datatype)? (ry::SVG.Length.datatype)? (transform::SVG.TransformList.datatype)?)
+SVG.circle:
+        circle::(SVG.Description.class* SVG.Animation.class* SVG.Core.attrib SVG.Conditional.attrib SVG.Style.attrib SVG.Paint.attrib SVG.Color.attrib SVG.Opacity.attrib SVG.Graphics.attrib SVG.Clip.attrib SVG.Mask.attrib SVG.Filter.attrib SVG.GraphicalEvents.attrib SVG.Cursor.attrib SVG.External.attrib (cx::SVG.Coordinate.datatype)? (cy::SVG.Coordinate.datatype)? r::SVG.Length.datatype (transform::SVG.TransformList.datatype)?)
+SVG.line:
+        line::(SVG.Description.class* SVG.Animation.class* SVG.Core.attrib SVG.Conditional.attrib SVG.Style.attrib SVG.Paint.attrib SVG.Color.attrib SVG.Opacity.attrib SVG.Graphics.attrib SVG.Marker.attrib SVG.Clip.attrib SVG.Mask.attrib SVG.Filter.attrib SVG.GraphicalEvents.attrib SVG.Cursor.attrib SVG.External.attrib (x1::SVG.Coordinate.datatype)? (y1::SVG.Coordinate.datatype)? (x2::SVG.Coordinate.datatype)? (y2::SVG.Coordinate.datatype)? (transform::SVG.TransformList.datatype)?)
+SVG.ellipse:
+        ellipse::(SVG.Description.class* SVG.Animation.class* SVG.Core.attrib SVG.Conditional.attrib SVG.Style.attrib SVG.Paint.attrib SVG.Color.attrib SVG.Opacity.attrib SVG.Graphics.attrib SVG.Clip.attrib SVG.Mask.attrib SVG.Filter.attrib SVG.GraphicalEvents.attrib SVG.Cursor.attrib SVG.External.attrib (cx::SVG.Coordinate.datatype)? (cy::SVG.Coordinate.datatype)? rx::SVG.Length.datatype ry::SVG.Length.datatype (transform::SVG.TransformList.datatype)?)
+SVG.polyline:
+        polyline::(SVG.Description.class* SVG.Animation.class* SVG.Core.attrib SVG.Conditional.attrib SVG.Style.attrib SVG.Paint.attrib SVG.Color.attrib SVG.Opacity.attrib SVG.Graphics.attrib SVG.Marker.attrib SVG.Clip.attrib SVG.Mask.attrib SVG.Filter.attrib SVG.GraphicalEvents.attrib SVG.Cursor.attrib SVG.External.attrib points::SVG.Points.datatype (transform::SVG.TransformList.datatype)?)
+SVG.polygon:
+        polygon::(SVG.Description.class* SVG.Animation.class* SVG.Core.attrib SVG.Conditional.attrib SVG.Style.attrib SVG.Paint.attrib SVG.Color.attrib SVG.Opacity.attrib SVG.Graphics.attrib SVG.Marker.attrib SVG.Clip.attrib SVG.Mask.attrib SVG.Filter.attrib SVG.GraphicalEvents.attrib SVG.Cursor.attrib SVG.External.attrib points::SVG.Points.datatype (transform::SVG.TransformList.datatype)?)
+SVG.ClassList.datatype:
+        STR
+SVG.MediaDesc.datatype:
+        STR
+SVG.StyleSheet.datatype:
+        STR
+SVG.Style.extra.class:
+        EPSILON
+SVG.Style.class:
+        SVG.style
+        SVG.Style.extra.class
+SVG.Style.extra.attrib:
+        EPSILON
+SVG.Style.attrib:
+        (style::SVG.StyleSheet.datatype)? (class::SVG.ClassList.datatype)? SVG.Style.extra.attrib
+SVG.style:
+        style::(STR SVG.Core.attrib type::SVG.ContentType.datatype (media::SVG.MediaDesc.datatype)? (title::SVG.Text.datatype)?)
+SVG.Cursor.class:
+        EPSILON
+SVG.Pattern.class:
+        EPSILON
+SVG.Mask.class:
+        EPSILON
+SVG.Marker.class:
+        EPSILON
+SVG.Profile.class:
+        EPSILON
+SVG.Gradient.class:
+        EPSILON
+SVG.Filter.class:
+        EPSILON
+SVG.Clip.class:
+        EPSILON
+SVG.DocumentEvents.attrib:
+        EPSILON
+SVG.View.extra.class:
+        EPSILON
+SVG.View.class:
+        SVG.view
+        SVG.View.extra.class
+SVG.view:
+        view::(SVG.Description.class* SVG.Core.attrib SVG.External.attrib (viewBox::SVG.ViewBoxSpec.datatype)? (preserveAspectRatio::SVG.PreserveAspectRatioSpec.datatype)? (zoomAndPan::("disable" | "magnify"))? (viewTarget::STR)?)
+SVG.XLink.extra.attrib:
+        EPSILON
+SVG.XLink.attrib:
+        (xlink:type::"simple")? (xlink:href::SVG.URI.datatype)? (xlink:role::SVG.URI.datatype)? (xlink:arcrole::SVG.URI.datatype)? (xlink:title::STR)? (xlink:show::"other")? (xlink:actuate::"onLoad")? SVG.XLink.extra.attrib
+SVG.XLinkRequired.extra.attrib:
+        EPSILON
+SVG.XLinkRequired.attrib:
+        (xlink:type::"simple")? xlink:href::SVG.URI.datatype (xlink:role::SVG.URI.datatype)? (xlink:arcrole::SVG.URI.datatype)? (xlink:title::STR)? (xlink:show::"other")? (xlink:actuate::"onLoad")? SVG.XLinkRequired.extra.attrib
+SVG.XLinkEmbed.extra.attrib:
+        EPSILON
+SVG.XLinkEmbed.attrib:
+        (xlink:type::"simple")? xlink:href::SVG.URI.datatype (xlink:role::SVG.URI.datatype)? (xlink:arcrole::SVG.URI.datatype)? (xlink:title::STR)? (xlink:show::"embed")? (xlink:actuate::"onLoad")? SVG.XLinkEmbed.extra.attrib
+SVG.XLinkReplace.extra.attrib:
+        EPSILON
+SVG.XLinkReplace.attrib:
+        (xlink:type::"simple")? xlink:href::SVG.URI.datatype (xlink:role::SVG.URI.datatype)? (xlink:arcrole::SVG.URI.datatype)? (xlink:title::STR)? (xlink:show::("new" | "replace"))? (xlink:actuate::"onRequest")? SVG.XLinkReplace.extra.attrib

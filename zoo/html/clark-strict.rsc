@@ -104,8 +104,8 @@ syntax Bdo_attlist
         Core_attrib Lang_attrib Dir_attrib
  ;
 syntax Dir_attrib
-        = "ltr"
-        | "rtl"
+        = 
+        dir: ("ltr" | "rtl")
  ;
 syntax Area
         = 
@@ -147,7 +147,7 @@ syntax Usemap_attlist
  ;
 syntax Shape_attrib
         = 
-        ("rect" | "circle" | "poly" | "default")?
+        ("rect" | "circle" | "poly" | "default") shape?
  ;
 syntax Coords_attrib
         = 
@@ -286,7 +286,7 @@ syntax Block_class
 syntax Form_attlist
         = Script_datatype onreset? Script_datatype onsubmit?
         | Charsets_datatype accept-charset? ContentTypes_datatype accept?
-        | Common_attrib URI_datatype action ("get" | "post")? ContentType_datatype enctype?
+        | Common_attrib URI_datatype action ("get" | "post") method? ContentType_datatype enctype?
         | Name_attlist
         | Target_attrib
  ;
@@ -315,7 +315,7 @@ syntax Textarea_attlist
  ;
 syntax Button_attlist
         = Script_datatype onblur? Script_datatype onfocus?
-        | Common_attrib String name? String value? ("button" | "submit" | "reset")? "disabled" disabled? Number_datatype tabindex? Character_datatype accesskey?
+        | Common_attrib String name? String value? ("button" | "submit" | "reset") type? "disabled" disabled? Number_datatype tabindex? Character_datatype accesskey?
  ;
 syntax Events_attrib
         = 
@@ -408,7 +408,7 @@ syntax Iframe
         iframe: Iframe_attlist Flow_model
  ;
 syntax Iframe_attlist
-        = Core_attrib URI_datatype longdesc? URI_datatype src? ("1" | "0")? Length_datatype width? Length_datatype height? Pixels_datatype marginwidth? Pixels_datatype marginheight? ("yes" | "no" | "auto")?
+        = Core_attrib URI_datatype longdesc? URI_datatype src? ("1" | "0") frameborder? Length_datatype width? Length_datatype height? Pixels_datatype marginwidth? Pixels_datatype marginheight? ("yes" | "no" | "auto") scrolling?
         | Name_attlist
  ;
 syntax Img
@@ -486,7 +486,7 @@ syntax Meta_attlist
  ;
 syntax Frame_attrib
         = Name_attlist
-        | ("void" | "above" | "below" | "hsides" | "lhs" | "rhs" | "vsides" | "box" | "border")?
+        | ("void" | "above" | "below" | "hsides" | "lhs" | "rhs" | "vsides" | "box" | "border") frame?
  ;
 syntax Name_attlist
         = 
@@ -502,7 +502,7 @@ syntax Param
  ;
 syntax Param_attlist
         = 
-        Id_attrib String name String value? ("data" | "ref" | "object")? ContentType_datatype type?
+        Id_attrib String name String value? ("data" | "ref" | "object") valuetype? ContentType_datatype type?
  ;
 syntax Hr
         = 
@@ -678,7 +678,7 @@ syntax Tfoot_attlist
  ;
 syntax Rules_attrib
         = 
-        ("none" | "groups" | "rows" | "cols" | "all")?
+        ("none" | "groups" | "rows" | "cols" | "all") rules?
  ;
 syntax Table
         = 
@@ -722,15 +722,15 @@ syntax Cell_attrib
  ;
 syntax CellHAlign_attrib
         = 
-        ("left" | "center" | "right")?
+        ("left" | "center" | "right") align?
  ;
 syntax CellVAlign_attrib
         = 
-        ("top" | "middle" | "bottom")?
+        ("top" | "middle" | "bottom") valign?
  ;
 syntax Scope_attrib
         = 
-        ("row" | "col")?
+        ("row" | "col") scope?
  ;
 syntax Link_attrib
         = 

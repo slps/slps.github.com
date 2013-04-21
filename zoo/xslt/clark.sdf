@@ -1,0 +1,156 @@
+module Main
+
+exports
+ context-free start-symbols stylesheet.element
+  sorts
+        Version Top-level-elements.model Any Top-level-extension Template.model Literal-result-element-as-stylesheet Literal-result-element Literal-result-element.atts Literal-result-element-no-version.atts Top-level-element.category Instruction.category Extension.atts Stylesheet.element Transform.element Stylesheet.model Include.element Import.element Strip-space.element Preserve-space.element Template.element Apply-templates.element Apply-imports.element Call-template.element Namespace-alias.element Element.element Attribute.element Attribute-set.element Text.element Processing-instruction.element Comment.element Copy.element Value-of.element Number.element For-each.element If.element Choose.element When.element Otherwise.element Sort.element Variable.element Param.element Copy-of.element With-param.element Key.element Decimal-format.element Message.element Fallback.element Output.element Prefixes.datatype Prefix.datatype Wildcards.datatype Qname.datatype Qnames.datatype Char.datatype Number.datatype Expression.datatype Pattern.datatype Qname-but-not-ncname.datatype Expr-avt.datatype Brace-avt.datatype Avt.datatype 
+  context-free syntax
+        "1.0" -> Version
+
+        (Top-level-element.category | Top-level-extension)* -> Top-level-elements.model
+
+        (ANY | STR | Any)* -> Any
+
+        Any -> Top-level-extension
+
+        (Instruction.category | Literal-result-element | STR)* -> Template.model
+
+        version::Version Literal-result-element-no-version.atts Template.model -> Literal-result-element-as-stylesheet
+
+        Literal-result-element.atts Template.model -> Literal-result-element
+
+        Literal-result-element-no-version.atts version::Version? -> Literal-result-element.atts
+
+        (Avt.datatype | extension-element-prefixes::Prefixes.datatype | exclude-result-prefixes::Prefixes.datatype | use-attribute-sets::Qnames.datatype)* -> Literal-result-element-no-version.atts
+
+        Include.element -> Top-level-element.category
+        Strip-space.element -> Top-level-element.category
+        Preserve-space.element -> Top-level-element.category
+        Template.element -> Top-level-element.category
+        Namespace-alias.element -> Top-level-element.category
+        Attribute-set.element -> Top-level-element.category
+        Variable.element -> Top-level-element.category
+        Param.element -> Top-level-element.category
+        Key.element -> Top-level-element.category
+        Decimal-format.element -> Top-level-element.category
+        Output.element -> Top-level-element.category
+
+        Apply-templates.element -> Instruction.category
+        Apply-imports.element -> Instruction.category
+        Call-template.element -> Instruction.category
+        Element.element -> Instruction.category
+        Attribute.element -> Instruction.category
+        Text.element -> Instruction.category
+        Processing-instruction.element -> Instruction.category
+        Comment.element -> Instruction.category
+        Copy.element -> Instruction.category
+        Value-of.element -> Instruction.category
+        Number.element -> Instruction.category
+        For-each.element -> Instruction.category
+        If.element -> Instruction.category
+        Choose.element -> Instruction.category
+        Variable.element -> Instruction.category
+        Copy-of.element -> Instruction.category
+        Message.element -> Instruction.category
+        Fallback.element -> Instruction.category
+
+        ANY* -> Extension.atts
+
+        stylesheet::Stylesheet.model -> Stylesheet.element
+
+        transform::Stylesheet.model -> Transform.element
+
+        Extension.atts id::STR? extension-element-prefixes::Prefixes.datatype? exclude-result-prefixes::Prefixes.datatype? version::Version Import.element* Top-level-elements.model -> Stylesheet.model
+
+        include::(Extension.atts href::STR) -> Include.element
+
+        import::(Extension.atts href::STR) -> Import.element
+
+        strip-space::(Extension.atts elements::Wildcards.datatype) -> Strip-space.element
+
+        preserve-space::(Extension.atts elements::Wildcards.datatype) -> Preserve-space.element
+
+        template::(Extension.atts match::Pattern.datatype? name::Qname.datatype? priority::Number.datatype? mode::Qname.datatype? Param.element* Template.model) -> Template.element
+
+        apply-templates::(Extension.atts select::Expression.datatype? mode::Qname.datatype? (Sort.element | With-param.element)*) -> Apply-templates.element
+
+        apply-imports::Extension.atts -> Apply-imports.element
+
+        call-template::(Extension.atts name::Qname.datatype With-param.element*) -> Call-template.element
+
+        namespace-alias::(Extension.atts stylesheet-prefix::Prefix.datatype result-prefix::Prefix.datatype) -> Namespace-alias.element
+
+        element::(Extension.atts name::(Qname.datatype | Expr-avt.datatype) namespace::(STR | Brace-avt.datatype)? use-attribute-sets::Qnames.datatype? Template.model) -> Element.element
+
+        attribute::(Extension.atts name::(Qname.datatype | Expr-avt.datatype) namespace::(STR | Brace-avt.datatype)? Template.model) -> Attribute.element
+
+        attribute-set::(Extension.atts name::Qname.datatype use-attribute-sets::Qnames.datatype? Attribute.element*) -> Attribute-set.element
+
+        text::(Extension.atts disable-output-escaping::("yes" | "no")? STR) -> Text.element
+
+        processing-instruction::(Extension.atts name::(STR | Expr-avt.datatype) Template.model) -> Processing-instruction.element
+
+        comment::(Extension.atts Template.model) -> Comment.element
+
+        copy::(Extension.atts use-attribute-sets::Qnames.datatype? Template.model) -> Copy.element
+
+        value-of::(Extension.atts select::Expression.datatype disable-output-escaping::("yes" | "no")?) -> Value-of.element
+
+        number::(Extension.atts level::("single" | "multiple" | "any")? count::Pattern.datatype? from::Pattern.datatype? value::Expression.datatype? format::Avt.datatype? lang::(STR | Expr-avt.datatype)? letter-value::("alphabetic" | "traditional" | Expr-avt.datatype)? grouping-separator::(Char.datatype | Expr-avt.datatype)? grouping-size::(Number.datatype | Expr-avt.datatype)?) -> Number.element
+
+        for-each::(Extension.atts select::Expression.datatype Sort.element* Template.model) -> For-each.element
+
+        if::(Extension.atts test::Expression.datatype Template.model) -> If.element
+
+        choose::(Extension.atts When.element+ Otherwise.element?) -> Choose.element
+
+        when::(Extension.atts test::Expression.datatype Template.model) -> When.element
+
+        otherwise::(Extension.atts Template.model) -> Otherwise.element
+
+        sort::(Extension.atts select::Expression.datatype? lang::(STR | Expr-avt.datatype)? data-type::("text" | "number" | Qname-but-not-ncname.datatype | Expr-avt.datatype)? order::("ascending" | "descending" | Expr-avt.datatype)? case-order::("upper-first" | "lower-first" | Expr-avt.datatype)?) -> Sort.element
+
+        variable::(Extension.atts name::Qname.datatype (select::Expression.datatype | Template.model)) -> Variable.element
+
+        param::(Extension.atts name::Qname.datatype (select::Expression.datatype | Template.model)) -> Param.element
+
+        copy-of::(Extension.atts select::Expression.datatype) -> Copy-of.element
+
+        with-param::(Extension.atts name::Qname.datatype (select::Expression.datatype | Template.model)) -> With-param.element
+
+        key::(Extension.atts name::Qname.datatype match::Pattern.datatype use::Expression.datatype) -> Key.element
+
+        decimal-format::(Extension.atts name::Qname.datatype? decimal-separator::Char.datatype? grouping-separator::Char.datatype? infinity::STR? minus-sign::Char.datatype? NaN::STR? percent::Char.datatype? per-mille::Char.datatype? zero-digit::Char.datatype? digit::Char.datatype? pattern-separator::Char.datatype?) -> Decimal-format.element
+
+        message::(Extension.atts terminate::("yes" | "no")? Template.model) -> Message.element
+
+        fallback::(Extension.atts Template.model) -> Fallback.element
+
+        output::(Extension.atts method::("xml" | "html" | "text" | Qname-but-not-ncname.datatype)? version::STR? encoding::STR? omit-xml-declaration::("yes" | "no")? standalone::("yes" | "no")? doctype-public::STR? doctype-system::STR? cdata-section-elements::Qnames.datatype? indent::("yes" | "no")? media-type::STR?) -> Output.element
+
+        (STR | "#default")* -> Prefixes.datatype
+
+        STR -> Prefix.datatype
+        "#default" -> Prefix.datatype
+
+        STR* -> Wildcards.datatype
+
+        STR -> Qname.datatype
+
+        STR* -> Qnames.datatype
+
+        STR -> Char.datatype
+
+        INT -> Number.datatype
+
+        STR -> Expression.datatype
+
+        STR -> Pattern.datatype
+
+        STR -> Qname-but-not-ncname.datatype
+
+        STR -> Expr-avt.datatype
+
+        STR -> Brace-avt.datatype
+
+        STR -> Avt.datatype

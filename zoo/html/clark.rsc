@@ -10,7 +10,7 @@ syntax Applet
  ;
 syntax Applet_attlist
         = Core_attrib Text_datatype alt String archive? String code? URI_datatype codebase? String object? Length_datatype height Length_datatype width
-        | ("top" | "middle" | "bottom" | "left" | "right")? Pixels_datatype hspace? Pixels_datatype vspace?
+        | ("top" | "middle" | "bottom" | "left" | "right") align? Pixels_datatype hspace? Pixels_datatype vspace?
         | Name_attlist
  ;
 syntax Inline_class
@@ -106,8 +106,8 @@ syntax Bdo_attlist
         Core_attrib Lang_attrib Dir_attrib
  ;
 syntax Dir_attrib
-        = "ltr"
-        | "rtl"
+        = 
+        dir: ("ltr" | "rtl")
  ;
 syntax Area
         = 
@@ -136,13 +136,13 @@ syntax A_attlist
 syntax Img_attlist
         = Usemap_attlist
         | Common_attrib URI_datatype src Text_datatype alt URI_datatype longdesc? Length_datatype height? Length_datatype width?
-        | ("top" | "middle" | "bottom" | "left" | "right")? Pixels_datatype border? Pixels_datatype hspace? Pixels_datatype vspace?
+        | ("top" | "middle" | "bottom" | "left" | "right") align? Pixels_datatype border? Pixels_datatype hspace? Pixels_datatype vspace?
         | Name_attlist
         | "ismap" ismap?
  ;
 syntax Object_attlist
         = Usemap_attlist
-        | ("top" | "middle" | "bottom" | "left" | "right")? Pixels_datatype border? Pixels_datatype hspace? Pixels_datatype vspace?
+        | ("top" | "middle" | "bottom" | "left" | "right") align? Pixels_datatype border? Pixels_datatype hspace? Pixels_datatype vspace?
         | Common_attrib "declare" declare? URI_datatype classid? URI_datatype codebase? URI_datatype data? ContentType_datatype type? ContentType_datatype codetype? URIs_datatype archive? Text_datatype standby? Length_datatype height? Length_datatype width? String name? Number_datatype tabindex?
  ;
 syntax Usemap_attlist
@@ -151,7 +151,7 @@ syntax Usemap_attlist
  ;
 syntax Shape_attrib
         = 
-        ("rect" | "circle" | "poly" | "default")?
+        ("rect" | "circle" | "poly" | "default") shape?
  ;
 syntax Coords_attrib
         = 
@@ -316,7 +316,7 @@ syntax Textarea_attlist
  ;
 syntax Button_attlist
         = Script_datatype onblur? Script_datatype onfocus?
-        | Common_attrib String name? String value? ("button" | "submit" | "reset")? "disabled" disabled? Number_datatype tabindex? Character_datatype accesskey?
+        | Common_attrib String name? String value? ("button" | "submit" | "reset") type? "disabled" disabled? Number_datatype tabindex? Character_datatype accesskey?
  ;
 syntax Events_attrib
         = 
@@ -356,7 +356,7 @@ syntax Legend
  ;
 syntax Legend_attlist
         = Common_attrib Character_datatype accesskey?
-        | ("top" | "bottom" | "left" | "right")?
+        | ("top" | "bottom" | "left" | "right") align?
  ;
 syntax Form_class
         = 
@@ -380,7 +380,7 @@ syntax Frame
  ;
 syntax Frame_attlist
         = 
-        Core_attrib URI_datatype longdesc? URI_datatype src? ("1" | "0")? Pixels_datatype marginwidth? Pixels_datatype marginheight? "noresize" noresize? ("yes" | "no" | "auto")?
+        Core_attrib URI_datatype longdesc? URI_datatype src? ("1" | "0") frameborder? Pixels_datatype marginwidth? Pixels_datatype marginheight? "noresize" noresize? ("yes" | "no" | "auto") scrolling?
  ;
 syntax Noframes
         = 
@@ -399,7 +399,7 @@ syntax Iframe
         iframe: Iframe_attlist Flow_model
  ;
 syntax Iframe_attlist
-        = Core_attrib URI_datatype longdesc? URI_datatype src? ("1" | "0")? Length_datatype width? Length_datatype height? Pixels_datatype marginwidth? Pixels_datatype marginheight? ("yes" | "no" | "auto")?
+        = Core_attrib URI_datatype longdesc? URI_datatype src? ("1" | "0") frameborder? Length_datatype width? Length_datatype height? Pixels_datatype marginwidth? Pixels_datatype marginheight? ("yes" | "no" | "auto") scrolling?
         | Name_attlist
  ;
 syntax Img
@@ -487,7 +487,7 @@ syntax Isindex_attlist
         Core_attrib I18n_attrib Text_datatype prompt?
  ;
 syntax Br_attlist
-        = ("left" | "all" | "right" | "none")?
+        = ("left" | "all" | "right" | "none") clear?
         | Core_attrib
  ;
 syntax Caption_attlist
@@ -507,7 +507,7 @@ syntax Heading_attrib
         | Common_attrib
  ;
 syntax Hr_attlist
-        = ("left" | "center" | "right")? "noshade" noshade? Pixels_datatype size? Pixels_datatype width?
+        = ("left" | "center" | "right") align? "noshade" noshade? Pixels_datatype size? Pixels_datatype width?
         | Common_attrib
  ;
 syntax Li_attlist
@@ -548,7 +548,7 @@ syntax Ul_attlist
  ;
 syntax Align_attrib
         = 
-        ("left" | "all" | "right" | "none")?
+        ("left" | "all" | "right" | "none") align?
  ;
 syntax Color_datatype
         = 
@@ -616,7 +616,7 @@ syntax Meta_attlist
  ;
 syntax Frame_attrib
         = Name_attlist
-        | ("void" | "above" | "below" | "hsides" | "lhs" | "rhs" | "vsides" | "box" | "border")?
+        | ("void" | "above" | "below" | "hsides" | "lhs" | "rhs" | "vsides" | "box" | "border") frame?
  ;
 syntax Name_attlist
         = 
@@ -632,7 +632,7 @@ syntax Param
  ;
 syntax Param_attlist
         = 
-        Id_attrib String name String value? ("data" | "ref" | "object")? ContentType_datatype type?
+        Id_attrib String name String value? ("data" | "ref" | "object") valuetype? ContentType_datatype type?
  ;
 syntax Hr
         = 
@@ -760,7 +760,7 @@ syntax Tfoot_attlist
  ;
 syntax Rules_attrib
         = 
-        ("none" | "groups" | "rows" | "cols" | "all")?
+        ("none" | "groups" | "rows" | "cols" | "all") rules?
  ;
 syntax Link_attrib
         = 

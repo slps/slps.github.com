@@ -93,8 +93,7 @@ bdo:
 bdo.attlist:
         Core.attrib lang.attrib dir.attrib
 dir.attrib:
-        "ltr"
-        "rtl"
+        dir::("ltr" | "rtl")
 area:
         area::area.attlist
 area.attlist:
@@ -134,7 +133,7 @@ object.attlist:
 usemap.attlist:
         (usemap::IDREF.datatype)?
 shape.attrib:
-        ("rect" | "circle" | "poly" | "default")?
+        (shape::("rect" | "circle" | "poly" | "default"))?
 coords.attrib:
         (coords::STR)?
 Length.datatype:
@@ -220,7 +219,7 @@ form.attlist:
 form.attlist:
         (accept-charset::Charsets.datatype)? (accept::ContentTypes.datatype)?
 form.attlist:
-        Common.attrib action::URI.datatype ("get" | "post")? (enctype::ContentType.datatype)?
+        Common.attrib action::URI.datatype (method::("get" | "post"))? (enctype::ContentType.datatype)?
 form.attlist:
         name.attlist
 form.attlist:
@@ -254,7 +253,7 @@ textarea.attlist:
 button.attlist:
         (onblur::Script.datatype)? (onfocus::Script.datatype)?
 button.attlist:
-        Common.attrib (name::STR)? (value::STR)? ("button" | "submit" | "reset")? (disabled::"disabled")? (tabindex::Number.datatype)? (accesskey::Character.datatype)?
+        Common.attrib (name::STR)? (value::STR)? (type::("button" | "submit" | "reset"))? (disabled::"disabled")? (tabindex::Number.datatype)? (accesskey::Character.datatype)?
 Events.attrib:
         (onclick::Script.datatype)? (ondblclick::Script.datatype)? (onmousedown::Script.datatype)? (onmouseup::Script.datatype)? (onmouseover::Script.datatype)? (onmousemove::Script.datatype)? (onmouseout::Script.datatype)? (onkeypress::Script.datatype)? (onkeydown::Script.datatype)? (onkeyup::Script.datatype)?
 InputType.class:
@@ -312,7 +311,7 @@ a:
 iframe:
         iframe::(iframe.attlist Flow.model)
 iframe.attlist:
-        Core.attrib (longdesc::URI.datatype)? (src::URI.datatype)? ("1" | "0")? (width::Length.datatype)? (height::Length.datatype)? (marginwidth::Pixels.datatype)? (marginheight::Pixels.datatype)? ("yes" | "no" | "auto")?
+        Core.attrib (longdesc::URI.datatype)? (src::URI.datatype)? (frameborder::("1" | "0"))? (width::Length.datatype)? (height::Length.datatype)? (marginwidth::Pixels.datatype)? (marginheight::Pixels.datatype)? (scrolling::("yes" | "no" | "auto"))?
 iframe.attlist:
         name.attlist
 img:
@@ -356,7 +355,7 @@ meta.attlist:
 frame.attrib:
         name.attlist
 frame.attrib:
-        ("void" | "above" | "below" | "hsides" | "lhs" | "rhs" | "vsides" | "box" | "border")?
+        (frame::("void" | "above" | "below" | "hsides" | "lhs" | "rhs" | "vsides" | "box" | "border"))?
 name.attlist:
         (name::STR)?
 object:
@@ -364,7 +363,7 @@ object:
 param:
         param::param.attlist
 param.attlist:
-        id.attrib name::STR (value::STR)? ("data" | "ref" | "object")? (type::ContentType.datatype)?
+        id.attrib name::STR (value::STR)? (valuetype::("data" | "ref" | "object"))? (type::ContentType.datatype)?
 hr:
         hr::hr.attlist
 hr.attlist:
@@ -455,7 +454,7 @@ tfoot:
 tfoot.attlist:
         Common.attrib CellHAlign.attrib CellVAlign.attrib
 rules.attrib:
-        ("none" | "groups" | "rows" | "cols" | "all")?
+        (rules::("none" | "groups" | "rows" | "cols" | "all"))?
 table:
         table::(table.attlist caption? tr+)
 caption:
@@ -477,11 +476,11 @@ td.attlist:
 Cell.attrib:
         Common.attrib (abbr::Text.datatype)? (axis::STR)? (headers::IDREFS.datatype)? scope.attrib (rowspan::Number.datatype)? (colspan::Number.datatype)? CellHAlign.attrib CellVAlign.attrib
 CellHAlign.attrib:
-        ("left" | "center" | "right")?
+        (align::("left" | "center" | "right"))?
 CellVAlign.attrib:
-        ("top" | "middle" | "bottom")?
+        (valign::("top" | "middle" | "bottom"))?
 scope.attrib:
-        ("row" | "col")?
+        (scope::("row" | "col"))?
 link.attrib:
         target.attrib
 target.attrib:

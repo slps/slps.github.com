@@ -99,8 +99,7 @@ exports
 
         Core.attrib Lang.attrib Dir.attrib -> Bdo.attlist
 
-        "ltr" -> Dir.attrib
-        "rtl" -> Dir.attrib
+        dir::("ltr" | "rtl") -> Dir.attrib
 
         area::Area.attlist -> Area
 
@@ -140,7 +139,7 @@ exports
 
         usemap::IDREF.datatype? -> Usemap.attlist
 
-        ("rect" | "circle" | "poly" | "default")? -> Shape.attrib
+        shape::("rect" | "circle" | "poly" | "default")? -> Shape.attrib
 
         coords::STR? -> Coords.attrib
 
@@ -226,7 +225,7 @@ exports
 
         accept-charset::Charsets.datatype? accept::ContentTypes.datatype? -> Form.attlist
 
-        Common.attrib action::URI.datatype ("get" | "post")? enctype::ContentType.datatype? -> Form.attlist
+        Common.attrib action::URI.datatype method::("get" | "post")? enctype::ContentType.datatype? -> Form.attlist
 
         Name.attlist -> Form.attlist
 
@@ -260,7 +259,7 @@ exports
 
         onblur::Script.datatype? onfocus::Script.datatype? -> Button.attlist
 
-        Common.attrib name::STR? value::STR? ("button" | "submit" | "reset")? disabled::"disabled"? tabindex::Number.datatype? accesskey::Character.datatype? -> Button.attlist
+        Common.attrib name::STR? value::STR? type::("button" | "submit" | "reset")? disabled::"disabled"? tabindex::Number.datatype? accesskey::Character.datatype? -> Button.attlist
 
         onclick::Script.datatype? ondblclick::Script.datatype? onmousedown::Script.datatype? onmouseup::Script.datatype? onmouseover::Script.datatype? onmousemove::Script.datatype? onmouseout::Script.datatype? onkeypress::Script.datatype? onkeydown::Script.datatype? onkeyup::Script.datatype? -> Events.attrib
 
@@ -318,7 +317,7 @@ exports
 
         iframe::(Iframe.attlist Flow.model) -> Iframe
 
-        Core.attrib longdesc::URI.datatype? src::URI.datatype? ("1" | "0")? width::Length.datatype? height::Length.datatype? marginwidth::Pixels.datatype? marginheight::Pixels.datatype? ("yes" | "no" | "auto")? -> Iframe.attlist
+        Core.attrib longdesc::URI.datatype? src::URI.datatype? frameborder::("1" | "0")? width::Length.datatype? height::Length.datatype? marginwidth::Pixels.datatype? marginheight::Pixels.datatype? scrolling::("yes" | "no" | "auto")? -> Iframe.attlist
 
         Name.attlist -> Iframe.attlist
 
@@ -362,7 +361,7 @@ exports
 
         Name.attlist -> Frame.attrib
 
-        ("void" | "above" | "below" | "hsides" | "lhs" | "rhs" | "vsides" | "box" | "border")? -> Frame.attrib
+        frame::("void" | "above" | "below" | "hsides" | "lhs" | "rhs" | "vsides" | "box" | "border")? -> Frame.attrib
 
         name::STR? -> Name.attlist
 
@@ -370,7 +369,7 @@ exports
 
         param::Param.attlist -> Param
 
-        Id.attrib name::STR value::STR? ("data" | "ref" | "object")? type::ContentType.datatype? -> Param.attlist
+        Id.attrib name::STR value::STR? valuetype::("data" | "ref" | "object")? type::ContentType.datatype? -> Param.attlist
 
         hr::Hr.attlist -> Hr
 
@@ -461,7 +460,7 @@ exports
 
         Common.attrib CellHAlign.attrib CellVAlign.attrib -> Tfoot.attlist
 
-        ("none" | "groups" | "rows" | "cols" | "all")? -> Rules.attrib
+        rules::("none" | "groups" | "rows" | "cols" | "all")? -> Rules.attrib
 
         table::(Table.attlist Caption? Tr+) -> Table
 
@@ -483,11 +482,11 @@ exports
 
         Common.attrib abbr::Text.datatype? axis::STR? headers::IDREFS.datatype? Scope.attrib rowspan::Number.datatype? colspan::Number.datatype? CellHAlign.attrib CellVAlign.attrib -> Cell.attrib
 
-        ("left" | "center" | "right")? -> CellHAlign.attrib
+        align::("left" | "center" | "right")? -> CellHAlign.attrib
 
-        ("top" | "middle" | "bottom")? -> CellVAlign.attrib
+        valign::("top" | "middle" | "bottom")? -> CellVAlign.attrib
 
-        ("row" | "col")? -> Scope.attrib
+        scope::("row" | "col")? -> Scope.attrib
 
         Target.attrib -> Link.attrib
 

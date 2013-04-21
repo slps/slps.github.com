@@ -75,7 +75,7 @@ IDREFS.datatype:
 form:
         form::(form.attlist Block.class+)
 form.attlist:
-        Common.attrib action::URI.datatype ("get" | "post")? (enctype::ContentType.datatype)?
+        Common.attrib action::URI.datatype (method::("get" | "post"))? (enctype::ContentType.datatype)?
 label:
         label::(label.attlist Inline.model)
 label.attlist:
@@ -195,7 +195,7 @@ object.attlist:
 param:
         param::param.attlist
 param.attlist:
-        id.attrib name::STR (value::STR)? ("data" | "ref" | "object")? (type::ContentType.datatype)?
+        id.attrib name::STR (value::STR)? (valuetype::("data" | "ref" | "object"))? (type::ContentType.datatype)?
 title:
         title::(title.attlist STR)
 title.attlist:
@@ -239,11 +239,11 @@ td.attlist:
 Cell.attrib:
         Common.attrib (abbr::Text.datatype)? (axis::STR)? (headers::IDREFS.datatype)? scope.attrib (rowspan::Number.datatype)? (colspan::Number.datatype)? CellHAlign.attrib CellVAlign.attrib
 CellHAlign.attrib:
-        ("left" | "center" | "right")?
+        (align::("left" | "center" | "right"))?
 CellVAlign.attrib:
-        ("top" | "middle" | "bottom")?
+        (valign::("top" | "middle" | "bottom"))?
 scope.attrib:
-        ("row" | "col")?
+        (scope::("row" | "col"))?
 br:
         br::br.attlist
 br.attlist:

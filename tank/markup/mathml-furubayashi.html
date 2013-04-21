@@ -1,0 +1,921 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:bgf="http://planet-sl.org/bgf" xmlns:xbgf="http://planet-sl.org/xbgf" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Browsable MathML Grammar</title><link href="/slps.css" rel="stylesheet" type="text/css"></link><script type="text/javascript">
+
+				  var _gaq = _gaq || [];
+				  _gaq.push(['_setAccount', 'UA-3743366-7']);
+				  _gaq.push(['_setDomainName', 'github.com']);
+				  _gaq.push(['_trackPageview']);
+
+				  (function() {
+				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				  })();
+
+				</script></head><body><h1 class="l">Browsable MathML Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.com/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Yutaka Furubayashi, <em>MathML 2.0 Schemata on RELAX-NG</em>, 15 March 2008.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>353</strong></li><li>Number of top alternatives: <strong>551</strong></li><li>Number of defined nonterminal symbols: <strong>353</strong></li><li>Root nonterminal symbols: <code><a href="#mml.math.qname" class="nt">mml.math.qname</a></code></li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#mml.pi.qname" class="nt">mml.pi.qname</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>81</strong></li><li>Special terminal symbols: <strong>1</strong>: <code class="t">"axis "</code></li><li>Keywords: <strong>80</strong>: <code class="t">"open", "closed", "open-closed", "closed-open", "nary", "prefix", "infix", "function-model", "lexicographic", "numeric", "local", "global", "e-notation", "integer", "rational", "real", "float", "complex-polar", "complex-cartesian", "constant", "transparent", "veryverythinmathspace", "verythinmathspace", "thinmathspace", "mediummathspace", "thickmathspace", "verythickmathspace", "veryverythickmathspace", "top", "bottom", "center", "baseline", "axis", "left", "right", "auto", "fit", "true", "false", "none", "solid", "dashed", "scroll", "elide", "truncate", "scale", "normal", "bold", "italic", "bold-italic", "double-struck", "bold-fraktur", "script", "bold-script", "fraktur", "sans-serif", "bold-sans-serif", "sans-serif-italic", "sans-serif-bold-italic", "monospace", "small", "big", "postfix", "infinity", "newline", "indentingnewline", "nobreak", "goodbreak", "badbreak", "thin", "medium", "thick", "toggle", "statusline", "tooltip", "highlight", "menu", "longdiv", "actuarial", "radical"</code></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="mml.Content">mml.Content</a>:
+        <a class="nt" href="#mml.ctoken">mml.ctoken</a>
+        <a class="nt" href="#mml.cspecial">mml.cspecial</a>
+        <a class="nt" href="#mml.cother">mml.cother</a>
+        <a class="nt" href="#mml.csemantics">mml.csemantics</a>
+        <a class="nt" href="#mml.c0ary">mml.c0ary</a>
+        <a class="nt" href="#mml.cconstructor">mml.cconstructor</a>
+        <a class="nt" href="#mml.cquantifier">mml.cquantifier</a>
+        <a class="nt" href="#mml.cop1ary">mml.cop1ary</a>
+        <a class="nt" href="#mml.cop2ary">mml.cop2ary</a>
+        <a class="nt" href="#mml.copnary">mml.copnary</a>
+        <a class="nt" href="#mml.copmisc">mml.copmisc</a>
+        <a class="nt" href="#mml.crel2ary">mml.crel2ary</a>
+        <a class="nt" href="#mml.crelnary">mml.crelnary</a>
+</pre><pre><a class="nt" name="mml.ContInPres">mml.ContInPres</a>:
+        <a class="nt" href="#mml.ci.qname">mml.ci.qname</a>
+        <a class="nt" href="#mml.csymbol.qname">mml.csymbol.qname</a>
+        <a class="nt" href="#mml.cn.qname">mml.cn.qname</a>
+        <a class="nt" href="#mml.c0ary">mml.c0ary</a>
+        <a class="nt" href="#mml.apply.qname">mml.apply.qname</a>
+        <a class="nt" href="#mml.fn.qname">mml.fn.qname</a>
+        <a class="nt" href="#mml.lambda.qname">mml.lambda.qname</a>
+        <a class="nt" href="#mml.reln.qname">mml.reln.qname</a>
+        <a class="nt" href="#mml.cconstructor">mml.cconstructor</a>
+        <a class="nt" href="#mml.semantics.qname">mml.semantics.qname</a>
+        <a class="nt" href="#mml.declare.qname">mml.declare.qname</a>
+</pre><pre><a class="nt" name="mml.att-base">mml.att-base</a>:
+        <span class="sel">base</span>::<a class="nt" href="#mml.number.datatype">mml.number.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-closure">mml.att-closure</a>:
+        <span class="sel">closure</span>::(<span class="t">"open"</span> | <span class="t">"closed"</span> | <span class="t">"open-closed"</span> | <span class="t">"closed-open"</span>)<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-definition">mml.att-definition</a>:
+        <span class="sel">definitionURL</span>::<a class="nt" href="#mml.uri.datatype">mml.uri.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-encoding">mml.att-encoding</a>:
+        <span class="sel">encoding</span>::<span class="meta">string</span><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-nargs">mml.att-nargs</a>:
+        <span class="sel">nargs</span>::(<span class="t">"nary"</span> | <a class="nt" href="#mml.number.datatype">mml.number.datatype</a>)<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-occurrence">mml.att-occurrence</a>:
+        <span class="sel">occurrence</span>::(<span class="t">"prefix"</span> | <span class="t">"infix"</span> | <span class="t">"function-model"</span>)<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-order">mml.att-order</a>:
+        <span class="sel">order</span>::(<span class="t">"lexicographic"</span> | <span class="t">"numeric"</span>)<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-scope">mml.att-scope</a>:
+        <span class="sel">scope</span>::(<span class="t">"local"</span> | <span class="t">"global"</span>)<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-type">mml.att-type</a>:
+        <span class="sel">type</span>::(<span class="t">"e-notation"</span> | <span class="t">"integer"</span> | <span class="t">"rational"</span> | <span class="t">"real"</span> | <span class="t">"float"</span> | <span class="t">"complex-polar"</span> | <span class="t">"complex-cartesian"</span> | <span class="t">"constant"</span>)<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.cconstructor">mml.cconstructor</a>:
+        <a class="nt" href="#mml.interval.qname">mml.interval.qname</a>
+        <a class="nt" href="#mml.list.qname">mml.list.qname</a>
+        <a class="nt" href="#mml.matrix.qname">mml.matrix.qname</a>
+        <a class="nt" href="#mml.matrixrow.qname">mml.matrixrow.qname</a>
+        <a class="nt" href="#mml.set.qname">mml.set.qname</a>
+        <a class="nt" href="#mml.vector.qname">mml.vector.qname</a>
+        <a class="nt" href="#mml.piecewise.qname">mml.piecewise.qname</a>
+</pre><pre><a class="nt" name="mml.interval.qname">mml.interval.qname</a>:
+        <span class="sel">interval</span>::(<a class="nt" href="#mml.ContentExpression">mml.ContentExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-closure">mml.att-closure</a>)
+</pre><pre><a class="nt" name="mml.set.qname">mml.set.qname</a>:
+        <span class="sel">set</span>::(<a class="nt" href="#mml.ContentExpression">mml.ContentExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-type">mml.att-type</a>)
+</pre><pre><a class="nt" name="mml.list.qname">mml.list.qname</a>:
+        <span class="sel">list</span>::(<a class="nt" href="#mml.ContentExpression">mml.ContentExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-order">mml.att-order</a>)
+</pre><pre><a class="nt" name="mml.vector.qname">mml.vector.qname</a>:
+        <span class="sel">vector</span>::(<a class="nt" href="#mml.ContentExpression">mml.ContentExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a>)
+</pre><pre><a class="nt" name="mml.matrix.qname">mml.matrix.qname</a>:
+        <span class="sel">matrix</span>::(<a class="nt" href="#mml.ContentExpression">mml.ContentExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a>)
+</pre><pre><a class="nt" name="mml.matrixrow.qname">mml.matrixrow.qname</a>:
+        <span class="sel">matrixrow</span>::(<a class="nt" href="#mml.ContentExpression">mml.ContentExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a>)
+</pre><pre><a class="nt" name="mml.piecewise.qname">mml.piecewise.qname</a>:
+        <span class="sel">piecewise</span>::(<a class="nt" href="#mml.piece.qname">mml.piece.qname</a><span class="meta">*</span> <a class="nt" href="#mml.otherwise.qname">mml.otherwise.qname</a><span class="meta">?</span> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a>)
+</pre><pre><a class="nt" name="mml.piece.qname">mml.piece.qname</a>:
+        <span class="sel">piece</span>::(<a class="nt" href="#mml.ContentExpression">mml.ContentExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a>)
+</pre><pre><a class="nt" name="mml.otherwise.qname">mml.otherwise.qname</a>:
+        <span class="sel">otherwise</span>::(<a class="nt" href="#mml.ContentExpression">mml.ContentExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a>)
+</pre><pre><a class="nt" name="mml.ctoken">mml.ctoken</a>:
+        <a class="nt" href="#mml.csymbol.qname">mml.csymbol.qname</a>
+        <a class="nt" href="#mml.ci.qname">mml.ci.qname</a>
+        <a class="nt" href="#mml.cn.qname">mml.cn.qname</a>
+</pre><pre><a class="nt" name="mml.ci.qname">mml.ci.qname</a>:
+        <span class="sel">ci</span>::((<a class="nt" href="#mml.MathMLCharacters">mml.MathMLCharacters</a> | <a class="nt" href="#mml.PresInCont">mml.PresInCont</a>)<span class="meta">*</span> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-type">mml.att-type</a> <a class="nt" href="#mml.att-definition">mml.att-definition</a> <a class="nt" href="#mml.att-encoding">mml.att-encoding</a>)
+</pre><pre><a class="nt" name="mml.csymbol.qname">mml.csymbol.qname</a>:
+        <span class="sel">csymbol</span>::((<a class="nt" href="#mml.MathMLCharacters">mml.MathMLCharacters</a> | <a class="nt" href="#mml.PresInCont">mml.PresInCont</a>)<span class="meta">*</span> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-type">mml.att-type</a> <a class="nt" href="#mml.att-definition">mml.att-definition</a> <a class="nt" href="#mml.att-encoding">mml.att-encoding</a>)
+</pre><pre><a class="nt" name="mml.cn.qname">mml.cn.qname</a>:
+        <span class="sel">cn</span>::((<a class="nt" href="#mml.MathMLCharacters">mml.MathMLCharacters</a> | <a class="nt" href="#mml.PresInCont">mml.PresInCont</a> | <a class="nt" href="#mml.sep.qname">mml.sep.qname</a>)<span class="meta">*</span> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-type">mml.att-type</a> <a class="nt" href="#mml.att-base">mml.att-base</a> <a class="nt" href="#mml.att-definition">mml.att-definition</a> <a class="nt" href="#mml.att-encoding">mml.att-encoding</a>)
+</pre><pre><a class="nt" name="mml.operators.common.attrib">mml.operators.common.attrib</a>:
+        <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-definition">mml.att-definition</a> <a class="nt" href="#mml.att-encoding">mml.att-encoding</a>
+</pre><pre><a class="nt" name="mml.cfuncop1ary">mml.cfuncop1ary</a>:
+        <a class="nt" href="#mml.inverse.qname">mml.inverse.qname</a>
+        <a class="nt" href="#mml.ident.qname">mml.ident.qname</a>
+        <a class="nt" href="#mml.domain.qname">mml.domain.qname</a>
+        <a class="nt" href="#mml.codomain.qname">mml.codomain.qname</a>
+        <a class="nt" href="#mml.image.qname">mml.image.qname</a>
+</pre><pre><a class="nt" name="mml.inverse.qname">mml.inverse.qname</a>:
+        <span class="sel">inverse</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.domain.qname">mml.domain.qname</a>:
+        <span class="sel">domain</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.codomain.qname">mml.codomain.qname</a>:
+        <span class="sel">codomain</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.image.qname">mml.image.qname</a>:
+        <span class="sel">image</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.cfuncopnary">mml.cfuncopnary</a>:
+        <a class="nt" href="#mml.fn.qname">mml.fn.qname</a>
+        <a class="nt" href="#mml.compose.qname">mml.compose.qname</a>
+</pre><pre><a class="nt" name="mml.fn.qname">mml.fn.qname</a>:
+        <span class="sel">fn</span>::(<a class="nt" href="#mml.ContentExpression">mml.ContentExpression</a> <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.ident.qname">mml.ident.qname</a>:
+        <span class="sel">ident</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.compose.qname">mml.compose.qname</a>:
+        <span class="sel">compose</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.carithop1ary">mml.carithop1ary</a>:
+        <a class="nt" href="#mml.abs.qname">mml.abs.qname</a>
+        <a class="nt" href="#mml.conjugate.qname">mml.conjugate.qname</a>
+        <a class="nt" href="#mml.exp.qname">mml.exp.qname</a>
+        <a class="nt" href="#mml.factorial.qname">mml.factorial.qname</a>
+        <a class="nt" href="#mml.arg.qname">mml.arg.qname</a>
+        <a class="nt" href="#mml.real.qname">mml.real.qname</a>
+        <a class="nt" href="#mml.imaginary.qname">mml.imaginary.qname</a>
+        <a class="nt" href="#mml.floor.qname">mml.floor.qname</a>
+        <a class="nt" href="#mml.ceiling.qname">mml.ceiling.qname</a>
+</pre><pre><a class="nt" name="mml.exp.qname">mml.exp.qname</a>:
+        <span class="sel">exp</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.abs.qname">mml.abs.qname</a>:
+        <span class="sel">abs</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.arg.qname">mml.arg.qname</a>:
+        <span class="sel">arg</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.real.qname">mml.real.qname</a>:
+        <span class="sel">real</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.imaginary.qname">mml.imaginary.qname</a>:
+        <span class="sel">imaginary</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.conjugate.qname">mml.conjugate.qname</a>:
+        <span class="sel">conjugate</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.factorial.qname">mml.factorial.qname</a>:
+        <span class="sel">factorial</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.floor.qname">mml.floor.qname</a>:
+        <span class="sel">floor</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.ceiling.qname">mml.ceiling.qname</a>:
+        <span class="sel">ceiling</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.carithop1or2ary">mml.carithop1or2ary</a>:
+        <a class="nt" href="#mml.minus.qname">mml.minus.qname</a>
+</pre><pre><a class="nt" name="mml.minus.qname">mml.minus.qname</a>:
+        <span class="sel">minus</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.carithop2ary">mml.carithop2ary</a>:
+        <a class="nt" href="#mml.quotient.qname">mml.quotient.qname</a>
+        <a class="nt" href="#mml.divide.qname">mml.divide.qname</a>
+        <a class="nt" href="#mml.power.qname">mml.power.qname</a>
+        <a class="nt" href="#mml.rem.qname">mml.rem.qname</a>
+</pre><pre><a class="nt" name="mml.quotient.qname">mml.quotient.qname</a>:
+        <span class="sel">quotient</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.divide.qname">mml.divide.qname</a>:
+        <span class="sel">divide</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.power.qname">mml.power.qname</a>:
+        <span class="sel">power</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.rem.qname">mml.rem.qname</a>:
+        <span class="sel">rem</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.carithopnary">mml.carithopnary</a>:
+        <a class="nt" href="#mml.plus.qname">mml.plus.qname</a>
+        <a class="nt" href="#mml.times.qname">mml.times.qname</a>
+        <a class="nt" href="#mml.max.qname">mml.max.qname</a>
+        <a class="nt" href="#mml.min.qname">mml.min.qname</a>
+        <a class="nt" href="#mml.gcd.qname">mml.gcd.qname</a>
+        <a class="nt" href="#mml.lcm.qname">mml.lcm.qname</a>
+</pre><pre><a class="nt" name="mml.plus.qname">mml.plus.qname</a>:
+        <span class="sel">plus</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.max.qname">mml.max.qname</a>:
+        <span class="sel">max</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.min.qname">mml.min.qname</a>:
+        <span class="sel">min</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.times.qname">mml.times.qname</a>:
+        <span class="sel">times</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.gcd.qname">mml.gcd.qname</a>:
+        <span class="sel">gcd</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.lcm.qname">mml.lcm.qname</a>:
+        <span class="sel">lcm</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.carithoproot">mml.carithoproot</a>:
+        <a class="nt" href="#mml.root.qname">mml.root.qname</a>
+</pre><pre><a class="nt" name="mml.root.qname">mml.root.qname</a>:
+        <span class="sel">root</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.clogicopquant">mml.clogicopquant</a>:
+        <a class="nt" href="#mml.exists.qname">mml.exists.qname</a>
+        <a class="nt" href="#mml.forall.qname">mml.forall.qname</a>
+</pre><pre><a class="nt" name="mml.exists.qname">mml.exists.qname</a>:
+        <span class="sel">exists</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.forall.qname">mml.forall.qname</a>:
+        <span class="sel">forall</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.clogicopnary">mml.clogicopnary</a>:
+        <a class="nt" href="#mml.and.qname">mml.and.qname</a>
+        <a class="nt" href="#mml.or.qname">mml.or.qname</a>
+        <a class="nt" href="#mml.xor.qname">mml.xor.qname</a>
+</pre><pre><a class="nt" name="mml.and.qname">mml.and.qname</a>:
+        <span class="sel">and</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.or.qname">mml.or.qname</a>:
+        <span class="sel">or</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.xor.qname">mml.xor.qname</a>:
+        <span class="sel">xor</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.clogicop1ary">mml.clogicop1ary</a>:
+        <a class="nt" href="#mml.not.qname">mml.not.qname</a>
+</pre><pre><a class="nt" name="mml.not.qname">mml.not.qname</a>:
+        <span class="sel">not</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.clogicop2ary">mml.clogicop2ary</a>:
+        <a class="nt" href="#mml.implies.qname">mml.implies.qname</a>
+</pre><pre><a class="nt" name="mml.implies.qname">mml.implies.qname</a>:
+        <span class="sel">implies</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.ccalcop">mml.ccalcop</a>:
+        <a class="nt" href="#mml.log.qname">mml.log.qname</a>
+        <a class="nt" href="#mml.int.qname">mml.int.qname</a>
+        <a class="nt" href="#mml.diff.qname">mml.diff.qname</a>
+        <a class="nt" href="#mml.partialdiff.qname">mml.partialdiff.qname</a>
+        <a class="nt" href="#mml.divergence.qname">mml.divergence.qname</a>
+        <a class="nt" href="#mml.grad.qname">mml.grad.qname</a>
+        <a class="nt" href="#mml.curl.qname">mml.curl.qname</a>
+        <a class="nt" href="#mml.laplacian.qname">mml.laplacian.qname</a>
+</pre><pre><a class="nt" name="mml.divergence.qname">mml.divergence.qname</a>:
+        <span class="sel">divergence</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.grad.qname">mml.grad.qname</a>:
+        <span class="sel">grad</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.curl.qname">mml.curl.qname</a>:
+        <span class="sel">curl</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.laplacian.qname">mml.laplacian.qname</a>:
+        <span class="sel">laplacian</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.log.qname">mml.log.qname</a>:
+        <span class="sel">log</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.int.qname">mml.int.qname</a>:
+        <span class="sel">int</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.diff.qname">mml.diff.qname</a>:
+        <span class="sel">diff</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.partialdiff.qname">mml.partialdiff.qname</a>:
+        <span class="sel">partialdiff</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.ccalcop1ary">mml.ccalcop1ary</a>:
+        <a class="nt" href="#mml.ln.qname">mml.ln.qname</a>
+</pre><pre><a class="nt" name="mml.ln.qname">mml.ln.qname</a>:
+        <span class="sel">ln</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.csetop1ary">mml.csetop1ary</a>:
+        <a class="nt" href="#mml.card.qname">mml.card.qname</a>
+</pre><pre><a class="nt" name="mml.card.qname">mml.card.qname</a>:
+        <span class="sel">card</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.csetop2ary">mml.csetop2ary</a>:
+        <a class="nt" href="#mml.setdiff.qname">mml.setdiff.qname</a>
+</pre><pre><a class="nt" name="mml.setdiff.qname">mml.setdiff.qname</a>:
+        <span class="sel">setdiff</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.csetopnary">mml.csetopnary</a>:
+        <a class="nt" href="#mml.union.qname">mml.union.qname</a>
+        <a class="nt" href="#mml.intersect.qname">mml.intersect.qname</a>
+        <a class="nt" href="#mml.cartesianproduct.qname">mml.cartesianproduct.qname</a>
+</pre><pre><a class="nt" name="mml.union.qname">mml.union.qname</a>:
+        <span class="sel">union</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.intersect.qname">mml.intersect.qname</a>:
+        <span class="sel">intersect</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.cartesianproduct.qname">mml.cartesianproduct.qname</a>:
+        <span class="sel">cartesianproduct</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.cseqop">mml.cseqop</a>:
+        <a class="nt" href="#mml.sum.qname">mml.sum.qname</a>
+        <a class="nt" href="#mml.product.qname">mml.product.qname</a>
+        <a class="nt" href="#mml.limit.qname">mml.limit.qname</a>
+</pre><pre><a class="nt" name="mml.sum.qname">mml.sum.qname</a>:
+        <span class="sel">sum</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.product.qname">mml.product.qname</a>:
+        <span class="sel">product</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.limit.qname">mml.limit.qname</a>:
+        <span class="sel">limit</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.ctrigop">mml.ctrigop</a>:
+        <a class="nt" href="#mml.sin.qname">mml.sin.qname</a>
+        <a class="nt" href="#mml.cos.qname">mml.cos.qname</a>
+        <a class="nt" href="#mml.tan.qname">mml.tan.qname</a>
+        <a class="nt" href="#mml.sec.qname">mml.sec.qname</a>
+        <a class="nt" href="#mml.csc.qname">mml.csc.qname</a>
+        <a class="nt" href="#mml.cot.qname">mml.cot.qname</a>
+        <a class="nt" href="#mml.sinh.qname">mml.sinh.qname</a>
+        <a class="nt" href="#mml.cosh.qname">mml.cosh.qname</a>
+        <a class="nt" href="#mml.tanh.qname">mml.tanh.qname</a>
+        <a class="nt" href="#mml.sech.qname">mml.sech.qname</a>
+        <a class="nt" href="#mml.csch.qname">mml.csch.qname</a>
+        <a class="nt" href="#mml.coth.qname">mml.coth.qname</a>
+        <a class="nt" href="#mml.arcsin.qname">mml.arcsin.qname</a>
+        <a class="nt" href="#mml.arccos.qname">mml.arccos.qname</a>
+        <a class="nt" href="#mml.arctan.qname">mml.arctan.qname</a>
+        <a class="nt" href="#mml.arccosh.qname">mml.arccosh.qname</a>
+        <a class="nt" href="#mml.arccot.qname">mml.arccot.qname</a>
+        <a class="nt" href="#mml.arccoth.qname">mml.arccoth.qname</a>
+        <a class="nt" href="#mml.arccsc.qname">mml.arccsc.qname</a>
+        <a class="nt" href="#mml.arccsch.qname">mml.arccsch.qname</a>
+        <a class="nt" href="#mml.arcsec.qname">mml.arcsec.qname</a>
+        <a class="nt" href="#mml.arcsech.qname">mml.arcsech.qname</a>
+        <a class="nt" href="#mml.arcsinh.qname">mml.arcsinh.qname</a>
+        <a class="nt" href="#mml.arctanh.qname">mml.arctanh.qname</a>
+</pre><pre><a class="nt" name="mml.sin.qname">mml.sin.qname</a>:
+        <span class="sel">sin</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.cos.qname">mml.cos.qname</a>:
+        <span class="sel">cos</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.tan.qname">mml.tan.qname</a>:
+        <span class="sel">tan</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.sec.qname">mml.sec.qname</a>:
+        <span class="sel">sec</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.csc.qname">mml.csc.qname</a>:
+        <span class="sel">csc</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.cot.qname">mml.cot.qname</a>:
+        <span class="sel">cot</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.sinh.qname">mml.sinh.qname</a>:
+        <span class="sel">sinh</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.cosh.qname">mml.cosh.qname</a>:
+        <span class="sel">cosh</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.tanh.qname">mml.tanh.qname</a>:
+        <span class="sel">tanh</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.sech.qname">mml.sech.qname</a>:
+        <span class="sel">sech</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.csch.qname">mml.csch.qname</a>:
+        <span class="sel">csch</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.coth.qname">mml.coth.qname</a>:
+        <span class="sel">coth</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.arcsin.qname">mml.arcsin.qname</a>:
+        <span class="sel">arcsin</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.arccos.qname">mml.arccos.qname</a>:
+        <span class="sel">arccos</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.arctan.qname">mml.arctan.qname</a>:
+        <span class="sel">arctan</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.arccosh.qname">mml.arccosh.qname</a>:
+        <span class="sel">arccosh</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.arccot.qname">mml.arccot.qname</a>:
+        <span class="sel">arccot</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.arccoth.qname">mml.arccoth.qname</a>:
+        <span class="sel">arccoth</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.arccsc.qname">mml.arccsc.qname</a>:
+        <span class="sel">arccsc</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.arccsch.qname">mml.arccsch.qname</a>:
+        <span class="sel">arccsch</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.arcsec.qname">mml.arcsec.qname</a>:
+        <span class="sel">arcsec</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.arcsech.qname">mml.arcsech.qname</a>:
+        <span class="sel">arcsech</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.arcsinh.qname">mml.arcsinh.qname</a>:
+        <span class="sel">arcsinh</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.arctanh.qname">mml.arctanh.qname</a>:
+        <span class="sel">arctanh</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.cstatopnary">mml.cstatopnary</a>:
+        <a class="nt" href="#mml.mean.qname">mml.mean.qname</a>
+        <a class="nt" href="#mml.sdev.qname">mml.sdev.qname</a>
+        <a class="nt" href="#mml.variance.qname">mml.variance.qname</a>
+        <a class="nt" href="#mml.median.qname">mml.median.qname</a>
+        <a class="nt" href="#mml.mode.qname">mml.mode.qname</a>
+</pre><pre><a class="nt" name="mml.mean.qname">mml.mean.qname</a>:
+        <span class="sel">mean</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.sdev.qname">mml.sdev.qname</a>:
+        <span class="sel">sdev</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.variance.qname">mml.variance.qname</a>:
+        <span class="sel">variance</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.median.qname">mml.median.qname</a>:
+        <span class="sel">median</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.mode.qname">mml.mode.qname</a>:
+        <span class="sel">mode</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.cstatopmoment">mml.cstatopmoment</a>:
+        <a class="nt" href="#mml.moment.qname">mml.moment.qname</a>
+</pre><pre><a class="nt" name="mml.moment.qname">mml.moment.qname</a>:
+        <span class="sel">moment</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.clalgop1ary">mml.clalgop1ary</a>:
+        <a class="nt" href="#mml.determinant.qname">mml.determinant.qname</a>
+        <a class="nt" href="#mml.transpose.qname">mml.transpose.qname</a>
+</pre><pre><a class="nt" name="mml.determinant.qname">mml.determinant.qname</a>:
+        <span class="sel">determinant</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.transpose.qname">mml.transpose.qname</a>:
+        <span class="sel">transpose</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.clalgop2ary">mml.clalgop2ary</a>:
+        <a class="nt" href="#mml.vectorproduct.qname">mml.vectorproduct.qname</a>
+        <a class="nt" href="#mml.scalarproduct.qname">mml.scalarproduct.qname</a>
+        <a class="nt" href="#mml.outerproduct.qname">mml.outerproduct.qname</a>
+</pre><pre><a class="nt" name="mml.vectorproduct.qname">mml.vectorproduct.qname</a>:
+        <span class="sel">vectorproduct</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.scalarproduct.qname">mml.scalarproduct.qname</a>:
+        <span class="sel">scalarproduct</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.outerproduct.qname">mml.outerproduct.qname</a>:
+        <span class="sel">outerproduct</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.clalgopnary">mml.clalgopnary</a>:
+        <a class="nt" href="#mml.selector.qname">mml.selector.qname</a>
+</pre><pre><a class="nt" name="mml.selector.qname">mml.selector.qname</a>:
+        <span class="sel">selector</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.cop1ary">mml.cop1ary</a>:
+        <a class="nt" href="#mml.cfuncop1ary">mml.cfuncop1ary</a>
+        <a class="nt" href="#mml.carithop1ary">mml.carithop1ary</a>
+        <a class="nt" href="#mml.clogicop1ary">mml.clogicop1ary</a>
+        <a class="nt" href="#mml.ccalcop1ary">mml.ccalcop1ary</a>
+        <a class="nt" href="#mml.ctrigop">mml.ctrigop</a>
+        <a class="nt" href="#mml.clalgop1ary">mml.clalgop1ary</a>
+        <a class="nt" href="#mml.csetop1ary">mml.csetop1ary</a>
+</pre><pre><a class="nt" name="mml.cop2ary">mml.cop2ary</a>:
+        <a class="nt" href="#mml.carithop2ary">mml.carithop2ary</a>
+        <a class="nt" href="#mml.clogicop2ary">mml.clogicop2ary</a>
+        <a class="nt" href="#mml.clalgop2ary">mml.clalgop2ary</a>
+        <a class="nt" href="#mml.csetop2ary">mml.csetop2ary</a>
+</pre><pre><a class="nt" name="mml.copnary">mml.copnary</a>:
+        <a class="nt" href="#mml.cfuncopnary">mml.cfuncopnary</a>
+        <a class="nt" href="#mml.carithopnary">mml.carithopnary</a>
+        <a class="nt" href="#mml.clogicopnary">mml.clogicopnary</a>
+        <a class="nt" href="#mml.csetopnary">mml.csetopnary</a>
+        <a class="nt" href="#mml.cstatopnary">mml.cstatopnary</a>
+        <a class="nt" href="#mml.clalgopnary">mml.clalgopnary</a>
+</pre><pre><a class="nt" name="mml.copmisc">mml.copmisc</a>:
+        <a class="nt" href="#mml.carithoproot">mml.carithoproot</a>
+        <a class="nt" href="#mml.carithop1or2ary">mml.carithop1or2ary</a>
+        <a class="nt" href="#mml.ccalcop">mml.ccalcop</a>
+        <a class="nt" href="#mml.cseqop">mml.cseqop</a>
+        <a class="nt" href="#mml.cstatopmoment">mml.cstatopmoment</a>
+        <a class="nt" href="#mml.clogicopquant">mml.clogicopquant</a>
+</pre><pre><a class="nt" name="mml.cother">mml.cother</a>:
+        <a class="nt" href="#mml.condition.qname">mml.condition.qname</a>
+        <a class="nt" href="#mml.declare.qname">mml.declare.qname</a>
+        <a class="nt" href="#mml.sep.qname">mml.sep.qname</a>
+</pre><pre><a class="nt" name="mml.condition.qname">mml.condition.qname</a>:
+        <span class="sel">condition</span>::(<a class="nt" href="#mml.ContentExpression">mml.ContentExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a>)
+</pre><pre><a class="nt" name="mml.declare.qname">mml.declare.qname</a>:
+        <span class="sel">declare</span>::(<a class="nt" href="#mml.ContentExpression">mml.ContentExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-type">mml.att-type</a> <a class="nt" href="#mml.att-scope">mml.att-scope</a> <a class="nt" href="#mml.att-nargs">mml.att-nargs</a> <a class="nt" href="#mml.att-occurrence">mml.att-occurrence</a> <a class="nt" href="#mml.att-definition">mml.att-definition</a> <a class="nt" href="#mml.att-encoding">mml.att-encoding</a>)
+</pre><pre><a class="nt" name="mml.sep.qname">mml.sep.qname</a>:
+        <span class="sel">sep</span>::ε
+</pre><pre><a class="nt" name="mml.cquantifier">mml.cquantifier</a>:
+        <a class="nt" href="#mml.lowlimit.qname">mml.lowlimit.qname</a>
+        <a class="nt" href="#mml.uplimit.qname">mml.uplimit.qname</a>
+        <a class="nt" href="#mml.bvar.qname">mml.bvar.qname</a>
+        <a class="nt" href="#mml.degree.qname">mml.degree.qname</a>
+        <a class="nt" href="#mml.logbase.qname">mml.logbase.qname</a>
+        <a class="nt" href="#mml.momentabout.qname">mml.momentabout.qname</a>
+        <a class="nt" href="#mml.domainofapplication.qname">mml.domainofapplication.qname</a>
+</pre><pre><a class="nt" name="mml.lowlimit.qname">mml.lowlimit.qname</a>:
+        <span class="sel">lowlimit</span>::(<a class="nt" href="#mml.ContentExpression">mml.ContentExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a>)
+</pre><pre><a class="nt" name="mml.uplimit.qname">mml.uplimit.qname</a>:
+        <span class="sel">uplimit</span>::(<a class="nt" href="#mml.ContentExpression">mml.ContentExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a>)
+</pre><pre><a class="nt" name="mml.bvar.qname">mml.bvar.qname</a>:
+        <span class="sel">bvar</span>::(<a class="nt" href="#mml.ContentExpression">mml.ContentExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a>)
+</pre><pre><a class="nt" name="mml.degree.qname">mml.degree.qname</a>:
+        <span class="sel">degree</span>::(<a class="nt" href="#mml.ContentExpression">mml.ContentExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a>)
+</pre><pre><a class="nt" name="mml.logbase.qname">mml.logbase.qname</a>:
+        <span class="sel">logbase</span>::(<a class="nt" href="#mml.ContentExpression">mml.ContentExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a>)
+</pre><pre><a class="nt" name="mml.momentabout.qname">mml.momentabout.qname</a>:
+        <span class="sel">momentabout</span>::(<a class="nt" href="#mml.ContentExpression">mml.ContentExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a>)
+</pre><pre><a class="nt" name="mml.domainofapplication.qname">mml.domainofapplication.qname</a>:
+        <span class="sel">domainofapplication</span>::(<a class="nt" href="#mml.ContentExpression">mml.ContentExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a>)
+</pre><pre><a class="nt" name="mml.cgenrel2ary">mml.cgenrel2ary</a>:
+        <a class="nt" href="#mml.neq.qname">mml.neq.qname</a>
+        <a class="nt" href="#mml.factorof.qname">mml.factorof.qname</a>
+</pre><pre><a class="nt" name="mml.neq.qname">mml.neq.qname</a>:
+        <span class="sel">neq</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.factorof.qname">mml.factorof.qname</a>:
+        <span class="sel">factorof</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.cgenrelnary">mml.cgenrelnary</a>:
+        <a class="nt" href="#mml.eq.qname">mml.eq.qname</a>
+        <a class="nt" href="#mml.leq.qname">mml.leq.qname</a>
+        <a class="nt" href="#mml.lt.qname">mml.lt.qname</a>
+        <a class="nt" href="#mml.geq.qname">mml.geq.qname</a>
+        <a class="nt" href="#mml.gt.qname">mml.gt.qname</a>
+        <a class="nt" href="#mml.equivalent.qname">mml.equivalent.qname</a>
+        <a class="nt" href="#mml.approx.qname">mml.approx.qname</a>
+</pre><pre><a class="nt" name="mml.eq.qname">mml.eq.qname</a>:
+        <span class="sel">eq</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.equivalent.qname">mml.equivalent.qname</a>:
+        <span class="sel">equivalent</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.approx.qname">mml.approx.qname</a>:
+        <span class="sel">approx</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.gt.qname">mml.gt.qname</a>:
+        <span class="sel">gt</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.lt.qname">mml.lt.qname</a>:
+        <span class="sel">lt</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.geq.qname">mml.geq.qname</a>:
+        <span class="sel">geq</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.leq.qname">mml.leq.qname</a>:
+        <span class="sel">leq</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.csetrel2ary">mml.csetrel2ary</a>:
+        <a class="nt" href="#mml.in.qname">mml.in.qname</a>
+        <a class="nt" href="#mml.notin.qname">mml.notin.qname</a>
+        <a class="nt" href="#mml.notsubset.qname">mml.notsubset.qname</a>
+        <a class="nt" href="#mml.notprsubset.qname">mml.notprsubset.qname</a>
+</pre><pre><a class="nt" name="mml.in.qname">mml.in.qname</a>:
+        <span class="sel">in</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.notin.qname">mml.notin.qname</a>:
+        <span class="sel">notin</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.notsubset.qname">mml.notsubset.qname</a>:
+        <span class="sel">notsubset</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.notprsubset.qname">mml.notprsubset.qname</a>:
+        <span class="sel">notprsubset</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.csetrelnary">mml.csetrelnary</a>:
+        <a class="nt" href="#mml.subset.qname">mml.subset.qname</a>
+        <a class="nt" href="#mml.prsubset.qname">mml.prsubset.qname</a>
+</pre><pre><a class="nt" name="mml.subset.qname">mml.subset.qname</a>:
+        <span class="sel">subset</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.prsubset.qname">mml.prsubset.qname</a>:
+        <span class="sel">prsubset</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.cseqrel2ary">mml.cseqrel2ary</a>:
+        <a class="nt" href="#mml.tendsto.qname">mml.tendsto.qname</a>
+</pre><pre><a class="nt" name="mml.tendsto.qname">mml.tendsto.qname</a>:
+        <span class="sel">tendsto</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a> <a class="nt" href="#mml.att-type">mml.att-type</a>)
+</pre><pre><a class="nt" name="mml.crel2ary">mml.crel2ary</a>:
+        <a class="nt" href="#mml.cgenrel2ary">mml.cgenrel2ary</a>
+        <a class="nt" href="#mml.csetrel2ary">mml.csetrel2ary</a>
+        <a class="nt" href="#mml.cseqrel2ary">mml.cseqrel2ary</a>
+</pre><pre><a class="nt" name="mml.crelnary">mml.crelnary</a>:
+        <a class="nt" href="#mml.cgenrelnary">mml.cgenrelnary</a>
+        <a class="nt" href="#mml.csetrelnary">mml.csetrelnary</a>
+</pre><pre><a class="nt" name="mml.csemantics">mml.csemantics</a>:
+        <a class="nt" href="#mml.semantics.qname">mml.semantics.qname</a>
+        <a class="nt" href="#mml.annotation.qname">mml.annotation.qname</a>
+        <a class="nt" href="#mml.annotation-xml.qname">mml.annotation-xml.qname</a>
+</pre><pre><a class="nt" name="mml.semantics.qname">mml.semantics.qname</a>:
+        <span class="sel">semantics</span>::(<a class="nt" href="#mml.ContentExpression">mml.ContentExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-definition">mml.att-definition</a> <a class="nt" href="#mml.att-encoding">mml.att-encoding</a>)
+</pre><pre><a class="nt" name="mml.annotation.qname">mml.annotation.qname</a>:
+        <span class="sel">annotation</span>::(<a class="nt" href="#mml.Annotation.datatype">mml.Annotation.datatype</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-encoding">mml.att-encoding</a>)
+</pre><pre><a class="nt" name="mml.annotation-xml.qname">mml.annotation-xml.qname</a>:
+        <span class="sel">annotation-xml</span>::(<a class="nt" href="#mml.Annotation-xml.datatype">mml.Annotation-xml.datatype</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-encoding">mml.att-encoding</a>)
+</pre><pre><a class="nt" name="mml.cspecial">mml.cspecial</a>:
+        <a class="nt" href="#mml.apply.qname">mml.apply.qname</a>
+        <a class="nt" href="#mml.reln.qname">mml.reln.qname</a>
+        <a class="nt" href="#mml.lambda.qname">mml.lambda.qname</a>
+</pre><pre><a class="nt" name="mml.apply.qname">mml.apply.qname</a>:
+        <span class="sel">apply</span>::(<a class="nt" href="#mml.ContentExpression">mml.ContentExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a>)
+</pre><pre><a class="nt" name="mml.reln.qname">mml.reln.qname</a>:
+        <span class="sel">reln</span>::(<a class="nt" href="#mml.ContentExpression">mml.ContentExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a>)
+</pre><pre><a class="nt" name="mml.lambda.qname">mml.lambda.qname</a>:
+        <span class="sel">lambda</span>::(<a class="nt" href="#mml.ContentExpression">mml.ContentExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a>)
+</pre><pre><a class="nt" name="mml.c0ary">mml.c0ary</a>:
+        <a class="nt" href="#mml.integers.qname">mml.integers.qname</a>
+        <a class="nt" href="#mml.reals.qname">mml.reals.qname</a>
+        <a class="nt" href="#mml.rationals.qname">mml.rationals.qname</a>
+        <a class="nt" href="#mml.naturalnumbers.qname">mml.naturalnumbers.qname</a>
+        <a class="nt" href="#mml.complexes.qname">mml.complexes.qname</a>
+        <a class="nt" href="#mml.primes.qname">mml.primes.qname</a>
+        <a class="nt" href="#mml.exponentiale.qname">mml.exponentiale.qname</a>
+        <a class="nt" href="#mml.imaginaryi.qname">mml.imaginaryi.qname</a>
+        <a class="nt" href="#mml.notanumber.qname">mml.notanumber.qname</a>
+        <a class="nt" href="#mml.true.qname">mml.true.qname</a>
+        <a class="nt" href="#mml.false.qname">mml.false.qname</a>
+        <a class="nt" href="#mml.emptyset.qname">mml.emptyset.qname</a>
+        <a class="nt" href="#mml.eulergamma.qname">mml.eulergamma.qname</a>
+        <a class="nt" href="#mml.infinity.qname">mml.infinity.qname</a>
+</pre><pre><a class="nt" name="mml.integers.qname">mml.integers.qname</a>:
+        <span class="sel">integers</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.reals.qname">mml.reals.qname</a>:
+        <span class="sel">reals</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.rationals.qname">mml.rationals.qname</a>:
+        <span class="sel">rationals</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.naturalnumbers.qname">mml.naturalnumbers.qname</a>:
+        <span class="sel">naturalnumbers</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.complexes.qname">mml.complexes.qname</a>:
+        <span class="sel">complexes</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.primes.qname">mml.primes.qname</a>:
+        <span class="sel">primes</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.exponentiale.qname">mml.exponentiale.qname</a>:
+        <span class="sel">exponentiale</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.imaginaryi.qname">mml.imaginaryi.qname</a>:
+        <span class="sel">imaginaryi</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.notanumber.qname">mml.notanumber.qname</a>:
+        <span class="sel">notanumber</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.true.qname">mml.true.qname</a>:
+        <span class="sel">true</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.false.qname">mml.false.qname</a>:
+        <span class="sel">false</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.emptyset.qname">mml.emptyset.qname</a>:
+        <span class="sel">emptyset</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.pi.qname">mml.pi.qname</a>:
+        <span class="sel">pi</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.eulergamma.qname">mml.eulergamma.qname</a>:
+        <span class="sel">eulergamma</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.infinity.qname">mml.infinity.qname</a>:
+        <span class="sel">infinity</span>::(ε <a class="nt" href="#mml.operators.common.attrib">mml.operators.common.attrib</a>)
+</pre><pre><a class="nt" name="mml.id.datatype">mml.id.datatype</a>:
+        <span class="meta">string</span>
+</pre><pre><a class="nt" name="mml.idref.datatype">mml.idref.datatype</a>:
+        <span class="meta">string</span>
+</pre><pre><a class="nt" name="mml.number.datatype">mml.number.datatype</a>:
+        <span class="meta">int</span>
+</pre><pre><a class="nt" name="mml.positiveinteger.datatype">mml.positiveinteger.datatype</a>:
+        <span class="meta">int</span>
+</pre><pre><a class="nt" name="mml.uri.datatype">mml.uri.datatype</a>:
+        <span class="meta">string</span>
+</pre><pre><a class="nt" name="mml.nonnegativefloat.datatype">mml.nonnegativefloat.datatype</a>:
+        <span class="meta">string</span>
+</pre><pre><a class="nt" name="mml.length.datatype">mml.length.datatype</a>:
+        <span class="meta">string</span>
+</pre><pre><a class="nt" name="mml.color.datatype">mml.color.datatype</a>:
+        <span class="meta">string</span>
+        <span class="meta">string</span>
+        <span class="t">"transparent"</span>
+</pre><pre><a class="nt" name="mml.Annotation.datatype">mml.Annotation.datatype</a>:
+        <span class="meta">string</span>
+</pre><pre><a class="nt" name="mml.Annotation-xml.datatype">mml.Annotation-xml.datatype</a>:
+        (<span class="meta">string</span> | (<span class="meta">string</span><span class="meta">*</span> <a class="nt" href="#mml.Annotation-xml.datatype">mml.Annotation-xml.datatype</a>))<span class="meta">*</span>
+</pre><pre><a class="nt" name="mml.namedspace.datatype">mml.namedspace.datatype</a>:
+        <span class="meta">string</span>
+        <span class="t">"veryverythinmathspace"</span>
+        <span class="t">"verythinmathspace"</span>
+        <span class="t">"thinmathspace"</span>
+        <span class="t">"mediummathspace"</span>
+        <span class="t">"thickmathspace"</span>
+        <span class="t">"verythickmathspace"</span>
+        <span class="t">"veryverythickmathspace"</span>
+</pre><pre><a class="nt" name="mml.align.datatype">mml.align.datatype</a>:
+        (<span class="t">"top"</span> | <span class="t">"bottom"</span> | <span class="t">"center"</span> | <span class="t">"baseline"</span> | <span class="t">"axis"</span>) <span class="meta">int</span><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.rowalign.datatype">mml.rowalign.datatype</a>:
+        (<span class="t">"top"</span> | <span class="t">"bottom"</span> | <span class="t">"center"</span> | <span class="t">"baseline"</span> | <span class="t">"axis"</span>)<span class="meta">+</span>
+</pre><pre><a class="nt" name="mml.columnalign.datatype">mml.columnalign.datatype</a>:
+        (<span class="t">"left"</span> | <span class="t">"center"</span> | <span class="t">"right"</span>)<span class="meta">+</span>
+</pre><pre><a class="nt" name="mml.columnwidth.datatype">mml.columnwidth.datatype</a>:
+        (<span class="t">"auto"</span> | <span class="meta">string</span> | (<span class="meta">string</span> | <span class="t">"veryverythinmathspace"</span> | <span class="t">"verythinmathspace"</span> | <span class="t">"thinmathspace"</span> | <span class="t">"mediummathspace"</span> | <span class="t">"thickmathspace"</span> | <span class="t">"verythickmathspace"</span> | <span class="t">"veryverythickmathspace"</span>) | <span class="t">"fit"</span>)<span class="meta">+</span>
+</pre><pre><a class="nt" name="mml.columnspan.datatype">mml.columnspan.datatype</a>:
+        <a class="nt" href="#mml.positiveinteger.datatype">mml.positiveinteger.datatype</a>
+</pre><pre><a class="nt" name="mml.groupalign.datatype">mml.groupalign.datatype</a>:
+        <span class="meta">string</span>
+</pre><pre><a class="nt" name="mml.alignmentscope.datatype">mml.alignmentscope.datatype</a>:
+        (<span class="t">"true"</span> | <span class="t">"false"</span>)<span class="meta">+</span>
+</pre><pre><a class="nt" name="mml.rowspacing.datatype">mml.rowspacing.datatype</a>:
+        <span class="meta">string</span><span class="meta">+</span>
+</pre><pre><a class="nt" name="mml.columnspacing.datatype">mml.columnspacing.datatype</a>:
+        (<span class="meta">string</span> (<span class="meta">string</span> | <span class="t">"veryverythinmathspace"</span> | <span class="t">"verythinmathspace"</span> | <span class="t">"thinmathspace"</span> | <span class="t">"mediummathspace"</span> | <span class="t">"thickmathspace"</span> | <span class="t">"verythickmathspace"</span> | <span class="t">"veryverythickmathspace"</span>))<span class="meta">+</span>
+</pre><pre><a class="nt" name="mml.lines.datatype">mml.lines.datatype</a>:
+        (<span class="t">"none"</span> | <span class="t">"solid"</span> | <span class="t">"dashed"</span>)<span class="meta">+</span>
+</pre><pre><a class="nt" name="mml.framespacing.datatype">mml.framespacing.datatype</a>:
+        (<span class="meta">string</span> | (<span class="meta">string</span> | <span class="t">"veryverythinmathspace"</span> | <span class="t">"verythinmathspace"</span> | <span class="t">"thinmathspace"</span> | <span class="t">"mediummathspace"</span> | <span class="t">"thickmathspace"</span> | <span class="t">"verythickmathspace"</span> | <span class="t">"veryverythickmathspace"</span>)) (<span class="meta">string</span> | (<span class="meta">string</span> | <span class="t">"veryverythinmathspace"</span> | <span class="t">"verythinmathspace"</span> | <span class="t">"thinmathspace"</span> | <span class="t">"mediummathspace"</span> | <span class="t">"thickmathspace"</span> | <span class="t">"verythickmathspace"</span> | <span class="t">"veryverythickmathspace"</span>))
+</pre><pre><a class="nt" name="mml.ContentExpression">mml.ContentExpression</a>:
+        (<a class="nt" href="#mml.Content">mml.Content</a> | <a class="nt" href="#mml.PresInCont">mml.PresInCont</a>)<span class="meta">*</span>
+</pre><pre><a class="nt" name="mml.PresExpression">mml.PresExpression</a>:
+        (<a class="nt" href="#mml.Presentation">mml.Presentation</a> | <a class="nt" href="#mml.ContInPres">mml.ContInPres</a>)<span class="meta">*</span>
+</pre><pre><a class="nt" name="mml.MathExpression">mml.MathExpression</a>:
+        (<a class="nt" href="#mml.PresInCont">mml.PresInCont</a> | <a class="nt" href="#mml.ContInPres">mml.ContInPres</a>)<span class="meta">*</span>
+</pre><pre><a class="nt" name="mml.MathMLCharacters">mml.MathMLCharacters</a>:
+        <a class="nt" href="#mml.mglyph.qname">mml.mglyph.qname</a>
+        <span class="meta">string</span>
+</pre><pre><a class="nt" name="mml.Common.attrib">mml.Common.attrib</a>:
+        <span class="sel">xlink:href</span>::<a class="nt" href="#mml.uri.datatype">mml.uri.datatype</a><span class="meta">?</span> <span class="sel">class</span>::<span class="meta">string</span><span class="meta">?</span> <span class="sel">style</span>::<span class="meta">string</span><span class="meta">?</span> <span class="sel">id</span>::<a class="nt" href="#mml.id.datatype">mml.id.datatype</a><span class="meta">?</span> <span class="sel">xref</span>::<a class="nt" href="#mml.idref.datatype">mml.idref.datatype</a><span class="meta">?</span> <span class="sel">other</span>::<span class="meta">string</span><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-macros">mml.att-macros</a>:
+        <span class="sel">macros</span>::<span class="meta">string</span><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-mode">mml.att-mode</a>:
+        <span class="sel">mode</span>::<span class="meta">string</span><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-display">mml.att-display</a>:
+        <span class="sel">display</span>::<span class="meta">string</span><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-topinfo">mml.att-topinfo</a>:
+        <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-macros">mml.att-macros</a> <a class="nt" href="#mml.att-mode">mml.att-mode</a> <a class="nt" href="#mml.att-display">mml.att-display</a>
+</pre><pre><a class="nt" name="mml.att-baseline">mml.att-baseline</a>:
+        <span class="sel">baseline</span>::<span class="meta">string</span><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-overflow">mml.att-overflow</a>:
+        <span class="sel">overflow</span>::(<span class="t">"scroll"</span> | <span class="t">"elide"</span> | <span class="t">"truncate"</span> | <span class="t">"scale"</span>)<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-altimg">mml.att-altimg</a>:
+        <span class="sel">altimg</span>::<a class="nt" href="#mml.uri.datatype">mml.uri.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-alttext">mml.att-alttext</a>:
+        <span class="sel">alttext</span>::<span class="meta">string</span><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-browif">mml.att-browif</a>:
+        <a class="nt" href="#mml.att-type">mml.att-type</a> <a class="nt" href="#mml.att-name">mml.att-name</a> <a class="nt" href="#mml.att-height">mml.att-height</a> <a class="nt" href="#mml.att-width">mml.att-width</a> <a class="nt" href="#mml.att-baseline">mml.att-baseline</a> <a class="nt" href="#mml.att-overflow">mml.att-overflow</a> <a class="nt" href="#mml.att-altimg">mml.att-altimg</a> <a class="nt" href="#mml.att-alttext">mml.att-alttext</a>
+</pre><pre><a class="nt" name="mml.math.qname">mml.math.qname</a>:
+        <span class="sel">math</span>::(<a class="nt" href="#mml.MathExpression">mml.MathExpression</a> <a class="nt" href="#mml.att-topinfo">mml.att-topinfo</a> <a class="nt" href="#mml.att-browif">mml.att-browif</a>)
+</pre><pre><a class="nt" name="mml.pactions">mml.pactions</a>:
+        <a class="nt" href="#mml.maction.qname">mml.maction.qname</a>
+</pre><pre><a class="nt" name="mml.maction.qname">mml.maction.qname</a>:
+        <span class="sel">maction</span>::(<a class="nt" href="#mml.PresExpression">mml.PresExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-actiontype">mml.att-actiontype</a>)
+</pre><pre><a class="nt" name="mml.PresInCont">mml.PresInCont</a>:
+        <a class="nt" href="#mml.ptoken">mml.ptoken</a>
+        <a class="nt" href="#mml.petoken">mml.petoken</a>
+        <a class="nt" href="#mml.plschema">mml.plschema</a>
+        <a class="nt" href="#mml.peschema">mml.peschema</a>
+        <a class="nt" href="#mml.pactions">mml.pactions</a>
+</pre><pre><a class="nt" name="mml.Presentation">mml.Presentation</a>:
+        <a class="nt" href="#mml.ptoken">mml.ptoken</a>
+        <a class="nt" href="#mml.petoken">mml.petoken</a>
+        <a class="nt" href="#mml.pscreschema">mml.pscreschema</a>
+        <a class="nt" href="#mml.plschema">mml.plschema</a>
+        <a class="nt" href="#mml.peschema">mml.peschema</a>
+        <a class="nt" href="#mml.pactions">mml.pactions</a>
+</pre><pre><a class="nt" name="mml.att-fontsize">mml.att-fontsize</a>:
+        <span class="sel">fontsize</span>::<a class="nt" href="#mml.length.datatype">mml.length.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-fontweight">mml.att-fontweight</a>:
+        <span class="sel">fontweight</span>::(<span class="t">"normal"</span> | <span class="t">"bold"</span>)<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-fontstyle">mml.att-fontstyle</a>:
+        <span class="sel">fontstyle</span>::(<span class="t">"normal"</span> | <span class="t">"italic"</span>)<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-fontfamily">mml.att-fontfamily</a>:
+        <span class="sel">fontfamily</span>::<span class="meta">string</span><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-color">mml.att-color</a>:
+        <span class="sel">color</span>::<a class="nt" href="#mml.color.datatype">mml.color.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-mathvariant">mml.att-mathvariant</a>:
+        <span class="sel">mathvariant</span>::(<span class="t">"normal"</span> | <span class="t">"bold"</span> | <span class="t">"italic"</span> | <span class="t">"bold-italic"</span> | <span class="t">"double-struck"</span> | <span class="t">"bold-fraktur"</span> | <span class="t">"script"</span> | <span class="t">"bold-script"</span> | <span class="t">"fraktur"</span> | <span class="t">"sans-serif"</span> | <span class="t">"bold-sans-serif"</span> | <span class="t">"sans-serif-italic"</span> | <span class="t">"sans-serif-bold-italic"</span> | <span class="t">"monospace"</span>)<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-mathsize">mml.att-mathsize</a>:
+        <span class="sel">mathsize</span>::(<span class="t">"small"</span> | <span class="t">"normal"</span> | <span class="t">"big"</span> | <a class="nt" href="#mml.length.datatype">mml.length.datatype</a>)<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-mathcolor">mml.att-mathcolor</a>:
+        <span class="sel">mathcolor</span>::<a class="nt" href="#mml.color.datatype">mml.color.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-mathbackground">mml.att-mathbackground</a>:
+        <span class="sel">mathbackground</span>::<a class="nt" href="#mml.color.datatype">mml.color.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-fontinfo">mml.att-fontinfo</a>:
+        <a class="nt" href="#mml.att-fontsize">mml.att-fontsize</a> <a class="nt" href="#mml.att-fontweight">mml.att-fontweight</a> <a class="nt" href="#mml.att-fontstyle">mml.att-fontstyle</a> <a class="nt" href="#mml.att-fontfamily">mml.att-fontfamily</a> <a class="nt" href="#mml.att-color">mml.att-color</a> <a class="nt" href="#mml.att-mathvariant">mml.att-mathvariant</a> <a class="nt" href="#mml.att-mathsize">mml.att-mathsize</a> <a class="nt" href="#mml.att-mathcolor">mml.att-mathcolor</a> <a class="nt" href="#mml.att-mathbackground">mml.att-mathbackground</a>
+</pre><pre><a class="nt" name="mml.att-form">mml.att-form</a>:
+        <span class="sel">form</span>::(<span class="t">"prefix"</span> | <span class="t">"infix"</span> | <span class="t">"postfix"</span>)<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-fence">mml.att-fence</a>:
+        <span class="sel">fence</span>::(<span class="t">"true"</span> | <span class="t">"false"</span>)<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-separator">mml.att-separator</a>:
+        <span class="sel">separator</span>::(<span class="t">"true"</span> | <span class="t">"false"</span>)<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-lspace">mml.att-lspace</a>:
+        <span class="sel">lspace</span>::<a class="nt" href="#mml.namedspace.datatype">mml.namedspace.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-rspace">mml.att-rspace</a>:
+        <span class="sel">rspace</span>::<a class="nt" href="#mml.namedspace.datatype">mml.namedspace.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-stretchy">mml.att-stretchy</a>:
+        <span class="sel">stretchy</span>::(<span class="t">"true"</span> | <span class="t">"false"</span>)<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-symmetric">mml.att-symmetric</a>:
+        <span class="sel">symmetric</span>::(<span class="t">"true"</span> | <span class="t">"false"</span>)<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-maxsize">mml.att-maxsize</a>:
+        <span class="sel">maxsize</span>::(<a class="nt" href="#mml.namedspace.datatype">mml.namedspace.datatype</a> | <span class="t">"infinity"</span>)<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-minsize">mml.att-minsize</a>:
+        <span class="sel">minsize</span>::<a class="nt" href="#mml.namedspace.datatype">mml.namedspace.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-largeop">mml.att-largeop</a>:
+        <span class="sel">largeop</span>::(<span class="t">"true"</span> | <span class="t">"false"</span>)<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-movablelimits">mml.att-movablelimits</a>:
+        <span class="sel">movablelimits</span>::(<span class="t">"true"</span> | <span class="t">"false"</span>)<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-accent">mml.att-accent</a>:
+        <span class="sel">accent</span>::(<span class="t">"true"</span> | <span class="t">"false"</span>)<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-opinfo">mml.att-opinfo</a>:
+        <a class="nt" href="#mml.att-form">mml.att-form</a> <a class="nt" href="#mml.att-fence">mml.att-fence</a> <a class="nt" href="#mml.att-separator">mml.att-separator</a> <a class="nt" href="#mml.att-lspace">mml.att-lspace</a> <a class="nt" href="#mml.att-rspace">mml.att-rspace</a> <a class="nt" href="#mml.att-stretchy">mml.att-stretchy</a> <a class="nt" href="#mml.att-symmetric">mml.att-symmetric</a> <a class="nt" href="#mml.att-maxsize">mml.att-maxsize</a> <a class="nt" href="#mml.att-minsize">mml.att-minsize</a> <a class="nt" href="#mml.att-largeop">mml.att-largeop</a> <a class="nt" href="#mml.att-movablelimits">mml.att-movablelimits</a> <a class="nt" href="#mml.att-accent">mml.att-accent</a>
+</pre><pre><a class="nt" name="mml.att-width">mml.att-width</a>:
+        <span class="sel">width</span>::<a class="nt" href="#mml.namedspace.datatype">mml.namedspace.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-height">mml.att-height</a>:
+        <span class="sel">height</span>::<a class="nt" href="#mml.length.datatype">mml.length.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-depth">mml.att-depth</a>:
+        <span class="sel">depth</span>::<a class="nt" href="#mml.length.datatype">mml.length.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-linebreak">mml.att-linebreak</a>:
+        <span class="sel">linebreak</span>::(<span class="t">"auto"</span> | <span class="t">"newline"</span> | <span class="t">"indentingnewline"</span> | <span class="t">"nobreak"</span> | <span class="t">"goodbreak"</span> | <span class="t">"badbreak"</span>)<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-sizeinfo">mml.att-sizeinfo</a>:
+        <a class="nt" href="#mml.att-width">mml.att-width</a> <a class="nt" href="#mml.att-height">mml.att-height</a> <a class="nt" href="#mml.att-depth">mml.att-depth</a>
+</pre><pre><a class="nt" name="mml.att-lquote">mml.att-lquote</a>:
+        <span class="sel">lquote</span>::<span class="meta">string</span><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-rquote">mml.att-rquote</a>:
+        <span class="sel">rquote</span>::<span class="meta">string</span><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-linethickness">mml.att-linethickness</a>:
+        <span class="sel">linethickness</span>::(<a class="nt" href="#mml.length.datatype">mml.length.datatype</a> | <span class="t">"thin"</span> | <span class="t">"medium"</span> | <span class="t">"thick"</span>)<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-scriptlevel">mml.att-scriptlevel</a>:
+        <span class="sel">scriptlevel</span>::<a class="nt" href="#mml.number.datatype">mml.number.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-displaystyle">mml.att-displaystyle</a>:
+        <span class="sel">displaystyle</span>::(<span class="t">"true"</span> | <span class="t">"false"</span>)<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-scriptsizemultiplier">mml.att-scriptsizemultiplier</a>:
+        <span class="sel">scriptsizemultiplier</span>::<a class="nt" href="#mml.nonnegativefloat.datatype">mml.nonnegativefloat.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-scriptminsize">mml.att-scriptminsize</a>:
+        <span class="sel">scriptminsize</span>::<a class="nt" href="#mml.length.datatype">mml.length.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-background">mml.att-background</a>:
+        <span class="sel">background</span>::<a class="nt" href="#mml.color.datatype">mml.color.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-veryverythinmathspace">mml.att-veryverythinmathspace</a>:
+        <span class="sel">veryverythinmathspace</span>::<a class="nt" href="#mml.length.datatype">mml.length.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-verythinmathspace">mml.att-verythinmathspace</a>:
+        <span class="sel">verythinmathspace</span>::<a class="nt" href="#mml.length.datatype">mml.length.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-thinmathspace">mml.att-thinmathspace</a>:
+        <span class="sel">thinmathspace</span>::<a class="nt" href="#mml.length.datatype">mml.length.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-mediummathspace">mml.att-mediummathspace</a>:
+        <span class="sel">mediummathspace</span>::<a class="nt" href="#mml.length.datatype">mml.length.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-thickmathspace">mml.att-thickmathspace</a>:
+        <span class="sel">thickmathspace</span>::<a class="nt" href="#mml.length.datatype">mml.length.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-verythickmathspace">mml.att-verythickmathspace</a>:
+        <span class="sel">verythickmathspace</span>::<a class="nt" href="#mml.length.datatype">mml.length.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-veryverythickmathspace">mml.att-veryverythickmathspace</a>:
+        <span class="sel">veryverythickmathspace</span>::<a class="nt" href="#mml.length.datatype">mml.length.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-open">mml.att-open</a>:
+        <span class="sel">open</span>::<span class="meta">string</span><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-close">mml.att-close</a>:
+        <span class="sel">close</span>::<span class="meta">string</span><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-separators">mml.att-separators</a>:
+        <span class="sel">separators</span>::<span class="meta">string</span><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-subscriptshift">mml.att-subscriptshift</a>:
+        <span class="sel">subscriptshift</span>::<a class="nt" href="#mml.length.datatype">mml.length.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-superscriptshift">mml.att-superscriptshift</a>:
+        <span class="sel">superscriptshift</span>::<a class="nt" href="#mml.length.datatype">mml.length.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-accentunder">mml.att-accentunder</a>:
+        <span class="sel">accentunder</span>::(<span class="t">"true"</span> | <span class="t">"false"</span>)<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-align">mml.att-align</a>:
+        <span class="sel">align</span>::<a class="nt" href="#mml.align.datatype">mml.align.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-rowalign">mml.att-rowalign</a>:
+        <span class="sel">rowalign</span>::<a class="nt" href="#mml.rowalign.datatype">mml.rowalign.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-columnalign">mml.att-columnalign</a>:
+        <span class="sel">columnalign</span>::<a class="nt" href="#mml.columnalign.datatype">mml.columnalign.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-columnwidth">mml.att-columnwidth</a>:
+        <span class="sel">columnwidth</span>::<a class="nt" href="#mml.columnwidth.datatype">mml.columnwidth.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-groupalign">mml.att-groupalign</a>:
+        <span class="sel">groupalign</span>::<a class="nt" href="#mml.groupalign.datatype">mml.groupalign.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-alignmentscope">mml.att-alignmentscope</a>:
+        <span class="sel">alignmentscope</span>::<a class="nt" href="#mml.alignmentscope.datatype">mml.alignmentscope.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-rowspacing">mml.att-rowspacing</a>:
+        <span class="sel">rowspacing</span>::<a class="nt" href="#mml.rowspacing.datatype">mml.rowspacing.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-columnspacing">mml.att-columnspacing</a>:
+        <span class="sel">columnspacing</span>::<a class="nt" href="#mml.columnspacing.datatype">mml.columnspacing.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-rowlines">mml.att-rowlines</a>:
+        <span class="sel">rowlines</span>::<a class="nt" href="#mml.lines.datatype">mml.lines.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-columnlines">mml.att-columnlines</a>:
+        <span class="sel">columnlines</span>::<a class="nt" href="#mml.lines.datatype">mml.lines.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-frame">mml.att-frame</a>:
+        <span class="sel">frame</span>::(<span class="t">"none"</span> | <span class="t">"solid"</span> | <span class="t">"dashed"</span>)<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-framespacing">mml.att-framespacing</a>:
+        <span class="sel">framespacing</span>::<a class="nt" href="#mml.framespacing.datatype">mml.framespacing.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-equalrows">mml.att-equalrows</a>:
+        <span class="sel">equalrows</span>::(<span class="t">"true"</span> | <span class="t">"false"</span>)<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-equalcolumns">mml.att-equalcolumns</a>:
+        <span class="sel">equalcolumns</span>::(<span class="t">"true"</span> | <span class="t">"false"</span>)<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-tableinfo">mml.att-tableinfo</a>:
+        <a class="nt" href="#mml.att-align">mml.att-align</a> <a class="nt" href="#mml.att-rowalign">mml.att-rowalign</a> <a class="nt" href="#mml.att-columnalign">mml.att-columnalign</a> <a class="nt" href="#mml.att-columnwidth">mml.att-columnwidth</a> <a class="nt" href="#mml.att-groupalign">mml.att-groupalign</a> <a class="nt" href="#mml.att-alignmentscope">mml.att-alignmentscope</a> <a class="nt" href="#mml.att-rowspacing">mml.att-rowspacing</a> <a class="nt" href="#mml.att-columnspacing">mml.att-columnspacing</a> <a class="nt" href="#mml.att-rowlines">mml.att-rowlines</a> <a class="nt" href="#mml.att-columnlines">mml.att-columnlines</a> <a class="nt" href="#mml.att-frame">mml.att-frame</a> <a class="nt" href="#mml.att-framespacing">mml.att-framespacing</a> <a class="nt" href="#mml.att-equalrows">mml.att-equalrows</a> <a class="nt" href="#mml.att-equalcolumns">mml.att-equalcolumns</a> <a class="nt" href="#mml.att-displaystyle">mml.att-displaystyle</a>
+</pre><pre><a class="nt" name="mml.att-rowspan">mml.att-rowspan</a>:
+        <span class="sel">rowspan</span>::(<span class="t">"top"</span> | <span class="t">"bottom"</span> | <span class="t">"center"</span> | <span class="t">"baseline"</span> | <span class="t">"axis "</span>)<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-columnspan">mml.att-columnspan</a>:
+        <span class="sel">columnspan</span>::<a class="nt" href="#mml.columnspan.datatype">mml.columnspan.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-edge">mml.att-edge</a>:
+        <span class="sel">edge</span>::(<span class="t">"left"</span> | <span class="t">"right"</span>)<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-actiontype">mml.att-actiontype</a>:
+        ((<span class="sel">actiontype</span>::<span class="t">"toggle"</span> <span class="sel">selection</span>::<a class="nt" href="#mml.positiveinteger.datatype">mml.positiveinteger.datatype</a>) | <span class="sel">actiontype</span>::<span class="t">"statusline"</span> | <span class="sel">actiontype</span>::<span class="t">"tooltip"</span> | (<span class="sel">actiontype</span>::<span class="t">"highlight"</span> <a class="nt" href="#mml.color.datatype">mml.color.datatype</a><span class="meta">*</span>) | (<span class="sel">actiontype</span>::<span class="t">"menu"</span> <span class="sel">selection</span>::<a class="nt" href="#mml.positiveinteger.datatype">mml.positiveinteger.datatype</a>))<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-name">mml.att-name</a>:
+        <span class="sel">name</span>::<span class="meta">string</span><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-alt">mml.att-alt</a>:
+        <span class="sel">alt</span>::<span class="meta">string</span><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-index">mml.att-index</a>:
+        <span class="sel">index</span>::<a class="nt" href="#mml.number.datatype">mml.number.datatype</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.att-bevelled">mml.att-bevelled</a>:
+        <span class="sel">bevelled</span>::(<span class="t">"true"</span> | <span class="t">"false"</span>)<span class="meta">?</span>
+</pre><pre><a class="nt" name="mml.ptoken">mml.ptoken</a>:
+        <a class="nt" href="#mml.mi.qname">mml.mi.qname</a>
+        <a class="nt" href="#mml.mn.qname">mml.mn.qname</a>
+        <a class="nt" href="#mml.mo.qname">mml.mo.qname</a>
+        <a class="nt" href="#mml.mtext.qname">mml.mtext.qname</a>
+        <a class="nt" href="#mml.ms.qname">mml.ms.qname</a>
+</pre><pre><a class="nt" name="mml.mi.qname">mml.mi.qname</a>:
+        <span class="sel">mi</span>::((<a class="nt" href="#mml.MathMLCharacters">mml.MathMLCharacters</a> | <a class="nt" href="#mml.malignmark.qname">mml.malignmark.qname</a>)<span class="meta">*</span> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-fontinfo">mml.att-fontinfo</a>)
+</pre><pre><a class="nt" name="mml.mn.qname">mml.mn.qname</a>:
+        <span class="sel">mn</span>::((<a class="nt" href="#mml.MathMLCharacters">mml.MathMLCharacters</a> | <a class="nt" href="#mml.malignmark.qname">mml.malignmark.qname</a>)<span class="meta">*</span> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-fontinfo">mml.att-fontinfo</a>)
+</pre><pre><a class="nt" name="mml.mo.qname">mml.mo.qname</a>:
+        <span class="sel">mo</span>::((<a class="nt" href="#mml.MathMLCharacters">mml.MathMLCharacters</a> | <a class="nt" href="#mml.malignmark.qname">mml.malignmark.qname</a>)<span class="meta">*</span> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-fontinfo">mml.att-fontinfo</a> <a class="nt" href="#mml.att-opinfo">mml.att-opinfo</a>)
+</pre><pre><a class="nt" name="mml.mtext.qname">mml.mtext.qname</a>:
+        <span class="sel">mtext</span>::((<a class="nt" href="#mml.MathMLCharacters">mml.MathMLCharacters</a> | <a class="nt" href="#mml.malignmark.qname">mml.malignmark.qname</a>)<span class="meta">*</span> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-fontinfo">mml.att-fontinfo</a>)
+</pre><pre><a class="nt" name="mml.ms.qname">mml.ms.qname</a>:
+        <span class="sel">ms</span>::((<a class="nt" href="#mml.MathMLCharacters">mml.MathMLCharacters</a> | <a class="nt" href="#mml.malignmark.qname">mml.malignmark.qname</a>)<span class="meta">*</span> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-fontinfo">mml.att-fontinfo</a> <a class="nt" href="#mml.att-lquote">mml.att-lquote</a> <a class="nt" href="#mml.att-rquote">mml.att-rquote</a>)
+</pre><pre><a class="nt" name="mml.petoken">mml.petoken</a>:
+        <a class="nt" href="#mml.mspace.qname">mml.mspace.qname</a>
+</pre><pre><a class="nt" name="mml.mspace.qname">mml.mspace.qname</a>:
+        <span class="sel">mspace</span>::(ε <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-sizeinfo">mml.att-sizeinfo</a> <a class="nt" href="#mml.att-linebreak">mml.att-linebreak</a>)
+</pre><pre><a class="nt" name="mml.peschema">mml.peschema</a>:
+        <a class="nt" href="#mml.maligngroup.qname">mml.maligngroup.qname</a>
+        <a class="nt" href="#mml.malignmark.qname">mml.malignmark.qname</a>
+</pre><pre><a class="nt" name="mml.malignmark.qname">mml.malignmark.qname</a>:
+        <span class="sel">malignmark</span>::(ε <a class="nt" href="#mml.att-edge">mml.att-edge</a>)
+</pre><pre><a class="nt" name="mml.maligngroup.qname">mml.maligngroup.qname</a>:
+        <span class="sel">maligngroup</span>::(ε <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-groupalign">mml.att-groupalign</a>)
+</pre><pre><a class="nt" name="mml.mglyph.qname">mml.mglyph.qname</a>:
+        <span class="sel">mglyph</span>::(ε <a class="nt" href="#mml.att-alt">mml.att-alt</a> <a class="nt" href="#mml.att-fontfamily">mml.att-fontfamily</a> <a class="nt" href="#mml.att-index">mml.att-index</a>)
+</pre><pre><a class="nt" name="mml.pgenschema">mml.pgenschema</a>:
+        <a class="nt" href="#mml.mrow.qname">mml.mrow.qname</a>
+        <a class="nt" href="#mml.mfrac.qname">mml.mfrac.qname</a>
+        <a class="nt" href="#mml.msqrt.qname">mml.msqrt.qname</a>
+        <a class="nt" href="#mml.mroot.qname">mml.mroot.qname</a>
+        <a class="nt" href="#mml.menclose.qname">mml.menclose.qname</a>
+        <a class="nt" href="#mml.mstyle.qname">mml.mstyle.qname</a>
+        <a class="nt" href="#mml.merror.qname">mml.merror.qname</a>
+        <a class="nt" href="#mml.mpadded.qname">mml.mpadded.qname</a>
+        <a class="nt" href="#mml.mphantom.qname">mml.mphantom.qname</a>
+        <a class="nt" href="#mml.mfenced.qname">mml.mfenced.qname</a>
+</pre><pre><a class="nt" name="mml.mrow.qname">mml.mrow.qname</a>:
+        <span class="sel">mrow</span>::(<a class="nt" href="#mml.PresExpression">mml.PresExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a>)
+</pre><pre><a class="nt" name="mml.mfrac.qname">mml.mfrac.qname</a>:
+        <span class="sel">mfrac</span>::(<a class="nt" href="#mml.PresExpression">mml.PresExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-bevelled">mml.att-bevelled</a> <a class="nt" href="#mml.att-linethickness">mml.att-linethickness</a>)
+</pre><pre><a class="nt" name="mml.msqrt.qname">mml.msqrt.qname</a>:
+        <span class="sel">msqrt</span>::(<a class="nt" href="#mml.PresExpression">mml.PresExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a>)
+</pre><pre><a class="nt" name="mml.menclose.qname">mml.menclose.qname</a>:
+        <span class="sel">menclose</span>::(<a class="nt" href="#mml.PresExpression">mml.PresExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <span class="sel">notation</span>::(<span class="t">"longdiv"</span> | <span class="t">"actuarial"</span> | <span class="t">"radical"</span>)<span class="meta">?</span>)
+</pre><pre><a class="nt" name="mml.mroot.qname">mml.mroot.qname</a>:
+        <span class="sel">mroot</span>::(<a class="nt" href="#mml.PresExpression">mml.PresExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a>)
+</pre><pre><a class="nt" name="mml.mstyle.qname">mml.mstyle.qname</a>:
+        <span class="sel">mstyle</span>::(<a class="nt" href="#mml.PresExpression">mml.PresExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-fontinfo">mml.att-fontinfo</a> <a class="nt" href="#mml.att-opinfo">mml.att-opinfo</a> <a class="nt" href="#mml.att-lquote">mml.att-lquote</a> <a class="nt" href="#mml.att-rquote">mml.att-rquote</a> <a class="nt" href="#mml.att-linethickness">mml.att-linethickness</a> <a class="nt" href="#mml.att-scriptlevel">mml.att-scriptlevel</a> <a class="nt" href="#mml.att-scriptsizemultiplier">mml.att-scriptsizemultiplier</a> <a class="nt" href="#mml.att-scriptminsize">mml.att-scriptminsize</a> <a class="nt" href="#mml.att-background">mml.att-background</a> <a class="nt" href="#mml.att-veryverythinmathspace">mml.att-veryverythinmathspace</a> <a class="nt" href="#mml.att-verythinmathspace">mml.att-verythinmathspace</a> <a class="nt" href="#mml.att-thinmathspace">mml.att-thinmathspace</a> <a class="nt" href="#mml.att-mediummathspace">mml.att-mediummathspace</a> <a class="nt" href="#mml.att-thickmathspace">mml.att-thickmathspace</a> <a class="nt" href="#mml.att-verythickmathspace">mml.att-verythickmathspace</a> <a class="nt" href="#mml.att-veryverythickmathspace">mml.att-veryverythickmathspace</a> <a class="nt" href="#mml.att-open">mml.att-open</a> <a class="nt" href="#mml.att-close">mml.att-close</a> <a class="nt" href="#mml.att-separators">mml.att-separators</a> <a class="nt" href="#mml.att-subscriptshift">mml.att-subscriptshift</a> <a class="nt" href="#mml.att-superscriptshift">mml.att-superscriptshift</a> <a class="nt" href="#mml.att-accentunder">mml.att-accentunder</a> <a class="nt" href="#mml.att-tableinfo">mml.att-tableinfo</a> <a class="nt" href="#mml.att-rowspan">mml.att-rowspan</a> <a class="nt" href="#mml.att-columnspan">mml.att-columnspan</a> <a class="nt" href="#mml.att-edge">mml.att-edge</a> <a class="nt" href="#mml.att-actiontype">mml.att-actiontype</a>)
+</pre><pre><a class="nt" name="mml.merror.qname">mml.merror.qname</a>:
+        <span class="sel">merror</span>::(<a class="nt" href="#mml.PresExpression">mml.PresExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a>)
+</pre><pre><a class="nt" name="mml.mpadded.qname">mml.mpadded.qname</a>:
+        <span class="sel">mpadded</span>::(<a class="nt" href="#mml.PresExpression">mml.PresExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-sizeinfo">mml.att-sizeinfo</a> <a class="nt" href="#mml.att-lspace">mml.att-lspace</a>)
+</pre><pre><a class="nt" name="mml.mphantom.qname">mml.mphantom.qname</a>:
+        <span class="sel">mphantom</span>::(<a class="nt" href="#mml.PresExpression">mml.PresExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a>)
+</pre><pre><a class="nt" name="mml.mfenced.qname">mml.mfenced.qname</a>:
+        <span class="sel">mfenced</span>::(<a class="nt" href="#mml.PresExpression">mml.PresExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-open">mml.att-open</a> <a class="nt" href="#mml.att-close">mml.att-close</a> <a class="nt" href="#mml.att-separators">mml.att-separators</a>)
+</pre><pre><a class="nt" name="mml.pscreschema">mml.pscreschema</a>:
+        <a class="nt" href="#mml.mprescripts.qname">mml.mprescripts.qname</a>
+        <a class="nt" href="#mml.none.qname">mml.none.qname</a>
+</pre><pre><a class="nt" name="mml.mprescripts.qname">mml.mprescripts.qname</a>:
+        <span class="sel">mprescripts</span>::ε
+</pre><pre><a class="nt" name="mml.none.qname">mml.none.qname</a>:
+        <span class="sel">none</span>::ε
+</pre><pre><a class="nt" name="mml.pscrschema">mml.pscrschema</a>:
+        <a class="nt" href="#mml.msub.qname">mml.msub.qname</a>
+        <a class="nt" href="#mml.msup.qname">mml.msup.qname</a>
+        <a class="nt" href="#mml.msubsup.qname">mml.msubsup.qname</a>
+        <a class="nt" href="#mml.munder.qname">mml.munder.qname</a>
+        <a class="nt" href="#mml.mover.qname">mml.mover.qname</a>
+        <a class="nt" href="#mml.munderover.qname">mml.munderover.qname</a>
+        <a class="nt" href="#mml.mmultiscripts.qname">mml.mmultiscripts.qname</a>
+</pre><pre><a class="nt" name="mml.msub.qname">mml.msub.qname</a>:
+        <span class="sel">msub</span>::(<a class="nt" href="#mml.PresExpression">mml.PresExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-subscriptshift">mml.att-subscriptshift</a>)
+</pre><pre><a class="nt" name="mml.msup.qname">mml.msup.qname</a>:
+        <span class="sel">msup</span>::(<a class="nt" href="#mml.PresExpression">mml.PresExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-superscriptshift">mml.att-superscriptshift</a>)
+</pre><pre><a class="nt" name="mml.msubsup.qname">mml.msubsup.qname</a>:
+        <span class="sel">msubsup</span>::(<a class="nt" href="#mml.PresExpression">mml.PresExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-subscriptshift">mml.att-subscriptshift</a> <a class="nt" href="#mml.att-superscriptshift">mml.att-superscriptshift</a>)
+</pre><pre><a class="nt" name="mml.munder.qname">mml.munder.qname</a>:
+        <span class="sel">munder</span>::(<a class="nt" href="#mml.PresExpression">mml.PresExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-accentunder">mml.att-accentunder</a>)
+</pre><pre><a class="nt" name="mml.mover.qname">mml.mover.qname</a>:
+        <span class="sel">mover</span>::(<a class="nt" href="#mml.PresExpression">mml.PresExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-accent">mml.att-accent</a>)
+</pre><pre><a class="nt" name="mml.munderover.qname">mml.munderover.qname</a>:
+        <span class="sel">munderover</span>::(<a class="nt" href="#mml.PresExpression">mml.PresExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-accent">mml.att-accent</a> <a class="nt" href="#mml.att-accentunder">mml.att-accentunder</a>)
+</pre><pre><a class="nt" name="mml.mmultiscripts.qname">mml.mmultiscripts.qname</a>:
+        <span class="sel">mmultiscripts</span>::(<a class="nt" href="#mml.PresExpression">mml.PresExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-subscriptshift">mml.att-subscriptshift</a> <a class="nt" href="#mml.att-superscriptshift">mml.att-superscriptshift</a>)
+</pre><pre><a class="nt" name="mml.ptabschema">mml.ptabschema</a>:
+        <a class="nt" href="#mml.mtable.qname">mml.mtable.qname</a>
+        <a class="nt" href="#mml.mtr.qname">mml.mtr.qname</a>
+        <a class="nt" href="#mml.mlabeledtr.qname">mml.mlabeledtr.qname</a>
+        <a class="nt" href="#mml.mtd.qname">mml.mtd.qname</a>
+</pre><pre><a class="nt" name="mml.mtable.qname">mml.mtable.qname</a>:
+        <span class="sel">mtable</span>::(<a class="nt" href="#mml.PresExpression">mml.PresExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-tableinfo">mml.att-tableinfo</a>)
+</pre><pre><a class="nt" name="mml.mtr.qname">mml.mtr.qname</a>:
+        <span class="sel">mtr</span>::(<a class="nt" href="#mml.PresExpression">mml.PresExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-rowalign">mml.att-rowalign</a> <a class="nt" href="#mml.att-columnalign">mml.att-columnalign</a> <a class="nt" href="#mml.att-groupalign">mml.att-groupalign</a>)
+</pre><pre><a class="nt" name="mml.mlabeledtr.qname">mml.mlabeledtr.qname</a>:
+        <span class="sel">mlabeledtr</span>::(<a class="nt" href="#mml.PresExpression">mml.PresExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-rowalign">mml.att-rowalign</a> <a class="nt" href="#mml.att-columnalign">mml.att-columnalign</a> <a class="nt" href="#mml.att-groupalign">mml.att-groupalign</a>)
+</pre><pre><a class="nt" name="mml.mtd.qname">mml.mtd.qname</a>:
+        <span class="sel">mtd</span>::(<a class="nt" href="#mml.PresExpression">mml.PresExpression</a> <a class="nt" href="#mml.Common.attrib">mml.Common.attrib</a> <a class="nt" href="#mml.att-rowalign">mml.att-rowalign</a> <a class="nt" href="#mml.att-columnalign">mml.att-columnalign</a> <a class="nt" href="#mml.att-groupalign">mml.att-groupalign</a> <a class="nt" href="#mml.att-rowspan">mml.att-rowspan</a> <a class="nt" href="#mml.att-columnspan">mml.att-columnspan</a>)
+</pre><pre><a class="nt" name="mml.plschema">mml.plschema</a>:
+        <a class="nt" href="#mml.pgenschema">mml.pgenschema</a>
+        <a class="nt" href="#mml.pscrschema">mml.pscrschema</a>
+        <a class="nt" href="#mml.ptabschema">mml.ptabschema</a>
+</pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
+Last updated: Apr2013.</div></body></html>

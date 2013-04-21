@@ -145,8 +145,8 @@ all:
 	_dev/format zoo java/jdt java/jdt
 	cp ../slps/topics/grammars/java/project/grammar.bgf zoo/java/project.bgf
 	_dev/format zoo java/project java/project
-	cp ../slps/topics/grammars/js/synytskyy-cordy/grammar.bgf zoo/javascript/js-synytskyy-cordy.bgf
-	_dev/format zoo javascript/js-synytskyy-cordy js/synytskyy-cordy
+	cp ../slps/topics/grammars/javascript/synytskyy-cordy/grammar.bgf zoo/javascript/synytskyy-cordy.bgf
+	_dev/format zoo javascript/synytskyy-cordy javascript/synytskyy-cordy
 	cp ../slps/topics/grammars/modula/src-052/grammar.bgf zoo/modula/src-052.bgf
 	_dev/format zoo modula/src-052 modula/src-052
 	cp ../slps/topics/grammars/modula/sdf/grammar.bgf zoo/modula/sdf.bgf
@@ -217,6 +217,8 @@ all:
 	_dev/format zoo xml/rosendal xml/rosendal
 	cp ../slps/topics/grammars/w3c/xpath1/grammar.bgf zoo/xpath/w3c-xpath1.bgf
 	_dev/format zoo xpath/w3c-xpath1 w3c/xpath1
+	cp ../slps/topics/grammars/xslt/clark/grammar.bgf zoo/xslt/clark.bgf
+	_dev/format zoo xslt/clark xslt/clark
 	cp ../slps/topics/grammars/xslt/rosendal/grammar.bgf zoo/xslt/rosendal.bgf
 	_dev/format zoo xslt/rosendal xslt/rosendal
 	cp ../slps/topics/grammars/xquery/rosendal/grammar.bgf zoo/xquery/rosendal.bgf

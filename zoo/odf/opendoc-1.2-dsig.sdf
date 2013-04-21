@@ -1,0 +1,14 @@
+module Main
+
+exports
+ context-free start-symbols dsig-document-signatures
+  sorts
+        Dsig-document-signatures Dsig-document-signatures-attlist Ds-signature DsMarkup 
+  context-free syntax
+        dsig:document-signatures::(Dsig-document-signatures-attlist Ds-signature+) -> Dsig-document-signatures
+
+        dsig:version::"1.2" -> Dsig-document-signatures-attlist
+
+        ds:Signature::DsMarkup -> Ds-signature
+
+        (ANY | STR | DsMarkup)* -> DsMarkup

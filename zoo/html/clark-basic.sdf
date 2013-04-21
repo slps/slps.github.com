@@ -81,7 +81,7 @@ exports
 
         form::(Form.attlist Block.class+) -> Form
 
-        Common.attrib action::URI.datatype ("get" | "post")? enctype::ContentType.datatype? -> Form.attlist
+        Common.attrib action::URI.datatype method::("get" | "post")? enctype::ContentType.datatype? -> Form.attlist
 
         label::(Label.attlist Inline.model) -> Label
 
@@ -201,7 +201,7 @@ exports
 
         param::Param.attlist -> Param
 
-        Id.attrib name::STR value::STR? ("data" | "ref" | "object")? type::ContentType.datatype? -> Param.attlist
+        Id.attrib name::STR value::STR? valuetype::("data" | "ref" | "object")? type::ContentType.datatype? -> Param.attlist
 
         title::(Title.attlist STR) -> Title
 
@@ -245,11 +245,11 @@ exports
 
         Common.attrib abbr::Text.datatype? axis::STR? headers::IDREFS.datatype? Scope.attrib rowspan::Number.datatype? colspan::Number.datatype? CellHAlign.attrib CellVAlign.attrib -> Cell.attrib
 
-        ("left" | "center" | "right")? -> CellHAlign.attrib
+        align::("left" | "center" | "right")? -> CellHAlign.attrib
 
-        ("top" | "middle" | "bottom")? -> CellVAlign.attrib
+        valign::("top" | "middle" | "bottom")? -> CellVAlign.attrib
 
-        ("row" | "col")? -> Scope.attrib
+        scope::("row" | "col")? -> Scope.attrib
 
         br::Br.attlist -> Br
 

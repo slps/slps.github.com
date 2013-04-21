@@ -3,7 +3,7 @@ applet:
 applet.attlist:
         Core.attrib alt::Text.datatype (archive::STR)? (code::STR)? (codebase::URI.datatype)? (object::STR)? height::Length.datatype width::Length.datatype
 applet.attlist:
-        ("top" | "middle" | "bottom" | "left" | "right")? (hspace::Pixels.datatype)? (vspace::Pixels.datatype)?
+        (align::("top" | "middle" | "bottom" | "left" | "right"))? (hspace::Pixels.datatype)? (vspace::Pixels.datatype)?
 applet.attlist:
         name.attlist
 Inline.class:
@@ -101,8 +101,7 @@ bdo:
 bdo.attlist:
         Core.attrib lang.attrib dir.attrib
 dir.attrib:
-        "ltr"
-        "rtl"
+        dir::("ltr" | "rtl")
 area:
         area::area.attlist
 area.attlist:
@@ -132,7 +131,7 @@ img.attlist:
 img.attlist:
         Common.attrib src::URI.datatype alt::Text.datatype (longdesc::URI.datatype)? (height::Length.datatype)? (width::Length.datatype)?
 img.attlist:
-        ("top" | "middle" | "bottom" | "left" | "right")? (border::Pixels.datatype)? (hspace::Pixels.datatype)? (vspace::Pixels.datatype)?
+        (align::("top" | "middle" | "bottom" | "left" | "right"))? (border::Pixels.datatype)? (hspace::Pixels.datatype)? (vspace::Pixels.datatype)?
 img.attlist:
         name.attlist
 img.attlist:
@@ -140,13 +139,13 @@ img.attlist:
 object.attlist:
         usemap.attlist
 object.attlist:
-        ("top" | "middle" | "bottom" | "left" | "right")? (border::Pixels.datatype)? (hspace::Pixels.datatype)? (vspace::Pixels.datatype)?
+        (align::("top" | "middle" | "bottom" | "left" | "right"))? (border::Pixels.datatype)? (hspace::Pixels.datatype)? (vspace::Pixels.datatype)?
 object.attlist:
         Common.attrib (declare::"declare")? (classid::URI.datatype)? (codebase::URI.datatype)? (data::URI.datatype)? (type::ContentType.datatype)? (codetype::ContentType.datatype)? (archive::URIs.datatype)? (standby::Text.datatype)? (height::Length.datatype)? (width::Length.datatype)? (name::STR)? (tabindex::Number.datatype)?
 usemap.attlist:
         (usemap::IDREF.datatype)?
 shape.attrib:
-        ("rect" | "circle" | "poly" | "default")?
+        (shape::("rect" | "circle" | "poly" | "default"))?
 coords.attrib:
         (coords::STR)?
 Length.datatype:
@@ -257,7 +256,7 @@ textarea.attlist:
 button.attlist:
         (onblur::Script.datatype)? (onfocus::Script.datatype)?
 button.attlist:
-        Common.attrib (name::STR)? (value::STR)? ("button" | "submit" | "reset")? (disabled::"disabled")? (tabindex::Number.datatype)? (accesskey::Character.datatype)?
+        Common.attrib (name::STR)? (value::STR)? (type::("button" | "submit" | "reset"))? (disabled::"disabled")? (tabindex::Number.datatype)? (accesskey::Character.datatype)?
 Events.attrib:
         (onclick::Script.datatype)? (ondblclick::Script.datatype)? (onmousedown::Script.datatype)? (onmouseup::Script.datatype)? (onmouseover::Script.datatype)? (onmousemove::Script.datatype)? (onmouseout::Script.datatype)? (onkeypress::Script.datatype)? (onkeydown::Script.datatype)? (onkeyup::Script.datatype)?
 InputType.class:
@@ -280,7 +279,7 @@ legend:
 legend.attlist:
         Common.attrib (accesskey::Character.datatype)?
 legend.attlist:
-        ("top" | "bottom" | "left" | "right")?
+        (align::("top" | "bottom" | "left" | "right"))?
 Form.class:
         fieldset
 Formctrl.class:
@@ -294,7 +293,7 @@ frameset.attlist:
 frame:
         frame::frame.attlist
 frame.attlist:
-        Core.attrib (longdesc::URI.datatype)? (src::URI.datatype)? ("1" | "0")? (marginwidth::Pixels.datatype)? (marginheight::Pixels.datatype)? (noresize::"noresize")? ("yes" | "no" | "auto")?
+        Core.attrib (longdesc::URI.datatype)? (src::URI.datatype)? (frameborder::("1" | "0"))? (marginwidth::Pixels.datatype)? (marginheight::Pixels.datatype)? (noresize::"noresize")? (scrolling::("yes" | "no" | "auto"))?
 noframes:
         noframes::(noframes.attlist body)
 noframes.attlist:
@@ -304,7 +303,7 @@ a:
 iframe:
         iframe::(iframe.attlist Flow.model)
 iframe.attlist:
-        Core.attrib (longdesc::URI.datatype)? (src::URI.datatype)? ("1" | "0")? (width::Length.datatype)? (height::Length.datatype)? (marginwidth::Pixels.datatype)? (marginheight::Pixels.datatype)? ("yes" | "no" | "auto")?
+        Core.attrib (longdesc::URI.datatype)? (src::URI.datatype)? (frameborder::("1" | "0"))? (width::Length.datatype)? (height::Length.datatype)? (marginwidth::Pixels.datatype)? (marginheight::Pixels.datatype)? (scrolling::("yes" | "no" | "auto"))?
 iframe.attlist:
         name.attlist
 img:
@@ -350,7 +349,7 @@ isindex:
 isindex.attlist:
         Core.attrib I18n.attrib (prompt::Text.datatype)?
 br.attlist:
-        ("left" | "all" | "right" | "none")?
+        (clear::("left" | "all" | "right" | "none"))?
 br.attlist:
         Core.attrib
 caption.attlist:
@@ -368,7 +367,7 @@ Heading.attrib:
 Heading.attrib:
         Common.attrib
 hr.attlist:
-        ("left" | "center" | "right")? (noshade::"noshade")? (size::Pixels.datatype)? (width::Pixels.datatype)?
+        (align::("left" | "center" | "right"))? (noshade::"noshade")? (size::Pixels.datatype)? (width::Pixels.datatype)?
 hr.attlist:
         Common.attrib
 li.attlist:
@@ -404,7 +403,7 @@ ul.attlist:
 ul.attlist:
         Common.attrib
 align.attrib:
-        ("left" | "all" | "right" | "none")?
+        (align::("left" | "all" | "right" | "none"))?
 Color.datatype:
         STR
 List.class:
@@ -446,7 +445,7 @@ meta.attlist:
 frame.attrib:
         name.attlist
 frame.attrib:
-        ("void" | "above" | "below" | "hsides" | "lhs" | "rhs" | "vsides" | "box" | "border")?
+        (frame::("void" | "above" | "below" | "hsides" | "lhs" | "rhs" | "vsides" | "box" | "border"))?
 name.attlist:
         (name::STR)?
 object:
@@ -454,7 +453,7 @@ object:
 param:
         param::param.attlist
 param.attlist:
-        id.attrib name::STR (value::STR)? ("data" | "ref" | "object")? (type::ContentType.datatype)?
+        id.attrib name::STR (value::STR)? (valuetype::("data" | "ref" | "object"))? (type::ContentType.datatype)?
 hr:
         hr::hr.attlist
 b:
@@ -519,7 +518,7 @@ tfoot:
 tfoot.attlist:
         Common.attrib CellHAlign.attrib CellVAlign.attrib
 rules.attrib:
-        ("none" | "groups" | "rows" | "cols" | "all")?
+        (rules::("none" | "groups" | "rows" | "cols" | "all"))?
 link.attrib:
         target.attrib
 target.attrib:

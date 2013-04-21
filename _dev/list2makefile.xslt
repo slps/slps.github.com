@@ -8,6 +8,11 @@
 			<xsl:for-each select="version/grammar">
 				<xsl:variable name="filename">
 					<xsl:choose>
+						<xsl:when test="as">
+							<xsl:value-of select="as"/>
+							<xsl:text>/</xsl:text>
+							<xsl:value-of select="translate(handle,'/','-')"/>
+						</xsl:when>
 						<xsl:when test="../../short">
 							<xsl:value-of select="handle"/>
 						</xsl:when>
