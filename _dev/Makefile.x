@@ -159,6 +159,24 @@ all:
 	_dev/format zoo occam/mu-srour occam/mu-srour
 	cp ../slps/topics/grammars/occam/mu-mitchell/grammar.bgf zoo/occam/mu-mitchell.bgf
 	_dev/format zoo occam/mu-mitchell occam/mu-mitchell
+	cp ../slps/topics/grammars/odf/opendoc-1.0/grammar.bgf zoo/odf/opendoc-1.0.bgf
+	_dev/format zoo odf/opendoc-1.0 odf/opendoc-1.0
+	cp ../slps/topics/grammars/odf/opendoc-1.0-strict/grammar.bgf zoo/odf/opendoc-1.0-strict.bgf
+	_dev/format zoo odf/opendoc-1.0-strict odf/opendoc-1.0-strict
+	cp ../slps/topics/grammars/odf/opendoc-1.0-manifest/grammar.bgf zoo/odf/opendoc-1.0-manifest.bgf
+	_dev/format zoo odf/opendoc-1.0-manifest odf/opendoc-1.0-manifest
+	cp ../slps/topics/grammars/odf/opendoc-1.1/grammar.bgf zoo/odf/opendoc-1.1.bgf
+	_dev/format zoo odf/opendoc-1.1 odf/opendoc-1.1
+	cp ../slps/topics/grammars/odf/opendoc-1.1-strict/grammar.bgf zoo/odf/opendoc-1.1-strict.bgf
+	_dev/format zoo odf/opendoc-1.1-strict odf/opendoc-1.1-strict
+	cp ../slps/topics/grammars/odf/opendoc-1.1-manifest/grammar.bgf zoo/odf/opendoc-1.1-manifest.bgf
+	_dev/format zoo odf/opendoc-1.1-manifest odf/opendoc-1.1-manifest
+	cp ../slps/topics/grammars/odf/opendoc-1.2/grammar.bgf zoo/odf/opendoc-1.2.bgf
+	_dev/format zoo odf/opendoc-1.2 odf/opendoc-1.2
+	cp ../slps/topics/grammars/odf/opendoc-1.2-manifest/grammar.bgf zoo/odf/opendoc-1.2-manifest.bgf
+	_dev/format zoo odf/opendoc-1.2-manifest odf/opendoc-1.2-manifest
+	cp ../slps/topics/grammars/odf/opendoc-1.2-dsig/grammar.bgf zoo/odf/opendoc-1.2-dsig.bgf
+	_dev/format zoo odf/opendoc-1.2-dsig odf/opendoc-1.2-dsig
 	cp ../slps/topics/grammars/pascal/delphi/grammar.bgf zoo/pascal/delphi.bgf
 	_dev/format zoo pascal/delphi pascal/delphi
 	cp ../slps/topics/grammars/pascal/delphipp/grammar.bgf zoo/pascal/delphipp.bgf
