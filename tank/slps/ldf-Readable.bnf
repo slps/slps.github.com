@@ -1,0 +1,132 @@
+document:
+        document-metadata part+
+document-metadata:
+        body? (number::STR)? author::person* topic::STR status version-or-edition previous::named-link* date::timestamp
+body:
+        ansi::EPSILON
+        ecma::EPSILON
+        ieee::EPSILON
+        iso::EPSILON
+        iso/iet::EPSILON
+        itu::EPSILON
+        iec::EPSILON
+        ietf::EPSILON
+        oasis::EPSILON
+        omg::EPSILON
+        wsa::EPSILON
+        w3c::EPSILON
+person:
+        name::STR (affiliation::STR)? (email::STR)?
+status:
+        unknown::EPSILON
+        draft::EPSILON
+        candidate::EPSILON
+        proposed::EPSILON
+        approved::EPSILON
+        revised::EPSILON
+        obsolete::EPSILON
+        withdrawn::EPSILON
+        collection::EPSILON
+        trial::EPSILON
+        errata::EPSILON
+        report::EPSILON
+version-or-edition:
+        version::STR
+        edition::STR
+named-link:
+        title::STR version-or-edition? (uri::anyURI)?
+part:
+        part-metadata section+
+part-metadata:
+        (id::ID)? part-role (title::STR)? author::person*
+part-role:
+        front-matter::EPSILON
+        core-part::EPSILON
+        back-matter::EPSILON
+        annex::EPSILON
+section:
+        section-metadata section-structure
+section-metadata:
+        (id::ID)? section-role type? (title::STR)? author::person*
+section-role:
+        abstract::EPSILON
+        conformance::EPSILON
+        compatibility::EPSILON
+        design-goals::EPSILON
+        document-structure::EPSILON
+        foreword::EPSILON
+        references::EPSILON
+        notation::EPSILON
+        scope::EPSILON
+        what-is-new::EPSILON
+        index::EPSILON
+        full-grammar::EPSILON
+        list-of-tables::EPSILON
+        list-of-authors::EPSILON
+        list-of-contents::EPSILON
+        list-of-references::EPSILON
+        top-section::EPSILON
+        lexical-section::EPSILON
+type:
+        normative::EPSILON
+        informative::EPSILON
+section-structure:
+        content::(content-content+)
+        placeholder::ANY
+        subsection+
+content-content:
+        para::mixed
+        list::list
+        production
+mixed:
+        (ANY | STR)*
+list:
+        item::mixed+
+production:
+        (label::label)? nonterminal::nonterminal expression
+label:
+        STR
+nonterminal:
+        STR
+expression:
+        epsilon::EPSILON
+        empty::EPSILON
+        value::value
+        any::EPSILON
+        terminal::terminal
+        nonterminal::nonterminal
+        selectable::(selector::selector expression)
+        marked::expression
+        sequence::(expression+)
+        choice::(expression+)
+        allof::(expression+)
+        not::expression
+        optional::expression
+        plus::expression
+        star::expression
+        seplistplus::(expression expression)
+        sepliststar::(expression expression)
+value:
+        int::EPSILON
+        string::EPSILON
+terminal:
+        STR
+selector:
+        STR
+subsection:
+        subsection-metadata section-structure
+subsection-metadata:
+        (id::ID)? subsection-role type? (title::STR)? author::person*
+subsection-role:
+        synopsis::EPSILON
+        description::EPSILON
+        syntax::EPSILON
+        constraints::EPSILON
+        relationship::EPSILON
+        semantics::EPSILON
+        default::EPSILON
+        rationale::EPSILON
+        example::EPSILON
+        update::EPSILON
+        subtopic::EPSILON
+        section::EPSILON

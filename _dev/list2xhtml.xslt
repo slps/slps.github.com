@@ -355,6 +355,7 @@ Last updated: </xsl:text>
 			</xsl:if>
 			<xsl:for-each select="*">
 				<xsl:choose>
+					<xsl:when test="local-name(.)='as'"/>
 					<xsl:when test="local-name(.)='name'"/>
 					<xsl:when test="local-name(.)='handle'"/>
 					<xsl:when test="local-name(.)='source'"/>
@@ -383,17 +384,13 @@ Last updated: </xsl:text>
 			<xsl:apply-templates select="source"/>
 			<xsl:for-each select="grammarname">
 				<xsl:variable name="filename">
-					<xsl:choose>
-						<xsl:when test="../../short">
-							<xsl:value-of select="concat(translate(../../short,'ABCDEFGHIJKLMNOPQRSTUVWXYZ +#“”','abcdefghijklmnopqrstuvwxyz_ps__'),concat('/',translate(.,'ABCDEFGHIJKLMNOPQRSTUVWXYZ +#“”','abcdefghijklmnopqrstuvwxyz_ps__')))"/>
-						</xsl:when>
-						<xsl:when test="../../name">
-							<xsl:value-of select="concat(translate(../../name,'ABCDEFGHIJKLMNOPQRSTUVWXYZ +#“”','abcdefghijklmnopqrstuvwxyz_ps__'),concat('/',translate(.,'ABCDEFGHIJKLMNOPQRSTUVWXYZ +#“”','abcdefghijklmnopqrstuvwxyz_ps__')))"/>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:text>error</xsl:text>
-						</xsl:otherwise>
-					</xsl:choose>
+					<xsl:value-of select="../to"/>
+					<xsl:text>/</xsl:text>
+					<xsl:if test="../from">
+						<xsl:value-of select="../from"/>
+						<xsl:text>-</xsl:text>
+					</xsl:if>
+										<xsl:value-of select="translate(.,'ABCDEFGHIJKLMNOPQRSTUVWXYZ +#“”','abcdefghijklmnopqrstuvwxyz_ps__')"/>
 				</xsl:variable>
 				<li>
 					<xsl:value-of select="."/>

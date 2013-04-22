@@ -1,0 +1,16 @@
+document:
+        title::STR author::STR abstract::STR content::contentType
+contentType:
+        (text::mixedType | grammar::(ANY language::STR (version::STR)?) | sample::sampleType | runnable::runnableType)* section::sectionType*
+sampleType:
+        EPSILON
+runnableType:
+        context::STR main::STR argument::STR* yields::STR language::STR (version::STR)?
+sectionType:
+        title::STR content::contentType
+mixedType:
+        (ANY | STR)*
+reference:
+        STR
+tail:
+        mixedType

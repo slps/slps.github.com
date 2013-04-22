@@ -1,0 +1,126 @@
+module Main
+
+exports
+ context-free start-symbols reference
+  sorts
+        Reference Sample Runnable Tail Document TitlePage Body Status Generated FrontSection SimpleSection SimpleText SimpleTextElement SimpleFigure SimpleTable SimpleList FrontList LexicalSection StructuredSection ListOfTerms ListOfInternalLinks TableRow StructuredSectionElement Normative Informative RunnableType MixedType Keyword 
+  context-free syntax
+        STR -> Reference
+
+        SampleType -> Sample
+
+        RunnableType -> Runnable
+
+        MixedType -> Tail
+
+        titlePage::TitlePage placeholder::Generated* frontMatter::(FrontSection+) lists::(FrontList+)? lexicalPart::(LexicalSection+)? core::StructuredSection+ annex::StructuredSection* -> Document
+
+        ((body::Body number::INT) | author::STR+) topic::STR (version::STR | edition::STR) status::Status date::STR -> TitlePage
+
+        ansi:: -> Body
+        ecma:: -> Body
+        ieee:: -> Body
+        iso:: -> Body
+        iso/iet:: -> Body
+        itu:: -> Body
+        ietf:: -> Body
+        iec:: -> Body
+        oasis:: -> Body
+        wsa:: -> Body
+        w3c:: -> Body
+
+        unknown:: -> Status
+        draft:: -> Status
+        candidate:: -> Status
+        proposed:: -> Status
+        approved:: -> Status
+        revised:: -> Status
+        obsolete:: -> Status
+        withdrawn:: -> Status
+        collection:: -> Status
+        trial:: -> Status
+        errata:: -> Status
+        report:: -> Status
+
+        index:: -> Generated
+        fullgrammar:: -> Generated
+        listoftables:: -> Generated
+        listofauthors:: -> Generated
+        listofcontents:: -> Generated
+        listofreferences:: -> Generated
+
+        foreword::SimpleSection -> FrontSection
+        designGoals::SimpleSection -> FrontSection
+        scope::SimpleSection -> FrontSection
+        conformance::SimpleSection -> FrontSection
+        compliance::SimpleSection -> FrontSection
+        compatibility::SimpleSection -> FrontSection
+        notation::SimpleSection -> FrontSection
+        normativeReferences::SimpleSection -> FrontSection
+        documentStructure::SimpleSection -> FrontSection
+        whatsnew::SimpleSection -> FrontSection
+
+        title::STR? author::STR* content::SimpleText id::STR? -> SimpleSection
+
+        SimpleTextElement+ -> SimpleText
+
+        empty:: -> SimpleTextElement
+        text::MixedType -> SimpleTextElement
+        figure::SimpleFigure -> SimpleTextElement
+        table::SimpleTable -> SimpleTextElement
+        list::SimpleList -> SimpleTextElement
+        formula::STR -> SimpleTextElement
+        sample::STR -> SimpleTextElement
+        Production -> SimpleTextElement
+
+        caption::STR type::STR file::STR id::STR? -> SimpleFigure
+
+        header::TableRow* row::TableRow+ -> SimpleTable
+
+        item::MixedType+ -> SimpleList
+
+        definitions::ListOfTerms -> FrontList
+        abbreviations::ListOfTerms -> FrontList
+        languageOverview::ListOfTerms -> FrontList
+
+        lineContinuations::SimpleSection -> LexicalSection
+        whitespace::SimpleSection -> LexicalSection
+        tokens::SimpleSection -> LexicalSection
+        preprocessor::SimpleSection -> LexicalSection
+        literals::SimpleSection -> LexicalSection
+        lexical::SimpleSection -> LexicalSection
+
+        title::STR author::STR* StructuredSectionElement+ id::STR? -> StructuredSection
+
+        title::STR? author::STR* term::(name::STR definition::SimpleText)+ id::STR? -> ListOfTerms
+
+        link::(text::STR linkText::STR? reference::STR)+ -> ListOfInternalLinks
+
+        cell::SimpleText+ -> TableRow
+
+        placeholder::Generated -> StructuredSectionElement
+        Normative -> StructuredSectionElement
+        Informative -> StructuredSectionElement
+        Production -> StructuredSectionElement
+        references::ListOfInternalLinks -> StructuredSectionElement
+        section::SimpleSection -> StructuredSectionElement
+        subtopic::StructuredSection -> StructuredSectionElement
+        value::(key::STR data::STR) -> StructuredSectionElement
+
+        synopsis::SimpleSection -> Normative
+        description::SimpleSection -> Normative
+        syntax::SimpleSection -> Normative
+        constraints::SimpleSection -> Normative
+        relationship::SimpleSection -> Normative
+        semantics::SimpleSection -> Normative
+        default::SimpleSection -> Normative
+
+        rationale::SimpleSection -> Informative
+        example::SimpleSection -> Informative
+        update::SimpleSection -> Informative
+
+        context::STR main::STR argument::STR* yields::STR language::STR version::STR? id::STR? -> RunnableType
+
+        (ANY | STR)* -> MixedType
+
+        STR -> Keyword

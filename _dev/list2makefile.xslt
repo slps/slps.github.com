@@ -41,35 +41,48 @@
 </xsl:text>
 			</xsl:for-each>
 			<xsl:for-each select="version/grammarset/grammarname">
-				<!-- clone! -->
-				<xsl:variable name="filename">
-					<xsl:choose>
-						<xsl:when test="../../short">
-							<xsl:value-of select="concat(translate(../../short,'ABCDEFGHIJKLMNOPQRSTUVWXYZ +#“”','abcdefghijklmnopqrstuvwxyz_ps__'),concat('/',translate(.,'ABCDEFGHIJKLMNOPQRSTUVWXYZ +#“”','abcdefghijklmnopqrstuvwxyz_ps__')))"/>
-						</xsl:when>
-						<xsl:when test="../../name">
-							<xsl:value-of select="concat(translate(../../name,'ABCDEFGHIJKLMNOPQRSTUVWXYZ +#“”','abcdefghijklmnopqrstuvwxyz_ps__'),concat('/',translate(.,'ABCDEFGHIJKLMNOPQRSTUVWXYZ +#“”','abcdefghijklmnopqrstuvwxyz_ps__')))"/>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:text>error</xsl:text>
-						</xsl:otherwise>
-					</xsl:choose>
-				</xsl:variable>
+				<!-- <xsl:if test="../from and ../to"> -->
 				<xsl:text>	cp ../slps/topics/grammars/</xsl:text>
-				<xsl:value-of select="."/>
-				<xsl:text>/grammar.bgf </xsl:text>
+				<xsl:if test="../from/@repo">
+					<xsl:value-of select="../from/@repo"/>
+					<xsl:text>/</xsl:text>
+					<xsl:value-of select="../from"/>
+					<xsl:text>/</xsl:text>
+					<xsl:value-of select="translate(.,'ABCDEFGHIJKLMNOPQRSTUVWXYZ +#“”','abcdefghijklmnopqrstuvwxyz_ps__')"/>
+					<xsl:text>.bgf </xsl:text>
+				</xsl:if>
+				<xsl:if test="not(../from/@repo)">
+					<xsl:value-of select="../from"/>
+					<xsl:text>/</xsl:text>
+					<xsl:value-of select="."/>
+					<xsl:text>/grammar.bgf </xsl:text>
+				</xsl:if>
 				<xsl:value-of select="/zoo/name"/>
 				<xsl:text>/</xsl:text>
-				<xsl:value-of select="$filename"/>
+				<xsl:value-of select="../to"/>
+				<xsl:text>/</xsl:text>
+				<xsl:if test="../to/text()!=../from/text()">
+					<xsl:value-of select="../from"/>
+					<xsl:text>-</xsl:text>
+				</xsl:if>
+				<xsl:value-of select="translate(.,'ABCDEFGHIJKLMNOPQRSTUVWXYZ +#“”','abcdefghijklmnopqrstuvwxyz_ps__')"/>
 				<xsl:text>.bgf
 	_dev/format </xsl:text>
 				<xsl:value-of select="/zoo/name"/>
 				<xsl:text> </xsl:text>
-				<xsl:value-of select="$filename"/>
+				<xsl:value-of select="../to"/>
+				<xsl:text>/</xsl:text>
+				<xsl:if test="../to/text()!=../from/text()">
+					<xsl:value-of select="../from"/>
+					<xsl:text>-</xsl:text>
+				</xsl:if>
+				<xsl:value-of select="translate(.,'ABCDEFGHIJKLMNOPQRSTUVWXYZ +#“”','abcdefghijklmnopqrstuvwxyz_ps__')"/>
 				<xsl:text> </xsl:text>
+				<xsl:value-of select="../from"/>
+				<xsl:text>/</xsl:text>
 				<xsl:value-of select="."/>
 				<xsl:text>
-			</xsl:text>
+</xsl:text>
 			</xsl:for-each>
 		</xsl:for-each>
 	</xsl:template>

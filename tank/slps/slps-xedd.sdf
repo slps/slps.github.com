@@ -1,0 +1,29 @@
+module Main
+
+exports
+ context-free start-symbols evolution
+  sorts
+        Evolution Step Rename Introduce Eliminate Metasymbols ConfixMetasymbols 
+  context-free syntax
+        Step* -> Evolution
+
+        Rename -> Step
+        Introduce -> Step
+        Eliminate -> Step
+
+        metasymbol::Metasymbols from::STR to::STR -> Rename
+
+        metasymbol::ConfixMetasymbols start::STR end::STR -> Introduce
+
+        metasymbol::Metasymbols -> Eliminate
+
+        terminator:: -> Metasymbols
+        defining:: -> Metasymbols
+        definition-separator:: -> Metasymbols
+        group:: -> Metasymbols
+        seplist-plus:: -> Metasymbols
+        seplist-star:: -> Metasymbols
+
+        group:: -> ConfixMetasymbols
+        seplist-plus:: -> ConfixMetasymbols
+        seplist-star:: -> ConfixMetasymbols

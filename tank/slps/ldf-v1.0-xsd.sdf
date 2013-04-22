@@ -1,0 +1,22 @@
+module Main
+
+exports
+ context-free start-symbols document
+  sorts
+        Document ContentType SampleType RunnableType SectionType MixedType Reference Tail 
+  context-free syntax
+        title::STR author::STR abstract::STR content::ContentType -> Document
+
+        (text::MixedType | grammar::(ANY language::STR version::STR?) | sample::SampleType | runnable::RunnableType)* section::SectionType* -> ContentType
+
+         -> SampleType
+
+        context::STR main::STR argument::STR* yields::STR language::STR version::STR? -> RunnableType
+
+        title::STR content::ContentType -> SectionType
+
+        (ANY | STR)* -> MixedType
+
+        STR -> Reference
+
+        MixedType -> Tail

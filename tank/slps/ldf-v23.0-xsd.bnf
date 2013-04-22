@@ -1,0 +1,134 @@
+document:
+        metadata::((body::(ansi::EPSILON | ecma::EPSILON | ieee::EPSILON | iso::EPSILON | iso/iet::EPSILON | itu::EPSILON | iec::EPSILON | ietf::EPSILON | oasis::EPSILON | omg::EPSILON | wsa::EPSILON | w3c::EPSILON))? (number::STR)? author::person* topic::STR status::(unknown::EPSILON | draft::EPSILON | candidate::EPSILON | proposed::EPSILON | approved::EPSILON | revised::EPSILON | obsolete::EPSILON | withdrawn::EPSILON | collection::EPSILON | trial::EPSILON | errata::EPSILON | report::EPSILON) (version::STR | edition::STR) previous::named-link* date::STR) part::part-type+
+named-link:
+        title::STR (version::STR | edition::STR)? (uri::STR)?
+part-type:
+        metadata::((id::STR)? role::(front-matter::EPSILON | core-part::EPSILON | back-matter::EPSILON | annex::EPSILON) (title::STR)? author::person*) section::section-type+
+metainfo:
+        (id::STR)? (title::STR)? author::STR*
+person:
+        name::STR (affiliation::STR)? (email::STR)?
+section-type:
+        metadata::((id::STR)? role::(abstract::EPSILON | conformance::EPSILON | compatibility::EPSILON | design-goals::EPSILON | document-structure::EPSILON | foreword::EPSILON | references::EPSILON | notation::EPSILON | scope::EPSILON | what-is-new::EPSILON | index::EPSILON | full-grammar::EPSILON | list-of-tables::EPSILON | list-of-authors::EPSILON | list-of-contents::EPSILON | list-of-references::EPSILON | top-section::EPSILON | lexical-section::EPSILON) (type::(normative::EPSILON | informative::EPSILON))? (title::STR)? author::person*) (content::(content-content+) | placeholder::ANY | subsection::subsection-type+)
+subsection-type:
+        metadata::((id::STR)? role::(synopsis::EPSILON | description::EPSILON | syntax::EPSILON | constraints::EPSILON | relationship::EPSILON | semantics::EPSILON | default::EPSILON | rationale::EPSILON | example::EPSILON | update::EPSILON | subtopic::EPSILON | section::EPSILON) (type::(normative::EPSILON | informative::EPSILON))? (title::STR)? author::person*) (content::(content-content+) | placeholder::ANY | subsection::subsection-type+)
+content-content:
+        para::mixed-type
+        list::list-type
+        production
+any-section:
+        placeholder
+        simple-section
+        lexical-section
+        structured-section
+        composite-section
+        list-section
+composite-section:
+        any-section+
+placeholder:
+        index::EPSILON
+        full-grammar::EPSILON
+        list-of-tables::EPSILON
+        list-of-authors::EPSILON
+        list-of-contents::EPSILON
+        list-of-references::EPSILON
+simple-section:
+        metainfo content::textual-content
+lexical-section:
+        role::lexical-section-role metainfo content::textual-content
+lexical-section-role:
+        lexical-issue::EPSILON
+        line-continuations::EPSILON
+        literals::EPSILON
+        preprocessor::EPSILON
+        tokens::EPSILON
+        whitespace::EPSILON
+list-section:
+        role::list-section-role metainfo content::(term+)
+list-section-role:
+        abbreviations::EPSILON
+        definitions::EPSILON
+        language-overview::EPSILON
+        normative-references::EPSILON
+term:
+        name::STR definition::textual-content
+structured-section:
+        metainfo content::(structured-section-element+)
+structured-section-element:
+        subtopic::structured-section
+        references::list-type
+        placeholder
+        value::(key::STR data::STR)
+        (normative-role | informative-role)? simple-section
+normative-role:
+        synopsis::EPSILON
+        description::EPSILON
+        syntax::EPSILON
+        constraints::EPSILON
+        relationship::EPSILON
+        semantics::EPSILON
+        default::EPSILON
+informative-role:
+        example::EPSILON
+        rationale::EPSILON
+        update::EPSILON
+anchor:
+        id::STR
+textual-content:
+        text-element+
+text-element:
+        empty::EPSILON
+        code
+        text::mixed-type
+        figure
+        table
+        list::list-type
+        formula::((math::anyMath | mfenced::anyMath | mtext::anyMath | msub::anyMath | msup::anyMath | mrow::anyMath | mi::anyMath | mo::anyMath | varepsilon::ANY)+)
+        sample::((ANY | STR)* source::STR)
+figure:
+        metainfo source::figure-source+
+figure-source:
+        type::figure-type (local-file::STR | uri::STR)
+figure-type:
+        PDF::EPSILON
+        PostScript::EPSILON
+        SVG::EPSILON
+        PNG::EPSILON
+        GIF::EPSILON
+        JPEG::EPSILON
+table:
+        header::table-row* row::table-row+
+table-row:
+        table-cell::textual-content+
+list-type:
+        item::mixed-type+
+mixed-type:
+        (ANY | STR)*
+formula:
+        ANY+
+keyword:
+        STR
+code:
+        STR
+link:
+        (text::STR)? (nonterminal::STR | reference::STR | external::STR)
+math:
+        anyMath
+mfenced:
+        anyMath
+mtext:
+        anyMath
+msub:
+        anyMath
+msup:
+        anyMath
+mrow:
+        anyMath
+mi:
+        anyMath
+mo:
+        anyMath
+varepsilon:
+        EPSILON
+anyMath:
+        (ANY | STR)*

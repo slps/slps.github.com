@@ -1,0 +1,138 @@
+module Main
+
+exports
+ context-free start-symbols document
+  sorts
+        Document Document-metadata Body Person Status Version-or-edition Named-link Part Part-metadata Part-role Section Section-metadata Section-role Type Section-structure Content-content Mixed List Production Label Nonterminal Expression Value Terminal Selector Subsection Subsection-metadata Subsection-role 
+  context-free syntax
+        Document-metadata Part+ -> Document
+
+        Body? number::STR? author::Person* topic::STR Status Version-or-edition previous::Named-link* date::Timestamp -> Document-metadata
+
+        ansi:: -> Body
+        ecma:: -> Body
+        ieee:: -> Body
+        iso:: -> Body
+        iso/iet:: -> Body
+        itu:: -> Body
+        iec:: -> Body
+        ietf:: -> Body
+        oasis:: -> Body
+        omg:: -> Body
+        wsa:: -> Body
+        w3c:: -> Body
+
+        name::STR affiliation::STR? email::STR? -> Person
+
+        unknown:: -> Status
+        draft:: -> Status
+        candidate:: -> Status
+        proposed:: -> Status
+        approved:: -> Status
+        revised:: -> Status
+        obsolete:: -> Status
+        withdrawn:: -> Status
+        collection:: -> Status
+        trial:: -> Status
+        errata:: -> Status
+        report:: -> Status
+
+        version::STR -> Version-or-edition
+        edition::STR -> Version-or-edition
+
+        title::STR Version-or-edition? uri::AnyURI? -> Named-link
+
+        Part-metadata Section+ -> Part
+
+        id::ID? Part-role title::STR? author::Person* -> Part-metadata
+
+        front-matter:: -> Part-role
+        core-part:: -> Part-role
+        back-matter:: -> Part-role
+        annex:: -> Part-role
+
+        Section-metadata Section-structure -> Section
+
+        id::ID? Section-role Type? title::STR? author::Person* -> Section-metadata
+
+        abstract:: -> Section-role
+        conformance:: -> Section-role
+        compatibility:: -> Section-role
+        design-goals:: -> Section-role
+        document-structure:: -> Section-role
+        foreword:: -> Section-role
+        references:: -> Section-role
+        notation:: -> Section-role
+        scope:: -> Section-role
+        what-is-new:: -> Section-role
+        index:: -> Section-role
+        full-grammar:: -> Section-role
+        list-of-tables:: -> Section-role
+        list-of-authors:: -> Section-role
+        list-of-contents:: -> Section-role
+        list-of-references:: -> Section-role
+        top-section:: -> Section-role
+        lexical-section:: -> Section-role
+
+        normative:: -> Type
+        informative:: -> Type
+
+        content::(Content-content+) -> Section-structure
+        placeholder::ANY -> Section-structure
+        Subsection+ -> Section-structure
+
+        para::Mixed -> Content-content
+        list::List -> Content-content
+        Production -> Content-content
+
+        (ANY | STR)* -> Mixed
+
+        item::Mixed+ -> List
+
+        label::Label? nonterminal::Nonterminal Expression -> Production
+
+        STR -> Label
+
+        STR -> Nonterminal
+
+        epsilon:: -> Expression
+        empty:: -> Expression
+        value::Value -> Expression
+        any:: -> Expression
+        terminal::Terminal -> Expression
+        nonterminal::Nonterminal -> Expression
+        selectable::(selector::Selector Expression) -> Expression
+        marked::Expression -> Expression
+        sequence::(Expression+) -> Expression
+        choice::(Expression+) -> Expression
+        allof::(Expression+) -> Expression
+        not::Expression -> Expression
+        optional::Expression -> Expression
+        plus::Expression -> Expression
+        star::Expression -> Expression
+        seplistplus::(Expression Expression) -> Expression
+        sepliststar::(Expression Expression) -> Expression
+
+        int:: -> Value
+        string:: -> Value
+
+        STR -> Terminal
+
+        STR -> Selector
+
+        Subsection-metadata Section-structure -> Subsection
+
+        id::ID? Subsection-role Type? title::STR? author::Person* -> Subsection-metadata
+
+        synopsis:: -> Subsection-role
+        description:: -> Subsection-role
+        syntax:: -> Subsection-role
+        constraints:: -> Subsection-role
+        relationship:: -> Subsection-role
+        semantics:: -> Subsection-role
+        default:: -> Subsection-role
+        rationale:: -> Subsection-role
+        example:: -> Subsection-role
+        update:: -> Subsection-role
+        subtopic:: -> Subsection-role
+        section:: -> Subsection-role

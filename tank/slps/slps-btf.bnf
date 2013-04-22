@@ -1,0 +1,47 @@
+root:
+        grammar tree
+grammar:
+        root::nonterminal* production*
+nonterminal:
+        STR
+production:
+        (label::label)? nonterminal::nonterminal expression
+label:
+        STR
+expression:
+        epsilon::EPSILON
+        empty::EPSILON
+        value::value
+        any::EPSILON
+        terminal::terminal
+        nonterminal::nonterminal
+        selectable::(selector::selector expression)
+        marked::expression
+        sequence::(expression+)
+        choice::(expression+)
+        allof::(expression+)
+        not::expression
+        optional::expression
+        plus::expression
+        star::expression
+        seplistplus::(expression expression)
+        sepliststar::(expression expression)
+value:
+        int::EPSILON
+        string::EPSILON
+terminal:
+        STR
+selector:
+        STR
+tree:
+        epsilon::EPSILON
+        any::ANY
+        terminal::terminal
+        nonterminal::(production tree)
+        selectable::(selector::selector tree)
+        value::(int::INT | string::STR)
+        sequence::(tree*)
+        choice::(expression tree)
+        optional::(tree?)
+        plus::(tree+)
+        star::(tree*)

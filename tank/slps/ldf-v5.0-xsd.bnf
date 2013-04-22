@@ -1,0 +1,76 @@
+reference:
+        STR
+sample:
+        sampleType
+runnable:
+        runnableType
+tail:
+        mixedType
+ListOfTerms:
+        (id::STR)? (title::STR)? author::STR+? term::(name::STR definition::SimpleText)+
+ListOfInternalLinks:
+        link::(text::STR reference::STR)+
+SimpleList:
+        item::STR+
+SimpleText:
+        (p::STR | list::SimpleList)+
+SimpleSection:
+        (id::STR)? (title::STR)? author::STR+? content::SimpleText
+StructuredSection:
+        id::STR title::STR author::STR+? (placeholder::generated | normative | informative | lexicals | production | relationship::ListOfInternalLinks | subtopic::StructuredSection)+
+normative:
+        purpose::SimpleSection
+        description::SimpleSection
+        location::SimpleSection
+        considerations::SimpleSection
+        defaults::SimpleSection
+        normative::SimpleSection
+informative:
+        note::SimpleSection
+        example::SimpleSection
+        informative::SimpleSection
+lexicals:
+        lineContinuations::SimpleSection
+        whitespace::SimpleSection
+        tokens::SimpleSection
+        preprocessor::SimpleSection
+        literals::SimpleSection
+        lexical::SimpleSection
+status:
+        draft::EPSILON
+        committee draft::EPSILON
+        recommendation::EPSILON
+        international standard::EPSILON
+generated:
+        index::EPSILON
+        fullgrammar::EPSILON
+        listoftables::EPSILON
+        listofauthors::EPSILON
+        listofcontents::EPSILON
+        listofreferences::EPSILON
+body:
+        ansi::EPSILON
+        ecma::EPSILON
+        ieee::EPSILON
+        iso::EPSILON
+        iso/iet::EPSILON
+        itu::EPSILON
+        ietf::EPSILON
+        iec::EPSILON
+        oasis::EPSILON
+        wsa::EPSILON
+        w3c::EPSILON
+document:
+        title::title placeholder::generated* frontMatter::frontMatter lists::frontLists lexicalPart::lexical core::StructuredSection+ annex::StructuredSection*
+title:
+        ((body::body number::INT) | author::STR+) topic::STR (version::STR | edition::STR) status::status date::STR
+frontMatter:
+        (foreword::SimpleSection | designGoals::SimpleSection | scope::SimpleSection | conformance::SimpleSection | compliance::SimpleSection | compatibility::SimpleSection | notation::SimpleSection | normativeReferences::SimpleSection | documentStructure::SimpleSection | whatsnew::SimpleSection | clause::SimpleSection | field::SimpleSection)+
+frontLists:
+        (definitions::ListOfTerms | abbreviations::ListOfTerms | languageOverview::ListOfTerms)+?
+lexical:
+        lexicals+
+runnableType:
+        context::STR main::STR argument::STR* yields::STR language::STR (version::STR)? (id::STR)?
+mixedType:
+        (ANY | STR)*

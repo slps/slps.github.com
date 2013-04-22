@@ -1,0 +1,82 @@
+module Main
+
+exports
+ context-free start-symbols reference
+  sorts
+        Reference Sample Runnable Tail ListOfTerms ListOfInternalLinks SimpleList SimpleText SimpleSection StructuredSection Normative Informative Lexicals Status Generated Body Document Title FrontMatter FrontLists Lexical RunnableType MixedType 
+  context-free syntax
+        STR -> Reference
+
+        SampleType -> Sample
+
+        RunnableType -> Runnable
+
+        MixedType -> Tail
+
+        id::STR? title::STR? author::STR+? term::(name::STR definition::SimpleText)+ -> ListOfTerms
+
+        link::(text::STR reference::STR)+ -> ListOfInternalLinks
+
+        item::STR+ -> SimpleList
+
+        (p::STR | list::SimpleList)+ -> SimpleText
+
+        id::STR? title::STR? author::STR+? content::SimpleText -> SimpleSection
+
+        id::STR title::STR author::STR+? (placeholder::Generated | Normative | Informative | Lexicals | Production | relationship::ListOfInternalLinks | subtopic::StructuredSection)+ -> StructuredSection
+
+        purpose::SimpleSection -> Normative
+        description::SimpleSection -> Normative
+        location::SimpleSection -> Normative
+        considerations::SimpleSection -> Normative
+        defaults::SimpleSection -> Normative
+        normative::SimpleSection -> Normative
+
+        note::SimpleSection -> Informative
+        example::SimpleSection -> Informative
+        informative::SimpleSection -> Informative
+
+        lineContinuations::SimpleSection -> Lexicals
+        whitespace::SimpleSection -> Lexicals
+        tokens::SimpleSection -> Lexicals
+        preprocessor::SimpleSection -> Lexicals
+        literals::SimpleSection -> Lexicals
+        lexical::SimpleSection -> Lexicals
+
+        draft:: -> Status
+        committee draft:: -> Status
+        recommendation:: -> Status
+        international standard:: -> Status
+
+        index:: -> Generated
+        fullgrammar:: -> Generated
+        listoftables:: -> Generated
+        listofauthors:: -> Generated
+        listofcontents:: -> Generated
+        listofreferences:: -> Generated
+
+        ansi:: -> Body
+        ecma:: -> Body
+        ieee:: -> Body
+        iso:: -> Body
+        iso/iet:: -> Body
+        itu:: -> Body
+        ietf:: -> Body
+        iec:: -> Body
+        oasis:: -> Body
+        wsa:: -> Body
+        w3c:: -> Body
+
+        title::Title placeholder::Generated* frontMatter::FrontMatter lists::FrontLists lexicalPart::Lexical core::StructuredSection+ annex::StructuredSection* -> Document
+
+        ((body::Body number::INT) | author::STR+) topic::STR (version::STR | edition::STR) status::Status date::STR -> Title
+
+        (foreword::SimpleSection | designGoals::SimpleSection | scope::SimpleSection | conformance::SimpleSection | compliance::SimpleSection | compatibility::SimpleSection | notation::SimpleSection | normativeReferences::SimpleSection | documentStructure::SimpleSection | whatsnew::SimpleSection | clause::SimpleSection | field::SimpleSection)+ -> FrontMatter
+
+        (definitions::ListOfTerms | abbreviations::ListOfTerms | languageOverview::ListOfTerms)+? -> FrontLists
+
+        Lexicals+ -> Lexical
+
+        context::STR main::STR argument::STR* yields::STR language::STR version::STR? id::STR? -> RunnableType
+
+        (ANY | STR)* -> MixedType

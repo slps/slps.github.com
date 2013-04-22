@@ -146,90 +146,191 @@ all:
 	_dev/format tank markup/svg-palies svg/palies
 	cp ../slps/topics/grammars/markup/uiml/grammar.bgf tank/markup/uiml.bgf
 	_dev/format tank markup/uiml markup/uiml
-	cp ../slps/topics/grammars/slps/bgf-1.0-xsd/grammar.bgf tank/slps/bgf-1.0-xsd.bgf
-	_dev/format tank slps/bgf-1.0-xsd slps/bgf-1.0-xsd
-	cp ../slps/topics/grammars/slps/bgf-2.0-xsd/grammar.bgf tank/slps/bgf-2.0-xsd.bgf
-	_dev/format tank slps/bgf-2.0-xsd slps/bgf-2.0-xsd
-	cp ../slps/topics/grammars/slps/bgf-2.1-xsd/grammar.bgf tank/slps/bgf-2.1-xsd.bgf
-	_dev/format tank slps/bgf-2.1-xsd slps/bgf-2.1-xsd
-	cp ../slps/topics/grammars/slps/bgf-3.0-xsd/grammar.bgf tank/slps/bgf-3.0-xsd.bgf
-	_dev/format tank slps/bgf-3.0-xsd slps/bgf-3.0-xsd
-	cp ../slps/topics/grammars/slps/bgf-3.1-xsd/grammar.bgf tank/slps/bgf-3.1-xsd.bgf
-	_dev/format tank slps/bgf-3.1-xsd slps/bgf-3.1-xsd
-	cp ../slps/topics/grammars/slps/bgf-4.0-xsd/grammar.bgf tank/slps/bgf-4.0-xsd.bgf
-	_dev/format tank slps/bgf-4.0-xsd slps/bgf-4.0-xsd
-	cp ../slps/topics/grammars/slps/bgf-4.1-adt/grammar.bgf tank/slps/bgf-4.1-adt.bgf
-	_dev/format tank slps/bgf-4.1-adt slps/bgf-4.1-adt
-	cp ../slps/topics/grammars/slps/bgf-4.2-adt/grammar.bgf tank/slps/bgf-4.2-adt.bgf
-	_dev/format tank slps/bgf-4.2-adt slps/bgf-4.2-adt
-	cp ../slps/topics/grammars/slps/bgf-4.3-adt/grammar.bgf tank/slps/bgf-4.3-adt.bgf
-	_dev/format tank slps/bgf-4.3-adt slps/bgf-4.3-adt
-	cp ../slps/topics/grammars/slps/bgf-5.0-adt/grammar.bgf tank/slps/bgf-5.0-adt.bgf
-	_dev/format tank slps/bgf-5.0-adt slps/bgf-5.0-adt
-	cp ../slps/topics/grammars/slps/bgf-5.1-adt/grammar.bgf tank/slps/bgf-5.1-adt.bgf
-	_dev/format tank slps/bgf-5.1-adt slps/bgf-5.1-adt
-	cp ../slps/topics/grammars/slps/bgf-5.2-xsd/grammar.bgf tank/slps/bgf-5.2-xsd.bgf
-	_dev/format tank slps/bgf-5.2-xsd slps/bgf-5.2-xsd
-	cp ../slps/topics/grammars/slps/bgf-5.3-adt/grammar.bgf tank/slps/bgf-5.3-adt.bgf
-	_dev/format tank slps/bgf-5.3-adt slps/bgf-5.3-adt
-	cp ../slps/topics/grammars/slps/btf/grammar.bgf tank/slps/btf.bgf
-	_dev/format tank slps/btf slps/btf
-	cp ../slps/topics/grammars/slps/edd/grammar.bgf tank/slps/edd.bgf
-	_dev/format tank slps/edd slps/edd
-	cp ../slps/topics/grammars/slps/edd/grammar.bgf tank/slps/edd.bgf
-	_dev/format tank slps/edd slps/edd
-	cp ../slps/topics/grammars/slps/edd/grammar.bgf tank/slps/edd.bgf
-	_dev/format tank slps/edd slps/edd
-	cp ../slps/topics/grammars/slps/edd/grammar.bgf tank/slps/edd.bgf
-	_dev/format tank slps/edd slps/edd
-	cp ../slps/topics/grammars/slps/xbgf-xsd/grammar.bgf tank/slps/xbgf-xsd.bgf
-	_dev/format tank slps/xbgf-xsd slps/xbgf-xsd
-	cp ../slps/topics/grammars/slps/xbgf-adt/grammar.bgf tank/slps/xbgf-adt.bgf
-	_dev/format tank slps/xbgf-adt slps/xbgf-adt
-	cp ../slps/topics/grammars/slps/edd/grammar.bgf tank/slps/edd.bgf
-	_dev/format tank slps/edd slps/edd
-	cp ../slps/topics/grammars/slps/edd/grammar.bgf tank/slps/edd.bgf
-	_dev/format tank slps/edd slps/edd
-	cp ../slps/topics/grammars/slps/edd/grammar.bgf tank/slps/edd.bgf
-	_dev/format tank slps/edd slps/edd
-	cp ../slps/topics/grammars/slps/cbgf-xsd/grammar.bgf tank/slps/cbgf-xsd.bgf
-	_dev/format tank slps/cbgf-xsd slps/cbgf-xsd
-	cp ../slps/topics/grammars/slps/cbgf-adt/grammar.bgf tank/slps/cbgf-adt.bgf
-	_dev/format tank slps/cbgf-adt slps/cbgf-adt
-	_dev/format tank tescol/reference Reference
-	_dev/format tank tescol/00000 00000
-	_dev/format tank tescol/00001 00001
-	_dev/format tank tescol/00010 00010
-	_dev/format tank tescol/00011 00011
-	_dev/format tank tescol/00100 00100
-	_dev/format tank tescol/00101 00101
-	_dev/format tank tescol/00110 00110
-	_dev/format tank tescol/00111 00111
-	_dev/format tank tescol/01000 01000
-	_dev/format tank tescol/01001 01001
-	_dev/format tank tescol/01010 01010
-	_dev/format tank tescol/01011 01011
-	_dev/format tank tescol/01100 01100
-	_dev/format tank tescol/01101 01101
-	_dev/format tank tescol/01110 01110
-	_dev/format tank tescol/01111 01111
-	_dev/format tank tescol/10000 10000
-	_dev/format tank tescol/10001 10001
-	_dev/format tank tescol/10010 10010
-	_dev/format tank tescol/10011 10011
-	_dev/format tank tescol/10100 10100
-	_dev/format tank tescol/10101 10101
-	_dev/format tank tescol/10110 10110
-	_dev/format tank tescol/10111 10111
-	_dev/format tank tescol/11000 11000
-	_dev/format tank tescol/11001 11001
-	_dev/format tank tescol/11010 11010
-	_dev/format tank tescol/11011 11011
-	_dev/format tank tescol/11100 11100
-	_dev/format tank tescol/11101 11101
-	_dev/format tank tescol/11110 11110
-	_dev/format tank tescol/11111 11111
-				cp ../slps/topics/grammars/metamodels/ACG/grammar.bgf tank/metamodels/ACG.bgf
+	cp ../slps/topics/grammars/slps/btf/grammar.bgf tank/slps/slps-btf.bgf
+	_dev/format tank slps/slps-btf slps/btf
+	cp ../slps/topics/grammars/slps/edd/grammar.bgf tank/slps/slps-edd.bgf
+	_dev/format tank slps/slps-edd slps/edd
+	cp ../slps/topics/grammars/slps/exbgf/grammar.bgf tank/slps/slps-exbgf.bgf
+	_dev/format tank slps/slps-exbgf slps/exbgf
+	cp ../slps/topics/grammars/slps/lcf/grammar.bgf tank/slps/slps-lcf.bgf
+	_dev/format tank slps/slps-lcf slps/lcf
+	cp ../slps/topics/grammars/slps/xbgf-xsd/grammar.bgf tank/slps/slps-xbgf-xsd.bgf
+	_dev/format tank slps/slps-xbgf-xsd slps/xbgf-xsd
+	cp ../slps/topics/grammars/slps/xbgf-adt/grammar.bgf tank/slps/slps-xbgf-adt.bgf
+	_dev/format tank slps/slps-xbgf-adt slps/xbgf-adt
+	cp ../slps/topics/grammars/slps/xedd/grammar.bgf tank/slps/slps-xedd.bgf
+	_dev/format tank slps/slps-xedd slps/xedd
+	cp ../slps/topics/grammars/slps/xldf/grammar.bgf tank/slps/slps-xldf.bgf
+	_dev/format tank slps/slps-xldf slps/xldf
+	cp ../slps/topics/grammars/slps/xoutcome/grammar.bgf tank/slps/slps-xoutcome.bgf
+	_dev/format tank slps/slps-xoutcome slps/xoutcome
+	cp ../slps/topics/grammars/slps/cbgf-xsd/grammar.bgf tank/slps/slps-cbgf-xsd.bgf
+	_dev/format tank slps/slps-cbgf-xsd slps/cbgf-xsd
+	cp ../slps/topics/grammars/slps/cbgf-adt/grammar.bgf tank/slps/slps-cbgf-adt.bgf
+	_dev/format tank slps/slps-cbgf-adt slps/cbgf-adt
+	cp ../slps/topics/grammars/bgf/v1.0-xsd/grammar.bgf tank/slps/bgf-v1.0-xsd.bgf
+	_dev/format tank slps/bgf-v1.0-xsd bgf/v1.0-xsd
+	cp ../slps/topics/grammars/bgf/v2.0-xsd/grammar.bgf tank/slps/bgf-v2.0-xsd.bgf
+	_dev/format tank slps/bgf-v2.0-xsd bgf/v2.0-xsd
+	cp ../slps/topics/grammars/bgf/v2.1-xsd/grammar.bgf tank/slps/bgf-v2.1-xsd.bgf
+	_dev/format tank slps/bgf-v2.1-xsd bgf/v2.1-xsd
+	cp ../slps/topics/grammars/bgf/v3.0-xsd/grammar.bgf tank/slps/bgf-v3.0-xsd.bgf
+	_dev/format tank slps/bgf-v3.0-xsd bgf/v3.0-xsd
+	cp ../slps/topics/grammars/bgf/v3.1-xsd/grammar.bgf tank/slps/bgf-v3.1-xsd.bgf
+	_dev/format tank slps/bgf-v3.1-xsd bgf/v3.1-xsd
+	cp ../slps/topics/grammars/bgf/v4.0-xsd/grammar.bgf tank/slps/bgf-v4.0-xsd.bgf
+	_dev/format tank slps/bgf-v4.0-xsd bgf/v4.0-xsd
+	cp ../slps/topics/grammars/bgf/v4.1-adt/grammar.bgf tank/slps/bgf-v4.1-adt.bgf
+	_dev/format tank slps/bgf-v4.1-adt bgf/v4.1-adt
+	cp ../slps/topics/grammars/bgf/v4.2-adt/grammar.bgf tank/slps/bgf-v4.2-adt.bgf
+	_dev/format tank slps/bgf-v4.2-adt bgf/v4.2-adt
+	cp ../slps/topics/grammars/bgf/v4.3-adt/grammar.bgf tank/slps/bgf-v4.3-adt.bgf
+	_dev/format tank slps/bgf-v4.3-adt bgf/v4.3-adt
+	cp ../slps/topics/grammars/bgf/v5.0-adt/grammar.bgf tank/slps/bgf-v5.0-adt.bgf
+	_dev/format tank slps/bgf-v5.0-adt bgf/v5.0-adt
+	cp ../slps/topics/grammars/bgf/v5.1-adt/grammar.bgf tank/slps/bgf-v5.1-adt.bgf
+	_dev/format tank slps/bgf-v5.1-adt bgf/v5.1-adt
+	cp ../slps/topics/grammars/bgf/v5.2-xsd/grammar.bgf tank/slps/bgf-v5.2-xsd.bgf
+	_dev/format tank slps/bgf-v5.2-xsd bgf/v5.2-xsd
+	cp ../slps/topics/grammars/bgf/v5.3-adt/grammar.bgf tank/slps/bgf-v5.3-adt.bgf
+	_dev/format tank slps/bgf-v5.3-adt bgf/v5.3-adt
+	cp ../slps/topics/grammars/ldf/Readable/grammar.bgf tank/slps/ldf-readable.bgf
+	_dev/format tank slps/ldf-readable ldf/Readable
+	cp ../slps/topics/grammars/ldf/v1.0-xsd/grammar.bgf tank/slps/ldf-v1.0-xsd.bgf
+	_dev/format tank slps/ldf-v1.0-xsd ldf/v1.0-xsd
+	cp ../slps/topics/grammars/ldf/v2.0-xsd/grammar.bgf tank/slps/ldf-v2.0-xsd.bgf
+	_dev/format tank slps/ldf-v2.0-xsd ldf/v2.0-xsd
+	cp ../slps/topics/grammars/ldf/v2.1-xsd/grammar.bgf tank/slps/ldf-v2.1-xsd.bgf
+	_dev/format tank slps/ldf-v2.1-xsd ldf/v2.1-xsd
+	cp ../slps/topics/grammars/ldf/v3.0-xsd/grammar.bgf tank/slps/ldf-v3.0-xsd.bgf
+	_dev/format tank slps/ldf-v3.0-xsd ldf/v3.0-xsd
+	cp ../slps/topics/grammars/ldf/v4.0-xsd/grammar.bgf tank/slps/ldf-v4.0-xsd.bgf
+	_dev/format tank slps/ldf-v4.0-xsd ldf/v4.0-xsd
+	cp ../slps/topics/grammars/ldf/v5.0-xsd/grammar.bgf tank/slps/ldf-v5.0-xsd.bgf
+	_dev/format tank slps/ldf-v5.0-xsd ldf/v5.0-xsd
+	cp ../slps/topics/grammars/ldf/v6.0-xsd/grammar.bgf tank/slps/ldf-v6.0-xsd.bgf
+	_dev/format tank slps/ldf-v6.0-xsd ldf/v6.0-xsd
+	cp ../slps/topics/grammars/ldf/v7.0-xsd/grammar.bgf tank/slps/ldf-v7.0-xsd.bgf
+	_dev/format tank slps/ldf-v7.0-xsd ldf/v7.0-xsd
+	cp ../slps/topics/grammars/ldf/v7.1-xsd/grammar.bgf tank/slps/ldf-v7.1-xsd.bgf
+	_dev/format tank slps/ldf-v7.1-xsd ldf/v7.1-xsd
+	cp ../slps/topics/grammars/ldf/v8.0-xsd/grammar.bgf tank/slps/ldf-v8.0-xsd.bgf
+	_dev/format tank slps/ldf-v8.0-xsd ldf/v8.0-xsd
+	cp ../slps/topics/grammars/ldf/v8.1-xsd/grammar.bgf tank/slps/ldf-v8.1-xsd.bgf
+	_dev/format tank slps/ldf-v8.1-xsd ldf/v8.1-xsd
+	cp ../slps/topics/grammars/ldf/v9.0-xsd/grammar.bgf tank/slps/ldf-v9.0-xsd.bgf
+	_dev/format tank slps/ldf-v9.0-xsd ldf/v9.0-xsd
+	cp ../slps/topics/grammars/ldf/v9.1-xsd/grammar.bgf tank/slps/ldf-v9.1-xsd.bgf
+	_dev/format tank slps/ldf-v9.1-xsd ldf/v9.1-xsd
+	cp ../slps/topics/grammars/ldf/v10.0-xsd/grammar.bgf tank/slps/ldf-v10.0-xsd.bgf
+	_dev/format tank slps/ldf-v10.0-xsd ldf/v10.0-xsd
+	cp ../slps/topics/grammars/ldf/v11.0-xsd/grammar.bgf tank/slps/ldf-v11.0-xsd.bgf
+	_dev/format tank slps/ldf-v11.0-xsd ldf/v11.0-xsd
+	cp ../slps/topics/grammars/ldf/v11.1-xsd/grammar.bgf tank/slps/ldf-v11.1-xsd.bgf
+	_dev/format tank slps/ldf-v11.1-xsd ldf/v11.1-xsd
+	cp ../slps/topics/grammars/ldf/v11.2-xsd/grammar.bgf tank/slps/ldf-v11.2-xsd.bgf
+	_dev/format tank slps/ldf-v11.2-xsd ldf/v11.2-xsd
+	cp ../slps/topics/grammars/ldf/v12.0-xsd/grammar.bgf tank/slps/ldf-v12.0-xsd.bgf
+	_dev/format tank slps/ldf-v12.0-xsd ldf/v12.0-xsd
+	cp ../slps/topics/grammars/ldf/v13.0-xsd/grammar.bgf tank/slps/ldf-v13.0-xsd.bgf
+	_dev/format tank slps/ldf-v13.0-xsd ldf/v13.0-xsd
+	cp ../slps/topics/grammars/ldf/v13.1-xsd/grammar.bgf tank/slps/ldf-v13.1-xsd.bgf
+	_dev/format tank slps/ldf-v13.1-xsd ldf/v13.1-xsd
+	cp ../slps/topics/grammars/ldf/v14.0-xsd/grammar.bgf tank/slps/ldf-v14.0-xsd.bgf
+	_dev/format tank slps/ldf-v14.0-xsd ldf/v14.0-xsd
+	cp ../slps/topics/grammars/ldf/v15.0-xsd/grammar.bgf tank/slps/ldf-v15.0-xsd.bgf
+	_dev/format tank slps/ldf-v15.0-xsd ldf/v15.0-xsd
+	cp ../slps/topics/grammars/ldf/v15.1-xsd/grammar.bgf tank/slps/ldf-v15.1-xsd.bgf
+	_dev/format tank slps/ldf-v15.1-xsd ldf/v15.1-xsd
+	cp ../slps/topics/grammars/ldf/v16.0-xsd/grammar.bgf tank/slps/ldf-v16.0-xsd.bgf
+	_dev/format tank slps/ldf-v16.0-xsd ldf/v16.0-xsd
+	cp ../slps/topics/grammars/ldf/v17.0-xsd/grammar.bgf tank/slps/ldf-v17.0-xsd.bgf
+	_dev/format tank slps/ldf-v17.0-xsd ldf/v17.0-xsd
+	cp ../slps/topics/grammars/ldf/v18.0-xsd/grammar.bgf tank/slps/ldf-v18.0-xsd.bgf
+	_dev/format tank slps/ldf-v18.0-xsd ldf/v18.0-xsd
+	cp ../slps/topics/grammars/ldf/v18.1-xsd/grammar.bgf tank/slps/ldf-v18.1-xsd.bgf
+	_dev/format tank slps/ldf-v18.1-xsd ldf/v18.1-xsd
+	cp ../slps/topics/grammars/ldf/v19.0-xsd/grammar.bgf tank/slps/ldf-v19.0-xsd.bgf
+	_dev/format tank slps/ldf-v19.0-xsd ldf/v19.0-xsd
+	cp ../slps/topics/grammars/ldf/v20.0-xsd/grammar.bgf tank/slps/ldf-v20.0-xsd.bgf
+	_dev/format tank slps/ldf-v20.0-xsd ldf/v20.0-xsd
+	cp ../slps/topics/grammars/ldf/v20.1-xsd/grammar.bgf tank/slps/ldf-v20.1-xsd.bgf
+	_dev/format tank slps/ldf-v20.1-xsd ldf/v20.1-xsd
+	cp ../slps/topics/grammars/ldf/v21.0-xsd/grammar.bgf tank/slps/ldf-v21.0-xsd.bgf
+	_dev/format tank slps/ldf-v21.0-xsd ldf/v21.0-xsd
+	cp ../slps/topics/grammars/ldf/v21.1-xsd/grammar.bgf tank/slps/ldf-v21.1-xsd.bgf
+	_dev/format tank slps/ldf-v21.1-xsd ldf/v21.1-xsd
+	cp ../slps/topics/grammars/ldf/v22.0-xsd/grammar.bgf tank/slps/ldf-v22.0-xsd.bgf
+	_dev/format tank slps/ldf-v22.0-xsd ldf/v22.0-xsd
+	cp ../slps/topics/grammars/ldf/v23.0-xsd/grammar.bgf tank/slps/ldf-v23.0-xsd.bgf
+	_dev/format tank slps/ldf-v23.0-xsd ldf/v23.0-xsd
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/reference.bgf tank/tescol/reference.bgf
+	_dev/format tank tescol/reference tescol/Reference
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/00000.bgf tank/tescol/00000.bgf
+	_dev/format tank tescol/00000 tescol/00000
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/00001.bgf tank/tescol/00001.bgf
+	_dev/format tank tescol/00001 tescol/00001
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/00010.bgf tank/tescol/00010.bgf
+	_dev/format tank tescol/00010 tescol/00010
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/00011.bgf tank/tescol/00011.bgf
+	_dev/format tank tescol/00011 tescol/00011
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/00100.bgf tank/tescol/00100.bgf
+	_dev/format tank tescol/00100 tescol/00100
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/00101.bgf tank/tescol/00101.bgf
+	_dev/format tank tescol/00101 tescol/00101
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/00110.bgf tank/tescol/00110.bgf
+	_dev/format tank tescol/00110 tescol/00110
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/00111.bgf tank/tescol/00111.bgf
+	_dev/format tank tescol/00111 tescol/00111
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/01000.bgf tank/tescol/01000.bgf
+	_dev/format tank tescol/01000 tescol/01000
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/01001.bgf tank/tescol/01001.bgf
+	_dev/format tank tescol/01001 tescol/01001
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/01010.bgf tank/tescol/01010.bgf
+	_dev/format tank tescol/01010 tescol/01010
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/01011.bgf tank/tescol/01011.bgf
+	_dev/format tank tescol/01011 tescol/01011
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/01100.bgf tank/tescol/01100.bgf
+	_dev/format tank tescol/01100 tescol/01100
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/01101.bgf tank/tescol/01101.bgf
+	_dev/format tank tescol/01101 tescol/01101
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/01110.bgf tank/tescol/01110.bgf
+	_dev/format tank tescol/01110 tescol/01110
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/01111.bgf tank/tescol/01111.bgf
+	_dev/format tank tescol/01111 tescol/01111
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/10000.bgf tank/tescol/10000.bgf
+	_dev/format tank tescol/10000 tescol/10000
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/10001.bgf tank/tescol/10001.bgf
+	_dev/format tank tescol/10001 tescol/10001
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/10010.bgf tank/tescol/10010.bgf
+	_dev/format tank tescol/10010 tescol/10010
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/10011.bgf tank/tescol/10011.bgf
+	_dev/format tank tescol/10011 tescol/10011
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/10100.bgf tank/tescol/10100.bgf
+	_dev/format tank tescol/10100 tescol/10100
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/10101.bgf tank/tescol/10101.bgf
+	_dev/format tank tescol/10101 tescol/10101
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/10110.bgf tank/tescol/10110.bgf
+	_dev/format tank tescol/10110 tescol/10110
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/10111.bgf tank/tescol/10111.bgf
+	_dev/format tank tescol/10111 tescol/10111
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/11000.bgf tank/tescol/11000.bgf
+	_dev/format tank tescol/11000 tescol/11000
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/11001.bgf tank/tescol/11001.bgf
+	_dev/format tank tescol/11001 tescol/11001
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/11010.bgf tank/tescol/11010.bgf
+	_dev/format tank tescol/11010 tescol/11010
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/11011.bgf tank/tescol/11011.bgf
+	_dev/format tank tescol/11011 tescol/11011
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/11100.bgf tank/tescol/11100.bgf
+	_dev/format tank tescol/11100 tescol/11100
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/11101.bgf tank/tescol/11101.bgf
+	_dev/format tank tescol/11101 tescol/11101
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/11110.bgf tank/tescol/11110.bgf
+	_dev/format tank tescol/11110 tescol/11110
+	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/11111.bgf tank/tescol/11111.bgf
+	_dev/format tank tescol/11111 tescol/11111
+	cp ../slps/topics/grammars/metamodels/ACG/grammar.bgf tank/metamodels/ACG.bgf
 	_dev/format tank metamodels/ACG metamodels/ACG
 	cp ../slps/topics/grammars/metamodels/ACME/grammar.bgf tank/metamodels/ACME.bgf
 	_dev/format tank metamodels/ACME metamodels/ACME

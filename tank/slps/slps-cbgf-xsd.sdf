@@ -1,0 +1,408 @@
+module Main
+
+exports
+ context-free start-symbols sequence
+  sorts
+        Sequence Transformation Folding-unfolding-transformation Unfold-fold Nonterminal Scope Label Fold-unfold Inline-extract Production Expression Value Terminal Selector Extract-inline Abridge-detour Detour-abridge Unchain-chain Chain-unchain Unfold Fold Inline Extract Abridge Detour Unchain Chain Refactoring-transformation Massage-massage Factor-factor Deyaccify-yaccify Yaccify-deyaccify Eliminate-introduce Introduce-eliminate Vertical-horizontal Horizontal-vertical Assoc-iterate Iterate-assoc Equate-clone Clone-equate Massage Distribute Factor Deyaccify Yaccify Eliminate Introduce Import Vertical Horizontal Equate Rassoc Lassoc Iterate SplitT Increasing-decreasing-transformation Add-remove Remove-add Appear-disappear Disappear-appear Widen-narrow Narrow-widen Upgrade-downgrade Downgrade-upgrade Unite-split Split-unite Concrete-revising-transformation Abstractize-concretize Concretize-abstractize Permute-permute Abstractize Concretize Permute Abstract-revising-transformation Define-undefine Undefine-define Inject-project Project-inject Replace-replace Define Undefine Redefine Inject Project Replace Decorative-transformation Designate-unlabel Unlabel-designate Deanonymize-anonymize Anonymize-deanonymize Designate Unlabel Deanonymize Anonymize Rename-rename Reroot-reroot Roots Increasing-transformation Add Appear Widen Upgrade Unite Decreasing-transformation Remove Disappear Narrow Downgrade Split Rename Reroot Strip Dump Bypass Atomic 
+  context-free syntax
+        (Transformation | Atomic)* -> Sequence
+
+        Folding-unfolding-transformation -> Transformation
+        Refactoring-transformation -> Transformation
+        Increasing-decreasing-transformation -> Transformation
+        Concrete-revising-transformation -> Transformation
+        Abstract-revising-transformation -> Transformation
+        Decorative-transformation -> Transformation
+        Rename-rename -> Transformation
+        Reroot-reroot -> Transformation
+
+        Folding-unfolding-transformation -> Transformation
+        Refactoring-transformation -> Transformation
+        Increasing-transformation -> Transformation
+        Decreasing-transformation -> Transformation
+        Concrete-revising-transformation -> Transformation
+        Abstract-revising-transformation -> Transformation
+        Decorative-transformation -> Transformation
+        Rename -> Transformation
+        Reroot -> Transformation
+        Strip -> Transformation
+        Dump -> Transformation
+        Bypass -> Transformation
+
+        Unfold-fold -> Folding-unfolding-transformation
+        Fold-unfold -> Folding-unfolding-transformation
+        Inline-extract -> Folding-unfolding-transformation
+        Extract-inline -> Folding-unfolding-transformation
+        Abridge-detour -> Folding-unfolding-transformation
+        Detour-abridge -> Folding-unfolding-transformation
+        Unchain-chain -> Folding-unfolding-transformation
+        Chain-unchain -> Folding-unfolding-transformation
+
+        Unfold -> Folding-unfolding-transformation
+        Fold -> Folding-unfolding-transformation
+        Inline -> Folding-unfolding-transformation
+        Extract -> Folding-unfolding-transformation
+        Abridge -> Folding-unfolding-transformation
+        Detour -> Folding-unfolding-transformation
+        Unchain -> Folding-unfolding-transformation
+        Chain -> Folding-unfolding-transformation
+
+        nonterminal::Nonterminal in::Scope? -> Unfold-fold
+
+        STR -> Nonterminal
+
+        STR -> Nonterminal
+
+        label::Label -> Scope
+        nonterminal::Nonterminal -> Scope
+
+        label::Label -> Scope
+        nonterminal::Nonterminal -> Scope
+
+        STR -> Label
+
+        STR -> Label
+
+        nonterminal::Nonterminal in::Scope? -> Fold-unfold
+
+        Production in::Scope? -> Inline-extract
+
+        label::Label? nonterminal::Nonterminal Expression -> Production
+
+        label::Label? nonterminal::Nonterminal Expression -> Production
+
+        epsilon:: -> Expression
+        empty:: -> Expression
+        value::Value -> Expression
+        any:: -> Expression
+        terminal::Terminal -> Expression
+        nonterminal::Nonterminal -> Expression
+        selectable::(selector::Selector Expression) -> Expression
+        marked::Expression -> Expression
+        sequence::(Expression+) -> Expression
+        choice::(Expression+) -> Expression
+        allof::(Expression+) -> Expression
+        not::Expression -> Expression
+        optional::Expression -> Expression
+        plus::Expression -> Expression
+        star::Expression -> Expression
+        seplistplus::(Expression Expression) -> Expression
+        sepliststar::(Expression Expression) -> Expression
+
+        epsilon:: -> Expression
+        empty:: -> Expression
+        value::Value -> Expression
+        any:: -> Expression
+        terminal::Terminal -> Expression
+        nonterminal::Nonterminal -> Expression
+        selectable::(selector::Selector Expression) -> Expression
+        marked::Expression -> Expression
+        sequence::(Expression+) -> Expression
+        choice::(Expression+) -> Expression
+        allof::(Expression+) -> Expression
+        not::Expression -> Expression
+        optional::Expression -> Expression
+        plus::Expression -> Expression
+        star::Expression -> Expression
+        seplistplus::(Expression Expression) -> Expression
+        sepliststar::(Expression Expression) -> Expression
+
+        int:: -> Value
+        string:: -> Value
+
+        int:: -> Value
+        string:: -> Value
+
+        STR -> Terminal
+
+        STR -> Terminal
+
+        STR -> Selector
+
+        STR -> Selector
+
+        Production in::Scope? -> Extract-inline
+
+        Production -> Abridge-detour
+
+        Production -> Detour-abridge
+
+        Production -> Unchain-chain
+
+        Production -> Chain-unchain
+
+        nonterminal::Nonterminal in::Scope? -> Unfold
+
+        nonterminal::Nonterminal in::Scope? -> Fold
+
+        Nonterminal -> Inline
+
+        Production in::Scope? -> Extract
+
+        Production -> Abridge
+
+        Production -> Detour
+
+        Production -> Unchain
+
+        Production -> Chain
+
+        Massage-massage -> Refactoring-transformation
+        Factor-factor -> Refactoring-transformation
+        Deyaccify-yaccify -> Refactoring-transformation
+        Yaccify-deyaccify -> Refactoring-transformation
+        Eliminate-introduce -> Refactoring-transformation
+        Introduce-eliminate -> Refactoring-transformation
+        Vertical-horizontal -> Refactoring-transformation
+        Horizontal-vertical -> Refactoring-transformation
+        Assoc-iterate -> Refactoring-transformation
+        Iterate-assoc -> Refactoring-transformation
+        Equate-clone -> Refactoring-transformation
+        Clone-equate -> Refactoring-transformation
+
+        Massage -> Refactoring-transformation
+        Distribute -> Refactoring-transformation
+        Factor -> Refactoring-transformation
+        Deyaccify -> Refactoring-transformation
+        Yaccify -> Refactoring-transformation
+        Eliminate -> Refactoring-transformation
+        Introduce -> Refactoring-transformation
+        Import -> Refactoring-transformation
+        Vertical -> Refactoring-transformation
+        Horizontal -> Refactoring-transformation
+        Equate -> Refactoring-transformation
+        Rassoc -> Refactoring-transformation
+        Lassoc -> Refactoring-transformation
+        Iterate -> Refactoring-transformation
+        SplitT -> Refactoring-transformation
+
+        Expression Expression in::Scope? -> Massage-massage
+
+        Expression Expression in::Scope? -> Factor-factor
+
+        Production+ -> Deyaccify-yaccify
+
+        Production+ -> Yaccify-deyaccify
+
+        Production+ -> Eliminate-introduce
+
+        Production+ -> Introduce-eliminate
+
+        nonterminal::Nonterminal -> Vertical-horizontal
+
+        nonterminal::Nonterminal -> Horizontal-vertical
+
+        Production Production -> Assoc-iterate
+
+        Production Production -> Iterate-assoc
+
+        align::(Production+) with::Nonterminal in::(Scope+) -> Equate-clone
+
+        align::(Production+) with::Nonterminal in::(Scope+) -> Clone-equate
+
+        Expression Expression in::Scope? -> Massage
+
+        Scope -> Distribute
+
+        Expression Expression in::Scope? -> Factor
+
+        nonterminal::Nonterminal -> Deyaccify
+
+        Production+ -> Yaccify
+
+        nonterminal::Nonterminal -> Eliminate
+
+        Production+ -> Introduce
+
+        Production+ -> Import
+
+        Scope -> Vertical
+
+        nonterminal::Nonterminal -> Horizontal
+
+        align::Nonterminal with::Nonterminal -> Equate
+
+        Production -> Rassoc
+
+        Production -> Lassoc
+
+        Production -> Iterate
+
+        terminal::Terminal into::(terminal::Terminal+) in::Scope? -> SplitT
+
+        Add-remove -> Increasing-decreasing-transformation
+        Remove-add -> Increasing-decreasing-transformation
+        Appear-disappear -> Increasing-decreasing-transformation
+        Disappear-appear -> Increasing-decreasing-transformation
+        Widen-narrow -> Increasing-decreasing-transformation
+        Narrow-widen -> Increasing-decreasing-transformation
+        Upgrade-downgrade -> Increasing-decreasing-transformation
+        Downgrade-upgrade -> Increasing-decreasing-transformation
+        Unite-split -> Increasing-decreasing-transformation
+        Split-unite -> Increasing-decreasing-transformation
+
+        vertical::Production -> Add-remove
+        horizontal::Production -> Add-remove
+
+        vertical::Production -> Remove-add
+        horizontal::Production -> Remove-add
+
+        Production -> Appear-disappear
+
+        Production -> Disappear-appear
+
+        Expression Expression in::Scope? -> Widen-narrow
+
+        Expression Expression in::Scope? -> Narrow-widen
+
+        Production Production -> Upgrade-downgrade
+
+        Production Production -> Downgrade-upgrade
+
+        add::(Production+) to::(Production+) in::(Scope+) -> Unite-split
+
+        add::(Production+) to::(Production+) in::(Scope+) -> Split-unite
+
+        Abstractize-concretize -> Concrete-revising-transformation
+        Concretize-abstractize -> Concrete-revising-transformation
+        Permute-permute -> Concrete-revising-transformation
+
+        Abstractize -> Concrete-revising-transformation
+        Concretize -> Concrete-revising-transformation
+        Permute -> Concrete-revising-transformation
+
+        Production -> Abstractize-concretize
+
+        Production -> Concretize-abstractize
+
+        Production Production -> Permute-permute
+
+        Production -> Abstractize
+
+        Production -> Concretize
+
+        Production -> Permute
+
+        Define-undefine -> Abstract-revising-transformation
+        Undefine-define -> Abstract-revising-transformation
+        Inject-project -> Abstract-revising-transformation
+        Project-inject -> Abstract-revising-transformation
+        Replace-replace -> Abstract-revising-transformation
+
+        Define -> Abstract-revising-transformation
+        Undefine -> Abstract-revising-transformation
+        Redefine -> Abstract-revising-transformation
+        Inject -> Abstract-revising-transformation
+        Project -> Abstract-revising-transformation
+        Replace -> Abstract-revising-transformation
+
+        Production+ -> Define-undefine
+
+        Production+ -> Undefine-define
+
+        Production -> Inject-project
+
+        Production -> Project-inject
+
+        Expression Expression in::Scope? tag::STR -> Replace-replace
+
+        Production+ tag::STR -> Define
+
+        nonterminal::Nonterminal+ tag::STR -> Undefine
+
+        Production+ tag::STR -> Redefine
+
+        Production tag::STR -> Inject
+
+        Production tag::STR -> Project
+
+        Expression Expression in::Scope? tag::STR -> Replace
+
+        Designate-unlabel -> Decorative-transformation
+        Unlabel-designate -> Decorative-transformation
+        Deanonymize-anonymize -> Decorative-transformation
+        Anonymize-deanonymize -> Decorative-transformation
+
+        Designate -> Decorative-transformation
+        Unlabel -> Decorative-transformation
+        Deanonymize -> Decorative-transformation
+        Anonymize -> Decorative-transformation
+
+        Production -> Designate-unlabel
+
+        Production -> Unlabel-designate
+
+        Production -> Deanonymize-anonymize
+
+        Production -> Anonymize-deanonymize
+
+        Production -> Designate
+
+        label::Label -> Unlabel
+
+        Production -> Deanonymize
+
+        Production -> Anonymize
+
+        label::(from::Label to::Label) -> Rename-rename
+        nonterminal::(from::Nonterminal to::Nonterminal) -> Rename-rename
+        selector::(in::Label? from::Selector to::Selector) -> Rename-rename
+        terminal::(from::Terminal to::Terminal) -> Rename-rename
+
+        from::Roots to::Roots -> Reroot-reroot
+
+        root::Nonterminal* -> Roots
+
+        Add -> Increasing-transformation
+        Appear -> Increasing-transformation
+        Widen -> Increasing-transformation
+        Upgrade -> Increasing-transformation
+        Unite -> Increasing-transformation
+
+        vertical::Production -> Add
+        horizontal::Production -> Add
+
+        Production -> Appear
+
+        Expression Expression in::Scope? -> Widen
+
+        Production Production -> Upgrade
+
+        add::Nonterminal to::Nonterminal -> Unite
+
+        Remove -> Decreasing-transformation
+        Disappear -> Decreasing-transformation
+        Narrow -> Decreasing-transformation
+        Downgrade -> Decreasing-transformation
+        Split -> Decreasing-transformation
+
+        vertical::Production -> Remove
+        horizontal::Production -> Remove
+
+        Production -> Disappear
+
+        Expression Expression in::Scope? -> Narrow
+
+        Production Production -> Downgrade
+
+        nonterminal::Nonterminal Production+ Scope* -> Split
+
+        label::(from::Label to::Label) -> Rename
+        nonterminal::(from::Nonterminal to::Nonterminal) -> Rename
+        selector::(in::Label? from::Selector to::Selector) -> Rename
+        terminal::(from::Terminal to::Terminal) -> Rename
+
+        root::Nonterminal* -> Reroot
+
+        label::Label -> Strip
+        allLabels:: -> Strip
+        selector::Selector -> Strip
+        allSelectors:: -> Strip
+        terminal::Terminal -> Strip
+        allTerminals:: -> Strip
+
+         -> Dump
+
+         -> Bypass
+
+        Transformation+ -> Atomic
