@@ -87,13 +87,25 @@ exports
 
         "unit" Qualified-id Hint-directive? ";" NL -> Unit-decl
 
-        "(" Id"," ")" -> Program-file-list
+        "(" 
+	    Id
+	    ","
+	   ")" -> Program-file-list
 
-        "requires" Qualified-id"," ";" NL -> Requires-clause
+        "requires" 
+	    Qualified-id
+	    ","
+	   ";" NL -> Requires-clause
 
-        "contains" Uses-item"," ";" NL -> Contains-clause
+        "contains" 
+	    Uses-item
+	    ","
+	   ";" NL -> Contains-clause
 
-        "uses" (NL IN) Uses-item"," ";" (EX NL) -> Uses-clause
+        "uses" NL IN 
+	    Uses-item
+	    ","
+	   ";" EX NL -> Uses-clause
 
         Qualified-id In-filename? -> Uses-item
 
@@ -150,15 +162,21 @@ exports
         Label-decl -> Nested-decl-section
         Procedure-impl-decl -> Nested-decl-section
 
-        "label" Label-id"," ";" NL -> Label-decl
+        "label" 
+	    Label-id
+	    ","
+	   ";" NL -> Label-decl
 
-        "exports" Exports-entry"," ";" NL -> Exports-section
+        "exports" 
+	    Exports-entry
+	    ","
+	   ";" NL -> Exports-section
 
         Procedure-id Formal-parameters? External-name? -> Exports-entry
 
         "resourcestring" Constant-decl+ -> Resource-section
 
-        "const" (NL IN) Constant-decl+ EX -> Const-section
+        "const" NL IN Constant-decl+ EX -> Const-section
 
         Identlist Constant-spec Hint-directive? ";" NL -> Constant-decl
 
@@ -171,7 +189,10 @@ exports
         Record-constant -> Typed-const
         Expr -> Typed-const
 
-        "(" Typed-const"," ")" -> Array-constant
+        "(" 
+	    Typed-const
+	    ","
+	   ")" -> Array-constant
 
         Id Colon Typed-const -> Record-field-constant
 
@@ -179,7 +200,7 @@ exports
 
         Record-field-constant ";" NL -> Record-field-constant-semi
 
-        Var-keyword (NL IN) Var-decl+ EX -> Var-section
+        Var-keyword NL IN Var-decl+ EX -> Var-section
 
         "var" -> Var-keyword
         "threadvar" -> Var-keyword
@@ -191,7 +212,7 @@ exports
 
         "absolute" Expr -> Absolute-init
 
-        "type" (NL IN) Type-decl+ EX -> Type-section
+        "type" NL IN Type-decl+ EX -> Type-section
 
         Identlist Equal "type"? Type-spec Hint-directive? ";" NL -> Type-decl
 
@@ -282,7 +303,10 @@ exports
         "array" Of-const -> Array-type
         "packed"? "array" Array-index-list* Of-basetype -> Array-type
 
-        "[" Array-index"," "]" -> Array-index-list
+        "[" 
+	    Array-index
+	    ","
+	   "]" -> Array-index-list
 
         Ordinal-type -> Array-index
         Qualified-id -> Array-index
@@ -334,7 +358,10 @@ exports
         "const" -> Parm-qual
         "out" -> Parm-qual
 
-        Id"," Parameter-type? -> Parameter
+        
+	    Id
+	    ","
+	   Parameter-type? -> Parameter
 
         Colon-type Param-init? -> Parameter-type
 
@@ -345,7 +372,10 @@ exports
         Sequence-stm -> Procedure-body
         "forward" -> Procedure-body
 
-        "(" Qualified-id"," ")" -> Heritage-list
+        "(" 
+		Qualified-id
+		","
+	       ")" -> Heritage-list
         "helper" "for" Id -> Heritage-list
 
         "class" -> Class-keyword
@@ -369,7 +399,7 @@ exports
 
         IN Class-member* EX -> Visibility-default
 
-        Visibility (NL IN) Class-member* EX -> Visibility-block
+        Visibility NL IN Class-member* EX -> Visibility-block
 
         Procedure-signature Method-deleg -> Method-decl
         Procedure-signature ";" Dispid-spec ";" -> Method-decl
@@ -430,7 +460,10 @@ exports
         "default" SP Expr -> Default-spec
         "nodefault" -> Default-spec
 
-        "implements" Qualified-id"," -> Implements-spec
+        "implements" 
+	    Qualified-id
+	    ","
+	   -> Implements-spec
 
         SP SPOFF Expression SPON -> Expr
 
@@ -546,11 +579,14 @@ exports
         "try" NL Statement-list "except" NL Exception-block End-struct -> Try-except-stm
 
         Sequence-stm -> Nested-stm
-        (NL IN) Statement? EX -> Nested-stm
+        NL IN Statement? EX -> Nested-stm
 
         NL "else" Nested-stm -> Else-stm
 
-        Case-label"," Colon Nested-stm ";"? -> Case-selector
+        
+	    Case-label
+	    ","
+	   Colon Nested-stm ";"? -> Case-selector
 
         Expr Dotdot-expr? -> Case-label
 

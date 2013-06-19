@@ -22,11 +22,11 @@ library_definition:
 unit_definition:
         "unit" decl_name ";" NL interface_section NL implementation_section NL init_section "."
 interface_section:
-        "interface" (NL NL) uses_clause? NL interface_declaration*
+        "interface" NL NL uses_clause? NL interface_declaration*
 implementation_section:
-        "implementation" (IN NL) uses_clause? declaration_section* (EX NL)
+        "implementation" IN NL uses_clause? declaration_section* EX NL
 init_section:
-        "intitialization" (IN NL) statement_list fin_statement_list? (EX NL) "end"
+        "intitialization" IN NL statement_list fin_statement_list? EX NL "end"
         compound_statement
         "end"
 interface_declaration:
@@ -42,7 +42,7 @@ exported_heading:
 program_block:
         uses_clause? block
 uses_clause:
-        "uses" (IN NL) uses_item+ ";" (EX NL)
+        "uses" IN NL uses_item+ ";" EX NL
 uses_item:
         ref_name in_clause?
 in_clause:
@@ -58,12 +58,12 @@ declaration_section:
 label_declaration_section:
         "label" decl_name
 constant_section:
-        "const" (IN NL) constant_declaration* (EX NL)
+        "const" IN NL constant_declaration* EX NL
 constant_declaration:
         decl_name "=" expression ";" NL
         decl_name ":" typeId "=" typed_constant ";" NL
 type_section:
-        "type" (IN NL) type_declaration+ (EX NL)
+        "type" IN NL type_declaration+ EX NL
 type_declaration:
         decl_name "=" type_or_restrictedType
 type_or_restrictedType:
@@ -214,7 +214,7 @@ ident_list_colonType:
 fin_statement_list:
         "finalization" statement_list
 classType:
-        "class" class_heritage? (IN NL) class_element_list? vis_spec_element_list* (EX NL) "end"?
+        "class" class_heritage? IN NL class_element_list? vis_spec_element_list* EX NL "end"?
 class_heritage:
         "(" {ref_name ","}* ")"
 class_visibility:
@@ -278,7 +278,7 @@ interfaceType:
 interface_heritage:
         "(" {ref_name ","}* ")"
 var_section:
-        var (NL IN) var_declaration_semicolon* (NL EX)
+        var NL IN var_declaration_semicolon* NL EX
 var:
         "var"
         "Var"
@@ -302,13 +302,13 @@ procedure_section:
         constructor_declaration
         destructor_declaration
 constructor_declaration:
-        constructor_heading ";" (IN NL) block (EX NL) ";" NL
+        constructor_heading ";" IN NL block EX NL ";" NL
 destructor_declaration:
-        destructor_heading ";" (IN NL) block (EX NL) ";" NL
+        destructor_heading ";" IN NL block EX NL ";" NL
 procedure_declaration:
-        procedure_heading ";" (IN NL) block (EX NL) ";" NL
+        procedure_heading ";" IN NL block EX NL ";" NL
 function_declaration:
-        function_heading semi_directive? ";" (IN NL) block (EX NL) ";" NL
+        function_heading semi_directive? ";" IN NL block EX NL ";" NL
 function_heading:
         function_word decl_name formal_parameters? ":" type_or_string
 type_or_string:
@@ -369,7 +369,7 @@ struct_statement:
         try_except_statement
         raise_statement
 compound_statement:
-        begin (IN NL) statement_list (EX NL) "end" NL
+        begin IN NL statement_list EX NL "end" NL
 begin:
         "begin"
         "Begin"
@@ -384,7 +384,7 @@ if:
         "if"
         "If"
 case_statement:
-        "case" expression "of" case_selector (IN NL) semi_case_selector* ";"? (EX NL) else_statement? ";"? NL "end"
+        "case" expression "of" case_selector IN NL semi_case_selector* ";"? EX NL else_statement? ";"? NL "end"
 semi_case_selector:
         ";" NL case_selector
 case_selector:
@@ -416,9 +416,9 @@ do:
 with_statement:
         "with" ref_name+ do statement
 try_finally_statement:
-        "try" (IN NL) statement_list (EX NL) "finally" (IN NL) statement_list (EX NL) "end"
+        "try" IN NL statement_list EX NL "finally" IN NL statement_list EX NL "end"
 try_except_statement:
-        "try" (IN NL) statement_list (EX NL) except ";"? (IN NL) exception_block (EX NL) "end"
+        "try" IN NL statement_list EX NL except ";"? IN NL exception_block EX NL "end"
 except:
         "except"
         "Except"
@@ -427,13 +427,13 @@ exception_block:
         statement_list
         exception_else
 exception_else:
-        exception_handler_list (NL EX) else_statement?
+        exception_handler_list NL EX else_statement?
 exception_handler_list:
         exception_handler semi_exception_handler* ";"?
 semi_exception_handler:
         ";" exception_handler
 exception_handler:
-        "on" exception_var? type do (IN NL) statement EX
+        "on" exception_var? type do IN NL statement EX
 exception_var:
         decl_name ":"
 raise_statement:

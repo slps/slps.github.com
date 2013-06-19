@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        JavaElement ClassFeature ClassMember Field JavaClass Method Package PrimitiveType FeatureParameter 
+        JavaElement ClassFeature ClassMember Field JavaClass Method Package PrimitiveType FeatureParameter String Boolean 
   context-free syntax
         ClassFeature -> JavaElement
 
@@ -28,6 +28,11 @@ exports
 
         classes::JavaClass+ -> Package
 
-         -> PrimitiveType
+        members::ClassMember+ package::Package typedElements::ClassMember+ parameters::FeatureParameter+ isAbstract::Boolean isStatic::Boolean isPublic::Boolean -> PrimitiveType
 
         type::JavaClass method::Method -> FeatureParameter
+
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean

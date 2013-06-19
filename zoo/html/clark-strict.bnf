@@ -256,6 +256,10 @@ button.attlist:
         Common.attrib (name::STR)? (value::STR)? (type::("button" | "submit" | "reset"))? (disabled::"disabled")? (tabindex::Number.datatype)? (accesskey::Character.datatype)?
 Events.attrib:
         (onclick::Script.datatype)? (ondblclick::Script.datatype)? (onmousedown::Script.datatype)? (onmouseup::Script.datatype)? (onmouseover::Script.datatype)? (onmousemove::Script.datatype)? (onmouseout::Script.datatype)? (onkeypress::Script.datatype)? (onkeydown::Script.datatype)? (onkeyup::Script.datatype)?
+select:
+        select::(select.attlist (option | optgroup)+)
+select:
+        select::(select.attlist option+)
 InputType.class:
         "image"
         "button"
@@ -300,8 +304,6 @@ label:
         label::(label.attlist Inline.model)
 input:
         input::input.attlist
-select:
-        select::(select.attlist option+)
 option:
         option::(Common.attrib (selected::"selected")? (value::STR)? STR)
 textarea:
@@ -429,6 +431,26 @@ style:
         style::(style.attlist STR)
 style.attlist:
         title.attrib I18n.attrib type::ContentType.datatype (media::MediaDesc.datatype)? (xml:space::"preserve")?
+table:
+        table::(table.attlist caption? (col* | colgroup*) ((thead? tfoot? tbody+) | tr+))
+table:
+        table::(table.attlist caption? tr+)
+th:
+        th::(th.attlist Flow.model)
+td:
+        td::(td.attlist Flow.model)
+CellHAlign.attrib:
+        (align::("left" | "center" | "right" | "justify" | "char"))? (char::Character.datatype)? (charoff::Length.datatype)?
+CellHAlign.attrib:
+        (align::("left" | "center" | "right"))?
+CellVAlign.attrib:
+        (valign::("top" | "middle" | "bottom" | "baseline"))?
+CellVAlign.attrib:
+        (valign::("top" | "middle" | "bottom"))?
+scope.attrib:
+        (scope::("row" | "col" | "rowgroup" | "colgroup"))?
+scope.attrib:
+        (scope::("row" | "col"))?
 table.attlist:
         (width::Length.datatype)? (border::Pixels.datatype)? frame.attrib rules.attrib (cellspacing::Length.datatype)? (cellpadding::Length.datatype)?
 table.attlist:
@@ -455,8 +477,6 @@ tfoot.attlist:
         Common.attrib CellHAlign.attrib CellVAlign.attrib
 rules.attrib:
         (rules::("none" | "groups" | "rows" | "cols" | "all"))?
-table:
-        table::(table.attlist caption? tr+)
 caption:
         caption::(caption.attlist Inline.model)
 caption.attlist:
@@ -465,22 +485,12 @@ tr:
         tr::(tr.attlist (th | td)+)
 tr.attlist:
         Common.attrib CellHAlign.attrib CellVAlign.attrib
-th:
-        th::(th.attlist Flow.model)
 th.attlist:
         Cell.attrib
-td:
-        td::(td.attlist Flow.model)
 td.attlist:
         Cell.attrib
 Cell.attrib:
         Common.attrib (abbr::Text.datatype)? (axis::STR)? (headers::IDREFS.datatype)? scope.attrib (rowspan::Number.datatype)? (colspan::Number.datatype)? CellHAlign.attrib CellVAlign.attrib
-CellHAlign.attrib:
-        (align::("left" | "center" | "right"))?
-CellVAlign.attrib:
-        (valign::("top" | "middle" | "bottom"))?
-scope.attrib:
-        (scope::("row" | "col"))?
 link.attrib:
         target.attrib
 target.attrib:

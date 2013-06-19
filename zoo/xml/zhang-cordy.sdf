@@ -198,9 +198,9 @@ exports
         Token -> Cdata
         Comment -> Cdata
 
-        "]" "]" ">" -> Cdend
+        "]]>" -> Cdend
 
         "&" Name ";" -> Reference
         Charref -> Reference
 
-        "<!" "[" "CDATA" "[" Cdata* Cdend -> Cdsect
+        "<![CDATA[" Cdata* Cdend -> Cdsect

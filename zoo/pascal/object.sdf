@@ -11,7 +11,10 @@ exports
 
         "program" Decl-name Program-file-list? ";" NL Program-block "." -> Program-definition
 
-        "(" Id"," ")" -> Program-file-list
+        "(" 
+	    Id
+	    ","
+	   ")" -> Program-file-list
 
         "package" Decl-name ";" NL Requires-clause? Contains-clause? "end" "." -> Package-definition
 
@@ -27,11 +30,11 @@ exports
 
         "unit" Decl-name ";" NL Interface-section NL Implementation-section NL Init-section "." -> Unit-definition
 
-        "interface" (NL NL) Uses-clause? NL Interface-declaration* -> Interface-section
+        "interface" NL NL Uses-clause? NL Interface-declaration* -> Interface-section
 
-        "implementation" (IN NL) Uses-clause? Declaration-section* (EX NL) -> Implementation-section
+        "implementation" IN NL Uses-clause? Declaration-section* EX NL -> Implementation-section
 
-        "intitialization" (IN NL) Statement-list Fin-statement-list? (EX NL) "end" -> Init-section
+        "intitialization" IN NL Statement-list Fin-statement-list? EX NL "end" -> Init-section
         Compound-statement -> Init-section
         "end" -> Init-section
 
@@ -47,7 +50,7 @@ exports
 
         Uses-clause? Block -> Program-block
 
-        "uses" (IN NL) Uses-item+ ";" (EX NL) -> Uses-clause
+        "uses" IN NL Uses-item+ ";" EX NL -> Uses-clause
 
         Ref-name In-clause? -> Uses-item
 
@@ -63,12 +66,12 @@ exports
 
         "label" Decl-name -> Label-declaration-section
 
-        "const" (IN NL) Constant-declaration* (EX NL) -> Constant-section
+        "const" IN NL Constant-declaration* EX NL -> Constant-section
 
         Decl-name "=" Expression ";" NL -> Constant-declaration
         Decl-name ":" TypeId "=" Typed-constant ";" NL -> Constant-declaration
 
-        "type" (IN NL) Type-declaration+ (EX NL) -> Type-section
+        "type" IN NL Type-declaration+ EX NL -> Type-section
 
         Decl-name "=" Type-or-restrictedType -> Type-declaration
 
@@ -79,7 +82,10 @@ exports
         Array-constant -> Typed-constant
         Record-constant -> Typed-constant
 
-        "(" Typed-constant"," ")" -> Array-constant
+        "(" 
+	    Typed-constant
+	    ","
+	   ")" -> Array-constant
 
         "(" Typed-constant Semicolon-record-field-constant* ")" -> Record-constant
 
@@ -115,7 +121,10 @@ exports
         EnumeratedType -> OrdinalType
         Ordinal-identifier -> OrdinalType
 
-        "(" Decl-name"," ")" -> EnumeratedType
+        "(" 
+	    Decl-name
+	    ","
+	   ")" -> EnumeratedType
 
         "shortint" -> Ordinal-identifier
         "smallint" -> Ordinal-identifier
@@ -150,7 +159,10 @@ exports
         "array" -> Array-word
         "Array" -> Array-word
 
-        "[" OrdinalType"," "]" -> Square-ordinalType
+        "[" 
+	    OrdinalType
+	    ","
+	   "]" -> Square-ordinalType
 
         "record" Field-list "end" -> RecordType
 
@@ -219,9 +231,12 @@ exports
 
         "finalization" Statement-list -> Fin-statement-list
 
-        "class" Class-heritage? (IN NL) Class-element-list? Vis-spec-element-list* (EX NL) "end"? -> ClassType
+        "class" Class-heritage? IN NL Class-element-list? Vis-spec-element-list* EX NL "end"? -> ClassType
 
-        "(" Ref-name"," ")" -> Class-heritage
+        "(" 
+	    Ref-name
+	    ","
+	   ")" -> Class-heritage
 
         "public" -> Class-visibility
         "protected" -> Class-visibility
@@ -281,9 +296,12 @@ exports
 
         "interface" Interface-heritage? Class-method-list? Class-property-list? "end" -> InterfaceType
 
-        "(" Ref-name"," ")" -> Interface-heritage
+        "(" 
+	    Ref-name
+	    ","
+	   ")" -> Interface-heritage
 
-        Var (NL IN) Var-declaration-semicolon* (NL EX) -> Var-section
+        Var NL IN Var-declaration-semicolon* NL EX -> Var-section
 
         "var" -> Var
         "Var" -> Var
@@ -307,13 +325,13 @@ exports
         Constructor-declaration -> Procedure-section
         Destructor-declaration -> Procedure-section
 
-        Constructor-heading ";" (IN NL) Block (EX NL) ";" NL -> Constructor-declaration
+        Constructor-heading ";" IN NL Block EX NL ";" NL -> Constructor-declaration
 
-        Destructor-heading ";" (IN NL) Block (EX NL) ";" NL -> Destructor-declaration
+        Destructor-heading ";" IN NL Block EX NL ";" NL -> Destructor-declaration
 
-        Procedure-heading ";" (IN NL) Block (EX NL) ";" NL -> Procedure-declaration
+        Procedure-heading ";" IN NL Block EX NL ";" NL -> Procedure-declaration
 
-        Function-heading Semi-directive? ";" (IN NL) Block (EX NL) ";" NL -> Function-declaration
+        Function-heading Semi-directive? ";" IN NL Block EX NL ";" NL -> Function-declaration
 
         Function-word Decl-name Formal-parameters? ":" Type-or-string -> Function-heading
 
@@ -338,7 +356,10 @@ exports
         "const" -> Parm-qual
         "out" -> Parm-qual
 
-        Decl-name"," Parameter-type? -> Parameter
+        
+	    Decl-name
+	    ","
+	   Parameter-type? -> Parameter
 
         ":" Array-of? Type Param-init? -> Parameter-type
 
@@ -374,7 +395,7 @@ exports
         Try-except-statement -> Struct-statement
         Raise-statement -> Struct-statement
 
-        Begin (IN NL) Statement-list (EX NL) "end" NL -> Compound-statement
+        Begin IN NL Statement-list EX NL "end" NL -> Compound-statement
 
         "begin" -> Begin
         "Begin" -> Begin
@@ -389,7 +410,7 @@ exports
         "if" -> If
         "If" -> If
 
-        "case" Expression "of" Case-selector (IN NL) Semi-case-selector* ";"? (EX NL) Else-statement? ";"? NL "end" -> Case-statement
+        "case" Expression "of" Case-selector IN NL Semi-case-selector* ";"? EX NL Else-statement? ";"? NL "end" -> Case-statement
 
         ";" NL Case-selector -> Semi-case-selector
 
@@ -421,9 +442,9 @@ exports
 
         "with" Ref-name+ Do Statement -> With-statement
 
-        "try" (IN NL) Statement-list (EX NL) "finally" (IN NL) Statement-list (EX NL) "end" -> Try-finally-statement
+        "try" IN NL Statement-list EX NL "finally" IN NL Statement-list EX NL "end" -> Try-finally-statement
 
-        "try" (IN NL) Statement-list (EX NL) Except ";"? (IN NL) Exception-block (EX NL) "end" -> Try-except-statement
+        "try" IN NL Statement-list EX NL Except ";"? IN NL Exception-block EX NL "end" -> Try-except-statement
 
         "except" -> Except
         "Except" -> Except
@@ -432,13 +453,13 @@ exports
         Statement-list -> Exception-block
         Exception-else -> Exception-block
 
-        Exception-handler-list (NL EX) Else-statement? -> Exception-else
+        Exception-handler-list NL EX Else-statement? -> Exception-else
 
         Exception-handler Semi-exception-handler* ";"? -> Exception-handler-list
 
         ";" Exception-handler -> Semi-exception-handler
 
-        "on" Exception-var? Type Do (IN NL) Statement EX -> Exception-handler
+        "on" Exception-var? Type Do IN NL Statement EX -> Exception-handler
 
         Decl-name ":" -> Exception-var
 
@@ -506,7 +527,10 @@ exports
         "True" -> Bool-value
         "False" -> Bool-value
 
-        "(" Expression"," ")" -> Arguments
+        "(" 
+	    Expression
+	    ","
+	   ")" -> Arguments
 
         ">" -> Rel-op
         "<" -> Rel-op
@@ -532,7 +556,10 @@ exports
         "DIV" -> Mul-op
         "AND" -> Mul-op
 
-        "[" Set-element"," "]" -> Set-constructor
+        "[" 
+	    Set-element
+	    ","
+	   "]" -> Set-constructor
 
         Expression DotDot-expression? -> Set-element
 
@@ -557,7 +584,10 @@ exports
 
         "." Id -> Dot-id
 
-        "[" Expression"," "]" -> Array-subscript
+        "[" 
+	    Expression
+	    ","
+	   "]" -> Array-subscript
 
         As Type -> As-type
 

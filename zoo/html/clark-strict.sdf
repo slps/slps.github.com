@@ -3,7 +3,7 @@ module Main
 exports
  context-free start-symbols html
   sorts
-        Applet Applet.attlist Inline.class Id.attrib Class.attrib Title.attrib Core.attrib Lang.attrib I18n.attrib Common.attrib CommonIdRequired.attrib Base Base.attlist Head.content Bdo Bdo.attlist Dir.attrib Area Area.attlist Map Map.attlist A.attlist Img.attlist Object.attlist Usemap.attlist Shape.attrib Coords.attrib Length.datatype LinkTypes.datatype MediaDesc.datatype MultiLength.datatype Number.datatype Pixels.datatype Script.datatype Text.datatype Character.datatype Charset.datatype Charsets.datatype ContentType.datatype ContentTypes.datatype Datetime.datatype FPI.datatype LanguageCode.datatype URI.datatype URIs.datatype NMTOKEN.datatype NMTOKENS.datatype ID.datatype IDREF.datatype IDREFS.datatype Del Del.attlist Ins Ins.attlist Edit.attrib Edit.class Block.class Form.attlist Body.attlist Label.attlist Input.attlist Select.attlist Textarea.attlist Button.attlist Events.attrib InputType.class Option.attlist Optgroup Optgroup.attlist Fieldset Fieldset.attlist Button Legend Legend.attlist Form.class Formctrl.class Form Label Input Select Option Textarea A Iframe Iframe.attlist Img Link Link.attlist Dl Dl.attlist Dt Dt.attlist Dd Dd.attlist Ol Ol.attlist Ul Ul.attlist Li Li.attlist List.class Meta Meta.attlist Frame.attrib Name.attlist Object Param Param.attlist Hr Hr.attlist B B.attlist Big Big.attlist I I.attlist Small Small.attlist Sub Sub.attlist Sup Sup.attlist Tt Tt.attlist Script Script.attlist Noscript Noscript.attlist Script.class Title Title.attlist Head Head.attlist Profile.attlist Body Html Html.attlist XHTML.version.attrib Style Style.attlist Table.attlist Col Col.attlist Colgroup Colgroup.attlist Tbody Tbody.attlist Thead Thead.attlist Tfoot Tfoot.attlist Rules.attrib Table Caption Caption.attlist Tr Tr.attlist Th Th.attlist Td Td.attlist Cell.attrib CellHAlign.attrib CellVAlign.attrib Scope.attrib Link.attrib Target.attrib Br Br.attlist Span Span.attlist Abbr Abbr.attlist Acronym Acronym.attlist Cite Cite.attlist Code Code.attlist Dfn Dfn.attlist Em Em.attlist Kbd Kbd.attlist Q Q.attlist Samp Samp.attlist Strong Strong.attlist Var Var.attlist Div Div.attlist P P.attlist Address Address.attlist Blockquote Blockquote.attlist Pre Pre.attlist H1 H2 H3 H4 H5 H6 Heading.attrib Heading.content Heading.class Inline.model Block.mix Block.model Flow.model 
+        Applet Applet.attlist Inline.class Id.attrib Class.attrib Title.attrib Core.attrib Lang.attrib I18n.attrib Common.attrib CommonIdRequired.attrib Base Base.attlist Head.content Bdo Bdo.attlist Dir.attrib Area Area.attlist Map Map.attlist A.attlist Img.attlist Object.attlist Usemap.attlist Shape.attrib Coords.attrib Length.datatype LinkTypes.datatype MediaDesc.datatype MultiLength.datatype Number.datatype Pixels.datatype Script.datatype Text.datatype Character.datatype Charset.datatype Charsets.datatype ContentType.datatype ContentTypes.datatype Datetime.datatype FPI.datatype LanguageCode.datatype URI.datatype URIs.datatype NMTOKEN.datatype NMTOKENS.datatype ID.datatype IDREF.datatype IDREFS.datatype Del Del.attlist Ins Ins.attlist Edit.attrib Edit.class Block.class Form.attlist Body.attlist Label.attlist Input.attlist Select.attlist Textarea.attlist Button.attlist Events.attrib Select InputType.class Option.attlist Optgroup Optgroup.attlist Fieldset Fieldset.attlist Button Legend Legend.attlist Form.class Formctrl.class Form Label Input Option Textarea A Iframe Iframe.attlist Img Link Link.attlist Dl Dl.attlist Dt Dt.attlist Dd Dd.attlist Ol Ol.attlist Ul Ul.attlist Li Li.attlist List.class Meta Meta.attlist Frame.attrib Name.attlist Object Param Param.attlist Hr Hr.attlist B B.attlist Big Big.attlist I I.attlist Small Small.attlist Sub Sub.attlist Sup Sup.attlist Tt Tt.attlist Script Script.attlist Noscript Noscript.attlist Script.class Title Title.attlist Head Head.attlist Profile.attlist Body Html Html.attlist XHTML.version.attrib Style Style.attlist Table Th Td CellHAlign.attrib CellVAlign.attrib Scope.attrib Table.attlist Col Col.attlist Colgroup Colgroup.attlist Tbody Tbody.attlist Thead Thead.attlist Tfoot Tfoot.attlist Rules.attrib Caption Caption.attlist Tr Tr.attlist Th.attlist Td.attlist Cell.attrib Link.attrib Target.attrib Br Br.attlist Span Span.attlist Abbr Abbr.attlist Acronym Acronym.attlist Cite Cite.attlist Code Code.attlist Dfn Dfn.attlist Em Em.attlist Kbd Kbd.attlist Q Q.attlist Samp Samp.attlist Strong Strong.attlist Var Var.attlist Div Div.attlist P P.attlist Address Address.attlist Blockquote Blockquote.attlist Pre Pre.attlist H1 H2 H3 H4 H5 H6 Heading.attrib Heading.content Heading.class Inline.model Block.mix Block.model Flow.model 
   context-free syntax
         applet::(Applet.attlist Param* Flow.model) -> Applet
 
@@ -263,6 +263,10 @@ exports
 
         onclick::Script.datatype? ondblclick::Script.datatype? onmousedown::Script.datatype? onmouseup::Script.datatype? onmouseover::Script.datatype? onmousemove::Script.datatype? onmouseout::Script.datatype? onkeypress::Script.datatype? onkeydown::Script.datatype? onkeyup::Script.datatype? -> Events.attrib
 
+        select::(Select.attlist (Option | Optgroup)+) -> Select
+
+        select::(Select.attlist Option+) -> Select
+
         "image" -> InputType.class
         "button" -> InputType.class
 
@@ -306,8 +310,6 @@ exports
         label::(Label.attlist Inline.model) -> Label
 
         input::Input.attlist -> Input
-
-        select::(Select.attlist Option+) -> Select
 
         option::(Common.attrib selected::"selected"? value::STR? STR) -> Option
 
@@ -436,6 +438,26 @@ exports
 
         Title.attrib I18n.attrib type::ContentType.datatype media::MediaDesc.datatype? xml:space::"preserve"? -> Style.attlist
 
+        table::(Table.attlist Caption? (Col* | Colgroup*) ((Thead? Tfoot? Tbody+) | Tr+)) -> Table
+
+        table::(Table.attlist Caption? Tr+) -> Table
+
+        th::(Th.attlist Flow.model) -> Th
+
+        td::(Td.attlist Flow.model) -> Td
+
+        align::("left" | "center" | "right" | "justify" | "char")? char::Character.datatype? charoff::Length.datatype? -> CellHAlign.attrib
+
+        align::("left" | "center" | "right")? -> CellHAlign.attrib
+
+        valign::("top" | "middle" | "bottom" | "baseline")? -> CellVAlign.attrib
+
+        valign::("top" | "middle" | "bottom")? -> CellVAlign.attrib
+
+        scope::("row" | "col" | "rowgroup" | "colgroup")? -> Scope.attrib
+
+        scope::("row" | "col")? -> Scope.attrib
+
         width::Length.datatype? border::Pixels.datatype? Frame.attrib Rules.attrib cellspacing::Length.datatype? cellpadding::Length.datatype? -> Table.attlist
 
         Common.attrib summary::Text.datatype? -> Table.attlist
@@ -462,8 +484,6 @@ exports
 
         rules::("none" | "groups" | "rows" | "cols" | "all")? -> Rules.attrib
 
-        table::(Table.attlist Caption? Tr+) -> Table
-
         caption::(Caption.attlist Inline.model) -> Caption
 
         Common.attrib -> Caption.attlist
@@ -472,21 +492,11 @@ exports
 
         Common.attrib CellHAlign.attrib CellVAlign.attrib -> Tr.attlist
 
-        th::(Th.attlist Flow.model) -> Th
-
         Cell.attrib -> Th.attlist
-
-        td::(Td.attlist Flow.model) -> Td
 
         Cell.attrib -> Td.attlist
 
         Common.attrib abbr::Text.datatype? axis::STR? headers::IDREFS.datatype? Scope.attrib rowspan::Number.datatype? colspan::Number.datatype? CellHAlign.attrib CellVAlign.attrib -> Cell.attrib
-
-        align::("left" | "center" | "right")? -> CellHAlign.attrib
-
-        valign::("top" | "middle" | "bottom")? -> CellVAlign.attrib
-
-        scope::("row" | "col")? -> Scope.attrib
 
         Target.attrib -> Link.attrib
 

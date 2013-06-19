@@ -8,11 +8,11 @@ exports
 
         Package-header? Import-declaration* Type-declaration* -> Package-declaration
 
-        "package" Package-name ";" (NL NL) -> Package-header
+        "package" Package-name ";" NL NL -> Package-header
 
         Qualified-name -> Package-name
 
-        "import" Imported-name ";" (NL NL) -> Import-declaration
+        "import" Imported-name ";" NL NL -> Import-declaration
 
         Package-or-type-name Dot-star? -> Imported-name
 
@@ -22,8 +22,8 @@ exports
 
         Reference -> Declared-name
 
-        Class-declaration (NL NL) -> Type-declaration
-        Interface-declaration (NL NL) -> Type-declaration
+        Class-declaration NL NL -> Type-declaration
+        Interface-declaration NL NL -> Type-declaration
 
         Class-header Class-body -> Class-declaration
 
@@ -57,7 +57,7 @@ exports
 
         Declared-name -> Interface-name
 
-        "{" (NL IN) Class-body-declaration* EX "}" ";"? (NL NL) -> Class-or-interface-body
+        "{" NL IN Class-body-declaration* EX "}" ";"? NL NL -> Class-or-interface-body
 
         Empty-declaration -> Class-body-declaration
         Member-declaration -> Class-body-declaration
@@ -73,13 +73,16 @@ exports
         Method-declaration -> Method-or-constructor-declaration
         Constructor-declaration -> Method-or-constructor-declaration
 
-        NL Block (NL NL) -> Instance-initializer
+        NL Block NL NL -> Instance-initializer
 
-        NL "static" Block (NL NL) -> Static-initializer
+        NL "static" Block NL NL -> Static-initializer
 
-        NL Modifier* Constructor-declarator Throws? Constructor-body (NL NL) -> Constructor-declaration
+        NL Modifier* Constructor-declarator Throws? Constructor-body NL NL -> Constructor-declaration
 
-        Class-name "(" Formal-parameter"," ")" -> Constructor-declarator
+        Class-name "(" 
+	    Formal-parameter
+	    ","
+	   ")" -> Constructor-declarator
 
         Block NL -> Constructor-body
 
@@ -98,11 +101,17 @@ exports
         Expression -> Variable-initializer
         Array-initializer -> Variable-initializer
 
-        "{" Variable-initializer"," ","? "}" -> Array-initializer
+        "{" 
+	    Variable-initializer
+	    ","
+	   ","? "}" -> Array-initializer
 
         NL Modifier* Type-specifier Method-declarator Throws? Method-body -> Method-declaration
 
-        Method-name "(" Formal-parameter"," ")" Dimension* -> Method-declarator
+        Method-name "(" 
+	    Formal-parameter
+	    ","
+	   ")" Dimension* -> Method-declarator
 
         Declared-name -> Method-name
 
@@ -112,8 +121,8 @@ exports
 
         "throws" Qualified-name+ -> Throws
 
-        Block (NL NL) -> Method-body
-        ";" (NL NL) -> Method-body
+        Block NL NL -> Method-body
+        ";" NL NL -> Method-body
 
         Type-name -> Type-specifier
         Array-type-specifier -> Type-specifier
@@ -133,7 +142,7 @@ exports
         "double" -> Primitive-type
         "void" -> Primitive-type
 
-        "{" (NL IN) Declaration-or-statement* EX "}" -> Block
+        "{" NL IN Declaration-or-statement* EX "}" -> Block
 
         Local-variable-declaration -> Declaration-or-statement
         Class-declaration -> Declaration-or-statement
@@ -171,9 +180,9 @@ exports
 
         "switch" "(" Expression ")" Switch-block NL -> Switch-statement
 
-        "{" (IN NL) Switch-alternative* EX "}" -> Switch-block
+        "{" IN NL Switch-alternative* EX "}" -> Switch-block
 
-        Switch-label (IN NL) Declaration-or-statement* EX -> Switch-alternative
+        Switch-label IN NL Declaration-or-statement* EX -> Switch-alternative
 
         "case" Constant-expression ":" -> Switch-label
         "default" ":" -> Switch-label
@@ -184,12 +193,18 @@ exports
 
         "for" "(" For-init For-expression For-update ")" Statement NL -> For-statement
 
-        Expression"," ";" -> For-init
+        
+		Expression
+		","
+	       ";" -> For-init
         Local-variable-declaration -> For-init
 
         Expression? ";" -> For-expression
 
-        Expression"," -> For-update
+        
+	Expression
+	","
+       -> For-update
 
         "break" Label-name? ";" NL -> Break-statement
 
@@ -336,7 +351,10 @@ exports
 
         "null" -> Null-literal
 
-        "new" Class-or-interface-name "(" Argument"," ")" Class-body? -> Class-instance-creation-expression
+        "new" Class-or-interface-name "(" 
+	    Argument
+	    ","
+	   ")" Class-body? -> Class-instance-creation-expression
 
         Qualified-name -> Class-or-interface-name
 
@@ -354,6 +372,9 @@ exports
         Method-argument -> Component
         Subscript -> Component
 
-        "(" Argument"," ")" -> Method-argument
+        "(" 
+	    Argument
+	    ","
+	   ")" -> Method-argument
 
         "." Id -> Dot-id

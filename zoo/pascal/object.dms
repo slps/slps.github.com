@@ -3,7 +3,10 @@ program = package_definition ;
 program = library_definition ;
 program = unit_definition ;
 program_definition = 'program' decl_name program_file_list? ';' NL program_block '.' ;
-program_file_list = '(' id',' ')' ;
+program_file_list = '(' 
+	    id
+	    ','
+	   ')' ;
 package_definition = 'package' decl_name ';' NL requires_clause? contains_clause? 'end' '.' ;
 requires_clause = requires_idList_semicolon* ;
 contains_clause = contains_idList_semicolon* ;
@@ -11,9 +14,9 @@ requires_idList_semicolon = 'requires' ref_name+ ';' NL ;
 contains_idList_semicolon = 'contains' ref_name+ ';' NL ;
 library_definition = 'library' decl_name ';' NL program_block '.' ;
 unit_definition = 'unit' decl_name ';' NL interface_section NL implementation_section NL init_section '.' ;
-interface_section = 'interface' (NL NL) uses_clause? NL interface_declaration* ;
-implementation_section = 'implementation' (IN NL) uses_clause? declaration_section* (EX NL) ;
-init_section = 'intitialization' (IN NL) statement_list fin_statement_list? (EX NL) 'end' ;
+interface_section = 'interface' NL NL uses_clause? NL interface_declaration* ;
+implementation_section = 'implementation' IN NL uses_clause? declaration_section* EX NL ;
+init_section = 'intitialization' IN NL statement_list fin_statement_list? EX NL 'end' ;
 init_section = compound_statement ;
 init_section = 'end' ;
 interface_declaration = constant_section ;
@@ -25,7 +28,7 @@ exported_heading = function_heading ';' NL ;
 exported_heading = constructor_heading ';' NL ;
 exported_heading = destructor_heading ';' NL ;
 program_block = uses_clause? block ;
-uses_clause = 'uses' (IN NL) uses_item+ ';' (EX NL) ;
+uses_clause = 'uses' IN NL uses_item+ ';' EX NL ;
 uses_item = ref_name in_clause? ;
 in_clause = 'in' charlit ;
 block = declaration_section* compound_statement ;
@@ -35,17 +38,20 @@ declaration_section = type_section ;
 declaration_section = var_section ;
 declaration_section = procedure_section ;
 label_declaration_section = 'label' decl_name ;
-constant_section = 'const' (IN NL) constant_declaration* (EX NL) ;
+constant_section = 'const' IN NL constant_declaration* EX NL ;
 constant_declaration = decl_name '=' expression ';' NL ;
 constant_declaration = decl_name ':' typeId '=' typed_constant ';' NL ;
-type_section = 'type' (IN NL) type_declaration+ (EX NL) ;
+type_section = 'type' IN NL type_declaration+ EX NL ;
 type_declaration = decl_name '=' type_or_restrictedType ;
 type_or_restrictedType = type ';' NL ;
 type_or_restrictedType = restrictedType ';' NL ;
 typed_constant = expression ;
 typed_constant = array_constant ;
 typed_constant = record_constant ;
-array_constant = '(' typed_constant',' ')' ;
+array_constant = '(' 
+	    typed_constant
+	    ','
+	   ')' ;
 record_constant = '(' typed_constant semicolon_record_field_constant* ')' ;
 semicolon_record_field_constant = ';' decl_name ':' typed_constant ;
 type = typeId ;
@@ -72,7 +78,10 @@ realType = 'comp' ;
 ordinalType = subrangeType ;
 ordinalType = enumeratedType ;
 ordinalType = ordinal_identifier ;
-enumeratedType = '(' decl_name',' ')' ;
+enumeratedType = '(' 
+	    decl_name
+	    ','
+	   ')' ;
 ordinal_identifier = 'shortint' ;
 ordinal_identifier = 'smallint' ;
 ordinal_identifier = 'integer' ;
@@ -99,7 +108,10 @@ structType = recordType 'packed'? ;
 arrayType = array_word square_ordinalType? 'of' type ;
 array_word = 'array' ;
 array_word = 'Array' ;
-square_ordinalType = '[' ordinalType',' ']' ;
+square_ordinalType = '[' 
+	    ordinalType
+	    ','
+	   ']' ;
 recordType = 'record' field_list 'end' ;
 field_list = field_declaration+ variant_section? ;
 field_declaration = decl_name+ ':' type ';' NL ;
@@ -138,8 +150,11 @@ object_field_list = ident_list_colonType semi_ident_list_colonType* ;
 semi_ident_list_colonType = ';' NL ident_list_colonType ;
 ident_list_colonType = decl_name+ ':' type ;
 fin_statement_list = 'finalization' statement_list ;
-classType = 'class' class_heritage? (IN NL) class_element_list? vis_spec_element_list* (EX NL) 'end'? ;
-class_heritage = '(' ref_name',' ')' ;
+classType = 'class' class_heritage? IN NL class_element_list? vis_spec_element_list* EX NL 'end'? ;
+class_heritage = '(' 
+	    ref_name
+	    ','
+	   ')' ;
 class_visibility = 'public' ;
 class_visibility = 'protected' ;
 class_visibility = 'Protected' ;
@@ -176,8 +191,11 @@ default_expression_OR_nodefault = 'default' expression ;
 default_expression_OR_nodefault = 'nodefault' ;
 implementsTypeId = 'implements' typeId ;
 interfaceType = 'interface' interface_heritage? class_method_list? class_property_list? 'end' ;
-interface_heritage = '(' ref_name',' ')' ;
-var_section = var (NL IN) var_declaration_semicolon* (NL EX) ;
+interface_heritage = '(' 
+	    ref_name
+	    ','
+	   ')' ;
+var_section = var NL IN var_declaration_semicolon* NL EX ;
 var = 'var' ;
 var = 'Var' ;
 var_declaration_semicolon = var_declaration ';' NL ;
@@ -192,10 +210,10 @@ procedure_section = procedure_declaration ;
 procedure_section = function_declaration ;
 procedure_section = constructor_declaration ;
 procedure_section = destructor_declaration ;
-constructor_declaration = constructor_heading ';' (IN NL) block (EX NL) ';' NL ;
-destructor_declaration = destructor_heading ';' (IN NL) block (EX NL) ';' NL ;
-procedure_declaration = procedure_heading ';' (IN NL) block (EX NL) ';' NL ;
-function_declaration = function_heading semi_directive? ';' (IN NL) block (EX NL) ';' NL ;
+constructor_declaration = constructor_heading ';' IN NL block EX NL ';' NL ;
+destructor_declaration = destructor_heading ';' IN NL block EX NL ';' NL ;
+procedure_declaration = procedure_heading ';' IN NL block EX NL ';' NL ;
+function_declaration = function_heading semi_directive? ';' IN NL block EX NL ';' NL ;
 function_heading = function_word decl_name formal_parameters? ':' type_or_string ;
 type_or_string = type ;
 type_or_string = charlit ;
@@ -210,7 +228,10 @@ formal_parameter = parm_qual? parameter ;
 parm_qual = var ;
 parm_qual = 'const' ;
 parm_qual = 'out' ;
-parameter = decl_name',' parameter_type? ;
+parameter = 
+	    decl_name
+	    ','
+	   parameter_type? ;
 parameter_type = ':' array_of? type param_init? ;
 param_init = '=' expression ;
 array_of = array_word set_constructor? 'of' ;
@@ -233,7 +254,7 @@ struct_statement = with_statement ;
 struct_statement = try_finally_statement ;
 struct_statement = try_except_statement ;
 struct_statement = raise_statement ;
-compound_statement = begin (IN NL) statement_list (EX NL) 'end' NL ;
+compound_statement = begin IN NL statement_list EX NL 'end' NL ;
 begin = 'begin' ;
 begin = 'Begin' ;
 conditional_statement = if_statement ;
@@ -242,7 +263,7 @@ if_statement = if expression 'then' statement? else_statement? ;
 else_statement = 'else' statement? ;
 if = 'if' ;
 if = 'If' ;
-case_statement = 'case' expression 'of' case_selector (IN NL) semi_case_selector* ';'? (EX NL) else_statement? ';'? NL 'end' ;
+case_statement = 'case' expression 'of' case_selector IN NL semi_case_selector* ';'? EX NL else_statement? ';'? NL 'end' ;
 semi_case_selector = ';' NL case_selector ;
 case_selector = case_label comma_case_label* ':' statement ;
 comma_case_label = ',' case_label ;
@@ -261,17 +282,17 @@ do = 'do' ;
 do = 'Do' ;
 do = 'DO' ;
 with_statement = 'with' ref_name+ do statement ;
-try_finally_statement = 'try' (IN NL) statement_list (EX NL) 'finally' (IN NL) statement_list (EX NL) 'end' ;
-try_except_statement = 'try' (IN NL) statement_list (EX NL) except ';'? (IN NL) exception_block (EX NL) 'end' ;
+try_finally_statement = 'try' IN NL statement_list EX NL 'finally' IN NL statement_list EX NL 'end' ;
+try_except_statement = 'try' IN NL statement_list EX NL except ';'? IN NL exception_block EX NL 'end' ;
 except = 'except' ;
 except = 'Except' ;
 exception_block =  ;
 exception_block = statement_list ;
 exception_block = exception_else ;
-exception_else = exception_handler_list (NL EX) else_statement? ;
+exception_else = exception_handler_list NL EX else_statement? ;
 exception_handler_list = exception_handler semi_exception_handler* ';'? ;
 semi_exception_handler = ';' exception_handler ;
-exception_handler = 'on' exception_var? type do (IN NL) statement EX ;
+exception_handler = 'on' exception_var? type do IN NL statement EX ;
 exception_var = decl_name ':' ;
 raise_statement = 'raise' ref_name? at_address? ;
 at_address = 'at' ref_name ;
@@ -323,7 +344,10 @@ bool_value = 'true' ;
 bool_value = 'false' ;
 bool_value = 'True' ;
 bool_value = 'False' ;
-arguments = '(' expression',' ')' ;
+arguments = '(' 
+	    expression
+	    ','
+	   ')' ;
 rel_op = '>' ;
 rel_op = '<' ;
 rel_op = '<=' ;
@@ -345,7 +369,10 @@ mul_op = 'shl' ;
 mul_op = 'shr' ;
 mul_op = 'DIV' ;
 mul_op = 'AND' ;
-set_constructor = '[' set_element',' ']' ;
+set_constructor = '[' 
+	    set_element
+	    ','
+	   ']' ;
 set_element = expression dotDot_expression? ;
 dotDot_expression = '..' expression ;
 startNameTag = SPOFF SP '<' 'UID' SP 'name' '=' stringlit '>' SPON ;
@@ -360,7 +387,10 @@ object_modifier = arguments ;
 object_modifier = '^' ;
 object_modifier = as_type ;
 dot_id = '.' id ;
-array_subscript = '[' expression',' ']' ;
+array_subscript = '[' 
+	    expression
+	    ','
+	   ']' ;
 as_type = as type ;
 as = 'As' ;
 as = 'as' ;

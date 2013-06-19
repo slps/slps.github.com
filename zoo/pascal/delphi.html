@@ -103,7 +103,7 @@
 </pre><pre><a class="nt" name="contains_clause">contains_clause</a>:
         <span class="t">"contains"</span> <span class="meta">{</span><a class="nt" href="#uses_item">uses_item</a> <span class="t">","</span><span class="meta">}*</span> <span class="t">";"</span> <a class="nt" href="#NL">NL</a>
 </pre><pre><a class="nt" name="uses_clause">uses_clause</a>:
-        <span class="t">"uses"</span> (<a class="nt" href="#NL">NL</a> <a class="nt" href="#IN">IN</a>) <span class="meta">{</span><a class="nt" href="#uses_item">uses_item</a> <span class="t">","</span><span class="meta">}*</span> <span class="t">";"</span> (<a class="nt" href="#EX">EX</a> <a class="nt" href="#NL">NL</a>)
+        <span class="t">"uses"</span> <a class="nt" href="#NL">NL</a> <a class="nt" href="#IN">IN</a> <span class="meta">{</span><a class="nt" href="#uses_item">uses_item</a> <span class="t">","</span><span class="meta">}*</span> <span class="t">";"</span> <a class="nt" href="#EX">EX</a> <a class="nt" href="#NL">NL</a>
 </pre><pre><a class="nt" name="uses_item">uses_item</a>:
         <a class="nt" href="#qualified_id">qualified_id</a> <a class="nt" href="#in_filename">in_filename</a><span class="meta">?</span>
 </pre><pre><a class="nt" name="in_filename">in_filename</a>:
@@ -168,7 +168,7 @@
 </pre><pre><a class="nt" name="resource_section">resource_section</a>:
         <span class="t">"resourcestring"</span> <a class="nt" href="#constant_decl">constant_decl</a><span class="meta">+</span>
 </pre><pre><a class="nt" name="const_section">const_section</a>:
-        <span class="t">"const"</span> (<a class="nt" href="#NL">NL</a> <a class="nt" href="#IN">IN</a>) <a class="nt" href="#constant_decl">constant_decl</a><span class="meta">+</span> <a class="nt" href="#EX">EX</a>
+        <span class="t">"const"</span> <a class="nt" href="#NL">NL</a> <a class="nt" href="#IN">IN</a> <a class="nt" href="#constant_decl">constant_decl</a><span class="meta">+</span> <a class="nt" href="#EX">EX</a>
 </pre><pre><a class="nt" name="constant_decl">constant_decl</a>:
         <a class="nt" href="#identlist">identlist</a> <a class="nt" href="#constant_spec">constant_spec</a> <a class="nt" href="#hint_directive">hint_directive</a><span class="meta">?</span> <span class="t">";"</span> <a class="nt" href="#NL">NL</a>
 </pre><pre><a class="nt" name="constant_spec">constant_spec</a>:
@@ -189,7 +189,7 @@
 </pre><pre><a class="nt" name="record_field_constant_semi">record_field_constant_semi</a>:
         <a class="nt" href="#record_field_constant">record_field_constant</a> <span class="t">";"</span> <a class="nt" href="#NL">NL</a>
 </pre><pre><a class="nt" name="var_section">var_section</a>:
-        <a class="nt" href="#var_keyword">var_keyword</a> (<a class="nt" href="#NL">NL</a> <a class="nt" href="#IN">IN</a>) <a class="nt" href="#var_decl">var_decl</a><span class="meta">+</span> <a class="nt" href="#EX">EX</a>
+        <a class="nt" href="#var_keyword">var_keyword</a> <a class="nt" href="#NL">NL</a> <a class="nt" href="#IN">IN</a> <a class="nt" href="#var_decl">var_decl</a><span class="meta">+</span> <a class="nt" href="#EX">EX</a>
 </pre><pre><a class="nt" name="var_keyword">var_keyword</a>:
         <span class="t">"var"</span>
         <span class="t">"threadvar"</span>
@@ -201,7 +201,7 @@
 </pre><pre><a class="nt" name="absolute_init">absolute_init</a>:
         <span class="t">"absolute"</span> <a class="nt" href="#expr">expr</a>
 </pre><pre><a class="nt" name="type_section">type_section</a>:
-        <span class="t">"type"</span> (<a class="nt" href="#NL">NL</a> <a class="nt" href="#IN">IN</a>) <a class="nt" href="#type_decl">type_decl</a><span class="meta">+</span> <a class="nt" href="#EX">EX</a>
+        <span class="t">"type"</span> <a class="nt" href="#NL">NL</a> <a class="nt" href="#IN">IN</a> <a class="nt" href="#type_decl">type_decl</a><span class="meta">+</span> <a class="nt" href="#EX">EX</a>
 </pre><pre><a class="nt" name="type_decl">type_decl</a>:
         <a class="nt" href="#identlist">identlist</a> <a class="nt" href="#equal">equal</a> <span class="t">"type"</span><span class="meta">?</span> <a class="nt" href="#type_spec">type_spec</a> <a class="nt" href="#hint_directive">hint_directive</a><span class="meta">?</span> <span class="t">";"</span> <a class="nt" href="#NL">NL</a>
 </pre><pre><a class="nt" name="type_spec">type_spec</a>:
@@ -379,7 +379,7 @@
 </pre><pre><a class="nt" name="visibility_default">visibility_default</a>:
         <a class="nt" href="#IN">IN</a> <a class="nt" href="#class_member">class_member</a><span class="meta">*</span> <a class="nt" href="#EX">EX</a>
 </pre><pre><a class="nt" name="visibility_block">visibility_block</a>:
-        <a class="nt" href="#visibility">visibility</a> (<a class="nt" href="#NL">NL</a> <a class="nt" href="#IN">IN</a>) <a class="nt" href="#class_member">class_member</a><span class="meta">*</span> <a class="nt" href="#EX">EX</a>
+        <a class="nt" href="#visibility">visibility</a> <a class="nt" href="#NL">NL</a> <a class="nt" href="#IN">IN</a> <a class="nt" href="#class_member">class_member</a><span class="meta">*</span> <a class="nt" href="#EX">EX</a>
 </pre><pre><a class="nt" name="method_decl">method_decl</a>:
         <a class="nt" href="#procedure_signature">procedure_signature</a> <a class="nt" href="#method_deleg">method_deleg</a>
         <a class="nt" href="#procedure_signature">procedure_signature</a> <span class="t">";"</span> <a class="nt" href="#dispid_spec">dispid_spec</a> <span class="t">";"</span>
@@ -556,7 +556,7 @@
         <span class="t">"try"</span> <a class="nt" href="#NL">NL</a> <a class="nt" href="#statement_list">statement_list</a> <span class="t">"except"</span> <a class="nt" href="#NL">NL</a> <a class="nt" href="#exception_block">exception_block</a> <a class="nt" href="#end_struct">end_struct</a>
 </pre><pre><a class="nt" name="nested_stm">nested_stm</a>:
         <a class="nt" href="#sequence_stm">sequence_stm</a>
-        (<a class="nt" href="#NL">NL</a> <a class="nt" href="#IN">IN</a>) <a class="nt" href="#statement">statement</a><span class="meta">?</span> <a class="nt" href="#EX">EX</a>
+        <a class="nt" href="#NL">NL</a> <a class="nt" href="#IN">IN</a> <a class="nt" href="#statement">statement</a><span class="meta">?</span> <a class="nt" href="#EX">EX</a>
 </pre><pre><a class="nt" name="else_stm">else_stm</a>:
         <a class="nt" href="#NL">NL</a> <span class="t">"else"</span> <a class="nt" href="#nested_stm">nested_stm</a>
 </pre><pre><a class="nt" name="case_selector">case_selector</a>:
@@ -587,4 +587,4 @@
         <a class="nt" href="#hexnumber">hexnumber</a>
         <a class="nt" href="#number">number</a>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: Apr2013.</div></body></html>
+Last updated: Jun2013.</div></body></html>

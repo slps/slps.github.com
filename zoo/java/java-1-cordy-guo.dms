@@ -1,14 +1,14 @@
 program = package_declaration ;
 package_declaration = package_header? import_declaration* type_declaration* ;
-package_header = 'package' package_name ';' (NL NL) ;
+package_header = 'package' package_name ';' NL NL ;
 package_name = qualified_name ;
-import_declaration = 'import' imported_name ';' (NL NL) ;
+import_declaration = 'import' imported_name ';' NL NL ;
 imported_name = package_or_type_name dot_star? ;
 package_or_type_name = qualified_name ;
 dot_star = '.' '*' ;
 declared_name = reference ;
-type_declaration = class_declaration (NL NL) ;
-type_declaration = interface_declaration (NL NL) ;
+type_declaration = class_declaration NL NL ;
+type_declaration = interface_declaration NL NL ;
 class_declaration = class_header class_body ;
 class_header = modifier* 'class' class_name extends_clause? implements_clause? ;
 class_body = class_or_interface_body ;
@@ -30,7 +30,7 @@ extends_clause = 'extends' type_name+ ;
 implements_clause = 'implements' qualified_name+ ;
 class_name = declared_name ;
 interface_name = declared_name ;
-class_or_interface_body = '{' (NL IN) class_body_declaration* EX '}' ';'? (NL NL) ;
+class_or_interface_body = '{' NL IN class_body_declaration* EX '}' ';'? NL NL ;
 class_body_declaration = empty_declaration ;
 class_body_declaration = member_declaration ;
 class_body_declaration = instance_initializer ;
@@ -41,10 +41,13 @@ member_declaration = method_or_constructor_declaration ;
 member_declaration = type_declaration ;
 method_or_constructor_declaration = method_declaration ;
 method_or_constructor_declaration = constructor_declaration ;
-instance_initializer = NL block (NL NL) ;
-static_initializer = NL 'static' block (NL NL) ;
-constructor_declaration = NL modifier* constructor_declarator throws? constructor_body (NL NL) ;
-constructor_declarator = class_name '(' formal_parameter',' ')' ;
+instance_initializer = NL block NL NL ;
+static_initializer = NL 'static' block NL NL ;
+constructor_declaration = NL modifier* constructor_declarator throws? constructor_body NL NL ;
+constructor_declarator = class_name '(' 
+	    formal_parameter
+	    ','
+	   ')' ;
 constructor_body = block NL ;
 field_declaration = variable_declaration ;
 variable_declaration = modifier* type_specifier variable_declarators ';' NL ;
@@ -54,15 +57,21 @@ variable_name = declared_name dimension* ;
 equals_variable_initializer = '=' variable_initializer ;
 variable_initializer = expression ;
 variable_initializer = array_initializer ;
-array_initializer = '{' variable_initializer',' ','? '}' ;
+array_initializer = '{' 
+	    variable_initializer
+	    ','
+	   ','? '}' ;
 method_declaration = NL modifier* type_specifier method_declarator throws? method_body ;
-method_declarator = method_name '(' formal_parameter',' ')' dimension* ;
+method_declarator = method_name '(' 
+	    formal_parameter
+	    ','
+	   ')' dimension* ;
 method_name = declared_name ;
 formal_parameter = 'final'? type_specifier formal_parameter_name ;
 formal_parameter_name = variable_name ;
 throws = 'throws' qualified_name+ ;
-method_body = block (NL NL) ;
-method_body = ';' (NL NL) ;
+method_body = block NL NL ;
+method_body = ';' NL NL ;
 type_specifier = type_name ;
 type_specifier = array_type_specifier ;
 array_type_specifier = type_name dimension+ ;
@@ -77,7 +86,7 @@ primitive_type = 'long' ;
 primitive_type = 'float' ;
 primitive_type = 'double' ;
 primitive_type = 'void' ;
-block = '{' (NL IN) declaration_or_statement* EX '}' ;
+block = '{' NL IN declaration_or_statement* EX '}' ;
 declaration_or_statement = local_variable_declaration ;
 declaration_or_statement = class_declaration ;
 declaration_or_statement = statement ;
@@ -104,17 +113,23 @@ expression_statement = expression ';' NL ;
 if_statement = 'if' '(' expression ')' statement else_clause? NL ;
 else_clause = 'else' statement ;
 switch_statement = 'switch' '(' expression ')' switch_block NL ;
-switch_block = '{' (IN NL) switch_alternative* EX '}' ;
-switch_alternative = switch_label (IN NL) declaration_or_statement* EX ;
+switch_block = '{' IN NL switch_alternative* EX '}' ;
+switch_alternative = switch_label IN NL declaration_or_statement* EX ;
 switch_label = 'case' constant_expression ':' ;
 switch_label = 'default' ':' ;
 while_statement = 'while' '(' expression ')' statement NL ;
 do_statement = 'do' statement 'while' '(' expression ')' ';' NL ;
 for_statement = 'for' '(' for_init for_expression for_update ')' statement NL ;
-for_init = expression',' ';' ;
+for_init = 
+		expression
+		','
+	       ';' ;
 for_init = local_variable_declaration ;
 for_expression = expression? ';' ;
-for_update = expression',' ;
+for_update = 
+	expression
+	','
+       ;
 break_statement = 'break' label_name? ';' NL ;
 continue_statement = 'continue' label_name? ';' NL ;
 return_statement = 'return' expression? ';' NL ;
@@ -207,7 +222,10 @@ string_literal = stringlit ;
 boolean_literal = 'true' ;
 boolean_literal = 'false' ;
 null_literal = 'null' ;
-class_instance_creation_expression = 'new' class_or_interface_name '(' argument',' ')' class_body? ;
+class_instance_creation_expression = 'new' class_or_interface_name '(' 
+	    argument
+	    ','
+	   ')' class_body? ;
 class_or_interface_name = qualified_name ;
 array_creation_expression = 'new' array_type_specifier array_initializer? ;
 dimension = '[' expression? ']' ;
@@ -217,5 +235,8 @@ reference = id component* ;
 component = dot_id ;
 component = method_argument ;
 component = subscript ;
-method_argument = '(' argument',' ')' ;
+method_argument = '(' 
+	    argument
+	    ','
+	   ')' ;
 dot_id = '.' id ;

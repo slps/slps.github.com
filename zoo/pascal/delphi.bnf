@@ -88,7 +88,7 @@ requires_clause:
 contains_clause:
         "contains" {uses_item ","}* ";" NL
 uses_clause:
-        "uses" (NL IN) {uses_item ","}* ";" (EX NL)
+        "uses" NL IN {uses_item ","}* ";" EX NL
 uses_item:
         qualified_id in_filename?
 in_filename:
@@ -153,7 +153,7 @@ exports_entry:
 resource_section:
         "resourcestring" constant_decl+
 const_section:
-        "const" (NL IN) constant_decl+ EX
+        "const" NL IN constant_decl+ EX
 constant_decl:
         identlist constant_spec hint_directive? ";" NL
 constant_spec:
@@ -174,7 +174,7 @@ record_constant:
 record_field_constant_semi:
         record_field_constant ";" NL
 var_section:
-        var_keyword (NL IN) var_decl+ EX
+        var_keyword NL IN var_decl+ EX
 var_keyword:
         "var"
         "threadvar"
@@ -186,7 +186,7 @@ var_init:
 absolute_init:
         "absolute" expr
 type_section:
-        "type" (NL IN) type_decl+ EX
+        "type" NL IN type_decl+ EX
 type_decl:
         identlist equal "type"? type_spec hint_directive? ";" NL
 type_spec:
@@ -364,7 +364,7 @@ interface_type:
 visibility_default:
         IN class_member* EX
 visibility_block:
-        visibility (NL IN) class_member* EX
+        visibility NL IN class_member* EX
 method_decl:
         procedure_signature method_deleg
         procedure_signature ";" dispid_spec ";"
@@ -541,7 +541,7 @@ try_except_stm:
         "try" NL statement_list "except" NL exception_block end_struct
 nested_stm:
         sequence_stm
-        (NL IN) statement? EX
+        NL IN statement? EX
 else_stm:
         NL "else" nested_stm
 case_selector:

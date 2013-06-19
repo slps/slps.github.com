@@ -3,11 +3,11 @@ program:
 package_declaration:
         package_header? import_declaration* type_declaration*
 package_header:
-        "package" package_name ";" (NL NL)
+        "package" package_name ";" NL NL
 package_name:
         qualified_name
 import_declaration:
-        "import" imported_name ";" (NL NL)
+        "import" imported_name ";" NL NL
 imported_name:
         package_or_type_name dot_star?
 package_or_type_name:
@@ -17,8 +17,8 @@ dot_star:
 declared_name:
         reference
 type_declaration:
-        class_declaration (NL NL)
-        interface_declaration (NL NL)
+        class_declaration NL NL
+        interface_declaration NL NL
 class_declaration:
         class_header class_body
 class_header:
@@ -52,7 +52,7 @@ class_name:
 interface_name:
         declared_name
 class_or_interface_body:
-        "{" (NL IN) class_body_declaration* EX "}" ";"? (NL NL)
+        "{" NL IN class_body_declaration* EX "}" ";"? NL NL
 class_body_declaration:
         empty_declaration
         member_declaration
@@ -68,11 +68,11 @@ method_or_constructor_declaration:
         method_declaration
         constructor_declaration
 instance_initializer:
-        NL block (NL NL)
+        NL block NL NL
 static_initializer:
-        NL "static" block (NL NL)
+        NL "static" block NL NL
 constructor_declaration:
-        NL modifier* constructor_declarator throws? constructor_body (NL NL)
+        NL modifier* constructor_declarator throws? constructor_body NL NL
 constructor_declarator:
         class_name "(" {formal_parameter ","}* ")"
 constructor_body:
@@ -107,8 +107,8 @@ formal_parameter_name:
 throws:
         "throws" qualified_name+
 method_body:
-        block (NL NL)
-        ";" (NL NL)
+        block NL NL
+        ";" NL NL
 type_specifier:
         type_name
         array_type_specifier
@@ -128,7 +128,7 @@ primitive_type:
         "double"
         "void"
 block:
-        "{" (NL IN) declaration_or_statement* EX "}"
+        "{" NL IN declaration_or_statement* EX "}"
 declaration_or_statement:
         local_variable_declaration
         class_declaration
@@ -166,9 +166,9 @@ else_clause:
 switch_statement:
         "switch" "(" expression ")" switch_block NL
 switch_block:
-        "{" (IN NL) switch_alternative* EX "}"
+        "{" IN NL switch_alternative* EX "}"
 switch_alternative:
-        switch_label (IN NL) declaration_or_statement* EX
+        switch_label IN NL declaration_or_statement* EX
 switch_label:
         "case" constant_expression ":"
         "default" ":"
