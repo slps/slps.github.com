@@ -378,6 +378,64 @@ Last updated: </xsl:text>
 			</xsl:for-each>
 		</ul>
 	</xsl:template>
+	<xsl:template match="used">
+		<li xmlns="http://www.w3.org/1999/xhtml">
+			<xsl:text>Used tools: </xsl:text>
+			<span class="links">
+				<xsl:for-each select="*">
+					<xsl:text> [</xsl:text>
+					<xsl:if test="local-name()='wiki'">
+						<a href="http://github.com/grammarware/slps/wiki/{.}">
+							<xsl:value-of select="."/>
+						</a>
+					</xsl:if>
+					<xsl:if test="local-name()='gdk'">
+						<a href="http://gdk.sourceforge.net/">GDK</a>
+					</xsl:if>
+					<xsl:if test="local-name()='hunter'">
+						<a href="http://github.com/grammarware/slps/blob/master/topics/recovery/hunter/hunter.py">Hunter</a>
+					</xsl:if>
+					<xsl:if test="local-name()='antlr2'">
+						<a href="http://github.com/grammarware/slps/wiki/ANTLR2">ANTLR2⇒BGF</a>
+					</xsl:if>
+					<xsl:if test="local-name()='antlr3'">
+						<a href="http://github.com/grammarware/slps/wiki/ANTLR3">ANTLR3⇒BGF</a>
+					</xsl:if>
+					<xsl:if test="local-name()='ecore'">
+						<a href="http://github.com/grammarware/slps/wiki/Ecore2BGF">Ecore⇒BGF</a>
+					</xsl:if>
+					<xsl:if test="local-name()='txl'">
+						<a href="http://github.com/grammarware/slps/wiki/TXL2BGF">TXL⇒BGF</a>
+					</xsl:if>
+					<xsl:if test="local-name()='rng'">
+						<a href="http://github.com/grammarware/slps/wiki/RelaxNG2BGF">RELAX NG⇒BGF</a>
+					</xsl:if>
+					<xsl:if test="local-name()='sdf2bgf'">
+						<a href="http://github.com/grammarware/slps/wiki/SDF2BGF">SDF⇒BGF</a>
+					</xsl:if>
+					<xsl:if test="local-name()='html2bgf'">
+						<a href="http://github.com/grammarware/slps/wiki/HTML2BGF">HTML⇒BGF</a>
+					</xsl:if>
+					<xsl:if test="local-name()='spec2bgf'">
+						<a href="http://github.com/grammarware/slps/wiki/Spec2BGF">W3CSpec⇒BGF</a>
+					</xsl:if>
+					<xsl:if test="local-name()='rascal-sd'">
+						<a href="http://github.com/grammarware/slps/wiki/RascalSyntax2BGF">Rascal SD⇒BGF</a>
+					</xsl:if>
+					<xsl:if test="local-name()='rascal-adt'">
+						<a href="http://github.com/grammarware/slps/wiki/RascalADT2BGF">Rascal ADT⇒BGF</a>
+					</xsl:if>
+					<xsl:if test="local-name()='pdf2lll'">
+						<a href="http://github.com/grammarware/slps/blob/master/topics/extraction/bnf2bgf/pdf2lll.py">PDF⇒LLL</a>
+					</xsl:if>
+					<xsl:if test="local-name()='lll2bgf'">
+						<a href="http://github.com/grammarware/slps/wiki/LLL2BGF">LLL⇒BGF</a>
+					</xsl:if>
+					<xsl:text>]</xsl:text>
+				</xsl:for-each>
+			</span>
+		</li>
+	</xsl:template>
 	<xsl:template match="grammarset">
 		<!-- clone of match="grammar"!!! -->
 		<ul xmlns="http://www.w3.org/1999/xhtml">
@@ -390,7 +448,7 @@ Last updated: </xsl:text>
 						<xsl:value-of select="../from"/>
 						<xsl:text>-</xsl:text>
 					</xsl:if>
-										<xsl:value-of select="translate(.,'ABCDEFGHIJKLMNOPQRSTUVWXYZ +#“”','abcdefghijklmnopqrstuvwxyz_ps__')"/>
+					<xsl:value-of select="translate(.,'ABCDEFGHIJKLMNOPQRSTUVWXYZ +#“”','abcdefghijklmnopqrstuvwxyz_ps__')"/>
 				</xsl:variable>
 				<li>
 					<xsl:value-of select="."/>
