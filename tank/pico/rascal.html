@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:bgf="http://planet-sl.org/bgf" xmlns:xbgf="http://planet-sl.org/xbgf" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Browsable Pico Grammar</title><link href="/slps.css" rel="stylesheet" type="text/css"></link><script type="text/javascript">
+
+				  var _gaq = _gaq || [];
+				  _gaq.push(['_setAccount', 'UA-3743366-7']);
+				  _gaq.push(['_setDomainName', 'github.com']);
+				  _gaq.push(['_trackPageview']);
+
+				  (function() {
+				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				  })();
+
+				</script></head><body><h1 class="l">Browsable Pico Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.io/zoo/">Grammar Zoo</a> for details. <br></br>Source used for this grammar: Jurgen Vinju, <code>lang::pico::syntax::Main</code>, 2011–2012.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>17</strong></li><li>Number of top alternatives: <strong>17</strong></li><li>Number of defined nonterminal symbols: <strong>6</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#Program" class="nt">Program</a></code></li><li>Bottom nonterminal symbols: <strong>3</strong>: <code><a href="#Id" class="nt">Id</a>, <a href="#Natural" class="nt">Natural</a>, <a href="#String" class="nt">String</a></code></li><li>Number of used terminal symbols: <strong>22</strong></li><li>Special terminal symbols: <strong>9</strong>: <code class="t">";", ":", ":=", "(", ")", "||", "+", "-", ","</code></li><li>Keywords: <strong>13</strong>: <code class="t">"begin", "end", "if", "then", "else", "fi", "while", "do", "od", "string", "natural", "nil-type", "declare"</code></li></ul><h2 class="l">Syntax</h2><pre>[<a class="label" name="program">program</a>] <a class="nt" name="Program">Program</a>:
+        <span class="t">"begin"</span> <span class="sel">decls</span>::<a class="nt" href="#Declarations">Declarations</a> <span class="sel">body</span>::<span class="meta">{</span><a class="nt" href="#Statement">Statement</a> <span class="t">";"</span><span class="meta">}*</span> <span class="t">"end"</span>
+</pre><pre>[<a class="label" name="idtype">idtype</a>] <a class="nt" name="IdType">IdType</a>:
+        <span class="sel">id</span>::<a class="nt" href="#Id">Id</a> <span class="t">":"</span> <span class="sel">t</span>::<a class="nt" href="#Type">Type</a>
+</pre><pre>[<a class="label" name="cond">cond</a>] <a class="nt" name="Statement">Statement</a>:
+        <span class="t">"if"</span> <span class="sel">cond</span>::<a class="nt" href="#Expression">Expression</a> <span class="t">"then"</span> <span class="sel">thenPart</span>::<span class="meta">{</span><a class="nt" href="#Statement">Statement</a> <span class="t">";"</span><span class="meta">}*</span> <span class="t">"else"</span> <span class="sel">elsePart</span>::<span class="meta">{</span><a class="nt" href="#Statement">Statement</a> <span class="t">";"</span><span class="meta">}*</span> <span class="t">"fi"</span>
+</pre><pre>[<a class="label" name="assign">assign</a>] <a class="nt" name="Statement">Statement</a>:
+        <span class="sel">var</span>::<a class="nt" href="#Id">Id</a> <span class="t">":="</span> <span class="sel">val</span>::<a class="nt" href="#Expression">Expression</a>
+</pre><pre>[<a class="label" name="cond">cond</a>] <a class="nt" name="Statement">Statement</a>:
+        <span class="t">"if"</span> <span class="sel">cond</span>::<a class="nt" href="#Expression">Expression</a> <span class="t">"then"</span> <span class="sel">thenPart</span>::<span class="meta">{</span><a class="nt" href="#Statement">Statement</a> <span class="t">";"</span><span class="meta">}*</span> <span class="t">"fi"</span>
+</pre><pre>[<a class="label" name="loop">loop</a>] <a class="nt" name="Statement">Statement</a>:
+        <span class="t">"while"</span> <span class="sel">cond</span>::<a class="nt" href="#Expression">Expression</a> <span class="t">"do"</span> <span class="sel">body</span>::<span class="meta">{</span><a class="nt" href="#Statement">Statement</a> <span class="t">";"</span><span class="meta">}*</span> <span class="t">"od"</span>
+</pre><pre>[<a class="label" name="string">string</a>] <a class="nt" name="Type">Type</a>:
+        <span class="t">"string"</span>
+</pre><pre>[<a class="label" name="natural">natural</a>] <a class="nt" name="Type">Type</a>:
+        <span class="t">"natural"</span>
+</pre><pre>[<a class="label" name="nil">nil</a>] <a class="nt" name="Type">Type</a>:
+        <span class="t">"nil-type"</span>
+</pre><pre><a class="nt" name="Expression">Expression</a>:
+        <span class="t">"("</span> <span class="sel">e</span>::<a class="nt" href="#Expression">Expression</a> <span class="t">")"</span>
+</pre><pre>[<a class="label" name="natcon">natcon</a>] <a class="nt" name="Expression">Expression</a>:
+        <span class="sel">natcon</span>::<a class="nt" href="#Natural">Natural</a>
+</pre><pre>[<a class="label" name="id">id</a>] <a class="nt" name="Expression">Expression</a>:
+        <span class="sel">name</span>::<a class="nt" href="#Id">Id</a>
+</pre><pre>[<a class="label" name="strcon">strcon</a>] <a class="nt" name="Expression">Expression</a>:
+        <span class="sel">string</span>::<a class="nt" href="#String">String</a>
+</pre><pre>[<a class="label" name="concat">concat</a>] <a class="nt" name="Expression">Expression</a>:
+        <span class="sel">lhs</span>::<a class="nt" href="#Expression">Expression</a> <span class="t">"||"</span> <span class="sel">rhs</span>::<a class="nt" href="#Expression">Expression</a>
+</pre><pre>[<a class="label" name="add">add</a>] <a class="nt" name="Expression">Expression</a>:
+        <span class="sel">lhs</span>::<a class="nt" href="#Expression">Expression</a> <span class="t">"+"</span> <span class="sel">rhs</span>::<a class="nt" href="#Expression">Expression</a>
+</pre><pre>[<a class="label" name="min">min</a>] <a class="nt" name="Expression">Expression</a>:
+        <span class="sel">lhs</span>::<a class="nt" href="#Expression">Expression</a> <span class="t">"-"</span> <span class="sel">rhs</span>::<a class="nt" href="#Expression">Expression</a>
+</pre><pre><a class="nt" name="Declarations">Declarations</a>:
+        <span class="t">"declare"</span> <span class="sel">decls</span>::<span class="meta">{</span><a class="nt" href="#IdType">IdType</a> <span class="t">","</span><span class="meta">}*</span> <span class="t">";"</span>
+</pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
+Last updated: Jun2013.</div></body></html>

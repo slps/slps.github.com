@@ -1,0 +1,16 @@
+[action] Action:
+        Id
+[choose] Action:
+        "choose" "(" actions::(Id*) ")"
+[and] Cond:
+        lhs::Cond "and" rhs::Cond
+[const] Cond:
+        Id
+[or] Cond:
+        lhs::Cond "or" rhs::Cond
+[fighter] Fighter:
+        name::Id "{" specs::(Spec*) "}"
+[behavior] Spec:
+        cond::Cond "[" move::Action fight::Action "]"
+[attribute] Spec:
+        name::Id "=" strength::Number

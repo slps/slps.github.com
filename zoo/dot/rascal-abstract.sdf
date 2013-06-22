@@ -1,0 +1,64 @@
+module Main
+
+exports
+  sorts
+        Id DotGraph Stms NodeId PortId CompassPt Stm Attr Attrs Outline Dotline 
+  context-free syntax
+        STR -> Id
+
+        graph::(id::Id stmts::Stms) -> DotGraph
+        digraph::(id::Id stmts::Stms) -> DotGraph
+
+        Stm* -> Stms
+
+        Id PortId -> NodeId
+
+        Id CompassPt -> PortId
+
+        N:: -> CompassPt
+        NE:: -> CompassPt
+        E:: -> CompassPt
+        SE:: -> CompassPt
+        S:: -> CompassPt
+        SW:: -> CompassPt
+        W:: -> CompassPt
+        NW:: -> CompassPt
+        C:: -> CompassPt
+        _:: -> CompassPt
+
+        N::(id::Id attrs::Attrs) -> Stm
+        N::id::Id -> Stm
+        N::(nid::NodeId attrs::Attrs) -> Stm
+        N::nid::NodeId -> Stm
+        E::(from::Id to::Id attrs::Attrs) -> Stm
+        E::(from::Id to::Id) -> Stm
+        E::(nfrom::NodeId to::Id attrs::Attrs) -> Stm
+        E::(nfrom::NodeId to::Id) -> Stm
+        E::(sfrom::Stm to::Id attrs::Attrs) -> Stm
+        E::(sfrom::Stm to::Id) -> Stm
+        E::(from::Id nto::NodeId attrs::Attrs) -> Stm
+        E::(from::Id nto::NodeId) -> Stm
+        E::(nfrom::NodeId nto::NodeId attrs::Attrs) -> Stm
+        E::(nfrom::NodeId nto::NodeId) -> Stm
+        E::(sfrom::Stm nto::NodeId attrs::Attrs) -> Stm
+        E::(sfrom::Stm nto::NodeId) -> Stm
+        E::(from::Id sto::Stm attrs::Attrs) -> Stm
+        E::(from::Id sto::Stm) -> Stm
+        E::(nfrom::NodeId sto::Stm attrs::Attrs) -> Stm
+        E::(nfrom::NodeId sto::Stm) -> Stm
+        E::(sfrom::Stm sto::Stm attrs::Attrs) -> Stm
+        E::(sfrom::Stm sto::Stm) -> Stm
+        S::(id::Id stms::Stms) -> Stm
+        S::stms::Stms -> Stm
+        A::(prop::Id val::Id) -> Stm
+        GRAPH::attrs::Attrs -> Stm
+        NODE::attrs::Attrs -> Stm
+        EDGE::attrs::Attrs -> Stm
+
+        prop::STR val::Id -> Attr
+
+        Attr* -> Attrs
+
+        (key::INT args::(STR*))* -> Outline
+
+        graph::DotGraph outline::Outline -> Dotline

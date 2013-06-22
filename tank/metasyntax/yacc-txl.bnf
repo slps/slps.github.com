@@ -1,0 +1,71 @@
+yac_id:
+        id dot_id*
+dot_id:
+        "." id
+yac_tokenDefinition:
+        yac_keyword yac_tokdef+ NL
+yac_tokdef:
+        id
+        charlit
+endSection:
+        "%%" NL NL
+yac_literal:
+        yac_id
+        charlit
+bar_yac_literals:
+        "|" SP yac_literal* NL
+productionDefinition:
+        yac_id ":" NL IN SP SP literalsAndTypes barLiteralsAndTypes* ";"? NL EX
+        "define" yac_id NL IN SP SP literalsAndTypes NL barLiteralsAndTypes* EX "end" "define" NL NL
+literalsAndTypes:
+        literalOrType*
+barLiteralsAndTypes:
+        "|" SP literalsAndTypes NL
+        SP bar_yac_literals NL
+literalOrType:
+        literal
+        type
+        prec
+        Ccode
+prec:
+        yac_keyword yac_id
+Ccode:
+        "{" Ccode_or_token* "}"
+Ccode_or_token:
+        Ccode
+        token
+type:
+        SP "[" yac_id "]"
+        SP "[" "opt" yac_idOrQuotedLiteral "]"
+        SP "[" "repeat" yac_idOrQuotedLiteral plusOrStar? "]"
+        SP "[" "list" yac_idOrQuotedLiteral plusOrStar? "]"
+plusOrStar:
+        "+"
+        "*"
+yac_idOrQuotedLiteral:
+        yac_id
+        quotedLiteral
+literal:
+        quotedLiteral
+        unquotedLiteral
+quotedLiteral:
+        SP "'" unquotedLiteral SP
+unquotedLiteral:
+        yac_id
+        charlit
+        stringlit
+        number
+        key
+program:
+        Yacc_Txl_Grammar
+Yacc_Txl_Grammar:
+        tokenDefinitions productionDefinitions Cdefinitions
+Cdefinitions:
+        endSection token*
+tokenDefinitions:
+        tokenDefinition* endSection?
+tokenDefinition:
+        yac_tokenDefinition
+        "define" yac_id NL IN yac_tokenDefinition EX "end" "define" NL NL
+productionDefinitions:
+        productionDefinition*

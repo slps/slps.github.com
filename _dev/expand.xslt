@@ -25,6 +25,9 @@
 					<xsl:when test="local-name()='grammar'">
 						<xsl:copy-of select="."/>
 					</xsl:when>
+					<xsl:when test="local-name()='grammarset'">
+						<xsl:copy-of select="."/>
+					</xsl:when>
 					<xsl:when test="local-name()='expand-grammar'">
 						<xsl:apply-templates select="."/>
 					</xsl:when>

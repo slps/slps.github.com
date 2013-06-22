@@ -1,0 +1,32 @@
+module Main
+
+exports
+  sorts
+        Makefile Element Rule Macro ShellLine Comment Dependency RuleDep FileDep String Boolean 
+  context-free syntax
+        name::String comment::Comment elements::Element+ -> Makefile
+
+        Rule -> Element
+
+        Macro -> Element
+
+        dependencies::Dependency+ shellLines::ShellLine+ -> Rule
+
+        value::String -> Macro
+
+        command::String display::Boolean ruleShellLine::Rule -> ShellLine
+
+        text::String -> Comment
+
+        RuleDep -> Dependency
+
+        FileDep -> Dependency
+
+        ruledep::Rule -> RuleDep
+
+        name::String -> FileDep
+
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean

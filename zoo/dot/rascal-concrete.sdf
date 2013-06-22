@@ -1,0 +1,65 @@
+module Main
+
+exports
+  sorts
+        Nod EdgeRhs Port AttrList0 Subgraph Graph AttrList Statement StatementOptional NodeStatement StatementList Edg DOT AttrTag EdgeStatement AttrStatement EdgeOp NodeId DotAttr 
+  context-free syntax
+        Subgraph -> Nod
+
+        NodeId -> Nod
+
+        Edg+ -> EdgeRhs
+
+        ":" Id Id? -> Port
+
+        "[" DotAttr* "]" -> AttrList0
+
+        ("subgraph" Id?)? "{" StatementList "}" -> Subgraph
+
+        "digraph" -> Graph
+
+        AttrTag -> Graph
+
+        "graph" -> Graph
+
+        AttrList0* -> AttrList
+
+        AttrStatement -> Statement
+
+        EdgeStatement -> Statement
+
+        NodeStatement -> Statement
+
+        Id "=" Id -> Statement
+
+        Statement ";"? -> StatementOptional
+
+        Nod AttrList -> NodeStatement
+
+        StatementOptional* -> StatementList
+
+        EdgeOp Nod -> Edg
+
+        LAYOUT* Graph Id "{" StatementList "}" "\n"? -> DOT
+
+        "node" -> AttrTag
+
+        "graph" -> AttrTag
+
+        "edge" -> AttrTag
+
+        Nod EdgeRhs AttrList -> EdgeStatement
+
+        AttrTag AttrList -> AttrStatement
+
+        "->" -> EdgeOp
+
+        "--" -> EdgeOp
+
+        Id Port -> NodeId
+
+        Id -> NodeId
+
+        Id "=" Id -> DotAttr
+
+        Id "=" Id "," -> DotAttr

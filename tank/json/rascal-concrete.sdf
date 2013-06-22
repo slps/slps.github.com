@@ -1,7 +1,6 @@
 module Main
 
 exports
- context-free start-symbols JSONText
   sorts
         JSONText Value Object Member Array 
   context-free syntax
@@ -23,8 +22,8 @@ exports
 
         "false" -> Value {cons(False)}
 
-        "{" members:: "}" -> Object {cons(Object)}
+        "{" members::Member"," "}" -> Object {cons(Object)}
 
         memberName::StringLiteral ":" memberValue::Value -> Member {cons(Member)}
 
-        "[" values:: "]" -> Array {cons(Array)}
+        "[" values::Value"," "]" -> Array {cons(Array)}

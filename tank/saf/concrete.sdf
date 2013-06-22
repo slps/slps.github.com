@@ -1,0 +1,21 @@
+module Main
+
+exports
+  sorts
+        Action Cond Fighter Spec 
+  context-free syntax
+        Id -> Action {cons(action)}
+
+        "choose" "(" actions::(Id*) ")" -> Action {cons(choose)}
+
+        lhs::Cond "and" rhs::Cond -> Cond {cons(and)}
+
+        Id -> Cond {cons(const)}
+
+        lhs::Cond "or" rhs::Cond -> Cond {cons(or)}
+
+        name::Id "{" specs::(Spec*) "}" -> Fighter {cons(fighter)}
+
+        cond::Cond "[" move::Action fight::Action "]" -> Spec {cons(behavior)}
+
+        name::Id "=" strength::Number -> Spec {cons(attribute)}

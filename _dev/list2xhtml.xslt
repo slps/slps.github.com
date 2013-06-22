@@ -431,6 +431,9 @@ Last updated: </xsl:text>
 					<xsl:if test="local-name()='lll2bgf'">
 						<a href="http://github.com/grammarware/slps/wiki/LLL2BGF">LLL⇒BGF</a>
 					</xsl:if>
+					<xsl:if test="local-name()='xsd2bgf'">
+						<a href="http://github.com/grammarware/slps/wiki/XSD2BGF">XMLSchema⇒BGF</a>
+					</xsl:if>
 					<xsl:text>]</xsl:text>
 				</xsl:for-each>
 			</span>
@@ -470,7 +473,7 @@ Last updated: </xsl:text>
 					</span>
 				</li>
 			</xsl:for-each>
-			<xsl:for-each select="tool|toolset|item|itemset">
+			<xsl:for-each select="tool|toolset|item|itemset|used">
 				<xsl:choose>
 					<xsl:when test="local-name(.)='toolset' and @ref">
 						<xsl:variable name="name" select="@ref"/>

@@ -1,0 +1,51 @@
+module Main
+
+exports
+  sorts
+        Formula False True 
+  context-free syntax
+        "!" arg::Formula -> Formula {cons(not)}
+
+        "true" -> Formula {cons(true)}
+
+        "false" -> Formula {cons(false)}
+
+        lhs::Formula "&" rhs::Formula -> Formula {cons(and)}
+
+        lhs::Formula "|" rhs::Formula -> Formula {cons(or)}
+
+        lhs::Formula "<=" rhs::Formula -> Formula {cons(fi)}
+
+        lhs::Formula "=>" rhs::Formula -> Formula {cons(if)}
+
+        lhs::Formula "<=>" rhs::Formula -> Formula {cons(iff)}
+
+         -> Formula {cons(id)}
+
+        "false" -> False
+
+        "not" t::True -> False
+
+        "(" False ")" -> False
+
+        lf::False "and" rt::True -> False
+
+        lf::False "and" rf::False -> False
+
+        lt::True "and" rf::False -> False
+
+        lf::False "or" rf::False -> False
+
+        "(" True ")" -> True
+
+        "true" -> True
+
+        "not" f::False -> True
+
+        lt::True "and" rt::True -> True
+
+        lt::True "or" rt::True -> True
+
+        lt::True "or" rf::False -> True
+
+        lf::False "or" rt::True -> True

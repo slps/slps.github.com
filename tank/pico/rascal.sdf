@@ -1,0 +1,39 @@
+module Main
+
+exports
+  sorts
+        Program IdType Statement Type Expression Declarations 
+  context-free syntax
+        "begin" decls::Declarations body::Statement";" "end" -> Program {cons(program)}
+
+        id::Id ":" t::Type -> IdType {cons(idtype)}
+
+        "if" cond::Expression "then" thenPart::Statement";" "else" elsePart::Statement";" "fi" -> Statement {cons(cond)}
+
+        var::Id ":=" val::Expression -> Statement {cons(assign)}
+
+        "if" cond::Expression "then" thenPart::Statement";" "fi" -> Statement {cons(cond)}
+
+        "while" cond::Expression "do" body::Statement";" "od" -> Statement {cons(loop)}
+
+        "string" -> Type {cons(string)}
+
+        "natural" -> Type {cons(natural)}
+
+        "nil-type" -> Type {cons(nil)}
+
+        "(" e::Expression ")" -> Expression
+
+        natcon::Natural -> Expression {cons(natcon)}
+
+        name::Id -> Expression {cons(id)}
+
+        string::String -> Expression {cons(strcon)}
+
+        lhs::Expression "||" rhs::Expression -> Expression {cons(concat)}
+
+        lhs::Expression "+" rhs::Expression -> Expression {cons(add)}
+
+        lhs::Expression "-" rhs::Expression -> Expression {cons(min)}
+
+        "declare" decls::IdType"," ";" -> Declarations

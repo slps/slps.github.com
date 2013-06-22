@@ -13,7 +13,7 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable Web Applications: Abstract Model Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.io/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Julien Baudry, <code>WebApplications_AbstractModel.ecore</code>, 2006/07/10.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>4</strong></li><li>Number of top alternatives: <strong>5</strong></li><li>Number of defined nonterminal symbols: <strong>4</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>4</strong>: <code><a href="#Boolean" class="nt">Boolean</a>, <a href="#Integer" class="nt">Integer</a>, <a href="#String" class="nt">String</a>, <a href="#HyperLink" class="nt">HyperLink</a></code></li><li>Bottom nonterminal symbols: <strong>1</strong>: <code><a href="#Server/ServerPage" class="nt">Server/ServerPage</a></code></li><li>Number of used terminal symbols: <strong>2</strong></li><li>Keywords: <strong>2</strong>: <code class="t">"true", "false"</code></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Boolean">Boolean</a>:
+				</script></head><body><h1 class="l">Browsable Web Applications: Abstract Model Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.io/zoo/">Grammar Zoo</a> for details. <br></br>Source used for this grammar: Julien Baudry, <code>WebApplications_AbstractModel.ecore</code>, 2006/07/10.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>11</strong></li><li>Number of top alternatives: <strong>12</strong></li><li>Number of defined nonterminal symbols: <strong>11</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>10</strong>: <code><a href="#Boolean" class="nt">Boolean</a>, <a href="#Integer" class="nt">Integer</a>, <a href="#String" class="nt">String</a>, <a href="#ClientPage" class="nt">ClientPage</a>, <a href="#ClientPageModule" class="nt">ClientPageModule</a>, <a href="#LogicInterface" class="nt">LogicInterface</a>, <a href="#DesignElement" class="nt">DesignElement</a>, <a href="#ServerPage" class="nt">ServerPage</a>, <a href="#BusinessLogic" class="nt">BusinessLogic</a>, <a href="#DesignTemplate" class="nt">DesignTemplate</a></code></li><li>Bottom nonterminal symbols: <strong>4</strong>: <code><a href="#Server/ServerPage" class="nt">Server/ServerPage</a>, <a href="#Client/ClientPage" class="nt">Client/ClientPage</a>, <a href="#Server/BusinessLogic" class="nt">Server/BusinessLogic</a>, <a href="#Server/DesignTemplate" class="nt">Server/DesignTemplate</a></code></li><li>Number of used terminal symbols: <strong>2</strong></li><li>Keywords: <strong>2</strong>: <code class="t">"true", "false"</code></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Boolean">Boolean</a>:
         <span class="t">"true"</span>
         <span class="t">"false"</span>
 </pre><pre><a class="nt" name="Integer">Integer</a>:
@@ -22,5 +22,19 @@
         <span class="meta">string</span>
 </pre><pre><a class="nt" name="HyperLink">HyperLink</a>:
         <span class="sel">server</span>::<a class="nt" href="#Server/ServerPage">Server/ServerPage</a><span class="meta">+</span>
+</pre><pre><a class="nt" name="ClientPage">ClientPage</a>:
+        <span class="sel">hyperlink</span>::<a class="nt" href="#HyperLink">HyperLink</a>
+</pre><pre><a class="nt" name="ClientPageModule">ClientPageModule</a>:
+        <span class="sel">consistsOf</span>::<a class="nt" href="#Client/ClientPage">Client/ClientPage</a>
+</pre><pre><a class="nt" name="LogicInterface">LogicInterface</a>:
+        ε
+</pre><pre><a class="nt" name="DesignElement">DesignElement</a>:
+        ε
+</pre><pre><a class="nt" name="ServerPage">ServerPage</a>:
+        <span class="sel">useBusinessLogic</span>::<a class="nt" href="#Server/BusinessLogic">Server/BusinessLogic</a> <span class="sel">useDesignTemplate</span>::<a class="nt" href="#Server/DesignTemplate">Server/DesignTemplate</a> <span class="sel">generates</span>::<a class="nt" href="#Client/ClientPage">Client/ClientPage</a><span class="meta">+</span> <span class="sel">link</span>::<a class="nt" href="#HyperLink">HyperLink</a><span class="meta">+</span>
+</pre><pre><a class="nt" name="BusinessLogic">BusinessLogic</a>:
+        ε
+</pre><pre><a class="nt" name="DesignTemplate">DesignTemplate</a>:
+        ε
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: Apr2013.</div></body></html>
+Last updated: Jun2013.</div></body></html>

@@ -1,0 +1,16 @@
+PROGRAM = 'begin' DECLS (STATEMENT (';' STATEMENT)*)? 'end' ;
+DECLS = 'declare' (ID-TYPE (',' ID-TYPE)*)? ';' ;
+ID-TYPE = PICO-ID ':' TYPE ;
+TYPE = 'natural' ;
+TYPE = 'string' ;
+TYPE = 'nil-type' ;
+STATEMENT = PICO-ID ':=' EXP ;
+STATEMENT = 'if' EXP 'then' (STATEMENT (';' STATEMENT)*)? 'else' (STATEMENT (';' STATEMENT)*)? 'fi' ;
+STATEMENT = 'while' EXP 'do' (STATEMENT (';' STATEMENT)*)? 'od' ;
+EXP = PICO-ID ;
+EXP = NatCon ;
+EXP = StrCon ;
+EXP = EXP '+' EXP ;
+EXP = EXP '-' EXP ;
+EXP = EXP '||' EXP ;
+EXP = '(' EXP ')' ;

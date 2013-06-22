@@ -1,0 +1,604 @@
+[localVarDec] LocalVarDec:
+        Type {VarDec ","}+
+[typeParams] TypeParams:
+        "<" {TypeParam ","}+ ">"
+Literal:
+        CharLiteral
+Literal:
+        BoolLiteral
+Literal:
+        ClassLiteral
+Literal:
+        FloatLiteral
+Literal:
+        StringLiteral
+Literal:
+        NullLiteral
+Literal:
+        IntLiteral
+ClassMod:
+        "abstract"
+ClassMod:
+        "static"
+ClassMod:
+        "public"
+ClassMod:
+        "strictfp"
+ClassMod:
+        "final"
+ClassMod:
+        "private"
+ClassMod:
+        "protected"
+[classDecHead] ClassDecHead:
+        "class" Id TypeParams? Super? Interfaces?
+ClassDec:
+        EnumDec
+[classDec] ClassDec:
+        ClassDecHead ClassBody
+[switchGroup] SwitchGroup:
+        SwitchLabel+ BlockStm+
+ClassBodyDec:
+        ClassMemberDec
+ClassBodyDec:
+        StaticInit
+ClassBodyDec:
+        ConstrDec
+ClassBodyDec:
+        InstanceInit
+[double] FloatType:
+        "double"
+[float] FloatType:
+        "float"
+ClassMemberDec:
+        ClassDec
+ClassMemberDec:
+        MethodDec
+ClassMemberDec:
+        FieldDec
+[semicolon] ClassMemberDec:
+        ";"
+ClassMemberDec:
+        InterfaceDec
+ConstantMod:
+        "static"
+ConstantMod:
+        "public"
+ConstantMod:
+        "final"
+[constantDec] ConstantDec:
+        Type {VarDec ","}+ ";"
+[switchBlock] SwitchBlock:
+        "{" SwitchGroup* SwitchLabel* "}"
+CondMid:
+        "?" Expr ":"
+[wildcardUpperBound] WildcardBound:
+        "extends" RefType
+[wildcardLowerBound] WildcardBound:
+        "super" RefType
+[enumDecHead] EnumDecHead:
+        "enum" Id Interfaces?
+[packageOrTypeName] PackageOrTypeName:
+        Id
+[packageOrTypeName] PackageOrTypeName:
+        PackageOrTypeName "." Id
+[interfaceDecHead] InterfaceDecHead:
+        "interface" Id TypeParams? ExtendsInterfaces?
+[int] IntType:
+        "int"
+[byte] IntType:
+        "byte"
+[long] IntType:
+        "long"
+[short] IntType:
+        "short"
+[char] IntType:
+        "char"
+VarInit:
+        Expr
+VarInit:
+        ArrayInit
+[enumBodyDecs] EnumBodyDecs:
+        ";" ClassBodyDec*
+[classType] ClassType:
+        TypeDecSpec TypeArgs?
+[extendsInterfaces] ExtendsInterfaces:
+        "extends" {InterfaceType ","}+
+[staticInit] StaticInit:
+        "static" Block
+[varArityParam] FormalParam:
+        Type "..." VarDecId
+[param] FormalParam:
+        Type VarDecId
+EnumConstArgs:
+        "(" {Expr ","}* ")"
+[localVarDecStm] LocalVarDecStm:
+        LocalVarDec ";"
+[compilationUnit] CompilationUnit:
+        PackageDec? ImportDec* TypeDec*
+[enumConst] EnumConst:
+        Id EnumConstArgs? ClassBody?
+NumType:
+        FloatType
+NumType:
+        IntType
+[deprMethodDecHead] MethodDecHead:
+        TypeParams? ResultType Id "(" {FormalParam ","}* ")" Dim+ Throws?
+[methodDecHead] MethodDecHead:
+        TypeParams? ResultType Id "(" {FormalParam ","}* ")" Throws?
+[singleElemAnno] Anno:
+        "@" TypeName "(" ")"
+[anno] Anno:
+        "@" TypeName "(" {ElemValPair ","}* ")"
+[markerAnno] Anno:
+        "@" TypeName
+[fieldDec] FieldDec:
+        Type {VarDec ","}+ ";"
+FieldMod:
+        "public"
+FieldMod:
+        "static"
+FieldMod:
+        "transient"
+FieldMod:
+        "final"
+FieldMod:
+        "volatile"
+FieldMod:
+        "private"
+FieldMod:
+        "protected"
+ArraySubscript:
+        "[" Expr "]"
+[float] FloatLiteral:
+        EPSILON
+[constrBody] ConstrBody:
+        "{" ConstrInv? BlockStm* "}"
+[packageName] PackageName:
+        {Id "."}+
+[qSuperField] FieldAccess:
+        TypeName "." "super" "." Id
+[field] FieldAccess:
+        "." Id
+[superField] FieldAccess:
+        "super" "." Id
+[qSuperConstrInv] ConstrInv:
+        Expr "." TypeArgs? "super" "(" {Expr ","}* ")" ";"
+[superConstrInv] ConstrInv:
+        TypeArgs? "super" "(" {Expr ","}* ")" ";"
+[altConstrInv] ConstrInv:
+        TypeArgs? "this" "(" {Expr ","}* ")" ";"
+[octa] IntLiteral:
+        EPSILON
+[hexa] IntLiteral:
+        EPSILON
+[deci] IntLiteral:
+        EPSILON
+[semicolon] InterfaceMemberDec:
+        ";"
+InterfaceMemberDec:
+        InterfaceDec
+InterfaceMemberDec:
+        AbstractMethodDec
+InterfaceMemberDec:
+        ClassDec
+InterfaceMemberDec:
+        ConstantDec
+[elemValPair] ElemValPair:
+        Id "="
+[catch] CatchClause:
+        "catch" "(" FormalParam ")" Block
+[arrayInit] ArrayInit:
+        "{" {VarInit ","}* "," "}"
+[arrayInit] ArrayInit:
+        "{" {VarInit ","}* "}"
+VarDecId:
+        Id
+[arrayVarDecId] VarDecId:
+        Id Dim+
+Modifier:
+        "protected"
+Modifier:
+        "private"
+Modifier:
+        "volatile"
+Modifier:
+        "synchronized"
+Modifier:
+        "final"
+Modifier:
+        "strictfp"
+Modifier:
+        "transient"
+Modifier:
+        "abstract"
+Modifier:
+        "native"
+Modifier:
+        "static"
+Modifier:
+        "public"
+[elemValArrayInit] ElemVal:
+        "{" {ElemVal ","}* "}"
+ElemVal:
+        Expr
+ElemVal:
+        Anno
+[elemValArrayInit] ElemVal:
+        "{" {ElemVal ","}* "," "}"
+[constrDec] ConstrDec:
+        ConstrHead ConstrBody
+ConstrMod:
+        "protected"
+ConstrMod:
+        "private"
+ConstrMod:
+        "public"
+[interfaceType] InterfaceType:
+        TypeDecSpec TypeArgs?
+[packageDec] PackageDec:
+        Anno* "package" PackageName ";"
+[arrayAccess] ArrayAccess:
+        ArraySubscript
+[typeImportOnDemandDec] ImportDec:
+        "import" PackageName "." "*" ";"
+[typeImportDec] ImportDec:
+        "import" TypeName ";"
+[staticImportDec] ImportDec:
+        "import" "static" TypeName "." Id ";"
+[staticImportOnDemandDec] ImportDec:
+        "import" "static" TypeName "." "*" ";"
+ArrayBaseType:
+        TypeName
+ArrayBaseType:
+        PrimType
+[unboundWld] ArrayBaseType:
+        TypeName "<" "?" ">"
+[typeName] TypeName:
+        PackageOrTypeName "." Id
+[typeName] TypeName:
+        Id
+[case] SwitchLabel:
+        "case" Expr ":"
+[default] SwitchLabel:
+        "default" ":"
+[constrDecHead] ConstrHead:
+        TypeParams? Id "(" {FormalParam ","}* ")" Throws?
+[synchronized] Stm:
+        "synchronized" "(" Expr ")" Block
+[exprStm] Stm:
+        Expr ";"
+[for] Stm:
+        "for" "(" {Expr ","}* ";" Expr? ";" {Expr ","}* ")" Stm
+[for] Stm:
+        "for" "(" LocalVarDec ";" Expr? ";" {Expr ","}* ")" Stm
+Stm:
+        Block
+[continue] Stm:
+        "continue" Id? ";"
+[try] Stm:
+        "try" Block CatchClause+
+[throw] Stm:
+        "throw" Expr ";"
+[switch] Stm:
+        "switch" "(" Expr ")" SwitchBlock
+[if] Stm:
+        "if" "(" Expr ")" Stm
+[break] Stm:
+        "break" Id? ";"
+[empty] Stm:
+        ";"
+[labeled] Stm:
+        Id ":" Stm
+[assertStm] Stm:
+        "assert" Expr ":" Expr ";"
+[forEach] Stm:
+        "for" "(" FormalParam ":" Expr ")" Stm
+[assertStm] Stm:
+        "assert" Expr ";"
+[try] Stm:
+        "try" Block CatchClause* "finally" Block
+[return] Stm:
+        "return" Expr? ";"
+[doWhile] Stm:
+        "do" Stm "while" "(" Expr ")" ";"
+[while] Stm:
+        "while" "(" Expr ")" Stm
+[if] Stm:
+        "if" "(" Expr ")" Stm "else" Stm
+[null] NullLiteral:
+        "null"
+ExceptionType:
+        ClassType
+ResultType:
+        Type
+[void] ResultType:
+        "void"
+[postDecr] Expr:
+        Expr "--"
+[postIncr] Expr:
+        Expr "++"
+[castPrim] Expr:
+        "(" PrimType ")" Expr
+[castRef] Expr:
+        "(" RefType ")" Expr
+[minus] Expr:
+        Expr
+[preIncr] Expr:
+        "++" Expr
+[plus] Expr:
+        Expr
+[preDecr] Expr:
+        "--" Expr
+[this] Expr:
+        "this"
+[mul] Expr:
+        Expr "*" Expr
+[div] Expr:
+        Expr Expr
+[remain] Expr:
+        Expr "%" Expr
+[qThis] Expr:
+        TypeName "." "this"
+[complement] Expr:
+        "~" Expr
+[not] Expr:
+        "!" Expr
+[plus] Expr:
+        Expr Expr
+[minus] Expr:
+        Expr Expr
+[uRightShift] Expr:
+        Expr ">>>" Expr
+[rightShift] Expr:
+        Expr ">>" Expr
+[leftShift] Expr:
+        Expr "<<" Expr
+[ltEq] Expr:
+        Expr "<=" Expr
+[lt] Expr:
+        Expr "<" Expr
+[gtEq] Expr:
+        Expr ">=" Expr
+[instanceOf] Expr:
+        Expr "instanceof" RefType
+[gt] Expr:
+        Expr ">" Expr
+[eq] Expr:
+        Expr "==" Expr
+[notEq] Expr:
+        Expr "!=" Expr
+[and] Expr:
+        Expr "&" Expr
+[excOr] Expr:
+        Expr "^" Expr
+[or] Expr:
+        Expr "|" Expr
+[lazyAnd] Expr:
+        Expr "&&" Expr
+[lazyOr] Expr:
+        Expr "||" Expr
+[cond] Expr:
+        Expr CondMid Expr
+[assignMinus] Expr:
+        LHS "-=" Expr
+[assignExcOr] Expr:
+        LHS "^=" Expr
+[assignPlus] Expr:
+        LHS "+=" Expr
+[assignURightShift] Expr:
+        LHS ">>>=" Expr
+[assignAnd] Expr:
+        LHS "&=" Expr
+[assignDiv] Expr:
+        LHS "/=" Expr
+[assignMul] Expr:
+        LHS "*=" Expr
+[assignRemain] Expr:
+        LHS "%=" Expr
+[assignLeftShift] Expr:
+        LHS "<<=" Expr
+[assignRightShift] Expr:
+        LHS ">>=" Expr
+[assignOr] Expr:
+        LHS "|=" Expr
+[assign] Expr:
+        LHS "=" Expr
+[qNewInstance] Expr:
+        Expr "." "new" TypeArgs? Id TypeArgs? "(" {Expr ","}* ")" ClassBody?
+[lit] Expr:
+        Literal
+[newInstance] Expr:
+        "new" TypeArgs? ClassOrInterfaceType "(" {Expr ","}* ")" ClassBody?
+[exprName] Expr:
+        ExprName
+Expr:
+        ArrayCreationExpr
+Expr:
+        "(" Expr ")"
+Expr:
+        EPSILON
+[invoke] Expr:
+        MethodSpec "(" {Expr ","}* ")"
+[arrayType] ArrayType:
+        Type "[" "]"
+[classBody] ClassBody:
+        "{" ClassBodyDec* "}"
+TypeDecSpec:
+        TypeName
+[member] TypeDecSpec:
+        TypeDecSpec TypeArgs "." Id
+PrimType:
+        NumType
+[boolean] PrimType:
+        "boolean"
+[enumDec] EnumDec:
+        EnumDecHead EnumBody
+ActualTypeArg:
+        Type
+[wildcard] ActualTypeArg:
+        "?" WildcardBound?
+[methodName] MethodName:
+        AmbName "." Id
+[methodName] MethodName:
+        Id
+InterfaceDec:
+        InterfaceDecHead "{" InterfaceMemberDec* "}"
+InterfaceDec:
+        AnnoDecHead "{" AnnoElemDec* "}"
+InterfaceMod:
+        "public"
+InterfaceMod:
+        "static"
+InterfaceMod:
+        "abstract"
+InterfaceMod:
+        "strictfp"
+InterfaceMod:
+        "protected"
+InterfaceMod:
+        "private"
+[voidClass] ClassLiteral:
+        "void" "." "class"
+[class] ClassLiteral:
+        Type "." "class"
+StringLiteral:
+        EPSILON
+AbstractMethodMod:
+        "abstract"
+AbstractMethodMod:
+        "public"
+[abstractMethodDec] AbstractMethodDec:
+        TypeParams? ResultType Id "(" {FormalParam ","}* ")" Throws? ";"
+[deprAbstractMethodDec] AbstractMethodDec:
+        TypeParams? ResultType Id "(" {FormalParam ","}* ")" Dim+ Throws? ";"
+[id] Id:
+        EPSILON
+[typeBound] TypeBound:
+        "extends" {ClassOrInterfaceType "&"}+
+AnnoElemDec:
+        EnumDec
+[semicolon] AnnoElemDec:
+        ";"
+AnnoElemDec:
+        ClassDec
+AnnoElemDec:
+        ConstantDec
+AnnoElemDec:
+        InterfaceDec
+[annoMethodDec] AnnoElemDec:
+        AbstractMethodMod* Type Id "(" ")" DefaultVal? ";"
+[false] BoolLiteral:
+        "false"
+[true] BoolLiteral:
+        "true"
+[noMethodBody] MethodBody:
+        ";"
+MethodBody:
+        Block
+[exprName] ExprName:
+        Id
+[exprName] ExprName:
+        AmbName "." Id
+[defaultVal] DefaultVal:
+        "default"
+[methodDec] MethodDec:
+        MethodDecHead MethodBody
+[ambName] AmbName:
+        AmbName "." Id
+[ambName] AmbName:
+        Id
+MethodMod:
+        "final"
+MethodMod:
+        "strictfp"
+MethodMod:
+        "synchronized"
+MethodMod:
+        "protected"
+MethodMod:
+        "private"
+MethodMod:
+        "static"
+MethodMod:
+        "public"
+MethodMod:
+        "abstract"
+MethodMod:
+        "native"
+[newArray] ArrayCreationExpr:
+        "new" ArrayBaseType DimExpr+
+[newArray] ArrayCreationExpr:
+        "new" ArrayBaseType ArrayInit
+RefType:
+        ClassOrInterfaceType
+RefType:
+        ArrayType
+TypeDec:
+        InterfaceDec
+TypeDec:
+        ClassDec
+[semicolon] TypeDec:
+        ";"
+[typeArgs] TypeArgs:
+        "<" {ActualTypeArg ","}+ ">"
+LHS:
+        ExprName
+LHS:
+        EPSILON
+[annoDecHead] AnnoDecHead:
+        "@" "interface" Id
+[typeParam] TypeParam:
+        TypeVarId TypeBound?
+[method] MethodSpec:
+        MethodName
+[superMethod] MethodSpec:
+        "super" "." TypeArgs? Id
+[genericMethod] MethodSpec:
+        AmbName "." TypeArgs Id
+[qSuperMethod] MethodSpec:
+        TypeName "." "super" "." TypeArgs? Id
+[method] MethodSpec:
+        "." TypeArgs? Id
+Type:
+        RefType
+Type:
+        PrimType
+[superDec] Super:
+        "extends" ClassType
+CharLiteral:
+        EPSILON
+[instanceInit] InstanceInit:
+        Block
+[enumBody] EnumBody:
+        "{" {EnumConst ","}* EnumBodyDecs? "}"
+[enumBody] EnumBody:
+        "{" {EnumConst ","}* "," EnumBodyDecs? "}"
+[throwsDec] Throws:
+        "throws" {ExceptionType ","}+
+[block] Block:
+        "{" BlockStm* "}"
+[typeVar] TypeVar:
+        TypeVarId
+TypeVarId:
+        Id
+[dim] Dim:
+        "[" "]"
+BlockStm:
+        Stm
+[classDecStm] BlockStm:
+        ClassDec
+BlockStm:
+        LocalVarDecStm
+[dim] DimExpr:
+        "[" Expr "]"
+[implementsDec] Interfaces:
+        "implements" {InterfaceType ","}+
+VarMod:
+        "final"
+[varDec] VarDec:
+        VarDecId "=" VarInit
+[varDec] VarDec:
+        VarDecId
+[classOrInterfaceType] ClassOrInterfaceType:
+        TypeDecSpec TypeArgs?

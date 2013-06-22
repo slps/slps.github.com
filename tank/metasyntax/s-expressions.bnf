@@ -1,0 +1,26 @@
+Display:
+        "[" SimpleString "]"
+[raw] SimpleString:
+        Raw
+[base64] SimpleString:
+        Base64
+[hex] SimpleString:
+        HexaDecimal
+[token] SimpleString:
+        Token
+[quoted] SimpleString:
+        QuotedString
+Base64:
+        "|" Base64Char* "|"
+[list] SExp:
+        List
+[string] SExp:
+        String
+HexaDecimal:
+        "#" HexDigit* "#"
+[display] String:
+        Display SimpleString
+[simple] String:
+        SimpleString
+List:
+        "(" SExp* ")"

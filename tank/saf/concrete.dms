@@ -1,0 +1,8 @@
+Action = Id ;
+Action = 'choose' '(' actions::(Id*) ')' ;
+Cond = lhs::Cond 'and' rhs::Cond ;
+Cond = Id ;
+Cond = lhs::Cond 'or' rhs::Cond ;
+Fighter = name::Id '{' specs::(Spec*) '}' ;
+Spec = cond::Cond '[' move::Action fight::Action ']' ;
+Spec = name::Id '=' strength::Number ;

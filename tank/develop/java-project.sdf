@@ -1,0 +1,46 @@
+module Main
+
+exports
+  sorts
+        JavaProject PackageFragment CompilationUnit ImportDeclaration Type Field Method JavaElement MEMBER-KIND NamedElement PackageDeclaration String 
+  context-free syntax
+        ownedPackageFragment::PackageFragment+ -> JavaProject
+
+        ownedCompilationUnit::CompilationUnit+ -> PackageFragment
+
+        importDeclaration::ImportDeclaration+ ownedType::Type+ declaration::PackageDeclaration -> CompilationUnit
+
+        name::String -> ImportDeclaration
+
+        nestedType::Type+ ownedSuperType::Type+ elementName::String member_kind::MEMBER-KIND methods::Method+ fields::Field+ -> Type
+
+         -> Field
+
+        returnType::String parametersName::String+ parametersType::String+ -> Method
+
+        Type -> JavaElement
+
+        Field -> JavaElement
+
+        Method -> JavaElement
+
+        class:: -> MEMBER-KIND
+        enum:: -> MEMBER-KIND
+        interface:: -> MEMBER-KIND
+        Annotation:: -> MEMBER-KIND
+
+        JavaProject -> NamedElement
+
+        PackageFragment -> NamedElement
+
+        CompilationUnit -> NamedElement
+
+        ImportDeclaration -> NamedElement
+
+        JavaElement -> NamedElement
+
+        PackageDeclaration -> NamedElement
+
+        name::String -> PackageDeclaration
+
+        STR -> String

@@ -1,0 +1,16 @@
+RealCon = IntCon '.' NatCon OptExp ;
+IntCon = '+' NatCon ;
+IntCon = NatCon ;
+IntCon = '-' NatCon ;
+AFun = StrCon ;
+AFun = IdCon ;
+Annotation = '{' ATerm',' '}' ;
+ATerm = AFun '(' ATerm',' ')' ;
+ATerm = RealCon ;
+ATerm = '[' ATerm',' ']' ;
+ATerm = ATerm Annotation ;
+ATerm = '<' ATerm '>' ;
+ATerm = IntCon ;
+ATerm = AFun ;
+OptExp = 'e' IntCon ;
+OptExp = ;

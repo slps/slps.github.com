@@ -1,0 +1,37 @@
+module Main
+
+exports
+  sorts
+        RealCon IntCon AFun Annotation ATerm OptExp 
+  context-free syntax
+        IntCon "." NatCon OptExp -> RealCon {cons(RealCon)}
+
+        "+" NatCon -> IntCon {cons(Positive)}
+
+        NatCon -> IntCon {cons(Natural)}
+
+        "-" NatCon -> IntCon {cons(Negative)}
+
+        StrCon -> AFun {cons(Quoted)}
+
+        IdCon -> AFun {cons(Unquoted)}
+
+        "{" ATerm"," "}" -> Annotation {cons(Default)}
+
+        AFun "(" ATerm"," ")" -> ATerm {cons(Appl)}
+
+        RealCon -> ATerm {cons(Real)}
+
+        "[" ATerm"," "]" -> ATerm {cons(List)}
+
+        ATerm Annotation -> ATerm {cons(Annotated)}
+
+        "<" ATerm ">" -> ATerm {cons(Placeholder)}
+
+        IntCon -> ATerm {cons(Int)}
+
+        AFun -> ATerm {cons(Fun)}
+
+        "e" IntCon -> OptExp {cons(Present)}
+
+         -> OptExp {cons(Absent)}

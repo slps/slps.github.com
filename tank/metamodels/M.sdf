@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        IdentifiedElement MElement MElementReference Module ModuleMember ImportDirective ExportDirective Value NumericalValue StringValue IntegerValue DecimalValue BooleanValue Boolean Integer String 
+        IdentifiedElement MElement MElementReference Module ModuleMember ImportDirective ExportDirective Value NumericalValue StringValue IntegerValue DecimalValue BooleanValue DerivedType TypeReference IntrinsicTypeReference DerivedTypeReference Field Collection ComputedValue InitializationExpression WhereExpression IdentityExpression EqualExpression InExpression CollectionExpression DefaultValueExpression StandardValueExpression Language Entity Boolean Integer String 
   context-free syntax
         MElement -> IdentifiedElement
 
@@ -47,6 +47,40 @@ exports
         value::Double -> DecimalValue
 
         value::Boolean -> BooleanValue
+
+        supertypes::Types/TypeReference+ fields::Types/Field+ initializationExpression::Expressions/InitializationExpression whereExpression::Expressions/WhereExpression expression::Expressions/Expression -> DerivedType
+
+        subtype::Types/DerivedType field::Types/Field lowerBound::Integer upperBound::Integer -> TypeReference
+
+        typeIdentifier::String -> IntrinsicTypeReference
+
+        type::Types/DerivedType -> DerivedTypeReference
+
+        owner::Types/DerivedType type::Types/TypeReference -> Field
+
+        qualifiers::String+ identifier::String -> Collection
+
+        qualifiers::String+ identifier::String -> ComputedValue
+
+        type::Types/DerivedType values::Value+ -> InitializationExpression
+
+        type::Types/DerivedType queryExpressions::Expressions/QueryExpression+ -> WhereExpression
+
+        identity::Types/Field -> IdentityExpression
+
+        leftValue::Expressions/ValueExpression rightValue::Expressions/ValueExpression -> EqualExpression
+
+        value::Expressions/ValueExpression collection::Expressions/CollectionExpression -> InExpression
+
+        inExpression::Expressions/InExpression collectionValue::Expressions/ValueExpression -> CollectionExpression
+
+         -> DefaultValueExpression
+
+        context::Expressions/ValueExpression value::String -> StandardValueExpression
+
+        module::Module -> Language
+
+        module::Module -> Entity
 
         "true" -> Boolean
         "false" -> Boolean

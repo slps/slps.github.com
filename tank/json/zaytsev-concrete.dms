@@ -1,4 +1,4 @@
-JSONObject = '{' '}' ;
+JSONObject = '{' JSONKeyValue',' '}' ;
 JSONData = JSONBasicType ;
 JSONBasicType = JSONString ;
 JSONBasicType = JSONNull ;
@@ -8,8 +8,8 @@ JSONBasicType = JSONArray ;
 JSONBasicType = JSONObject ;
 JSONBoolean = 'false' ;
 JSONBoolean = 'true' ;
-JSONArray = '[' ']' ;
-JSONNumber = Digits ;
+JSONArray = '[' JSONBasicType',' ']' ;
+JSONNumber = '-'? Digits ('.' Digits)? ;
 JSONNull = 'null' ;
 JSONKeyValue = key::JSONBasicType ':' val::JSONBasicType ;
 JSONString = DoubleQuotedString ;

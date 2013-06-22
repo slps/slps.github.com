@@ -2,14 +2,14 @@ module Main
 
 exports
   sorts
-        WikiText WikiSymbol WikiLink 
+        WikiText WikiLink WikiSymbol 
   context-free syntax
-        WikiSymbol* -> WikiText
+        WikiSymbol* -> WikiText {cons(wss)}
 
-        w::MWWord -> WikiSymbol
-
-        wl::WikiLink -> WikiSymbol
+        "[[" destination::PageName "|" description::(MWWord+) "]]" -> WikiLink {cons(barred)}
 
         "[[" destination::PageName "]]" -> WikiLink {cons(simple)}
 
-        "[[" destination::PageName "|" description::(MWWord+) "]]" -> WikiLink {cons(barred)}
+        MWWord -> WikiSymbol {cons(w)}
+
+        WikiLink -> WikiSymbol {cons(wl)}

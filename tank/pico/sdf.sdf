@@ -1,0 +1,28 @@
+module Main
+
+exports
+ context-free start-symbols PROGRAM
+  sorts
+        PROGRAM DECLS ID-TYPE TYPE STATEMENT EXP 
+  context-free syntax
+        "begin" DECLS (STATEMENT (";" STATEMENT)*)? "end" -> PROGRAM
+
+        "declare" (ID-TYPE ("," ID-TYPE)*)? ";" -> DECLS
+
+        PICO-ID ":" TYPE -> ID-TYPE
+
+        "natural" -> TYPE
+        "string" -> TYPE
+        "nil-type" -> TYPE
+
+        PICO-ID ":=" EXP -> STATEMENT
+        "if" EXP "then" (STATEMENT (";" STATEMENT)*)? "else" (STATEMENT (";" STATEMENT)*)? "fi" -> STATEMENT
+        "while" EXP "do" (STATEMENT (";" STATEMENT)*)? "od" -> STATEMENT
+
+        PICO-ID -> EXP
+        NatCon -> EXP
+        StrCon -> EXP
+        EXP "+" EXP -> EXP
+        EXP "-" EXP -> EXP
+        EXP "||" EXP -> EXP
+        "(" EXP ")" -> EXP

@@ -1,10 +1,11 @@
 module Main
 
 exports
- context-free start-symbols BGFExpression
   sorts
-        BGFExpression BGFValue 
+        BGFProduction BGFExpression BGFValue 
   context-free syntax
+        production::(label::STR lhs::STR rhs::BGFExpression) -> BGFProduction
+
         epsilon:: -> BGFExpression
         empty:: -> BGFExpression
         val::v::BGFValue -> BGFExpression

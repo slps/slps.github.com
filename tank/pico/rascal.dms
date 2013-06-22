@@ -1,0 +1,17 @@
+Program = 'begin' decls::Declarations body::Statement';' 'end' ;
+IdType = id::Id ':' t::Type ;
+Statement = 'if' cond::Expression 'then' thenPart::Statement';' 'else' elsePart::Statement';' 'fi' ;
+Statement = var::Id ':=' val::Expression ;
+Statement = 'if' cond::Expression 'then' thenPart::Statement';' 'fi' ;
+Statement = 'while' cond::Expression 'do' body::Statement';' 'od' ;
+Type = 'string' ;
+Type = 'natural' ;
+Type = 'nil-type' ;
+Expression = '(' e::Expression ')' ;
+Expression = natcon::Natural ;
+Expression = name::Id ;
+Expression = string::String ;
+Expression = lhs::Expression '||' rhs::Expression ;
+Expression = lhs::Expression '+' rhs::Expression ;
+Expression = lhs::Expression '-' rhs::Expression ;
+Declarations = 'declare' decls::IdType',' ';' ;

@@ -1,0 +1,295 @@
+module Main
+
+exports
+  sorts
+        StructDeclarator PrototypeParameter TypeSpecifier StructDeclaration TypeName Initializer InitDeclarator Statement ExternalDeclaration PrototypeParameters Parameters FunctionPrototype Parameter AnonymousIdentifier PrototypeDeclarator AbstractDeclarator Declarator Specifier StorageClass Declaration Enumerator NonCommaExpression FunctionDefinition GlobalDeclaration TranslationUnit TypeQualifier MoreParameters Expression 
+  context-free syntax
+        Declarator -> StructDeclarator
+
+        Declarator? ":" Expression -> StructDeclarator
+
+        Specifier* AbstractDeclarator -> PrototypeParameter
+
+        "struct" Identifier "{" StructDeclaration* "}" -> TypeSpecifier {cons(StructDecl)}
+
+        "union" Identifier -> TypeSpecifier {cons(Union)}
+
+        "int" -> TypeSpecifier {cons(Int)}
+
+        "void" -> TypeSpecifier {cons(Void)}
+
+        "struct" "{" StructDeclaration* "}" -> TypeSpecifier {cons(StructAnonDecl)}
+
+        "short" -> TypeSpecifier {cons(Short)}
+
+        Identifier -> TypeSpecifier {cons(Identifier)}
+
+        "enum" Identifier "{" Enumerator"," "}" -> TypeSpecifier {cons(EnumDecl)}
+
+        "signed" -> TypeSpecifier
+
+        "union" Identifier "{" StructDeclaration* "}" -> TypeSpecifier {cons(UnionDecl)}
+
+        "union" "{" StructDeclaration* "}" -> TypeSpecifier {cons(UnionAnonDecl)}
+
+        "enum" Identifier -> TypeSpecifier {cons(Enum)}
+
+        "struct" Identifier -> TypeSpecifier {cons(Struct)}
+
+        "unsigned" -> TypeSpecifier
+
+        "long" -> TypeSpecifier {cons(Long)}
+
+        "double" -> TypeSpecifier {cons(Double)}
+
+        "float" -> TypeSpecifier {cons(Float)}
+
+        "enum" "{" Enumerator"," "}" -> TypeSpecifier {cons(EnumAnonDecl)}
+
+        "char" -> TypeSpecifier {cons(Char)}
+
+        specs::(Specifier+) ";" -> StructDeclaration {cons(StructDeclWithoutDecl)}
+
+        specs::(Specifier+) StructDeclarator"," ";" -> StructDeclaration {cons(StructDeclWithDecl)}
+
+        Specifier+ AbstractDeclarator -> TypeName
+
+        "{" Initializer"," ","? "}" -> Initializer
+
+        NonCommaExpression -> Initializer
+
+        decl::Declarator "=" Initializer -> InitDeclarator
+
+        Declarator -> InitDeclarator {cons(decl)}
+
+        "default" ":" Statement -> Statement
+
+        "switch" "(" Expression ")" Statement -> Statement
+
+        "return" ";" -> Statement
+
+        "for" "(" Expression? ";" Expression? ";" Expression? ")" Statement -> Statement
+
+        "case" Expression ":" Statement -> Statement
+
+        "continue" ";" -> Statement
+
+        ";" -> Statement
+
+        "goto" Identifier ";" -> Statement
+
+        "do" Statement "while" "(" Expression ")" ";" -> Statement
+
+        "{" Declaration* Statement* "}" -> Statement
+
+        "while" "(" Expression ")" Statement -> Statement
+
+        "break" ";" -> Statement
+
+        "if" "(" Expression ")" Statement -> Statement
+
+        Identifier ":" Statement -> Statement
+
+        Expression ";" -> Statement
+
+        "if" "(" Expression ")" Statement "else" Statement -> Statement
+
+        "return" Expression ";" -> Statement
+
+        FunctionPrototype -> ExternalDeclaration
+
+        FunctionDefinition -> ExternalDeclaration
+
+        GlobalDeclaration -> ExternalDeclaration
+
+        "void" -> PrototypeParameters
+
+        PrototypeParameter"," MoreParameters? -> PrototypeParameters
+
+        Parameter"," MoreParameters? -> Parameters
+
+        "void" -> Parameters
+
+        specs::(Specifier*) decl::PrototypeDeclarator ";" -> FunctionPrototype {cons(DefaultFunctionPrototype)}
+
+        Specifier* Declarator -> Parameter
+
+         -> AnonymousIdentifier
+
+        decl::PrototypeDeclarator "(" params::(PrototypeParameters?) ")" -> PrototypeDeclarator {cons(FunctionDeclarator)}
+
+        Identifier -> PrototypeDeclarator {cons(Identifier)}
+
+        "(" decl::AbstractDeclarator ")" -> PrototypeDeclarator {cons(Bracket)}
+
+        decl::PrototypeDeclarator "[" exp::(Expression?) "]" -> PrototypeDeclarator {cons(ArrayDeclarator)}
+
+        "*" qualifiers::(TypeQualifier*) decl::PrototypeDeclarator -> PrototypeDeclarator {cons(PointerDeclarator)}
+
+        AnonymousIdentifier -> AbstractDeclarator {cons(Identifier)}
+
+        decl::AbstractDeclarator "[" exp::(Expression?) "]" -> AbstractDeclarator {cons(ArrayDeclarator)}
+
+        "(" decl::AbstractDeclarator ")" -> AbstractDeclarator {cons(Bracket)}
+
+        decl::AbstractDeclarator "(" params::(Parameters?) ")" -> AbstractDeclarator {cons(FunctionDeclarator)}
+
+        "*" qualifiers::(TypeQualifier*) decl::AbstractDeclarator -> AbstractDeclarator {cons(PointerDeclarator)}
+
+        decl::Declarator "[" exp::(Expression?) "]" -> Declarator {cons(ArrayDeclarator)}
+
+        Identifier -> Declarator {cons(Identifier)}
+
+        decl::Declarator "(" params::(Parameters?) ")" -> Declarator {cons(FunctionDeclarator)}
+
+        "(" decl::Declarator ")" -> Declarator {cons(Bracket)}
+
+        "*" qualifiers::(TypeQualifier*) decl::Declarator -> Declarator {cons(PointerDeclarator)}
+
+        StorageClass -> Specifier {cons(StorageClass)}
+
+        TypeQualifier -> Specifier {cons(TypeQualifier)}
+
+        TypeSpecifier -> Specifier {cons(TypeSpecifier)}
+
+        "register" -> StorageClass
+
+        "static" -> StorageClass
+
+        "extern" -> StorageClass
+
+        "auto" -> StorageClass
+
+        "typedef" -> StorageClass {cons(TypeDef)}
+
+        specs::(Specifier+) ";" -> Declaration {cons(DeclarationWithoutInitDecls)}
+
+        specs::(Specifier+) initDeclarators::InitDeclarator"," ";" -> Declaration {cons(DeclarationWithInitDecls)}
+
+        Identifier -> Enumerator
+
+        Identifier "=" NonCommaExpression -> Enumerator
+
+        expr::Expression -> NonCommaExpression {cons(NonCommaExpression)}
+
+        specs::(Specifier*) Declarator Declaration* "{" Declaration* Statement* "}" -> FunctionDefinition {cons(DefaultFunctionDefinition)}
+
+        specs::(Specifier+) ";" -> GlobalDeclaration {cons(GlobalDeclarationWithoutInitDecls)}
+
+        specs::(Specifier*) initDeclarators::InitDeclarator"," ";" -> GlobalDeclaration {cons(GlobalDeclarationWithInitDecls)}
+
+        ExternalDeclaration+ -> TranslationUnit
+
+        "const" -> TypeQualifier
+
+        "volatile" -> TypeQualifier
+
+        "," "..." -> MoreParameters
+
+        CharacterConstant -> Expression
+
+        Expression "--" -> Expression
+
+        Identifier -> Expression {cons(Variable)}
+
+        Expression "[" Expression "]" -> Expression
+
+        "(" Expression ")" -> Expression {cons(Bracket)}
+
+        "sizeof" "(" TypeName ")" -> Expression
+
+        Expression "++" -> Expression
+
+        FloatingPointConstant -> Expression
+
+        Expression "." Identifier -> Expression
+
+        StringConstant -> Expression
+
+        IntegerConstant -> Expression
+
+        HexadecimalConstant -> Expression
+
+        Expression "->" Identifier -> Expression
+
+        Expression "(" NonCommaExpression"," ")" -> Expression
+
+        Expression -> Expression
+
+        "sizeof" exp::Expression -> Expression {cons(SizeOfExpression)}
+
+        "&" Expression -> Expression
+
+        "!" Expression -> Expression
+
+        "(" TypeName ")" Expression -> Expression
+
+        "*" Expression -> Expression
+
+        "+" Expression -> Expression
+
+        "-" Expression -> Expression
+
+        "~" Expression -> Expression
+
+        lexp::Expression "*" rexp::Expression -> Expression {cons(MultiplicationExpression)}
+
+        Expression "/" Expression -> Expression
+
+        Expression "%" Expression -> Expression
+
+        Expression "+" Expression -> Expression
+
+        Expression "-" Expression -> Expression
+
+        Expression ">>" Expression -> Expression
+
+        Expression "<<" Expression -> Expression
+
+        Expression "<=" Expression -> Expression
+
+        Expression ">=" Expression -> Expression
+
+        Expression ">" Expression -> Expression
+
+        Expression "<" Expression -> Expression
+
+        Expression "==" Expression -> Expression
+
+        Expression "!=" Expression -> Expression
+
+        Expression "&" Expression -> Expression
+
+        Expression "^" Expression -> Expression
+
+        Expression "|" Expression -> Expression
+
+        Expression "&&" Expression -> Expression
+
+        Expression "||" Expression -> Expression
+
+        Expression "?" Expression ":" Expression -> Expression
+
+        Expression "|=" Expression -> Expression
+
+        Expression "&=" Expression -> Expression
+
+        Expression "*=" Expression -> Expression
+
+        Expression "/=" Expression -> Expression
+
+        Expression "+=" Expression -> Expression
+
+        Expression ">>=" Expression -> Expression
+
+        Expression "^=" Expression -> Expression
+
+        Expression "-=" Expression -> Expression
+
+        Expression "<<=" Expression -> Expression
+
+        Expression "%=" Expression -> Expression
+
+        Expression "=" Expression -> Expression
+
+        Expression "," Expression -> Expression {cons(CommaExpression)}

@@ -1,0 +1,290 @@
+StructDeclarator:
+        Declarator
+StructDeclarator:
+        Declarator? ":" Expression
+PrototypeParameter:
+        Specifier* AbstractDeclarator
+[StructDecl] TypeSpecifier:
+        "struct" Identifier "{" StructDeclaration* "}"
+[Union] TypeSpecifier:
+        "union" Identifier
+[Int] TypeSpecifier:
+        "int"
+[Void] TypeSpecifier:
+        "void"
+[StructAnonDecl] TypeSpecifier:
+        "struct" "{" StructDeclaration* "}"
+[Short] TypeSpecifier:
+        "short"
+[Identifier] TypeSpecifier:
+        Identifier
+[EnumDecl] TypeSpecifier:
+        "enum" Identifier "{" {Enumerator ","}+ "}"
+TypeSpecifier:
+        "signed"
+[UnionDecl] TypeSpecifier:
+        "union" Identifier "{" StructDeclaration* "}"
+[UnionAnonDecl] TypeSpecifier:
+        "union" "{" StructDeclaration* "}"
+[Enum] TypeSpecifier:
+        "enum" Identifier
+[Struct] TypeSpecifier:
+        "struct" Identifier
+TypeSpecifier:
+        "unsigned"
+[Long] TypeSpecifier:
+        "long"
+[Double] TypeSpecifier:
+        "double"
+[Float] TypeSpecifier:
+        "float"
+[EnumAnonDecl] TypeSpecifier:
+        "enum" "{" {Enumerator ","}+ "}"
+[Char] TypeSpecifier:
+        "char"
+[StructDeclWithoutDecl] StructDeclaration:
+        specs::(Specifier+) ";"
+[StructDeclWithDecl] StructDeclaration:
+        specs::(Specifier+) {StructDeclarator ","}+ ";"
+TypeName:
+        Specifier+ AbstractDeclarator
+Initializer:
+        "{" {Initializer ","}+ ","? "}"
+Initializer:
+        NonCommaExpression
+InitDeclarator:
+        decl::Declarator "=" Initializer
+[decl] InitDeclarator:
+        Declarator
+Statement:
+        "default" ":" Statement
+Statement:
+        "switch" "(" Expression ")" Statement
+Statement:
+        "return" ";"
+Statement:
+        "for" "(" Expression? ";" Expression? ";" Expression? ")" Statement
+Statement:
+        "case" Expression ":" Statement
+Statement:
+        "continue" ";"
+Statement:
+        ";"
+Statement:
+        "goto" Identifier ";"
+Statement:
+        "do" Statement "while" "(" Expression ")" ";"
+Statement:
+        "{" Declaration* Statement* "}"
+Statement:
+        "while" "(" Expression ")" Statement
+Statement:
+        "break" ";"
+Statement:
+        "if" "(" Expression ")" Statement
+Statement:
+        Identifier ":" Statement
+Statement:
+        Expression ";"
+Statement:
+        "if" "(" Expression ")" Statement "else" Statement
+Statement:
+        "return" Expression ";"
+ExternalDeclaration:
+        FunctionPrototype
+ExternalDeclaration:
+        FunctionDefinition
+ExternalDeclaration:
+        GlobalDeclaration
+PrototypeParameters:
+        "void"
+PrototypeParameters:
+        {PrototypeParameter ","}+ MoreParameters?
+Parameters:
+        {Parameter ","}+ MoreParameters?
+Parameters:
+        "void"
+[DefaultFunctionPrototype] FunctionPrototype:
+        specs::(Specifier*) decl::PrototypeDeclarator ";"
+Parameter:
+        Specifier* Declarator
+AnonymousIdentifier:
+        EPSILON
+[FunctionDeclarator] PrototypeDeclarator:
+        decl::PrototypeDeclarator "(" params::(PrototypeParameters?) ")"
+[Identifier] PrototypeDeclarator:
+        Identifier
+[Bracket] PrototypeDeclarator:
+        "(" decl::AbstractDeclarator ")"
+[ArrayDeclarator] PrototypeDeclarator:
+        decl::PrototypeDeclarator "[" exp::(Expression?) "]"
+[PointerDeclarator] PrototypeDeclarator:
+        "*" qualifiers::(TypeQualifier*) decl::PrototypeDeclarator
+[Identifier] AbstractDeclarator:
+        AnonymousIdentifier
+[ArrayDeclarator] AbstractDeclarator:
+        decl::AbstractDeclarator "[" exp::(Expression?) "]"
+[Bracket] AbstractDeclarator:
+        "(" decl::AbstractDeclarator ")"
+[FunctionDeclarator] AbstractDeclarator:
+        decl::AbstractDeclarator "(" params::(Parameters?) ")"
+[PointerDeclarator] AbstractDeclarator:
+        "*" qualifiers::(TypeQualifier*) decl::AbstractDeclarator
+[ArrayDeclarator] Declarator:
+        decl::Declarator "[" exp::(Expression?) "]"
+[Identifier] Declarator:
+        Identifier
+[FunctionDeclarator] Declarator:
+        decl::Declarator "(" params::(Parameters?) ")"
+[Bracket] Declarator:
+        "(" decl::Declarator ")"
+[PointerDeclarator] Declarator:
+        "*" qualifiers::(TypeQualifier*) decl::Declarator
+[StorageClass] Specifier:
+        StorageClass
+[TypeQualifier] Specifier:
+        TypeQualifier
+[TypeSpecifier] Specifier:
+        TypeSpecifier
+StorageClass:
+        "register"
+StorageClass:
+        "static"
+StorageClass:
+        "extern"
+StorageClass:
+        "auto"
+[TypeDef] StorageClass:
+        "typedef"
+[DeclarationWithoutInitDecls] Declaration:
+        specs::(Specifier+) ";"
+[DeclarationWithInitDecls] Declaration:
+        specs::(Specifier+) initDeclarators::{InitDeclarator ","}+ ";"
+Enumerator:
+        Identifier
+Enumerator:
+        Identifier "=" NonCommaExpression
+[NonCommaExpression] NonCommaExpression:
+        expr::Expression
+[DefaultFunctionDefinition] FunctionDefinition:
+        specs::(Specifier*) Declarator Declaration* "{" Declaration* Statement* "}"
+[GlobalDeclarationWithoutInitDecls] GlobalDeclaration:
+        specs::(Specifier+) ";"
+[GlobalDeclarationWithInitDecls] GlobalDeclaration:
+        specs::(Specifier*) initDeclarators::{InitDeclarator ","}+ ";"
+TranslationUnit:
+        ExternalDeclaration+
+TypeQualifier:
+        "const"
+TypeQualifier:
+        "volatile"
+MoreParameters:
+        "," "..."
+Expression:
+        CharacterConstant
+Expression:
+        Expression "--"
+[Variable] Expression:
+        Identifier
+Expression:
+        Expression "[" Expression "]"
+[Bracket] Expression:
+        "(" Expression ")"
+Expression:
+        "sizeof" "(" TypeName ")"
+Expression:
+        Expression "++"
+Expression:
+        FloatingPointConstant
+Expression:
+        Expression "." Identifier
+Expression:
+        StringConstant
+Expression:
+        IntegerConstant
+Expression:
+        HexadecimalConstant
+Expression:
+        Expression "->" Identifier
+Expression:
+        Expression "(" {NonCommaExpression ","}* ")"
+Expression:
+        Expression
+[SizeOfExpression] Expression:
+        "sizeof" exp::Expression
+Expression:
+        "&" Expression
+Expression:
+        "!" Expression
+Expression:
+        "(" TypeName ")" Expression
+Expression:
+        "*" Expression
+Expression:
+        "+" Expression
+Expression:
+        "-" Expression
+Expression:
+        "~" Expression
+[MultiplicationExpression] Expression:
+        lexp::Expression "*" rexp::Expression
+Expression:
+        Expression "/" Expression
+Expression:
+        Expression "%" Expression
+Expression:
+        Expression "+" Expression
+Expression:
+        Expression "-" Expression
+Expression:
+        Expression ">>" Expression
+Expression:
+        Expression "<<" Expression
+Expression:
+        Expression "<=" Expression
+Expression:
+        Expression ">=" Expression
+Expression:
+        Expression ">" Expression
+Expression:
+        Expression "<" Expression
+Expression:
+        Expression "==" Expression
+Expression:
+        Expression "!=" Expression
+Expression:
+        Expression "&" Expression
+Expression:
+        Expression "^" Expression
+Expression:
+        Expression "|" Expression
+Expression:
+        Expression "&&" Expression
+Expression:
+        Expression "||" Expression
+Expression:
+        Expression "?" Expression ":" Expression
+Expression:
+        Expression "|=" Expression
+Expression:
+        Expression "&=" Expression
+Expression:
+        Expression "*=" Expression
+Expression:
+        Expression "/=" Expression
+Expression:
+        Expression "+=" Expression
+Expression:
+        Expression ">>=" Expression
+Expression:
+        Expression "^=" Expression
+Expression:
+        Expression "-=" Expression
+Expression:
+        Expression "<<=" Expression
+Expression:
+        Expression "%=" Expression
+Expression:
+        Expression "=" Expression
+[CommaExpression] Expression:
+        Expression "," Expression

@@ -4,7 +4,7 @@ exports
   sorts
         JSONObject JSONData JSONBasicType JSONBoolean JSONArray JSONNumber JSONNull JSONKeyValue JSONString 
   context-free syntax
-        "{" "}" -> JSONObject
+        "{" JSONKeyValue"," "}" -> JSONObject
 
         JSONBasicType -> JSONData
 
@@ -24,9 +24,9 @@ exports
 
         "true" -> JSONBoolean
 
-        "[" "]" -> JSONArray
+        "[" JSONBasicType"," "]" -> JSONArray
 
-        Digits -> JSONNumber
+        "-"? Digits ("." Digits)? -> JSONNumber
 
         "null" -> JSONNull
 

@@ -1,10 +1,13 @@
 module Main
 
 exports
- context-free start-symbols BGFGrammar
   sorts
-        BGFGrammar BGFProduction BGFExpression BGFValue BGFProdList BGFExprList 
+        BGFProdList BGFExprList BGFGrammar BGFProduction BGFExpression BGFValue 
   context-free syntax
+        BGFProduction* -> BGFProdList
+
+        BGFExpression* -> BGFExprList
+
         grammar::(roots::(STR*) prods::BGFProdList) -> BGFGrammar
 
         production::(label::STR lhs::STR rhs::BGFExpression) -> BGFProduction
@@ -27,7 +30,3 @@ exports
 
         string:: -> BGFValue
         integer:: -> BGFValue
-
-        BGFProduction* -> BGFProdList
-
-        BGFExpression* -> BGFExprList

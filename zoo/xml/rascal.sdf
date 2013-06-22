@@ -1,0 +1,18 @@
+module Main
+
+exports
+  sorts
+        Node Namespace 
+  context-free syntax
+        document::root::Node -> Node
+        attribute::(namespace::Namespace name::STR text::STR) -> Node
+        element::(namespace::Namespace name::STR children::(Node*)) -> Node
+        charData::text::STR -> Node
+        cdata::text::STR -> Node
+        comment::text::STR -> Node
+        pi::(target::STR text::STR) -> Node
+        entityRef::name::STR -> Node
+        charRef::code::INT -> Node
+
+        namespace::(prefix::STR uri::STR) -> Namespace
+        none:: -> Namespace

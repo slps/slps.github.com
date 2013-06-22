@@ -1,5 +1,5 @@
 JSONObject:
-        "{" "}"
+        "{" {JSONKeyValue ","}* "}"
 JSONData:
         JSONBasicType
 JSONBasicType:
@@ -19,9 +19,9 @@ JSONBoolean:
 JSONBoolean:
         "true"
 JSONArray:
-        "[" "]"
+        "[" {JSONBasicType ","}* "]"
 JSONNumber:
-        Digits
+        "-"? Digits ("." Digits)?
 JSONNull:
         "null"
 JSONKeyValue:

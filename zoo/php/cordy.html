@@ -1,0 +1,451 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:bgf="http://planet-sl.org/bgf" xmlns:xbgf="http://planet-sl.org/xbgf" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Browsable PHP 3,4,5 Grammar</title><link href="/slps.css" rel="stylesheet" type="text/css"></link><script type="text/javascript">
+
+				  var _gaq = _gaq || [];
+				  _gaq.push(['_setAccount', 'UA-3743366-7']);
+				  _gaq.push(['_setDomainName', 'github.com']);
+				  _gaq.push(['_trackPageview']);
+
+				  (function() {
+				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				  })();
+
+				</script></head><body><h1 class="l">Browsable PHP 3,4,5 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.io/zoo/">Grammar Zoo</a> for details. <br></br>Source used for this grammar: James R. Cordy, <em>TXL Grammar for PHP 3,4,5</em>, Version 1.0, June 2007.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>146</strong></li><li>Number of top alternatives: <strong>288</strong></li><li>Number of defined nonterminal symbols: <strong>146</strong></li><li>Root nonterminal symbols: <code><a href="#program" class="nt">program</a></code></li><li>Other top nonterminal symbols: <strong>2</strong>: <code><a href="#popid" class="nt">popid</a>, <a href="#token_or_key" class="nt">token_or_key</a></code></li><li>Bottom nonterminal symbols: <strong>17</strong>: <code><a href="#NL" class="nt">NL</a>, <a href="#token" class="nt">token</a>, <a href="#key" class="nt">key</a>, <a href="#SPOFF" class="nt">SPOFF</a>, <a href="#SPON" class="nt">SPON</a>, <a href="#IN" class="nt">IN</a>, <a href="#EX" class="nt">EX</a>, <a href="#FL" class="nt">FL</a>, <a href="#SP" class="nt">SP</a>, <a href="#id" class="nt">id</a>, <a href="#MagicConstant" class="nt">MagicConstant</a>, <a href="#number" class="nt">number</a>, <a href="#Hexa" class="nt">Hexa</a>, <a href="#Octa" class="nt">Octa</a>, <a href="#stringlit" class="nt">stringlit</a>, <a href="#charlit" class="nt">charlit</a>, <a href="#CommandString" class="nt">CommandString</a></code></li><li>Number of used terminal symbols: <strong>143</strong></li><li>Special terminal symbols: <strong>63</strong>: <code class="t">"&lt;?php", "&lt;?", "&lt;%", "&lt;?=", "?&gt;", "%&gt;", ";", "&lt;", "&gt;", "/", "!", "/&gt;", "=", "xml:", "-", "&amp;", "(", ",", ")", "{", "}", ":", "=&gt;", ".=", "+=", "-=", "*=", "/=", "%=", "&amp;=", "|=", "^=", "&lt;&lt;=", "&gt;&gt;=", "=&amp;", "?", "||", "&amp;&amp;", "|", "^", "==", "!=", "===", "!==", "&lt;&gt;", "&lt;=", "&gt;=", "&lt;&lt;", "&gt;&gt;", ".", "+", "*", "%", "~", "@", "++", "--", "&lt;&lt;&lt;", "::", "-&gt;", "[", "]", "$"</code></li><li>Keywords: <strong>80</strong>: <code class="t">"html", "body", "head", "form", "table", "tr", "td", "script", "select", "label", "div", "function", "class", "abstract", "final", "extends", "implements", "var", "const", "interface", "public", "protected", "private", "static", "if", "endif", "elseif", "else", "while", "endwhile", "do", "for", "endfor", "switch", "endswitch", "case", "default", "break", "continue", "return", "global", "unset", "echo", "print", "foreach", "as", "endforeach", "declare", "try", "catch", "throw", "or", "xor", "and", "instanceof", "int", "integer", "bool", "boolean", "real", "double", "float", "string", "array", "object", "null", "true", "false", "list", "new", "clone", "isset", "empty", "intval", "eval", "exit", "include", "include_once", "require", "require_once"</code></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="program">program</a>:
+        <a class="nt" href="#Document">Document</a>
+</pre><pre><a class="nt" name="Document">Document</a>:
+        <a class="nt" href="#PHPOpenTag">PHPOpenTag</a><span class="meta">?</span> <a class="nt" href="#PHPSection">PHPSection</a> <a class="nt" href="#PHPCloseTagDocumentSection">PHPCloseTagDocumentSection</a><span class="meta">?</span>
+        <a class="nt" href="#HTMLSection">HTMLSection</a> <a class="nt" href="#PHPOpenTagPHPSection">PHPOpenTagPHPSection</a><span class="meta">?</span> <a class="nt" href="#PHPCloseTagDocumentSection">PHPCloseTagDocumentSection</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="PHPCloseTagDocumentSection">PHPCloseTagDocumentSection</a>:
+        <a class="nt" href="#PHPCloseTag">PHPCloseTag</a> <a class="nt" href="#HTMLSection">HTMLSection</a> <a class="nt" href="#PHPCloseTagDocumentSection">PHPCloseTagDocumentSection</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="PHPOpenTagPHPSection">PHPOpenTagPHPSection</a>:
+        <a class="nt" href="#PHPOpenTag">PHPOpenTag</a> <a class="nt" href="#PHPSection">PHPSection</a>
+</pre><pre><a class="nt" name="PHPSection">PHPSection</a>:
+        <a class="nt" href="#TopStatement">TopStatement</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="PHPOpenTag">PHPOpenTag</a>:
+        <span class="t">"&lt;?php"</span> <a class="nt" href="#NL">NL</a>
+        <span class="t">"&lt;?"</span> <a class="nt" href="#NL">NL</a>
+        <span class="t">"&lt;%"</span> <a class="nt" href="#NL">NL</a>
+        <span class="t">"&lt;?="</span> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="PHPCloseTag">PHPCloseTag</a>:
+        <span class="t">"?&gt;"</span> <a class="nt" href="#NL">NL</a>
+        <span class="t">"%&gt;"</span> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="HTMLSection">HTMLSection</a>:
+        <a class="nt" href="#InlineHTML">InlineHTML</a>
+</pre><pre><a class="nt" name="InlineHTML">InlineHTML</a>:
+        <a class="nt" href="#InlineHTMLtoken">InlineHTMLtoken</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="InlineHTMLtoken">InlineHTMLtoken</a>:
+        <a class="nt" href="#tag_token_or_key">tag_token_or_key</a>
+</pre><pre><a class="nt" name="tag_token_or_key">tag_token_or_key</a>:
+        <a class="nt" href="#tag">tag</a>
+        <span class="t">";"</span> <a class="nt" href="#NL">NL</a>
+        <a class="nt" href="#token">token</a>
+        <a class="nt" href="#key">key</a>
+</pre><pre><a class="nt" name="tag">tag</a>:
+        <span class="t">"&lt;"</span> <a class="nt" href="#SPOFF">SPOFF</a> <a class="nt" href="#bigtag_id">bigtag_id</a> <a class="nt" href="#tag_attribute">tag_attribute</a><span class="meta">*</span> <span class="t">"&gt;"</span> <a class="nt" href="#SPON">SPON</a> (<a class="nt" href="#IN">IN</a> <a class="nt" href="#NL">NL</a>)
+        <a class="nt" href="#EX">EX</a> <a class="nt" href="#FL">FL</a> <span class="t">"&lt;"</span> <a class="nt" href="#SPOFF">SPOFF</a> <span class="t">"/"</span> <a class="nt" href="#bigtag_id">bigtag_id</a> <span class="t">"&gt;"</span> <a class="nt" href="#SPON">SPON</a> <a class="nt" href="#FL">FL</a>
+        <span class="t">"&lt;"</span> <a class="nt" href="#SPOFF">SPOFF</a> <span class="t">"!"</span><span class="meta">?</span> <a class="nt" href="#id_or_key">id_or_key</a> <a class="nt" href="#tag_attribute">tag_attribute</a><span class="meta">*</span> <span class="t">"&gt;"</span> <a class="nt" href="#SPON">SPON</a> <a class="nt" href="#NL">NL</a>
+        <span class="t">"&lt;"</span> <a class="nt" href="#SPOFF">SPOFF</a> <span class="t">"/"</span> <a class="nt" href="#id_or_key">id_or_key</a> <span class="t">"&gt;"</span> <a class="nt" href="#SPON">SPON</a> <a class="nt" href="#NL">NL</a>
+        <span class="t">"&lt;"</span> <a class="nt" href="#SPOFF">SPOFF</a> <a class="nt" href="#id_or_key">id_or_key</a> <a class="nt" href="#tag_attribute">tag_attribute</a><span class="meta">*</span> <span class="t">"/&gt;"</span> <a class="nt" href="#SPON">SPON</a> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="bigtag_id">bigtag_id</a>:
+        <span class="t">"html"</span>
+        <span class="t">"body"</span>
+        <span class="t">"head"</span>
+        <span class="t">"form"</span>
+        <span class="t">"table"</span>
+        <span class="t">"tr"</span>
+        <span class="t">"td"</span>
+        <span class="t">"script"</span>
+        <span class="t">"select"</span>
+        <span class="t">"label"</span>
+        <span class="t">"div"</span>
+</pre><pre><a class="nt" name="tag_attribute">tag_attribute</a>:
+        <a class="nt" href="#SP">SP</a> <a class="nt" href="#xml_colon">xml_colon</a><span class="meta">?</span> <a class="nt" href="#id_or_key">id_or_key</a> <span class="t">"="</span> <a class="nt" href="#token">token</a>
+</pre><pre><a class="nt" name="xml_colon">xml_colon</a>:
+        <span class="t">"xml:"</span>
+</pre><pre><a class="nt" name="id_or_key">id_or_key</a>:
+        <a class="nt" href="#id">id</a> <span class="t">"-"</span><span class="meta">?</span> <a class="nt" href="#id">id</a><span class="meta">?</span>
+        <a class="nt" href="#key">key</a>
+</pre><pre><a class="nt" name="TopStatement">TopStatement</a>:
+        <a class="nt" href="#FunctionDecl">FunctionDecl</a>
+        <a class="nt" href="#ClassDecl">ClassDecl</a>
+        <a class="nt" href="#Statement">Statement</a>
+        <a class="nt" href="#InterfaceDecl">InterfaceDecl</a>
+</pre><pre><a class="nt" name="FunctionDecl">FunctionDecl</a>:
+        <span class="t">"function"</span> <span class="t">"&amp;"</span><span class="meta">?</span> <a class="nt" href="#id">id</a> <span class="t">"("</span> <span class="meta">{</span><a class="nt" href="#Param">Param</a> <span class="t">","</span><span class="meta">}*</span> <span class="t">")"</span> <a class="nt" href="#NL">NL</a> <a class="nt" href="#Block">Block</a>
+</pre><pre><a class="nt" name="ClassDecl">ClassDecl</a>:
+        <a class="nt" href="#ClassType">ClassType</a> <a class="nt" href="#id">id</a> <a class="nt" href="#NL">NL</a> <a class="nt" href="#ExtendsClause">ExtendsClause</a><span class="meta">?</span> <a class="nt" href="#ImplementsClause">ImplementsClause</a><span class="meta">?</span> <span class="t">"{"</span> (<a class="nt" href="#NL">NL</a> <a class="nt" href="#IN">IN</a>) <a class="nt" href="#ClassMember">ClassMember</a><span class="meta">*</span> <a class="nt" href="#EX">EX</a> <span class="t">"}"</span> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="ClassType">ClassType</a>:
+        <span class="t">"class"</span>
+        <span class="t">"abstract"</span> <span class="t">"class"</span>
+        <span class="t">"final"</span> <span class="t">"class"</span>
+</pre><pre><a class="nt" name="ExtendsClause">ExtendsClause</a>:
+        <span class="t">"extends"</span> <a class="nt" href="#id">id</a> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="ImplementsClause">ImplementsClause</a>:
+        <span class="t">"implements"</span> <span class="meta">{</span><a class="nt" href="#Name">Name</a> <span class="t">","</span><span class="meta">}+</span> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="Name">Name</a>:
+        <a class="nt" href="#id">id</a>
+</pre><pre><a class="nt" name="ClassMember">ClassMember</a>:
+        <a class="nt" href="#VarModifiers">VarModifiers</a><span class="meta">?</span> <a class="nt" href="#FunctionDecl">FunctionDecl</a>
+        <a class="nt" href="#VarModifiers">VarModifiers</a><span class="meta">?</span> <span class="t">"abstract"</span> <a class="nt" href="#VarModifiers">VarModifiers</a><span class="meta">?</span> <span class="t">"function"</span> <span class="t">"&amp;"</span><span class="meta">?</span> <a class="nt" href="#id">id</a> <span class="t">"("</span> <span class="meta">{</span><a class="nt" href="#Param">Param</a> <span class="t">","</span><span class="meta">}*</span> <span class="t">")"</span> <span class="t">";"</span> <a class="nt" href="#NL">NL</a>
+        <span class="t">"var"</span> <span class="meta">{</span><a class="nt" href="#InstanceVariable">InstanceVariable</a> <span class="t">","</span><span class="meta">}+</span> <span class="t">";"</span> <a class="nt" href="#NL">NL</a>
+        <span class="t">"const"</span> <a class="nt" href="#id">id</a> <span class="t">"="</span> <a class="nt" href="#StaticScalar">StaticScalar</a> <span class="t">";"</span> <a class="nt" href="#NL">NL</a>
+        <a class="nt" href="#VarModifiers">VarModifiers</a> <span class="meta">{</span><a class="nt" href="#InstanceVariable">InstanceVariable</a> <span class="t">","</span><span class="meta">}+</span> <span class="t">";"</span> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="InterfaceDecl">InterfaceDecl</a>:
+        <span class="t">"interface"</span> <a class="nt" href="#id">id</a> <a class="nt" href="#NL">NL</a> <a class="nt" href="#InterfaceExtendsClause">InterfaceExtendsClause</a><span class="meta">?</span> <span class="t">"{"</span> (<a class="nt" href="#NL">NL</a> <a class="nt" href="#IN">IN</a>) <a class="nt" href="#InterfaceMember">InterfaceMember</a><span class="meta">*</span> (<a class="nt" href="#EX">EX</a> <a class="nt" href="#NL">NL</a>) <span class="t">"}"</span>
+</pre><pre><a class="nt" name="InterfaceExtendsClause">InterfaceExtendsClause</a>:
+        <span class="t">"extends"</span> <span class="meta">{</span><a class="nt" href="#Name">Name</a> <span class="t">","</span><span class="meta">}+</span>
+</pre><pre><a class="nt" name="InterfaceMember">InterfaceMember</a>:
+        <a class="nt" href="#VarModifiers">VarModifiers</a><span class="meta">?</span> <span class="t">"function"</span> <span class="t">"&amp;"</span><span class="meta">?</span> <a class="nt" href="#id">id</a> <span class="t">"("</span> <span class="meta">{</span><a class="nt" href="#Param">Param</a> <span class="t">","</span><span class="meta">}*</span> <span class="t">")"</span> <span class="t">";"</span> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="InstanceVariable">InstanceVariable</a>:
+        <a class="nt" href="#TVariable">TVariable</a> <a class="nt" href="#EqualsStaticScalar">EqualsStaticScalar</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="TVariable">TVariable</a>:
+        <a class="nt" href="#SimpleVariableName">SimpleVariableName</a>
+</pre><pre><a class="nt" name="EqualsStaticScalar">EqualsStaticScalar</a>:
+        <span class="t">"="</span> <a class="nt" href="#StaticScalar">StaticScalar</a>
+</pre><pre><a class="nt" name="VarModifiers">VarModifiers</a>:
+        <a class="nt" href="#VarModifier">VarModifier</a><span class="meta">+</span>
+</pre><pre><a class="nt" name="VarModifier">VarModifier</a>:
+        <span class="t">"public"</span>
+        <span class="t">"protected"</span>
+        <span class="t">"private"</span>
+        <span class="t">"static"</span>
+        <span class="t">"final"</span>
+</pre><pre><a class="nt" name="Param">Param</a>:
+        <a class="nt" href="#TypeHint">TypeHint</a><span class="meta">?</span> <span class="t">"&amp;"</span><span class="meta">?</span> <a class="nt" href="#TVariable">TVariable</a> <a class="nt" href="#EqualsStaticScalar">EqualsStaticScalar</a><span class="meta">?</span>
+        <span class="t">"const"</span> <a class="nt" href="#TVariable">TVariable</a>
+</pre><pre><a class="nt" name="TypeHint">TypeHint</a>:
+        <a class="nt" href="#id">id</a>
+</pre><pre><a class="nt" name="Statement">Statement</a>:
+        <a class="nt" href="#ExprStatement">ExprStatement</a>
+        <a class="nt" href="#BlockStatement">BlockStatement</a>
+        <a class="nt" href="#IfStatement">IfStatement</a>
+        <a class="nt" href="#WhileStatement">WhileStatement</a>
+        <a class="nt" href="#DoStatement">DoStatement</a>
+        <a class="nt" href="#ForStatement">ForStatement</a>
+        <a class="nt" href="#SwitchStatement">SwitchStatement</a>
+        <a class="nt" href="#ControlStatement">ControlStatement</a>
+        <a class="nt" href="#GlobalStaticStatement">GlobalStaticStatement</a>
+        <a class="nt" href="#UnsetStatement">UnsetStatement</a>
+        <a class="nt" href="#EchoStatement">EchoStatement</a>
+        <a class="nt" href="#PrintStatement">PrintStatement</a>
+        <a class="nt" href="#InlineHTMLStatement">InlineHTMLStatement</a>
+        <a class="nt" href="#ForEachStatement">ForEachStatement</a>
+        <a class="nt" href="#NullStatement">NullStatement</a>
+        <a class="nt" href="#DeclareStatement">DeclareStatement</a>
+        <a class="nt" href="#TryStatement">TryStatement</a>
+        <a class="nt" href="#ThrowStatement">ThrowStatement</a>
+</pre><pre><a class="nt" name="ExprStatement">ExprStatement</a>:
+        <a class="nt" href="#Expr">Expr</a> <span class="t">";"</span><span class="meta">?</span> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="BlockStatement">BlockStatement</a>:
+        <a class="nt" href="#Block">Block</a>
+</pre><pre><a class="nt" name="Block">Block</a>:
+        <span class="t">"{"</span> (<a class="nt" href="#NL">NL</a> <a class="nt" href="#IN">IN</a>) <a class="nt" href="#TopStatement">TopStatement</a><span class="meta">*</span> <a class="nt" href="#EX">EX</a> <span class="t">"}"</span> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="IfStatement">IfStatement</a>:
+        <span class="t">"if"</span> <span class="t">"("</span> <a class="nt" href="#Expr">Expr</a> <span class="t">")"</span> <a class="nt" href="#NL">NL</a> <a class="nt" href="#Statement">Statement</a> <a class="nt" href="#ElseIfStatement">ElseIfStatement</a><span class="meta">*</span> <a class="nt" href="#ElseStatement">ElseStatement</a><span class="meta">?</span>
+        <span class="t">"if"</span> <span class="t">"("</span> <a class="nt" href="#Expr">Expr</a> <span class="t">")"</span> <span class="t">":"</span> (<a class="nt" href="#NL">NL</a> <a class="nt" href="#IN">IN</a>) <a class="nt" href="#TopStatement">TopStatement</a><span class="meta">*</span> <a class="nt" href="#EX">EX</a> <a class="nt" href="#AltElseifStatement">AltElseifStatement</a><span class="meta">*</span> <a class="nt" href="#AltElseStatement">AltElseStatement</a><span class="meta">?</span> <span class="t">"endif"</span> <span class="t">";"</span> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="ElseIfStatement">ElseIfStatement</a>:
+        <span class="t">"elseif"</span> <span class="t">"("</span> <a class="nt" href="#Expr">Expr</a> <span class="t">")"</span> <a class="nt" href="#NL">NL</a> <a class="nt" href="#Statement">Statement</a>
+</pre><pre><a class="nt" name="ElseStatement">ElseStatement</a>:
+        <span class="t">"else"</span> <a class="nt" href="#NL">NL</a> <a class="nt" href="#Statement">Statement</a>
+</pre><pre><a class="nt" name="AltElseifStatement">AltElseifStatement</a>:
+        <span class="t">"elseif"</span> <span class="t">"("</span> <a class="nt" href="#Expr">Expr</a> <span class="t">")"</span> <span class="t">":"</span> (<a class="nt" href="#NL">NL</a> <a class="nt" href="#IN">IN</a>) <a class="nt" href="#TopStatement">TopStatement</a><span class="meta">*</span> <a class="nt" href="#EX">EX</a>
+</pre><pre><a class="nt" name="AltElseStatement">AltElseStatement</a>:
+        <span class="t">"else"</span> <span class="t">":"</span> (<a class="nt" href="#NL">NL</a> <a class="nt" href="#IN">IN</a>) <a class="nt" href="#TopStatement">TopStatement</a><span class="meta">*</span> <a class="nt" href="#EX">EX</a>
+</pre><pre><a class="nt" name="WhileStatement">WhileStatement</a>:
+        <span class="t">"while"</span> <span class="t">"("</span> <a class="nt" href="#Expr">Expr</a> <span class="t">")"</span> <a class="nt" href="#NL">NL</a> <a class="nt" href="#Statement">Statement</a>
+        <span class="t">"while"</span> <span class="t">"("</span> <a class="nt" href="#Expr">Expr</a> <span class="t">")"</span> <span class="t">":"</span> (<a class="nt" href="#NL">NL</a> <a class="nt" href="#IN">IN</a>) <a class="nt" href="#TopStatement">TopStatement</a><span class="meta">*</span> <a class="nt" href="#EX">EX</a> <span class="t">"endwhile"</span> <span class="t">";"</span> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="DoStatement">DoStatement</a>:
+        <span class="t">"do"</span> <a class="nt" href="#NL">NL</a> <a class="nt" href="#Statement">Statement</a> <span class="t">"while"</span> <span class="t">"("</span> <a class="nt" href="#Expr">Expr</a> <span class="t">")"</span> <span class="t">";"</span> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="ForStatement">ForStatement</a>:
+        <span class="t">"for"</span> <span class="t">"("</span> <span class="meta">{</span><a class="nt" href="#Expr">Expr</a> <span class="t">","</span><span class="meta">}*</span> <span class="t">";"</span> <span class="meta">{</span><a class="nt" href="#Expr">Expr</a> <span class="t">","</span><span class="meta">}*</span> <span class="t">";"</span> <span class="meta">{</span><a class="nt" href="#Expr">Expr</a> <span class="t">","</span><span class="meta">}*</span> <span class="t">")"</span> <a class="nt" href="#NL">NL</a> <a class="nt" href="#Statement">Statement</a>
+        <span class="t">"for"</span> <span class="t">"("</span> <span class="meta">{</span><a class="nt" href="#Expr">Expr</a> <span class="t">","</span><span class="meta">}*</span> <span class="t">";"</span> <span class="meta">{</span><a class="nt" href="#Expr">Expr</a> <span class="t">","</span><span class="meta">}*</span> <span class="t">";"</span> <span class="meta">{</span><a class="nt" href="#Expr">Expr</a> <span class="t">","</span><span class="meta">}*</span> <span class="t">")"</span> <span class="t">":"</span> (<a class="nt" href="#NL">NL</a> <a class="nt" href="#IN">IN</a>) <a class="nt" href="#Statement">Statement</a><span class="meta">*</span> <a class="nt" href="#EX">EX</a> <span class="t">"endfor"</span> <span class="t">";"</span> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="SwitchStatement">SwitchStatement</a>:
+        <span class="t">"switch"</span> <span class="t">"("</span> <a class="nt" href="#Expr">Expr</a> <span class="t">")"</span> <a class="nt" href="#NL">NL</a> <span class="t">"{"</span> <span class="t">";"</span><span class="meta">?</span> (<a class="nt" href="#NL">NL</a> <a class="nt" href="#IN">IN</a>) <a class="nt" href="#Case">Case</a><span class="meta">*</span> <a class="nt" href="#EX">EX</a> <span class="t">"}"</span> <a class="nt" href="#NL">NL</a>
+        <span class="t">"switch"</span> <span class="t">"("</span> <a class="nt" href="#Expr">Expr</a> <span class="t">")"</span> <span class="t">":"</span> <span class="t">";"</span><span class="meta">?</span> (<a class="nt" href="#NL">NL</a> <a class="nt" href="#IN">IN</a>) <a class="nt" href="#Case">Case</a><span class="meta">*</span> <a class="nt" href="#EX">EX</a> <span class="t">"endswitch"</span> <span class="t">";"</span> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="Case">Case</a>:
+        <span class="t">"case"</span> <a class="nt" href="#Expr">Expr</a> <a class="nt" href="#CaseSeparator">CaseSeparator</a> (<a class="nt" href="#NL">NL</a> <a class="nt" href="#IN">IN</a>) <a class="nt" href="#TopStatement">TopStatement</a><span class="meta">*</span> <a class="nt" href="#EX">EX</a>
+        <span class="t">"default"</span> <a class="nt" href="#CaseSeparator">CaseSeparator</a> (<a class="nt" href="#NL">NL</a> <a class="nt" href="#IN">IN</a>) <a class="nt" href="#TopStatement">TopStatement</a><span class="meta">*</span> <a class="nt" href="#EX">EX</a>
+</pre><pre><a class="nt" name="CaseSeparator">CaseSeparator</a>:
+        <span class="t">";"</span>
+        <span class="t">":"</span>
+</pre><pre><a class="nt" name="ControlStatement">ControlStatement</a>:
+        <span class="t">"break"</span> <a class="nt" href="#Expr">Expr</a><span class="meta">?</span> <span class="t">";"</span> <a class="nt" href="#NL">NL</a>
+        <span class="t">"continue"</span> <a class="nt" href="#Expr">Expr</a><span class="meta">?</span> <span class="t">";"</span> <a class="nt" href="#NL">NL</a>
+        <span class="t">"return"</span> <a class="nt" href="#Expr">Expr</a><span class="meta">?</span> <span class="t">";"</span> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="GlobalStaticStatement">GlobalStaticStatement</a>:
+        <span class="t">"global"</span> <span class="meta">{</span><a class="nt" href="#CVar">CVar</a> <span class="t">","</span><span class="meta">}+</span> <span class="t">";"</span> <a class="nt" href="#NL">NL</a>
+        <span class="t">"static"</span> <span class="meta">{</span><a class="nt" href="#StaticVariable">StaticVariable</a> <span class="t">","</span><span class="meta">}+</span> <span class="t">";"</span> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="StaticVariable">StaticVariable</a>:
+        <a class="nt" href="#TVariable">TVariable</a> <a class="nt" href="#EqualsStaticScalar">EqualsStaticScalar</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="UnsetStatement">UnsetStatement</a>:
+        <span class="t">"unset"</span> <span class="t">"("</span> <span class="meta">{</span><a class="nt" href="#ObjectCVar">ObjectCVar</a> <span class="t">","</span><span class="meta">}+</span> <span class="t">")"</span> <span class="t">";"</span> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="EchoStatement">EchoStatement</a>:
+        <span class="t">"echo"</span> <span class="meta">{</span><a class="nt" href="#Expr">Expr</a> <span class="t">","</span><span class="meta">}+</span> <span class="t">";"</span><span class="meta">?</span> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="PrintStatement">PrintStatement</a>:
+        <span class="t">"print"</span> <span class="meta">{</span><a class="nt" href="#Expr">Expr</a> <span class="t">","</span><span class="meta">}+</span> <span class="t">";"</span><span class="meta">?</span> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="InlineHTMLStatement">InlineHTMLStatement</a>:
+        <a class="nt" href="#PHPCloseTag">PHPCloseTag</a> <a class="nt" href="#InlineHTML">InlineHTML</a> <a class="nt" href="#PHPOpenTag">PHPOpenTag</a>
+</pre><pre><a class="nt" name="ForEachStatement">ForEachStatement</a>:
+        <span class="t">"foreach"</span> <span class="t">"("</span> <a class="nt" href="#Expr">Expr</a> <span class="t">"as"</span> <a class="nt" href="#ForEachPattern">ForEachPattern</a> <span class="t">")"</span> <a class="nt" href="#NL">NL</a> <a class="nt" href="#Statement">Statement</a>
+        <span class="t">"foreach"</span> <span class="t">"("</span> <a class="nt" href="#Expr">Expr</a> <span class="t">"as"</span> <a class="nt" href="#ForEachPattern">ForEachPattern</a> <span class="t">")"</span> <span class="t">":"</span> (<a class="nt" href="#NL">NL</a> <a class="nt" href="#IN">IN</a>) <a class="nt" href="#Statement">Statement</a><span class="meta">*</span> <a class="nt" href="#EX">EX</a> <span class="t">"endforeach"</span> <span class="t">";"</span> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="ForEachPattern">ForEachPattern</a>:
+        <a class="nt" href="#ForEachKey">ForEachKey</a><span class="meta">?</span> <a class="nt" href="#ForEachVar">ForEachVar</a>
+</pre><pre><a class="nt" name="ForEachKey">ForEachKey</a>:
+        <a class="nt" href="#ForEachVar">ForEachVar</a> <span class="t">"=&gt;"</span>
+</pre><pre><a class="nt" name="ForEachVar">ForEachVar</a>:
+        <a class="nt" href="#CVar">CVar</a>
+        <span class="t">"&amp;"</span> <a class="nt" href="#CVar">CVar</a>
+</pre><pre><a class="nt" name="NullStatement">NullStatement</a>:
+        <span class="t">";"</span> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="DeclareStatement">DeclareStatement</a>:
+        <span class="t">"declare"</span> <span class="t">"("</span> <a class="nt" href="#Directive">Directive</a><span class="meta">*</span> <span class="t">")"</span> <a class="nt" href="#NL">NL</a> <a class="nt" href="#Statement">Statement</a>
+</pre><pre><a class="nt" name="Directive">Directive</a>:
+        <a class="nt" href="#id">id</a>
+</pre><pre><a class="nt" name="TryStatement">TryStatement</a>:
+        <span class="t">"try"</span> <a class="nt" href="#NL">NL</a> <a class="nt" href="#Block">Block</a> <a class="nt" href="#Catch">Catch</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="Catch">Catch</a>:
+        <span class="t">"catch"</span> <span class="t">"("</span> <a class="nt" href="#id">id</a> <a class="nt" href="#TVariable">TVariable</a> <span class="t">")"</span> <a class="nt" href="#NL">NL</a> <a class="nt" href="#Block">Block</a>
+</pre><pre><a class="nt" name="ThrowStatement">ThrowStatement</a>:
+        <span class="t">"throw"</span> <a class="nt" href="#Expr">Expr</a> <span class="t">";"</span> <a class="nt" href="#NL">NL</a>
+</pre><pre><a class="nt" name="Expr">Expr</a>:
+        <a class="nt" href="#LogicalOrExpr">LogicalOrExpr</a>
+</pre><pre><a class="nt" name="LogicalOrExpr">LogicalOrExpr</a>:
+        <a class="nt" href="#LogicalXorExpr">LogicalXorExpr</a> <a class="nt" href="#OrLogicalXorExpr">OrLogicalXorExpr</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="OrLogicalXorExpr">OrLogicalXorExpr</a>:
+        <span class="t">"or"</span> <a class="nt" href="#LogicalXorExpr">LogicalXorExpr</a>
+</pre><pre><a class="nt" name="LogicalXorExpr">LogicalXorExpr</a>:
+        <a class="nt" href="#LogicalAndExpr">LogicalAndExpr</a> <a class="nt" href="#LogicalXorLogicalAndExpr">LogicalXorLogicalAndExpr</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="LogicalXorLogicalAndExpr">LogicalXorLogicalAndExpr</a>:
+        <span class="t">"xor"</span> <a class="nt" href="#LogicalAndExpr">LogicalAndExpr</a>
+</pre><pre><a class="nt" name="LogicalAndExpr">LogicalAndExpr</a>:
+        <a class="nt" href="#AssignmentExpr">AssignmentExpr</a> <a class="nt" href="#LogicalAndAssignmentExpr">LogicalAndAssignmentExpr</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="LogicalAndAssignmentExpr">LogicalAndAssignmentExpr</a>:
+        <span class="t">"and"</span> <a class="nt" href="#AssignmentExpr">AssignmentExpr</a>
+</pre><pre><a class="nt" name="AssignmentExpr">AssignmentExpr</a>:
+        <a class="nt" href="#TernaryExpr">TernaryExpr</a> <a class="nt" href="#AssignOpAssignmentExpr">AssignOpAssignmentExpr</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="AssignOpAssignmentExpr">AssignOpAssignmentExpr</a>:
+        <a class="nt" href="#AssignOp">AssignOp</a> <a class="nt" href="#AssignmentExpr">AssignmentExpr</a>
+</pre><pre><a class="nt" name="AssignOp">AssignOp</a>:
+        <span class="t">".="</span>
+        <span class="t">"="</span>
+        <span class="t">"+="</span>
+        <span class="t">"-="</span>
+        <span class="t">"*="</span>
+        <span class="t">"/="</span>
+        <span class="t">"%="</span>
+        <span class="t">"&amp;="</span>
+        <span class="t">"|="</span>
+        <span class="t">"^="</span>
+        <span class="t">"&lt;&lt;="</span>
+        <span class="t">"&gt;&gt;="</span>
+        <span class="t">"=&amp;"</span>
+</pre><pre><a class="nt" name="TernaryExpr">TernaryExpr</a>:
+        <a class="nt" href="#ConditionalOrExpr">ConditionalOrExpr</a> <a class="nt" href="#IfConditionalOrExpr">IfConditionalOrExpr</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="IfConditionalOrExpr">IfConditionalOrExpr</a>:
+        <span class="t">"?"</span> <a class="nt" href="#Expr">Expr</a> <span class="t">":"</span> <a class="nt" href="#Expr">Expr</a>
+</pre><pre><a class="nt" name="ConditionalOrExpr">ConditionalOrExpr</a>:
+        <a class="nt" href="#ConditionalAndExpr">ConditionalAndExpr</a> <a class="nt" href="#ConditionalOrConditionalAndExpr">ConditionalOrConditionalAndExpr</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="ConditionalOrConditionalAndExpr">ConditionalOrConditionalAndExpr</a>:
+        <span class="t">"||"</span> <a class="nt" href="#ConditionalAndExpr">ConditionalAndExpr</a>
+</pre><pre><a class="nt" name="ConditionalAndExpr">ConditionalAndExpr</a>:
+        <a class="nt" href="#BitOrExpr">BitOrExpr</a> <a class="nt" href="#ConditionalAndBitOrExpr">ConditionalAndBitOrExpr</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="ConditionalAndBitOrExpr">ConditionalAndBitOrExpr</a>:
+        <span class="t">"&amp;&amp;"</span> <a class="nt" href="#BitOrExpr">BitOrExpr</a>
+</pre><pre><a class="nt" name="BitOrExpr">BitOrExpr</a>:
+        <a class="nt" href="#BitXorExpr">BitXorExpr</a> <a class="nt" href="#BitOrBitXorExpr">BitOrBitXorExpr</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="BitOrBitXorExpr">BitOrBitXorExpr</a>:
+        <span class="t">"|"</span> <a class="nt" href="#BitXorExpr">BitXorExpr</a>
+</pre><pre><a class="nt" name="BitXorExpr">BitXorExpr</a>:
+        <a class="nt" href="#BitAndExpr">BitAndExpr</a> <a class="nt" href="#BitXorBitAndExpr">BitXorBitAndExpr</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="BitXorBitAndExpr">BitXorBitAndExpr</a>:
+        <span class="t">"^"</span> <a class="nt" href="#BitAndExpr">BitAndExpr</a>
+</pre><pre><a class="nt" name="BitAndExpr">BitAndExpr</a>:
+        <a class="nt" href="#EqualityExpr">EqualityExpr</a> <a class="nt" href="#BitAndEqualityExpr">BitAndEqualityExpr</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="BitAndEqualityExpr">BitAndEqualityExpr</a>:
+        <span class="t">"&amp;"</span> <a class="nt" href="#EqualityExpr">EqualityExpr</a>
+</pre><pre><a class="nt" name="EqualityExpr">EqualityExpr</a>:
+        <a class="nt" href="#InequalityExpr">InequalityExpr</a> <a class="nt" href="#EqualityOpInequalityExpr">EqualityOpInequalityExpr</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="EqualityOpInequalityExpr">EqualityOpInequalityExpr</a>:
+        <a class="nt" href="#EqualityOp">EqualityOp</a> <a class="nt" href="#InequalityExpr">InequalityExpr</a>
+</pre><pre><a class="nt" name="EqualityOp">EqualityOp</a>:
+        <span class="t">"=="</span>
+        <span class="t">"!="</span>
+        <span class="t">"==="</span>
+        <span class="t">"!=="</span>
+</pre><pre><a class="nt" name="InequalityExpr">InequalityExpr</a>:
+        <a class="nt" href="#ShiftExpr">ShiftExpr</a> <a class="nt" href="#InequalityOpShiftExpr">InequalityOpShiftExpr</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="InequalityOpShiftExpr">InequalityOpShiftExpr</a>:
+        <a class="nt" href="#InequalityOp">InequalityOp</a> <a class="nt" href="#ShiftExpr">ShiftExpr</a>
+</pre><pre><a class="nt" name="InequalityOp">InequalityOp</a>:
+        <span class="t">"&lt;&gt;"</span>
+        <span class="t">"&lt;"</span>
+        <span class="t">"&lt;="</span>
+        <span class="t">"&gt;"</span>
+        <span class="t">"&gt;="</span>
+</pre><pre><a class="nt" name="ShiftExpr">ShiftExpr</a>:
+        <a class="nt" href="#CatExpr">CatExpr</a> <a class="nt" href="#ShiftOpCatExpr">ShiftOpCatExpr</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="ShiftOpCatExpr">ShiftOpCatExpr</a>:
+        <a class="nt" href="#ShiftOp">ShiftOp</a> <a class="nt" href="#CatExpr">CatExpr</a>
+</pre><pre><a class="nt" name="ShiftOp">ShiftOp</a>:
+        <span class="t">"&lt;&lt;"</span>
+        <span class="t">"&gt;&gt;"</span>
+</pre><pre><a class="nt" name="CatExpr">CatExpr</a>:
+        <a class="nt" href="#AddExpr">AddExpr</a> <a class="nt" href="#CatAddExpr">CatAddExpr</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="CatAddExpr">CatAddExpr</a>:
+        <span class="t">"."</span> <a class="nt" href="#AddExpr">AddExpr</a>
+</pre><pre><a class="nt" name="AddExpr">AddExpr</a>:
+        <a class="nt" href="#MultExpr">MultExpr</a> <a class="nt" href="#AddOpMultExpr">AddOpMultExpr</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="AddOpMultExpr">AddOpMultExpr</a>:
+        <a class="nt" href="#AddOp">AddOp</a> <a class="nt" href="#MultExpr">MultExpr</a>
+</pre><pre><a class="nt" name="AddOp">AddOp</a>:
+        <span class="t">"+"</span>
+        <span class="t">"-"</span>
+</pre><pre><a class="nt" name="MultExpr">MultExpr</a>:
+        <a class="nt" href="#NotExpr">NotExpr</a> <a class="nt" href="#MultOpNotExpr">MultOpNotExpr</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="MultOpNotExpr">MultOpNotExpr</a>:
+        <a class="nt" href="#MultOp">MultOp</a> <a class="nt" href="#NotExpr">NotExpr</a>
+</pre><pre><a class="nt" name="MultOp">MultOp</a>:
+        <span class="t">"*"</span>
+        <span class="t">"/"</span>
+        <span class="t">"%"</span>
+</pre><pre><a class="nt" name="NotExpr">NotExpr</a>:
+        <span class="t">"!"</span><span class="meta">*</span> <a class="nt" href="#InstanceExpr">InstanceExpr</a>
+</pre><pre><a class="nt" name="InstanceExpr">InstanceExpr</a>:
+        <a class="nt" href="#UnaryExpr">UnaryExpr</a> <a class="nt" href="#InstanceOfUnaryExpr">InstanceOfUnaryExpr</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="InstanceOfUnaryExpr">InstanceOfUnaryExpr</a>:
+        <span class="t">"instanceof"</span> <a class="nt" href="#UnaryExpr">UnaryExpr</a>
+</pre><pre><a class="nt" name="UnaryExpr">UnaryExpr</a>:
+        <a class="nt" href="#UnaryOp">UnaryOp</a><span class="meta">*</span> <a class="nt" href="#IncDecExpr">IncDecExpr</a>
+</pre><pre><a class="nt" name="UnaryOp">UnaryOp</a>:
+        <span class="t">"~"</span>
+        <span class="t">"-"</span>
+        <span class="t">"@"</span>
+        <span class="t">"("</span> <a class="nt" href="#CastType">CastType</a> <span class="t">")"</span>
+        <span class="t">"@"</span> <span class="t">"!"</span>
+</pre><pre><a class="nt" name="CastType">CastType</a>:
+        <span class="t">"int"</span>
+        <span class="t">"integer"</span>
+        <span class="t">"bool"</span>
+        <span class="t">"boolean"</span>
+        <span class="t">"real"</span>
+        <span class="t">"double"</span>
+        <span class="t">"float"</span>
+        <span class="t">"string"</span>
+        <span class="t">"array"</span>
+        <span class="t">"object"</span>
+        <span class="t">"unset"</span>
+</pre><pre><a class="nt" name="IncDecExpr">IncDecExpr</a>:
+        <a class="nt" href="#IncDec">IncDec</a><span class="meta">*</span> <a class="nt" href="#Primary">Primary</a> <a class="nt" href="#IncDec">IncDec</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="IncDec">IncDec</a>:
+        <span class="t">"++"</span>
+        <span class="t">"--"</span>
+</pre><pre><a class="nt" name="Primary">Primary</a>:
+        <a class="nt" href="#VariableOrFunctionCall">VariableOrFunctionCall</a>
+        <a class="nt" href="#ScalarConstant">ScalarConstant</a>
+        <a class="nt" href="#Array">Array</a>
+        <a class="nt" href="#List">List</a>
+        <a class="nt" href="#InternalFunction">InternalFunction</a>
+        <span class="t">"("</span> <a class="nt" href="#Expr">Expr</a> <span class="t">")"</span>
+</pre><pre><a class="nt" name="ScalarConstant">ScalarConstant</a>:
+        <a class="nt" href="#PlusMinus">PlusMinus</a><span class="meta">?</span> <a class="nt" href="#NumericConstant">NumericConstant</a>
+        <a class="nt" href="#StringConstant">StringConstant</a>
+        <a class="nt" href="#MagicConstant">MagicConstant</a>
+        <a class="nt" href="#BooleanConstant">BooleanConstant</a>
+        <span class="t">"null"</span>
+</pre><pre><a class="nt" name="PlusMinus">PlusMinus</a>:
+        <span class="t">"+"</span>
+        <span class="t">"-"</span>
+</pre><pre><a class="nt" name="NumericConstant">NumericConstant</a>:
+        <a class="nt" href="#number">number</a>
+        <a class="nt" href="#Hexa">Hexa</a>
+        <a class="nt" href="#Octa">Octa</a>
+</pre><pre><a class="nt" name="StringConstant">StringConstant</a>:
+        <a class="nt" href="#stringlit">stringlit</a>
+        <a class="nt" href="#charlit">charlit</a>
+        <a class="nt" href="#CommandString">CommandString</a>
+        <span class="t">"&lt;&lt;&lt;"</span> <a class="nt" href="#id">id</a> (<a class="nt" href="#IN">IN</a> <a class="nt" href="#NL">NL</a>) <a class="nt" href="#EncapsedInlineHTML">EncapsedInlineHTML</a><span class="meta">*</span> <a class="nt" href="#id">id</a> <a class="nt" href="#EX">EX</a>
+</pre><pre><a class="nt" name="EncapsedInlineHTML">EncapsedInlineHTML</a>:
+        <a class="nt" href="#tag_token_or_key">tag_token_or_key</a>
+</pre><pre><a class="nt" name="popid">popid</a>:
+        <a class="nt" href="#id">id</a>
+</pre><pre><a class="nt" name="token_or_key">token_or_key</a>:
+        <a class="nt" href="#token">token</a>
+        <a class="nt" href="#key">key</a>
+</pre><pre><a class="nt" name="BooleanConstant">BooleanConstant</a>:
+        <span class="t">"true"</span>
+        <span class="t">"false"</span>
+</pre><pre><a class="nt" name="StaticScalar">StaticScalar</a>:
+        <a class="nt" href="#Primary">Primary</a>
+</pre><pre><a class="nt" name="Array">Array</a>:
+        <span class="t">"array"</span> <span class="t">"("</span> <a class="nt" href="#IN">IN</a> <span class="meta">{</span><a class="nt" href="#ArrayPair">ArrayPair</a> <span class="t">","</span><span class="meta">}*</span> <span class="t">","</span><span class="meta">?</span> <a class="nt" href="#EX">EX</a> <span class="t">")"</span>
+</pre><pre><a class="nt" name="ArrayPair">ArrayPair</a>:
+        <a class="nt" href="#NL">NL</a> <a class="nt" href="#ArrayKey">ArrayKey</a><span class="meta">?</span> <a class="nt" href="#ArrayValue">ArrayValue</a>
+</pre><pre><a class="nt" name="ArrayKey">ArrayKey</a>:
+        <a class="nt" href="#Expr">Expr</a> <span class="t">"=&gt;"</span>
+</pre><pre><a class="nt" name="ArrayValue">ArrayValue</a>:
+        <a class="nt" href="#Expr">Expr</a>
+        <span class="t">"&amp;"</span> <a class="nt" href="#ObjectCVar">ObjectCVar</a>
+</pre><pre><a class="nt" name="VariableOrFunctionCall">VariableOrFunctionCall</a>:
+        <a class="nt" href="#ObjectCVar">ObjectCVar</a>
+</pre><pre><a class="nt" name="ObjectCVar">ObjectCVar</a>:
+        <a class="nt" href="#ClassNameColonColon">ClassNameColonColon</a><span class="meta">?</span> <a class="nt" href="#CVar">CVar</a> <a class="nt" href="#CallParams">CallParams</a><span class="meta">?</span> <a class="nt" href="#ArrowObjectProperty">ArrowObjectProperty</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="ClassNameColonColon">ClassNameColonColon</a>:
+        <a class="nt" href="#ClassName">ClassName</a> <span class="t">"::"</span>
+</pre><pre><a class="nt" name="CallParam">CallParam</a>:
+        <span class="t">"&amp;"</span><span class="meta">?</span> <a class="nt" href="#Expr">Expr</a>
+</pre><pre><a class="nt" name="CallParams">CallParams</a>:
+        <span class="t">"("</span> <span class="meta">{</span><a class="nt" href="#CallParam">CallParam</a> <span class="t">","</span><span class="meta">}*</span> <span class="t">")"</span>
+</pre><pre><a class="nt" name="ClassName">ClassName</a>:
+        <a class="nt" href="#id">id</a>
+</pre><pre><a class="nt" name="ArrowObjectProperty">ArrowObjectProperty</a>:
+        <span class="t">"-&gt;"</span> <a class="nt" href="#ObjectProperty">ObjectProperty</a> <a class="nt" href="#CallParams">CallParams</a><span class="meta">?</span>
+</pre><pre><a class="nt" name="ObjectProperty">ObjectProperty</a>:
+        <a class="nt" href="#VariableName">VariableName</a>
+        <a class="nt" href="#IdOrKey">IdOrKey</a>
+        <a class="nt" href="#ObjectProperty">ObjectProperty</a> <a class="nt" href="#VariableExtension">VariableExtension</a>
+        <a class="nt" href="#ObjectCVar">ObjectCVar</a>
+</pre><pre><a class="nt" name="CVar">CVar</a>:
+        <a class="nt" href="#ReferenceVariable">ReferenceVariable</a>
+</pre><pre><a class="nt" name="ReferenceVariable">ReferenceVariable</a>:
+        <a class="nt" href="#CompoundVariable">CompoundVariable</a> <a class="nt" href="#VariableExtension">VariableExtension</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="VariableExtension">VariableExtension</a>:
+        <span class="t">"["</span> <a class="nt" href="#Expr">Expr</a><span class="meta">?</span> <span class="t">"]"</span>
+        <span class="t">"{"</span> <a class="nt" href="#Expr">Expr</a> <span class="t">"}"</span>
+</pre><pre><a class="nt" name="CompoundVariable">CompoundVariable</a>:
+        <a class="nt" href="#VariableName">VariableName</a>
+</pre><pre><a class="nt" name="VariableName">VariableName</a>:
+        <a class="nt" href="#SimpleVariableName">SimpleVariableName</a>
+        <span class="t">"$"</span> <a class="nt" href="#VariableName">VariableName</a>
+        <span class="t">"{"</span> <a class="nt" href="#SimpleVariableName">SimpleVariableName</a> <span class="t">"}"</span>
+        <span class="t">"{"</span> <a class="nt" href="#Expr">Expr</a> <span class="t">"}"</span>
+</pre><pre><a class="nt" name="SimpleVariableName">SimpleVariableName</a>:
+        <a class="nt" href="#id">id</a>
+        <span class="t">"$"</span> <a class="nt" href="#SPOFF">SPOFF</a> <a class="nt" href="#IdOrKey">IdOrKey</a> <a class="nt" href="#SPON">SPON</a>
+</pre><pre><a class="nt" name="IdOrKey">IdOrKey</a>:
+        <a class="nt" href="#id">id</a>
+        <a class="nt" href="#key">key</a>
+</pre><pre><a class="nt" name="List">List</a>:
+        <span class="t">"list"</span> <span class="t">"("</span> <span class="meta">{</span><a class="nt" href="#ListElem">ListElem</a> <span class="t">","</span><span class="meta">}*</span> <span class="t">")"</span>
+</pre><pre><a class="nt" name="ListElem">ListElem</a>:
+        <a class="nt" href="#List">List</a>
+        <a class="nt" href="#ObjectCVar">ObjectCVar</a>
+        ε
+</pre><pre><a class="nt" name="InternalFunction">InternalFunction</a>:
+        <span class="t">"new"</span> <a class="nt" href="#Primary">Primary</a>
+        <span class="t">"clone"</span> <a class="nt" href="#Primary">Primary</a>
+        <span class="t">"isset"</span> <span class="t">"("</span> <span class="meta">{</span><a class="nt" href="#ObjectCVar">ObjectCVar</a> <span class="t">","</span><span class="meta">}+</span> <span class="t">")"</span>
+        <span class="t">"empty"</span> <span class="t">"("</span> <a class="nt" href="#ObjectCVar">ObjectCVar</a> <span class="t">")"</span>
+        <span class="t">"intval"</span> <span class="t">"("</span> <a class="nt" href="#ObjectCVar">ObjectCVar</a> <span class="t">")"</span>
+        <span class="t">"eval"</span> <span class="t">"("</span> <a class="nt" href="#Expr">Expr</a> <span class="t">")"</span>
+        <span class="t">"exit"</span> <a class="nt" href="#exit_value">exit_value</a><span class="meta">?</span>
+        <span class="t">"include"</span> <a class="nt" href="#Expr">Expr</a>
+        <span class="t">"include_once"</span> <a class="nt" href="#Expr">Expr</a>
+        <span class="t">"require"</span> <a class="nt" href="#Expr">Expr</a>
+        <span class="t">"require_once"</span> <a class="nt" href="#Expr">Expr</a>
+</pre><pre><a class="nt" name="exit_value">exit_value</a>:
+        <span class="t">"("</span> <a class="nt" href="#Expr">Expr</a><span class="meta">?</span> <span class="t">")"</span>
+</pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
+Last updated: Jun2013.</div></body></html>

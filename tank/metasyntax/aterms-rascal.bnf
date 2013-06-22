@@ -1,0 +1,32 @@
+[RealCon] RealCon:
+        IntCon "." NatCon OptExp
+[Positive] IntCon:
+        "+" NatCon
+[Natural] IntCon:
+        NatCon
+[Negative] IntCon:
+        "-" NatCon
+[Quoted] AFun:
+        StrCon
+[Unquoted] AFun:
+        IdCon
+[Default] Annotation:
+        "{" {ATerm ","}+ "}"
+[Appl] ATerm:
+        AFun "(" {ATerm ","}+ ")"
+[Real] ATerm:
+        RealCon
+[List] ATerm:
+        "[" {ATerm ","}* "]"
+[Annotated] ATerm:
+        ATerm Annotation
+[Placeholder] ATerm:
+        "<" ATerm ">"
+[Int] ATerm:
+        IntCon
+[Fun] ATerm:
+        AFun
+[Present] OptExp:
+        "e" IntCon
+[Absent] OptExp:
+        EPSILON

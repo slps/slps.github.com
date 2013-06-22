@@ -13,7 +13,7 @@
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				  })();
 
-				</script></head><body><h1 class="l">Browsable M 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.io/tank/">Grammar Tank</a> for details. <br></br>Source used for this grammar: Hugo Brunelière, <code>M.ecore</code>, 2009.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>25</strong></li><li>Number of top alternatives: <strong>26</strong></li><li>Number of defined nonterminal symbols: <strong>16</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>2</strong>: <code><a href="#IdentifiedElement" class="nt">IdentifiedElement</a>, <a href="#Value" class="nt">Value</a></code></li><li>Bottom nonterminal symbols: <strong>7</strong>: <code><a href="#Field" class="nt">Field</a>, <a href="#Collection" class="nt">Collection</a>, <a href="#ComputedValue" class="nt">ComputedValue</a>, <a href="#DerivedType" class="nt">DerivedType</a>, <a href="#Language" class="nt">Language</a>, <a href="#Entity" class="nt">Entity</a>, <a href="#Double" class="nt">Double</a></code></li><li>Number of used terminal symbols: <strong>2</strong></li><li>Keywords: <strong>2</strong>: <code class="t">"true", "false"</code></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="IdentifiedElement">IdentifiedElement</a>:
+				</script></head><body><h1 class="l">Browsable M 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.io/zoo/">Grammar Zoo</a> for details. <br></br>Source used for this grammar: Hugo Brunelière, <code>M.ecore</code>, 2009.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>42</strong></li><li>Number of top alternatives: <strong>43</strong></li><li>Number of defined nonterminal symbols: <strong>33</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>12</strong>: <code><a href="#IdentifiedElement" class="nt">IdentifiedElement</a>, <a href="#TypeReference" class="nt">TypeReference</a>, <a href="#IntrinsicTypeReference" class="nt">IntrinsicTypeReference</a>, <a href="#DerivedTypeReference" class="nt">DerivedTypeReference</a>, <a href="#InitializationExpression" class="nt">InitializationExpression</a>, <a href="#WhereExpression" class="nt">WhereExpression</a>, <a href="#IdentityExpression" class="nt">IdentityExpression</a>, <a href="#EqualExpression" class="nt">EqualExpression</a>, <a href="#InExpression" class="nt">InExpression</a>, <a href="#CollectionExpression" class="nt">CollectionExpression</a>, <a href="#DefaultValueExpression" class="nt">DefaultValueExpression</a>, <a href="#StandardValueExpression" class="nt">StandardValueExpression</a></code></li><li>Bottom nonterminal symbols: <strong>11</strong>: <code><a href="#Double" class="nt">Double</a>, <a href="#Types/TypeReference" class="nt">Types/TypeReference</a>, <a href="#Types/Field" class="nt">Types/Field</a>, <a href="#Expressions/InitializationExpression" class="nt">Expressions/InitializationExpression</a>, <a href="#Expressions/WhereExpression" class="nt">Expressions/WhereExpression</a>, <a href="#Expressions/Expression" class="nt">Expressions/Expression</a>, <a href="#Types/DerivedType" class="nt">Types/DerivedType</a>, <a href="#Expressions/QueryExpression" class="nt">Expressions/QueryExpression</a>, <a href="#Expressions/ValueExpression" class="nt">Expressions/ValueExpression</a>, <a href="#Expressions/CollectionExpression" class="nt">Expressions/CollectionExpression</a>, <a href="#Expressions/InExpression" class="nt">Expressions/InExpression</a></code></li><li>Number of used terminal symbols: <strong>2</strong></li><li>Keywords: <strong>2</strong>: <code class="t">"true", "false"</code></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="IdentifiedElement">IdentifiedElement</a>:
         <a class="nt" href="#MElement">MElement</a>
 </pre><pre><a class="nt" name="IdentifiedElement">IdentifiedElement</a>:
         <a class="nt" href="#Field">Field</a>
@@ -57,6 +57,40 @@
         <span class="sel">value</span>::<a class="nt" href="#Double">Double</a>
 </pre><pre><a class="nt" name="BooleanValue">BooleanValue</a>:
         <span class="sel">value</span>::<a class="nt" href="#Boolean">Boolean</a>
+</pre><pre><a class="nt" name="DerivedType">DerivedType</a>:
+        <span class="sel">supertypes</span>::<a class="nt" href="#Types/TypeReference">Types/TypeReference</a><span class="meta">+</span> <span class="sel">fields</span>::<a class="nt" href="#Types/Field">Types/Field</a><span class="meta">+</span> <span class="sel">initializationExpression</span>::<a class="nt" href="#Expressions/InitializationExpression">Expressions/InitializationExpression</a> <span class="sel">whereExpression</span>::<a class="nt" href="#Expressions/WhereExpression">Expressions/WhereExpression</a> <span class="sel">expression</span>::<a class="nt" href="#Expressions/Expression">Expressions/Expression</a>
+</pre><pre><a class="nt" name="TypeReference">TypeReference</a>:
+        <span class="sel">subtype</span>::<a class="nt" href="#Types/DerivedType">Types/DerivedType</a> <span class="sel">field</span>::<a class="nt" href="#Types/Field">Types/Field</a> <span class="sel">lowerBound</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">upperBound</span>::<a class="nt" href="#Integer">Integer</a>
+</pre><pre><a class="nt" name="IntrinsicTypeReference">IntrinsicTypeReference</a>:
+        <span class="sel">typeIdentifier</span>::<a class="nt" href="#String">String</a>
+</pre><pre><a class="nt" name="DerivedTypeReference">DerivedTypeReference</a>:
+        <span class="sel">type</span>::<a class="nt" href="#Types/DerivedType">Types/DerivedType</a>
+</pre><pre><a class="nt" name="Field">Field</a>:
+        <span class="sel">owner</span>::<a class="nt" href="#Types/DerivedType">Types/DerivedType</a> <span class="sel">type</span>::<a class="nt" href="#Types/TypeReference">Types/TypeReference</a>
+</pre><pre><a class="nt" name="Collection">Collection</a>:
+        <span class="sel">qualifiers</span>::<a class="nt" href="#String">String</a><span class="meta">+</span> <span class="sel">identifier</span>::<a class="nt" href="#String">String</a>
+</pre><pre><a class="nt" name="ComputedValue">ComputedValue</a>:
+        <span class="sel">qualifiers</span>::<a class="nt" href="#String">String</a><span class="meta">+</span> <span class="sel">identifier</span>::<a class="nt" href="#String">String</a>
+</pre><pre><a class="nt" name="InitializationExpression">InitializationExpression</a>:
+        <span class="sel">type</span>::<a class="nt" href="#Types/DerivedType">Types/DerivedType</a> <span class="sel">values</span>::<a class="nt" href="#Value">Value</a><span class="meta">+</span>
+</pre><pre><a class="nt" name="WhereExpression">WhereExpression</a>:
+        <span class="sel">type</span>::<a class="nt" href="#Types/DerivedType">Types/DerivedType</a> <span class="sel">queryExpressions</span>::<a class="nt" href="#Expressions/QueryExpression">Expressions/QueryExpression</a><span class="meta">+</span>
+</pre><pre><a class="nt" name="IdentityExpression">IdentityExpression</a>:
+        <span class="sel">identity</span>::<a class="nt" href="#Types/Field">Types/Field</a>
+</pre><pre><a class="nt" name="EqualExpression">EqualExpression</a>:
+        <span class="sel">leftValue</span>::<a class="nt" href="#Expressions/ValueExpression">Expressions/ValueExpression</a> <span class="sel">rightValue</span>::<a class="nt" href="#Expressions/ValueExpression">Expressions/ValueExpression</a>
+</pre><pre><a class="nt" name="InExpression">InExpression</a>:
+        <span class="sel">value</span>::<a class="nt" href="#Expressions/ValueExpression">Expressions/ValueExpression</a> <span class="sel">collection</span>::<a class="nt" href="#Expressions/CollectionExpression">Expressions/CollectionExpression</a>
+</pre><pre><a class="nt" name="CollectionExpression">CollectionExpression</a>:
+        <span class="sel">inExpression</span>::<a class="nt" href="#Expressions/InExpression">Expressions/InExpression</a> <span class="sel">collectionValue</span>::<a class="nt" href="#Expressions/ValueExpression">Expressions/ValueExpression</a>
+</pre><pre><a class="nt" name="DefaultValueExpression">DefaultValueExpression</a>:
+        ε
+</pre><pre><a class="nt" name="StandardValueExpression">StandardValueExpression</a>:
+        <span class="sel">context</span>::<a class="nt" href="#Expressions/ValueExpression">Expressions/ValueExpression</a> <span class="sel">value</span>::<a class="nt" href="#String">String</a>
+</pre><pre><a class="nt" name="Language">Language</a>:
+        <span class="sel">module</span>::<a class="nt" href="#Module">Module</a>
+</pre><pre><a class="nt" name="Entity">Entity</a>:
+        <span class="sel">module</span>::<a class="nt" href="#Module">Module</a>
 </pre><pre><a class="nt" name="Boolean">Boolean</a>:
         <span class="t">"true"</span>
         <span class="t">"false"</span>
@@ -65,4 +99,4 @@
 </pre><pre><a class="nt" name="String">String</a>:
         <span class="meta">string</span>
 </pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: Apr2013.</div></body></html>
+Last updated: Jun2013.</div></body></html>

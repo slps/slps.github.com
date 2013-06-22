@@ -1,0 +1,35 @@
+Class:
+        class::(version::INT access::INT name::STR signature::STR superName::STR interfaces::(STR*) sourceFile::STR sourceDebug::STR outerClass::STR outerMethod::STR outerMethodDescription::STR innerClasses::(InnerClass*) fields::(Field*) methods::(Method*))
+        class::(version::INT access::INT name::STR signature::STR superName::STR interfaces::(STR*) innerClasses::(InnerClass*) fields::(Field*) methods::(Method*))
+InnerClass:
+        innerClass::(name::STR outerName::STR innerName::STR access::INT)
+        innerClass::(name::STR access::INT)
+Field:
+        field::(access::INT name::STR description::STR signature::STR value::ANY)
+        field::(access::INT name::STR description::STR signature::STR)
+Method:
+        method::(access::INT name::STR description::STR signature::STR exceptions::(STR*) instructions::(Instruction*) tryCatchBlocks::(TryCatchBlock*) localVariables::(LocalVariable*))
+Instruction:
+        fieldRef::(opcode::INT owner::STR name::STR description::STR)
+        increment::(index::INT amount::INT)
+        instruction::opcode::INT
+        integer::(opcode::INT operand::INT)
+        jump::(opcode::INT labelIndex::INT)
+        label::index::INT
+        lineNumber::(line::INT labelIndex::INT)
+        localVariable::(opcode::INT index::INT)
+        loadConstantString::stringValue::STR
+        loadConstantInteger::integerValue::INT
+        loadConstantLong::longValue::INT
+        loadConstantFloat::floatValue::INT
+        loadConstantDouble::doubleValue::INT
+        lookupSwitch::(defaultLabelIndex::INT keys::(INT*) cases::(INT*))
+        method::(opcode::INT owner::STR name::STR description::STR)
+        multiANewArray::(description::STR dimensions::INT)
+        tableSwitch::(minIndex::INT maxIndex::INT defaultLabelIndex::INT cases::(INT*))
+        type::(opcode::INT description::STR)
+TryCatchBlock:
+        tryCatchBlock::(startLabelIndex::INT endLabelIndex::INT handlerLabelIndex::INT type::STR)
+        finallyBlock::(startLabelIndex::INT endLabelIndex::INT handlerLabelIndex::INT)
+LocalVariable:
+        localVariable::(name::STR description::STR signature::STR startLabelIndex::INT endLabelIndex::INT index::INT)

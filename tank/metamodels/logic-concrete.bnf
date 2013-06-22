@@ -1,0 +1,46 @@
+[not] Formula:
+        "!" arg::Formula
+[true] Formula:
+        "true"
+[false] Formula:
+        "false"
+[and] Formula:
+        lhs::Formula "&" rhs::Formula
+[or] Formula:
+        lhs::Formula "|" rhs::Formula
+[fi] Formula:
+        lhs::Formula "<=" rhs::Formula
+[if] Formula:
+        lhs::Formula "=>" rhs::Formula
+[iff] Formula:
+        lhs::Formula "<=>" rhs::Formula
+[id] Formula:
+        EPSILON
+False:
+        "false"
+False:
+        "not" t::True
+False:
+        "(" False ")"
+False:
+        lf::False "and" rt::True
+False:
+        lf::False "and" rf::False
+False:
+        lt::True "and" rf::False
+False:
+        lf::False "or" rf::False
+True:
+        "(" True ")"
+True:
+        "true"
+True:
+        "not" f::False
+True:
+        lt::True "and" rt::True
+True:
+        lt::True "or" rt::True
+True:
+        lt::True "or" rf::False
+True:
+        lf::False "or" rt::True

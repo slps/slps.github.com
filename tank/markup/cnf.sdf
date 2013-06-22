@@ -1,0 +1,13 @@
+module Main
+
+exports
+  sorts
+        Line Disjuncts Dimacs 
+  context-free syntax
+        comment::Comment -> Line {cons(comment)}
+
+        disjunct::Disjunct -> Line {cons(disjunct)}
+
+        Number+ -> Disjuncts {cons(numbers)}
+
+        prologue::Prologue lines::Line"\n" "\n" -> Dimacs

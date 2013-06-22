@@ -1,0 +1,31 @@
+module Main
+
+exports
+  sorts
+        Display SimpleString Base64 SExp HexaDecimal String List 
+  context-free syntax
+        "[" SimpleString "]" -> Display
+
+        Raw -> SimpleString {cons(raw)}
+
+        Base64 -> SimpleString {cons(base64)}
+
+        HexaDecimal -> SimpleString {cons(hex)}
+
+        Token -> SimpleString {cons(token)}
+
+        QuotedString -> SimpleString {cons(quoted)}
+
+        "|" Base64Char* "|" -> Base64
+
+        List -> SExp {cons(list)}
+
+        String -> SExp {cons(string)}
+
+        "#" HexDigit* "#" -> HexaDecimal
+
+        Display SimpleString -> String {cons(display)}
+
+        SimpleString -> String {cons(simple)}
+
+        "(" SExp* ")" -> List

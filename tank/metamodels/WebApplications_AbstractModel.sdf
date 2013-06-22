@@ -2,7 +2,7 @@ module Main
 
 exports
   sorts
-        Boolean Integer String HyperLink 
+        Boolean Integer String HyperLink ClientPage ClientPageModule LogicInterface DesignElement ServerPage BusinessLogic DesignTemplate 
   context-free syntax
         "true" -> Boolean
         "false" -> Boolean
@@ -12,3 +12,17 @@ exports
         STR -> String
 
         server::Server/ServerPage+ -> HyperLink
+
+        hyperlink::HyperLink -> ClientPage
+
+        consistsOf::Client/ClientPage -> ClientPageModule
+
+         -> LogicInterface
+
+         -> DesignElement
+
+        useBusinessLogic::Server/BusinessLogic useDesignTemplate::Server/DesignTemplate generates::Client/ClientPage+ link::HyperLink+ -> ServerPage
+
+         -> BusinessLogic
+
+         -> DesignTemplate

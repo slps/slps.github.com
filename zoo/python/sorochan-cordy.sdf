@@ -1,0 +1,380 @@
+module Main
+
+exports
+ context-free start-symbols program
+  sorts
+        Program File-input Stmt-or-newline Decorator Decorator-arglist Decorators Decorated Funcdef Parameters Varargslist Fpdef-test Fpdef-test-comma Is-test Fpdef Fplist Stmt Simple-stmt Semicolon-small-stmt Small-stmt Expr-stmt Is-expr Augassign Assign-value Print-stmt Del-stmt Pass-stmt Flow-stmt Break-stmt Continue-stmt Return-stmt Yield-stmt Raise-stmt Test-list Comma-test Import-stmt Import-name Import-from Import-items Import-as-name As-name Dotted-as-name As-id Import-as-names Dotted-as-names Dotted-name Dot-dotted-name Global-stmt Exec-stmt In-test Assert-stmt Compound-stmt If-stmt Elif-clause Else-clause While-stmt For-stmt Try-stmt Finally-clause Except-clause-suite With-stmt With-var Except-clause Except-test As-or-comma-test Suite Endofline Indent Dedent Testplist-safe Old-test Old-lambdef Test If-test Or-test Orop-or-test And-test Andop-and-test Not-test Comparison Comp-op-comparison Comp-op Expr Orop-expr Xor-expr Xorop-expr And-expr Andop-and-expr Shift-expr Shiftop-shift-expr Shift-op Arith-expr Op-arith-expr Arith-op Term Op-term Term-op Factor Unary-op Power Exp-factor Atom Listmaker Testplist-gexp Lambdef Trailer Subscriptlist Subscript Sliceop Exprlist Testlist Dictmaker Dict-entry Classdef Arglist Star-test Comma-opt-star-test Argument Argument-value Plist-iter Plist-for Plist-if Gen-iter Gen-for Gen-if Testlist1 Encoding-decl Yield-expr Literal More-stringliteral Stringliteral Stringprefix String Integerliteral Integer Long Floatliteral Imag 
+  context-free syntax
+        File-input -> Program
+
+        Stmt-or-newline* -> File-input
+
+        Stmt -> Stmt-or-newline
+        Endofline -> Stmt-or-newline
+
+        "@" Dotted-name Decorator-arglist? Endofline Endofline* -> Decorator
+
+        SPOFF "(" SPON IN Arglist? Endofline* ")" EX -> Decorator-arglist
+
+        Decorator+ -> Decorators
+
+        Decorators Classdef -> Decorated
+        Decorators Funcdef -> Decorated
+
+        "def" Id Parameters ":" Suite -> Funcdef
+
+        SPOFF "(" SPON Varargslist? Endofline* ")" -> Parameters
+
+        Fpdef-test-comma* Endofline* "*" Id -> Varargslist
+        Fpdef-test-comma* Endofline* "*" Id Endofline? "," Endofline* "**" Id -> Varargslist
+        Fpdef-test-comma* Endofline* "**" Id -> Varargslist
+        Fpdef-test+ ","? -> Varargslist
+
+        Endofline* Fpdef Is-test? Endofline? -> Fpdef-test
+
+        Fpdef-test "," -> Fpdef-test-comma
+
+        "=" Endofline* Test -> Is-test
+
+        Id Endofline? -> Fpdef
+        SPOFF "(" SPON Fplist Endofline* ")" Endofline? -> Fpdef
+
+        Fpdef+ ","? -> Fplist
+
+        Simple-stmt Endofline -> Stmt
+        Compound-stmt -> Stmt
+
+        Small-stmt Semicolon-small-stmt* ";"? -> Simple-stmt
+        Comment -> Simple-stmt
+
+        ";" Small-stmt -> Semicolon-small-stmt
+
+        Expr-stmt -> Small-stmt
+        Print-stmt -> Small-stmt
+        Del-stmt -> Small-stmt
+        Pass-stmt -> Small-stmt
+        Flow-stmt -> Small-stmt
+        Import-stmt -> Small-stmt
+        Global-stmt -> Small-stmt
+        Exec-stmt -> Small-stmt
+        Assert-stmt -> Small-stmt
+
+        Testlist Is-expr* -> Expr-stmt
+        Testlist Augassign Assign-value -> Expr-stmt
+
+        "=" Endofline* Assign-value -> Is-expr
+
+        "+=" -> Augassign
+        "-=" -> Augassign
+        "*=" -> Augassign
+        "/=" -> Augassign
+        "%=" -> Augassign
+        "&=" -> Augassign
+        "|=" -> Augassign
+        "^=" -> Augassign
+        "<<=" -> Augassign
+        ">>=" -> Augassign
+        "**=" -> Augassign
+        "//=" -> Augassign
+
+        Yield-expr -> Assign-value
+        Testlist -> Assign-value
+
+        "print" ">>"? Test"," ","? -> Print-stmt
+
+        "del" Exprlist -> Del-stmt
+
+        "pass" -> Pass-stmt
+
+        Break-stmt -> Flow-stmt
+        Continue-stmt -> Flow-stmt
+        Return-stmt -> Flow-stmt
+        Raise-stmt -> Flow-stmt
+        Yield-stmt -> Flow-stmt
+
+        "break" -> Break-stmt
+
+        "continue" -> Continue-stmt
+
+        "return" Testlist? -> Return-stmt
+
+        Yield-expr -> Yield-stmt
+
+        "raise" Test-list? -> Raise-stmt
+
+        Test Comma-test? Comma-test? -> Test-list
+
+        Endofline? "," Test -> Comma-test
+
+        Import-name -> Import-stmt
+        Import-from -> Import-stmt
+
+        "import" Dotted-as-names -> Import-name
+
+        "from" "."* Dotted-name? Endofline* "import" Import-items -> Import-from
+
+        "*" -> Import-items
+        Endofline* SPOFF "(" SPON Import-as-names Endofline* ")" -> Import-items
+        Endofline* Import-as-names -> Import-items
+
+        Endofline* Id As-name? -> Import-as-name
+
+        "as" Id -> As-name
+
+        Dotted-name As-id? -> Dotted-as-name
+
+        "as" Id -> As-id
+
+        Import-as-name+ ","? -> Import-as-names
+
+        Dotted-as-name+ -> Dotted-as-names
+
+        Id Dot-dotted-name? -> Dotted-name
+
+        Endofline* "." Endofline* Dotted-name -> Dot-dotted-name
+
+        "global" Id+ -> Global-stmt
+
+        "exec" Expr In-test? Comma-test? -> Exec-stmt
+
+        "in" Test -> In-test
+
+        "assert" Test Comma-test? -> Assert-stmt
+
+        If-stmt -> Compound-stmt
+        While-stmt -> Compound-stmt
+        For-stmt -> Compound-stmt
+        Try-stmt -> Compound-stmt
+        With-stmt -> Compound-stmt
+        Funcdef -> Compound-stmt
+        Classdef -> Compound-stmt
+        Decorated -> Compound-stmt
+
+        "if" Test ":" Suite Elif-clause* Else-clause? -> If-stmt
+
+        "elif" Test ":" Suite -> Elif-clause
+
+        "else" ":" Suite -> Else-clause
+
+        "while" Test ":" Suite Else-clause? -> While-stmt
+
+        "for" Exprlist "in" Testlist ":" Suite Else-clause? -> For-stmt
+
+        "try" ":" Suite Except-clause-suite* Else-clause? Finally-clause? -> Try-stmt
+
+        "finally" ":" Suite -> Finally-clause
+
+        Except-clause ":" Suite -> Except-clause-suite
+
+        "with" Test With-var? ":" Suite -> With-stmt
+
+        "as" Expr -> With-var
+
+        "except" Except-test? -> Except-clause
+
+        Test As-or-comma-test? -> Except-test
+
+        "as" Test -> As-or-comma-test
+        "," Test -> As-or-comma-test
+
+        Indent Endofline Stmt-or-newline+ Dedent -> Suite
+        Simple-stmt Endofline -> Suite
+
+        Comment? Newline -> Endofline
+
+        "INDENT" IN -> Indent
+
+        "DEDENT" EX -> Dedent
+
+        Old-test+ ","? -> Testplist-safe
+
+        Or-test -> Old-test
+        Old-lambdef -> Old-test
+
+        "lambda" Varargslist? ":" Old-test -> Old-lambdef
+
+        Endofline* Or-test If-test? Endofline? -> Test
+        Endofline* Lambdef Endofline? -> Test
+
+        Endofline* "if" Or-test "else" Test -> If-test
+
+        And-test Orop-or-test? -> Or-test
+
+        Endofline* "or" Endofline* Or-test -> Orop-or-test
+
+        Not-test Andop-and-test? -> And-test
+
+        Endofline* "and" Endofline* And-test -> Andop-and-test
+
+        "not"* Endofline* Comparison -> Not-test
+
+        Expr Comp-op-comparison? -> Comparison
+
+        Endofline* Comp-op Endofline* Comparison -> Comp-op-comparison
+
+        "<" -> Comp-op
+        ">" -> Comp-op
+        "==" -> Comp-op
+        ">=" -> Comp-op
+        "<=" -> Comp-op
+        "<>" -> Comp-op
+        "!=" -> Comp-op
+        "in" -> Comp-op
+        "not" "in" -> Comp-op
+        "is" -> Comp-op
+        "is" "not" -> Comp-op
+
+        Xor-expr Orop-expr? -> Expr
+
+        Endofline* "|" Endofline* Expr -> Orop-expr
+
+        And-expr Xorop-expr? -> Xor-expr
+
+        Endofline* "^" Endofline* Xor-expr -> Xorop-expr
+
+        Shift-expr Andop-and-expr? -> And-expr
+
+        Endofline* "&" Endofline* And-expr -> Andop-and-expr
+
+        Arith-expr Shiftop-shift-expr* -> Shift-expr
+
+        Endofline? Shift-op Endofline? Shift-expr -> Shiftop-shift-expr
+
+        "<<" -> Shift-op
+        ">>" -> Shift-op
+
+        Term Op-arith-expr* -> Arith-expr
+
+        Endofline* Arith-op Endofline* Arith-expr -> Op-arith-expr
+
+        "+" -> Arith-op
+        "-" -> Arith-op
+
+        Factor Op-term* -> Term
+
+        Endofline* Term-op Endofline* Term -> Op-term
+
+        "*" -> Term-op
+        "/" -> Term-op
+        "%" -> Term-op
+        "//" -> Term-op
+
+        Unary-op* Power -> Factor
+
+        "+" -> Unary-op
+        "-" -> Unary-op
+        "~" -> Unary-op
+
+        Atom Trailer* Exp-factor? -> Power
+
+        "**" Factor -> Exp-factor
+
+        Id -> Atom
+        Literal -> Atom
+        "(" IN Endofline* Yield-expr? Endofline* ")" EX -> Atom
+        "(" IN Endofline* Testplist-gexp Endofline* ")" EX -> Atom
+        "[" IN Endofline* Listmaker? "]" EX -> Atom
+        "{" IN Endofline* Dictmaker? Endofline* "}" EX -> Atom
+        "`" Testlist1 "`" -> Atom
+
+        Endofline* Test Endofline* Plist-for Endofline* -> Listmaker
+        Endofline* Test"," ","? Endofline* -> Listmaker
+
+        Test+ Endofline? ","? -> Testplist-gexp
+        Test Endofline? Gen-for -> Testplist-gexp
+
+        "lambda" Varargslist? ":" Test -> Lambdef
+
+        SPOFF "(" SPON IN Arglist Endofline* ")" EX -> Trailer
+        "[" IN Subscriptlist "]" EX -> Trailer
+        Endofline* "." Endofline* Id -> Trailer
+
+        Subscript+ "," Endofline* -> Subscriptlist
+
+        Endofline* "." "." "." Endofline? -> Subscript
+        Endofline* Test Endofline? -> Subscript
+        Endofline* Test? ":" Test? Sliceop? Endofline? -> Subscript
+
+        ":" Test? -> Sliceop
+
+        Expr+ Endofline* ","? -> Exprlist
+
+        Test+ Endofline* ","? -> Testlist
+
+        Dict-entry"," Endofline* ","? Endofline* -> Dictmaker
+
+        Endofline* Test ":" Endofline* Test -> Dict-entry
+
+        "class" Id? ":" Suite -> Classdef
+        "class" Id? SPOFF "(" SPON Testlist? Endofline* ")" ":" Suite -> Classdef
+
+        Star-test? Argument"," Comma-opt-star-test? -> Arglist
+
+        Endofline* "*" Test -> Star-test
+        Endofline* "**" Test -> Star-test
+
+        "," Star-test? Comma-opt-star-test? -> Comma-opt-star-test
+
+        Endofline* Test Argument-value? Endofline* -> Argument
+
+        Endofline* Gen-for? -> Argument-value
+        "=" Endofline* Test -> Argument-value
+
+        Endofline* Plist-for -> Plist-iter
+        Endofline* Plist-if -> Plist-iter
+
+        "for" Endofline* Exprlist "in" Testplist-safe Plist-iter? -> Plist-for
+
+        "if" Old-test Plist-iter? -> Plist-if
+
+        Endofline* Gen-for -> Gen-iter
+        Endofline* Gen-if -> Gen-iter
+
+        "for" Exprlist "in" Or-test Gen-iter? -> Gen-for
+
+        "if" Old-test Gen-iter? -> Gen-if
+
+        Test"," -> Testlist1
+
+        Id -> Encoding-decl
+
+        "yield" Testlist -> Yield-expr
+
+        Stringliteral More-stringliteral* -> Literal
+        Integerliteral -> Literal
+        Floatliteral -> Literal
+
+        Endofline* Stringliteral -> More-stringliteral
+
+        Stringprefix SPOFF String SPON -> Stringliteral
+        String -> Stringliteral
+
+        "r" -> Stringprefix
+        "u" -> Stringprefix
+        "ur" -> Stringprefix
+        "R" -> Stringprefix
+        "U" -> Stringprefix
+        "UR" -> Stringprefix
+        "Ur" -> Stringprefix
+        "uR" -> Stringprefix
+        "b" -> Stringprefix
+
+        Stringlit -> String
+        Charlit -> String
+        Longstringlit -> String
+        Longcharlit -> String
+
+        Integer Long? Imag? -> Integerliteral
+
+        Integernumber -> Integer
+        Hexinteger -> Integer
+        Octinteger -> Integer
+
+        SPOFF "l" SPON -> Long
+        SPOFF "L" SPON -> Long
+
+        Number Imag? -> Floatliteral
+        Pointfloat Imag? -> Floatliteral
+
+        SPOFF "j" SPON -> Imag
+        SPOFF "J" SPON -> Imag
