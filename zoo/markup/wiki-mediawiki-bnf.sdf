@@ -1,0 +1,850 @@
+module Main
+
+exports
+ context-free start-symbols wiki-page
+  sorts
+        Wiki-page Redirect Redirect-tag Characters Character Whitespace-char Space-tab Space TAB Newline CR LF Non-whitespace-char Letter Ucase-letter Lcase-letter Decimal-digit Symbol Html-unsafe-symbol Unescaped-ampersand Unescaped-less-than Unescaped-greater-than Underscore Html-entity Html-entity-name Decimal-number Hex-number Hex-digit Internal-link-start Article-link Interwiki-prefix Interwiki Namespace-prefix Namespace Article-title Page Page-first-char Canonical-page-first-char Page-char Canonical-page-char Sub-page Sub-page-separator Title-legal-char Internal-link-end Pipe EOL Article Special-block-and-more Special-block Horizontal-rule Dashes Inline-text Inline-element Category-link Category-namespace Sort-key Any-text Unicode-character Any-supported-unicode-character Whitespaces Link Internal-link Section-id Link-description Extra-description External-link External-link-start Url Protocol Url-path Url-char Whitespace External-link-end Magic-link Isbn Spaces Isbn-number Rfc-number Digits Pmid-number Image-inline Page-name Title-character Bad-title-characters Image-extension Image-option Image-mode-parameter Image-mode-manual-thumb Image-name Image-mode-auto-thumb Image-mode-frame Image-mode-frameless Image-size-parameter Image-align-parameter Image-align-left Image-align-center Image-align-right Image-align-none Image-valign-parameter Image-valign-baseline Image-valign-sub Image-valign-super Image-valign-top Image-valign-text-top Image-valign-middle Image-valign-bottom Image-valign-text-bottom Caption Image-other-parameter Image-param-page Image-param-upright Image-param-border Gallery-block Gallery-image Media-inline Media-extension Text-with-formatting Formatting Bold-italic-toggle Bold-toggle Italic-toggle Noparse-block Nowiki-block Nowiki-opening-tag Nowiki-body Nowiki-closing-tag Html-block Html-opening-tag Html-body Html-closing-tag Pre-block Pre-opening-tag Pre-body Pre-closing-tag Html-comment Behaviour-switch Behaviourswitch-toc Behaviourswitch-forcetoc Behaviourswitch-notoc Behaviourswitch-noeditsection Behaviourswitch-nogallery Text Line Plain-text Unicode-wiki Wiki-markup-characters Harmless-character Random-character Heading Level-6-heading Space-tabs Level-5-heading Level-4-heading Level-3-heading Level-2-heading Level-1-heading List-item Indent-item Item-body Defined-term Definition Enumerated-item Bullet-item Table Table-parameters Table-first-row Table-column-line Table-column-multiline Table-cell-parameters Table-row Table-column Space-block Space-block-2 Paragraph-and-more Paragraph Lines-of-text Line-of-text 
+  context-free syntax
+        Redirect Article? -> Wiki-page
+        Article? -> Wiki-page
+
+        Redirect-tag Characters Internal-link-start Article-link (Internal-link-end | Pipe | EOL) -> Redirect
+
+        "#redirect" -> Redirect-tag
+
+        Character+ -> Characters
+
+        Whitespace-char -> Character
+        Non-whitespace-char -> Character
+        Html-entity -> Character
+
+        Space-tab -> Whitespace-char
+        Newline -> Whitespace-char
+
+        Space -> Space-tab
+        TAB -> Space-tab
+
+        " " -> Space
+
+        "\t" -> TAB
+
+        CR LF -> Newline
+        LF CR -> Newline
+        CR -> Newline
+        LF -> Newline
+
+        "\r" -> CR
+
+        "\n" -> LF
+
+        Letter -> Non-whitespace-char
+        Decimal-digit -> Non-whitespace-char
+        Symbol -> Non-whitespace-char
+
+        Ucase-letter -> Letter
+        Lcase-letter -> Letter
+
+        "A" -> Ucase-letter
+        "B" -> Ucase-letter
+        "C" -> Ucase-letter
+        "D" -> Ucase-letter
+        "E" -> Ucase-letter
+        "F" -> Ucase-letter
+        "G" -> Ucase-letter
+        "H" -> Ucase-letter
+        "I" -> Ucase-letter
+        "J" -> Ucase-letter
+        "K" -> Ucase-letter
+        "L" -> Ucase-letter
+        "M" -> Ucase-letter
+        "N" -> Ucase-letter
+        "O" -> Ucase-letter
+        "P" -> Ucase-letter
+        "Q" -> Ucase-letter
+        "R" -> Ucase-letter
+        "S" -> Ucase-letter
+        "T" -> Ucase-letter
+        "U" -> Ucase-letter
+        "V" -> Ucase-letter
+        "W" -> Ucase-letter
+        "X" -> Ucase-letter
+        "Y" -> Ucase-letter
+        "Z" -> Ucase-letter
+
+        "a" -> Lcase-letter
+        "b" -> Lcase-letter
+        "c" -> Lcase-letter
+        "d" -> Lcase-letter
+        "e" -> Lcase-letter
+        "f" -> Lcase-letter
+        "g" -> Lcase-letter
+        "h" -> Lcase-letter
+        "i" -> Lcase-letter
+        "j" -> Lcase-letter
+        "k" -> Lcase-letter
+        "l" -> Lcase-letter
+        "m" -> Lcase-letter
+        "n" -> Lcase-letter
+        "o" -> Lcase-letter
+        "p" -> Lcase-letter
+        "q" -> Lcase-letter
+        "r" -> Lcase-letter
+        "s" -> Lcase-letter
+        "t" -> Lcase-letter
+        "u" -> Lcase-letter
+        "v" -> Lcase-letter
+        "w" -> Lcase-letter
+        "x" -> Lcase-letter
+        "y" -> Lcase-letter
+        "z" -> Lcase-letter
+
+        "0" -> Decimal-digit
+        "1" -> Decimal-digit
+        "2" -> Decimal-digit
+        "3" -> Decimal-digit
+        "4" -> Decimal-digit
+        "5" -> Decimal-digit
+        "6" -> Decimal-digit
+        "7" -> Decimal-digit
+        "8" -> Decimal-digit
+        "9" -> Decimal-digit
+
+        Html-unsafe-symbol -> Symbol
+        Underscore -> Symbol
+        "." -> Symbol
+        "," -> Symbol
+
+        Unescaped-ampersand -> Html-unsafe-symbol
+        Unescaped-less-than -> Html-unsafe-symbol
+        Unescaped-greater-than -> Html-unsafe-symbol
+
+        "&" -> Unescaped-ampersand
+
+        "<" -> Unescaped-less-than
+
+        ">" -> Unescaped-greater-than
+
+        "_" -> Underscore
+
+        "&" Html-entity-name ";" -> Html-entity
+        "&#" Decimal-number ";" -> Html-entity
+        "&#x" Hex-number ";" -> Html-entity
+
+        WgHtmlEntities -> Html-entity-name
+
+        Decimal-digit+ -> Decimal-number
+
+        Hex-digit+ -> Hex-number
+
+        Decimal-digit -> Hex-digit
+        "A" -> Hex-digit
+        "B" -> Hex-digit
+        "C" -> Hex-digit
+        "D" -> Hex-digit
+        "E" -> Hex-digit
+        "F" -> Hex-digit
+        "a" -> Hex-digit
+        "b" -> Hex-digit
+        "c" -> Hex-digit
+        "d" -> Hex-digit
+        "e" -> Hex-digit
+        "f" -> Hex-digit
+
+        "[[" -> Internal-link-start
+
+        (Interwiki-prefix | ":")? Namespace-prefix? Article-title -> Article-link
+
+        (Interwiki-prefix | ":")? Namespace-prefix? Article-title -> Article-link
+        "/" Article-title -> Article-link
+        "../"* Article-title? -> Article-link
+
+        Interwiki ":" -> Interwiki-prefix
+
+        "Wikipedia" -> Interwiki
+
+        Namespace? ":" -> Namespace-prefix
+
+        STR -> Namespace
+
+        Page Sub-page* -> Article-title
+
+        (Title-legal-char | "%")* -> Article-title
+
+        Page-first-char Page-char* -> Page
+
+        Canonical-page-first-char -> Page-first-char
+        Lcase-letter -> Page-first-char
+
+        Ucase-letter -> Canonical-page-first-char
+        Decimal-digit -> Canonical-page-first-char
+        Underscore -> Canonical-page-first-char
+
+        Canonical-page-char -> Page-char
+        Space -> Page-char
+
+        Letter -> Canonical-page-char
+        Decimal-digit -> Canonical-page-char
+        Underscore -> Canonical-page-char
+
+        Sub-page-separator Page-char+ -> Sub-page
+
+        "/" -> Sub-page-separator
+
+        Space -> Title-legal-char
+        "%" -> Title-legal-char
+        "!" -> Title-legal-char
+        """ -> Title-legal-char
+        "$" -> Title-legal-char
+        "&" -> Title-legal-char
+        "'" -> Title-legal-char
+        "(" -> Title-legal-char
+        ")" -> Title-legal-char
+        "*" -> Title-legal-char
+        "," -> Title-legal-char
+        "-" -> Title-legal-char
+        "." -> Title-legal-char
+        "/" -> Title-legal-char
+        "0" -> Title-legal-char
+        "1" -> Title-legal-char
+        "2" -> Title-legal-char
+        "3" -> Title-legal-char
+        "4" -> Title-legal-char
+        "5" -> Title-legal-char
+        "6" -> Title-legal-char
+        "7" -> Title-legal-char
+        "8" -> Title-legal-char
+        "9" -> Title-legal-char
+        ":" -> Title-legal-char
+        ";" -> Title-legal-char
+        "=" -> Title-legal-char
+        "?" -> Title-legal-char
+        "@" -> Title-legal-char
+        "A" -> Title-legal-char
+        "B" -> Title-legal-char
+        "C" -> Title-legal-char
+        "D" -> Title-legal-char
+        "E" -> Title-legal-char
+        "F" -> Title-legal-char
+        "G" -> Title-legal-char
+        "H" -> Title-legal-char
+        "I" -> Title-legal-char
+        "J" -> Title-legal-char
+        "K" -> Title-legal-char
+        "L" -> Title-legal-char
+        "M" -> Title-legal-char
+        "N" -> Title-legal-char
+        "O" -> Title-legal-char
+        "P" -> Title-legal-char
+        "Q" -> Title-legal-char
+        "R" -> Title-legal-char
+        "S" -> Title-legal-char
+        "T" -> Title-legal-char
+        "U" -> Title-legal-char
+        "V" -> Title-legal-char
+        "W" -> Title-legal-char
+        "X" -> Title-legal-char
+        "Y" -> Title-legal-char
+        "Z" -> Title-legal-char
+        "\" -> Title-legal-char
+        "^" -> Title-legal-char
+        "_" -> Title-legal-char
+        "`" -> Title-legal-char
+        "a" -> Title-legal-char
+        "b" -> Title-legal-char
+        "c" -> Title-legal-char
+        "d" -> Title-legal-char
+        "e" -> Title-legal-char
+        "f" -> Title-legal-char
+        "g" -> Title-legal-char
+        "h" -> Title-legal-char
+        "i" -> Title-legal-char
+        "j" -> Title-legal-char
+        "k" -> Title-legal-char
+        "l" -> Title-legal-char
+        "m" -> Title-legal-char
+        "n" -> Title-legal-char
+        "o" -> Title-legal-char
+        "p" -> Title-legal-char
+        "q" -> Title-legal-char
+        "r" -> Title-legal-char
+        "s" -> Title-legal-char
+        "t" -> Title-legal-char
+        "u" -> Title-legal-char
+        "v" -> Title-legal-char
+        "w" -> Title-legal-char
+        "x" -> Title-legal-char
+        "y" -> Title-legal-char
+        "z" -> Title-legal-char
+        "~" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        "" -> Title-legal-char
+        " " -> Title-legal-char
+        "¡" -> Title-legal-char
+        "¢" -> Title-legal-char
+        "£" -> Title-legal-char
+        "¤" -> Title-legal-char
+        "¥" -> Title-legal-char
+        "¦" -> Title-legal-char
+        "§" -> Title-legal-char
+        "¨" -> Title-legal-char
+        "©" -> Title-legal-char
+        "ª" -> Title-legal-char
+        "«" -> Title-legal-char
+        "¬" -> Title-legal-char
+        "­" -> Title-legal-char
+        "®" -> Title-legal-char
+        "¯" -> Title-legal-char
+        "°" -> Title-legal-char
+        "±" -> Title-legal-char
+        "²" -> Title-legal-char
+        "³" -> Title-legal-char
+        "´" -> Title-legal-char
+        "µ" -> Title-legal-char
+        "¶" -> Title-legal-char
+        "·" -> Title-legal-char
+        "¸" -> Title-legal-char
+        "¹" -> Title-legal-char
+        "º" -> Title-legal-char
+        "»" -> Title-legal-char
+        "¼" -> Title-legal-char
+        "½" -> Title-legal-char
+        "¾" -> Title-legal-char
+        "¿" -> Title-legal-char
+        "À" -> Title-legal-char
+        "Á" -> Title-legal-char
+        "Â" -> Title-legal-char
+        "Ã" -> Title-legal-char
+        "Ä" -> Title-legal-char
+        "Å" -> Title-legal-char
+        "Æ" -> Title-legal-char
+        "Ç" -> Title-legal-char
+        "È" -> Title-legal-char
+        "É" -> Title-legal-char
+        "Ê" -> Title-legal-char
+        "Ë" -> Title-legal-char
+        "Ì" -> Title-legal-char
+        "Í" -> Title-legal-char
+        "Î" -> Title-legal-char
+        "Ï" -> Title-legal-char
+        "Ð" -> Title-legal-char
+        "Ñ" -> Title-legal-char
+        "Ò" -> Title-legal-char
+        "Ó" -> Title-legal-char
+        "Ô" -> Title-legal-char
+        "Õ" -> Title-legal-char
+        "Ö" -> Title-legal-char
+        "×" -> Title-legal-char
+        "Ø" -> Title-legal-char
+        "Ù" -> Title-legal-char
+        "Ú" -> Title-legal-char
+        "Û" -> Title-legal-char
+        "Ü" -> Title-legal-char
+        "Ý" -> Title-legal-char
+        "Þ" -> Title-legal-char
+        "ß" -> Title-legal-char
+        "à" -> Title-legal-char
+        "á" -> Title-legal-char
+        "â" -> Title-legal-char
+        "ã" -> Title-legal-char
+        "ä" -> Title-legal-char
+        "å" -> Title-legal-char
+        "æ" -> Title-legal-char
+        "ç" -> Title-legal-char
+        "è" -> Title-legal-char
+        "é" -> Title-legal-char
+        "ê" -> Title-legal-char
+        "ë" -> Title-legal-char
+        "ì" -> Title-legal-char
+        "í" -> Title-legal-char
+        "î" -> Title-legal-char
+        "ï" -> Title-legal-char
+        "ð" -> Title-legal-char
+        "ñ" -> Title-legal-char
+        "ò" -> Title-legal-char
+        "ó" -> Title-legal-char
+        "ô" -> Title-legal-char
+        "õ" -> Title-legal-char
+        "ö" -> Title-legal-char
+        "÷" -> Title-legal-char
+        "ø" -> Title-legal-char
+        "ù" -> Title-legal-char
+        "ú" -> Title-legal-char
+        "û" -> Title-legal-char
+        "ü" -> Title-legal-char
+        "ý" -> Title-legal-char
+        "þ" -> Title-legal-char
+        "ÿ" -> Title-legal-char
+        "+" -> Title-legal-char
+
+        "]]" -> Internal-link-end
+
+        "|" -> Pipe
+
+        Newline -> EOL
+        EOF -> EOL
+
+        Special-block-and-more -> Article
+        Paragraph-and-more -> Article
+
+        Special-block (EOF | (Newline? Special-block-and-more) | (Newline? Paragraph-and-more)) -> Special-block-and-more
+
+        Horizontal-rule -> Special-block
+        Heading -> Special-block
+        List-item -> Special-block
+        Table -> Special-block
+        Space-block -> Special-block
+
+        "----" Dashes? Inline-text? Newline -> Horizontal-rule
+
+        "-"+ -> Dashes
+
+        Inline-element Inline-text? -> Inline-text
+
+        Category-link -> Inline-element
+        Link -> Inline-element
+        Magic-link -> Inline-element
+        Image-inline -> Inline-element
+        Gallery-block -> Inline-element
+        Media-inline -> Inline-element
+        Text-with-formatting -> Inline-element
+
+        Internal-link-start Category-namespace ":" Article-title (Pipe Sort-key)? Internal-link-end -> Category-link
+
+        "Category" -> Category-namespace
+
+        Any-text -> Sort-key
+
+        Unicode-character* -> Any-text
+
+        <(Any-supported-unicode-character Whitespaces)> -> Unicode-character
+
+        ANY -> Any-supported-unicode-character
+
+        Newline -> Whitespaces
+        TAB -> Whitespaces
+        Space -> Whitespaces
+
+        Internal-link -> Link
+        External-link -> Link
+
+        Internal-link-start Article-link ("#" Section-id)? (Pipe Link-description?)? Internal-link-end Extra-description? -> Internal-link
+
+        (Title-legal-char | "%" | "#")* -> Section-id
+
+        Article-title -> Link-description
+
+        Letter+ -> Extra-description
+
+        External-link-start Url Whitespace? Link-description? External-link-end -> External-link
+        Url -> External-link
+
+        "[" -> External-link-start
+
+        Protocol Url-path -> Url
+
+        "http://" -> Protocol
+        "https://" -> Protocol
+        "ftp://" -> Protocol
+        "ftps://" -> Protocol
+        "mailto:" -> Protocol
+
+        Url-char Url-path? -> Url-path
+
+        LEGAL-URL-ENTITY -> Url-char
+
+        Whitespace-char Whitespace? -> Whitespace
+        EOF -> Whitespace
+
+        "]" -> External-link-end
+
+        Isbn -> Magic-link
+        Rfc-number -> Magic-link
+        Pmid-number -> Magic-link
+
+        "ISBN" Spaces Isbn-number -> Isbn
+
+        Space+ -> Spaces
+
+        "97" ("8" | "9") (Space | "-")? Decimal-digit (Space | "-")? "9"* (Decimal-digit | "X" | "x") -> Isbn-number
+
+        "RFC" Spaces Digits -> Rfc-number
+
+        Decimal-digit+ -> Digits
+
+        "PMID" Spaces Digits -> Pmid-number
+
+        "[[" "Image:" Page-name "." Image-extension (Pipe Image-option)* "]]" -> Image-inline
+
+        Title-character (Space? Title-character)* -> Page-name
+
+        <(Unicode-character Bad-title-characters)> -> Title-character
+
+        "[" -> Bad-title-characters
+        "]" -> Bad-title-characters
+        "{" -> Bad-title-characters
+        "}" -> Bad-title-characters
+        "<" -> Bad-title-characters
+        ">" -> Bad-title-characters
+        "_" -> Bad-title-characters
+        "|" -> Bad-title-characters
+        "#" -> Bad-title-characters
+
+        "jpg" -> Image-extension
+        "jpeg" -> Image-extension
+        "png" -> Image-extension
+        "svg" -> Image-extension
+        "gif" -> Image-extension
+        "bmp" -> Image-extension
+
+        Image-mode-parameter -> Image-option
+        Image-size-parameter -> Image-option
+        Image-align-parameter -> Image-option
+        Image-valign-parameter -> Image-option
+        Caption -> Image-option
+        Image-other-parameter -> Image-option
+
+        Image-mode-manual-thumb -> Image-mode-parameter
+        Image-mode-auto-thumb -> Image-mode-parameter
+        Image-mode-frame -> Image-mode-parameter
+        Image-mode-frameless -> Image-mode-parameter
+
+        "thumbnail=" Image-name -> Image-mode-manual-thumb
+        "thumb=" Image-name -> Image-mode-manual-thumb
+
+        Page-name "." Image-extension -> Image-name
+
+        "thumbnail" -> Image-mode-auto-thumb
+        "thumb" -> Image-mode-auto-thumb
+
+        "framed" -> Image-mode-frame
+        "enframed" -> Image-mode-frame
+        "frame" -> Image-mode-frame
+
+        "frameless" -> Image-mode-frameless
+
+        Digits "px" -> Image-size-parameter
+
+        Image-align-left -> Image-align-parameter
+        Image-align-center -> Image-align-parameter
+        Image-align-right -> Image-align-parameter
+        Image-align-none -> Image-align-parameter
+
+        "left" -> Image-align-left
+
+        "center" -> Image-align-center
+        "centre" -> Image-align-center
+
+        "right" -> Image-align-right
+
+        "none" -> Image-align-none
+
+        Image-valign-baseline -> Image-valign-parameter
+        Image-valign-sub -> Image-valign-parameter
+        Image-valign-super -> Image-valign-parameter
+        Image-valign-top -> Image-valign-parameter
+        Image-valign-text-top -> Image-valign-parameter
+        Image-valign-middle -> Image-valign-parameter
+        Image-valign-bottom -> Image-valign-parameter
+        Image-valign-text-bottom -> Image-valign-parameter
+
+        "baseline" -> Image-valign-baseline
+
+        "sub" -> Image-valign-sub
+
+        "super" -> Image-valign-super
+        "sup" -> Image-valign-super
+
+        "top" -> Image-valign-top
+
+        "text-top" -> Image-valign-text-top
+
+        "middle" -> Image-valign-middle
+
+        "bottom" -> Image-valign-bottom
+
+        "text-bottom" -> Image-valign-text-bottom
+
+        Inline-text -> Caption
+
+        Image-param-page -> Image-other-parameter
+        Image-param-upright -> Image-other-parameter
+        Image-param-border -> Image-other-parameter
+
+        "page=$1" -> Image-param-page
+        "page $1" -> Image-param-page
+
+        "upright" ("="? Digits)? -> Image-param-upright
+
+        "border" -> Image-param-border
+
+        "<gallery>" Newline? Gallery-image (Newline? Gallery-image)* Newline? "</gallery>" -> Gallery-block
+
+        Image-name ("|" Caption)? -> Gallery-image
+
+        "[[" "Media:" Page-name "." Media-extension "]]" -> Media-inline
+
+        "ogg" -> Media-extension
+        "wav" -> Media-extension
+
+        Formatting -> Text-with-formatting
+        Inline-html -> Text-with-formatting
+        Noparse-block -> Text-with-formatting
+        Behaviour-switch -> Text-with-formatting
+        Html-entity -> Text-with-formatting
+        Html-unsafe-symbol -> Text-with-formatting
+        Text -> Text-with-formatting
+        Random-character -> Text-with-formatting
+
+        Bold-italic-toggle -> Formatting
+        Bold-toggle -> Formatting
+        Italic-toggle -> Formatting
+
+        "'''''" -> Bold-italic-toggle
+
+        "'''" -> Bold-toggle
+
+        "''" -> Italic-toggle
+
+        Nowiki-block -> Noparse-block
+        Html-block -> Noparse-block
+        Math-block -> Noparse-block
+        Pre-block -> Noparse-block
+        Html-comment -> Noparse-block
+
+        Nowiki-opening-tag Whitespace? Nowiki-body Whitespace? Nowiki-closing-tag? -> Nowiki-block
+
+        "<nowiki" (Whitespace Characters?)? ">" -> Nowiki-opening-tag
+
+        Characters -> Nowiki-body
+
+        "</nowiki" Whitespace? ">" -> Nowiki-closing-tag
+
+        Html-opening-tag Whitespace? Html-body Whitespace? Html-closing-tag? -> Html-block
+
+        "<html" (Whitespace Characters?)? ">" -> Html-opening-tag
+
+        Characters -> Html-body
+
+        "</html" Whitespace? ">" -> Html-closing-tag
+
+        Pre-opening-tag Whitespace? Pre-body Whitespace? Pre-closing-tag? -> Pre-block
+
+        "<pre" (Whitespace Characters?)? ">" -> Pre-opening-tag
+
+        Characters -> Pre-body
+
+        "</pre" Whitespace? ">" -> Pre-closing-tag
+
+        "<!--" Characters? "-->" -> Html-comment
+
+        Behaviourswitch-toc -> Behaviour-switch
+        Behaviourswitch-forcetoc -> Behaviour-switch
+        Behaviourswitch-notoc -> Behaviour-switch
+        Behaviourswitch-noeditsection -> Behaviour-switch
+        Behaviourswitch-nogallery -> Behaviour-switch
+
+        "__TOC__" -> Behaviourswitch-toc
+
+        "__FORCETOC__" -> Behaviourswitch-forcetoc
+
+        "__NOTOC__" -> Behaviourswitch-notoc
+
+        "__NOEDITSECTION__" -> Behaviourswitch-noeditsection
+
+        "__NOGALLERY__" -> Behaviourswitch-nogallery
+
+        Line+ (Newline+ Line+)* -> Text
+
+        Harmless-character+ -> Text
+
+        Plain-text+ (Spaces Plain-text+)* -> Line
+
+        Unicode-wiki -> Plain-text
+        "<nowiki>" ("|" | "[" | "]" | "<" | ">" | "{" | "}")* "</nowiki>" -> Plain-text
+        Unicode-wiki Space* ("*" | "#" | ":" | ";") -> Plain-text
+        Unicode-wiki Space? "=" Space? Unicode-wiki -> Plain-text
+        Unicode-wiki "'" -> Plain-text
+        " '" Unicode-wiki -> Plain-text
+
+        <(Unicode-character Wiki-markup-characters)> -> Unicode-wiki
+
+        "|" -> Wiki-markup-characters
+        "[" -> Wiki-markup-characters
+        "]" -> Wiki-markup-characters
+        "*" -> Wiki-markup-characters
+        "#" -> Wiki-markup-characters
+        ":" -> Wiki-markup-characters
+        ";" -> Wiki-markup-characters
+        "<" -> Wiki-markup-characters
+        ">" -> Wiki-markup-characters
+        "=" -> Wiki-markup-characters
+        "'" -> Wiki-markup-characters
+        "{" -> Wiki-markup-characters
+        "}" -> Wiki-markup-characters
+
+        "A" -> Harmless-character
+        "B" -> Harmless-character
+        "C" -> Harmless-character
+        "D" -> Harmless-character
+        "E" -> Harmless-character
+        "F" -> Harmless-character
+        "G" -> Harmless-character
+        "H" -> Harmless-character
+        "I" -> Harmless-character
+        "J" -> Harmless-character
+        "K" -> Harmless-character
+        "L" -> Harmless-character
+        "M" -> Harmless-character
+        "N" -> Harmless-character
+        "O" -> Harmless-character
+        "P" -> Harmless-character
+        "Q" -> Harmless-character
+        "R" -> Harmless-character
+        "S" -> Harmless-character
+        "T" -> Harmless-character
+        "U" -> Harmless-character
+        "V" -> Harmless-character
+        "W" -> Harmless-character
+        "X" -> Harmless-character
+        "Y" -> Harmless-character
+        "Z" -> Harmless-character
+        "a" -> Harmless-character
+        "b" -> Harmless-character
+        "c" -> Harmless-character
+        "d" -> Harmless-character
+        "e" -> Harmless-character
+        "f" -> Harmless-character
+        "g" -> Harmless-character
+        "h" -> Harmless-character
+        "i" -> Harmless-character
+        "j" -> Harmless-character
+        "k" -> Harmless-character
+        "l" -> Harmless-character
+        "m" -> Harmless-character
+        "n" -> Harmless-character
+        "o" -> Harmless-character
+        "p" -> Harmless-character
+        "q" -> Harmless-character
+        "r" -> Harmless-character
+        "s" -> Harmless-character
+        "t" -> Harmless-character
+        "u" -> Harmless-character
+        "v" -> Harmless-character
+        "w" -> Harmless-character
+        "x" -> Harmless-character
+        "y" -> Harmless-character
+        "z" -> Harmless-character
+        "0" -> Harmless-character
+        "1" -> Harmless-character
+        "2" -> Harmless-character
+        "3" -> Harmless-character
+        "4" -> Harmless-character
+        "5" -> Harmless-character
+        "6" -> Harmless-character
+        "7" -> Harmless-character
+        "8" -> Harmless-character
+        "9" -> Harmless-character
+
+        ANY -> Random-character
+
+        Level-6-heading -> Heading
+        Level-5-heading -> Heading
+        Level-4-heading -> Heading
+        Level-3-heading -> Heading
+        Level-2-heading -> Heading
+        Level-1-heading -> Heading
+
+        "======" Inline-text "======" Space-tabs Newline -> Level-6-heading
+
+        Space-tab+ -> Space-tabs
+
+        "=====" Inline-text "=====" Space-tabs Newline -> Level-5-heading
+
+        "====" Inline-text "====" Space-tabs Newline -> Level-4-heading
+
+        "===" Inline-text "===" Space-tabs Newline -> Level-3-heading
+
+        "==" Inline-text "==" Space-tabs Newline -> Level-2-heading
+
+        "=" Inline-text "=" Space-tabs Newline -> Level-1-heading
+
+        Indent-item -> List-item
+        Enumerated-item -> List-item
+        Bullet-item -> List-item
+
+        ":" (List-item | Item-body)? -> Indent-item
+
+        Defined-term -> Item-body
+        Whitespace? Inline-text -> Item-body
+
+        ";" Text Definition? -> Defined-term
+
+        ":" Inline-text -> Definition
+
+        "#" (List-item | Item-body)? -> Enumerated-item
+
+        "*" (List-item | Item-body)? -> Bullet-item
+
+        "{|" (Space Table-parameters)? Newline Table-first-row "|}" -> Table
+
+        CSS -> Table-parameters
+        Html-table-attributes -> Table-parameters
+
+        Table-column-line Newline -> Table-first-row
+        Table-column-multiline -> Table-first-row
+        Table-row -> Table-first-row
+
+        "|" Inline-text ("|" Table-column-line)? -> Table-column-line
+
+        "|" (Table-cell-parameters "|")? Any-text Newline Table-column-multiline? -> Table-column-multiline
+
+        CSS -> Table-cell-parameters
+        Html-cell-attributes -> Table-cell-parameters
+
+        "|-" CSS? Newline Table-column Table-row? -> Table-row
+
+        Table-column-line -> Table-column
+        Table-column-multiline -> Table-column
+
+        Space Inline-text Newline Space-block-2* -> Space-block
+
+        Space Inline-text? Newline -> Space-block-2
+
+        Paragraph (EOF | (Newline? Special-block-and-more) | (Newline Paragraph-and-more)) -> Paragraph-and-more
+
+        Newline Lines-of-text? -> Paragraph
+        Lines-of-text -> Paragraph
+
+        Line-of-text Lines-of-text? -> Lines-of-text
+
+        Inline-text Newline -> Line-of-text

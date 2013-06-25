@@ -1,0 +1,125 @@
+module Main
+
+exports
+  sorts
+        Integer String Boolean ErrorType SeverityType StatusType OperatingSystemType PriorityType ReportedPlatformType ResolutionType BugzillaRoot Bug StringElt Keywords Dependson Blocks Cc LongDesc Attachment 
+  context-free syntax
+        INT -> Integer
+
+        STR -> String
+
+        "true" -> Boolean
+        "false" -> Boolean
+
+        et_null:: -> ErrorType
+        et_NotFound:: -> ErrorType
+        et_NotPermitted:: -> ErrorType
+        et_InvalidBugId:: -> ErrorType
+
+        st_null:: -> SeverityType
+        st_blocker:: -> SeverityType
+        st_critical:: -> SeverityType
+        st_major:: -> SeverityType
+        st_normal:: -> SeverityType
+        st_minor:: -> SeverityType
+        st_trivial:: -> SeverityType
+        st_enhancement:: -> SeverityType
+
+        st_null:: -> StatusType
+        st_UNCONFIRMED:: -> StatusType
+        st_NEW:: -> StatusType
+        st_ASSIGNED:: -> StatusType
+        st_REOPENED:: -> StatusType
+        st_RESOLVED:: -> StatusType
+        st_VERIFIED:: -> StatusType
+        st_CLOSED:: -> StatusType
+
+        ost_null:: -> OperatingSystemType
+        ost_all:: -> OperatingSystemType
+        ost_Windows 3.1:: -> OperatingSystemType
+        ost_Windows 95:: -> OperatingSystemType
+        ost_Windows 98:: -> OperatingSystemType
+        ost_Windows ME:: -> OperatingSystemType
+        ost_Windows 2000:: -> OperatingSystemType
+        ost_Windows NT:: -> OperatingSystemType
+        ost_Windows XP:: -> OperatingSystemType
+        ost_Windows Vista:: -> OperatingSystemType
+        ost_Windows Server 2003:: -> OperatingSystemType
+        ost_MacSystem 7:: -> OperatingSystemType
+        ost_MacSystem 7.5:: -> OperatingSystemType
+        ost_MacSystem 7.6.1:: -> OperatingSystemType
+        ost_MacSystem 8.0:: -> OperatingSystemType
+        ost_MacSystem 8.5:: -> OperatingSystemType
+        ost_MacSystem 8.6:: -> OperatingSystemType
+        ost_MacSystem 9.x:: -> OperatingSystemType
+        ost_Mac OS X 10.0:: -> OperatingSystemType
+        ost_Mac OS X 10.1:: -> OperatingSystemType
+        ost_Mac OS X 10.2:: -> OperatingSystemType
+        ost_Mac OS X 10.3:: -> OperatingSystemType
+        ost_Linux:: -> OperatingSystemType
+        ost_BDS/OS:: -> OperatingSystemType
+        ost_FreeBSD:: -> OperatingSystemType
+        ost_NetBSD:: -> OperatingSystemType
+        ost_OpenBSD:: -> OperatingSystemType
+        ost_AIX:: -> OperatingSystemType
+        ost_BeOS:: -> OperatingSystemType
+        ost_HP-UX:: -> OperatingSystemType
+        ost_IRIX:: -> OperatingSystemType
+        ost_Neutrino:: -> OperatingSystemType
+        ost_OpenVMS:: -> OperatingSystemType
+        ost_OS/2:: -> OperatingSystemType
+        ost_OSF/1:: -> OperatingSystemType
+        ost_Solaris:: -> OperatingSystemType
+        ost_SunOS:: -> OperatingSystemType
+        ost_other:: -> OperatingSystemType
+
+        pt_null:: -> PriorityType
+        pt_P1:: -> PriorityType
+        pt_P2:: -> PriorityType
+        pt_P3:: -> PriorityType
+        pt_P4:: -> PriorityType
+        pt_P5:: -> PriorityType
+
+        rpt_null:: -> ReportedPlatformType
+        rpt_all:: -> ReportedPlatformType
+        rpt_DEC:: -> ReportedPlatformType
+        rpt_HP:: -> ReportedPlatformType
+        rpt_Macintosh:: -> ReportedPlatformType
+        rpt_PC:: -> ReportedPlatformType
+        rpt_SGI:: -> ReportedPlatformType
+        rpt_Sun:: -> ReportedPlatformType
+        rpt_other:: -> ReportedPlatformType
+
+        rt_null:: -> ResolutionType
+        rt_FIXED:: -> ResolutionType
+        rt_INVALID:: -> ResolutionType
+        rt_WONTFIX:: -> ResolutionType
+        rt_LATER:: -> ResolutionType
+        rt_REMIND:: -> ResolutionType
+        rt_DUPLICATE:: -> ResolutionType
+        rt_WORKSFORME:: -> ResolutionType
+        rt_MOVED:: -> ResolutionType
+
+        version::String urlbase::String maintainer::String exporter::String bugs::Bug+ -> BugzillaRoot
+
+        bug_bugzillaRoot::BugzillaRoot error::ErrorType bug_id::String exporter::String urlbase::String bug_status::StatusType resolution::ResolutionType product::String priority::PriorityType version::String rep_platform::ReportedPlatformType assigned_to::String delta_ts::String component::String reporter::String target_milestone::String bug_severity::SeverityType creation_ts::String qa_contact::String status_whiteboard::String op_sys::OperatingSystemType bug_file_loc::String short_desc::String keywords::Keywords+ dependson::Dependson+ blocks::Blocks+ cc::Cc+ long_desc::LongDesc+ attachment::Attachment+ -> Bug
+
+        Keywords -> StringElt
+
+        Dependson -> StringElt
+
+        Blocks -> StringElt
+
+        Cc -> StringElt
+
+        value::String -> Keywords
+
+        value::String -> Dependson
+
+        value::String -> Blocks
+
+        value::String -> Cc
+
+        isPrivate::Boolean who::String bug_when::String thetext::String -> LongDesc
+
+        isObsolete::Boolean isPatch::Boolean isPrivate::Boolean id::String date::String desc::String type::String data::String -> Attachment
