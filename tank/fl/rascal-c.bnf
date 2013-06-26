@@ -1,0 +1,22 @@
+[prg] Program:
+        functions::{Function "\n"}+
+[ifThenElse] Expr:
+        "if" cond::Expr "then" thenbranch::Expr "else" elsebranch::Expr
+Expr:
+        "(" e::Expr ")"
+[literal] Expr:
+        i::Int
+[argument] Expr:
+        a::Name
+[binary] Expr:
+        lexpr::Expr op::Ops rexpr::Expr
+[apply] Expr:
+        f::Name vargs::(Expr+)
+[plus] Ops:
+        "+"
+[equal] Ops:
+        "=="
+[minus] Ops:
+        "-"
+[fun] Function:
+        f::Name args::(Name+) "=" body::Expr

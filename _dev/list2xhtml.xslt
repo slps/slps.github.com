@@ -350,11 +350,11 @@ Last updated: </xsl:text>
 						<xsl:text>] [</xsl:text>
 						<a href="{$filename}.sdf">SDF</a>
 						<xsl:text>]</xsl:text>
-						<xsl:if test="not(../../short = 'Metamodels')">
+						<!-- <xsl:if test="not(../../short = 'Metamodels')">
 							<xsl:text> [</xsl:text>
 							<a href="{$filename}.rsc">Rascal</a>
 							<xsl:text>]</xsl:text>
-						</xsl:if>
+						</xsl:if> -->
 					</span>
 				</li>
 			</xsl:if>
@@ -472,9 +472,9 @@ Last updated: </xsl:text>
 						<a href="{$filename}.dms">DMS BNF</a>
 						<xsl:text>] [</xsl:text>
 						<a href="{$filename}.sdf">SDF</a>
-						<xsl:text>] [</xsl:text>
+						<!-- <xsl:text>] [</xsl:text>
 						<a href="{$filename}.rsc">Rascal</a>
-						<xsl:text>]</xsl:text>
+						<xsl:text>]</xsl:text> -->
 					</span>
 				</li>
 			</xsl:for-each>

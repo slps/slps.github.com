@@ -1,0 +1,39 @@
+module Main
+
+exports
+  sorts
+        _Literal _IF _THEN _ELSE Name Literal Atom IfThenElse Operators Binary Apply Expr Function Program 
+  context-free syntax
+        Literal -> _Literal
+
+        "if" -> _IF
+
+        "then" -> _THEN
+
+        "else" -> _ELSE
+
+        STR -> Name
+
+        "-"? INT -> Literal
+
+        Name -> Atom
+        Literal -> Atom
+        "(" Expr ")" -> Atom
+
+        _IF Expr _THEN Expr _ELSE Expr -> IfThenElse
+
+        "==" -> Operators
+        "+" -> Operators
+        "-" -> Operators
+
+        Atom (Operators Atom)* -> Binary
+
+        Name Atom+ -> Apply
+
+        Binary -> Expr
+        Apply -> Expr
+        IfThenElse -> Expr
+
+        Name Name+ "=" Expr -> Function
+
+        Function+ StringEnd -> Program

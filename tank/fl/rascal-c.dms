@@ -1,0 +1,11 @@
+Program = functions::Function'\n' ;
+Expr = 'if' cond::Expr 'then' thenbranch::Expr 'else' elsebranch::Expr ;
+Expr = '(' e::Expr ')' ;
+Expr = i::Int ;
+Expr = a::Name ;
+Expr = lexpr::Expr op::Ops rexpr::Expr ;
+Expr = f::Name vargs::(Expr+) ;
+Ops = '+' ;
+Ops = '==' ;
+Ops = '-' ;
+Function = f::Name args::(Name+) '=' body::Expr ;
