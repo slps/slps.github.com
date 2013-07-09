@@ -24,9 +24,17 @@
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:variable>
+				<!--
 				<xsl:text>	cp ../slps/topics/grammars/</xsl:text>
 				<xsl:value-of select="handle"/>
 				<xsl:text>/grammar.bgf </xsl:text>
+				<xsl:value-of select="/zoo/name"/>
+				<xsl:text>/</xsl:text>
+				<xsl:value-of select="$filename"/>
+				-->
+				<xsl:text>	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/</xsl:text>
+				<xsl:value-of select="handle"/>
+				<xsl:text>/grammar.bgf &gt; </xsl:text>
 				<xsl:value-of select="/zoo/name"/>
 				<xsl:text>/</xsl:text>
 				<xsl:value-of select="$filename"/>

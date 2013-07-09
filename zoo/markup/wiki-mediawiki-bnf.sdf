@@ -1,7 +1,6 @@
 module Main
 
 exports
- context-free start-symbols wiki-page
   sorts
         Wiki-page Redirect Redirect-tag Characters Character Whitespace-char Space-tab Space TAB Newline CR LF Non-whitespace-char Letter Ucase-letter Lcase-letter Decimal-digit Symbol Html-unsafe-symbol Unescaped-ampersand Unescaped-less-than Unescaped-greater-than Underscore Html-entity Html-entity-name Decimal-number Hex-number Hex-digit Internal-link-start Article-link Interwiki-prefix Interwiki Namespace-prefix Namespace Article-title Page Page-first-char Canonical-page-first-char Page-char Canonical-page-char Sub-page Sub-page-separator Title-legal-char Internal-link-end Pipe EOL Article Special-block-and-more Special-block Horizontal-rule Dashes Inline-text Inline-element Category-link Category-namespace Sort-key Any-text Unicode-character Any-supported-unicode-character Whitespaces Link Internal-link Section-id Link-description Extra-description External-link External-link-start Url Protocol Url-path Url-char Whitespace External-link-end Magic-link Isbn Spaces Isbn-number Rfc-number Digits Pmid-number Image-inline Page-name Title-character Bad-title-characters Image-extension Image-option Image-mode-parameter Image-mode-manual-thumb Image-name Image-mode-auto-thumb Image-mode-frame Image-mode-frameless Image-size-parameter Image-align-parameter Image-align-left Image-align-center Image-align-right Image-align-none Image-valign-parameter Image-valign-baseline Image-valign-sub Image-valign-super Image-valign-top Image-valign-text-top Image-valign-middle Image-valign-bottom Image-valign-text-bottom Caption Image-other-parameter Image-param-page Image-param-upright Image-param-border Gallery-block Gallery-image Media-inline Media-extension Text-with-formatting Formatting Bold-italic-toggle Bold-toggle Italic-toggle Noparse-block Nowiki-block Nowiki-opening-tag Nowiki-body Nowiki-closing-tag Html-block Html-opening-tag Html-body Html-closing-tag Pre-block Pre-opening-tag Pre-body Pre-closing-tag Html-comment Behaviour-switch Behaviourswitch-toc Behaviourswitch-forcetoc Behaviourswitch-notoc Behaviourswitch-noeditsection Behaviourswitch-nogallery Text Line Plain-text Unicode-wiki Wiki-markup-characters Harmless-character Random-character Heading Level-6-heading Space-tabs Level-5-heading Level-4-heading Level-3-heading Level-2-heading Level-1-heading List-item Indent-item Item-body Defined-term Definition Enumerated-item Bullet-item Table Table-parameters Table-first-row Table-column-line Table-column-multiline Table-cell-parameters Table-row Table-column Space-block Space-block-2 Paragraph-and-more Paragraph Lines-of-text Line-of-text 
   context-free syntax
@@ -446,7 +445,12 @@ exports
 
         Unicode-character* -> Any-text
 
-        <(Any-supported-unicode-character Whitespaces)> -> Unicode-character
+        
+				Any-supported-unicode-character
+				
+						Whitespaces
+					
+			 -> Unicode-character
 
         ANY -> Any-supported-unicode-character
 
@@ -507,7 +511,12 @@ exports
 
         Title-character (Space? Title-character)* -> Page-name
 
-        <(Unicode-character Bad-title-characters)> -> Title-character
+        
+				Unicode-character
+				
+						Bad-title-characters
+					
+			 -> Title-character
 
         "[" -> Bad-title-characters
         "]" -> Bad-title-characters
@@ -696,7 +705,12 @@ exports
         Unicode-wiki "'" -> Plain-text
         " '" Unicode-wiki -> Plain-text
 
-        <(Unicode-character Wiki-markup-characters)> -> Unicode-wiki
+        
+				Unicode-character
+				
+						Wiki-markup-characters
+					
+			 -> Unicode-wiki
 
         "|" -> Wiki-markup-characters
         "[" -> Wiki-markup-characters

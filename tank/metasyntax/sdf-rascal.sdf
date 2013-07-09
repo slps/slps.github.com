@@ -4,246 +4,246 @@ exports
   sorts
         Grammar Restrictions Priority Section Import Attrs Imports Sections Annotation ATermAttribute Module ATerm OptExp Character Label SDF Lookaheads Aliases Group Prods Range Renaming Class ImpSection Sym RealCon Lookahead Priorities FunctionName Restriction Syms Prod ModuleName Assoc ArgumentIndicator IntCon Definition Alias AFun Attribute Renamings 
   context-free syntax
-        "context-free" "priorities" Priorities -> Grammar {cons(ContextFreePriorities)}
+        ContextFreePriorities("context-free" "priorities" Priorities) -> Grammar
 
-        ImpSection -> Grammar {cons(ImpSection)}
+        ImpSectionImpSection -> Grammar
 
-        "start-symbols" Syms -> Grammar {cons(KernalStartSyms)}
+        KernalStartSyms("start-symbols" Syms) -> Grammar
 
-        "aliases" Aliases -> Grammar {cons(Aliases)}
+        Aliases("aliases" Aliases) -> Grammar
 
-        "variables" Prods -> Grammar {cons(Variables)}
+        Variables("variables" Prods) -> Grammar
 
-        "context-free" "syntax" Prods -> Grammar {cons(ContextFreeSyntax)}
+        ContextFreeSyntax("context-free" "syntax" Prods) -> Grammar
 
-        "lexical" "restrictions" Restrictions -> Grammar {cons(LexicalRestrictions)}
+        LexicalRestrictions("lexical" "restrictions" Restrictions) -> Grammar
 
-        "sorts" Syms -> Grammar {cons(Sorts)}
+        Sorts("sorts" Syms) -> Grammar
 
-        "context-free" "start-symbols" Syms -> Grammar {cons(ContextFreeStartSyms)}
+        ContextFreeStartSyms("context-free" "start-symbols" Syms) -> Grammar
 
-        "syntax" Prods -> Grammar {cons(Syntax)}
+        Syntax("syntax" Prods) -> Grammar
 
-        "restrictions" Restrictions -> Grammar {cons(Restrictions)}
+        Restrictions("restrictions" Restrictions) -> Grammar
 
-        "priorities" Priorities -> Grammar {cons(Priorities)}
+        Priorities("priorities" Priorities) -> Grammar
 
-        "lexical" "start-symbols" Syms -> Grammar {cons(LexicalStartSyms)}
+        LexicalStartSyms("lexical" "start-symbols" Syms) -> Grammar
 
-        "lexical" "variables" Prods -> Grammar {cons(LexicalVariables)}
+        LexicalVariables("lexical" "variables" Prods) -> Grammar
 
-        "context-free" "restrictions" Restrictions -> Grammar {cons(ContextFreeRestrictions)}
+        ContextFreeRestrictions("context-free" "restrictions" Restrictions) -> Grammar
 
-        "lexical" "priorities" Priorities -> Grammar {cons(LexicalPriorities)}
+        LexicalPriorities("lexical" "priorities" Priorities) -> Grammar
 
-        "lexical" "syntax" Prods -> Grammar {cons(LexicalSyntax)}
+        LexicalSyntax("lexical" "syntax" Prods) -> Grammar
 
-        Restriction* -> Restrictions {cons(Default)}
+        DefaultRestriction* -> Restrictions
 
-        Group">" -> Priority {cons(Chain)}
+        ChainGroup">" -> Priority
 
-        Group Assoc Group -> Priority {cons(Assoc)}
+        Assoc(Group Assoc Group) -> Priority
 
-        "exports" Grammar* -> Section {cons(Exports)}
+        Exports("exports" Grammar*) -> Section
 
-        "hiddens" Grammar* -> Section {cons(Hiddens)}
+        Hiddens("hiddens" Grammar*) -> Section
 
-        "(" Import ")" -> Import {cons(Bracket)}
+        Bracket("(" Import ")") -> Import
 
-        ModuleName -> Import {cons(Module)}
+        ModuleModuleName -> Import
 
-        ModuleName Renamings -> Import {cons(RenamedModule)}
+        RenamedModule(ModuleName Renamings) -> Import
 
-        "{" Attribute"," "}" -> Attrs {cons(Attrs)}
+        Attrs("{" Attribute"," "}") -> Attrs
 
-         -> Attrs {cons(NoAttrs)}
+        NoAttrs -> Attrs
 
         Import* -> Imports
 
         Section* -> Sections
 
-        "{" ATerm"," "}" -> Annotation {cons(Default)}
+        Default("{" ATerm"," "}") -> Annotation
 
-         -> ATermAttribute {cons(Default)}
+        Default -> ATermAttribute
 
-        "module" ModuleName ImpSection* Sections -> Module {cons(Module)}
+        Module("module" ModuleName ImpSection* Sections) -> Module
 
-        RealCon -> ATerm {cons(Real)}
+        RealRealCon -> ATerm
 
-        AFun "(" ATerm"," ")" -> ATerm {cons(Appl)}
+        Appl(AFun "(" ATerm"," ")") -> ATerm
 
-        ATerm Annotation -> ATerm {cons(Annotated)}
+        Annotated(ATerm Annotation) -> ATerm
 
-        "<" ATerm ">" -> ATerm {cons(Placeholder)}
+        Placeholder("<" ATerm ">") -> ATerm
 
-        IntCon -> ATerm {cons(Int)}
+        IntIntCon -> ATerm
 
-        AFun -> ATerm {cons(Fun)}
+        FunAFun -> ATerm
 
-        "[" ATerm"," "]" -> ATerm {cons(List)}
+        List("[" ATerm"," "]") -> ATerm
 
-        "e" IntCon -> OptExp {cons(Present)}
+        Present("e" IntCon) -> OptExp
 
-         -> OptExp {cons(Absent)}
+        Absent -> OptExp
 
-        "\EOF" -> Character {cons(eof)}
+        eof"\EOF" -> Character
 
-        ShortChar -> Character {cons(short)}
+        shortShortChar -> Character
 
-        NumChar -> Character {cons(Numeric)}
+        NumericNumChar -> Character
 
-        "\TOP" -> Character {cons(top)}
+        top"\TOP" -> Character
 
-        "\LABEL_START" -> Character {cons(label_start)}
+        label_start"\LABEL_START" -> Character
 
-        "\BOT" -> Character {cons(bot)}
+        bot"\BOT" -> Character
 
-         -> Label {cons(IdCon)}
+        IdCon -> Label
 
-        StrCon -> Label {cons(Quoted)}
+        QuotedStrCon -> Label
 
-        "definition" def::Definition -> SDF {cons(Definition)}
+        Definition("definition" def::Definition) -> SDF
 
-        Lookahead -> Lookaheads {cons(Single)}
+        SingleLookahead -> Lookaheads
 
-        Lookaheads "|" Lookaheads -> Lookaheads {cons(Alt)}
+        Alt(Lookaheads "|" Lookaheads) -> Lookaheads
 
-        "[[" Lookahead"," "]]" -> Lookaheads {cons(List)}
+        List("[[" Lookahead"," "]]") -> Lookaheads
 
-        "(" Lookaheads ")" -> Lookaheads {cons(Bracket)}
+        Bracket("(" Lookaheads ")") -> Lookaheads
 
         Alias* -> Aliases
 
-        Group "." -> Group {cons(NonTransitive)}
+        NonTransitive(Group ".") -> Group
 
-        "{" Assoc ":" Prods "}" -> Group {cons(AssocGroup)}
+        AssocGroup("{" Assoc ":" Prods "}") -> Group
 
-        Group ArgumentIndicator -> Group {cons(WithArguments)}
+        WithArguments(Group ArgumentIndicator) -> Group
 
-        Prod -> Group {cons(SimpleGroup)}
+        SimpleGroupProd -> Group
 
-        "{" Prods "}" -> Group {cons(ProdsGroup)}
+        ProdsGroup("{" Prods "}") -> Group
 
         Prod* -> Prods
 
-        Character "-" Character -> Range {cons(Range)}
+        Range(Character "-" Character) -> Range
 
         Character -> Range
 
-        Prod "=>" Prod -> Renaming {cons(production)}
+        production(Prod "=>" Prod) -> Renaming
 
-        Sym "=>" Sym -> Renaming {cons(Sym)}
+        Sym(Sym "=>" Sym) -> Renaming
 
-        "[" Range* "]" -> Class {cons(SimpleCharClass)}
+        SimpleCharClass("[" Range* "]") -> Class
 
-        "(" Class ")" -> Class {cons(Bracket)}
+        Bracket("(" Class ")") -> Class
 
-        "~" Class -> Class {cons(Comp)}
+        Comp("~" Class) -> Class
 
-        Class "/" Class -> Class {cons(Diff)}
+        Diff(Class "/" Class) -> Class
 
-        Class "/\" Class -> Class {cons(ISect)}
+        ISect(Class "/\" Class) -> Class
 
-        Class "\/" Class -> Class {cons(Union)}
+        Union(Class "\/" Class) -> Class
 
-        "imports" Imports -> ImpSection {cons(Imports)}
+        Imports("imports" Imports) -> ImpSection
 
-        "(" ")" -> Sym {cons(Empty)}
+        Empty("(" ")") -> Sym
 
-        StrCon -> Sym {cons(Lit)}
+        LitStrCon -> Sym
 
-        Sym "?" -> Sym {cons(Opt)}
+        Opt(Sym "?") -> Sym
 
-        "(" Sym Sym+ ")" -> Sym {cons(Seq)}
+        Seq("(" Sym Sym+ ")") -> Sym
 
-        "(" Sym ")" -> Sym {cons(Bracket)}
+        Bracket("(" Sym ")") -> Sym
 
-        SingleQuotedStrCon -> Sym {cons(CILit)}
+        CILitSingleQuotedStrCon -> Sym
 
-        "<" Sym "-VAR" ">" -> Sym {cons(Varsym)}
+        Varsym("<" Sym "-VAR" ">") -> Sym
 
-        Sort -> Sym {cons(Sort)}
+        SortSort -> Sym
 
-        "<" Sym "-LEX" ">" -> Sym {cons(Lex)}
+        Lex("<" Sym "-LEX" ">") -> Sym
 
-        "LAYOUT" -> Sym {cons(Layout)}
+        Layout"LAYOUT" -> Sym
 
-        "<" Sym "-CF" ">" -> Sym {cons(CF)}
+        CF("<" Sym "-CF" ">") -> Sym
 
-        Sort "[[" Sym"," "]]" -> Sym {cons(ParameterizedSort)}
+        ParameterizedSort(Sort "[[" Sym"," "]]") -> Sym
 
-        Sym "*" -> Sym {cons(IterStar)}
+        IterStar(Sym "*") -> Sym
 
-        "{" Sym Sym "}" "*" -> Sym {cons(IterStarSep)}
+        IterStarSep("{" Sym Sym "}" "*") -> Sym
 
-        Sym "+" -> Sym {cons(Iter)}
+        Iter(Sym "+") -> Sym
 
-        Class -> Sym {cons(Class)}
+        ClassClass -> Sym
 
-        "{" Sym Sym "}" "+" -> Sym {cons(IterSep)}
+        IterSep("{" Sym Sym "}" "+") -> Sym
 
-        Sym "|" Sym -> Sym {cons(Alt)}
+        Alt(Sym "|" Sym) -> Sym
 
-        Label ":" Sym -> Sym {cons(Label)}
+        Label(Label ":" Sym) -> Sym
 
-        IntCon "." NatCon OptExp -> RealCon {cons(RealCon)}
+        RealCon(IntCon "." NatCon OptExp) -> RealCon
 
-        class::Class -> Lookahead {cons(Class)}
+        Classclass::Class -> Lookahead
 
-        class::Class "." las::Lookaheads -> Lookahead {cons(Seq)}
+        Seq(class::Class "." las::Lookaheads) -> Lookahead
 
         Priority"," -> Priorities
 
-        StrCon -> FunctionName {cons(QuotedFun)}
+        QuotedFunStrCon -> FunctionName
 
-        IdCon -> FunctionName {cons(UnquotedFun)}
+        UnquotedFunIdCon -> FunctionName
 
-        Syms "-/-" Lookaheads -> Restriction {cons(Follow)}
+        Follow(Syms "-/-" Lookaheads) -> Restriction
 
         Sym* -> Syms
 
-        Syms "->" Sym Attrs -> Prod {cons(Prod)}
+        Prod(Syms "->" Sym Attrs) -> Prod
 
-        id::ModuleId "[" actuals::Syms "]" -> ModuleName {cons(Parameterized)}
+        Parameterized(id::ModuleId "[" actuals::Syms "]") -> ModuleName
 
-         -> ModuleName {cons(Unparameterized)}
+        Unparameterized -> ModuleName
 
-        "non-assoc" -> Assoc {cons(NonAssoc)}
+        NonAssoc"non-assoc" -> Assoc
 
-        "assoc" -> Assoc {cons(Assoc)}
+        Assoc"assoc" -> Assoc
 
-        "left" -> Assoc {cons(Left)}
+        Left"left" -> Assoc
 
-        "right" -> Assoc {cons(Right)}
+        Right"right" -> Assoc
 
-        "<" NatCon"," ">" -> ArgumentIndicator {cons(Default)}
+        Default("<" NatCon"," ">") -> ArgumentIndicator
 
-        "-" NatCon -> IntCon {cons(Negative)}
+        Negative("-" NatCon) -> IntCon
 
-        NatCon -> IntCon {cons(Natural)}
+        NaturalNatCon -> IntCon
 
-        "+" NatCon -> IntCon {cons(Positive)}
+        Positive("+" NatCon) -> IntCon
 
-        Module* -> Definition {cons(modules)}
+        modulesModule* -> Definition
 
-        Sym "->" Sym -> Alias {cons(Alias)}
+        Alias(Sym "->" Sym) -> Alias
 
-        StrCon -> AFun {cons(Quoted)}
+        QuotedStrCon -> AFun
 
-         -> AFun {cons(Unquoted)}
+        Unquoted -> AFun
 
-        ATermAttribute -> Attribute {cons(Term)}
+        TermATermAttribute -> Attribute
 
-        Assoc -> Attribute {cons(Assoc)}
+        AssocAssoc -> Attribute
 
-        "bracket" -> Attribute {cons(Bracket)}
+        Bracket"bracket" -> Attribute
 
-        "id" "(" ModuleName ")" -> Attribute {cons(Id)}
+        Id("id" "(" ModuleName ")") -> Attribute
 
-        "avoid" -> Attribute {cons(Avoid)}
+        Avoid"avoid" -> Attribute
 
-        "prefer" -> Attribute {cons(Prefer)}
+        Prefer"prefer" -> Attribute
 
-        "reject" -> Attribute {cons(Reject)}
+        Reject"reject" -> Attribute
 
-        "[" Renaming* "]" -> Renamings {cons(Renamings)}
+        Renamings("[" Renaming* "]") -> Renamings

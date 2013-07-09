@@ -1,16 +1,25 @@
-RealCon = IntCon '.' NatCon OptExp ;
-IntCon = '+' NatCon ;
-IntCon = NatCon ;
-IntCon = '-' NatCon ;
-AFun = StrCon ;
-AFun = IdCon ;
-Annotation = '{' ATerm',' '}' ;
-ATerm = AFun '(' ATerm',' ')' ;
-ATerm = RealCon ;
-ATerm = '[' ATerm',' ']' ;
-ATerm = ATerm Annotation ;
-ATerm = '<' ATerm '>' ;
-ATerm = IntCon ;
-ATerm = AFun ;
-OptExp = 'e' IntCon ;
-OptExp = ;
+RealCon = RealCon(IntCon '.' NatCon OptExp) ;
+IntCon = Positive('+' NatCon) ;
+IntCon = NaturalNatCon ;
+IntCon = Negative('-' NatCon) ;
+AFun = QuotedStrCon ;
+AFun = UnquotedIdCon ;
+Annotation = Default('{' 
+						ATerm
+						','
+					 '}') ;
+ATerm = Appl(AFun '(' 
+						ATerm
+						','
+					 ')') ;
+ATerm = RealRealCon ;
+ATerm = List('[' 
+						ATerm
+						','
+					 ']') ;
+ATerm = Annotated(ATerm Annotation) ;
+ATerm = Placeholder('<' ATerm '>') ;
+ATerm = IntIntCon ;
+ATerm = FunAFun ;
+OptExp = Present('e' IntCon) ;
+OptExp = Absent ;

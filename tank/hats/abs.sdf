@@ -4,13 +4,13 @@ exports
   sorts
         SqlAttrDefList ABSGoal Guard ModuleNameDecl DataConstructorList Literal AnnotationList DeclList BlockWithoutAnnotations FeatureList Featvar ExportList MlitExp DatatypeparamListDecl ParamDecls SqlOrderingAttributes StmtList FieldDecl EqualityExp VarOrFieldRef Appcond FeatureDecl MfactorExp ImplementInterfacesRemove CaseExp MultExp Name SqlAggregateFunction IDENTIFIER ParamDecl Mexp AfterCondition Fextension SqlAttrDef FunctionDecl ModuleModifierList DatatypeDecl TYPE-IDENTIFIER Product Decl Feature SimpleTypeName PureExpPrefix DeltaId CaseBranchList ExpFunctionDef AsyncCall ConstructorArgList SqlOrderingAttributeList InfModifierFragmentList AndExp WhenCondition MethodsigList SqlAttrAssignment OoModifier MimplExp SqlTupleCaseBranches TypesynDecl IfnameList FnodeList ImportList ProductList LocationExp SqlAttrRefList DeltaParamDecl ConstructorArg FunctionalModifier EffExp FnappListExp LetExp ClassDecl DeltaDeclList PatternList SqlTupleScalarFunctionSum InfModifierFragment DeltaParamDecls MainBlock DeltaparamList CompoundStmt Methodsig SqlTupleConstantList NewlocExp DeltaclauseList PureExpNoIf DatatypeuseList OptfeatureList ListLiteralExp MaddExp DeltaList ConstructorPattern FactorAppcond SqlStringLiteral VarDecl Group ModifierFragment QualifiedInterfaceDecl DeltaDecl TypeExp Block SqlRelationRef AnyName AttrAssignments FromCondition AdaptationList SqlTupleConstant NewExp WhileStmt ModuleModifier QualifiedTypeName SqlExp CorefeatureList Delta ImplementInterfacesAdd MeqExp ModifierFragmentList IfExp SqlAttrAssignmentList AttributeConstraintList AnyNameList ExtendsInterfaces SqlAtomicRelationRef AttrAssignment IncompleteExp ImplementInterfaces IfThenElseStmt SyncCall CompilationUnit Import HasCondition SqlTupleScalarFunctionQuotient Export SqlAndCondition DataConstructor SqlTupleScalarFunctionProduct SqlAttrsDef AddExp DeltaAccessList PureExp ConstructorExp INTLITERAL IntLiteral MmultExp OriginalCall SqlOrCondition Stmt Deltaparam ParamDeclList SqlTupleScalarFunctionConcat DataExp Exp TypeName SqlTupleCaseFunction Datatypeuse FatherExp Method AndAppcond IntList SqlCondition SqlGroupingAttributes Datatypeparam PatternParams ModuleDeclList CaseBranch Deltaparams DeltaAccess OrExp SqlOrderingAttribute QualifiedClassDecl DeltaClause QualifiedName FnappExp OptSqlCondition LAYOUT ModuleName Adaptation DataExpList StringLiteral SqlTupleScalarFunction MethodList Featuremodeldecl InitBlock DatatypeparamList StmtWithoutAnnotations BoundaryInt OrAppcond Annotation SqlTupleCaseBranch Ifname Fnode AtomicSqlTupleScalarFunction RelationalExp ModuleDecl SqlAttrRef MandExp Deltaspec MrelExp DeltaParamDeclList Cog FieldDeclList ProductLine InterfaceDecl Cardinality Factor DataConstructorParams SqlComparisonRelation Pattern AttrAssignmentList SimpleName 
   context-free syntax
-        SqlAttrDef -> SqlAttrDefList {cons(a)}
+        aSqlAttrDef -> SqlAttrDefList
 
         l::SqlAttrDefList COMMA a::SqlAttrDef -> SqlAttrDefList
 
-        CompilationUnit -> ABSGoal {cons(cu)}
+        cuCompilationUnit -> ABSGoal
 
-        DataExp -> Guard {cons(e)}
+        eDataExp -> Guard
 
         r::VarOrFieldRef QMARK -> Guard
 
@@ -22,41 +22,41 @@ exports
 
         MODULE n::ModuleName SEMICOLON -> ModuleNameDecl
 
-        DataConstructor -> DataConstructorList {cons(i)}
+        iDataConstructor -> DataConstructorList
 
         l::DataConstructorList BAR i::DataConstructor -> DataConstructorList
 
-        IntLiteral -> Literal {cons(i)}
+        iIntLiteral -> Literal
 
-        StringLiteral -> Literal {cons(s)}
+        sStringLiteral -> Literal
 
         l::AnnotationList a::Annotation -> AnnotationList
 
-        Annotation -> AnnotationList {cons(a)}
+        aAnnotation -> AnnotationList
 
         l::DeclList t::Decl -> DeclList
 
-        Decl -> DeclList {cons(t)}
+        tDecl -> DeclList
 
         LBRACE s::StmtList? RBRACE -> BlockWithoutAnnotations
 
-        Feature -> FeatureList {cons(f)}
+        fFeature -> FeatureList
 
         l::FeatureList COMMA f::Feature -> FeatureList
 
-        TYPE-IDENTIFIER -> Featvar {cons(f)}
+        fTYPE-IDENTIFIER -> Featvar
 
-        Export -> ExportList {cons(t)}
+        tExport -> ExportList
 
         l::ExportList t::Export -> ExportList
 
-        INTLITERAL -> MlitExp {cons(i)}
+        iINTLITERAL -> MlitExp
 
-        IDENTIFIER -> MlitExp {cons(id)}
+        idIDENTIFIER -> MlitExp
 
         f::TYPE-IDENTIFIER DOT a::IDENTIFIER -> MlitExp
 
-        TYPE-IDENTIFIER -> MlitExp {cons(id)}
+        idTYPE-IDENTIFIER -> MlitExp
 
         LT l::DatatypeparamList GT -> DatatypeparamListDecl
 
@@ -68,7 +68,7 @@ exports
 
         l::StmtList i::Stmt -> StmtList
 
-        Stmt -> StmtList {cons(i)}
+        iStmt -> StmtList
 
         an::AnnotationList? PORT t::TypeExp i::IDENTIFIER -> FieldDecl
 
@@ -86,7 +86,7 @@ exports
 
         callee::THIS b::BANG method::IDENTIFIER? -> VarOrFieldRef
 
-        IDENTIFIER -> VarOrFieldRef {cons(n)}
+        nIDENTIFIER -> VarOrFieldRef
 
         callee::THIS d::DOT -> VarOrFieldRef
 
@@ -94,7 +94,7 @@ exports
 
         OrAppcond -> Appcond
 
-        TYPE-IDENTIFIER -> FeatureDecl {cons(f)}
+        fTYPE-IDENTIFIER -> FeatureDecl
 
         f::TYPE-IDENTIFIER LBRACE g::Group? acl::AttributeConstraintList RBRACE -> FeatureDecl
 
@@ -114,7 +114,7 @@ exports
 
         e1::MultExp MOD e2::Factor -> MultExp
 
-        Factor -> MultExp {cons(f)}
+        fFactor -> MultExp
 
         e1::MultExp DIV e2::Factor -> MultExp
 
@@ -124,7 +124,7 @@ exports
 
         COUNT LPAREN MULT RPAREN -> SqlAggregateFunction
 
-        SqlTupleScalarFunction -> SqlAggregateFunction {cons(f)}
+        fSqlTupleScalarFunction -> SqlAggregateFunction
 
         i::IDENTIFIER LPAREN f::SqlTupleScalarFunction RPAREN -> SqlAggregateFunction
 
@@ -142,7 +142,7 @@ exports
 
         fun::SqlAggregateFunction AS e::DataExp -> SqlAttrDef
 
-        Factor -> SqlAttrDef {cons(f)}
+        fFactor -> SqlAttrDef
 
         al::AnnotationList? DEF t::Datatypeuse fn::IDENTIFIER p::DatatypeparamListDecl LPAREN l::ParamDeclList? RPAREN ASSIGN ef::ExpFunctionDef SEMICOLON -> FunctionDecl
 
@@ -154,7 +154,7 @@ exports
 
         l::ModuleModifierList m::ModuleModifier -> ModuleModifierList
 
-        ModuleModifier -> ModuleModifierList {cons(m)}
+        mModuleModifier -> ModuleModifierList
 
         al::AnnotationList? DATA id::TYPE-IDENTIFIER p::DatatypeparamListDecl? SEMICOLON -> DatatypeDecl
 
@@ -180,19 +180,19 @@ exports
 
         id::TYPE-IDENTIFIER attrs::AttrAssignments? -> Feature
 
-        TYPE-IDENTIFIER -> SimpleTypeName {cons(id)}
+        idTYPE-IDENTIFIER -> SimpleTypeName
 
         LPAREN e::IfExp RPAREN -> PureExpPrefix
 
         PureExpNoIf -> PureExpPrefix
 
-        TYPE-IDENTIFIER -> DeltaId {cons(delta)}
+        deltaTYPE-IDENTIFIER -> DeltaId
 
         l::CaseBranchList b::CaseBranch -> CaseBranchList
 
-        CaseBranch -> CaseBranchList {cons(b)}
+        bCaseBranch -> CaseBranchList
 
-        DataExp -> ExpFunctionDef {cons(ef)}
+        efDataExp -> ExpFunctionDef
 
         callee::PureExpPrefix BANG method::IDENTIFIER LPAREN params::DataExpList? RPAREN -> AsyncCall
 
@@ -200,15 +200,15 @@ exports
 
         l::ConstructorArgList COMMA a::ConstructorArg -> ConstructorArgList
 
-        ConstructorArg -> ConstructorArgList {cons(a)}
+        aConstructorArg -> ConstructorArgList
 
         l::SqlOrderingAttributeList COMMA a::SqlOrderingAttribute -> SqlOrderingAttributeList
 
-        SqlOrderingAttribute -> SqlOrderingAttributeList {cons(a)}
+        aSqlOrderingAttribute -> SqlOrderingAttributeList
 
         l::InfModifierFragmentList f::InfModifierFragment -> InfModifierFragmentList
 
-        InfModifierFragment -> InfModifierFragmentList {cons(f)}
+        fInfModifierFragment -> InfModifierFragmentList
 
         e1::AndExp ANDAND e2::EqualityExp -> AndExp
 
@@ -242,25 +242,25 @@ exports
 
         l::SqlTupleCaseBranches b::SqlTupleCaseBranch -> SqlTupleCaseBranches
 
-        SqlTupleCaseBranch -> SqlTupleCaseBranches {cons(b)}
+        bSqlTupleCaseBranch -> SqlTupleCaseBranches
 
         al::AnnotationList? TYPE lhs::TYPE-IDENTIFIER ASSIGN rhs::Datatypeuse SEMICOLON -> TypesynDecl
 
         l::IfnameList COMMA i::Ifname -> IfnameList
 
-        Ifname -> IfnameList {cons(i)}
+        iIfname -> IfnameList
 
          -> FnodeList
 
         l::FnodeList COMMA f::Fnode -> FnodeList
 
-        Fnode -> FnodeList {cons(f)}
+        fFnode -> FnodeList
 
-        Import -> ImportList {cons(t)}
+        tImport -> ImportList
 
         l::ImportList t::Import -> ImportList
 
-        Product -> ProductList {cons(p)}
+        pProduct -> ProductList
 
         l::ProductList p::Product -> ProductList
 
@@ -268,13 +268,13 @@ exports
 
         l::SqlAttrRefList COMMA a::SqlAttrRef -> SqlAttrRefList
 
-        SqlAttrRef -> SqlAttrRefList {cons(a)}
+        aSqlAttrRef -> SqlAttrRefList
 
-        ParamDecl -> DeltaParamDecl {cons(p)}
+        pParamDecl -> DeltaParamDecl
 
         id::TYPE-IDENTIFIER c::HasCondition -> DeltaParamDecl
 
-        Datatypeuse -> ConstructorArg {cons(u)}
+        uDatatypeuse -> ConstructorArg
 
         u::Datatypeuse id::IDENTIFIER -> ConstructorArg
 
@@ -310,13 +310,13 @@ exports
 
         annotations::AnnotationList? CLASS id::TYPE-IDENTIFIER params::ParamDecls? i::ImplementInterfaces? LBRACE fields::FieldDeclList? initBlock::InitBlock? methods::MethodList? RBRACE -> ClassDecl
 
-        DeltaDecl -> DeltaDeclList {cons(t)}
+        tDeltaDecl -> DeltaDeclList
 
         l::DeltaDeclList t::DeltaDecl -> DeltaDeclList
 
         l::PatternList COMMA i::Pattern -> PatternList
 
-        Pattern -> PatternList {cons(i)}
+        iPattern -> PatternList
 
         f1::SqlTupleScalarFunctionSum MINUS f2::SqlTupleScalarFunctionProduct -> SqlTupleScalarFunctionSum
 
@@ -336,7 +336,7 @@ exports
 
         l::DeltaparamList COMMA p::Deltaparam -> DeltaparamList
 
-        Deltaparam -> DeltaparamList {cons(p)}
+        pDeltaparam -> DeltaparamList
 
         IfThenElseStmt -> CompoundStmt
 
@@ -346,7 +346,7 @@ exports
 
         al::AnnotationList? returntype::TypeExp id::IDENTIFIER LPAREN params::ParamDeclList? RPAREN -> Methodsig
 
-        SqlTupleConstant -> SqlTupleConstantList {cons(c)}
+        cSqlTupleConstant -> SqlTupleConstantList
 
         l::SqlTupleConstantList COMMA c::SqlTupleConstant -> SqlTupleConstantList
 
@@ -372,7 +372,7 @@ exports
 
         LetExp -> PureExpNoIf
 
-        Datatypeuse -> DatatypeuseList {cons(i)}
+        iDatatypeuse -> DatatypeuseList
 
         l::DatatypeuseList COMMA i::Datatypeuse -> DatatypeuseList
 
@@ -384,23 +384,23 @@ exports
 
         e1::MaddExp MINUS e2::MmultExp -> MaddExp
 
-        MmultExp -> MaddExp {cons(e)}
+        eMmultExp -> MaddExp
 
         e1::MaddExp PLUS e2::MmultExp -> MaddExp
 
         l::DeltaList COMMA id::Delta -> DeltaList
 
-        Delta -> DeltaList {cons(id)}
+        idDelta -> DeltaList
 
         co::TypeName p::PatternParams? -> ConstructorPattern
 
         LPAREN ac::Appcond RPAREN -> FactorAppcond
 
-        Feature -> FactorAppcond {cons(f)}
+        fFeature -> FactorAppcond
 
         NEGATION ac::FactorAppcond -> FactorAppcond
 
-        SQLSTRINGLITERAL -> SqlStringLiteral {cons(s)}
+        sSQLSTRINGLITERAL -> SqlStringLiteral
 
         t::TypeExp i::IDENTIFIER ASSIGN e::Exp -> VarDecl
 
@@ -422,7 +422,7 @@ exports
 
         DELTA id::TYPE-IDENTIFIER params::DeltaParamDecls? SEMICOLON uses::DeltaAccessList? modifiers::ModuleModifierList? -> DeltaDecl
 
-        TypeName -> TypeExp {cons(n)}
+        nTypeName -> TypeExp
 
         n::TypeName LT p::DatatypeuseList GT -> TypeExp
 
@@ -446,11 +446,11 @@ exports
 
         l::AdaptationList ad::Adaptation -> AdaptationList
 
-        Adaptation -> AdaptationList {cons(ad)}
+        adAdaptation -> AdaptationList
 
-        IntLiteral -> SqlTupleConstant {cons(i)}
+        iIntLiteral -> SqlTupleConstant
 
-        SqlStringLiteral -> SqlTupleConstant {cons(s)}
+        sSqlStringLiteral -> SqlTupleConstant
 
         TRUE -> SqlTupleConstant
 
@@ -458,15 +458,15 @@ exports
 
         FALSE -> SqlTupleConstant
 
-        VarOrFieldRef -> SqlTupleConstant {cons(r)}
+        rVarOrFieldRef -> SqlTupleConstant
 
         NEW c::Cog? i::TypeName LPAREN l::DataExpList? RPAREN -> NewExp
 
         WHILE LPAREN e1::DataExp RPAREN s1::Stmt -> WhileStmt
 
-        OoModifier -> ModuleModifier {cons(m)}
+        mOoModifier -> ModuleModifier
 
-        FunctionalModifier -> ModuleModifier {cons(m)}
+        mFunctionalModifier -> ModuleModifier
 
         qn::TypeName DOT n::TYPE-IDENTIFIER -> QualifiedTypeName
 
@@ -482,7 +482,7 @@ exports
 
         COREFEATURES l::FeatureList SEMICOLON -> CorefeatureList
 
-        TYPE-IDENTIFIER -> Delta {cons(id)}
+        idTYPE-IDENTIFIER -> Delta
 
         ADDS i::IfnameList -> ImplementInterfacesAdd
 
@@ -492,13 +492,13 @@ exports
 
         e1::MeqExp EQEQ e2::MrelExp -> MeqExp
 
-        ModifierFragment -> ModifierFragmentList {cons(f)}
+        fModifierFragment -> ModifierFragmentList
 
         l::ModifierFragmentList f::ModifierFragment -> ModifierFragmentList
 
         IF e::DataExp THEN c::DataExp ELSE a::DataExp -> IfExp
 
-        SqlAttrAssignment -> SqlAttrAssignmentList {cons(a)}
+        aSqlAttrAssignment -> SqlAttrAssignmentList
 
         l::SqlAttrAssignmentList COMMA a::SqlAttrAssignment -> SqlAttrAssignmentList
 
@@ -522,15 +522,15 @@ exports
 
         acl::AttributeConstraintList IFOUT COLON e::Mexp SEMICOLON -> AttributeConstraintList
 
-        AnyName -> AnyNameList {cons(n)}
+        nAnyName -> AnyNameList
 
         l::AnyNameList COMMA n::AnyName -> AnyNameList
 
         EXTENDS i::IfnameList -> ExtendsInterfaces
 
-        StringLiteral -> SqlAtomicRelationRef {cons(r)}
+        rStringLiteral -> SqlAtomicRelationRef
 
-        VarOrFieldRef -> SqlAtomicRelationRef {cons(r)}
+        rVarOrFieldRef -> SqlAtomicRelationRef
 
         n::IDENTIFIER ASSIGN i::INTLITERAL -> AttrAssignment
 
@@ -594,15 +594,15 @@ exports
 
         MULT -> SqlAttrsDef
 
-        SqlAttrDefList -> SqlAttrsDef {cons(l)}
+        lSqlAttrDefList -> SqlAttrsDef
 
         e1::AddExp PLUS e2::MultExp -> AddExp
 
-        MultExp -> AddExp {cons(e)}
+        eMultExp -> AddExp
 
         e1::AddExp MINUS e2::MultExp -> AddExp
 
-        DeltaAccess -> DeltaAccessList {cons(t)}
+        tDeltaAccess -> DeltaAccessList
 
         l::DeltaAccessList t::DeltaAccess -> DeltaAccessList
 
@@ -614,17 +614,17 @@ exports
 
         PureExpNoIf -> PureExp
 
-        TypeName -> ConstructorExp {cons(f)}
+        fTypeName -> ConstructorExp
 
         f::TypeName LPAREN l::DataExpList? RPAREN -> ConstructorExp
 
          -> INTLITERAL
 
-        INTLITERAL -> IntLiteral {cons(i)}
+        iINTLITERAL -> IntLiteral
 
         e1::MmultExp MULT e2::MfactorExp -> MmultExp
 
-        MfactorExp -> MmultExp {cons(e)}
+        eMfactorExp -> MmultExp
 
         e1::MmultExp DIV e2::MfactorExp -> MmultExp
 
@@ -644,15 +644,15 @@ exports
 
         al::AnnotationList? s::StmtWithoutAnnotations SEMICOLON -> Stmt
 
-        INTLITERAL -> Deltaparam {cons(i)}
+        iINTLITERAL -> Deltaparam
 
-        TYPE-IDENTIFIER -> Deltaparam {cons(c)}
+        cTYPE-IDENTIFIER -> Deltaparam
 
         fid::TYPE-IDENTIFIER DOT aid::IDENTIFIER -> Deltaparam
 
         l::ParamDeclList COMMA i::ParamDecl -> ParamDeclList
 
-        ParamDecl -> ParamDeclList {cons(i)}
+        iParamDecl -> ParamDeclList
 
         f1::SqlTupleScalarFunctionConcat CONCAT f2::SqlTupleScalarFunctionSum -> SqlTupleScalarFunctionConcat
 
@@ -660,9 +660,9 @@ exports
 
         OrExp -> DataExp
 
-        DataExp -> Exp {cons(e)}
+        eDataExp -> Exp
 
-        EffExp -> Exp {cons(e)}
+        eEffExp -> Exp
 
         QualifiedTypeName -> TypeName
 
@@ -690,7 +690,7 @@ exports
 
         il::IntList COMMA i::INTLITERAL -> IntList
 
-        INTLITERAL -> IntList {cons(i)}
+        iINTLITERAL -> IntList
 
         NOT c::SqlCondition -> SqlCondition
 
@@ -704,13 +704,13 @@ exports
 
         GROUP BY a::SqlAttrRefList -> SqlGroupingAttributes
 
-        TYPE-IDENTIFIER -> Datatypeparam {cons(id)}
+        idTYPE-IDENTIFIER -> Datatypeparam
 
         LPAREN l::PatternList? RPAREN -> PatternParams
 
         l::ModuleDeclList t::ModuleDecl -> ModuleDeclList
 
-        ModuleDecl -> ModuleDeclList {cons(t)}
+        tModuleDecl -> ModuleDeclList
 
         lhs::Pattern RARROW rhs::DataExp SEMICOLON -> CaseBranch
 
@@ -724,7 +724,7 @@ exports
 
         e::DataExp DESC -> SqlOrderingAttribute
 
-        DataExp -> SqlOrderingAttribute {cons(e)}
+        eDataExp -> SqlOrderingAttribute
 
         e::DataExp ASC -> SqlOrderingAttribute
 
@@ -750,15 +750,15 @@ exports
 
         l::DataExpList COMMA i::DataExp -> DataExpList
 
-        DataExp -> DataExpList {cons(i)}
+        iDataExp -> DataExpList
 
-        STRINGLITERAL -> StringLiteral {cons(s)}
+        sSTRINGLITERAL -> StringLiteral
 
         SqlTupleScalarFunctionConcat -> SqlTupleScalarFunction
 
         l::MethodList i::Method -> MethodList
 
-        Method -> MethodList {cons(i)}
+        iMethod -> MethodList
 
         l::Featuremodeldecl EXTENSION ext::Fextension -> Featuremodeldecl
 
@@ -770,7 +770,7 @@ exports
 
         l::DatatypeparamList COMMA p::Datatypeparam -> DatatypeparamList
 
-        Datatypeparam -> DatatypeparamList {cons(p)}
+        pDatatypeparam -> DatatypeparamList
 
         REBIND field::IDENTIFIER ASSIGN e::Exp -> StmtWithoutAnnotations
 
@@ -780,9 +780,9 @@ exports
 
         REBIND obj::Exp COLON field::IDENTIFIER ASSIGN e::Exp -> StmtWithoutAnnotations
 
-        EffExp -> StmtWithoutAnnotations {cons(e)}
+        eEffExp -> StmtWithoutAnnotations
 
-        VarDecl -> StmtWithoutAnnotations {cons(vd)}
+        vdVarDecl -> StmtWithoutAnnotations
 
         DURATION LPAREN min::DataExp COMMA max::DataExp RPAREN -> StmtWithoutAnnotations
 
@@ -798,7 +798,7 @@ exports
 
         MOVECOGTO DataExp -> StmtWithoutAnnotations
 
-        INTLITERAL -> BoundaryInt {cons(i)}
+        iINTLITERAL -> BoundaryInt
 
         MULT -> BoundaryInt
 
@@ -814,13 +814,13 @@ exports
 
         WHEN c::SqlOrCondition THEN f::SqlTupleScalarFunction -> SqlTupleCaseBranch
 
-        TypeName -> Ifname {cons(n)}
+        nTypeName -> Ifname
 
         OPT f::FeatureDecl -> Fnode
 
-        FeatureDecl -> Fnode {cons(f)}
+        fFeatureDecl -> Fnode
 
-        StringLiteral -> AtomicSqlTupleScalarFunction {cons(a)}
+        aStringLiteral -> AtomicSqlTupleScalarFunction
 
         SqlTupleConstant -> AtomicSqlTupleScalarFunction
 
@@ -856,7 +856,7 @@ exports
 
         e1::MrelExp LTEQ e2::MaddExp -> MrelExp
 
-        DeltaParamDecl -> DeltaParamDeclList {cons(i)}
+        iDeltaParamDecl -> DeltaParamDeclList
 
         l::DeltaParamDeclList COMMA i::DeltaParamDecl -> DeltaParamDeclList
 
@@ -904,14 +904,14 @@ exports
 
         USCORE -> Pattern
 
-        Literal -> Pattern {cons(l)}
+        lLiteral -> Pattern
 
-        IDENTIFIER -> Pattern {cons(v)}
+        vIDENTIFIER -> Pattern
 
         ConstructorPattern -> Pattern
 
-        AttrAssignment -> AttrAssignmentList {cons(a)}
+        aAttrAssignment -> AttrAssignmentList
 
         l::AttrAssignmentList COMMA a::AttrAssignment -> AttrAssignmentList
 
-        IDENTIFIER -> SimpleName {cons(id)}
+        idIDENTIFIER -> SimpleName

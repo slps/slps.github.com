@@ -4,23 +4,23 @@ exports
   sorts
         Formula False True 
   context-free syntax
-        "!" arg::Formula -> Formula {cons(not)}
+        not("!" arg::Formula) -> Formula
 
-        "true" -> Formula {cons(true)}
+        true"true" -> Formula
 
-        "false" -> Formula {cons(false)}
+        false"false" -> Formula
 
-        lhs::Formula "&" rhs::Formula -> Formula {cons(and)}
+        and(lhs::Formula "&" rhs::Formula) -> Formula
 
-        lhs::Formula "|" rhs::Formula -> Formula {cons(or)}
+        or(lhs::Formula "|" rhs::Formula) -> Formula
 
-        lhs::Formula "<=" rhs::Formula -> Formula {cons(fi)}
+        fi(lhs::Formula "<=" rhs::Formula) -> Formula
 
-        lhs::Formula "=>" rhs::Formula -> Formula {cons(if)}
+        if(lhs::Formula "=>" rhs::Formula) -> Formula
 
-        lhs::Formula "<=>" rhs::Formula -> Formula {cons(iff)}
+        iff(lhs::Formula "<=>" rhs::Formula) -> Formula
 
-         -> Formula {cons(id)}
+        id -> Formula
 
         "false" -> False
 

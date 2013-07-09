@@ -440,7 +440,7 @@ sort-key:
 any-text:
         unicode-character*
 unicode-character:
-        <(any-supported-unicode-character Whitespaces)>
+        (any-supported-unicode-character & !Whitespaces)
 any-supported-unicode-character:
         ANY
 Whitespaces:
@@ -501,7 +501,7 @@ image-inline:
 page-name:
         title-character (space? title-character)*
 title-character:
-        <(unicode-character bad-title-characters)>
+        (unicode-character & !bad-title-characters)
 bad-title-characters:
         "["
         "]"
@@ -690,7 +690,7 @@ plain-text:
         unicode-wiki "'"
         " '" unicode-wiki
 unicode-wiki:
-        <(unicode-character wiki-markup-characters)>
+        (unicode-character & !wiki-markup-characters)
 wiki-markup-characters:
         "|"
         "["

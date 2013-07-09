@@ -12,18 +12,18 @@ exports
 
         StringLiteral -> Value
 
-        "true" -> Value {cons(True)}
+        True"true" -> Value
 
         Object -> Value
 
         Array -> Value
 
-        "null" -> Value {cons(Null)}
+        Null"null" -> Value
 
-        "false" -> Value {cons(False)}
+        False"false" -> Value
 
-        "{" members::Member"," "}" -> Object {cons(Object)}
+        Object("{" members::Member"," "}") -> Object
 
-        memberName::StringLiteral ":" memberValue::Value -> Member {cons(Member)}
+        Member(memberName::StringLiteral ":" memberValue::Value) -> Member
 
-        "[" values::Value"," "]" -> Array {cons(Array)}
+        Array("[" values::Value"," "]") -> Array

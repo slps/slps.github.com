@@ -380,7 +380,12 @@ category-link = internal-link-start category-namespace ':' article-title (pipe s
 category-namespace = 'Category' ;
 sort-key = any-text ;
 any-text = unicode-character* ;
-unicode-character = (any-supported-unicode-character Whitespaces) ;
+unicode-character = 
+				any-supported-unicode-character
+				
+						Whitespaces
+					
+			 ;
 any-supported-unicode-character = ANY ;
 Whitespaces = newline ;
 Whitespaces = TAB ;
@@ -416,7 +421,12 @@ digits = decimal-digit+ ;
 pmid-number = 'PMID' spaces digits ;
 image-inline = '[[' 'Image:' page-name '.' image-extension (pipe image-option)* ']]' ;
 page-name = title-character (space? title-character)* ;
-title-character = (unicode-character bad-title-characters) ;
+title-character = 
+				unicode-character
+				
+						bad-title-characters
+					
+			 ;
 bad-title-characters = '[' ;
 bad-title-characters = ']' ;
 bad-title-characters = '{' ;
@@ -542,7 +552,12 @@ plain-text = unicode-wiki space* ('*' | '#' | ':' | ';') ;
 plain-text = unicode-wiki space? '=' space? unicode-wiki ;
 plain-text = unicode-wiki ''' ;
 plain-text = ' '' unicode-wiki ;
-unicode-wiki = (unicode-character wiki-markup-characters) ;
+unicode-wiki = 
+				unicode-character
+				
+						wiki-markup-characters
+					
+			 ;
 wiki-markup-characters = '|' ;
 wiki-markup-characters = '[' ;
 wiki-markup-characters = ']' ;

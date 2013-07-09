@@ -1,0 +1,37 @@
+module Main
+
+exports
+  sorts
+        AFun ATerm Annotation IntCon OptExp RealCon 
+  context-free syntax
+        StrCon -> AFun
+
+        IdCon -> AFun
+
+        IntCon -> ATerm
+
+        RealCon -> ATerm
+
+        fun::AFun -> ATerm
+
+        fun::AFun "(" args::(ATerm ("," ATerm)*) ")" -> ATerm
+
+        "<" type::ATerm ">" -> ATerm
+
+        "[" elems::((ATerm ("," ATerm)*)?) "]" -> ATerm
+
+        trm::ATerm Annotation -> ATerm
+
+        "{" annos::(ATerm ("," ATerm)*) "}" -> Annotation
+
+        NatCon -> IntCon
+
+        pos::"+" NatCon -> IntCon
+
+        neg::"-" NatCon -> IntCon
+
+        "e" IntCon -> OptExp
+
+         -> OptExp
+
+        base::IntCon "." decimal::NatCon exp::OptExp -> RealCon

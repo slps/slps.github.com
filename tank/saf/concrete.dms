@@ -1,8 +1,8 @@
-Action = Id ;
-Action = 'choose' '(' actions::(Id*) ')' ;
-Cond = lhs::Cond 'and' rhs::Cond ;
-Cond = Id ;
-Cond = lhs::Cond 'or' rhs::Cond ;
-Fighter = name::Id '{' specs::(Spec*) '}' ;
-Spec = cond::Cond '[' move::Action fight::Action ']' ;
-Spec = name::Id '=' strength::Number ;
+Action = actionId ;
+Action = choose('choose' '(' actions::(Id*) ')') ;
+Cond = and(lhs::Cond 'and' rhs::Cond) ;
+Cond = constId ;
+Cond = or(lhs::Cond 'or' rhs::Cond) ;
+Fighter = fighter(name::Id '{' specs::(Spec*) '}') ;
+Spec = behavior(cond::Cond '[' move::Action fight::Action ']') ;
+Spec = attribute(name::Id '=' strength::Number) ;

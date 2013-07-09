@@ -4,9 +4,9 @@ exports
   sorts
         LocalVarDec TypeParams Literal ClassMod ClassDecHead ClassDec SwitchGroup ClassBodyDec FloatType ClassMemberDec ConstantMod ConstantDec SwitchBlock CondMid WildcardBound EnumDecHead PackageOrTypeName InterfaceDecHead IntType VarInit EnumBodyDecs ClassType ExtendsInterfaces StaticInit FormalParam EnumConstArgs LocalVarDecStm CompilationUnit EnumConst NumType MethodDecHead Anno FieldDec FieldMod ArraySubscript FloatLiteral ConstrBody PackageName FieldAccess ConstrInv IntLiteral InterfaceMemberDec ElemValPair CatchClause ArrayInit VarDecId Modifier ElemVal ConstrDec ConstrMod InterfaceType PackageDec ArrayAccess ImportDec ArrayBaseType TypeName SwitchLabel ConstrHead Stm NullLiteral ExceptionType ResultType Expr ArrayType ClassBody TypeDecSpec PrimType EnumDec ActualTypeArg MethodName InterfaceDec InterfaceMod ClassLiteral StringLiteral AbstractMethodMod AbstractMethodDec Id TypeBound AnnoElemDec BoolLiteral MethodBody ExprName DefaultVal MethodDec AmbName MethodMod ArrayCreationExpr RefType TypeDec TypeArgs LHS AnnoDecHead TypeParam MethodSpec Type Super CharLiteral InstanceInit EnumBody Throws Block TypeVar TypeVarId Dim BlockStm DimExpr Interfaces VarMod VarDec ClassOrInterfaceType 
   context-free syntax
-        Type VarDec"," -> LocalVarDec {cons(localVarDec)}
+        localVarDec(Type VarDec",") -> LocalVarDec
 
-        "<" TypeParam"," ">" -> TypeParams {cons(typeParams)}
+        typeParams("<" TypeParam"," ">") -> TypeParams
 
         CharLiteral -> Literal
 
@@ -36,13 +36,13 @@ exports
 
         "protected" -> ClassMod
 
-        "class" Id TypeParams? Super? Interfaces? -> ClassDecHead {cons(classDecHead)}
+        classDecHead("class" Id TypeParams? Super? Interfaces?) -> ClassDecHead
 
         EnumDec -> ClassDec
 
-        ClassDecHead ClassBody -> ClassDec {cons(classDec)}
+        classDec(ClassDecHead ClassBody) -> ClassDec
 
-        SwitchLabel+ BlockStm+ -> SwitchGroup {cons(switchGroup)}
+        switchGroup(SwitchLabel+ BlockStm+) -> SwitchGroup
 
         ClassMemberDec -> ClassBodyDec
 
@@ -52,9 +52,9 @@ exports
 
         InstanceInit -> ClassBodyDec
 
-        "double" -> FloatType {cons(double)}
+        double"double" -> FloatType
 
-        "float" -> FloatType {cons(float)}
+        float"float" -> FloatType
 
         ClassDec -> ClassMemberDec
 
@@ -62,7 +62,7 @@ exports
 
         FieldDec -> ClassMemberDec
 
-        ";" -> ClassMemberDec {cons(semicolon)}
+        semicolon";" -> ClassMemberDec
 
         InterfaceDec -> ClassMemberDec
 
@@ -72,73 +72,73 @@ exports
 
         "final" -> ConstantMod
 
-        Type VarDec"," ";" -> ConstantDec {cons(constantDec)}
+        constantDec(Type VarDec"," ";") -> ConstantDec
 
-        "{" SwitchGroup* SwitchLabel* "}" -> SwitchBlock {cons(switchBlock)}
+        switchBlock("{" SwitchGroup* SwitchLabel* "}") -> SwitchBlock
 
         "?" Expr ":" -> CondMid
 
-        "extends" RefType -> WildcardBound {cons(wildcardUpperBound)}
+        wildcardUpperBound("extends" RefType) -> WildcardBound
 
-        "super" RefType -> WildcardBound {cons(wildcardLowerBound)}
+        wildcardLowerBound("super" RefType) -> WildcardBound
 
-        "enum" Id Interfaces? -> EnumDecHead {cons(enumDecHead)}
+        enumDecHead("enum" Id Interfaces?) -> EnumDecHead
 
-        Id -> PackageOrTypeName {cons(packageOrTypeName)}
+        packageOrTypeNameId -> PackageOrTypeName
 
-        PackageOrTypeName "." Id -> PackageOrTypeName {cons(packageOrTypeName)}
+        packageOrTypeName(PackageOrTypeName "." Id) -> PackageOrTypeName
 
-        "interface" Id TypeParams? ExtendsInterfaces? -> InterfaceDecHead {cons(interfaceDecHead)}
+        interfaceDecHead("interface" Id TypeParams? ExtendsInterfaces?) -> InterfaceDecHead
 
-        "int" -> IntType {cons(int)}
+        int"int" -> IntType
 
-        "byte" -> IntType {cons(byte)}
+        byte"byte" -> IntType
 
-        "long" -> IntType {cons(long)}
+        long"long" -> IntType
 
-        "short" -> IntType {cons(short)}
+        short"short" -> IntType
 
-        "char" -> IntType {cons(char)}
+        char"char" -> IntType
 
         Expr -> VarInit
 
         ArrayInit -> VarInit
 
-        ";" ClassBodyDec* -> EnumBodyDecs {cons(enumBodyDecs)}
+        enumBodyDecs(";" ClassBodyDec*) -> EnumBodyDecs
 
-        TypeDecSpec TypeArgs? -> ClassType {cons(classType)}
+        classType(TypeDecSpec TypeArgs?) -> ClassType
 
-        "extends" InterfaceType"," -> ExtendsInterfaces {cons(extendsInterfaces)}
+        extendsInterfaces("extends" InterfaceType",") -> ExtendsInterfaces
 
-        "static" Block -> StaticInit {cons(staticInit)}
+        staticInit("static" Block) -> StaticInit
 
-        Type "..." VarDecId -> FormalParam {cons(varArityParam)}
+        varArityParam(Type "..." VarDecId) -> FormalParam
 
-        Type VarDecId -> FormalParam {cons(param)}
+        param(Type VarDecId) -> FormalParam
 
         "(" Expr"," ")" -> EnumConstArgs
 
-        LocalVarDec ";" -> LocalVarDecStm {cons(localVarDecStm)}
+        localVarDecStm(LocalVarDec ";") -> LocalVarDecStm
 
-        PackageDec? ImportDec* TypeDec* -> CompilationUnit {cons(compilationUnit)}
+        compilationUnit(PackageDec? ImportDec* TypeDec*) -> CompilationUnit
 
-        Id EnumConstArgs? ClassBody? -> EnumConst {cons(enumConst)}
+        enumConst(Id EnumConstArgs? ClassBody?) -> EnumConst
 
         FloatType -> NumType
 
         IntType -> NumType
 
-        TypeParams? ResultType Id "(" FormalParam"," ")" Dim+ Throws? -> MethodDecHead {cons(deprMethodDecHead)}
+        deprMethodDecHead(TypeParams? ResultType Id "(" FormalParam"," ")" Dim+ Throws?) -> MethodDecHead
 
-        TypeParams? ResultType Id "(" FormalParam"," ")" Throws? -> MethodDecHead {cons(methodDecHead)}
+        methodDecHead(TypeParams? ResultType Id "(" FormalParam"," ")" Throws?) -> MethodDecHead
 
-        "@" TypeName "(" ")" -> Anno {cons(singleElemAnno)}
+        singleElemAnno("@" TypeName "(" ")") -> Anno
 
-        "@" TypeName "(" ElemValPair"," ")" -> Anno {cons(anno)}
+        anno("@" TypeName "(" ElemValPair"," ")") -> Anno
 
-        "@" TypeName -> Anno {cons(markerAnno)}
+        markerAnno("@" TypeName) -> Anno
 
-        Type VarDec"," ";" -> FieldDec {cons(fieldDec)}
+        fieldDec(Type VarDec"," ";") -> FieldDec
 
         "public" -> FieldMod
 
@@ -156,31 +156,31 @@ exports
 
         "[" Expr "]" -> ArraySubscript
 
-         -> FloatLiteral {cons(float)}
+        float -> FloatLiteral
 
-        "{" ConstrInv? BlockStm* "}" -> ConstrBody {cons(constrBody)}
+        constrBody("{" ConstrInv? BlockStm* "}") -> ConstrBody
 
-        Id"." -> PackageName {cons(packageName)}
+        packageNameId"." -> PackageName
 
-        TypeName "." "super" "." Id -> FieldAccess {cons(qSuperField)}
+        qSuperField(TypeName "." "super" "." Id) -> FieldAccess
 
-        "." Id -> FieldAccess {cons(field)}
+        field("." Id) -> FieldAccess
 
-        "super" "." Id -> FieldAccess {cons(superField)}
+        superField("super" "." Id) -> FieldAccess
 
-        Expr "." TypeArgs? "super" "(" Expr"," ")" ";" -> ConstrInv {cons(qSuperConstrInv)}
+        qSuperConstrInv(Expr "." TypeArgs? "super" "(" Expr"," ")" ";") -> ConstrInv
 
-        TypeArgs? "super" "(" Expr"," ")" ";" -> ConstrInv {cons(superConstrInv)}
+        superConstrInv(TypeArgs? "super" "(" Expr"," ")" ";") -> ConstrInv
 
-        TypeArgs? "this" "(" Expr"," ")" ";" -> ConstrInv {cons(altConstrInv)}
+        altConstrInv(TypeArgs? "this" "(" Expr"," ")" ";") -> ConstrInv
 
-         -> IntLiteral {cons(octa)}
+        octa -> IntLiteral
 
-         -> IntLiteral {cons(hexa)}
+        hexa -> IntLiteral
 
-         -> IntLiteral {cons(deci)}
+        deci -> IntLiteral
 
-        ";" -> InterfaceMemberDec {cons(semicolon)}
+        semicolon";" -> InterfaceMemberDec
 
         InterfaceDec -> InterfaceMemberDec
 
@@ -190,17 +190,17 @@ exports
 
         ConstantDec -> InterfaceMemberDec
 
-        Id "=" -> ElemValPair {cons(elemValPair)}
+        elemValPair(Id "=") -> ElemValPair
 
-        "catch" "(" FormalParam ")" Block -> CatchClause {cons(catch)}
+        catch("catch" "(" FormalParam ")" Block) -> CatchClause
 
-        "{" VarInit"," "," "}" -> ArrayInit {cons(arrayInit)}
+        arrayInit("{" VarInit"," "," "}") -> ArrayInit
 
-        "{" VarInit"," "}" -> ArrayInit {cons(arrayInit)}
+        arrayInit("{" VarInit"," "}") -> ArrayInit
 
         Id -> VarDecId
 
-        Id Dim+ -> VarDecId {cons(arrayVarDecId)}
+        arrayVarDecId(Id Dim+) -> VarDecId
 
         "protected" -> Modifier
 
@@ -224,15 +224,15 @@ exports
 
         "public" -> Modifier
 
-        "{" ElemVal"," "}" -> ElemVal {cons(elemValArrayInit)}
+        elemValArrayInit("{" ElemVal"," "}") -> ElemVal
 
         Expr -> ElemVal
 
         Anno -> ElemVal
 
-        "{" ElemVal"," "," "}" -> ElemVal {cons(elemValArrayInit)}
+        elemValArrayInit("{" ElemVal"," "," "}") -> ElemVal
 
-        ConstrHead ConstrBody -> ConstrDec {cons(constrDec)}
+        constrDec(ConstrHead ConstrBody) -> ConstrDec
 
         "protected" -> ConstrMod
 
@@ -240,183 +240,183 @@ exports
 
         "public" -> ConstrMod
 
-        TypeDecSpec TypeArgs? -> InterfaceType {cons(interfaceType)}
+        interfaceType(TypeDecSpec TypeArgs?) -> InterfaceType
 
-        Anno* "package" PackageName ";" -> PackageDec {cons(packageDec)}
+        packageDec(Anno* "package" PackageName ";") -> PackageDec
 
-        ArraySubscript -> ArrayAccess {cons(arrayAccess)}
+        arrayAccessArraySubscript -> ArrayAccess
 
-        "import" PackageName "." "*" ";" -> ImportDec {cons(typeImportOnDemandDec)}
+        typeImportOnDemandDec("import" PackageName "." "*" ";") -> ImportDec
 
-        "import" TypeName ";" -> ImportDec {cons(typeImportDec)}
+        typeImportDec("import" TypeName ";") -> ImportDec
 
-        "import" "static" TypeName "." Id ";" -> ImportDec {cons(staticImportDec)}
+        staticImportDec("import" "static" TypeName "." Id ";") -> ImportDec
 
-        "import" "static" TypeName "." "*" ";" -> ImportDec {cons(staticImportOnDemandDec)}
+        staticImportOnDemandDec("import" "static" TypeName "." "*" ";") -> ImportDec
 
         TypeName -> ArrayBaseType
 
         PrimType -> ArrayBaseType
 
-        TypeName "<" "?" ">" -> ArrayBaseType {cons(unboundWld)}
+        unboundWld(TypeName "<" "?" ">") -> ArrayBaseType
 
-        PackageOrTypeName "." Id -> TypeName {cons(typeName)}
+        typeName(PackageOrTypeName "." Id) -> TypeName
 
-        Id -> TypeName {cons(typeName)}
+        typeNameId -> TypeName
 
-        "case" Expr ":" -> SwitchLabel {cons(case)}
+        case("case" Expr ":") -> SwitchLabel
 
-        "default" ":" -> SwitchLabel {cons(default)}
+        default("default" ":") -> SwitchLabel
 
-        TypeParams? Id "(" FormalParam"," ")" Throws? -> ConstrHead {cons(constrDecHead)}
+        constrDecHead(TypeParams? Id "(" FormalParam"," ")" Throws?) -> ConstrHead
 
-        "synchronized" "(" Expr ")" Block -> Stm {cons(synchronized)}
+        synchronized("synchronized" "(" Expr ")" Block) -> Stm
 
-        Expr ";" -> Stm {cons(exprStm)}
+        exprStm(Expr ";") -> Stm
 
-        "for" "(" Expr"," ";" Expr? ";" Expr"," ")" Stm -> Stm {cons(for)}
+        for("for" "(" Expr"," ";" Expr? ";" Expr"," ")" Stm) -> Stm
 
-        "for" "(" LocalVarDec ";" Expr? ";" Expr"," ")" Stm -> Stm {cons(for)}
+        for("for" "(" LocalVarDec ";" Expr? ";" Expr"," ")" Stm) -> Stm
 
         Block -> Stm
 
-        "continue" Id? ";" -> Stm {cons(continue)}
+        continue("continue" Id? ";") -> Stm
 
-        "try" Block CatchClause+ -> Stm {cons(try)}
+        try("try" Block CatchClause+) -> Stm
 
-        "throw" Expr ";" -> Stm {cons(throw)}
+        throw("throw" Expr ";") -> Stm
 
-        "switch" "(" Expr ")" SwitchBlock -> Stm {cons(switch)}
+        switch("switch" "(" Expr ")" SwitchBlock) -> Stm
 
-        "if" "(" Expr ")" Stm -> Stm {cons(if)}
+        if("if" "(" Expr ")" Stm) -> Stm
 
-        "break" Id? ";" -> Stm {cons(break)}
+        break("break" Id? ";") -> Stm
 
-        ";" -> Stm {cons(empty)}
+        empty";" -> Stm
 
-        Id ":" Stm -> Stm {cons(labeled)}
+        labeled(Id ":" Stm) -> Stm
 
-        "assert" Expr ":" Expr ";" -> Stm {cons(assertStm)}
+        assertStm("assert" Expr ":" Expr ";") -> Stm
 
-        "for" "(" FormalParam ":" Expr ")" Stm -> Stm {cons(forEach)}
+        forEach("for" "(" FormalParam ":" Expr ")" Stm) -> Stm
 
-        "assert" Expr ";" -> Stm {cons(assertStm)}
+        assertStm("assert" Expr ";") -> Stm
 
-        "try" Block CatchClause* "finally" Block -> Stm {cons(try)}
+        try("try" Block CatchClause* "finally" Block) -> Stm
 
-        "return" Expr? ";" -> Stm {cons(return)}
+        return("return" Expr? ";") -> Stm
 
-        "do" Stm "while" "(" Expr ")" ";" -> Stm {cons(doWhile)}
+        doWhile("do" Stm "while" "(" Expr ")" ";") -> Stm
 
-        "while" "(" Expr ")" Stm -> Stm {cons(while)}
+        while("while" "(" Expr ")" Stm) -> Stm
 
-        "if" "(" Expr ")" Stm "else" Stm -> Stm {cons(if)}
+        if("if" "(" Expr ")" Stm "else" Stm) -> Stm
 
-        "null" -> NullLiteral {cons(null)}
+        null"null" -> NullLiteral
 
         ClassType -> ExceptionType
 
         Type -> ResultType
 
-        "void" -> ResultType {cons(void)}
+        void"void" -> ResultType
 
-        Expr "--" -> Expr {cons(postDecr)}
+        postDecr(Expr "--") -> Expr
 
-        Expr "++" -> Expr {cons(postIncr)}
+        postIncr(Expr "++") -> Expr
 
-        "(" PrimType ")" Expr -> Expr {cons(castPrim)}
+        castPrim("(" PrimType ")" Expr) -> Expr
 
-        "(" RefType ")" Expr -> Expr {cons(castRef)}
+        castRef("(" RefType ")" Expr) -> Expr
 
-        Expr -> Expr {cons(minus)}
+        minusExpr -> Expr
 
-        "++" Expr -> Expr {cons(preIncr)}
+        preIncr("++" Expr) -> Expr
 
-        Expr -> Expr {cons(plus)}
+        plusExpr -> Expr
 
-        "--" Expr -> Expr {cons(preDecr)}
+        preDecr("--" Expr) -> Expr
 
-        "this" -> Expr {cons(this)}
+        this"this" -> Expr
 
-        Expr "*" Expr -> Expr {cons(mul)}
+        mul(Expr "*" Expr) -> Expr
 
-        Expr Expr -> Expr {cons(div)}
+        div(Expr Expr) -> Expr
 
-        Expr "%" Expr -> Expr {cons(remain)}
+        remain(Expr "%" Expr) -> Expr
 
-        TypeName "." "this" -> Expr {cons(qThis)}
+        qThis(TypeName "." "this") -> Expr
 
-        "~" Expr -> Expr {cons(complement)}
+        complement("~" Expr) -> Expr
 
-        "!" Expr -> Expr {cons(not)}
+        not("!" Expr) -> Expr
 
-        Expr Expr -> Expr {cons(plus)}
+        plus(Expr Expr) -> Expr
 
-        Expr Expr -> Expr {cons(minus)}
+        minus(Expr Expr) -> Expr
 
-        Expr ">>>" Expr -> Expr {cons(uRightShift)}
+        uRightShift(Expr ">>>" Expr) -> Expr
 
-        Expr ">>" Expr -> Expr {cons(rightShift)}
+        rightShift(Expr ">>" Expr) -> Expr
 
-        Expr "<<" Expr -> Expr {cons(leftShift)}
+        leftShift(Expr "<<" Expr) -> Expr
 
-        Expr "<=" Expr -> Expr {cons(ltEq)}
+        ltEq(Expr "<=" Expr) -> Expr
 
-        Expr "<" Expr -> Expr {cons(lt)}
+        lt(Expr "<" Expr) -> Expr
 
-        Expr ">=" Expr -> Expr {cons(gtEq)}
+        gtEq(Expr ">=" Expr) -> Expr
 
-        Expr "instanceof" RefType -> Expr {cons(instanceOf)}
+        instanceOf(Expr "instanceof" RefType) -> Expr
 
-        Expr ">" Expr -> Expr {cons(gt)}
+        gt(Expr ">" Expr) -> Expr
 
-        Expr "==" Expr -> Expr {cons(eq)}
+        eq(Expr "==" Expr) -> Expr
 
-        Expr "!=" Expr -> Expr {cons(notEq)}
+        notEq(Expr "!=" Expr) -> Expr
 
-        Expr "&" Expr -> Expr {cons(and)}
+        and(Expr "&" Expr) -> Expr
 
-        Expr "^" Expr -> Expr {cons(excOr)}
+        excOr(Expr "^" Expr) -> Expr
 
-        Expr "|" Expr -> Expr {cons(or)}
+        or(Expr "|" Expr) -> Expr
 
-        Expr "&&" Expr -> Expr {cons(lazyAnd)}
+        lazyAnd(Expr "&&" Expr) -> Expr
 
-        Expr "||" Expr -> Expr {cons(lazyOr)}
+        lazyOr(Expr "||" Expr) -> Expr
 
-        Expr CondMid Expr -> Expr {cons(cond)}
+        cond(Expr CondMid Expr) -> Expr
 
-        LHS "-=" Expr -> Expr {cons(assignMinus)}
+        assignMinus(LHS "-=" Expr) -> Expr
 
-        LHS "^=" Expr -> Expr {cons(assignExcOr)}
+        assignExcOr(LHS "^=" Expr) -> Expr
 
-        LHS "+=" Expr -> Expr {cons(assignPlus)}
+        assignPlus(LHS "+=" Expr) -> Expr
 
-        LHS ">>>=" Expr -> Expr {cons(assignURightShift)}
+        assignURightShift(LHS ">>>=" Expr) -> Expr
 
-        LHS "&=" Expr -> Expr {cons(assignAnd)}
+        assignAnd(LHS "&=" Expr) -> Expr
 
-        LHS "/=" Expr -> Expr {cons(assignDiv)}
+        assignDiv(LHS "/=" Expr) -> Expr
 
-        LHS "*=" Expr -> Expr {cons(assignMul)}
+        assignMul(LHS "*=" Expr) -> Expr
 
-        LHS "%=" Expr -> Expr {cons(assignRemain)}
+        assignRemain(LHS "%=" Expr) -> Expr
 
-        LHS "<<=" Expr -> Expr {cons(assignLeftShift)}
+        assignLeftShift(LHS "<<=" Expr) -> Expr
 
-        LHS ">>=" Expr -> Expr {cons(assignRightShift)}
+        assignRightShift(LHS ">>=" Expr) -> Expr
 
-        LHS "|=" Expr -> Expr {cons(assignOr)}
+        assignOr(LHS "|=" Expr) -> Expr
 
-        LHS "=" Expr -> Expr {cons(assign)}
+        assign(LHS "=" Expr) -> Expr
 
-        Expr "." "new" TypeArgs? Id TypeArgs? "(" Expr"," ")" ClassBody? -> Expr {cons(qNewInstance)}
+        qNewInstance(Expr "." "new" TypeArgs? Id TypeArgs? "(" Expr"," ")" ClassBody?) -> Expr
 
-        Literal -> Expr {cons(lit)}
+        litLiteral -> Expr
 
-        "new" TypeArgs? ClassOrInterfaceType "(" Expr"," ")" ClassBody? -> Expr {cons(newInstance)}
+        newInstance("new" TypeArgs? ClassOrInterfaceType "(" Expr"," ")" ClassBody?) -> Expr
 
-        ExprName -> Expr {cons(exprName)}
+        exprNameExprName -> Expr
 
         ArrayCreationExpr -> Expr
 
@@ -424,29 +424,29 @@ exports
 
          -> Expr
 
-        MethodSpec "(" Expr"," ")" -> Expr {cons(invoke)}
+        invoke(MethodSpec "(" Expr"," ")") -> Expr
 
-        Type "[" "]" -> ArrayType {cons(arrayType)}
+        arrayType(Type "[" "]") -> ArrayType
 
-        "{" ClassBodyDec* "}" -> ClassBody {cons(classBody)}
+        classBody("{" ClassBodyDec* "}") -> ClassBody
 
         TypeName -> TypeDecSpec
 
-        TypeDecSpec TypeArgs "." Id -> TypeDecSpec {cons(member)}
+        member(TypeDecSpec TypeArgs "." Id) -> TypeDecSpec
 
         NumType -> PrimType
 
-        "boolean" -> PrimType {cons(boolean)}
+        boolean"boolean" -> PrimType
 
-        EnumDecHead EnumBody -> EnumDec {cons(enumDec)}
+        enumDec(EnumDecHead EnumBody) -> EnumDec
 
         Type -> ActualTypeArg
 
-        "?" WildcardBound? -> ActualTypeArg {cons(wildcard)}
+        wildcard("?" WildcardBound?) -> ActualTypeArg
 
-        AmbName "." Id -> MethodName {cons(methodName)}
+        methodName(AmbName "." Id) -> MethodName
 
-        Id -> MethodName {cons(methodName)}
+        methodNameId -> MethodName
 
         InterfaceDecHead "{" InterfaceMemberDec* "}" -> InterfaceDec
 
@@ -464,9 +464,9 @@ exports
 
         "private" -> InterfaceMod
 
-        "void" "." "class" -> ClassLiteral {cons(voidClass)}
+        voidClass("void" "." "class") -> ClassLiteral
 
-        Type "." "class" -> ClassLiteral {cons(class)}
+        class(Type "." "class") -> ClassLiteral
 
          -> StringLiteral
 
@@ -474,17 +474,17 @@ exports
 
         "public" -> AbstractMethodMod
 
-        TypeParams? ResultType Id "(" FormalParam"," ")" Throws? ";" -> AbstractMethodDec {cons(abstractMethodDec)}
+        abstractMethodDec(TypeParams? ResultType Id "(" FormalParam"," ")" Throws? ";") -> AbstractMethodDec
 
-        TypeParams? ResultType Id "(" FormalParam"," ")" Dim+ Throws? ";" -> AbstractMethodDec {cons(deprAbstractMethodDec)}
+        deprAbstractMethodDec(TypeParams? ResultType Id "(" FormalParam"," ")" Dim+ Throws? ";") -> AbstractMethodDec
 
-         -> Id {cons(id)}
+        id -> Id
 
-        "extends" ClassOrInterfaceType"&" -> TypeBound {cons(typeBound)}
+        typeBound("extends" ClassOrInterfaceType"&") -> TypeBound
 
         EnumDec -> AnnoElemDec
 
-        ";" -> AnnoElemDec {cons(semicolon)}
+        semicolon";" -> AnnoElemDec
 
         ClassDec -> AnnoElemDec
 
@@ -492,27 +492,27 @@ exports
 
         InterfaceDec -> AnnoElemDec
 
-        AbstractMethodMod* Type Id "(" ")" DefaultVal? ";" -> AnnoElemDec {cons(annoMethodDec)}
+        annoMethodDec(AbstractMethodMod* Type Id "(" ")" DefaultVal? ";") -> AnnoElemDec
 
-        "false" -> BoolLiteral {cons(false)}
+        false"false" -> BoolLiteral
 
-        "true" -> BoolLiteral {cons(true)}
+        true"true" -> BoolLiteral
 
-        ";" -> MethodBody {cons(noMethodBody)}
+        noMethodBody";" -> MethodBody
 
         Block -> MethodBody
 
-        Id -> ExprName {cons(exprName)}
+        exprNameId -> ExprName
 
-        AmbName "." Id -> ExprName {cons(exprName)}
+        exprName(AmbName "." Id) -> ExprName
 
-        "default" -> DefaultVal {cons(defaultVal)}
+        defaultVal"default" -> DefaultVal
 
-        MethodDecHead MethodBody -> MethodDec {cons(methodDec)}
+        methodDec(MethodDecHead MethodBody) -> MethodDec
 
-        AmbName "." Id -> AmbName {cons(ambName)}
+        ambName(AmbName "." Id) -> AmbName
 
-        Id -> AmbName {cons(ambName)}
+        ambNameId -> AmbName
 
         "final" -> MethodMod
 
@@ -532,9 +532,9 @@ exports
 
         "native" -> MethodMod
 
-        "new" ArrayBaseType DimExpr+ -> ArrayCreationExpr {cons(newArray)}
+        newArray("new" ArrayBaseType DimExpr+) -> ArrayCreationExpr
 
-        "new" ArrayBaseType ArrayInit -> ArrayCreationExpr {cons(newArray)}
+        newArray("new" ArrayBaseType ArrayInit) -> ArrayCreationExpr
 
         ClassOrInterfaceType -> RefType
 
@@ -544,66 +544,66 @@ exports
 
         ClassDec -> TypeDec
 
-        ";" -> TypeDec {cons(semicolon)}
+        semicolon";" -> TypeDec
 
-        "<" ActualTypeArg"," ">" -> TypeArgs {cons(typeArgs)}
+        typeArgs("<" ActualTypeArg"," ">") -> TypeArgs
 
         ExprName -> LHS
 
          -> LHS
 
-        "@" "interface" Id -> AnnoDecHead {cons(annoDecHead)}
+        annoDecHead("@" "interface" Id) -> AnnoDecHead
 
-        TypeVarId TypeBound? -> TypeParam {cons(typeParam)}
+        typeParam(TypeVarId TypeBound?) -> TypeParam
 
-        MethodName -> MethodSpec {cons(method)}
+        methodMethodName -> MethodSpec
 
-        "super" "." TypeArgs? Id -> MethodSpec {cons(superMethod)}
+        superMethod("super" "." TypeArgs? Id) -> MethodSpec
 
-        AmbName "." TypeArgs Id -> MethodSpec {cons(genericMethod)}
+        genericMethod(AmbName "." TypeArgs Id) -> MethodSpec
 
-        TypeName "." "super" "." TypeArgs? Id -> MethodSpec {cons(qSuperMethod)}
+        qSuperMethod(TypeName "." "super" "." TypeArgs? Id) -> MethodSpec
 
-        "." TypeArgs? Id -> MethodSpec {cons(method)}
+        method("." TypeArgs? Id) -> MethodSpec
 
         RefType -> Type
 
         PrimType -> Type
 
-        "extends" ClassType -> Super {cons(superDec)}
+        superDec("extends" ClassType) -> Super
 
          -> CharLiteral
 
-        Block -> InstanceInit {cons(instanceInit)}
+        instanceInitBlock -> InstanceInit
 
-        "{" EnumConst"," EnumBodyDecs? "}" -> EnumBody {cons(enumBody)}
+        enumBody("{" EnumConst"," EnumBodyDecs? "}") -> EnumBody
 
-        "{" EnumConst"," "," EnumBodyDecs? "}" -> EnumBody {cons(enumBody)}
+        enumBody("{" EnumConst"," "," EnumBodyDecs? "}") -> EnumBody
 
-        "throws" ExceptionType"," -> Throws {cons(throwsDec)}
+        throwsDec("throws" ExceptionType",") -> Throws
 
-        "{" BlockStm* "}" -> Block {cons(block)}
+        block("{" BlockStm* "}") -> Block
 
-        TypeVarId -> TypeVar {cons(typeVar)}
+        typeVarTypeVarId -> TypeVar
 
         Id -> TypeVarId
 
-        "[" "]" -> Dim {cons(dim)}
+        dim("[" "]") -> Dim
 
         Stm -> BlockStm
 
-        ClassDec -> BlockStm {cons(classDecStm)}
+        classDecStmClassDec -> BlockStm
 
         LocalVarDecStm -> BlockStm
 
-        "[" Expr "]" -> DimExpr {cons(dim)}
+        dim("[" Expr "]") -> DimExpr
 
-        "implements" InterfaceType"," -> Interfaces {cons(implementsDec)}
+        implementsDec("implements" InterfaceType",") -> Interfaces
 
         "final" -> VarMod
 
-        VarDecId "=" VarInit -> VarDec {cons(varDec)}
+        varDec(VarDecId "=" VarInit) -> VarDec
 
-        VarDecId -> VarDec {cons(varDec)}
+        varDecVarDecId -> VarDec
 
-        TypeDecSpec TypeArgs? -> ClassOrInterfaceType {cons(classOrInterfaceType)}
+        classOrInterfaceType(TypeDecSpec TypeArgs?) -> ClassOrInterfaceType

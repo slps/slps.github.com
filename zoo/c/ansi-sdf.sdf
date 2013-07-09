@@ -1,0 +1,263 @@
+module Main
+
+exports
+  sorts
+        TranslationUnit ExternalDeclaration FunctionDefinition Declaration InitDeclarator Specifier StructDeclaration StructDeclarator Enumerator Pointer Parameters MoreParameters Parameter TypeName Initializer D Expression LineDirective Flag Statement 
+  context-free syntax
+        ExternalDeclaration+ -> TranslationUnit
+
+        FunctionDefinition -> ExternalDeclaration
+
+        Declaration -> ExternalDeclaration
+
+        Specifier* Declarator Declaration* "{" Declaration* Statement* "}" -> FunctionDefinition
+
+        Specifier+ (InitDeclarator ("," InitDeclarator)*) ";" -> Declaration
+
+        Specifier+ ";" -> Declaration
+
+        Declarator -> InitDeclarator
+
+        Declarator "=" Initializer -> InitDeclarator
+
+        Identifier -> Specifier
+
+        "typedef" -> Specifier
+
+        "extern" -> Specifier
+
+        "static" -> Specifier
+
+        "auto" -> Specifier
+
+        "register" -> Specifier
+
+        "void" -> Specifier
+
+        "char" -> Specifier
+
+        "short" -> Specifier
+
+        "int" -> Specifier
+
+        "long" -> Specifier
+
+        "float" -> Specifier
+
+        "double" -> Specifier
+
+        "signed" -> Specifier
+
+        "unsigned" -> Specifier
+
+        "const" -> Specifier
+
+        "volatile" -> Specifier
+
+        ("struct" | "union") Identifier "{" StructDeclaration+ "}" -> Specifier
+
+        ("struct" | "union") "{" StructDeclaration+ "}" -> Specifier
+
+        ("struct" | "union") Identifier -> Specifier
+
+        "enum" "{" (Enumerator ("," Enumerator)*) "}" -> Specifier
+
+        "enum" Identifier "{" (Enumerator ("," Enumerator)*) "}" -> Specifier
+
+        "enum" Identifier -> Specifier
+
+        Specifier+ (StructDeclarator ("," StructDeclarator)*) ";" -> StructDeclaration
+
+        Declarator -> StructDeclarator
+
+        ":" Expression -> StructDeclarator
+
+        Declarator ":" Expression -> StructDeclarator
+
+        Identifier -> Enumerator
+
+        Identifier "=" Expression -> Enumerator
+
+        ("*" Specifier*)+ -> Pointer
+
+        (Parameter ("," Parameter)*) MoreParameters? -> Parameters
+
+        "," "..." -> MoreParameters
+
+        Specifier+ Declarator -> Parameter
+
+        Specifier+ AbstractDeclarator -> Parameter
+
+        Specifier+ AbstractDeclarator -> TypeName
+
+        Expression -> Initializer
+
+        "{" (Initializer ("," Initializer)*) ","? "}" -> Initializer
+
+        Pointer D -> D
+
+        I -> D
+
+        "(" D ")" -> D
+
+        D "[" Expression? "]" -> D
+
+        D "(" Parameters? ")" -> D
+
+        D "(" Parameters? ")" -> D
+
+        D "[" Expression? "]" -> D
+
+        "__builtin_va_arg" "(" Expression "," TypeName ")" -> Expression
+
+        "#" linenum::IntegerConstant filename::StringConstant Flag* -> LineDirective
+
+        "1" -> Flag
+
+        "2" -> Flag
+
+        "3" -> Flag
+
+        "4" -> Flag
+
+        LineDirective -> ExternalDeclaration
+
+        LineDirective -> Statement
+
+        LineDirective -> StructDeclarator
+
+        "va_arg" "(" Expression "," TypeName ")" -> Expression
+
+        Identifier -> Expression
+
+        HexadecimalConstant -> Expression
+
+        IntegerConstant -> Expression
+
+        CharacterConstant -> Expression
+
+        FloatingPointConstant -> Expression
+
+        StringConstant -> Expression
+
+        "(" Expression ")" -> Expression
+
+        "sizeof" "(" TypeName ")" -> Expression
+
+        Expression "[" Expression "]" -> Expression
+
+        Expression "(" (Expression ("," Expression)*)? ")" -> Expression
+
+        Expression "." Identifier -> Expression
+
+        Expression "->" Identifier -> Expression
+
+        Expression "++" -> Expression
+
+        Expression "--" -> Expression
+
+        "++" Expression -> Expression
+
+        "--" Expression -> Expression
+
+        "&" Expression -> Expression
+
+        "*" Expression -> Expression
+
+        "+" Expression -> Expression
+
+        "-" Expression -> Expression
+
+        "~" Expression -> Expression
+
+        "!" Expression -> Expression
+
+        "sizeof" Expression -> Expression
+
+        "(" TypeName ")" Expression -> Expression
+
+        Expression "*" Expression -> Expression
+
+        Expression "/" Expression -> Expression
+
+        Expression "%" Expression -> Expression
+
+        Expression "+" Expression -> Expression
+
+        Expression "-" Expression -> Expression
+
+        Expression "<<" Expression -> Expression
+
+        Expression ">>" Expression -> Expression
+
+        Expression "<" Expression -> Expression
+
+        Expression ">" Expression -> Expression
+
+        Expression "<=" Expression -> Expression
+
+        Expression ">=" Expression -> Expression
+
+        Expression "==" Expression -> Expression
+
+        Expression "!=" Expression -> Expression
+
+        Expression "=" Expression -> Expression
+
+        Expression "*=" Expression -> Expression
+
+        Expression "/=" Expression -> Expression
+
+        Expression "%=" Expression -> Expression
+
+        Expression "+=" Expression -> Expression
+
+        Expression "-=" Expression -> Expression
+
+        Expression "<<=" Expression -> Expression
+
+        Expression ">>=" Expression -> Expression
+
+        Expression "&=" Expression -> Expression
+
+        Expression "^=" Expression -> Expression
+
+        Expression "|=" Expression -> Expression
+
+        "(" Statement ")" ";" -> Statement
+
+        ("struct" | "union") Identifier? "{" "}" -> Specifier
+
+        "{" Declaration* Statement* "}" -> Statement
+
+        Identifier ":" Statement -> Statement
+
+        "case" Expression ":" Statement -> Statement
+
+        "default" ":" Statement -> Statement
+
+        ";" -> Statement
+
+        Expression ";" -> Statement
+
+        "if" "(" Expression ")" Statement -> Statement
+
+        "if" "(" Expression ")" Statement "else" Statement -> Statement
+
+        "switch" "(" Expression ")" Statement -> Statement
+
+        "while" "(" Expression ")" Statement -> Statement
+
+        "do" Statement "while" "(" Expression ")" ";" -> Statement
+
+        "for" "(" Expression? ";" Expression? ";" Expression? ")" Statement -> Statement
+
+        "goto" Identifier ";" -> Statement
+
+        "continue" ";" -> Statement
+
+        "break" ";" -> Statement
+
+        "return" ";" -> Statement
+
+        "return" Expression ";" -> Statement

@@ -1,34 +1,34 @@
-[program] Program:
-        "begin" decls::Declarations body::{Statement ";"}* "end"
-[idtype] IdType:
-        id::Id ":" t::Type
-[cond] Statement:
-        "if" cond::Expression "then" thenPart::{Statement ";"}* "else" elsePart::{Statement ";"}* "fi"
-[assign] Statement:
-        var::Id ":=" val::Expression
-[cond] Statement:
-        "if" cond::Expression "then" thenPart::{Statement ";"}* "fi"
-[loop] Statement:
-        "while" cond::Expression "do" body::{Statement ";"}* "od"
-[string] Type:
-        "string"
-[natural] Type:
-        "natural"
-[nil] Type:
-        "nil-type"
+Program:
+        program("begin" decls::Declarations body::{Statement ";"}* "end")
+IdType:
+        idtype(id::Id ":" t::Type)
+Statement:
+        cond("if" cond::Expression "then" thenPart::{Statement ";"}* "else" elsePart::{Statement ";"}* "fi")
+Statement:
+        assign(var::Id ":=" val::Expression)
+Statement:
+        cond("if" cond::Expression "then" thenPart::{Statement ";"}* "fi")
+Statement:
+        loop("while" cond::Expression "do" body::{Statement ";"}* "od")
+Type:
+        string"string"
+Type:
+        natural"natural"
+Type:
+        nil"nil-type"
 Expression:
         "(" e::Expression ")"
-[natcon] Expression:
-        natcon::Natural
-[id] Expression:
-        name::Id
-[strcon] Expression:
-        string::String
-[concat] Expression:
-        lhs::Expression "||" rhs::Expression
-[add] Expression:
-        lhs::Expression "+" rhs::Expression
-[min] Expression:
-        lhs::Expression "-" rhs::Expression
+Expression:
+        natconnatcon::Natural
+Expression:
+        idname::Id
+Expression:
+        strconstring::String
+Expression:
+        concat(lhs::Expression "||" rhs::Expression)
+Expression:
+        add(lhs::Expression "+" rhs::Expression)
+Expression:
+        min(lhs::Expression "-" rhs::Expression)
 Declarations:
         "declare" decls::{IdType ","}* ";"

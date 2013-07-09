@@ -1,32 +1,32 @@
-[RealCon] RealCon:
-        IntCon "." NatCon OptExp
-[Positive] IntCon:
-        "+" NatCon
-[Natural] IntCon:
-        NatCon
-[Negative] IntCon:
-        "-" NatCon
-[Quoted] AFun:
-        StrCon
-[Unquoted] AFun:
-        IdCon
-[Default] Annotation:
-        "{" {ATerm ","}+ "}"
-[Appl] ATerm:
-        AFun "(" {ATerm ","}+ ")"
-[Real] ATerm:
-        RealCon
-[List] ATerm:
-        "[" {ATerm ","}* "]"
-[Annotated] ATerm:
-        ATerm Annotation
-[Placeholder] ATerm:
-        "<" ATerm ">"
-[Int] ATerm:
-        IntCon
-[Fun] ATerm:
-        AFun
-[Present] OptExp:
-        "e" IntCon
-[Absent] OptExp:
-        EPSILON
+RealCon:
+        RealCon(IntCon "." NatCon OptExp)
+IntCon:
+        Positive("+" NatCon)
+IntCon:
+        NaturalNatCon
+IntCon:
+        Negative("-" NatCon)
+AFun:
+        QuotedStrCon
+AFun:
+        UnquotedIdCon
+Annotation:
+        Default("{" {ATerm ","}+ "}")
+ATerm:
+        Appl(AFun "(" {ATerm ","}+ ")")
+ATerm:
+        RealRealCon
+ATerm:
+        List("[" {ATerm ","}* "]")
+ATerm:
+        Annotated(ATerm Annotation)
+ATerm:
+        Placeholder("<" ATerm ">")
+ATerm:
+        IntIntCon
+ATerm:
+        FunAFun
+OptExp:
+        Present("e" IntCon)
+OptExp:
+        AbsentEPSILON

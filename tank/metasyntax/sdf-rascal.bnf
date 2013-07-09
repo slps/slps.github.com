@@ -1,244 +1,244 @@
-[ContextFreePriorities] Grammar:
-        "context-free" "priorities" Priorities
-[ImpSection] Grammar:
-        ImpSection
-[KernalStartSyms] Grammar:
-        "start-symbols" Syms
-[Aliases] Grammar:
-        "aliases" Aliases
-[Variables] Grammar:
-        "variables" Prods
-[ContextFreeSyntax] Grammar:
-        "context-free" "syntax" Prods
-[LexicalRestrictions] Grammar:
-        "lexical" "restrictions" Restrictions
-[Sorts] Grammar:
-        "sorts" Syms
-[ContextFreeStartSyms] Grammar:
-        "context-free" "start-symbols" Syms
-[Syntax] Grammar:
-        "syntax" Prods
-[Restrictions] Grammar:
-        "restrictions" Restrictions
-[Priorities] Grammar:
-        "priorities" Priorities
-[LexicalStartSyms] Grammar:
-        "lexical" "start-symbols" Syms
-[LexicalVariables] Grammar:
-        "lexical" "variables" Prods
-[ContextFreeRestrictions] Grammar:
-        "context-free" "restrictions" Restrictions
-[LexicalPriorities] Grammar:
-        "lexical" "priorities" Priorities
-[LexicalSyntax] Grammar:
-        "lexical" "syntax" Prods
-[Default] Restrictions:
-        Restriction*
-[Chain] Priority:
-        {Group ">"}+
-[Assoc] Priority:
-        Group Assoc Group
-[Exports] Section:
-        "exports" Grammar*
-[Hiddens] Section:
-        "hiddens" Grammar*
-[Bracket] Import:
-        "(" Import ")"
-[Module] Import:
-        ModuleName
-[RenamedModule] Import:
-        ModuleName Renamings
-[Attrs] Attrs:
-        "{" {Attribute ","}* "}"
-[NoAttrs] Attrs:
-        EPSILON
+Grammar:
+        ContextFreePriorities("context-free" "priorities" Priorities)
+Grammar:
+        ImpSectionImpSection
+Grammar:
+        KernalStartSyms("start-symbols" Syms)
+Grammar:
+        Aliases("aliases" Aliases)
+Grammar:
+        Variables("variables" Prods)
+Grammar:
+        ContextFreeSyntax("context-free" "syntax" Prods)
+Grammar:
+        LexicalRestrictions("lexical" "restrictions" Restrictions)
+Grammar:
+        Sorts("sorts" Syms)
+Grammar:
+        ContextFreeStartSyms("context-free" "start-symbols" Syms)
+Grammar:
+        Syntax("syntax" Prods)
+Grammar:
+        Restrictions("restrictions" Restrictions)
+Grammar:
+        Priorities("priorities" Priorities)
+Grammar:
+        LexicalStartSyms("lexical" "start-symbols" Syms)
+Grammar:
+        LexicalVariables("lexical" "variables" Prods)
+Grammar:
+        ContextFreeRestrictions("context-free" "restrictions" Restrictions)
+Grammar:
+        LexicalPriorities("lexical" "priorities" Priorities)
+Grammar:
+        LexicalSyntax("lexical" "syntax" Prods)
+Restrictions:
+        DefaultRestriction*
+Priority:
+        Chain{Group ">"}+
+Priority:
+        Assoc(Group Assoc Group)
+Section:
+        Exports("exports" Grammar*)
+Section:
+        Hiddens("hiddens" Grammar*)
+Import:
+        Bracket("(" Import ")")
+Import:
+        ModuleModuleName
+Import:
+        RenamedModule(ModuleName Renamings)
+Attrs:
+        Attrs("{" {Attribute ","}* "}")
+Attrs:
+        NoAttrsEPSILON
 Imports:
         Import*
 Sections:
         Section*
-[Default] Annotation:
-        "{" {ATerm ","}+ "}"
-[Default] ATermAttribute:
-        EPSILON
-[Module] Module:
-        "module" ModuleName ImpSection* Sections
-[Real] ATerm:
-        RealCon
-[Appl] ATerm:
-        AFun "(" {ATerm ","}+ ")"
-[Annotated] ATerm:
-        ATerm Annotation
-[Placeholder] ATerm:
-        "<" ATerm ">"
-[Int] ATerm:
-        IntCon
-[Fun] ATerm:
-        AFun
-[List] ATerm:
-        "[" {ATerm ","}* "]"
-[Present] OptExp:
-        "e" IntCon
-[Absent] OptExp:
-        EPSILON
-[eof] Character:
-        "\EOF"
-[short] Character:
-        ShortChar
-[Numeric] Character:
-        NumChar
-[top] Character:
-        "\TOP"
-[label_start] Character:
-        "\LABEL_START"
-[bot] Character:
-        "\BOT"
-[IdCon] Label:
-        EPSILON
-[Quoted] Label:
-        StrCon
-[Definition] SDF:
-        "definition" def::Definition
-[Single] Lookaheads:
-        Lookahead
-[Alt] Lookaheads:
-        Lookaheads "|" Lookaheads
-[List] Lookaheads:
-        "[[" {Lookahead ","}* "]]"
-[Bracket] Lookaheads:
-        "(" Lookaheads ")"
+Annotation:
+        Default("{" {ATerm ","}+ "}")
+ATermAttribute:
+        DefaultEPSILON
+Module:
+        Module("module" ModuleName ImpSection* Sections)
+ATerm:
+        RealRealCon
+ATerm:
+        Appl(AFun "(" {ATerm ","}+ ")")
+ATerm:
+        Annotated(ATerm Annotation)
+ATerm:
+        Placeholder("<" ATerm ">")
+ATerm:
+        IntIntCon
+ATerm:
+        FunAFun
+ATerm:
+        List("[" {ATerm ","}* "]")
+OptExp:
+        Present("e" IntCon)
+OptExp:
+        AbsentEPSILON
+Character:
+        eof"\EOF"
+Character:
+        shortShortChar
+Character:
+        NumericNumChar
+Character:
+        top"\TOP"
+Character:
+        label_start"\LABEL_START"
+Character:
+        bot"\BOT"
+Label:
+        IdConEPSILON
+Label:
+        QuotedStrCon
+SDF:
+        Definition("definition" def::Definition)
+Lookaheads:
+        SingleLookahead
+Lookaheads:
+        Alt(Lookaheads "|" Lookaheads)
+Lookaheads:
+        List("[[" {Lookahead ","}* "]]")
+Lookaheads:
+        Bracket("(" Lookaheads ")")
 Aliases:
         Alias*
-[NonTransitive] Group:
-        Group "."
-[AssocGroup] Group:
-        "{" Assoc ":" Prods "}"
-[WithArguments] Group:
-        Group ArgumentIndicator
-[SimpleGroup] Group:
-        Prod
-[ProdsGroup] Group:
-        "{" Prods "}"
+Group:
+        NonTransitive(Group ".")
+Group:
+        AssocGroup("{" Assoc ":" Prods "}")
+Group:
+        WithArguments(Group ArgumentIndicator)
+Group:
+        SimpleGroupProd
+Group:
+        ProdsGroup("{" Prods "}")
 Prods:
         Prod*
-[Range] Range:
-        Character "-" Character
+Range:
+        Range(Character "-" Character)
 Range:
         Character
-[production] Renaming:
-        Prod "=>" Prod
-[Sym] Renaming:
-        Sym "=>" Sym
-[SimpleCharClass] Class:
-        "[" Range* "]"
-[Bracket] Class:
-        "(" Class ")"
-[Comp] Class:
-        "~" Class
-[Diff] Class:
-        Class "/" Class
-[ISect] Class:
-        Class "/\" Class
-[Union] Class:
-        Class "\/" Class
-[Imports] ImpSection:
-        "imports" Imports
-[Empty] Sym:
-        "(" ")"
-[Lit] Sym:
-        StrCon
-[Opt] Sym:
-        Sym "?"
-[Seq] Sym:
-        "(" Sym Sym+ ")"
-[Bracket] Sym:
-        "(" Sym ")"
-[CILit] Sym:
-        SingleQuotedStrCon
-[Varsym] Sym:
-        "<" Sym "-VAR" ">"
-[Sort] Sym:
-        Sort
-[Lex] Sym:
-        "<" Sym "-LEX" ">"
-[Layout] Sym:
-        "LAYOUT"
-[CF] Sym:
-        "<" Sym "-CF" ">"
-[ParameterizedSort] Sym:
-        Sort "[[" {Sym ","}+ "]]"
-[IterStar] Sym:
-        Sym "*"
-[IterStarSep] Sym:
-        "{" Sym Sym "}" "*"
-[Iter] Sym:
-        Sym "+"
-[Class] Sym:
-        Class
-[IterSep] Sym:
-        "{" Sym Sym "}" "+"
-[Alt] Sym:
-        Sym "|" Sym
-[Label] Sym:
-        Label ":" Sym
-[RealCon] RealCon:
-        IntCon "." NatCon OptExp
-[Class] Lookahead:
-        class::Class
-[Seq] Lookahead:
-        class::Class "." las::Lookaheads
+Renaming:
+        production(Prod "=>" Prod)
+Renaming:
+        Sym(Sym "=>" Sym)
+Class:
+        SimpleCharClass("[" Range* "]")
+Class:
+        Bracket("(" Class ")")
+Class:
+        Comp("~" Class)
+Class:
+        Diff(Class "/" Class)
+Class:
+        ISect(Class "/\" Class)
+Class:
+        Union(Class "\/" Class)
+ImpSection:
+        Imports("imports" Imports)
+Sym:
+        Empty("(" ")")
+Sym:
+        LitStrCon
+Sym:
+        Opt(Sym "?")
+Sym:
+        Seq("(" Sym Sym+ ")")
+Sym:
+        Bracket("(" Sym ")")
+Sym:
+        CILitSingleQuotedStrCon
+Sym:
+        Varsym("<" Sym "-VAR" ">")
+Sym:
+        SortSort
+Sym:
+        Lex("<" Sym "-LEX" ">")
+Sym:
+        Layout"LAYOUT"
+Sym:
+        CF("<" Sym "-CF" ">")
+Sym:
+        ParameterizedSort(Sort "[[" {Sym ","}+ "]]")
+Sym:
+        IterStar(Sym "*")
+Sym:
+        IterStarSep("{" Sym Sym "}" "*")
+Sym:
+        Iter(Sym "+")
+Sym:
+        ClassClass
+Sym:
+        IterSep("{" Sym Sym "}" "+")
+Sym:
+        Alt(Sym "|" Sym)
+Sym:
+        Label(Label ":" Sym)
+RealCon:
+        RealCon(IntCon "." NatCon OptExp)
+Lookahead:
+        Classclass::Class
+Lookahead:
+        Seq(class::Class "." las::Lookaheads)
 Priorities:
         {Priority ","}*
-[QuotedFun] FunctionName:
-        StrCon
-[UnquotedFun] FunctionName:
-        IdCon
-[Follow] Restriction:
-        Syms "-/-" Lookaheads
+FunctionName:
+        QuotedFunStrCon
+FunctionName:
+        UnquotedFunIdCon
+Restriction:
+        Follow(Syms "-/-" Lookaheads)
 Syms:
         Sym*
-[Prod] Prod:
-        Syms "->" Sym Attrs
-[Parameterized] ModuleName:
-        id::ModuleId "[" actuals::Syms "]"
-[Unparameterized] ModuleName:
-        EPSILON
-[NonAssoc] Assoc:
-        "non-assoc"
-[Assoc] Assoc:
-        "assoc"
-[Left] Assoc:
-        "left"
-[Right] Assoc:
-        "right"
-[Default] ArgumentIndicator:
-        "<" {NatCon ","}+ ">"
-[Negative] IntCon:
-        "-" NatCon
-[Natural] IntCon:
-        NatCon
-[Positive] IntCon:
-        "+" NatCon
-[modules] Definition:
-        Module*
-[Alias] Alias:
-        Sym "->" Sym
-[Quoted] AFun:
-        StrCon
-[Unquoted] AFun:
-        EPSILON
-[Term] Attribute:
-        ATermAttribute
-[Assoc] Attribute:
-        Assoc
-[Bracket] Attribute:
-        "bracket"
-[Id] Attribute:
-        "id" "(" ModuleName ")"
-[Avoid] Attribute:
-        "avoid"
-[Prefer] Attribute:
-        "prefer"
-[Reject] Attribute:
-        "reject"
-[Renamings] Renamings:
-        "[" Renaming* "]"
+Prod:
+        Prod(Syms "->" Sym Attrs)
+ModuleName:
+        Parameterized(id::ModuleId "[" actuals::Syms "]")
+ModuleName:
+        UnparameterizedEPSILON
+Assoc:
+        NonAssoc"non-assoc"
+Assoc:
+        Assoc"assoc"
+Assoc:
+        Left"left"
+Assoc:
+        Right"right"
+ArgumentIndicator:
+        Default("<" {NatCon ","}+ ">")
+IntCon:
+        Negative("-" NatCon)
+IntCon:
+        NaturalNatCon
+IntCon:
+        Positive("+" NatCon)
+Definition:
+        modulesModule*
+Alias:
+        Alias(Sym "->" Sym)
+AFun:
+        QuotedStrCon
+AFun:
+        UnquotedEPSILON
+Attribute:
+        TermATermAttribute
+Attribute:
+        AssocAssoc
+Attribute:
+        Bracket"bracket"
+Attribute:
+        Id("id" "(" ModuleName ")")
+Attribute:
+        Avoid"avoid"
+Attribute:
+        Prefer"prefer"
+Attribute:
+        Reject"reject"
+Renamings:
+        Renamings("[" Renaming* "]")

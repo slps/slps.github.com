@@ -1,5 +1,5 @@
-WikiText = WikiSymbol* ;
-WikiLink = '[[' destination::PageName '|' description::(MWWord+) ']]' ;
-WikiLink = '[[' destination::PageName ']]' ;
-WikiSymbol = MWWord ;
-WikiSymbol = WikiLink ;
+WikiText = wssWikiSymbol* ;
+WikiLink = barred('[[' destination::PageName '|' description::(MWWord+) ']]') ;
+WikiLink = simple('[[' destination::PageName ']]') ;
+WikiSymbol = wMWWord ;
+WikiSymbol = wlWikiLink ;

@@ -1,0 +1,16 @@
+AFun = StrCon ;
+AFun = IdCon ;
+ATerm = IntCon ;
+ATerm = RealCon ;
+ATerm = fun::AFun ;
+ATerm = fun::AFun '(' args::(ATerm (',' ATerm)*) ')' ;
+ATerm = '<' type::ATerm '>' ;
+ATerm = '[' elems::((ATerm (',' ATerm)*)?) ']' ;
+ATerm = trm::ATerm Annotation ;
+Annotation = '{' annos::(ATerm (',' ATerm)*) '}' ;
+IntCon = NatCon ;
+IntCon = pos::'+' NatCon ;
+IntCon = neg::'-' NatCon ;
+OptExp = 'e' IntCon ;
+OptExp = ;
+RealCon = base::IntCon '.' decimal::NatCon exp::OptExp ;

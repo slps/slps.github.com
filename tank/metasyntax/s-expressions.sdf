@@ -6,26 +6,26 @@ exports
   context-free syntax
         "[" SimpleString "]" -> Display
 
-        Raw -> SimpleString {cons(raw)}
+        rawRaw -> SimpleString
 
-        Base64 -> SimpleString {cons(base64)}
+        base64Base64 -> SimpleString
 
-        HexaDecimal -> SimpleString {cons(hex)}
+        hexHexaDecimal -> SimpleString
 
-        Token -> SimpleString {cons(token)}
+        tokenToken -> SimpleString
 
-        QuotedString -> SimpleString {cons(quoted)}
+        quotedQuotedString -> SimpleString
 
         "|" Base64Char* "|" -> Base64
 
-        List -> SExp {cons(list)}
+        listList -> SExp
 
-        String -> SExp {cons(string)}
+        stringString -> SExp
 
         "#" HexDigit* "#" -> HexaDecimal
 
-        Display SimpleString -> String {cons(display)}
+        display(Display SimpleString) -> String
 
-        SimpleString -> String {cons(simple)}
+        simpleSimpleString -> String
 
         "(" SExp* ")" -> List

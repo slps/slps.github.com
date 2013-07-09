@@ -4,36 +4,36 @@ exports
   sorts
         Program IdType Statement Type Expression Declarations 
   context-free syntax
-        "begin" decls::Declarations body::Statement";" "end" -> Program {cons(program)}
+        program("begin" decls::Declarations body::Statement";" "end") -> Program
 
-        id::Id ":" t::Type -> IdType {cons(idtype)}
+        idtype(id::Id ":" t::Type) -> IdType
 
-        "if" cond::Expression "then" thenPart::Statement";" "else" elsePart::Statement";" "fi" -> Statement {cons(cond)}
+        cond("if" cond::Expression "then" thenPart::Statement";" "else" elsePart::Statement";" "fi") -> Statement
 
-        var::Id ":=" val::Expression -> Statement {cons(assign)}
+        assign(var::Id ":=" val::Expression) -> Statement
 
-        "if" cond::Expression "then" thenPart::Statement";" "fi" -> Statement {cons(cond)}
+        cond("if" cond::Expression "then" thenPart::Statement";" "fi") -> Statement
 
-        "while" cond::Expression "do" body::Statement";" "od" -> Statement {cons(loop)}
+        loop("while" cond::Expression "do" body::Statement";" "od") -> Statement
 
-        "string" -> Type {cons(string)}
+        string"string" -> Type
 
-        "natural" -> Type {cons(natural)}
+        natural"natural" -> Type
 
-        "nil-type" -> Type {cons(nil)}
+        nil"nil-type" -> Type
 
         "(" e::Expression ")" -> Expression
 
-        natcon::Natural -> Expression {cons(natcon)}
+        natconnatcon::Natural -> Expression
 
-        name::Id -> Expression {cons(id)}
+        idname::Id -> Expression
 
-        string::String -> Expression {cons(strcon)}
+        strconstring::String -> Expression
 
-        lhs::Expression "||" rhs::Expression -> Expression {cons(concat)}
+        concat(lhs::Expression "||" rhs::Expression) -> Expression
 
-        lhs::Expression "+" rhs::Expression -> Expression {cons(add)}
+        add(lhs::Expression "+" rhs::Expression) -> Expression
 
-        lhs::Expression "-" rhs::Expression -> Expression {cons(min)}
+        min(lhs::Expression "-" rhs::Expression) -> Expression
 
         "declare" decls::IdType"," ";" -> Declarations

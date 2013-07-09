@@ -30,6 +30,8 @@
 				</script>
 			</head>
 			<body style="background-color:#9C9;">
+				<div style="float:right;" class="box"><img src="../grammarlab.png"/></div>
+				<div style="float:left;" class="box"><img src="logo.png"/></div>
 				<h1>Software Language Processing Suite</h1>
 				<xsl:if test="name='zoo'">
 					<h1>

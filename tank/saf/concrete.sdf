@@ -4,18 +4,18 @@ exports
   sorts
         Action Cond Fighter Spec 
   context-free syntax
-        Id -> Action {cons(action)}
+        actionId -> Action
 
-        "choose" "(" actions::(Id*) ")" -> Action {cons(choose)}
+        choose("choose" "(" actions::(Id*) ")") -> Action
 
-        lhs::Cond "and" rhs::Cond -> Cond {cons(and)}
+        and(lhs::Cond "and" rhs::Cond) -> Cond
 
-        Id -> Cond {cons(const)}
+        constId -> Cond
 
-        lhs::Cond "or" rhs::Cond -> Cond {cons(or)}
+        or(lhs::Cond "or" rhs::Cond) -> Cond
 
-        name::Id "{" specs::(Spec*) "}" -> Fighter {cons(fighter)}
+        fighter(name::Id "{" specs::(Spec*) "}") -> Fighter
 
-        cond::Cond "[" move::Action fight::Action "]" -> Spec {cons(behavior)}
+        behavior(cond::Cond "[" move::Action fight::Action "]") -> Spec
 
-        name::Id "=" strength::Number -> Spec {cons(attribute)}
+        attribute(name::Id "=" strength::Number) -> Spec

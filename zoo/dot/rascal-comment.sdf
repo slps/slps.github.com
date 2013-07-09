@@ -1,0 +1,45 @@
+module Main
+
+exports
+  sorts
+        Graph Stmt-list Stmt Attr-stmt Attr-list A-list Edge-stmt EdgeRHS Node-stmt Node-id Port Subgraph Compass-pt 
+  context-free syntax
+        "strict"? ("graph" | "digraph") ID? "{" Stmt-list "}" -> Graph
+
+        (Stmt ";"? Stmt-list?)? -> Stmt-list
+
+        Node-stmt -> Stmt
+        Edge-stmt -> Stmt
+        Attr-stmt -> Stmt
+        ID "=" ID -> Stmt
+        Subgraph -> Stmt
+
+        ("graph" | "node" | "edge") Attr-list -> Attr-stmt
+
+        "[" A-list? "]" Attr-list? -> Attr-list
+
+        ID ("=" ID)? ","? A-list? -> A-list
+
+        (Node-id | Subgraph) EdgeRHS Attr-list? -> Edge-stmt
+
+        Edgeop (Node-id | Subgraph) EdgeRHS? -> EdgeRHS
+
+        Node-id Attr-list? -> Node-stmt
+
+        ID Port? -> Node-id
+
+        ":" ID (":" Compass-pt)? -> Port
+        ":" Compass-pt -> Port
+
+        (Subgraph ID?)? "{" Stmt-list "}" -> Subgraph
+
+        "n" -> Compass-pt
+        "ne" -> Compass-pt
+        "e" -> Compass-pt
+        "se" -> Compass-pt
+        "s" -> Compass-pt
+        "sw" -> Compass-pt
+        "w" -> Compass-pt
+        "nw" -> Compass-pt
+        "c" -> Compass-pt
+        "_" -> Compass-pt

@@ -1,0 +1,323 @@
+module Main
+
+exports
+  sorts
+        Grammar Alias Aliases Symbol CharRange CharRanges OptCharRanges CharClass Character ATermAttribute Attribute Attributes Production Productions Label FunctionName Definition Module Section Sections ModuleName ImpSection Imports Import Associativity ArgumentIndicator Group Priority Priorities Renamings Renaming Lookahead Lookaheads Restriction Restrictions SDF Symbols 
+  context-free syntax
+        "aliases" Aliases -> Grammar
+
+        Symbol arrow::"->" alias::Symbol -> Alias
+
+        list::(Alias*) -> Aliases
+
+        "lexical" "syntax" Productions -> Grammar
+
+        "context-free" "syntax" Productions -> Grammar
+
+        "variables" Productions -> Grammar
+
+        "lexical" "variables" Productions -> Grammar
+
+        "<" Symbol "-CF" ">" -> Symbol
+
+        "<" Symbol "-LEX" ">" -> Symbol
+
+        "<" Symbol "-VAR" ">" -> Symbol
+
+        "LAYOUT" -> Symbol
+
+        CharClass -> Symbol
+
+        Character -> CharRange
+
+        start::Character "-" end::Character -> CharRange
+
+        CharRange -> CharRanges
+
+        left::CharRanges right::CharRanges -> CharRanges
+
+        "(" CharRanges ")" -> CharRanges
+
+         -> OptCharRanges
+
+        CharRanges -> OptCharRanges
+
+        "[" OptCharRanges "]" -> CharClass
+
+        "~" CharClass -> CharClass
+
+        left::CharClass "/" right::CharClass -> CharClass
+
+        left::CharClass "/\" right::CharClass -> CharClass
+
+        left::CharClass "/" right::CharClass -> CharClass
+
+        "(" CharClass ")" -> CharClass
+
+        NumChar -> Character
+
+        ShortChar -> Character
+
+        "TOP" -> Character
+
+        "EOF" -> Character
+
+        "BOT" -> Character
+
+        "LABEL_START" -> Character
+
+        "(/)" -> Grammar
+
+        left::Grammar right::Grammar -> Grammar
+
+        "(" Grammar ")" -> Grammar
+
+        aterm::ATerm -> ATermAttribute
+
+        ATermAttribute -> Attribute
+
+        "{" list::((Attribute ("," Attribute)*)?) "}" -> Attributes
+
+         -> Attributes
+
+        Symbols "->" result::Symbol Attributes -> Production
+
+        list::(Production*) -> Productions
+
+        "syntax" Productions -> Grammar
+
+        StrCon -> Label
+
+        IdCon -> Label
+
+        Label ":" Symbol -> Symbol
+
+        left-quote::"`" Symbol right-quote::"`" -> Symbol
+
+        IdCon -> FunctionName
+
+        StrCon -> FunctionName
+
+        string::StrCon -> Symbol
+
+        ci-string::SingleQuotedStrCon -> Symbol
+
+        fun::FunctionName "(" arguments::((Symbol ("," Symbol)*)?) ")" "->" result::Symbol Attributes -> Production
+
+        list::(Module*) -> Definition
+
+        "module" ModuleName list::(ImpSection*) Sections -> Module
+
+        "exports" Grammar -> Section
+
+        "hiddens" Grammar -> Section
+
+        list::(Section*) -> Sections
+
+        ModuleId -> ModuleName
+
+        ModuleId "[" params::Symbols "]" -> ModuleName
+
+        "id" "(" ModuleName ")" -> Attribute
+
+        "imports" list::Imports -> ImpSection
+
+        ImpSection -> Grammar
+
+        list::(Import*) -> Imports
+
+        ModuleName -> Import
+
+        ModuleName Renamings -> Import
+
+        "(" Import ")" -> Import
+
+        "left" -> Associativity
+
+        "right" -> Associativity
+
+        "non-assoc" -> Associativity
+
+        "assoc" -> Associativity
+
+        "bracket" -> Attribute
+
+        Associativity -> Attribute
+
+        "<" arguments::(NatCon ("," NatCon)*) ">" -> ArgumentIndicator
+
+        Group ArgumentIndicator -> Group
+
+        Group "." -> Group
+
+        Production -> Group
+
+        "{" Productions "}" -> Group
+
+        "{" Associativity ":" Productions "}" -> Group
+
+        list::(Group (">" Group)*) -> Priority
+
+        left::Group Associativity right::Group -> Priority
+
+        list::((Priority ("," Priority)*)?) -> Priorities
+
+        "priorities" Priorities -> Grammar
+
+        "(" ")" -> Symbol
+
+        "(" head::Symbol tail::(Symbol+) ")" -> Symbol
+
+        Symbol "?" -> Symbol
+
+        Symbol "+" -> Symbol
+
+        Symbol "*" -> Symbol
+
+        "{" Symbol sep::Symbol "}" "+" -> Symbol
+
+        "{" Symbol sep::Symbol "}" "*" -> Symbol
+
+        "<" head::Symbol "," rest::(Symbol ("," Symbol)*) ">" -> Symbol
+
+        "(" arguments::Symbols "=>" results::Symbol ")" -> Symbol
+
+        left::Symbol "|" right::Symbol -> Symbol
+
+        "(" left::Symbol "->" right::Symbol ")" -> Symbol
+
+        Symbol "?" -> Symbol
+
+        Symbol "*" -> Symbol
+
+        Symbol "+" -> Symbol
+
+        "[" list::(Renaming*) "]" -> Renamings
+
+        from::Symbol "=>" to::Symbol -> Renaming
+
+        from-prod::Production "=>" to-prod::Production -> Renaming
+
+        CharClass -> Lookahead
+
+        head::CharClass "." tail::Lookaheads -> Lookahead
+
+        Lookahead -> Lookaheads
+
+        left::Lookaheads "|" right::Lookaheads -> Lookaheads
+
+        "(" Lookaheads ")" -> Lookaheads
+
+        "[[" list::((Lookahead ("," Lookahead)*)?) "]]" -> Lookaheads
+
+        Symbols "-/-" Lookaheads -> Restriction
+
+        list::(Restriction*) -> Restrictions
+
+        "restrictions" Restrictions -> Grammar
+
+        "reject" -> Attribute
+
+        "prefer" -> Attribute
+
+        "avoid" -> Attribute
+
+        "<START>" -> Symbol
+
+        "<Start>" -> Symbol
+
+        "lexical" "priorities" Priorities -> Grammar
+
+        "context-free" "priorities" Priorities -> Grammar
+
+        "lexical" "restrictions" Restrictions -> Grammar
+
+        "context-free" "restrictions" Restrictions -> Grammar
+
+        "definition" Definition -> SDF
+
+        "aliases" -> ModuleName
+
+        "lexical" -> ModuleName
+
+        "priorities" -> ModuleName
+
+        "context-free" -> ModuleName
+
+        "definition" -> ModuleName
+
+        "syntax" -> ModuleName
+
+        "variables" -> ModuleName
+
+        "module" -> ModuleName
+
+        "imports" -> ModuleName
+
+        "exports" -> ModuleName
+
+        "hiddens" -> ModuleName
+
+        "left" -> ModuleName
+
+        "right" -> ModuleName
+
+        "assoc" -> ModuleName
+
+        "non-assoc" -> ModuleName
+
+        "bracket" -> ModuleName
+
+        "sorts" -> ModuleName
+
+        "bracket" -> ModuleName
+
+        "sorts" -> ModuleName
+
+        "restrictions" -> ModuleName
+
+        StrCon "(" arguments::((Symbol ("," Symbol)*)?) ")" -> Symbols
+
+        Associativity -> Label
+
+        Associativity -> ATermAttribute
+
+        "reject" -> ATermAttribute
+
+        "prefer" -> ATermAttribute
+
+        "avoid" -> ATermAttribute
+
+        "bracket" -> ATermAttribute
+
+        "id" "(" ModuleName ")" -> ATermAttribute
+
+        "<START>" -> Symbol
+
+        "<Start>" -> Symbol
+
+        "lexical" "priorities" Priorities -> Grammar
+
+        "context-free" "priorities" Priorities -> Grammar
+
+        "lexical" "restrictions" Restrictions -> Grammar
+
+        "context-free" "restrictions" Restrictions -> Grammar
+
+        "definition" Definition -> SDF
+
+        Sort -> Symbol
+
+        Sort "[[" parameters::(Symbol ("," Symbol)*) "]]" -> Symbol
+
+        "sorts" Symbols -> Grammar
+
+        "start-symbols" Symbols -> Grammar
+
+        "lexical" "start-symbols" Symbols -> Grammar
+
+        "context-free" "start-symbols" Symbols -> Grammar
+
+        "(" Symbol ")" -> Symbol
+
+        list::(Symbol*) -> Symbols

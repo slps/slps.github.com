@@ -1,0 +1,754 @@
+Literal:
+        dateTimedateTimeLiteral::DateTimeLiteral
+Literal:
+        stringstringLiteral::StringLiteral
+Literal:
+        realrealLiteral::RealLiteral
+Literal:
+        locationlocationLiteral::LocationLiteral
+Literal:
+        rationalrationalLiteral::RationalLiteral
+Literal:
+        regExpregExpLiteral::RegExpLiteral
+Literal:
+        booleanbooleanLiteral::BooleanLiteral
+Literal:
+        integerintegerLiteral::IntegerLiteral
+Module:
+        default(header::Header body::Body)
+KeywordArguments:
+        noneEPSILON
+KeywordArguments:
+        default(optionalComma::OptionalComma keywordArgumentList::{KeywordArgument ","}+)
+ModuleParameters:
+        default("[" parameters::{TypeVar ","}+ "]")
+Strategy:
+        topDown"top-down"
+Strategy:
+        topDownBreak"top-down-break"
+Strategy:
+        innermost"innermost"
+Strategy:
+        bottomUp"bottom-up"
+Strategy:
+        outermost"outermost"
+Strategy:
+        bottomUpBreak"bottom-up-break"
+Variable:
+        unInitializedname::Name
+Variable:
+        initialized(name::Name "=" initial::Expression)
+TypeArg:
+        defaulttype::Type
+TypeArg:
+        named(type::Type name::Name)
+Catch:
+        binding("catch" pattern::Pattern ":" body::Statement)
+Catch:
+        default("catch" ":" body::Statement)
+Renaming:
+        default(from::Name "=>" to::Name)
+Signature:
+        noThrows(modifiers::FunctionModifiers type::Type name::Name parameters::Parameters)
+Signature:
+        withThrows(modifiers::FunctionModifiers type::Type name::Name parameters::Parameters "throws" exceptions::{Type ","}+)
+KeywordArgument:
+        default(name::Name "=" expression::Expression)
+Sym:
+        empty("(" ")")
+Sym:
+        characterClasscharClass::Class
+Sym:
+        sequence("(" first::Sym sequence::(Sym+) ")")
+Sym:
+        iterStar(symbol::Sym "*")
+Sym:
+        labeled(symbol::Sym label::NonterminalLabel)
+Sym:
+        parameter("&" nonterminal::Nonterminal)
+Sym:
+        iterStarSep("{" symbol::Sym sep::Sym "}" "*")
+Sym:
+        alternative("(" first::Sym "|" alternatives::{Sym "|"}+ ")")
+Sym:
+        endOfLine(symbol::Sym "$")
+Sym:
+        column(symbol::Sym "@" column::IntegerLiteral)
+Sym:
+        nonterminalEPSILON
+Sym:
+        optional(symbol::Sym "?")
+Sym:
+        caseInsensitiveLiteralcistring::CaseInsensitiveStringConstant
+Sym:
+        start("start" "[" nonterminal::Nonterminal "]")
+Sym:
+        literalstring::StringConstant
+Sym:
+        parametrized("[" parameters::{Sym ","}+ "]")
+Sym:
+        iterSep("{" symbol::Sym sep::Sym "}" "+")
+Sym:
+        startOfLine("^" symbol::Sym)
+Sym:
+        iter(symbol::Sym "+")
+Sym:
+        except(symbol::Sym "!" label::NonterminalLabel)
+Sym:
+        notFollow(symbol::Sym "!>>" match::Sym)
+Sym:
+        follow(symbol::Sym ">>" match::Sym)
+Sym:
+        notPrecede(match::Sym "!<<" symbol::Sym)
+Sym:
+        precede(match::Sym "<<" symbol::Sym)
+Sym:
+        unequal(symbol::Sym "\" match::Sym)
+Header:
+        default(tags::Tags "module" name::QualifiedName imports::(Import*))
+Header:
+        parameters(tags::Tags "module" name::QualifiedName params::ModuleParameters imports::(Import*))
+Commands:
+        listcommands::(EvalCommand+)
+SyntaxDefinition:
+        keyword("keyword" defined::Sym "=" production::Prod ";")
+SyntaxDefinition:
+        language(start::Start "syntax" defined::Sym "=" production::Prod ";")
+SyntaxDefinition:
+        lexical("lexical" defined::Sym "=" production::Prod ";")
+SyntaxDefinition:
+        layout(vis::Visibility "layout" defined::Sym "=" production::Prod ";")
+Kind:
+        alias"alias"
+Kind:
+        view"view"
+Kind:
+        function"function"
+Kind:
+        tag"tag"
+Kind:
+        data"data"
+Kind:
+        anno"anno"
+Kind:
+        variable"variable"
+Kind:
+        module"module"
+Kind:
+        all"all"
+ImportedModule:
+        renamings(name::QualifiedName renamings::Renamings)
+ImportedModule:
+        actualsRenaming(name::QualifiedName actuals::ModuleActuals renamings::Renamings)
+ImportedModule:
+        defaultname::QualifiedName
+ImportedModule:
+        actuals(name::QualifiedName actuals::ModuleActuals)
+Target:
+        emptyEPSILON
+Target:
+        labeledname::Name
+IntegerLiteral:
+        octalIntegerLiteraloctal::OctalIntegerLiteral
+IntegerLiteral:
+        hexIntegerLiteralhex::HexIntegerLiteral
+IntegerLiteral:
+        decimalIntegerLiteraldecimal::DecimalIntegerLiteral
+FunctionBody:
+        default("{" statements::(Statement*) "}")
+Expression:
+        fieldUpdate(expression::Expression "[" key::Name "=" replacement::Expression "]")
+Expression:
+        range("[" first::Expression ".." last::Expression "]")
+Expression:
+        list("[" elements::{Expression ","}* "]")
+Expression:
+        slice("[" optFirst::OptionalExpression ".." optLast::OptionalExpression "]")
+Expression:
+        voidClosure(parameters::Parameters "{" statements::(Statement*) "}")
+Expression:
+        subscript("[" subscripts::{Expression ","}+ "]")
+Expression:
+        bracket("(" expression::Expression ")")
+Expression:
+        any("any" "(" generators::{Expression ","}+ ")")
+Expression:
+        is(expression::Expression "is" name::Name)
+Expression:
+        transitiveClosureargument::Expression
+Expression:
+        map("(" mappings::(","*) ")")
+Expression:
+        getAnnotation(expression::Expression "@" name::Name)
+Expression:
+        transitiveReflexiveClosureargument::Expression
+Expression:
+        qualifiedNamequalifiedName::QualifiedName
+Expression:
+        sliceStep("[" optFirst::OptionalExpression "," second::Expression ".." optLast::OptionalExpression "]")
+Expression:
+        has(expression::Expression "has" name::Name)
+Expression:
+        setAnnotation(expression::Expression "[" "@" name::Name "=" value::Expression "]")
+Expression:
+        set("{" elements::{Expression ","}* "}")
+Expression:
+        fieldAccess(expression::Expression "." field::Name)
+Expression:
+        all("all" "(" generators::{Expression ","}+ ")")
+Expression:
+        fieldProject("<" fields::{Field ","}+ ">")
+Expression:
+        reifiedType("type" "(" symbol::Expression "," definitions::Expression ")")
+Expression:
+        callOrTree(expression::EPSILON "(" arguments::{Expression ","}* keywordArguments::KeywordArguments ")")
+Expression:
+        nonEmptyBlock("{" statements::(Statement+) "}")
+Expression:
+        reducer("(" init::Expression "|" result::Expression "|" generators::{Expression ","}+ ")")
+Expression:
+        closure(type::Type parameters::Parameters "{" statements::(Statement+) "}")
+Expression:
+        reifyType"#"
+Expression:
+        visit(label::Label visit::Visit)
+Expression:
+        literalliteral::Literal
+Expression:
+        tuple("<" elements::{Expression ","}+ ">")
+Expression:
+        stepRange("[" first::Expression "," second::Expression ".." last::Expression "]")
+Expression:
+        itEPSILON
+Expression:
+        comprehensioncomprehension::Comprehension
+Expression:
+        isDefined(argument::Expression "?")
+Expression:
+        negative("-" argument::Expression)
+Expression:
+        splice("*" argument::Expression)
+Expression:
+        asType("[" type::Type "]" argument::EPSILON)
+Expression:
+        negation("!" argument::EPSILON)
+Expression:
+        composition(lhs::Expression "o" rhs::Expression)
+Expression:
+        remainder(lhs::Expression "%" rhs::Expression)
+Expression:
+        product(lhs::Expression "*" rhs::EPSILON)
+Expression:
+        join(lhs::Expression "join" rhs::Expression)
+Expression:
+        division(lhs::Expression "/" rhs::Expression)
+Expression:
+        intersection(lhs::Expression rhs::Expression)
+Expression:
+        appendAfter(lhs::Expression rhs::Expression)
+Expression:
+        insertBefore(lhs::Expression ">>" rhs::Expression)
+Expression:
+        addition(lhs::Expression "+" rhs::EPSILON)
+Expression:
+        subtraction(lhs::EPSILON "-" rhs::Expression)
+Expression:
+        modulo(lhs::Expression "mod" rhs::Expression)
+Expression:
+        notIn(lhs::Expression "notin" rhs::Expression)
+Expression:
+        in(lhs::Expression "in" rhs::Expression)
+Expression:
+        lessThanOrEq(lhs::Expression "<=" rhs::Expression)
+Expression:
+        lessThan(lhs::Expression rhs::Expression)
+Expression:
+        greaterThan(lhs::Expression ">" rhs::Expression)
+Expression:
+        greaterThanOrEq(lhs::Expression ">=" rhs::Expression)
+Expression:
+        nonEquals(lhs::Expression "!=" rhs::Expression)
+Expression:
+        equals(lhs::Expression "==" rhs::Expression)
+Expression:
+        ifDefinedOtherwise(lhs::Expression "?" rhs::Expression)
+Expression:
+        match(pattern::Pattern ":=" expression::Expression)
+Expression:
+        enumerator(pattern::Pattern "<-" expression::Expression)
+Expression:
+        noMatch(pattern::Pattern "!:=" expression::Expression)
+Expression:
+        implication(lhs::Expression "==>" rhs::Expression)
+Expression:
+        equivalence(lhs::Expression "<==>" rhs::Expression)
+Expression:
+        and(lhs::Expression "&&" rhs::Expression)
+Expression:
+        or(lhs::Expression "||" rhs::Expression)
+Expression:
+        ifThenElse(condition::Expression "?" thenExp::Expression ":" elseExp::Expression)
+Expression:
+        concreteconcrete::Concrete
+UserType:
+        namename::QualifiedName
+UserType:
+        parametric("[" parameters::{Type ","}+ "]")
+Import:
+        extend("extend" module::ImportedModule ";")
+Import:
+        default("import" module::ImportedModule ";")
+Import:
+        syntaxsyntax::SyntaxDefinition
+Import:
+        external("import" name::QualifiedName "=" at::LocationLiteral ";")
+Body:
+        toplevelstoplevels::(Toplevel*)
+ProtocolPart:
+        nonInterpolatedprotocolChars::ProtocolChars
+ProtocolPart:
+        interpolated(pre::PreProtocolChars expression::Expression tail::ProtocolTail)
+StringTemplate:
+        while("while" "(" condition::Expression ")" "{" preStats::(Statement*) body::StringMiddle postStats::(Statement*) "}")
+StringTemplate:
+        ifThenElse("if" "(" conditions::{Expression ","}+ ")" "{" preStatsThen::(Statement*) thenString::StringMiddle postStatsThen::(Statement*) "}" "else" "{" preStatsElse::(Statement*) elseString::StringMiddle postStatsElse::(Statement*) "}")
+StringTemplate:
+        for("for" "(" generators::{Expression ","}+ ")" "{" preStats::(Statement*) body::StringMiddle postStats::(Statement*) "}")
+StringTemplate:
+        doWhile("do" "{" preStats::(Statement*) body::StringMiddle postStats::(Statement*) "}" "while" "(" condition::Expression ")")
+StringTemplate:
+        ifThen("if" "(" conditions::{Expression ","}+ ")" "{" preStats::(Statement*) body::StringMiddle postStats::(Statement*) "}")
+Label:
+        emptyEPSILON
+Label:
+        default(name::Name ":")
+Field:
+        indexfieldIndex::IntegerLiteral
+Field:
+        namefieldName::Name
+PathPart:
+        nonInterpolatedpathChars::PathChars
+PathPart:
+        interpolated(pre::PrePathChars expression::Expression tail::PathTail)
+EvalCommand:
+        importimported::Import
+EvalCommand:
+        declarationdeclaration::Declaration
+EvalCommand:
+        statementstatement::EPSILON
+FunctionModifier:
+        java"java"
+FunctionModifier:
+        default"default"
+FunctionModifier:
+        test"test"
+Assignment:
+        subtraction"-="
+Assignment:
+        intersection"&="
+Assignment:
+        append"<<="
+Assignment:
+        default"="
+Assignment:
+        ifDefined"?="
+Assignment:
+        division"/="
+Assignment:
+        product"*="
+Assignment:
+        addition"+="
+CommonKeywordParameters:
+        absentEPSILON
+CommonKeywordParameters:
+        present("(" keywordFormalList::{KeywordFormal ","}+ ")")
+Assignable:
+        bracket("(" arg::Assignable ")")
+Assignable:
+        slice(receiver::Assignable "[" optFirst::OptionalExpression ".." optLast::OptionalExpression "]")
+Assignable:
+        variablequalifiedName::QualifiedName
+Assignable:
+        ifDefinedOrDefault(receiver::Assignable "?" defaultExpression::Expression)
+Assignable:
+        tuple("<" elements::{Assignable ","}+ ">")
+Assignable:
+        annotation(receiver::Assignable "@" annotation::Name)
+Assignable:
+        fieldAccess(receiver::Assignable "." field::Name)
+Assignable:
+        subscript(receiver::Assignable "[" subscript::Expression "]")
+Assignable:
+        constructor(name::Name "(" arguments::{Assignable ","}+ ")")
+Assignable:
+        sliceStep(receiver::Assignable "[" optFirst::OptionalExpression "," second::Expression ".." optLast::OptionalExpression "]")
+Assoc:
+        associative"assoc"
+Assoc:
+        left"left"
+Assoc:
+        nonAssociative"non-assoc"
+Assoc:
+        right"right"
+Replacement:
+        unconditionalreplacementExpression::Expression
+Replacement:
+        conditional(replacementExpression::Expression "when" conditions::{Expression ","}+)
+DataTarget:
+        emptyEPSILON
+DataTarget:
+        labeled(label::Name ":")
+ConcreteHole:
+        one("<" symbol::Sym name::Name ">")
+Parameters:
+        default("(" formals::Formals keywordFormals::KeywordFormals ")")
+Parameters:
+        varArgs("(" formals::Formals "..." keywordFormals::KeywordFormals ")")
+LocalVariableDeclaration:
+        dynamic("dynamic" declarator::Declarator)
+LocalVariableDeclaration:
+        defaultdeclarator::Declarator
+Range:
+        fromTo(start::Char "-" end::Char)
+Range:
+        charactercharacter::Char
+LocationLiteral:
+        default(protocolPart::ProtocolPart pathPart::PathPart)
+ShellCommand:
+        listDeclarations"declarations"
+ShellCommand:
+        test"test"
+ShellCommand:
+        listModules"modules"
+ShellCommand:
+        setOption("set" name::QualifiedName expression::Expression)
+ShellCommand:
+        edit("edit" name::QualifiedName)
+ShellCommand:
+        history"history"
+ShellCommand:
+        quit"quit"
+ShellCommand:
+        undeclare("undeclare" name::QualifiedName)
+ShellCommand:
+        help"help"
+ShellCommand:
+        unimport("unimport" name::QualifiedName)
+KeywordFormal:
+        default(type::Type name::Name "=" expression::Expression)
+StringMiddle:
+        midmid::MidStringChars
+StringMiddle:
+        interpolated(mid::MidStringChars expression::Expression tail::StringMiddle)
+StringMiddle:
+        template(mid::MidStringChars template::StringTemplate tail::StringMiddle)
+QualifiedName:
+        defaultEPSILON
+DataTypeSelector:
+        selector(sort::QualifiedName "." production::Name)
+StringTail:
+        midInterpolated(mid::MidStringChars expression::Expression tail::StringTail)
+StringTail:
+        midTemplate(mid::MidStringChars template::StringTemplate tail::StringTail)
+StringTail:
+        postpost::PostStringChars
+PatternWithAction:
+        replacing(pattern::Pattern "=>" replacement::Replacement)
+PatternWithAction:
+        arbitrary(pattern::Pattern ":" statement::Statement)
+Command:
+        statementstatement::EPSILON
+Command:
+        declarationdeclaration::Declaration
+Command:
+        expressionexpression::Expression
+Command:
+        importimported::Import
+Command:
+        shell(":" command::ShellCommand)
+Visit:
+        givenStrategy(strategy::Strategy "visit" "(" subject::Expression ")" "{" cases::(Case+) "}")
+Visit:
+        defaultStrategy("visit" "(" subject::Expression ")" "{" cases::(Case+) "}")
+ProtocolTail:
+        postpost::PostProtocolChars
+ProtocolTail:
+        mid(mid::MidProtocolChars expression::Expression tail::ProtocolTail)
+PathTail:
+        mid(mid::MidPathChars expression::Expression tail::PathTail)
+PathTail:
+        postpost::PostPathChars
+Visibility:
+        private"private"
+Visibility:
+        defaultEPSILON
+Visibility:
+        public"public"
+StringLiteral:
+        interpolated(pre::PreStringChars expression::Expression tail::StringTail)
+StringLiteral:
+        template(pre::PreStringChars template::StringTemplate tail::StringTail)
+StringLiteral:
+        nonInterpolatedconstant::StringConstant
+Renamings:
+        default("renaming" renamings::{Renaming ","}+)
+OptionalExpression:
+        noExpressionEPSILON
+OptionalExpression:
+        expressionexpression::Expression
+Tags:
+        defaulttags::(Tag*)
+Formals:
+        defaultformals::{Pattern ","}*
+Start:
+        present"start"
+Start:
+        absentEPSILON
+Statement:
+        throw("throw" statement::EPSILON)
+Statement:
+        return("return" statement::EPSILON)
+Statement:
+        append("append" dataTarget::DataTarget statement::EPSILON)
+Statement:
+        insert("insert" dataTarget::DataTarget statement::EPSILON)
+Statement:
+        assignment(assignable::Assignable operator::Assignment statement::EPSILON)
+Statement:
+        variableDeclaration(declaration::LocalVariableDeclaration ";")
+Statement:
+        while(label::Label "while" "(" conditions::{Expression ","}+ ")" body::EPSILON)
+Statement:
+        for(label::Label "for" "(" generators::{Expression ","}+ ")" body::Statement)
+Statement:
+        emptyStatement";"
+Statement:
+        doWhile(label::Label "do" body::Statement "while" "(" condition::Expression ")" ";")
+Statement:
+        tryFinally("try" body::Statement handlers::(Catch+) "finally" finallyBody::EPSILON)
+Statement:
+        switch(label::Label "switch" "(" expression::Expression ")" "{" cases::(Case+) "}")
+Statement:
+        fail("fail" target::Target ";")
+Statement:
+        assert("assert" expression::Expression ";")
+Statement:
+        functionDeclarationfunctionDeclaration::FunctionDeclaration
+Statement:
+        continue("continue" target::Target ";")
+Statement:
+        assertWithMessage("assert" expression::Expression ":" message::Expression ";")
+Statement:
+        ifThenElse(label::Label "if" "(" conditions::{Expression ","}+ ")" thenStatement::Statement "else" elseStatement::EPSILON)
+Statement:
+        expression(expression::EPSILON ";")
+Statement:
+        globalDirective("global" type::Type names::{QualifiedName ","}+ ";")
+Statement:
+        ifThen(label::Label "if" "(" conditions::{Expression ","}+ ")" thenStatement::EPSILON)
+Statement:
+        try("try" body::Statement handlers::(Catch+))
+Statement:
+        nonEmptyBlock(label::Label "{" statements::(Statement+) "}")
+Statement:
+        visit(label::Label visit::Visit)
+Statement:
+        break("break" target::Target ";")
+Statement:
+        solve("solve" "(" variables::{QualifiedName ","}+ bound::Bound ")" body::EPSILON)
+Statement:
+        filter("filter" ";")
+StructuredType:
+        default(basicType::BasicType "[" arguments::{TypeArg ","}+ "]")
+FunctionType:
+        typeArguments(type::Type "(" arguments::{TypeArg ","}* ")")
+Case:
+        patternWithAction("case" patternWithAction::PatternWithAction)
+Case:
+        default("default" ":" statement::Statement)
+Declarator:
+        default(type::Type variables::{Variable ","}+)
+Bound:
+        emptyEPSILON
+Bound:
+        default(";" expression::Expression)
+Declaration:
+        alias(tags::Tags visibility::Visibility "alias" user::UserType "=" base::Type ";")
+Declaration:
+        dataAbstract(tags::Tags visibility::Visibility "data" user::UserType ";")
+Declaration:
+        variable(tags::Tags visibility::Visibility type::Type variables::{Variable ","}+ ";")
+Declaration:
+        annotation(tags::Tags visibility::Visibility "anno" annoType::Type onType::Type "@" name::Name ";")
+Declaration:
+        functionfunctionDeclaration::FunctionDeclaration
+Declaration:
+        data(tags::Tags visibility::Visibility "data" user::UserType commonKeywordParameters::CommonKeywordParameters "=" variants::{Variant "|"}+ ";")
+Declaration:
+        tag(tags::Tags visibility::Visibility "tag" kind::Kind name::Name "on" types::{Type ","}+ ";")
+Type:
+        functionfunction::FunctionType
+Type:
+        bracket("(" type::Type ")")
+Type:
+        basicbasic::BasicType
+Type:
+        variabletypeVar::TypeVar
+Type:
+        symbolsymbol::EPSILON
+Type:
+        useruser::UserType
+Type:
+        selectorselector::DataTypeSelector
+Type:
+        structuredstructured::StructuredType
+KeywordFormals:
+        default(optionalComma::OptionalComma keywordFormalList::{KeywordFormal ","}+)
+KeywordFormals:
+        noneEPSILON
+Class:
+        complement("!" charClass::Class)
+Class:
+        simpleCharclass("[" ranges::(Range*) "]")
+Class:
+        difference(lhs::Class "-" rhs::Class)
+Class:
+        intersection(lhs::Class "&&" rhs::Class)
+Class:
+        bracket("(" charclass::Class ")")
+Class:
+        union(lhs::Class "||" rhs::Class)
+Comprehension:
+        map("(" from::Expression ":" to::Expression "|" generators::{Expression ","}+ ")")
+Comprehension:
+        list("[" results::{Expression ","}+ "|" generators::{Expression ","}+ "]")
+Comprehension:
+        set("{" results::{Expression ","}+ "|" generators::{Expression ","}+ "}")
+FunctionModifiers:
+        listmodifiers::(FunctionModifier*)
+Variant:
+        nAryConstructor(name::Name "(" arguments::{TypeArg ","}* keywordArguments::KeywordFormals ")")
+FunctionDeclaration:
+        default(tags::Tags visibility::Visibility signature::Signature body::FunctionBody)
+FunctionDeclaration:
+        abstract(tags::Tags visibility::Visibility signature::Signature ";")
+FunctionDeclaration:
+        expression(tags::Tags visibility::Visibility signature::Signature "=" expression::Expression ";")
+FunctionDeclaration:
+        conditional(tags::Tags visibility::Visibility signature::Signature "=" expression::Expression "when" conditions::{Expression ","}+ ";")
+ProdModifier:
+        associativityassociativity::Assoc
+ProdModifier:
+        tagtag::Tag
+ProdModifier:
+        bracket"bracket"
+Toplevel:
+        givenVisibilitydeclaration::Declaration
+TypeVar:
+        free("&" name::Name)
+TypeVar:
+        bounded("&" name::Name "<:" bound::Type)
+BasicType:
+        rational"rat"
+BasicType:
+        bag"bag"
+BasicType:
+        dateTime"datetime"
+BasicType:
+        string"str"
+BasicType:
+        set"set"
+BasicType:
+        type"type"
+BasicType:
+        bool"bool"
+BasicType:
+        listRelation"lrel"
+BasicType:
+        relation"rel"
+BasicType:
+        void"void"
+BasicType:
+        value"value"
+BasicType:
+        loc"loc"
+BasicType:
+        num"num"
+BasicType:
+        list"list"
+BasicType:
+        tuple"tuple"
+BasicType:
+        map"map"
+BasicType:
+        int"int"
+BasicType:
+        node"node"
+BasicType:
+        real"real"
+Prod:
+        associativityGroup(associativity::Assoc "(" group::Prod ")")
+Prod:
+        reference(":" referenced::Name)
+Prod:
+        labeled(modifiers::(ProdModifier*) name::Name ":" args::(Sym*))
+Prod:
+        others"..."
+Prod:
+        unlabeled(modifiers::(ProdModifier*) args::(Sym*))
+Prod:
+        all(lhs::Prod "|" rhs::Prod)
+Prod:
+        first(lhs::Prod rhs::Prod)
+DateTimeLiteral:
+        dateAndTimeLiteraldateAndTime::DateAndTime
+DateTimeLiteral:
+        timeLiteraltime::JustTime
+DateTimeLiteral:
+        dateLiteraldate::JustDate
+Pattern:
+        concreteconcrete::Concrete
+Pattern:
+        map("(" mappings::(","*) ")")
+Pattern:
+        list("[" elements::{Pattern ","}* "]")
+Pattern:
+        callOrTree(expression::Pattern "(" arguments::{Pattern ","}* keywordArguments::KeywordArguments ")")
+Pattern:
+        literalliteral::Literal
+Pattern:
+        splicePlus("+" argument::Pattern)
+Pattern:
+        qualifiedNamequalifiedName::QualifiedName
+Pattern:
+        negative("-" argument::Pattern)
+Pattern:
+        tuple("<" elements::{Pattern ","}+ ">")
+Pattern:
+        multiVariable(qualifiedName::QualifiedName "*")
+Pattern:
+        typedVariable(type::Type name::Name)
+Pattern:
+        set("{" elements::{Pattern ","}* "}")
+Pattern:
+        reifiedType("type" "(" symbol::Pattern "," definitions::Pattern ")")
+Pattern:
+        splice("*" argument::Pattern)
+Pattern:
+        asType("[" type::Type "]" argument::Pattern)
+Pattern:
+        descendant("/" pattern::Pattern)
+Pattern:
+        variableBecomes(name::Name ":" pattern::Pattern)
+Pattern:
+        anti("!" pattern::Pattern)
+Pattern:
+        typedVariableBecomes(type::Type name::Name ":" pattern::Pattern)
+Tag:
+        default("@" name::Name contents::TagString)
+Tag:
+        expression("@" name::Name "=" expression::Expression)
+Tag:
+        empty("@" name::Name)
+ModuleActuals:
+        default("[" types::{Type ","}+ "]")

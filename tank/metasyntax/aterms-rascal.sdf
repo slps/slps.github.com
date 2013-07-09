@@ -4,34 +4,43 @@ exports
   sorts
         RealCon IntCon AFun Annotation ATerm OptExp 
   context-free syntax
-        IntCon "." NatCon OptExp -> RealCon {cons(RealCon)}
+        RealCon(IntCon "." NatCon OptExp) -> RealCon
 
-        "+" NatCon -> IntCon {cons(Positive)}
+        Positive("+" NatCon) -> IntCon
 
-        NatCon -> IntCon {cons(Natural)}
+        NaturalNatCon -> IntCon
 
-        "-" NatCon -> IntCon {cons(Negative)}
+        Negative("-" NatCon) -> IntCon
 
-        StrCon -> AFun {cons(Quoted)}
+        QuotedStrCon -> AFun
 
-        IdCon -> AFun {cons(Unquoted)}
+        UnquotedIdCon -> AFun
 
-        "{" ATerm"," "}" -> Annotation {cons(Default)}
+        Default("{" 
+						ATerm
+						","
+					 "}") -> Annotation
 
-        AFun "(" ATerm"," ")" -> ATerm {cons(Appl)}
+        Appl(AFun "(" 
+						ATerm
+						","
+					 ")") -> ATerm
 
-        RealCon -> ATerm {cons(Real)}
+        RealRealCon -> ATerm
 
-        "[" ATerm"," "]" -> ATerm {cons(List)}
+        List("[" 
+						ATerm
+						","
+					 "]") -> ATerm
 
-        ATerm Annotation -> ATerm {cons(Annotated)}
+        Annotated(ATerm Annotation) -> ATerm
 
-        "<" ATerm ">" -> ATerm {cons(Placeholder)}
+        Placeholder("<" ATerm ">") -> ATerm
 
-        IntCon -> ATerm {cons(Int)}
+        IntIntCon -> ATerm
 
-        AFun -> ATerm {cons(Fun)}
+        FunAFun -> ATerm
 
-        "e" IntCon -> OptExp {cons(Present)}
+        Present("e" IntCon) -> OptExp
 
-         -> OptExp {cons(Absent)}
+        Absent -> OptExp
