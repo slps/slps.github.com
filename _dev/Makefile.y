@@ -1,17 +1,33 @@
 all:
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/hats/abs/grammar.bgf > tank/hats/abs.bgf
 	_dev/format tank hats/abs hats/abs
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/api2mol/abstract/grammar.bgf > tank/api2mol/abstract.bgf
+	_dev/format tank api2mol/abstract api2mol/abstract
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/api2mol/concrete/grammar.bgf > tank/api2mol/concrete.bgf
+	_dev/format tank api2mol/concrete api2mol/concrete
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/fl/antlr/grammar.bgf > tank/fl/antlr.bgf
 	_dev/format tank fl/antlr fl/antlr
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/fl/dcg/grammar.bgf > tank/fl/dcg.bgf
 	_dev/format tank fl/dcg fl/dcg
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/fl/python/grammar.bgf > tank/fl/python.bgf
 	_dev/format tank fl/python fl/python
-	_dev/format tank fl/rascal-c fl/rascal-c
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/fl/concrete-rascal/grammar.bgf > tank/fl/concrete-rascal.bgf
+	_dev/format tank fl/concrete-rascal fl/concrete-rascal
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/fl/sdf/grammar.bgf > tank/fl/sdf.bgf
 	_dev/format tank fl/sdf fl/sdf
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/fl/txl/grammar.bgf > tank/fl/txl.bgf
 	_dev/format tank fl/txl fl/txl
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/fl/ecore/grammar.bgf > tank/fl/ecore.bgf
 	_dev/format tank fl/ecore fl/ecore
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/fl/emf/grammar.bgf > tank/fl/emf.bgf
 	_dev/format tank fl/emf fl/emf
-	_dev/format tank fl/rascal-a fl/rascal-a
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/fl/abstract-rascal/grammar.bgf > tank/fl/abstract-rascal.bgf
+	_dev/format tank fl/abstract-rascal fl/abstract-rascal
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/fl/xsd/grammar.bgf > tank/fl/xsd.bgf
 	_dev/format tank fl/xsd fl/xsd
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/fl/om/grammar.bgf > tank/fl/om.bgf
 	_dev/format tank fl/om fl/om
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/fl/jaxb/grammar.bgf > tank/fl/jaxb.bgf
 	_dev/format tank fl/jaxb fl/jaxb
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metasyntax/asf-sdf/grammar.bgf > tank/metasyntax/asf-sdf.bgf
 	_dev/format tank metasyntax/asf-sdf metasyntax/asf-sdf
@@ -23,8 +39,12 @@ all:
 	_dev/format tank metasyntax/aterms-rascal metasyntax/aterms-rascal
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metasyntax/bnf-sdf/grammar.bgf > tank/metasyntax/bnf-sdf.bgf
 	_dev/format tank metasyntax/bnf-sdf metasyntax/bnf-sdf
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metasyntax/box-sdf/grammar.bgf > tank/metasyntax/box-sdf.bgf
+	_dev/format tank metasyntax/box-sdf metasyntax/box-sdf
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metasyntax/box-rascal/grammar.bgf > tank/metasyntax/box-rascal.bgf
 	_dev/format tank metasyntax/box-rascal metasyntax/box-rascal
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metasyntax/dtd/grammar.bgf > tank/metasyntax/dtd.bgf
+	_dev/format tank metasyntax/dtd metasyntax/dtd
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metasyntax/ebnf-bgf/grammar.bgf > tank/metasyntax/ebnf-bgf.bgf
 	_dev/format tank metasyntax/ebnf-bgf metasyntax/ebnf-bgf
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metasyntax/ebnf-iso-1/grammar.bgf > tank/metasyntax/ebnf-iso-1.bgf
@@ -39,8 +59,12 @@ all:
 	_dev/format tank metasyntax/lll-ldta metasyntax/lll-ldta
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metasyntax/lll-kort/grammar.bgf > tank/metasyntax/lll-kort.bgf
 	_dev/format tank metasyntax/lll-kort metasyntax/lll-kort
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metasyntax/pdg/grammar.bgf > tank/metasyntax/pdg.bgf
+	_dev/format tank metasyntax/pdg metasyntax/pdg
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metasyntax/rascal-new/grammar.bgf > tank/metasyntax/rascal-new.bgf
 	_dev/format tank metasyntax/rascal-new metasyntax/rascal-new
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metasyntax/rascal-types/grammar.bgf > tank/metasyntax/rascal-types.bgf
+	_dev/format tank metasyntax/rascal-types metasyntax/rascal-types
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metasyntax/rascal-adt-simple/grammar.bgf > tank/metasyntax/rascal-adt-simple.bgf
 	_dev/format tank metasyntax/rascal-adt-simple metasyntax/rascal-adt-simple
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metasyntax/relaxng/grammar.bgf > tank/metasyntax/relaxng.bgf
@@ -61,14 +85,26 @@ all:
 	_dev/format tank metasyntax/yacc-sdf metasyntax/yacc-sdf
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metasyntax/yacc-txl/grammar.bgf > tank/metasyntax/yacc-txl.bgf
 	_dev/format tank metasyntax/yacc-txl metasyntax/yacc-txl
-	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/develop/ant/grammar.bgf > tank/develop/ant.bgf
-	_dev/format tank develop/ant develop/ant
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/develop/ant-ruchaud-brunel/grammar.bgf > tank/develop/ant-ruchaud-brunel.bgf
+	_dev/format tank develop/ant-ruchaud-brunel develop/ant-ruchaud-brunel
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/develop/ant-bruneliere/grammar.bgf > tank/develop/ant-bruneliere.bgf
+	_dev/format tank develop/ant-bruneliere develop/ant-bruneliere
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/develop/bugzilla/grammar.bgf > tank/develop/bugzilla.bgf
 	_dev/format tank develop/bugzilla develop/bugzilla
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/develop/make/grammar.bgf > tank/develop/make.bgf
 	_dev/format tank develop/make develop/make
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/develop/mantis/grammar.bgf > tank/develop/mantis.bgf
+	_dev/format tank develop/mantis develop/mantis
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/develop/maven-maven/grammar.bgf > tank/develop/maven-maven.bgf
+	_dev/format tank develop/maven-maven develop/maven-maven
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/develop/maven-project/grammar.bgf > tank/develop/maven-project.bgf
+	_dev/format tank develop/maven-project develop/maven-project
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/develop/java-project/grammar.bgf > tank/develop/java-project.bgf
 	_dev/format tank develop/java-project develop/java-project
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/develop/microsoft-project-bruneliere/grammar.bgf > tank/develop/microsoft-project-bruneliere.bgf
+	_dev/format tank develop/microsoft-project-bruneliere develop/microsoft-project-bruneliere
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/develop/microsoft-project-touzet/grammar.bgf > tank/develop/microsoft-project-touzet.bgf
+	_dev/format tank develop/microsoft-project-touzet develop/microsoft-project-touzet
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/pico/sdf/grammar.bgf > tank/pico/sdf.bgf
 	_dev/format tank pico/sdf pico/sdf
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/pico/rascal/grammar.bgf > tank/pico/rascal.bgf
@@ -259,6 +295,34 @@ all:
 	_dev/format tank tescol/11110 tescol/11110
 	cp ../slps/topics/grammars/../testing/gbtf/tests/tescol/11111.bgf tank/tescol/11111.bgf
 	_dev/format tank tescol/11111 tescol/11111
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/conf/cocus/grammar.bgf > tank/conf/cocus.bgf
+	_dev/format tank conf/cocus conf/cocus
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/conf/conferencereview/grammar.bgf > tank/conf/conferencereview.bgf
+	_dev/format tank conf/conferencereview conf/conferencereview
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/conf/conftool/grammar.bgf > tank/conf/conftool.bgf
+	_dev/format tank conf/conftool conf/conftool
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/conf/confious/grammar.bgf > tank/conf/confious.bgf
+	_dev/format tank conf/confious conf/confious
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/conf/edas/grammar.bgf > tank/conf/edas.bgf
+	_dev/format tank conf/edas conf/edas
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/conf/ekaw/grammar.bgf > tank/conf/ekaw.bgf
+	_dev/format tank conf/ekaw conf/ekaw
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/conf/iasted/grammar.bgf > tank/conf/iasted.bgf
+	_dev/format tank conf/iasted conf/iasted
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/conf/microarch/grammar.bgf > tank/conf/microarch.bgf
+	_dev/format tank conf/microarch conf/microarch
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/conf/cmt/grammar.bgf > tank/conf/cmt.bgf
+	_dev/format tank conf/cmt conf/cmt
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/conf/paperdyne/grammar.bgf > tank/conf/paperdyne.bgf
+	_dev/format tank conf/paperdyne conf/paperdyne
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/conf/precisionconference/grammar.bgf > tank/conf/precisionconference.bgf
+	_dev/format tank conf/precisionconference conf/precisionconference
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/conf/sigkdd/grammar.bgf > tank/conf/sigkdd.bgf
+	_dev/format tank conf/sigkdd conf/sigkdd
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/conf/sofsem/grammar.bgf > tank/conf/sofsem.bgf
+	_dev/format tank conf/sofsem conf/sofsem
+	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/conf/zakongroup/grammar.bgf > tank/conf/zakongroup.bgf
+	_dev/format tank conf/zakongroup conf/zakongroup
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/ACG/grammar.bgf > tank/metamodels/ACG.bgf
 	_dev/format tank metamodels/ACG metamodels/ACG
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/ACME/grammar.bgf > tank/metamodels/ACME.bgf
@@ -269,16 +333,12 @@ all:
 	_dev/format tank metamodels/Agate metamodels/Agate
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/ATL/grammar.bgf > tank/metamodels/ATL.bgf
 	_dev/format tank metamodels/ATL metamodels/ATL
-	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/AWKPrograms/grammar.bgf > tank/metamodels/AWKPrograms.bgf
-	_dev/format tank metamodels/AWKPrograms metamodels/AWKPrograms
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/XMorphLanguage_abstractSyntax/grammar.bgf > tank/metamodels/XMorphLanguage_abstractSyntax.bgf
 	_dev/format tank metamodels/XMorphLanguage_abstractSyntax metamodels/XMorphLanguage_abstractSyntax
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/TroposActorConcept/grammar.bgf > tank/metamodels/TroposActorConcept.bgf
 	_dev/format tank metamodels/TroposActorConcept metamodels/TroposActorConcept
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/Amble/grammar.bgf > tank/metamodels/Amble.bgf
 	_dev/format tank metamodels/Amble metamodels/Amble
-	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/AntScripts/grammar.bgf > tank/metamodels/AntScripts.bgf
-	_dev/format tank metamodels/AntScripts metamodels/AntScripts
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/AnyLogic/grammar.bgf > tank/metamodels/AnyLogic.bgf
 	_dev/format tank metamodels/AnyLogic metamodels/AnyLogic
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/Architectural_Description/grammar.bgf > tank/metamodels/Architectural_Description.bgf
@@ -331,36 +391,24 @@ all:
 	_dev/format tank metamodels/Class metamodels/Class
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/ClassicModels/grammar.bgf > tank/metamodels/ClassicModels.bgf
 	_dev/format tank metamodels/ClassicModels metamodels/ClassicModels
-	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/cmt.owl/grammar.bgf > tank/metamodels/cmt.owl.bgf
-	_dev/format tank metamodels/cmt.owl metamodels/cmt.owl
-	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/Cocus.owl/grammar.bgf > tank/metamodels/Cocus.owl.bgf
-	_dev/format tank metamodels/Cocus.owl metamodels/Cocus.owl
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/CompanyStructure/grammar.bgf > tank/metamodels/CompanyStructure.bgf
 	_dev/format tank metamodels/CompanyStructure metamodels/CompanyStructure
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/ComponentUML/grammar.bgf > tank/metamodels/ComponentUML.bgf
 	_dev/format tank metamodels/ComponentUML metamodels/ComponentUML
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/IEEE1471ConceptualModel/grammar.bgf > tank/metamodels/IEEE1471ConceptualModel.bgf
 	_dev/format tank metamodels/IEEE1471ConceptualModel metamodels/IEEE1471ConceptualModel
-	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/confOf.owl/grammar.bgf > tank/metamodels/confOf.owl.bgf
-	_dev/format tank metamodels/confOf.owl metamodels/confOf.owl
-	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/confious.owl/grammar.bgf > tank/metamodels/confious.owl.bgf
-	_dev/format tank metamodels/confious.owl metamodels/confious.owl
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/Contact/grammar.bgf > tank/metamodels/Contact.bgf
 	_dev/format tank metamodels/Contact metamodels/Contact
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/ControllerUML/grammar.bgf > tank/metamodels/ControllerUML.bgf
 	_dev/format tank metamodels/ControllerUML metamodels/ControllerUML
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/Cristal/grammar.bgf > tank/metamodels/Cristal.bgf
 	_dev/format tank metamodels/Cristal metamodels/Cristal
-	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/crs_dr.owl/grammar.bgf > tank/metamodels/crs_dr.owl.bgf
-	_dev/format tank metamodels/crs_dr.owl metamodels/crs_dr.owl
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/DSL/grammar.bgf > tank/metamodels/DSL.bgf
 	_dev/format tank metamodels/DSL metamodels/DSL
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/DSLtools/grammar.bgf > tank/metamodels/DSLtools.bgf
 	_dev/format tank metamodels/DSLtools metamodels/DSLtools
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/DSLModel/grammar.bgf > tank/metamodels/DSLModel.bgf
 	_dev/format tank metamodels/DSLModel metamodels/DSLModel
-	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/DTD/grammar.bgf > tank/metamodels/DTD.bgf
-	_dev/format tank metamodels/DTD metamodels/DTD
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/DTMP/grammar.bgf > tank/metamodels/DTMP.bgf
 	_dev/format tank metamodels/DTMP metamodels/DTMP
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/DXF/grammar.bgf > tank/metamodels/DXF.bgf
@@ -405,10 +453,6 @@ all:
 	_dev/format tank metamodels/EclipseLaunchConfigurations metamodels/EclipseLaunchConfigurations
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/EclipsePlugIn/grammar.bgf > tank/metamodels/EclipsePlugIn.bgf
 	_dev/format tank metamodels/EclipsePlugIn metamodels/EclipsePlugIn
-	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/edas.owl/grammar.bgf > tank/metamodels/edas.owl.bgf
-	_dev/format tank metamodels/edas.owl metamodels/edas.owl
-	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/ekaw.owl/grammar.bgf > tank/metamodels/ekaw.owl.bgf
-	_dev/format tank metamodels/ekaw.owl metamodels/ekaw.owl
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/Family/grammar.bgf > tank/metamodels/Family.bgf
 	_dev/format tank metamodels/Family metamodels/Family
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/FeatureDiagrams/grammar.bgf > tank/metamodels/FeatureDiagrams.bgf
@@ -451,8 +495,6 @@ all:
 	_dev/format tank metamodels/IMSTransactionMessage metamodels/IMSTransactionMessage
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/IRL/grammar.bgf > tank/metamodels/IRL.bgf
 	_dev/format tank metamodels/IRL metamodels/IRL
-	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/iasted.owl/grammar.bgf > tank/metamodels/iasted.owl.bgf
-	_dev/format tank metamodels/iasted.owl metamodels/iasted.owl
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/TroposIntegratingActorConcept/grammar.bgf > tank/metamodels/TroposIntegratingActorConcept.bgf
 	_dev/format tank metamodels/TroposIntegratingActorConcept metamodels/TroposIntegratingActorConcept
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/Jess/grammar.bgf > tank/metamodels/Jess.bgf
@@ -471,8 +513,6 @@ all:
 	_dev/format tank metamodels/Klaper metamodels/Klaper
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/LQN/grammar.bgf > tank/metamodels/LQN.bgf
 	_dev/format tank metamodels/LQN metamodels/LQN
-	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/LaTeX/grammar.bgf > tank/metamodels/LaTeX.bgf
-	_dev/format tank metamodels/LaTeX metamodels/LaTeX
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/M/grammar.bgf > tank/metamodels/M.bgf
 	_dev/format tank metamodels/M metamodels/M
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/Marte/grammar.bgf > tank/metamodels/Marte.bgf
@@ -481,28 +521,16 @@ all:
 	_dev/format tank metamodels/MAS metamodels/MAS
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/Matlab/grammar.bgf > tank/metamodels/Matlab.bgf
 	_dev/format tank metamodels/Matlab metamodels/Matlab
-	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/MSProject/grammar.bgf > tank/metamodels/MSProject.bgf
-	_dev/format tank metamodels/MSProject metamodels/MSProject
-	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/MSProject2/grammar.bgf > tank/metamodels/MSProject2.bgf
-	_dev/format tank metamodels/MSProject2 metamodels/MSProject2
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/MTRANS/grammar.bgf > tank/metamodels/MTRANS.bgf
 	_dev/format tank metamodels/MTRANS metamodels/MTRANS
-	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/Mantis/grammar.bgf > tank/metamodels/Mantis.bgf
-	_dev/format tank metamodels/Mantis metamodels/Mantis
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/Maude/grammar.bgf > tank/metamodels/Maude.bgf
 	_dev/format tank metamodels/Maude metamodels/Maude
-	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/MavenMaven/grammar.bgf > tank/metamodels/MavenMaven.bgf
-	_dev/format tank metamodels/MavenMaven metamodels/MavenMaven
-	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/MavenProject/grammar.bgf > tank/metamodels/MavenProject.bgf
-	_dev/format tank metamodels/MavenProject metamodels/MavenProject
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/Measure/grammar.bgf > tank/metamodels/Measure.bgf
 	_dev/format tank metamodels/Measure metamodels/Measure
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/METAH/grammar.bgf > tank/metamodels/METAH.bgf
 	_dev/format tank metamodels/METAH metamodels/METAH
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/Metrics/grammar.bgf > tank/metamodels/Metrics.bgf
 	_dev/format tank metamodels/Metrics metamodels/Metrics
-	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/MICRO.owl/grammar.bgf > tank/metamodels/MICRO.owl.bgf
-	_dev/format tank metamodels/MICRO.owl metamodels/MICRO.owl
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/MiningMart/grammar.bgf > tank/metamodels/MiningMart.bgf
 	_dev/format tank metamodels/MiningMart metamodels/MiningMart
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/MoDAF-AV/grammar.bgf > tank/metamodels/MoDAF-AV.bgf
@@ -529,26 +557,18 @@ all:
 	_dev/format tank metamodels/ODP-TV metamodels/ODP-TV
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/OWL/grammar.bgf > tank/metamodels/OWL.bgf
 	_dev/format tank metamodels/OWL metamodels/OWL
-	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/OpenConf.owl/grammar.bgf > tank/metamodels/OpenConf.owl.bgf
-	_dev/format tank metamodels/OpenConf.owl metamodels/OpenConf.owl
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/OpenQVT/grammar.bgf > tank/metamodels/OpenQVT.bgf
 	_dev/format tank metamodels/OpenQVT metamodels/OpenQVT
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/PASSI/grammar.bgf > tank/metamodels/PASSI.bgf
 	_dev/format tank metamodels/PASSI metamodels/PASSI
-	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/PDG/grammar.bgf > tank/metamodels/PDG.bgf
-	_dev/format tank metamodels/PDG metamodels/PDG
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/PIF/grammar.bgf > tank/metamodels/PIF.bgf
 	_dev/format tank metamodels/PIF metamodels/PIF
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/PRR/grammar.bgf > tank/metamodels/PRR.bgf
 	_dev/format tank metamodels/PRR metamodels/PRR
-	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/paperdyne.owl/grammar.bgf > tank/metamodels/paperdyne.owl.bgf
-	_dev/format tank metamodels/paperdyne.owl metamodels/paperdyne.owl
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/Parameters/grammar.bgf > tank/metamodels/Parameters.bgf
 	_dev/format tank metamodels/Parameters metamodels/Parameters
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/PathExp/grammar.bgf > tank/metamodels/PathExp.bgf
 	_dev/format tank metamodels/PathExp metamodels/PathExp
-	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/PCS.owl/grammar.bgf > tank/metamodels/PCS.owl.bgf
-	_dev/format tank metamodels/PCS.owl metamodels/PCS.owl
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/Perceptory/grammar.bgf > tank/metamodels/Perceptory.bgf
 	_dev/format tank metamodels/Perceptory metamodels/Perceptory
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/Person/grammar.bgf > tank/metamodels/Person.bgf
@@ -633,8 +653,6 @@ all:
 	_dev/format tank metamodels/SeminarSchedulingSystem metamodels/SeminarSchedulingSystem
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/Sharengo/grammar.bgf > tank/metamodels/Sharengo.bgf
 	_dev/format tank metamodels/Sharengo metamodels/Sharengo
-	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/sigkdd.owl/grammar.bgf > tank/metamodels/sigkdd.owl.bgf
-	_dev/format tank metamodels/sigkdd.owl metamodels/sigkdd.owl
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/SignalFlow/grammar.bgf > tank/metamodels/SignalFlow.bgf
 	_dev/format tank metamodels/SignalFlow metamodels/SignalFlow
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/SimpleAirlineDomain/grammar.bgf > tank/metamodels/SimpleAirlineDomain.bgf
@@ -653,8 +671,6 @@ all:
 	_dev/format tank metamodels/SimpleSBVR metamodels/SimpleSBVR
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/SimulinkStateFlow/grammar.bgf > tank/metamodels/SimulinkStateFlow.bgf
 	_dev/format tank metamodels/SimulinkStateFlow metamodels/SimulinkStateFlow
-	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/Conference.owl/grammar.bgf > tank/metamodels/Conference.owl.bgf
-	_dev/format tank metamodels/Conference.owl metamodels/Conference.owl
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/SoftwareQualityControl/grammar.bgf > tank/metamodels/SoftwareQualityControl.bgf
 	_dev/format tank metamodels/SoftwareQualityControl metamodels/SoftwareQualityControl
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/MSOfficeExcel_SpreadsheetMLBasicDef/grammar.bgf > tank/metamodels/MSOfficeExcel_SpreadsheetMLBasicDef.bgf
@@ -725,10 +741,6 @@ all:
 	_dev/format tank metamodels/MSOfficeWord_WordprocessingMLTableElts metamodels/MSOfficeWord_WordprocessingMLTableElts
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/WorkDefinitions/grammar.bgf > tank/metamodels/WorkDefinitions.bgf
 	_dev/format tank metamodels/WorkDefinitions metamodels/WorkDefinitions
-	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/XAML-Perspective/grammar.bgf > tank/metamodels/XAML-Perspective.bgf
-	_dev/format tank metamodels/XAML-Perspective metamodels/XAML-Perspective
-	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/XAML-ResourceDictionary/grammar.bgf > tank/metamodels/XAML-ResourceDictionary.bgf
-	_dev/format tank metamodels/XAML-ResourceDictionary metamodels/XAML-ResourceDictionary
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/ASM/grammar.bgf > tank/metamodels/ASM.bgf
 	_dev/format tank metamodels/ASM metamodels/ASM
 	xsltproc _dev/label-fix.xslt ../slps/topics/grammars/metamodels/XPDL-1.14/grammar.bgf > tank/metamodels/XPDL-1.14.bgf

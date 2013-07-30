@@ -1,0 +1,37 @@
+module Main
+
+exports
+  sorts
+        RSS Channel Item Image TextInput Cloud Category Enclosure Source Date DayKind String Integer 
+  context-free syntax
+        version::String channel::Channel -> RSS
+
+        title::String link::String description::String language::String copyright::String managingEditor::String webmaster::String generator::String docs::String ttl::Integer rating::String skipHours::Integer+ skipDays::DayKind+ rss::RSS pubDate::Date lastBuildDate::Date image::Image textInput::TextInput cloud::Cloud category::Category items::Item+ -> Channel
+
+        title::String link::String description::String author::String comments::String guid::String source::Source pubDate::Date enclosure::Enclosure category::Category channel::Channel -> Item
+
+        url::String title::String link::String description::String width::Integer height::Integer channel::Channel -> Image
+
+        title::String description::String name::String link::String channel::Channel -> TextInput
+
+        domain::String port::Integer path::String registerProcedure::String protocol::String channel::Channel -> Cloud
+
+        domain::String value::String -> Category
+
+        url::String lenght::Integer type::String -> Enclosure
+
+        url::String value::String -> Source
+
+        eDay::DayKind day::Integer month::Integer year::Integer hours::Integer minutes::Integer seconds::Integer -> Date
+
+        Monday:: -> DayKind
+        Tuesday:: -> DayKind
+        Wednesday:: -> DayKind
+        Thursday:: -> DayKind
+        Friday:: -> DayKind
+        Saturday:: -> DayKind
+        Sunday:: -> DayKind
+
+        STR -> String
+
+        INT -> Integer

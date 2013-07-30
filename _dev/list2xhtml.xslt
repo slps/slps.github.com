@@ -364,6 +364,7 @@ Last updated: </xsl:text>
 				<xsl:choose>
 					<xsl:when test="local-name(.)='as'"/>
 					<xsl:when test="local-name(.)='name'"/>
+					<xsl:when test="local-name(.)='meta'"/>
 					<xsl:when test="local-name(.)='handle'"/>
 					<xsl:when test="local-name(.)='source'"/>
 					<xsl:when test="local-name(.)='toolset' and @ref">
@@ -408,6 +409,9 @@ Last updated: </xsl:text>
 					<xsl:if test="local-name()='antlr3'">
 						<a href="http://github.com/grammarware/slps/wiki/ANTLR3">ANTLR3⇒BGF</a>
 					</xsl:if>
+					<xsl:if test="local-name()='dcg'">
+						<a href="http://github.com/grammarware/slps/wiki/DCG2BGF">DCG⇒BGF</a>
+					</xsl:if>
 					<xsl:if test="local-name()='ecore'">
 						<a href="http://github.com/grammarware/slps/wiki/Ecore2BGF">Ecore⇒BGF</a>
 					</xsl:if>
@@ -422,6 +426,9 @@ Last updated: </xsl:text>
 					</xsl:if>
 					<xsl:if test="local-name()='html2bgf'">
 						<a href="http://github.com/grammarware/slps/wiki/HTML2BGF">HTML⇒BGF</a>
+					</xsl:if>
+					<xsl:if test="local-name()='pyparsing'">
+						<a href="http://github.com/grammarware/slps/wiki/Python2BGF">Python⇒BGF</a>
 					</xsl:if>
 					<xsl:if test="local-name()='spec2bgf'">
 						<a href="http://github.com/grammarware/slps/wiki/Spec2BGF">W3CSpec⇒BGF</a>
@@ -440,6 +447,9 @@ Last updated: </xsl:text>
 					</xsl:if>
 					<xsl:if test="local-name()='xsd2bgf'">
 						<a href="http://github.com/grammarware/slps/wiki/XSD2BGF">XMLSchema⇒BGF</a>
+					</xsl:if>
+					<xsl:if test="local-name()='java2bgf'">
+						<a href="http://github.com/grammarware/slps/wiki/Java2BGF">Java⇒BGF</a>
 					</xsl:if>
 					<xsl:text>]</xsl:text>
 				</xsl:for-each>
@@ -475,8 +485,8 @@ Last updated: </xsl:text>
 						<xsl:text>] [</xsl:text>
 						<a href="{$filename}.sdf">SDF</a>
 						<!-- <xsl:text>] [</xsl:text>
-						<a href="{$filename}.rsc">Rascal</a>
-						<xsl:text>]</xsl:text> -->
+						<a href="{$filename}.rsc">Rascal</a> -->
+						<xsl:text>]</xsl:text>
 					</span>
 				</li>
 			</xsl:for-each>

@@ -1,0 +1,55 @@
+module Main
+
+exports
+  sorts
+        Definition DefaultMetaclassSection Mapping Section PropertySection NewSection MultipleSection ValueSection Statement StatementType NamedElement MethodCall Parameter Constructor 
+  context-free syntax
+        context::STR+ defaultMetaclass::DefaultMetaclassSection mappings::Mapping+ -> Definition
+
+        metaclassName::STR attribute::STR -> DefaultMetaclassSection
+
+        metaclass::STR instanceClass::STR sections::Section+ -> Mapping
+
+        DefaultMetaclassSection -> Section
+
+        PropertySection -> Section
+
+        NewSection -> Section
+
+        MultipleSection -> Section
+
+        ValueSection -> Section
+
+        property::STR statements::Statement+ -> PropertySection
+
+        constructors::Constructor+ -> NewSection
+
+        statements::Statement+ -> MultipleSection
+
+        metaValue::STR instanceValue::STR -> ValueSection
+
+        type::StatementType variables::STR+ calls::MethodCall+ -> Statement
+
+        GET:: -> StatementType
+        SET:: -> StatementType
+        APPEND:: -> StatementType
+        INSERT_AT:: -> StatementType
+        REMOVE:: -> StatementType
+        REMOVE_AT:: -> StatementType
+        REMOVE_LAST:: -> StatementType
+        REMOVE_ALL:: -> StatementType
+        COUNT:: -> StatementType
+        ACCESSORS:: -> StatementType
+        DIRECT:: -> StatementType
+
+        MethodCall -> NamedElement
+
+        Parameter -> NamedElement
+
+        Constructor -> MethodCall
+
+        params::Parameter+ -> MethodCall
+
+        name::STR -> Parameter
+
+        params::Parameter+ -> Constructor

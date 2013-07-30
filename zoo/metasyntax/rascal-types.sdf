@@ -1,0 +1,129 @@
+module Main
+
+exports
+  sorts
+        TagKind RName Symbol LabelSource Modifier Vis AbstractValue LabelStackItem Timing Configuration DefOrUse LiteralNodeInfo MapNodeInfo PatternTree BindResult AssignableTree ATResult RuntimeException Bindings RSignatureItem RSignature 
+  context-free syntax
+        functionKind:: -> TagKind
+        variableKind:: -> TagKind
+        allKind:: -> TagKind
+        annoKind:: -> TagKind
+        dataKind:: -> TagKind
+        viewKind:: -> TagKind
+        aliasKind:: -> TagKind
+        moduleKind:: -> TagKind
+        tagKind:: -> TagKind
+
+        RSimpleName::name::STR -> RName
+        RCompoundName::nameParts::(STR*) -> RName
+
+        user::(rname::RName parameters::(Symbol*)) -> Symbol
+        failure::messages::(Message*) -> Symbol
+        inferred::uniqueId::INT -> Symbol
+        overloaded::overloads::(Symbol*) -> Symbol
+
+        visitLabel:: -> LabelSource
+        blockLabel:: -> LabelSource
+        forLabel:: -> LabelSource
+        whileLabel:: -> LabelSource
+        doWhileLabel:: -> LabelSource
+        ifLabel:: -> LabelSource
+        switchLabel:: -> LabelSource
+        caseLabel:: -> LabelSource
+
+        javaModifier:: -> Modifier
+        testModifier:: -> Modifier
+        defaultModifier:: -> Modifier
+
+        publicVis:: -> Vis
+        privateVis:: -> Vis
+        defaultVis:: -> Vis
+
+        label::(name::RName source::LabelSource containedIn::INT at::STR) -> AbstractValue
+        variable::(name::RName rtype::Symbol inferred::("true" | "false") containedIn::INT at::STR) -> AbstractValue
+        function::(name::RName rtype::Symbol isVarArgs::("true" | "false") containedIn::INT throwsTypes::(Symbol*) at::STR) -> AbstractValue
+        closure::(rtype::Symbol containedIn::INT at::STR) -> AbstractValue
+        module::(name::RName at::STR) -> AbstractValue
+        overload::(items::(INT*) rtype::Symbol) -> AbstractValue
+        datatype::(name::RName rtype::Symbol containedIn::INT ats::(STR*)) -> AbstractValue
+        sorttype::(name::RName rtype::Symbol containedIn::INT ats::(STR*)) -> AbstractValue
+        constructor::(name::RName rtype::Symbol containedIn::INT at::STR) -> AbstractValue
+        production::(name::RName rtype::Symbol containedIn::INT at::STR) -> AbstractValue
+        annotation::(name::RName rtype::Symbol onTypes::(Symbol*) containedIn::INT at::STR) -> AbstractValue
+        tag::(name::RName tkind::TagKind onTypes::(Symbol*) containedIn::INT at::STR) -> AbstractValue
+        alias::(name::RName rtype::Symbol containedIn::INT at::STR) -> AbstractValue
+        booleanScope::(containedIn::INT at::STR) -> AbstractValue
+        blockScope::(containedIn::INT at::STR) -> AbstractValue
+
+        labelStackItem::(labelName::RName labelSource::LabelSource labelType::Symbol) -> LabelStackItem
+
+        timing::(tmsg::STR tstart::STR tend::STR) -> Timing
+
+        config::(messages::(Message*) locationTypes::((STR Symbol)*) labelEnv::((RName INT)*) fcvEnv::((RName INT)*) typeEnv::((RName INT)*) modEnv::((RName INT)*) annotationEnv::((RName INT)*) tagEnv::((RName INT)*) visibilities::((INT Vis)*) store::((INT AbstractValue)*) adtFields::((INT STR Symbol)*) nonterminalFields::((INT STR Symbol)*) functionModifiers::((INT Modifier)*) definitions::((INT STR)*) uses::((INT STR)*) adtConstructors::((INT INT)*) nonterminalConstructors::((INT INT)*) stack::(INT*) labelStack::(LabelStackItem*) timings::(Timing*) nextLoc::INT uniqueify::INT) -> Configuration
+
+        def::name::RName -> DefOrUse
+        use::name::RName -> DefOrUse
+
+        literalNodeInfo::(DefOrUse STR) -> LiteralNodeInfo
+
+        mapNodeInfo::(PatternTree PatternTree) -> MapNodeInfo
+
+        setNode::children::(PatternTree*) -> PatternTree
+        listNode::children::(PatternTree*) -> PatternTree
+        nameNode::name::RName -> PatternTree
+        multiNameNode::name::RName -> PatternTree
+        spliceNodePlus::name::RName -> PatternTree
+        spliceNodePlus::(name::RName at::STR rtype::Symbol) -> PatternTree
+        spliceNodeStar::name::RName -> PatternTree
+        spliceNodeStar::(name::RName at::STR rtype::Symbol) -> PatternTree
+        negativeNode::child::PatternTree -> PatternTree
+        literalNode::rtype::Symbol -> PatternTree
+        literalNode::names::(LiteralNodeInfo*) -> PatternTree
+        tupleNode::children::(PatternTree*) -> PatternTree
+        typedNameNode::(name::RName at::STR rtype::Symbol) -> PatternTree
+        mapNode::mapChildren::(MapNodeInfo*) -> PatternTree
+        reifiedTypeNode::(s::PatternTree d::PatternTree) -> PatternTree
+        callOrTreeNode::(head::PatternTree args::(PatternTree*)) -> PatternTree
+        concreteSyntaxNode::(rtype::Symbol args::(PatternTree*)) -> PatternTree
+        varBecomesNode::(name::RName at::STR child::PatternTree) -> PatternTree
+        asTypeNode::(rtype::Symbol child::PatternTree) -> PatternTree
+        deepNode::child::PatternTree -> PatternTree
+        antiNode::child::PatternTree -> PatternTree
+        tvarBecomesNode::(rtype::Symbol name::RName at::STR child::PatternTree) -> PatternTree
+
+        Configuration PatternTree -> BindResult
+
+        bracketNode::child::AssignableTree -> AssignableTree
+        variableNode::name::RName -> AssignableTree
+        subscriptNode::(receiver::AssignableTree subscriptType::Symbol) -> AssignableTree
+        fieldAccessNode::(receiver::AssignableTree name::RName) -> AssignableTree
+        ifDefinedOrDefaultNode::(receiver::AssignableTree defaultType::Symbol) -> AssignableTree
+        constructorNode::(name::RName children::(AssignableTree*)) -> AssignableTree
+        tupleNodeAT::children::(AssignableTree*) -> AssignableTree
+        annotationNode::(receiver::AssignableTree name::RName) -> AssignableTree
+
+        Configuration AssignableTree -> ATResult
+
+        UnexpectedRType::t1::Symbol -> RuntimeException
+        UnexpectedRTypes::(t1::Symbol t2::Symbol) -> RuntimeException
+        UnimplementedRType::t1::Symbol -> RuntimeException
+        CannotCalculateBindings::(t1::Symbol t2::Symbol l::STR) -> RuntimeException
+        invalidMatch::(varName::STR typeLub::Symbol typeBound::Symbol) -> RuntimeException
+        invalidMatch::(targetType::Symbol sourceType::Symbol) -> RuntimeException
+
+        (varName::STR varType::Symbol)* -> Bindings
+
+        AliasSigItem::(aliasName::RName aliasType::UserType aliasedType::Type at::STR) -> RSignatureItem
+        FunctionSigItem::(functionName::RName sig::Signature at::STR) -> RSignatureItem
+        VariableSigItem::(variableName::RName variableType::Type at::STR) -> RSignatureItem
+        ADTSigItem::(adtName::RName adtType::UserType at::STR) -> RSignatureItem
+        ConstructorSigItem::(conName::RName adtType::UserType argTypes::(TypeArg*) adtAt::STR at::STR) -> RSignatureItem
+        ProductionSigItem::(prod::Production sortAt::STR at::STR) -> RSignatureItem
+        AnnotationSigItem::(annName::RName annType::Type onType::Type at::STR) -> RSignatureItem
+        TagSigItem::(tagName::RName tagKind::TagKind taggedTypes::(Symbol*) at::STR) -> RSignatureItem
+        LexicalSigItem::(sortName::RName sort::Symbol at::STR) -> RSignatureItem
+        ContextfreeSigItem::(sortName::RName sort::Symbol at::STR) -> RSignatureItem
+        KeywordSigItem::(sortName::RName sort::Symbol at::STR) -> RSignatureItem
+        LayoutSigItem::(sortName::RName sort::Symbol at::STR) -> RSignatureItem
+
+        rsignature::(datatypes::(RSignatureItem*) lexicalNonterminals::(RSignatureItem*) contextfreeNonterminals::(RSignatureItem*) keywordNonterminals::(RSignatureItem*) layoutNonterminals::(RSignatureItem*) aliases::(RSignatureItem*) tags::(RSignatureItem*) annotations::(RSignatureItem*) publicVariables::(RSignatureItem*) publicFunctions::(RSignatureItem*) publicConstructors::(RSignatureItem*) publicProductions::(RSignatureItem*) privateVariables::(RSignatureItem*) privateFunctions::(RSignatureItem*) imports::(RName*)) -> RSignature

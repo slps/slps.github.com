@@ -1,0 +1,79 @@
+module Main
+
+exports
+  sorts
+        LocationPath AbsoluteLocationPath RelativeLocationPath Step AxisSpecifier AxisName NodeTest Predicate PredicateExpr AbbreviatedAbsoluteLocationPath AbbreviatedRelativeLocationPath AbbreviatedStep AbbreviatedAxisSpecifier Expr PrimaryExpr FunctionCall Argument UnionExpr PathExpr FilterExpr OrExpr AndExpr EqualityExpr RelationalExpr AdditiveExpr MultiplicativeExpr UnaryExpr ExprToken Number Operator OperatorName MultiplyOperator VariableReference NameTest NodeType ExprWhitespace Digits 
+  context-free syntax
+        NT-LocationPath(RelativeLocationPath | AbsoluteLocationPath) -> LocationPath
+
+        NT-AbsoluteLocationPath(("/" RelativeLocationPath?) | AbbreviatedAbsoluteLocationPath) -> AbsoluteLocationPath
+
+        NT-RelativeLocationPath(Step | (RelativeLocationPath "/" Step) | AbbreviatedRelativeLocationPath) -> RelativeLocationPath
+
+        NT-Step((AxisSpecifier NodeTest Predicate*) | AbbreviatedStep) -> Step
+
+        NT-AxisSpecifier((AxisName "::") | AbbreviatedAxisSpecifier) -> AxisSpecifier
+
+        NT-AxisName("ancestor" | "ancestor-or-self" | "attribute" | "child" | "descendant" | "descendant-or-self" | "following" | "following-sibling" | "namespace" | "parent" | "preceding" | "preceding-sibling" | "self") -> AxisName
+
+        NT-NodeTest(NameTest | (NodeType "(" ")") | ("processing-instruction" "(" Literal ")")) -> NodeTest
+
+        NT-Predicate("[" PredicateExpr "]") -> Predicate
+
+        NT-PredicateExprExpr -> PredicateExpr
+
+        NT-AbbreviatedAbsoluteLocationPath("//" RelativeLocationPath) -> AbbreviatedAbsoluteLocationPath
+
+        NT-AbbreviatedRelativeLocationPath(RelativeLocationPath "//" Step) -> AbbreviatedRelativeLocationPath
+
+        NT-AbbreviatedStep("." | "..") -> AbbreviatedStep
+
+        NT-AbbreviatedAxisSpecifier"@"? -> AbbreviatedAxisSpecifier
+
+        NT-ExprOrExpr -> Expr
+
+        NT-PrimaryExpr(VariableReference | ("(" Expr ")") | Literal | Number | FunctionCall) -> PrimaryExpr
+
+        NT-FunctionCall(FunctionName "(" (Argument ("," Argument)*)? ")") -> FunctionCall
+
+        NT-ArgumentExpr -> Argument
+
+        NT-UnionExpr(PathExpr | (UnionExpr "|" PathExpr)) -> UnionExpr
+
+        NT-PathExpr(LocationPath | FilterExpr | (FilterExpr "/" RelativeLocationPath) | (FilterExpr "//" RelativeLocationPath)) -> PathExpr
+
+        NT-FilterExpr(PrimaryExpr | (FilterExpr Predicate)) -> FilterExpr
+
+        NT-OrExpr(AndExpr | (OrExpr "or" AndExpr)) -> OrExpr
+
+        NT-AndExpr(EqualityExpr | (AndExpr "and" EqualityExpr)) -> AndExpr
+
+        NT-EqualityExpr(RelationalExpr | (EqualityExpr "=" RelationalExpr) | (EqualityExpr "!=" RelationalExpr)) -> EqualityExpr
+
+        NT-RelationalExpr(AdditiveExpr | (RelationalExpr "<" AdditiveExpr) | (RelationalExpr ">" AdditiveExpr) | (RelationalExpr "<=" AdditiveExpr) | (RelationalExpr ">=" AdditiveExpr)) -> RelationalExpr
+
+        NT-AdditiveExpr(MultiplicativeExpr | (AdditiveExpr "+" MultiplicativeExpr) | (AdditiveExpr "-" MultiplicativeExpr)) -> AdditiveExpr
+
+        NT-MultiplicativeExpr(UnaryExpr | (MultiplicativeExpr MultiplyOperator UnaryExpr) | (MultiplicativeExpr "div" UnaryExpr) | (MultiplicativeExpr "mod" UnaryExpr)) -> MultiplicativeExpr
+
+        NT-UnaryExpr(UnionExpr | ("-" UnaryExpr)) -> UnaryExpr
+
+        NT-ExprToken("(" | ")" | "[" | "]" | "." | ".." | "@" | "," | "::" | NameTest | NodeType | Operator | FunctionName | AxisName | Literal | Number | VariableReference) -> ExprToken
+
+        NT-Number((Digits ("." Digits?)?) | ("." Digits)) -> Number
+
+        NT-Operator(OperatorName | MultiplyOperator | "/" | "//" | "|" | "+" | "-" | "=" | "!=" | "<" | "<=" | ">" | ">=") -> Operator
+
+        NT-OperatorName("and" | "or" | "mod" | "div") -> OperatorName
+
+        NT-MultiplyOperator"*" -> MultiplyOperator
+
+        NT-VariableReference("$" QName) -> VariableReference
+
+        NT-NameTest("*" | (NCName ":" "*") | QName) -> NameTest
+
+        NT-NodeType("comment" | "text" | "processing-instruction" | "node") -> NodeType
+
+        NT-ExprWhitespaceS -> ExprWhitespace
+
+        NT-Digits("0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")+ -> Digits

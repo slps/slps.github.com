@@ -1,0 +1,27 @@
+module Main
+
+exports
+  sorts
+        Program Function Expr Ops 
+  context-free syntax
+        Function+ -> Program
+
+        Name Name+ "=" Expr Newline+ -> Function
+
+        binary(Expr Ops Expr) -> Expr
+
+        apply(Name Expr+) -> Expr
+
+        ifThenElse("if" Expr "then" Expr "else" Expr) -> Expr
+
+        "(" Expr ")" -> Expr
+
+        argumentName -> Expr
+
+        literalInt -> Expr
+
+        minus"-" -> Ops
+
+        plus"+" -> Ops
+
+        equal"==" -> Ops

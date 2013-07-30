@@ -1,0 +1,27 @@
+module Main
+
+exports
+  sorts
+        Program Expr Ops Function 
+  context-free syntax
+        prgfunctions::Function"\n" -> Program
+
+        ifThenElse("if" cond::Expr "then" thenbranch::Expr "else" elsebranch::Expr) -> Expr
+
+        "(" e::Expr ")" -> Expr
+
+        literali::Int -> Expr
+
+        argumenta::Name -> Expr
+
+        binary(lexpr::Expr op::Ops rexpr::Expr) -> Expr
+
+        apply(f::Name vargs::(Expr+)) -> Expr
+
+        plus"+" -> Ops
+
+        equal"==" -> Ops
+
+        minus"-" -> Ops
+
+        fun(f::Name args::(Name+) "=" body::Expr) -> Function

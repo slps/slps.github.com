@@ -9,8 +9,8 @@ clean:
 
 build:
 	make zooprj
-	make tankprj
-	#make tmprj
+	# make tankprj
+	# make tmprj
 
 htmls:
 	xsltproc --stringparam date `date +"%b%Y"` _dev/list2xhtml.xslt _dev/zoo.xml  >  zoo/index.html
@@ -27,10 +27,10 @@ zooprj:
 tankprj:
 	rm -f tank/*/*
 	xsltproc _dev/expand.xslt _dev/tank.xml > _dev/tank.expanded.xml
-	cp ../slps/topics/convergence/xbgf/fl/snapshot/*.bgf tank/fl/
+	#cp ../slps/topics/convergence/xbgf/fl/snapshot/*.bgf tank/fl/
 	cp ../slps/topics/testing/gbtf/tests/tescol/*.bgf tank/tescol/
 	chmod 644 tank/*/*.bgf
-	xsltproc _dev/list2makefile.xslt _dev/tank.expanded.xml | grep -v 'tank/fl' > _dev/Makefile.y
+	xsltproc _dev/list2makefile.xslt _dev/tank.expanded.xml > _dev/Makefile.y
 	make -f _dev/Makefile.y
 	xsltproc --stringparam date `date +"%b%Y"` _dev/list2xhtml.xslt _dev/tank.expanded.xml > tank/index.html
 

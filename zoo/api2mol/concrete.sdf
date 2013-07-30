@@ -1,0 +1,40 @@
+module Main
+
+exports
+  sorts
+        MainRule ContextSection DefaultMetaclassSection Mapping MetaclassName InstanceName Section NewSection MultipleSection PropertySection ValueSection Statement ConstructorCall MethodCall Variable Param 
+  context-free syntax
+        ContextSection? DefaultMetaclassSection? Mapping* -> MainRule
+
+        AT CONTEXT InstanceName (COMMA InstanceName)* SEMI -> ContextSection
+
+        AT DEFAULT-METACLASS ID LPAREN ID RPAREN SEMI -> DefaultMetaclassSection
+
+        ENUM? MetaclassName COLON InstanceName LCURLY Section* RCURLY -> Mapping
+
+        ID -> MetaclassName
+
+        ID (DOT ID)* -> InstanceName
+
+        NewSection -> Section
+        MultipleSection -> Section
+        PropertySection -> Section
+        ValueSection -> Section
+
+        AT NEW ConstructorCall* -> NewSection
+
+        AT MULTIPLE Statement* -> MultipleSection
+
+        ID COLON Statement* -> PropertySection
+
+        ID COLON InstanceName SEMI -> ValueSection
+
+        ID (LPAREN Variable (COMMA Variable)* RPAREN)? MethodCall? SEMI -> Statement
+
+        ID LPAREN (Param (COMMA Param)*)? RPAREN SEMI -> ConstructorCall
+
+        ID (LPAREN (Param (COMMA Param)*)? RPAREN)? -> MethodCall
+
+        ID -> Variable
+
+        ID -> Param

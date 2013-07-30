@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:bgf="http://planet-sl.org/bgf" xmlns:xbgf="http://planet-sl.org/xbgf" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Browsable ATOM Grammar</title><link href="/slps.css" rel="stylesheet" type="text/css"></link><script type="text/javascript">
+
+				  var _gaq = _gaq || [];
+				  _gaq.push(['_setAccount', 'UA-3743366-7']);
+				  _gaq.push(['_setDomainName', 'github.com']);
+				  _gaq.push(['_trackPageview']);
+
+				  (function() {
+				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				  })();
+
+				</script></head><body><h1 class="l">Browsable ATOM Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.io/zoo/">Grammar Zoo</a> for details. <br></br>Source used for this grammar: Tim Dettrick, <em>RELAX NG XML Syntax Grammar for the Atom Format Specification Version 11</em>, Converted from Relax NG Compact Syntax Grammar, as seen in RFC 4287, 2013-01-24 04:06:41.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>42</strong></li><li>Number of top alternatives: <strong>48</strong></li><li>Number of defined nonterminal symbols: <strong>42</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#atomFeed" class="nt">atomFeed</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>3</strong></li><li>Keywords: <strong>3</strong>: <code class="t">"text", "html", "xhtml"</code></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="atomCommonAttributes">atomCommonAttributes</a>:
+        <span class="sel">xml:base</span>::<a class="nt" href="#atomUri">atomUri</a><span class="meta">?</span> <span class="sel">xml:lang</span>::<a class="nt" href="#atomLanguageTag">atomLanguageTag</a><span class="meta">?</span> <a class="nt" href="#undefinedAttribute">undefinedAttribute</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="atomPlainTextConstruct">atomPlainTextConstruct</a>:
+        <a class="nt" href="#atomCommonAttributes">atomCommonAttributes</a> <span class="sel">type</span>::(<span class="t">"text"</span> | <span class="t">"html"</span>)<span class="meta">?</span> <span class="meta">string</span>
+</pre><pre><a class="nt" name="atomXHTMLTextConstruct">atomXHTMLTextConstruct</a>:
+        <a class="nt" href="#atomCommonAttributes">atomCommonAttributes</a> <span class="sel">type</span>::<span class="t">"xhtml"</span> <a class="nt" href="#xhtmlDiv">xhtmlDiv</a>
+</pre><pre><a class="nt" name="atomTextConstruct">atomTextConstruct</a>:
+        <a class="nt" href="#atomPlainTextConstruct">atomPlainTextConstruct</a>
+        <a class="nt" href="#atomXHTMLTextConstruct">atomXHTMLTextConstruct</a>
+</pre><pre><a class="nt" name="atomPersonConstruct">atomPersonConstruct</a>:
+        <a class="nt" href="#atomCommonAttributes">atomCommonAttributes</a> <span class="sel">atom:name</span>::<span class="meta">string</span> <span class="sel">atom:uri</span>::<a class="nt" href="#atomUri">atomUri</a><span class="meta">?</span> <span class="sel">atom:email</span>::<a class="nt" href="#atomEmailAddress">atomEmailAddress</a><span class="meta">?</span> <a class="nt" href="#extensionElement">extensionElement</a><span class="meta">*</span>
+</pre><pre><a class="nt" name="atomDateConstruct">atomDateConstruct</a>:
+        <a class="nt" href="#atomCommonAttributes">atomCommonAttributes</a> <span class="meta">string</span>
+</pre><pre><a class="nt" name="atomFeed">atomFeed</a>:
+        <span class="sel">atom:feed</span>::(<a class="nt" href="#atomCommonAttributes">atomCommonAttributes</a> <a class="nt" href="#atomAuthor">atomAuthor</a><span class="meta">*</span> <a class="nt" href="#atomCategory">atomCategory</a><span class="meta">*</span> <a class="nt" href="#atomContributor">atomContributor</a><span class="meta">*</span> <a class="nt" href="#atomGenerator">atomGenerator</a><span class="meta">?</span> <a class="nt" href="#atomIcon">atomIcon</a><span class="meta">?</span> <a class="nt" href="#atomId">atomId</a> <a class="nt" href="#atomLink">atomLink</a><span class="meta">*</span> <a class="nt" href="#atomLogo">atomLogo</a><span class="meta">?</span> <a class="nt" href="#atomRights">atomRights</a><span class="meta">?</span> <a class="nt" href="#atomSubtitle">atomSubtitle</a><span class="meta">?</span> <a class="nt" href="#atomTitle">atomTitle</a> <a class="nt" href="#atomUpdated">atomUpdated</a> <a class="nt" href="#extensionElement">extensionElement</a><span class="meta">*</span> <a class="nt" href="#atomEntry">atomEntry</a><span class="meta">*</span>)
+</pre><pre><a class="nt" name="atomEntry">atomEntry</a>:
+        <span class="sel">atom:entry</span>::(<a class="nt" href="#atomCommonAttributes">atomCommonAttributes</a> <a class="nt" href="#atomAuthor">atomAuthor</a><span class="meta">*</span> <a class="nt" href="#atomCategory">atomCategory</a><span class="meta">*</span> <a class="nt" href="#atomContent">atomContent</a><span class="meta">?</span> <a class="nt" href="#atomContributor">atomContributor</a><span class="meta">*</span> <a class="nt" href="#atomId">atomId</a> <a class="nt" href="#atomLink">atomLink</a><span class="meta">*</span> <a class="nt" href="#atomPublished">atomPublished</a><span class="meta">?</span> <a class="nt" href="#atomRights">atomRights</a><span class="meta">?</span> <a class="nt" href="#atomSource">atomSource</a><span class="meta">?</span> <a class="nt" href="#atomSummary">atomSummary</a><span class="meta">?</span> <a class="nt" href="#atomTitle">atomTitle</a> <a class="nt" href="#atomUpdated">atomUpdated</a> <a class="nt" href="#extensionElement">extensionElement</a><span class="meta">*</span>)
+</pre><pre><a class="nt" name="atomInlineTextContent">atomInlineTextContent</a>:
+        <span class="sel">atom:content</span>::(<a class="nt" href="#atomCommonAttributes">atomCommonAttributes</a> <span class="sel">type</span>::(<span class="t">"text"</span> | <span class="t">"html"</span>)<span class="meta">?</span> <span class="meta">string</span><span class="meta">*</span>)
+</pre><pre><a class="nt" name="atomInlineXHTMLContent">atomInlineXHTMLContent</a>:
+        <span class="sel">atom:content</span>::(<a class="nt" href="#atomCommonAttributes">atomCommonAttributes</a> <span class="sel">type</span>::<span class="t">"xhtml"</span> <a class="nt" href="#xhtmlDiv">xhtmlDiv</a>)
+</pre><pre><a class="nt" name="atomInlineOtherContent">atomInlineOtherContent</a>:
+        <span class="sel">atom:content</span>::(<a class="nt" href="#atomCommonAttributes">atomCommonAttributes</a> <span class="sel">type</span>::<a class="nt" href="#atomMediaType">atomMediaType</a><span class="meta">?</span> (<span class="meta">string</span> | <a class="nt" href="#anyElement">anyElement</a>)<span class="meta">*</span>)
+</pre><pre><a class="nt" name="atomOutOfLineContent">atomOutOfLineContent</a>:
+        <span class="sel">atom:content</span>::(<a class="nt" href="#atomCommonAttributes">atomCommonAttributes</a> <span class="sel">type</span>::<a class="nt" href="#atomMediaType">atomMediaType</a><span class="meta">?</span> <span class="sel">src</span>::<a class="nt" href="#atomUri">atomUri</a>)
+</pre><pre><a class="nt" name="atomContent">atomContent</a>:
+        <a class="nt" href="#atomInlineTextContent">atomInlineTextContent</a>
+        <a class="nt" href="#atomInlineXHTMLContent">atomInlineXHTMLContent</a>
+        <a class="nt" href="#atomInlineOtherContent">atomInlineOtherContent</a>
+        <a class="nt" href="#atomOutOfLineContent">atomOutOfLineContent</a>
+</pre><pre><a class="nt" name="atomAuthor">atomAuthor</a>:
+        <span class="sel">atom:author</span>::<a class="nt" href="#atomPersonConstruct">atomPersonConstruct</a>
+</pre><pre><a class="nt" name="atomCategory">atomCategory</a>:
+        <span class="sel">atom:category</span>::(<a class="nt" href="#atomCommonAttributes">atomCommonAttributes</a> <span class="sel">term</span>::<span class="meta">string</span> <span class="sel">scheme</span>::<a class="nt" href="#atomUri">atomUri</a><span class="meta">?</span> <span class="sel">label</span>::<span class="meta">string</span><span class="meta">?</span> <a class="nt" href="#undefinedContent">undefinedContent</a>)
+</pre><pre><a class="nt" name="atomContributor">atomContributor</a>:
+        <span class="sel">atom:contributor</span>::<a class="nt" href="#atomPersonConstruct">atomPersonConstruct</a>
+</pre><pre><a class="nt" name="atomGenerator">atomGenerator</a>:
+        <span class="sel">atom:generator</span>::(<a class="nt" href="#atomCommonAttributes">atomCommonAttributes</a> <span class="sel">uri</span>::<a class="nt" href="#atomUri">atomUri</a><span class="meta">?</span> <span class="sel">version</span>::<span class="meta">string</span><span class="meta">?</span> <span class="meta">string</span>)
+</pre><pre><a class="nt" name="atomIcon">atomIcon</a>:
+        <span class="sel">atom:icon</span>::(<a class="nt" href="#atomCommonAttributes">atomCommonAttributes</a> <a class="nt" href="#atomUri">atomUri</a>)
+</pre><pre><a class="nt" name="atomId">atomId</a>:
+        <span class="sel">atom:id</span>::(<a class="nt" href="#atomCommonAttributes">atomCommonAttributes</a> <a class="nt" href="#atomUri">atomUri</a>)
+</pre><pre><a class="nt" name="atomLogo">atomLogo</a>:
+        <span class="sel">atom:logo</span>::(<a class="nt" href="#atomCommonAttributes">atomCommonAttributes</a> <a class="nt" href="#atomUri">atomUri</a>)
+</pre><pre><a class="nt" name="atomLink">atomLink</a>:
+        <span class="sel">atom:link</span>::(<a class="nt" href="#atomCommonAttributes">atomCommonAttributes</a> <span class="sel">href</span>::<a class="nt" href="#atomUri">atomUri</a> <span class="sel">rel</span>::(<a class="nt" href="#atomNCName">atomNCName</a> | <a class="nt" href="#atomUri">atomUri</a>)<span class="meta">?</span> <span class="sel">type</span>::<a class="nt" href="#atomMediaType">atomMediaType</a><span class="meta">?</span> <span class="sel">hreflang</span>::<a class="nt" href="#atomLanguageTag">atomLanguageTag</a><span class="meta">?</span> <span class="sel">title</span>::<span class="meta">string</span><span class="meta">?</span> <span class="sel">length</span>::<span class="meta">string</span><span class="meta">?</span> <a class="nt" href="#undefinedContent">undefinedContent</a>)
+</pre><pre><a class="nt" name="atomPublished">atomPublished</a>:
+        <span class="sel">atom:published</span>::<a class="nt" href="#atomDateConstruct">atomDateConstruct</a>
+</pre><pre><a class="nt" name="atomRights">atomRights</a>:
+        <span class="sel">atom:rights</span>::<a class="nt" href="#atomTextConstruct">atomTextConstruct</a>
+</pre><pre><a class="nt" name="atomSource">atomSource</a>:
+        <span class="sel">atom:source</span>::(<a class="nt" href="#atomCommonAttributes">atomCommonAttributes</a> <a class="nt" href="#atomAuthor">atomAuthor</a><span class="meta">*</span> <a class="nt" href="#atomCategory">atomCategory</a><span class="meta">*</span> <a class="nt" href="#atomContributor">atomContributor</a><span class="meta">*</span> <a class="nt" href="#atomGenerator">atomGenerator</a><span class="meta">?</span> <a class="nt" href="#atomIcon">atomIcon</a><span class="meta">?</span> <a class="nt" href="#atomId">atomId</a><span class="meta">?</span> <a class="nt" href="#atomLink">atomLink</a><span class="meta">*</span> <a class="nt" href="#atomLogo">atomLogo</a><span class="meta">?</span> <a class="nt" href="#atomRights">atomRights</a><span class="meta">?</span> <a class="nt" href="#atomSubtitle">atomSubtitle</a><span class="meta">?</span> <a class="nt" href="#atomTitle">atomTitle</a><span class="meta">?</span> <a class="nt" href="#atomUpdated">atomUpdated</a><span class="meta">?</span> <a class="nt" href="#extensionElement">extensionElement</a><span class="meta">*</span>)
+</pre><pre><a class="nt" name="atomSubtitle">atomSubtitle</a>:
+        <span class="sel">atom:subtitle</span>::<a class="nt" href="#atomTextConstruct">atomTextConstruct</a>
+</pre><pre><a class="nt" name="atomSummary">atomSummary</a>:
+        <span class="sel">atom:summary</span>::<a class="nt" href="#atomTextConstruct">atomTextConstruct</a>
+</pre><pre><a class="nt" name="atomTitle">atomTitle</a>:
+        <span class="sel">atom:title</span>::<a class="nt" href="#atomTextConstruct">atomTextConstruct</a>
+</pre><pre><a class="nt" name="atomUpdated">atomUpdated</a>:
+        <span class="sel">atom:updated</span>::<a class="nt" href="#atomDateConstruct">atomDateConstruct</a>
+</pre><pre><a class="nt" name="atomNCName">atomNCName</a>:
+        <span class="meta">string</span>
+</pre><pre><a class="nt" name="atomMediaType">atomMediaType</a>:
+        <span class="meta">string</span>
+</pre><pre><a class="nt" name="atomLanguageTag">atomLanguageTag</a>:
+        <span class="meta">string</span>
+</pre><pre><a class="nt" name="atomUri">atomUri</a>:
+        <span class="meta">string</span>
+</pre><pre><a class="nt" name="atomEmailAddress">atomEmailAddress</a>:
+        <span class="meta">string</span>
+</pre><pre><a class="nt" name="simpleExtensionElement">simpleExtensionElement</a>:
+        <span class="meta">string</span>
+</pre><pre><a class="nt" name="structuredExtensionElement">structuredExtensionElement</a>:
+        <span class="meta">any</span><span class="meta">+</span> (<span class="meta">string</span> | <a class="nt" href="#anyElement">anyElement</a>)<span class="meta">*</span>
+        <span class="meta">any</span><span class="meta">*</span> <span class="meta">string</span><span class="meta">?</span> <a class="nt" href="#anyElement">anyElement</a><span class="meta">+</span> (<span class="meta">string</span> | <a class="nt" href="#anyElement">anyElement</a>)<span class="meta">*</span>
+</pre><pre><a class="nt" name="extensionElement">extensionElement</a>:
+        <a class="nt" href="#simpleExtensionElement">simpleExtensionElement</a>
+        <a class="nt" href="#structuredExtensionElement">structuredExtensionElement</a>
+</pre><pre><a class="nt" name="undefinedAttribute">undefinedAttribute</a>:
+        <span class="meta">any</span>
+</pre><pre><a class="nt" name="undefinedContent">undefinedContent</a>:
+        (<span class="meta">string</span> | <a class="nt" href="#anyForeignElement">anyForeignElement</a>)<span class="meta">*</span>
+</pre><pre><a class="nt" name="anyElement">anyElement</a>:
+        (<span class="meta">any</span> | <span class="meta">string</span> | <a class="nt" href="#anyElement">anyElement</a>)<span class="meta">*</span>
+</pre><pre><a class="nt" name="anyForeignElement">anyForeignElement</a>:
+        (<span class="meta">any</span> | <span class="meta">string</span> | <a class="nt" href="#anyElement">anyElement</a>)<span class="meta">*</span>
+</pre><pre><a class="nt" name="anyXHTML">anyXHTML</a>:
+        (<span class="meta">any</span> | <span class="meta">string</span> | <a class="nt" href="#anyXHTML">anyXHTML</a>)<span class="meta">*</span>
+</pre><pre><a class="nt" name="xhtmlDiv">xhtmlDiv</a>:
+        <span class="sel">xhtml:div</span>::((<span class="meta">any</span> | <span class="meta">string</span> | <a class="nt" href="#anyXHTML">anyXHTML</a>)<span class="meta">*</span>)
+</pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
+Last updated: Jul2013.</div></body></html>

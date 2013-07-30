@@ -59,8 +59,10 @@
 										<xsl:when test="local-name()='mutation'"/>
 										<xsl:when test="local-name()='antlr2'"/>
 										<xsl:when test="local-name()='antlr3'"/>
-										<xsl:when test="local-name()='ecore'"/>
+										<xsl:when test="local-name()='dcg'"/>
+										<xsl:when test="local-name()='ecore'"/>										<xsl:when test="local-name()='java2bgf'"/>
 										<xsl:when test="local-name()='txl'"/>
+										<xsl:when test="local-name()='pyparsing'"/>
 										<xsl:when test="local-name()='rng'"/>
 										<xsl:when test="local-name()='sdf2bgf'"/>
 										<xsl:when test="local-name()='html2bgf'"/>
@@ -68,6 +70,7 @@
 										<xsl:when test="local-name()='pdf2lll2bgf'"/>
 										<xsl:when test="local-name()='rascal-sd'"/>
 										<xsl:when test="local-name()='rascal-adt'"/>
+										<xsl:when test="local-name()='xsd2bgf'"/>
 										<xsl:when test="local-name()='edd'">
 											<link>
 												<mu>
@@ -196,6 +199,9 @@
 					<xsl:if test="$g/*/antlr3">
 						<antlr3/>
 					</xsl:if>
+					<xsl:if test="$g/*/dcg">
+						<dcg/>
+					</xsl:if>
 					<xsl:if test="$g/*/ecore">
 						<ecore/>
 					</xsl:if>
@@ -212,6 +218,9 @@
 					<xsl:if test="$g/*/txl">
 						<txl/>
 					</xsl:if>
+					<xsl:if test="$g/*/pyparsing">
+						<pyparsing/>
+					</xsl:if>
 					<xsl:if test="$g/*/rng">
 						<rng/>
 					</xsl:if>
@@ -220,6 +229,9 @@
 					</xsl:if>
 					<xsl:if test="$g/*/html2bgf">
 						<html2bgf/>
+					</xsl:if>
+					<xsl:if test="$g/*/java2bgf">
+						<java2bgf/>
 					</xsl:if>
 					<xsl:if test="$g/*/spec2bgf">
 						<spec2bgf/>
@@ -232,6 +244,9 @@
 					</xsl:if>
 					<xsl:if test="$g/*/xbgf">
 						<wiki>XBGF</wiki>
+					</xsl:if>
+					<xsl:if test="$g/*/xsd2bgf">
+						<xsd2bgf/>
 					</xsl:if>
 				</used>
 			</xsl:if>
