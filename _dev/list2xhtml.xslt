@@ -30,8 +30,12 @@
 				</script>
 			</head>
 			<body style="background-color:#9C9;">
-				<div style="float:right;" class="box"><img src="../grammarlab.png"/></div>
-				<div style="float:left;" class="box"><img src="logo.png"/></div>
+				<div style="float:right;" class="box">
+					<img src="../grammarlab.png"/>
+				</div>
+				<div style="float:left;" class="box">
+					<img src="logo.png"/>
+				</div>
 				<h1>Software Language Processing Suite</h1>
 				<xsl:if test="name='zoo'">
 					<h1>
@@ -360,11 +364,25 @@ Last updated: </xsl:text>
 					</span>
 				</li>
 			</xsl:if>
+			<li>
+				<xsl:text>Tagged with:</xsl:text>
+				<xsl:for-each select="tags/*">
+					<xsl:text>   </xsl:text>
+					<span style="border:1px solid #228B22; color: #228B22">
+						<xsl:value-of select="local-name(.)"/>
+						<xsl:if test=".">
+							<xsl:text>:</xsl:text>
+							<xsl:value-of select="."/>
+						</xsl:if>
+					</span>
+				</xsl:for-each>
+			</li>
 			<xsl:for-each select="*">
 				<xsl:choose>
 					<xsl:when test="local-name(.)='as'"/>
 					<xsl:when test="local-name(.)='name'"/>
 					<xsl:when test="local-name(.)='meta'"/>
+					<xsl:when test="local-name(.)='tags'"/>
 					<xsl:when test="local-name(.)='handle'"/>
 					<xsl:when test="local-name(.)='source'"/>
 					<xsl:when test="local-name(.)='toolset' and @ref">

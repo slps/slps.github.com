@@ -37,6 +37,7 @@
 	</xsl:template>
 	<xsl:template match="expand-grammar">
 		<xsl:variable name="handle" select="."/>
+		<xsl:variable name="language" select="../.."/>
 		<xsl:variable name="g" select="document(concat('../../slps/topics/grammars/',$handle,'/zoo.xml'))/grammar"/>
 		<grammar>
 			<xsl:for-each select="$g/*">
@@ -60,7 +61,8 @@
 										<xsl:when test="local-name()='antlr2'"/>
 										<xsl:when test="local-name()='antlr3'"/>
 										<xsl:when test="local-name()='dcg'"/>
-										<xsl:when test="local-name()='ecore'"/>										<xsl:when test="local-name()='java2bgf'"/>
+										<xsl:when test="local-name()='ecore'"/>
+										<xsl:when test="local-name()='java2bgf'"/>
 										<xsl:when test="local-name()='txl'"/>
 										<xsl:when test="local-name()='pyparsing'"/>
 										<xsl:when test="local-name()='rng'"/>
@@ -250,6 +252,26 @@
 					</xsl:if>
 				</used>
 			</xsl:if>
+			<tags>
+				<language>
+					<xsl:choose>
+						<xsl:when test="$language/short">
+							<xsl:value-of select="$language/short"/>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="$language/name"/>
+						</xsl:otherwise>
+					</xsl:choose>
+				</language>
+				<xsl:copy-of select="$g/meta/*|$g/source/author|$g/source/standard"/>
+				<xsl:for-each select="$g/extraction/*|$g/recovery/*">
+					<xsl:element name="{local-name(..)}">
+						<xsl:value-of select="local-name(.)"/>
+					</xsl:element>
+					<!-- <extraction>
+					</extraction> -->
+				</xsl:for-each>
+			</tags>
 		</grammar>
 	</xsl:template>
 	<!-- <xsl:template match="edd">
