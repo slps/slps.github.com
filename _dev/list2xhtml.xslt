@@ -39,12 +39,12 @@
 				<h1>Software Language Processing Suite</h1>
 				<xsl:if test="name='zoo'">
 					<h1>
-						<xsl:text>Grammar Zoo | </xsl:text>
-						<a href="../tank/index.html">Grammar Tank</a>
+						<xsl:text>Grammar Zoo</xsl:text>
+						<!-- <a href="../tank/index.html">Grammar Tank</a> -->
 					</h1>
 					<div class="c">
 						<em>
-							The objective of the Grammar Zoo is to accumulate grammars of contemporary 
+							The objective of the Grammar Zoo is to accumulate grammars of various
 							software languages, extracted and recovered from language documentation, parser
 							specifications and other artefacts and make them available in a range of formats.
 						</em>
@@ -63,6 +63,16 @@
 					</div>
 				</xsl:if>
 				<h2><xsl:value-of select="count(//grammar)+count(//grammarname)"/> grammars and counting</h2>
+				<div class="c">
+					<xsl:text>Bulk download of the whole corpus:</xsl:text>
+					<span class="links">
+						<xsl:text> [</xsl:text>
+						<a href="bulk-bgf.tar.gz">XML/BGF</a>
+						<xsl:text>] [</xsl:text>
+						<a href="bulk-ebnf.tar.gz">TXT/EBNF</a>
+						<xsl:text>]</xsl:text>
+					</span>
+				</div>
 				<h1>
 					<a href="#{translate(language[1]/name,'ABCDEFGHIJKLMNOPQRSTUVWXYZ +#“”','abcdefghijklmnopqrstuvwxyz_ps__')}">
 						<xsl:choose>
