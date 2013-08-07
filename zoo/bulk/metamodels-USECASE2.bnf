@@ -1,0 +1,54 @@
+String:
+        STR
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+Requirement:
+        NonFunctionnelRequirement
+Requirement:
+        FunctionnelRequirement
+Requirement:
+        NonFunctionnelRequirement
+        FunctionnelRequirement
+NonFunctionnelRequirement:
+        scopes::UseCase+
+FunctionnelRequirement:
+        specifies::UseCase+
+UseCase:
+        Manage
+UseCase:
+        scenario::ScenarioDescription+ condition::Condition+ interacter::Role+ specified_by::FunctionnelRequirement+ scoped_by::NonFunctionnelRequirement+ meet_by::Goal+
+Goal:
+        to_meet::UseCase+
+Role:
+        HumanRole
+Role:
+        SystemRole
+Role:
+        EventRole
+Role:
+        interacted_with::UseCase+
+HumanRole:
+        interacted_with::UseCase+
+SystemRole:
+        interacted_with::UseCase+
+EventRole:
+        interacted_with::UseCase+
+Manage:
+        managed_Resource::Resource+
+Resource:
+        EPSILON
+ScenarioDescription:
+        useCase::UseCase
+Condition:
+        Pre
+Condition:
+        Post
+Condition:
+        constrained_with::UseCase+
+Pre:
+        constrained_with::UseCase+
+Post:
+        constrained_with::UseCase+

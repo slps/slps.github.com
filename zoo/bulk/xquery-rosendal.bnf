@@ -1,0 +1,65 @@
+XQueryProgram:
+        expressions::ExecutableExpression+
+Expression:
+        ExecutableExpression
+Expression:
+        Node
+Expression:
+        ReturnXPath
+Expression:
+        parentNode::ElementNode returnEx::Return
+ExecutableExpression:
+        FLWOR
+ExecutableExpression:
+        FunctionCall
+ExecutableExpression:
+        FunctionDeclaration
+ExecutableExpression:
+        xQueryProgram::XQueryProgram functionDeclaration::FunctionDeclaration
+Node:
+        ElementNode
+Node:
+        AttributeNode
+Node:
+        name::String
+FLWOR:
+        for::For let::Let where::Where orderBy::OrderBy return::Return
+FunctionCall:
+        name::String parameters::XPath+
+FunctionDeclaration:
+        name::String expression::ExecutableExpression+
+ElementNode:
+        TextNode
+ElementNode:
+        nodes::Expression+
+AttributeNode:
+        value::String
+TextNode:
+        nodes::Expression+
+ReturnXPath:
+        XPath
+ReturnXPath:
+        value::String
+XPath:
+        BooleanExp
+XPath:
+        functionCall::FunctionCall for::For let::Let
+BooleanExp:
+        where::Where
+For:
+        var::String flwor::FLWOR expression::XPath
+Let:
+        var::String flwor::FLWOR expression::XPath
+Where:
+        flwor::FLWOR expression::BooleanExp
+OrderBy:
+        flwor::FLWOR
+Return:
+        flwor::FLWOR expressions::Expression+
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR

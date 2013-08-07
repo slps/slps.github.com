@@ -1,0 +1,318 @@
+Grammar:
+        "aliases" Aliases
+Alias:
+        Symbol arrow::"->" alias::Symbol
+Aliases:
+        list::(Alias*)
+Grammar:
+        "lexical" "syntax" Productions
+Grammar:
+        "context-free" "syntax" Productions
+Grammar:
+        "variables" Productions
+Grammar:
+        "lexical" "variables" Productions
+Symbol:
+        "<" Symbol "-CF" ">"
+Symbol:
+        "<" Symbol "-LEX" ">"
+Symbol:
+        "<" Symbol "-VAR" ">"
+Symbol:
+        "LAYOUT"
+Symbol:
+        CharClass
+CharRange:
+        Character
+CharRange:
+        start::Character "-" end::Character
+CharRanges:
+        CharRange
+CharRanges:
+        left::CharRanges right::CharRanges
+CharRanges:
+        "(" CharRanges ")"
+OptCharRanges:
+        EPSILON
+OptCharRanges:
+        CharRanges
+CharClass:
+        "[" OptCharRanges "]"
+CharClass:
+        "~" CharClass
+CharClass:
+        left::CharClass "/" right::CharClass
+CharClass:
+        left::CharClass "/\" right::CharClass
+CharClass:
+        left::CharClass "/" right::CharClass
+CharClass:
+        "(" CharClass ")"
+Character:
+        NumChar
+Character:
+        ShortChar
+Character:
+        "TOP"
+Character:
+        "EOF"
+Character:
+        "BOT"
+Character:
+        "LABEL_START"
+Grammar:
+        "(/)"
+Grammar:
+        left::Grammar right::Grammar
+Grammar:
+        "(" Grammar ")"
+ATermAttribute:
+        aterm::ATerm
+Attribute:
+        ATermAttribute
+Attributes:
+        "{" list::((Attribute ("," Attribute)*)?) "}"
+Attributes:
+        EPSILON
+Production:
+        Symbols "->" result::Symbol Attributes
+Productions:
+        list::(Production*)
+Grammar:
+        "syntax" Productions
+Label:
+        StrCon
+Label:
+        IdCon
+Symbol:
+        Label ":" Symbol
+Symbol:
+        left-quote::"`" Symbol right-quote::"`"
+FunctionName:
+        IdCon
+FunctionName:
+        StrCon
+Symbol:
+        string::StrCon
+Symbol:
+        ci-string::SingleQuotedStrCon
+Production:
+        fun::FunctionName "(" arguments::((Symbol ("," Symbol)*)?) ")" "->" result::Symbol Attributes
+Definition:
+        list::(Module*)
+Module:
+        "module" ModuleName list::(ImpSection*) Sections
+Section:
+        "exports" Grammar
+Section:
+        "hiddens" Grammar
+Sections:
+        list::(Section*)
+ModuleName:
+        ModuleId
+ModuleName:
+        ModuleId "[" params::Symbols "]"
+Attribute:
+        "id" "(" ModuleName ")"
+ImpSection:
+        "imports" list::Imports
+Grammar:
+        ImpSection
+Imports:
+        list::(Import*)
+Import:
+        ModuleName
+Import:
+        ModuleName Renamings
+Import:
+        "(" Import ")"
+Associativity:
+        "left"
+Associativity:
+        "right"
+Associativity:
+        "non-assoc"
+Associativity:
+        "assoc"
+Attribute:
+        "bracket"
+Attribute:
+        Associativity
+ArgumentIndicator:
+        "<" arguments::(NatCon ("," NatCon)*) ">"
+Group:
+        Group ArgumentIndicator
+Group:
+        Group "."
+Group:
+        Production
+Group:
+        "{" Productions "}"
+Group:
+        "{" Associativity ":" Productions "}"
+Priority:
+        list::(Group (">" Group)*)
+Priority:
+        left::Group Associativity right::Group
+Priorities:
+        list::((Priority ("," Priority)*)?)
+Grammar:
+        "priorities" Priorities
+Symbol:
+        "(" ")"
+Symbol:
+        "(" head::Symbol tail::(Symbol+) ")"
+Symbol:
+        Symbol "?"
+Symbol:
+        Symbol "+"
+Symbol:
+        Symbol "*"
+Symbol:
+        "{" Symbol sep::Symbol "}" "+"
+Symbol:
+        "{" Symbol sep::Symbol "}" "*"
+Symbol:
+        "<" head::Symbol "," rest::(Symbol ("," Symbol)*) ">"
+Symbol:
+        "(" arguments::Symbols "=>" results::Symbol ")"
+Symbol:
+        left::Symbol "|" right::Symbol
+Symbol:
+        "(" left::Symbol "->" right::Symbol ")"
+Symbol:
+        Symbol "?"
+Symbol:
+        Symbol "*"
+Symbol:
+        Symbol "+"
+Renamings:
+        "[" list::(Renaming*) "]"
+Renaming:
+        from::Symbol "=>" to::Symbol
+Renaming:
+        from-prod::Production "=>" to-prod::Production
+Lookahead:
+        CharClass
+Lookahead:
+        head::CharClass "." tail::Lookaheads
+Lookaheads:
+        Lookahead
+Lookaheads:
+        left::Lookaheads "|" right::Lookaheads
+Lookaheads:
+        "(" Lookaheads ")"
+Lookaheads:
+        "[[" list::((Lookahead ("," Lookahead)*)?) "]]"
+Restriction:
+        Symbols "-/-" Lookaheads
+Restrictions:
+        list::(Restriction*)
+Grammar:
+        "restrictions" Restrictions
+Attribute:
+        "reject"
+Attribute:
+        "prefer"
+Attribute:
+        "avoid"
+Symbol:
+        "<START>"
+Symbol:
+        "<Start>"
+Grammar:
+        "lexical" "priorities" Priorities
+Grammar:
+        "context-free" "priorities" Priorities
+Grammar:
+        "lexical" "restrictions" Restrictions
+Grammar:
+        "context-free" "restrictions" Restrictions
+SDF:
+        "definition" Definition
+ModuleName:
+        "aliases"
+ModuleName:
+        "lexical"
+ModuleName:
+        "priorities"
+ModuleName:
+        "context-free"
+ModuleName:
+        "definition"
+ModuleName:
+        "syntax"
+ModuleName:
+        "variables"
+ModuleName:
+        "module"
+ModuleName:
+        "imports"
+ModuleName:
+        "exports"
+ModuleName:
+        "hiddens"
+ModuleName:
+        "left"
+ModuleName:
+        "right"
+ModuleName:
+        "assoc"
+ModuleName:
+        "non-assoc"
+ModuleName:
+        "bracket"
+ModuleName:
+        "sorts"
+ModuleName:
+        "bracket"
+ModuleName:
+        "sorts"
+ModuleName:
+        "restrictions"
+Symbols:
+        StrCon "(" arguments::((Symbol ("," Symbol)*)?) ")"
+Label:
+        Associativity
+ATermAttribute:
+        Associativity
+ATermAttribute:
+        "reject"
+ATermAttribute:
+        "prefer"
+ATermAttribute:
+        "avoid"
+ATermAttribute:
+        "bracket"
+ATermAttribute:
+        "id" "(" ModuleName ")"
+Symbol:
+        "<START>"
+Symbol:
+        "<Start>"
+Grammar:
+        "lexical" "priorities" Priorities
+Grammar:
+        "context-free" "priorities" Priorities
+Grammar:
+        "lexical" "restrictions" Restrictions
+Grammar:
+        "context-free" "restrictions" Restrictions
+SDF:
+        "definition" Definition
+Symbol:
+        Sort
+Symbol:
+        Sort "[[" parameters::(Symbol ("," Symbol)*) "]]"
+Grammar:
+        "sorts" Symbols
+Grammar:
+        "start-symbols" Symbols
+Grammar:
+        "lexical" "start-symbols" Symbols
+Grammar:
+        "context-free" "start-symbols" Symbols
+Symbol:
+        "(" Symbol ")"
+Symbols:
+        list::(Symbol*)

@@ -1,0 +1,23 @@
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR
+QoSComponent:
+        operations::Operation profile::QoSProfile+
+Operation:
+        EPSILON
+QoSProfile:
+        CompoundProfile
+QoSProfile:
+        SimpleProfile
+CompoundProfile:
+        profileTransition::ProfileTransition+ simpleProfile::SimpleProfile+
+SimpleProfile:
+        compoundProfile::CompoundProfile uses::QoSStatement provides::QoSStatement
+QoSStatement:
+        EPSILON
+ProfileTransition:
+        operations::Operation+ from::SimpleProfile to::SimpleProfile compoundProfile::CompoundProfile

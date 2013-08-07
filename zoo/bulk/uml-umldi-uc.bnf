@@ -1,0 +1,116 @@
+Instance:
+        ComponentInstance
+Instance:
+        NodeInstance
+Instance:
+        UseCaseInstance
+AttributeLink:
+        instance::Instance value::Instance linkEnd::LinkEnd attribute::Attribute
+Link:
+        association::Association connection::LinkEnd
+LinkEnd:
+        link::Link qualifiedValue::AttributeLink+ instance::Instance associationEnd::AssociationEnd
+ComponentInstance:
+        resident::Instance+ nodeInstance::NodeInstance
+NodeInstance:
+        resident::ComponentInstance+
+UseCase:
+        include::Include+ extend::Extend+ extensionPoint::ExtensionPoint+
+Actor:
+        powertypeRange::Generalization+ feature::Feature+
+UseCaseInstance:
+        ownedInstance::Instance+ linkEnd::LinkEnd+ classifier::Classifier+ componentInstance::ComponentInstance slot::AttributeLink+ ownedLink::Link+
+Extend:
+        extensionPoint::ExtensionPoint+ extension::UseCase base::UseCase condition::BooleanExpression
+Include:
+        addition::UseCase base::UseCase
+ExtensionPoint:
+        useCase::UseCase location::String
+Element:
+        ModelElement
+ModelElement:
+        Instance
+ModelElement:
+        AttributeLink
+ModelElement:
+        Link
+ModelElement:
+        LinkEnd
+ModelElement:
+        ExtensionPoint
+ModelElement:
+        GeneralizableElement
+ModelElement:
+        Namespace
+ModelElement:
+        Feature
+ModelElement:
+        AssociationEnd
+ModelElement:
+        Relationship
+GeneralizableElement:
+        Classifier
+GeneralizableElement:
+        Association
+Namespace:
+        Classifier
+Classifier:
+        UseCase
+Classifier:
+        Actor
+Feature:
+        StructuralFeature
+StructuralFeature:
+        Attribute
+AssociationEnd:
+        association::Association specification::Classifier+ participant::Classifier qualifier::Attribute+ isNavigable::Boolean ordering::OrderingKind aggregation::AggregationKind targetScope::ScopeKind multiplicity::Multiplicity changeability::ChangeableKind
+Relationship:
+        Extend
+Relationship:
+        Include
+Relationship:
+        Generalization
+Relationship:
+        Association
+Association:
+        connection::AssociationEnd
+Attribute:
+        associationEnd::AssociationEnd initialValue::Expression
+Generalization:
+        parent::GeneralizableElement powertype::Classifier child::GeneralizableElement discriminator::String
+AggregationKind:
+        ak_none::EPSILON
+        ak_aggregate::EPSILON
+        ak_composite::EPSILON
+ChangeableKind:
+        ck_changeable::EPSILON
+        ck_frozen::EPSILON
+        ck_addOnly::EPSILON
+OrderingKind:
+        ok_unordered::EPSILON
+        ok_ordered::EPSILON
+ScopeKind:
+        sk_instance::EPSILON
+        sk_classifier::EPSILON
+VisibilityKind:
+        vk_public::EPSILON
+        vk_protected::EPSILON
+        vk_private::EPSILON
+        vk_package::EPSILON
+Multiplicity:
+        range::MultiplicityRange+
+MultiplicityRange:
+        multiplicity::Multiplicity lower::Integer upper::Integer
+Expression:
+        BooleanExpression
+Expression:
+        language::String body::String
+BooleanExpression:
+        language::String body::String
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR

@@ -1,0 +1,68 @@
+Variable:
+        name::String type::String value::String visibility::String context::Context
+Context:
+        variables::Variable+ rule::Rule
+Rule:
+        RootRule
+Rule:
+        RuleSetCall
+Rule:
+        QARule
+Rule:
+        context::Context subRule::Rule superRule::Rule services::Service+
+RootRule:
+        ruleSet::RuleSet
+RuleSetCall:
+        ruleSet::RuleSet
+QARule:
+        query::Query action::Action
+RuleSet:
+        rootRule::RootRule
+Service:
+        OCLService
+Service:
+        RTransService
+Service:
+        JavaService
+Service:
+        visibility::String signature::String rule::Rule
+OCLService:
+        visibility::String signature::String rule::Rule
+RTransService:
+        visibility::String signature::String rule::Rule
+JavaService:
+        visibility::String signature::String rule::Rule
+RulePart:
+        Action
+RulePart:
+        Query
+Action:
+        RTransAction
+Action:
+        JavaAction
+Action:
+        qARule::QARule
+RTransAction:
+        qARule::QARule
+JavaAction:
+        qARule::QARule
+Query:
+        OCLFilter
+Query:
+        RTransQuery
+Query:
+        JavaQuery
+Query:
+        JavaFilter
+Query:
+        qARule::QARule
+OCLFilter:
+        qARule::QARule
+RTransQuery:
+        qARule::QARule
+JavaQuery:
+        qARule::QARule
+JavaFilter:
+        qARule::QARule
+String:
+        STR

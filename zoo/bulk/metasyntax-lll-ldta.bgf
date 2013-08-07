@@ -1,0 +1,68 @@
+<bgf:grammar xmlns:bgf="http://planet-sl.org/bgf" xmlns:ldf="http://planet-sl.org/ldf"><bgf:production><nonterminal xmlns:xns1="http://planet-sl.org/bgf">grammar</nonterminal><bgf:expression><plus xmlns:xns1="http://planet-sl.org/bgf">
+	<xns1:expression>
+	  <nonterminal>rule</nonterminal>
+	</xns1:expression>
+      </plus></bgf:expression></bgf:production><bgf:production><nonterminal xmlns:xns1="http://planet-sl.org/bgf">rule</nonterminal><bgf:expression><sequence xmlns:xns1="http://planet-sl.org/bgf">
+	<xns1:expression>
+	  <nonterminal>sort</nonterminal>
+	</xns1:expression>
+	<xns1:expression>
+	  <terminal>:</terminal>
+	</xns1:expression>
+	<xns1:expression>
+	  <nonterminal>alts</nonterminal>
+	</xns1:expression>
+	<xns1:expression>
+	  <terminal>;</terminal>
+	</xns1:expression>
+      </sequence></bgf:expression></bgf:production><bgf:production><nonterminal xmlns:xns1="http://planet-sl.org/bgf">alts</nonterminal><bgf:expression><sequence xmlns:xns1="http://planet-sl.org/bgf">
+	<xns1:expression>
+	  <nonterminal>alt</nonterminal>
+	</xns1:expression>
+	<xns1:expression>
+	  <star>
+	    <xns1:expression>
+	      <nonterminal>alts-tail</nonterminal>
+	    </xns1:expression>
+	  </star>
+	</xns1:expression>
+      </sequence></bgf:expression></bgf:production><bgf:production><nonterminal xmlns:xns1="http://planet-sl.org/bgf">alts-tail</nonterminal><bgf:expression><sequence xmlns:xns1="http://planet-sl.org/bgf">
+	<xns1:expression>
+	  <terminal>|</terminal>
+	</xns1:expression>
+	<xns1:expression>
+	  <nonterminal>alt</nonterminal>
+	</xns1:expression>
+      </sequence></bgf:expression></bgf:production><bgf:production><nonterminal xmlns:xns1="http://planet-sl.org/bgf">alt</nonterminal><bgf:expression><star xmlns:xns1="http://planet-sl.org/bgf">
+	<xns1:expression>
+	  <nonterminal>term</nonterminal>
+	</xns1:expression>
+      </star></bgf:expression></bgf:production><bgf:production><nonterminal xmlns:xns1="http://planet-sl.org/bgf">term</nonterminal><bgf:expression><sequence xmlns:xns1="http://planet-sl.org/bgf">
+	<xns1:expression>
+	  <nonterminal>basis</nonterminal>
+	</xns1:expression>
+	<xns1:expression>
+	  <optional>
+	    <xns1:expression>
+	      <nonterminal>repetition</nonterminal>
+	    </xns1:expression>
+	  </optional>
+	</xns1:expression>
+      </sequence></bgf:expression></bgf:production><bgf:production><nonterminal xmlns:xns1="http://planet-sl.org/bgf">basis</nonterminal><bgf:expression><choice xmlns:xns1="http://planet-sl.org/bgf">
+	<xns1:expression>
+	  <nonterminal>literal</nonterminal>
+	</xns1:expression>
+	<xns1:expression>
+	  <nonterminal>sort</nonterminal>
+	</xns1:expression>
+      </choice></bgf:expression></bgf:production><bgf:production><nonterminal xmlns:xns1="http://planet-sl.org/bgf">repetition</nonterminal><bgf:expression><choice xmlns:xns1="http://planet-sl.org/bgf">
+	<xns1:expression>
+	  <terminal>*</terminal>
+	</xns1:expression>
+	<xns1:expression>
+	  <terminal>+</terminal>
+	</xns1:expression>
+	<xns1:expression>
+	  <terminal>?</terminal>
+	</xns1:expression>
+      </choice></bgf:expression></bgf:production></bgf:grammar>

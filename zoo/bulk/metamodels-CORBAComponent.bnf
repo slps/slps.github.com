@@ -1,0 +1,51 @@
+InterfaceDef:
+        ComponentDef
+InterfaceDef:
+        HomeDef
+InterfaceDef:
+        ComponentDef
+        HomeDef
+OperationDef:
+        FactoryDef
+OperationDef:
+        FinderDef
+OperationDef:
+        FactoryDef
+        FinderDef
+ValueDef:
+        EPSILON
+ComponentDef:
+        isBasic::Boolean facets::ProvidesDef+ receptacles::UsesDef+ supports::InterfaceDef+ emits::EmitsDef+ publishes::PublishesDef+ consumes::ConsumesDef+
+ProvidesDef:
+        provides::InterfaceDef prd_home::ComponentDef
+UsesDef:
+        multiple::Boolean uses::InterfaceDef ud_home::ComponentDef
+EventDef:
+        EmitsDef
+EventDef:
+        PublishesDef
+EventDef:
+        ConsumesDef
+EventDef:
+        type::ValueDef
+EmitsDef:
+        ed_home::ComponentDef
+PublishesDef:
+        pud_home::ComponentDef
+ConsumesDef:
+        cd_home::ComponentDef
+HomeDef:
+        manages::ComponentDef factories::FactoryDef+ finders::FinderDef+ key::PrimaryKeyDef
+FactoryDef:
+        fa_home::HomeDef
+FinderDef:
+        fi_home::HomeDef
+PrimaryKeyDef:
+        pkd_home::HomeDef type::ValueDef
+Integer:
+        INT
+String:
+        STR
+Boolean:
+        "true"
+        "false"

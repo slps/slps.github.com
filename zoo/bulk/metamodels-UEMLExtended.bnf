@@ -1,0 +1,138 @@
+UEMLObject:
+        UEMLModel
+UEMLObject:
+        Port
+UEMLObject:
+        Flow
+UEMLObject:
+        Object
+UEMLObject:
+        Activity
+UEMLObject:
+        has::Geometry model::UEMLModel
+UEMLModel:
+        contains::UEMLObject+
+Geometry:
+        object::UEMLObject
+Port:
+        ResourceRole
+Port:
+        Anchor
+Port:
+        ResourceRole
+        Anchor
+Flow:
+        ResourceFlow
+Flow:
+        IOFlow
+Flow:
+        ControlFlow
+Flow:
+        associationConnector::AssociationConnector
+Activity:
+        Process
+Activity:
+        Task
+Activity:
+        resourceRole::ResourceRole+ parent::Process hasOutput::OutputPort+ hasInput::InputPort+ activityType::ActivityType
+Object:
+        InformationObject
+Object:
+        Resource
+Object:
+        ioFlow::IOFlow
+InformationObject:
+        controlFlow::ControlFlow
+Resource:
+        PassiveObject
+Resource:
+        Service
+Resource:
+        Agent
+Resource:
+        carries::ResourceFlow plays::ResourceRole+ resourceType::ResourceType commitment::Commitment+
+MaterialResource:
+        EPSILON
+HumanResource:
+        obliger::Commitment claimer::Commitment has_parties::Contract
+ResourceFlow:
+        resourceCarries::Resource+
+IOFlow:
+        carries::Object+
+ControlFlow:
+        TriggerFlow
+ControlFlow:
+        ConstraintFlow
+ControlFlow:
+        carries::InformationObject+
+TriggerFlow:
+        carries::InformationObject+
+ConstraintFlow:
+        carries::InformationObject+
+ResourceRole:
+        resourcePlays::Resource+ roleQualifier::RoleType in::Activity
+RoleType:
+        EPSILON
+Anchor:
+        OutputPort
+Anchor:
+        InputPort
+Anchor:
+        ConnectionOperator
+Anchor:
+        OutputPort
+        InputPort
+OutputPort:
+        activity::Activity
+InputPort:
+        activity::Activity
+ConnectionOperator:
+        target::AssociationConnector origin::AssociationConnector
+AssociationConnector:
+        origin::FlowObject+ target::FlowObject+ classAssociation::Flow
+FlowObject:
+        Event
+FlowObject:
+        Activity
+FlowObject:
+        ConnectionOperator
+FlowObject:
+        target::AssociationConnector origin::AssociationConnector
+Event:
+        target::AssociationConnector origin::AssociationConnector
+ResourceType:
+        resource::Resource+
+ActivityType:
+        activityT::Activity+
+PassiveObject:
+        MaterialResource
+PassiveObject:
+        Commitment
+PassiveObject:
+        Contract
+PassiveObject:
+        MaterialResource
+        Commitment
+        Contract
+Commitment:
+        resource::Resource+ task::Task agentO::Agent agentC::Agent contract::Contract
+Software:
+        obliger::Commitment claimer::Commitment has_parties::Contract
+Organisation:
+        obliger::Commitment claimer::Commitment has_parties::Contract
+Process:
+        child::Activity fulfills::Contract+ realises::Service
+Service:
+        process::Process
+Agent:
+        HumanResource
+Agent:
+        Software
+Agent:
+        Organisation
+Agent:
+        obliger::Commitment claimer::Commitment has_parties::Contract
+Contract:
+        process::Process+ agent::Agent collection_of::Commitment+
+Task:
+        fulfills::Commitment+

@@ -1,0 +1,39 @@
+OclExpression:
+        SelfExp
+OclExpression:
+        ResultExp
+OclExpression:
+        VariableExp
+OclExpression:
+        OperationExp
+OclExpression:
+        QueryExp
+SelfExp:
+        queryArg::QueryExp+ querySrc::QueryExp+ resultType::Type varDec::VariableDeclaration+ varInit::VariableInitialisation+
+ResultExp:
+        queryArg::QueryExp+ querySrc::QueryExp+ resultType::Type varDec::VariableDeclaration+ varInit::VariableInitialisation+
+VariableExp:
+        var::String
+VariableDeclaration:
+        var::String varType::Type oclExpression::OclExpression+ queryExp::QueryExp+ varInit::VariableInitialisation+
+VariableInitialisation:
+        initExpression::OclExpression varDec::VariableDeclaration iterateExp::IterateExp
+ForAllExp:
+        EPSILON
+ExistsExp:
+        EPSILON
+SelectExp:
+        EPSILON
+RejectExp:
+        EPSILON
+CollectExp:
+        EPSILON
+IterateExp:
+        varInit::VariableInitialisation
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR

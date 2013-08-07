@@ -1,0 +1,254 @@
+String:
+        STR
+Integer:
+        INT
+Boolean:
+        "true"
+        "false"
+AssociationDirectionKind:
+        None::EPSILON
+        To::EPSILON
+        From::EPSILON
+        Both::EPSILON
+OrientationKind:
+        Horizontal::EPSILON
+        Vertical::EPSILON
+AccessLevelKind:
+        Public::EPSILON
+        Private::EPSILON
+ProcessTypeKind:
+        None::EPSILON
+        Private::EPSILON
+        Abstract::EPSILON
+        Collaboration::EPSILON
+StatusKind:
+        None::EPSILON
+        Ready::EPSILON
+        Active::EPSILON
+        Cancelled::EPSILON
+        Aborting::EPSILON
+        Aborted::EPSILON
+        Completing::EPSILON
+        Completed::EPSILON
+AdHocOrderingKind:
+        Sequential::EPSILON
+        Parallel::EPSILON
+ModeKind:
+        Automatic::EPSILON
+        Manual::EPSILON
+GatewayTypeKind:
+        Xor::EPSILON
+        Or::EPSILON
+        Complex::EPSILON
+        And::EPSILON
+ExecutionKind:
+        Asynchr::EPSILON
+        Synchr::EPSILON
+TriggerKind:
+        None::EPSILON
+        Message::EPSILON
+        Timer::EPSILON
+        Rule::EPSILON
+        Link::EPSILON
+        Error::EPSILON
+        Cancel::EPSILON
+        Compensation::EPSILON
+        Terminate::EPSILON
+        Multiple::EPSILON
+ImplementationKind:
+        WebService::EPSILON
+        Other::EPSILON
+        Unspecified::EPSILON
+Element:
+        Package
+Element:
+        MessageFlow
+Element:
+        Association
+Element:
+        Pool
+Element:
+        Lane
+Element:
+        Participant
+Element:
+        Artifact
+Element:
+        TypeDeclaration
+Element:
+        Application
+Element:
+        Activity
+Element:
+        Process
+Element:
+        Transition
+Element:
+        ActivitySet
+Element:
+        Object
+Element:
+        ExternalPackage
+Element:
+        Category
+Element:
+        DataField
+Package:
+        script::Script externalPackages::ExternalPackage+ typeDeclarations::TypeDeclaration+ participants::Participant+ applications::Application+ dataFields::DataField+ pools::Pool+ messageFlows::MessageFlow+ associations::Association+ artifacts::Artifact+ workflowProcesses::Process+
+MessageFlow:
+        targetActivity::Activity sourceActivity::Activity targetPool::Pool sourcePool::Pool object::Object
+Association:
+        associationDirection::AssociationDirectionKind targetArtifact::Artifact sourceArtifact::Artifact targetPool::Pool sourcePool::Pool targetActivity::Activity sourceActivity::Activity object::Object
+Pool:
+        orientation::OrientationKind boundaryVisible::Boolean lanes::Lane+ object::Object participant::Participant process::Process
+Lane:
+        object::Object parentLane::Lane parentPool::Pool
+Participant:
+        id::String name::String
+Artifact:
+        DataObject
+Artifact:
+        Group
+Artifact:
+        Annotation
+Artifact:
+        textAnnotation::String group::String object::Object dataObject::DataObject
+DataObject:
+        state::String requiredForStart::Boolean producedAtCompletion::Boolean dataFields::DataField+
+Group:
+        textAnnotation::String group::String object::Object dataObject::DataObject
+Annotation:
+        textAnnotation::String group::String object::Object dataObject::DataObject
+TypeDeclaration:
+        id::String name::String
+Application:
+        ParametrizedApplication
+Application:
+        ReferencedApplication
+Application:
+        ParametrizedApplication
+        ReferencedApplication
+ParametrizedApplication:
+        EPSILON
+ReferencedApplication:
+        externalReference::ExternalReference
+Activity:
+        Task
+Activity:
+        Route
+Activity:
+        SubFlow
+Activity:
+        BlockActivity
+Activity:
+        Event
+Activity:
+        isStartActivity::Boolean status::StatusKind startMode::ModeKind finishMode::ModeKind startQuantity::Integer isATransaction::Boolean dataFields::DataField+ object::Object
+Task:
+        TaskService
+Task:
+        TaskReceive
+Task:
+        TaskManual
+Task:
+        TaskReference
+Task:
+        TaskScript
+Task:
+        TaskSend
+Task:
+        TaskUser
+Task:
+        TaskApplication
+TaskService:
+        implementation::ImplementationKind
+TaskReceive:
+        instantiate::Boolean implementation::ImplementationKind
+TaskManual:
+        EPSILON
+TaskReference:
+        taskRef::Task
+TaskScript:
+        script::Script
+TaskSend:
+        implementation::ImplementationKind
+TaskUser:
+        implementation::ImplementationKind
+TaskApplication:
+        packageRef::Package
+Route:
+        Gateway
+Route:
+        gatewayType::GatewayTypeKind instantiate::Boolean markerVisiable::Boolean
+SubFlow:
+        execution::ExecutionKind instanceDataField::String packageRef::Package startActivitySet::ActivitySet startActivity::Activity
+BlockActivity:
+        activitySet::ActivitySet startActivity::Activity
+Event:
+        StartEvent
+Event:
+        IntermediateEvent
+Event:
+        EndEvent
+Trigger:
+        ResultCompensation
+Trigger:
+        ResultError
+Trigger:
+        ResultMultiple
+Trigger:
+        TriggerResultLink
+Trigger:
+        TriggerResultMessage
+Trigger:
+        TriggerIntermediateMultiple
+Trigger:
+        TriggerMultiple
+Trigger:
+        TriggerRule
+Trigger:
+        TriggerTimer
+ResultCompensation:
+        activity::Activity
+ResultError:
+        errorCode::String
+ResultMultiple:
+        EPSILON
+TriggerResultLink:
+        processRef::Process
+TriggerResultMessage:
+        EPSILON
+TriggerIntermediateMultiple:
+        EPSILON
+TriggerMultiple:
+        EPSILON
+TriggerRule:
+        ruleName::String
+TriggerTimer:
+        timeDate::String timeCycle::String
+StartEvent:
+        triggerKind::TriggerKind implementation::ImplementationKind trigger::Trigger
+IntermediateEvent:
+        target::Activity
+EndEvent:
+        triggerKind::TriggerKind implementation::ImplementationKind trigger::Trigger
+Gateway:
+        gatewayType::GatewayTypeKind instantiate::Boolean markerVisiable::Boolean
+Process:
+        accessLevel::AccessLevelKind processType::ProcessTypeKind status::StatusKind suppressJoinFailure::Boolean enableInstanceCompensation::Boolean adHoc::Boolean adHocOrdering::AdHocOrderingKind adHocCompletionCondition::String participant::Participant+ applications::Application+ dataField::DataField activitySets::ActivitySet+ activities::Activity+ transitions::Transition+ object::Object defaultStartActivitySet::ActivitySet defaultStartActivity::Activity
+Transition:
+        quantity::Integer object::Object to::Activity from::Activity
+ActivitySet:
+        adHoc::Boolean adHocOrdering::AdHocOrderingKind adHocCompletionCondition::String defaultStartActivity::Activity activities::Activity+ transitions::Transition+ object::Object
+ExternalReference:
+        xref::String location::String namespace::String
+Object:
+        categories::Category+
+ExternalPackage:
+        href::String
+Category:
+        id::String name::String
+DataField:
+        isArray::Boolean correlation::Boolean dataType::TypeDeclaration
+Script:
+        type::String version::String grammar::String

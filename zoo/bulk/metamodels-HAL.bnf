@@ -1,0 +1,138 @@
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR
+HAL:
+        connexion::Connexion contents::Entry+
+Connexion:
+        login::String password::String
+Entry:
+        Article
+Entry:
+        Notice
+Article:
+        ArticleRecent
+Article:
+        ArticleRetro
+ArticleRecent:
+        fichiers::DepotsType
+ArticleRetro:
+        dateRedaction::String fichiers::AbstractDepot
+Notice:
+        metaArtNotice::MetaArtNoticeType
+ReferenceBiblioType:
+        ArtRevueType
+ReferenceBiblioType:
+        WorkshopType
+ReferenceBiblioType:
+        ArtOuvrageType
+ReferenceBiblioType:
+        OuvrageType
+ReferenceBiblioType:
+        TheseType
+ReferenceBiblioType:
+        BrevetType
+ReferenceBiblioType:
+        AutreType
+ArtRevueType:
+        ArtRevue
+ArtRevueType:
+        ArtJournal
+WorkshopType:
+        Workshop
+WorkshopType:
+        Communication
+WorkshopType:
+        Conference
+ArtOuvrageType:
+        ArtOuvrage
+OuvrageType:
+        Ouvrage
+TheseType:
+        These
+BrevetType:
+        Brevet
+AutreType:
+        Autre
+ArtRevue:
+        urldoi::String journal::String volume::String page::String annee::String
+ArtJournal:
+        urldoi::String journal::String volume::String page::String annee::String
+Workshop:
+        urldoi::String titconf::String ville::String pays::String edcom::String annee::String page::String edsci::String serie::String
+Communication:
+        urldoi::String titconf::String ville::String pays::String edcom::String annee::String page::String edsci::String serie::String
+Conference:
+        urldoi::String titconf::String ville::String pays::String edcom::String annee::String page::String edsci::String serie::String
+ArtOuvrage:
+        urldoi::String titouv::String edcom::String annee::String edsci::String serie::String
+Ouvrage:
+        urldoi::String edcom::String annee::String page::String
+Brevet:
+        datebrevet::String numbrevet::String page::String pays::String
+Autre:
+        urldoi::String annee::String description::String
+These:
+        orgthe::String niveau::String defencedate::String directeur::String codirecteur::String
+MetaType:
+        MetaArtType
+MetaType:
+        MetaArtNoticeType
+MetaArtType:
+        domain::String abstract::String referenceBiblio::ReferenceBiblioType
+MetaArtNoticeType:
+        domain::String abstract::String referenceBiblio::ReferenceBiblioType
+AutLabType:
+        auteurs::Auteur+ laboratoires::Laboratoire+
+Auteur:
+        nom::String prenom::String autrePrenom::String email::String urlPerso::String lab::Laboratoire
+Laboratoire:
+        id::Integer metas::AbstractMetaLab
+AbstractMetaLab:
+        MetaLab
+MetaLab:
+        id::String
+AffiliationType:
+        institution::String+ prive::String+ ecole::String+ universite::String+
+TamponType:
+        id::String
+DateVisibleEnum:
+        15J::EPSILON
+        1M::EPSILON
+        3M::EPSILON
+        1A::EPSILON
+        2A::EPSILON
+        JAMAIS::EPSILON
+AbstractDepot:
+        Depot
+AbstractDepot:
+        DepotWeb
+Depot:
+        format::FormatEnum
+FormatEnum:
+        PDF::EPSILON
+        TEX::EPSILON
+        DOC::EPSILON
+        RTF::EPSILON
+        TXT::EPSILON
+        PS::EPSILON
+        ANNEX::EPSILON
+DepotWeb:
+        format::FormatWebEnum
+FormatWebEnum:
+        XML::EPSILON
+        HTML::EPSILON
+        HTM::EPSILON
+AbstractDepotType:
+        DepotsType
+AbstractDepotType:
+        WebLink
+DepotsType:
+        depots::AbstractDepot+
+WebLink:
+        identifiant::String server::Server
+Server:
+        EPSILON

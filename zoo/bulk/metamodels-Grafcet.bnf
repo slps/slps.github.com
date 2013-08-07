@@ -1,0 +1,31 @@
+String:
+        STR
+Boolean:
+        "true"
+        "false"
+LocatedElement:
+        NamedElement
+NamedElement:
+        Grafcet
+NamedElement:
+        Element
+NamedElement:
+        Connection
+Grafcet:
+        elements::Element+ connections::Connection+
+Element:
+        Step
+Element:
+        Transition
+Step:
+        isInitial::Boolean isActive::Boolean action::String incomingConnections::TransitionToStep+ outgoingConnections::StepToTransition+
+Transition:
+        condition::String incomingConnections::StepToTransition+ outgoingConnections::TransitionToStep+
+Connection:
+        StepToTransition
+Connection:
+        TransitionToStep
+StepToTransition:
+        from::Step to::Transition
+TransitionToStep:
+        from::Transition to::Step

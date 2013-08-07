@@ -1,0 +1,39 @@
+Classifier:
+        Actor
+Classifier:
+        UseCase
+Classifier:
+        instance::Instance+
+Instance:
+        UseCaseInstance
+Instance:
+        classifier::Classifier+
+Actor:
+        instance::Instance+
+UseCase:
+        extensionPoint::String+ includeAddition::Include includeBase::Include extendExtension::Extend extendBase::Extend extensionPoints::ExtensionPoint+
+UseCaseInstance:
+        classifier::Classifier+
+RelationShip:
+        Include
+RelationShip:
+        Extend
+Include:
+        addition::UseCase base::UseCase
+Extend:
+        condition::BooleanExpression extension::UseCase base::UseCase extensionPoint::ExtensionPoint+
+BooleanExpression:
+        value::String
+ModelElement:
+        ExtensionPoint
+ExtensionPoint:
+        location::LocationReference extend::Extend+ useCase::UseCase+
+LocationReference:
+        value::String
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR

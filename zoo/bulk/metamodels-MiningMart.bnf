@@ -1,0 +1,135 @@
+String:
+        STR
+Integer:
+        INT
+Boolean:
+        "true"
+        "false"
+InOut:
+        Input::EPSILON
+        OutPut::EPSILON
+LinkPackage:
+        type::InOut dataObject::CaseRepresentation/DataObject value::DataRepresentation/Value column::DataRepresentation/Column columnSet::DataRepresentation/ColumnSet
+ModelElement:
+        EPSILON
+Classifier:
+        EPSILON
+StructuralFeature:
+        EPSILON
+Class:
+        name::String attributes::SimplfiedMiningMart/Attribute+
+DataType:
+        attribute::SimplfiedMiningMart/Attribute
+Attribute:
+        class::SimplfiedMiningMart/Class has::SimplfiedMiningMart/DataType
+Column:
+        name::String dataType::SimplfiedMiningMart/DataType keys::DataRepresentation/Key+ belongsToColumnSet::DataRepresentation/ColumnSet corespondsToBaseAttribute::DataRepresentation/BaseAttribute linkPackage::LinkPackage
+ColumnSet:
+        number::Integer file::String dbConnectString::String user::String hasColumn::DataRepresentation/Column+ hasKey::DataRepresentation/Key+ correspondsToConcept::DataRepresentation/Concept correspondsToRelationShip::DataRepresentation/RelationShip linkPackage::LinkPackage
+ColumnStatistics:
+        unique::Integer missing::Integer min::Integer max::Integer average::Integer standarDeviation::Integer distributionValue::String distributionCount::Integer distributionMin::Integer distributionMax::Integer forColumn::DataRepresentation/Column
+ColumnSetStatistics:
+        allNumber::Integer ordinalNumber::Integer nominalNumber::Integer timeNumber::Integer forColumnSet::DataRepresentation/ColumnSet
+Snapshot:
+        EPSILON
+Table:
+        EPSILON
+View:
+        EPSILON
+Key:
+        isUsedForIndex::Boolean hasColumn::DataRepresentation/Column+ isAssociatedToColumnSet::DataRepresentation/ColumnSet
+ForeignKey:
+        isConnectionTo::DataRepresentation/Table correspondsToRelationShip::DataRepresentation/RelationShip
+PrimaryKey:
+        EPSILON
+Concept:
+        subConceptRestriction::String isA::DataRepresentation/Concept FromConcept::DataRepresentation/RelationShip ToConcept::DataRepresentation/RelationShip correspondsToColumnSet::DataRepresentation/ColumnSet
+RelationShip:
+        subRelationShipRestriction::String defined::String isA::DataRepresentation/RelationShip correspondsToForeignKey::DataRepresentation/ForeignKey+ correspondsToColumnSet::DataRepresentation/ColumnSet FromConcept::DataRepresentation/Concept ToConcept::DataRepresentation/Concept
+FeatureAttribute:
+        name::String relevanceForMining::Boolean attributeType::SimplfiedMiningMart/DataType belongsToConcept::DataRepresentation/Concept correspondsToColumns::DataRepresentation/Column+
+BaseAttribute:
+        isPartMultiColumnFeature::DataRepresentation/MultiColumnFeature domainDataType::DataRepresentation/DomainDataType
+MultiColumnFeature:
+        consitsOfBaseAttributes::DataRepresentation/BaseAttribute+
+Value:
+        domainDataType::DataRepresentation/DomainDataType belongsToUserInput::DataRepresentation/UserInput+ linkPackage::LinkPackage
+UserInput:
+        containsValues::DataRepresentation/Value+
+Ordinal:
+        EPSILON
+Scalar:
+        EPSILON
+Time:
+        EPSILON
+Binary:
+        EPSILON
+Categorial:
+        EPSILON
+KeyAttribute:
+        EPSILON
+TimeGroup:
+        EPSILON
+Spatial:
+        EPSILON
+Constant:
+        EPSILON
+RoleRestriction:
+        name::String restrictionForRelationShip::DataRepresentation/RelationShip restrictionForConcept::DataRepresentation/Concept restrictionToConcept::DataRepresentation/Concept min::Integer max::Integer belongsToConcept::DataRepresentation/Concept
+DomainDataType:
+        baseAttributeD::DataRepresentation/BaseAttribute
+Nominal:
+        EPSILON
+Case:
+        name::String caseMode::Boolean caseInput::CaseRepresentation/Parameter caseOutput::DataRepresentation/Concept documentation::String listOfStep::CaseRepresentation/Step+ population::DataRepresentation/Concept targetAttributes::DataRepresentation/FeatureAttribute
+Step:
+        name::String description::String belongsToCase::CaseRepresentation/Case embedsOperator::CaseRepresentation/Operator predecessors::CaseRepresentation/Step+ successors::CaseRepresentation/Step+
+LoopStep:
+        iterationSet::DataRepresentation/FeatureAttribute+ outputSet::DataRepresentation/FeatureAttribute+
+MultiStep:
+        iterationCondition::String
+Parameter:
+        name::String place::String parameterType::CaseRepresentation/ParameterType belongsToOperator::CaseRepresentation/Operator
+ParameterType:
+        Value::EPSILON
+        Concept::EPSILON
+        RelationShip::EPSILON
+        FeatureAttribute::EPSILON
+FeatureConstruction:
+        scalingFactor::Integer
+DataMinStep:
+        EPSILON
+TimeOperator:
+        EPSILON
+FeatureSelection:
+        EPSILON
+MultiRelFeatureConstr:
+        EPSILON
+RowSelection:
+        EPSILON
+Agregation:
+        EPSILON
+Scaling:
+        EPSILON
+Discretization:
+        EPSILON
+Segmentation:
+        EPSILON
+Sampling:
+        EPSILON
+ExecutionElement:
+        source::CaseRepresentation/DataObject target::CaseRepresentation/DataObject
+DataObject:
+        source::CaseRepresentation/ExecutionElement target::CaseRepresentation/ExecutionElement linkPackageCaseRepresentation::LinkPackage
+MSL-Tool:
+        EPSILON
+TransformationGroup:
+        transformation::CaseRepresentation/Transformation+
+Transformation:
+        transformationGroup::CaseRepresentation/TransformationGroup
+Function:
+        nameOf::String signature::String
+StoredProcedure:
+        nameOf::String signature::String
+SQLQuery:
+        select::DataRepresentation/Column+ from::DataRepresentation/ColumnSet+ where::String+

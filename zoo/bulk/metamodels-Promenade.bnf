@@ -1,0 +1,79 @@
+String:
+        STR
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+Strong:
+        EPSILON
+Start:
+        EPSILON
+End:
+        EPSILON
+FeedBack:
+        EPSILON
+Weak:
+        precs::Precedence+ auxTasks::MetaTaskOccurence+
+Grouping:
+        precs::Precedence+ auxTasks::MetaTaskOccurence+
+Precedence:
+        DynPrecedence
+Precedence:
+        DerPrecedence
+Precedence:
+        BasPrecedence
+Precedence:
+        deprecs::DerPrecedence+ parbind::ParBinding+
+DynPrecedence:
+        Strong
+DynPrecedence:
+        Start
+DynPrecedence:
+        End
+DynPrecedence:
+        FeedBack
+DynPrecedence:
+        Weak
+DynPrecedence:
+        Grouping
+DynPrecedence:
+        deprecs::DerPrecedence+ parbind::ParBinding+
+DerPrecedence:
+        Weak
+DerPrecedence:
+        Grouping
+DerPrecedence:
+        precs::Precedence+ auxTasks::MetaTaskOccurence+
+BasPrecedence:
+        Strong
+BasPrecedence:
+        Start
+BasPrecedence:
+        End
+BasPrecedence:
+        FeedBack
+BasPrecedence:
+        deprecs::DerPrecedence+ parbind::ParBinding+
+MetaTaskOccurence:
+        dprecs::DerPrecedence+ taskCl::MetaTask+
+ParBinding:
+        inclusion::Boolean precs::Precedence+ targetPar::ParameterPrec sourcePar::ParameterPrec
+ParameterPrec:
+        parbindsTar::ParBinding+ parbindsSour::ParBinding+ dstParams::ParameterPrec+ orParams::ParameterPrec+
+ModelElement:
+        MetaTaskOccurence
+ModelElement:
+        MetaTask
+ModelElement:
+        dependencyUMLsupp::DependancyUML dependencyUMLcli::DependancyUML
+DependancyUML:
+        suppier::ModelElement+ client::ModelElement+
+MetaTask:
+        params::ParameterUML+ occurs::MetaTaskOccurence+
+ParameterUML:
+        ParameterPrec
+ParameterUML:
+        task::MetaTask doc::MetaDocument+
+MetaDocument:
+        params::ParameterUML+

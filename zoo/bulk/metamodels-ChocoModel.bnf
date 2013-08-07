@@ -1,0 +1,68 @@
+LocatedElement:
+        Package
+LocatedElement:
+        Import
+LocatedElement:
+        ChocoProblem
+LocatedElement:
+        Element
+LocatedElement:
+        Domain
+OpConstraint:
+        eq::EPSILON
+        and2::EPSILON
+        or2::EPSILON
+        gt::EPSILON
+        ge::EPSILON
+        lt::EPSILON
+        le::EPSILON
+        plus::EPSILON
+Package:
+        name::String import::Import+ problem::ChocoProblem
+Import:
+        fqn::String
+ChocoProblem:
+        name::String elements::Element+
+Element:
+        Expression
+Element:
+        PostConstraint
+Expression:
+        ConstraintDef
+Expression:
+        IntVar
+Expression:
+        IntConstant
+Expression:
+        SymbolicTerm
+Expression:
+        IntValue
+Expression:
+        IntExp
+Expression:
+        Constraint
+ConstraintDef:
+        op::OpConstraint left::Expression right::Expression
+IntVar:
+        domain::Domain
+Domain:
+        lower::Integer upper::Integer
+IntConstant:
+        val::Integer
+SymbolicTerm:
+        term::Expression
+IntValue:
+        val::Integer
+IntExp:
+        op::OpConstraint left::Expression right::Expression
+Constraint:
+        op::OpConstraint left::Expression right::Expression
+PostConstraint:
+        op::OpConstraint constraint::ConstraintDef
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR

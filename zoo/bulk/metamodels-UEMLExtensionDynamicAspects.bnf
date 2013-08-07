@@ -1,0 +1,102 @@
+UEMLObject:
+        UEMLModel
+UEMLObject:
+        Port
+UEMLObject:
+        Flow
+UEMLObject:
+        Object
+UEMLObject:
+        Activity
+UEMLObject:
+        has::Geometry model::UEMLModel
+UEMLModel:
+        contains::UEMLObject+
+Geometry:
+        object::UEMLObject
+Port:
+        ResourceRole
+Port:
+        Anchor
+Port:
+        ResourceRole
+        Anchor
+Flow:
+        ResourceFlow
+Flow:
+        IOFlow
+Flow:
+        ControlFlow
+Flow:
+        associationConnector::AssociationConnector
+Activity:
+        Task
+Activity:
+        resourceRole::ResourceRole+ parent::Process hasOutput::OutputPort+ hasInput::InputPort+
+Object:
+        InformationObject
+Object:
+        Resource
+Object:
+        ioFlow::IOFlow
+InformationObject:
+        controlFlow::ControlFlow
+Resource:
+        MaterialResource
+Resource:
+        HumanResource
+Resource:
+        carries::ResourceFlow plays::ResourceRole+
+MaterialResource:
+        carries::ResourceFlow plays::ResourceRole+
+HumanResource:
+        carries::ResourceFlow plays::ResourceRole+
+ResourceFlow:
+        resourceCarries::Resource+
+IOFlow:
+        carries::Object+
+ControlFlow:
+        TriggerFlow
+ControlFlow:
+        ConstraintFlow
+ControlFlow:
+        carries::InformationObject+
+TriggerFlow:
+        carries::InformationObject+
+ConstraintFlow:
+        carries::InformationObject+
+ResourceRole:
+        resourcePlays::Resource+ roleQualifier::RoleType in::Activity
+RoleType:
+        EPSILON
+Anchor:
+        OutputPort
+Anchor:
+        InputPort
+Anchor:
+        ConnectionOperator
+Anchor:
+        OutputPort
+        InputPort
+OutputPort:
+        activity::Activity
+InputPort:
+        activity::Activity
+ConnectionOperator:
+        target::AssociationConnector origin::AssociationConnector
+AssociationConnector:
+        origin::FlowObject+ target::FlowObject+ classAssociation::Flow
+Task:
+        resourceRole::ResourceRole+ parent::Process hasOutput::OutputPort+ hasInput::InputPort+
+FlowObject:
+        Event
+FlowObject:
+        Activity
+FlowObject:
+        ConnectionOperator
+FlowObject:
+        target::AssociationConnector origin::AssociationConnector
+Event:
+        target::AssociationConnector origin::AssociationConnector
+Process:
+        child::Activity+

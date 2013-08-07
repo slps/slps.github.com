@@ -1,0 +1,95 @@
+Element:
+        NamedElement
+Element:
+        RuleSet
+Element:
+        RuleAction
+Element:
+        RuleCondition
+Element:
+        Binding
+Element:
+        OclExpression
+Element:
+        VariableDeclaration
+Element:
+        location::String commentsBefore::String+ commentsAfter::String+
+NamedElement:
+        Rule
+NamedElement:
+        OclType
+RuleSet:
+        rules::Rule+
+Rule:
+        binding::Binding condition::RuleCondition actions::RuleAction+ ruleOwner::RuleSet
+RuleAction:
+        DeleteAction
+RuleAction:
+        AssignAction
+RuleAction:
+        InvokeAction
+RuleAction:
+        CreateAction
+RuleAction:
+        actionOwner::Rule
+RuleCondition:
+        ruleConditionOwner::Rule conditionExp::PRRExpressions/OclExpression
+Binding:
+        bindingOwner::Rule ruleVariable::RuleVariable+
+RuleVariable:
+        ruleVariableOwner::Binding filter::PRRExpressions/OclExpression
+DeleteAction:
+        objValue::PRRExpressions/OclExpression
+CreateAction:
+        insertArguments::PRRExpressions/OclExpression+
+AssignAction:
+        objValue::PRRExpressions/OclExpression aValue::PRRExpressions/OclExpression
+InvokeAction:
+        invocation::PRRExpressions/OclExpression
+IteratorExp:
+        name::String
+LoopExp:
+        body::PRRExpressions/OclExpression iterators::PRRExpressions/Iterator+
+OperatorCallExp:
+        EPSILON
+OperationCallExp:
+        arguments::PRRExpressions/OclExpression+ operationName::String signature::String
+CollectionOperationCallExp:
+        EPSILON
+StringExp:
+        stringSymbol::String
+BooleanExp:
+        booleanSymbol::Boolean
+IntegerExp:
+        integerSymbol::Integer
+RealExp:
+        realSymbol::Double
+NavigationOrAttributeCallExp:
+        name::String
+Iterator:
+        loopExpr::PRRExpressions/LoopExp
+VariableDeclaration:
+        type::PRRTypes/OclType varName::String variableExp::PRRExpressions/VariableExp+
+VariableExp:
+        referredVariable::PRRExpressions/VariableDeclaration
+TypeExp:
+        referredType::PRRTypes/OclType
+AllInstanceExp:
+        sourceType::PRRTypes/OclType
+OclType:
+        variableDeclaration::PRRExpressions/VariableDeclaration+ oclExpression::PRRExpressions/OclExpression+ appliedAllInstance::PRRExpressions/AllInstanceExp typeExp::PRRExpressions/TypeExp+
+StringType:
+        EPSILON
+RealType:
+        EPSILON
+BooleanType:
+        EPSILON
+IntegerType:
+        EPSILON
+Integer:
+        INT
+String:
+        STR
+Boolean:
+        "true"
+        "false"

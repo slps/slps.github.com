@@ -1,0 +1,33 @@
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR
+NamedElement:
+        DataBase
+NamedElement:
+        Table
+NamedElement:
+        Column
+NamedElement:
+        EnumItem
+DataBase:
+        tables::Table+
+Table:
+        columns::Column+ database::DataBase
+Column:
+        IntegerColumn
+Column:
+        EnumColumn
+Column:
+        type::String isPrimaryKey::Boolean null::Boolean defaultValue::String comment::String table::Table
+IntegerColumn:
+        isAutoIncrement::Boolean
+EnumColumn:
+        enumSet::EnumSet
+EnumSet:
+        enumItems::EnumItem+
+EnumItem:
+        enumSet::EnumSet

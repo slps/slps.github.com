@@ -1,0 +1,34 @@
+_Literal:
+        Literal
+_IF:
+        "if"
+_THEN:
+        "then"
+_ELSE:
+        "else"
+name:
+        STR
+literal:
+        "-"? INT
+atom:
+        name
+        literal
+        "(" expr ")"
+ifThenElse:
+        _IF expr _THEN expr _ELSE expr
+operators:
+        "=="
+        "+"
+        "-"
+binary:
+        atom (operators atom)*
+apply:
+        name atom+
+expr:
+        binary
+        apply
+        ifThenElse
+function:
+        name name+ "=" expr
+program:
+        function+ StringEnd

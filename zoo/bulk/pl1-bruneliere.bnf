@@ -1,0 +1,54 @@
+PLIClassifier:
+        PLISimpleType
+PLIClassifier:
+        PLINamedType
+PLIClassifier:
+        PLIComposedType
+PLIClassifier:
+        name::String typedElements::PLIElement+
+PLISimpleType:
+        PLIComputationalType
+PLISimpleType:
+        PLINonComputationalType
+PLISimpleType:
+        alias::PLIAlias
+PLINamedType:
+        name::String typedElements::PLIElement+
+PLIComposedType:
+        elements::PLIElement+
+PLIAlias:
+        type::PLISimpleType contains::PLIAttribute+
+PLIAttribute:
+        EPSILON
+PLIComputationalType:
+        alias::PLIAlias
+PLINonComputationalType:
+        alias::PLIAlias
+PLIElement:
+        level::String name::String sharedType::PLIClassifier group::PLIComposedType initial::PLIElementInitialValue source::PLISourceText array::PLIArray
+PLIElementInitialValue:
+        initialValue::String
+PLISourceText:
+        source::String fileName::String
+PLIArray:
+        PLIFixedBoundArray
+PLIArray:
+        PLIFixedLboundArray
+PLIArray:
+        PLIHBoundArray
+PLIArray:
+        PLIVariableBoundArray
+PLIArray:
+        arrayOf::PLIElement
+PLIFixedBoundArray:
+        IBound::Integer uBound::Integer referredTo::PLIElement
+PLIFixedLboundArray:
+        IBound::Integer uBoundToAllocate::String referredTo::PLIElement
+PLIHBoundArray:
+        uBound::Integer IBoundToAllocate::String referredTo::PLIElement
+PLIVariableBoundArray:
+        IBoundToAllocate::String hBoundToAllocate::String referredTo::PLIElement
+String:
+        STR
+Integer:
+        INT

@@ -1,0 +1,59 @@
+program:
+        element*
+element:
+        singleton_tag
+        tag
+        text
+        comment_tag
+        tag_beg
+        tag_end
+tag:
+        "<" id attributes ">" (NL IN) tag_elements EX "</" id ">" NL
+tag_elements:
+        element*
+singleton_tag:
+        "<" singleton_id attributes ">" singleton_tag_end? NL
+        "<" id attributes "/>" NL
+singleton_tag_end:
+        "</" singleton_id ">"
+singleton_id:
+        "br"
+        "hr"
+        "|" "img"
+        "meta"
+        "base"
+        "basefont"
+        x_id
+        "dt"
+comment_tag:
+        "<!" comment_text* ">" NL
+comment_text:
+        punctuation SP
+        token
+tag_beg:
+        "<" id attributes ">" NL
+tag_end:
+        "</" id ">" NL
+attributes:
+        SPOFF attribute* SPON
+attribute:
+        SP attribute_id equals_attribute_value?
+attribute_id:
+        id
+        x_id
+equals_attribute_value:
+        "=" attribute_value
+attribute_value:
+        stringlit
+        number
+        id
+        url
+        fileref
+text:
+        text_unit+ NL
+text_unit:
+        punctuation SP
+        ")" SP
+        SP "("
+        token
+        "<" number

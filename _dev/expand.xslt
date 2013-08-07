@@ -111,7 +111,16 @@
 										<xsl:when test="local-name()='xbgf'">
 											<link>
 												<xbgf>
-													<xsl:value-of select="$handle"/>
+													<xsl:choose>
+														<xsl:when test="../../as">
+															<xsl:value-of select="../../as"/>
+															<xsl:text>/</xsl:text>
+															<xsl:value-of select="translate($handle,'/','-')"/>
+														</xsl:when>
+														<xsl:otherwise>
+															<xsl:value-of select="$handle"/>
+														</xsl:otherwise>
+													</xsl:choose>
 													<xsl:text>-</xsl:text>
 													<xsl:value-of select="."/>
 												</xbgf>
@@ -150,7 +159,16 @@
 										<xsl:when test="local-name()='xbgf'">
 											<link>
 												<xbgf>
-													<xsl:value-of select="$handle"/>
+													<xsl:choose>
+														<xsl:when test="../../as">
+															<xsl:value-of select="../../as"/>
+															<xsl:text>/</xsl:text>
+															<xsl:value-of select="translate($handle,'/','-')"/>
+														</xsl:when>
+														<xsl:otherwise>
+															<xsl:value-of select="$handle"/>
+														</xsl:otherwise>
+													</xsl:choose>
 													<xsl:text>-</xsl:text>
 													<xsl:value-of select="."/>
 												</xbgf>

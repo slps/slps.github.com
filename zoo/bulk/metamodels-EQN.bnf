@@ -1,0 +1,63 @@
+RoutingChain:
+        queuingNetwork::QueuingNetwork+
+QueuingNetwork:
+        center::Center+ workLoad::RoutingChain
+ExecutionGraph:
+        nodeNested::Node node::Node+
+Center:
+        Special
+Center:
+        ActiveCenter
+Center:
+        PassiveCenter
+Center:
+        node::Node queuingNetwork::QueuingNetwork
+Node:
+        nested::ExecutionGraph executionGraph::ExecutionGraph demand::Center+
+Special:
+        Source
+Special:
+        Sink
+Special:
+        Fork
+Special:
+        Join
+Special:
+        Split
+Special:
+        Allocate
+Special:
+        Release
+Special:
+        Source
+        Sink
+        Fork
+        Join
+        Split
+        Allocate
+        Release
+ActiveCenter:
+        node::Node queuingNetwork::QueuingNetwork
+PassiveCenter:
+        node::Node queuingNetwork::QueuingNetwork
+Source:
+        EPSILON
+Sink:
+        EPSILON
+Fork:
+        EPSILON
+Join:
+        EPSILON
+Split:
+        EPSILON
+Allocate:
+        EPSILON
+Release:
+        EPSILON
+String:
+        STR
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT

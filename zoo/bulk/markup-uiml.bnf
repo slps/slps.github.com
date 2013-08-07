@@ -1,0 +1,287 @@
+UIML:
+        head::Header templates::Template+ interfaces::Interface+ peers::Peer+
+Header:
+        metas::MetaData+
+MetaData:
+        name::String content::String
+Peer:
+        id::String how::HowKind export::ExportKind source::Source presentations::Presentation+ logics::Logic+
+Presentation:
+        id::String how::HowKind export::ExportKind base::String source::Source dClasses::DClass+
+Logic:
+        id::String how::HowKind export::ExportKind source::Source dComponents::DComponent+
+DComponent:
+        id::String how::HowKind export::ExportKind mapsTo::String location::String source::Source dMethods::DMethod+
+DClass:
+        id::String how::HowKind export::ExportKind mapsTo::String mapsType::String source::Source dMethods::DMethod+ dProperties::DProperty+ events::Event+ listeners::Listener+
+DProperty:
+        id::String mapsType::MapsTypeKind mapsTo::String returnType::String dMethods::DMethod+ dParams::DParam+
+DMethod:
+        id::String how::HowKind export::ExportKind mapsTo::String returnType::String source::Source dParams::DParam+ script::Script
+DParam:
+        id::String type::String value::String
+Script:
+        id::String type::String how::HowKind export::ExportKind value::String source::String
+Listener:
+        class::String attacher::String
+UsedInTagKind:
+        event::EPSILON
+        listener::EPSILON
+        part::EPSILON
+MapsTypeKind:
+        attribute::EPSILON
+        getMethod::EPSILON
+        setMethod::EPSILON
+        method::EPSILON
+ExtensibleElement:
+        Peer
+ExtensibleElement:
+        Presentation
+ExtensibleElement:
+        Logic
+ExtensibleElement:
+        DComponent
+ExtensibleElement:
+        DClass
+ExtensibleElement:
+        DMethod
+ExtensibleElement:
+        Script
+ExtensibleElement:
+        Interface
+ExtensibleElement:
+        Structure
+ExtensibleElement:
+        Part
+ExtensibleElement:
+        Style
+ExtensibleElement:
+        Property
+ExtensibleElement:
+        Content
+ExtensibleElement:
+        Behavior
+ExtensibleElement:
+        Constant
+ExtensibleElement:
+        Rule
+ExtensibleElement:
+        Restructure
+Source:
+        LocalSource
+Source:
+        RemoteSource
+LocalSource:
+        source::ExtensibleElement
+RemoteSource:
+        location::String
+Interface:
+        id::String how::HowKind export::ExportKind source::Source structure::Structure+ style::Style+ content::Content+ behavior::Behavior+
+Structure:
+        id::String how::HowKind export::ExportKind source::Source parts::Part+
+Part:
+        id::String how::HowKind export::ExportKind class::String wherePart::String source::Source style::Style content::Content behavior::Behavior parts::Part+ repeats::Repeat+
+Style:
+        id::String how::HowKind export::ExportKind source::Source properties::Property+
+Property:
+        name::String how::HowKind export::ExportKind values::String+ parts::Part+ events::Event+ source::Source constants::Constant+ properties::Property+ references::Reference+ calls::Call+ iterators::Iterator+
+Content:
+        id::String how::HowKind export::ExportKind source::Source constants::Constant+
+Behavior:
+        id::String how::HowKind export::ExportKind source::Source rules::Rule+
+Repeat:
+        iterator::Iterator parts::Part+
+Constant:
+        id::String how::HowKind export::ExportKind model::String value::String source::Source constants::Constant+
+Reference:
+        constant::Constant
+Rule:
+        id::String how::HowKind export::ExportKind source::Source condition::Condition action::Action
+Condition:
+        EventCondition
+Condition:
+        EqualCondition
+Condition:
+        OpCondition
+EventCondition:
+        event::Event
+EqualCondition:
+        equal::Equal
+OpCondition:
+        op::Operation
+Action:
+        Action_1
+Action:
+        Action_2
+Action:
+        Action_1
+        Action_2
+Action_1:
+        event::Event properties::Property+ calls::Call+ restructures::Restructure+
+Action_2:
+        whenTrue::WhenTrue whenFalse::WhenFalse byDefault::ByDefault
+Call:
+        name::String params::Parameter+
+Parameter:
+        PropertyParameter
+Parameter:
+        ReferenceParameter
+Parameter:
+        CallParameter
+Parameter:
+        OperationParameter
+Parameter:
+        EventParameter
+Parameter:
+        ConstantParameter
+Parameter:
+        IteratorParameter
+PropertyParameter:
+        property::Property
+ReferenceParameter:
+        reference::Reference
+CallParameter:
+        call::Call
+OperationParameter:
+        op::Operation
+EventParameter:
+        event::Event
+ConstantParameter:
+        constant::Constant
+IteratorParameter:
+        iterator::Iterator
+Iterator:
+        ConstantIterator
+Iterator:
+        PropertyIterator
+Iterator:
+        CallIterator
+Iterator:
+        TextIterator
+ConstantIterator:
+        constant::Constant
+PropertyIterator:
+        property::Property
+CallIterator:
+        call::Call
+TextIterator:
+        value::Integer
+Event:
+        class::String parts::Part+
+Equal:
+        EqualToConstant
+Equal:
+        EqualToProperty
+Equal:
+        EqualToReference
+Equal:
+        EqualToOperation
+EqualToConstant:
+        constant::Constant
+EqualToProperty:
+        property::Property
+EqualToReference:
+        reference::Reference
+EqualToOperation:
+        op::Operation
+Operation:
+        name::String constants::Constant+ properties::Property+ references::Reference+ calls::Call+ ops::Operation+ events::Event+
+Restructure:
+        how::HowKind atPart::Part wherePart::Part source::Source template::Template
+Branch:
+        WhenTrue
+Branch:
+        WhenFalse
+Branch:
+        ByDefault
+Branch:
+        properties::Property+ calls::Call+ restructure::Restructure op::Operation equal::Equal event::Event
+WhenTrue:
+        properties::Property+ calls::Call+ restructure::Restructure op::Operation equal::Equal event::Event
+WhenFalse:
+        properties::Property+ calls::Call+ restructure::Restructure op::Operation equal::Equal event::Event
+ByDefault:
+        properties::Property+ calls::Call+ restructure::Restructure op::Operation equal::Equal event::Event
+HowKind:
+        append::EPSILON
+        cascade::EPSILON
+        replace::EPSILON
+        union::EPSILON
+        delete::EPSILON
+ExportKind:
+        hidden::EPSILON
+        optional::EPSILON
+        required::EPSILON
+WhereKind:
+        first::EPSILON
+        last::EPSILON
+        before::EPSILON
+        after::EPSILON
+String:
+        STR
+Integer:
+        INT
+Template:
+        BehaviorTemplate
+Template:
+        DClassTemplate
+Template:
+        DComponentTemplate
+Template:
+        ConstantTemplate
+Template:
+        ContentTemplate
+Template:
+        InterfaceTemplate
+Template:
+        LogicTemplate
+Template:
+        PartTemplate
+Template:
+        PeerTemplate
+Template:
+        PresentationTemplate
+Template:
+        PropertyTemplate
+Template:
+        RestructureTemplate
+Template:
+        RuleTemplate
+Template:
+        ScriptTemplate
+Template:
+        StructureTemplate
+Template:
+        StyleTemplate
+BehaviorTemplate:
+        behavior::Behavior
+DClassTemplate:
+        dClass::DClass
+DComponentTemplate:
+        dComponent::DComponent
+ConstantTemplate:
+        constant::Constant
+ContentTemplate:
+        content::Content
+InterfaceTemplate:
+        interface::Interface
+LogicTemplate:
+        logic::Logic
+PartTemplate:
+        part::Part
+PeerTemplate:
+        peer::Peer
+PresentationTemplate:
+        presentation::Presentation
+PropertyTemplate:
+        property::Property
+RestructureTemplate:
+        restructure::Restructure
+RuleTemplate:
+        rule::Rule
+ScriptTemplate:
+        script::Script
+StructureTemplate:
+        structure::Structure
+StyleTemplate:
+        style::Style

@@ -1,0 +1,267 @@
+Entity:
+        NamedElement
+Entity:
+        Comment
+Entity:
+        Property
+Entity:
+        DataType
+Entity:
+        ConnectorEnd
+Entity:
+        Interface
+Entity:
+        Classifier
+Entity:
+        InformationFlow
+Entity:
+        Parameter
+Entity:
+        ActivityEdge
+Entity:
+        ParameterSet
+Entity:
+        InstanceSpecification
+Entity:
+        ValueSpecification
+Entity:
+        Behavior
+Entity:
+        Operation
+Entity:
+        ObjectNode
+Entity:
+        Abstraction
+Entity:
+        ActivityPartition
+Entity:
+        Trace
+Entity:
+        Realization
+NamedElement:
+        Dependency
+NamedElement:
+        Package
+NamedElement:
+        Allocated
+NamedElement:
+        RequirementRelated
+Dependency:
+        Conform
+Conform:
+        target::Viewpoint source::View
+Package:
+        View
+View:
+        conformsTo::Viewpoint
+Class:
+        Viewpoint
+Class:
+        Block
+Class:
+        Requirement
+Class:
+        name::String
+Viewpoint:
+        stakeholders::String+ purpose::String concerns::String+ languages::String+ methods::String+
+Comment:
+        Rationale
+Comment:
+        Problem
+Comment:
+        content::String
+Rationale:
+        content::String
+Problem:
+        content::String
+Block:
+        ConstraintBlock
+Block:
+        isEncapsulated::Boolean
+ConstraintBlock:
+        isEncapsulated::Boolean
+Property:
+        BlockProperty
+Property:
+        Port
+Property:
+        FlowProperty
+Property:
+        BlockProperty
+        Port
+        FlowProperty
+BlockProperty:
+        ConstraintProperty
+BlockProperty:
+        DistributedProperty
+BlockProperty:
+        ConstraintProperty
+        DistributedProperty
+ConstraintProperty:
+        EPSILON
+DistributedProperty:
+        BasicInterval
+DistributedProperty:
+        Normal
+DistributedProperty:
+        BasicInterval
+        Normal
+DataType:
+        ValueType
+ValueType:
+        Unit
+ValueType:
+        Dimension
+ValueType:
+        unit::Unit dimension::Dimension
+Unit:
+        unit::Unit dimension::Dimension
+Dimension:
+        unit::Unit dimension::Dimension
+ConnectorEnd:
+        NestedConnectorEnd
+NestedConnectorEnd:
+        propertyPath::Property
+Port:
+        FlowPort
+Port:
+        isBehavior::Boolean
+FlowPort:
+        isAtomic::Boolean direction::FlowDirection isConjugated::Boolean
+FlowProperty:
+        direction::FlowDirection
+Interface:
+        FlowSpecification
+FlowSpecification:
+        ownedFlowProperty::FlowProperty+
+FlowDirection:
+        in::EPSILON
+        out::EPSILON
+        inout::EPSILON
+Classifier:
+        Class
+Classifier:
+        InformationItem
+Classifier:
+        Class
+        InformationItem
+InformationItem:
+        represented::Classifier+
+InformationFlow:
+        ItemFlow
+InformationFlow:
+        conveyed::Classifier+ source::NamedElement+ target::NamedElement+
+ItemFlow:
+        itemProperty::BlockProperty
+Parameter:
+        Optional
+Parameter:
+        Rate
+ActivityEdge:
+        Probability
+ActivityEdge:
+        Rate
+ActivityEdge:
+        EPSILON
+ParameterSet:
+        Probability
+ParameterSet:
+        EPSILON
+Optional:
+        EPSILON
+Rate:
+        Continous
+Rate:
+        Discrete
+Rate:
+        instance::InstanceSpecification
+InstanceSpecification:
+        EPSILON
+Continous:
+        instance::InstanceSpecification
+Discrete:
+        instance::InstanceSpecification
+Probability:
+        probability::ValueSpecification
+ValueSpecification:
+        EPSILON
+Behavior:
+        ControlOperation
+Behavior:
+        TestCase
+Behavior:
+        EPSILON
+Operation:
+        ControlOperation
+Operation:
+        TestCase
+Operation:
+        EPSILON
+ControlOperation:
+        EPSILON
+ObjectNode:
+        NoBuffer
+ObjectNode:
+        Overwrite
+ObjectNode:
+        NoBuffer
+        Overwrite
+NoBuffer:
+        EPSILON
+Overwrite:
+        EPSILON
+Abstraction:
+        Allocate
+Allocate:
+        EPSILON
+Allocated:
+        allocatedFrom::NamedElement+ allocatedTo::NamedElement+
+ActivityPartition:
+        AllocateActivityPartition
+AllocateActivityPartition:
+        EPSILON
+Trace:
+        DeriveReqt
+Trace:
+        Verify
+Trace:
+        Copy
+Trace:
+        DeriveReqt
+        Verify
+        Copy
+DeriveReqt:
+        EPSILON
+Verify:
+        EPSILON
+Copy:
+        EPSILON
+Realization:
+        Satisfy
+Satisfy:
+        EPSILON
+Requirement:
+        text::String id::String derived::Requirement+ derivedFrom::Requirement+ satisfiedBy::NamedElement+ refinedBy::NamedElement+ tracedTo::NamedElement+ verifiedBy::TestCase+ master::Requirement
+TestCase:
+        EPSILON
+RequirementRelated:
+        verifies::Requirement+ tracedFrom::Requirement+ satisfies::Requirement+ refines::Requirement+
+BasicInterval:
+        Interval
+BasicInterval:
+        Uniform
+BasicInterval:
+        min::Integer max::Integer
+Interval:
+        min::Integer max::Integer
+Uniform:
+        min::Integer max::Integer
+Normal:
+        mean::Integer standardDeviation::Integer
+String:
+        STR
+Integer:
+        INT
+Boolean:
+        "true"
+        "false"

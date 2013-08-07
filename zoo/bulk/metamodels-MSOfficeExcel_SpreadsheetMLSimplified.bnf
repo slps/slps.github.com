@@ -1,0 +1,51 @@
+Integer:
+        INT
+String:
+        STR
+Boolean:
+        "true"
+        "false"
+DateTimeType:
+        year::Integer month::Integer day::Integer hour::Integer minute::Integer second::Integer
+ValueType:
+        StringValue
+ValueType:
+        NumberValue
+ValueType:
+        DateTimeTypeValue
+ValueType:
+        BooleanValue
+ValueType:
+        ErrorValue
+StringValue:
+        value::String
+NumberValue:
+        value::Double
+DateTimeTypeValue:
+        value::DateTimeType
+BooleanValue:
+        value::Boolean
+ErrorValue:
+        vt_data::Data
+Workbook:
+        wb_worksheets::Worksheet+
+Worksheet:
+        ws_workbook::Workbook ws_table::Table name::String
+Table:
+        t_worksheet::Worksheet t_cols::Column+ t_rows::Row+
+TableElement:
+        ColOrRowElement
+TableElement:
+        Cell
+ColOrRowElement:
+        Column
+ColOrRowElement:
+        Row
+Column:
+        c_table::Table autoFitWidth::Boolean width::Double
+Row:
+        r_table::Table r_cells::Cell+ autoFitHeight::Boolean height::Double
+Cell:
+        c_row::Row arrayRange::String formula::String hRef::String mergeAcross::Double mergeDown::Double c_data::Data
+Data:
+        d_cell::Cell value::ValueType

@@ -1,0 +1,277 @@
+LocatedElement:
+        Root
+LocatedElement:
+        VocabularyEntry
+LocatedElement:
+        Caption
+LocatedElement:
+        PrimaryRepresentation
+LocatedElement:
+        ConceptDefinition
+LocatedElement:
+        ConceptSource
+LocatedElement:
+        Note
+LocatedElement:
+        Sentence
+LocatedElement:
+        NameSpaceURI
+LocatedElement:
+        Word
+LocatedElement:
+        SBVRExpression
+LocatedElement:
+        SBVRPropWithKW
+LocatedElement:
+        ModalForm
+LocatedElement:
+        SimpleSBVRProp
+LocatedElement:
+        SubSBVRProp
+LocatedElement:
+        LinkSBVRConcept
+LocatedElement:
+        ConjConcept
+LocatedElement:
+        Concept
+LocatedElement:
+        NounConcept
+LocatedElement:
+        Qualification
+LocatedElement:
+        GeneralConcept
+LocatedElement:
+        Qualifier
+LocatedElement:
+        ModalBegin
+Root:
+        entries::VocabularyEntry+
+VocabularyEntry:
+        primaryRep::PrimaryRepresentation caption::Caption+
+Caption:
+        DefCaption
+Caption:
+        DescCaption
+Caption:
+        SrcCaption
+Caption:
+        DBCaption
+Caption:
+        GenCCaption
+Caption:
+        CTypCaption
+Caption:
+        Necessity
+Caption:
+        Possibility
+Caption:
+        RefSCaption
+Caption:
+        NoteCaption
+Caption:
+        ExCaption
+Caption:
+        SynCaption
+Caption:
+        SynFCaption
+Caption:
+        SeeCaption
+Caption:
+        SFCaption
+Caption:
+        NSURICaption
+DefCaption:
+        definition::ConceptDefinition
+DescCaption:
+        description::Note
+SrcCaption:
+        source::ConceptSource
+DBCaption:
+        dictionaryBasis::ConceptSource
+GenCCaption:
+        generalConcept::PrimaryRepresentation
+CTypCaption:
+        conceptType::PrimaryRepresentation+
+Necessity:
+        exp::SBVRExpression
+Possibility:
+        exp::SBVRExpression
+RefSCaption:
+        referenceScheme::PrimaryRepresentation
+NoteCaption:
+        note::Note
+ExCaption:
+        example::SBVRExpression+
+SynCaption:
+        synonym::PrimaryRepresentation+
+SynFCaption:
+        synonymousForm::SBVRExpression+
+SeeCaption:
+        see::PrimaryRepresentation
+SFCaption:
+        subjectField::PrimaryRepresentation
+NSURICaption:
+        namespaceURI::NameSpaceURI
+PrimaryRepresentation:
+        NotFactTypeRepresentation
+PrimaryRepresentation:
+        FactTypeFormRepresentation
+NotFactTypeRepresentation:
+        TermRepresentation
+NotFactTypeRepresentation:
+        NameRepresentation
+TermRepresentation:
+        term::StringWord+
+NameRepresentation:
+        hasThe::Boolean name::NameWord+
+FactTypeFormRepresentation:
+        primaryRep1::NotFactTypeRepresentation verbExp::Verb+ primaryRep2::NotFactTypeRepresentation
+ConceptDefinition:
+        exp::Concept conjexp::ConjConcept+
+ConceptSource:
+        source::Word+
+Note:
+        sentences::Sentence+
+Sentence:
+        words::Word+
+NameSpaceURI:
+        URI::Word+
+Word:
+        StringWord
+Word:
+        QuotedStringWord
+Word:
+        NameWord
+StringWord:
+        val::String
+QuotedStringWord:
+        val::String
+NameWord:
+        val::String
+Verb:
+        is::EPSILON
+        relevant::EPSILON
+        comprises::EPSILON
+        to::EPSILON
+        work::EPSILON
+        in::EPSILON
+        trades::EPSILON
+        as::EPSILON
+        are::EPSILON
+        accepted::EPSILON
+        generally::EPSILON
+        important::EPSILON
+        across::EPSILON
+        share::EPSILON
+        sets::EPSILON
+        assigned::EPSILON
+        by::EPSILON
+        contains::EPSILON
+        for::EPSILON
+        has::EPSILON
+        specifies::EPSILON
+        specified::EPSILON
+ConjonctionnalKeyWord:
+        and::EPSILON
+        or::EPSILON
+        if::EPSILON
+        whether::EPSILON
+ModalVerb:
+        must::EPSILON
+        may::EPSILON
+        never::EPSILON
+        always::EPSILON
+Join:
+        that::EPSILON
+        who::EPSILON
+Link:
+        of::EPSILON
+        quoteS::EPSILON
+Qualif:
+        the::EPSILON
+        The::EPSILON
+        a::EPSILON
+        A::EPSILON
+        an::EPSILON
+        An::EPSILON
+        Each::EPSILON
+        each::EPSILON
+        Some::EPSILON
+        some::EPSILON
+        At::EPSILON
+        at::EPSILON
+        Exactly::EPSILON
+        exactly::EPSILON
+EndOperator:
+        given::EPSILON
+        thanone::EPSILON
+        one::EPSILON
+        isobligatorythat::EPSILON
+        ispermittedthat::EPSILON
+        isprohibitedthat::EPSILON
+        isnecessarythat::EPSILON
+        ispossiblethat::EPSILON
+        isimpossiblethat::EPSILON
+        isnotthecasethat::EPSILON
+        least::EPSILON
+        leastone::EPSILON
+        most::EPSILON
+        mostone::EPSILON
+        leastnandatmostm::EPSILON
+        andonlyif::EPSILON
+        ornot::EPSILON
+        not::EPSILON
+        of::EPSILON
+SBVRExpression:
+        hasPoint::Boolean firstProposition::SimpleSBVRProp nextProposition::SBVRPropWithKW+
+SBVRPropWithKW:
+        conjonction::ConjonctionnalKeyWord endConj::EndOperator proposition::SimpleSBVRProp
+ModalForm:
+        modal::ModalVerb isNeg::Boolean
+SimpleSBVRProp:
+        modal::ModalBegin concept1::Concept modalVerb::ModalForm verbs::Verb+ concept2::Concept
+SubSBVRProp:
+        join::Join modalVerb::ModalVerb verbs::Verb+ concept2::Concept
+LinkSBVRConcept:
+        link::Link concept::Concept
+ConjConcept:
+        conjonction::ConjonctionnalKeyWord concept::Concept
+Concept:
+        NameConcept
+Concept:
+        ObjectConcept
+Concept:
+        StringConcept
+NameConcept:
+        the::Qualif name::NameWord+
+ObjectConcept:
+        operatoredConcept::NounConcept qualify::Qualification
+StringConcept:
+        stringWord::QuotedStringWord+
+NounConcept:
+        qualif::Qualifier noun::StringWord+
+Qualification:
+        generalConcept::GeneralConcept+
+GeneralConcept:
+        NameGConcept
+GeneralConcept:
+        NounGConcept
+NameGConcept:
+        name::NameConcept
+NounGConcept:
+        noun::StringWord+
+Qualifier:
+        op::Qualif endOperator::EndOperator min::StringWord max::StringWord
+ModalBegin:
+        ModalBeginC
+ModalBegin:
+        endOperator::EndOperator
+ModalBeginC:
+        endOperator::EndOperator
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR

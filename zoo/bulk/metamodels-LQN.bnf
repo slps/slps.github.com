@@ -1,0 +1,56 @@
+String:
+        STR
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+LQN:
+        name::String comment::String author::String created_On::Date modified_On::Date task::Task+ processor::Processor+
+Task:
+        name::String type::TaskType priority::Integer mutliplicity::Integer replicas::Integer entry::Entry+ processor::Processor lqn::LQN activity::Activity+
+Processor:
+        name::String scheduling::SchedulingType mutliplicity::Integer replicas::Integer spped::Integer task::Task lqn::LQN
+Entry:
+        name::String num_Phase::Integer arrival_Rate::Integer contained_In::Task replay_To::Entry callreceives::Call callsends::Call phase::Phase+ activity::Activity task::Task
+Phase:
+        number::Integer type::PhaseType think_Time::Integer execution_Demand::Integer COV::Integer entry::Entry activity::Activity
+Activity:
+        name::String arrival_Rate::Integer contained_In::Task replay_To::Entry linkPrecedes::Link+ linkfollows::Link+ call::Call+ phase::Phase entry::Entry task::Task
+Link:
+        type::LinkType mean_Links::Integer fromActivity::Activity toActivity::Activity activityPrecedes::Activity activityfollows::Activity
+CallPhase:
+        mean_Calls::Integer refers_To::Phase call::Call+
+Call:
+        EntryCall
+Call:
+        ActivityCall
+Call:
+        toEntry::Entry num_Phases::Integer type::CallType callPhase::CallPhase+ activity::Activity entryreceives::Entry entrysends::Entry
+EntryCall:
+        from_Entry::Entry
+ActivityCall:
+        fromActivity::Activity
+Date:
+        day::String month::String year::String
+SchedulingType:
+        FCFS::EPSILON
+        preemptive_Priority::EPSILON
+        head_of_line::EPSILON
+        random::EPSILON
+PhaseType:
+        stochastic::EPSILON
+        deterministic::EPSILON
+CallType:
+        synchronous::EPSILON
+        asynchronous::EPSILON
+        forwording::EPSILON
+LinkType:
+        and_Fork::EPSILON
+        and_join::EPSILON
+        basic::EPSILON
+        or_Fork::EPSILON
+        or_join::EPSILON
+TaskType:
+        a_reference::EPSILON
+        non_reference::EPSILON

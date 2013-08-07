@@ -1,0 +1,1044 @@
+literal:
+        boolean_literal
+        integer_literal
+        real_literal
+        character_literal
+        string_literal
+        null_literal
+boolean_literal:
+        "true"
+        "false"
+integer_literal:
+        decimal_integer_literal
+        hexadecimal_integer_literal
+character_literal:
+        charlit
+string_literal:
+        stringlit
+null_literal:
+        "null"
+program:
+        compilation_unit
+compilation_unit:
+        extern_alias_directives? using_directives? global_attributes? namespace_member_declarations?
+namespace_name:
+        namespace_or_type_name
+type_name:
+        namespace_or_type_name
+namespace_or_type_name:
+        "this"? id colon_colon_id? dot_id* type_argument_list?
+colon_colon_id:
+        "::" id
+dot_id:
+        "." id
+type:
+        value_type
+        reference_type
+        type_parameter
+type:
+        pointer_type
+value_type:
+        struct_type
+        enum_type
+struct_type:
+        type_name
+        simple_type
+        nullable_type
+simple_type:
+        numeric_type
+        "bool"
+numeric_type:
+        integral_type
+        floating_point_type
+        "decimal"
+integral_type:
+        "sbyte"
+        "byte"
+        "short"
+        "ushort"
+        "int"
+        "uint"
+        "long"
+        "ulong"
+        "char"
+floating_point_type:
+        "float"
+        "double"
+enum_type:
+        type_name
+nullable_type:
+        non_nullable_value_type "?"
+non_nullable_value_type:
+        enum_type
+        type_name
+        simple_type
+reference_type:
+        class_type
+        interface_type
+        array_type
+        delegate_type
+class_type:
+        type_name
+        "object"
+        "string"
+interface_type:
+        type_name
+array_type:
+        non_array_type rank_specifiers
+non_array_type:
+        value_type
+        class_type
+        interface_type
+        delegate_type
+        type_parameter
+rank_specifiers:
+        rank_specifier*
+rank_specifier:
+        "[" ","* "]"
+delegate_type:
+        type_name
+variable_reference:
+        expression
+argument_list:
+        {argument ","}*
+argument:
+        expression
+        "ref" variable_reference
+        "out" variable_reference
+primary_expression:
+        array_creation_expression
+        primary_no_array_creation_expression
+        object_initializer_expression
+primary_no_array_creation_expression:
+        simple_primary_expression primary_expression_modifier*
+primary_no_array_creation_expression:
+        sizeof_expression
+simple_primary_expression:
+        literal
+        simple_name
+        parenthesized_expression
+        this_access
+        base_access
+        object_or_delegate_creation_expression
+        typeof_expression
+        checked_expression
+        unchecked_expression
+        default_value_expression
+        anonymous_method_expression
+        predefined_type member_access_operator
+        qualified_alias_member member_access_operator
+primary_expression_modifier:
+        member_access_operator
+        invocation_operator
+        element_access_operator
+        post_increment_operator
+        post_decrement_operator
+primary_expression_modifier:
+        pointer_member_access_operator
+        pointer_element_access_operator
+simple_name:
+        id type_argument_list?
+parenthesized_expression:
+        "(" expression ")"
+member_access_operator:
+        "." id type_argument_list?
+predefined_type:
+        "bool"
+        "byte"
+        "char"
+        "decimal"
+        "double"
+        "float"
+        "int"
+        "long"
+        "object"
+        "sbyte"
+        "short"
+        "string"
+        "uint"
+        "ulong"
+        "ushort"
+invocation_operator:
+        "(" {argument ","}* ")"
+invocation_operator:
+        "((" argument_list_or_key* "))"
+element_access_operator:
+        "[" expression+ "]"
+this_access:
+        "this"
+base_access:
+        "base" "." id type_argument_list?
+        "base" "[" expression+ "]"
+post_increment_operator:
+        "++"
+post_decrement_operator:
+        "--"
+object_or_delegate_creation_expression:
+        "new" type "(" argument_list? ")"
+array_creation_expression:
+        "new" non_array_type "[" expression_list "]" rank_specifiers? array_initializer?
+        "new" array_type array_initializer
+object_initializer_expression:
+        "new" array_type? object_formals? rank_specifiers? object_initializer
+object_formals:
+        "(" formal_parameter_list? ")"
+object_initializer:
+        "{" member_initializer_list? ","? "}"
+member_initializer_list:
+        member_initializer+
+member_initializer:
+        member_name_equals? expression
+        member_name_equals? array_initializer
+member_name_equals:
+        simple_name "="
+expression_list:
+        expression+
+typeof_expression:
+        "typeof" "(" type ")"
+        "typeof" "(" unbound_type_name ")"
+        "typeof" "(" "void" ")"
+        "typeof" "(" ")"
+unbound_type_name:
+        id colon_colon_id? generic_dimension_specifier? dot_id_generic_dimension_specifier*
+dot_id_generic_dimension_specifier:
+        "." id generic_dimension_specifier?
+generic_dimension_specifier:
+        "<" ","* ">"
+checked_expression:
+        "checked" "(" expression ")"
+unchecked_expression:
+        "unchecked" "(" expression ")"
+default_value_expression:
+        "default" "(" type ")"
+anonymous_method_expression:
+        "delegate" anonymous_method_signature? block
+anonymous_method_signature:
+        "(" anonymous_method_parameter_list? ")"
+anonymous_method_parameter_list:
+        anonymous_method_parameter+
+anonymous_method_parameter:
+        parameter_modifier? type id
+unary_expression:
+        primary_expression
+        "+" unary_expression
+        "-" unary_expression
+        "!" unary_expression
+        "~" unary_expression
+        pre_increment_expression
+        pre_decrement_expression
+        cast_expression
+unary_expression:
+        pointer_indirection_expression
+        addressof_expression
+pre_increment_expression:
+        "++" unary_expression
+pre_decrement_expression:
+        "--" unary_expression
+cast_expression:
+        "(" type ")" unary_expression
+multiplicative_expression:
+        unary_expression
+        multiplicative_expression "*" unary_expression
+        multiplicative_expression "/" unary_expression
+        multiplicative_expression "%" unary_expression
+additive_expression:
+        multiplicative_expression
+        additive_expression "+" multiplicative_expression
+        additive_expression "-" multiplicative_expression
+shift_expression:
+        additive_expression
+        shift_expression "<<" additive_expression
+        shift_expression ">>" additive_expression
+relational_expression:
+        shift_expression
+        relational_expression "<" shift_expression
+        relational_expression ">" shift_expression
+        relational_expression "<=" shift_expression
+        relational_expression ">=" shift_expression
+        relational_expression "is" type
+        relational_expression "as" type
+equality_expression:
+        relational_expression
+        equality_expression "==" relational_expression
+        equality_expression "!=" relational_expression
+and_expression:
+        equality_expression
+        and_expression "&" equality_expression
+exclusive_or_expression:
+        and_expression
+        exclusive_or_expression "^" and_expression
+inclusive_or_expression:
+        exclusive_or_expression
+        inclusive_or_expression "|" exclusive_or_expression
+conditional_and_expression:
+        inclusive_or_expression
+        conditional_and_expression "&&" inclusive_or_expression
+conditional_or_expression:
+        conditional_and_expression
+        conditional_or_expression "||" conditional_and_expression
+null_coalescing_expression:
+        conditional_or_expression
+        conditional_or_expression "??" null_coalescing_expression
+conditional_expression:
+        null_coalescing_expression
+        null_coalescing_expression "?" expression ":" expression
+assignment:
+        unary_expression assignment_operator expression
+assignment_operator:
+        "="
+        "+="
+        "-="
+        "*="
+        "/="
+        "%="
+        "&="
+        "|="
+        "^="
+        "<<="
+        ">>="
+expression:
+        conditional_expression
+        assignment
+        query_expression
+        lambda_expression
+constant_expression:
+        expression
+boolean_expression:
+        expression
+query_expression:
+        from_clause IN query_body EX
+query_body:
+        query_body_clause* final_query_clause query_continuation?
+query_body_clause:
+        NL from_clause
+        NL join_clause
+        NL let_clause
+        NL where_clause
+        NL orderby_clause
+from_clause:
+        "from" item_name "in" src_expr
+join_clause:
+        "join" item_name "in" src_expr "on" key_expr "equals" key_expr into_item_name?
+into_item_name:
+        "into" item_name
+let_clause:
+        "let" item_name "=" sel_expr
+where_clause:
+        "where" pred_expr
+orderby_clause:
+        "orderby" {key_expr_ascending_descending ","}*
+key_expr_ascending_descending:
+        key_expr ascending_descending?
+ascending_descending:
+        "ascending"
+        "descending"
+final_query_clause:
+        NL select_clause
+        NL groupby_clause
+select_clause:
+        "select" sel_expr
+groupby_clause:
+        "group" sel_expr "by" key_expr
+query_continuation:
+        "into" item_name query_body
+item_name:
+        type? simple_name
+sel_expr:
+        expression
+key_expr:
+        expression
+src_expr:
+        expression
+pred_expr:
+        expression
+lambda_expression:
+        input_parameters "=>" expression
+        input_parameters "=>" block
+input_parameters:
+        input_parameter
+        "(" {input_parameter ","}* ")"
+input_parameter:
+        type? id
+statement:
+        labeled_statement
+        declaration_statement
+        embedded_statement
+embedded_statement:
+        block
+        empty_statement
+        expression_statement
+        selection_statement
+        iteration_statement
+        jump_statement
+        try_statement
+        checked_statement
+        unchecked_statement
+        lock_statement
+        using_statement
+        yield_statement
+embedded_statement:
+        unsafe_statement
+embedded_statement:
+        fixed_statement
+block:
+        "{" NL IN statement_list? EX "}" ";"?
+statement_list:
+        statement+
+empty_statement:
+        ";"
+labeled_statement:
+        id ":" statement
+declaration_statement:
+        local_variable_declaration ";" NL
+        local_constant_declaration ";" NL
+local_variable_declaration:
+        type local_variable_declarators
+local_variable_declarators:
+        local_variable_declarator+
+local_variable_declarator:
+        id equals_local_variable_initializer?
+equals_local_variable_initializer:
+        "=" local_variable_initializer
+local_variable_initializer:
+        expression
+        array_initializer
+local_variable_initializer:
+        expression
+        array_initializer
+        stackalloc_initializer
+local_constant_declaration:
+        "const" type constant_declarators
+expression_statement:
+        statement_expression ";" NL
+statement_expression:
+        primary_no_array_creation_expression
+        object_creation_expression
+        assignment
+        pre_increment_expression
+        pre_decrement_expression
+object_creation_expression:
+        "new" type "(" argument_list? ")"
+selection_statement:
+        if_statement
+        switch_statement
+if_statement:
+        "if" "(" boolean_expression ")" nested_statement else_if_clause* else_clause? NL
+else_if_clause:
+        "else" "if" "(" boolean_expression ")" nested_statement
+else_clause:
+        "else" nested_statement
+nested_statement:
+        block
+        IN NL embedded_statement EX
+switch_statement:
+        "switch" "(" expression ")" switch_block
+switch_block:
+        "{" NL IN switch_sections EX "}" NL
+switch_sections:
+        switch_section+
+switch_section:
+        switch_labels NL IN statement_list EX
+switch_labels:
+        switch_label+
+switch_label:
+        "case" constant_expression ":"
+        "default" ":"
+iteration_statement:
+        while_statement
+        do_statement
+        for_statement
+        foreach_statement
+while_statement:
+        "while" "(" boolean_expression ")" nested_statement NL
+do_statement:
+        "do" NL IN embedded_statement EX "while" "(" boolean_expression ")" ";" NL
+for_statement:
+        "for" "(" for_initializer? ";" for_condition? ";" for_iterator? ")" nested_statement NL
+for_initializer:
+        local_variable_declaration
+        statement_expression_list
+for_condition:
+        boolean_expression
+for_iterator:
+        statement_expression_list
+statement_expression_list:
+        statement_expression+
+foreach_statement:
+        "foreach" "(" type id "in" expression ")" nested_statement NL
+jump_statement:
+        break_statement
+        continue_statement
+        goto_statement
+        return_statement
+        throw_statement
+break_statement:
+        "break" ";" NL
+continue_statement:
+        "continue" ";" NL
+goto_statement:
+        "goto" id ";" NL
+        "goto" "case" constant_expression ";" NL
+        "goto" "default" ";" NL
+return_statement:
+        "return" expression? ";" NL
+throw_statement:
+        "throw" expression? ";" NL
+try_statement:
+        "try" block NL catch_clauses? finally_clause?
+catch_clauses:
+        specific_catch_clauses? general_catch_clause?
+specific_catch_clauses:
+        specific_catch_clause+
+specific_catch_clause:
+        "catch" "(" class_type id? ")" block NL
+general_catch_clause:
+        "catch" block NL
+finally_clause:
+        "finally" block NL
+checked_statement:
+        "checked" block NL
+unchecked_statement:
+        "unchecked" block NL
+lock_statement:
+        "lock" "(" expression ")" NL embedded_statement
+using_statement:
+        "using" "(" resource_acquisition ")" NL embedded_statement
+resource_acquisition:
+        local_variable_declaration
+        expression
+yield_statement:
+        "yield" "return" expression ";" NL
+        "yield" "break" ";" NL
+namespace_declaration:
+        "namespace" qualified_identifier NL namespace_body
+qualified_identifier:
+        id dot_id*
+namespace_body:
+        "{" NL IN extern_alias_directives? using_directives? namespace_member_declarations? EX "}" ";"? NL
+extern_alias_directives:
+        extern_alias_directive+ NL
+extern_alias_directive:
+        "extern" id id ";" NL
+using_directives:
+        using_directive+ NL
+using_directive:
+        using_alias_directive
+        using_namespace_directive
+using_alias_directive:
+        "using" id "=" namespace_or_type_name ";" NL
+using_namespace_directive:
+        "using" namespace_name ";" NL
+namespace_member_declarations:
+        namespace_member_declaration+
+namespace_member_declaration:
+        namespace_declaration NL
+        type_declaration NL
+type_declaration:
+        class_declaration
+        struct_declaration
+        interface_declaration
+        enum_declaration
+        delegate_declaration
+qualified_alias_member:
+        id "::" id type_argument_list?
+class_declaration:
+        attributes? class_modifiers? "partial"? "class" id type_parameter_list? class_base? type_parameter_constraints_clauses? NL class_body
+class_modifiers:
+        class_modifier+
+class_modifier:
+        "new"
+        "public"
+        "protected"
+        "internal"
+        "private"
+        "abstract"
+        "sealed"
+        "static"
+class_modifier:
+        "unsafe"
+class_base:
+        ":" class_and_interface_type_ist
+class_and_interface_type_ist:
+        class_or_interface_type+
+class_or_interface_type:
+        class_type
+        interface_type
+class_body:
+        "{" NL IN class_member_declarations? EX "}" ";"? NL
+class_member_declarations:
+        class_member_declaration+
+class_member_declaration:
+        constant_declaration
+        field_declaration
+        method_declaration
+        property_declaration
+        event_declaration
+        indexer_declaration
+        operator_declaration
+        constructor_declaration
+        finalizer_declaration
+        static_constructor_declaration
+        type_declaration
+constant_declaration:
+        attributes? constant_modifiers? "const" type constant_declarators ";" NL
+constant_modifiers:
+        constant_modifier+
+constant_modifier:
+        "new"
+        "public"
+        "protected"
+        "internal"
+        "private"
+constant_declarators:
+        constant_declarator+
+constant_declarator:
+        id "=" constant_expression
+field_declaration:
+        attributes? field_modifiers? type variable_declarators ";" NL
+field_modifiers:
+        field_modifier+
+field_modifier:
+        "new"
+        "public"
+        "protected"
+        "internal"
+        "private"
+        "static"
+        "readonly"
+        "volatile"
+field_modifier:
+        "unsafe"
+variable_declarators:
+        variable_declarator+
+variable_declarator:
+        id equals_variable_initializer?
+equals_variable_initializer:
+        "=" variable_initializer
+variable_initializer:
+        expression
+        array_initializer
+method_declaration:
+        method_header NL method_body NL
+method_header:
+        attributes? method_modifiers? return_type member_name type_parameter_list? "(" formal_parameter_list? ")" type_parameter_constraints_clauses?
+method_modifiers:
+        method_modifier+
+method_modifier:
+        "new"
+        "public"
+        "protected"
+        "internal"
+        "private"
+        "static"
+        "virtual"
+        "sealed"
+        "override"
+        "abstract"
+        "extern"
+        "partial"
+method_modifier:
+        "unsafe"
+return_type:
+        type
+        "void"
+member_name:
+        interface_type_dot? id
+interface_type_dot:
+        interface_type "."
+method_body:
+        block NL
+        ";" NL
+formal_parameter_list:
+        fixed_parameters comma_parameter_array?
+comma_parameter_array:
+        "," parameter_array
+fixed_parameters:
+        fixed_parameter+
+fixed_parameter:
+        attributes? parameter_modifier? type id
+        parameter_array
+parameter_modifier:
+        "ref"
+        "out"
+parameter_array:
+        attributes? "params" array_type id
+property_declaration:
+        NL attributes? property_modifiers? type member_name "{" NL IN accessor_declarations EX "}" NL
+property_modifiers:
+        property_modifier+
+property_modifier:
+        "new"
+        "public"
+        "protected"
+        "internal"
+        "private"
+        "static"
+        "virtual"
+        "sealed"
+        "override"
+        "abstract"
+        "extern"
+property_modifier:
+        "unsafe"
+accessor_declarations:
+        get_accessor_declaration set_accessor_declaration?
+        set_accessor_declaration get_accessor_declaration?
+get_accessor_declaration:
+        attributes? accessor_modifier? "get" accessor_body
+set_accessor_declaration:
+        attributes? accessor_modifier? "set" accessor_body
+accessor_modifier:
+        "protected"
+        "internal"
+        "private"
+        "protected" "internal"
+        "internal" "protected"
+accessor_body:
+        block NL
+        ";" NL
+event_declaration:
+        attributes? event_modifiers? "event" type variable_declarators ";" NL
+        attributes? event_modifiers? "event" type member_name "{" NL IN event_accessor_declarations EX "}" NL EX
+event_modifiers:
+        event_modifier+
+event_modifier:
+        "new"
+        "public"
+        "protected"
+        "internal"
+        "private"
+        "static"
+        "virtual"
+        "sealed"
+        "override"
+        "abstract"
+        "extern"
+event_modifier:
+        "unsafe"
+event_accessor_declarations:
+        add_accessor_declaration remove_accessor_declaration
+        remove_accessor_declaration add_accessor_declaration
+add_accessor_declaration:
+        attributes? "add" block NL
+remove_accessor_declaration:
+        attributes? "remove" block NL
+indexer_declaration:
+        attributes? indexer_modifiers? indexer_declarator "{" NL IN accessor_declarations EX "}" NL
+indexer_modifiers:
+        indexer_modifier+
+indexer_modifier:
+        "new"
+        "public"
+        "protected"
+        "internal"
+        "private"
+        "virtual"
+        "sealed"
+        "override"
+        "abstract"
+        "extern"
+indexer_modifier:
+        "unsafe"
+indexer_declarator:
+        type interface_type_dot? "this" "[" formal_parameter_list "]"
+operator_declaration:
+        attributes? operator_modifiers? operator_declarator operator_body
+operator_modifiers:
+        operator_modifier+
+operator_modifier:
+        "public"
+        "static"
+        "extern"
+operator_modifier:
+        "unsafe"
+operator_declarator:
+        unary_operator_declarator
+        binary_operator_declarator
+        conversion_operator_declarator
+unary_operator_declarator:
+        type "operator" overloadable_unary_operator "(" type id ")"
+overloadable_unary_operator:
+        "+"
+        "-"
+        "!"
+        "~"
+        "++"
+        "--"
+        "true"
+        "false"
+binary_operator_declarator:
+        type "operator" overloadable_binary_operator "(" type id ")"
+overloadable_binary_operator:
+        "+"
+        "-"
+        "*"
+        "/"
+        "%"
+        "&"
+        "|"
+        "^"
+        "<<"
+        ">>"
+        "=="
+        "!="
+        ">"
+        "<"
+        ">="
+        "<="
+conversion_operator_declarator:
+        "implicit" "operator" type "(" type id ")"
+        "explicit" "operator" type "(" type id ")"
+operator_body:
+        block NL
+        ";" NL
+constructor_declaration:
+        attributes? constructor_modifiers? constructor_declarator NL constructor_body NL
+constructor_modifiers:
+        constructor_modifier+
+constructor_modifier:
+        "public"
+        "protected"
+        "internal"
+        "private"
+        "extern"
+constructor_modifier:
+        "unsafe"
+constructor_declarator:
+        id "(" formal_parameter_list? ")" constructor_initializer?
+constructor_initializer:
+        ":" "base" "(" argument_list? ")"
+        ":" "this" "(" argument_list? ")"
+constructor_body:
+        block NL
+        ";" NL
+static_constructor_declaration:
+        attributes? static_constructor_modifiers id "(" ")" NL static_constructor_body NL
+static_constructor_modifiers:
+        "extern"? "static"
+        "static" "extern"?
+static_constructor_modifiers:
+        "extern"? "unsafe"? "static"
+        "unsafe"? "extern"? "static"
+        "extern"? "static" "unsafe"?
+        "unsafe"? "static" "extern"?
+        "static" "extern"? "unsafe"?
+        "static" "unsafe"? "extern"?
+static_constructor_body:
+        block NL
+        ";" NL
+finalizer_declaration:
+        attributes? "extern"? "~" id "(" ")" finalizer_body
+finalizer_declaration:
+        attributes? "extern"? "unsafe"? "~" id "(" ")" NL finalizer_body NL
+        attributes? "unsafe"? "extern"? "~" id "(" ")" NL finalizer_body NL
+finalizer_body:
+        block NL
+        ";" NL
+struct_declaration:
+        attributes? struct_modifiers? "partial"? "struct" id type_parameter_list? struct_interfaces? type_parameter_constraints_clauses? NL struct_body NL
+struct_modifiers:
+        struct_modifier+
+struct_modifier:
+        "new"
+        "public"
+        "proctected"
+        "internal"
+        "private"
+struct_modifier:
+        "unsafe"
+struct_interfaces:
+        ":" interface_type_list
+interface_type_list:
+        interface_type+
+struct_body:
+        "{" NL IN struct_member_declarations? EX "}" ";"? NL
+struct_member_declarations:
+        struct_member_declaration+
+struct_member_declaration:
+        constant_declaration
+        field_declaration
+        method_declaration
+        property_declaration
+        event_declaration
+        indexer_declaration
+        operator_declaration
+        constructor_declaration
+        static_constructor_declaration
+        type_declaration
+array_initializer:
+        "{" variable_initializer_list? ","? "}"
+variable_initializer_list:
+        variable_initializer+
+interface_declaration:
+        attributes? interface_modifiers? "partial"? "interface" id type_parameter_list? interface_base? type_parameter_constraints_clauses? NL interface_body NL
+interface_modifiers:
+        interface_modifier*
+interface_modifier:
+        "new"
+        "public"
+        "protected"
+        "internal"
+        "private"
+interface_modifier:
+        "unsafe"
+interface_base:
+        ":" interface_type_list
+interface_body:
+        "{" NL IN interface_member_declarations? EX "}" ";"? NL
+interface_member_declarations:
+        interface_member_declaration+
+interface_member_declaration:
+        interface_method_declaration
+        interface_property_declaration
+        interface_event_declaration
+        interface_indexer_declaration
+interface_method_declaration:
+        attributes? "new"? return_type id type_parameter_list? "(" formal_parameter_list? ")" type_parameter_constraints_clauses? ";" NL
+interface_property_declaration:
+        attributes? "new"? type id NL "{" NL IN interface_accessors EX "}" NL
+interface_accessors:
+        attributes? "get" ";"
+        attributes? "set" ";"
+        attributes? "get" ";" attributes? "set" ";"
+        attributes? "set" ";" attributes? "get" ";"
+interface_event_declaration:
+        attributes? "new"? "event" type id ";" NL
+interface_indexer_declaration:
+        attributes? "new"? type "this" "[" formal_parameter_list "]" "{" NL IN interface_accessors EX "}" NL
+enum_declaration:
+        attributes? enum_modifiers? "enum" id enum_base? enum_body NL
+enum_base:
+        ":" integral_type
+enum_body:
+        "{" NL IN enum_member_declarations? ","? EX "}" ";"? NL
+enum_modifiers:
+        enum_modifier+
+enum_modifier:
+        "new"
+        "public"
+        "protected"
+        "internal"
+        "private"
+enum_member_declarations:
+        enum_member_declaration+
+enum_member_declaration:
+        attributes? id equals_constant_expression?
+equals_constant_expression:
+        "=" constant_expression
+delegate_declaration:
+        attributes? delegate_modifiers? "delegate" return_type id type_parameter_list? "(" formal_parameter_list? ")" type_parameter_constraints_clauses? ";" NL
+delegate_modifiers:
+        delegate_modifier+
+delegate_modifier:
+        "new"
+        "public"
+        "protected"
+        "internal"
+        "private"
+delegate_modifier:
+        "unsafe"
+global_attributes:
+        global_attribute_sections
+global_attribute_sections:
+        global_attribute_section+
+global_attribute_section:
+        "[" global_attribute_target_specifier attribute_list ","? "]"
+global_attribute_target_specifier:
+        global_attribute_target ":"
+global_attribute_target:
+        id
+        key
+attributes:
+        attribute_sections
+attribute_sections:
+        attribute_section+
+attribute_section:
+        "[" attribute_target_specifier? attribute_list ","? "]"
+attribute_target_specifier:
+        attribute_target ":"
+attribute_target:
+        id
+        key
+attribute_list:
+        attribute+
+attribute:
+        attribute_name attribute_arguments?
+attribute_name:
+        type_name
+attribute_arguments:
+        "(" attribute_argument_list ")"
+attribute_argument_list:
+        {attribute_argument ","}*
+attribute_argument:
+        positional_argument
+        named_argument
+positional_argument:
+        attribute_argument_expression
+named_argument:
+        id "=" attribute_argument_expression
+attribute_argument_expression:
+        expression
+type_parameter_list:
+        "<" type_parameters ">"
+type_parameters:
+        attributes_type_parameter+
+attributes_type_parameter:
+        attributes? type_parameter
+type_parameter:
+        id
+type_argument_list:
+        "<" type_argument+ ">"
+type_argument:
+        type
+type_parameter_constraints_clauses:
+        type_parameter_constraints_clause+
+type_parameter_constraints_clause:
+        "where" type_parameter ":" type_parameter_constraints
+type_parameter_constraints:
+        {type_parameter_constraint ","}*
+type_parameter_constraint:
+        primary_constraint
+        secondary_constraint
+        constructor_constraint
+primary_constraint:
+        class_type
+        "class"
+        "struct"
+secondary_constraint:
+        interface_type
+        type_parameter
+constructor_constraint:
+        "new" "(" ")"
+unsafe_statement:
+        "unsafe" block
+pointer_type:
+        unmanaged_type "*"*
+        "void" "*" "*"*
+unmanaged_type:
+        value_type
+        reference_type
+        type_parameter
+pointer_indirection_expression:
+        "*" unary_expression
+pointer_member_access_operator:
+        "->" id type_argument_list?
+pointer_element_access_operator:
+        "[" expression "]"
+addressof_expression:
+        "&" unary_expression
+sizeof_expression:
+        "sizeof" "(" unmanaged_type ")"
+fixed_statement:
+        "fixed" "(" pointer_type fixed_pointer_declarators ")" embedded_statement
+fixed_pointer_declarators:
+        fixed_pointer_declarator+
+fixed_pointer_declarator:
+        id "=" fixed_pointer_initializer
+fixed_pointer_initializer:
+        "&" variable_reference
+        expression
+stackalloc_initializer:
+        "stackalloc" unmanaged_type "[" expression "]"
+argument_list_or_key:
+        argument_list
+        "in"

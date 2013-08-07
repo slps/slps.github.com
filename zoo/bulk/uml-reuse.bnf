@@ -1,0 +1,42 @@
+ReuseContract:
+        supplier::ProviderClause client::ReuserClause
+Dependency:
+        ReuseContract
+Dependency:
+        owningDependency::Dependency subDependency::Dependency+
+ProviderClause:
+        CompositeProvider
+ProviderClause:
+        BasicProvider
+ProviderClause:
+        CompositeProvider
+        BasicProvider
+Package:
+        ProviderClause
+Package:
+        ReuserClause
+Package:
+        ProviderClause
+        ReuserClause
+ReuserClause:
+        CompositeReuser
+ReuserClause:
+        BasicReuser
+ReuserClause:
+        CompositeReuser
+        BasicReuser
+CompositeProvider:
+        subcontract::ReuseContract
+BasicProvider:
+        EPSILON
+CompositeReuser:
+        subreuser::ReuserClause+
+BasicReuser:
+        EPSILON
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR

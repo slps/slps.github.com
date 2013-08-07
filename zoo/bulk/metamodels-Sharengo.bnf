@@ -1,0 +1,35 @@
+ModelElement:
+        Classifier
+ModelElement:
+        Operation
+ModelElement:
+        BusinessRule
+ModelElement:
+        Flow
+Classifier:
+        Service
+Classifier:
+        BusinessObject
+Operation:
+        ServiceOperation
+Operation:
+        BusinessObjectOperation
+Operation:
+        ServiceOperation
+        BusinessObjectOperation
+Service:
+        operations::ServiceOperation+
+BusinessObject:
+        operations::BusinessObjectOperation+
+ServiceOperation:
+        BOFlows::Service2BusinessObjectFlow+ rules::BusinessRule+
+BusinessObjectOperation:
+        rules::BusinessRule+
+BusinessRule:
+        expr::String
+Flow:
+        Service2BusinessObjectFlow
+Service2BusinessObjectFlow:
+        source::String target::String
+String:
+        STR

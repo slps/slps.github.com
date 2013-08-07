@@ -1,0 +1,22 @@
+SortDeclaration:
+        Partition
+OperatorDeclaration:
+        PartitionElement
+BuiltInOperator:
+        PartitionOperator
+Partition:
+        partition::(SortDeclaration.content Sort PartitionElement+)
+PartitionElement:
+        partitionelement::(OperatorDeclaration.content Term+)
+PartitionOperator.content:
+        BuiltInOperator.content
+PartitionOperator:
+        PartitionLessThan
+        PartitionGreaterThan
+        PartitionElementOf
+PartitionLessThan:
+        ltp::PartitionOperator.content
+PartitionGreaterThan:
+        gtp::PartitionOperator.content
+PartitionElementOf:
+        partitionelementof::(refpartition::STR PartitionOperator.content)

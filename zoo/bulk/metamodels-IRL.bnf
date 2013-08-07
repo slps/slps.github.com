@@ -1,0 +1,107 @@
+Element:
+        NamedElement
+Element:
+        Extended
+Element:
+        Typed
+Element:
+        RuleSetDeclaration
+Element:
+        Binding
+Element:
+        RuleCondition
+Element:
+        RuleAction
+Element:
+        location::String commentsBefore::String+ commentsAfter::String+
+NamedElement:
+        ExtendedIdentifier
+NamedElement:
+        RuleSet
+NamedElement:
+        Type
+NamedElement:
+        RulesetElementDefinition
+ExtendedIdentifier:
+        parentIdentifier::ExtendedIdentifier extendedIdentifierOwner::Extended
+Extended:
+        Definition
+Extended:
+        ClassInstancesDeclaration
+Definition:
+        ImportDefinition
+Definition:
+        PropertyDefinition
+RuleSet:
+        importDefinitions::ImportDefinition+ propertyDefinitions::IRLDeclarations/PropertyDefinition rulesetElementDefinitions::IRLRules/RulesetElementDefinition+
+ImportDefinition:
+        importDefinitionOwners::RuleSet dotStar::Boolean
+IteratorExp:
+        name::String
+LoopExpression:
+        body::IRLExpressions/Expression iterators::IRLExpressions/Iterator+
+OperatorCallExpression:
+        EPSILON
+OperationCallExpression:
+        arguments::IRLExpressions/Expression+ operationName::String signature::String
+Iterator:
+        loopExpression::IRLExpressions/LoopExpression
+IntegerExpression:
+        integerSymbol::Integer
+RealExpression:
+        realSymbol::Double
+BooleanExpression:
+        booleanSymbol::Boolean
+NavigationOrAttributeCallExpression:
+        name::String
+VariableExpression:
+        referredVariable::IRLDeclarations/VariableDeclaration name::String
+StringExpression:
+        stringSymbol::String
+StringType:
+        EPSILON
+IntegerType:
+        EPSILON
+RealType:
+        EPSILON
+BooleanType:
+        EPSILON
+ClassType:
+        EPSILON
+PropertyDefinition:
+        propertyDefinitionOwner::RuleSet ruleSetDeclarations::IRLDeclarations/RuleSetDeclaration+ semicoloneOpt::Boolean
+ClassInstancesDeclaration:
+        extendedIdentifier::ExtendedIdentifier
+PropertyDeclaration:
+        EPSILON
+VariableDeclaration:
+        varName::String variableExp::IRLExpressions/VariableExpression+
+RuleDefinition:
+        binding::IRLRules/Binding condition::IRLRules/RuleCondition actions::IRLRules/RuleAction+
+Binding:
+        bindingOwner::IRLRules/RuleDefinition ruleVariable::IRLRules/RuleVariable+
+CollectionOperationRuleVariable:
+        operationName::String collectWhere::IRLExpressions/Expression
+SimpleRuleVariable:
+        EPSILON
+RuleCondition:
+        conditionExpression::IRLExpressions/Expression ruleDefinitionCondition::IRLRules/RuleDefinition
+RuleAction:
+        actionOwner::IRLRules/RuleDefinition
+DeleteAction:
+        objValue::IRLExpressions/Expression
+CreateAction:
+        insertArguments::IRLExpressions/Expression+
+ModifyAction:
+        objValue::IRLExpressions/Expression modifiedArguments::IRLExpressions/Expression+
+UpdateAction:
+        objValue::IRLExpressions/Expression
+InvokeAction:
+        invocation::IRLExpressions/Expression
+Integer:
+        INT
+String:
+        STR
+Boolean:
+        "true"
+        "false"

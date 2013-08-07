@@ -1,0 +1,45 @@
+Task:
+        service::Service+
+User:
+        useCase::UseCase+ actor::Actor+
+Actor:
+        useCase::UseCase+ goal::Goal+ user::User+
+Goal:
+        service::Service+ actor::Actor+
+UseCase:
+        context::Context service::Service+ user::User+ actor::Actor+
+Service:
+        useCase::UseCase+ goal::Goal+ task::Task+
+Scenario:
+        EPSILON
+Context:
+        preCondition::PreCondition+ postCondition::PostCondition+ useCase::UseCase+
+PreCondition:
+        context::Context+
+PostCondition:
+        context::Context+
+Episode:
+        event::Event+
+Event:
+        Action
+Event:
+        Responce
+Event:
+        Stimilus
+Event:
+        episode::Episode+
+Action:
+        episode::Episode+
+Responce:
+        parameter::Parameter+
+Stimilus:
+        parameter::Parameter+
+Parameter:
+        stimilus::Stimilus+ responce::Responce+
+String:
+        STR
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT

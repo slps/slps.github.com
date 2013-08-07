@@ -1,0 +1,23 @@
+MetaClass:
+        EPSILON
+MetaModel:
+        EPSILON
+Module:
+        name::String mode::String metaDest::MetaModel+ metaSource::MetaModel+ rules::Rule+
+Rule:
+        isAbstract::Boolean isEntryPoint::Boolean name::String module::Module target::MetaClass source::MetaClass declaration::Variable sections::Section+ guard::Expression inheritances::Inheritance+
+Inheritance:
+        rule::Rule expressions::Expression+ inheritedRules::Rule+
+Expression:
+        operator::String inheritance::Inheritance rule::Rule instruction::Instruction
+Section:
+        kind::String rule::Rule instructions::Instruction+
+Instruction:
+        body::Expression section::Section
+Variable:
+        name::String rule::Rule
+Boolean:
+        "true"
+        "false"
+String:
+        STR

@@ -1,0 +1,119 @@
+CellType:
+        unit::String formula::String err::String value::String
+VisioDocument:
+        docMasters::MastersCollection docPages::PagesCollection
+PageSheet:
+        ss_shapes::ShapesCollection lineStyle::Integer fillStyle::Integer textStyle::Integer shapeElts::ShapeElt+
+NamedElt:
+        MasterShortCut
+NamedElt:
+        Page
+IdentifiedElt:
+        MasterShortCut
+IdentifiedElt:
+        Master
+IdentifiedElt:
+        Page
+Shape:
+        PageSheet
+Shape:
+        ss_shapes::ShapesCollection lineStyle::Integer fillStyle::Integer textStyle::Integer shapeElts::ShapeElt+
+ShapeElt:
+        Text
+ShapeElt:
+        Geom
+IXElt:
+        XYElt
+DelElt:
+        XYElt
+Geom:
+        noFill::CellType noLine::CellType noShow::CellType noSnap::CellType linesTo::LineTo+ movesTo::MoveTo+ arcsTo::ArcTo+ splineKnots::SplineKnot+ polylinesTo::PolylineTo+ infiniteLines::InfiniteLine+ ellipses::Ellipse+ ellipticalArcsTo::EllipticalArcTo+ splineStarts::SplineStart+ nurbsTo::NURBSTo+
+XYElt:
+        LineTo
+XYElt:
+        MoveTo
+XYElt:
+        XYAElt
+LineTo:
+        lt_geom::Geom
+MoveTo:
+        mt_geom::Geom
+XYAElt:
+        ArcTo
+XYAElt:
+        SplineKnot
+XYAElt:
+        PolylineTo
+XYAElt:
+        XYABElt
+ArcTo:
+        ac_geom::Geom
+SplineKnot:
+        sk_geom::Geom
+PolylineTo:
+        pt_geom::Geom
+XYABElt:
+        InfiniteLine
+XYABElt:
+        XYABCDElt
+InfiniteLine:
+        il_geom::Geom
+XYABCDElt:
+        Ellipse
+XYABCDElt:
+        EllipticalArcTo
+XYABCDElt:
+        SplineStart
+XYABCDElt:
+        XYABCDEElt
+Ellipse:
+        e_geom::Geom
+EllipticalArcTo:
+        eat_geom::Geom
+SplineStart:
+        ss_geom::Geom
+XYABCDEElt:
+        NURBSTo
+NURBSTo:
+        nt_geom::Geom
+Text:
+        textElts::TextElt+
+TextElt:
+        StringElt
+StringElt:
+        value::String
+MastersCollection:
+        ms_visioDocument::VisioDocument masters::Master+ masterShortCuts::MasterShortCut+
+MasterShortCut:
+        m_masterShortCuts::MastersCollection iconSize::Integer patternFlags::Integer prompt::String shortcutURL::String shortcutHelp::String alignName::Integer icons::Icon+
+Icon:
+        i_masterShortCut::MasterShortCut value::String
+Master:
+        m_masters::MastersCollection baseID::String matchByName::Boolean iconSize::Integer patternFlags::Integer prompt::String hidden::Boolean iconUpdate::Boolean alignName::Integer masterElts::MasterElt+
+ShapesCollection:
+        shapes::Shape+
+ConnectsCollection:
+        connections::Connect+
+Connect:
+        c_connects::ConnectsCollection fromSheet::Integer toSheet::Integer fromCell::String toCell::String fromPart::Integer toPart::Integer
+MasterElt:
+        Icon
+MasterElt:
+        ShapesCollection
+MasterElt:
+        ConnectsCollection
+PagesCollection:
+        ps_visioDocument::VisioDocument pages::Page+
+Page:
+        p_pages::PagesCollection background::Boolean backPage::Integer viewScale::Double viewCenterX::Double ViewCenterY::Double reviewerID::Integer associatedPage::Integer pageElts::PageElt+
+PageElt:
+        ShapesCollection
+PageElt:
+        ConnectsCollection
+Integer:
+        INT
+String:
+        STR
+Boolean:
+        "true"
+        "false"

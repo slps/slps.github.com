@@ -1,0 +1,577 @@
+program:
+        program_definition
+        package_definition
+        library_definition
+        unit_definition
+program_definition:
+        "program" decl_name program_file_list? ";" NL program_block "."
+program_file_list:
+        "(" {id ","}* ")"
+package_definition:
+        "package" decl_name ";" NL requires_clause? contains_clause? "end" "."
+requires_clause:
+        requires_idList_semicolon*
+contains_clause:
+        contains_idList_semicolon*
+requires_idList_semicolon:
+        "requires" ref_name+ ";" NL
+contains_idList_semicolon:
+        "contains" ref_name+ ";" NL
+library_definition:
+        "library" decl_name ";" NL program_block "."
+unit_definition:
+        "unit" decl_name ";" NL interface_section NL implementation_section NL init_section "."
+interface_section:
+        "interface" NL NL uses_clause? NL interface_declaration*
+implementation_section:
+        "implementation" IN NL uses_clause? declaration_section* EX NL
+init_section:
+        "intitialization" IN NL statement_list fin_statement_list? EX NL "end"
+        compound_statement
+        "end"
+interface_declaration:
+        constant_section
+        type_section
+        var_section
+        exported_heading directive?
+exported_heading:
+        procedure_heading ";" NL
+        function_heading ";" NL
+        constructor_heading ";" NL
+        destructor_heading ";" NL
+program_block:
+        uses_clause? block
+uses_clause:
+        "uses" IN NL uses_item+ ";" EX NL
+uses_item:
+        ref_name in_clause?
+in_clause:
+        "in" charlit
+block:
+        declaration_section* compound_statement
+declaration_section:
+        label_declaration_section
+        constant_section
+        type_section
+        var_section
+        procedure_section
+label_declaration_section:
+        "label" decl_name
+constant_section:
+        "const" IN NL constant_declaration* EX NL
+constant_declaration:
+        decl_name "=" expression ";" NL
+        decl_name ":" typeId "=" typed_constant ";" NL
+type_section:
+        "type" IN NL type_declaration+ EX NL
+type_declaration:
+        decl_name "=" type_or_restrictedType
+type_or_restrictedType:
+        type ";" NL
+        restrictedType ";" NL
+typed_constant:
+        expression
+        array_constant
+        record_constant
+array_constant:
+        "(" {typed_constant ","}* ")"
+record_constant:
+        "(" typed_constant semicolon_record_field_constant* ")"
+semicolon_record_field_constant:
+        ";" decl_name ":" typed_constant
+type:
+        typeId
+        simpleType
+        structType
+        pointerType
+        stringType
+        procedureType
+        variantType
+        class_referenceType
+restrictedType:
+        objectType
+        classType
+        interfaceType
+class_referenceType:
+        "class" "of" typeId
+simpleType:
+        ordinalType
+        realType
+realType:
+        "real48"
+        "real"
+        "single"
+        "double"
+        "extended"
+        "currency"
+        "comp"
+ordinalType:
+        subrangeType
+        enumeratedType
+        ordinal_identifier
+enumeratedType:
+        "(" {decl_name ","}* ")"
+ordinal_identifier:
+        "shortint"
+        "smallint"
+        "integer"
+        "byte"
+        "longint"
+        "int64"
+        "word"
+        "boolean"
+        "char"
+        "widechar"
+        "longchar"
+        "pchar"
+variantType:
+        "variant"
+        "olevariant"
+subrangeType:
+        expression ".." expression
+stringType:
+        "string"
+        "ansistring"
+        "widestring"
+        "string" "[" expression "]"
+structType:
+        arrayType "packed"?
+        setType "packed"?
+        fileType "packed"?
+        recordType "packed"?
+arrayType:
+        array_word square_ordinalType? "of" type
+array_word:
+        "array"
+        "Array"
+square_ordinalType:
+        "[" {ordinalType ","}* "]"
+recordType:
+        "record" field_list "end"
+field_list:
+        field_declaration+ variant_section?
+field_declaration:
+        decl_name+ ":" type ";" NL
+variant_section:
+        "case" id_colon? typeId "of" record_variant_semicolon+ ";"?
+id_colon:
+        decl_name ":"
+record_variant_semicolon:
+        record_variant ";" NL
+record_variant:
+        expression+ ":" "(" field_list? ")"
+setType:
+        "set" "of" ordinalType
+fileType:
+        "file" "of" typeId
+pointerType:
+        "^" typeId
+procedureType:
+        proc_or_func_heading of_object?
+proc_or_func_heading:
+        procedure_heading
+        function_heading
+of_object:
+        "of" "object"
+typeId:
+        ref_name
+        predefinedType
+predefinedType:
+        "integer"
+        "real"
+        "boolean"
+        "char"
+        "byte"
+objectType:
+        "object" object_heritage? object_field_list? method_list? "end"
+object_heritage:
+        "(" ref_name ")"
+method_list:
+        virtual_method_heading semi_virtual_method_heading*
+semi_virtual_method_heading:
+        ";" NL virtual_method_heading
+virtual_method_heading:
+        method_heading semi_directive? semicolon_virtual?
+semicolon_virtual:
+        ";" "virtual"
+method_heading:
+        procedure_heading
+        function_heading
+        destructor_heading
+        constructor_heading
+semi_directive:
+        ";" directive
+constructor_heading:
+        "constructor" decl_name formal_parameters?
+destructor_heading:
+        "destructor" decl_name formal_parameters?
+object_field_list:
+        ident_list_colonType semi_ident_list_colonType*
+semi_ident_list_colonType:
+        ";" NL ident_list_colonType
+ident_list_colonType:
+        decl_name+ ":" type
+fin_statement_list:
+        "finalization" statement_list
+classType:
+        "class" class_heritage? IN NL class_element_list? vis_spec_element_list* EX NL "end"?
+class_heritage:
+        "(" {ref_name ","}* ")"
+class_visibility:
+        "public"
+        "protected"
+        "Protected"
+        "private"
+        "published"
+vis_spec_element_list:
+        NL class_visibility class_element_list?
+class_element_list:
+        class_element_semi+
+class_element_semi:
+        NL class_element ";"
+class_element:
+        virtual_method_heading
+        ident_list_colonType
+        property_list
+        EPSILON
+class_method_list:
+        class_visibility_method_list*
+class_visibility_method_list:
+        class_visibility method_list
+class_property_list:
+        class_visibility_property_list*
+class_visibility_property_list:
+        class_visibility property_list
+property_list:
+        property_word decl_name property_interface? property_specifiers*
+property_word:
+        "property"
+        "Property"
+property_interface:
+        property_parameter_list? ":" type
+property_parameter_list:
+        "[" idList_colonTypeId_semicolon* "]"
+idList_colonTypeId_semicolon:
+        decl_name+ ":" typeId ";" NL
+property_specifiers:
+        index_expession
+        read_id
+        write_id
+        stored_id_OR_stored_expression
+        default_expression_OR_nodefault
+        implementsTypeId
+index_expession:
+        "index" expression
+read_id:
+        "read" ref_name
+write_id:
+        "write" ref_name
+stored_id_OR_stored_expression:
+        "stored" id_or_expression
+default_expression_OR_nodefault:
+        "default" expression
+        "nodefault"
+implementsTypeId:
+        "implements" typeId
+interfaceType:
+        "interface" interface_heritage? class_method_list? class_property_list? "end"
+interface_heritage:
+        "(" {ref_name ","}* ")"
+var_section:
+        var NL IN var_declaration_semicolon* NL EX
+var:
+        "var"
+        "Var"
+var_declaration_semicolon:
+        var_declaration ";" NL
+var_declaration:
+        decl_name+ ":" type var_assignment?
+var_assignment:
+        absolute_assignment
+        constant_assignment
+absolute_assignment:
+        "absolute" id_or_expression
+id_or_expression:
+        ref_name
+        expression
+constant_assignment:
+        "=" expression
+procedure_section:
+        procedure_declaration
+        function_declaration
+        constructor_declaration
+        destructor_declaration
+constructor_declaration:
+        constructor_heading ";" IN NL block EX NL ";" NL
+destructor_declaration:
+        destructor_heading ";" IN NL block EX NL ";" NL
+procedure_declaration:
+        procedure_heading ";" IN NL block EX NL ";" NL
+function_declaration:
+        function_heading semi_directive? ";" IN NL block EX NL ";" NL
+function_heading:
+        function_word decl_name formal_parameters? ":" type_or_string
+type_or_string:
+        type
+        charlit
+function_word:
+        "function"
+        "Function"
+procedure_heading:
+        procedure decl_name formal_parameters?
+procedure:
+        "procedure"
+        "Procedure"
+formal_parameters:
+        "(" formal_parameter semi_formal_parameter* ")"
+semi_formal_parameter:
+        ";" NL formal_parameter
+formal_parameter:
+        parm_qual? parameter
+parm_qual:
+        var
+        "const"
+        "out"
+parameter:
+        {decl_name ","}* parameter_type?
+parameter_type:
+        ":" array_of? type param_init?
+param_init:
+        "=" expression
+array_of:
+        array_word set_constructor? "of"
+statement_list:
+        statement semi_statement*
+semi_statement:
+        ";" NL statement
+statement:
+        labelId_colon? unlabeled_statement
+        EPSILON
+labelId_colon:
+        labelId ":"
+unlabeled_statement:
+        simple_statement
+        struct_statement
+simple_statement:
+        ref_name assign_expression?
+        "inherited" ref_name?
+        "goto" labelId
+assign_expression:
+        ":=" expression
+labelId:
+        "label" number+ ";" NL
+struct_statement:
+        compound_statement
+        conditional_statement
+        loop_statement
+        with_statement
+        try_finally_statement
+        try_except_statement
+        raise_statement
+compound_statement:
+        begin IN NL statement_list EX NL "end" NL
+begin:
+        "begin"
+        "Begin"
+conditional_statement:
+        if_statement
+        case_statement
+if_statement:
+        if expression "then" statement? else_statement?
+else_statement:
+        "else" statement?
+if:
+        "if"
+        "If"
+case_statement:
+        "case" expression "of" case_selector IN NL semi_case_selector* ";"? EX NL else_statement? ";"? NL "end"
+semi_case_selector:
+        ";" NL case_selector
+case_selector:
+        case_label comma_case_label* ":" statement
+comma_case_label:
+        "," case_label
+case_label:
+        expression dotDot_expression?
+loop_statement:
+        repeating_statement
+        while_statement
+        for_statement
+repeating_statement:
+        "repeat" statement ";"? "until" expression
+while_statement:
+        "while" expression do statement
+for_statement:
+        for ref_name ":=" expression to_or_downto expression do statement
+to_or_downto:
+        "to"
+        "downto"
+for:
+        "for"
+        "For"
+do:
+        "do"
+        "Do"
+        "DO"
+with_statement:
+        "with" ref_name+ do statement
+try_finally_statement:
+        "try" IN NL statement_list EX NL "finally" IN NL statement_list EX NL "end"
+try_except_statement:
+        "try" IN NL statement_list EX NL except ";"? IN NL exception_block EX NL "end"
+except:
+        "except"
+        "Except"
+exception_block:
+        EPSILON
+        statement_list
+        exception_else
+exception_else:
+        exception_handler_list NL EX else_statement?
+exception_handler_list:
+        exception_handler semi_exception_handler* ";"?
+semi_exception_handler:
+        ";" exception_handler
+exception_handler:
+        "on" exception_var? type do IN NL statement EX
+exception_var:
+        decl_name ":"
+raise_statement:
+        "raise" ref_name? at_address?
+at_address:
+        "at" ref_name
+expression:
+        factor op_factor*
+        op_factor+
+op_factor:
+        op factor
+op:
+        ">"
+        "<"
+        "<="
+        ">="
+        "<>"
+        "="
+        "in"
+        "is"
+        "+"
+        "-"
+        "or"
+        "xor"
+        "*"
+        "/"
+        "div"
+        "mod"
+        "and"
+        "shl"
+        "shr"
+        "DIV"
+        "AND"
+rel_op_simple_expression:
+        rel_op simple_expression
+simple_expression:
+        term? add_op_term*
+add_op_term:
+        add_op term
+term:
+        factor mul_op_factor*
+mul_op_factor:
+        mul_op factor
+factor:
+        ref_name
+        charlit
+        pond_number+
+        "@" "@"? ref_name
+        "nil"
+        "(" expression ")"
+        not_word factor
+        set_constructor
+        predefinedType "(" expression ")"
+        bool_value
+        "-"? number
+pond_number:
+        "#" number
+not_word:
+        "not"
+        "Not"
+        "NOT"
+bool_value:
+        "true"
+        "false"
+        "True"
+        "False"
+arguments:
+        "(" {expression ","}* ")"
+rel_op:
+        ">"
+        "<"
+        "<="
+        ">="
+        "<>"
+        "="
+        "in"
+        "is"
+add_op:
+        "+"
+        "-"
+        "or"
+        "xor"
+mul_op:
+        "*"
+        "/"
+        "div"
+        "mod"
+        "and"
+        "shl"
+        "shr"
+        "DIV"
+        "AND"
+set_constructor:
+        "[" {set_element ","}* "]"
+set_element:
+        expression dotDot_expression?
+dotDot_expression:
+        ".." expression
+startNameTag:
+        SPOFF SP "<" "UID" SP "name" "=" stringlit ">" SPON
+endNameTag:
+        SPOFF SP "</" "UID" ">" SPON
+decl_name:
+        id dot_id*
+ref_name:
+        object
+object:
+        id object_modifier*
+        "(" ref_name ")" object_modifier*
+object_modifier:
+        "." id
+        array_subscript
+        arguments
+        "^"
+        as_type
+dot_id:
+        "." id
+array_subscript:
+        "[" {expression ","}* "]"
+as_type:
+        as type
+as:
+        "As"
+        "as"
+directive:
+        "cdecl"
+        "register"
+        "dynamic"
+        "virtual"
+        "export"
+        "external"
+        "far"
+        "forward"
+        "message" ref_name?
+        "override"
+        "overload"
+        "pascal"
+        "reintroduce"
+        "safecall"
+        "stdcall"
+        "Override"

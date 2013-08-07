@@ -1,0 +1,143 @@
+IdedElement:
+        Module
+IdedElement:
+        NetElement
+IdedElement:
+        Node
+IdedElement:
+        Arc
+IdedElement:
+        Page
+IdedElement:
+        Instance
+URI:
+        value::String
+Color:
+        EPSILON
+AnyElement:
+        name::String text::String
+NCName:
+        value::String
+RotationType:
+        rtvertical::EPSILON
+        rthorizontal::EPSILON
+        rtdiagonal::EPSILON
+ShapeType:
+        shtline::EPSILON
+        shtcurve::EPSILON
+StyleType:
+        sttsolid::EPSILON
+        sttdash::EPSILON
+        sttdot::EPSILON
+DecorationType:
+        dtunderligne::EPSILON
+        dtoverligne::EPSILON
+        dtlinethrough::EPSILON
+AlignType:
+        atleft::EPSILON
+        atcenter::EPSILON
+        atright::EPSILON
+PNMLDocument:
+        xmlns::URI nets::NetElement+ modules::Module+
+Module:
+        interfaces::Interface+ netcontents::NetContent+ document::PNMLDocument
+Interface:
+        module::Module importplace::Node+ exportplace::Reference+ importtransition::Node+ exporttransition::Reference+
+NetElement:
+        type::URI document::PNMLDocument contents::NetContent+ tools::ToolSpecific+ netgraphics::NetGraphics name::Name
+NetContent:
+        NetContentElement
+NetContent:
+        Arc
+NetContent:
+        Page
+NetContent:
+        ReferencePlace
+NetContent:
+        ReferenceTransition
+NetContent:
+        Instance
+ToolSpecific:
+        tool::String version::String anyelement::AnyElement+ net::NetElement arc::Arc node::Node page::Page
+LabeledElement:
+        Name
+LabeledElement:
+        Inscription
+LabeledElement:
+        InitialMarking
+Label:
+        text::String namedelement::LabeledElement
+Name:
+        net::NetElement netcontent::NetContent
+Inscription:
+        arc::Arc
+InitialMarking:
+        place::Place
+NetContentElement:
+        Place
+NetContentElement:
+        Transition
+Arc:
+        source::NetContentElement target::NetContentElement tools::ToolSpecific+ edgegraphics::EdgeGraphics inscription::Inscription
+Page:
+        contents::NetContent+ tools::ToolSpecific+ pagegraphics::PageGraphics
+Reference:
+        ReferencePlace
+Reference:
+        ReferenceTransition
+ReferencePlace:
+        net::NetElement name::Name page::Page module::Module instance::Node ref::NCName importnode::ImportNode
+ReferenceTransition:
+        net::NetElement name::Name page::Page module::Module instance::Node ref::NCName importnode::ImportNode
+Instance:
+        ref::URI importplace::ImportNode+ importtransition::ImportNode+
+ImportNode:
+        parameter::NCName ref::Reference instanceplace::Instance instancetransition::Instance
+Node:
+        Reference
+Node:
+        netcontentelement::NetContentElement tools::ToolSpecific+ nodegraphics::NodeGraphics
+Place:
+        initialmarking::InitialMarking
+Transition:
+        node::Node
+Graphics:
+        NetGraphics
+Graphics:
+        NodeGraphics
+Graphics:
+        EdgeGraphics
+Graphics:
+        AnnotationGraphics
+Graphics:
+        PageGraphics
+NetGraphics:
+        net::NetElement
+NodeGraphics:
+        node::Node position::Position dimension::Dimension fill::Fill line::Line
+EdgeGraphics:
+        arc::Arc position::Position+ fill::Fill line::Line
+AnnotationGraphics:
+        namedelement::LabeledElement offset::Offset font::Font fill::Fill line::Line
+PageGraphics:
+        page::Page
+Coordinate:
+        Position
+Coordinate:
+        Offset
+Position:
+        nodegraphics::NodeGraphics edgegraphics::EdgeGraphics
+Offset:
+        annotationgraphics::AnnotationGraphics
+Dimension:
+        width::Integer height::Integer nodegraphics::NodeGraphics
+Fill:
+        gradientrotation::RotationType interiorcolor::Color gradientcolor::Color image::URI nodegraphics::NodeGraphics edgegraphics::EdgeGraphics annotationgraphics::AnnotationGraphics
+Line:
+        color::Color width::Integer shape::ShapeType style::StyleType nodegraphics::NodeGraphics edgegraphics::EdgeGraphics annotationgraphics::AnnotationGraphics
+Font:
+        family::String style::String weight::String size::String decoration::DecorationType align::AlignType rotation::Integer annotationgraphics::AnnotationGraphics
+Integer:
+        INT
+String:
+        STR

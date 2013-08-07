@@ -1,0 +1,349 @@
+ListString:
+        value::String
+ListInteger:
+        value::Integer
+Model:
+        library::Boolean pathname::String descriptor::Descriptor project::Project fileRef::FileRef storageUnitM::StorageUnit+ enumsBlock::ConstBlock importedOperator::Operator+ client::Model+ libraries::Model+ allLibry::Model+ typeM::Type+ model::Model coverageFileM::CoverageFile criterionFileM::CriterionFile root::Instance all::Operator+ application::MtcApplication reference::Reference+ tmpNode::Node+ constBlockK::ConstBlock node::Node varBlockK::VarBlock typeBlock::TypeBlock refinement::NamedType implementation::Implementation constant::Constant allConstant::Constant allvariable::GlobalVariable variable::GlobalVariable allConstVar::ConstVar constVar::ConstVar constBlock::ConstBlock varBlock::VarBlock allNamedType::NamedType namedType::NamedType
+Implementation:
+        key::Model namedTypeI::NamedType+
+ConstBlock:
+        modelC::Model keyC::Model key::Model constant::Constant
+VarBlock:
+        variable::GlobalVariable keyVB::Model key::Model
+GlobalVariable:
+        key::VarBlock
+TypeBlock:
+        type::NamedType key::Model
+Session:
+        descriptor::Descriptor model::Model loadsModel::Model+ DefinedIn::String loader::Loader
+Descriptor:
+        modelFileName::String sernFileName::String sernPersistAs::String rnetFileName::String rnetPersistAs::String occBase::Integer size::Integer nameVerify::Boolean checked::Boolean libraryModels::ListString+ annTypeFiles::ListString+ modelD::Model
+StorageUnit:
+        saoFileName::String annFileName::String persistAs::String loaded::Boolean saoModified::Boolean annModified::Boolean fileRef::FileRef modelS::Model element::StorageElement+
+StorageElement:
+        Block
+StorageElement:
+        Operator
+Object:
+        Implementation
+Object:
+        Descriptor
+Object:
+        StorageUnit
+Object:
+        Expression
+Object:
+        Label
+Object:
+        CompositeElement
+Object:
+        Annotable
+Object:
+        Edge
+Object:
+        StateMachine
+Object:
+        Model
+Block:
+        NodeBlock
+Block:
+        ModelBlock
+NodeBlock:
+        ParamBlock
+NodeBlock:
+        EqBlock
+NodeBlock:
+        node::Node
+ModelBlock:
+        ConstBlock
+ModelBlock:
+        VarBlock
+ModelBlock:
+        TypeBlock
+Expression:
+        ExprNull
+Expression:
+        ConstValue
+Expression:
+        ExprContact
+Expression:
+        ExprCall
+Expression:
+        ExprId
+Label:
+        expression::Expression
+ExprNull:
+        label::Label exprContactE::ExprContact exprCallE::ExprCall dependance::ConstVar subExprId::ExprId+ paramArray::ParamArray constant::Constant equationE::Equation assertionE::Assertion
+ConstValue:
+        value::String kind::Object
+ExprContact:
+        boolAct::ExprId initValue::Expression+ calledOpr::ExprCall
+ExprCall:
+        numOcc::Integer predefOpr::Integer parameter::Expression+ exprContactEC::ExprContact operator::Operator
+Operator:
+        Node
+Operator:
+        category::String conversion::Boolean state::Boolean index::Integer variable::LocalVariable input::LocalVariable+ output::LocalVariable+ hidden::LocalVariable+ client::EqBlock+ modelO::Model modelOp::Model criterionO::Criterion intanceO::Instance+ operator::Operator
+ExprId:
+        exprContactEI::ExprContact reference::ConstVar
+LocalVariable:
+        optional::Boolean const::Boolean probe::Boolean pure::Boolean initValue::String operatorI::Operator operatorO::Operator operatorH::Operator nodeL::Node nodeI::Node
+Node:
+        nodeKind::Object eqBlock::EqBlock paramBlock::ParamBlock local::LocalVariable+ internal::LocalVariable+ key::Model stateMachine::StateMachine modelN::Model
+ParamBlock:
+        key::Node columnsSize::ListInteger+ array::ParamArray+
+ParamArray:
+        notes::ListString+ paramBlock::ParamBlock operator::Operator value::Expression+
+ConstVar:
+        Constant
+ConstVar:
+        Variable
+ConstVar:
+        kind::Object type::Type client::EqBlock+
+Constant:
+        imported::Boolean value::Expression enumeration::Enumeration key::ConstBlock
+Variable:
+        GlobalVariable
+Variable:
+        LocalVariable
+Variable:
+        clock::Variable definition::Equation+
+Type:
+        Table
+Type:
+        NamedType
+Type:
+        Enumeration
+Type:
+        Composite
+Table:
+        size::Integer typeT::Type
+NamedType:
+        kind::Object refinement::NamedType+ refined::NamedType+ to::Operator from::Operator implementation::Implementation definition::Type keyM::Model key::TypeBlock
+Enumeration:
+        value::Constant+
+Composite:
+        Structure
+Composite:
+        Tuple
+CompositeElement:
+        typeC::Type key::Composite
+Structure:
+        element::CompositeElement
+Tuple:
+        element::CompositeElement
+EqBlock:
+        equation::Equation+ assertion::Assertion key::Node calledOperator::Operator+ referencedId::ConstVar+
+Equation:
+        rotation::Integer symetrical::Boolean terminator::Boolean eqBlock::EqBlock left::Variable+ right::Expression outEdge::Edge+ position::RPoint size::RSize
+Assertion:
+        key::EqBlock expression::Expression edge::Edge position::RPoint
+Annotable:
+        StorageElement
+Annotable:
+        ParamArray
+Annotable:
+        ConstVar
+Annotable:
+        Type
+Annotable:
+        Equation
+Annotable:
+        Assertion
+Annotable:
+        Project
+Prop:
+        name::String values::ListString+ entity::Annotable configurationP::Configuration
+Configuration:
+        name::String propC::Prop+ projectC::Project
+Project:
+        pathname::String configuration::Configuration+ fileRef::FileRef+ owner::Element+
+Element:
+        FileRef
+Element:
+        Folder
+FileRef:
+        pathname::String persistAs::String DefinedIn::String
+Folder:
+        extensions::String element::Element+
+Reference:
+        TypeReference
+Reference:
+        OperatorReference
+Reference:
+        VariableReference
+TypeReference:
+        EPSILON
+OperatorReference:
+        EPSILON
+VariableReference:
+        EPSILON
+Error:
+        EPSILON
+Edge:
+        leftVarIndex::Integer labelOrientation::Integer leftVar::Variable rightExpression::ExprId srcEquation::Equation assertion::Assertion position::RPoint+ dstEquation::Equation
+RPoint:
+        EPSILON
+RSize:
+        EPSILON
+Entity:
+        StateObj
+StateObj:
+        GraphicalObject
+GraphicalObject:
+        StInputOutput
+GraphicalObject:
+        Transition
+GraphicalObject:
+        State
+GraphicalObject:
+        InitialStPtr
+StInputOutput:
+        StInitInput
+StInputOutput:
+        StInput
+StInputOutput:
+        StOutput
+StInitInput:
+        name::String type::String clock::Boolean const::Boolean optional::Boolean
+StInput:
+        name::String type::String clock::Boolean const::Boolean optional::Boolean
+StOutput:
+        name::String type::String clock::Boolean const::Boolean optional::Boolean
+Transition:
+        conditions::String transKind::Integer state1::State state2::State
+State:
+        name::String cx::Double cy::Double transition1::Transition+ transition2::Transition+ stOutput::StOutput
+InitialStPtr:
+        cx::Double cy::Double state::State
+StateMachine:
+        initialStPtr::InitialStPtr state::State+ transition::Transition+
+Base:
+        StateBase
+StateBase:
+        DefineIn::String
+AnnNote:
+        name::String modified::Boolean annNoteType::AnnNoteType annotable::Annotable annAttValue::AnnAttValue+
+AnnAttValue:
+        AnnAttIntValue
+AnnAttValue:
+        AnnAttBoolValue
+AnnAttValue:
+        AnnAttCharValue
+AnnAttValue:
+        AnnAttRealValue
+AnnAttValue:
+        AnnAttStringValue
+AnnNoteType:
+        name::String annAttDefinition::AnnAttDefinition annAttGroup::AnnAttGroup key::AnnotSchema
+AnnAttDefinition:
+        name::String type::Integer annAttGroup::AnnAttGroup key::AnnNoteType annProperty::AnnProperty
+AnnAttIntValue:
+        value::Integer
+AnnAttBoolValue:
+        value::Boolean
+AnnAttCharValue:
+        value::Char
+AnnAttRealValue:
+        value::Double
+AnnAttStringValue:
+        AnnAttFileValue
+AnnAttStringValue:
+        AnnAttDateValue
+AnnAttStringValue:
+        AnnAttOidValue
+AnnAttStringValue:
+        AnnAttEnumValue
+AnnAttStringValue:
+        value::String
+AnnAttFileValue:
+        value::String
+AnnAttDateValue:
+        value::String
+AnnAttOidValue:
+        value::String
+AnnAttEnumValue:
+        value::String
+AnnProperty:
+        AnnPropertyInt
+AnnProperty:
+        AnnPropertyBool
+AnnProperty:
+        AnnPropertyChar
+AnnProperty:
+        AnnPropertyReal
+AnnProperty:
+        AnnPropertyString
+AnnProperty:
+        AnnPropertyEnum
+AnnProperty:
+        name::String type::Integer key::AnnAttDefinition
+AnnPropertyInt:
+        value::Integer
+AnnPropertyBool:
+        value::Boolean
+AnnPropertyChar:
+        value::Char
+AnnPropertyReal:
+        value::Double
+AnnPropertyString:
+        value::String
+AnnPropertyEnum:
+        value::Object
+AnnotSchema:
+        pathname::String annNoteType::AnnNoteType annCategory::AnnCategory
+AnnCategory:
+        name::String key::AnnotSchema anootability::Annotability+
+Annotability:
+        minCardinality::Integer maxCardinality::Integer defaultNote::Boolean annNoteType::AnnNoteType
+AnnAttGroup:
+        name::String key::AnnNoteType
+File:
+        CoverageFile
+File:
+        CriterionFile
+MtcApplication:
+        coverageFileCov::CoverageFile+ criterionFileCri::CriterionFile+ modelM::Model
+CoverageFile:
+        record::Record modelCov::Model application::MtcApplication recordCov::Record
+CriterionFile:
+        application::MtcApplication modelCri::Model criterionC::Criterion+
+MtcEntity:
+        Element
+MtcEntity:
+        File
+MtcEntity:
+        HistoryEntry
+MtcEntity:
+        Criterion
+MtcEntity:
+        Instance
+MtcEntity:
+        Result
+MtcEntity:
+        Record
+MtcEntity:
+        Model
+MtcEntity:
+        Operator
+HistoryEntry:
+        file::File
+Criterion:
+        ident::String name::String description::String criterionFileC::CriterionFile operatorC::Operator element::Element+
+Instance:
+        index::Integer occ::String modelI::Model operatorI::Operator associationClassI::AssociationClass caller::Instance called::Instance+ origin::Instance related::Instance+
+AssociationClass:
+        resultA::Result recordA::Record+ instanceA::Instance+
+Result:
+        elementCount::Integer associationClassRs::AssociationClass record::Record
+Record:
+        creator::String name::String date::String author::String description::String key::CoverageFile associationClassRc::AssociationClass coverageFileR::CoverageFile result::Result+
+Loader:
+        descriptor::Descriptor session::Session
+String:
+        STR
+Integer:
+        INT
+Boolean:
+        "true"
+        "false"

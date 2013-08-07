@@ -1,0 +1,85 @@
+IdentifiedElement:
+        MElement
+IdentifiedElement:
+        Field
+IdentifiedElement:
+        Collection
+IdentifiedElement:
+        ComputedValue
+MElement:
+        Module
+MElement:
+        ModuleMember
+MElementReference:
+        alias::String referencedElement::MElement
+Module:
+        imports::ImportDirective+ exports::ExportDirective+ moduleMembers::ModuleMember+
+ModuleMember:
+        DerivedType
+ModuleMember:
+        Language
+ModuleMember:
+        Entity
+ImportDirective:
+        module::Module importedElements::MElementReference+
+ExportDirective:
+        module::Module exportedElements::ModuleMember+
+Value:
+        NumericalValue
+Value:
+        StringValue
+Value:
+        BooleanValue
+NumericalValue:
+        IntegerValue
+NumericalValue:
+        DecimalValue
+StringValue:
+        value::String
+IntegerValue:
+        value::Integer
+DecimalValue:
+        value::Double
+BooleanValue:
+        value::Boolean
+DerivedType:
+        supertypes::Types/TypeReference+ fields::Types/Field+ initializationExpression::Expressions/InitializationExpression whereExpression::Expressions/WhereExpression expression::Expressions/Expression
+TypeReference:
+        subtype::Types/DerivedType field::Types/Field lowerBound::Integer upperBound::Integer
+IntrinsicTypeReference:
+        typeIdentifier::String
+DerivedTypeReference:
+        type::Types/DerivedType
+Field:
+        owner::Types/DerivedType type::Types/TypeReference
+Collection:
+        qualifiers::String+ identifier::String
+ComputedValue:
+        qualifiers::String+ identifier::String
+InitializationExpression:
+        type::Types/DerivedType values::Value+
+WhereExpression:
+        type::Types/DerivedType queryExpressions::Expressions/QueryExpression+
+IdentityExpression:
+        identity::Types/Field
+EqualExpression:
+        leftValue::Expressions/ValueExpression rightValue::Expressions/ValueExpression
+InExpression:
+        value::Expressions/ValueExpression collection::Expressions/CollectionExpression
+CollectionExpression:
+        inExpression::Expressions/InExpression collectionValue::Expressions/ValueExpression
+DefaultValueExpression:
+        EPSILON
+StandardValueExpression:
+        context::Expressions/ValueExpression value::String
+Language:
+        module::Module
+Entity:
+        module::Module
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR

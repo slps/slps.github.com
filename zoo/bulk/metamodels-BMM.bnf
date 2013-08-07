@@ -1,0 +1,131 @@
+MotivationElement:
+        Assessment
+MotivationElement:
+        End
+MotivationElement:
+        Influencer
+MotivationElement:
+        InfluencingOrganization
+MotivationElement:
+        Means
+MotivationElement:
+        PotentialImpact
+MotivationElement:
+        AssessmentCategory
+MotivationElement:
+        InfluencerCategory
+MotivationElement:
+        OrganizationCategory
+MotivationElement:
+        OrganizationUnit
+MotivationElement:
+        BusinessProcess
+MotivationElement:
+        Asset
+MotivationElement:
+        Liability
+MotivationElement:
+        name::String description::String
+Assessment:
+        usingAssessmentUsesUsedAssessment::Assessment+ assessmentProvidesImpetusForDirective::Directive+ assessmentIdentifiesPotentialImpact::PotentialImpact+ assessmentJudgmentOfInfluencer::Influencer+
+End:
+        Vision
+End:
+        DesiredResult
+End:
+        Vision
+        DesiredResult
+Influencer:
+        Regulation
+InfluencingOrganization:
+        influencingOrganizationIsSourceOfInfluencer::Influencer+
+Means:
+        Mission
+Means:
+        CourseOfAction
+Means:
+        Directive
+Means:
+        Mission
+        CourseOfAction
+        Directive
+PotentialImpact:
+        PotentialReward
+PotentialImpact:
+        Risk
+PotentialImpact:
+        potentialImpactProvidesImpetusForDirective::Directive+
+AssessmentCategory:
+        assessmentCategoryCategoriesAssessment::Assessment+
+InfluencerCategory:
+        influencerCategoryCategorizesInfluencer::Influencer+
+OrganizationCategory:
+        organizationCategoryCategorizesInfluencingOrganization::InfluencingOrganization+
+OrganizationUnit:
+        organizationUnitDefinesEnd::End+ organizationUnitEstablishesMeans::Means+ organizationUnitIsResponsibleForAsset::Asset+ organizationUnitIsResponsibleForLiability::Liability+ organizationUnitRecognizesInfluencer::Influencer+ organizationUnitActAsInfluencingOrganization::InfluencingOrganization+ organizationUnitMakesAssessment::Assessment+ organizationUnitIsResponsibleForBusinessProcess::BusinessProcess+
+BusinessProcess:
+        businessProcessRealizesCourseOfAction::CourseOfAction+ businessProcessManagerAsset::Asset+ businessProcessDeliversOfeering::Offering+
+Asset:
+        Resource
+Asset:
+        FixedAsset
+Asset:
+        Resource
+        FixedAsset
+Liability:
+        liabilityClaimsResource::Resource+
+Resource:
+        EPSILON
+Mission:
+        Strategy
+Mission:
+        missionMakesOperativeVision::Vision
+CourseOfAction:
+        Tactic
+CourseOfAction:
+        enablingCourseofActionEnablesEnabledCourseOfAction::CourseOfAction+ broaderCourseofActionIncludesMoreSpecificCourseOfAction::CourseOfAction+ courseOfActionChanneIsEffortsTowardsDesiredResult::DesiredResult courseOfActionDeployAsset::Asset+ courseOfActionDefiensOffering::Offering+
+FixedAsset:
+        Offering
+FixedAsset:
+        fixedAssetProvidesResource::Resource+
+Offering:
+        offeringRequiresResource::Resource+ offeringUsesFixedAsset::FixedAsset+
+Directive:
+        BusinessRule
+Directive:
+        BusinessPolicy
+Directive:
+        directiveGovernsCourseOfAction::CourseOfAction+ directiveIsSourceOfCourseOfAction::CourseOfAction+ directiveActAsRegulation::Regulation+ directiveSupportsAchievementOfDesiredResult::DesiredResult+ directiveGovernsUseOfAsset::Asset+
+Strategy:
+        strategyIsAComponentOfThePlanForMission::Mission+ strategyDeterminesOrganizationUnit::OrganizationUnit+
+Tactic:
+        tacticImplementsStrategy::Strategy+ tacticEffectsEnforcementLevelOfBusinessRule::BusinessRule+
+BusinessRule:
+        businessRuleGuidesBusinessProcess::BusinessProcess+
+BusinessPolicy:
+        businessPolicyIsBasisForBusinessRule::BusinessRule+ broaderBusinessPolicyIncludesMoreSpecificBusinessPolicy::BusinessPolicy+ businessPolicyGovernsBusinessProcess::BusinessProcess+
+Regulation:
+        EPSILON
+Vision:
+        EPSILON
+DesiredResult:
+        Goal
+DesiredResult:
+        Objective
+DesiredResult:
+        broaderDesiredResultIncludesMoreSpecificDesiredResult::DesiredResult+
+Goal:
+        goalAmplidfiesVision::Vision
+Objective:
+        objectiveQuantifiesGoal::Goal+
+PotentialReward:
+        potentialImpactProvidesImpetusForDirective::Directive+
+Risk:
+        potentialImpactProvidesImpetusForDirective::Directive+
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR

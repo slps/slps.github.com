@@ -1,0 +1,3912 @@
+yesorno:
+        STR
+titles:
+        title?
+tbl.table-titles.mdl:
+        titles
+tbl.table-main.mdl:
+        tgroup+
+        graphic+
+tbl.table.att:
+        (tabstyle::STR)? (tocentry::yesorno)? (shortentry::yesorno)? (orient::("port" | "land"))? (pgwide::yesorno)?
+tbl.tgroup.mdl:
+        colspec* spanspec* thead? tfoot? tbody
+tbl.tgroup.att:
+        (tgroupstyle::STR)?
+tbl.hdft.mdl:
+        colspec* row+
+tbl.row.mdl:
+        (entry | entrytbl)+
+tbl.entrytbl.mdl:
+        colspec* spanspec* thead? tbody
+table:
+        table::(table.attlist tbl.table.mdl)
+table.attlist:
+        (frame::("top" | "bottom" | "topbot" | "all" | "sides" | "none"))? (colsep::yesorno)? (rowsep::yesorno)? tbl.table.att bodyatt secur
+tgroup:
+        tgroup::(tgroup.attlist tbl.tgroup.mdl)
+tgroup.attlist:
+        cols::STR tbl.tgroup.att (colsep::yesorno)? (rowsep::yesorno)? (align::("left" | "right" | "center" | "justify" | "char"))? (char::STR)? (charoff::STR)? secur
+colspec:
+        colspec::(colspec.attlist EPSILON)
+colspec.attlist:
+        (colnum::STR)? (colname::STR)? (colwidth::STR)? (colsep::yesorno)? (rowsep::yesorno)? (align::("left" | "right" | "center" | "justify" | "char"))? (char::STR)? (charoff::STR)?
+spanspec:
+        spanspec::(spanspec.attlist EPSILON)
+spanspec.attlist:
+        namest::STR nameend::STR spanname::STR (colsep::yesorno)? (rowsep::yesorno)? (align::("left" | "right" | "center" | "justify" | "char"))? (char::STR)? (charoff::STR)?
+thead:
+        thead::(thead.attlist tbl.hdft.mdl)
+thead.attlist:
+        (valign::("top" | "middle" | "bottom"))? secur
+tfoot:
+        tfoot::(tfoot.attlist tbl.hdft.mdl)
+tfoot.attlist:
+        (valign::("top" | "middle" | "bottom"))? secur
+tbody:
+        tbody::(tbody.attlist row+)
+tbody.attlist:
+        (valign::("top" | "middle" | "bottom"))? secur
+row:
+        row::(row.attlist tbl.row.mdl)
+row.attlist:
+        (rowsep::yesorno)? (valign::("top" | "middle" | "bottom"))? secur
+entrytbl:
+        entrytbl::(entrytbl.attlist tbl.entrytbl.mdl)
+entrytbl.attlist:
+        cols::STR tbl.tgroup.att (colname::STR)? (spanname::STR)? (namest::STR)? (nameend::STR)? (colsep::yesorno)? (rowsep::yesorno)? (align::("left" | "right" | "center" | "justify" | "char"))? (char::STR)? (charoff::STR)? secur
+entry:
+        entry::(entry.attlist tbl.entry.mdl*)
+entry.attlist:
+        (colname::STR)? (namest::STR)? (nameend::STR)? (spanname::STR)? (morerows::STR)? (colsep::yesorno)? (rowsep::yesorno)? (align::("left" | "right" | "center" | "justify" | "char"))? (char::STR)? (charoff::STR)? (rotate::yesorno)? (valign::("top" | "middle" | "bottom"))? secur
+local.appendix.class:
+        EMPTY
+appendix.class:
+        appendix
+        local.appendix.class
+local.article.class:
+        EMPTY
+article.class:
+        article
+        local.article.class
+local.book.class:
+        EMPTY
+book.class:
+        book
+        local.book.class
+local.chapter.class:
+        EMPTY
+chapter.class:
+        chapter
+        local.chapter.class
+local.index.class:
+        EMPTY
+index.class:
+        index
+        setindex
+        local.index.class
+local.refentry.class:
+        EMPTY
+refentry.class:
+        refentry
+        local.refentry.class
+local.section.class:
+        EMPTY
+section.class:
+        section
+        local.section.class
+local.nav.class:
+        EMPTY
+nav.class:
+        toc
+        lot
+        index
+        glossary
+        bibliography
+        local.nav.class
+forms.hook:
+        EMPTY
+local.divcomponent.mix:
+        EMPTY
+divcomponent.mix:
+        list.class
+        admon.class
+        linespecific.class
+        synop.class
+        para.class
+        informal.class
+        formal.class
+        compound.class
+        genobj.class
+        descobj.class
+        ndxterm.class
+        beginpage
+        forms.hook
+        local.divcomponent.mix
+local.refcomponent.mix:
+        EMPTY
+refcomponent.mix:
+        list.class
+        admon.class
+        linespecific.class
+        synop.class
+        para.class
+        informal.class
+        formal.class
+        compound.class
+        genobj.class
+        descobj.class
+        ndxterm.class
+        beginpage
+        local.refcomponent.mix
+local.indexdivcomponent.mix:
+        EMPTY
+indexdivcomponent.mix:
+        itemizedlist
+        orderedlist
+        variablelist
+        simplelist
+        linespecific.class
+        synop.class
+        para.class
+        informal.class
+        anchor
+        remark
+        link.char.class
+        beginpage
+        local.indexdivcomponent.mix
+local.refname.char.mix:
+        EMPTY
+refname.char.mix:
+        STR
+        tech.char.class
+        local.refname.char.mix
+local.partcontent.mix:
+        EMPTY
+partcontent.mix:
+        appendix.class
+        chapter.class
+        nav.class
+        article.class
+        preface
+        refentry.class
+        reference
+        local.partcontent.mix
+local.refinline.char.mix:
+        EMPTY
+refinline.char.mix:
+        STR
+        xref.char.class
+        gen.char.class
+        link.char.class
+        tech.char.class
+        base.char.class
+        docinfo.char.class
+        other.char.class
+        ndxterm.class
+        beginpage
+        local.refinline.char.mix
+local.refclass.char.mix:
+        EMPTY
+refclass.char.mix:
+        STR
+        application
+        local.refclass.char.mix
+div.title.content:
+        title subtitle? titleabbrev?
+bookcomponent.title.content:
+        title subtitle? titleabbrev?
+sect.title.content:
+        title subtitle? titleabbrev?
+refsect.title.content:
+        title subtitle? titleabbrev?
+bookcomponent.content:
+        divcomponent.mix+ (sect1* | refentry.class* | simplesect* | section.class*)
+        sect1+
+        refentry.class+
+        simplesect+
+        section.class+
+local.set.attrib:
+        EPSILON
+set.role.attrib:
+        role.attrib
+set:
+        set::(set.attlist div.title.content? setinfo? toc? book.class+ setindex?)
+set.attlist:
+        (fpi::STR)? status.attrib common.attrib set.role.attrib local.set.attrib
+local.setinfo.attrib:
+        EPSILON
+setinfo.role.attrib:
+        role.attrib
+setinfo:
+        setinfo::(setinfo.attlist info.class+)
+setinfo.attlist:
+        (contents::STR)? common.attrib setinfo.role.attrib local.setinfo.attrib
+local.book.attrib:
+        EPSILON
+book.role.attrib:
+        role.attrib
+book:
+        book::(book.attlist div.title.content? bookinfo? (dedication | toc | lot | glossary | bibliography | preface | chapter.class | reference | part | article.class | appendix.class | index.class | colophon)*)
+book.attlist:
+        (fpi::STR)? label.attrib status.attrib common.attrib book.role.attrib local.book.attrib
+local.bookinfo.attrib:
+        EPSILON
+bookinfo.role.attrib:
+        role.attrib
+bookinfo:
+        bookinfo::(bookinfo.attlist info.class+)
+bookinfo.attlist:
+        (contents::STR)? common.attrib bookinfo.role.attrib local.bookinfo.attrib
+local.dedication.attrib:
+        EPSILON
+dedication.role.attrib:
+        role.attrib
+dedication:
+        dedication::(dedication.attlist sect.title.content? legalnotice.mix+)
+dedication.attlist:
+        status.attrib common.attrib dedication.role.attrib local.dedication.attrib
+local.colophon.attrib:
+        EPSILON
+colophon.role.attrib:
+        role.attrib
+colophon:
+        colophon::(colophon.attlist sect.title.content? textobject.mix+)
+colophon.attlist:
+        status.attrib common.attrib colophon.role.attrib local.colophon.attrib
+local.toc.attrib:
+        EPSILON
+toc.role.attrib:
+        role.attrib
+toc:
+        toc::(toc.attlist beginpage? bookcomponent.title.content? tocfront* (tocpart | tocchap)* tocback*)
+toc.attlist:
+        pagenum.attrib common.attrib toc.role.attrib local.toc.attrib
+local.tocfront.attrib:
+        EPSILON
+tocfront.role.attrib:
+        role.attrib
+tocfront:
+        tocfront::(tocfront.attlist para.char.mix*)
+tocfront.attlist:
+        label.attrib linkend.attrib pagenum.attrib common.attrib tocfront.role.attrib local.tocfront.attrib
+local.tocentry.attrib:
+        EPSILON
+tocentry.role.attrib:
+        role.attrib
+tocentry:
+        tocentry::(tocentry.attlist para.char.mix*)
+tocentry.attlist:
+        linkend.attrib pagenum.attrib common.attrib tocentry.role.attrib local.tocentry.attrib
+local.tocpart.attrib:
+        EPSILON
+tocpart.role.attrib:
+        role.attrib
+tocpart:
+        tocpart::(tocpart.attlist tocentry+ tocchap*)
+tocpart.attlist:
+        common.attrib tocpart.role.attrib local.tocpart.attrib
+local.tocchap.attrib:
+        EPSILON
+tocchap.role.attrib:
+        role.attrib
+tocchap:
+        tocchap::(tocchap.attlist tocentry+ toclevel1*)
+tocchap.attlist:
+        label.attrib common.attrib tocchap.role.attrib local.tocchap.attrib
+local.toclevel1.attrib:
+        EPSILON
+toclevel1.role.attrib:
+        role.attrib
+toclevel1:
+        toclevel1::(toclevel1.attlist tocentry+ toclevel2*)
+toclevel1.attlist:
+        common.attrib toclevel1.role.attrib local.toclevel1.attrib
+local.toclevel2.attrib:
+        EPSILON
+toclevel2.role.attrib:
+        role.attrib
+toclevel2:
+        toclevel2::(toclevel2.attlist tocentry+ toclevel3*)
+toclevel2.attlist:
+        common.attrib toclevel2.role.attrib local.toclevel2.attrib
+local.toclevel3.attrib:
+        EPSILON
+toclevel3.role.attrib:
+        role.attrib
+toclevel3:
+        toclevel3::(toclevel3.attlist tocentry+ toclevel4*)
+toclevel3.attlist:
+        common.attrib toclevel3.role.attrib local.toclevel3.attrib
+local.toclevel4.attrib:
+        EPSILON
+toclevel4.role.attrib:
+        role.attrib
+toclevel4:
+        toclevel4::(toclevel4.attlist tocentry+ toclevel5*)
+toclevel4.attlist:
+        common.attrib toclevel4.role.attrib local.toclevel4.attrib
+local.toclevel5.attrib:
+        EPSILON
+toclevel5.role.attrib:
+        role.attrib
+toclevel5:
+        toclevel5::(toclevel5.attlist tocentry+)
+toclevel5.attlist:
+        common.attrib toclevel5.role.attrib local.toclevel5.attrib
+local.tocback.attrib:
+        EPSILON
+tocback.role.attrib:
+        role.attrib
+tocback:
+        tocback::(tocback.attlist para.char.mix*)
+tocback.attlist:
+        label.attrib linkend.attrib pagenum.attrib common.attrib tocback.role.attrib local.tocback.attrib
+local.lot.attrib:
+        EPSILON
+lot.role.attrib:
+        role.attrib
+lot:
+        lot::(lot.attlist beginpage? bookcomponent.title.content? lotentry*)
+lot.attlist:
+        label.attrib common.attrib lot.role.attrib local.lot.attrib
+local.lotentry.attrib:
+        EPSILON
+lotentry.role.attrib:
+        role.attrib
+lotentry:
+        lotentry::(lotentry.attlist para.char.mix*)
+lotentry.attlist:
+        linkend.attrib pagenum.attrib (srccredit::STR)? common.attrib lotentry.role.attrib local.lotentry.attrib
+local.appendix.attrib:
+        EPSILON
+appendix.role.attrib:
+        role.attrib
+appendix:
+        appendix::(appendix.attlist beginpage? appendixinfo? bookcomponent.title.content nav.class* tocchap? bookcomponent.content nav.class*)
+appendix.attlist:
+        label.attrib status.attrib common.attrib appendix.role.attrib local.appendix.attrib
+local.chapter.attrib:
+        EPSILON
+chapter.role.attrib:
+        role.attrib
+chapter:
+        chapter::(chapter.attlist beginpage? chapterinfo? bookcomponent.title.content nav.class* tocchap? bookcomponent.content nav.class*)
+chapter.attlist:
+        label.attrib status.attrib common.attrib chapter.role.attrib local.chapter.attrib
+local.part.attrib:
+        EPSILON
+part.role.attrib:
+        role.attrib
+part:
+        part::(part.attlist beginpage? partinfo? bookcomponent.title.content partintro? partcontent.mix+)
+part.attlist:
+        label.attrib status.attrib common.attrib part.role.attrib local.part.attrib
+local.preface.attrib:
+        EPSILON
+preface.role.attrib:
+        role.attrib
+preface:
+        preface::(preface.attlist beginpage? prefaceinfo? bookcomponent.title.content nav.class* tocchap? bookcomponent.content nav.class*)
+preface.attlist:
+        status.attrib common.attrib preface.role.attrib local.preface.attrib
+local.reference.attrib:
+        EPSILON
+reference.role.attrib:
+        role.attrib
+reference:
+        reference::(reference.attlist beginpage? referenceinfo? bookcomponent.title.content partintro? refentry.class+)
+reference.attlist:
+        label.attrib status.attrib common.attrib reference.role.attrib local.reference.attrib
+local.partintro.attrib:
+        EPSILON
+partintro.role.attrib:
+        role.attrib
+partintro:
+        partintro::(partintro.attlist div.title.content? bookcomponent.content)
+partintro.attlist:
+        label.attrib common.attrib partintro.role.attrib local.partintro.attrib
+local.appendixinfo.attrib:
+        EPSILON
+appendixinfo.role.attrib:
+        role.attrib
+appendixinfo:
+        appendixinfo::(appendixinfo.attlist info.class+)
+appendixinfo.attlist:
+        common.attrib appendixinfo.role.attrib local.appendixinfo.attrib
+local.bibliographyinfo.attrib:
+        EPSILON
+bibliographyinfo.role.attrib:
+        role.attrib
+bibliographyinfo:
+        bibliographyinfo::(bibliographyinfo.attlist info.class+)
+bibliographyinfo.attlist:
+        common.attrib bibliographyinfo.role.attrib local.bibliographyinfo.attrib
+local.chapterinfo.attrib:
+        EPSILON
+chapterinfo.role.attrib:
+        role.attrib
+chapterinfo:
+        chapterinfo::(chapterinfo.attlist info.class+)
+chapterinfo.attlist:
+        common.attrib chapterinfo.role.attrib local.chapterinfo.attrib
+local.glossaryinfo.attrib:
+        EPSILON
+glossaryinfo.role.attrib:
+        role.attrib
+glossaryinfo:
+        glossaryinfo::(glossaryinfo.attlist info.class+)
+glossaryinfo.attlist:
+        common.attrib glossaryinfo.role.attrib local.glossaryinfo.attrib
+local.indexinfo.attrib:
+        EPSILON
+indexinfo.role.attrib:
+        role.attrib
+indexinfo:
+        indexinfo::(indexinfo.attlist info.class+)
+indexinfo.attlist:
+        common.attrib indexinfo.role.attrib local.indexinfo.attrib
+local.setindexinfo.attrib:
+        EPSILON
+setindexinfo.role.attrib:
+        role.attrib
+setindexinfo:
+        setindexinfo::(setindexinfo.attlist info.class+)
+setindexinfo.attlist:
+        common.attrib setindexinfo.role.attrib local.setindexinfo.attrib
+local.partinfo.attrib:
+        EPSILON
+partinfo.role.attrib:
+        role.attrib
+partinfo:
+        partinfo::(partinfo.attlist info.class+)
+partinfo.attlist:
+        common.attrib partinfo.role.attrib local.partinfo.attrib
+local.prefaceinfo.attrib:
+        EPSILON
+prefaceinfo.role.attrib:
+        role.attrib
+prefaceinfo:
+        prefaceinfo::(prefaceinfo.attlist info.class+)
+prefaceinfo.attlist:
+        common.attrib prefaceinfo.role.attrib local.prefaceinfo.attrib
+local.refentryinfo.attrib:
+        EPSILON
+refentryinfo.role.attrib:
+        role.attrib
+refentryinfo:
+        refentryinfo::(refentryinfo.attlist info.class+)
+refentryinfo.attlist:
+        common.attrib refentryinfo.role.attrib local.refentryinfo.attrib
+local.refsectioninfo.attrib:
+        EPSILON
+refsectioninfo.role.attrib:
+        role.attrib
+refsectioninfo:
+        refsectioninfo::(refsectioninfo.attlist info.class+)
+refsectioninfo.attlist:
+        common.attrib refsectioninfo.role.attrib local.refsectioninfo.attrib
+local.refsect1info.attrib:
+        EPSILON
+refsect1info.role.attrib:
+        role.attrib
+refsect1info:
+        refsect1info::(refsect1info.attlist info.class+)
+refsect1info.attlist:
+        common.attrib refsect1info.role.attrib local.refsect1info.attrib
+local.refsect2info.attrib:
+        EPSILON
+refsect2info.role.attrib:
+        role.attrib
+refsect2info:
+        refsect2info::(refsect2info.attlist info.class+)
+refsect2info.attlist:
+        common.attrib refsect2info.role.attrib local.refsect2info.attrib
+local.refsect3info.attrib:
+        EPSILON
+refsect3info.role.attrib:
+        role.attrib
+refsect3info:
+        refsect3info::(refsect3info.attlist info.class+)
+refsect3info.attlist:
+        common.attrib refsect3info.role.attrib local.refsect3info.attrib
+local.refsynopsisdivinfo.attrib:
+        EPSILON
+refsynopsisdivinfo.role.attrib:
+        role.attrib
+refsynopsisdivinfo:
+        refsynopsisdivinfo::(refsynopsisdivinfo.attlist info.class+)
+refsynopsisdivinfo.attlist:
+        common.attrib refsynopsisdivinfo.role.attrib local.refsynopsisdivinfo.attrib
+local.referenceinfo.attrib:
+        EPSILON
+referenceinfo.role.attrib:
+        role.attrib
+referenceinfo:
+        referenceinfo::(referenceinfo.attlist info.class+)
+referenceinfo.attlist:
+        common.attrib referenceinfo.role.attrib local.referenceinfo.attrib
+local.sect1info.attrib:
+        EPSILON
+sect1info.role.attrib:
+        role.attrib
+sect1info:
+        sect1info::(sect1info.attlist info.class+)
+sect1info.attlist:
+        common.attrib sect1info.role.attrib local.sect1info.attrib
+local.sect2info.attrib:
+        EPSILON
+sect2info.role.attrib:
+        role.attrib
+sect2info:
+        sect2info::(sect2info.attlist info.class+)
+sect2info.attlist:
+        common.attrib sect2info.role.attrib local.sect2info.attrib
+local.sect3info.attrib:
+        EPSILON
+sect3info.role.attrib:
+        role.attrib
+sect3info:
+        sect3info::(sect3info.attlist info.class+)
+sect3info.attlist:
+        common.attrib sect3info.role.attrib local.sect3info.attrib
+local.sect4info.attrib:
+        EPSILON
+sect4info.role.attrib:
+        role.attrib
+sect4info:
+        sect4info::(sect4info.attlist info.class+)
+sect4info.attlist:
+        common.attrib sect4info.role.attrib local.sect4info.attrib
+local.sect5info.attrib:
+        EPSILON
+sect5info.role.attrib:
+        role.attrib
+sect5info:
+        sect5info::(sect5info.attlist info.class+)
+sect5info.attlist:
+        common.attrib sect5info.role.attrib local.sect5info.attrib
+local.section.attrib:
+        EPSILON
+section.role.attrib:
+        role.attrib
+section:
+        section::(section.attlist sectioninfo? sect.title.content nav.class* ((divcomponent.mix+ (refentry.class* | section.class* | simplesect*)) | refentry.class+ | section.class+ | simplesect+) nav.class*)
+section.attlist:
+        label.attrib status.attrib common.attrib section.role.attrib local.section.attrib
+sectioninfo.role.attrib:
+        role.attrib
+local.sectioninfo.attrib:
+        EPSILON
+sectioninfo:
+        sectioninfo::(sectioninfo.attlist info.class+)
+sectioninfo.attlist:
+        common.attrib sectioninfo.role.attrib local.sectioninfo.attrib
+local.sect1.attrib:
+        EPSILON
+sect1.role.attrib:
+        role.attrib
+sect1:
+        sect1::(sect1.attlist sect1info? sect.title.content nav.class* ((divcomponent.mix+ (refentry.class* | sect2* | simplesect*)) | refentry.class+ | sect2+ | simplesect+) nav.class*)
+sect1.attlist:
+        (renderas::("sect2" | "sect3" | "sect4" | "sect5"))? label.attrib status.attrib common.attrib sect1.role.attrib local.sect1.attrib
+local.sect2.attrib:
+        EPSILON
+sect2.role.attrib:
+        role.attrib
+sect2:
+        sect2::(sect2.attlist sect2info? sect.title.content nav.class* ((divcomponent.mix+ (refentry.class* | sect3* | simplesect*)) | refentry.class+ | sect3+ | simplesect+) nav.class*)
+sect2.attlist:
+        (renderas::("sect1" | "sect3" | "sect4" | "sect5"))? label.attrib status.attrib common.attrib sect2.role.attrib local.sect2.attrib
+local.sect3.attrib:
+        EPSILON
+sect3.role.attrib:
+        role.attrib
+sect3:
+        sect3::(sect3.attlist sect3info? sect.title.content nav.class* ((divcomponent.mix+ (refentry.class* | sect4* | simplesect*)) | refentry.class+ | sect4+ | simplesect+) nav.class*)
+sect3.attlist:
+        (renderas::("sect1" | "sect2" | "sect4" | "sect5"))? label.attrib status.attrib common.attrib sect3.role.attrib local.sect3.attrib
+local.sect4.attrib:
+        EPSILON
+sect4.role.attrib:
+        role.attrib
+sect4:
+        sect4::(sect4.attlist sect4info? sect.title.content nav.class* ((divcomponent.mix+ (refentry.class* | sect5* | simplesect*)) | refentry.class+ | sect5+ | simplesect+) nav.class*)
+sect4.attlist:
+        (renderas::("sect1" | "sect2" | "sect3" | "sect5"))? label.attrib status.attrib common.attrib sect4.role.attrib local.sect4.attrib
+local.sect5.attrib:
+        EPSILON
+sect5.role.attrib:
+        role.attrib
+sect5:
+        sect5::(sect5.attlist sect5info? sect.title.content nav.class* ((divcomponent.mix+ (refentry.class* | simplesect*)) | refentry.class+ | simplesect+) nav.class*)
+sect5.attlist:
+        (renderas::("sect1" | "sect2" | "sect3" | "sect4"))? label.attrib status.attrib common.attrib sect5.role.attrib local.sect5.attrib
+local.simplesect.attrib:
+        EPSILON
+simplesect.role.attrib:
+        role.attrib
+simplesect:
+        simplesect::(simplesect.attlist sect.title.content divcomponent.mix+)
+simplesect.attlist:
+        common.attrib simplesect.role.attrib local.simplesect.attrib
+local.bibliography.attrib:
+        EPSILON
+bibliography.role.attrib:
+        role.attrib
+bibliography:
+        bibliography::(bibliography.attlist bibliographyinfo? bookcomponent.title.content? component.mix* (bibliodiv+ | (biblioentry | bibliomixed)+))
+bibliography.attlist:
+        status.attrib common.attrib bibliography.role.attrib local.bibliography.attrib
+local.bibliodiv.attrib:
+        EPSILON
+bibliodiv.role.attrib:
+        role.attrib
+bibliodiv:
+        bibliodiv::(bibliodiv.attlist sect.title.content? component.mix* (biblioentry | bibliomixed)+)
+bibliodiv.attlist:
+        status.attrib common.attrib bibliodiv.role.attrib local.bibliodiv.attrib
+local.glossary.attrib:
+        EPSILON
+glossary.role.attrib:
+        role.attrib
+glossary:
+        glossary::(glossary.attlist glossaryinfo? bookcomponent.title.content? component.mix* (glossdiv+ | glossentry+) bibliography?)
+glossary.attlist:
+        status.attrib common.attrib glossary.role.attrib local.glossary.attrib
+local.glossdiv.attrib:
+        EPSILON
+glossdiv.role.attrib:
+        role.attrib
+glossdiv:
+        glossdiv::(glossdiv.attlist sect.title.content component.mix* glossentry+)
+glossdiv.attlist:
+        status.attrib common.attrib glossdiv.role.attrib local.glossdiv.attrib
+local.indexes.attrib:
+        EPSILON
+indexes.role.attrib:
+        role.attrib
+index:
+        index::(index.attlist indexinfo? bookcomponent.title.content? component.mix* (indexdiv* | indexentry*))
+index.attlist:
+        common.attrib indexes.role.attrib local.indexes.attrib
+setindex:
+        setindex::(setindex.attlist setindexinfo? bookcomponent.title.content? component.mix* (indexdiv* | indexentry*))
+setindex.attlist:
+        common.attrib indexes.role.attrib local.indexes.attrib
+local.indexdiv.attrib:
+        EPSILON
+indexdiv.role.attrib:
+        role.attrib
+indexdiv:
+        indexdiv::(indexdiv.attlist sect.title.content? indexdivcomponent.mix* (indexentry+ | segmentedlist))
+indexdiv.attlist:
+        common.attrib indexdiv.role.attrib local.indexdiv.attrib
+local.indexentry.attrib:
+        EPSILON
+indexentry.role.attrib:
+        role.attrib
+indexentry:
+        indexentry::(indexentry.attlist primaryie (seeie | seealsoie)* (secondaryie (seeie | seealsoie | tertiaryie)*)*)
+indexentry.attlist:
+        common.attrib indexentry.role.attrib local.indexentry.attrib
+local.primsecterie.attrib:
+        EPSILON
+primsecterie.role.attrib:
+        role.attrib
+primaryie:
+        primaryie::(primaryie.attlist ndxterm.char.mix*)
+primaryie.attlist:
+        linkends.attrib common.attrib primsecterie.role.attrib local.primsecterie.attrib
+secondaryie:
+        secondaryie::(secondaryie.attlist ndxterm.char.mix*)
+secondaryie.attlist:
+        linkends.attrib common.attrib primsecterie.role.attrib local.primsecterie.attrib
+tertiaryie:
+        tertiaryie::(tertiaryie.attlist ndxterm.char.mix*)
+tertiaryie.attlist:
+        linkends.attrib common.attrib primsecterie.role.attrib local.primsecterie.attrib
+local.seeie.attrib:
+        EPSILON
+seeie.role.attrib:
+        role.attrib
+seeie:
+        seeie::(seeie.attlist ndxterm.char.mix*)
+seeie.attlist:
+        linkend.attrib common.attrib seeie.role.attrib local.seeie.attrib
+local.seealsoie.attrib:
+        EPSILON
+seealsoie.role.attrib:
+        role.attrib
+seealsoie:
+        seealsoie::(seealsoie.attlist ndxterm.char.mix*)
+seealsoie.attlist:
+        linkends.attrib common.attrib seealsoie.role.attrib local.seealsoie.attrib
+local.refentry.attrib:
+        EPSILON
+refentry.role.attrib:
+        role.attrib
+refentry:
+        refentry::(refentry.attlist beginpage? ndxterm.class* refentryinfo? refmeta? (remark | link.char.class)* refnamediv refsynopsisdiv? (refsect1+ | refsection+))
+refentry.attlist:
+        status.attrib common.attrib refentry.role.attrib local.refentry.attrib
+local.refmeta.attrib:
+        EPSILON
+refmeta.role.attrib:
+        role.attrib
+refmeta:
+        refmeta::(refmeta.attlist ndxterm.class* refentrytitle manvolnum? refmiscinfo* ndxterm.class*)
+refmeta.attlist:
+        common.attrib refmeta.role.attrib local.refmeta.attrib
+local.refmiscinfo.attrib:
+        EPSILON
+refmiscinfo.role.attrib:
+        role.attrib
+refmiscinfo:
+        refmiscinfo::(refmiscinfo.attlist docinfo.char.mix*)
+refmiscinfo.attlist:
+        (class::STR)? common.attrib refmiscinfo.role.attrib local.refmiscinfo.attrib
+local.refnamediv.attrib:
+        EPSILON
+refnamediv.role.attrib:
+        role.attrib
+refnamediv:
+        refnamediv::(refnamediv.attlist refdescriptor? refname+ refpurpose refclass* (remark | link.char.class)*)
+refnamediv.attlist:
+        common.attrib refnamediv.role.attrib local.refnamediv.attrib
+local.refdescriptor.attrib:
+        EPSILON
+refdescriptor.role.attrib:
+        role.attrib
+refdescriptor:
+        refdescriptor::(refdescriptor.attlist refname.char.mix*)
+refdescriptor.attlist:
+        common.attrib refdescriptor.role.attrib local.refdescriptor.attrib
+local.refname.attrib:
+        EPSILON
+refname.role.attrib:
+        role.attrib
+refname:
+        refname::(refname.attlist refname.char.mix*)
+refname.attlist:
+        common.attrib refname.role.attrib local.refname.attrib
+local.refpurpose.attrib:
+        EPSILON
+refpurpose.role.attrib:
+        role.attrib
+refpurpose:
+        refpurpose::(refpurpose.attlist refinline.char.mix*)
+refpurpose.attlist:
+        common.attrib refpurpose.role.attrib local.refpurpose.attrib
+local.refclass.attrib:
+        EPSILON
+refclass.role.attrib:
+        role.attrib
+refclass:
+        refclass::(refclass.attlist refclass.char.mix*)
+refclass.attlist:
+        common.attrib refclass.role.attrib local.refclass.attrib
+local.refsynopsisdiv.attrib:
+        EPSILON
+refsynopsisdiv.role.attrib:
+        role.attrib
+refsynopsisdiv:
+        refsynopsisdiv::(refsynopsisdiv.attlist refsynopsisdivinfo? refsect.title.content? ((refcomponent.mix+ refsect2*) | refsect2+))
+refsynopsisdiv.attlist:
+        common.attrib refsynopsisdiv.role.attrib local.refsynopsisdiv.attrib
+local.refsection.attrib:
+        EPSILON
+refsection.role.attrib:
+        role.attrib
+refsection:
+        refsection::(refsection.attlist refsectioninfo? refsect.title.content ((refcomponent.mix+ refsection*) | refsection+))
+refsection.attlist:
+        status.attrib common.attrib refsection.role.attrib local.refsection.attrib
+local.refsect1.attrib:
+        EPSILON
+refsect1.role.attrib:
+        role.attrib
+refsect1:
+        refsect1::(refsect1.attlist refsect1info? refsect.title.content ((refcomponent.mix+ refsect2*) | refsect2+))
+refsect1.attlist:
+        status.attrib common.attrib refsect1.role.attrib local.refsect1.attrib
+local.refsect2.attrib:
+        EPSILON
+refsect2.role.attrib:
+        role.attrib
+refsect2:
+        refsect2::(refsect2.attlist refsect2info? refsect.title.content ((refcomponent.mix+ refsect3*) | refsect3+))
+refsect2.attlist:
+        status.attrib common.attrib refsect2.role.attrib local.refsect2.attrib
+local.refsect3.attrib:
+        EPSILON
+refsect3.role.attrib:
+        role.attrib
+refsect3:
+        refsect3::(refsect3.attlist refsect3info? refsect.title.content refcomponent.mix+)
+refsect3.attlist:
+        status.attrib common.attrib refsect3.role.attrib local.refsect3.attrib
+local.article.attrib:
+        EPSILON
+article.role.attrib:
+        role.attrib
+article:
+        article::(article.attlist div.title.content? articleinfo? tocchap? lot* bookcomponent.content (nav.class | appendix.class | ackno)*)
+article.attlist:
+        (class::("journalarticle" | "productsheet" | "whitepaper" | "techreport" | "specification" | "faq"))? (parentbook::STR)? status.attrib common.attrib article.role.attrib local.article.attrib
+local.notation.class:
+        EMPTY
+notation.class:
+        "BMP"
+        "CGM-CHAR"
+        "CGM-BINARY"
+        "CGM-CLEAR"
+        "DITROFF"
+        "DVI"
+        "EPS"
+        "EQN"
+        "FAX"
+        "GIF"
+        "GIF87a"
+        "GIF89a"
+        "JPG"
+        "JPEG"
+        "IGES"
+        "PCX"
+        "PIC"
+        "PNG"
+        "PS"
+        "SGML"
+        "TBL"
+        "TEX"
+        "TIFF"
+        "WMF"
+        "WPG"
+        "SVG"
+        "linespecific"
+        local.notation.class
+yesorno.attvals:
+        STR
+local.ndxterm.class:
+        EMPTY
+ndxterm.class:
+        indexterm
+        local.ndxterm.class
+local.list.class:
+        EMPTY
+list.class:
+        calloutlist
+        glosslist
+        itemizedlist
+        orderedlist
+        segmentedlist
+        simplelist
+        variablelist
+        local.list.class
+local.admon.class:
+        EMPTY
+admon.class:
+        caution
+        important
+        note
+        tip
+        warning
+        local.admon.class
+local.linespecific.class:
+        EMPTY
+linespecific.class:
+        literallayout
+        programlisting
+        programlistingco
+        screen
+        screenco
+        screenshot
+        local.linespecific.class
+local.method.synop.class:
+        EMPTY
+method.synop.class:
+        constructorsynopsis
+        destructorsynopsis
+        methodsynopsis
+        local.method.synop.class
+local.synop.class:
+        EMPTY
+synop.class:
+        synopsis
+        cmdsynopsis
+        funcsynopsis
+        classsynopsis
+        fieldsynopsis
+        method.synop.class
+        local.synop.class
+local.para.class:
+        EMPTY
+para.class:
+        formalpara
+        para
+        simpara
+        local.para.class
+local.informal.class:
+        EMPTY
+informal.class:
+        address
+        blockquote
+        graphic
+        graphicco
+        mediaobject
+        mediaobjectco
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        local.informal.class
+local.formal.class:
+        EMPTY
+formal.class:
+        equation
+        example
+        figure
+        table
+        local.formal.class
+ebnf.block.hook:
+        EMPTY
+local.compound.class:
+        EMPTY
+compound.class:
+        msgset
+        procedure
+        sidebar
+        qandaset
+        ebnf.block.hook
+        local.compound.class
+local.genobj.class:
+        EMPTY
+genobj.class:
+        anchor
+        bridgehead
+        remark
+        highlights
+        local.genobj.class
+local.descobj.class:
+        EMPTY
+descobj.class:
+        abstract
+        authorblurb
+        epigraph
+        local.descobj.class
+local.xref.char.class:
+        EMPTY
+xref.char.class:
+        footnoteref
+        xref
+        local.xref.char.class
+local.gen.char.class:
+        EMPTY
+gen.char.class:
+        abbrev
+        acronym
+        citation
+        citerefentry
+        citetitle
+        emphasis
+        firstterm
+        foreignphrase
+        glossterm
+        footnote
+        phrase
+        quote
+        trademark
+        wordasword
+        personname
+        local.gen.char.class
+local.link.char.class:
+        EMPTY
+link.char.class:
+        link
+        olink
+        ulink
+        local.link.char.class
+ebnf.inline.hook:
+        EMPTY
+local.tech.char.class:
+        EMPTY
+tech.char.class:
+        action
+        application
+        classname
+        methodname
+        interfacename
+        exceptionname
+        ooclass
+        oointerface
+        ooexception
+        command
+        computeroutput
+        database
+        email
+        envar
+        errorcode
+        errorname
+        errortype
+        errortext
+        filename
+        function
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        interface
+        keycap
+        keycode
+        keycombo
+        keysym
+        literal
+        constant
+        markup
+        medialabel
+        menuchoice
+        mousebutton
+        option
+        optional
+        parameter
+        prompt
+        property
+        replaceable
+        returnvalue
+        sgmltag
+        structfield
+        structname
+        symbol
+        systemitem
+        token
+        type
+        userinput
+        varname
+        ebnf.inline.hook
+        local.tech.char.class
+local.base.char.class:
+        EMPTY
+base.char.class:
+        anchor
+        local.base.char.class
+local.docinfo.char.class:
+        EMPTY
+docinfo.char.class:
+        author
+        authorinitials
+        corpauthor
+        modespec
+        othercredit
+        productname
+        productnumber
+        revhistory
+        local.docinfo.char.class
+local.other.char.class:
+        EMPTY
+other.char.class:
+        remark
+        subscript
+        superscript
+        local.other.char.class
+local.inlineobj.char.class:
+        EMPTY
+inlineobj.char.class:
+        inlinegraphic
+        inlinemediaobject
+        inlineequation
+        local.inlineobj.char.class
+formalobject.title.content:
+        title titleabbrev?
+local.component.mix:
+        EMPTY
+component.mix:
+        list.class
+        admon.class
+        linespecific.class
+        synop.class
+        para.class
+        informal.class
+        formal.class
+        compound.class
+        genobj.class
+        descobj.class
+        ndxterm.class
+        beginpage
+        local.component.mix
+local.sidebar.mix:
+        EMPTY
+sidebar.mix:
+        list.class
+        admon.class
+        linespecific.class
+        synop.class
+        para.class
+        informal.class
+        formal.class
+        procedure
+        genobj.class
+        ndxterm.class
+        beginpage
+        local.sidebar.mix
+local.qandaset.mix:
+        EMPTY
+qandaset.mix:
+        list.class
+        admon.class
+        linespecific.class
+        synop.class
+        para.class
+        informal.class
+        formal.class
+        procedure
+        genobj.class
+        ndxterm.class
+        local.qandaset.mix
+local.revdescription.mix:
+        EMPTY
+revdescription.mix:
+        list.class
+        admon.class
+        linespecific.class
+        synop.class
+        para.class
+        informal.class
+        formal.class
+        procedure
+        genobj.class
+        ndxterm.class
+        local.revdescription.mix
+local.footnote.mix:
+        EMPTY
+footnote.mix:
+        list.class
+        linespecific.class
+        synop.class
+        para.class
+        informal.class
+        local.footnote.mix
+local.example.mix:
+        EMPTY
+example.mix:
+        list.class
+        linespecific.class
+        synop.class
+        para.class
+        informal.class
+        ndxterm.class
+        beginpage
+        local.example.mix
+local.highlights.mix:
+        EMPTY
+highlights.mix:
+        list.class
+        admon.class
+        para.class
+        ndxterm.class
+        local.highlights.mix
+local.para.mix:
+        EMPTY
+para.mix:
+        list.class
+        admon.class
+        linespecific.class
+        informal.class
+        formal.class
+        local.para.mix
+local.admon.mix:
+        EMPTY
+admon.mix:
+        list.class
+        linespecific.class
+        synop.class
+        para.class
+        informal.class
+        formal.class
+        procedure
+        sidebar
+        anchor
+        bridgehead
+        remark
+        ndxterm.class
+        beginpage
+        local.admon.mix
+local.figure.mix:
+        EMPTY
+figure.mix:
+        linespecific.class
+        synop.class
+        informal.class
+        ndxterm.class
+        beginpage
+        local.figure.mix
+local.tabentry.mix:
+        EMPTY
+tabentry.mix:
+        list.class
+        admon.class
+        linespecific.class
+        para.class
+        graphic
+        mediaobject
+        local.tabentry.mix
+local.glossdef.mix:
+        EMPTY
+glossdef.mix:
+        list.class
+        linespecific.class
+        synop.class
+        para.class
+        informal.class
+        formal.class
+        remark
+        ndxterm.class
+        beginpage
+        local.glossdef.mix
+local.legalnotice.mix:
+        EMPTY
+legalnotice.mix:
+        list.class
+        admon.class
+        linespecific.class
+        para.class
+        blockquote
+        ndxterm.class
+        beginpage
+        local.legalnotice.mix
+local.textobject.mix:
+        EMPTY
+textobject.mix:
+        list.class
+        admon.class
+        linespecific.class
+        para.class
+        blockquote
+        local.textobject.mix
+local.mediaobject.mix:
+        EMPTY
+mediaobject.mix:
+        videoobject
+        audioobject
+        imageobject
+        textobject
+        local.mediaobject.mix
+local.listpreamble.mix:
+        EMPTY
+listpreamble.mix:
+        admon.class
+        linespecific.class
+        synop.class
+        para.class
+        informal.class
+        genobj.class
+        descobj.class
+        ndxterm.class
+        beginpage
+        local.listpreamble.mix
+forminlines.hook:
+        EMPTY
+local.para.char.mix:
+        EMPTY
+para.char.mix:
+        STR
+        xref.char.class
+        gen.char.class
+        link.char.class
+        tech.char.class
+        base.char.class
+        docinfo.char.class
+        other.char.class
+        inlineobj.char.class
+        synop.class
+        ndxterm.class
+        beginpage
+        forminlines.hook
+        local.para.char.mix
+local.title.char.mix:
+        EMPTY
+title.char.mix:
+        STR
+        xref.char.class
+        gen.char.class
+        link.char.class
+        tech.char.class
+        base.char.class
+        docinfo.char.class
+        other.char.class
+        inlineobj.char.class
+        ndxterm.class
+        local.title.char.mix
+local.ndxterm.char.mix:
+        EMPTY
+ndxterm.char.mix:
+        STR
+        xref.char.class
+        gen.char.class
+        link.char.class
+        tech.char.class
+        base.char.class
+        docinfo.char.class
+        other.char.class
+        inlinegraphic
+        inlinemediaobject
+        local.ndxterm.char.mix
+local.cptr.char.mix:
+        EMPTY
+cptr.char.mix:
+        STR
+        link.char.class
+        tech.char.class
+        base.char.class
+        other.char.class
+        inlinegraphic
+        inlinemediaobject
+        ndxterm.class
+        beginpage
+        local.cptr.char.mix
+local.smallcptr.char.mix:
+        EMPTY
+smallcptr.char.mix:
+        STR
+        replaceable
+        inlinegraphic
+        inlinemediaobject
+        ndxterm.class
+        beginpage
+        local.smallcptr.char.mix
+local.word.char.mix:
+        EMPTY
+word.char.mix:
+        STR
+        acronym
+        emphasis
+        trademark
+        link.char.class
+        base.char.class
+        other.char.class
+        inlinegraphic
+        inlinemediaobject
+        ndxterm.class
+        beginpage
+        local.word.char.mix
+local.docinfo.char.mix:
+        EMPTY
+docinfo.char.mix:
+        STR
+        link.char.class
+        emphasis
+        trademark
+        replaceable
+        other.char.class
+        inlinegraphic
+        inlinemediaobject
+        ndxterm.class
+        local.docinfo.char.mix
+arch.attrib:
+        (arch::STR)?
+condition.attrib:
+        (condition::STR)?
+conformance.attrib:
+        (conformance::STR)?
+os.attrib:
+        (os::STR)?
+revision.attrib:
+        (revision::STR)?
+security.attrib:
+        (security::STR)?
+userlevel.attrib:
+        (userlevel::STR)?
+vendor.attrib:
+        (vendor::STR)?
+local.effectivity.attrib:
+        EPSILON
+effectivity.attrib:
+        arch.attrib condition.attrib conformance.attrib os.attrib revision.attrib security.attrib userlevel.attrib vendor.attrib local.effectivity.attrib
+id.attrib:
+        (id::STR)?
+idreq.attrib:
+        id::STR
+lang.attrib:
+        (lang::STR)?
+remap.attrib:
+        (remap::STR)?
+role.attrib:
+        (role::STR)?
+xreflabel.attrib:
+        (xreflabel::STR)?
+revisionflag.attrib:
+        (revisionflag::("changed" | "added" | "deleted" | "off"))?
+local.common.attrib:
+        EPSILON
+common.attrib:
+        id.attrib lang.attrib remap.attrib xreflabel.attrib revisionflag.attrib effectivity.attrib local.common.attrib
+idreq.common.attrib:
+        idreq.attrib lang.attrib remap.attrib xreflabel.attrib revisionflag.attrib effectivity.attrib local.common.attrib
+local.graphics.attrib:
+        EPSILON
+graphics.attrib:
+        (entityref::STR)? (fileref::STR)? (format::notation.class)? (srccredit::STR)? (width::STR)? (contentwidth::STR)? (depth::STR)? (contentdepth::STR)? (align::("left" | "right" | "center"))? (valign::("top" | "middle" | "bottom"))? (scale::STR)? (scalefit::yesorno.attvals)? local.graphics.attrib
+local.keyaction.attrib:
+        EPSILON
+keyaction.attrib:
+        (action::("click" | "double-click" | "press" | "seq" | "simul" | "other"))? (otheraction::STR)? local.keyaction.attrib
+label.attrib:
+        (label::STR)?
+linespecific.attrib:
+        (format::"linespecific")? (linenumbering::("numbered" | "unnumbered"))?
+linkend.attrib:
+        (linkend::STR)?
+linkendreq.attrib:
+        linkend::STR
+linkends.attrib:
+        (linkends::STR)?
+local.mark.attrib:
+        EPSILON
+mark.attrib:
+        (mark::STR)? local.mark.attrib
+moreinfo.attrib:
+        (moreinfo::("refentry" | "none"))?
+pagenum.attrib:
+        (pagenum::STR)?
+local.status.attrib:
+        EPSILON
+status.attrib:
+        (status::STR)? local.status.attrib
+width.attrib:
+        (width::STR)?
+local.title.attrib:
+        EPSILON
+title.role.attrib:
+        role.attrib
+title:
+        title::(title.attlist title.char.mix*)
+title.attlist:
+        pagenum.attrib common.attrib title.role.attrib local.title.attrib
+local.titleabbrev.attrib:
+        EPSILON
+titleabbrev.role.attrib:
+        role.attrib
+titleabbrev:
+        titleabbrev::(titleabbrev.attlist title.char.mix*)
+titleabbrev.attlist:
+        common.attrib titleabbrev.role.attrib local.titleabbrev.attrib
+local.subtitle.attrib:
+        EPSILON
+subtitle.role.attrib:
+        role.attrib
+subtitle:
+        subtitle::(subtitle.attlist title.char.mix*)
+subtitle.attlist:
+        common.attrib subtitle.role.attrib local.subtitle.attrib
+local.person.ident.mix:
+        EMPTY
+person.ident.mix:
+        honorific
+        firstname
+        surname
+        lineage
+        othername
+        affiliation
+        authorblurb
+        contrib
+        local.person.ident.mix
+local.bibliocomponent.mix:
+        EMPTY
+bibliocomponent.mix:
+        abbrev
+        abstract
+        address
+        artpagenums
+        author
+        authorgroup
+        authorinitials
+        bibliomisc
+        biblioset
+        collab
+        confgroup
+        contractnum
+        contractsponsor
+        copyright
+        corpauthor
+        corpname
+        date
+        edition
+        editor
+        invpartnumber
+        isbn
+        issn
+        issuenum
+        orgname
+        biblioid
+        citebiblioid
+        bibliosource
+        bibliorelation
+        bibliocoverage
+        othercredit
+        pagenums
+        printhistory
+        productname
+        productnumber
+        pubdate
+        publisher
+        publishername
+        pubsnumber
+        releaseinfo
+        revhistory
+        seriesvolnums
+        subtitle
+        title
+        titleabbrev
+        volumenum
+        citetitle
+        personname
+        person.ident.mix
+        ndxterm.class
+        local.bibliocomponent.mix
+local.info.class:
+        EMPTY
+info.class:
+        graphic
+        mediaobject
+        legalnotice
+        modespec
+        subjectset
+        keywordset
+        itermset
+        bibliocomponent.mix
+        local.info.class
+local.biblioentry.attrib:
+        EPSILON
+biblioentry.role.attrib:
+        role.attrib
+biblioentry:
+        biblioentry::(biblioentry.attlist (articleinfo | bibliocomponent.mix)+)
+biblioentry.attlist:
+        common.attrib biblioentry.role.attrib local.biblioentry.attrib
+local.bibliomixed.attrib:
+        EPSILON
+bibliomixed.role.attrib:
+        role.attrib
+bibliomixed:
+        bibliomixed::(bibliomixed.attlist (STR | bibliocomponent.mix | bibliomset)*)
+bibliomixed.attlist:
+        common.attrib bibliomixed.role.attrib local.bibliomixed.attrib
+local.articleinfo.attrib:
+        EPSILON
+articleinfo.role.attrib:
+        role.attrib
+articleinfo:
+        articleinfo::(articleinfo.attlist info.class+)
+articleinfo.attlist:
+        common.attrib articleinfo.role.attrib local.articleinfo.attrib
+local.biblioset.attrib:
+        EPSILON
+biblioset.role.attrib:
+        role.attrib
+biblioset:
+        biblioset::(biblioset.attlist bibliocomponent.mix+)
+biblioset.attlist:
+        (relation::STR)? common.attrib biblioset.role.attrib local.biblioset.attrib
+bibliomset.role.attrib:
+        role.attrib
+local.bibliomset.attrib:
+        EPSILON
+bibliomset:
+        bibliomset::(bibliomset.attlist (STR | bibliocomponent.mix | bibliomset)*)
+bibliomset.attlist:
+        (relation::STR)? common.attrib bibliomset.role.attrib local.bibliomset.attrib
+local.bibliomisc.attrib:
+        EPSILON
+bibliomisc.role.attrib:
+        role.attrib
+bibliomisc:
+        bibliomisc::(bibliomisc.attlist para.char.mix*)
+bibliomisc.attlist:
+        common.attrib bibliomisc.role.attrib local.bibliomisc.attrib
+local.subjectset.attrib:
+        EPSILON
+subjectset.role.attrib:
+        role.attrib
+subjectset:
+        subjectset::(subjectset.attlist subject+)
+subjectset.attlist:
+        (scheme::STR)? common.attrib subjectset.role.attrib local.subjectset.attrib
+local.subject.attrib:
+        EPSILON
+subject.role.attrib:
+        role.attrib
+subject:
+        subject::(subject.attlist subjectterm+)
+subject.attlist:
+        (weight::STR)? common.attrib subject.role.attrib local.subject.attrib
+local.subjectterm.attrib:
+        EPSILON
+subjectterm.role.attrib:
+        role.attrib
+subjectterm:
+        subjectterm::(subjectterm.attlist STR)
+subjectterm.attlist:
+        common.attrib subjectterm.role.attrib local.subjectterm.attrib
+local.keywordset.attrib:
+        EPSILON
+keywordset.role.attrib:
+        role.attrib
+keywordset:
+        keywordset::(keywordset.attlist keyword+)
+keywordset.attlist:
+        common.attrib keywordset.role.attrib local.keywordset.attrib
+local.keyword.attrib:
+        EPSILON
+keyword.role.attrib:
+        role.attrib
+keyword:
+        keyword::(keyword.attlist STR)
+keyword.attlist:
+        common.attrib keyword.role.attrib local.keyword.attrib
+local.itermset.attrib:
+        EPSILON
+itermset.role.attrib:
+        role.attrib
+itermset:
+        itermset::(itermset.attlist indexterm+)
+itermset.attlist:
+        common.attrib itermset.role.attrib local.itermset.attrib
+local.blockinfo.attrib:
+        EPSILON
+blockinfo.role.attrib:
+        role.attrib
+blockinfo:
+        blockinfo::(blockinfo.attlist info.class+)
+blockinfo.attlist:
+        common.attrib blockinfo.role.attrib local.blockinfo.attrib
+local.msgset.attrib:
+        EPSILON
+msgset.role.attrib:
+        role.attrib
+msgset:
+        msgset::(msgset.attlist blockinfo? formalobject.title.content? (msgentry+ | simplemsgentry+))
+msgset.attlist:
+        common.attrib msgset.role.attrib local.msgset.attrib
+local.msgentry.attrib:
+        EPSILON
+msgentry.role.attrib:
+        role.attrib
+msgentry:
+        msgentry::(msgentry.attlist msg+ msginfo? msgexplan*)
+msgentry.attlist:
+        common.attrib msgentry.role.attrib local.msgentry.attrib
+local.simplemsgentry.attrib:
+        EPSILON
+simplemsgentry.role.attrib:
+        role.attrib
+simplemsgentry:
+        simplemsgentry::(simplemsgentry.attlist msgtext msgexplan+)
+simplemsgentry.attlist:
+        (audience::STR)? (level::STR)? (origin::STR)? common.attrib simplemsgentry.role.attrib local.simplemsgentry.attrib
+local.msg.attrib:
+        EPSILON
+msg.role.attrib:
+        role.attrib
+msg:
+        msg::(msg.attlist title? msgmain (msgsub | msgrel)*)
+msg.attlist:
+        common.attrib msg.role.attrib local.msg.attrib
+local.msgmain.attrib:
+        EPSILON
+msgmain.role.attrib:
+        role.attrib
+msgmain:
+        msgmain::(msgmain.attlist title? msgtext)
+msgmain.attlist:
+        common.attrib msgmain.role.attrib local.msgmain.attrib
+local.msgsub.attrib:
+        EPSILON
+msgsub.role.attrib:
+        role.attrib
+msgsub:
+        msgsub::(msgsub.attlist title? msgtext)
+msgsub.attlist:
+        common.attrib msgsub.role.attrib local.msgsub.attrib
+local.msgrel.attrib:
+        EPSILON
+msgrel.role.attrib:
+        role.attrib
+msgrel:
+        msgrel::(msgrel.attlist title? msgtext)
+msgrel.attlist:
+        common.attrib msgrel.role.attrib local.msgrel.attrib
+local.msginfo.attrib:
+        EPSILON
+msginfo.role.attrib:
+        role.attrib
+msginfo:
+        msginfo::(msginfo.attlist (msglevel | msgorig | msgaud)*)
+msginfo.attlist:
+        common.attrib msginfo.role.attrib local.msginfo.attrib
+local.msglevel.attrib:
+        EPSILON
+msglevel.role.attrib:
+        role.attrib
+msglevel:
+        msglevel::(msglevel.attlist smallcptr.char.mix*)
+msglevel.attlist:
+        common.attrib msglevel.role.attrib local.msglevel.attrib
+local.msgorig.attrib:
+        EPSILON
+msgorig.role.attrib:
+        role.attrib
+msgorig:
+        msgorig::(msgorig.attlist smallcptr.char.mix*)
+msgorig.attlist:
+        common.attrib msgorig.role.attrib local.msgorig.attrib
+local.msgaud.attrib:
+        EPSILON
+msgaud.role.attrib:
+        role.attrib
+msgaud:
+        msgaud::(msgaud.attlist para.char.mix*)
+msgaud.attlist:
+        common.attrib msgaud.role.attrib local.msgaud.attrib
+local.msgexplan.attrib:
+        EPSILON
+msgexplan.role.attrib:
+        role.attrib
+msgexplan:
+        msgexplan::(msgexplan.attlist title? component.mix+)
+msgexplan.attlist:
+        common.attrib msgexplan.role.attrib local.msgexplan.attrib
+local.qandaset.attrib:
+        EPSILON
+qandaset.role.attrib:
+        role.attrib
+qandaset:
+        qandaset::(qandaset.attlist blockinfo? formalobject.title.content? qandaset.mix* (qandadiv+ | qandaentry+))
+qandaset.attlist:
+        (defaultlabel::("qanda" | "number" | "none"))? common.attrib qandaset.role.attrib local.qandaset.attrib
+local.qandadiv.attrib:
+        EPSILON
+qandadiv.role.attrib:
+        role.attrib
+qandadiv:
+        qandadiv::(qandadiv.attlist blockinfo? formalobject.title.content? qandaset.mix* (qandadiv+ | qandaentry+))
+qandadiv.attlist:
+        common.attrib qandadiv.role.attrib local.qandadiv.attrib
+local.qandaentry.attrib:
+        EPSILON
+qandaentry.role.attrib:
+        role.attrib
+qandaentry:
+        qandaentry::(qandaentry.attlist blockinfo? revhistory? question answer*)
+qandaentry.attlist:
+        common.attrib qandaentry.role.attrib local.qandaentry.attrib
+local.question.attrib:
+        EPSILON
+question.role.attrib:
+        role.attrib
+question:
+        question::(question.attlist label? qandaset.mix+)
+question.attlist:
+        common.attrib question.role.attrib local.question.attrib
+local.answer.attrib:
+        EPSILON
+answer.role.attrib:
+        role.attrib
+answer:
+        answer::(answer.attlist label? qandaset.mix* qandaentry*)
+answer.attlist:
+        common.attrib answer.role.attrib local.answer.attrib
+local.label.attrib:
+        EPSILON
+label.role.attrib:
+        role.attrib
+label:
+        label::(label.attlist word.char.mix*)
+label.attlist:
+        common.attrib label.role.attrib local.label.attrib
+local.procedure.attrib:
+        EPSILON
+procedure.role.attrib:
+        role.attrib
+procedure:
+        procedure::(procedure.attlist blockinfo? formalobject.title.content? component.mix* step+)
+procedure.attlist:
+        common.attrib procedure.role.attrib local.procedure.attrib
+local.step.attrib:
+        EPSILON
+step.role.attrib:
+        role.attrib
+step:
+        step::(step.attlist title? ((component.mix+ (substeps component.mix*)?) | (substeps component.mix*)))
+step.attlist:
+        (performance::("optional" | "required"))? common.attrib step.role.attrib local.step.attrib
+local.substeps.attrib:
+        EPSILON
+substeps.role.attrib:
+        role.attrib
+substeps:
+        substeps::(substeps.attlist step+)
+substeps.attlist:
+        (performance::("optional" | "required"))? common.attrib substeps.role.attrib local.substeps.attrib
+local.sidebarinfo.attrib:
+        EPSILON
+sidebarinfo.role.attrib:
+        role.attrib
+sidebarinfo:
+        sidebarinfo::(sidebarinfo.attlist info.class+)
+sidebarinfo.attlist:
+        common.attrib sidebarinfo.role.attrib local.sidebarinfo.attrib
+local.sidebar.attrib:
+        EPSILON
+sidebar.role.attrib:
+        role.attrib
+sidebar:
+        sidebar::(sidebar.attlist sidebarinfo? formalobject.title.content? sidebar.mix+)
+sidebar.attlist:
+        common.attrib sidebar.role.attrib local.sidebar.attrib
+local.abstract.attrib:
+        EPSILON
+abstract.role.attrib:
+        role.attrib
+abstract:
+        abstract::(abstract.attlist title? para.class+)
+abstract.attlist:
+        common.attrib abstract.role.attrib local.abstract.attrib
+local.authorblurb.attrib:
+        EPSILON
+authorblurb.role.attrib:
+        role.attrib
+authorblurb:
+        authorblurb::(authorblurb.attlist title? para.class+)
+authorblurb.attlist:
+        common.attrib authorblurb.role.attrib local.authorblurb.attrib
+local.personblurb.attrib:
+        EPSILON
+personblurb.role.attrib:
+        role.attrib
+personblurb:
+        personblurb::(personblurb.attlist title? para.class+)
+personblurb.attlist:
+        common.attrib personblurb.role.attrib local.personblurb.attrib
+local.blockquote.attrib:
+        EPSILON
+blockquote.role.attrib:
+        role.attrib
+blockquote:
+        blockquote::(blockquote.attlist title? attribution? component.mix+)
+blockquote.attlist:
+        common.attrib blockquote.role.attrib local.blockquote.attrib
+local.attribution.attrib:
+        EPSILON
+attribution.role.attrib:
+        role.attrib
+attribution:
+        attribution::(attribution.attlist para.char.mix*)
+attribution.attlist:
+        common.attrib attribution.role.attrib local.attribution.attrib
+local.bridgehead.attrib:
+        EPSILON
+bridgehead.role.attrib:
+        role.attrib
+bridgehead:
+        bridgehead::(bridgehead.attlist title.char.mix*)
+bridgehead.attlist:
+        (renderas::("other" | "sect1" | "sect2" | "sect3" | "sect4" | "sect5"))? common.attrib bridgehead.role.attrib local.bridgehead.attrib
+local.remark.attrib:
+        EPSILON
+remark.role.attrib:
+        role.attrib
+remark:
+        remark::(remark.attlist para.char.mix*)
+remark.attlist:
+        common.attrib remark.role.attrib local.remark.attrib
+local.epigraph.attrib:
+        EPSILON
+epigraph.role.attrib:
+        role.attrib
+epigraph:
+        epigraph::(epigraph.attlist attribution? (para.class | literallayout)+)
+epigraph.attlist:
+        common.attrib epigraph.role.attrib local.epigraph.attrib
+local.footnote.attrib:
+        EPSILON
+footnote.role.attrib:
+        role.attrib
+footnote:
+        footnote::(footnote.attlist footnote.mix+)
+footnote.attlist:
+        label.attrib common.attrib footnote.role.attrib local.footnote.attrib
+local.highlights.attrib:
+        EPSILON
+highlights.role.attrib:
+        role.attrib
+highlights:
+        highlights::(highlights.attlist highlights.mix+)
+highlights.attlist:
+        common.attrib highlights.role.attrib local.highlights.attrib
+local.formalpara.attrib:
+        EPSILON
+formalpara.role.attrib:
+        role.attrib
+formalpara:
+        formalpara::(formalpara.attlist title ndxterm.class* para)
+formalpara.attlist:
+        common.attrib formalpara.role.attrib local.formalpara.attrib
+local.para.attrib:
+        EPSILON
+para.role.attrib:
+        role.attrib
+para:
+        para::(para.attlist (para.char.mix | para.mix)*)
+para.attlist:
+        common.attrib para.role.attrib local.para.attrib
+local.simpara.attrib:
+        EPSILON
+simpara.role.attrib:
+        role.attrib
+simpara:
+        simpara::(simpara.attlist para.char.mix*)
+simpara.attlist:
+        common.attrib simpara.role.attrib local.simpara.attrib
+local.admon.attrib:
+        EPSILON
+admon.role.attrib:
+        role.attrib
+caution:
+        caution::(caution.attlist title? admon.mix+)
+caution.attlist:
+        common.attrib admon.role.attrib local.admon.attrib
+important:
+        important::(important.attlist title? admon.mix+)
+important.attlist:
+        common.attrib admon.role.attrib local.admon.attrib
+note:
+        note::(note.attlist title? admon.mix+)
+note.attlist:
+        common.attrib admon.role.attrib local.admon.attrib
+tip:
+        tip::(tip.attlist title? admon.mix+)
+tip.attlist:
+        common.attrib admon.role.attrib local.admon.attrib
+warning:
+        warning::(warning.attlist title? admon.mix+)
+warning.attlist:
+        common.attrib admon.role.attrib local.admon.attrib
+local.glosslist.attrib:
+        EPSILON
+glosslist.role.attrib:
+        role.attrib
+glosslist:
+        glosslist::(glosslist.attlist glossentry+)
+glosslist.attlist:
+        common.attrib glosslist.role.attrib local.glosslist.attrib
+local.glossentry.attrib:
+        EPSILON
+glossentry.role.attrib:
+        role.attrib
+glossentry:
+        glossentry::(glossentry.attlist glossterm acronym? abbrev? ndxterm.class* revhistory? (glosssee | glossdef+))
+glossentry.attlist:
+        (sortas::STR)? common.attrib glossentry.role.attrib local.glossentry.attrib
+local.glossdef.attrib:
+        EPSILON
+glossdef.role.attrib:
+        role.attrib
+glossdef:
+        glossdef::(glossdef.attlist glossdef.mix+ glossseealso*)
+glossdef.attlist:
+        (subject::STR)? common.attrib glossdef.role.attrib local.glossdef.attrib
+local.glosssee.attrib:
+        EPSILON
+glosssee.role.attrib:
+        role.attrib
+glosssee:
+        glosssee::(glosssee.attlist para.char.mix*)
+glosssee.attlist:
+        (otherterm::STR)? common.attrib glosssee.role.attrib local.glosssee.attrib
+local.glossseealso.attrib:
+        EPSILON
+glossseealso.role.attrib:
+        role.attrib
+glossseealso:
+        glossseealso::(glossseealso.attlist para.char.mix*)
+glossseealso.attlist:
+        (otherterm::STR)? common.attrib glossseealso.role.attrib local.glossseealso.attrib
+local.itemizedlist.attrib:
+        EPSILON
+itemizedlist.role.attrib:
+        role.attrib
+itemizedlist:
+        itemizedlist::(itemizedlist.attlist blockinfo? formalobject.title.content? listpreamble.mix* listitem+)
+itemizedlist.attlist:
+        (spacing::("normal" | "compact"))? mark.attrib common.attrib itemizedlist.role.attrib local.itemizedlist.attrib
+local.orderedlist.attrib:
+        EPSILON
+orderedlist.role.attrib:
+        role.attrib
+orderedlist:
+        orderedlist::(orderedlist.attlist blockinfo? formalobject.title.content? listpreamble.mix* listitem+)
+orderedlist.attlist:
+        (numeration::("arabic" | "upperalpha" | "loweralpha" | "upperroman" | "lowerroman"))? (inheritnum::("inherit" | "ignore"))? (continuation::("continues" | "restarts"))? (spacing::("normal" | "compact"))? common.attrib orderedlist.role.attrib local.orderedlist.attrib
+local.listitem.attrib:
+        EPSILON
+listitem.role.attrib:
+        role.attrib
+listitem:
+        listitem::(listitem.attlist component.mix+)
+listitem.attlist:
+        (override::STR)? common.attrib listitem.role.attrib local.listitem.attrib
+local.segmentedlist.attrib:
+        EPSILON
+segmentedlist.role.attrib:
+        role.attrib
+segmentedlist:
+        segmentedlist::(segmentedlist.attlist formalobject.title.content? segtitle+ seglistitem+)
+segmentedlist.attlist:
+        common.attrib segmentedlist.role.attrib local.segmentedlist.attrib
+local.segtitle.attrib:
+        EPSILON
+segtitle.role.attrib:
+        role.attrib
+segtitle:
+        segtitle::(segtitle.attlist title.char.mix*)
+segtitle.attlist:
+        common.attrib segtitle.role.attrib local.segtitle.attrib
+local.seglistitem.attrib:
+        EPSILON
+seglistitem.role.attrib:
+        role.attrib
+seglistitem:
+        seglistitem::(seglistitem.attlist seg+)
+seglistitem.attlist:
+        common.attrib seglistitem.role.attrib local.seglistitem.attrib
+local.seg.attrib:
+        EPSILON
+seg.role.attrib:
+        role.attrib
+seg:
+        seg::(seg.attlist para.char.mix*)
+seg.attlist:
+        common.attrib seg.role.attrib local.seg.attrib
+local.simplelist.attrib:
+        EPSILON
+simplelist.role.attrib:
+        role.attrib
+simplelist:
+        simplelist::(simplelist.attlist member+)
+simplelist.attlist:
+        (columns::STR)? (type::("inline" | "vert" | "horiz"))? common.attrib simplelist.role.attrib local.simplelist.attrib
+local.member.attrib:
+        EPSILON
+member.role.attrib:
+        role.attrib
+member:
+        member::(member.attlist para.char.mix*)
+member.attlist:
+        common.attrib member.role.attrib local.member.attrib
+local.variablelist.attrib:
+        EPSILON
+variablelist.role.attrib:
+        role.attrib
+variablelist:
+        variablelist::(variablelist.attlist blockinfo? formalobject.title.content? listpreamble.mix* varlistentry+)
+variablelist.attlist:
+        (termlength::STR)? common.attrib variablelist.role.attrib local.variablelist.attrib
+local.varlistentry.attrib:
+        EPSILON
+varlistentry.role.attrib:
+        role.attrib
+varlistentry:
+        varlistentry::(varlistentry.attlist term+ listitem)
+varlistentry.attlist:
+        common.attrib varlistentry.role.attrib local.varlistentry.attrib
+local.term.attrib:
+        EPSILON
+term.role.attrib:
+        role.attrib
+term:
+        term::(term.attlist para.char.mix*)
+term.attlist:
+        common.attrib term.role.attrib local.term.attrib
+local.calloutlist.attrib:
+        EPSILON
+calloutlist.role.attrib:
+        role.attrib
+calloutlist:
+        calloutlist::(calloutlist.attlist formalobject.title.content? callout+)
+calloutlist.attlist:
+        common.attrib calloutlist.role.attrib local.calloutlist.attrib
+local.callout.attrib:
+        EPSILON
+callout.role.attrib:
+        role.attrib
+callout:
+        callout::(callout.attlist component.mix+)
+callout.attlist:
+        arearefs::STR common.attrib callout.role.attrib local.callout.attrib
+local.example.attrib:
+        EPSILON
+example.role.attrib:
+        role.attrib
+example:
+        example::(example.attlist blockinfo? formalobject.title.content example.mix+)
+example.attlist:
+        label.attrib width.attrib common.attrib example.role.attrib local.example.attrib
+local.informalexample.attrib:
+        EPSILON
+informalexample.role.attrib:
+        role.attrib
+informalexample:
+        informalexample::(informalexample.attlist blockinfo? example.mix+)
+informalexample.attlist:
+        width.attrib common.attrib informalexample.role.attrib local.informalexample.attrib
+local.programlistingco.attrib:
+        EPSILON
+programlistingco.role.attrib:
+        role.attrib
+programlistingco:
+        programlistingco::(programlistingco.attlist areaspec programlisting calloutlist*)
+programlistingco.attlist:
+        common.attrib programlistingco.role.attrib local.programlistingco.attrib
+local.areaspec.attrib:
+        EPSILON
+areaspec.role.attrib:
+        role.attrib
+areaspec:
+        areaspec::(areaspec.attlist (area | areaset)+)
+areaspec.attlist:
+        (units::("calspair" | "linecolumn" | "linerange" | "linecolumnpair" | "other"))? (otherunits::STR)? common.attrib areaspec.role.attrib local.areaspec.attrib
+local.area.attrib:
+        EPSILON
+area.role.attrib:
+        role.attrib
+area:
+        area::(area.attlist EPSILON)
+area.attlist:
+        label.attrib linkends.attrib (units::("calspair" | "linecolumn" | "linerange" | "linecolumnpair" | "other"))? (otherunits::STR)? coords::STR idreq.common.attrib area.role.attrib local.area.attrib
+local.areaset.attrib:
+        EPSILON
+areaset.role.attrib:
+        role.attrib
+areaset:
+        areaset::(areaset.attlist area+)
+areaset.attlist:
+        label.attrib (units::("calspair" | "linecolumn" | "linerange" | "linecolumnpair" | "other"))? (otherunits::STR)? coords::STR idreq.common.attrib areaset.role.attrib local.areaset.attrib
+local.programlisting.attrib:
+        EPSILON
+programlisting.role.attrib:
+        role.attrib
+programlisting:
+        programlisting::(programlisting.attlist (para.char.mix | co | coref | lineannotation | textobject)*)
+programlisting.attlist:
+        width.attrib linespecific.attrib common.attrib programlisting.role.attrib local.programlisting.attrib
+local.literallayout.attrib:
+        EPSILON
+literallayout.role.attrib:
+        role.attrib
+literallayout:
+        literallayout::(literallayout.attlist (para.char.mix | co | coref | textobject | lineannotation)*)
+literallayout.attlist:
+        width.attrib linespecific.attrib (class::("monospaced" | "normal"))? common.attrib literallayout.role.attrib local.literallayout.attrib
+local.screenco.attrib:
+        EPSILON
+screenco.role.attrib:
+        role.attrib
+screenco:
+        screenco::(screenco.attlist areaspec screen calloutlist*)
+screenco.attlist:
+        common.attrib screenco.role.attrib local.screenco.attrib
+local.screen.attrib:
+        EPSILON
+screen.role.attrib:
+        role.attrib
+screen:
+        screen::(screen.attlist (para.char.mix | co | coref | textobject | lineannotation)*)
+screen.attlist:
+        width.attrib linespecific.attrib common.attrib screen.role.attrib local.screen.attrib
+local.screenshot.attrib:
+        EPSILON
+screenshot.role.attrib:
+        role.attrib
+screenshot:
+        screenshot::(screenshot.attlist screeninfo? (graphic | graphicco | mediaobject | mediaobjectco))
+screenshot.attlist:
+        common.attrib screenshot.role.attrib local.screenshot.attrib
+local.screeninfo.attrib:
+        EPSILON
+screeninfo.role.attrib:
+        role.attrib
+screeninfo:
+        screeninfo::(screeninfo.attlist para.char.mix*)
+screeninfo.attlist:
+        common.attrib screeninfo.role.attrib local.screeninfo.attrib
+local.figure.attrib:
+        EPSILON
+figure.role.attrib:
+        role.attrib
+figure:
+        figure::(figure.attlist blockinfo? formalobject.title.content (figure.mix | link.char.class)+)
+figure.attlist:
+        (float::yesorno.attvals)? (pgwide::yesorno.attvals)? label.attrib common.attrib figure.role.attrib local.figure.attrib
+local.informalfigure.attrib:
+        EPSILON
+informalfigure.role.attrib:
+        role.attrib
+informalfigure:
+        informalfigure::(informalfigure.attlist blockinfo? (figure.mix | link.char.class)+)
+informalfigure.attlist:
+        (float::yesorno.attvals)? (pgwide::yesorno.attvals)? label.attrib common.attrib informalfigure.role.attrib local.informalfigure.attrib
+local.graphicco.attrib:
+        EPSILON
+graphicco.role.attrib:
+        role.attrib
+graphicco:
+        graphicco::(graphicco.attlist areaspec graphic calloutlist*)
+graphicco.attlist:
+        common.attrib graphicco.role.attrib local.graphicco.attrib
+local.graphic.attrib:
+        EPSILON
+graphic.role.attrib:
+        role.attrib
+graphic:
+        graphic::(graphic.attlist EPSILON)
+graphic.attlist:
+        graphics.attrib common.attrib graphic.role.attrib local.graphic.attrib
+local.inlinegraphic.attrib:
+        EPSILON
+inlinegraphic.role.attrib:
+        role.attrib
+inlinegraphic:
+        inlinegraphic::(inlinegraphic.attlist EPSILON)
+inlinegraphic.attlist:
+        graphics.attrib common.attrib inlinegraphic.role.attrib local.inlinegraphic.attrib
+local.mediaobject.attrib:
+        EPSILON
+mediaobject.role.attrib:
+        role.attrib
+mediaobject:
+        mediaobject::(mediaobject.attlist objectinfo? mediaobject.mix+ caption?)
+mediaobject.attlist:
+        common.attrib mediaobject.role.attrib local.mediaobject.attrib
+local.inlinemediaobject.attrib:
+        EPSILON
+inlinemediaobject.role.attrib:
+        role.attrib
+inlinemediaobject:
+        inlinemediaobject::(inlinemediaobject.attlist objectinfo? mediaobject.mix+)
+inlinemediaobject.attlist:
+        common.attrib inlinemediaobject.role.attrib local.inlinemediaobject.attrib
+local.videoobject.attrib:
+        EPSILON
+videoobject.role.attrib:
+        role.attrib
+videoobject:
+        videoobject::(videoobject.attlist objectinfo? videodata)
+videoobject.attlist:
+        common.attrib videoobject.role.attrib local.videoobject.attrib
+local.audioobject.attrib:
+        EPSILON
+audioobject.role.attrib:
+        role.attrib
+audioobject:
+        audioobject::(audioobject.attlist objectinfo? audiodata)
+audioobject.attlist:
+        common.attrib audioobject.role.attrib local.audioobject.attrib
+local.imageobject.attrib:
+        EPSILON
+imageobject.role.attrib:
+        role.attrib
+imageobject:
+        imageobject::(imageobject.attlist objectinfo? imagedata)
+imageobject.attlist:
+        common.attrib imageobject.role.attrib local.imageobject.attrib
+local.textobject.attrib:
+        EPSILON
+textobject.role.attrib:
+        role.attrib
+textobject:
+        textobject::(textobject.attlist objectinfo? (phrase | textdata | textobject.mix+))
+textobject.attlist:
+        common.attrib textobject.role.attrib local.textobject.attrib
+local.objectinfo.attrib:
+        EPSILON
+objectinfo.role.attrib:
+        role.attrib
+objectinfo:
+        objectinfo::(objectinfo.attlist info.class+)
+objectinfo.attlist:
+        common.attrib objectinfo.role.attrib local.objectinfo.attrib
+local.objectdata.attrib:
+        EPSILON
+objectdata.attrib:
+        (entityref::STR)? (fileref::STR)? (format::notation.class)? (srccredit::STR)? local.objectdata.attrib
+local.videodata.attrib:
+        EPSILON
+videodata.role.attrib:
+        role.attrib
+videodata:
+        videodata::(videodata.attlist EPSILON)
+videodata.attlist:
+        (width::STR)? (contentwidth::STR)? (depth::STR)? (contentdepth::STR)? (align::("left" | "right" | "center"))? (valign::("top" | "middle" | "bottom"))? (scale::STR)? (scalefit::yesorno.attvals)? objectdata.attrib common.attrib videodata.role.attrib local.videodata.attrib
+local.audiodata.attrib:
+        EPSILON
+audiodata.role.attrib:
+        role.attrib
+audiodata:
+        audiodata::(audiodata.attlist EPSILON)
+audiodata.attlist:
+        objectdata.attrib common.attrib audiodata.role.attrib local.audiodata.attrib
+local.imagedata.attrib:
+        EPSILON
+imagedata.role.attrib:
+        role.attrib
+imagedata:
+        imagedata::(imagedata.attlist EPSILON)
+imagedata.attlist:
+        (width::STR)? (contentwidth::STR)? (depth::STR)? (contentdepth::STR)? (align::("left" | "right" | "center"))? (valign::("top" | "middle" | "bottom"))? (scale::STR)? (scalefit::yesorno.attvals)? objectdata.attrib common.attrib imagedata.role.attrib local.imagedata.attrib
+local.textdata.attrib:
+        EPSILON
+textdata.role.attrib:
+        role.attrib
+textdata:
+        textdata::(textdata.attlist EPSILON)
+textdata.attlist:
+        (encoding::STR)? objectdata.attrib common.attrib textdata.role.attrib local.textdata.attrib
+local.caption.attrib:
+        EPSILON
+caption.role.attrib:
+        role.attrib
+caption:
+        caption::(caption.attlist textobject.mix*)
+caption.attlist:
+        common.attrib caption.role.attrib local.caption.attrib
+local.mediaobjectco.attrib:
+        EPSILON
+mediaobjectco.role.attrib:
+        role.attrib
+mediaobjectco:
+        mediaobjectco::(mediaobjectco.attlist objectinfo? imageobjectco (imageobjectco | textobject)*)
+mediaobjectco.attlist:
+        common.attrib mediaobjectco.role.attrib local.mediaobjectco.attrib
+local.imageobjectco.attrib:
+        EPSILON
+imageobjectco.role.attrib:
+        role.attrib
+imageobjectco:
+        imageobjectco::(imageobjectco.attlist areaspec imageobject calloutlist*)
+imageobjectco.attlist:
+        common.attrib imageobjectco.role.attrib local.imageobjectco.attrib
+equation.content:
+        alt? (graphic+ | mediaobject+)
+inlineequation.content:
+        alt? (graphic+ | inlinemediaobject+)
+local.equation.attrib:
+        EPSILON
+equation.role.attrib:
+        role.attrib
+equation:
+        equation::(equation.attlist blockinfo? formalobject.title.content? (informalequation | equation.content))
+equation.attlist:
+        label.attrib common.attrib equation.role.attrib local.equation.attrib
+local.informalequation.attrib:
+        EPSILON
+informalequation.role.attrib:
+        role.attrib
+informalequation:
+        informalequation::(informalequation.attlist blockinfo? equation.content)
+informalequation.attlist:
+        common.attrib informalequation.role.attrib local.informalequation.attrib
+local.inlineequation.attrib:
+        EPSILON
+inlineequation.role.attrib:
+        role.attrib
+inlineequation:
+        inlineequation::(inlineequation.attlist inlineequation.content)
+inlineequation.attlist:
+        common.attrib inlineequation.role.attrib local.inlineequation.attrib
+local.alt.attrib:
+        EPSILON
+alt.role.attrib:
+        role.attrib
+alt:
+        alt::(alt.attlist STR)
+alt.attlist:
+        common.attrib alt.role.attrib local.alt.attrib
+tables.role.attrib:
+        role.attrib
+bodyatt:
+        label.attrib
+secur:
+        common.attrib tables.role.attrib
+common.table.attribs:
+        bodyatt secur
+tbl.table.mdl:
+        blockinfo? formalobject.title.content ndxterm.class* textobject* (graphic+ | mediaobject+ | tgroup+)
+tbl.entry.mdl:
+        para.char.mix
+        tabentry.mix
+local.informaltable.attrib:
+        EPSILON
+informaltable:
+        informaltable::(informaltable.attlist blockinfo? textobject* (graphic+ | mediaobject+ | tgroup+))
+informaltable.attlist:
+        (frame::("top" | "bottom" | "topbot" | "all" | "sides" | "none"))? (colsep::yesorno.attvals)? (rowsep::yesorno.attvals)? common.table.attribs tbl.table.att local.informaltable.attrib
+local.synopsis.attrib:
+        EPSILON
+synopsis.role.attrib:
+        role.attrib
+synopsis:
+        synopsis::(synopsis.attlist (para.char.mix | graphic | mediaobject | co | coref | textobject | lineannotation)*)
+synopsis.attlist:
+        label.attrib linespecific.attrib common.attrib synopsis.role.attrib local.synopsis.attrib
+local.cmdsynopsis.attrib:
+        EPSILON
+cmdsynopsis.role.attrib:
+        role.attrib
+cmdsynopsis:
+        cmdsynopsis::(cmdsynopsis.attlist (command | arg | group | sbr)+ synopfragment*)
+cmdsynopsis.attlist:
+        label.attrib (sepchar::STR)? (cmdlength::STR)? common.attrib cmdsynopsis.role.attrib local.cmdsynopsis.attrib
+local.arg.attrib:
+        EPSILON
+arg.role.attrib:
+        role.attrib
+arg:
+        arg::(arg.attlist (STR | arg | group | option | synopfragmentref | replaceable | sbr)*)
+arg.attlist:
+        (choice::("opt" | "req" | "plain"))? (rep::("norepeat" | "repeat"))? common.attrib arg.role.attrib local.arg.attrib
+local.group.attrib:
+        EPSILON
+group.role.attrib:
+        role.attrib
+group:
+        group::(group.attlist (arg | group | option | synopfragmentref | replaceable | sbr)+)
+group.attlist:
+        (choice::("opt" | "req" | "plain"))? (rep::("norepeat" | "repeat"))? common.attrib group.role.attrib local.group.attrib
+local.sbr.attrib:
+        EPSILON
+sbr.role.attrib:
+        role.attrib
+sbr:
+        sbr::(sbr.attlist EPSILON)
+sbr.attlist:
+        common.attrib sbr.role.attrib local.sbr.attrib
+local.synopfragmentref.attrib:
+        EPSILON
+synopfragmentref.role.attrib:
+        role.attrib
+synopfragmentref:
+        synopfragmentref::(synopfragmentref.attlist STR)
+synopfragmentref.attlist:
+        linkendreq.attrib common.attrib synopfragmentref.role.attrib local.synopfragmentref.attrib
+local.synopfragment.attrib:
+        EPSILON
+synopfragment.role.attrib:
+        role.attrib
+synopfragment:
+        synopfragment::(synopfragment.attlist (arg | group)+)
+synopfragment.attlist:
+        idreq.common.attrib synopfragment.role.attrib local.synopfragment.attrib
+local.funcsynopsis.attrib:
+        EPSILON
+funcsynopsis.role.attrib:
+        role.attrib
+funcsynopsis:
+        funcsynopsis::(funcsynopsis.attlist (funcsynopsisinfo | funcprototype)+)
+funcsynopsis.attlist:
+        label.attrib common.attrib funcsynopsis.role.attrib local.funcsynopsis.attrib
+local.funcsynopsisinfo.attrib:
+        EPSILON
+funcsynopsisinfo.role.attrib:
+        role.attrib
+funcsynopsisinfo:
+        funcsynopsisinfo::(funcsynopsisinfo.attlist (cptr.char.mix | textobject | lineannotation)*)
+funcsynopsisinfo.attlist:
+        linespecific.attrib common.attrib funcsynopsisinfo.role.attrib local.funcsynopsisinfo.attrib
+local.funcprototype.attrib:
+        EPSILON
+funcprototype.role.attrib:
+        role.attrib
+funcprototype:
+        funcprototype::(funcprototype.attlist funcdef (void | varargs | paramdef+))
+funcprototype.attlist:
+        common.attrib funcprototype.role.attrib local.funcprototype.attrib
+local.funcdef.attrib:
+        EPSILON
+funcdef.role.attrib:
+        role.attrib
+funcdef:
+        funcdef::(funcdef.attlist (STR | type | replaceable | function)*)
+funcdef.attlist:
+        common.attrib funcdef.role.attrib local.funcdef.attrib
+local.void.attrib:
+        EPSILON
+void.role.attrib:
+        role.attrib
+void:
+        void::(void.attlist EPSILON)
+void.attlist:
+        common.attrib void.role.attrib local.void.attrib
+local.varargs.attrib:
+        EPSILON
+varargs.role.attrib:
+        role.attrib
+varargs:
+        varargs::(varargs.attlist EPSILON)
+varargs.attlist:
+        common.attrib varargs.role.attrib local.varargs.attrib
+local.paramdef.attrib:
+        EPSILON
+paramdef.role.attrib:
+        role.attrib
+paramdef:
+        paramdef::(paramdef.attlist (STR | type | replaceable | parameter | funcparams)*)
+paramdef.attlist:
+        common.attrib paramdef.role.attrib local.paramdef.attrib
+local.funcparams.attrib:
+        EPSILON
+funcparams.role.attrib:
+        role.attrib
+funcparams:
+        funcparams::(funcparams.attlist cptr.char.mix*)
+funcparams.attlist:
+        common.attrib funcparams.role.attrib local.funcparams.attrib
+local.classsynopsis.attrib:
+        EPSILON
+classsynopsis.role.attrib:
+        role.attrib
+classsynopsis:
+        classsynopsis::(classsynopsis.attlist (ooclass | oointerface | ooexception)+ (classsynopsisinfo | fieldsynopsis | method.synop.class)*)
+classsynopsis.attlist:
+        (language::STR)? (class::("class" | "interface"))? common.attrib classsynopsis.role.attrib local.classsynopsis.attrib
+local.classsynopsisinfo.attrib:
+        EPSILON
+classsynopsisinfo.role.attrib:
+        role.attrib
+classsynopsisinfo:
+        classsynopsisinfo::(classsynopsisinfo.attlist (cptr.char.mix | textobject | lineannotation)*)
+classsynopsisinfo.attlist:
+        linespecific.attrib common.attrib classsynopsisinfo.role.attrib local.classsynopsisinfo.attrib
+local.ooclass.attrib:
+        EPSILON
+ooclass.role.attrib:
+        role.attrib
+ooclass:
+        ooclass::(ooclass.attlist modifier* classname)
+ooclass.attlist:
+        common.attrib ooclass.role.attrib local.ooclass.attrib
+local.oointerface.attrib:
+        EPSILON
+oointerface.role.attrib:
+        role.attrib
+oointerface:
+        oointerface::(oointerface.attlist modifier* interfacename)
+oointerface.attlist:
+        common.attrib oointerface.role.attrib local.oointerface.attrib
+local.ooexception.attrib:
+        EPSILON
+ooexception.role.attrib:
+        role.attrib
+ooexception:
+        ooexception::(ooexception.attlist modifier* exceptionname)
+ooexception.attlist:
+        common.attrib ooexception.role.attrib local.ooexception.attrib
+local.modifier.attrib:
+        EPSILON
+modifier.role.attrib:
+        role.attrib
+modifier:
+        modifier::(modifier.attlist smallcptr.char.mix*)
+modifier.attlist:
+        common.attrib modifier.role.attrib local.modifier.attrib
+local.interfacename.attrib:
+        EPSILON
+interfacename.role.attrib:
+        role.attrib
+interfacename:
+        interfacename::(interfacename.attlist cptr.char.mix*)
+interfacename.attlist:
+        common.attrib interfacename.role.attrib local.interfacename.attrib
+local.exceptionname.attrib:
+        EPSILON
+exceptionname.role.attrib:
+        role.attrib
+exceptionname:
+        exceptionname::(exceptionname.attlist smallcptr.char.mix*)
+exceptionname.attlist:
+        common.attrib exceptionname.role.attrib local.exceptionname.attrib
+local.fieldsynopsis.attrib:
+        EPSILON
+fieldsynopsis.role.attrib:
+        role.attrib
+fieldsynopsis:
+        fieldsynopsis::(fieldsynopsis.attlist modifier* type? varname initializer?)
+fieldsynopsis.attlist:
+        (language::STR)? common.attrib fieldsynopsis.role.attrib local.fieldsynopsis.attrib
+local.initializer.attrib:
+        EPSILON
+initializer.role.attrib:
+        role.attrib
+initializer:
+        initializer::(initializer.attlist smallcptr.char.mix*)
+initializer.attlist:
+        common.attrib initializer.role.attrib local.initializer.attrib
+local.constructorsynopsis.attrib:
+        EPSILON
+constructorsynopsis.role.attrib:
+        role.attrib
+constructorsynopsis:
+        constructorsynopsis::(constructorsynopsis.attlist modifier* methodname? (methodparam+ | void) exceptionname*)
+constructorsynopsis.attlist:
+        (language::STR)? common.attrib constructorsynopsis.role.attrib local.constructorsynopsis.attrib
+local.destructorsynopsis.attrib:
+        EPSILON
+destructorsynopsis.role.attrib:
+        role.attrib
+destructorsynopsis:
+        destructorsynopsis::(destructorsynopsis.attlist modifier* methodname? (methodparam+ | void) exceptionname*)
+destructorsynopsis.attlist:
+        (language::STR)? common.attrib destructorsynopsis.role.attrib local.destructorsynopsis.attrib
+local.methodsynopsis.attrib:
+        EPSILON
+methodsynopsis.role.attrib:
+        role.attrib
+methodsynopsis:
+        methodsynopsis::(methodsynopsis.attlist modifier* (type | void)? methodname (methodparam+ | void) exceptionname* modifier*)
+methodsynopsis.attlist:
+        (language::STR)? common.attrib methodsynopsis.role.attrib local.methodsynopsis.attrib
+local.methodname.attrib:
+        EPSILON
+methodname.role.attrib:
+        role.attrib
+methodname:
+        methodname::(methodname.attlist smallcptr.char.mix*)
+methodname.attlist:
+        common.attrib methodname.role.attrib local.methodname.attrib
+local.methodparam.attrib:
+        EPSILON
+methodparam.role.attrib:
+        role.attrib
+methodparam:
+        methodparam::(methodparam.attlist modifier* type? ((parameter initializer?) | funcparams) modifier*)
+methodparam.attlist:
+        (choice::("opt" | "req" | "plain"))? (rep::("norepeat" | "repeat"))? common.attrib methodparam.role.attrib local.methodparam.attrib
+local.ackno.attrib:
+        EPSILON
+ackno.role.attrib:
+        role.attrib
+ackno:
+        ackno::(ackno.attlist docinfo.char.mix*)
+ackno.attlist:
+        common.attrib ackno.role.attrib local.ackno.attrib
+local.address.attrib:
+        EPSILON
+address.role.attrib:
+        role.attrib
+address:
+        address::(address.attlist (STR | personname | person.ident.mix | street | pob | postcode | city | state | country | phone | fax | email | otheraddr)*)
+address.attlist:
+        linespecific.attrib common.attrib address.role.attrib local.address.attrib
+local.street.attrib:
+        EPSILON
+street.role.attrib:
+        role.attrib
+street:
+        street::(street.attlist docinfo.char.mix*)
+street.attlist:
+        common.attrib street.role.attrib local.street.attrib
+local.pob.attrib:
+        EPSILON
+pob.role.attrib:
+        role.attrib
+pob:
+        pob::(pob.attlist docinfo.char.mix*)
+pob.attlist:
+        common.attrib pob.role.attrib local.pob.attrib
+local.postcode.attrib:
+        EPSILON
+postcode.role.attrib:
+        role.attrib
+postcode:
+        postcode::(postcode.attlist docinfo.char.mix*)
+postcode.attlist:
+        common.attrib postcode.role.attrib local.postcode.attrib
+local.city.attrib:
+        EPSILON
+city.role.attrib:
+        role.attrib
+city:
+        city::(city.attlist docinfo.char.mix*)
+city.attlist:
+        common.attrib city.role.attrib local.city.attrib
+local.state.attrib:
+        EPSILON
+state.role.attrib:
+        role.attrib
+state:
+        state::(state.attlist docinfo.char.mix*)
+state.attlist:
+        common.attrib state.role.attrib local.state.attrib
+local.country.attrib:
+        EPSILON
+country.role.attrib:
+        role.attrib
+country:
+        country::(country.attlist docinfo.char.mix*)
+country.attlist:
+        common.attrib country.role.attrib local.country.attrib
+local.phone.attrib:
+        EPSILON
+phone.role.attrib:
+        role.attrib
+phone:
+        phone::(phone.attlist docinfo.char.mix*)
+phone.attlist:
+        common.attrib phone.role.attrib local.phone.attrib
+local.fax.attrib:
+        EPSILON
+fax.role.attrib:
+        role.attrib
+fax:
+        fax::(fax.attlist docinfo.char.mix*)
+fax.attlist:
+        common.attrib fax.role.attrib local.fax.attrib
+local.otheraddr.attrib:
+        EPSILON
+otheraddr.role.attrib:
+        role.attrib
+otheraddr:
+        otheraddr::(otheraddr.attlist docinfo.char.mix*)
+otheraddr.attlist:
+        common.attrib otheraddr.role.attrib local.otheraddr.attrib
+local.affiliation.attrib:
+        EPSILON
+affiliation.role.attrib:
+        role.attrib
+affiliation:
+        affiliation::(affiliation.attlist shortaffil? jobtitle* orgname? orgdiv* address*)
+affiliation.attlist:
+        common.attrib affiliation.role.attrib local.affiliation.attrib
+local.shortaffil.attrib:
+        EPSILON
+shortaffil.role.attrib:
+        role.attrib
+shortaffil:
+        shortaffil::(shortaffil.attlist docinfo.char.mix*)
+shortaffil.attlist:
+        common.attrib shortaffil.role.attrib local.shortaffil.attrib
+local.jobtitle.attrib:
+        EPSILON
+jobtitle.role.attrib:
+        role.attrib
+jobtitle:
+        jobtitle::(jobtitle.attlist docinfo.char.mix*)
+jobtitle.attlist:
+        common.attrib jobtitle.role.attrib local.jobtitle.attrib
+local.orgdiv.attrib:
+        EPSILON
+orgdiv.role.attrib:
+        role.attrib
+orgdiv:
+        orgdiv::(orgdiv.attlist docinfo.char.mix*)
+orgdiv.attlist:
+        common.attrib orgdiv.role.attrib local.orgdiv.attrib
+local.artpagenums.attrib:
+        EPSILON
+artpagenums.role.attrib:
+        role.attrib
+artpagenums:
+        artpagenums::(artpagenums.attlist docinfo.char.mix*)
+artpagenums.attlist:
+        common.attrib artpagenums.role.attrib local.artpagenums.attrib
+local.personname.attrib:
+        EPSILON
+personname.role.attrib:
+        role.attrib
+personname:
+        personname::(personname.attlist (honorific | firstname | surname | lineage | othername)+)
+personname.attlist:
+        common.attrib personname.role.attrib local.personname.attrib
+local.author.attrib:
+        EPSILON
+author.role.attrib:
+        role.attrib
+author:
+        author::(author.attlist (personname | person.ident.mix+) (personblurb | email | address)*)
+author.attlist:
+        common.attrib author.role.attrib local.author.attrib
+local.authorgroup.attrib:
+        EPSILON
+authorgroup.role.attrib:
+        role.attrib
+authorgroup:
+        authorgroup::(authorgroup.attlist (author | editor | collab | corpauthor | othercredit)+)
+authorgroup.attlist:
+        common.attrib authorgroup.role.attrib local.authorgroup.attrib
+local.collab.attrib:
+        EPSILON
+collab.role.attrib:
+        role.attrib
+collab:
+        collab::(collab.attlist collabname affiliation*)
+collab.attlist:
+        common.attrib collab.role.attrib local.collab.attrib
+local.collabname.attrib:
+        EPSILON
+collabname.role.attrib:
+        role.attrib
+collabname:
+        collabname::(collabname.attlist docinfo.char.mix*)
+collabname.attlist:
+        common.attrib collabname.role.attrib local.collabname.attrib
+local.authorinitials.attrib:
+        EPSILON
+authorinitials.role.attrib:
+        role.attrib
+authorinitials:
+        authorinitials::(authorinitials.attlist docinfo.char.mix*)
+authorinitials.attlist:
+        common.attrib authorinitials.role.attrib local.authorinitials.attrib
+local.confgroup.attrib:
+        EPSILON
+confgroup.role.attrib:
+        role.attrib
+confgroup:
+        confgroup::(confgroup.attlist (confdates | conftitle | confnum | address | confsponsor)*)
+confgroup.attlist:
+        common.attrib confgroup.role.attrib local.confgroup.attrib
+local.confdates.attrib:
+        EPSILON
+confdates.role.attrib:
+        role.attrib
+confdates:
+        confdates::(confdates.attlist docinfo.char.mix*)
+confdates.attlist:
+        common.attrib confdates.role.attrib local.confdates.attrib
+local.conftitle.attrib:
+        EPSILON
+conftitle.role.attrib:
+        role.attrib
+conftitle:
+        conftitle::(conftitle.attlist docinfo.char.mix*)
+conftitle.attlist:
+        common.attrib conftitle.role.attrib local.conftitle.attrib
+local.confnum.attrib:
+        EPSILON
+confnum.role.attrib:
+        role.attrib
+confnum:
+        confnum::(confnum.attlist docinfo.char.mix*)
+confnum.attlist:
+        common.attrib confnum.role.attrib local.confnum.attrib
+local.confsponsor.attrib:
+        EPSILON
+confsponsor.role.attrib:
+        role.attrib
+confsponsor:
+        confsponsor::(confsponsor.attlist docinfo.char.mix*)
+confsponsor.attlist:
+        common.attrib confsponsor.role.attrib local.confsponsor.attrib
+local.contractnum.attrib:
+        EPSILON
+contractnum.role.attrib:
+        role.attrib
+contractnum:
+        contractnum::(contractnum.attlist docinfo.char.mix*)
+contractnum.attlist:
+        common.attrib contractnum.role.attrib local.contractnum.attrib
+local.contractsponsor.attrib:
+        EPSILON
+contractsponsor.role.attrib:
+        role.attrib
+contractsponsor:
+        contractsponsor::(contractsponsor.attlist docinfo.char.mix*)
+contractsponsor.attlist:
+        common.attrib contractsponsor.role.attrib local.contractsponsor.attrib
+local.copyright.attrib:
+        EPSILON
+copyright.role.attrib:
+        role.attrib
+copyright:
+        copyright::(copyright.attlist year+ holder*)
+copyright.attlist:
+        common.attrib copyright.role.attrib local.copyright.attrib
+local.year.attrib:
+        EPSILON
+year.role.attrib:
+        role.attrib
+year:
+        year::(year.attlist docinfo.char.mix*)
+year.attlist:
+        common.attrib year.role.attrib local.year.attrib
+local.holder.attrib:
+        EPSILON
+holder.role.attrib:
+        role.attrib
+holder:
+        holder::(holder.attlist docinfo.char.mix*)
+holder.attlist:
+        common.attrib holder.role.attrib local.holder.attrib
+local.corpauthor.attrib:
+        EPSILON
+corpauthor.role.attrib:
+        role.attrib
+corpauthor:
+        corpauthor::(corpauthor.attlist docinfo.char.mix*)
+corpauthor.attlist:
+        common.attrib corpauthor.role.attrib local.corpauthor.attrib
+local.corpname.attrib:
+        EPSILON
+corpname:
+        corpname::(corpname.attlist docinfo.char.mix*)
+corpname.role.attrib:
+        role.attrib
+corpname.attlist:
+        common.attrib corpname.role.attrib local.corpname.attrib
+local.date.attrib:
+        EPSILON
+date.role.attrib:
+        role.attrib
+date:
+        date::(date.attlist docinfo.char.mix*)
+date.attlist:
+        common.attrib date.role.attrib local.date.attrib
+local.edition.attrib:
+        EPSILON
+edition.role.attrib:
+        role.attrib
+edition:
+        edition::(edition.attlist docinfo.char.mix*)
+edition.attlist:
+        common.attrib edition.role.attrib local.edition.attrib
+local.editor.attrib:
+        EPSILON
+editor.role.attrib:
+        role.attrib
+editor:
+        editor::(editor.attlist (personname | person.ident.mix+) (personblurb | email | address)*)
+editor.attlist:
+        common.attrib editor.role.attrib local.editor.attrib
+local.isbn.attrib:
+        EPSILON
+isbn.role.attrib:
+        role.attrib
+isbn:
+        isbn::(isbn.attlist docinfo.char.mix*)
+isbn.attlist:
+        common.attrib isbn.role.attrib local.isbn.attrib
+local.issn.attrib:
+        EPSILON
+issn.role.attrib:
+        role.attrib
+issn:
+        issn::(issn.attlist docinfo.char.mix*)
+issn.attlist:
+        common.attrib issn.role.attrib local.issn.attrib
+biblio.class.attrib:
+        (class::("uri" | "doi" | "isbn" | "issn" | "libraryofcongress" | "pubnumber" | "other"))? (otherclass::STR)?
+local.biblioid.attrib:
+        EPSILON
+biblioid.role.attrib:
+        role.attrib
+biblioid:
+        biblioid::(biblioid.attlist docinfo.char.mix*)
+biblioid.attlist:
+        biblio.class.attrib common.attrib biblioid.role.attrib local.biblioid.attrib
+local.citebiblioid.attrib:
+        EPSILON
+citebiblioid.role.attrib:
+        role.attrib
+citebiblioid:
+        citebiblioid::(citebiblioid.attlist docinfo.char.mix*)
+citebiblioid.attlist:
+        biblio.class.attrib common.attrib citebiblioid.role.attrib local.citebiblioid.attrib
+local.bibliosource.attrib:
+        EPSILON
+bibliosource.role.attrib:
+        role.attrib
+bibliosource:
+        bibliosource::(bibliosource.attlist docinfo.char.mix*)
+bibliosource.attlist:
+        biblio.class.attrib common.attrib bibliosource.role.attrib local.bibliosource.attrib
+local.bibliorelation.attrib:
+        EPSILON
+local.bibliorelation.types:
+        EMPTY
+bibliorelation.type.attrib:
+        (type::("isversionof" | "hasversion" | "isreplacedby" | "replaces" | "isrequiredby" | "requires" | "ispartof" | "haspart" | "isreferencedby" | "references" | "isformatof" | "hasformat" | "othertype" | local.bibliorelation.types))? (othertype::STR)?
+bibliorelation.role.attrib:
+        role.attrib
+bibliorelation:
+        bibliorelation::(bibliorelation.attlist docinfo.char.mix*)
+bibliorelation.attlist:
+        biblio.class.attrib bibliorelation.type.attrib common.attrib bibliorelation.role.attrib local.bibliorelation.attrib
+local.bibliocoverage.attrib:
+        EPSILON
+bibliocoverage.role.attrib:
+        role.attrib
+bibliocoverage:
+        bibliocoverage::(bibliocoverage.attlist docinfo.char.mix*)
+bibliocoverage.attlist:
+        (spatial::("dcmipoint" | "iso3166" | "dcmibox" | "tgn" | "otherspatial"))? (otherspatial::STR)? (temporal::("dcmiperiod" | "w3c-dtf" | "othertemporal"))? (othertemporal::STR)? common.attrib bibliocoverage.role.attrib local.bibliocoverage.attrib
+local.invpartnumber.attrib:
+        EPSILON
+invpartnumber.role.attrib:
+        role.attrib
+invpartnumber:
+        invpartnumber::(invpartnumber.attlist docinfo.char.mix*)
+invpartnumber.attlist:
+        common.attrib invpartnumber.role.attrib local.invpartnumber.attrib
+local.issuenum.attrib:
+        EPSILON
+issuenum.role.attrib:
+        role.attrib
+issuenum:
+        issuenum::(issuenum.attlist docinfo.char.mix*)
+issuenum.attlist:
+        common.attrib issuenum.role.attrib local.issuenum.attrib
+local.legalnotice.attrib:
+        EPSILON
+legalnotice.role.attrib:
+        role.attrib
+legalnotice:
+        legalnotice::(legalnotice.attlist blockinfo? title? legalnotice.mix+)
+legalnotice.attlist:
+        common.attrib legalnotice.role.attrib local.legalnotice.attrib
+local.modespec.attrib:
+        EPSILON
+modespec.role.attrib:
+        role.attrib
+modespec:
+        modespec::(modespec.attlist docinfo.char.mix*)
+modespec.attlist:
+        (application::notation.class)? common.attrib modespec.role.attrib local.modespec.attrib
+local.orgname.attrib:
+        EPSILON
+orgname.role.attrib:
+        role.attrib
+orgname:
+        orgname::(orgname.attlist docinfo.char.mix*)
+orgname.attlist:
+        common.attrib (class::("corporation" | "nonprofit" | "consortium" | "informal" | "other"))? (otherclass::STR)? orgname.role.attrib local.orgname.attrib
+local.othercredit.attrib:
+        EPSILON
+othercredit.role.attrib:
+        role.attrib
+othercredit:
+        othercredit::(othercredit.attlist (personname | person.ident.mix+) (personblurb | email | address)*)
+othercredit.attlist:
+        common.attrib othercredit.role.attrib local.othercredit.attrib
+local.pagenums.attrib:
+        EPSILON
+pagenums.role.attrib:
+        role.attrib
+pagenums:
+        pagenums::(pagenums.attlist docinfo.char.mix*)
+pagenums.attlist:
+        common.attrib pagenums.role.attrib local.pagenums.attrib
+local.contrib.attrib:
+        EPSILON
+contrib.role.attrib:
+        role.attrib
+contrib:
+        contrib::(contrib.attlist docinfo.char.mix*)
+contrib.attlist:
+        common.attrib contrib.role.attrib local.contrib.attrib
+local.firstname.attrib:
+        EPSILON
+firstname.role.attrib:
+        role.attrib
+firstname:
+        firstname::(firstname.attlist docinfo.char.mix*)
+firstname.attlist:
+        common.attrib firstname.role.attrib local.firstname.attrib
+local.honorific.attrib:
+        EPSILON
+honorific.role.attrib:
+        role.attrib
+honorific:
+        honorific::(honorific.attlist docinfo.char.mix*)
+honorific.attlist:
+        common.attrib honorific.role.attrib local.honorific.attrib
+local.lineage.attrib:
+        EPSILON
+lineage.role.attrib:
+        role.attrib
+lineage:
+        lineage::(lineage.attlist docinfo.char.mix*)
+lineage.attlist:
+        common.attrib lineage.role.attrib local.lineage.attrib
+local.othername.attrib:
+        EPSILON
+othername.role.attrib:
+        role.attrib
+othername:
+        othername::(othername.attlist docinfo.char.mix*)
+othername.attlist:
+        common.attrib othername.role.attrib local.othername.attrib
+local.surname.attrib:
+        EPSILON
+surname.role.attrib:
+        role.attrib
+surname:
+        surname::(surname.attlist docinfo.char.mix*)
+surname.attlist:
+        common.attrib surname.role.attrib local.surname.attrib
+local.printhistory.attrib:
+        EPSILON
+printhistory.role.attrib:
+        role.attrib
+printhistory:
+        printhistory::(printhistory.attlist para.class+)
+printhistory.attlist:
+        common.attrib printhistory.role.attrib local.printhistory.attrib
+local.productname.attrib:
+        EPSILON
+productname.role.attrib:
+        role.attrib
+productname:
+        productname::(productname.attlist para.char.mix*)
+productname.attlist:
+        (class::("service" | "trade" | "registered" | "copyright"))? common.attrib productname.role.attrib local.productname.attrib
+local.productnumber.attrib:
+        EPSILON
+productnumber.role.attrib:
+        role.attrib
+productnumber:
+        productnumber::(productnumber.attlist docinfo.char.mix*)
+productnumber.attlist:
+        common.attrib productnumber.role.attrib local.productnumber.attrib
+local.pubdate.attrib:
+        EPSILON
+pubdate.role.attrib:
+        role.attrib
+pubdate:
+        pubdate::(pubdate.attlist docinfo.char.mix*)
+pubdate.attlist:
+        common.attrib pubdate.role.attrib local.pubdate.attrib
+local.publisher.attrib:
+        EPSILON
+publisher.role.attrib:
+        role.attrib
+publisher:
+        publisher::(publisher.attlist publishername address*)
+publisher.attlist:
+        common.attrib publisher.role.attrib local.publisher.attrib
+local.publishername.attrib:
+        EPSILON
+publishername.role.attrib:
+        role.attrib
+publishername:
+        publishername::(publishername.attlist docinfo.char.mix*)
+publishername.attlist:
+        common.attrib publishername.role.attrib local.publishername.attrib
+local.pubsnumber.attrib:
+        EPSILON
+pubsnumber.role.attrib:
+        role.attrib
+pubsnumber:
+        pubsnumber::(pubsnumber.attlist docinfo.char.mix*)
+pubsnumber.attlist:
+        common.attrib pubsnumber.role.attrib local.pubsnumber.attrib
+local.releaseinfo.attrib:
+        EPSILON
+releaseinfo.role.attrib:
+        role.attrib
+releaseinfo:
+        releaseinfo::(releaseinfo.attlist docinfo.char.mix*)
+releaseinfo.attlist:
+        common.attrib releaseinfo.role.attrib local.releaseinfo.attrib
+local.revhistory.attrib:
+        EPSILON
+revhistory.role.attrib:
+        role.attrib
+revhistory:
+        revhistory::(revhistory.attlist revision+)
+revhistory.attlist:
+        common.attrib revhistory.role.attrib local.revhistory.attrib
+local.revision.attrib:
+        EPSILON
+revision.role.attrib:
+        role.attrib
+revision:
+        revision::(revision.attlist revnumber date authorinitials* (revremark | revdescription)?)
+revision.attlist:
+        common.attrib revision.role.attrib local.revision.attrib
+local.revnumber.attrib:
+        EPSILON
+revnumber.role.attrib:
+        role.attrib
+revnumber:
+        revnumber::(revnumber.attlist docinfo.char.mix*)
+revnumber.attlist:
+        common.attrib revnumber.role.attrib local.revnumber.attrib
+local.revremark.attrib:
+        EPSILON
+revremark.role.attrib:
+        role.attrib
+revremark:
+        revremark::(revremark.attlist docinfo.char.mix*)
+revremark.attlist:
+        common.attrib revremark.role.attrib local.revremark.attrib
+local.revdescription.attrib:
+        EPSILON
+revdescription.role.attrib:
+        role.attrib
+revdescription:
+        revdescription::(revdescription.attlist revdescription.mix+)
+revdescription.attlist:
+        common.attrib revdescription.role.attrib local.revdescription.attrib
+local.seriesvolnums.attrib:
+        EPSILON
+seriesvolnums.role.attrib:
+        role.attrib
+seriesvolnums:
+        seriesvolnums::(seriesvolnums.attlist docinfo.char.mix*)
+seriesvolnums.attlist:
+        common.attrib seriesvolnums.role.attrib local.seriesvolnums.attrib
+local.volumenum.attrib:
+        EPSILON
+volumenum.role.attrib:
+        role.attrib
+volumenum:
+        volumenum::(volumenum.attlist docinfo.char.mix*)
+volumenum.attlist:
+        common.attrib volumenum.role.attrib local.volumenum.attrib
+local.accel.attrib:
+        EPSILON
+accel.role.attrib:
+        role.attrib
+accel:
+        accel::(accel.attlist smallcptr.char.mix*)
+accel.attlist:
+        common.attrib accel.role.attrib local.accel.attrib
+local.action.attrib:
+        EPSILON
+action.role.attrib:
+        role.attrib
+action:
+        action::(action.attlist cptr.char.mix*)
+action.attlist:
+        moreinfo.attrib common.attrib action.role.attrib local.action.attrib
+local.application.attrib:
+        EPSILON
+application.role.attrib:
+        role.attrib
+application:
+        application::(application.attlist para.char.mix*)
+application.attlist:
+        (class::("hardware" | "software"))? moreinfo.attrib common.attrib application.role.attrib local.application.attrib
+local.classname.attrib:
+        EPSILON
+classname.role.attrib:
+        role.attrib
+classname:
+        classname::(classname.attlist smallcptr.char.mix*)
+classname.attlist:
+        common.attrib classname.role.attrib local.classname.attrib
+local.co.attrib:
+        EPSILON
+co.role.attrib:
+        role.attrib
+co:
+        co::(co.attlist EPSILON)
+co.attlist:
+        label.attrib linkends.attrib idreq.common.attrib co.role.attrib local.co.attrib
+local.coref.attrib:
+        EPSILON
+coref.role.attrib:
+        role.attrib
+coref:
+        coref::(coref.attlist EPSILON)
+coref.attlist:
+        label.attrib linkendreq.attrib common.attrib coref.role.attrib local.coref.attrib
+local.command.attrib:
+        EPSILON
+command.role.attrib:
+        role.attrib
+command:
+        command::(command.attlist cptr.char.mix*)
+command.attlist:
+        moreinfo.attrib common.attrib command.role.attrib local.command.attrib
+local.computeroutput.attrib:
+        EPSILON
+computeroutput.role.attrib:
+        role.attrib
+computeroutput:
+        computeroutput::(computeroutput.attlist (cptr.char.mix | co)*)
+computeroutput.attlist:
+        moreinfo.attrib common.attrib computeroutput.role.attrib local.computeroutput.attrib
+local.database.attrib:
+        EPSILON
+database.role.attrib:
+        role.attrib
+database:
+        database::(database.attlist cptr.char.mix*)
+database.attlist:
+        (class::("name" | "table" | "field" | "key1" | "key2" | "record"))? moreinfo.attrib common.attrib database.role.attrib local.database.attrib
+local.email.attrib:
+        EPSILON
+email.role.attrib:
+        role.attrib
+email:
+        email::(email.attlist docinfo.char.mix*)
+email.attlist:
+        common.attrib email.role.attrib local.email.attrib
+local.envar.attrib:
+        EPSILON
+envar.role.attrib:
+        role.attrib
+envar:
+        envar::(envar.attlist smallcptr.char.mix*)
+envar.attlist:
+        common.attrib envar.role.attrib local.envar.attrib
+local.errorcode.attrib:
+        EPSILON
+errorcode.role.attrib:
+        role.attrib
+errorcode:
+        errorcode::(errorcode.attlist smallcptr.char.mix*)
+errorcode.attlist:
+        moreinfo.attrib common.attrib errorcode.role.attrib local.errorcode.attrib
+local.errorname.attrib:
+        EPSILON
+errorname.role.attrib:
+        role.attrib
+errorname:
+        errorname::(errorname.attlist smallcptr.char.mix*)
+errorname.attlist:
+        common.attrib errorname.role.attrib local.errorname.attrib
+local.errortext.attrib:
+        EPSILON
+errortext.role.attrib:
+        role.attrib
+errortext:
+        errortext::(errortext.attlist smallcptr.char.mix*)
+errortext.attlist:
+        common.attrib errortext.role.attrib local.errortext.attrib
+local.errortype.attrib:
+        EPSILON
+errortype.role.attrib:
+        role.attrib
+errortype:
+        errortype::(errortype.attlist smallcptr.char.mix*)
+errortype.attlist:
+        common.attrib errortype.role.attrib local.errortype.attrib
+local.filename.attrib:
+        EPSILON
+filename.role.attrib:
+        role.attrib
+filename:
+        filename::(filename.attlist cptr.char.mix*)
+filename.attlist:
+        (class::("headerfile" | "partition" | "devicefile" | "libraryfile" | "directory" | "extension" | "symlink"))? (path::STR)? moreinfo.attrib common.attrib filename.role.attrib local.filename.attrib
+local.function.attrib:
+        EPSILON
+function.role.attrib:
+        role.attrib
+function:
+        function::(function.attlist cptr.char.mix*)
+function.attlist:
+        moreinfo.attrib common.attrib function.role.attrib local.function.attrib
+local.guibutton.attrib:
+        EPSILON
+guibutton.role.attrib:
+        role.attrib
+guibutton:
+        guibutton::(guibutton.attlist (smallcptr.char.mix | accel)*)
+guibutton.attlist:
+        moreinfo.attrib common.attrib guibutton.role.attrib local.guibutton.attrib
+local.guiicon.attrib:
+        EPSILON
+guiicon.role.attrib:
+        role.attrib
+guiicon:
+        guiicon::(guiicon.attlist (smallcptr.char.mix | accel)*)
+guiicon.attlist:
+        moreinfo.attrib common.attrib guiicon.role.attrib local.guiicon.attrib
+local.guilabel.attrib:
+        EPSILON
+guilabel.role.attrib:
+        role.attrib
+guilabel:
+        guilabel::(guilabel.attlist (smallcptr.char.mix | accel)*)
+guilabel.attlist:
+        moreinfo.attrib common.attrib guilabel.role.attrib local.guilabel.attrib
+local.guimenu.attrib:
+        EPSILON
+guimenu.role.attrib:
+        role.attrib
+guimenu:
+        guimenu::(guimenu.attlist (smallcptr.char.mix | accel)*)
+guimenu.attlist:
+        moreinfo.attrib common.attrib guimenu.role.attrib local.guimenu.attrib
+local.guimenuitem.attrib:
+        EPSILON
+guimenuitem.role.attrib:
+        role.attrib
+guimenuitem:
+        guimenuitem::(guimenuitem.attlist (smallcptr.char.mix | accel)*)
+guimenuitem.attlist:
+        moreinfo.attrib common.attrib guimenuitem.role.attrib local.guimenuitem.attrib
+local.guisubmenu.attrib:
+        EPSILON
+guisubmenu.role.attrib:
+        role.attrib
+guisubmenu:
+        guisubmenu::(guisubmenu.attlist (smallcptr.char.mix | accel)*)
+guisubmenu.attlist:
+        moreinfo.attrib common.attrib guisubmenu.role.attrib local.guisubmenu.attrib
+local.hardware.attrib:
+        EPSILON
+hardware.role.attrib:
+        role.attrib
+hardware:
+        hardware::(hardware.attlist cptr.char.mix*)
+hardware.attlist:
+        moreinfo.attrib common.attrib hardware.role.attrib local.hardware.attrib
+local.interface.attrib:
+        EPSILON
+interface.role.attrib:
+        role.attrib
+interface:
+        interface::(interface.attlist (smallcptr.char.mix | accel)*)
+interface.attlist:
+        moreinfo.attrib common.attrib interface.role.attrib local.interface.attrib
+local.keycap.attrib:
+        EPSILON
+keycap.role.attrib:
+        role.attrib
+keycap:
+        keycap::(keycap.attlist cptr.char.mix*)
+keycap.attlist:
+        moreinfo.attrib common.attrib keycap.role.attrib local.keycap.attrib
+local.keycode.attrib:
+        EPSILON
+keycode.role.attrib:
+        role.attrib
+keycode:
+        keycode::(keycode.attlist smallcptr.char.mix*)
+keycode.attlist:
+        common.attrib keycode.role.attrib local.keycode.attrib
+local.keycombo.attrib:
+        EPSILON
+keycombo.role.attrib:
+        role.attrib
+keycombo:
+        keycombo::(keycombo.attlist (keycap | keycombo | keysym | mousebutton)+)
+keycombo.attlist:
+        keyaction.attrib moreinfo.attrib common.attrib keycombo.role.attrib local.keycombo.attrib
+local.keysym.attrib:
+        EPSILON
+keysysm.role.attrib:
+        role.attrib
+keysym:
+        keysym::(keysym.attlist smallcptr.char.mix*)
+keysym.attlist:
+        common.attrib keysysm.role.attrib local.keysym.attrib
+local.lineannotation.attrib:
+        EPSILON
+lineannotation.role.attrib:
+        role.attrib
+lineannotation:
+        lineannotation::(lineannotation.attlist para.char.mix*)
+lineannotation.attlist:
+        common.attrib lineannotation.role.attrib local.lineannotation.attrib
+local.literal.attrib:
+        EPSILON
+literal.role.attrib:
+        role.attrib
+literal:
+        literal::(literal.attlist cptr.char.mix*)
+literal.attlist:
+        moreinfo.attrib common.attrib literal.role.attrib local.literal.attrib
+local.constant.attrib:
+        EPSILON
+constant.role.attrib:
+        role.attrib
+constant:
+        constant::(constant.attlist smallcptr.char.mix*)
+constant.attlist:
+        (class::"limit")? common.attrib constant.role.attrib local.constant.attrib
+local.varname.attrib:
+        EPSILON
+varname.role.attrib:
+        role.attrib
+varname:
+        varname::(varname.attlist smallcptr.char.mix*)
+varname.attlist:
+        common.attrib varname.role.attrib local.varname.attrib
+local.markup.attrib:
+        EPSILON
+markup.role.attrib:
+        role.attrib
+markup:
+        markup::(markup.attlist smallcptr.char.mix*)
+markup.attlist:
+        common.attrib markup.role.attrib local.markup.attrib
+local.medialabel.attrib:
+        EPSILON
+medialabel.role.attrib:
+        role.attrib
+medialabel:
+        medialabel::(medialabel.attlist smallcptr.char.mix*)
+medialabel.attlist:
+        (class::("cartridge" | "cdrom" | "disk" | "tape"))? common.attrib medialabel.role.attrib local.medialabel.attrib
+local.menuchoice.attrib:
+        EPSILON
+menuchoice.role.attrib:
+        role.attrib
+menuchoice:
+        menuchoice::(menuchoice.attlist shortcut? (guibutton | guiicon | guilabel | guimenu | guimenuitem | guisubmenu | interface)+)
+menuchoice.attlist:
+        moreinfo.attrib common.attrib menuchoice.role.attrib local.menuchoice.attrib
+local.shortcut.attrib:
+        EPSILON
+shortcut.role.attrib:
+        role.attrib
+shortcut:
+        shortcut::(shortcut.attlist (keycap | keycombo | keysym | mousebutton)+)
+shortcut.attlist:
+        keyaction.attrib moreinfo.attrib common.attrib shortcut.role.attrib local.shortcut.attrib
+local.mousebutton.attrib:
+        EPSILON
+mousebutton.role.attrib:
+        role.attrib
+mousebutton:
+        mousebutton::(mousebutton.attlist smallcptr.char.mix*)
+mousebutton.attlist:
+        moreinfo.attrib common.attrib mousebutton.role.attrib local.mousebutton.attrib
+local.msgtext.attrib:
+        EPSILON
+msgtext.role.attrib:
+        role.attrib
+msgtext:
+        msgtext::(msgtext.attlist component.mix+)
+msgtext.attlist:
+        common.attrib msgtext.role.attrib local.msgtext.attrib
+local.option.attrib:
+        EPSILON
+option.role.attrib:
+        role.attrib
+option:
+        option::(option.attlist cptr.char.mix*)
+option.attlist:
+        common.attrib option.role.attrib local.option.attrib
+local.optional.attrib:
+        EPSILON
+optional.role.attrib:
+        role.attrib
+optional:
+        optional::(optional.attlist cptr.char.mix*)
+optional.attlist:
+        common.attrib optional.role.attrib local.optional.attrib
+local.parameter.attrib:
+        EPSILON
+parameter.role.attrib:
+        role.attrib
+parameter:
+        parameter::(parameter.attlist cptr.char.mix*)
+parameter.attlist:
+        (class::("command" | "function" | "option"))? moreinfo.attrib common.attrib parameter.role.attrib local.parameter.attrib
+local.prompt.attrib:
+        EPSILON
+prompt.role.attrib:
+        role.attrib
+prompt:
+        prompt::(prompt.attlist (smallcptr.char.mix | co)*)
+prompt.attlist:
+        moreinfo.attrib common.attrib prompt.role.attrib local.prompt.attrib
+local.property.attrib:
+        EPSILON
+property.role.attrib:
+        role.attrib
+property:
+        property::(property.attlist cptr.char.mix*)
+property.attlist:
+        moreinfo.attrib common.attrib property.role.attrib local.property.attrib
+local.replaceable.attrib:
+        EPSILON
+replaceable.role.attrib:
+        role.attrib
+replaceable:
+        replaceable::(replaceable.attlist (STR | link.char.class | optional | base.char.class | other.char.class | inlinegraphic | inlinemediaobject | co)*)
+replaceable.attlist:
+        (class::("command" | "function" | "option" | "parameter"))? common.attrib replaceable.role.attrib local.replaceable.attrib
+local.returnvalue.attrib:
+        EPSILON
+returnvalue.role.attrib:
+        role.attrib
+returnvalue:
+        returnvalue::(returnvalue.attlist smallcptr.char.mix*)
+returnvalue.attlist:
+        common.attrib returnvalue.role.attrib local.returnvalue.attrib
+local.sgmltag.attrib:
+        EPSILON
+sgmltag.role.attrib:
+        role.attrib
+sgmltag:
+        sgmltag::(sgmltag.attlist smallcptr.char.mix*)
+sgmltag.attlist:
+        (class::("attribute" | "attvalue" | "element" | "endtag" | "emptytag" | "genentity" | "numcharref" | "paramentity" | "pi" | "xmlpi" | "starttag" | "sgmlcomment"))? common.attrib sgmltag.role.attrib local.sgmltag.attrib
+local.structfield.attrib:
+        EPSILON
+structfield.role.attrib:
+        role.attrib
+structfield:
+        structfield::(structfield.attlist smallcptr.char.mix*)
+structfield.attlist:
+        common.attrib structfield.role.attrib local.structfield.attrib
+local.structname.attrib:
+        EPSILON
+structname.role.attrib:
+        role.attrib
+structname:
+        structname::(structname.attlist smallcptr.char.mix*)
+structname.attlist:
+        common.attrib structname.role.attrib local.structname.attrib
+local.symbol.attrib:
+        EPSILON
+symbol.role.attrib:
+        role.attrib
+symbol:
+        symbol::(symbol.attlist smallcptr.char.mix*)
+symbol.attlist:
+        (class::"limit")? common.attrib symbol.role.attrib local.symbol.attrib
+local.systemitem.attrib:
+        EPSILON
+systemitem.role.attrib:
+        role.attrib
+systemitem:
+        systemitem::(systemitem.attlist (cptr.char.mix | acronym | co)*)
+systemitem.attlist:
+        (class::("constant" | "event" | "eventhandler" | "domainname" | "fqdomainname" | "ipaddress" | "netmask" | "etheraddress" | "groupname" | "library" | "macro" | "osname" | "filesystem" | "resource" | "systemname" | "username" | "newsgroup"))? moreinfo.attrib common.attrib systemitem.role.attrib local.systemitem.attrib
+local.token.attrib:
+        EPSILON
+token.role.attrib:
+        role.attrib
+token:
+        token::(token.attlist smallcptr.char.mix*)
+token.attlist:
+        common.attrib token.role.attrib local.token.attrib
+local.type.attrib:
+        EPSILON
+type.role.attrib:
+        role.attrib
+type:
+        type::(type.attlist smallcptr.char.mix*)
+type.attlist:
+        common.attrib type.role.attrib local.type.attrib
+local.userinput.attrib:
+        EPSILON
+userinput.role.attrib:
+        role.attrib
+userinput:
+        userinput::(userinput.attlist (cptr.char.mix | co)*)
+userinput.attlist:
+        moreinfo.attrib common.attrib userinput.role.attrib local.userinput.attrib
+local.abbrev.attrib:
+        EPSILON
+abbrev.role.attrib:
+        role.attrib
+abbrev:
+        abbrev::(abbrev.attlist word.char.mix*)
+abbrev.attlist:
+        common.attrib abbrev.role.attrib local.abbrev.attrib
+local.acronym.attrib:
+        EPSILON
+acronym.role.attrib:
+        role.attrib
+acronym:
+        acronym::(acronym.attlist word.char.mix*)
+acronym.attlist:
+        common.attrib acronym.role.attrib local.acronym.attrib
+local.citation.attrib:
+        EPSILON
+citation.role.attrib:
+        role.attrib
+citation:
+        citation::(citation.attlist para.char.mix*)
+citation.attlist:
+        common.attrib citation.role.attrib local.citation.attrib
+local.citerefentry.attrib:
+        EPSILON
+citerefentry.role.attrib:
+        role.attrib
+citerefentry:
+        citerefentry::(citerefentry.attlist refentrytitle manvolnum?)
+citerefentry.attlist:
+        common.attrib citerefentry.role.attrib local.citerefentry.attrib
+local.refentrytitle.attrib:
+        EPSILON
+refentrytitle.role.attrib:
+        role.attrib
+refentrytitle:
+        refentrytitle::(refentrytitle.attlist para.char.mix*)
+refentrytitle.attlist:
+        common.attrib refentrytitle.role.attrib local.refentrytitle.attrib
+local.manvolnum.attrib:
+        EPSILON
+namvolnum.role.attrib:
+        role.attrib
+manvolnum:
+        manvolnum::(manvolnum.attlist word.char.mix*)
+manvolnum.attlist:
+        common.attrib namvolnum.role.attrib local.manvolnum.attrib
+local.citetitle.attrib:
+        EPSILON
+citetitle.role.attrib:
+        role.attrib
+citetitle:
+        citetitle::(citetitle.attlist para.char.mix*)
+citetitle.attlist:
+        (pubwork::("article" | "book" | "chapter" | "part" | "refentry" | "section" | "journal" | "series" | "set" | "manuscript"))? common.attrib citetitle.role.attrib local.citetitle.attrib
+local.emphasis.attrib:
+        EPSILON
+emphasis.role.attrib:
+        role.attrib
+emphasis:
+        emphasis::(emphasis.attlist para.char.mix*)
+emphasis.attlist:
+        common.attrib emphasis.role.attrib local.emphasis.attrib
+local.firstterm.attrib:
+        EPSILON
+firstterm.role.attrib:
+        role.attrib
+firstterm:
+        firstterm::(firstterm.attlist word.char.mix*)
+firstterm.attlist:
+        linkend.attrib common.attrib firstterm.role.attrib local.firstterm.attrib
+local.foreignphrase.attrib:
+        EPSILON
+foreignphrase.role.attrib:
+        role.attrib
+foreignphrase:
+        foreignphrase::(foreignphrase.attlist para.char.mix*)
+foreignphrase.attlist:
+        common.attrib foreignphrase.role.attrib local.foreignphrase.attrib
+local.glossterm.attrib:
+        EPSILON
+glossterm.role.attrib:
+        role.attrib
+glossterm:
+        glossterm::(glossterm.attlist para.char.mix*)
+glossterm.attlist:
+        linkend.attrib (baseform::STR)? common.attrib glossterm.role.attrib local.glossterm.attrib
+local.phrase.attrib:
+        EPSILON
+phrase.role.attrib:
+        role.attrib
+phrase:
+        phrase::(phrase.attlist para.char.mix*)
+phrase.attlist:
+        common.attrib phrase.role.attrib local.phrase.attrib
+local.quote.attrib:
+        EPSILON
+quote.role.attrib:
+        role.attrib
+quote:
+        quote::(quote.attlist para.char.mix*)
+quote.attlist:
+        common.attrib quote.role.attrib local.quote.attrib
+local.ssscript.attrib:
+        EPSILON
+ssscript.role.attrib:
+        role.attrib
+subscript:
+        subscript::(subscript.attlist (STR | link.char.class | emphasis | replaceable | symbol | inlinegraphic | inlinemediaobject | base.char.class | other.char.class)*)
+subscript.attlist:
+        common.attrib ssscript.role.attrib local.ssscript.attrib
+superscript:
+        superscript::(superscript.attlist (STR | link.char.class | emphasis | replaceable | symbol | inlinegraphic | inlinemediaobject | base.char.class | other.char.class)*)
+superscript.attlist:
+        common.attrib ssscript.role.attrib local.ssscript.attrib
+local.trademark.attrib:
+        EPSILON
+trademark.role.attrib:
+        role.attrib
+trademark:
+        trademark::(trademark.attlist (STR | link.char.class | tech.char.class | base.char.class | other.char.class | inlinegraphic | inlinemediaobject | emphasis)*)
+trademark.attlist:
+        (class::("service" | "trade" | "registered" | "copyright"))? common.attrib trademark.role.attrib local.trademark.attrib
+local.wordasword.attrib:
+        EPSILON
+wordasword.role.attrib:
+        role.attrib
+wordasword:
+        wordasword::(wordasword.attlist word.char.mix*)
+wordasword.attlist:
+        common.attrib wordasword.role.attrib local.wordasword.attrib
+local.link.attrib:
+        EPSILON
+link.role.attrib:
+        role.attrib
+link:
+        link::(link.attlist para.char.mix*)
+link.attlist:
+        (endterm::STR)? linkendreq.attrib (type::STR)? common.attrib link.role.attrib local.link.attrib
+local.olink.attrib:
+        EPSILON
+olink.role.attrib:
+        role.attrib
+olink:
+        olink::(olink.attlist para.char.mix*)
+olink.attlist:
+        (targetdocent::STR)? (linkmode::STR)? (localinfo::STR)? (type::STR)? (targetdoc::STR)? (targetptr::STR)? common.attrib olink.role.attrib local.olink.attrib
+local.ulink.attrib:
+        EPSILON
+ulink.role.attrib:
+        role.attrib
+ulink:
+        ulink::(ulink.attlist para.char.mix*)
+ulink.attlist:
+        url::STR (type::STR)? common.attrib ulink.role.attrib local.ulink.attrib
+local.footnoteref.attrib:
+        EPSILON
+footnoteref.role.attrib:
+        role.attrib
+footnoteref:
+        footnoteref::(footnoteref.attlist EPSILON)
+footnoteref.attlist:
+        linkendreq.attrib label.attrib common.attrib footnoteref.role.attrib local.footnoteref.attrib
+local.xref.attrib:
+        EPSILON
+xref.role.attrib:
+        role.attrib
+xref:
+        xref::(xref.attlist EPSILON)
+xref.attlist:
+        (endterm::STR)? linkendreq.attrib common.attrib xref.role.attrib local.xref.attrib
+local.anchor.attrib:
+        EPSILON
+anchor.role.attrib:
+        role.attrib
+anchor:
+        anchor::(anchor.attlist EPSILON)
+anchor.attlist:
+        idreq.attrib pagenum.attrib remap.attrib xreflabel.attrib revisionflag.attrib effectivity.attrib anchor.role.attrib local.anchor.attrib
+local.beginpage.attrib:
+        EPSILON
+beginpage.role.attrib:
+        role.attrib
+beginpage:
+        beginpage::(beginpage.attlist EPSILON)
+beginpage.attlist:
+        pagenum.attrib common.attrib beginpage.role.attrib local.beginpage.attrib
+local.indexterm.attrib:
+        EPSILON
+indexterm.role.attrib:
+        role.attrib
+indexterm:
+        indexterm::(indexterm.attlist primary? ((secondary ((tertiary (see | seealso+)?) | see | seealso+)?) | see | seealso+)?)
+indexterm.attlist:
+        pagenum.attrib (scope::("all" | "global" | "local"))? (significance::("preferred" | "normal"))? (class::("singular" | "startofrange" | "endofrange"))? (startref::STR)? (zone::STR)? common.attrib indexterm.role.attrib local.indexterm.attrib
+local.primsecter.attrib:
+        EPSILON
+primsecter.role.attrib:
+        role.attrib
+primary:
+        primary::(primary.attlist ndxterm.char.mix*)
+primary.attlist:
+        (sortas::STR)? common.attrib primsecter.role.attrib local.primsecter.attrib
+secondary:
+        secondary::(secondary.attlist ndxterm.char.mix*)
+secondary.attlist:
+        (sortas::STR)? common.attrib primsecter.role.attrib local.primsecter.attrib
+tertiary:
+        tertiary::(tertiary.attlist ndxterm.char.mix*)
+tertiary.attlist:
+        (sortas::STR)? common.attrib primsecter.role.attrib local.primsecter.attrib
+local.seeseealso.attrib:
+        EPSILON
+seeseealso.role.attrib:
+        role.attrib
+see:
+        see::(see.attlist ndxterm.char.mix*)
+see.attlist:
+        common.attrib seeseealso.role.attrib local.seeseealso.attrib
+seealso:
+        seealso::(seealso.attlist ndxterm.char.mix*)
+seealso.attlist:
+        common.attrib seeseealso.role.attrib local.seeseealso.attrib

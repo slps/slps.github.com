@@ -1,0 +1,49 @@
+ModelElement:
+        Arc
+ModelElement:
+        Vertex
+SyncChart:
+        context::ModelElement referenceState::ReferenceState+
+ReferenceState:
+        CompositeState
+ReferenceState:
+        subSyncChart::SyncChart containers::Stg
+Arc:
+        Transition
+Arc:
+        PseudoTransition
+Vertex:
+        PseudoState
+Vertex:
+        State
+PseudoState:
+        kind::PseudoStateKind
+PseudoStateKind:
+        EPSILON
+State:
+        SimpleState
+State:
+        CompositeState
+State:
+        isFinal::Boolean
+SimpleState:
+        isFinal::Boolean
+CompositeState:
+        canTerminate::Boolean isSuspendable::Boolean stg::Stg+
+Stg:
+        withFinal::Boolean compositeState::CompositeState arc::Arc+ referenceState::ReferenceState+
+Transition:
+        kind::TransitionKind
+TransitionKind:
+        EPSILON
+PseudoTransition:
+        kind::PseudoTransitionKind
+PseudoTransitionKind:
+        EPSILON
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR

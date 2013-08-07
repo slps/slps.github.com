@@ -1,0 +1,514 @@
+Top-sort:
+        CompilationUnits
+CompilationUnits:
+        CompilationUnit*
+CompilationUnit:
+        PackageDeclaration? ImportDeclaration* TypeDeclaration+
+PackageDeclaration:
+        "package" Name ";"
+Name:
+        Type "." "class"
+Name:
+        Identifier ("." Identifier)*
+Type:
+        PrimitiveType
+Type:
+        ReferenceType
+PrimitiveType:
+        NumericType
+PrimitiveType:
+        "boolean"
+NumericType:
+        IntegralType
+NumericType:
+        FloatingPointType
+IntegralType:
+        "byte"
+IntegralType:
+        "short"
+IntegralType:
+        "int"
+IntegralType:
+        "long"
+IntegralType:
+        "char"
+FloatingPointType:
+        "float"
+FloatingPointType:
+        "double"
+ReferenceType:
+        ClassOrInterfaceType
+ReferenceType:
+        ArrayType
+ClassOrInterfaceType:
+        Name
+ArrayType:
+        PrimitiveType "[" "]"
+ArrayType:
+        Name "[" "]"
+ArrayType:
+        ArrayType "[" "]"
+Identifier:
+        "@" NatCon
+ImportDeclaration:
+        SingleTypeImportDeclaration
+ImportDeclaration:
+        TypeImportOnDemandDeclaration
+SingleTypeImportDeclaration:
+        "import" Name ";"
+TypeImportOnDemandDeclaration:
+        "import" Name "." "*" ";"
+TypeDeclaration:
+        ClassDeclaration
+TypeDeclaration:
+        InterfaceDeclaration
+TypeDeclaration:
+        ";"
+ClassDeclaration:
+        Modifier* "class" Identifier Super? Interfaces? ClassBody
+Modifier:
+        "public"
+Modifier:
+        "protected"
+Modifier:
+        "private"
+Modifier:
+        "static"
+Modifier:
+        "abstract"
+Modifier:
+        "final"
+Modifier:
+        "native"
+Modifier:
+        "synchronized"
+Modifier:
+        "transient"
+Modifier:
+        "volatile"
+Super:
+        "extends" ClassType
+ClassType:
+        ClassOrInterfaceType
+Interfaces:
+        "implements" (InterfaceType ("," InterfaceType)*)
+InterfaceType:
+        ClassOrInterfaceType
+ClassBody:
+        "{" ClassBodyDeclaration* "}"
+ClassBodyDeclaration:
+        ClassMemberDeclaration
+ClassBodyDeclaration:
+        StaticInitializer
+ClassBodyDeclaration:
+        ConstructorDeclaration
+ClassBodyDeclaration:
+        ";"
+ClassBodyDeclaration:
+        ClassDeclaration
+ClassBodyDeclaration:
+        InterfaceDeclaration
+ClassMemberDeclaration:
+        FieldDeclaration
+ClassMemberDeclaration:
+        MethodDeclaration
+ClassMemberDeclaration:
+        Block
+FieldDeclaration:
+        Modifier* Type (VariableDeclarator ("," VariableDeclarator)*) ";"
+VariableDeclarator:
+        VariableDeclaratorId
+VariableDeclarator:
+        VariableDeclaratorId "=" VariableInitializer
+VariableDeclaratorId:
+        Identifier
+VariableDeclaratorId:
+        VariableDeclaratorId "[" "]"
+VariableInitializer:
+        Expression
+VariableInitializer:
+        ArrayInitializer
+Expression:
+        Primary
+Expression:
+        "+" Expression
+Expression:
+        "-" Expression
+Expression:
+        "~" Expression
+Expression:
+        "!" Expression
+Expression:
+        "(" PrimitiveType Dim* ")" Expression
+Expression:
+        "(" Type ")" Expression
+Expression:
+        "(" Name Dim+ ")" Expression
+Expression:
+        Expression "*" Expression
+Expression:
+        Expression "/" Expression
+Expression:
+        Expression "%" Expression
+Expression:
+        Expression "+" Expression
+Expression:
+        Expression "-" Expression
+Expression:
+        Expression "<<" Expression
+Expression:
+        Expression ">>" Expression
+Expression:
+        Expression ">>>" Expression
+Expression:
+        Expression "<" Expression
+Expression:
+        Expression ">" Expression
+Expression:
+        Expression "<=" Expression
+Expression:
+        Expression ">=" Expression
+Expression:
+        Expression "instanceof" ReferenceType
+Expression:
+        Expression "==" Expression
+Expression:
+        Expression "!=" Expression
+Expression:
+        Expression "&" Expression
+Expression:
+        Expression "^" Expression
+Expression:
+        Expression "|" Expression
+Expression:
+        Expression "&&" Expression
+Expression:
+        Expression "||" Expression
+Expression:
+        Expression "?" Expression ":" Expression
+Expression:
+        StatementExpression
+Expression:
+        Assignment
+Expression:
+        "+" Expression
+Expression:
+        "-" Expression
+Expression:
+        "~" Expression
+Expression:
+        "!" Expression
+Expression:
+        Expression "<" Expression
+Expression:
+        Expression ">" Expression
+Expression:
+        Expression "<=" Expression
+Expression:
+        Expression ">=" Expression
+Primary:
+        PrimaryNoNewArray
+Primary:
+        ArrayCreationExpression
+PrimaryNoNewArray:
+        Literal
+PrimaryNoNewArray:
+        "this"
+PrimaryNoNewArray:
+        Name "." "this"
+PrimaryNoNewArray:
+        "(" Expression ")"
+PrimaryNoNewArray:
+        ClassInstanceCreationExpression
+PrimaryNoNewArray:
+        FieldAccess
+PrimaryNoNewArray:
+        MethodInvocation
+PrimaryNoNewArray:
+        ArrayAccess
+Literal:
+        IntegerLiteral
+Literal:
+        LongLiteral
+Literal:
+        FloatingPointLiteral
+Literal:
+        DoubleLiteral
+Literal:
+        BooleanLiteral
+Literal:
+        CharacterLiteral
+Literal:
+        StringLiteral
+Literal:
+        NullLiteral
+IntegerLiteral:
+        DecimalIntegerLiteral
+IntegerLiteral:
+        HexIntegerLiteral
+IntegerLiteral:
+        OctalIntegerLiteral
+LongLiteral:
+        DecimalLongLiteral
+LongLiteral:
+        HexLongLiteral
+LongLiteral:
+        OctalLongLiteral
+ClassInstanceCreationExpression:
+        "new" ClassType "(" (Expression ("," Expression)*)? ")"
+ClassInstanceCreationExpression:
+        "new" ClassType "(" (Expression ("," Expression)*)? ")" ClassBody
+FieldAccess:
+        Name
+FieldAccess:
+        Primary "." Identifier
+FieldAccess:
+        "super" "." Identifier
+MethodInvocation:
+        Name "(" (Expression ("," Expression)*)? ")"
+MethodInvocation:
+        Primary "." Identifier "(" (Expression ("," Expression)*)? ")"
+MethodInvocation:
+        Primary "." ClassInstanceCreationExpression
+MethodInvocation:
+        "super" "." Identifier "(" (Expression ("," Expression)*)? ")"
+ArrayAccess:
+        Name "[" Expression "]"
+ArrayAccess:
+        PrimaryNoNewArray "[" Expression "]"
+ArrayCreationExpression:
+        "new" PrimitiveType DimExpr+ Dim*
+ArrayCreationExpression:
+        "new" ClassOrInterfaceType DimExpr+ Dim*
+ArrayCreationExpression:
+        "new" PrimitiveType DimExprInitialized+ ArrayInitializer
+ArrayCreationExpression:
+        "new" ClassOrInterfaceType DimExprInitialized+ ArrayInitializer
+DimExpr:
+        "[" Expression "]"
+Dim:
+        "[" "]"
+DimExprInitialized:
+        "[" Expression? "]"
+ArrayInitializer:
+        "{" (VariableInitializer ("," VariableInitializer)*)? ","? "}"
+StatementExpression:
+        Expression "++"
+StatementExpression:
+        Expression "--"
+StatementExpression:
+        "++" Expression
+StatementExpression:
+        "--" Expression
+StatementExpression:
+        Assignment
+StatementExpression:
+        Expression "++"
+StatementExpression:
+        Expression "--"
+StatementExpression:
+        "++" Expression
+StatementExpression:
+        "--" Expression
+StatementExpression:
+        MethodInvocation
+StatementExpression:
+        ClassInstanceCreationExpression
+Assignment:
+        LeftHandSide AssignmentOperator Expression
+LeftHandSide:
+        FieldAccess
+LeftHandSide:
+        ArrayAccess
+AssignmentOperator:
+        "="
+AssignmentOperator:
+        "*="
+AssignmentOperator:
+        "/="
+AssignmentOperator:
+        "%="
+AssignmentOperator:
+        "+="
+AssignmentOperator:
+        "-="
+AssignmentOperator:
+        "<<="
+AssignmentOperator:
+        ">>="
+AssignmentOperator:
+        ">>>="
+AssignmentOperator:
+        "&="
+AssignmentOperator:
+        "^="
+AssignmentOperator:
+        "|="
+MethodDeclaration:
+        MethodHeader MethodBody
+MethodHeader:
+        Modifier* MethodRes MethodDeclarator Throws?
+MethodRes:
+        "void"
+MethodRes:
+        Type
+MethodDeclarator:
+        Identifier "(" (FormalParameter ("," FormalParameter)*)? ")"
+MethodDeclarator:
+        MethodDeclarator "[" "]"
+FormalParameter:
+        Modifier* Type VariableDeclaratorId
+Throws:
+        "throws" (ClassType ("," ClassType)*)
+MethodBody:
+        Block
+MethodBody:
+        ";"
+Block:
+        "{" BlockStatement* "}"
+BlockStatement:
+        Modifier* LocalVariableDeclarationStatement
+BlockStatement:
+        Statement
+LocalVariableDeclarationStatement:
+        LocalVariableDeclaration ";"
+LocalVariableDeclaration:
+        Type (VariableDeclarator ("," VariableDeclarator)*)
+Statement:
+        StatementWithoutTrailingSubstatement
+Statement:
+        LabeledStatement
+Statement:
+        IfThenStatement
+Statement:
+        IfThenElseStatement
+Statement:
+        WhileStatement
+Statement:
+        ForStatement
+Statement:
+        ClassDeclaration
+Statement:
+        AssertStatement
+StatementWithoutTrailingSubstatement:
+        Block
+StatementWithoutTrailingSubstatement:
+        EmptyStatement
+StatementWithoutTrailingSubstatement:
+        ExpressionStatement
+StatementWithoutTrailingSubstatement:
+        SwitchStatement
+StatementWithoutTrailingSubstatement:
+        DoStatement
+StatementWithoutTrailingSubstatement:
+        BreakStatement
+StatementWithoutTrailingSubstatement:
+        ContinueStatement
+StatementWithoutTrailingSubstatement:
+        ReturnStatement
+StatementWithoutTrailingSubstatement:
+        SynchronizedStatement
+StatementWithoutTrailingSubstatement:
+        ThrowStatement
+StatementWithoutTrailingSubstatement:
+        TryStatement
+EmptyStatement:
+        ";"
+ExpressionStatement:
+        StatementExpression ";"
+SwitchStatement:
+        "switch" "(" Expression ")" SwitchBlock
+SwitchBlock:
+        "{" SwitchBlockStatementGroup* SwitchLabel* "}"
+SwitchBlockStatementGroup:
+        SwitchLabel+ BlockStatement+
+SwitchLabel:
+        "case" Expression ":"
+SwitchLabel:
+        "default" ":"
+DoStatement:
+        "do" Statement "while" "(" Expression ")" ";"
+BreakStatement:
+        "break" Identifier? ";"
+ContinueStatement:
+        "continue" Identifier? ";"
+ReturnStatement:
+        "return" Expression? ";"
+SynchronizedStatement:
+        "synchronized" "(" Expression ")" Block
+ThrowStatement:
+        "throw" Expression ";"
+TryStatement:
+        "try" Block CatchClause+
+TryStatement:
+        "try" Block CatchClause* Finally
+CatchClause:
+        "catch" "(" FormalParameter ")" Block
+Finally:
+        "finally" Block
+LabeledStatement:
+        Identifier ":" Statement
+IfThenStatement:
+        "if" "(" Expression ")" Statement
+IfThenElseStatement:
+        "if" "(" Expression ")" StatementNoShortIf "else" Statement
+StatementNoShortIf:
+        StatementWithoutTrailingSubstatement
+StatementNoShortIf:
+        LabeledStatementNoShortIf
+StatementNoShortIf:
+        IfThenElseStatementNoShortIf
+StatementNoShortIf:
+        WhileStatementNoShortIf
+StatementNoShortIf:
+        ForStatementNoShortIf
+LabeledStatementNoShortIf:
+        Identifier ":" StatementNoShortIf
+WhileStatementNoShortIf:
+        "while" "(" Expression ")" StatementNoShortIf
+WhileStatement:
+        "while" "(" Expression ")" Statement
+ForStatement:
+        "for" "(" ForInit? ";" Expression? ";" ForUpdate? ")" Statement
+ForInit:
+        StatementExpressionList
+ForInit:
+        LocalVariableDeclaration
+StatementExpressionList:
+        StatementExpression ("," StatementExpression)*
+ForUpdate:
+        StatementExpressionList
+AssertStatement:
+        "assert" Expression ";"
+StaticInitializer:
+        "static" Block
+ConstructorDeclaration:
+        Modifier* ConstructorDeclarator Throws? ConstructorBody
+ConstructorDeclarator:
+        SimpleName "(" (FormalParameter ("," FormalParameter)*)? ")"
+SimpleName:
+        Identifier
+ConstructorBody:
+        "{" ExplicitConstructorInvocation? BlockStatement* "}"
+ExplicitConstructorInvocation:
+        "this" "(" (Expression ("," Expression)*)? ")" ";"
+ExplicitConstructorInvocation:
+        "super" "(" (Expression ("," Expression)*)? ")" ";"
+InterfaceDeclaration:
+        Modifier* "interface" Identifier ExtendsInterfaces? InterfaceBody
+ExtendsInterfaces:
+        "extends" (InterfaceType ("," InterfaceType)*)
+InterfaceBody:
+        "{" InterfaceMemberDeclaration* "}"
+InterfaceMemberDeclaration:
+        ConstantDeclaration
+InterfaceMemberDeclaration:
+        AbstractMethodDeclaration
+InterfaceMemberDeclaration:
+        InterfaceDeclaration
+InterfaceMemberDeclaration:
+        ClassDeclaration
+ConstantDeclaration:
+        FieldDeclaration
+AbstractMethodDeclaration:
+        MethodHeader ";"

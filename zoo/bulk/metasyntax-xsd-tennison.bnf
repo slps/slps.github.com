@@ -1,0 +1,221 @@
+openAttrs:
+        STR*
+annotated:
+        openAttrs (id::STR)? annotation?
+schemaTop:
+        redefinable
+        topLevelElement
+        topLevelAttribute
+        notation
+redefinable:
+        topLevelSimpleType
+        topLevelComplexType
+        namedGroup
+        namedAttributeGroup
+formChoice:
+        "qualified"
+        "unqualified"
+reducedDerivationControl:
+        ("extension" | "restriction")*
+derivationSet:
+        "#all"
+        reducedDerivationControl
+allNNI:
+        INT
+        "unbounded"
+occurs:
+        (minOccurs::INT | maxOccurs::allNNI)*
+typeDefParticle:
+        groupRef
+        all
+        choice
+        sequence
+nestedParticle:
+        localElement
+        groupRef
+        choice
+        sequence
+        any
+fixedOrDefault:
+        EPSILON
+        fixed::STR
+        default::STR
+attributeType:
+        EPSILON
+        type::STR
+        localSimpleType
+localAttribute:
+        attribute::(annotated (use::("optional" | "prohibited" | "required"))? fixedOrDefault (ref::STR | (name::STR (form::formChoice)? attributeType)))
+topLevelAttribute:
+        attribute::(annotated name::STR fixedOrDefault attributeType)
+attrDecls:
+        (localAttribute | attributeGroupRef)* anyAttribute?
+anyAttribute:
+        anyAttribute::wildcard
+complexTypeModel:
+        simpleContent
+        (mixed::("true" | "false"))? (complexContent | (typeDefParticle? attrDecls))
+complexType:
+        annotated complexTypeModel
+topLevelComplexType:
+        complexType::(complexType name::STR (abstract::("true" | "false") | block::derivationSet | final::derivationSet)*)
+localComplexType:
+        complexType::complexType
+complexRestriction:
+        restriction::(annotated base::STR typeDefParticle? attrDecls)
+extensionType:
+        annotated base::STR
+complexExtension:
+        extension::(extensionType typeDefParticle? attrDecls)
+complexContent:
+        complexContent::(annotated (mixed::("true" | "false"))? (complexRestriction | complexExtension))
+simpleRestriction:
+        restriction::(annotated simpleRestrictionModel attrDecls)
+simpleExtension:
+        extension::(extensionType attrDecls)
+simpleContent:
+        simpleContent::(annotated (simpleRestriction | simpleExtension))
+blockSet:
+        "#all"
+        ("extension" | "restriction" | "substitution")*
+element:
+        annotated fixedOrDefault (nillable::("true" | "false") | block::blockSet)* (EPSILON | type::STR | localSimpleType | localComplexType) identityConstraint*
+topLevelElement:
+        element::(element name::STR (substitutionGroup::STR | abstract::("true" | "false") | final::derivationSet)*)
+localElement:
+        element::(occurs (ref::STR | (element name::STR (form::formChoice)?)))
+namedGroup:
+        group::(annotated name::STR (all::allModel | choice::simpleExplicitGroup | sequence::simpleExplicitGroup))
+groupRef:
+        group::(annotated occurs ref::STR)
+explicitGroup:
+        annotated occurs nestedParticle*
+simpleExplicitGroup:
+        annotated nestedParticle*
+allModel:
+        annotated element::((minOccurs::("0" | "1") | maxOccurs::("0" | "1"))* (ref::STR | (element name::STR (form::formChoice)?)))*
+all:
+        all::(allModel (minOccurs::("0" | "1") | maxOccurs::"1")*)
+choice:
+        choice::explicitGroup
+sequence:
+        sequence::explicitGroup
+wildcard:
+        annotated (namespace::("##any" | "##other" | (STR | "##targetNamespace" | "##local")*) | processContents::("lax" | "skip" | "strict"))*
+any:
+        any::(wildcard occurs)
+namedAttributeGroup:
+        attributeGroup::(annotated name::STR attrDecls)
+attributeGroupRef:
+        attributeGroup::(annotated ref::STR)
+include:
+        include::(annotated schemaLocation::STR)
+redefine:
+        redefine::(openAttrs (id::STR)? schemaLocation::STR (annotation | redefinable)*)
+import:
+        annotated (schemaLocation::STR)?
+importRequiredNamespace:
+        import::(import namespace::STR)
+importOptionalNamespace:
+        import::(import (namespace::STR)?)
+selector:
+        selector::(annotated xpath::STR)
+field:
+        field::(annotated xpath::STR)
+keybase:
+        annotated name::STR selector field+
+identityConstraint:
+        unique
+        key
+        keyref
+unique:
+        unique::keybase
+key:
+        key::keybase
+keyref:
+        keyref::(keybase refer::STR)
+notation:
+        notation::(annotated name::STR public::STR (system::STR)?)
+appinfoContent:
+        anyContent
+anyContent:
+        (STR | (ANY* anyContent))*
+appinfo:
+        appinfo::((source::STR)? appinfoContent)
+documentationContent:
+        anyContent
+documentation:
+        documentation::((source::STR | xml:lang::STR)* documentationContent)
+annotation:
+        annotation::(openAttrs (id::STR)? (documentation | appinfo)*)
+simpleDerivation:
+        simpleRestriction
+        list
+        union
+simpleDerivationSet:
+        "#all"
+        ("list" | "union" | "restriction")*
+simpleType:
+        annotated simpleDerivation
+topLevelSimpleType:
+        simpleType::(simpleType name::STR (final::simpleDerivationSet)?)
+localSimpleType:
+        simpleType::simpleType
+rangeFacets:
+        (minExclusive | minInclusive)? (maxExclusive | maxInclusive)?
+digitFacets:
+        totalDigits? fractionDigits?
+lengthFacets:
+        length
+        minLength? maxLength?
+commonFacets:
+        enumeration* whiteSpaceCollapse? pattern*
+simpleRestrictionModel:
+        base::"xs:anySimpleType" rangeFacets digitFacets lengthFacets whiteSpace? enumeration* pattern*
+        base::"xs:string" lengthFacets whiteSpace? enumeration* pattern*
+        base::"xs:normalizedString" lengthFacets whiteSpaceReplaceOrCollapse? enumeration* pattern*
+        base::("xs:token" | "xs:language" | "xs:Name" | "xs:NCName" | "xs:ID" | "xs:IDREF" | "xs:IDREFS" | "xs:NMTOKEN" | "xs:NMTOKENS" | "xs:ENTITY" | "xs:ENTITIES" | "xs:hexBinary" | "xs:base64Binary" | "xs:anyURI" | "xs:QName" | "xs:NOTATION") lengthFacets commonFacets
+        base::"xs:boolean" whiteSpaceCollapse? pattern*
+        base::("xs:decimal" | "xs:integer" | "xs:nonPositiveInteger" | "xs:nonNegativeInteger" | "xs:positiveInteger" | "xs:negativeInteger" | "xs:unsignedLong" | "xs:unsignedInt" | "xs:unsignedShort" | "xs:unsignedByte" | "xs:long" | "xs:int" | "xs:short" | "xs:byte") digitFacets rangeFacets commonFacets
+        base::("xs:float" | "xs:double" | "xs:duration" | "xs:dateTime" | "xs:time" | "xs:date" | "xs:gYearMonth" | "xs:gYear" | "xs:gMonthDay" | "xs:gMonth" | "xs:gDay") rangeFacets commonFacets
+        (base::STR | localSimpleType) rangeFacets digitFacets lengthFacets whiteSpace? enumeration* pattern*
+list:
+        list::(annotated (localSimpleType | itemType::STR))
+union:
+        union::(annotated ((memberTypes::(STR+) localSimpleType*) | ((memberTypes::EPSILON)? localSimpleType+)))
+facet:
+        annotated (fixed::("true" | "false"))?
+noFixedFacet:
+        annotated value::STR
+rangeFacet:
+        facet value::(INT | STR | "UNKNOWN data")
+minExclusive:
+        minExclusive::rangeFacet
+minInclusive:
+        minInclusive::rangeFacet
+maxExclusive:
+        maxExclusive::rangeFacet
+maxInclusive:
+        maxInclusive::rangeFacet
+numFacet:
+        facet value::INT
+totalDigits:
+        totalDigits::(facet value::INT)
+fractionDigits:
+        fractionDigits::numFacet
+length:
+        length::numFacet
+minLength:
+        minLength::numFacet
+maxLength:
+        maxLength::numFacet
+enumeration:
+        enumeration::noFixedFacet
+whiteSpace:
+        whiteSpace::(facet value::("preserve" | "replace" | "collapse"))
+whiteSpaceReplaceOrCollapse:
+        whiteSpace::(facet value::("replace" | "collapse"))
+whiteSpaceCollapse:
+        whiteSpace::(facet value::"collapse")
+pattern:
+        pattern::noFixedFacet

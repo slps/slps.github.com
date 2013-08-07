@@ -1,0 +1,24 @@
+Integer:
+        INT
+String:
+        STR
+MSPProject:
+        resource::MSPResource+ link::MSPLink+ task::MSPTask+
+MSPTask:
+        finishDate::Date startDate::Date project::MSPProject superTask::MSPTask subTask::MSPTask+ assignment::MSPAssignment+ inLink::MSPLink+ outLink::MSPLink+
+MSPLink:
+        project::MSPProject succ::MSPTask pred::MSPTask
+MSPAssignment:
+        task::MSPTask resource::MSPResource
+MSPResource:
+        MSPHumanResource
+MSPResource:
+        MSPMachine
+MSPResource:
+        cost::Double project::MSPProject assignment::MSPAssignment+
+MSPHumanResource:
+        email::String
+MSPMachine:
+        cost::Double project::MSPProject assignment::MSPAssignment+
+Date:
+        day::Integer month::Integer year::Integer

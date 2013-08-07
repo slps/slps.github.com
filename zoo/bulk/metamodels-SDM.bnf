@@ -1,0 +1,503 @@
+String:
+        STR
+Integer:
+        INT
+Boolean:
+        "true"
+        "false"
+SystemDefinitionModel:
+        information::Information import::Import+ designData::DesignData settingDefinitions::SettingDefinitions communicationDefinition::SDMCommunicationDefinition+ containmentDefinition::SDMContainmentDefinition+ delegationDefinition::SDMDelegationDefinition+ referenceDefinition::SDMReferenceDefinition+ endpointDefinition::SDMEndpointDefinition+ resourceDefinition::SDMResourceDefinition+ systemDefinition::SDMSystemDefinition+ constraintDefinition::SDMConstraintDefinition+ manager::SDMManager+ nameSpace::NameSpace namespaceIdentity::NamespaceIdentity documentLanguage::Culture+ compilationHash::CompilationHashType+
+Information:
+        sdm::SystemDefinitionModel friendlyname::String companyname::String copyright::String trademark::String description::Description comments::String compilerversion::FourPartVersionType
+Import:
+        sdm::SystemDefinitionModel alias::SimpleName identity::ImportNamespaceIdentity
+ImportNamespaceIdentity:
+        import::Import
+SDMCommunicationDefinition:
+        sdm::SystemDefinitionModel
+SDMContainmentDefinition:
+        sdm::SystemDefinitionModel
+SDMDelegationDefinition:
+        sdm::SystemDefinitionModel
+SDMReferenceDefinition:
+        sdm::SystemDefinitionModel
+SDMEndpointDefinition:
+        sdm::SystemDefinitionModel
+SDMResourceDefinition:
+        sdm::SystemDefinitionModel
+SDMSystemDefinition:
+        sdm::SystemDefinitionModel
+SDMConstraintDefinition:
+        sdm::SystemDefinitionModel
+SDMManager:
+        sdm::SystemDefinitionModel
+ManagerDeclaration:
+        SDMManager
+ManagerDeclaration:
+        description::Description name::SimpleName assemblyName::String version::FourPartVersionType publicKeyToken::PublicKeyTokenType culture::CultureNeutral platform::Platform sourcePath::Path
+ObjectDefinition:
+        SystemDefinition
+ObjectDefinition:
+        EndpointDefinition
+ObjectDefinition:
+        ResourceDefinition
+ObjectDefinition:
+        flow::OBFlow+ relationshipConstraint::OBRelationshipConstraint+ constraint::OBConstraint+ constraintGroup::OBConstraintGroup+ endpointDefinition::OBEndpointDefinition+ systemDefinition::OBSystemDefinition+ resourceDefinition::OBResourceDefinition+ communicationDefinition::OBCommunicationDefinition+ containmentDefinition::OBContainmentDefinition+ delegationDefinition::OBDelegationDefinition+ referenceDefinition::OBReferenceDefinition+ hostingDefinition::OBHostingDefinition+ endpoint::OBEndpoint+ subsystem::OBSubsystem+ resource::OBResource+ hosting::OBHosting+ containment::OBContainment+ connection::OBConnection+ delegation::OBDelegation+ obreference::OBReference+ layer::String extends::QualifiedName abstract::Boolean
+OBFlow:
+        objectDefinition::ObjectDefinition
+OBRelationshipConstraint:
+        objectDefinition::ObjectDefinition
+OBConstraint:
+        objectDefinition::ObjectDefinition
+OBConstraintGroup:
+        objectDefinition::ObjectDefinition
+OBEndpointDefinition:
+        objectDefinition::ObjectDefinition
+OBSystemDefinition:
+        objectDefinition::ObjectDefinition
+OBResourceDefinition:
+        objectDefinition::ObjectDefinition
+OBCommunicationDefinition:
+        objectDefinition::ObjectDefinition
+OBContainmentDefinition:
+        objectDefinition::ObjectDefinition
+OBDelegationDefinition:
+        objectDefinition::ObjectDefinition
+OBReferenceDefinition:
+        objectDefinition::ObjectDefinition
+OBHostingDefinition:
+        objectDefinition::ObjectDefinition
+OBEndpoint:
+        objectDefinition::ObjectDefinition
+OBSubsystem:
+        objectDefinition::ObjectDefinition
+OBResource:
+        objectDefinition::ObjectDefinition
+OBHosting:
+        objectDefinition::ObjectDefinition
+OBContainment:
+        objectDefinition::ObjectDefinition
+OBConnection:
+        objectDefinition::ObjectDefinition
+OBDelegation:
+        objectDefinition::ObjectDefinition
+OBReference:
+        objectDefinition::ObjectDefinition
+SystemDefinition:
+        SDMSystemDefinition
+SystemDefinition:
+        OBSystemDefinition
+SystemDefinition:
+        simulationRoot::Boolean
+EndpointDefinition:
+        SDMEndpointDefinition
+EndpointDefinition:
+        OBEndpointDefinition
+EndpointDefinition:
+        SDMEndpointDefinition
+        OBEndpointDefinition
+ResourceDefinition:
+        SDMResourceDefinition
+ResourceDefinition:
+        OBResourceDefinition
+ResourceDefinition:
+        SDMResourceDefinition
+        OBResourceDefinition
+RelationshipDefinition:
+        CommunicationDefinition
+RelationshipDefinition:
+        HostingDefinition
+RelationshipDefinition:
+        ContainmentDefinition
+RelationshipDefinition:
+        DelegationDefinition
+RelationshipDefinition:
+        ReferenceDefinition
+RelationshipDefinition:
+        objectConstraint::RDObjectConstraint+ constraint::RDConstraint+ constraintGroup::RDConstraintGroup+ flow::RDFlow+ connection::RDConnection+ hosting::RDHosting+ delegation::RDDelegation+ reference::RDReference+ containment::RDContainment+ extends::QualifiedName abstract::Boolean
+RDObjectConstraint:
+        relationshipDefinition::RelationshipDefinition
+RDConstraint:
+        relationshipDefinition::RelationshipDefinition
+RDConstraintGroup:
+        relationshipDefinition::RelationshipDefinition
+RDFlow:
+        relationshipDefinition::RelationshipDefinition
+RDConnection:
+        relationshipDefinition::RelationshipDefinition
+RDHosting:
+        relationshipDefinition::RelationshipDefinition
+RDDelegation:
+        relationshipDefinition::RelationshipDefinition
+RDReference:
+        relationshipDefinition::RelationshipDefinition
+RDContainment:
+        relationshipDefinition::RelationshipDefinition
+CommunicationDefinition:
+        SDMCommunicationDefinition
+CommunicationDefinition:
+        OBCommunicationDefinition
+CommunicationDefinition:
+        clientDefinition::QualifiedName serverDefinition::QualifiedName
+HostingDefinition:
+        OBHostingDefinition
+HostingDefinition:
+        guestDefinition::QualifiedName hostDefinition::QualifiedName simulationRoot::Boolean
+ContainmentDefinition:
+        SDMContainmentDefinition
+ContainmentDefinition:
+        OBContainmentDefinition
+ContainmentDefinition:
+        parentDefinition::QualifiedName memberDefinition::QualifiedName
+DelegationDefinition:
+        SDMDelegationDefinition
+DelegationDefinition:
+        OBDelegationDefinition
+DelegationDefinition:
+        proxyDefinition::QualifiedName delegateDefinition::QualifiedName
+ReferenceDefinition:
+        SDMReferenceDefinition
+ReferenceDefinition:
+        OBReferenceDefinition
+ReferenceDefinition:
+        dependentDefinition::QualifiedName sourceDefinition::QualifiedName
+Member:
+        ObjectMember
+Member:
+        RelationshipMember
+Member:
+        ConstraintMember
+Member:
+        FlowMember
+Member:
+        SettingMember
+Member:
+        description::Description+ designData::DesignData settingValue::MembSettingValue+ settingValueList::MembSettingValueList+ name::SimpleName definition::QualifiedName
+MembSettingValue:
+        member::Member
+MembSettingValueList:
+        member::Member
+ObjectMember:
+        SystemMember
+ObjectMember:
+        EndpointMember
+ObjectMember:
+        ResourceMember
+ObjectMember:
+        minOccurs::MinOccurs maxOccurs::MaxOccurs reference::Boolean proxy::Boolean
+RelationshipMember:
+        HostingMember
+RelationshipMember:
+        CommunicationMember
+RelationshipMember:
+        ContainmentMember
+RelationshipMember:
+        DelegationMember
+RelationshipMember:
+        ReferenceMember
+RelationshipMember:
+        HostingMember
+        CommunicationMember
+        ContainmentMember
+        DelegationMember
+        ReferenceMember
+SystemMember:
+        OBSubsystem
+EndpointMember:
+        OBEndpoint
+ResourceMember:
+        OBResource
+HostingMember:
+        OBHosting
+HostingMember:
+        RDHosting
+HostingMember:
+        guestMember::Path hostMember::Path
+CommunicationMember:
+        OBConnection
+CommunicationMember:
+        RDConnection
+CommunicationMember:
+        clientMember::Path serverMember::Path
+ContainmentMember:
+        OBContainment
+ContainmentMember:
+        RDContainment
+ContainmentMember:
+        childMember::Path
+DelegationMember:
+        OBDelegation
+DelegationMember:
+        RDDelegation
+DelegationMember:
+        proxyMember::Path delegateMember::Path
+ReferenceMember:
+        OBReference
+ReferenceMember:
+        RDReference
+ReferenceMember:
+        dependentMember::Path sourceMember::Path
+DesignData:
+        nameSpace::NameSpace+
+NameSpace:
+        designData::DesignData
+ObjectConstraint:
+        RDObjectConstraint
+ObjectConstraint:
+        RCObjectConstraint
+ObjectConstraint:
+        CGObjectConstraint
+ObjectConstraint:
+        CDObjectConstraint
+ObjectConstraint:
+        constraint::OCConstraint+ relationshipConstraint::OCRelationshipConstraint+ constraintGroup::OCConstraintGroup+ primaryRole::RolesList primaryObjectDefinition::QualifiedName secondaryRole::RolesList+ secondaryObjectDefinition::QualifiedName+ minOccurs::MinOccurs+ maxOccurs::MaxOccurs+
+OCConstraint:
+        objectConstraint::ObjectConstraint
+OCRelationshipConstraint:
+        objectConstraint_OC::ObjectConstraint
+OCConstraintGroup:
+        objectConstraint_OC::ObjectConstraint
+RelationshipConstraint:
+        OBRelationshipConstraint
+RelationshipConstraint:
+        OCRelationshipConstraint
+RelationshipConstraint:
+        RCRelationshipConstraint
+RelationshipConstraint:
+        CGRelationshipConstraint
+RelationshipConstraint:
+        CDRelationshipConstraint
+RelationshipConstraint:
+        constraint::RCConstraint+ relationshipConstraint::RCRelationshipConstraint+ objectConstraint::RCObjectConstraint+ constraintGroup::RCConstraintGroup+ relationshipDefinition::QualifiedName targetRole::RolesList targetObjectDefinition::QualifiedName minOccurs::MinOccurs maxOccurs::MaxOccurs delegationAware::Boolean
+RCConstraint:
+        relationshipConstraint::RelationshipConstraint
+RCRelationshipConstraint:
+        relationshipConstraint_RC::RelationshipConstraint
+RCObjectConstraint:
+        relationshipConstraint_RC::RelationshipConstraint
+RCConstraintGroup:
+        relationshipConstraint_RC::RelationshipConstraint
+ConstraintGroup:
+        OBConstraintGroup
+ConstraintGroup:
+        RDConstraintGroup
+ConstraintGroup:
+        OCConstraintGroup
+ConstraintGroup:
+        RCConstraintGroup
+ConstraintGroup:
+        CDConstraintGroup
+ConstraintGroup:
+        constraint::CGConstraint+ relationshipConstraint::CGRelationshipConstraint+ objectConstraint::CGObjectConstraint+
+CGConstraint:
+        constraintGroup::ConstraintGroup
+CGRelationshipConstraint:
+        constraintGroup_CG::ConstraintGroup
+CGObjectConstraint:
+        constraintGroup_CG::ConstraintGroup
+StructuralConstraint:
+        ObjectConstraint
+StructuralConstraint:
+        RelationshipConstraint
+StructuralConstraint:
+        ConstraintGroup
+StructuralConstraint:
+        description::Description designData::DesignData name::SimpleName evaluate::ConstraintEvaluation raiseError::Boolean returnEarly::Boolean
+ConstraintDefinition:
+        SDMConstraintDefinition
+ConstraintDefinition:
+        relationshipConstraint::CDRelationshipConstraint+ constraintGroup::CDConstraintGroup+ objectConstraint::CDObjectConstraint+ constraint::CDConstraint+ targetDefinition::QualifiedName returnEarly::Boolean
+CDRelationshipConstraint:
+        constraintDefinition::ConstraintDefinition
+CDConstraintGroup:
+        constraintDefinition::ConstraintDefinition
+CDObjectConstraint:
+        constraintDefinition::ConstraintDefinition
+CDConstraint:
+        constraintDefinition::ConstraintDefinition
+ConstraintMember:
+        OBConstraint
+ConstraintMember:
+        RDConstraint
+ConstraintMember:
+        OCConstraint
+ConstraintMember:
+        RCConstraint
+ConstraintMember:
+        CGConstraint
+ConstraintMember:
+        CDConstraint
+ConstraintMember:
+        input::Input+ raiseError::Boolean evaluate::ConstraintEvaluation
+Definition:
+        ObjectDefinition
+Definition:
+        RelationshipDefinition
+Definition:
+        ConstraintDefinition
+Definition:
+        FlowDefinition
+Definition:
+        description::Description designData::DesignData settingDeclaration::DefSettingDeclaration+ settingValue::DefSettingValue+ settingValueList::DefSettingValueList+ name::SimpleName manager::QualifiedName className::String
+DefSettingDeclaration:
+        definition_DSD::Definition
+DefSettingValue:
+        definition::Definition
+DefSettingValueList:
+        definition::Definition
+SimpleName:
+        value::String
+QualifiedName:
+        value::String
+Path:
+        value::String
+SettingPath:
+        value::String
+NamespaceIdentity:
+        ImportNamespaceIdentity
+NamespaceIdentity:
+        name::Path version::FourPartVersionType publicKey::PublicKeyType publicKeyToken::PublicKeyTokenType culture::CultureNeutral platform::Platform
+FlowDefinition:
+        description::Description designData::DesignData settingDeclaration::DefSettingDeclaration+ settingValue::DefSettingValue+ settingValueList::DefSettingValueList+ name::SimpleName manager::QualifiedName className::String
+FlowMember:
+        OBFlow
+FlowMember:
+        RDFlow
+FlowMember:
+        input::Input+ output::Output+
+ValueTransfer:
+        Output
+ValueTransfer:
+        Input
+ValueTransfer:
+        name::SimpleName path::SettingPath cast::Boolean convert::Boolean
+Output:
+        fixed::Boolean replace::Boolean
+Input:
+        name::SimpleName path::SettingPath cast::Boolean convert::Boolean
+SettingDefinitions:
+        nameSpace::NameSpace manager::QualifiedName clrNameSpace::String
+SettingMember:
+        DefSettingDeclaration
+SettingMember:
+        facet::Facet+ settingAttributes::SettingsAttributes
+SettingsAttributes:
+        list::Boolean access::SettingMemberAccess secure::SettingMemberSecure deploymentTime::Boolean required::Boolean canBeNull::Boolean elementsCanBeNull::Boolean defaultRead::String defaultWrite::String
+SettingMemberAccess:
+        ReadWrite::EPSILON
+        ReadOnly::EPSILON
+        WriteOnly::EPSILON
+SettingMemberSecure:
+        Always::EPSILON
+        PerInstance::EPSILON
+        Never::EPSILON
+Facet:
+        name::SimpleName
+SettingValue:
+        MembSettingValue
+SettingValue:
+        DefSettingValue
+SettingValue:
+        contents::String+ settingValueAttributes::SettingValueAttributes
+SettingValueList:
+        MembSettingValueList
+SettingValueList:
+        DefSettingValueList
+SettingValueList:
+        value::Value+ settingValueAttributes::SettingValueAttributes
+Value:
+        contents::String+ null::Boolean
+SettingValueAttributes:
+        path::SettingPath null::Boolean fixed::Boolean unset::Boolean definition::QualifiedName convert::Boolean secure::Boolean reference::Boolean
+Description:
+        entry::Entry+ resourceId::String manager::QualifiedName
+Entry:
+        description::Description
+DescriptionEntry:
+        Entry
+DescriptionEntry:
+        name::String resourceId::String manager::QualifiedName substitute::Substitute
+Substitute:
+        descriptionEntry::DescriptionEntry
+PathList:
+        Substitute
+PathList:
+        settingPath::SettingPath+
+MaxOccurs:
+        value::String
+MinOccurs:
+        value::String
+FourPartVersionType:
+        value::String
+PublicKeyType:
+        value::String
+PublicKeyTokenType:
+        value::String
+CompilationHashType:
+        value::String
+RolesList:
+        Host::EPSILON
+        Guest::EPSILON
+        Parent::EPSILON
+        Member::EPSILON
+        Source::EPSILON
+        Dependent::EPSILON
+        Proxy::EPSILON
+        Delegate::EPSILON
+        Client::EPSILON
+        Server::EPSILON
+Culture:
+        value::String
+CultureNeutral:
+        value::String
+ProcessorArchitectures:
+        x86::EPSILON
+        ia64::EPSILON
+        amd64::EPSILON
+        wow64::EPSILON
+        msil::EPSILON
+        shx::EPSILON
+        arm::EPSILON
+        data::EPSILON
+Platform:
+        x86::EPSILON
+        ia64::EPSILON
+        amd64::EPSILON
+        wow64::EPSILON
+        msil::EPSILON
+        shx::EPSILON
+        arm::EPSILON
+        data::EPSILON
+        *::EPSILON
+        neutral::EPSILON
+ConstraintEvaluation:
+        Design::EPSILON
+        Never::EPSILON
+Element:
+        NameSpace
+Element:
+        SimpleName
+Element:
+        QualifiedName
+Element:
+        Path
+Element:
+        SettingPath
+Element:
+        MaxOccurs
+Element:
+        MinOccurs
+Element:
+        FourPartVersionType
+Element:
+        PublicKeyType
+Element:
+        PublicKeyTokenType
+Element:
+        CompilationHashType
+Element:
+        Culture
+Element:
+        CultureNeutral
+Element:
+        value::String

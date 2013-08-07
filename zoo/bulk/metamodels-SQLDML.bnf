@@ -1,0 +1,103 @@
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR
+LocatedElement:
+        SQLRoot
+LocatedElement:
+        Statement
+LocatedElement:
+        NamedElement
+LocatedElement:
+        WhereClause
+LocatedElement:
+        Expression
+SQLRoot:
+        statements::Statement+
+Statement:
+        ViewStatement
+Statement:
+        InsertStmt
+Statement:
+        QueryStmt
+ViewStatement:
+        name::String columns::ColumnExp+ query::QueryStmt
+InsertStmt:
+        tableName::String values::Expression+
+QueryStmt:
+        QueryStmtCol
+QueryStmt:
+        QueryStmtAllCol
+QueryStmtCol:
+        columns::Expression+
+QueryStmtAllCol:
+        tables::Table+ condition::WhereClause
+NamedElement:
+        Table
+NamedElement:
+        DataType
+NamedElement:
+        ColumnExp
+Table:
+        alias::String
+WhereClause:
+        expression::Expression
+Expression:
+        BinaryExp
+Expression:
+        NotExp
+Expression:
+        LikeExp
+Expression:
+        InExp
+Expression:
+        Predicate
+Expression:
+        QueryPredicate
+BinaryExp:
+        OrExp
+BinaryExp:
+        AndExp
+BinaryExp:
+        OperationExp
+OrExp:
+        opName::String leftExp::Expression rightExp::Expression
+AndExp:
+        opName::String leftExp::Expression rightExp::Expression
+NotExp:
+        opName::String valueExp::Expression unused::Expression
+LikeExp:
+        columnName::String expression::StringValueExp
+InExp:
+        columnName::String elements::Predicate+
+OperationExp:
+        optName::String
+Predicate:
+        ValueExp
+Predicate:
+        ListExp
+Predicate:
+        FunctionExp
+Predicate:
+        ColumnExp
+QueryPredicate:
+        query::QueryStmt
+ColumnExp:
+        alias::String type::DataType
+ValueExp:
+        StringValueExp
+ValueExp:
+        IntegerValueExp
+StringValueExp:
+        aValue::String
+IntegerValueExp:
+        aValue::Integer
+ListExp:
+        elements::Expression+
+FunctionExp:
+        arguments::Expression+ name::String
+DataType:
+        name::String

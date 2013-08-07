@@ -1,0 +1,102 @@
+Element:
+        Architecture
+Element:
+        Organization
+Element:
+        Guidance
+Element:
+        Document
+Element:
+        Action
+Element:
+        Agreement
+Element:
+        Task
+Element:
+        InformationAsset
+Element:
+        Network
+Element:
+        MissionArea
+Element:
+        System
+Element:
+        Mission
+Element:
+        FunctionalArea
+Element:
+        Capability
+Element:
+        MaterielItem
+Element:
+        Facility
+Element:
+        name::String content::String
+Architecture:
+        isAssociatedWith::Architecture+ missions::Mission+ isFocusOf::FunctionalArea+ uses::Organization+
+Organization:
+        isAssociatedWith::Organization+ softwareItems::SoftwareItem+ owns::InformationAsset+ includes::Node+ performsTo::Capability+ hasRequirement::Requirement+ hasMissionArea::MissionArea+ associatedSystems::System+ isProponentOf::FunctionalArea+
+Guidance:
+        Requirement
+Guidance:
+        isAssocitatedWith::Guidance+ isImplementedBy::Architecture+ isSpecifiedIn::Document+ providesAuthorityFor::InformationAsset+ defines::MissionArea+
+Document:
+        isAssociatedWith::Document+ describesArchitecture::Architecture describesSystem::System+ isSpecifiedUsing::Agreement+ cites::InformationAsset+
+Action:
+        mayBeA::Task isAssociatedWith::Action+ involvedIn::ActivityModel+
+Agreement:
+        Standard
+Agreement:
+        isAssociatedWith::Agreement+ isCitedBy::Agreement+ appliesTo::InformationAsset+ implements::Guidance+
+Standard:
+        isAssociatedWith::Agreement+ isCitedBy::Agreement+ appliesTo::InformationAsset+ implements::Guidance+
+Task:
+        isAssociatedWith::Task+ isPerformedBy::Node+ isPerformedUsing::System+ specifies::Requirement+
+InformationAsset:
+        ConceptualDataModel
+InformationAsset:
+        ActivityModel
+InformationAsset:
+        isAssociatedWith::InformationAsset+
+ConceptualDataModel:
+        isAssociatedWith::InformationAsset+
+ActivityModel:
+        isAssociatedWith::InformationAsset+
+Node:
+        isAssociatedWith::Node+ describes::Architecture+ hasServicesProvidedBy::Facility+ involvedIn::ActivityModel+ uses::InformationAsset+ involves::InfoExchRequirement+ isParticipedInBy::Network+ supports::System+
+Network:
+        isAssociatedWith::Network+ isDescribedIn::Document+ compliesWith::Standard+ has::Organization+ performsTo::Capability+
+Requirement:
+        InfoExchRequirement
+Requirement:
+        ExchangeNeedLineReq
+Requirement:
+        mayBeSatifiedBy::Architecture+ isSpecifiedUsing::InformationAsset+ specifiesNeedFor::MaterielItem+ cites::MissionArea+
+InfoExchRequirement:
+        isCitedIn::Document+ isSpecifiedInInfos::InformationAsset+
+ExchangeNeedLineReq:
+        mayBeSatifiedBy::Architecture+ isSpecifiedUsing::InformationAsset+ specifiesNeedFor::MaterielItem+ cites::MissionArea+
+MissionArea:
+        supports::Task+
+System:
+        isAssociatedWith::System+ citedIn::Architecture+ compliesWith::Standard+ isDescribedBy::InformationAsset+ uses::MaterielItem+ operatesUsing::Network+ performsTo::Capability+ associatedOrganization::Organization+ appliesTo::Requirement+
+Mission:
+        isCitedBy::Architecture requires::Task+ isAssigned::Organization+ mayCite::FunctionalArea+
+FunctionalArea:
+        isPartOf::FunctionalArea+ supports::System+ cites::MissionArea+
+Capability:
+        specifiesRequired::Requirement+
+MaterielItem:
+        EquipmentType
+MaterielItem:
+        SoftwareItem
+MaterielItem:
+        establishedAs::MaterielItem+ conformsTo::Standard+ performsTo::Capability+
+EquipmentType:
+        establishedAs::MaterielItem+ conformsTo::Standard+ performsTo::Capability+
+SoftwareItem:
+        uses::EquipmentType+ isSourceFor::Organization
+Facility:
+        name::String content::String
+String:
+        STR

@@ -1,0 +1,267 @@
+LocatedElement:
+        ACG
+LocatedElement:
+        ACGElement
+LocatedElement:
+        StatementBlock
+LocatedElement:
+        Statement
+LocatedElement:
+        VariableDecl
+LocatedElement:
+        Expression
+ACG:
+        metamodel::String startsWith::String elements::ACGElement+
+ACGElement:
+        Function
+ACGElement:
+        Attribute
+ACGElement:
+        Node
+Function:
+        context::String name::String parameters::Parameter+ body::Expression
+Attribute:
+        context::String name::String body::Expression
+Parameter:
+        name::String
+Node:
+        ASMNode
+Node:
+        CodeNode
+Node:
+        SimpleNode
+ASMNode:
+        name::Expression
+CodeNode:
+        element::String mode::String guard::Expression
+SimpleNode:
+        element::String mode::String guard::Expression
+StatementBlock:
+        Node
+StatementBlock:
+        CompoundStat
+Statement:
+        ReportStat
+Statement:
+        FieldStat
+Statement:
+        ParamStat
+Statement:
+        EmitStat
+Statement:
+        CompoundStat
+CompoundStat:
+        ForEachStat
+CompoundStat:
+        OnceStat
+CompoundStat:
+        VariableStat
+CompoundStat:
+        OperationStat
+CompoundStat:
+        ConditionalStat
+CompoundStat:
+        LetStat
+CompoundStat:
+        AnalyzeStat
+ForEachStat:
+        iterator::VariableDecl collection::Expression
+OnceStat:
+        EPSILON
+VariableStat:
+        definition::Expression name::Expression
+OperationStat:
+        context::Expression name::Expression
+ConditionalStat:
+        condition::Expression elseStatements::Statement+
+LetStat:
+        variable::VariableDecl value::Expression
+AnalyzeStat:
+        target::Expression mode::String
+ReportStat:
+        severity::Severity message::Expression
+Severity:
+        critic::EPSILON
+        error::EPSILON
+        warning::EPSILON
+FieldStat:
+        name::Expression type::Expression
+ParamStat:
+        name::Expression type::Expression
+EmitStat:
+        LabelStat
+EmitStat:
+        NewStat
+EmitStat:
+        DupStat
+EmitStat:
+        DupX1Stat
+EmitStat:
+        PopStat
+EmitStat:
+        SwapStat
+EmitStat:
+        IterateStat
+EmitStat:
+        EndIterateStat
+EmitStat:
+        GetAsmStat
+EmitStat:
+        FindMEStat
+EmitStat:
+        PushTStat
+EmitStat:
+        PushFStat
+EmitStat:
+        EmitWithOperandStat
+EmitStat:
+        EmitWithLabelRefStat
+LabelStat:
+        name::String id::Expression
+NewStat:
+        EPSILON
+DupStat:
+        EPSILON
+DupX1Stat:
+        EPSILON
+PopStat:
+        EPSILON
+SwapStat:
+        EPSILON
+IterateStat:
+        EPSILON
+EndIterateStat:
+        EPSILON
+GetAsmStat:
+        EPSILON
+FindMEStat:
+        EPSILON
+PushTStat:
+        EPSILON
+PushFStat:
+        EPSILON
+EmitWithOperandStat:
+        PushStat
+EmitWithOperandStat:
+        PushIStat
+EmitWithOperandStat:
+        PushDStat
+EmitWithOperandStat:
+        LoadStat
+EmitWithOperandStat:
+        StoreStat
+EmitWithOperandStat:
+        CallStat
+EmitWithOperandStat:
+        PCallStat
+EmitWithOperandStat:
+        SuperCallStat
+EmitWithOperandStat:
+        GetStat
+EmitWithOperandStat:
+        SetStat
+PushStat:
+        operand::Expression
+PushIStat:
+        operand::Expression
+PushDStat:
+        operand::Expression
+LoadStat:
+        operand::Expression
+StoreStat:
+        operand::Expression
+CallStat:
+        operand::Expression
+PCallStat:
+        operand::Expression
+SuperCallStat:
+        operand::Expression
+GetStat:
+        operand::Expression
+SetStat:
+        operand::Expression
+EmitWithLabelRefStat:
+        IfStat
+EmitWithLabelRefStat:
+        GotoStat
+IfStat:
+        label::LabelStat
+GotoStat:
+        label::LabelStat
+VariableDecl:
+        Parameter
+VariableDecl:
+        name::String
+Expression:
+        VariableExp
+Expression:
+        SelfExp
+Expression:
+        LastExp
+Expression:
+        IfExp
+Expression:
+        IsAExp
+Expression:
+        LetExp
+Expression:
+        PropertyCallExp
+Expression:
+        LiteralExp
+VariableExp:
+        variable::VariableDecl
+SelfExp:
+        EPSILON
+LastExp:
+        EPSILON
+IfExp:
+        condition::Expression thenExp::Expression elseExp::Expression
+IsAExp:
+        source::Expression type::String
+LetExp:
+        variable::VariableDecl value::Expression in::Expression
+PropertyCallExp:
+        NavigationExp
+PropertyCallExp:
+        IteratorExp
+PropertyCallExp:
+        OperationCallExp
+NavigationExp:
+        source::Expression name::String
+IteratorExp:
+        iterator::VariableDecl body::Expression
+OperationCallExp:
+        OperatorCallExp
+OperationCallExp:
+        arguments::Expression+
+OperatorCallExp:
+        arguments::Expression+
+LiteralExp:
+        OclUndefinedExp
+LiteralExp:
+        CollectionExp
+LiteralExp:
+        BooleanExp
+LiteralExp:
+        IntegerExp
+LiteralExp:
+        StringExp
+OclUndefinedExp:
+        EPSILON
+CollectionExp:
+        SequenceExp
+SequenceExp:
+        elements::Expression+
+BooleanExp:
+        value::Boolean
+IntegerExp:
+        value::Integer
+StringExp:
+        value::String
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR

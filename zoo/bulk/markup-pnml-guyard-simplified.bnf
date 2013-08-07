@@ -1,0 +1,48 @@
+LocatedElement:
+        IdedElement
+LocatedElement:
+        URI
+LocatedElement:
+        PNMLDocument
+LocatedElement:
+        NetContent
+LocatedElement:
+        LabeledElement
+LocatedElement:
+        Label
+IdedElement:
+        NetElement
+IdedElement:
+        NetContentElement
+IdedElement:
+        Arc
+URI:
+        value::String
+PNMLDocument:
+        xmlns::URI nets::NetElement+
+NetElement:
+        type::URI document::PNMLDocument contents::NetContent+ name::Name
+NetContent:
+        NetContentElement
+NetContent:
+        Arc
+LabeledElement:
+        Name
+Label:
+        text::String labeledElement::LabeledElement
+Name:
+        net::NetElement netContent::NetContent
+NetContentElement:
+        Place
+NetContentElement:
+        Transition
+Arc:
+        source::NetContentElement target::NetContentElement
+Place:
+        EPSILON
+Transition:
+        EPSILON
+Integer:
+        INT
+String:
+        STR

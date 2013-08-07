@@ -1,0 +1,24 @@
+String:
+        STR
+Integer:
+        INT
+Element:
+        PetriNet
+Element:
+        Place
+Element:
+        Transition
+PetriNet:
+        places::Place+ transitions::Transition+ arcs::Arc+
+Place:
+        incoming::TransToPlaceArc+ outgoing::PlaceToTransArc+
+Transition:
+        incoming::PlaceToTransArc+ outgoing::TransToPlaceArc+
+Arc:
+        PlaceToTransArc
+Arc:
+        TransToPlaceArc
+PlaceToTransArc:
+        source::Place target::Transition
+TransToPlaceArc:
+        source::Transition target::Place

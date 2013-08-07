@@ -1,0 +1,34 @@
+Project:
+        documents::Document+
+TypedElement:
+        ElementWithIL
+TypedElement:
+        CoverLink
+TypedElement:
+        Attribute
+ElementWithIL:
+        Document
+ElementWithIL:
+        TextElement
+Document:
+        project::Project sections::Section+
+TextElement:
+        Section
+TextElement:
+        AbstractRequirement
+Section:
+        document::Document sectionChildren::Section+ sectionParent::Section requirements::AbstractRequirement+
+AbstractRequirement:
+        Requirement
+AbstractRequirement:
+        MacroRequirement
+Requirement:
+        section::Section isContained::MacroRequirement coverLinks::CoverLink+ attribute::Attribute+
+MacroRequirement:
+        contains::AbstractRequirement+
+CoverLink:
+        linkWith::AbstractRequirement
+Attribute:
+        value::String
+String:
+        STR

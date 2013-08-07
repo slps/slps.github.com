@@ -1,0 +1,51 @@
+Element:
+        ModelElement
+ModelElement:
+        GeneralizableElement
+ModelElement:
+        Namespace
+ModelElement:
+        Feature
+ModelElement:
+        Relationship
+GeneralizableElement:
+        Classifier
+GeneralizableElement:
+        Package
+Namespace:
+        Classifier
+Namespace:
+        Package
+Classifier:
+        Subsystem
+Relationship:
+        Generalization
+Generalization:
+        parent::GeneralizableElement powertype::Classifier child::GeneralizableElement discriminator::String
+Package:
+        Model
+Package:
+        Subsystem
+Package:
+        elementImport::ElementImport+
+Model:
+        elementImport::ElementImport+
+Subsystem:
+        isInstantiable::Boolean
+ElementImport:
+        package::Package importedElement::ModelElement visibility::VisibilityKind alias::String isSpecification::Boolean
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR
+ScopeKind:
+        sk_instance::EPSILON
+        sk_classifier::EPSILON
+VisibilityKind:
+        vk_public::EPSILON
+        vk_protected::EPSILON
+        vk_private::EPSILON
+        vk_package::EPSILON

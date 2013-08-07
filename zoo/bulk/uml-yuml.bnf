@@ -1,0 +1,69 @@
+LocatedElement:
+        Model
+LocatedElement:
+        Class
+LocatedElement:
+        ModelElement
+LocatedElement:
+        ClassDefinition
+LocatedElement:
+        Cardinality
+LocatedElement:
+        ClassMember
+Model:
+        classes::Class+ elements::ModelElement+
+Class:
+        name::String
+ModelElement:
+        ColorableElement
+ModelElement:
+        Relationship
+ColorableElement:
+        ClassReference
+ColorableElement:
+        Note
+ClassReference:
+        class::Class stereotype::String definition::ClassDefinition
+AssociationType:
+        simpleAssociation::EPSILON
+        aggregation::EPSILON
+        composition::EPSILON
+Relationship:
+        Association
+Relationship:
+        Inheritance
+Relationship:
+        NoteAssociation
+ClassDefinition:
+        attributes::Attribute+ methods::Method+
+Association:
+        type::AssociationType sourceCardinality::Cardinality sourceLabel::String navigableSource::Boolean sourceVisibility::Visibility targetCardinality::Cardinality targetLabel::String navigableTarget::Boolean targetVisibility::Visibility
+Inheritance:
+        source::ClassReference target::ClassReference
+Cardinality:
+        lowerBound::Integer upperBound::Integer
+Visibility:
+        unspecified::EPSILON
+        public::EPSILON
+        private::EPSILON
+        protected::EPSILON
+        package::EPSILON
+ClassMember:
+        Attribute
+ClassMember:
+        Method
+Attribute:
+        type::String
+Method:
+        arguments::String+
+Note:
+        text::String+
+NoteAssociation:
+        note::Note
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR

@@ -1,0 +1,30 @@
+String:
+        STR
+Actor:
+        decomposition::Decomposition+ contribution::Contribution+ meansEnd::MeansEnd+
+Decomposition:
+        BooleanDecomposition
+Decomposition:
+        PointOfView::Actor
+Contribution:
+        metric::String contributer::Goal contributed::Goal PointOfView::Actor
+Goal:
+        contributionR::Contribution+ contributionD::Contribution+ meansEndS::MeansEnd+ meansEndD::MeansEnd+ booleanDecomposition::BooleanDecomposition booleanDecLink::BooleanDecLink+
+MeansEnd:
+        meansR::Resource means::Goal end::Goal PointOfView::Actor meansP::Plan
+Resource:
+        meansEndR::MeansEnd+
+Plan:
+        meansEndP::MeansEnd+ booleanDecompositionP::BooleanDecomposition booleanDecLinkP::BooleanDecLink+
+BooleanDecomposition:
+        type::String root::Goal rootP::Plan booleanDecLinkD::BooleanDecLink+
+BooleanDecLink:
+        AndDecLink
+BooleanDecLink:
+        OrDecLink
+BooleanDecLink:
+        booleanDecompositionB::BooleanDecomposition target::Goal targetP::Plan
+AndDecLink:
+        booleanDecompositionB::BooleanDecomposition target::Goal targetP::Plan
+OrDecLink:
+        booleanDecompositionB::BooleanDecomposition target::Goal targetP::Plan

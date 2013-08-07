@@ -1,0 +1,22 @@
+RModelElement:
+        Schema
+RModelElement:
+        Table
+RModelElement:
+        Column
+RModelElement:
+        Key
+RModelElement:
+        ForeignKey
+Schema:
+        tables::Table+
+Table:
+        schema::Schema column::Column+ key::Key+ foreignKey::ForeignKey+
+Column:
+        type::String owner::Table key::Key+ foreignKey::ForeignKey+
+Key:
+        owner::Table column::Column+ refersToOpposite::ForeignKey+
+ForeignKey:
+        column::Column+ owner::Table refersTo::Key
+String:
+        STR

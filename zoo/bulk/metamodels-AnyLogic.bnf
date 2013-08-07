@@ -1,0 +1,65 @@
+ModelElement:
+        VisualModelElement
+ModelElement:
+        Model
+ModelElement:
+        ActiveObjectClass
+ModelElement:
+        Experiment
+ModelElement:
+        id::Integer name::String excludeFromBuild::Boolean
+VisualModelElement:
+        Connector
+VisualModelElement:
+        EmbeddedObject
+VisualModelElement:
+        Shape
+VisualModelElement:
+        Control
+VisualModelElement:
+        position::Point label::Point publicFlag::Boolean presentationFlag::Boolean showLabel::Boolean
+Point:
+        x::Integer y::Integer
+Model:
+        engineVersion::Integer javaPackageName::String activeObjectClasses::ActiveObjectClass+ experiments::Experiment+
+ActiveObjectClass:
+        clientAreaTopLeft::Point presentationTopGroupPersistent::Boolean iconTopGroupPersistent::Boolean generic::Boolean genericParameters::String agent::Boolean environmentDefinesInitialLocation::Boolean connectors::Connector+ embeddedObjects::EmbeddedObject+ shapes::Shape+
+Connector:
+        sourceEmbeddedObject::EmbeddedObject sourceConnectableName::String targetEmbeddedObject::EmbeddedObject targetConnectableName::String points::Point+
+EmbeddedObject:
+        presentation::EmbeddedObjectPresentation activeObjectClass::ActiveObjectClassRef genericParametersSubstitute::String parameters::Parameter+
+ActiveObjectClassRef:
+        packageName::String className::String
+Parameter:
+        name::String value::String
+Shape:
+        EmbeddedObjectPresentation
+Shape:
+        Text
+Shape:
+        asObject::Boolean embeddedIcon::Boolean rotation::Double
+EmbeddedObjectPresentation:
+        asObject::Boolean embeddedIcon::Boolean rotation::Double
+Experiment:
+        SimulationExperiment
+SimulationExperiment:
+        activeObjectClass::ActiveObjectClass clientAreaTopLeft::Point presentationTopGroupPersistent::Boolean iconTopGroupPersistent::Boolean frame::Frame commandLineArguments::String maximumMemory::Integer randomSeed::Boolean seedValue::Integer vmArgs::String absoluteAccuracy::Double relativeAccuracy::Double timeAccuracy::Double fixedTimeStep::Double shapes::Shape+ controls::Control+ parameters::Parameter+ enableAdaptiveFrameManagement::Boolean enableAntiAliasing::Boolean enablePanning::Boolean enableZoom::Boolean executionMode::String cpuRatio::String title::String framesPerSecond::String realTimeScale::String uiProperties::Parameter+ useCalendar::Boolean stopOption::String initialDate::String initialTime::String finalDate::String finalTime::String modelTimeUnit::String
+Control:
+        Button
+Control:
+        width::Integer height::Integer asObject::Boolean embeddedIcon::Boolean fillColor::Integer textColor::Integer enableExpression::String actionCode::String labelText::String font::Font
+Button:
+        width::Integer height::Integer asObject::Boolean embeddedIcon::Boolean fillColor::Integer textColor::Integer enableExpression::String actionCode::String labelText::String font::Font
+Frame:
+        x::Integer y::Integer width::Integer height::Integer
+Text:
+        color::Integer text::String font::Font alignment::String
+Font:
+        name::String size::Integer style::Integer
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR

@@ -1,0 +1,113 @@
+UEMLObject:
+        UEMLModel
+UEMLObject:
+        Port
+UEMLObject:
+        Flow
+UEMLObject:
+        Activity
+UEMLObject:
+        Object
+UEMLObject:
+        has::Geometry model::UEMLModel
+UEMLModel:
+        contains::UEMLObject+
+Geometry:
+        object::UEMLObject
+Port:
+        ResourceRole
+Port:
+        Anchor
+Port:
+        ResourceRole
+        Anchor
+Flow:
+        ResourceFlow
+Flow:
+        IOFlow
+Flow:
+        ControlFlow
+Flow:
+        associationConnector::AssociationConnector
+Activity:
+        resourceRole::ResourceRole+ child::Activity+ parent::Activity hasOutput::OutputPort+ hasInput::InputPort+
+Object:
+        InformationObject
+Object:
+        Resource
+Object:
+        ioFlow::IOFlow
+InformationObject:
+        controlFlow::ControlFlow
+Resource:
+        PassiveObject
+Resource:
+        Agent
+Resource:
+        carries::ResourceFlow plays::ResourceRole+ commitment::Commitment+
+MaterialResource:
+        EPSILON
+HumanResource:
+        EPSILON
+ResourceFlow:
+        resourceCarries::Resource+
+IOFlow:
+        carries::Object+
+ControlFlow:
+        TriggerFlow
+ControlFlow:
+        ConstraintFlow
+ControlFlow:
+        carries::InformationObject+
+TriggerFlow:
+        carries::InformationObject+
+ConstraintFlow:
+        carries::InformationObject+
+ResourceRole:
+        resourcePlays::Resource+ roleQualifier::RoleType in::Activity
+RoleType:
+        EPSILON
+Anchor:
+        OutputPort
+Anchor:
+        InputPort
+Anchor:
+        ConnectionOperator
+Anchor:
+        target::AssociationConnector origin::AssociationConnector
+OutputPort:
+        activity::Activity
+InputPort:
+        activity::Activity
+ConnectionOperator:
+        target::AssociationConnector origin::AssociationConnector
+AssociationConnector:
+        origin::Anchor+ target::Anchor+ classAssociation::Flow
+PassiveObject:
+        MaterialResource
+PassiveObject:
+        Commitment
+PassiveObject:
+        Contract
+PassiveObject:
+        MaterialResource
+        Commitment
+        Contract
+Commitment:
+        resource::Resource+
+Contract:
+        EPSILON
+Agent:
+        HumanResource
+Agent:
+        Software
+Agent:
+        Organisation
+Agent:
+        HumanResource
+        Software
+        Organisation
+Software:
+        EPSILON
+Organisation:
+        EPSILON

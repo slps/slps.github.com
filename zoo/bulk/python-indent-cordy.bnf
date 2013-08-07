@@ -1,0 +1,35 @@
+program:
+        line*
+line:
+        tab_space* linetoken* indent? endofline+ dedent*
+endofline:
+        tab_space* comment? newline
+indent:
+        SP "INDENT"
+dedent:
+        "DEDENT" SP
+tab_space:
+        tab
+        space
+linetoken:
+        tab_space
+        nonblank_token
+nonblank_token:
+        compound
+        token
+compound:
+        "{" compoundtoken* "}"
+        "[" compoundtokensquare* "]"
+        "(" compoundtokenround* ")"
+compoundtoken:
+        linetoken
+        newline
+        comment
+compoundtokensquare:
+        linetoken
+        newline
+        comment
+compoundtokenround:
+        linetoken
+        newline
+        comment

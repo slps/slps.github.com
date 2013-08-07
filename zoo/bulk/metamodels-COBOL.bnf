@@ -1,0 +1,58 @@
+COBOLUsageValue:
+        cuv_binary::EPSILON
+        cuv_dbcs::EPSILON
+        cuv_double::EPSILON
+        cuv_display::EPSILON
+        cuv_float::EPSILON
+        cuv_index::EPSILON
+        cuv_objectReference::EPSILON
+        cuv_packedDecimal::EPSILON
+        cuv_pointer::EPSILON
+        cuv_procedurePointer::EPSILON
+COBOLInitialValueKind:
+        civk_string_value::EPSILON
+        civk_low_value::EPSILON
+        civk_high_value::EPSILON
+        civk_zero_value::EPSILON
+        civk_quotes::EPSILON
+        civk_null::EPSILON
+        civk_all_literal::EPSILON
+COBOLElement:
+        COBOLRedefiningElement
+COBOLElement:
+        level::String refined::Boolean name::String sharedType::COBOLClassifier group::COBOLComposedType initial::COBOLElementInitialValue+ contains::COBOL88Element+ source::COBOLSourceText array::COBOLFixedLengthArray
+COBOLClassifier:
+        COBOLSimpleType
+COBOLClassifier:
+        COBOLComposedType
+COBOLClassifier:
+        typeded::Boolean name::String typedElements::COBOLElement+
+COBOLSimpleType:
+        usageValue::COBOLUsageValue pictureString::String usage::Boolean
+COBOLComposedType:
+        elements::COBOLElement+
+COBOLElementInitialValue:
+        initVal::String valueKind::COBOLInitialValueKind
+COBOL88Element:
+        name::String has::COBOL88ElementValue+
+COBOL88ElementValue:
+        lowerLimit::String upperLimit::String range::Boolean
+COBOLRedefiningElement:
+        redefines::COBOLElement
+COBOL66Element:
+        name::String end::COBOLElement start::COBOLElement
+COBOLSourceText:
+        source::String fileName::String
+COBOLFixedLengthArray:
+        COBOLVariableLengthArray
+COBOLFixedLengthArray:
+        maxUpper::Integer
+COBOLVariableLengthArray:
+        minUpper::Integer dependingOn::COBOLElement
+Integer:
+        INT
+String:
+        STR
+Boolean:
+        "true"
+        "false"

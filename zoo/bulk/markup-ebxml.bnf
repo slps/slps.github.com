@@ -1,0 +1,71 @@
+MultyPartyCollaboration:
+        partners::BusinessPartnerRole+
+BusinessPartnerRole:
+        collaboration::MultyPartyCollaboration transition::Transaction performers::Performs+
+Performs:
+        performedBy::BusinessPartnerRole collaboration::BinaryCollaboration role::AuthorizedRole
+AuthorizedRole:
+        isInitiator::Boolean performers::Performs+
+Transaction:
+        onInitiation::String conditionGuard::String conditionExpression::String from::BusinessState to::BusinessState
+BinaryCollaboration:
+        pattern::String timeToPerform::String preCondition::String postCondition::String beginsWhen::String endsWhen::String roles::Performs+ transitions::Transaction+ states::BusinessState+
+BusinessState:
+        Start
+BusinessState:
+        Fork
+BusinessState:
+        Join
+BusinessState:
+        CompletionState
+BusinessState:
+        BusinessActivity
+Start:
+        collaboration::BinaryCollaboration from::AuthorizedRole to::AuthorizedRole
+Fork:
+        waitForAll::String
+Join:
+        collaboration::BinaryCollaboration from::AuthorizedRole to::AuthorizedRole
+CompletionState:
+        Failure
+CompletionState:
+        Success
+CompletionState:
+        guardCondition::String
+Failure:
+        guardCondition::String
+Success:
+        guardCondition::String
+BusinessActivity:
+        BusinessTransactionActivity
+BusinessActivity:
+        CollaborationActivity
+BusinessTransactionActivity:
+        timeToPerform::String isConcurrent::Boolean isLegallyBinding::Boolean use::BusinessTransaction
+CollaborationActivity:
+        use::BinaryCollaboration
+BusinessTransaction:
+        pattern::String isGuaranteedDeliveryRequired::Boolean preCondition::String postCondition::String beginsWhen::String endsWhen::String requester::RequestingBusinessActivity responder::RespondingBusinessActivity
+BusinessAction:
+        RequestingBusinessActivity
+BusinessAction:
+        RespondingBusinessActivity
+RequestingBusinessActivity:
+        timeToAcknowledgeAcceptance::String transaction::BusinessTransaction documentEnvelope::DocumentEnvelope
+RespondingBusinessActivity:
+        transaction::BusinessTransaction documentEnvelope::DocumentEnvelope
+DocumentSecurity:
+        DocumentEnvelope
+DocumentSecurity:
+        Attachment
+DocumentEnvelope:
+        isPositiveResponse::Boolean requesting::RequestingBusinessActivity responding::RespondingBusinessActivity attachements::Attachment+ document::BusinessDocument
+Attachment:
+        mimeType::String specification::String version::String envelope::DocumentEnvelope document::BusinessDocument
+BusinessDocument:
+        specificationLocation::String specificationElement::String conditionExpression::String envelopes::DocumentEnvelope+ attachments::Attachment+
+Boolean:
+        "true"
+        "false"
+String:
+        STR

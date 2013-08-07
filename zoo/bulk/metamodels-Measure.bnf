@@ -1,0 +1,36 @@
+ModelKind:
+        KM3::EPSILON
+        UML2::EPSILON
+RootMeasureSet:
+        modelType::ModelKind categories::Category+ measureSets::MeasureSet+
+Category:
+        name::String desc::String metrics::Metric+ root::RootMeasureSet
+Metric:
+        name::String desc::String preferredValue::String category::Category
+ElementKind:
+        metamodel::EPSILON
+        model::EPSILON
+        package::EPSILON
+        interface::EPSILON
+        class::EPSILON
+MeasureSet:
+        elementName::String elementType::ElementKind measures::Measure+ root::RootMeasureSet subsets::MeasureSet+ parent::MeasureSet
+Measure:
+        IntegerMeasure
+Measure:
+        DoubleMeasure
+Measure:
+        PercentageMeasure
+IntegerMeasure:
+        value::Integer
+DoubleMeasure:
+        value::Double
+PercentageMeasure:
+        value::Double
+String:
+        STR
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT

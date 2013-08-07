@@ -1,0 +1,568 @@
+TemplateExp:
+        ObjectTemplateExp
+TemplateExp:
+        CollectionTemplateExp
+ObjectTemplateExp:
+        part::PropertyTemplateItem+ referredClass::Class
+CollectionTemplateExp:
+        part::OclExpression+ kind::CollectionKind referredCollectionType::CollectionType match::OclExpression
+PropertyTemplateItem:
+        objContainer::ObjectTemplateExp value::OclExpression referredProperty::Property
+ImperativeIterateExp:
+        target::Variable
+AssignExp:
+        value::OclExpression+ left::OclExpression defaultValue::OclExpression isReset::Boolean
+BlockExp:
+        body::OclExpression+
+SwitchExp:
+        alternativePart::AltExp+ elsePart::OclExpression
+VariableInitExp:
+        referredVariable::Variable withResult::Boolean
+WhileExp:
+        condition::OclExpression body::OclExpression
+ComputeExp:
+        returnedElement::Variable body::OclExpression
+AltExp:
+        condition::OclExpression body::OclExpression
+UnlinkExp:
+        target::OclExpression item::OclExpression
+ReturnExp:
+        value::OclExpression
+BreakExp:
+        EPSILON
+TryExp:
+        tryBody::OclExpression exception::Type+ exceptBody::OclExpression
+RaiseExp:
+        exception::Type
+ContinueExp:
+        EPSILON
+ForExp:
+        condition::OclExpression
+TupleExp:
+        element::OclExpression+
+Typedef:
+        base::Type condition::OclExpression
+InstantiationExp:
+        ObjectExp
+InstantiationExp:
+        instantiatedClass::Class extent::Variable argument::OclExpression+
+DictionaryType:
+        keyType::Type
+DictLiteralExp:
+        part::DictLiteralPart+
+DictLiteralPart:
+        key::OclExpression value::OclExpression
+TemplateParameterType:
+        specification::String
+LogExp:
+        text::String level::Integer condition::OclExpression element::Element
+AssertExp:
+        severity::SeverityKind log::LogExp assertion::OclExpression
+SeverityKind:
+        error::EPSILON
+        fatal::EPSILON
+        warning::EPSILON
+ImperativeLoopExp:
+        ImperativeIterateExp
+ImperativeLoopExp:
+        ForExp
+ImperativeLoopExp:
+        CollectorExp
+CollectorExp:
+        target::Variable
+ImperativeExpression:
+        AssignExp
+ImperativeExpression:
+        BlockExp
+ImperativeExpression:
+        VariableInitExp
+ImperativeExpression:
+        WhileExp
+ImperativeExpression:
+        ComputeExp
+ImperativeExpression:
+        AltExp
+ImperativeExpression:
+        UnlinkExp
+ImperativeExpression:
+        ReturnExp
+ImperativeExpression:
+        BreakExp
+ImperativeExpression:
+        TryExp
+ImperativeExpression:
+        RaiseExp
+ImperativeExpression:
+        ContinueExp
+ImperativeExpression:
+        TupleExp
+ImperativeExpression:
+        InstantiationExp
+ImperativeExpression:
+        LogExp
+ImperativeExpression:
+        AssertExp
+ImperativeExpression:
+        UnpackExp
+ImperativeExpression:
+        SwitchExp
+ImperativeExpression:
+        ImperativeLoopExp
+UnpackExp:
+        variable::Variable+
+AnonymousTupleType:
+        elementType::Type+
+AnonymousTupleLiteralExp:
+        part::AnonymousTupleLiteralPart+
+AnonymousTupleLiteralPart:
+        value::OclExpression+
+ListType:
+        elementType::Type
+Class:
+        Typedef
+Class:
+        AnonymousTupleType
+Class:
+        ModelType
+Class:
+        Module
+Class:
+        Transformation
+Class:
+        TupleType
+Class:
+        AnyType
+Class:
+        ownedAttribute::Property+ ownedOperation::Operation+ superClass::Class+ isAbstract::Boolean
+DataType:
+        Enumeration
+DataType:
+        PrimitiveType
+DataType:
+        CollectionType
+DataType:
+        TupleType
+Element:
+        PropertyTemplateItem
+Element:
+        DictLiteralPart
+Element:
+        AnonymousTupleLiteralPart
+Element:
+        Tag
+Element:
+        NamedElement
+Element:
+        Comment
+Element:
+        ModuleImport
+Element:
+        OperationBody
+Element:
+        Pattern
+Element:
+        Predicate
+Element:
+        RelationImplementation
+Element:
+        Key
+Tag:
+        element::Element+ transformation::Transformation owner::Module value::String name::String
+Enumeration:
+        ownedLiteral::EnumerationLiteral+
+NamedElement:
+        Package
+NamedElement:
+        Type
+NamedElement:
+        EnumerationLiteral
+NamedElement:
+        TypedElement
+NamedElement:
+        Domain
+NamedElement:
+        TypedModel
+NamedElement:
+        Rule
+Extent:
+        URIExtent
+Object:
+        Element
+Object:
+        Extent
+Object:
+        Element
+        Extent
+Operation:
+        ImperativeOperation
+Operation:
+        Function
+Operation:
+        class::Class ownedParameter::Parameter+ raisedException::Type+
+MultiplicityElement:
+        Operation
+MultiplicityElement:
+        Parameter
+MultiplicityElement:
+        Property
+Package:
+        Module
+Package:
+        Transformation
+Package:
+        ownedType::Type+ nestedPackage::Package+ uri::String
+Type:
+        TemplateParameterType
+Type:
+        Class
+Type:
+        DataType
+Type:
+        InvalidType
+Type:
+        VoidType
+Type:
+        AnyType
+Parameter:
+        VarParameter
+Parameter:
+        FunctionParameter
+Parameter:
+        operation::Operation
+EnumerationLiteral:
+        enumeration::Enumeration
+Property:
+        ContextualProperty
+Property:
+        Class::Class opposite::Property module::Module isReadOnly::Boolean isDerived::Boolean isComposite::Boolean isId::Boolean default::String
+TypedElement:
+        OclExpression
+TypedElement:
+        Variable
+TypedElement:
+        CollectionLiteralPart
+TypedElement:
+        TupleLiteralPart
+TypedElement:
+        Operation
+TypedElement:
+        Parameter
+TypedElement:
+        Property
+PrimitiveType:
+        EPSILON
+URIExtent:
+        ModelType
+URIExtent:
+        EPSILON
+Boolean:
+        "true"
+        "false"
+String:
+        STR
+Integer:
+        INT
+Comment:
+        annotatedElement::NamedElement+
+MappingBody:
+        initSection::OclExpression+ endSection::OclExpression+
+Helper:
+        isQuery::Boolean
+ResolveExp:
+        ResolveInExp
+ResolveExp:
+        condition::OclExpression one::Boolean isInverse::Boolean isDeferred::Boolean
+ResolveInExp:
+        inMapping::MappingOperation
+OperationalTransformation:
+        intermediateClass::Class+ refined::Transformation intermediateProperty::Property+ modelParameter::ModelParameter+ entry::EntryOperation relation::Relation+
+MappingParameter:
+        refinedDomain::RelationDomain extent::ModelParameter
+MappingOperation:
+        disjunct::MappingOperation+ refinedRelation::Relation merged::MappingOperation+ inherited::MappingOperation+ when::OclExpression+
+MappingCallExp:
+        isStrict::Boolean
+Constructor:
+        context::VarParameter result::VarParameter+ overridden::ImperativeOperation body::OperationBody isBlackbox::Boolean
+ContextualProperty:
+        context::Class overridden::Property
+EntryOperation:
+        context::VarParameter result::VarParameter+ overridden::ImperativeOperation body::OperationBody isBlackbox::Boolean
+ImperativeCallExp:
+        MappingCallExp
+ImperativeCallExp:
+        isVirtual::Boolean
+ImperativeOperation:
+        Helper
+ImperativeOperation:
+        Constructor
+ImperativeOperation:
+        EntryOperation
+ImperativeOperation:
+        MappingOperation
+ImperativeOperation:
+        context::VarParameter result::VarParameter+ overridden::ImperativeOperation body::OperationBody isBlackbox::Boolean
+DirectionKind:
+        in::EPSILON
+        inout::EPSILON
+        out::EPSILON
+Library:
+        ownedTag::Tag+ configProperty::Property+ moduleImport::ModuleImport+ usedModelType::ModelType+ isBlackbox::Boolean
+ModelParameter:
+        ctxOwner::ImperativeOperation resOwner::ImperativeOperation kind::DirectionKind
+ModelType:
+        metamodel::Package+ additionalCondition::OclExpression+ conformanceKind::String
+Module:
+        OperationalTransformation
+Module:
+        Library
+Module:
+        ownedTag::Tag+ configProperty::Property+ moduleImport::ModuleImport+ usedModelType::ModelType+ isBlackbox::Boolean
+ModuleImport:
+        binding::ModelType+ module::Module importedModule::Module kind::ImportKind
+ImportKind:
+        extension::EPSILON
+        access::EPSILON
+VarParameter:
+        MappingParameter
+VarParameter:
+        ModelParameter
+VarParameter:
+        ctxOwner::ImperativeOperation resOwner::ImperativeOperation kind::DirectionKind
+OperationBody:
+        MappingBody
+OperationBody:
+        ConstructorBody
+OperationBody:
+        operation::ImperativeOperation content::OclExpression+
+ConstructorBody:
+        operation::ImperativeOperation content::OclExpression+
+ObjectExp:
+        referredObject::Variable body::ConstructorBody
+Area:
+        Mapping
+Area:
+        CoreDomain
+Assignment:
+        bottomPattern::BottomPattern slotExpression::OclExpression value::OclExpression targetProperty::Property isDefault::Boolean
+BottomPattern:
+        area::Area assignment::Assignment+ realizedVariable::RealizedVariable+ enforcementOperation::EnforcementOperation+
+GuardPattern:
+        area::Area
+Mapping:
+        specification::Mapping+ local::Mapping+ context::Mapping
+RealizedVariable:
+        initExpression::OclExpression LetExp::LetExp computeOwner::ComputeExp bindParameter::Parameter
+CoreDomain:
+        isCheckable::Boolean isEnforceable::Boolean rule::Rule typedModel::TypedModel guardPattern::GuardPattern bottomPattern::BottomPattern
+CorePattern:
+        BottomPattern
+CorePattern:
+        GuardPattern
+CorePattern:
+        BottomPattern
+        GuardPattern
+EnforcementOperation:
+        enforcementMode::EnforcementMode bottomPattern::BottomPattern operationCallExp::OperationCallExp
+EnforcementMode:
+        Deletion::EPSILON
+        Creation::EPSILON
+Domain:
+        RelationDomain
+Domain:
+        CoreDomain
+Domain:
+        isCheckable::Boolean isEnforceable::Boolean rule::Rule typedModel::TypedModel
+Transformation:
+        RelationalTransformation
+Transformation:
+        ownedTag::Tag+ modelParameter::TypedModel+ rule::Rule+ extends::Transformation
+TypedModel:
+        transformation::Transformation usedPackage::Package+ dependsOn::TypedModel+
+Rule:
+        Relation
+Rule:
+        Mapping
+Rule:
+        domain::Domain+ transformation::Transformation overrides::Rule
+Pattern:
+        CorePattern
+Pattern:
+        DomainPattern
+Pattern:
+        predicate::Predicate+ bindsTo::Variable+ whenOwner::Relation whereOwner::Relation
+Predicate:
+        conditionExpression::OclExpression pattern::Pattern
+Function:
+        queryExpression::OclExpression
+FunctionParameter:
+        operation::Operation initExpression::OclExpression LetExp::LetExp computeOwner::ComputeExp bindParameter::Parameter
+RelationalTransformation:
+        ownedKey::Key+
+Relation:
+        isTopLevel::Boolean variable::Variable+ operationalImpl::RelationImplementation+ where::Pattern when::Pattern
+RelationDomain:
+        pattern::DomainPattern rootVariable::Variable
+DomainPattern:
+        templateExpression::TemplateExp
+RelationImplementation:
+        relation::Relation impl::Operation inDirectionOf::TypedModel
+Key:
+        identifies::Class part::Property+ transformation::RelationalTransformation
+BooleanLiteralExp:
+        booleanSymbol::Boolean
+CallExp:
+        ResolveExp
+CallExp:
+        FeaturePropertyCall
+CallExp:
+        SwitchExp
+CallExp:
+        LoopExp
+CollectionKind:
+        OrderedSet::EPSILON
+        Set::EPSILON
+        Bag::EPSILON
+        Sequence::EPSILON
+OclExpression:
+        ImperativeExpression
+OclExpression:
+        CallExp
+OclExpression:
+        IfExp
+OclExpression:
+        LetExp
+OclExpression:
+        VariableExp
+OclExpression:
+        TypeExp
+OclExpression:
+        LiteralExp
+OclExpression:
+        LoopExp
+UnlimitedNaturalExp:
+        symbol::UnlimitedNatural
+IfExp:
+        condition::OclExpression thenExpression::OclExpression elseExpression::OclExpression
+LetExp:
+        in::OclExpression+ variable::Variable
+Variable:
+        RealizedVariable
+Variable:
+        VarParameter
+Variable:
+        FunctionParameter
+Variable:
+        initExpression::OclExpression LetExp::LetExp computeOwner::ComputeExp bindParameter::Parameter
+PropertyCallExp:
+        referredProperty::Property
+VariableExp:
+        referredVariable::Variable
+TypeExp:
+        referredType::Type
+LoopExp:
+        IteratorExp
+LoopExp:
+        IterateExp
+LoopExp:
+        ImperativeLoopExp
+IteratorExp:
+        body::OclExpression iterator::Variable+
+StringLiteralExp:
+        stringSymbol::String
+IntegerLiteralExp:
+        integerSymbol::Integer
+OperationCallExp:
+        ImperativeCallExp
+OperationCallExp:
+        argument::OclExpression+ referredOperation::Operation
+RealLiteralExp:
+        realSymbol::Real
+LiteralExp:
+        TemplateExp
+LiteralExp:
+        DictLiteralExp
+LiteralExp:
+        AnonymousTupleLiteralExp
+LiteralExp:
+        PrimitiveLiteralExp
+LiteralExp:
+        CollectionLiteralExp
+LiteralExp:
+        TupleLiteralExp
+LiteralExp:
+        NullLiteralExp
+LiteralExp:
+        InvalidLiteralExp
+LiteralExp:
+        EnumLiteralExp
+IterateExp:
+        result::Variable
+PrimitiveLiteralExp:
+        BooleanLiteralExp
+PrimitiveLiteralExp:
+        StringLiteralExp
+PrimitiveLiteralExp:
+        NumericLiteralExp
+NumericLiteralExp:
+        UnlimitedNaturalExp
+NumericLiteralExp:
+        IntegerLiteralExp
+NumericLiteralExp:
+        RealLiteralExp
+CollectionLiteralExp:
+        kind::CollectionKind part::CollectionLiteralPart+
+CollectionLiteralPart:
+        CollectionItem
+CollectionLiteralPart:
+        CollectionRange
+CollectionItem:
+        item::OclExpression
+CollectionRange:
+        first::OclExpression last::OclExpression
+TupleLiteralExp:
+        part::TupleLiteralPart+
+NullLiteralExp:
+        EPSILON
+ExpressionInOcl:
+        bodyExpression::OclExpression context::Variable resultVariable::Variable parameterVariable::Variable
+OpaqueExpression:
+        ExpressionInOcl
+InvalidLiteralExp:
+        EPSILON
+FeaturePropertyCall:
+        PropertyCallExp
+FeaturePropertyCall:
+        OperationCallExp
+TupleLiteralPart:
+        TupleLiteralExp::TupleLiteralExp attribute::Property
+BagType:
+        elementType::Type
+CollectionType:
+        DictionaryType
+CollectionType:
+        ListType
+CollectionType:
+        BagType
+CollectionType:
+        OrderedSetType
+CollectionType:
+        SequenceType
+CollectionType:
+        SetType
+EnumLiteralExp:
+        referredEnumLiteral::EnumerationLiteral
+InvalidType:
+        package::Package
+OrderedSetType:
+        elementType::Type
+SequenceType:
+        elementType::Type
+SetType:
+        elementType::Type
+TupleType:
+        ownedAttribute::Property+ ownedOperation::Operation+ superClass::Class+ isAbstract::Boolean
+VoidType:
+        package::Package
+AnyType:
+        ownedAttribute::Property+ ownedOperation::Operation+ superClass::Class+ isAbstract::Boolean package::Package

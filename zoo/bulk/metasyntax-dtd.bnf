@@ -1,0 +1,74 @@
+Occurence:
+        zeroOrOne::EPSILON
+        zeroOrMore::EPSILON
+        oneOrMore::EPSILON
+        one::EPSILON
+OtherAttributeTypeEnum:
+        cdata::EPSILON
+        id::EPSILON
+        idref::EPSILON
+        entityType::EPSILON
+        entities::EPSILON
+        nmtoken::EPSILON
+        nmtakens::EPSILON
+TypeDescription:
+        Notation
+TypeDescription:
+        Entity
+TypeDescription:
+        Element
+TypeDescription:
+        AttributeList
+TypeDescription:
+        AttributeDescription
+Notation:
+        content::String
+Entity:
+        content::String isInternal::Boolean
+Element:
+        AnyElement
+Element:
+        RestrictedElement
+AnyElement:
+        EPSILON
+RestrictedElement:
+        content::ElementContent
+ElementContent:
+        Mixed
+ElementContent:
+        Children
+Mixed:
+        elements::String
+Children:
+        Sequence
+Children:
+        Leaf
+Children:
+        Choice
+Sequence:
+        children::Children
+Leaf:
+        elementName::String
+Choice:
+        childrenChoice::Children
+AttributeList:
+        containsAttributes::AttributeDescription+
+AttributeDescription:
+        NoDefaultValue
+AttributeDescription:
+        DefaultValue
+NoDefaultValue:
+        isRequired::Boolean
+DefaultValue:
+        value::String isFixed::Boolean
+AttributeType:
+        Enumeration
+Enumeration:
+        values::String
+OtherAttributeType:
+        type::OtherAttributeTypeEnum
+String:
+        STR
+Boolean:
+        "true"
+        "false"

@@ -1,0 +1,73 @@
+<bgf:grammar xmlns:bgf="http://planet-sl.org/bgf" xmlns:ldf="http://planet-sl.org/ldf"><bgf:production><nonterminal xmlns:xns1="http://planet-sl.org/bgf">SortDeclaration</nonterminal><bgf:expression><nonterminal xmlns:xns1="http://planet-sl.org/bgf">Partition</nonterminal></bgf:expression></bgf:production><bgf:production><nonterminal xmlns:xns1="http://planet-sl.org/bgf">OperatorDeclaration</nonterminal><bgf:expression><nonterminal xmlns:xns1="http://planet-sl.org/bgf">PartitionElement</nonterminal></bgf:expression></bgf:production><bgf:production><nonterminal xmlns:xns1="http://planet-sl.org/bgf">BuiltInOperator</nonterminal><bgf:expression><nonterminal xmlns:xns1="http://planet-sl.org/bgf">PartitionOperator</nonterminal></bgf:expression></bgf:production><bgf:production><nonterminal xmlns:xns1="http://planet-sl.org/bgf">Partition</nonterminal><bgf:expression><selectable xmlns:xns1="http://planet-sl.org/bgf">
+	<selector>partition</selector>
+	<xns1:expression>
+	  <sequence>
+	    <xns1:expression>
+	      <nonterminal>SortDeclaration.content</nonterminal>
+	    </xns1:expression>
+	    <xns1:expression>
+	      <nonterminal>Sort</nonterminal>
+	    </xns1:expression>
+	    <xns1:expression>
+	      <plus>
+		<xns1:expression>
+		  <nonterminal>PartitionElement</nonterminal>
+		</xns1:expression>
+	      </plus>
+	    </xns1:expression>
+	  </sequence>
+	</xns1:expression>
+      </selectable></bgf:expression></bgf:production><bgf:production><nonterminal xmlns:xns1="http://planet-sl.org/bgf">PartitionElement</nonterminal><bgf:expression><selectable xmlns:xns1="http://planet-sl.org/bgf">
+	<selector>partitionelement</selector>
+	<xns1:expression>
+	  <sequence>
+	    <xns1:expression>
+	      <nonterminal>OperatorDeclaration.content</nonterminal>
+	    </xns1:expression>
+	    <xns1:expression>
+	      <plus>
+		<xns1:expression>
+		  <nonterminal>Term</nonterminal>
+		</xns1:expression>
+	      </plus>
+	    </xns1:expression>
+	  </sequence>
+	</xns1:expression>
+      </selectable></bgf:expression></bgf:production><bgf:production><nonterminal xmlns:xns1="http://planet-sl.org/bgf">PartitionOperator.content</nonterminal><bgf:expression><nonterminal xmlns:xns1="http://planet-sl.org/bgf">BuiltInOperator.content</nonterminal></bgf:expression></bgf:production><bgf:production><nonterminal xmlns:xns1="http://planet-sl.org/bgf">PartitionOperator</nonterminal><bgf:expression><choice xmlns:xns1="http://planet-sl.org/bgf">
+	<xns1:expression>
+	  <nonterminal>PartitionLessThan</nonterminal>
+	</xns1:expression>
+	<xns1:expression>
+	  <nonterminal>PartitionGreaterThan</nonterminal>
+	</xns1:expression>
+	<xns1:expression>
+	  <nonterminal>PartitionElementOf</nonterminal>
+	</xns1:expression>
+      </choice></bgf:expression></bgf:production><bgf:production><nonterminal xmlns:xns1="http://planet-sl.org/bgf">PartitionLessThan</nonterminal><bgf:expression><selectable xmlns:xns1="http://planet-sl.org/bgf">
+	<selector>ltp</selector>
+	<xns1:expression>
+	  <nonterminal>PartitionOperator.content</nonterminal>
+	</xns1:expression>
+      </selectable></bgf:expression></bgf:production><bgf:production><nonterminal xmlns:xns1="http://planet-sl.org/bgf">PartitionGreaterThan</nonterminal><bgf:expression><selectable xmlns:xns1="http://planet-sl.org/bgf">
+	<selector>gtp</selector>
+	<xns1:expression>
+	  <nonterminal>PartitionOperator.content</nonterminal>
+	</xns1:expression>
+      </selectable></bgf:expression></bgf:production><bgf:production><nonterminal xmlns:xns1="http://planet-sl.org/bgf">PartitionElementOf</nonterminal><bgf:expression><selectable xmlns:xns1="http://planet-sl.org/bgf">
+	<selector>partitionelementof</selector>
+	<xns1:expression>
+	  <sequence>
+	    <xns1:expression>
+	      <selectable>
+		<selector>refpartition</selector>
+		<xns1:expression>
+		  <value>string</value>
+		</xns1:expression>
+	      </selectable>
+	    </xns1:expression>
+	    <xns1:expression>
+	      <nonterminal>PartitionOperator.content</nonterminal>
+	    </xns1:expression>
+	  </sequence>
+	</xns1:expression>
+      </selectable></bgf:expression></bgf:production></bgf:grammar>

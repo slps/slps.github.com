@@ -1,0 +1,66 @@
+LocatedElement:
+        Profile
+LocatedElement:
+        Method
+LocatedElement:
+        ThreadAction
+LocatedElement:
+        Trace
+LocatedElement:
+        StackTraceElement
+LocatedElement:
+        Times
+LocatedElement:
+        Time
+LocatedElement:
+        Date
+Profile:
+        header::String threadActions::ThreadAction+ traces::Trace+ times::Times methods::Method+
+Method:
+        fullyQualifiedName::String stackTraceElements::StackTraceElement+
+ThreadAction:
+        ThreadStart
+ThreadAction:
+        ThreadEnd
+ThreadStart:
+        obj::Integer name::String group::String
+ThreadEnd:
+        id::Integer
+Trace:
+        id::Integer threadId::Integer elements::StackTraceElement+ times::Time+
+StackTraceElement:
+        method::Method fileName::String line::Integer trace::Trace
+Times:
+        unit::String total::Integer date::Date elements::Time+
+Time:
+        rank::Integer self::Double accum::Double count::Integer trace::Trace method::Method
+Date:
+        day::Day month::Month dayOfMonth::Integer hour::Integer minutes::Integer seconds::Integer year::Integer
+Day:
+        Monday::EPSILON
+        Tuesday::EPSILON
+        Wednesday::EPSILON
+        Thursday::EPSILON
+        Friday::EPSILON
+        Saturday::EPSILON
+        Sunday::EPSILON
+Month:
+        January::EPSILON
+        February::EPSILON
+        March::EPSILON
+        April::EPSILON
+        May::EPSILON
+        June::EPSILON
+        July::EPSILON
+        August::EPSILON
+        September::EPSILON
+        October::EPSILON
+        November::EPSILON
+        December::EPSILON
+Boolean:
+        "true"
+        "false"
+Integer:
+        INT
+String:
+        STR
