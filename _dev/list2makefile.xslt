@@ -3,6 +3,8 @@
 	<xsl:output method="text" encoding="UTF-8"/>
 	<xsl:template match="/zoo">
 		<xsl:text>all:
+	rm -rf zoo/bulk*
+	mkdir zoo/bulk/
 </xsl:text>
 		<xsl:for-each select="language">
 			<xsl:for-each select="version/grammar">
@@ -39,6 +41,15 @@
 				<xsl:text>/</xsl:text>
 				<xsl:value-of select="$filename"/>
 				<xsl:text>.bgf
+	cp </xsl:text>
+				<xsl:value-of select="/zoo/name"/>
+				<xsl:text>/</xsl:text>
+				<xsl:value-of select="$filename"/>
+				<xsl:text>.bgf </xsl:text>
+				<xsl:value-of select="/zoo/name"/>
+				<xsl:text>/bulk/</xsl:text>
+				<xsl:value-of select="translate($filename,'/','-')"/>
+				<xsl:text>.bgf
 	_dev/format </xsl:text>
 				<xsl:value-of select="/zoo/name"/>
 				<xsl:text> </xsl:text>
@@ -46,6 +57,15 @@
 				<xsl:text> </xsl:text>
 				<xsl:value-of select="handle"/>
 				<xsl:text>
+	cp </xsl:text>
+				<xsl:value-of select="/zoo/name"/>
+				<xsl:text>/</xsl:text>
+				<xsl:value-of select="$filename"/>
+				<xsl:text>.bnf </xsl:text>
+				<xsl:value-of select="/zoo/name"/>
+				<xsl:text>/bulk/</xsl:text>
+				<xsl:value-of select="translate($filename,'/','-')"/>
+				<xsl:text>.bnf
 </xsl:text>
 			</xsl:for-each>
 			<xsl:for-each select="version/grammarset/grammarname">
@@ -93,5 +113,11 @@
 </xsl:text>
 			</xsl:for-each>
 		</xsl:for-each>
+		<xsl:text>	tar cfv zoo/bulk-bgf.tar zoo/bulk/*.bgf
+	gzip zoo/bulk-bgf.tar
+	tar cfv zoo/bulk-ebnf.tar zoo/bulk/*.bnf
+	gzip zoo/bulk-ebnf.tar
+	#rm -rf zoo/bulk
+</xsl:text>
 	</xsl:template>
 </xsl:stylesheet>
