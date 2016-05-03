@@ -1,74 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:bgf="http://planet-sl.org/bgf" xmlns:xbgf="http://planet-sl.org/xbgf" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Browsable ADELFE 1.0 Grammar</title><link href="/slps.css" rel="stylesheet" type="text/css"></link><script type="text/javascript">
-
-				  var _gaq = _gaq || [];
-				  _gaq.push(['_setAccount', 'UA-3743366-7']);
-				  _gaq.push(['_setDomainName', 'github.com']);
-				  _gaq.push(['_trackPageview']);
-
-				  (function() {
-				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-				  })();
-
-				</script></head><body><h1 class="l">Browsable ADELFE 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.io/zoo/">Grammar Zoo</a> for details. <br></br>Source used for this grammar: Carole Bernon, Massimo Cossentino, Marie-Pierre Gleizes, Paola Turci, Franco Zambonelli, SIMON Eric, <code>ADELFE.ecore</code>, 2006/07/13.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>28</strong></li><li>Number of top alternatives: <strong>29</strong></li><li>Number of defined nonterminal symbols: <strong>19</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#Classifier" class="nt">Classifier</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Classifier">Classifier</a>:
-        <a class="nt" href="#Environnement">Environnement</a>
-</pre><pre><a class="nt" name="Classifier">Classifier</a>:
-        <a class="nt" href="#Element">Element</a>
-</pre><pre><a class="nt" name="Classifier">Classifier</a>:
-        <a class="nt" href="#Environnement">Environnement</a>
-        <a class="nt" href="#Element">Element</a>
-</pre><pre><a class="nt" name="Environnement">Environnement</a>:
-        <span class="sel">element</span>::<a class="nt" href="#Element">Element</a>
-</pre><pre><a class="nt" name="Element">Element</a>:
-        <span class="sel">environnement</span>::<a class="nt" href="#Environnement">Environnement</a> <span class="sel">action</span>::<a class="nt" href="#CooperativeAgent">CooperativeAgent</a> <span class="sel">perception</span>::<a class="nt" href="#CooperativeAgent">CooperativeAgent</a>
-</pre><pre><a class="nt" name="CooperativeAgent">CooperativeAgent</a>:
-        <span class="sel">elementA</span>::<a class="nt" href="#Element">Element</a> <span class="sel">elementP</span>::<a class="nt" href="#Element">Element</a> <span class="sel">representation</span>::<a class="nt" href="#Representation">Representation</a><span class="meta">+</span> <span class="sel">skill</span>::<a class="nt" href="#Skill">Skill</a><span class="meta">+</span> <span class="sel">aptitude</span>::<a class="nt" href="#Aptitude">Aptitude</a><span class="meta">+</span> <span class="sel">characteristic</span>::<a class="nt" href="#Characteristic">Characteristic</a><span class="meta">+</span> <span class="sel">communication</span>::<a class="nt" href="#Communication">Communication</a><span class="meta">+</span> <span class="sel">observes</span>::<a class="nt" href="#CooperationRules">CooperationRules</a><span class="meta">+</span>
-</pre><pre><a class="nt" name="Representation">Representation</a>:
-        <span class="sel">cooperativeAgentR</span>::<a class="nt" href="#CooperativeAgent">CooperativeAgent</a> <span class="sel">element</span>::<a class="nt" href="#Element">Element</a>
-</pre><pre><a class="nt" name="Skill">Skill</a>:
-        <span class="sel">cooperativeAgentS</span>::<a class="nt" href="#CooperativeAgent">CooperativeAgent</a>
-</pre><pre><a class="nt" name="Aptitude">Aptitude</a>:
-        <span class="sel">cooperativeAgentA</span>::<a class="nt" href="#CooperativeAgent">CooperativeAgent</a>
-</pre><pre><a class="nt" name="Characteristic">Characteristic</a>:
-        <span class="sel">cooperativeAgentCha</span>::<a class="nt" href="#CooperativeAgent">CooperativeAgent</a>
-</pre><pre><a class="nt" name="Communication">Communication</a>:
-        <span class="sel">cooperativeAgentCom</span>::<a class="nt" href="#CooperativeAgent">CooperativeAgent</a> <span class="sel">aip</span>::<a class="nt" href="#AIP">AIP</a><span class="meta">+</span>
-</pre><pre><a class="nt" name="AIP">AIP</a>:
-        ε
-</pre><pre><a class="nt" name="CooperationRules">CooperationRules</a>:
-        <span class="sel">detects</span>::<a class="nt" href="#NCS">NCS</a><span class="meta">+</span>
-</pre><pre><a class="nt" name="NCS">NCS</a>:
-        <a class="nt" href="#Incomprehension">Incomprehension</a>
-</pre><pre><a class="nt" name="NCS">NCS</a>:
-        <a class="nt" href="#Ambiguity">Ambiguity</a>
-</pre><pre><a class="nt" name="NCS">NCS</a>:
-        <a class="nt" href="#Incompetence">Incompetence</a>
-</pre><pre><a class="nt" name="NCS">NCS</a>:
-        <a class="nt" href="#Unproductiveness">Unproductiveness</a>
-</pre><pre><a class="nt" name="NCS">NCS</a>:
-        <a class="nt" href="#Concurrency">Concurrency</a>
-</pre><pre><a class="nt" name="NCS">NCS</a>:
-        <a class="nt" href="#Conflict">Conflict</a>
-</pre><pre><a class="nt" name="NCS">NCS</a>:
-        <a class="nt" href="#Uselessness">Uselessness</a>
-</pre><pre><a class="nt" name="NCS">NCS</a>:
-        <span class="sel">cooperationRules</span>::<a class="nt" href="#CooperationRules">CooperationRules</a>
-</pre><pre><a class="nt" name="Incomprehension">Incomprehension</a>:
-        <span class="sel">cooperationRules</span>::<a class="nt" href="#CooperationRules">CooperationRules</a>
-</pre><pre><a class="nt" name="Ambiguity">Ambiguity</a>:
-        <span class="sel">cooperationRules</span>::<a class="nt" href="#CooperationRules">CooperationRules</a>
-</pre><pre><a class="nt" name="Incompetence">Incompetence</a>:
-        <span class="sel">cooperationRules</span>::<a class="nt" href="#CooperationRules">CooperationRules</a>
-</pre><pre><a class="nt" name="Unproductiveness">Unproductiveness</a>:
-        <span class="sel">cooperationRules</span>::<a class="nt" href="#CooperationRules">CooperationRules</a>
-</pre><pre><a class="nt" name="Concurrency">Concurrency</a>:
-        <span class="sel">cooperationRules</span>::<a class="nt" href="#CooperationRules">CooperationRules</a>
-</pre><pre><a class="nt" name="Conflict">Conflict</a>:
-        <span class="sel">cooperationRules</span>::<a class="nt" href="#CooperationRules">CooperationRules</a>
-</pre><pre><a class="nt" name="Uselessness">Uselessness</a>:
-        <span class="sel">cooperationRules</span>::<a class="nt" href="#CooperationRules">CooperationRules</a>
-</pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: Aug2013.</div></body></html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>Redirecting to the new Grammar Zoo</title>
+<meta http-equiv="refresh" content="0;url=http://slebok.github.io/zoo/index.html">
+</head>
+<body>
+</body>
+</html>

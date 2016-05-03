@@ -1,68 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:bgf="http://planet-sl.org/bgf" xmlns:xbgf="http://planet-sl.org/xbgf" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Browsable RELAX NG Grammar</title><link href="/slps.css" rel="stylesheet" type="text/css"></link><script type="text/javascript">
-
-				  var _gaq = _gaq || [];
-				  _gaq.push(['_setAccount', 'UA-3743366-7']);
-				  _gaq.push(['_setDomainName', 'github.com']);
-				  _gaq.push(['_trackPageview']);
-
-				  (function() {
-				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-				  })();
-
-				</script></head><body><h1 class="l">Browsable RELAX NG Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.io/zoo/">Grammar Zoo</a> for details. <br></br>Source used for this grammar: <em>OASIS</em>, <em>RELAX NG 1.0</em>, from the RELAX NG Specification, with errata applied, <code>relaxng.rng</code>, July 2008.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>15</strong></li><li>Number of top alternatives: <strong>36</strong></li><li>Number of defined nonterminal symbols: <strong>15</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: —</li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>2</strong></li><li>Keywords: <strong>2</strong>: <code class="t">"choice", "interleave"</code></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="pattern">pattern</a>:
-        <span class="sel">element</span>::((<span class="sel">name</span>::<span class="meta">string</span> | <a class="nt" href="#open-name-class">open-name-class</a>) <a class="nt" href="#common-atts">common-atts</a> <a class="nt" href="#open-patterns">open-patterns</a>)
-        <span class="sel">attribute</span>::(<a class="nt" href="#common-atts">common-atts</a> (<span class="sel">name</span>::<span class="meta">string</span> | <a class="nt" href="#open-name-class">open-name-class</a>) <a class="nt" href="#other">other</a> <a class="nt" href="#pattern">pattern</a><span class="meta">?</span>)
-        <span class="sel">group</span>::(<a class="nt" href="#common-atts">common-atts</a> <a class="nt" href="#open-patterns">open-patterns</a>)
-        <span class="sel">interleave</span>::(<a class="nt" href="#common-atts">common-atts</a> <a class="nt" href="#open-patterns">open-patterns</a>)
-        <span class="sel">choice</span>::(<a class="nt" href="#common-atts">common-atts</a> <a class="nt" href="#open-patterns">open-patterns</a>)
-        <span class="sel">optional</span>::(<a class="nt" href="#common-atts">common-atts</a> <a class="nt" href="#open-patterns">open-patterns</a>)
-        <span class="sel">zeroOrMore</span>::(<a class="nt" href="#common-atts">common-atts</a> <a class="nt" href="#open-patterns">open-patterns</a>)
-        <span class="sel">oneOrMore</span>::(<a class="nt" href="#common-atts">common-atts</a> <a class="nt" href="#open-patterns">open-patterns</a>)
-        <span class="sel">list</span>::(<a class="nt" href="#common-atts">common-atts</a> <a class="nt" href="#open-patterns">open-patterns</a>)
-        <span class="sel">mixed</span>::(<a class="nt" href="#common-atts">common-atts</a> <a class="nt" href="#open-patterns">open-patterns</a>)
-        <span class="sel">ref</span>::(<span class="sel">name</span>::<span class="meta">string</span> <a class="nt" href="#common-atts">common-atts</a> <a class="nt" href="#other">other</a>)
-        <span class="sel">parentRef</span>::(<span class="sel">name</span>::<span class="meta">string</span> <a class="nt" href="#common-atts">common-atts</a> <a class="nt" href="#other">other</a>)
-        <span class="sel">empty</span>::(<a class="nt" href="#common-atts">common-atts</a> <a class="nt" href="#other">other</a>)
-        <span class="sel">text</span>::(<a class="nt" href="#common-atts">common-atts</a> <a class="nt" href="#other">other</a>)
-        <span class="sel">value</span>::(<span class="sel">type</span>::<span class="meta">string</span><span class="meta">?</span> <a class="nt" href="#common-atts">common-atts</a> <span class="meta">string</span>)
-        <span class="sel">data</span>::(<span class="sel">type</span>::<span class="meta">string</span> <a class="nt" href="#common-atts">common-atts</a> <a class="nt" href="#other">other</a> <span class="sel">param</span>::(<span class="sel">name</span>::<span class="meta">string</span> <a class="nt" href="#common-atts">common-atts</a> <span class="meta">string</span>)<span class="meta">*</span> <span class="sel">except</span>::(<a class="nt" href="#common-atts">common-atts</a> <a class="nt" href="#open-patterns">open-patterns</a>)<span class="meta">?</span>)
-        <span class="sel">notAllowed</span>::(<a class="nt" href="#common-atts">common-atts</a> <a class="nt" href="#other">other</a>)
-        <span class="sel">externalRef</span>::(<span class="sel">href</span>::<span class="meta">string</span> <a class="nt" href="#common-atts">common-atts</a> <a class="nt" href="#other">other</a>)
-        <span class="sel">grammar</span>::(<a class="nt" href="#common-atts">common-atts</a> <a class="nt" href="#grammar-content">grammar-content</a>)
-</pre><pre><a class="nt" name="grammar-content">grammar-content</a>:
-        <a class="nt" href="#other">other</a> (<a class="nt" href="#start-element">start-element</a> | <a class="nt" href="#define-element">define-element</a> | <span class="sel">div</span>::(<a class="nt" href="#common-atts">common-atts</a> <a class="nt" href="#grammar-content">grammar-content</a>) | <span class="sel">include</span>::(<span class="sel">href</span>::<span class="meta">string</span> <a class="nt" href="#common-atts">common-atts</a> <a class="nt" href="#include-content">include-content</a>))<span class="meta">*</span>
-</pre><pre><a class="nt" name="include-content">include-content</a>:
-        <a class="nt" href="#other">other</a> (<a class="nt" href="#start-element">start-element</a> | <a class="nt" href="#define-element">define-element</a> | <span class="sel">div</span>::(<a class="nt" href="#common-atts">common-atts</a> <a class="nt" href="#include-content">include-content</a>))<span class="meta">*</span>
-</pre><pre><a class="nt" name="start-element">start-element</a>:
-        <span class="sel">start</span>::(<a class="nt" href="#combine-att">combine-att</a> <a class="nt" href="#common-atts">common-atts</a> <a class="nt" href="#open-pattern">open-pattern</a>)
-</pre><pre><a class="nt" name="define-element">define-element</a>:
-        <span class="sel">define</span>::(<span class="sel">name</span>::<span class="meta">string</span> <a class="nt" href="#combine-att">combine-att</a> <a class="nt" href="#common-atts">common-atts</a> <a class="nt" href="#open-patterns">open-patterns</a>)
-</pre><pre><a class="nt" name="combine-att">combine-att</a>:
-        <span class="sel">combine</span>::(<span class="t">"choice"</span> | <span class="t">"interleave"</span>)<span class="meta">?</span>
-</pre><pre><a class="nt" name="open-patterns">open-patterns</a>:
-        <a class="nt" href="#other">other</a> <a class="nt" href="#pattern">pattern</a><span class="meta">+</span>
-</pre><pre><a class="nt" name="open-pattern">open-pattern</a>:
-        <a class="nt" href="#other">other</a> <a class="nt" href="#pattern">pattern</a>
-</pre><pre><a class="nt" name="name-class">name-class</a>:
-        <span class="sel">name</span>::(<a class="nt" href="#common-atts">common-atts</a> <span class="meta">string</span>)
-        <span class="sel">anyName</span>::(<a class="nt" href="#common-atts">common-atts</a> <a class="nt" href="#except-name-class">except-name-class</a>)
-        <span class="sel">nsName</span>::(<a class="nt" href="#common-atts">common-atts</a> <a class="nt" href="#except-name-class">except-name-class</a>)
-        <span class="sel">choice</span>::(<a class="nt" href="#common-atts">common-atts</a> <a class="nt" href="#open-name-classes">open-name-classes</a>)
-</pre><pre><a class="nt" name="except-name-class">except-name-class</a>:
-        <a class="nt" href="#other">other</a> <span class="sel">except</span>::<a class="nt" href="#open-name-classes">open-name-classes</a><span class="meta">?</span>
-</pre><pre><a class="nt" name="open-name-classes">open-name-classes</a>:
-        <a class="nt" href="#other">other</a> <a class="nt" href="#name-class">name-class</a><span class="meta">+</span>
-</pre><pre><a class="nt" name="open-name-class">open-name-class</a>:
-        <a class="nt" href="#other">other</a> <a class="nt" href="#name-class">name-class</a>
-</pre><pre><a class="nt" name="common-atts">common-atts</a>:
-        <span class="sel">ns</span>::<span class="meta">string</span><span class="meta">?</span> <span class="sel">datatypeLibrary</span>::<span class="meta">string</span><span class="meta">?</span> <span class="meta">any</span><span class="meta">*</span>
-</pre><pre><a class="nt" name="other">other</a>:
-        (<span class="meta">any</span> | <span class="meta">string</span> | <a class="nt" href="#any">any</a>)<span class="meta">*</span><span class="meta">*</span>
-</pre><pre><a class="nt" name="any">any</a>:
-        (<span class="meta">any</span> | <span class="meta">string</span> | <a class="nt" href="#any">any</a>)<span class="meta">*</span>
-</pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: Aug2013.</div></body></html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>Redirecting to the new Grammar Zoo</title>
+<meta http-equiv="refresh" content="0;url=http://slebok.github.io/zoo/index.html">
+</head>
+<body>
+</body>
+</html>

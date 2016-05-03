@@ -1,82 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:bgf="http://planet-sl.org/bgf" xmlns:xbgf="http://planet-sl.org/xbgf" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Browsable AnyLogic 1.0 Grammar</title><link href="/slps.css" rel="stylesheet" type="text/css"></link><script type="text/javascript">
-
-				  var _gaq = _gaq || [];
-				  _gaq.push(['_setAccount', 'UA-3743366-7']);
-				  _gaq.push(['_setDomainName', 'github.com']);
-				  _gaq.push(['_trackPageview']);
-
-				  (function() {
-				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-				  })();
-
-				</script></head><body><h1 class="l">Browsable AnyLogic 1.0 Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.io/zoo/">Grammar Zoo</a> for details. <br></br>Source used for this grammar: Jendrick Johannes, <code>AnyLogic.ecore</code>, 2008/01/29.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>32</strong></li><li>Number of top alternatives: <strong>33</strong></li><li>Number of defined nonterminal symbols: <strong>21</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#ModelElement" class="nt">ModelElement</a></code></li><li>Bottom nonterminal symbols: <strong>1</strong>: <code><a href="#Double" class="nt">Double</a></code></li><li>Number of used terminal symbols: <strong>2</strong></li><li>Keywords: <strong>2</strong>: <code class="t">"true", "false"</code></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="ModelElement">ModelElement</a>:
-        <a class="nt" href="#VisualModelElement">VisualModelElement</a>
-</pre><pre><a class="nt" name="ModelElement">ModelElement</a>:
-        <a class="nt" href="#Model">Model</a>
-</pre><pre><a class="nt" name="ModelElement">ModelElement</a>:
-        <a class="nt" href="#ActiveObjectClass">ActiveObjectClass</a>
-</pre><pre><a class="nt" name="ModelElement">ModelElement</a>:
-        <a class="nt" href="#Experiment">Experiment</a>
-</pre><pre><a class="nt" name="ModelElement">ModelElement</a>:
-        <span class="sel">id</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">excludeFromBuild</span>::<a class="nt" href="#Boolean">Boolean</a>
-</pre><pre><a class="nt" name="VisualModelElement">VisualModelElement</a>:
-        <a class="nt" href="#Connector">Connector</a>
-</pre><pre><a class="nt" name="VisualModelElement">VisualModelElement</a>:
-        <a class="nt" href="#EmbeddedObject">EmbeddedObject</a>
-</pre><pre><a class="nt" name="VisualModelElement">VisualModelElement</a>:
-        <a class="nt" href="#Shape">Shape</a>
-</pre><pre><a class="nt" name="VisualModelElement">VisualModelElement</a>:
-        <a class="nt" href="#Control">Control</a>
-</pre><pre><a class="nt" name="VisualModelElement">VisualModelElement</a>:
-        <span class="sel">position</span>::<a class="nt" href="#Point">Point</a> <span class="sel">label</span>::<a class="nt" href="#Point">Point</a> <span class="sel">publicFlag</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">presentationFlag</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">showLabel</span>::<a class="nt" href="#Boolean">Boolean</a>
-</pre><pre><a class="nt" name="Point">Point</a>:
-        <span class="sel">x</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">y</span>::<a class="nt" href="#Integer">Integer</a>
-</pre><pre><a class="nt" name="Model">Model</a>:
-        <span class="sel">engineVersion</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">javaPackageName</span>::<a class="nt" href="#String">String</a> <span class="sel">activeObjectClasses</span>::<a class="nt" href="#ActiveObjectClass">ActiveObjectClass</a><span class="meta">+</span> <span class="sel">experiments</span>::<a class="nt" href="#Experiment">Experiment</a><span class="meta">+</span>
-</pre><pre><a class="nt" name="ActiveObjectClass">ActiveObjectClass</a>:
-        <span class="sel">clientAreaTopLeft</span>::<a class="nt" href="#Point">Point</a> <span class="sel">presentationTopGroupPersistent</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">iconTopGroupPersistent</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">generic</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">genericParameters</span>::<a class="nt" href="#String">String</a> <span class="sel">agent</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">environmentDefinesInitialLocation</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">connectors</span>::<a class="nt" href="#Connector">Connector</a><span class="meta">+</span> <span class="sel">embeddedObjects</span>::<a class="nt" href="#EmbeddedObject">EmbeddedObject</a><span class="meta">+</span> <span class="sel">shapes</span>::<a class="nt" href="#Shape">Shape</a><span class="meta">+</span>
-</pre><pre><a class="nt" name="Connector">Connector</a>:
-        <span class="sel">sourceEmbeddedObject</span>::<a class="nt" href="#EmbeddedObject">EmbeddedObject</a> <span class="sel">sourceConnectableName</span>::<a class="nt" href="#String">String</a> <span class="sel">targetEmbeddedObject</span>::<a class="nt" href="#EmbeddedObject">EmbeddedObject</a> <span class="sel">targetConnectableName</span>::<a class="nt" href="#String">String</a> <span class="sel">points</span>::<a class="nt" href="#Point">Point</a><span class="meta">+</span>
-</pre><pre><a class="nt" name="EmbeddedObject">EmbeddedObject</a>:
-        <span class="sel">presentation</span>::<a class="nt" href="#EmbeddedObjectPresentation">EmbeddedObjectPresentation</a> <span class="sel">activeObjectClass</span>::<a class="nt" href="#ActiveObjectClassRef">ActiveObjectClassRef</a> <span class="sel">genericParametersSubstitute</span>::<a class="nt" href="#String">String</a> <span class="sel">parameters</span>::<a class="nt" href="#Parameter">Parameter</a><span class="meta">+</span>
-</pre><pre><a class="nt" name="ActiveObjectClassRef">ActiveObjectClassRef</a>:
-        <span class="sel">packageName</span>::<a class="nt" href="#String">String</a> <span class="sel">className</span>::<a class="nt" href="#String">String</a>
-</pre><pre><a class="nt" name="Parameter">Parameter</a>:
-        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">value</span>::<a class="nt" href="#String">String</a>
-</pre><pre><a class="nt" name="Shape">Shape</a>:
-        <a class="nt" href="#EmbeddedObjectPresentation">EmbeddedObjectPresentation</a>
-</pre><pre><a class="nt" name="Shape">Shape</a>:
-        <a class="nt" href="#Text">Text</a>
-</pre><pre><a class="nt" name="Shape">Shape</a>:
-        <span class="sel">asObject</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">embeddedIcon</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">rotation</span>::<a class="nt" href="#Double">Double</a>
-</pre><pre><a class="nt" name="EmbeddedObjectPresentation">EmbeddedObjectPresentation</a>:
-        <span class="sel">asObject</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">embeddedIcon</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">rotation</span>::<a class="nt" href="#Double">Double</a>
-</pre><pre><a class="nt" name="Experiment">Experiment</a>:
-        <a class="nt" href="#SimulationExperiment">SimulationExperiment</a>
-</pre><pre><a class="nt" name="SimulationExperiment">SimulationExperiment</a>:
-        <span class="sel">activeObjectClass</span>::<a class="nt" href="#ActiveObjectClass">ActiveObjectClass</a> <span class="sel">clientAreaTopLeft</span>::<a class="nt" href="#Point">Point</a> <span class="sel">presentationTopGroupPersistent</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">iconTopGroupPersistent</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">frame</span>::<a class="nt" href="#Frame">Frame</a> <span class="sel">commandLineArguments</span>::<a class="nt" href="#String">String</a> <span class="sel">maximumMemory</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">randomSeed</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">seedValue</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">vmArgs</span>::<a class="nt" href="#String">String</a> <span class="sel">absoluteAccuracy</span>::<a class="nt" href="#Double">Double</a> <span class="sel">relativeAccuracy</span>::<a class="nt" href="#Double">Double</a> <span class="sel">timeAccuracy</span>::<a class="nt" href="#Double">Double</a> <span class="sel">fixedTimeStep</span>::<a class="nt" href="#Double">Double</a> <span class="sel">shapes</span>::<a class="nt" href="#Shape">Shape</a><span class="meta">+</span> <span class="sel">controls</span>::<a class="nt" href="#Control">Control</a><span class="meta">+</span> <span class="sel">parameters</span>::<a class="nt" href="#Parameter">Parameter</a><span class="meta">+</span> <span class="sel">enableAdaptiveFrameManagement</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">enableAntiAliasing</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">enablePanning</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">enableZoom</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">executionMode</span>::<a class="nt" href="#String">String</a> <span class="sel">cpuRatio</span>::<a class="nt" href="#String">String</a> <span class="sel">title</span>::<a class="nt" href="#String">String</a> <span class="sel">framesPerSecond</span>::<a class="nt" href="#String">String</a> <span class="sel">realTimeScale</span>::<a class="nt" href="#String">String</a> <span class="sel">uiProperties</span>::<a class="nt" href="#Parameter">Parameter</a><span class="meta">+</span> <span class="sel">useCalendar</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">stopOption</span>::<a class="nt" href="#String">String</a> <span class="sel">initialDate</span>::<a class="nt" href="#String">String</a> <span class="sel">initialTime</span>::<a class="nt" href="#String">String</a> <span class="sel">finalDate</span>::<a class="nt" href="#String">String</a> <span class="sel">finalTime</span>::<a class="nt" href="#String">String</a> <span class="sel">modelTimeUnit</span>::<a class="nt" href="#String">String</a>
-</pre><pre><a class="nt" name="Control">Control</a>:
-        <a class="nt" href="#Button">Button</a>
-</pre><pre><a class="nt" name="Control">Control</a>:
-        <span class="sel">width</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">height</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">asObject</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">embeddedIcon</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">fillColor</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">textColor</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">enableExpression</span>::<a class="nt" href="#String">String</a> <span class="sel">actionCode</span>::<a class="nt" href="#String">String</a> <span class="sel">labelText</span>::<a class="nt" href="#String">String</a> <span class="sel">font</span>::<a class="nt" href="#Font">Font</a>
-</pre><pre><a class="nt" name="Button">Button</a>:
-        <span class="sel">width</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">height</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">asObject</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">embeddedIcon</span>::<a class="nt" href="#Boolean">Boolean</a> <span class="sel">fillColor</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">textColor</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">enableExpression</span>::<a class="nt" href="#String">String</a> <span class="sel">actionCode</span>::<a class="nt" href="#String">String</a> <span class="sel">labelText</span>::<a class="nt" href="#String">String</a> <span class="sel">font</span>::<a class="nt" href="#Font">Font</a>
-</pre><pre><a class="nt" name="Frame">Frame</a>:
-        <span class="sel">x</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">y</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">width</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">height</span>::<a class="nt" href="#Integer">Integer</a>
-</pre><pre><a class="nt" name="Text">Text</a>:
-        <span class="sel">color</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">text</span>::<a class="nt" href="#String">String</a> <span class="sel">font</span>::<a class="nt" href="#Font">Font</a> <span class="sel">alignment</span>::<a class="nt" href="#String">String</a>
-</pre><pre><a class="nt" name="Font">Font</a>:
-        <span class="sel">name</span>::<a class="nt" href="#String">String</a> <span class="sel">size</span>::<a class="nt" href="#Integer">Integer</a> <span class="sel">style</span>::<a class="nt" href="#Integer">Integer</a>
-</pre><pre><a class="nt" name="Boolean">Boolean</a>:
-        <span class="t">"true"</span>
-        <span class="t">"false"</span>
-</pre><pre><a class="nt" name="Integer">Integer</a>:
-        <span class="meta">int</span>
-</pre><pre><a class="nt" name="String">String</a>:
-        <span class="meta">string</span>
-</pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: Aug2013.</div></body></html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>Redirecting to the new Grammar Zoo</title>
+<meta http-equiv="refresh" content="0;url=http://slebok.github.io/zoo/index.html">
+</head>
+<body>
+</body>
+</html>

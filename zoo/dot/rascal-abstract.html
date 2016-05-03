@@ -1,76 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:bgf="http://planet-sl.org/bgf" xmlns:xbgf="http://planet-sl.org/xbgf" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Browsable Dot Grammar</title><link href="/slps.css" rel="stylesheet" type="text/css"></link><script type="text/javascript">
-
-				  var _gaq = _gaq || [];
-				  _gaq.push(['_setAccount', 'UA-3743366-7']);
-				  _gaq.push(['_setDomainName', 'github.com']);
-				  _gaq.push(['_trackPageview']);
-
-				  (function() {
-				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-				  })();
-
-				</script></head><body><h1 class="l">Browsable Dot Grammar</h1><a href="http://creativecommons.org/licenses/by/3.0/"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="CC-BY"></img></a><p>Extracted and/or recovered by <strong><a href="http://grammarware.net">Vadim Zaytsev</a></strong>,	see <a href="http://slps.github.io/zoo/">Grammar Zoo</a> for details. <br></br>Source used for this grammar: Bert Lisser, <code>lang::dot::Dot</code>, 2012.</p><h2 class="l">Summary</h2><ul><li>Number of production rules: <strong>11</strong></li><li>Number of top alternatives: <strong>48</strong></li><li>Number of defined nonterminal symbols: <strong>11</strong></li><li>Root nonterminal symbols: —</li><li>Other top nonterminal symbols: <strong>1</strong>: <code><a href="#Dotline" class="nt">Dotline</a></code></li><li>Bottom nonterminal symbols: —</li><li>Number of used terminal symbols: <strong>—</strong></li></ul><h2 class="l">Syntax</h2><pre><a class="nt" name="Id">Id</a>:
-        <span class="meta">string</span>
-</pre><pre><a class="nt" name="DotGraph">DotGraph</a>:
-        <span class="sel">graph</span>::(<span class="sel">id</span>::<a class="nt" href="#Id">Id</a> <span class="sel">stmts</span>::<a class="nt" href="#Stms">Stms</a>)
-        <span class="sel">digraph</span>::(<span class="sel">id</span>::<a class="nt" href="#Id">Id</a> <span class="sel">stmts</span>::<a class="nt" href="#Stms">Stms</a>)
-</pre><pre><a class="nt" name="Stms">Stms</a>:
-        <a class="nt" href="#Stm">Stm</a><span class="meta">*</span>
-</pre><pre><a class="nt" name="NodeId">NodeId</a>:
-        <a class="nt" href="#Id">Id</a> <a class="nt" href="#PortId">PortId</a>
-</pre><pre><a class="nt" name="PortId">PortId</a>:
-        <a class="nt" href="#Id">Id</a> <a class="nt" href="#CompassPt">CompassPt</a>
-</pre><pre><a class="nt" name="CompassPt">CompassPt</a>:
-        <span class="sel">N</span>::ε
-        <span class="sel">NE</span>::ε
-        <span class="sel">E</span>::ε
-        <span class="sel">SE</span>::ε
-        <span class="sel">S</span>::ε
-        <span class="sel">SW</span>::ε
-        <span class="sel">W</span>::ε
-        <span class="sel">NW</span>::ε
-        <span class="sel">C</span>::ε
-        <span class="sel">_</span>::ε
-</pre><pre><a class="nt" name="Stm">Stm</a>:
-        <span class="sel">N</span>::(<span class="sel">id</span>::<a class="nt" href="#Id">Id</a> <span class="sel">attrs</span>::<a class="nt" href="#Attrs">Attrs</a>)
-        <span class="sel">N</span>::<span class="sel">id</span>::<a class="nt" href="#Id">Id</a>
-        <span class="sel">N</span>::(<span class="sel">nid</span>::<a class="nt" href="#NodeId">NodeId</a> <span class="sel">attrs</span>::<a class="nt" href="#Attrs">Attrs</a>)
-        <span class="sel">N</span>::<span class="sel">nid</span>::<a class="nt" href="#NodeId">NodeId</a>
-        <span class="sel">E</span>::(<span class="sel">from</span>::<a class="nt" href="#Id">Id</a> <span class="sel">to</span>::<a class="nt" href="#Id">Id</a> <span class="sel">attrs</span>::<a class="nt" href="#Attrs">Attrs</a>)
-        <span class="sel">E</span>::(<span class="sel">from</span>::<a class="nt" href="#Id">Id</a> <span class="sel">to</span>::<a class="nt" href="#Id">Id</a>)
-        <span class="sel">E</span>::(<span class="sel">nfrom</span>::<a class="nt" href="#NodeId">NodeId</a> <span class="sel">to</span>::<a class="nt" href="#Id">Id</a> <span class="sel">attrs</span>::<a class="nt" href="#Attrs">Attrs</a>)
-        <span class="sel">E</span>::(<span class="sel">nfrom</span>::<a class="nt" href="#NodeId">NodeId</a> <span class="sel">to</span>::<a class="nt" href="#Id">Id</a>)
-        <span class="sel">E</span>::(<span class="sel">sfrom</span>::<a class="nt" href="#Stm">Stm</a> <span class="sel">to</span>::<a class="nt" href="#Id">Id</a> <span class="sel">attrs</span>::<a class="nt" href="#Attrs">Attrs</a>)
-        <span class="sel">E</span>::(<span class="sel">sfrom</span>::<a class="nt" href="#Stm">Stm</a> <span class="sel">to</span>::<a class="nt" href="#Id">Id</a>)
-        <span class="sel">E</span>::(<span class="sel">from</span>::<a class="nt" href="#Id">Id</a> <span class="sel">nto</span>::<a class="nt" href="#NodeId">NodeId</a> <span class="sel">attrs</span>::<a class="nt" href="#Attrs">Attrs</a>)
-        <span class="sel">E</span>::(<span class="sel">from</span>::<a class="nt" href="#Id">Id</a> <span class="sel">nto</span>::<a class="nt" href="#NodeId">NodeId</a>)
-        <span class="sel">E</span>::(<span class="sel">nfrom</span>::<a class="nt" href="#NodeId">NodeId</a> <span class="sel">nto</span>::<a class="nt" href="#NodeId">NodeId</a> <span class="sel">attrs</span>::<a class="nt" href="#Attrs">Attrs</a>)
-        <span class="sel">E</span>::(<span class="sel">nfrom</span>::<a class="nt" href="#NodeId">NodeId</a> <span class="sel">nto</span>::<a class="nt" href="#NodeId">NodeId</a>)
-        <span class="sel">E</span>::(<span class="sel">sfrom</span>::<a class="nt" href="#Stm">Stm</a> <span class="sel">nto</span>::<a class="nt" href="#NodeId">NodeId</a> <span class="sel">attrs</span>::<a class="nt" href="#Attrs">Attrs</a>)
-        <span class="sel">E</span>::(<span class="sel">sfrom</span>::<a class="nt" href="#Stm">Stm</a> <span class="sel">nto</span>::<a class="nt" href="#NodeId">NodeId</a>)
-        <span class="sel">E</span>::(<span class="sel">from</span>::<a class="nt" href="#Id">Id</a> <span class="sel">sto</span>::<a class="nt" href="#Stm">Stm</a> <span class="sel">attrs</span>::<a class="nt" href="#Attrs">Attrs</a>)
-        <span class="sel">E</span>::(<span class="sel">from</span>::<a class="nt" href="#Id">Id</a> <span class="sel">sto</span>::<a class="nt" href="#Stm">Stm</a>)
-        <span class="sel">E</span>::(<span class="sel">nfrom</span>::<a class="nt" href="#NodeId">NodeId</a> <span class="sel">sto</span>::<a class="nt" href="#Stm">Stm</a> <span class="sel">attrs</span>::<a class="nt" href="#Attrs">Attrs</a>)
-        <span class="sel">E</span>::(<span class="sel">nfrom</span>::<a class="nt" href="#NodeId">NodeId</a> <span class="sel">sto</span>::<a class="nt" href="#Stm">Stm</a>)
-        <span class="sel">E</span>::(<span class="sel">sfrom</span>::<a class="nt" href="#Stm">Stm</a> <span class="sel">sto</span>::<a class="nt" href="#Stm">Stm</a> <span class="sel">attrs</span>::<a class="nt" href="#Attrs">Attrs</a>)
-        <span class="sel">E</span>::(<span class="sel">sfrom</span>::<a class="nt" href="#Stm">Stm</a> <span class="sel">sto</span>::<a class="nt" href="#Stm">Stm</a>)
-        <span class="sel">S</span>::(<span class="sel">id</span>::<a class="nt" href="#Id">Id</a> <span class="sel">stms</span>::<a class="nt" href="#Stms">Stms</a>)
-        <span class="sel">S</span>::<span class="sel">stms</span>::<a class="nt" href="#Stms">Stms</a>
-        <span class="sel">A</span>::(<span class="sel">prop</span>::<a class="nt" href="#Id">Id</a> <span class="sel">val</span>::<a class="nt" href="#Id">Id</a>)
-        <span class="sel">GRAPH</span>::<span class="sel">attrs</span>::<a class="nt" href="#Attrs">Attrs</a>
-        <span class="sel">NODE</span>::<span class="sel">attrs</span>::<a class="nt" href="#Attrs">Attrs</a>
-        <span class="sel">EDGE</span>::<span class="sel">attrs</span>::<a class="nt" href="#Attrs">Attrs</a>
-</pre><pre><a class="nt" name="Attr">Attr</a>:
-        <span class="sel">prop</span>::<span class="meta">string</span> <span class="sel">val</span>::<a class="nt" href="#Id">Id</a>
-</pre><pre><a class="nt" name="Attrs">Attrs</a>:
-        <a class="nt" href="#Attr">Attr</a><span class="meta">*</span>
-</pre><pre><a class="nt" name="Outline">Outline</a>:
-        (<span class="sel">key</span>::<span class="meta">int</span> <span class="sel">args</span>::(<span class="meta">string</span><span class="meta">*</span>))<span class="meta">*</span>
-</pre><pre><a class="nt" name="Dotline">Dotline</a>:
-        <span class="sel">graph</span>::<a class="nt" href="#DotGraph">DotGraph</a> <span class="sel">outline</span>::<a class="nt" href="#Outline">Outline</a>
-</pre><hr></hr><div class="b">Maintained by Dr. <a href="http://grammarware.net/">Vadim Zaytsev</a> a.k.a. @<a href="http://github.com/grammarware">grammarware</a>.
-Last updated: Aug2013.</div></body></html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>Redirecting to the new Grammar Zoo</title>
+<meta http-equiv="refresh" content="0;url=http://slebok.github.io/zoo/index.html">
+</head>
+<body>
+</body>
+</html>
